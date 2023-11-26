@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Starknet改进语法全解读 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="​Cairo 编译器的第 2 版对 Starknet 语法进行了更改，使代码更加明确和安全。" />
+<meta name="keywords" content="StarkNet" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54779/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Starknet改进语法全解读" />
+<meta property="og:description" content="​Cairo 编译器的第 2 版对 Starknet 语法进行了更改，使代码更加明确和安全。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54779/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-11T00:00:00+00:00" />
+
+<meta itemprop="name" content="Starknet改进语法全解读">
+<meta itemprop="description" content="​Cairo 编译器的第 2 版对 Starknet 语法进行了更改，使代码更加明确和安全。"><meta itemprop="datePublished" content="2023-07-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3359">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Starknet改进语法全解读"/>
+<meta name="twitter:description" content="​Cairo 编译器的第 2 版对 Starknet 语法进行了更改，使代码更加明确和安全。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Starknet改进语法全解读</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-11">
+      2023-07-11
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3359 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>Cairo 编译器的第 2 版对 Starknet 语法进行了更改，使代码更加明确和安全。智能合约公共接口是使用特征定义的，并且对存储的访问是通过 ContractState 特征完成的。私有方法必须使用与公共接口不同的实现来定义。事件现在定义为枚举，其中每个变体都是同名的结构。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0711/13_m7v8ie41cj.png" alt="Starknet改进语法全解读"></p>
+<h3 id="概要">概要</h3>
+<p>Cairo 编译器的第 2 版对 Starknet 语法进行了更改，使代码更加明确和安全。智能合约公共接口是使用特征定义的，并且对存储的访问是通过 ContractState 特征完成的。私有方法必须使用与公共接口不同的实现来定义。事件现在定义为枚举，其中每个变体都是同名的结构。</p>
+<p>免责声明：此处使用的术语指的是 Cairo 编译器的不同版本，其语法是临时的，因为 Starknet 社区仍在讨论哪些是最好用的术语。一旦确定，本文将进行相应更新。</p>
+<h3 id="the-compiler-v2">The Compiler v2</h3>
+<p>就在上周，Cairo 编译器的新的主要版本 2.0.0-rc0 在 Github 上发布。新的编译器对 Starknet 插件进行了重大改进，使我们的代码更安全、更明确、更可重复使用。请注意，<strong>Starknet 测试网或主网尚不支持这个新版本的编译器</strong> ，因为它仍在集成环境中进行。</p>
+<p>本文的目标是向您展示如何将为 Cairo 编译器版本 1.x 创建的 Starknet 智能合约重写为与编译器版本 2.x 兼容的智能合约。我们的起点是上一篇文章中创建的 Ownable 智能合约，它与 Cario 编译器版本 1.x 兼容。</p>
+<p>#[contract]mod Ownable {use starknet::ContractAddress;use starknet::get_caller_address;</p>
+<p>#[event]fn OwnershipTransferred(previous_owner: ContractAddress, new_owner: ContractAddress) {}</p>
+<p>struct Storage {owner: ContractAddress,}</p>
+<p>#[constructor]fn constructor() {let deployer = get_caller_address();owner::write(deployer);}</p>
+<p>#[view]fn get_owner() -&gt; ContractAddress {owner::read()}</p>
+<p>#[external]fn transfer_ownership(new_owner: ContractAddress) {only_owner();let previous_owner = owner::read();owner::write(new_owner);OwnershipTransferred(previous_owner, new_owner);}</p>
+<p>fn only_owner() {let caller = get_caller_address();assert(caller == owner::read(), &lsquo;Caller is not the owner&rsquo;);}}</p>
+<h3 id="项目设置">项目设置</h3>
+<p>由于 Protostar 尚不支持编译器 v2，因此本文将依赖支持它的 Scarb 预发行版本（版本 0.5.0-alpha.1）。要安装该特定版本的 Scarb，您可以使用以下命令。</p>
+<p>$ curl &ndash;proto &lsquo;=https&rsquo; &ndash;tlsv1.2 -sSf | bash -s &ndash; -v 0.5.0-alpha.1</p>
+<p>安装完成后，验证您是否获得了正确的版本。</p>
+<p>$ scarb &ndash;version&raquo;&gt;scarb 0.5.0-alpha.1 (546dad33d 2023-06-19)cairo:2.0.0-rc3()</p>
+<p>现在可以创建一个 Scarb 项目。</p>
+<p>$ scarb new cairo1_v2$cdcairo1_v2</p>
+<p>您应该得到如下所示的文件夹结构。</p>
+<p>$ tree .&raquo;&gt;.├── Scarb.toml└── src└──lib.cairo</p>
+<p>为了让 Scarb 编译 Starknet 智能合约，需要启用 Starknet 插件作为依赖项。</p>
+<p>// Scarb.toml&hellip;[dependencies]starknet=&ldquo;2.0.0-rc3&rdquo;</p>
+<p>设置完成后，我们可以前往 src/lib.cairo 开始编写智能合约。</p>
+<h3 id="存储与构造器">存储与构造器</h3>
+<p>在 Cairo 编译器的版本 2 中，智能合约仍然由带有 contract 属性注释的模块定义，只是这次该属性以定义它的插件的名称命名，在本例中为 starknet。</p>
+<p>#[starknet::contract]mod Ownable {}</p>
+<p>内部存储仍然定义为一个必须称为 Storage 的结构，只是这次必须使用一个存储属性来注释它。</p>
+<p>#[starknet::contract]mod Ownable {use super::ContractAddress; #[storage]struct Storage {owner: ContractAddress,}}</p>
+<p>为了定义构造函数，我们使用构造函数属性来注释函数，就像在 v1 中所做的那样，优点是现在函数可以具有任何名称，不需要像 v1 中那样被称为“构造函数”。尽管这不是必需的，但出于习惯，我仍然会将该函数称为“构造函数”，但您可以以不同的方式调用它。</p>
+<p>另一个重要的变化是，现在构造函数会自动传递对 ContractState 的引用，该引用充当存储变量的中介，在本例中为“所有者”。</p>
+<p>#[starknet::contract]mod Ownable {use super::ContractAddress; #[storage]struct Storage {owner: ContractAddress,} #[constructor]fn constructor(ref self: ContractState) {let deployer = get_caller_address();self.owner.write(deployer);}}</p>
+<p>请注意，写入和读取存储的语法自 v1 以来已发生变化。之前我们执行owner::write()，而现在执行self.owner.write()。这同样适用于从存储中读取。</p>
+<p>顺便说一下，ContractState 这个类型不需要手动进入作用域，它已包含在前奏中。</p>
+<h3 id="公共方法">公共方法</h3>
+<p>与 Cairo 编译器版本 1 的一个重要区别是，现在我们需要使用带有 starknet::interface 属性注释的特征来明确定义智能合约的公共接口。</p>
+<p>use starknet::ContractAddress;</p>
+<p>#[starknet::interface]trait OwnableTrait { fn transfer_ownership(ref self: T, new_owner: ContractAddress); fn get_owner(self: @T) -&gt; ContractAddress;}</p>
+<p>#[starknet::contract]mod Ownable { &hellip;}</p>
+<p>如果您还记得 v1 中的原始代码，我们的智能合约有两个「公共」方法（get_owner 和 transfer_ownership）和一个「私有」方法（only_owner）。这一特征仅处理公共方法，而不依赖于「外部」或「视图」属性来表示哪个方法可以修改合约的状态，哪个方法不允许。相反，现在通过参数 self 的类型来明确这一点。</p>
+<p>如果一个方法需要引用 ContractStorage（一旦实现，通用 T 就是这样），该方法就能够修改智能合约的内部状态。这就是我们过去所说的“外部”方法。另一方面，如果一个方法需要 ContractStorage 的快照，那么它只能读取它，而不能修改。这就是我们过去所说的“视图”方法。</p>
+<p>现在，我们可以使用关键字 impl 为刚刚定义的特征创建一个实现。请记住，Cairo 与 Rust 的不同之处在于，实现是具备名称的。</p>
+<p>use starknet::ContractAddress;</p>
+<p>#[starknet::interface]trait OwnableTrait { fn transfer_ownership(ref self: T, new_owner: ContractAddress); fn get_owner(self: @T) -&gt; ContractAddress;}</p>
+<p>#[starknet::contract]mod Ownable { &hellip; #[external(v0)] impl OwnableImpl of super::OwnableTrait { fn transfer_ownership(ref self: ContractState, new_owner: ContractAddress) { let prev_owner = self.owner.read(); self.owner.write(new_owner); }</p>
+<p>fn get_owner(self: @ContractState) -&gt; ContractAddress { self.owner.read() } }}</p>
+<p>我们在定义智能合约的模块内为我们的特征创建了一个实现，将类型 ContractState 作为通用类型 T 传递，这样就可以像构造函数那样访问存储。</p>
+<p>我们的实现用属性 external(v0) 进行注释。属性中的版本 0 意味着选择器仅从方法名称派生，就像过去的情况一样。缺点是，如果您为您的智能合约定义了另一个不同特征的实现，并且两个特征碰巧对它其中一个方法使用相同的名称，则编译器会因为选择器的重复而抛出错误。</p>
+<p>该属性的未来版本可能会添加一种新的方法来计算选择器，以防止冲突，但目前还不能使用。目前，我们只能使用外部属性的版本 0。</p>
+<h3 id="私有方法">私有方法</h3>
+<p>我们还需要为智能合约定义另一种方法，only_owner。此方法检查调用它的人是否应该是智能合约的所有者。</p>
+<p>因为这是一个不允许从外部调用的私有方法，所以不能将其定义为 OwnableTrait（智能合约的公共接口）的一部分。相反，我们将使用 generate_trait 属性创建自动生成特征的新实现。</p>
+<p>&hellip;#[starknet::contract]mod Ownable { &hellip; #[generate_trait] impl PrivateMethods of PrivateMethodsTrait { fn only_owner(self: @ContractState) { let caller = get_caller_address(); assert(caller == self.owner.read(), &lsquo;Caller is not the owner&rsquo;); } }}</p>
+<p>现在可以通过在需要的地方调用 self.only_owner() 来使用 only_owner 方法。</p>
+<p>#[starknet::contract]mod Ownable { &hellip; #[external(v0)] impl OwnableImpl of super::OwnableTrait { fn transfer_ownership(ref self: ContractState, new_owner: ContractAddress) { self.only_owner(); &hellip; } &hellip; }</p>
+<p>#[generate_trait] impl PrivateMethods of PrivateMethodsTrait { fn only_owner(self: @ContractState) { &hellip; } }}</p>
+<h3 id="事件">事件</h3>
+<p>在 Cairo v1 中，事件只是一个没有主体的函数，并用事件（event）属性进行注释，而在 v2 版本中，事件是一个用相同属性注释的枚举（enum），但现在使用派生（derive） 实现了一些附加特征。</p>
+<p>&hellip;#[starknet::contract]mod Ownable { &hellip; #[event] #[derive(Drop, starknet::Event)] enum Event { OwnershipTransferred: OwnershipTransferred, }</p>
+<p>#[derive(Drop, starknet::Event)] struct OwnershipTransferred { #[key] prev_owner: ContractAddress, #[key] new_owner: ContractAddress, }}</p>
+<p>事件枚举的每个变体都必须是同名的结构体。在该结构中，使用可选的 key 属性定义想要发出的所有值，来通知系统我们希望 Starknet 索引哪些值，以便索引器更快地搜索和检索。在本例中，我们希望对两个值（prev_owner 和 new_owner）建立索引。</p>
+<p>ContractState 特征定义了一个发出方法，可以用来发出事件。</p>
+<p>&hellip;#[starknet::contract]mod Ownable { &hellip; #[external(v0)] impl OwnableImpl of super::OwnableTrait { fn transfer_ownership(ref self: ContractState, new_owner: ContractAddress) { &hellip; self.emit(Event::OwnershipTransferred(OwnershipTransferred { prev_owner: prev_owner, new_owner: new_owner, })); } &hellip; } &hellip;}</p>
+<p>通过这个最终功能，我们已经完成了 Ownable 智能合约从 v1 到 v2 的迁移。完整代码如下所示。</p>
+<p>use starknet::ContractAddress;</p>
+<p>#[starknet::interface]trait OwnableTrait { fn transfer_ownership(ref self: T, new_owner: ContractAddress); fn get_owner(self: @T) -&gt; ContractAddress;}</p>
+<p>#[starknet::contract]mod Ownable { use super::ContractAddress; use starknet::get_caller_address;</p>
+<p>#[event] #[derive(Drop, starknet::Event)] enum Event { OwnershipTransferred: OwnershipTransferred, }</p>
+<p>#[derive(Drop, starknet::Event)] struct OwnershipTransferred { #[key] prev_owner: ContractAddress, #[key] new_owner: ContractAddress, }</p>
+<p>#[storage] struct Storage { owner: ContractAddress, }</p>
+<p>#[constructor] fn constructor(ref self: ContractState) { let deployer = get_caller_address(); self.owner.write(deployer); }</p>
+<p>#[external(v0)] impl OwnableImpl of super::OwnableTrait { fn transfer_ownership(ref self: ContractState, new_owner: ContractAddress) { self.only_owner(); let prev_owner = self.owner.read(); self.owner.write(new_owner); self.emit(Event::OwnershipTransferred(OwnershipTransferred { prev_owner: prev_owner, new_owner: new_owner, })); }</p>
+<p>fn get_owner(self: @ContractState) -&gt; ContractAddress { self.owner.read() } }</p>
+<p>#[generate_trait] impl PrivateMethods of PrivateMethodsTrait { fn only_owner(self: @ContractState) { let caller = get_caller_address(); assert(caller == self.owner.read(), &lsquo;Caller is not the owner&rsquo;); } }}</p>
+<p>您也可以在 Github 上找到这段代码。</p>
+<h3 id="结论">结论</h3>
+<p>Cairo 编译器第 2 版为 Starknet 带来了新的语法，使智能合约代码看起来与 Cairo 本身更加一致，并且在扩展上更类似于 Rust。即使牺牲了更多繁琐的代码，安全方面的优势也值得权衡。</p>
+<p>在本文中，我们没有触及关于新语法的所有内容，特别是如何与其他智能合约交互，但您可以阅读编译器的变更日志、阅读论坛上的这篇文章或观看 StarkWare 的 YouTube 频道上的视频来了解更多信息。</p>
+<p>这个新版本的编译器将在几周内提供给 Starknet 的测试网，在几周后提供给主网，所以暂时不要尝试部署此代码，它还不能运行。</p>
+<p>Cairo 一直在变得更好。</p>
+<p><strong>资源</strong></p>
+<ul>
+<li>
+<p>合约语法——迁移指南</p>
+</li>
+<li>
+<p>Cairo 1：合约语法在不断发展</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54753/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SignalPlus宏观研报(20230711)：美国通胀放缓，加密资产受青睐</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54729/">
+                <span class="next-text nav-default">Vanguard Group持有价值5.6亿美元的比特币矿企公司股票</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概要">概要</a></li>
+        <li><a href="#the-compiler-v2">The Compiler v2</a></li>
+        <li><a href="#项目设置">项目设置</a></li>
+        <li><a href="#存储与构造器">存储与构造器</a></li>
+        <li><a href="#公共方法">公共方法</a></li>
+        <li><a href="#私有方法">私有方法</a></li>
+        <li><a href="#事件">事件</a></li>
+        <li><a href="#结论">结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

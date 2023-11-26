@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          詳解Lens Protocol擴展解決方案Momoka：運作方式、基本構成與特點 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Momoka 通過 EVM 錢包簽名模擬交易，並將交易存儲在數據可用層以進行驗證，既可確保用戶主權，也能實現超大規模擴展。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50268/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="詳解Lens Protocol擴展解決方案Momoka：運作方式、基本構成與特點" />
+<meta property="og:description" content="Momoka 通過 EVM 錢包簽名模擬交易，並將交易存儲在數據可用層以進行驗證，既可確保用戶主權，也能實現超大規模擴展。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50268/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="詳解Lens Protocol擴展解決方案Momoka：運作方式、基本構成與特點">
+<meta itemprop="description" content="Momoka 通過 EVM 錢包簽名模擬交易，並將交易存儲在數據可用層以進行驗證，既可確保用戶主權，也能實現超大規模擴展。"><meta itemprop="datePublished" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4798">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="詳解Lens Protocol擴展解決方案Momoka：運作方式、基本構成與特點"/>
+<meta name="twitter:description" content="Momoka 通過 EVM 錢包簽名模擬交易，並將交易存儲在數據可用層以進行驗證，既可確保用戶主權，也能實現超大規模擴展。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">詳解Lens Protocol擴展解決方案Momoka：運作方式、基本構成與特點</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-28">
+      2023-04-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4798 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Lens Protocol</p>
+<p>原文编译：Peng SUN，Foresight News</p>
+<p>4 月 27 日，Web3 社交图谱协议 Lens Protocol 推出 Optimistic L3 扩展解决方案 Momoka 内测版（原名为 Bonsai），已可供 Lens 开发者使用。Momoka 要解决的依然是区块链的存储与扩容限制及其与 Web3 社交大规模采用之间的矛盾问题，该方案试图在不牺牲用户主权的情况下提高网络的吞吐量并降低成本。Momoka 的特点是不会将交易压缩到 L1，而是将它们发送并存储在数据可用层上。</p>
+<h2 id="一超越区块空间的扩展数据可用层">一、超越区块空间的扩展：数据可用层</h2>
+<p>作为 Web3 社交图谱协议，Lens Protocol 支持用户拥有和控制其数字身份与社交图片，也支持将任何用户生成的内容（文字、音乐或视频）铸造成 NFT，允许创作者通过 NFT 实现盈利。截止今日，虽然仍处于测试阶段，但 Lens 用户已经创建并收集了超过 340 万枚 NFT，平均获利收入约为 50 万美元。由于将内容代币化为 NFT 需要为区块链提供的安全与交易保证支付一定的手续费成本，但对于内容创作者来说，重要的是确定某一特定的内容是否适合代币化，有些内容可能不需要这种级别的安全与保证。</p>
+<p>数据可用层（Data availability layers）用于避免在链上存储数据，通过将链上资源指向现有的数据可用性位置（存储）来减少成本，这是扩展与 NFT 等链上所有权相关信息的一种便捷方式。同样，虽然 Lens 上的内容可能包括实际的链上交易，但内容数据本身被链接到数据可用位置，如 Arweave。</p>
+<p>另一种解决方案 Bundlr 实现了 Arweave 的可扩展性，提供了数据可用性保障，能够使用 EVM 支持的钱包来保存 DA 逻辑，并快速将数据发布到 Arweave。DA 层可用于存储 Lens 原生操作，譬如发帖、评论、镜像（Mirrors）、点赞等等。</p>
+<p>然而，在链上存储数据成本昂贵，而且 EVM 只能根据一个区块配置的最大 Gas 限制来处理每个区块内有限数量的交易。Polygon PoS 是一个区块时间为 2 秒的共享区块空间。因此，一些延迟不可避免，而每个区块的最大 Gas 限制使得高需求的社交媒体操作的扩展具有挑战性。然而，Polygon PoS 仍然是一个保护基于区块链的 Lens 工件（譬如个人资料和用户网络所有权）的一个很好的解决方案。事实上，很多用户生成的内容代币化可以在 zkEVM rollup 上铸造，同时使用以太坊网络作为最终层。</p>
+<p>通常来说，高需求的社交体验峰值为 25, 000 TPS。虽然 Lens Protocol 今天可能不需要这一级别的容量，但可扩展性仍然是要考虑的关键，它可以使 Lens 为 Web3 提供社交层，并支持任何社交网络用例。有了 Momoka，Lens 的可扩展性就不再受限于区块空间。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/14_5vkigj6o00.png" alt="详解Lens Protocol扩展解决方案Momoka：运作方式、基本构成与特点"></p>
+<p>在 Lens，我们认为 Web3 的社会基础设施堆栈应该是精细化且专门构建的，这取决于不同的网络工件类型。对于用户个人资料等高价值的工件，更高的安全性很有价值。对于评论等更随意的网络工件，一个更轻便的 DA 基础设施层可能是一个可行的解决方案。</p>
+<h2 id="二lens-原生的超大规模解决方案">二、Lens 原生的超大规模解决方案</h2>
+<p>Momoka 是一个 Optimistic L3 扩展解决方案，可在链下处理 Polygon 交易，以实现超大规模并降低交易成本。虽然使用区块链为用户提供所有权和控制权很重要，但 Momoka 为社交网络增加了一个新的解决方案，使 Lens 能够提供更大规模的扩展性。Momoka 没有将交易压缩到类似于 L2 解决方案的 L1 中，而是将交易发送到数据可用层，以优化成本并实现社交媒体网络所需的更高可扩展性，无需考虑区块空间或区块时间配置的限制。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/kyvkqim4qrqlj0z" alt="详解Lens Protocol扩展解决方案Momoka：运作方式、基本构成与特点"></p>
+<p>Momoka 是一个开源软件，任何人都可以作为一个节点实时运行，通过操作无需信任的交易提交器和验证器，以验证 Lens 数据可用性内容出版物（Publication）和相关操作。理想情况下，运行一个唯一的验证器就足以实现确定性。长期目标是将 Momoka 扩展为一个完整的网络协议基础设施，一个内容出版物可以被多个 Momoka 节点提交与验证，以提高内容出版物的有效性。</p>
+<p>Momoka 的构建方式不依赖于 Lens API 等连接层；节点运营商可以完全独立地运行节点，这意味着即使 Lens API 或任何第三方对 Lens Protocol 的访问点不复存在，你也始终能证明内容的有效性。Momoka 还支持索引——这意味着通过 Momoka，节点运营商可以流式传输和索引 Lens 数据，而无需任何第三方保留和扩大 Lens 无许可数据基础设施。</p>
+<p>即日起，要想运行一个 Momoka 节点并为 Lens 生态系统做出贡献，可前往 <a href="https://github.com/lens-protocol/bonsai">GitHub</a> 开始验证 Lens 数据可用性交易。</p>
+<h2 id="三momoka-运作方式">三、Momoka 运作方式</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0428/14_jt7gonio7g.png" alt="详解Lens Protocol扩展解决方案Momoka：运作方式、基本构成与特点"></p>
+<p>Lens Protocol 目前部署在基于 EVM 的 Polygon 网络上，发帖、评论、镜像、关注和收藏等所有操作都是被构建、签名并发送以存储在 EVM 上的交易。与 EVM 过程不同，Momoka 构建交易，需要来自钱包的签名（这将在链上传递状态），但不在链上发送和广播实际交易。</p>
+<p>相反，交易签名和类型化数据用于将 DA 元数据创建为交易。然后，该交易被传送到 DA 层，其中包含创建该交易时的区块编号和区块哈希、签名的类型化数据、交易签名以及其他关键细节等信息。此数据的结构仅需一个存档节点即可完全验证。</p>
+<p>EVM 的功能是大型状态机。EVM 的 JSON-RPC 方法允许使用 eth_call 模拟交易，它可以确定交易的结果（有一定的限制）而不需要实际发送。你可以指定一个区块号（block number）来运行模拟交易，并将已签名的类型化数据交易与类型化数据一起使用。这可以通过 Lens Protocol 智能合约上的每一个 withSig 方法来完成。只需一个 Polygon 节点，任何人都可以验证 DA 层的数据是准确的，在那个时间点上会是有效的，并且符合 Lens Protocol 智能合约规则。</p>
+<p>Momoka 允许 Lens 生态系统扩展到更高的 TPS（这是目前 EVM 链无法实现的），并提供一个具有成本效益和低延迟的解决方案。这可以在不影响用户对其个人资料和社交图谱的所有权与控制权这一核心价值的情况下实现。同时，索引过程对应用开发者来说并不陌生。使用 Momoka 是可选的；喜欢 Momoka 的人可以继续把所有信息都存储在 Polygon 上。然而，如果内容出版物不需要无信任执行层的功能，就没有必要使用 EVM 状态。</p>
+<p>Momoka 使节点运营商能够验证特定操作是否已按照 Lens Protocol 智能合约规则在链上执行（或根据任何其他智能合约规则进行验证），同时将交易本身存储在数据可用层以进行验证。</p>
+<p>Momoka 涉及执行与在 EVM 链上相同的签名操作，但无需在链上实际发送交易并花费在 EVM 状态下执行交易所需的 Gas。相反，一个数据可用性交易是根据 Momoka 规则创建的，并导出到 DA 层，附有证明和所需信息。该解决方案使任何人都能交叉检查数据，提供有保障的证据，证明该操作必须是由具有创建并提交交易签名能力的用户执行的。交易本身通过模拟进行演示。这种方法允许 Lens 在保持区块链提供的所有权和信任的同时，根据用例和内容类型，随时随地进行扩展。</p>
+<p>由于数据存储在去中心化层上，因此没有中心化实体控制内容。用户保留其内容出版物的所有权，如果 Lens 生态系统的任何部分失效，数据仍然是可验证、可访问和可供任何人使用的。去中心化确保用户的数据提交无法被篡改。</p>
+<h2 id="四momoka-网络的组成部分">四、Momoka 网络的组成部分</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0428/14_5jnnfsihz1.png" alt="详解Lens Protocol扩展解决方案Momoka：运作方式、基本构成与特点"></p>
+<h3 id="提交器submitters">提交器（Submitters）</h3>
+<p>提交器负责验证和构建 DA 元数据并提交给 Arweave。在 DA 提交生成证明后，数据会通过 Bundlr 上传到 Arweave，并能得到即时的回应。提交器必须提供任何人都可以提出异议的证明。验证器软件监听从白名单提交器地址发送的 DA 内容出版物，并验证其有效性。</p>
+<p>为了保持信任，提交器要对自己的行为负责，并面临由网络协议验证的不当行为的潜在惩罚。最初，提交器白名单将包括一个由 Lens 核心团队运营的单一地址。随着该方法被证实，该系统将被扩大，允许任何人成为提交器，并对良好行为进行奖励，对不良行为进行惩罚。如果对提交器来说不会造成任何损失，他们可能会用无效的提交来充斥系统，使验证器不堪重负，导致延迟。</p>
+<p>在测试阶段，Lens 团队将负责纠正任何错误，并计划在测试结束后对错误提供漏洞赏金。</p>
+<h3 id="验证器verifiers">验证器（Verifiers）</h3>
+<p>验证器的任务是监控提交器的 DA 内容出版物并确认其有效性。它们在评估即将发布的内容出版物时必须遵循特定标准，主要目标是确保提交器是真实的。任何人都可以使用开源软件通过一些命令来运行验证器。验证器利用 LevelDB 快速存储结果。该代码能够将分叉存档节点与 Foundry 的 anvil 一起用于本地机器执行。但是，为了获得最佳速度，目前建议使用存档节点。运行验证器所需的只是一个存档节点。</p>
+<h3 id="时间戳timestamps">时间戳（Timestamps）</h3>
+<p>你可能担心提交器可能会就它在哪个区块上进行提交这件事对你进行欺骗，这正是 Bundlr 时间戳证明发挥作用的地方。此外，每个签名都有一个截止日期，该截止日期与挖矿区块的时间戳相对应，如果发送则签名无效。Bundlr 使你能够请求时间戳证明，在存储时返回当前的时间戳，允许任何人验证其时间戳。这是确定要使用适当的区块号的真实来源；我们应该使用最接近 Bundlr 生成时间戳的区块号。需要注意的是，由于节点软件的原因，延迟是不可避免的，所以如果它选择了一个区块号，并且经过验证，如果它落后了一个区块号，这也是可以接受的范围。</p>
+<h2 id="五向后兼容">五、向后兼容</h2>
+<h3 id="无需签名">无需签名</h3>
+<p>出色的用户体验对于 Lens 用户来说至关重要。DA 内容出版物与可以代表用户发帖、镜像或评论调度程序（dispatcher）一起工作。如果启用，它将通过状态检查。Lens Protocol 合约逻辑规定，如果调度程序代表用户签名，则交易有效。不想信任调度程序的用户仍然可以用钱包对类型化数据进行签名并通过提交器提交。此过程与当前流程类似，但交易被发送到 Momoka 提交器而不是 Polygon 节点。</p>
+<h3 id="无-gas">无 Gas</h3>
+<p>DA 操作不需要 Gas，可以免费使用。客户端仍然需要将 contentURI 上传到可解析的位置。提交器通过 Bundlr 支付在 Arweave 上存储 DA 元数据的费用，这比可执行 EVM 交易的成本要低得多（成本低 1000 倍）。</p>
+<h3 id="收藏">收藏</h3>
+<p>将用户生成的内容作为 NFT 收藏，一直是 Lens 协议中至关重要的货币化层。虽然 Momoka 交易不是链上交易，但在创建者设置这些参数以启用代币化的情况下，创作者或内容消费者可以代表创作者「懒惰铸造」（lazy mint）内容。这意味着只要有想法，任何内容都可以被货币化。我们期待集成商将 Polygon 上的懒惰铸造作为一项功能，并在 Momoka 上推出。</p>
+<h2 id="六momoka-浏览器">六、Momoka 浏览器</h2>
+<p>为了更容易找到任何使用 Momoka 进行的交易，Lens 构建了 Momoka Explorer（<a href="https://momoka.lens.xyz/">momoka.lens.xyz</a>）来跟踪和查找 Momoka 交易，并监测 Momoka 的吞吐速度。你可以找到交易的所有细节和所有相关数据。Momoka Explorer 还允许通过自己的节点验证交易。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/14_u9mczn1t3s.png" alt="详解Lens Protocol扩展解决方案Momoka：运作方式、基本构成与特点"></p>
+<h2 id="七momoka-路线图">七、Momoka 路线图</h2>
+<p>Momoka 测试版现已上线。任何人都可以使用 Momoka 节点验证器来证明和验证交易。目前，Momoka 支持的交易包括发布内容出版物、评论和镜像。不久之后，Momoka 将支持将数据可用性评论发布到链上内容出版物中，反之亦然。</p>
+<p>未来，Momoka 交易可以作为网络协议进行，这意味着多个节点必须验证交易以确保其有效性，并且节点之间可以对彼此的验证提出异议。网络协议也可以伴随激励和罚没机制来维持协议的有效性。</p>
+<p>由于 Momoka 是开源软件，任何人都可以做出贡献并帮助改进它。随着更多地了解 Momoka 如何在超大规模下工作，团队将不断改进源代码并添加功能。</p>
+<p>Momoka 被设计为一个节点网络，可以作为一个通用的数据扩展解决方案，也可以被社交网络之外的其他用例使用。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50294/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">详解MantisSwap：Polygon zkEVM上的新AMM</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50213/">
+                <span class="next-text nav-default">星球日報 | 香港將於5月發布加密貨幣交易平台許可指南；CoinList將於5月18日上線CyberConnect（4月28日）</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一超越区块空间的扩展数据可用层">一、超越区块空间的扩展：数据可用层</a></li>
+    <li><a href="#二lens-原生的超大规模解决方案">二、Lens 原生的超大规模解决方案</a></li>
+    <li><a href="#三momoka-运作方式">三、Momoka 运作方式</a></li>
+    <li><a href="#四momoka-网络的组成部分">四、Momoka 网络的组成部分</a>
+      <ul>
+        <li><a href="#提交器submitters">提交器（Submitters）</a></li>
+        <li><a href="#验证器verifiers">验证器（Verifiers）</a></li>
+        <li><a href="#时间戳timestamps">时间戳（Timestamps）</a></li>
+      </ul>
+    </li>
+    <li><a href="#五向后兼容">五、向后兼容</a>
+      <ul>
+        <li><a href="#无需签名">无需签名</a></li>
+        <li><a href="#无-gas">无 Gas</a></li>
+        <li><a href="#收藏">收藏</a></li>
+      </ul>
+    </li>
+    <li><a href="#六momoka-浏览器">六、Momoka 浏览器</a></li>
+    <li><a href="#七momoka-路线图">七、Momoka 路线图</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

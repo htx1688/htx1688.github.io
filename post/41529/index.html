@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          安全性剖析：对比 LayerZero、Wormhole 等跨链桥优劣 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在物理和加密的世界中，桥梁都是为了连接两个被障碍物隔开的地方。" />
+<meta name="keywords" content="LayerZero, 跨链桥" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41529/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="安全性剖析：对比 LayerZero、Wormhole 等跨链桥优劣" />
+<meta property="og:description" content="在物理和加密的世界中，桥梁都是为了连接两个被障碍物隔开的地方。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41529/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-15T00:00:00+00:00" />
+
+<meta itemprop="name" content="安全性剖析：对比 LayerZero、Wormhole 等跨链桥优劣">
+<meta itemprop="description" content="在物理和加密的世界中，桥梁都是为了连接两个被障碍物隔开的地方。"><meta itemprop="datePublished" content="2022-08-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6843">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="安全性剖析：对比 LayerZero、Wormhole 等跨链桥优劣"/>
+<meta name="twitter:description" content="在物理和加密的世界中，桥梁都是为了连接两个被障碍物隔开的地方。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">安全性剖析：对比 LayerZero、Wormhole 等跨链桥优劣</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-15">
+      2022-08-15
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6843 字 -
+        预计阅读 14 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>撰文：Jonathan Claudius, Anirudh Suresh, Eric Wong, Akshath Sivaprasad</p>
+<p>编译：0x9F，0x214，BlockBeats</p>
+<p>在物理和加密的世界中，桥梁都是为了连接两个被障碍物隔开的地方。物理桥梁连接被山谷、河流等自然屏障隔开的土地，而跨链桥协议则连接原本没有办法进行通信和同步的区块链。每当桥梁遭受摧毁和攻击，其重要性就得以彰显。在物理世界中，历史上有据可查的灾难性桥梁坍塌事件足以表明它们是多么重要，以及设计或建造不当的桥梁是多么危险。</p>
+<p>加密世界的「<strong>跨链桥</strong> 」协议亦是如此。跨链桥在安全风险方面极易被盯上。从智能合约可能的漏洞和攻击的规模角度来看，跨链桥呈现出一个二次方风险面：<strong>随着桥接的区块链数量增加，维持跨链桥运行所需的智能合约数量也呈二次方增长</strong> （至少在点对点模型中如此）。根据定制配置在不同运行时间编写的更多智能合约也迅速增加了跨链桥风险。在轮辐模型中，一个与中心链 / 网络相关的漏洞会导致不对称的风险。</p>
+<p>正如最近的 Nomad 攻击事件所示，一个错误可能导致桥梁的大部分或全部资金损失。然而漏洞与跨链桥无关，可能只是源于一个操作上的失误。在 Ronin 跨链桥的案例中，糟糕的操作安全措施让网络钓鱼攻击有机可乘，黑客获得了对保障网络安全的大部分验证节点的控制权，从而能够携带价值超过 5 亿的资金逃之夭夭。2 月份发生的 Wormhole 攻击事件同样是由于验证审查的缺失，让攻击者能够创建一个虚假签名，窃取超过 3.2 亿美元。</p>
+<p>如果不关注安全性，不可避免地会发生更多的疏忽，因而遭受攻击和损失。对黑客而言，跨链桥规模巨大的 TVL 比普通协议更具吸引力。</p>
+<p>上述的攻击事件均与协议的桥接逻辑无关，而是与智能合约漏洞和操作疏忽有关。即使使用最精心编写的代码，经过最棒的安全审计，随着连接的区块链和启用功能的数量增加，也必然会有被遗漏的漏洞。出于这个原因，跨链桥需要被配置为不仅在正常情况下能够安全工作，更重要的是能够应对极端情况。</p>
+<p>用户在使用跨链桥时主要关注以下几个特性：良好的用户体验、低滑点高效率和资产安全。其中，安全性是评估跨链桥的重中之重。</p>
+<p>考虑到这一点，让我们看看不同桥梁是如何迭加其安全性的。我们将从以下三个层面展开讨论，比较不同跨链桥的安全性。</p>
+<ol>
+<li>
+<p><strong>信任假设</strong></p>
+</li>
+<li>
+<p><strong>代码质保</strong></p>
+</li>
+<li>
+<p><strong>安全特性</strong></p>
+</li>
+</ol>
+<p>前两者将讨论：跨链桥在信任层和源代码这两个层面上是否充分考虑了其脆弱性 / 漏洞的根源。最后一点涉及到，一个协议是否承认，不管多么仔细地编码与审计，漏洞不可避免，并且能相应地建立了额外的保障措施，以尽可能减少用户的潜在损失。</p>
+<p>为了保持完全透明，在深入讨论之前，我们承认 Jump Crypto 确是 Wormhole 项目的运营监护人，并且是 Wormhole 的核心贡献者之一，但我们在这篇文章中将尽可能客观评估，我们欢迎和接受任何关于如何改进这篇文章的反馈，以展现跨链桥之间差异的详细情况。</p>
+<hr>
+<h3 id="heading"></h3>
+<p><strong>信任假设</strong></p>
+<p>从其核心构成，跨链桥可以被分解成 3 个组成部分：</p>
+<ol>
+<li>
+<p>智能合约（Smart contract）：发出 / 接收每条区块链信息</p>
+</li>
+<li>
+<p>预言机（Oracle）：验证信息是否来自原始链</p>
+</li>
+<li>
+<p>中继器（Relayer）：将消息提交给目标链</p>
+</li>
+</ol>
+<p>在实践中，跨链桥在预言机上实现共识（围绕信息是否有效）这一方面可能存在很大差异，这也进一步影响中继器。</p>
+<p>在我们深入研究之前，这里是对该领域一些最流行的桥接器所使用的共识机制的一个快速介绍。</p>
+<h4 id="heading-1"></h4>
+<p><strong>Axelar</strong></p>
+<p>Axelar 在基于 Cosmos PoS 网络上运行，验证者由 Token 持有者选举产生，并按比例获得投票权，投票权重由委托权益加权计算得出。Axelar 网络通过 (t,n) 阈值签名方案来验证跨链信息，其中签名者的投票权，权重归一化为 n，n 必须大于 t，即协议阈值，才能签署一个信息。Axelar 网络目前最多有 50 个验证者，并且必须获得超过 66.67% 的多数投票才能签署消息（这两个变量都可以通过治理投票进行修改）。</p>
+<p>理论上，验证者的数量可以无限大，但在实践中，因为验证者不需要为每条区块链运行节点，投票权会出现倾斜。在 Axelar 目前的验证者名单中共有 47 个验证者，但只有 20 个拥有实际有效的投票权。在某条特定区块链上，这一数字更小。例如，如果我们只考虑验证 Aurora 上的信息，只需要 8 个节点就可以成功发送一条消息，只需要 4 个节点审查这一消息。</p>
+<h4 id="heading-2"></h4>
+<p><strong>LayerZero</strong></p>
+<p>LayerZero 是一个跨链互操作协议，它将区块链之间的无需信任通信问题简化为预言机（Oracle）和中继器（Relayer）这两个实体之间的独立性问题。预言机将区块头转发给目标链，而中继器将交易证明转发给目标链，两者共同证明消息是有效的，且信息确实提交到原始链上。用户应用程序（UA）可以自由使用 LayerZero 的默认预言机和中继器，也可以创建和运行自己的预言机和中继器。</p>
+<p>默认的预言机是一个 Chainlink 去中心化预言机网络（DON），它在三个参与者（FTX、Polygon 和 Sequoia）之间使用阈值签名方案（Threshold signature）。在撰写本文时，由于 LayerZero 代码库的闭源性质，笔者对其执行情况缺乏了解。关于特定应用版本的预言机，LayerZero 自己的 Ackee 审计指出，对创建和运行自己的预言机和中继器的应用来说，成功提交一个无效的交易证明和区块头并不困难。不过，这种模块化确实提供了好处，如果未来出现任何漏洞，都将仅作用于那些使用受影响的预言机 - 中继器对的应用程序。</p>
+<p>LayerZero 的信任假设取决于两个实体的行为——只要预言机和中继者彼此独立运行，就不可能成功发送无效消息。但反过来而言，因为这一系统要求预言机和中继者均正常运行才得以验证信息，两者中任何一方都可以任意删除信息数据。</p>
+<h4 id="heading-3"></h4>
+<p><strong>Multichain</strong></p>
+<p>Multichain 是一个跨链信息传递协议，源自之前的 Anyswap。Multichain 使用安全多方计算（SMPC）来运行阈值签名方案，创建公钥并签署链与链之间传递的消息。这些节点以无需信任的方式控制用户账户（EOA），钱包地址与拆分的私钥一一对应。这些帐户用于存储资产并将资产转移到目标链，目标链只需检查发件人的地址是否可信，无需验证消息本身。</p>
+<p>Multichain 网络目前由 24 个 SMPC 节点组成，由不同的机构运行，并且需要大多数节点（「大多数」的量化标准似乎并不公开）来共同验证消息。因此，该协议的安全性依赖于 SMPC 节点的声誉安全，它假设所有节点中诚实的节点占半数以上。跨链发送数据需要 13 个签名者，审查消息需要 12 个节点。</p>
+<h4 id="heading-4"></h4>
+<p><strong>Nomad</strong></p>
+<p>Nomad 是一个以 EVM 为重点的跨链信息传递协议，采用 optimistic 机制来验证消息，其中消息被添加到 Merkle 树中，并被哈希加密到一个新的根中，由更新者（Updater）发布到原始链上。更新者必须交纳保证金，从而激励他们发布有效的证明并尽量减少停机时间。然后，观察者（Watcher）会有时间对新根进行争议怀疑并提交欺诈证明。一旦超过时间范围，这一 Merkle 根就被认为是有效的，并被转发到目标链进行发布，使得原始消息（因为 Merkle 根只是消息的一个「化身代表」）被发布到目标链上。</p>
+<p>这种 optimistic 模型只需要一个诚实的观察者来验证是否发布了一个无效的更新。这种安全模型的代价是，观察者有大约 30 分钟的时间来提交欺诈证明，这就使消息的传输也被延迟了 30 分钟。因为观察者可以通过向目标合约发送虚假欺诈证明来阻止消息被处理，所以 Nomad 使用一组由应用程序指定、经过许可的观察者。协议的安全性基于至少有一个诚实观察者存在的可能性，以及因恶意行为而削减更新者的经济安全性。</p>
+<p>Nomad 智能合约可以通过多签治理模式进行升级，5 个签名者中需要有 3 个来执行治理变更和处理恢复管理。</p>
+<p>应指出的是，最近的 Nomad 黑客事件与其共识机制的安全性无关；它是一个不幸的合约配置错误，导致智能合约终端出现恶意行为。</p>
+<h4 id="heading-5"></h4>
+<p><strong>Wormhole</strong></p>
+<p>Wormhole 利用权威证明（PoA）守护者网络作为预言机，并利用无需许可的中继器网络来跨链传输消息。19 个守护者中的每一个都为 Wormhole 支持的每一条链运行完整节点，并监听每个链上 Wormhole 核心合约发出的消息。这些守护者验证并签署这些消息，然后在 P2P 网络上互相传递。一旦一个消息收到 2/3 以上守护者（至少 13 个）的签名，它就会被转发到目标链上。这一设计的副产品是，它允许一个完全无需信任的中继器网络将消息发布目标链上，因为这些信息是由守护者签名的，所以消息内容既不可能被改变也不可能被审查，因为任何人都可以运行一个中继器来提交任何信息。</p>
+<p>协议的安全保障来自于守护者的声誉权威。在 Wormhole 案例中，这是一个由 Web3 中 19 个最大的质押和基础设施供应商组成的团体。签署假消息需要 13 个守护者，审查消息需要 7 个守护者。此外，现有的守护者有能力投票移除或替换其他守护者。</p>
+<h3 id="heading-6"></h3>
+<p><strong>代码质保</strong></p>
+<p>代码质保是指在链上部署代码之前需要完成的工作。这可能涉及到以下几个方面：</p>
+<ol>
+<li>
+<p>审计：对已公开的核心功能和新功能进行多次、独立的质量审计</p>
+</li>
+<li>
+<p>赏金：包括为漏洞披露者们提供具有吸引力的奖励，以及能够爽快支付大额赏金的行业口碑</p>
+</li>
+<li>
+<p>测试：在每一次代码更改上测试尽可能多的协议栈，从而在不断增长的软件生态中进行回归测试</p>
+</li>
+<li>
+<p>部署安全：在公开环境下进行开发、合并代码之前需要审查、合约字节码验证、升级之前进行模拟测试</p>
+</li>
+</ol>
+<p>下表总结了五个跨链桥协议在这四个方面的表现。</p>
+<h4 id="heading-7"></h4>
+<p><strong>Axelar</strong></p>
+<p>Axelar 有多次公开且信誉良好的审计，并运行一个相当强大（尽管近几个月活跃度下降）的测试套件：持续集成（CI）和持续交付（CD）运行、bash 构建脚本以及校验和（checksum）验证。Axelar 与 Immunefi 合作设立了漏洞赏金计划，对严重漏洞披露者给予高达 100 万美元的赏金，但其他级别的赏金额度相对较小。Axelar repo 有贡献者定期提交代码，Pull Request 需要至少 1 个审查者批准。</p>
+<h4 id="heading-8"></h4>
+<p><strong>LayerZero</strong></p>
+<p>LayerZero 在代码部署方面似乎有些不透明。虽然有来自顶级审核员的几次公开审计，但却缺乏公开的持续集成（CI）和持续交付（CD）流程。代码似乎是一次性公开发布，不是一个敏捷的开发流程。进行的测试似乎相对过时，并仅限于 JavaScript 测试。Pull Request 看起来缺乏一个强制性的同行评审步骤。LayerZero 确实在 4 月份宣布了一个与 Immunefi 合作的 1500 万美元漏洞赏金计划。然而，迄今为止还没有公开发布相关项目，也没有关于如何提交漏洞获得赏金的说明。</p>
+<h4 id="heading-9"></h4>
+<p><strong>Multichain</strong></p>
+<p>Multichain 进行了多次公开审计，并与 Immunefi 有一个高达 200 万美元的赏金计划。Multichain 进行的测试看起来停滞不前，似乎仅限于一般的 ABI 和简单的转移测试。虽然有持续集成（CI）和持续交付（CD）运行以及有限的单元和集成测试，但部署过程看起来主要是手动的。Multichain 的 repo 有贡献者定期提交代码，但看起来只需要一方合并代码（原始开发者能够合并他们自己的代码）。</p>
+<h4 id="heading-10"></h4>
+<p><strong>Nomad</strong></p>
+<p>Nomad 最近接受了 Quantstamp 的公开审计，并有一个 Immunefi 的漏洞赏金计划，赏金最高达 100 万美元。Nomad 的测试套件包括一些围绕利用 Foundry 进行路由和消息传递的测试，也和 Axelar 一样有 bash 构建脚本来构建和验证字节码。Nomad 的 Repo 有贡献者定期提交代码，它的 Pull Request 需要至少两方合并代码（原始开发者加 1 个独立审查者）。</p>
+<h4 id="heading-11"></h4>
+<p><strong>Wormhole</strong></p>
+<p>Wormhole 的安全页面突显了他们已完成和正在进行的来自业界领先的审计公司的审计。Wormhole 在 Immunefi 上有一个 1000 万美元的赏金计划。自 2 月份遭受黑客攻击以来，Wormhole 已支付了 1100 多万美元以上的漏洞赏金，包括 5 月份支付给一个白帽黑客的 1000 万美元。Wormhole 的 repo 使用混合单元和集成测试，有一个可扩展的持续集成（CI）和持续交付（CD）套件，并运行了一系列模拟测试，以验证升级的向后兼容性和未来的升级能力。此外，Wormhole 通过积极的提交和贡献者提交公开建设，让透明的代码审查和负责任的披露可以实现。Wormhole 的 Pull Request 需要至少三方合并代码（原始开发者加 2 个独立审查者）。</p>
+<p>注意，协议的代码质保方式在经历了严重的安全事件后会有很大的改善。例如，在遭受黑客攻击后，Wormhole 的代码质保方式迅速得到改善。同样，在本周的攻击事件之后，Nomad 协议很可能会在不久的将来采用更多的代码质保方式。显然最好在事件发生之前就采用这些做法，可惜它们并不总在优先列表上。</p>
+<h3 id="heading-12"></h3>
+<p><strong>安全功能</strong></p>
+<p>如上所述，跨链桥一旦发生安全问题，代价极其高昂。上面的代码质保措施对跨链桥供应商的安全计划至关重要。本节我们将仔细研究每个跨链桥正在开发或部署的协议内安全功能，以了解在核心信任假设和代码质保根本不足的情况下，这些跨链桥是如何实现多层防御的。</p>
+<h4 id="heading-13"></h4>
+<p><strong>Axelar</strong></p>
+<p>在白皮书中，Axelar 描述了一个由网络分配的资金池，作为治理控制的保障和备用机制，以便在 Axelar 中断的情况下为用户提供恢复治理的指导。在这样的危机中，由阈值合约（Axelar 验证者管理）存放的「紧急解锁钥匙」将与辅助恢复用户集共享。如果需要，这个队列可能扩展到成千上万的个人和机构，他们可以集体控制网络以：</p>
+<ul>
+<li>
+<p>为可以转入 / 转出某一特定链的资金量设定速率限制</p>
+</li>
+<li>
+<p>决定链上原生资产的包装形式的情况</p>
+</li>
+</ul>
+<p>这些功能看起来是专有的，目前还没开源。此外，这些提议的功能不提供被动安全性来限制风险，而是在生死存亡关头被激活。</p>
+<h4 id="heading-14"></h4>
+<p><strong>LayerZero</strong></p>
+<p>LayerZero 的桥接模型包括交易应用程序选择目标链上的中继器的要求。因此，在这个模型中，协议内安全功能的关键之处在中继器。</p>
+<p>4 月份，LayerZero 团队介绍了他们的协议内安全功能的方法，称为「穹顶（the dome）」和「预犯罪（pre-crime）」。关于穹顶功能的公开信息很少，但博客文章中提供了关于预犯罪是如何运作的线索。预犯罪模型基本上允许用户应用程序（UA）定义一组特定的状态，中继器必须根据这些状态进行验证。如果这些状态没有得到验证，中继器就不会中继交易。</p>
+<p>注意，这些功能看起来是专有的，目前还没开源。虽然概念上很强大，但很难独立评估其有效性。</p>
+<h4 id="heading-15"></h4>
+<p><strong>Multichain</strong></p>
+<p>Multichain 在最近的一篇文章中，披露了他们的一些安全措施，包括提及他们的桥接配置的一些安全功能：</p>
+<ol>
+<li>
+<p>交易量限制和总交易额限制：这一功能允许交易量较大的区块链被限制在一个特定的上限。另外，对于交易量较低的区块链，则采用总交易额限制的方式。</p>
+</li>
+<li>
+<p>链上监控：这种模式涉及监控软件和链上看门狗，以检测异常行为并触发突发事件响应行为。</p>
+</li>
+<li>
+<p>产品暂停：这一功能允许暂停所有产品，并在实施突发事件响应行为时有效将所有产品暂停。</p>
+</li>
+<li>
+<p>安全基金：这实际上是一个保障基金，拿出所有跨链费用的 10% 补偿用户在特殊情况下的财产损失。</p>
+</li>
+</ol>
+<h4 id="heading-16"></h4>
+<p><strong>Nomad</strong></p>
+<p>Nomad 利用 optimistic verification model，即消息在原始链上签名，并有一个内置的时间窗口会在目标链上强制执行。在某种程度上，我们可以观察到这类似于「不早于这个时间打开这封信」。这段时间对于实施「自动断路器」和在 Merkle 根被认为有效之前停止转移资产是有用的。这在 Nomad 文档中已作为一个概念出现，开发似乎正在进行中。</p>
+<h4 id="heading-17"></h4>
+<p><strong>Wormhole</strong></p>
+<p>Wormhole 的消息传递模型是群播（multi-cast）的，即消息由守护者 / 预言机网络从原始链进行公证，并且不信任将该消息带到目标链的中继器。这种模式基本上需要一个非常强大的预言机网络，协议内安全功能有赖于此。</p>
+<p>Wormhole 项目有三个主要的协议内安全功能正在开发中：监管、会计和紧急关闭。这些功能是在公开可见的情况下开发的，这让我们能够深入了解它们最终会如何运作。这些功能正在等待开发完成并被守护者采用。</p>
+<ol>
+<li>
+<p>监管：这一功能在守护者 / 预言机中实现，允许守护者在一个时间窗口内监控来自任何受监管链的价值流动的名义金额。守护者可以为每条链设定一个可接受的上限，一旦达到这个上限，就会阻止这条链超出的资产流动。</p>
+</li>
+<li>
+<p>会计：这一功能在守护者 / 预言机中实现，允许守护者维护他们自己的区块链（又称「wormchain」），它们可以作为不同链之间的跨链账本。这个账本不仅可以让守护者担任链上的验证者，还充当了一个会计插件。守护者可以拒绝原始链没有足够的资金（验证独立于智能合约逻辑之外）的跨链交易。</p>
+</li>
+<li>
+<p>关闭：这一功能在链上实施，允许守护者在意识到跨链桥存在的威胁后，达成共识暂时停止跨链桥上的资产流动。目前的实施方案允许通过拟议的实施方案中的链上函数调用来实现。</p>
+</li>
+</ol>
+<h3 id="heading-18"></h3>
+<p><strong>结语</strong></p>
+<p>在未来几个月或几年里，我们相信安全将成为跨链桥之间拉大差距的地方。那些优先考虑安全问题的跨链桥更可能度过危机，不这么做的跨链桥则很可能挺不过去。安全性可能曾经只是竞争优势的一个来源，然而，现在它必须成为每条跨链桥都应优先考虑的首要功能。我们希望所有跨链桥团结起来，共同提升跨链桥安全技术水平。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41494/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">zkSync桥接存储总价值超过15万枚ETH</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41533/">
+                <span class="next-text nav-default">初创公司：你应该成为一个去中心化的自治组织吗？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-18"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

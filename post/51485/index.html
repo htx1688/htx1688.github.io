@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          ​BitKeep研报：深度解读zkSync Era，原理、应用与生态 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="随着 zkSync 生态的不断拓展，我们期待 zkSync 3.0 能够在未来带来更多的惊喜。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51485/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="​BitKeep研报：深度解读zkSync Era，原理、应用与生态" />
+<meta property="og:description" content="随着 zkSync 生态的不断拓展，我们期待 zkSync 3.0 能够在未来带来更多的惊喜。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51485/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-18T00:00:00+00:00" />
+
+<meta itemprop="name" content="​BitKeep研报：深度解读zkSync Era，原理、应用与生态">
+<meta itemprop="description" content="随着 zkSync 生态的不断拓展，我们期待 zkSync 3.0 能够在未来带来更多的惊喜。"><meta itemprop="datePublished" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7534">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"/>
+<meta name="twitter:description" content="随着 zkSync 生态的不断拓展，我们期待 zkSync 3.0 能够在未来带来更多的惊喜。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">​BitKeep研报：深度解读zkSync Era，原理、应用与生态</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-18">
+      2023-05-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7534 字 -
+        预计阅读 16 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="摘要">摘要：</h2>
+<p>根据Lookonchain监测，三个巨鲸地址过去一周共增持约195 万枚LDO，Lido Finance V2版本升级投票通过允许用户提取质押的ETH，链上有巨头持续布局LSD赛道，看好未来赛道的成长性。本文为大家梳理了一下 zkSync Era 生态的最新动态，得到以下结论：</p>
+<ul>
+<li>
+<p>zkSync Era的出现将交易成本对比之前降低了50 倍，zkSync生态系统呈指数增长趋势；</p>
+</li>
+<li>
+<p>众多生态纷纷部署、迁移至 zkSync 网络，涉及 DeFi、跨链桥、NFT 等各个领域；</p>
+</li>
+<li>
+<p>以太坊网络受不可能三角问题，Layer 2 发展是必然趋势；</p>
+</li>
+<li>
+<p>zk-EVM竞争白热化、zkSync Era运用的零知识技术还有待提升和确认。</p>
+</li>
+</ul>
+<h2 id="1关于zksync-era">1.关于zkSync Era</h2>
+<p>随着Arbitrum 、SuiNetwork 主网纷纷上线，如今全网最火的黑马主网当属zkSync Era网络了。今年3 月24 日zkSync官方宣布zkSync Era网络正式面向所有用户开放。zkSync Era作为加密领域最受支持的项目之一，从 a16z、Dragonfly、Lightspeed 等公司筹集了超过 4.5 亿美元。以太坊网络的拥堵和高交易费让人们对 Layer 2  扩容方案更为青睐。</p>
+<p>zkSync 获得的 4.5  亿美元融资将对自身发展和大规模采用的机会产生重大影响，今年很多机构也在开发zk-EVM，包括我们熟知的币安、polygon、zksync、starknet、scroll、aztec以及小狐狸的母公司consensys都在布局。</p>
+<p>BitKeep COO Moka也表示：“BitKeep钱包率先接入zkSync Era，大家可以通过BitKeep APP和插件web钱包管理自己在zkSync Era上的资产。随着zkSync 2.0 “可组合性”功能升级，我们会在Swap、NFT等全方面支持zkSync生态系统，降低大家体验zkSync生态门槛，与zkSync 共同发展Rollup生态系统。”</p>
+<p>近期 BitKeep 将联合 zkSync 举办以 Diving into zkSync: An Ecosystem of Opportunities 为主题的Twitter Space，邀请到了Bayo Akins, Infrastructure BD Lead zkSync、Jimmy Yin, Co-Founder @iZUMi Finance 、Mikayla, Operation Manager @Orbiter、Ervin, Co-Founder of Star Protocol and zkSync Name Service 以及 Gua, BD of SyncSwap出席本次活动。欢迎大家<a href="https://twitter.com/BitKeepOS">点击这里</a>前往活动现场。</p>
+<h3 id="11什么是zksync-era">1.1 什么是zkSync Era</h3>
+<p>zkSync Era是一个基于zkSync技术的区块链生态系统，旨在实现高性能、低成本的智能合约和区块链应用。zkSync Era是完全开源的，可以自由地查看、修改和分叉代码，zkSync 2.0 现在是zkSync Era，而zkSync 1.0 现在是zkSync Lite。交易成本对比之前降低了50 倍，此外更是以2000 TPS的速度碾压以太坊。zkSync Era的高效和低价，受到了资本极大的关注，持续飞速发展。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_eg6hv334fa.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 1 ：Data from Dune @makaineko</p>
+<p>自zkSync Era和 Polygon zkEVM发布以来的几周内，zkSync生态系统呈快速增长趋势。到Q1末，zkSync生态系统的总锁定价值已经接近2 亿美元。BitKeep已上线zkSync Era主网支持Swap一键兑换，大家可以使用BitKeep体验zkSync Era生态，同时BitKeep即将上线借gas费交易功能。</p>
+<h3 id="12-zksync-era-原理与优势">1.2 zkSync Era 原理与优势</h3>
+<p>zkSync是一个协议，它使用zk-rollup技术，可以在以太坊主网上实现高性能扩容，从而实现低成本交易和更快的确认时间。zkSync Era是在zkSync协议的基础上构建的，它拥有了更快的交易速度、更高的可扩展性和更具经济性的特点，涉及DeFi、跨链桥、NFT等各个领域。</p>
+<p>zkSync的架构结合了两种协议：zk-Rollups 和validium。它们被定义为zk-EVM（智能合约）和zkPorter（离链数据可用性）。下面是一张说明图，展示了后者的运作方式。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_5iq1871ngn.jpg" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 2 ：From twitter @milesdeutscher</p>
+<p>zkSync Era的亮点：</p>
+<ul>
+<li>具备主网级别安全性，完全不依赖第三方</li>
+</ul>
+<p>zkSync Era将采用多层安全机制，并配备独立监测和风险缓解机制，确保了主网级别的安全性。与其他托管层解决方案不同，zkSync Era不仅去中心化，而且完全不依赖第三方，这意味着用户可以控制自己的数字资产，不必担心资产被中心化的第三方服务机构攻击。zkSync Era 还具有链上验证和不可篡改的特性，提供了高水平的安全保障。</p>
+<ul>
+<li>强大的 LLVM 编译器</li>
+</ul>
+<p>LLVM 是世界上最成熟的编译器技术之一。使用 LLVM 编译器可以带来显著的性能提升和开发者体验改进。在 Era 上，开发者可以利用 LLVM 编译器优势，实现智能合约的高效编译和执行。</p>
+<ul>
+<li>支持的EVM特性，引入新特性。</li>
+</ul>
+<p>zkSync Era支持无需权限的EVM兼容智能合约，这意味着任何人都可以发布和交互智能合约，无需第三方中心化机构的许可。开发人员能够在 zkSync 2.0 上重新部署以太坊 L1 项目，只要该代码不涉及问题部署全新的智能合约，即可免去更改底层基本代码的麻烦。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_pefvjm4f3n.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 3: Matter Labs</p>
+<p>同时zkSync Era还引入新特性，如账户抽象化。账户抽象化使zkSync用户可以使用多种资产，包括ETH和ERC 20 代币，以一种可扩展和高效的方式进行交易，不仅提高了用户使用的灵活性，而且降低了交易的成本和时间。</p>
+<p>根据Anthony Rose的说法，账户抽象为更多人与区块链上的应用程序提供了一个不那么虚构的互动方式。他表示，zkSync进入2023 年的主要目标之一是让用户轻松自然地在链上互动。就像web2用户在网上冲浪时不需要知道HTML或HTTPS一样，Anthony认为zkSync将能够利用账户抽象为用户提供同样丝滑的互动性。zkSync设想能够将用户账户转变为智能合约本身，这有可能允许更大程度的灵活性，同时也改善整体的用户体验</p>
+<h3 id="13-zksynczksync-era与zk-evm之间的区别">1.3 zkSync、zkSync Era与ZK EVM之间的区别</h3>
+<p>zkSync是一个以以太坊虚拟机的EVM高度兼容的zk Rollup解决方案，最大的优势就是zkSync允许开发人员使用以太坊智能合约的开发语言Solidity在一个低费用高度可拓展的Layer环境中去部署他们的应用，同时在不影响安全性和去中心化的情况下提高他的TPS，可以达到每秒处理上万笔交易并降低约99% 的gas费用。</p>
+<p>zkSync 2.0 就是zkSync ERA，可以让以太坊主网更多的DAPP更加便捷的迁移至Era主网上，比如 AAVA、Uniswap都有迁移至ERA主网上，zkSync Era的出现利好整个zkSync生态的发展。方便更多优质的生态拓展或部署在zkSync主网，扩大整个项目生态。</p>
+<p>zk-EVM 全称 Zero Knowledge Ethereum Virtual Machine，中文就是我们今年常听的零知识以太坊虚拟机。简单理解它就是利用一种叫做“零知识证明”的技术去执行这个智能合约，能提供更高的隐私性、安全性和更快的速度，是行业今年重大技术创新，一度成为市场上的热门话题。此外，zkSync是zk-EVM上面第一个上线的项目。</p>
+<h2 id="2zksync-era生态">2.zkSync Era生态</h2>
+<p>Matter Labs官方表示已有超过150 个项目在zkSync上部署或表达了对其进行部署的意愿。这些项目总价值超过了6, 500 万美元，但仍有许多应用程序还没上线到主网。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_7hf0eh6u8q.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 4 : From zkSync.io</p>
+<p>BitKeep已支持zkSync 主网及其生态应用，文中列出的只是 zkSync 2.0 网络上部分 DApp，更多 DApp 体验，可以根据<a href="https://study.bitkeep.com/en/?ht_kb=interested-in-qualifying-for-the-zksync-airdrop-heres-how">教程</a>，使用 BitKeep 钱包激活 zkSync 帐户，体验最新的零知识证明技术。</p>
+<h3 id="21-zksync-era生态环境">2.1 zkSync era生态环境</h3>
+<p>zkSync Era生态火爆到什么程度呢，主网上线12 天独立用户数达到26 万人，当前独立地址53 万+个，这个数据放在web2的世界里都是相当惊人了，同时锁仓量飙升到1 亿美金，排名仅此于dydyx。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_hyeliwlsd8.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 5: Data from Dune @makaineko</p>
+<p>通过官方跨链桥到以太坊的gas费用上涨到5 美金一笔，在主网的现货区域化交易所里单笔swap的gas费用也高达1.3 美金，要知道他是一个Layer 2 网络，对比Optimism 和Arbitrum 网络上0.3 美金的gas费，可见市场对zkSync Era的看好和热爱，当然高昂的gas费用少不了羊毛党的推波助澜。</p>
+<h3 id="22-zksync-era生态项目盘点">2.2 zkSync Era生态项目盘点</h3>
+<p>从2023 年3 月上线以来，zkSync Era生态发展迅猛。我们为您总结了一些优质项目，涵盖DeFi、跨链桥、NFT等各个领域，让我们一起来看看这些项目现在已经发展到了什么程度，并发现有哪些有龙头潜力的应用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_80bcbtqe43.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 6: From defillama</p>
+<p><strong>ORBITER FINANCE</strong></p>
+<p>Orbiter Finance 是一个去中心化的 Rollup 跨链桥，帮助以太坊原生资产在 L1 和 L2 之间即时转移。跨链桥允许不同的区块链交互，不限制用户只能在同一区块上活动。例如，Orbiter Finance 可将资金从以太坊 L1 区块链桥接到 zkSync L2 的环境中，在将这些有价值的资产桥接回 L1 之前，可以以更低的成本完成。跨链桥的出现，帮助用户参与进更多的应用程序、服务和选项交互中，避免了无法访问的情况。</p>
+<p><strong>Syncswap</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_2ebfamum7u.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 7: Data from defillama</p>
+<p>Syncswap是做现货的去中心化交易所，目前锁仓量在网络上以3770 万美金的数量排名第一，重点是他还没有发币，</p>
+<p>其主要特点包括：持多种 AMM 算法、手续费高度可定制化以及Gas Refund等功能。项目还处于很早期的阶段，但是已经是zkSync Era网路的龙头项目了，有龙头效应，可以保持重点关注。</p>
+<p><strong>SpaceFi</strong></p>
+<p>SpaceFi是基于EVM和zksync跨链的web3平台，解决资产跨链和互操作性等问题，另外SpaceFi还与Celestia合作，为EVM生态带来模块化等解决方案。产品功能包括Defi、NFT、太空基地等，当前锁仓量780 万美金。</p>
+<p>作为Web3跨链应用平台的SpaceFi也在第一时间对zkSync Era进行了支持，并在3 月28 日上线DEX、Farm、PlantNFT等多个产品。</p>
+<p><strong>Nexonfi</strong></p>
+<p>作为一个借贷协议，根据其官网显示，当前只支持以太坊和USDC的借贷，借出USDC的利息高达6.7% </p>
+<p>白皮书中还明确写着代币持有者会获得他们协议的收益分红，在代币经济模型中也明确写着61% 作为社区激励。目前并没有发币，借贷项目往往是一个网络上的明星项目，作为zk era网络上第一个借贷协议，大家也可以持续跟进的。</p>
+<p><strong>iZUMi Pro</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_ywvvey5y8j.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 8: Data from defillama</p>
+<p>iZUMi Finance 最近完成刚一轮 2200 万美元融资，计划用此轮融资支持 iZiSwap Pro 在 zkSync Era 网络上的早期流动性。iZiSwap Pro 是 iZUMi Finance 链上订单簿 DEX 产品，采用 iZUMi 创新的离散流动性 AMM（DL-AMM）模型，完全基于链上，实现 100% 去中心化。</p>
+<p><strong>Tevaera</strong></p>
+<p>作为一个链游平台，类似于arbitrum链的TreasureDAO，它的第一款游戏交TevaRun，目前在Goerli测试网进行测试阶段。这个项目的重点在于，项目会开发自己专用的游戏区块链网络TevaChain，是基于zk构建的，简单来说Layer 2 是给以太坊扩容的，而TevaChain是要给zkSync进行扩容。作为游戏平台肯定比单个的游戏更加有竞争力，此外它专门开发的Layer 3 游戏链也是值得期待的点。</p>
+<p><strong>zkSync Name Service</strong></p>
+<p>zkSync Name Service 是 zkSync Era 生态上的去中心化身份 DID，提供 zkSync 的域名服务。zkSync Name Service 的核心思想是基于 zkRollup 技术，将大量的交易打包并提交到以太坊主网络上进行结算，以提高交易效率和降低成本。这种技术可以实现高效而去中心化的数字身份和资产管理，保护用户的隐私和安全。</p>
+<p>zkSync Era 是一个无需许可的网络，任何项目都可以部署，所以大家一定要理性投资，注意自己钱包安全不要随意授权签名防止钱包被盗。BitKeep钱包现已支持一键添加 zkSync 主网，以及上述DAPP应用，大家可以使用只需使用BitKeep就可以参与zkSync生态体验了。</p>
+<h2 id="3竞品分析">3.竞品分析</h2>
+<h3 id="zk-rollups">ZK Rollups</h3>
+<p>ZK Rollups是通过零知识证明验证来进行Rollups环节，在高峰负载下可以提供多达2000 TPS！更值得注意的是 ZK Rollups是唯一可以通过一个系统进行扩展的 L2 扩展解决方案，该系统可以提供整个数量级的扩展：zkPorter 可以提供高达 20, 000 TPS。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_gydnqkoafb.jpg" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>Figure 9:From zkEVM website</p>
+<p>zkSync 2.0 的架构包含了 zk-rollup 和 validium，二者的结合方式又被称作 “volition”，因为它给用户在 zk-rollup 和 validium 两者间选择的自由。</p>
+<p>相比于Optimistic Rollups，ZK Rollups在安全性方面更高级别，因为它不需要引入其他信任假设，并且依靠以太坊和零知识证明的算法来保证安全。这种安全性是通过使用数学方法来验证交易的正确性，同时避免恶意行为，保证整个系统的安全和可靠性。需要注意的是，虽然ZK Rollups在安全性方面具有优势，但在实现复杂性和性能方面可能存在一些挑战。</p>
+<p><strong>Optimistic rollups</strong></p>
+<p>Optimistic rollups是一种扩展以太坊网络的技术，它依赖于发布公开信息来验证链上的交易。这种验证方法在发现可疑信息时会打开一个“挑战窗口”，其他验证者和用户可以对显示可疑信息的交易发起挑战，以揭示可能的恶意行为。挑战窗口需要一定时间来提供这种验证，通常需要7 天的时间。因此，如果想要在Optimistic rollups网络上桥接L2环境中的代币回L1链，可能需要等待长达7 天的挑战期。</p>
+<p>Op Rollups与ZK Rollups方法本质的区别是，ZK所有人都可以参与通过PoW认证来参与认证，而OP里面更倾向于选择一组值得信赖的认证者，监督整个打包交易的过程。</p>
+<p><strong>Arbitrum</strong></p>
+<p>Arbitrum是一种利用Optimistic Rollup模式的Layer 2 协议项目，目前是Layer 2 中TVL最高的，受益于先发优势，其应用程序、交易量和市场份额方面都最为领先。Arbitrum在验证时，进行多轮fraud proofs. 同时，Aribitrum的交易并不在Layer 1 上进行执行，并且有自己的虚拟机，更加兼容ETH网络。</p>
+<p><strong>Polygon zkEVM</strong></p>
+<p>Polygon zkEVM 同样使用的是零知识Rollups技术，提供比以太坊主网更低的交易费用服务。它与大多数以太坊应用兼容。如果应用程序无需预编译，则代表无需重新编写代码以适应zkEVM。另外，Optimism 的提款可能需要 7 天，Arbitrum 的提款需要 2 周，但是通过 PoS 桥在 Polygon 上的提款可在 3 小时内完成。</p>
+<p>zkSync这样的zk-Rollups交易依靠密码学和数学证明来验证交易的真实性，这意味着zk-Rollups 的交易速度远远高于其他Rollups，并且可以像数学证明那样快速处理交易。甚至Vitalik Buterin也认可zk-Rollups 的长期优势。</p>
+<h2 id="4机遇与发展">4.机遇与发展</h2>
+<p>zkSync Era是目前在开发zk-EVM 的众多项目之一，其他项目包括StarkNet、Polygon Hermez和Scroll。所有的zk-EVM都是不一样的，<strong>它们在可组合性（与原始EVM合约的接近程度）和高性能（zk-Rollups的运行速度）之间存在着明显的权衡。</strong> 在这种权衡中，zk-Sync选择了高性能，从而牺牲了可组合性。</p>
+<p>目前主要有四种不同类型的zk-EVM，这四种类型如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/21_f0q85lbyas.png" alt="​BitKeep研报：深度解读zkSync Era，原理、应用与生态"></p>
+<p>zkSync为高性能设计了 zkSync Era，特别选择保持源代码兼容性（Solidity 和 Vyper），这带来了额外的安全优势。在重新部署到L2时，EVM项目不需要进行任何代码更改，通过保持在L1上已经经过实战检验的最佳实践，降低了漏洞和攻击的风险。这也意味着L2平台可以通过与L1中使用相同的代码库来确保缺陷更少、安全性更高的部署，同时减少了重新部署到L2的时间和成本。</p>
+<p>面对以太坊网络的三角形难题，即很难同时实现可扩展性、安全性和去中心化。尽管许多项目都在尝试为链带来可扩展性，但每种解决方案和技术都有自己独特的权衡和用例。zkSync 已经为 DApp 展示了更高的效率、无缝的交易和更低的成本。</p>
+<p>zkSync Era运用的零知识技术在区块链上还很新，还没有像传统验证技术那样经过回溯测试。它依赖于复杂的数学假设和密码技术，如果这些假设中的任何一个被打破或实施过程中出现错误，它们就容易受到攻击。加上理解 ZK-Rollups 的困难也可能使普通用户更难访问它们并限制它们的采用。</p>
+<p>从本文也可以看出，zkSync网络上很多项目尚处于早期阶段，信息披露有限，过低的项目质量，并且没有超高 APY 的收益支撑，是很难留住用户资金的。除了继续推动zkSync主网的发展，也要扩大zkSync应用生态，鼓励更多的项目方和开发者加入到zkSync生态中，进一步推进zkSync的发展和应用。从路线图来看，未来还将继续提升证明者技术加速硬件设施，编译器将集成支持LLVM的现代编程语音，以及zkSync 3.0 的创新。</p>
+<h2 id="5总结">5.总结：</h2>
+<p>zkSync 有许多发展自身的故事和可能性。随着以太坊技术的不断发展，zk-EVM的竞争也越来越白热化，尽管零知识证明技术还很新，但目前已有不少团队在开发zk-EVM，并且不断推出新的功能和改进。zkSync Era在过去的一段时间内已经展现出了极高的性能和效率，随着zkSync生态的不断拓展，我们期待zkSync 3.0 能够在未来带来更多的惊喜。</p>
+<p>最后关于代币的发布，zkSync总裁AlexGluchowski明确说过：目前zk还在早期阶段，还不够去中心化，可能一年之后才发币，但同时zkSync要发币的信号也算是非常明确了。在同行竞争如此激烈的环境下，相信zkSync发币时间提早也是有可能的。</p>
+<h2 id="reference">Reference：</h2>
+<p>1. Exploring zkSync: An introduction to rollups and layer 2 s</p>
+<p>2. https://era.zksync.io/docs/dev/building-on-zksync</p>
+<p>3. https://zksync.io/</p>
+<p>4. https://blog.matter-labs.io/</p>
+<p>5. https://vitalik.ca/general/2022/08/04/zkevm.html</p>
+<p>6. https://twitter.com/milesdeutscher</p>
+<h2 id="免责声明">免责声明</h2>
+<p>BitKeep与本报告中所涉及的第三方不存在任何影响 报告客观性、独立性、公正性的关联关系。本报告所引用的资料及数据均来自合规管道，BitKeep不对其真实性、准确性或完整性做出任何保证。</p>
+<p>文章中的结论和观点不构成相关数字资产的任何投资建议。 BitKeep不对因使用本报告内容而导致的损失承担任何责任，数字资产合约交易是创新的产品，风险较高，专业性较强。请您理性判断自己的投资能力，审慎做出投资决策。本文所载资料、意见及推测仅反映研究人员于定稿本报告当日的判断，未来基于行业变化和数据资讯的更新，存在观点与判断更新的可能性。</p>
+<p>关注 <a href="https://bitkeep.com/zh/index">BitKeep</a>，获取最新活动、动态和资讯，让 BitKeep 成为你进入 Web3 空间的首要门户</p>
+<p>更多信息请访问：<a href="https://bitkeep.com/">Website</a> | <a href="https://twitter.com/BitKeepOS">Twitter</a> | <a href="https://t.me/BitKeep_Announcements_New">Telegram</a> | <a href="https://linkedin.com/company/bitkeep">LinkedIn</a> | <a href="https://discord.com/invite/gUQB7gUarR">Discord</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51477/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Binance澳大利亚：用户可以继续提取澳元</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51489/">
+                <span class="next-text nav-default">​BitKeep研报：深度解读zkSync Era的原理、应用与生态</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#摘要">摘要：</a></li>
+    <li><a href="#1关于zksync-era">1.关于zkSync Era</a>
+      <ul>
+        <li><a href="#11什么是zksync-era">1.1 什么是zkSync Era</a></li>
+        <li><a href="#12-zksync-era-原理与优势">1.2 zkSync Era 原理与优势</a></li>
+        <li><a href="#13-zksynczksync-era与zk-evm之间的区别">1.3 zkSync、zkSync Era与ZK EVM之间的区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#2zksync-era生态">2.zkSync Era生态</a>
+      <ul>
+        <li><a href="#21-zksync-era生态环境">2.1 zkSync era生态环境</a></li>
+        <li><a href="#22-zksync-era生态项目盘点">2.2 zkSync Era生态项目盘点</a></li>
+      </ul>
+    </li>
+    <li><a href="#3竞品分析">3.竞品分析</a>
+      <ul>
+        <li><a href="#zk-rollups">ZK Rollups</a></li>
+      </ul>
+    </li>
+    <li><a href="#4机遇与发展">4.机遇与发展</a></li>
+    <li><a href="#5总结">5.总结：</a></li>
+    <li><a href="#reference">Reference：</a></li>
+    <li><a href="#免责声明">免责声明</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

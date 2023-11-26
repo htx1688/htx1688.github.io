@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          新的社交媒体年：Nostr原理和关键管理问题 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="我们今天要讨论的是，最近广受关注且具有一定创新性的新型社交媒体协议Nostr-Damus。" />
+<meta name="keywords" content="Nostr" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46950/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="新的社交媒体年：Nostr原理和关键管理问题" />
+<meta property="og:description" content="我们今天要讨论的是，最近广受关注且具有一定创新性的新型社交媒体协议Nostr-Damus。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46950/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-03T00:00:00+00:00" />
+
+<meta itemprop="name" content="新的社交媒体年：Nostr原理和关键管理问题">
+<meta itemprop="description" content="我们今天要讨论的是，最近广受关注且具有一定创新性的新型社交媒体协议Nostr-Damus。"><meta itemprop="datePublished" content="2023-02-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5888">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="新的社交媒体年：Nostr原理和关键管理问题"/>
+<meta name="twitter:description" content="我们今天要讨论的是，最近广受关注且具有一定创新性的新型社交媒体协议Nostr-Damus。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">新的社交媒体年：Nostr原理和关键管理问题</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-03">
+      2023-02-03
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5888 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>第五权利下的新型社交媒体设计已经探索多年，却并没有被大规模采用的迹象。在过去的一年里，随着加密技术的不断发展，以及对马斯克收购推特的担忧，去中心化社交网络迎来新的机会。</strong></p>
+<p>这些社交网络试图解决的问题：可能包括加强审查制度，使内容审核更加灵活，削弱大型社交媒体公司塑造和跟踪人们在网上谈论的内容的权力等。</p>
+<p><strong>随着新平台的出现和增长，对替代社交网络的选择往往带有政治考虑因素。</strong></p>
+<p>如 Getr、Parler、Gab 和 Truth Social 这样站点，都通过将自己宣传为 Twitter 的言论自由替代品来迎合右派。</p>
+<p>我们今天要讨论的是，最近广受关注且具有一定创新性的新型社交媒体协议Nostr-Damus。其中包括Nostr的技术原理、待解决的关键管理问题及如何激励中继持续运转。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0203/24_qibp75dfpv.png" alt="BPqj4TMa1nuXgpH25rEuKz0kMJxbLKpIFpgM6WAo.png"></p>
+<h2 id="背景nostr"><strong>背景：Nostr</strong></h2>
+<p>Nostr 于 2020 年启动，是一种去中心化协议，允许用户拥有自己的身份并使用公钥-私钥加密的数字签名来验证帖子。然后，这些帖子会传播到互连服务器网络。该协议并未使用区块链，因为在早期实验中发现区块链对于社交网络来说太慢。但在结构上存在相似之处，Nostr 凭借其自由主义和开源精神在加密人群中找到了早期的利基市场。</p>
+<h2 id="mastodon-vs-nostr"><strong>Mastodon VS Nostr</strong>  </h2>
+<p>Nostr 协议和第一个中继服务器由开发人员 fiatjaf 在 2020 年底创建。在引起广泛关注之前，Nostr 只是一个安静的小众协议，致力于成为 Twitter 和 Mastodon 问题的轻量级解决方案。</p>
+<p>Mastodon，一个成立于 2016 年的开源网络，允许任何人设置服务器。该设计通常被描述为“联合”，并且可能属于也可能不属于“Web3”的模糊界限，具体取决于如何定义。Mastodon允许用户加入具有自定义内容审核规则的策划社区。目前注册用户达到200w+，成为了自由派、记者和学者的避风港。</p>
+<p>Twitter 和 Mastodon 系统中，身份/用户名是由运行服务器的人控制。</p>
+<p>Nostr的核心区别在于：每个用户都使用公钥/私钥对来处理该功能，而不是使用服务器运营商所拥有的用户名，使得Nostr抗审查。这是构建整个 Nostr 协议的核心构建块之一。</p>
+<p>“事件”：这是客户端和客户端为了发送和检索消息而连接的中继服务器使用的基本对象/数据类型。该协议的总体思路是，客户端将事件发送到中继服务器，中继服务器随后存储和索引它们，其他客户端可以与中继服务器通信以请求它们已接收和存储的事件。在最初的 NIP 01 中，定义了三种不同的事件类型：</p>
+<p><strong>0：发送有关用户的元数据，例如用户名、图片、简介等。</strong></p>
+<p><strong>1：发送短信和基本内容</strong></p>
+<p><strong>2：推荐中继服务器供关注事件创建者的人连接</strong></p>
+<p>所有事件都以特定定义的方式构建。包括创建者的公钥、创建时间戳、类型（或规范中的种类）、内容有效负载和事件创建者的签名。另外，还可以有引用其他事件或用户的标签，并且有一个 ID 值，该值是除创建者签名之外的所有内容的哈希值（类似于比特币交易的 TXID）。</p>
+<p>这让用户可以通过验证签名（以及拥有该密钥的人，如果它没有被破坏的话）来保证信息确实是由其中的公钥所有者创建的，并保证信息在他们签署后没有被修改。</p>
+<p>就像不能在比特币交易签署后改变它而不使其失效一样，用户也不能在Nostr事件的创建者签署后改变它而不使其成为明显的欺诈。</p>
+<p>事件类型系统从最初的 NIP 得到了相当大的扩展。有一种事件类型用于加密的直接信息，通过结合发送方的私钥和接收方的公钥来建立一个共享密钥，其结果与你通过结合发送方的公钥和接收方的私钥得到的密钥相同（这就是BIP 47和沉默支付的工作方式）。也有可替换事件和短暂事件的类型。在可替换事件的情况下（很明显），它们被设计成事件的原始创建者可以签署一个新的事件来替换旧的事件。遵循该规范的中继服务器将自动从其存储中删除旧事件，并在收到后开始向客户提供较新的版本。短暂事件的设计是这样的：当发送到中继站时，它们将被广播给任何订阅其创建者的人，但中继服务器不应该存储它们。这就创造了一种可能性，即在其广播期间，只有在线的人才能看到消息。甚至还有一种事件类型，用来表示对其他人的事件的反应（如喜欢或表情符号）。</p>
+<p>说到最后一个问题，事件也可以包含标签。目前有事件（引用一个确切的Nostr事件）、公钥（标记或引用其他用户）和主题（模仿功能，如电子邮件主题）的标签类型。所有这些都可以包括指向特定中继服务器的指针，从这些服务器上可以获取数据，这样用户就可以在不同的服务器上进行实际的互动，也就是说，一个用户在一个中继服务器上发布他们的内容，可以与另一个用户在不同的中继服务器上发布的内容进行互动和引用，这样就可以让任何用户以适当的顺序连贯地获取整个交互线程，而不需要在找出相关数据的地方进行大量的复杂操作。</p>
+<p>在原始 NIP 中，给出了客户端如何通过订阅消息/数据结构与中继服务器交互的规范，该结构包括客户端有兴趣接收哪些事件的过滤器。这些过滤器可以根据先前的标准指定用户的公钥、确切的事件、事件类型，甚至是他们想要的特定时间范围。用户甚至可以提交公钥或事件 ID 的前缀，例如“1xjisj &hellip;”。并从以该短字符串开头的公钥接收任何一个或多个事件（这对于从中继服务器隐藏实际想要查看的内容非常有用）。</p>
+<p><em>总的来说，协议是一个非常简单的通用方案，用于在用户之间传递消息，涵盖了重要的事情，例如保证消息的完整性以及使用公钥身份发送消息的人，同时还促进了后端基础设施 中继服务器可以是高度集中的或允许用户运行他们自己的个人中继服务器，同时彼此无缝交互并且在用户被禁止使用一个中继服务器的情况下不会造成大规模混乱。他们可以转移到另一个服务器或运行自己的服务器，并且他们从之前的服务器上脱离平台并不会失去他们的数字身份或追随者，因为他们仍然保持对私钥的控制，并且用户可以在其他地方找到他们时对其进行身份验证。</em></p>
+<p>中继服务器也可以随心所欲地运行：免费运营、收取小额费用来发布或下载消息，甚至还有一个 NIP 要求 hashcash 样式的工作证明来提交消息。它们可以是一个单一的中继服务器，用于托管帖子并将其仅提供给其他用户，或者一个大规模运行的服务器，例如 Twitter 或 Reddit（客户端可以根据需要显示和组织信息，这允许模拟任何社交媒体） 。所有这些都可以无缝互操作，并且不会将用户拒之门外。</p>
+<h2 id="nostr-待解决的关键管理问题"><strong>Nostr 待解决的关键管理问题</strong></h2>
+<p>用户公钥/私钥是 Nostr 作为协议工作方式不可或缺的一部分。这起到了实际用户与其他人如何识别他们之间紧密绑定的作用，以防止任何中继服务器解除这两件事的绑定，即将某人的标识符提供给另一个用户。也解决了用平台最大的问题之一：缺乏对用户自身身份的控制。</p>
+<p>不过这也引入了新的问题：密钥可能会丢失，密钥可能会受到损害，如果发生此类事件，用户将无法寻求帮助。</p>
+<p>这将不可避免地需要一种方案，让用户以一种可验证和可发现的方式从一个密钥对转换到另一个密钥对，并可让他们通过协议与其他用户互动。整个协议是基于证明一个事件来自一个特定的用户（身份密钥），所以一旦某人的密钥被破坏，所有这些保证都会被抛到九霄云外。</p>
+<p>Nostr 需要一个实际的密码方案，将一个密钥的轮换与另一个密钥联系起来。开发人员 fiatjaf 提出了一项可能解决此问题的基本方案的提案。基本思想是采用从单个主种子派生的一长串地址，并创建一组“调整后的”密钥，类似于 Taproot 树如何提交给比特币密钥。Taproot 获取 Taproot 树的 Merkle 树根并将其“添加”到公钥以创建新的公钥。这可以通过将该 Merkle 树根添加到私钥来复制，以获得与新公钥匹配的私钥。Fiatjaf 的想法是将承诺从末尾向后链接到开始，这样每个经过调整的密钥实际上都会包含下一个经过调整的密钥用于创建它的证明。</p>
+<p>所以，想象一下从密钥 Z 开始，链中的最后一个。你可以用一些东西来调整它，然后返回并使用调整后的 密钥 Z (Z&rsquo; + Y = Y&rsquo;) 创建密钥Y 的调整版本。从这里您可以获取 Y&rsquo;，然后用它来调整 X (Y&rsquo; + X = X&rsquo;)。你会一直这样做回到密钥 A，得到 A&rsquo;，然后从那里开始使用该密钥。当它被破坏时，用户可以广播一个包含未调整密钥 A 和调整密钥 B&rsquo; 的事件。这将包含显示 B&rsquo; 用于生成 A&rsquo; 所需的所有数据，并且用户可以立即停止关注 A&rsquo; 并转而关注 B&rsquo;。他们会明确地知道 B&rsquo; 是该用户的下一个密钥，并改为遵循该密钥。</p>
+<p>不过，这个提议仍然存在一些问题。首先，必须提前生成将要使用的所有密钥，并且无法轮换到一组全新的密钥。这可以通过在这个方案中提交一个可以公证这种轮换的主密钥来解决，或者简单地从一开始就生成一组非常大的密钥。任何一条路径都是可行的，但最终需要保持根密钥或密钥材料的安全，并且只向 Nostr 客户端公开单个快捷键（Hotkeys）。</p>
+<p>然而，该方案不会保护用户或提供在根密钥材料丢失或本身受到损害的情况下进行身份恢复的机制。 </p>
+<p>为了在这里对潜在的解决方案进行一些讨论，换一种思考，将一个密钥调整为一个主冷密钥，该主冷密钥还必须用于签署从一个密钥到另一个密钥的事件轮换。您有密钥 A&rsquo;，它是通过添加 A 和 M（主密钥）派生的，轮换事件将是 A、M 和 B&rsquo;（通过添加 B 和 M 生成）以及 M 的签名。M 可以是 多重签名阈值密钥——三分之二、五分之三等。这可能会增加冗余以防丢失，并为密钥轮换提供安全机制。这也打开了使用服务来帮助恢复或将其中一些密钥传播给可信赖的朋友的大门。它提供了与比特币本身的多重签名相同的灵活性。</p>
+<p>NIP26 也是一个可能对处理这个问题非常有用的提案。这指定了事件的协议扩展，允许来自一个密钥的签名授权另一个密钥代表它发布事件。然后，“令牌”或委托的签名证明将包含在第二个公钥代表第一个公钥发布的所有事件中。它甚至可以是有时间限制的，因此委托令牌会自动过期并且必须更新。</p>
+<p>密钥管理和安全问题是一个非常大的问题，具有非常大的设计空间，充满权衡和痛点。但，Nostr如果不能为用户保护和维护这些身份的完整性，则完全基于用作身份的公钥/私钥对的协议，将不能被大规模的采用。</p>
+<h2 id="nostr-面临的扩展"><strong>Nostr 面临的扩展</strong></h2>
+<p>整个Nostr协议依赖于某个地方的人运行一个中继服务器。没有 &ldquo;Nostr网络&rdquo;，只有中继和连接到中继的客户端。需要激励人们运行中继器，从长远来看，这最终将是中继器能扩展到什么程度的一个重要部分。除非Nostr中继可以盈利，或者至少可以带来足够的资金来支付自己的运营成本，否则永远不会有与Twitter服务器同样规模的中继。</p>
+<h3 id="广告"><strong>广告</strong></h3>
+<p>考虑到 Nostr 作为协议的工作方式，完全阻止广告将非常微不足道，使其成为不可行的解决方案。中继服务器可以尝试使用广告作为一种收入模式，这显然是几乎所有在线免费服务的主要收入模式，但问题在于用户基本上必须选择加入。中继可以很容易地将广告注入到它们发送给客户端的事件中，但如果广告事件不是由它们有意订阅的公钥创建的，客户端也可以很容易地将它们从用户界面中过滤掉。</p>
+<h3 id="小额支付"><strong>小额支付</strong></h3>
+<p>小额支付是另一个明显的解决方案，特别是考虑到目前正在尝试将闪电网络更紧密地集成到 Nostr 应用程序中。这种模式在如何收费方面提供了很大的灵活性。中继可以只对在那里发布事件收费，也可以对下载事件阅读收费，还可以将两者结合起来，并根据两者消耗的资源多少来调整每一种的价格。不过，这种模式能否扩大到像Twitter那样的规模表示怀疑。</p>
+<p>内容小额支付在许多基于闪电网络的利基产品中显示出自己的可行性，但真正扩展到全球规模存在两个基本问题。</p>
+<p>首先，目前还没有足够的比特币采用。即使每个人都神奇地接受为 Nostr 上的每一次小服务交互付费，也没有足够多的人持有比特币来支持像 Twitter 这样大规模的比特币。中继可以通过法币收取订阅费用，但这些支付方式不会支持为每个发布或下载的事件支付一小部分费用。其次，人们实际上已经习惯了这种免费服务。这正是人们所期望的。我并不认为靠小额支付就能真正支持大规模的中继。</p>
+<p>有一种方法可以使小额支付 &ldquo;更有粘性 &ldquo;或更有可持续性，而不需要把它们强加给使用中继的每一类用户。关于在Nostr之上建立各种应用的讨论已经很多了，除了Twitter的克隆。GitHub、维基百科，甚至是Uber。</p>
+<p>最后一个是关键：经济期望。人们非常习惯于在某处发布招聘广告时支付费用，或在网上订购东西时向市场运营商支付一定的费用，但不会为认为应该免费的商品提供服务—谷歌、推特。这可以为中继站提供一种方法，从他们的用户那里创造一个可靠的收入支柱，而不产生大量的摩擦或打破一般潜在用户的期望。</p>
+<p>如果小额支付也将成为一个因素，那么中继运营商将不得不运行一个闪电节点，以便首先从用户那里接收资金。如果与中继实施的任何小额支付模型适当协同，这可能会增加收入。中继服务器的收入越大，它在闪电网络上需要的流动性就越大，以促进这一点。如果运营商正确地规划他们如何在网络中部署或分配流动性，那么除了通过中继接受或传输数据收取的任何费用外，仅运行路由节点的行为本身就可能成为一个不小的收入来源。 </p>
+<h2 id="结论"><strong>结论</strong></h2>
+<p>Web3 社交项目，除了以上提到的Nostr和Mastodon之外，还包括 Farcaster 和 Lens 等项目，它们并不会快速取代现有的社交媒体平台。据统计，Twitter 有数亿活跃用户，Facebook 有数十亿，但 Mastodon 只有 250 万用户， Nostr 仅大约 22w 个唯一用户身份。许多Web3的社交项目都面临着可用性障碍，这些障碍会减慢大规模采用速度。</p>
+<p>_媒体与政治必不可分。随着 Web3 社交项目的激增和公共对话在不同应用程序和协议之间的分裂，可能会产生政治结果。_即使，墨西拿长期以来提倡去中心化社交媒体，但仍担心去中心化会进一步加剧近年来以相互敌对和误解为标志的公共话语。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/46958/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">晚间必读5篇 | a16z：代币设计的陷阱、解决方案与未来展望</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46952/">
+                <span class="next-text nav-default">行情回暖 这些 ZK 概念项目值得关注</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景nostr"><strong>背景：Nostr</strong></a></li>
+    <li><a href="#mastodon-vs-nostr"><strong>Mastodon VS Nostr</strong>  </a></li>
+    <li><a href="#nostr-待解决的关键管理问题"><strong>Nostr 待解决的关键管理问题</strong></a></li>
+    <li><a href="#nostr-面临的扩展"><strong>Nostr 面临的扩展</strong></a>
+      <ul>
+        <li><a href="#广告"><strong>广告</strong></a></li>
+        <li><a href="#小额支付"><strong>小额支付</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#结论"><strong>结论</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

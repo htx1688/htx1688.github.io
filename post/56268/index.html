@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深入研究RWA协议机制及生态系统 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="我们将在本文深入研究关于现实世界资产（RWA）代币风险管理的关键问题。" />
+<meta name="keywords" content="RWA" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56268/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深入研究RWA协议机制及生态系统" />
+<meta property="og:description" content="我们将在本文深入研究关于现实世界资产（RWA）代币风险管理的关键问题。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56268/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="深入研究RWA协议机制及生态系统">
+<meta itemprop="description" content="我们将在本文深入研究关于现实世界资产（RWA）代币风险管理的关键问题。"><meta itemprop="datePublished" content="2023-08-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="13916">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入研究RWA协议机制及生态系统"/>
+<meta name="twitter:description" content="我们将在本文深入研究关于现实世界资产（RWA）代币风险管理的关键问题。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深入研究RWA协议机制及生态系统</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-02">
+      2023-08-02
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 13916 字 -
+        预计阅读 28 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Taeheon Lee &amp; Jungwoo Pyo，加密KOL；翻译：金色财经xiaozou</p>
+<p>我们将在本文深入研究关于现实世界资产（RWA）代币风险管理的关键问题。我们将分析不同协议是如何处理此类相关风险的，并讨论迄今为止可能遇到的所有问题。之后，我们将探讨DeFi协议如何渗透到RWA抵押品借贷市场。最后，我们将对一系列围绕Web3领域RWA的观点进行评估，同时也将思考这些资产可能给Web3行业带来哪些独特的好处及限制。</p>
+<p><strong>1、管理RWA贷款的违约风险</strong></p>
+<p>我们将在本节内容中讨论与使用RWA抵押品相关的显著违约风险，以及为减轻这种风险可采取的策略。在深入细节之前，了解在传统DeFi领域中使用代币抵押品的风险以及现有DeFi协议如何处理违约风险至关重要。我们将从基本背景着手，然后将重心转移到RWA代币支持的贷款的违约的不同之处，并研究各RWA协议该如何应对这些挑战。</p>
+<p><strong>1.1 早期DeFi协议中的贷款头寸违约</strong></p>
+<p>在之前的DeFi模型中，当用户将稳定币存入协议时，他们只需要关心协议机制是否能够保护存款的价值。换句话说，当借款人的抵押代币价格下降时，评估协议是否能够执行清算等过程是至关重要的。例如，如果你是AAVE上的USDC存款人，你所要关心的只是，当贷方担保的ETH价格下降时，该协议会不会清算贷方头寸保护你的USDC。MakerDAO也是如此。要使DAI的价值保持在1美元，所要做的就是在MakerDAO持有的抵押品的价值低于作为贷款发行的DAI的价值之前清算借款人的抵押品头寸。</p>
+<p>因此，从存款人的角度来看，他们只需要检查协议是否使用了主要协议（如AAVE或MakerDAO）中的适当机制，以及是否存在任何违约情况。从协议的角度来看，当出现违约情况时，它会检查机制出了什么问题，然后仅对机制进行适当的修改以处理违约情况。</p>
+<p><strong>1.1.1 示例</strong></p>
+<p>2020年3月，由于代币价格大幅下跌，MakerDAO经历了大量违约。当时的问题是MakerDAO的清算机制设计不佳，导致清算人无法按照协议的要求参与清算过程。MakerDAO在恢复阶段对协议进行了改进，包括对其清算机制的抵押品拍卖过程进行了重大更新。</p>
+<p>除了清算机制外，现有的DeFi协议还设有与清算相关的风险参数，以预防违约。在一家名为Gauntlet的代币经济建模公司的帮助下，MakerDAO和AAVE等DeFi协议已经为清算设定了贷款价值比（LTV）阈值，并在他们认为市场处于熊市时调整这些参数，以确保保护其抵押品资产。例如，2022年12月，为了应对加密市场的放缓，AAVE社区增加了稳定币贷款所需的抵押品数量。</p>
+<p><strong>1.1.2 小结</strong></p>
+<p>在之前的DeFi中，如果协议的代币资产价格正常并以该价格处置其抵押品，则不会发生违约。换句话说，在传统的DeFi模型中，如果一个协议出现了违约情况，那么这就是协议设计的问题，这意味着协议设计很糟糕，或者没有合理考虑到协议可能出现的风险。</p>
+<p><strong>1.2 RWA协议的贷款头寸违约</strong></p>
+<p><strong>1.2.1 借款人违约意识</strong></p>
+<p>处理RWA的协议对违约的看法略有不同：它们认识到每个RWA代币抵押品都可能发生违约，并且它们不认为协议有义务防止这种情况发生。</p>
+<p>在传统的DeFi中，当抵押代币的价格低于一定水平时，可以将其出售给链上市场。然而，RWA代币没有一个可以立即以固定价格出售的市场。因此，即使RWA的价格下跌，协议也很难适当出售抵押品来保护协议资产的价值。此外，无论RWA的代币化程度如何，区块链上的代币所有权是否能反映实际RWA的所有权，目前还不清楚。这两个因素使得在需要清算RWA代币抵押品时，实际上是不可能快速清算区块链上的抵押品并赎回借款人的贷款头寸的。</p>
+<p><strong>1.2.2 Tranche分级：一种违约响应机制</strong></p>
+<p>出于这个原因，RWA协议假设违约随时可能发生，并且重点不是通过清算来防止协议违约，而是在发生违约时如何将资产损失分配给贷方。更具体地说，一些贷款人可能愿意存款，因为他们希望获得高利息回报，即使可能会有一些资本损失，而另一些贷款人可能宁愿不承担任何损失，即使回报率很低。RWA协议根据贷方的风险偏好对贷方及存款进行分类，即使是对同一金库也是如此。<img src="https://img.bibiqing.com/news/2023/0802/14_shbsevs9f7.png" alt="WA0NgOtyyvl1XaOspbbUhwFrCteyI9JalFASOcBU.png" title="7074645"></p>
+<p>这种结构在传统金融中称为tranche（分级），大多数RWA协议在接收贷款人的存款时采用分级结构，通常分为高级分级和初级分级。高级分级是一种可以预防损失但获得的回报有限的融资形式，而初级分级是一个可以获得更高回报的资金池，但也是首先遭受损失的资本。</p>
+<p>以分级结构接收贷款人存款的金库的设计方式也与传统金融使用的分级相同。当借款人偿还他们所借的本金和利息时，还款首先分配给高级分级，然后再分配给在初级分级存款的贷款人。剩余的全部金额将分配给初级分级。在借款人破产的情况下，未偿金额损失将首先由初级分级承担。当初级分级无法单独收回所有未偿金额时，损失再由高级分级承担。</p>
+<p><strong>1.2.3 GoldFinch Finance的高级分级</strong></p>
+<p>TrueFi的结构化信用金库和Centrifuge Tinlake的Tin &amp; DROP的每个金库都有高级和初级分级。然而，GoldFinch Finance的分级结构略有不同：将资产直接存入特定金库的贷款人被称为backer（支持者），支持者的所有存款都被视为初级分级。相反，将钱存入GoldFinch协议而非特定金库的贷款人被称为流动性提供者，他们的存款被视为高级分级。各金库中有多少支持者存入资金决定了高级分级中的资金将有多少分配给各金库。这样带来的结果就是，每个金库都能够借入比支持者提供的资金更多的流动性，从这个意义上说，这种模型称为杠杆模型。</p>
+<p>让我们推测一下为什么GoldFinch使用与其他RWA协议不同的高级分级结构。首先，GoldFinch的目标借款人都是发展中国家的企业（即使它们有各自不同的特点），所以把GoldFinch的所有贷款金库捆绑在一起，为它们的风险和回报创建一种存款产品，然后把高级分级打包成发展中国家金融产品的多元化投资提供给用户，这似乎是自然而然的做法。另一方面，其他RWA协议在贷款对象方面是如此不同，我认为将协议中的所有贷款捆绑成一个单一的存款产品是没有意义的。</p>
+<p><strong>1.3 分级结构的设计考虑</strong></p>
+<p><strong>1.3.1 为初级分级提供资金很重要</strong></p>
+<p>如上所述，在RWA代币抵押贷款协议中，如果借款人无法偿还贷款，那么协议将面临无法偿还的损失，并且这些金库的贷款人可能无法收回他们的代币。考虑到贷款人主要是代币持有者，他们存入稳定币，并希望在相对较小的资产损失风险的情况下获得回报，因此在借款人破产的情况下，需要有一种方法来限制贷款人的损失规模。</p>
+<p>在当前的RWA代币支持的贷款协议中，初级分级充当了这一角色。初级分级发挥了缓冲损失的作用，让普通投资者可以相对轻松地投资RWA协议。换句话说，在RWA代币支持的贷款中，并不是“无风险”的，初级分级是每个贷款头寸的保险。RWA协议需要关注确保初级分级存款的规模，监控每个金库的初级分级是否为初级分级存款人提供了足够的回报。</p>
+<p><strong>1.3.2 设置好初级和高级分级大小比例</strong></p>
+<p>如果初级分级的规模相对于源自金库的贷款规模来说太小，那么初级分级将无法吸收足够的损失；所以，初级分级的规模不应太小。相反，如果初级分级的规模太大，那么由于初级分级的结构，你有可能无法获得足够的利息收入来投资初级分级。这意味着你需要适当地设置初级分级与高级分级的大小比例。这个比例可以通过考虑以下因素来设定：</p>
+<ul>
+<li>
+<p>借款人不还款的概率和预期损失。你的金库不还款的概率越高，初级分级规模就应该越大。想要确定借款人不还款的可能性，你可以使用以下信息：借款人过去的贷款和还款历史，借款人质押的RWA的价格稳定性和处置难易程度，以及总体市场状况。</p>
+</li>
+<li>
+<p>初级分级的收益竞争力。可以预期的初级分级利息收益率自然应该高于高级分级，并且至少适度地高于其他DeFi中稳定币可以获得的利息收益率，以便代币持有者有动力将其资产存入高级分级。</p>
+</li>
+</ul>
+<p>RWA协议应该持续监控上述因素，以跟踪初级分级是否可以维持其规模。如果初级分级存款回报率很低，建议使用协议中的代币来奖励初级分级存款人。</p>
+<p><strong>1.4 案例分析</strong></p>
+<p><strong>1.4.1 违约案例</strong></p>
+<p>2022年，关于RWA协议金库违约的消息接连不断：首先是TrueFi向Blockwater Capital提供的340万美元贷款违约。从TrueFi借钱的加密货币基金Invictus Capital也未能按时偿还100万美元的贷款。Maple Finance也未能收回借给加密货币基金Auros Global的2,400 wETH。此外，由Celsius、Alameda、Orthogonal Trading、M11和其他公司管理的一系列金库违约导致Maple Finance在2022年12月发生了5400万美元的贷款违约。除了Maple Finance之外，TrueFi和Centrifuge也分别发生了440万美元和250万美元的违约。</p>
+<p>2022年10月之后发生的违约有一个共同点，那就是借款人都是加密货币基金，他们经常将借来的资产放在FTX等交易所。他们计划利用RWA借贷协议中的贷款来执行他们的策略，如做市和套利，赚取利润来偿还贷款和利息。然而，当FTX崩溃时，他们的贷款被冻结在该交易所，他们无法偿还RWA协议中的贷款。除了FTX，还有一个案例就是Invictus Capital，其在Terra稳定币崩溃后遭受了巨大损失，无法偿还贷款。</p>
+<p>在RWA协议中，一旦金库违约，损失将由为金库提供资金的贷方分担。当Babel Finance从Maple Finance获得的1000万美元贷款在2022年7月违约时，未偿还的违约金额被记入金库的贷方，导致约3.2%的损失。</p>
+<p><strong>1.4.2 协议机制改进</strong></p>
+<p>Maple Finance在去年的违约事件之后改变了其机制方向，为RWA协议除了上述机制之外可以考虑的其他违约风险管理方法提供了见解。</p>
+<p>借款人多样化——Maple Finance去年经历如此大规模的贷款违约（超过5000万美元）的原因之一是加密货币基金高度集中于借款人一方。由于借款人都是受加密市场影响的参与者，当像FTX崩溃这样的事件发生时，许多金库都会同时出现无法还款的情况。从协议的角度来看，一下子如此大量的未还款给协议带来了沉重负担，需要通过协议创建的金库来收回这些未还款。Maple Finance也意识到了这一问题，并决定从2023年开始实现借款人的多样化。</p>
+<p>赋权金库管理员——以前，金库管理员不能在借款人不还款的情况下立即声明违约，需要等上一段时间之后才可以。从表面上看，这似乎不是个问题，因为违约是由协议定义的机制触发的。然而，由于没有办法清算借款人的抵押品以迫使他们偿还贷款，所以RWA协议要求贷款人在确定金库已失去偿还能力时尽快冻结金库资产，以尽可能保护贷款人的资产。鉴于这一点，Maple Finance修改了协议，允许金库管理员在其认为借款人已失去偿还能力的情况下立即声明违约。</p>
+<p>调整金库管理员激励机制——2022年违约期间出现的一个问题是，一些金库管理员并没有分享有关他们所管理的金库状态和借款人还款状态的准确信息。鉴于RWA协议的性质——不仅依赖协议逻辑，还依赖使用协议的贷款人、借款人和管理员之间的信任关系——金管理员的这种行为可能会导致更大的违约损失。在这方面，还需要规则来强制金库管理员在创建金库时将大量资产存入初级分级。</p>
+<p><strong>2、DeFi协议进军RWA抵押贷款市场</strong></p>
+<p>自2022年下半年以来，RWA生态系统中最受关注的问题之一就是，在现有的DeFi协议中出现了几个项目，这些项目宣布了纳入RWA的意图。MakerDAO和AAVE就是最突出的例子，而Frax Finance也在积极讨论与RWA相关的机制。在本节内容中，我们将讨论MakerDAO和AAVE试图引入RWA的背景环境，以及采取了何种形式引入。</p>
+<p><strong>2.1 MakerDAO</strong></p>
+<p><strong>2.1.1 引入RWA的目的</strong></p>
+<p>协议的稳定增长——MakerDAO社区的主要议程之一一直都是创造一种稳定增加DAI发行的途径。MakerDAO自2018年运营稳定币以来面临的一大问题就是，它无法仅凭ERC20代币抵押品继续增长DAI。MakerDAO认识到，只接收代币抵押品会使DAI的发行过于依赖于对加密货币的长期需求。通过纳入RWA抵押品，MakerDAO希望DAI将为想基于RWA或信贷借款的实体提供作为借贷工具的效用。在这一战略下，MakerDAO将不再仅仅依赖于加密货币市场条件，还将能够基于实体经济创造DAI需求。因此，DAI的发行将能够更加稳定地增长。</p>
+<p>货币化——MakerDAO最初还通过协议提供的DAI存款费用（即DSR）创造了DAI需求，基于这种需求，借款人支付的利息成为协议的主要收入来源。然而，MakerDAO社区很快就意识到代币的收益不高，也不可持续，于是他们开始转而关注RWA的收益，这是相当高且可持续的收益，他们开始直接向想要抵押RWA借款的实体发行DAI，并使RWA收益成为协议的主要收入来源。</p>
+<p><strong>2.1.2 采用标准</strong></p>
+<p>每当MakerDAO为特定RWA创建金库或向特定借款人提供由RWA担保的贷款时，它都会依赖社区成员的支持来做出决定。在做这些决定时，MakerDAO社区决定使用以下评估标准：</p>
+<ul>
+<li>
+<p>可扩展性：首先，MakerDAO要求RWA必须有足够高的发行量和足够大的市场规模来增加DAI的发行。</p>
+</li>
+<li>
+<p>稳定性：由于RWA被用作发行DAI的抵押品，因此抵押品保持价值稳定是非常重要的。为此，MakerDAO社区要确定RWA的价格是否足够稳定，以及市场上是否有足够的流动性来处理它们。此外，协议还要评估是否存在任何可能危及MakerDAO稳定性的风险。</p>
+</li>
+<li>
+<p>需求：即使MakerDAO接收RWA作为抵押品并发行DAI，如果在利息和其他财务成本方面，从传统金融机构借钱要更好，那么接收RWA作为MakerDAO的抵押品并没有多大意义。在这方面，MakerDAO社区将从RWA所有者的角度评估在MakerDAO上借款的效用，即MakerDAO和RWA所有者是否能够互惠互利。</p>
+</li>
+<li>
+<p>监管风险：除了处理RWA之外，MakerDAO团队还考虑在将资产纳入协议的过程中是否需要涉及更多监管或法律实体，以及是否存在额外的技术、经济或监管风险。</p>
+</li>
+</ul>
+<p><strong>2.1.3 实施步骤</strong></p>
+<p>此外，MakerDAO总结了采用RWA所需的具体步骤。</p>
+<ul>
+<li>
+<p>如何将RWA资产转换为MakerDAO上的可交易资产？为了将RWA作为协议的抵押品，用户需要能够对其进行代币化，并要有适当的法律机制，允许他们在需要进行清算时处理RWA。</p>
+</li>
+<li>
+<p>在传统金融世界里，有可能阻止DAI借款人再次抵押同一资产吗？由于代币化RWA的合法权利与实体经济中的权利是分开的，因此借款人可能会用他们的RWA从MakerDAO借款，然后在传统金融机构中再次借款。如果发生这种情况，借款人就不太可能偿还他们从RWA协议获得的贷款。鉴于这方面，MakerDAO试图阻止借款人使用他们的RWA作为抵押品来获得另一笔贷款。</p>
+</li>
+<li>
+<p>能否可靠地检索价格信息等？Oracle将如何设计？即使在清算过程中处理抵押品的方式存在差异，由于RWA充当抵押品，因此RWA的价值仍然对借款人的还款潜力有重大影响。在这方面，MakerDAO关心的是如何可靠地获取这些RWA资产的价值。</p>
+</li>
+</ul>
+<p><strong>2.1.4 采用情况</strong></p>
+<p>2022年7月，MakerDAO创建了现实世界金融核心部门，旨在提高MakerDAO对现实世界金融的影响力。通过这个部门，该协议团队一直在向现实金融领域的参与者提供RWA支持的贷款，并继续为他们创建金库。这些金库的运作方式是直接向需要贷款的借款人发放DAI。主要金库如下（截至2023年3月）。<img src="https://img.bibiqing.com/news/2023/0802/14_dz3ije0ilu.png" alt="97yuevxbMiHM2oX0QQNvcOsblSIEVHbsbUfKmkI8.png" title="7074646"></p>
+<p>在MakerDAO上作为RWA抵押品发行的DAI金额目前已超过6亿美元，DAI的发行速度一直在快速增长，特别是自2022年年底以来。像RWA009-A这样的金库特别重要，因为它们直接从MakerDAO提供资金，而不是由政府监管的银行借出。在协议收入方面，它也有助于提高协议的净收入，截至2023年1月，作为RWA抵押品发行的DAI价值约6.5亿美元，约占协议总费用收入的75%。</p>
+<p>在此背景下，MakerDAO不断审查评估将DAI作为RWA抵押品借出的金库，如短期债券、机构信贷和能源生产设施。<img src="https://img.bibiqing.com/news/2023/0802/14_ms6cnnj41i.png" alt="V7ztB66MYAaXQOemAKwIafo3LDUUtfbLEdoxOEeq.png" title="7074647"></p>
+<p>MakerDAO社区表示，每个RWA都必须通过治理来决定是否处理资产，这是低效和缓慢的。因此，MakerDAO正在寻求与RWA代币化和Centrifuge（+ Tinlake）等RWA抵押贷款协议合作，以允许RWA协议负责RWA资产处理的必要步骤。MakerDAO还在与Maple Finance洽谈合作事宜。在此合作中，Maple Finance将再次被用作基础设施，以促进基于RWA的抵押贷款，MakerDAO可能会向Maple Finance发行DAI，并根据各金库的风险调整各金库的DAI发行限额和违约利率等参数。在与RWA协议的合作中，MakerDAO期望其他协议发挥如下作用：（1）吸引和管理借款人，（2）负责法律程序或组织法律结构，以及（3）处理违约。</p>
+<p><strong>2.2 AAVE</strong></p>
+<p><strong>2.2.1 背景</strong></p>
+<p>GHO的崛起——2022年7月，Aave治理论坛在一个名为“介绍GHO”的议项中，提出了一项基于Aave协议发行一种名为GHO的稳定币的计划。与其他稳定币一样，GHO将得到多种资产类别的支持。不过，值得注意的是，它不是特定于加密货币的，而是一组相互关联程度较低的资产组合，比如RWA和信用评分。</p>
+<p>在GHO机制中，一个被称为Facilitator的实体被授权发行GHO代币，而不是由单个实体管理所有抵押品。Facilitator向社区提议GHO的发行方法，如果提案通过，则可以在一定范围内按照该Facilitator提议的方法发行GHO。有趣的是，Facilitator不必坚持发行加密货币担保的稳定币；事实上，GHO可以以每个Facilitator定义的任何方式发行/销毁，包括针对多种资产类别的抵押、算法、基于信用或基于delta中性头寸，Facilitator越多样化，GHO的价格就越稳定。<img src="https://img.bibiqing.com/news/2023/0802/14_5cw1pguw86.png" alt="jrphBIH8hOo2OU0BNRJChUyn4dTxWuCFjWDp6VHI.png" title="7074648"></p>
+<p>RWA在DeFi领域的重要性——2022年11月和12月，Aave社区开始探讨RWA的重要性。在“帮助Aave思考RWA”一文中，来自Warbler Labs的Punia指出，RWA可以通过两种方式帮助Aave协议：通过加密货币之外的稳定币抵押品的多样化提供稳定性，并通过利用比加密货币更大的资产池为GHO扩展为全球稳定币铺平道路。</p>
+<p>在“为什么RWA对DeFi很重要”一文中，作者认为，虽然DeFi可以通过专注于原生加密货币来实现一定程度的增长（约10倍），但加密货币市场的规模有明显的限制，RWA是实现更大增长（约100倍）所必需的。DeFi需要从TradFi那里获取部分市场份额，才能最终进入主流。</p>
+<ul>
+<li>
+<p>DeFi和TradFi类似于电子商务和实体店交易之间比例的反转，因为有了互联网，人们更喜欢电子商务而不是实体店交易。DeFi和TradFi也是如此：随着区块链技术的发展以及变得越来越活跃，人们会将会更喜欢DeFi而非TradFi。</p>
+</li>
+<li>
+<p>金融领域始终都存在用户需求，人们在金融应用和资金上总是希望有更加灵活的方式，这是一个普遍的现象。DeFi可以在所有这些方面更好地为他们服务。</p>
+</li>
+<li>
+<p>DeFi的可见性和互操作性使其比中心化协议更安全，波动性更小，从而更好地为整个经济系统服务。</p>
+</li>
+</ul>
+<p>MakerDAO的成功——MakerDAO的成功进一步加强了基于Aave协议的RWA的用例。从DeFi协议中获得稳定的收入流对其可持续性至关重要，根据文章“概述Aave的RWA战略”描述，截至2022年11月，MakerDAO从RWA中获得了超过50%的协议收入。<img src="https://img.bibiqing.com/news/2023/0802/14_46dln77g55.png" alt="Sc4zRMVRszMtacLr4tA9I9x2GemHAZhOqm7rYq5e.png" title="7074649"></p>
+<p>上图显示了MakerDAO按资产划分的收入变化情况，截至2023年3月，RWA占收入的50%以上。随着时间的推移，RWA在总收入中所占的份额越来越大，显然RWA比我们想象的要重要得多。</p>
+<p><strong>2.2.2 效果及预期结果</strong></p>
+<p>根据文章“概述Aave的RWA策略”所述，Aave仅将链上资产作为GHO的抵押品的风险如下：</p>
+<ul>
+<li>
+<p>在市场低迷期间，如果相关资产缺乏市场流动性，则协议存在累积负债的风险，即，如果仅将加密资产视为抵押品，则存在协议违约的风险。</p>
+</li>
+<li>
+<p>协议缺乏流动性最终使其容易受到经济攻击或清算。</p>
+</li>
+<li>
+<p>加密货币资产对市场状况高度敏感，在市场低迷期间，由于杠杆需求降低，借贷协议的现金流可能会恶化。</p>
+</li>
+</ul>
+<p>最终，当RWA资产作为GHO的抵押品提供时，Aave社区希望看到以下效果，这与MakerDAO社区决定接受RWA时所期望的效果大体一致。</p>
+<ul>
+<li>
+<p>由于RWA比加密资产更稳定，波动性更小，所以其风险更依赖于宏观经济流，并且对加密市场本身的波动性更强。</p>
+</li>
+<li>
+<p>RWA借款人的筹资通常用于生产性业务，而不是投机性交易。这比加密货币投机的规模要大得多，无论是牛市还是熊市都是如此。</p>
+</li>
+</ul>
+<p><strong>2.2.3 Aave的RWA采用策略</strong></p>
+<p>与传统加密货币相比，RWA是一种完全不同的资产类别。在Aave社区中有很多关于RWA应该如何实现的讨论。在文章“概述Aave的RWA策略”中，作者详细阐述了DeFi的不同元素，以说明哪些元素是被提倡的。</p>
+<ul>
+<li>
+<p>资产类型：作者主张首先引入风险较低、收益较低的RWA，以了解它如何在加密市场中发挥作用，从而建立对RWA Facilitator的长期信任，然后逐步引入风险较高、收益较高的资产。资产类别不应直接与加密市场相关，例如，排除对做市商、矿工、DAO等的贷款。</p>
+</li>
+<li>
+<p>债务上限：在现实世界中，采用GHO作为法定代币需要时间，因此我们必须假设所有借款人最初都会将GHO兑换为现有的法定代币（USDC、USDT、USD……）。这就是为什么指定的债务上限应该与可用于出售或赎回现有稳定币的流动性成正比，因为最终，GHO保持与美元的软挂钩以维持其价值是很重要的。总而言之，债务上限应该是这样的：即如果大量的GHO被出售给市场，债务上限也不会贬值。</p>
+</li>
+<li>
+<p>利率：作者认为，Aave目前的利率模型不应适用于RWA，利率应基于包销和类似TradFi的交易。这是因为Aave的Facilitator可以为RWA设定不同于其他资产类别的利率。</p>
+</li>
+</ul>
+<p><strong>2.2.4 采用情况</strong></p>
+<p>2021年12月28日，Aave与Centrifuge合作推出RWA市场，以实现RWA的代币化。RWA市场在Aave服务中提供了Centrifuge Tinlake的TIN &amp; DROP模型，允许存款人通过稳定的加密相关RWA抵押品获取收益，Centrifuge发行人通过Aave借贷将加密市场作为一种流动性来源。<img src="https://img.bibiqing.com/news/2023/0802/14_mbf40yn3hg.png" alt="D1geSVfI72XQA8WUvwW42jzugAjfrKi16tjQQgQ0.png" title="7074650"></p>
+<p>由于RWA市场是一个封闭的市场，只有通过KYC流程验证成为存款人的用户才能作为投资者参与其中。发行人（Centrifuge发行人）可以为他们的资产创建池，LP代币对应Centrifuge Tinlake的DROP。存款人（投资者）可以存入USDC进行存款质押，从该池中购买DROP。</p>
+<p>RWA市场一经推出便迅速增长，于2022年4月突破2000万美元，但随后在市场低迷期间，市场规模萎缩，截至2023年3月，总市场规模约为750万美元。幸运的是，没有发生资金违约，协议本身也按预期有条不紊地运作。</p>
+<p>通过RWA市场的运作，Aave了解到，要真正将RWA引入DeFi，需要解决几个关键的挑战。</p>
+<ul>
+<li>
+<p>它需要与风险评估(RA)或包销相关的各领域专家。</p>
+</li>
+<li>
+<p>贷款人应该认真考虑他们的策略，考虑RWA抵押品的寿命和流动性，因为它本质上是一种不同于加密货币等高流动性类型的资产。</p>
+</li>
+<li>
+<p>RWA筹资依赖于Aave的稳定币流动性，而这通常会受到Aave以外因素的影响。</p>
+</li>
+</ul>
+<p>RWA Facilitator。RWA市场的例子向我们展示了将RWA引入DeFi的潜力。我们已经看到，关于将RWA Facilitator作为GHO发行推动因素之一的讨论正在取得进展。截至2022年12月，Centrifuge将继续尝试成为提供全方位服务的GHO RWA Facilitator。</p>
+<p>我们在之前的文章中确定了需要解决的一些关键挑战，以使RWA具有可扩展性。在Aave协议中，我们期望RWA Facilitator具有以下特性：</p>
+<ul>
+<li>
+<p>与DeFi的兼容性：这是指确保RWA抵押品很好地集成到链上生态系统中。</p>
+</li>
+<li>
+<p>可信的基础设施：进行涉及RWA抵押品的中介服务需要在健全的法律框架内具有高度的透明度。要成功地将RWA纳入链上生态系统，需要一个值得信赖的专业经纪框架。</p>
+</li>
+</ul>
+<p>Centrifuge目前正在开发一个基于Centrifuge池持有资产的指数代币。指数代币购买者将购买Centrifuge资产组合，这是生态系统内信贷群体集体智慧考虑后的风险分散的结果。RWA池也可以作为指数的投资组合构成，这可能是作为Aave GHO Facilitator的RWA的最佳案例。</p>
+<p><strong>3、RWA抵押贷款市场的现状和未来</strong></p>
+<p>到目前为止，我们已经描述了处理RWA代币的协议所采用的机制，以及为什么要如此设计。在本节内容中，我们将快速看一下处理RWA代币的协议的当前状态。我们将首先来看贷款额的整体趋势，然后再看各协议的表现。</p>
+<p><strong>3.1 TVL和整体贷款额趋势</strong></p>
+<p><strong>3.1.1 加密货币基金贷款的增长和紧缩</strong></p>
+<p>下图显示了基于RWA代币借贷的协议的活跃贷款量。在2022年之前，TrueFi占RWA抵押贷款的大部分份额，部分原因是因为TrueFi是第一个RWA抵押贷款协议。此后，Maple Finance快速增长，到2022年下半年，Maple Finance和TrueFi各占RWA抵押贷款市场的半壁江山。<img src="https://img.bibiqing.com/news/2023/0802/14_nsdcljtqaq.png" alt="W80InyUMKKVAnB9d1TC6Fd7QiLmMTvBYM5oboMBq.png" title="7074651"></p>
+<p>在此期间，Maple Finance和TrueFi的借款人主要是从事基于加密货币的做市和交易的加密基金，如MGNR、Auros capital、Folkvang Trading和Alameda Research。直到2022年下半年，Maple Finance和TrueFi似乎经历了快速增长，因为加密货币牛市中，交易公司需要更多资金。</p>
+<p>然而，随着我们进入2022年下半年，Terra协议崩溃和FTX银行挤兑等事件对主要加密基金造成了重大影响，对加密基金的贷款量也相应减少。因此，从2023年起，上图中Maple Finance和TrueFi的权重几乎消失不见了。</p>
+<p><strong>3.1.2 非加密基金贷款稳定增长</strong></p>
+<p>虽然Centrifuge和GoldFinch没有像Maple Finance那样出现爆炸式增长，但自2022年以来它们一直呈现稳步增长，并且在去年下半年的重大事件中似乎维持了总体贷款额，没有受到太大损害。Centrifuge提供各种资产类别的贷款，包括由房地产担保的贷款和由货运发票担保的贷款。GoldFinch向发展中国家的金融科技公司和房地产公司提供贷款。下图显示了Centrifuge提供贷款的各领域，他们实际上是向各个领域贷款，包括房地产、发展中国家和机构。<img src="https://img.bibiqing.com/news/2023/0802/14_6si7749s1i.png" alt="LBcDTsdykEBEjc0hx5C7wLBMHvVqNzUWNscHUIlG.png" title="7074652"></p>
+<p>Centrifuge和GoldFinch去年似乎没有受到太大损害，因为它们的贷款并不集中于加密公司，而是集中于非加密公司，鉴于此，从它们那里借款的需求仍然强劲，并且无论加密市场的状况如何，借款需求都在稳步增长。</p>
+<p><strong>3.1.3 在DeFi借贷协议中增加RWA抵押</strong></p>
+<p>此外，如上所述，MakerDAO、AAVE和FRAX等稳定币和借贷协议正在积极进军RWA抵押贷款领域，并在各自协议内缓慢增加RWA资产的比重。自去年6月份以来，FRAX一直在通过治理论坛讨论将FRAX分配给RWA抵押贷款池，并就与TrueFi和PropFi等公司合作事宜进行投票。虽然我们对DeFi中的RWA抵押贷款机制还很陌生，但见证该领域在2023年的快速增长将会非常有趣。</p>
+<p><strong>3.2 使用RWA的好处</strong></p>
+<p><strong>3.2.1 吸引实体经济玩家加入DeFi生态系统</strong></p>
+<p>DeFi和NFT等产品的大多数用户仍然集中于长期拥有和交易加密货币的少数人，因此为了发展Web3生态系统，我们需要让更多用户进入Web3生态系统。各种相关计划正在进行中，例如Web2 X Web3合作以及RWA代币支持的贷款都可能是其中一员。</p>
+<p>如果RWA抵押贷款能够为投资公司和机构提供传统金融无法提供的价值，并将其流动性带入DeFi生态系统，那么它可能会再次推动Web3生态系统的整体规模增长。通过RWA协议渐渐将更多机构带入Web3空间，区块链可以定位为新兴金融技术的基础设施。将RWA代币引入DeFi生态系统是扩大用户基础的重要一步。</p>
+<p><strong>3.2.2 除代币外，DeFi还可以有其他货币化方式</strong></p>
+<p>如前所述，RWA抵押品允许区块链项目从加密货币以外的来源产生收益。传统的基于加密货币的激励措施的问题在于，它们过于依赖市场条件，而且不能提供有意义或可持续的回报。<img src="https://img.bibiqing.com/news/2023/0802/14_rbd2g7plr7.png" alt="xYJ0qZtDtTe8EZahszRytdofQduKcfQU4bV0i6R7.png" title="7074653"></p>
+<p>然而，通过利用来自RWA的利息收入作为新的收入流，DeFi协议可以拥有除了新发行的代币之外的收入流，从DeFi的角度来看，这可能是有吸引力的，特别是如果与RWA相关的风险被很好的理解和管理。事实上，如果你浏览rwa.xyz网站，将会看到由DeFi协议处理的RWA的平均利息收益率为10%。MakerDAO的大部分收入来自其RWA金库，所以如果正确使用RWA的话，协议可以扩大自己的收入流。</p>
+<p><strong>3.2.3 不受DeFi加密货币市场影响的安全需求</strong></p>
+<p>在任何领域，无论是DeFi还是NFT，区块链项目的一个最大问题就是，它们都极易受到以比特币为代表的加密货币市场的影响。对于DeFi借贷协议来说，这个问题更加严重，因为在DeFi借贷协议上存储法定代币（ETH、UNI等）并试图放贷的人通常是试图通过借贷来利用多头头寸的人。相反，在DeFi贷款协议上存储稳定币并希望借入法定代币的人代表的是空头头寸。<img src="https://img.bibiqing.com/news/2023/0802/14_ilu6ct3sfy.png" alt="8OHnG5uABSAFD6BP2wNy99kj6IHgNXijrx11L13M.png" title="7074654"></p>
+<p>因此，如果你看一看像MakerDAO或AAVE这样的DeFi协议，就可以看到协议的规模会根据市场情况急剧增加或减少。但是，如果协议的用户群中有拥有RWA的实体，那么这些协议的需求则会相对不受加密市场的影响，并且允许在对协议规模具有一定程度可预测性的情况下进行操作。</p>
+<p><strong>3.3 使用RWA的缺点或局限性</strong></p>
+<p><strong>3.3.1 出现信任问题</strong></p>
+<p>除了在成本和交易速度方面的优势外，通过区块链和智能合约而无需信任中心化一方实现预期结果的能力，一直是DeFi最重要的价值之一。然而，大多数使用RWA代币作为抵押品的DeFi活动都是基于信任的。当贷款人把钱存入金库时，他们必须信任第三方，他们还必须相信借款人会诚实地偿还贷款。</p>
+<p>看看过去的一年RWA协议都发生了什么，金库违约以及借款人不能赎回本金，因为金库中的第三方行为不端。我们已经经历过这样的情况，我们还将继续面对这些信任问题，直到围绕RWA代币形成更坚实的法律和制度基础，即使这样，与完全加密原生的DeFi相比，我们使用的协议可能仍然具有一定程度的信任问题。</p>
+<p><strong>3.3.2 只有部分用户有资格获得贷款</strong></p>
+<p>在RWA借贷协议中，我们提到贷款人、借款人和第三方之间需要一定程度的信任，并且RWA代币支持的贷款确实用于低抵押贷款。然而，由于各主体之间需要信任，能够通过RWA借贷协议借款的用户群体仍然集中于某些机构。看看Centrifuge、GoldFinch、Maple Finance等产品，你会发现通过该协议借用或充当管理员的实体大多是具有一定声誉和专业知识的机构。没有一个市场可以让普通人能够轻易地抵押RWA进行借款。</p>
+<p><strong>3.3.3 真的能降低成本吗？</strong></p>
+<p>智能合约确实可以降低金融交易中的很多仲裁成本。然而，就RWA协议而言，RWA代币化过程、识别借款人以及RWA风险会产生额外成本，因为它需要具有RWA知识的专家和处理法律及管理任务的实体。事实上，有些协议要求为每个金库建立一个专用工具。从这方面来说，仍然存在与RWA相关的多种成本。这种限制将继续存在，直到每个RWA的基础设施到位，并且基本形成各资产的风险评估标准。</p>
+<p><strong>3.4 对RWA协议的个人看法</strong></p>
+<p>RWA有很大的价值，因为它可以同时解决区块链生态系统的一些限制和传统金融的部分低效问题。一旦我们在2023年获得一些关于RWA的行政指导方针，RWA将得到区块链市场的更多关注，这就是为什么RWA代币如今吸引了很多关注以及市场将在未来增长的原因。</p>
+<p><strong>3.4.1 需要识别与传统金融或Web3产品不同的身份</strong></p>
+<p>但是对于处理RWA的协议来说，它说基于的理念与许多DeFi或区块链项目大有不同。这是因为一切都不是像现有的Web3产品那样通过智能合约来处理的，而是某种程度上，你必须信任某人并接受随之而来的问题。这与处于Web3领域的人所见过的现有Web3产品有很大的不同，处理RWA的协议介于现有金融系统和Web3产品之间。</p>
+<p>从这方面来看，当协议处理RWA时，它们不仅需要清楚地了解它们通过其服务可以为现有金融部门和区块链生态系统带来的价值，还需要清楚地了解它们为什么要尝试处理RWA，以及在此过程中可能出现的各种问题和限制，无论是对于现有金融部门还是区块链生态系统来说。协议应该意识到在运行过程中由于信息的透明度和中心化程度可能出现的问题，并对这些问题进行改进，使RWA市场发展成为一个更加成熟的行业。</p>
+<p><strong>3.4.2 风险管理的重要性</strong></p>
+<p>正如我在本文中不断提到的，处理RWA的协议仍然以借贷协议为中心，这里发生的借贷基于一种信用形式。由于贷款本身往往是出于杠杆目的，在过度扩张和投资的过程中，借贷系统本身随时可能出现不稳定状况。这种风险对协议的破坏性更大，特别是因为这种借贷不像传统金融那样受到监管和监控，而是可以由各金库中的第三方自行决定。</p>
+<p>大多数RWA协议还没有完全准备好处理这些风险，因此协议目前被迫依赖于不透明的信息披露（与传统的Web3产品相比）、某些主体的行为以及其机制不受监管的特性。在这一背景下，各协议都必须始终关注这些风险的管理方法。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56274/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">深入探讨「意图计算」如何改变Web3交互?</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56252/">
+                <span class="next-text nav-default">生产力 SaaS 如何应对 AI 的颠覆？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

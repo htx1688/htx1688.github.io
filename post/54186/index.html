@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Buidler DAO：Token的初始发行方式分析与总结 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="关于Token发行类型的优缺点分析与研究。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54186/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Buidler DAO：Token的初始发行方式分析与总结" />
+<meta property="og:description" content="关于Token发行类型的优缺点分析与研究。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54186/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="Buidler DAO：Token的初始发行方式分析与总结">
+<meta itemprop="description" content="关于Token发行类型的优缺点分析与研究。"><meta itemprop="datePublished" content="2023-07-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="12100">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Buidler DAO：Token的初始发行方式分析与总结"/>
+<meta name="twitter:description" content="关于Token发行类型的优缺点分析与研究。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Buidler DAO：Token的初始发行方式分析与总结</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-02">
+      2023-07-02
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 12100 字 -
+        预计阅读 25 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文来源：Buidler DAO</p>
+<p>原文作者：@付少庆 @经济模型小组</p>
+<p>原文编排：@黑羽小斗</p>
+<h2 id="前言">前言</h2>
+<p>经济模型小组希望能够研究 Token 相关的整体流程。主要包含几个部分：</p>
+<ul>
+<li>
+<p>经济模型的设计；</p>
+</li>
+<li>
+<p>Token 的发行；</p>
+</li>
+<li>
+<p>Token 的流通管理。</p>
+</li>
+</ul>
+<p>本文主要讨论 Token 发行相关的内容。随着区块链和 Web3 项目的发展，项目中开始同时包含 FT 和 NFT。当前，学术界和应用领域更多地研究和发展了 FT 的发行，对于 NFT 的作用与发行进行的相关研究与积累的案例还不够丰富。万向区块链的肖风博士发布的《Web3 应用的三代币模式》涉及到了 NFT 相关知识，我们在本文的最后一节也简单分析了 NFT 的发行，小组后期会继续在这个细分领域开展深入研究。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/zno5rw0y5sgyz94" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<h2 id="token-发行基础知识">Token 发行基础知识</h2>
+<h3 id="token-的类型">Token 的类型</h3>
+<p><strong>（1）瑞士金融管理局的分类</strong></p>
+<p>2018 年，瑞士金融市场监督管理局根据通证潜在的不同经济功能对其进行了分类，该分类方法在国际上受到了较大的认可。参照这种比较官方和专业的分类定义，具体而言，通证可分为以下三种类型。</p>
+<ul>
+<li>
+<p>支付型通证（Payment Token）：指为了在现在或将来取得某样物品或某种服务，而作为金钱或价值转移的一种支付手段。这种通证更像我们所说的货币。</p>
+</li>
+<li>
+<p>应用类通证（Utility Token）：该类通证以数字化的形式存在，主要用于基于区块链技术为基础架构开发的应用或服务。例如，消耗的 Gas 费用。</p>
+</li>
+<li>
+<p>资产类通证（Asset Token）：这类通证以一定资产作为支撑，如通证持有者可向发行人索要的债务或股权、未来公司收益或者资产流动中一定的份额等。因此，就其经济功能而言，这类通证近似于股票、债券或衍生品。如果把法币当成一种资产，稳定币的一个观察角度就是这种类型的通证。</p>
+</li>
+</ul>
+<p>这种分类方式会产生交集，一些通证具有某两种或者三种分类属性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/yubgk9vrn2yl6pm" alt="深度解析Token各种发行方式和经济模型设计"></p>
+<p>这种分类更符合从金融与货币的角度观察通证。项目中的通证 Token 一般有一个演过的过程，通常是先具有应用属性，应用的繁荣使得这种通证具有了一般等价物（货币）的性质，就会更多的具有支付职能，被大范围使用的通证具有很好的流动性和价值背书，于是就容易发展出价值储藏属性，于是更像资产。</p>
+<p><strong>（2）侧重监管的分类：实用型与证券型（也称为：应用型和权益型）</strong></p>
+<p>通证本质上是价值的载体，利用区块链技术将价值、权益、实物资产通证化，其内涵可以是权益，如分红权、所有权、债权；可以是资产，如实物资产的映射上链，对应资产类通证；可以是货币，如 BTC、USDT，对应支付型通证；可以是应用或服务中的流通通证，此种通证主要是为了在应用内使用而发行的，很多 dAPP 都发行了自身的通证，对应应用类通证；还可以是一切有价值的东西，如创造力、注意力等。</p>
+<p>但实际上有些通证是多种类型的混合体，如交易所发行的平台币，以交易所部分盈利作为支撑，具有很强的金融属性，但同时交易所也为其开辟了众多的使用场景，具有使用价值。</p>
+<p>基于通证产生了通证经济这一概念，被认为潜力无限，主要特点是利用通证本身的特性，创造出更加优秀的生态体系、更好的价值模型、更多的用户群体，以及通过通证实现一种大规模的分布式的价值创造形式——这一点有开源协作的精髓。</p>
+<p>这种侧重监管的通证分类模式，把通证分为两大类四小类。</p>
+<p><strong>第一大类：实用型通证（Utility Token）。</strong></p>
+<p>产品或服务通证（Use of Product），代表公司的产品或服务的使用权。</p>
+<p>奖励通证（Reward Token），用户通过自己的行为获得奖励。</p>
+<p><strong>第二大类：证券型通证（Security Token）。</strong></p>
+<p>权益通证（Equity Token），类似公司的股权、债券等。</p>
+<p>资产通证（Asset Token），对应实体世界中的资产，如不动产、黄金等。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/jvey9snv0y18lqm" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p>这种分法更符合监管相关的观察角度，Utility Token 可以自由发展，Security Token 受到监管，但如果 Utility Token 涉及了金融活动，具有了证券属性，也会被监管。</p>
+<p>注：我们之前的文章 <a href="https://mp.weixin.qq.com/s?__biz=Mzg2MzgxNjAyOA==&amp;mid=2247488737&amp;idx=1&amp;sn=384d39b1ab97b346f788939ea6d66f8b&amp;chksm=ce7384d2f9040dc4f053bc370dbbcc4e87681561202d86cf9c3b60ce89d4264e81816a282134&amp;scene=21#wechat_redirect">四象限代币经济模型 ( 一 )：双 FT 模型</a>对此也做过详细论述。</p>
+<h3 id="token-发行的目的">Token 发行的目的</h3>
+<p><strong>从已有的案例看，Token 发行有两个主要目的：</strong></p>
+<ul>
+<li>
+<p>将 Token 发放到使用者手上（促进用户使用应用）</p>
+</li>
+<li>
+<p>筹集资金</p>
+</li>
+</ul>
+<p><strong>Token 中的两种类型 FT 与 NFT：</strong></p>
+<ul>
+<li>
+<p>FT 更符合货币的特点，上述两点目标最明显，FT 的发行需要找到一群认可 FT 价值的人员，FT 的价值在于对于项目未来的描述。</p>
+</li>
+<li>
+<p>NFT 也可以完成上述的两个目标，但因为其特点和发展历程，可分析内容不多。（后面我们专门有一小节讨论 NFT 的发行）</p>
+</li>
+<li>
+<p>Token 发行方式的考查指标</p>
+</li>
+</ul>
+<p>根据 Token 发行的目的，我们初步总结了几个指标。通常来说合规性问题应该列在首位，但因为区块链行业发展的早期特点，监管与合规也都在探索中，一些情况不够明朗，暂时把合规性问题放到第二项。</p>
+<ul>
+<li>
+<p>Token 发行的用户覆盖度问题：高价值 Web3 用户是大家常采用的一种方式，根据应用的特点，还需要其他的筛选方式，并根据规划与执行，最大限度的满足目标用户的覆盖。Token 应该覆盖的领域因每个应用的不同而有不同的计算方式</p>
+</li>
+<li>
+<p>合规性问题：根据 Token 的性质和主要国家的政策，采取合规的发行方式或进行合规的验证</p>
+</li>
+<li>
+<p>资金的募集指标：在满足合规性与覆盖度的前提下，资金的募集是否达到预定计划是一个主要的考察指标。这个指标有总额和粒度两个维度</p>
+</li>
+</ul>
+<p>对于发行的 Token 的锁定期问题，我们认为是设计阶段与后期流动性管理阶段的任务，不作为发行阶段的考察指标</p>
+<h3 id="token-的初始发行与项目发展中的-token-发行">Token 的初始发行与项目发展中的 Token 发行</h3>
+<p><strong>在 Token 的发行案例中，有几类研究标准：</strong></p>
+<ul>
+<li>
+<p>初始发行总量（初始总量为 0 与初始总量不为 0 两种）</p>
+</li>
+<li>
+<p>固定总量与可变总量（这个维度只影响后期的流动性分析，本文不讨论）</p>
+</li>
+</ul>
+<p>下图是初始流通量为 0 ，固定总量的经济模型代表。这种类型的经济模型设计以比特币为代币，没有早期的通证发行问题。对于后期基于难度系统的货币发行，不在本文讨论范围内，会归类到后期流动性管理中学习与研究。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/b1bk2d1nglvdzhl" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p>固定总量的通证模型（初始流通量为 0）</p>
+<p>下图是初始总量不为 0 ，需要借助 Token 发行方式筹集资金或更精准的触达用户。以以太坊为代币，是我们研究的 Token 发行方式，如 IC0、IE 0、ID 0 等内容范围，作用范围如图中的红圈所示。对于超出实际应用的 Token 数量，需要使用经济学手段冻结流动性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/7efs49yctk8os2p" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p>固定总量的通证模型（初始流通量不为 0）</p>
+<p>对于项目运行中通过 PoW，PoS 等方式发行的 Token，我们认为是后期流动性管理阶段的任务，不讨论这部分的 Token 发行。</p>
+<h2 id="token-发行方式-ixo">Token 发行方式 IxO</h2>
+<p>在 Token 的发行方式上有私募与公募两种大的分类，我们这里讨论的发行都是公募发行，私募发行不涉及这些方式问题。</p>
+<p>我们先用一句话简单总结几种常见的数字货币发行方式：直接在公链上发起的方式是最原始的 IC0；直接向用户的钱包里面免费发送是 Airdrop 空投；通过中心化数字货币交易平台发行是 IE 0、与金融监管机构合作发行是 STO，在去中心化交易所 DEX 上发行是 ID 0 。</p>
+<h3 id="私募">私募</h3>
+<p>私募基金，是指以非公开方式向特定投资者募集资金并以特定目标为投资对象的投资基金。私募基金是以大众传播以外的手段招募，发起人集合非公众性多元主体的资金设立投资基金，进行投资。</p>
+<p>在 Token 领域，私募一般都是这个领域的投资机构或个人，通常会想传统融资一样在线下洽谈好即可。对于 Token 融资的这种形式，后期发展成为 SAFT。SAFT 全称为 Simple Agreement for Future Tokens（简单未来代币协议），是区块链开发商为了开发区块链网络融资而发行的一种通证，类似于期货，赋予投资人在区块链网络开发完成后获得相应代币的权利。</p>
+<p>SAFT 因其合规性强而被诸多知名项目采用，例如 Telegram、Filecoin。SAFT 对于实用类代币尤其适用，该类代币在上线后不是一种证券，但是通过募资进行网络建设则是一种投资协议，采用 SAFT 可以使其合规程序更加清晰。</p>
+<p>根据 Token 发行考查指标，我们总结私募方式的效果：</p>
+<ul>
+<li>
+<p>Token 发行的覆盖度问题：覆盖度很差，都是投资方，不是用户</p>
+</li>
+<li>
+<p>合规性问题：一般都合规</p>
+</li>
+<li>
+<p>资金的募集指标：一般会达到比较好的效果，金额都会较大。资金粒度方面不好控制，都是大额用户</p>
+</li>
+<li>
+<p>IC0（Initial Coin Offering）</p>
+</li>
+</ul>
+<h3 id="icoinitial-coin-offering数字货币首次公开发行">ICO（Initial Coin Offering）数字货币首次公开发行</h3>
+<p>ICO 首次代币发行，源自股票市场的首次公开发行（IPO）概念，是区块链项目首次发行代币，募集比特币、以太坊等通用数字货币的行为。当某公司以融资为目的，发行加密货币，通常会发行一定数量的加密代币，接着向参与项目的人出售这些代币。通常这些代币被用于兑换比特币、以太币等数字货币，当然也可以兑换法币。</p>
+<p>ICO 是从数字货币及区块链行业衍生出的项目筹资方式。可查的首个 ICO 来自于 Mastercoin 项目（现已更名为 Omni），其在 2013 年 7 月时在 Bitcointalk（最大的比特币和数字货币社区论坛）上宣布通过比特币进行 ICO 众筹，并生成对应的 Mastercoin 代币并分发给到众筹参与者。本质上来说这次 ICO 是一种以物换物的行为，即参与者用比特币换得 Mastercoin 项目里的代币。一开始 ICO 只是数字货币爱好者的一种社区行为，随着数字货币以及区块链的不断发展，开始被越来越多人接受并参与。绝大部分 IC0 都是通过比特币或其他数字货币进行的。</p>
+<p>在区块链领域，ICO 开始被广泛的使用是在以太坊支持基于以太坊系统发行 ERC 20 代币之后，ICO 的现象出现了井喷现象。其中最大的融资项目是 EOS，采用每天竞价发行的方式，历时近一年的时间，筹集了大约 40 多亿美金。</p>
+<p>ICO 的优点：</p>
+<p>在于提供了一种在线的，基于数字货币的筹集资金方式。简单，方便，也便于新通证的发放。ICO 比较好的完成资金筹集，与通证发行的两个主要任务。</p>
+<p>ICO 的问题：</p>
+<p>项目经营风险：参与 ICO 的项目，大多处于早期，抗风险能力差，容易发生经营风险。因此，大部分 ICO 和天使投资类似，面临项目早期的风险，容易出现投资损失。</p>
+<p>金融风险：投资者在投资 ICO 的过程中，可能会面临集资诈骗、投资损失的风险。目前 IC0 处于项目的初期，缺乏监管，有些创业公司可能借此市场火爆的机会，制造虚假项目信息，利用 ICO 集资诈骗。</p>
+<p>监管法律风险：当前 ICO 的募集，大多以 BTC、ETH 为主，还处于监管空白的状态，缺乏相关的法律法规。从 2017 年之后，各国加大了对于 ICO 的监管和控制，但各种变相的 IXO 也起到和 ICO 相似的作用。</p>
+<p>目前在 CoinMarketCap 上，ICO 被泛指为广义的首次代币发行，包括 IEO、IDO 等方式。如下图所示：顶部的 ICO Calendar 是广义的 ICO，里面的 Upcoming Project 中的 ICO 是本节描述的 ICO。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/yznq53a6yzmzwc1" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p>根据 Token 发行考查指标，我们总结 ICO 方式的效果：</p>
+<ul>
+<li>
+<p>Token 发行的覆盖度问题：没有参与条件限制，覆盖度最广，需要设计参与规则筛选出真正客户。因为投资的需求，ICO 经常会吸引很多非应用的投资客户，而不是真正使用应用的天使用户。（通常与空投相结合会有较好的效果）</p>
+</li>
+<li>
+<p>合规性问题：虽然后期添加了 KYC 等内容，但 ICO 被大部分地区认为是否非法</p>
+</li>
+<li>
+<p>资金的募集指标：一般会达到比较好的效果。在募集资金方面，如果 ICO 达不到好的效果，其他方式也比较难有好的效果。资金粒度方面不好控制，可以有大额用户</p>
+</li>
+<li>
+<p>Airdrop 空投</p>
+</li>
+</ul>
+<p>空投（Airdrop）是一种数字货币的派发方式，最初数字货币只有比特币挖矿一种方式。但是后来在出现的山寨币、分叉币的派发方式，除了挖矿，还可以空投派发。空投如字面意思凭空赠送，开发团队白送你数字货币，币直接打到你的地址里，而不需要你挖矿、购买，或者分叉之前持有原币，可以没有任何条件白送你币。当然更多的是依据一些条件来空投，例如持有某些数字货币的账号。空投的规则由发行方来决定，可以是你注册了就送你一定数量的币，也有许多通过快照的方式派发。</p>
+<p>在区块链发展的早期，空投的选择条件不多，但发展到 Web3.0 阶段，很多项目都有了一定的进展之后再空投，于是可以对做成贡献的用户进行空投，还可以使用空投引导用户完成相关的任务。例如 Arbitrum 的空投设计。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/bifbqrr9ncrpsfj" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p>空投的优点:</p>
+<p>将新的代币发放到期望的用户群中，便于新币的流通，促进了新币的应用。空投因为不涉及融资，一般都没有监管问题。</p>
+<p>对应用的真正用户进行定向空投，并引导用户完成相关任务。</p>
+<p>空投的缺点：</p>
+<p>空投的方式缺少了融资功能，单纯的完成货币的发行。</p>
+<p>根据 Token 发行考查指标，我们总结 Airdrop 方式的效果：</p>
+<p>Token 发行的覆盖度问题：通过设置空投条件，能够有比较好的覆盖度</p>
+<p>合规性问题：基本不存在合规性问题</p>
+<p>资金的募集指标：达不到募集资金的要求。但投放的力度控制较好</p>
+<h3 id="ieoinitial-exchange-offerings">IEO （Initial Exchange Offerings）</h3>
+<p>IEO Initial Exchange Offerings 数字货币首次交易所发行</p>
+<p>首次交易所发行 IEO 是指通过数字货币交易平台为新项目筹集资金的一种方式。</p>
+<p>IEO 通常由交易平台提供支持，因此选择该方案筹集资金的项目方必须认真对待其项目方案。在绝大多数情况下，IEO 提案由参与发行的交易平台严格审查。从某种意义而言，交易平台是以自己的商业信誉为获得审批的 IEO 项目提供担保。</p>
+<p>通过 IEO ，潜在投资者可以在资产上线交易平台前先行买入。在推动代币销售的交易平台上，提供 KYC（身份认证）信息的注册用户可在公开市场开放交易前购买代币。</p>
+<p>IEO 的优点：</p>
+<p>IEO 首次交易所发行比起以前的 IC0，有了更个明显的好处。通证直接上了交易平台，促进了通证的流通。对于普通投资者，项目币上交易所，可以更快的参与交易。其次项目方也受益，因为在交易所直接 IEO ，相当于受众面扩大到整个交易所的用户，扩大了投资人的受众群。对于真正优质的项目和早期创业者来说，IEO 不但是一个好的融资途径，而且可以省去大量费用和精力上线交易平台，专注于项目研发和社区运营。对于交易所，IEO 最直观的好处，就是扩大交易量和日活。项目的粉丝会作为新用户及其资金会随着项目大量涌入，他们中的一些人最终可能会成为交易所的老用户。这样的活动，比传统的邀请返佣、交易大赛等运营手段更加诱人。</p>
+<p>IEO 的缺点：</p>
+<p>发行成本的问题。一般交易所会有上币费的要求，并且金额不少。对于一些早期项目来说是一笔负担。</p>
+<p>IEO 方式对项目有一定的审核要求，因此对于很多项目方门槛较高。</p>
+<p>根据 Token 发行考查指标，我们总结 IEO 方式的效果：</p>
+<ul>
+<li>
+<p>Token 发行的覆盖度问题：只能促进有交易需求的用户，不能很好的覆盖真正产品的天使客户，最好与空投交叉使用</p>
+</li>
+<li>
+<p>合规性问题：一般由交易所来保证合规性</p>
+</li>
+<li>
+<p>资金的募集指标：相对较好，能够通过交易募集到较丰富的资金。但存在庄家拉盘，早期投资者过早退出的情况。资金粒度方面控制不好</p>
+</li>
+</ul>
+<p>与最先出现的 IC0 相比，IEO 扩大了交易用户的群体，利于融资。</p>
+<h3 id="stosecuritytokenoffering">STO（SecurityTokenOffering）</h3>
+<p>STO，即 Security Token Offering，证券通证发行的意思。证券是一种财产权的有价凭证，持有者可以依据此凭证，证明其所有权或债权等私权的证明文件。美国 SEC 认为满足 Howey 测试的就是证券，即满足 Howey Test:Acontract, transaction or scheme whereby a person invests his money in a common enterprise and is led to expect profits solely from the efforts of the promoter or a third party.笼统来说，在 SEC 看来，但凡是有「收益预期」的所有投资，都应该被认为是证券。</p>
+<p>STO 是现实中的某种金融资产或权益，比如公司股权、债权、知识产权，信托份额，以及黄金珠宝等实物资产，转变为链上加密数字权益凭证，是现实世界各种资产、权益，服务的数字化。</p>
+<p>STO 介于 IPO 与 IC0 之间，是监管部分想用 IPO 的管理方式来管理数字货币的发型。一方面，STO 因承认其具有证券性的特征，接受各国证券监管机构的监管。虽然 STO 依然基于底层区块链技术，但能通过技术层面上的更新，实现与监管口径的对接；另一方面，相对于复杂耗时的 IPO 进程，如同 IC0，STO 的底层区块链技术同样可以实现 STO 更高效更便捷的发行。</p>
+<ul>
+<li><strong>STO 的起源</strong></li>
+</ul>
+<p>IC0 持续破发，区块链技术神话被打破，无资产、无信用、割韭菜、资金盘、跑路等事件持续不断发生。从根本上说，这些事件的发生是因为 IC0 没有资产和价值作为基础，仅靠宣传、描绘未来和没意义的共识。对 IC0、交易所等重要环节缺乏直接监管也是重要原因。STO 以实际资产为基础，主动拥抱政府监管，试图打破 IC0 窘局。</p>
+<p>美国证券交易委员会（SEC）在看到 Token 这种区块链产生的新物种后，决定将其纳入证券监管而形成的。此举一度给数字货币和区块链行业造成了相当严重的打击，以为将遭遇灭顶之灾。</p>
+<p>但随后的发展却是越来越多的国家和地区开始跟进，相继出炉自己的监管政策——尽管这些监管政策甚至连其所指的 STO 本身定义都存在一定的分歧，但却让市场逐步意识到监管并不是灭顶之灾，而是给予合法身份，可以正大光明地发展壮大。于是我们看到，从区块链项目到传统行业，从资本大佬到证券业人士，以及各种资产拥有者，都在积极关注这个行业，甚至争相涌入到这个行业。</p>
+<p>从某种意义上讲，STO 和它背后的区块链、Token、通证经济学等在身份未明、带有非议的当下，监管这把达摩克利斯之剑举起来，更像是为它洗涤恶名并指引其前进的明灯。</p>
+<p>从美国发起的 STO 监管已经逐步引发了全球多个国家和地区的跟进，全球监管体系在混沌中已经呈现出相对明朗的态势。</p>
+<p><strong>STO 优势：</strong></p>
+<p>1.内在价值：ST 有真实的资产或者收益作为价值支撑，例如公司股份、利润、地产。</p>
+<p>2.自动合规和快速清算：ST 获得监管机构的批准和许可，将 KYC/AML 机制自动化，并实现瞬时清结算。</p>
+<p>3.所有权分割更小单元：加速资产所有权的分割，降低高风险投资品的进入门槛，比如房地产和高端艺术品。</p>
+<p>4.风险投资的民主化：拓展筹集资金的方式。</p>
+<p>5.资产互通性：资产的标准化协议将促使不同质资产、不同法币间的互通更为便捷。</p>
+<p>6.增加流动性和市场深度：可以通过 ST 投资于流动性较差的资产，不用担心赎回问题。市场深度也会通过以下渠道增加：</p>
+<ul>
+<li>
+<p>数字资产价格的上涨创造了数十亿美元的增量财富，会被投向市场</p>
+</li>
+<li>
+<p>类似 Bancor 的程序化做市商提高了长尾 ST 的流动性</p>
+</li>
+<li>
+<p>资产互通协议将促进跨国资产流通</p>
+</li>
+</ul>
+<p>7. 降低监管风险，加强尽职调查。适用于监管要约豁免，将各国针对 KYC 和 AML 的规定写入智能合约，有望实现自动可编程的合规。</p>
+<p>8. ST 有望降低资产的流通成本。降低过程中的交易摩擦，比如利用智能合约实现自动合规和资金归集、将合同和会计报告的数据上链、增加资产可分性、实现 T+ 0 的清结算等等。</p>
+<p>9. 受到证券法 SEC 监管，符合法律合规性，更安全。</p>
+<p>10. 24 小时交易。</p>
+<p><strong>STO 问题：</strong></p>
+<p>1. 有严格的转让和出售规定。参考 Polymath ST-20 标准的描述，ERC-20 代币对于资产的流转交易没有限制，任何人可以转给任何人一堆 ERC-20 代币。但是对于证券代币来说，这是不可以的。ST-20 的目的就是要保证发行方能够确保 Token 只能在通过 KYC 的人里面流转，这样的效果是缩小了交易人群的范围。</p>
+<p>2. 不能像 Utility token 那种成为平台上的支付手段。</p>
+<p>3. 跨平台的 Security Token 流通存在极大的监管障碍。</p>
+<p>4. 资产流动性过高可能带来巨大的价格波动。STO 可能让一个初创企业直接成为公众上市公司，拥有许多 ST 持有者。由于初创公司面临的不确定因素和起伏很多，这些不确定信号都可能让 Token 价格造成剧烈波动。</p>
+<p>5. STO 创新可能只是把风险堆积到了尾部。</p>
+<p>6. 与传统金融竞争：</p>
+<ul>
+<li>
+<p>与传统金融产品竞争。从投资者的角度来说，虽然信息公开度更高，不见得作为证券代币（ST）就黄袍加身，比 Utility Token 更安全，还是要看标的质量，发展前景，财务健康度等情况</p>
+</li>
+<li>
+<p>与传统金融资金竞争。目前来说优质资产在现有证券资本市场能接触到的资金体量、投资者数量远超 STO</p>
+</li>
+<li>
+<p>与传统金融机构竞争。只接受合格投资者的证券融资平台其实在美国已经存在多年，从股权众筹到地产投资众筹都有。比如地产投资平台 Fundrise 能让合格投资者进行各种项目的部分收益权投资，没有通过 Token 罢了。比如 Sharepost 能让合格投资者购买各种创业公司 Pre IPO 股权，也是基于现有技术架构</p>
+</li>
+<li>
+<p>与传统金融环境竞争。传统金融监管和法律成熟度远超 STO</p>
+</li>
+</ul>
+<p>7. 机构投资决策相对成熟和理性，没有散户投资者的二级市场，流动性是应该折价而不是溢价，估值一般来说难说会更高</p>
+<p>8. 证券代币依赖金融中介进行风险评估和定价，更好的匹配资产和资金端。ST 需要把链下资产所有权和信息上链，通过代币的形式在监管框架下流通。目前证券代币（ST）的价值并不基于链上活动或去中心化网络，是在符合监管前提下映射股权或债权的 Token 凭证，和分布式网络和区块链底层技术关系不大</p>
+<p>STO 是想用当前 IPO 与证券管理的传统办法管理数字货币的发行，这有很大的难度与挑战，因为数字货币的特性与传统的证券有很大的不同，监管政策必须做出改动和调整。</p>
+<p>根据 Token 发行考查指标，我们总结 STO 方式的效果：</p>
+<ul>
+<li>
+<p>Token 发行的覆盖度问题：只能让满足要求监管要求的用户参与，不能很好的覆盖真正产品的天使客户，即使是持有数字货币的客户也有很大一部分不能参与</p>
+</li>
+<li>
+<p>合规性问题：合规</p>
+</li>
+<li>
+<p>资金的募集指标：一般因为限制原因，资金募集情况并不好。颗粒度也不好控制</p>
+</li>
+<li>
+<p>其他 IXO</p>
+</li>
+</ul>
+<h2 id="ifo-initial-fork-offerings-数字货币首次分叉发行">IFO Initial Fork Offerings 数字货币首次分叉发行</h2>
+<p>数字货币首次分叉发行一般是基于比特币等主流币而进行的分叉，IFO 涉及的分叉币种就是在原有比特币区块链的基础上，按照不同规则分裂出另一条链，比如比特币第一次进行分叉诞生了名为 BCH（比特币现金）的全新数字货币。「分叉」不仅保留了比特币大部分的代码，它还继承了比特币分叉之前的数据。</p>
+<p>分叉经常与空投一起使用。产生的新币对老用户进行空投，使得老用户获得利益，加速新币种的被认可和流通。</p>
+<p>分叉币的模式有几个是成功的？区块链的项目还是在于项目方要有持续的发展，使用 IFO 方式的团队经常带有投机性，很难让项目很好的发展。</p>
+<h2 id="imo-initial-miner-offerings-数字货币首次矿机发行">IMO Initial Miner Offerings 数字货币首次矿机发行</h2>
+<p>IMO ，首次矿机发行，就是通过发行矿机的方式来发行代币。</p>
+<p>公司或团队构造一种特定的区块链，使用特定的算法，只能采用该公司或团队自行发售的专用矿机，才能挖到这种区块链上的代币。通常这种矿机具有应用的功能，在矿机的持续使用中获得价值来源。</p>
+<p>IMO 这种融资模式，简单地说就是通过发行一种专用矿机，通过挖矿来产生新的数字货币。有过一些 IMO 案例，比如迅雷玩客云—链克（原玩客币 WKC），快播旗下流量矿石的流量宝盒—流量币（LLT），还有后来的暴风播酷云—BFC 积分等。</p>
+<p>对于需要硬件设备支持的应用，并且依靠硬件运营商业模式的项目可以采用这种方式。能够精准的找到早期的天使用户，并且为这些用户做出激励行为。</p>
+<h2 id="iboinitial-bancor-offering首次兑换发行">IBO （Initial Bancor Offering）首次兑换发行</h2>
+<p>了解 IBO 之前，先了解 Bancor，这个单词来源于在 1940 年— 1942 年间由凯恩斯、舒马赫提出的一个超主权货币的概念。在凯恩斯提出的计划中，Bancor 可作为一种账户单位用于国际贸易中，以黄金计值。会员国可用黄金换取「班科」，但不可以用「班科」换取黄金。各国货币以「班科」标价。</p>
+<p>然而，由于美国实力在二战后一枝独秀，凯恩斯代表的英国方案并没有在布雷顿森林会议上被采纳。回到 Bancor 协议，Bancor 协议由 Bancor Network 项目提出应用，旨在采用公式来设定好数字资产间的兑换价格。Bancor 协议使智能合约区块链上的自动价格发现和自主流动机制成为可能。这些智能代币拥有一个或者多个连接器，连接到持有其他代币的网络，允许用户直接通过智能代币的合约，按照一个持续计算以保持买入卖出交易量平衡的价格，立即为已连接的代币购买或清算智能代币。</p>
+<p>在一个标准的 IB 0 发行中，项目方需要按照设定的比例，首先抵押一定价值的另一种 Token 作为「准备金」，而后就是完全通过智能合约去实现 Token 的发行和流通，项目的资金被被锁定在了智能合约之中，随时接受着大家的监督。因此 IB 0 模式也就衍生出了以下诸多的优点。</p>
+<p>IBO 的一个案例是在 EOS 的侧链项目—FIBOS。因为 IBO 这个新概念，FIBOS 在其当年八月底主网上线之后的短短一周时间，就募集到 85 万个 EOS。</p>
+<p>IBO 的理论是 DEX 等应用的底层理论先导，在 DEX 和 IDO 中，不同的数字货币之间的兑换更加顺畅。</p>
+<h2 id="ido-相关知识">IDO 相关知识</h2>
+<p>从 Coinmarketcap 和其他业内相关资料上看 IDO 是当前的主要发行方式，本节我们详细的研究 IDO 相关内容。从 2.1 节的图中，我们可以看到 2023 年大部分项目都采用了 IDO 的方式。</p>
+<h3 id="基础概念">基础概念</h3>
+<p>IDO ，全称为 Initial DEX Offering 指是基于去中心化交易所（DEX）进行的代币首次发行。IDO 通过去中心化交易所（DEX）推动代币销售。加密货币项目向 DEX 提供代币，用户通过平台投入资金，DEX 完成最后的分发和划转。这些过程通过区块链中的智能合约自动操作。</p>
+<p>2019 年，IDO 因其低至零费用和去中心化性质而开始受到关注。因此，IDO 成为项目首选在私人和早期种子轮之外寻求筹款的主要平台。自 2018 年首次 IDO 以来，已经进行了 2365 次 IDO ，筹集了超过 16 亿美元的资金（来源：CryptoRank， 2022 年 12 月）。关于 IDO 的一些详细信息可以浏览参考文献获得更多的信息。下面链接的汇总的统计信息比较全面。</p>
+<p><a href="https://blog.bybit.com/en-US/post/a-deep-dive-into-the-ID0-landscape-blt6b833275fde1a848/">https://blog.bybit.com/en-US/post/a-deep-dive-into-the-ID0-landscape-blt6b833275fde1a848/</a></p>
+<p>虽然 IDO 是在 DEX 上发行，根据具体方式的不同，粗略分为如下的几种渠道:</p>
+<p>通过传统 DEX 平台发行，比如 Uniswap、Balancer 的 LBP、SushiSwap、DODO 众筹建池等；</p>
+<p>通过 Token 发行平台进行，比如 PolkaStarter、DuckStarter、Bounce、Mesa 等；</p>
+<p>通过 DAO 平台发行，比如 DAO Maker；</p>
+<p>其他新渠道玩法：MASK 创建的 ITO 方式，借助于 Twitter 等社交平台公布并发行。（Twitter 是入口，底层还是传统的 DEX）</p>
+<p>因为 IDO 细分的方式不同，在流程上也有一些差异。如果是在传统的 DEX 平台上，一般就不存在审核的问题。如果是借助发行平台，发行平台会完成相关的审核工作。一些项目已经产生 Token（一般为 ERC-20 形式），也不需要借助发行平台提供的代币发行能力。</p>
+<p>一般一个项目如果想通过发行代币融资，很多流程都是相同的。常规如下：</p>
+<ul>
+<li>
+<p>构建商业计划</p>
+</li>
+<li>
+<p>准备宣传材料（如官网、项目白皮书等内容）</p>
+</li>
+<li>
+<p>选择 Token 发行方式（这里可以是 ICO、IEO、IDO 等方式）</p>
+</li>
+<li>
+<p>根据选择的发行方式做准备。（如发行 ERC-20 代币，相关审核材料）</p>
+</li>
+<li>
+<p>完成 Token 发行</p>
+</li>
+<li>
+<p>收到募集资金</p>
+</li>
+</ul>
+<p>对于选择 IDO 的发行方式，大致的流程是：从 IDO 的几种形式中，选择一种方式，一般常见的会选择使用 Token 发行平台进行发行，我们也以这种方式来说明。选择发行平台的方式，会根据各个平台的不同而有所不同。</p>
+<p>一般平台都会有审查的工作：</p>
+<ul>
+<li>
+<p>完成审查后，项目方可在 DEX 开展 IDO 。项目方以固定价格供应代币，用户锁定资金来换取代币。投资者稍后将在代币生成活动（TGE，Token Generation Event）中收到代币。</p>
+</li>
+<li>
+<p>通常会有一份投资者白名单。投资者可能需要完成营销任务才能加入其中，或者仅需提供钱包地址。</p>
+</li>
+<li>
+<p>筹集到的部分资金用于创建该项目代币的流动性资金池。其余资金留给团队。投资者可在 TGE 之后交易代币。提供的流动性通常会锁定一段时间。</p>
+</li>
+<li>
+<p>在 TGE 阶段，代币划转给用户，流动性资金心开放交易。</p>
+</li>
+</ul>
+<p>IDO 优点：</p>
+<ul>
+<li>
+<p>具有去中心化交易的特点（公开透明、流动性好）</p>
+</li>
+<li>
+<p>在一级市场发行结束之后，方便开始二级市场上线</p>
+</li>
+<li>
+<p>为投资者提供了参与早期项目的机会</p>
+</li>
+</ul>
+<p>我个人认为目前 IDO 流行的原因是不用担心监管的问题。</p>
+<p>IDO 缺点：</p>
+<ul>
+<li>
+<p>一般没有 KYC 或 AML。前期有不少的虚假项目，和早期的虚假交易对同样原理。</p>
+</li>
+<li>
+<p>在发行平台上的 IDO ，经常要求拥有发行平台的代币才可以参与，增加了参与者的代价。</p>
+</li>
+<li>
+<p>DEX 的可扩展性较差。ICO 和 IEO 中有筹集超过 10 亿美元的项目，对于 DEX，至今未发生，IDO 金额一般都偏小。</p>
+</li>
+<li>
+<p>IDO 在发展变化中，面临监管与创新之间的平衡，以及去中心化与风险控制之间的权衡。</p>
+</li>
+</ul>
+<p>根据 Token 发行考查指标，我们总结 IDO 方式的效果：</p>
+<p>Token 发行的覆盖度问题：只能在去中心化交易所里面有交易需求的用户，不能很好的覆盖真正产品的天使客户，最好与空投交叉使用。</p>
+<ul>
+<li>
+<p>合规性问题：一般由 DEX 交易所来保证合规性，或者说这种方式放弃合规性问题。</p>
+</li>
+<li>
+<p>资金的募集指标：相对较好，能够通过交易募集到较丰富的资金。资金控制力度较好，可以设置单个参与者的金额。</p>
+</li>
+<li>
+<p>与最先出现的 IEO 相比，IDO 交易用户的群体前期并不大，随着去中心化交易所的发展效果逐渐会好于中心化交易所。</p>
+</li>
+<li>
+<p>IDO 发行渠道和平台</p>
+</li>
+</ul>
+<p>上一节我们已经说明 IDO 的几种常见渠道，如下:</p>
+<p>通过传统 DEX 平台发行，比如 Uniswap、Balancer 的 LBP、SushiSwap、DODO 众筹建池等；</p>
+<p>通过 Token 发行平台进行，比如 PolkaStarter、DuckStarter、Bounce、Mesa 等；</p>
+<p>通过 DAO 平台发行，比如 Dao Maker；</p>
+<p>其他新渠道玩法：MASK 创建的 ITO 方式，借助于 Twitter 等社交平台公布并发行。（Twitter 是入口，底层还是传统的 DEX）</p>
+<p>从 Cryptorank.io 网站上看到对于 IDO 的排名。https://cryptorank.io/ID0-platforms-roi</p>
+<p>下图是 2023-5-30 的截图。看一看到每个平台的 IDO 总数量，价值回报。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/iceqo2m8lpknwbh" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p>根据 Cryptorank 历史数据可以看出，这些 IDO 平台代币从发行至历史最高价，涨幅都在几百乃至上千个百分点。其中，GameFi 平台的代币涨幅高达 4946.3% ，这使其成为 IDO 代币中涨幅最高的代表案例之一。说明优秀的 IDO 平台往往拥有更高增长潜力的代币，这也使其成为区块链投资者最青睐的对象之一。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/5k23jfbncbo36pt" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p>几个典型的 IDO 平台</p>
+<ul>
+<li>
+<p><a href="https://daomaker.com/launchpad">https://daomaker.com/launchpad</a></p>
+</li>
+<li>
+<p><a href="https://governance.polkastarter.com/">https://governance.polkastarter.com/</a></p>
+</li>
+<li>
+<p><a href="https://bscpad.com/">https://bscpad.com/</a></p>
+</li>
+<li>
+<p><a href="https://dashboard.trustswap.org/">https://dashboard.trustswap.org/</a></p>
+</li>
+<li>
+<p><a href="https://starterlabs.xyz/#/home">https://starterlabs.xyz/#/home</a></p>
+</li>
+<li>
+<p><a href="https://enjinstarter.com/index.html">https://enjinstarter.com/index.html</a></p>
+</li>
+<li>
+<p><a href="https://occam.fi/">https://occam.fi/</a></p>
+</li>
+<li>
+<p><a href="https://bullperks.com/">https://bullperks.com/</a></p>
+</li>
+<li>
+<p><a href="https://pancakeswap.finance/">https://pancakeswap.finance/</a></p>
+</li>
+<li>
+<p>几种主要发行方式的对比</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0702/ltork49y9syut57" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0702/od96kdj7g0zsomf" alt="Buidler DAO：Token的初始发行方式分析与总结"></p>
+<h3 id="经济模型中涉及到的-nft-发行">经济模型中涉及到的 NFT 发行</h3>
+<p>Token 发行的两个目的：</p>
+<p>1、将 Token 发放到使用者手上（促进用户使用应用）</p>
+<p>2、筹集资金</p>
+<p>NFT 也可以完成上述的两个目标。NFT 发送到使用者手中，可以通过直接发送到目的人钱包地址上，或通过 NFT 交易市场发放到使用者手中。对于使用价值，更多的体现在对 NFT 的价值的认识上，很多 NFT 是通过合集的形式呈现，体现一种模因的文化因素。通常只需要在众多的人群中找到找到一个认可价值的人即可。</p>
+<p>通过出售 NFT 可以完成筹集资金的功能，尤其是权益型 NFT，因为用户对于未来的收益预期更容易来购买 NFT。</p>
+<p>这个细分领域，经济学小组的其他成员后期会深入研究，并发表相关的文章输出研究成果</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li>
+<p>付少庆，胡曙光 著，《区块链经济模型》，北京理工大学出版社， 2022 年 04 月。</p>
+</li>
+<li>
+<p>卡米拉·鲁索（Camila Russo）著，《点对万物——以太坊与未来数字金融》，中译出版社， 2022 年 10 月。</p>
+</li>
+<li>
+<p>肖风 ，《Web3 新经济和代币化》（三代币模型），HashGroup， 2023 年 04 月。</p>
+</li>
+<li>
+<p>cointelegraph. Initial DEX offering (IDO): A beginner&rsquo;s guide on launching a cryptocurrency on a decentralized exchange[EB/OL] . 202 x. <a href="https://cointelegraph.com/learn/initial-dex-offering-ido">https://cointelegraph.com/learn/initial-dex-offering-ido</a> 。</p>
+</li>
+<li>
+<p>Ian Lee. A Deep Dive Into The IDO Landscape[EB/OL] . 2023.1.16 <a href="https://blog.bybit.com/en-US/post/a-deep-dive-into-the-ido-landscape-blt6b833275fde1a848/">https://blog.bybit.com/en-US/post/a-deep-dive-into-the-ido-landscape-blt6b833275fde1a848/</a></p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54170/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">BCH两周翻3倍 PoW叙事复兴是一场梦吗？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54182/">
+                <span class="next-text nav-default">Foresight Ventures市场周报：大环境震荡，大趋势必涨</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#token-发行基础知识">Token 发行基础知识</a>
+      <ul>
+        <li><a href="#token-的类型">Token 的类型</a></li>
+        <li><a href="#token-发行的目的">Token 发行的目的</a></li>
+        <li><a href="#token-的初始发行与项目发展中的-token-发行">Token 的初始发行与项目发展中的 Token 发行</a></li>
+      </ul>
+    </li>
+    <li><a href="#token-发行方式-ixo">Token 发行方式 IxO</a>
+      <ul>
+        <li><a href="#私募">私募</a></li>
+        <li><a href="#icoinitial-coin-offering数字货币首次公开发行">ICO（Initial Coin Offering）数字货币首次公开发行</a></li>
+        <li><a href="#ieoinitial-exchange-offerings">IEO （Initial Exchange Offerings）</a></li>
+        <li><a href="#stosecuritytokenoffering">STO（SecurityTokenOffering）</a></li>
+      </ul>
+    </li>
+    <li><a href="#ifo-initial-fork-offerings-数字货币首次分叉发行">IFO Initial Fork Offerings 数字货币首次分叉发行</a></li>
+    <li><a href="#imo-initial-miner-offerings-数字货币首次矿机发行">IMO Initial Miner Offerings 数字货币首次矿机发行</a></li>
+    <li><a href="#iboinitial-bancor-offering首次兑换发行">IBO （Initial Bancor Offering）首次兑换发行</a></li>
+    <li><a href="#ido-相关知识">IDO 相关知识</a>
+      <ul>
+        <li><a href="#基础概念">基础概念</a></li>
+        <li><a href="#经济模型中涉及到的-nft-发行">经济模型中涉及到的 NFT 发行</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文献">参考文献</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          对话 ERC-4337 作者：以太坊账户抽象及其演化 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="如果帐户抽象是游戏规则的改变者，并且是我们未来加密体验不可或缺的默认设置，那么需要构建许多其他 Dapps 和基础设施才能使其正常工作。" />
+<meta name="keywords" content="ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/45576/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="对话 ERC-4337 作者：以太坊账户抽象及其演化" />
+<meta property="og:description" content="如果帐户抽象是游戏规则的改变者，并且是我们未来加密体验不可或缺的默认设置，那么需要构建许多其他 Dapps 和基础设施才能使其正常工作。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/45576/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-15T00:00:00+00:00" />
+
+<meta itemprop="name" content="对话 ERC-4337 作者：以太坊账户抽象及其演化">
+<meta itemprop="description" content="如果帐户抽象是游戏规则的改变者，并且是我们未来加密体验不可或缺的默认设置，那么需要构建许多其他 Dapps 和基础设施才能使其正常工作。"><meta itemprop="datePublished" content="2022-12-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7053">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="对话 ERC-4337 作者：以太坊账户抽象及其演化"/>
+<meta name="twitter:description" content="如果帐户抽象是游戏规则的改变者，并且是我们未来加密体验不可或缺的默认设置，那么需要构建许多其他 Dapps 和基础设施才能使其正常工作。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">对话 ERC-4337 作者：以太坊账户抽象及其演化</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-12-15">
+      2022-12-15
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7053 字 -
+        预计阅读 15 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>采访：Lucas、Jenny，分别为火必孵化器高级研究经理和高级运营经理（原文）</p>
+<p>受访者：Kristof Gazso、Praneeth Srikanti，前者为 ERC-4337 共同作者、后者为 Ethereal Ventures 投资合伙人</p>
+<p>编译：aididiaojp.eth，Foresight News</p>
+<p><strong>主持人：各位能否先自我介绍一下？</strong></p>
+<p><strong>Kristof：</strong> 我在 2021 年 5 月加入 Nethermind，大约在去年 11 月的时候，我在想我接下来要在这个领域做什么，这个领域所面临最大的瓶颈是什么？目前最大的问题是看到没有技术背景的普通人在使用以太坊应用程序时会遇到很大困难。所以对我来说我能做的最有效的事情就是解决以太坊的账户和钱包使用困难的问题，改善以太坊应用程序的用户体验。</p>
+<p>账户有两种类型：私人账户（EOA）和智能合约账户。现在在以太坊上，用户主要使用的是 EOA 账户（ 比如 Metamask 和 Rainbow），但它们存在一定的限制。</p>
+<p>我一直在寻找解决方案，不久后发现了帐户抽象的概念。我意识到现在还没有任何提案有机会部署到主网，因为之前的所有提案要么太复杂，要么需要在提案方面做太多工作。所以与 Vitalik 和 OpenGSN 一起，我们一起探索账户抽象的解决方案，通过它，主网就不需要进行共识级别的协议更改，而这就是 ERC-4337 的主要创新点。</p>
+<p>我们可以看到目前为止已经有一些应用程序正在被构建。现在，我们正在不断发展生态，并为 ERC-4337 的普及铺平道路。</p>
+<p><strong>Praneeth：</strong> 我是 Ethereal Ventures 的投资合伙人，这是一家新成立的加密投资公司，由 ConsenSys 的前风险投资团队创立。</p>
+<p>为了让更多的人进入 Web3，我们需要为用户提供更低门槛和流畅的体验，这是人们从根本上习惯的典型约定，例如身份验证和社会恢复。</p>
+<p>通过帐户抽象，它能够为这些问题提供有效的解决方案。我非常有兴趣看到 ERC-4337 的演变，并与生态系统中的人们和利益相关者合作来见证它的诞生。</p>
+<p><strong>主持人：今年关于实施账户抽象的 ERC 4337 被提出，在 Devcon 期间我们有几个关于账户抽象的讨论。 ERC 4337 实际上成为了一个流行词，尽管当前市场非常不好，但我们看到了围绕账户账户已经出现了一些好的势头。那么首先能解释一下什么是账户抽象吗？</strong></p>
+<p><strong>Kristof：</strong> 我先来通俗地解释一下。在以太坊中，大多数人使用的账户都是私钥账户，我们称这些账户为外部拥有账户 EOA。</p>
+<p>然而，以太坊中还有另一种类型的账户，就是智能合约账户。EOA 账户由私钥控制，而智能合约账户由其代码控制。</p>
+<p>问题在于在以太坊中，EOA 账户拥有很多智能合约账户所没有的特殊权限。比如只有 EOA 账户可以发起交易，而智能合约账户不能发起交易。</p>
+<p>此外，EOA 账户在工作方式上是非常程序化的，所以对于 EOA 账户，Gas 支付的工作方式是你将在交易中使用的所有 Gas 放在以太坊智能合约中，如果有任何剩余，它才会退还到账户。</p>
+<p>在 EOA 中，签名验证也非常程序化，例如 ECDSA 签名。这本身并没有什么问题，但我们在这个方案中有很多今天可以使用的创新。</p>
+<p>因此账户抽象只是试图通过摆脱只有一种账户类型的观念，并为智能合约账户提供了更多权力，赋予他们发起交易的权力。</p>
+<p><strong>Praneeth：</strong> 账户抽象能够为 Web3 引入更多的安全性和用户友好性，这就是我们希望用户在第一次开始与区块链交互时的感受。考虑他们需要如何存储和记住他们的私钥而不授予访问特定智能合约来购买代币或服务的经历是糟糕的。</p>
+<p>帐户抽象使我们能够以非常直观的方式进行交互。人们可以用它来对关键权限进行精准控制，这是人们今天在 Web2 帐户上使用的东西。</p>
+<p>我们还需要从根本上考虑给定钱包的限制功能是什么，并尝试看看我们是否可以从基于交易的模型转变为有希望成为基于共识的模型。</p>
+<p><strong>Kristof：</strong> 如果我们能很好地过渡到智能合约钱包，这里有几个示例，说明用户能够在当前功能之上获得的权力。</p>
+<p>一个例子是 Gas 支付方式。Dapps 将非常容易获得激励用户交易的能力。用户还可以使用不同的代币甚至链下信用卡进行支付，因此无需 ETH 即可进行交易。现在任何类型的系统或个人 Gas 支付方式都是可能的。</p>
+<p>使用签名方案，用户可以拥有社会恢复方案和多重签名方案，并且可以完全自定义帐户的行为方式以及子帐户的权限类型。</p>
+<p>用户的主帐户可能由多重签名控制，并通过私钥授予快速访问权限，但前提是它与链上游戏合约进行交互。通过此设置，用户钱包和链上游戏将能够代表用户进行交易，但权限非常有限。换句话说用户可以使用 EVM/Solidity 代码完全定义个人帐户应该如何，你可以提供自定义权限，例如基于时间的权限、支出限制等。</p>
+<p>最后一个非常常见的用户体验问题是缺少批量交易。用户不必再需要批准然后在 Uniswap 上进行 Swap（现在是 2 笔交易），而是用户现在可以将任意数量的单独操作放入同一个事务中。</p>
+<p>这些改善结合在一起，为下一代加密用户提供了真正强大的用户体验。用户基本上可以拥有与使用 NEO Banks 相同的体验。</p>
+<p><strong>主持人：以太坊社区正在推进 EIP-4337 的实现，EIP-4337 是在 EIP-86、EIP-2938 等之后推出的。为什么我们要有一个新的账户抽象协议级标准？对以太坊开发社区和用户有何影响？</strong></p>
+<p><strong>Kristof：</strong> 之前最相关的提案是 EIP-2938 ，这是我朋友 Ansgar 创建的。EIP-2938 定义了一种基于以太坊的账户抽象机制，它实际上是改变了以太坊将如何运作的协议。那么现在为什么不进行维护？问题在于，任何类型的协议级别更改都是一个非常困难的过程。在过去一年半的时间里，几乎所有核心开发人员的努力都投入到了合并上，因此核心开发人员没有时间尝试实施帐户抽象提案。</p>
+<p>帐户抽象在 UX 术语中非常有用，但它的优先级不如可扩展性和安全性高，目前资源主要分配在合并、取款以及 EIP-4844 proto-danksharding 和 EVM 等方面，并且核心开发人员社区至少还需要 2-4 年的时间才能将注意力转移到提升用户体验上。这就是为什么我们决定尝试提出新的 ERC-4337 提案，该提案可以通过与以太坊一起部署的智能合约来实现，而无需在协议级别进行部署。</p>
+<p>我想社区没有采用 2938 之类的最终原因是因为帐户抽象本质上会引入一些潜在的拒绝服务风险。通过帐户抽象，你可以让钱包定义交易是否有效，基本上你必须执行自定义 EVM 代码来确定交易是否实际支付给矿工或验证者。因此，将类似的东西直接引入共识是一个非常大的风险，最好先尝试使用 ERC，而非实际更改节点服务。</p>
+<p><strong>Praneeth：</strong> 我认为这是 4337 生态系统在类似 EVM 兼容环境中启动的一种非常好的方式，它可以在以后的协议中完全友好并为其他发明起到引导作用。</p>
+<p><strong>主持人：以帐户抽象为标准，合约钱包成为第一选择，如 Gnosis Safe，Argent 之类的，那么哪些功能现在是可以普及的，又有哪些功能有望在不久的将来出现？</strong></p>
+<p><strong>Kristof：</strong> 首先需要注意的是，Gnosis Safe 和 Argent 尚未与 ERC-4337 兼容。所以 ERC-4337 只是一个标准，它定义了账户抽象钱包和付款人以及生态系统的其他部分应该是什么样子。</p>
+<p>关于你的另一个问题，即我们已经看到了哪些功能以及我们在未来期待哪些功能？在 Argent 中，我们已经看到了使用 ERC-20 代币进行支付之类的事情。我们还没有看到非常普遍的 Gas 费支付形式。这绝对是 Gnosis Safe 和 Argent 的未来。我们已经看到社交恢复和多同步等方案有很多差异，但我们还没有真正看到子帐户的生成和为子帐户提供非常自定义的权限。</p>
+<p>我记得使用 Argent 有一项功能，你可以在其中生成一个签名者密钥，该密钥可以根据你的规定条款代表你进行交易。所以你可能会去找你的社交恢复签名者，你可能会要求他们批准一个可以在一天内进行交易的特殊密钥，这意味着你可以按顺序执行大量交易，而不必每次都返回给你的签名者。所以这已经是未来可能发生的事情的一个基本例子。</p>
+<p>据我所知，目前还没有引入支出限制之类的东西，我认为这对未来的用户体验非常重要。Argent 和 Gnosis Safe 等钱包尚未符合标准，一旦符合标准，它们将解锁许多非常酷的功能。</p>
+<p><strong>Praneeth：</strong> ERC-4337 仍然需要现有用户通过将资产和活动转移到新帐户来升级我们拥有的控制台，使其符合 ERC-4337 标准。除此之外，为了确保迁移过程可以顺利进行，还有一些其他措施需要发挥作用，并且避免引入太多摩擦，特别是对于后台没有太多活动的帐户来说。</p>
+<p>但除此之外，我认为仍然存在这样的想法，即我们将让 EOA 始终成为第一选择，我们可能会看到更多与帐户抽象相关的功能发挥作用，尤其是在人们从 4337 中汲取灵感的 L2 上。获得 EOA 迁移帐户的途径也将是一个非常有趣的途径，而且很有希望在不久之后实现突破。</p>
+<p><strong>Kristof：</strong>  Praneeth，你提到了一个非常有趣的话题，那就是我们究竟如何在未来将 EOA 迁移到智能合约钱包。这是一个非常重要的问题，很多和我谈过智能合约钱包的人都有一个共同的反应，就是觉得把所有东西都转移到一个新钱包很麻烦，尤其是灵魂绑定代币。</p>
+<p>所以，我们得想办法把 EOA 钱包做成智能合约。我们有两个主要选择。一种是较弱的版本，我们可以引入一种新的交易类型。这种交易类型能够实现的是如果你提交了一笔交易，它会简单地将你的 EOA 转换成一个智能合约账户，例如可根据你在数据字段中指定的代码来进行转换。你只需调用 1 笔交易，就可以以非常完全自定义的方式来定义你的帐户使用智能合约代码的样子。这将与你之前拥有的所有代币、所有 NFT 或所有东西的地址相同。</p>
+<p>另一种选择是一个更强的版本，即不是让用户选择将他们的 EOA 变成智能合约，而是一旦硬分叉发生，你可以立即将每个 EOA 变成一个非常简单的智能合约账户，所以这个智能合约账户将与你现在拥有的方案相同。它将依赖于 ECDSA，这基本上一举摆脱了 EOA。</p>
+<p>这是我们现在需要考虑的一个重要权衡，我们很可能会倾向于第二种选择，试图获得更强大的版本。因为如果你采用较弱的版本并允许人们将 EOA 变成智能合约账户，你实际上会更多地使用 EOA。因此，你将拥有一种交易类型，其唯一用途是将 EOA 转换为智能合约账户。但是如果将来你想完全摆脱 EOA 怎么办，所以这是我们正在努力弄清楚的未来主题。</p>
+<p>但正如我之前所说，尝试引入以太坊的任何类型的共识改变都需要很长时间才能实施，比如 1-3 年。所以绝对不要打赌很快就会摆脱 EOA。</p>
+<p><strong>Praneeth：</strong> 我绝对同意这一点。此外，它还改变了应用程序开发人员的这些假设，因为它与通常依赖于围绕签名方案某些假设的合约相关，这些假设基本上表明该签名是否与 EOA 帐户相关。</p>
+<p>但我认为这会引发更多的问题，因为它可能归结为对可能旧的帐户进行强制转换，并且在某种意义上可能无法真正检测到人们多年未进行任何活动的帐户。但我认为，对于使用 EOA 的人来说，在接受起来，可能需要做出一些改变。</p>
+<p><strong>主持人：如果帐户抽象是游戏规则的改变者，并且是我们未来加密体验不可或缺的默认设置，那么需要构建许多其他 Dapps 和基础设施才能使其正常工作。对于开发者来说，需要哪些钱包支持，以及 Dapps 如何提前计划以设计基于智能合约钱包的功能？</strong></p>
+<p><strong>Kristof：</strong> 有两个非常简单的答案，Dapps 有望实现部署，而且不是太难。一是停止歧视智能合约账户，比如停止使用交易来源。一旦我们有了账户抽象，这确实会在未来产生很大的误导，即使现在使用 457 。如果你使用交易来源，它也会将你指向 Bundles，一个将用户操作捆绑在一起的生态系统播放器。因此，停止使用交易来源，不要禁止智能合约与你的 Dapps 交互。</p>
+<p>二是开始与 EIP-1271 兼容。这个 EIP 定义了一种用智能合约钱包签署授权的方法。因此，如果智能合约钱包实现了「if valid signature」功能并返回「true」，那么你会把它当作是钱包签署了该消息。但是许多 Dapps 仍然不符合这一点，它们假设 EOA 账户有一个简单的 ECDSA 签名来确定它是否被签名。所以我想这就是两件事。一，不要歧视智能合约账户，二，遵守 EIP-1271 。</p>
+<p><strong>Praneeth：</strong> 是的，我认为这很准确。只需记住一件事，所有围绕 EVM 对象格式的变化都可能进入上海升级。</p>
+<p>当我们考虑更广泛的提案或构建者分离的长期路线图，并确保我们有能力被核心协议考虑时，许多有望发生的工作，如专门的美国部分，从根本上来说将是非常重要的团队，因为你正在考虑新的机制和模型，比如发挥作用的提案或构建者分离方案。</p>
+<p>但只要确保你密切关注 EOF 和 EIP，你就能更好地理解协议中验证和执行的概念。</p>
+<p><strong>主持人：我们只在由 Layer 2 和 Layer 3 组成的以太坊生态系统中谈论账户抽象，还是在更广泛的多链生态系统中谈论账户抽象？为什么 Layer 2 会是账户抽象的发源地而不是 以太坊？StarkNet 目前在开发账户抽象方面的工作是什么？</strong></p>
+<p><strong>Kristof：</strong> 我可以回答你的第一个问题，这就是为什么我们用两个词来看待 Layer 2 中帐户抽象的发展：Gas 费。通过帐户抽象，依靠智能合约代码来验证你的交易是否有效。但使用 EOA，这由节点本身去验证的。</p>
+<p>由于 Layer 1 主网 Gas 成本比 Layer 2 高很多，因此 Layer 1 中增加的 Gas 成本惩罚要大得多。在第一层，EOA 交易可能花费 10 美元，而智能合约钱包交易可能花费 20 美元，这在 Layer 2 可能只需要一美分或者两美分。因此，Layer 2 中的 Gas 费差异可以忽略不计，这就是为什么我们期望看到 Layer 2 在任何特定的 Layer 1 采用之前出现。</p>
+<p>据我所知，StarkNet 有很多受 ERC-4337 启发的机制。我对它们不是很熟悉，但它们已经允许部署智能合约并直接使用该合约发起交易。所以他们以类似于 4337 的方式实施相关合约，并且他们已经在他们的协议中进行了尝试。他们向前迈进了一大步，这非常鼓舞人心。</p>
+<p><strong>Praneeth：</strong>  Dan Finlay 的委托框架，本质上具有向任何 solidity 合约和账户添加反事实委托的能力，包括许多与基于智能合约的钱包相关的功能：具有验证、具有批量交易的能力。使用该框架为基础，允许 EOA 充当智能合约钱包，而无需通过在链下发布消息来部署合约。这基本上是 EIP-3074 和 EIP-5003 的主要工作。</p>
+<p>但是你的签名密钥仍然与用户仍需要备份的密钥相关联。你可以将权限委托给任意智能合约，但你仍然会遇到与撤销和取消权限以及节点管理相关的问题。我认为有一些非常有趣的概念围绕着帐户抽象，但是是以一种避免协议修改的方式进行的。使用这些实验中的一些甚至可以看看这是否是一种可用于大部分 EOA 帐户的数据迁移的方法。</p>
+<p>我们会鼓励人们花一些时间看看已经试用了一段时间的可委托框架。</p>
+<p><strong>听众问题（Eric Siu）：你对 4337 与其他 EIP（如 3074 和 5003 ）的帐户抽象有何看法？</strong></p>
+<p><strong>Kristof：</strong>  3074 比任何账户 EIP 的出现都要早。它的作用是赋予 EOA 账户更多的权力。因此它引入了调用者的概念，并且基本上允许该调用者在其可以定义的一些限制下代表 EOA 进行交易。</p>
+<p>这有两个问题，也是它可能不会进入主网的原因。第一个问题是它服务于 EOA，让 EOA 变得更强大。这很好，因为如果你想使用智能合约钱包的功能，你不必再转移你的余额，但这也很糟糕，因为如果你将来要引入账户抽象时会有很多技术问题。</p>
+<p>第二个问题是它与 Invokers 有一些安全问题。授予对调用者的完全访问权限可能会导致一些奇怪的副作用。Yoav Weiss 是 4337 的共同作者，他发表了 3074 的许多安全问题，我建议人们查看他概述安全问题的帖子。所以我想这就是为什么这个 EIP 不太可能进入主网的原因。</p>
+<p><strong>听众提问 (Ric Burton)：我真的很好奇舞台上的人们认为在所有这些开始发挥作用的未来可能发生什么。我认为现在我们专注于实施细节以及如何让 Dapps 开发人员了解所有这些事情。我想知道如果所有这一切都在五年内实现，你未来的梦想是什么，是否有任何匹配的应用程序、产品、工具或服务？</strong></p>
+<p><strong>Kristof：</strong> 对我来说，我的愿景是一旦我们真正拥有一个良好的账户抽象生态系统，在以太坊上运营奖励将与使用我们现在拥有的任何类型的 NEO Bank 一样简单或更简单。我可以很容易地将任何资产转移给朋友。我可以使用许多内置应用程序来进行储蓄和预算，但权限非常有限，例如阻止我的信用卡并执行这些操作。我真的认为一旦我们的钱包利用了账户抽象化的许多功能，我们将能够与链上生态系统进行交互，就像我们与我们的银行在链下生态系统中进行交互一样简单。</p>
+<p><strong>Praneeth：</strong> 我之前非常简要地谈到了这一点，但从某种意义上说，它是用户表达他们的意图，并自动执行或在应用程序和协议的自动会话中执行的能力，我们抽象出这个组合共识的固有事务称之为抽象账户。当你与这些协议交互时，人们需要使用可以做到这一点的技术或工具，而不会真正陷入执行细节，即如何以实际方式实现这一点。因此，我认为将事物组合在一起的能力；分配多个未停滞的动作；签署可以稍后轻松提交到区块链承诺的能力；以及从根本上在验证和执行之间进行核心分离的能力等都是值得思考的事情。</p>
+<p>从根本上说，这意味着能够公开更多与访问和授权相关的细粒度的事情。用户通常习惯于使用当今世界中非常成熟的 Web2 平台，但是让这些功能实际执行或写入协议中，并能够通过非常熟悉的用户流程来调整这些功能，将对于提高 Web3 平台的采用率非常有帮助。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45566/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">从多个案例入手 详解代币经济的重要性及设计思路</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/45582/">
+                <span class="next-text nav-default">法律视角解读：香港准入加密ETF 金融机构如何入局？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

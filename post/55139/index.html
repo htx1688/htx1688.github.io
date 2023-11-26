@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="多模态很可能就是人卷人的最后一代了，再未来的模型开发和演进说不定就以 AGI 为主力了" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55139/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读" />
+<meta property="og:description" content="多模态很可能就是人卷人的最后一代了，再未来的模型开发和演进说不定就以 AGI 为主力了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55139/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读">
+<meta itemprop="description" content="多模态很可能就是人卷人的最后一代了，再未来的模型开发和演进说不定就以 AGI 为主力了"><meta itemprop="datePublished" content="2023-07-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4195">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读"/>
+<meta name="twitter:description" content="多模态很可能就是人卷人的最后一代了，再未来的模型开发和演进说不定就以 AGI 为主力了"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-17">
+      2023-07-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4195 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文来源：少数派</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/10_ymyfi2qezd.png" alt="OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读"></p>
+<p>图片来源：由<a href="https://www.wujieai.com/ai">无界 AI</a> 生成</p>
+<p>那是前几天一个普通的上午。我正在日常搬砖，突然各路信息席卷而来：「赶紧的，GPT-4 模型构架泄露啦，国产大模型要再次超越啦！」</p>
+<p>打开社媒一看，好么，都不用会英语，国内的人翻机翻都已经上线了，这速度，我是真的服气。但是，等我去追根溯源，看看信息到底有几分靠谱的时候，我突然就有把科技圈逛出了娱乐圈的感觉。</p>
+<p>鉴于目前「Fake News」满天飞的互联网现状，我看到这个消息后，干的第一件事就是追本溯源。</p>
+<h2 id="来龙去脉"><strong>▍来龙去脉</strong></h2>
+<p>我信息挖掘的起点是 Hacker News 上分享的、通过 Thread Reader 提取的推文串（存档于 7 月 11 日）。点开一看，上来就是两句：</p>
+<blockquote>
+<p>GPT-4&rsquo;s details are leaked.<br>
+It is over.</p>
+</blockquote>
+<p>这标题党水平完全不逊色于国内。</p>
+<p>众所周知，OpenAI 在发布 GPT-4 的同时打破了自己对 open 的承诺，没有透露任何权重或技术细节，被业界广泛批评。这大概就是博主为什么要用 It is over 这个梗来渲染「情节反转」的戏剧效果。</p>
+<p>再看内容，正是 OpenAI 守口如瓶的 GPT-4 训练细节。这些信息前面有过很多猜测，但是官方一直都没有披露，提到的时候都说的很模糊（原文比较晦涩，用了很多缩写和行话，一些会在后文解释）：</p>
+<ul>
+<li><strong>模型参数量</strong> ：1.8 万亿，比 GPT-3.5（1750 亿）大 10 倍左右。</li>
+<li><strong>模型层深</strong> ：120 层。</li>
+<li><strong>模型构架</strong> ：混合专家模型（MoE，解释见后文），一共 16 个「专家」，每个专家 1110 亿参数量。每次向前传递推理（生成一个 token 的输出）选择两个专家。</li>
+<li><strong>训练数据</strong> ：共 13T（13 万亿个）token 的数据。文本数据被重复训练了 2 次，代码数据被重复训练了 4 次。这个数据其实挺重要的，后续具体分析。</li>
+<li><strong>并行策略</strong> ：8 路张量并行 + 16 路管道并行。有多个位于不同数据中心的多个 GPU 集群同时训练，每个集群有 128 个 GPU。</li>
+<li><strong>预训练上下文</strong> ：8K。32K 版本是在 8K 基础上微调的。</li>
+<li><strong>训练成本</strong> ：在约 25000 张 A100 上，以大约 2.15e25 flops 的速率，持续训练 90 至 100 天。按照每张 A100 小时 1 美元，大约需要 6300 万美元。（如今可在约 55 天内使用约 8192 张 H100 完成，费用估算为 2150 万美元。）</li>
+</ul>
+<p>问题是，这些信息是怎么弄来的，是否靠谱呢？</p>
+<p>顺藤摸「瓜」，我又找到了这串推文的发布者——Yam Peleg。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/uzzk741m8gwysdl" alt="OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读"></p>
+<p>这老哥的账号虽然我没关注，但还真看过他以前的文章。他是以色列一个「创业公司」的 CEO（但成立有 15 年，可能再叫创业公司不太合适了）；本人工程经历丰富，很懂大语言模型，曾经尝试反向破解过 GPT-4 和 ChatGPT 代码解释器。今年六月，OpenAI 成员访问以色列的时候，Peleg 还去参加座谈沟通了，并且还和 CEO Sam Altman 合影。</p>
+<p>读这老哥的文章，我就禁不住想起来在以色列时候见过的一位学生联络员 Tom，随便说点啥都能给你搞得热血沸腾的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/f0isvtbbp4o14pd" alt="OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读"></p>
+<p>左起：Sam Altman、Yam Peleg（来源：@Yampeleg）</p>
+<p>考虑到这老哥一直在研究 OpenAI，也认识 OpenAI 内部很多人，所以他如果得到了点啥内部消息，我觉得可信度其实还挺高的。</p>
+<p>但等我晚上准备去仔细研读下他发的东西的时候，突然发现他把前面发的都删了。本来我以为是被 OpenAI 捂嘴了，还庆幸自己留了档。后面仔细一看，发现不是因为 OpenAI 要求删除，而是因为他也是从一个付费专栏转述的，被人投诉侵犯了版权。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/s3j1kty5f8tfz46" alt="OpenAI「打死都不说」的 GPT-4 训练细节被传出，这是我的解读"></p>
+<p>这篇原始来源是一个叫做 SemiAnalysis 的 Substack 专栏，他们稍早之前发了一篇题为 GPT-4 Architecture, Infrastructure, Training Dataset, Costs, Vision, MoE 的文章，放在付费墙后。</p>
+<p>查了一下得知：</p>
+<blockquote>
+<p>SemiAnalysis 是一个精品半导体研究和咨询公司，专注于从化学原料到晶圆厂到设计 IP 和战略的半导体供应链。该公司由 Dylan Patel 创办，一位有着多年半导体行业经验的分析师和工程师。Patel 曾在英特尔、AMD、高通等公司担任过从设计工程师到市场营销经理等的角色。<br>
+SemiAnalysis 的团队还包括多位专业的半导体分析师和咨询顾问。他们各自有着不同的专长领域，如 AI、云计算、网络、存储、电动汽车、射频、物联网等。他们为客户提供了从化学原料到晶圆厂到设计 IP 和战略的全方位的半导体供应链分析和咨询服务。</p>
+</blockquote>
+<p>早些时候，SemiAnalysis 还发过一篇文章披露谷歌工程师在内部通信中说「我们没有护城河，但 OpenAI 也没有」（We Have No Moat, And Neither Does OpenAI），引起不小议论。这篇文章后面被证实为真。</p>
+<p>这样看来，Dylan Patel 老哥可能确实有些内线，他们给出的信息可信度应该还是可以的。</p>
+<p>至于他们为啥这么急着让 Yam 老哥删推——因为这些「内部信息」确实价值不菲，订阅 SemiAnalysis 的付费文章，一年要 500 美元。Yam 老哥订阅的精英版更是要 1000 美元。</p>
+<h2 id="梳理分析"><strong>▍梳理分析</strong></h2>
+<p>根据这个来龙去脉，我的看法是，这个传闻还是有一定的可信度的。以下则是我基于这些信息的一些分析，提出来供大家讨论。</p>
+<h2 id="私有模型的竞争将集中在并行能力上"><strong>私有模型的竞争将集中在并行能力上</strong></h2>
+<p>根据此次传闻，目前如果要训练一个 GPT-4 竞品，按照使用约 8,192 个 H100 芯片来估算，以每小时 2 美元的价格，在约 55 天内可以完成预训练，成本约为 2150 万美元（1.5 亿人民币）。</p>
+<p>这个成本对于目前波涛汹涌的 LLM 市场来说，真的不算大。国内目前的主要玩家都可以比较轻松地承担数次训练。所以，这次说真的，再过半年模型能力（起码参数规模）对标 GPT-4 可能真的不是吹牛。</p>
+<p>如果训练成本不是问题，那么训练数据会不会成为问题呢？我认为也不会。传闻称，GPT-4 的训练数据共 13T（13 万亿个）token。作为对比，CommonCrawl 和 RefinedWeb 两个公开数据集都是 5T 个 token，传闻称，余下部分来源 Twitter、Reddit 和 YouTube；一些诉讼还主张 OpenAI 使用了来自 LibGen、SciHub 等「影子图书馆」的盗版数据。</p>
+<p>因此，我认为这个数据规模并不是不可企及，再加上国内本身也积累了很多中文资源，所以训练数据也应该问题不大。</p>
+<p>其他的类似预训练、微调以及中文编解码等问题，其实也不存在太多的技术秘密，方法还是 比较公开的。给足够的资源，半年时间应该都可以解决。</p>
+<p>所以，最后剩下的门槛就是并行能力了。其实这次传闻里面用了极大的篇幅去介绍相关的内容，专业程度还是比较高的，这里我只能做些粗浅解释。</p>
+<p>粗略地说，所谓并行问题，就是你有了大模型，如何以最低的成本让最多的人同时使用。这里面涉及到很多专业的设计问题，在运算资源固定的情况下，应该如何分配不同环节的运算资源？如何处理并发？如何管理内存？</p>
+<p>并行处理的能力直接决定了用户体验。目前基于 GPT-3.5 的 ChatGPT 和 API 都比较流畅了，这是非常厉害的。这里大家可能会说，我体验的其他国产 LLM 或者 Claude 都比 GPT-3.5 还快啊。但是，大家没有考虑使用的量级问题，GPT-3.5 在这么高的并发下有这样的性能，其他的厂商如果匹配不了 OpenAI 的这个能力，也就没能力来抢 OpenAI 的市场。</p>
+<p>所以，并行能力可能会成为各路 OpenAI 竞争对手的角逐重点之一。</p>
+<h2 id="gpt-5-的重点在于多模态"><strong>GPT-5 的重点在于多模态</strong></h2>
+<p>前面提到，传闻称 GPT-4 是由 16 个专家模型组成的「专家混合」（mixture of experts, MoE）模型。这里简单解释一下什么是「专家混合」，这是指将用户的「问题」划分成若干子问题，每个子问题交给一个较小的模型（也就是一个「专家」）去解决，然后通过一个「路由模型」进行选择和组合，再输出给用户。</p>
+<p>传闻进一步称，GPT-4 的每个「专家」有 1110 亿参数量——相当于 GPT-3（这个和 Sam Altman 前期说的 GPT-4 参数甚至小于 GPT-3.5 相符），其中有 550 亿个参数是共享的。每次向前传递推理（生成一个 token 的输出）使用两个「专家」，事实上耗费的参数量约为 2800 亿。这个数字显著小于不用 MoE 所需的数量，也和前期很多学者预测的类似。</p>
+<p>值得注意的是，传闻指出 GPT-4 训练所用的文本和代码数据都是被重复使用过的。再结合使用 MoE 构架的选择，我个人猜测：要么目前可以比较方便获取的高质量文本数据已经接近枯竭，要么无限制增大数据量对 LLM 性能的提升已经非常有限了。</p>
+<p>但是，无论是哪一种情况，GPT-5 想要有大的性能突破，就必须能够充分利用现存的大量视频、图片以及音频数据，换言之是一个「多模态」的模型。</p>
+<p>问题在于，根据这次的传闻，OpenAI 目前的视觉多模态并没有太多的过人之处。它是一个独立的视觉编码器，使用文本做输入进行预训练，然后使用约 2 万亿个 Token 进行微调。这种训练方式，明显无法充分利用已有的视频、图片以及音频数据。</p>
+<p>所以，OpenAI 一直强调还没有训练 GPT-5，大概率是真话。在训练 GPT-5 之前，他们还得找到一个更好的多模态模型构架，让模型可以充分利用音视频数据。而只有能够利用这些优质的训练数据，GPT-5 才有可能获得足够的能力提升。（同时，如果 GPT-5 真的能够充分利用这些音视频数据的话，那不管是 AGI 还是 OpenAI 最近提出的「超智体」，似乎确实也没那么遥远了。）</p>
+<h2 id="openai-可能是有意放出的本次传闻"><strong>OpenAI 可能是有意放出的本次传闻</strong></h2>
+<p>这个推论就完全是个人的瞎猜了。事实根据不足，大家看看就好。</p>
+<p>我的理解是，OpenAI 很清楚 GPT-4 的护城河并不深；在如今这种热潮中，竞争对手迎头赶上也并不困难。并且如上分析，他们现在的多模态大模型构架应该还没有搞定，这个时候如果有新的玩家上来就从多模态开始突破，OpenAI 被弯道超车的概率也是很大的。</p>
+<p>所以，这也许是 OpenAI 的缓兵之计——我就给你们透露一些 GPT-4 的信息，让头部的玩家都先去做 GPT-4 的复刻工作，把 OpenAI 已经走过的路也再走一遍。</p>
+<p>如果在这个过程中，OpenAI 给 GPT-5 的训练打好了基础，完成了多模态大模型的前期攻关，即使 GPT-4 已经被其他的大语言模型超越，OpenAI 也不慌了。个人认为，多模态很可能就是人卷人的最后一代了，再未来的模型开发和演进说不定就以 AGI 为主力了。也就是说，这次赢了，可能就赢到最后了。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55140/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">NFT即钱包的ERC-6551真有那么神奇吗？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55117/">
+                <span class="next-text nav-default">SEC 与 Ripple 诉讼：您需要了解的一切</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#来龙去脉"><strong>▍来龙去脉</strong></a></li>
+    <li><a href="#梳理分析"><strong>▍梳理分析</strong></a></li>
+    <li><a href="#私有模型的竞争将集中在并行能力上"><strong>私有模型的竞争将集中在并行能力上</strong></a></li>
+    <li><a href="#gpt-5-的重点在于多模态"><strong>GPT-5 的重点在于多模态</strong></a></li>
+    <li><a href="#openai-可能是有意放出的本次传闻"><strong>OpenAI 可能是有意放出的本次传闻</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

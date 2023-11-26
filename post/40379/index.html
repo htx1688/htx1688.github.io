@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文读懂区块链执行层、存储层和共识层的扩容方案 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="信任最小化是一种宝贵的安全属性，而区块链技术则拥有得天独厚的优势。" />
+<meta name="keywords" content="区块链" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40379/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文读懂区块链执行层、存储层和共识层的扩容方案" />
+<meta property="og:description" content="信任最小化是一种宝贵的安全属性，而区块链技术则拥有得天独厚的优势。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40379/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文读懂区块链执行层、存储层和共识层的扩容方案">
+<meta itemprop="description" content="信任最小化是一种宝贵的安全属性，而区块链技术则拥有得天独厚的优势。"><meta itemprop="datePublished" content="2022-07-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="10458">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文读懂区块链执行层、存储层和共识层的扩容方案"/>
+<meta name="twitter:description" content="信任最小化是一种宝贵的安全属性，而区块链技术则拥有得天独厚的优势。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文读懂区块链执行层、存储层和共识层的扩容方案</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-07-19">
+      2022-07-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 10458 字 -
+        预计阅读 21 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>信任最小化是一种宝贵的安全属性，而区块链技术则拥有得天独厚的优势，可以实现这一属性。</strong> 区块链基于计算机代码、密码学和去中心化共识来保障安全，并替代了握手、品牌声誉以及纸面合约等传统的协议机制。其安全保障也为加密事实奠定了基础。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0719/21_yrt01ajsny.png" alt="一文读懂区块链执行层、存储层和共识层的扩容方案"></p>
+<p>加密事实可以为应用和记录的后端计算实现信任最小化</p>
+<p>目前，区块链已经为各种创新的应用场景实现了信任最小化，其中包括货币政策（如：比特币）以及数字资产交易（如：DEX）。然而，区块链一直以来都难以满足许多应用场景对速度和成本的需求，在这两个维度无法与传统计算系统相媲美。区块链在可扩展性方面的限制也使得用户不得不支付高昂的交易费，这使得开发者不禁怀疑区块链是否真的能支持高价值的应用场景，并实现实时数据处理。</p>
+<p>区块链的终极目标是覆盖所有用户和应用场景，因此可扩展性是其研发的重点，也是推动智能合约成为金融、供应链和游戏等传统行业后端基础架构的关键要素。下文概述了区块链的可扩展性问题，重点聚焦区块链与传统计算系统的区别，并列举了区块链在执行层、存储层以及共识层不同扩容方案的优劣势。</p>
+<p>注：本文并没有详尽列举所有区块链扩容方案。由于区块链的研发工作具有一定前沿性，因此目前各个解决方案仍在研发、测试、部署和更新阶段。</p>
+<p><strong>区块链与传统计算的对比分析</strong></p>
+<p>在讨论如何扩展区块链之前，必须先了解区块链计算与传统计算的根本区别。总的来说，区块链具有以下核心价值：</p>
+<ul>
+<li>
+<p><strong>计算具有高确定性——</strong> 按照预定义的代码逻辑严格执行，并具有非常高的确定性。</p>
+</li>
+<li>
+<p><strong>可信且中立——</strong> 区块链没有中心化的管理员或特殊的网络权限，这意味着任何人都可以提交交易，无需担心被操控或差别对待。</p>
+</li>
+<li>
+<p><strong>终端用户进行验证——</strong> 世界上任何一个人都可以审核区块链账本的历史和当前状态以及客户端软件的底层代码。</p>
+</li>
+</ul>
+<p>更具体而言，区块链的任务是管理内部账本，这个账本可以记录资产所有权、合约状态或原始数据。大多数区块链网络都由“区块生产者”和“全节点”管理。这两类参与者各自发挥不同的功能，但有时也会相互重叠。 </p>
+<p>区块生产者会收集用户提交的未经确认的交易，查看交易的有效性，并将交易放置在我们称之为“区块”的数据结构中。区块生产者通常在工作量证明（PoW）区块链中被叫作“矿工”，在权益证明（PoS）区块链中被叫作“验证节点”。PoW和PoS都是抗女巫攻击的机制，可以一直维持区块链账本的稳健性并防止账本被操控。</p>
+<p>区块生产者提交区块后，区块会被全节点接受或拒绝。全节点会独立储存区块链账本的完整副本，并不断验证新区块，但是全节点不需要参与区块生产过程。大多数全节点由区块生产者运行，但交易所、RPC协议提供方以及stablecoin发行方等关键经济主体和终端用户也可以运行全节点。全节点有权拒绝无效的区块，因此可以监督区块生产者的行为，即使大部分区块生产者都是恶意的，也可以保障网络安全。在这个机制下，如果网络中存在一定数量的诚实全节点，那么创建无效区块就会变成一件吃力不讨好的事情。 </p>
+<p><img src="https://img.bibiqing.com/news/2022/0719/21_efn35frtr4.png" alt="一文读懂区块链执行层、存储层和共识层的扩容方案"></p>
+<p>用户通过全节点向区块链提交交易，而矿工和验证节点则向全节点提供区块并获得验证</p>
+<p>另外，将全节点和区块生产者分开，还可以避免矿工或验证节点随意更改协议规则从而操控区块。这是一种权力制衡机制，区块生产者只有权力排序交易，但无法决定区块链的规则。规则由全节点社区治理，理论上来说，任何人都可以轻松加入全节点社区。要进一步了解区块链的底层架构，请查看《一文读懂加密事实：信任最小化的计算和记录》。</p>
+<p>降低硬件要求对于降低全节点运行门槛来说至关重要，这一直以来都是区块链维持去中心化水平的关键，也是实现信任最小化的关键。然而，去中心化通常也会导致区块链速度非常慢，因为网络的运行速度取决于其中最慢的那个节点。这个问题也被称为“区块链的不可能三角”，或者“可扩展性难题”，即：传统区块链只能在可扩展性、去中心化和安全性这三个维度中的两个维度上实现提升。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0719/21_qipcymfz2g.png" alt="一文读懂区块链执行层、存储层和共识层的扩容方案"></p>
+<p>区块链的不可能三角指区块链在可扩展性、安全性以及去中心化水平这三个维度不得不做出取舍</p>
+<p>传统区块链模式存在一个瓶颈，那就是要实现可扩展性就必须牺牲去中心化水平或安全性，或在这两个维度都做出一定牺牲。比如，实现了可扩展性和去中心化的网络就不得不对大量活跃参与者提供经济激励，以保障安全性。而实现了可扩展性和安全性的网络通常必须提高节点运行成本，从而牺牲去中心化水平。另外，实现了去中心化和安全性的网络通常需要维持较低的节点要求和较高的攻击成本，但最终会在可扩展性方面遭遇瓶颈。</p>
+<p>与区块链不同的是，传统的计算环境无需担心去中心化问题，因为它们的主要目的并不是在最大程度上实现信任最小化。因此，传统的计算网络通常都是中心化的，并且由盈利型企业运行。由于网络由单一实体管理，并且其计算结果不需要由终端用户独立验证，因此可以实现低成本和高运行速度。 </p>
+<p>正因如此，传统计算环境的信任模型基于的是品牌背书和法律合同。相比之下，区块链的信任模式则基于的是密码学和博弈论，参与者可以独立验证，并且可以直接参与网络。由于传统计算环境会受到外部影响，存在单点失效和单点控制风险，并且用户无法对流程进行审核，因此它与区块链网络无法兼容。</p>
+<p>这些问题对区块链扩容都提出了根本挑战：区块链如何在速度和成本方面赶上传统计算环境，又在信任最小化和去中心化方面保持原有的强大能力？ </p>
+<p><strong>区块链扩容的三个关键特质</strong></p>
+<p>区块链扩容可以大致分为三类，即：执行层、存储层和共识层扩容。下文中为每个类别都做了详细定义，并探讨了其旨在解决的核心问题。实际上，在每一层实现扩容都同时会在另一层或另两层实现扩容。</p>
+<p><strong>区块链执行层</strong></p>
+<p>区块链执行层指执行交易和状态变更的计算层。交易执行包括查看交易的有效性（如：验证签名和通证余额），执行链上逻辑并计算状态变更。状态变更指全节点更新账本的副本，以反应新的通证转账、智能合约代码更新以及数据存储。 </p>
+<p>区块链执行层扩容通常指每秒处理的交易量（TPS），但是在更宏观的层面，它指的是每秒处理的计算量，因为每笔交易的复杂性和成本都各不相同。网络中处理的交易数量越多，任意时间点需要执行的计算量就更大。 </p>
+<p>在扩容执行层的时候，主要问题是如何在每秒处理更多计算量，并同时无需大幅提高对全节点验证区块链交易的硬件要求。 </p>
+<p><strong>区块链存储层</strong></p>
+<p>区块链存储层指全节点维持和储存账本副本的存储层。区块链的存储功能通常分为两类：</p>
+<ul>
+<li>
+<p><strong>历史数据——</strong> 包括所有原始交易和区块数据。交易数据包括起始和目的地地址、发送金额以及每笔交易的签名。区块数据包括来自某一区块的交易列表和元数据，比如根哈希值、nonce以及前一个区块的哈希值等。历史数据通常无需快速访问，只需要至少有一个诚实节点就可以下载。</p>
+</li>
+<li>
+<p><strong>全局状态——</strong> 是全部数据的快照，智能合约可以对其进行读写，比如所有智能合约的账户余额以及变量。全局状态可以看作是区块链的数据库，需要对输入的交易进行验证。状态通常储存在树数据结构中（如：默克尔树），全节点可以轻松快速地访问并更改。</p>
+</li>
+</ul>
+<p>全节点需要访问历史数据，以首次与区块链同步，并且需要访问全局状态，以验证新区块并执行新的状态变更。随着账本和相关存储数据量不断变大，状态计算会越来越慢，而且成本也会越来越高，因为节点需要花更多时间并执行更多计算才能对状态进行读写。如果节点的内存满了，就需要使用磁盘存储空间，这就会进一步降低计算速度，因为节点在执行过程中需要在不同的存储环境中来回切换。</p>
+<p>随着区块链对存储的要求越来越高，通常会导致状态膨胀（state bloat）。如果出现状态膨胀，全节点往往不得不升级硬件，否则就会很难与当前版本的账本保持同步，而用户也很难同步新的全节点。一些因素可能会导致区块链出现状态膨胀，比如账本的历史数据量、新区块的添加频率、每个区块的最大空间以及为了验证交易和执行状态变更而必须储存在链上的数据量。 </p>
+<p>在扩容存储层的时候，主要问题是如何让区块链既能处理并验证更多数据，又不用提高对全节点的存储要求。也就是说，在不颠覆区块链信任假设的前提下可以将数据长期储存在哪里呢？ </p>
+<p><strong>区块链共识层</strong></p>
+<p>区块链共识层指去中心化网络中的节点对区块链当前状态达成一致协议的地方。共识的关键是保证多数节点是诚实的，并最终实现终局，即：准确地处理交易，并在最大程度上确保交易不会被撤回。区块链共识层的设计原则通常是在最大程度上降低通信成本，以提升去中心化水平的上限，实现更强大的拜占庭容错机制，并缩短终局时间。</p>
+<p>在扩容共识层的时候，最主要的问题是如何提高终局速度，降低成本，并进一步实现信任最小化。而这一切的大前提是要保障可预测性、稳定性以及准确性。</p>
+<p><strong>执行层扩容</strong></p>
+<p>以下是目前区块链执行层的五种扩容方案，以及每种方案的优劣势。在实际操作中，有些方案会合并在一起，以提升执行效果。</p>
+<p><strong>提升验证节点的硬件要求，实现纵向扩容</strong> </p>
+<p>可以通过提高区块生产者的硬件要求来扩容区块链执行层。硬件要求更高，意味着每个验证节点都可以在每秒执行更多计算。</p>
+<p><strong>优势：</strong> 建立一个去中心化的网络，其中所有节点都拥有强大的计算能力。这样一来，区块链就可以扩大区块空间，加速区块生成，降低交易成本，并同时仍然保障区块链和智能合约的核心优势，即：信任最小化水平优于传统的计算环境。此类区块链尤其适用于高频交易、游戏以及其他对延迟比较敏感的应用场景。</p>
+<p><strong>劣势：</strong> 对验证节点进行纵向扩容会限制网络的去中心化水平，因为运行验证节点或全节点的成本变高了。节点成本通常会随着时间推移而越来越高，这也会让大多数用户望而却步。维持去中心化水平将取决于摩尔定律，即：芯片上的晶体管数量每两年会翻一倍，而计算成本则会减半。全节点成本上升也会导致直接验证链上活动的终端用户成本上升，因此会削弱信任最小化。</p>
+<p><strong>打造多链生态，实现横向扩容</strong></p>
+<p>除了纵向扩容之外，也可以利用多个独立的区块链或某一区块链生态的侧链来进行横向扩容。横向扩容可以将某一生态中的交易计算量分散到多个独立的区块链上，每条连都拥有自己的区块生产者和执行能力。</p>
+<p>优势：多链生态可以充分定制化每条链的执行层，比如节点硬件要求、隐私功能、gas费用、虚拟机以及许可设置等。正因如此，多链生态有时候会产生dApp专属的区块链，某条区块链会专门支持某个dApp或一小群dApp。拥有自我主权的区块链还可以隔离安全风险，即：一条链的安全性不一定会蔓延到生态中的其他链。</p>
+<p>劣势：多链生态需要每条区块链都通过不断发行通胀性的原生通证来建立自己的安全机制。虽然这个模式对于早期区块链来说是正常的，但也很难过渡到通过链上用户费盈利的更可持续的经济模式，因为用户费往往会分散在各个不同的区块链上，难以实现规模效应。而且由于交互的dApp和通证不一定在同一条链上，因此也存在兼容方面的问题。</p>
+<p><strong>将执行层分片，实现横向扩容</strong></p>
+<p>另一个类似的扩容方案就是将一条区块链分成很多片，并行执行。每个分片其实都是一个区块链，也就是说许多区块链可以并行执行。另外，还会有一条主链，其唯一的任务就是保持所有分片同步。 </p>
+<p>在执行分片时，验证者池也会分散到各个分片上去执行交易。节点会定期随机轮转，因此不会总是执行/验证同一个分片上的交易。而且分片数量也会进行配置，确保任何一个分片发遭受攻击的概率都接近零。</p>
+<p><strong>优势：</strong> 所有执行层的分片会从同一个节点池抽取节点，因此无需在新的分片上建立安全机制。如果节点池规模够大，每个执行环境都可以达到同样的安全水平。执行层分片也不需要提高节点的硬件要求，因为节点一次只需要执行一个分片上的计算任务。分片可以在同一个虚拟机上运行，也可以使用不同的配置参数，满足特殊用例的需求。 </p>
+<p><strong>劣势：</strong> 由于所有节点都必须能支持每个分片上的计算，因此分片在灵活性上存在限制。另外，由于主链上的计算需求会越来越大，以及每个分片上分到的节点数量可能不够，因此一条区块链可以支持的分片数量也存在上限。除此之外，由于采用了共享安全模式，所有分片都可能会出现同样的安全漏洞，因此在负载平衡和实现风险方面会存在一定问题。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0719/21_3o36ngvkdo.png" alt="一文读懂区块链执行层、存储层和共识层的扩容方案"></p>
+<p>在多链生态中，不同区块链一般不会共享同一个安全机制，然而不同的分片之间会共享同一个节点池，因此也会共享同样的安全机制</p>
+<p><strong>通过模块化实现横向扩容</strong></p>
+<p>另一种横向扩容方案就是模块化区块链。这个方案将区块链的基础架构划分成执行层、数据可用性层（DA）以及共识层。最主流的区块链模块化机制就是rollup。该机制将计算和状态转移到链下网络，并在链上储存交易数据。然后会使用零知识证明（zk-rollup）或欺诈证明（optimistic rollup），对在链下计算的状态变更结果进行链上验证。 </p>
+<p><strong>优势：</strong> 模块化区块链将交易执行和状态转移到成本更低、更精益化以及吞吐量更高的计算环境中，并同时得以保留底层区块链的安全属性。这是因为共识层在验证执行层链下计算时仍然基于原有的去中心化底层区块链（即L1）。也就是说，由于全节点无须再执行每一笔交易，因此可以更高效地利用底层区块链的计算带宽。全节点只需要验证简洁证明并储存少部分交易数据即可。  </p>
+<p>Rollup还可以设置熔断机制，以实现信任最小化。如果一个rollup网络无法正常运行，用户可以提取自己的加密资产并提交至底层区块链。许多模块化网络还可以分摊用户成本。在底层区块链上验证zk-rollup的证明需要支出一笔固定成本。随着使用量增加，这笔成本可以由更多用户共同分摊，因此每个用户的共识成本会相应减少。另外，rollup还具有1/n的信任模式，即：即使只有一个诚实节点也能保障计算的准确性和稳健性。</p>
+<p><strong>劣势：</strong> 大部分模块化方案都会以底层区块链作为安全保障，但底层区块链的区块空间通常比较有限而且成本也更高，因此这个方案可能相比侧链或单独的区块链速度更慢或成本更高。目前的模块化方案通常还存在升级风险，需要来自rollup以外的治理干预，因此无法保障不可篡改性。最后，运行rollup或其他模块化区块链比运行单独的区块链更具创新性也更复杂。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0719/21_ws6q59glcs.png" alt="一文读懂区块链执行层、存储层和共识层的扩容方案"></p>
+<p>有人提出通过模块化来扩容以太坊，将其划分成执行、数据可用性和共识层（资料来源）</p>
+<p><strong>支付和状态通道</strong></p>
+<p>支付和状态通道可以实现区块链扩容。用户将cryptocurrency锁定在一个多签智能合约中，然后在链下交换签过名的消息，消息代表了资产所有权转让或状态变更信息。整个过程中无需发起任何链上交易。用户只有在创建通道和关闭通道时才需要发起链上交易。</p>
+<p>用户可以通过多签合约对每笔交易进行加密签名，以此来保障通道中的结算正确无误。每个签名都会有一个nonce，智能合约可以通过nonce来验证交易顺序是否正确。</p>
+<p><strong>优势：</strong> 支付和状态通道可以实现实时且零成本的cryptocurrency转账，而且几乎不存在延迟。支付通道可以实现小额付款，而这个功能在底层区块链通常是无法实现的。另外，支付通道还可以将cryptocurrency锁定在通道中，如果双方合作顺利，就可以快速在链上结算。</p>
+<p><strong>劣势：</strong> 状态/支付通道需要每个参与方都保持联网状态，以确保交易对手方不会使用旧消息在链上进行结算。也就是说，watchtower要持续对通道进行监控并保护用户资金安全。支付通道还需要预先充值，因此大额支付就会很麻烦，而且资金效率会很低。 </p>
+<p>另外，很难在各个通道之间高效地调度支付任务，因此可能导致转账失败，或者为了确保用户可以获得充足的流动性或高效的路径而创造出更中心化的模式。总而言之，状态/支付通道在一组已知的静态参与者中运行效果最佳，但在一组不受限的动态参与者中则无法发挥作用。还有一个问题就是所有权，通道往往很难或无法代表没有明确所有者的物品（比如：DEX的流动性池）。</p>
+<p><strong>扩容数据存储层</strong></p>
+<p>以下是目前扩容区块链存储层的六种方案。在实际操作中，有些方案会合并在一起，以更好地提升存储能力。</p>
+<p><strong>纵向扩容区块链节点</strong></p>
+<p>与纵向扩容区块链执行层一样，纵向扩容区块链存储层也需要升级全节点的硬件。 </p>
+<p><strong>优势：</strong> 区块链提高全节点的存储上限，可以大幅降低存储成本。全节点可以储存更多历史数据和状态。将数据直接储存在全节点，无需依靠额外的存储层或外部存储系统，因此访问链上数据会更方便。</p>
+<p><strong>劣势：</strong> 随着时间推移，链上会储存越来越多的数据。因此全节点的运行成本就不断上升，而这将威胁到区块链的去中心化水平。一旦去中心化水平降低，用户就会获得更低的信任最小化保障，无法充分保障数据的可用性和准确性。状态膨胀还会导致区块执行速度降低，这将为网络造成更大的压力。 </p>
+<p><strong>在底层区块链上进行数据分片</strong></p>
+<p>另一个区块链数据存储扩容方案是数据分片。数据分片将账本数据或重建账本所使用的数据分成不同分片，降低对每个节点的存储要求。</p>
+<p><strong>优势：</strong> 数据分片可以提升区块链的存储能力并降低存储成本，而且无需提高对节点的硬件要求。这个方案可以降低用户运行节点的门槛，因此可以维持去中心化水平。数据分片还可以提升rollup的存储能力，rollup会将交易数据储存在底层区块链上，以重建rollup状态。另外，Darksharding等方案还可以建立一个合并费用市场，以更好地平衡数据负载量并输入数据。 </p>
+<p><strong>劣势：</strong> 由于分片越多对主链造成的压力就越大，因此区块链可以承载的分片数量存在上限。另外，还需要实现数据可用性采样（DAS），验证用于重构部分账本的历史数据在出块时的可用性，同时节点无需亲自下载所有数据。除此之外，数据分片还会产生通信成本，当节点轮转到其他分片时互相需要交换存储数据。另外，还需要靠大量节点来维持较高的安全性，也就是说每个分片都要维持一定的去中心化水平，因此整个节点池的规模要非常大。</p>
+<p><strong>使用模块化的区块链来压缩链上数据存储</strong></p>
+<p>模块化区块链在链下执行计算任务，然后将交易数据和状态变更储存在链上或链下。其他节点或用户可以用这些数据来重建账本的当前或历史状态。rollup将数据储存在链上之前会先在链下进行压缩。</p>
+<p><strong>优势：</strong> 将压缩过的数据储存在链上对于模块化区块链来说是最安全的数据存储方案，因为网络中的所有节点都会储存数据。另外，这样做还能降低底层区块链上的数据存储成本。rollup实现了数据分片后，就可以更高效且更低成本地将交易数据储存在链上，并随着使用量增加而更好地实现扩容。 </p>
+<p><strong>劣势：</strong> 链上存储的成本要远高于链下存储，这可能会使模块化区块链在可扩展性方面不如更加中心化的存储方案。压缩数据可能还会损失一些对验证不是至关重要的数据，因此用户可能无法基于剩余的数据对链上活动进行更加细致的分析。</p>
+<p><strong>模块化区块链的链下数据存储</strong></p>
+<p>模块化区块链可以在链下储存交易数据，以进一步降低链上存储要求。比如“validiums”，在链上发布零知识证明，并在链下储存数据。目前，模块化区块链主要采用四种链下数据存储方案：</p>
+<ul>
+<li>
+<p><strong>中心化存储——</strong> 在链下中心化的平台上储存数据。这种方案的数据存储成本最低，但也可能导致数据缺乏透明性或安全性，比如中心化的存储平台有可能会修改数据或直接下线。</p>
+</li>
+<li>
+<p><strong>获得许可的DAC——</strong> 在链下储存数据，在链上证明数据的准确性，并且由一小群可信节点组成的委员会签名通过，这个委员会叫作“数据可用性委员会”（DAC）。这个方案的优劣势与中心化的存储方案相似，但在数据可用性方面的信任假设要更胜一筹。</p>
+</li>
+<li>
+<p><strong>无需许可的DAC——</strong> 在链下储存数据，使用无需许可的DAC提供链上证明，采用加密经济激励机制来激励诚实行为。无需许可的DAC的成本低于链上存储方案，而且安全性高于其他链下存储方案。它的缺点是，安全性仍然不如链上存储方案，而且目前还未实现大规模应用以及可持续的经济模式。</p>
+</li>
+<li>
+<p><strong>Volition——</strong> 用户可以自行选择将交易数据储存在链上或链下。Volition具有一定创新性，因为它在交易层面提供了数据可用性方案，并同时让所有交易都共享同样的状态根并分摊共识成本。然而，这个方案比上述其他方案更复杂，而且目前还没有落地。</p>
+</li>
+</ul>
+<p><strong>数据修剪</strong></p>
+<p>数据修剪技术可以允许区块链全节点删除某个区块高度之前的历史数据。数据修剪通常与PoS检查点（checkpoint）同时使用，超过某个检查点的区块中的交易会被认定终局。这意味着这些交易无法被撤回，除非达成重大社会共识或出现硬分叉。 </p>
+<p><strong>优势：</strong> 数据修剪会减少节点参与共识时需要储存或参考的数据量。由于历史数据已经得到了验证，因此可以被修剪，以缩小账本规模。如果运行全节点只是为了验证未来区块而不是追溯历史区块，那么就无需再储存历史数据。</p>
+<p><strong>劣势：</strong> 数据修剪需要依靠交易平台或区块浏览器等第三方来永久储存历史数据，以一直追溯到创世区块。然而，由于这是一个1/n的信任模式，因此只需要一个第三方诚实地储存数据，帮助全节点重建所有的历史状态。由于PoS提供了检查点和弱主观性，因此这个假设的意义就不大了。然而，这些数据仍然对链上分析和区块浏览器有一定价值。</p>
+<p><strong>无状态、状态过期以及状态租金</strong></p>
+<p>另外还有一些方案的侧重点是限制全节点储存的状态数量，尤其是通过设置状态过期、 无状态或状态租金来实现。 </p>
+<ul>
+<li>
+<p><strong>状态过期——</strong> 节点可以对超过一段时间没有被访问的状态进行修剪，并可以使用某种默尔克证明（也称为“witness”）在需要时恢复已经过期的状态。</p>
+</li>
+<li>
+<p><strong>无状态——</strong> 全节点不需要储存状态。全节点只需通过witness验证新区块即可。弱无状态性指只有出块节点需要储存全局状态，而其他所有节点都无需储存状态就可以验证区块。</p>
+</li>
+<li>
+<p><strong>状态租金——</strong> 用户需要支付租金，以获得有限的状态存储空间。没有支付租金的状态将被收回并租给新用户。</p>
+</li>
+</ul>
+<p><strong>优势：</strong> 这些方案对状态存储要求设置了限制，最终有助于限制节点的状态存储量。这可以缓解状态肿胀，有效应对账本不断扩大或链上交易数量不断增多的情况。限制状态存储可以很好地在长期实现终端用户验证并同时维持较低的硬件要求。 </p>
+<p><strong>劣势：</strong> 限制状态存储具有一定创新性，用户无需单次付费，让网络中的每个节点都永久储存自己的状态信息，这与目前区块链的运行模式差异非常大。另外，区块链要从传统的状态存储模式升级到限制性更高的状态存储模式并非易事。一些状态可能无法随时访问，因此可能会影响某些应用在开发阶段的具体假设。新的状态存储模式还可能会提高某些应用的成本。</p>
+<p><strong>扩容共识层</strong></p>
+<p>下面是扩容区块链共识层的四个关键目标，这些目标涉及出块速度、终局速度以及应对节点下线或恶意攻击的稳健性。这里要注意的是，扩容共识层不仅是为了提高速度，还是为了提升准确性、稳定性以及安全性。</p>
+<p><strong>提升执行和存储能力</strong></p>
+<p>升级区块链共识机制的一个基本要素就是提升计算和存储能力，并同时基本维持对全节点的硬件要求。这样做可以在账本不断扩大的过程中让更多节点能参与共识，或至少防止现有节点离开网络，可以有效针对运行时间、抗操控能力、精准性和安全性更好地达成共识。如果执行和存储能力可以得到大幅提升，同时不会对全节点产生太大影响，那么区块链甚至可以稳定地实现更高的出块速度和更大的区块空间，并且无需牺牲核心的去中心化特质。</p>
+<p><strong>减少网络带宽使用</strong></p>
+<p>另一种扩容区块链共识机制的方式是减少网络带宽使用，即：降低全节点达成共识所需的通信成本（也是收发消息的成本）。节点要达成共识，无需与所有其他节点通信（即：all-to-all投票），而是只需在任意时间与一小部分节点通信即可（即：重复抽样投票）。有些共识机制不采用多轮投票或通信机制，而是只需要在区块传播时进行通信，但这往往会导致非确定性的终局。</p>
+<p><strong>降低网络延迟</strong> </p>
+<p>有一些方案的重点是降低共识期间的网络延迟，特别是加速终局。一些区块链共识机制通过多轮重复抽样或all-to-all投票来实现即时终局。其他区块链则设置了检查点，并由验证者在一段时间后达成共识来保障安全。这意味着区块在通过检查点后即被认为终局，之后再也无法在协议内展开区块重组。网络延迟和网络带宽之间必须要做出一定权衡，不过也有一些混合型方案在两者之间都实现了优化。</p>
+<p><strong>提高安全预算</strong></p>
+<p>还可以通过提升安全预算来扩容信任最小化的共识层，为参与共识的节点提供激励。常见的方式是提供流动性、发放通证奖励或由于区块空间供不应求而提高交易费收入。提高安全预算会为参与者带来更多潜在收入，这也会提升网络的去中心化水平，因为会有更多节点受到经济激励而加入网络。区块链还可以要求节点质押更多通证或提供更多算力，以参与共识机制。不过如果门槛设得太高，可能会降低网络的去中心化水平。</p>
+<p><strong>可扩展性和安全跨链的未来发展前景</strong></p>
+<p>区块链扩容目前正处于关键发展阶段，正在开发、测试并发布一系列丰富的解决方案。区块链目前的发展重点是在保障信任最小化的前提下实现扩容，势必将成为各个行业和应用场景首选的后端基础架构。</p>
+<p>为了对不断发展的多链生态提供支持，Chainlink正在积极开发跨链互操作性协议（CCIP），帮助用户以自定义的逻辑安全地跨各个区块链传输数据和通证。CCIP的关注重点是安全性，并创建了一个反欺诈网络，实现跨链智能合约和安全的通证桥，并同时维持区块链原有的信任假设。更多关于CCIP的信息，请阅读《CCIP解锁跨链智能合约创新》。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0719/21_js76tpw32k.png" alt="一文读懂区块链执行层、存储层和共识层的扩容方案"></p>
+<p>CCIP的基础架构</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40350/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">新加坡加密基金管理公司Fintonia集团获得迪拜临时许可证</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40369/">
+                <span class="next-text nav-default">以太坊即将合并 如何从中找到超额收益机会？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

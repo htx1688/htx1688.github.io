@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          基于 2-of-2 多方安全计算的 MACI 匿名化方案 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="这篇文章将展示基于 2-of-2 MPC 技术的 MACI 匿名化方案的具体实现。" />
+<meta name="keywords" content="MACI, 区块链" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49354/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="基于 2-of-2 多方安全计算的 MACI 匿名化方案" />
+<meta property="og:description" content="这篇文章将展示基于 2-of-2 MPC 技术的 MACI 匿名化方案的具体实现。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49354/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="基于 2-of-2 多方安全计算的 MACI 匿名化方案">
+<meta itemprop="description" content="这篇文章将展示基于 2-of-2 MPC 技术的 MACI 匿名化方案的具体实现。"><meta itemprop="datePublished" content="2023-04-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5035">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基于 2-of-2 多方安全计算的 MACI 匿名化方案"/>
+<meta name="twitter:description" content="这篇文章将展示基于 2-of-2 MPC 技术的 MACI 匿名化方案的具体实现。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">基于 2-of-2 多方安全计算的 MACI 匿名化方案</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-06">
+      2023-04-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5035 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>这篇文章将展示基于 2-of-2 MPC 技术的 MACI 匿名化方案的具体实现。本文核心内容主要分为三个部分：从任意算法到逻辑电路的实现；从逻辑电路到混淆电路的实现；利用不经意传输实现多方安全计算。最后，我们总结基于多方安全计算的匿名化方案。</p>
+<p>感谢 Felix Cai 对 MACI 和隐私投票中多个问题的讨论。</p>
+<p>这篇文章将展示基于 2-of-2 MPC 技术的 MACI 匿名化方案的具体实现。本文核心内容主要分为三个部分：从任意算法到逻辑电路的实现；从逻辑电路到混淆电路的实现；利用不经意传输实现多方安全计算。最后，我们总结基于多方安全计算的匿名化方案。</p>
+<h2 id="算法">算法</h2>
+<p>在 MACI 系统中，操作员 Operator（记为O）管理着一个数组，这个数组记为 deactivate[]，其元素个数与 registry 数组中的元素个数相同。数组中每个位置的编号代表了 key 值（用户的编号），而每个位置存储着对应的公钥。为了更好地理解 deactivate[] 数组，可参考如下例子：在 deactivate[] 数组中，假设 registry 中的用户1（deactivate[] 数组中的第一个元素）发起了 deactivate key 操作，操作员O收到该操作请求后，如果操作的合法性被O承认，O在 deactivate[] 数组中的第一个位置填入 registry 数组中第一个位置所包含的 value 值（用户2的公钥）。另外，假设用户O没有发起 deactivate key 操作，那么 deactivate[] 数组中的第二个元素的值为 0。这样一来, deactivate[] 数组的元素个数和 registry 数组中的元素个数相同就可以理解了。</p>
+<p>现在，为了实现 MACI 系统对管理员的匿名性，需要设计一个 2-of-2 的 MPC 方案来实现以下两个性质:</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_ts8eb3bn6u.png" alt="4lGT5WPEn2seP4Tl0mvJ9dzZQYjx4r9epRHHXB7u.png"></p>
+<p>先暂且不考虑这两个要实现的目标。先考虑更换密钥的操作: A发起更换 deactivate[] 数组中属于A的公钥的请求，O验证A的请求是否合法，如果合法，则执行更换公钥操作；否则，拒绝请求。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_toisj33peh.png" alt="LPqkYWzFoqxK1UTJsfUKiyN6OZvjiFGMbESwxpMH.png"></p>
+<p>根据上述逻辑，我们先设计一份伪代码来实现这个操作，如下:</p>
+<p>function findElement(array, PK_1, PK_1′) {  for (let i = 1; i &lt; array.length; i++) {    if (array[i] === PK_1) {      return PK_1′;    }  }  return false;}</p>
+<!---->
+<p>fn find_element(array: &amp;[i32], a: i32, b: i32) -&gt; bool {  let mut result = false;  for i in 1..array.len() {      result = result || (array[i] == a &amp;&amp; b == a);  }  result}</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_su6rddu0zp.png" alt="wXXeLvU542CMWBPpyUgqfXTalraF16b8ytR2EHOH.png"></p>
+<h2 id="逻辑电路的生成原理">逻辑电路的生成原理</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_g6eai7p621.png" alt="CrHsxVnYoqYiQYhF5rlg6JlFnxTfIbiODseYDaAf.png"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_zhdhmgtkip.png" alt="t8PQz1Vg1eQbrpbcK83WK3nhm258y9twFh3tM2Lw.png"></p>
+<p>为了简单起见，暂且假设一个公钥由二位二进制数来表示（实际的公钥是 256 位二进制数）。那么，现在就需要用用户A的输入公钥，对比 deactivate[] 数组中的二把公钥。因此，需要对比二次。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_3j91vywb3u.png" alt="GazxapHrzga4MIskPF0LSTkxGLKWbXJYaSkYst7G.png"></p>
+<p>逻辑电路由逻辑门组成，逻辑电路中的逻辑门被分为  层，比如上面的电路是两层。逻辑门第一层需要用户来添加输入, 其他层是中间节点，最后是根节点。对于用户输入的逻辑门，有两个输入和一个输出。其中一个输入由用户A完成。另外一个由O完成。这三个逻辑门组成了一个子逻辑电路。这个子逻辑电路负责一次公钥的对比。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_za3thh9wit.png" alt="3EXfWoUAjfNBSJ0afvDtojjloFxRDTBKFjq3hVXK.png"></p>
+<h2 id="逻辑电路的生成工具">逻辑电路的生成工具</h2>
+<p>在现实中，为了让一个固定的算法转换成逻辑电路，需要用到一些工具，如</p>
+<p>1.Verilog HDL 和 VHDL：这两种硬件描述语言被广泛用于数字电路的设计和仿真，可以使用它们来描述算法的行为，并将其转换为逻辑电路的形式。这些语言都支持从高级语言（如C、C++ 和 Java）转换为硬件描述语言的形式。使用 Verilog 或 VHDL 需要一定的硬件设计和编程经验。</p>
+<p>2.Xilinx Vivado Design Suite：这是一款商业软件，用于 FPGA（现场可编程门阵列）的设计和开发。它提供了一个综合工具，可以将高级语言或 RTL（寄存器传输级）代码转换为逻辑电路的形式。它支持多种编程语言，包括 C、C++、SystemC、Verilog 和 VHDL 等。</p>
+<p>3.Yosys：这是一款开源的 EDA（电子设计自动化）工具，用于数字电路的设计和仿真。它支持从 Verilog 和 VHDL 等硬件描述语言转换为逻辑电路的形式。它也支持从高级语言（如 C、C++ 和 Python）转换为 RTL 代码，然后转换为逻辑电路的形式。</p>
+<h2 id="混淆电路garbled-circuit">混淆电路（Garbled Circuit）</h2>
+<h2 id="逻辑门的加密混淆">逻辑门的加密（混淆）</h2>
+<p>回到现在的例子中，因为我们的公钥在 deactivate[] 数组中都是有序号的（序号等价于用户的编号），且数组 deactivate[] 中的最大元素个数是有上限的（用户的个数）。因此，假设最大元素个数是N，那么，就需要构建N个子电路，然后合成一个最终的逻辑电路。</p>
+<p>由于逻辑电路在每一个 epoch 中（一个 epoch 是区块链更新 registry 中元素的一个周期）是固定的，那么，所有用户都可以使用这个早已经生成好的，并存储在区块链中的逻辑电路。在本文例子中，由于 deactivate[] 数组中只有两个元素，因此子电路只有两个（每个子电路对应于一次公钥的对比）。</p>
+<p><em>注：在一个 epoch 中，registry 数组中元素个数是固定的，因此用户的输入和数组中的元素的对比次数是固定的，因此逻辑子电路的个数是确定的，且逻辑子电路是事先可以确定好的，因此整个逻辑电路是唯一确定的。</em></p>
+<p>接下来，就是将逻辑电路的每一个输入进行加密，然后将每一个逻辑门进行混淆。</p>
+<p>先考虑加密。加密这个动作是由用户A完成的。他对每一个输入和输出的 0 和 1 用加密值表示。注意，最终的根逻辑门的输出不需要进行加密，在本案例中，就是 0（对比失败），和 1（更换新的公钥）。如图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_6qjbcqz3k0.png" alt="g0URRXSUsdCphUqJ5j7zm2yEanm6ZOSmz1S47XG1.png"></p>
+<p>逻辑电路中的每一条引线的 0 和 1 都用加密值代替。同时，每一个逻辑电路都有一个固定的编号（这个是所有人都已知的）。例如，编号 1、2、5 就构成了一个子电路 1（比较用户的公钥和数组中的第一把公钥）。</p>
+<p>基于此，将逻辑电路的每一个逻辑门的输入和输出（除了根逻辑门）进行加密后，在 Operator 的视角里，对于加密后的逻辑电路，他就不知道每个逻辑门的输入数字（加密值）对应的明文（是 0 还是 1）。</p>
+<h2 id="输入加密的方法">输入加密的方法</h2>
+<p>在混淆电路中，为每个输入值生成两个随机 key 的过程通常是使用伪随机数生成器（PRNG）来实现的。常用的生成随机 key 的实现和库有很多，例如 OpenSSL、Crypto++、libsodium 等。</p>
+<h2 id="输出加密的方法">输出加密的方法</h2>
+<p>基于伪随机函数 PRF 的方法是 Yao 的混淆电路中实现对输出二进制数 0 和 1 的加密的主要方法之一。具体来说，这种方法可以实现对每个逻辑门的输出进行加密，保证了数据的机密性和可靠性。</p>
+<p>在基于 PRF 的方法中，每个逻辑门的输出都被混淆成为一组包含多个 label 的二元组，其中每个 label 都是一个随机的 01 字符串。在生成每个 label 时，可以使用伪随机函数（PRF）来实现。具体来说，可以使用一个密钥和输入值（如 0 或 1）作为 PRF 的输入，然后得到一个随机的 01 字符串作为 label。由于 PRF 是一种可以模拟真正随机数的算法，因此生成的 label 具有高度的随机性和不可预测性，保证了数据的机密性和安全性。</p>
+<p>在混淆输出时，可以将每个逻辑门的输出表示为一个包含两个 label 的二元组（如 {label0, label1}）。其中，当输入为 0 时，使用 label0 作为输出；当输入为 1 时，使用 label1 作为输出。在将逻辑门的输出发送给下一个参与方时，只发送一个包含正确 label 的二元组，保证了数据的机密性和保密性。常见的 PRF 包括 HMAC、SHA、AES 等。</p>
+<p><em>需要注意的是，对逻辑门的输出采用上述方法的目的是为了便于不经意传输（oblivious transfer）的实现。</em></p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_53brazvm8m.png" alt="V8HtOfTGn7Bb9CkAD6aM3InYm5qFOggnL54Xrl1R.png"></p>
+<p>这里其实就可以推导不经意传输过程了。比如，用户 A 将这四个输出——</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_sj42cz10sh.png" alt="ll56jWia3zcrpMuUVta8KwbuygfnV37ZWQ5Iwm2k.png"></p>
+<h2 id="用户-a-输入的生成">用户 A 输入的生成</h2>
+<p>现在，我们继续假设，用户A公钥的编号是 1，数值是 10，而数组中的二把公钥（编号分别为 0、1）的数值分别是 11, 10。也就是说用户A的公钥在数组中。</p>
+<p>接着，用户将自己的输入，分别输入到两个子电路中（sub-circuit 1 和 2）。用户在第一个逻辑子电路（1、2、5）中进行输入。他的输入是：在编号为 1 的逻辑门输入 2674（代表二进制数 1）；在编号为 2 的逻辑门输入 8798（代表二进制数 0）。用户在第二个逻辑子电路（3、4、6）中进行输入。那么，他的输入是：在编号为 3 的逻辑门中输入 9809（代表二进制数 1）；在编号为 4 的逻辑门中输入 3453（代表二进制数 0）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_lzb1syd2a4.png" alt="hW1Z5cSFI8smg5ck2QtECSaSHRqujRT02o3Ct6X2.png"></p>
+<h2 id="电路混淆">电路混淆</h2>
+<p>接下来的步骤就是将逻辑电路进行混淆。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_ywnau79kd0.png" alt="lm5tJNAFexIiJnV2oqli9ApiwA8iAjWnYduQBTMC.png"></p>
+<p>这样一来，根据这个表格的排序可能性，O想通过表三还原成真正的表一，会碰到 4 种可能性。那么，如果在一次证明中涉及到N个逻辑门，每个逻辑门用户A都做上述操作，那么就有4N种可能性。这样，通过排序任意颠倒，使得O很难推断出每个数字到底代表 0 还是 1。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_7z8ft8c16i.png" alt="hEFKy9mTJnZEipBQt9u4VpSYLtGS0tPKYLwrDVOD.png"></p>
+<h2 id="第一次通信">第一次通信</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_vslqtyjy6k.png" alt="X7wv5lLo0vcZbUpXZxOyEyd3JIYn7OglDWZJ79i9.png"></p>
+<h2 id="不经意传输oblivious-transfer">不经意传输（Oblivious Transfer）</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_h5o91viadw.png" alt="7oUnRRN5bYSxJ8x2JGnFihiKwHmfpCBEIHcW6DyS.png"></p>
+<p>此时，我们需要回顾两个一定要保证的性质：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_8zmrsfk380.png" alt="sG1KsVLPRfiWBT8ctmWI0KSQcuZkpSWilZ5wuQeX.png"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_glzfeal7ph.png" alt="bD73WeJeoDdYY9HtNvGwFixLWDHPERiTfnZapIky.png"></p>
+<p>上述三个步骤，满足了第二个性质，但是没有满足第一个性质，也就是说，O在解密了其中一个加密值后，得到了明文 1，但是，也暴露了另一个明文 0。这样一来，混淆逻辑门表就暴露了很多信息给O，这样让O有机会破解A的秘密，从而使得性质 1 无效。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_tvkvimkvce.png" alt="UxVFgDwllT0aReg5mgg9bG8jtxJ9yythCL7J5qRv.png"></p>
+<p>从对一个逻辑门的 OT 通信可以看出整个 OT 通信的全貌，即每个逻辑门的 OT 通信都是如此，且在一次 OT 通信过程中全部完成。这样，O就能得到所有叶子逻辑门的输出，这样他就能进一步得到分支逻辑门的输出，从而最终得到根逻辑门的输出。</p>
+<h2 id="方案改进">方案改进</h2>
+<p>上述方案中，需要且可以改进的地方有很多。例如，改进算法设计，降低算法的复杂度；改进逻辑电路的设计，让逻辑电路变得更加简单（减少门的个数，减少通信是需要传递的信息）；增加方案的安全性，加大破解方案的计算复杂度；让交互变成非交互。</p>
+<h2 id="算法和逻辑电路的改进">算法和逻辑电路的改进</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_ofgju6ucev.png" alt="KW9B63qTbAss2xqcNmkkcIsakdT8cf0q2Y7TBWMa.png"></p>
+<p>但是，如果采用 Merkle Patricia Tree 的数据结构的话，对比的次数要少很多（这是因为对于 256 位的公钥来说，形成的 MPT 一定是稀疏的，因此，可能筛选二到三轮就可以筛选出想要的值）。那么，一旦算法计算复杂度下降了，逻辑电路的设计也就要简单很多。</p>
+<p>逻辑电路的设计也有化简的可能性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_6qjbcqz3k0.png" alt="g0URRXSUsdCphUqJ5j7zm2yEanm6ZOSmz1S47XG1.png"></p>
+<p>A的每个输入都不同，O也是。实际上，可以进行化简。变成如下图所示。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_rnjcbsg5y1.png" alt="kUzQDcu4wcx14vGm7coIrG3HinUfX4ty9uTkj5LD.png"></p>
+<p>这样的化简可以让输入变少。</p>
+<h2 id="增加安全性">增加安全性</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_gdwvr74ksm.png" alt="D6BkwMu3wpNTCnxgKuFjIp2x4EXXZtXm4s89h7Cc.png"></p>
+<p>如果O想输入的是 0，那么他得到的结果必然是 0，也就是说，他天然知道输出 0 的加密值，那么他就天然知道了 1 的加密值。同时，由于A的输入已经是确定的，那么他可以根据A的输入值，和1的输出的加密值所在的行，去分析，如果 1 的输出的加密值所在的行，不包含A的输入加密值，那么A的输入就是 0，否则就是 1。</p>
+<p>为了解决这类问题，我们需要对输出全部进行加密。比如使用该种方法：上表中的四个输出值 0、0、0、1 分别加密为——</p>
+<p><img src="https://img.bibiqing.com/news/2023/0406/10_md4v4fp14f.png" alt="6x0Qg3HGQ4hiFYspEEjU8KP8mrtAfeBbdwyjKqDZ.png"></p>
+<p>——这样一来，输出的四个值分别对应为四个不同的密文。因此，在此环境下， 无法通过上述推断来反推出A的输入值是 0 还是 1。但是，这种方法使得输出加密值的个数从二变成了四。通信复杂度会增大。</p>
+<p>此外，非交互式的不经意传输协议也值得研究。</p>
+<h2 id="总结">总结</h2>
+<p>上述方法首先不考虑需要实现 MACI 匿名化的两个目标，即在明文下设计一个算法，让O能够正确判断是否执行用户A的请求。基于此，再将所设计的算法转化成逻辑电路。再将逻辑电路转化成混淆电路。需要注意的是，逻辑电路在每一个区块链的 epoch 中是固定的且能够从区块链中直接获取的。用户A获取该 epoch 的逻辑电路，利用相应工具将逻辑电路转化成混淆电路。同时，用户A将每一个混淆电路的输入进行加密，并将加密好的信息发送给O。此时，O由于不知道加密后的输入对应的明文是什么，O也就不知道用户A具体的输入是什么了，这样就实现了匿名化的第一个性质。</p>
+<p>进而，使用不经意传输是实现第二个目的的方法。通过不经意传输，用户A并不知道O具体采用了哪些加密值进行进一步的输入，因此用户A无法推断出 deactivate[] 数组中的其他元素信息。同时，由于O通过不经意传输获得了足够的有效输入，因此O将这些有效输入输入到被加密的混淆电路中，最终能够得到正确的输出，该输出和明文下执行第一节的算法所得到的输出是相同的。因此，O就能够根据输出来判断是否要执行用户A的请求。</p>
+<p>最终，O将上述所有操作利用零知识证明生成操作的 proof。区块链对 proof 进行验证，验证通过后，区块链将根据 deactivate[] 数组中的元素和 registry 数组中的元素来更新 registry 数组并结束 epoch 和开启下一个 epoch。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49388/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">观点：约 59% 的非流动性 ETH 或将在 Shapella 升级后被提取</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49390/">
+                <span class="next-text nav-default">金色Web3.0日报 | 欧盟将在几个月内发布元宇宙相关新政策</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#算法">算法</a></li>
+    <li><a href="#逻辑电路的生成原理">逻辑电路的生成原理</a></li>
+    <li><a href="#逻辑电路的生成工具">逻辑电路的生成工具</a></li>
+    <li><a href="#混淆电路garbled-circuit">混淆电路（Garbled Circuit）</a></li>
+    <li><a href="#逻辑门的加密混淆">逻辑门的加密（混淆）</a></li>
+    <li><a href="#输入加密的方法">输入加密的方法</a></li>
+    <li><a href="#输出加密的方法">输出加密的方法</a></li>
+    <li><a href="#用户-a-输入的生成">用户 A 输入的生成</a></li>
+    <li><a href="#电路混淆">电路混淆</a></li>
+    <li><a href="#第一次通信">第一次通信</a></li>
+    <li><a href="#不经意传输oblivious-transfer">不经意传输（Oblivious Transfer）</a></li>
+    <li><a href="#方案改进">方案改进</a></li>
+    <li><a href="#算法和逻辑电路的改进">算法和逻辑电路的改进</a></li>
+    <li><a href="#增加安全性">增加安全性</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

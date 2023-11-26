@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          全面解读DID身份系统：现状、概念与重要性 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="DID 将承载 Web2 身份与社会关系在 Web3 世界的映射。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54426/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="全面解读DID身份系统：现状、概念与重要性" />
+<meta property="og:description" content="DID 将承载 Web2 身份与社会关系在 Web3 世界的映射。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54426/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="全面解读DID身份系统：现状、概念与重要性">
+<meta itemprop="description" content="DID 将承载 Web2 身份与社会关系在 Web3 世界的映射。"><meta itemprop="datePublished" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="11001">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="全面解读DID身份系统：现状、概念与重要性"/>
+<meta name="twitter:description" content="DID 将承载 Web2 身份与社会关系在 Web3 世界的映射。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">全面解读DID身份系统：现状、概念与重要性</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-06">
+      2023-07-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 11001 字 -
+        预计阅读 22 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Eunice</p>
+<p>原文来源：PAKA</p>
+<h2 id="前-言">前 言</h2>
+<p>基于区块链技术的 Web3 显露在历史舞台，有相当部分推力来源于人们对它能够对抗商业组织特权与非自愿审查的期待——通过以代码代替人治来保障每位参与者的权益。就目前的情况来看，行业给出的各类解决方案——用户通过肆意地注册钱包以进行交互——不仅导致女巫攻击和钓鱼攻击的频繁出现且无法问责，侵蚀 Web3 社区的信心，损害 Web3 用户的隐私安全和资产安全；也致使拥有链上信誉但缺乏资产的 Web3 用户无法享受到优质的金融服务（好比线下信用贷模式的金融服务）。</p>
+<p>Web2 中被诟病的「强者剥削弱者」、传统社会中「劣币驱逐良币」的恶行在 Web3 中重现。就连 Web3 所呼吁和信奉的数据自主权（SSI ）（这也是它吸引用户的特质之一）也在实现的道路上屡屡受阻，因为用户的隐私数据要么被存储在去中心化项目的中心化服务器上，要么被公开完整地呈现在区块链上，其安全性和隐私性并没有获得实际保护；甚至在一定程度上，相较 Web2，带来了更大程度的经济损失，且一旦遭受则几乎无可挽回，并且由于缺乏合适的监管加持，恶意攻击者的身份难以定位和追责。</p>
+<p>在这样的背景下 Web3 意识到，可视化身份主体的信誉、建议基于身份的契约、以及引入合适的法规，对其长足发展是不可或缺的。基于这样一个基础意识，由「去中心化标识符（DID）+ 可验证凭证（VC）」构成的去中心化身份概念逐渐清晰，为 Web3 社会下身份系统的构建提供了一份解决方案。 </p>
+<p>简要说明下，身份系统发展从由单一权威机构进行管理和控制的中心化身份；到使用户身份数据具备一定程度可移植性、可跨平台登录的联盟身份，如微信、谷歌账号的跨平台登录；到需经授权和许可来进行身份数据共享的初步的去中心化身份，如 OpenID；再进步到能真正实现数据完全由个人所拥有和控制的自主权身份（SSI：Self-Sovernge Identity）——在 Web3 中通常指基于 DID+VC 构建的具有隐私安全的去中心化身份系统。中心化正在部分被去中心化所取代，去中心化不再涉及中央数据存储和收集。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_tasvvr846z.jpeg" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h2 id="身份隐私数据现状">身份隐私数据现状</h2>
+<p>身份及其相关信息多用于证明「我是谁」，「我是否符合享受某项服务所需的特定要求」。如找工作时的学历要求、购买房屋和办理银行贷款时的资产证明、以及我们是否满足成为某实体或虚拟服务商的 VIP 客户的条件，等等许多场景都需要用到身份信息。</p>
+<p>现实生活中，人们的身份信息在公务系统中备案，并在各类生活场景中通过出示相应证件和证书以核查和验证；互联网世界中，我们的身份以账号密码表示，基于此的行为数据由相应服务提供商的数据存储系统记录。</p>
+<p>它们的共同点是：</p>
+<ul>
+<li>
+<p>用户数据由第三方组织保存（他们无法自己控制与身份相关的信息）；</p>
+</li>
+<li>
+<p>用户无法自由使用自己的数据（因此无法决定谁有权访问他们的身份信息、无法控制访问者的授权范围）。</p>
+</li>
+</ul>
+<p>因为当用户需要通过网络来联接与世界各地的社交、游戏、金融、购物等活动时， 这些身份信息需毫无保留地上传给某个平台，且用户活动生成的线上游戏身份数据、社交身份数据等也被封存在巨头的服务器中——也就是说，用户仅有权查看但无权按照自己的意愿删除、增加或交易自己的数据。这些数据无保留的暴露给机构存在着相当大的隐私和安全隐患，毕竟机构们利用特权擅自盗用用户数据的现象似乎已经是 Web2 中屡见不鲜、习以为常的了。</p>
+<p>与此同时，各组织间相对独立的数据系统迫使用户数据被碎片化地保存在不可互相访问的系统中，因此用户难以完整地查看、调用、解析自己的数据。而实现 SSI 的先觉条件之一是用户能自己掌控自己的隐私数据，即拥有数据主权——数据保管权和数据使用权。而 DID 实现了这一点。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_syjua6bck9.png" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h2 id="did归还用户的数据主权s">DID——归还用户的数据主权 S</h2>
+<h3 id="什么是-did">什么是 DID</h3>
+<p>简单来说，去中心化标识符（DID）是一个字符串形式的 URI， 具有全局唯一性、高可用性、可解析性和加密可验证性，对任何受益于自管理、加密可验证标识符——如个人身份、组织身份、链上活动历史、物联网场景等的应用程序都大有裨益，也可用以标识其他形式的主体——如产品或是一些不存在的东西，譬如想法或概念等。</p>
+<p>好比 Ethereum 和 Polygon 之类的很多区块链平台都在关注 DID，但目前都在试验阶段，还没有一方给出系统化的方案。最常使用的 DID 标准来自于 W 3 C（World Wide Web Consortium，全球最大的 Web 规范发展组织）和 DIF（Decentrailized Identity Foundation），其中 W 3 C 标准使用更为广泛。</p>
+<p>DID 和 VC 是密不可分的，W 3 C VC 的商业部署大量使用 DID 来标识人员、组织和事物，并实现一定程度的安全和隐私保护保证，未经许可任何其它方都无法访问、使用、泄露 DID 主体的身份数据。</p>
+<p>用户的 DID 完全由用户自主控制，根据确定的算法生成，并非由单一机构全权赋予。DID 可被解析为存储于区块链之上的 DID 文档——包含如授权密钥（ Authentication Key ）、加密密钥（ Agreement Key ）、委托密钥（Delegation Key）、验证密钥（Assertion key），以及与 DID 主体交互的服务端点链接等信息。这些密钥可以被通俗的理解为生活中我们用于不同目的的签名，签名的文件（目的）可能是保密涵、委托书、或同意某方使用你的个人信息的授权书等等。</p>
+<p>也正是因为基于这样的公钥基础设施，DID+VC 身份系统才使得户能更好地保护他们的数据并选择是否共享以及如何共享数据，因为只有私钥的所有者才拥有 DID 的完全授权。这和区块链中资产由私钥控制同理。</p>
+<p>说句题外话，但这也会导致以下问题的出现：</p>
+<ul>
+<li>
+<p>找回丢失的私钥非常困难；</p>
+</li>
+<li>
+<p>一旦你的私钥被盗，冒充等恶意行为可能会导致「你」行为不端。</p>
+</li>
+</ul>
+<p>因此所有用户都有责任做好其私钥和助记符的安全备份。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/b6w4uhv6htz91c6" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h2 id="vc线上可信赖的身份信息">VC——线上可信赖的身份信息</h2>
+<p>VC 是比 SBT 深入的身份系统要素。</p>
+<p>2022 年 5 月，以太坊的联合创始人 Vitalik Buterin、微软首席技术官办公室的研究员 Glen Weyl、 Flashbots 的策略师 Puja Ahluwalia Ohlhaver 共同发布了——《Decentralized Society: Finding Web3&rsquo;s Soul - 去中心化社会：寻找 Web3 的灵魂》 引发了人们对 SBT（SoulBound Token：灵魂绑定通证）的热议。去中心化身份概念也因此获得更多关注。</p>
+<p>SBT 在一定程度上可以代替 VC 用以构建 Web3 的社会关系，EIP-4973、EIP-5114、ERC 721 S、EIP-3525 等协议基本代表了对 SBT 应用形式的畅想。但 SBT 天然的局限性限制着它构成一个完善的去中心化身份系统：</p>
+<ul>
+<li>首先，SBT 的本质仍是 Token。</li>
+</ul>
+<p>Token 指向的是一个钱包地址，而非某个能代表身份的身份标识，任何能获得钱包地址的人都可以查看该钱包所有者拥有的 SBTs， 毫无隐私可言。更重要的是，我们并不希望社会契约主体是一个个钱包而非身份，因为交易只是社会活动的一部分。</p>
+<ul>
+<li>其次，SBT 依赖于链存在。</li>
+</ul>
+<p>虽可在如 EVM 等多链兼容环境态中证明身份，但对于跨生态、跨平台、甚至脱链的场景是无能为力的。</p>
+<ul>
+<li>最后，SBT 在出示和应用场景方面也具有相当的局限性。</li>
+</ul>
+<p>类似于 NFT，现有的 SBT 只有完全展示和完全隐藏这两种出示形式 ，并不具有完备的保护数据隐私的功能。</p>
+<p>虽然目前业内也在做 SBT 聚合，但各项目发布的 SBT 的信息承载形式并不统一，所以也只能是在白板上排列展示，其可读性极差，并不便于用户使用和解读。</p>
+<p>即使现在可以选择性地披露 SBT——即根据需要出示 SBT 中的部分信息，但这里要敲黑板的是，这部分信息也是属于不加修饰和掩盖的明文披露，这就存在一个问题——用户在证明自己的身份情况时由于必须部分暴露 SBT 中的隐私数据，那么经多次暴露后，这些隐私数据仍可被收集、整理、分析，形成完整的用户画像，从而威胁隐私安全。这一点和我们所说的 Web2 画像是一样的，你想想当你打开淘宝看见的推送广告，居然是相似于你刚才逛过的家具店品类的信息，或者淘宝总是根据你的消费习惯来向你推送对应款式、价位、风格的商品，非常像一个信息茧房。并不是所有人都总是喜欢信息茧房，它会限制你的信息开拓甚至更严重情况下的会局限你的认知。</p>
+<p>所以如我们所见， SBT 风华短暂，能够 广泛、深度使用的场景非常有限，我们已经对「SBT 能够满足未来 Web3 社会复杂的身份数据交互需求」这样一个想法打上了问号。</p>
+<p>而 DID+VC 方案则有效地化解了上述 SBT 的三个局限，通过密码学等技术手段确保发布、持有和控制 DID 和 VC 的最终权掌握在用户手中。并通过系列技术和协议保证</p>
+<ul>
+<li>
+<p>身份系统可跨链、跨平台、甚至脱链使用；</p>
+</li>
+<li>
+<p>身份信息展示方案统一，无需根据不同的场景来使用不同的展示方案；</p>
+</li>
+<li>
+<p>甚至可在 DID 协议之上开发定制化的产品。</p>
+</li>
+</ul>
+<p>（补充：至于 NFT，笔者认为并不能拿来和 VC 做比较，因为 NFT 代表的是一种所有权，且这种所有权是可以更改和转让并可追踪的。而 VC 承载的则是与身份相关的信息，这些信息是属于你的、独一无二的，是不能转让的。）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_3ep1ucazr1.jpeg" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h3 id="什么是-vc">什么是 VC</h3>
+<p>VC 是一个 DID（如某可信机构，某 DAO 组织、政务系统、商业机构）对另一个 DID（如用户、合作方）的某些属性做背书而发出的描述性声明，是基于密码学生成和验证的，用以证明其所有者某些属性且这些属性是真实的（如身份、能力、资质等）[ 1 ]。这些认证结果又可以被记录在存储于类似 Arweave、IPFS 之上的其他 VC 之中，所有相关信息公开、可验、可查、永久可追溯，任何人都可以对其进行独立验证以确保凭证内容的真实可信 [ 2 ]。这些 VC 也可以上线各主要公链，与其他生态应用程序互操作。有且仅有具有 VC 所有权的 DID 主体能够控制谁可以访问以及如何访问他们的 VC。</p>
+<p>注意，上面一段我们提到了两种 VC，一个用于存储用户的隐私数据 [ 1 ]，我们在这里称为个人 VC；另一个用于存储个人 VC 验证的凭证 [ 2 ]，我们在这里称为结果 VC。这里有个问题，目前大多数的可验证凭证都是存储在没有能力提供隐私保护的中心化数据库中或区块链上，这对于结果 VC [ 2 ] 来讲并无大碍，但对于个人 VC [ 1 ] 来讲则是无法容忍的。</p>
+<p>那么我们要如何才能确保包含个人隐私数据的 VC 的存储安全性和隐私性呢？这里就涉及 VC 的存储方式：</p>
+<h3 id="vc-的存储方式">VC 的存储方式</h3>
+<p>目前主要有三种：</p>
+<ul>
+<li>在用户本地存储和备份。</li>
+</ul>
+<p>这和我们把私钥记录在笔记本或不介入互联联网的程序之上是同理的。但类似的，一旦丢失就几乎不能被找回。用户在享有更多的主权时需要承担更多责任。</p>
+<ul>
+<li>加密后存储在用户控制的云存储内。</li>
+</ul>
+<p>这种方式并不相同于 Web2 中将数据直接存储在互联网巨头中心化的服务器上。加密后的 VC 的访问、使用和删除权限，只有掌握其相应 DID 私钥的所有者可以进行操作。当然，用户一样需要保存好 DID 的私钥或助记词。</p>
+<ul>
+<li>在去中心化存储平台上存储需要公开的 VC 信息存储。</li>
+</ul>
+<p>通过这种方式使得信息可追踪、可验证。且这些信息的所有权仍旧归属于 VC 所有者。</p>
+<p>在此强调，无论是哪种方式，用户都应该做好 VC 和私钥的备份。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_ncqh78c405.jpeg" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h3 id="vc-的出示方式">VC 的出示方式</h3>
+<p>让我们更深入一点，更细心的读者或许会意识到，即使我们做到了存储方面的隐私和安全，但在出示 VC 的时候如果无法实现「在不透露任何隐私信息的情况下让对方知道我满足他们的条件」，那么我们披露的那部信息不仍是完全暴露在网络中的吗？不就又回到前文讲的存在类似 SBT/NFT 信息被追踪、收集，进而形成完整的用户画像，侵扰我们的日常生活和经济活动吗？</p>
+<p>这种缺乏隐私保护的数据呈现并不是 SSI 所追求的！</p>
+<p>这里也恰是当下被热议的 ZKP（零知识证明）技术的切入点。</p>
+<p>实现隐私的技术有多种，如安全多方计算（Secure Multi-Party Computation）、同态加密（Homomorphic encryption）、零知识证明（Zero-Knowledge Proof）等。但</p>
+<ul>
+<li>
+<p>安全多方计算要求参与方 &gt;n，在独立用户层面具有很大的使用场景限制，不过却是电子投票、门限签名以及网上拍卖等诸多应用得以实施的密码学基础。</p>
+</li>
+<li>
+<p>同态加密往往需要较高的计算时间或存储成本，相比传统加密算法的性能和强度还相差甚远。</p>
+</li>
+<li>
+<p>零知识证明不具备以上两者的限制，且可以通过多次递归使网络非常具有可扩展性，但唯一不足是开发门槛较高。</p>
+</li>
+</ul>
+<p>ZKP 是目前 Web3 在隐私安全和网络扩展性方面最受关注的技术， 可以帮助用户在不透露任何信息的情况下证明自己的某种属性、资质，也可以仅仅只是返回服务方一个「yes」or「no」的答复。新兴的 zCloak Network 在这方面做了很好的表率，实现了对身份信息展示的细粒度控制——其 VC 出示方式有四种：零知识证明披露（ZKP Disclosure）、摘要披露（Digest Disclosure）、选择性披露（Selective Disclosure）、全信息明文披露（Full disclosure 0) 。</p>
+<p>也就是说，基于 ZKP 技术，用户可以选择或全部、或部分、或完全不披露自己的信息、抑或通过隐秘的数据分析来获得一个「DeFi 达人」的标签以显示自己的某种能力和资质，于此同时还能够让服务提供方识别用户是否完全符合他们某项业务的目标用户的标准。这不仅极大地保护了用户的数据隐私安全，还充分尊重了用户多样的信息披露意愿。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/n8ccbtyj130526u" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h3 id="zkp-浅析">ZKP 浅析</h3>
+<p>ZKP 目前分为 SNARK（Scalable Transparent Argument of Knowledge）和 STARK（Succinct Non-interactive Argument of Knowledge）两个系统，都可用来创建有效性证明，主要区别我们用以下表格来说明：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_j9k5rh00vg.png" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<p>SNARK：</p>
+<ul>
+<li>
+<p>证明大小非常小，因此验证时间短，所以在像以太坊这样的区块链上处理 SNARK 证明时需支付的 Gas 费也较低，这是它的一大优点。</p>
+</li>
+<li>
+<p>但它依赖于非标准的安全假设，且需要信任的生成阶段，如果在这个阶段出现问题，可能导致系统的安全性遭到破坏。</p>
+</li>
+</ul>
+<p>相比之下，STARK</p>
+<ul>
+<li>
+<p>则基于较弱的安全假设、完全透明，不需要信任的生成阶段，且可抗量子计算（也就是安全性非常高）。</p>
+</li>
+<li>
+<p>且更为通用，对于并行化有更好的适应性，无需针对对不同的场景进行电路定制，这可以大大的节省开发成本、简化开发工作。而 SNARK 是需要的。</p>
+</li>
+</ul>
+<p>（ 所以，我们看到，目前在跨链和 L2 扩容方面都多采用 SNARK， 而隐私数据的保护则多采用 STARK。因为前者证明更小、验证时间更短、Gas 费更低，而后者具有极高的安全性和也更利于开发。6 月 20 日，以太坊联合创始人 Vitalik Buterin 在最新文章《更深入探讨钱包和其他用例的跨 L2 读取》中就指出：在跨链证明的实现上，零知识证明（ZK-SNARK）等是非常可行的技术选择，未来 10 年 zk-SNARK 将与区块链一样重要。）</p>
+<p>让我们用一个场景来说明这两者的应用。假设我们要在区块链上实现一个隐私投票系统。这个系统要求验证用户是否有投票权，但又不能泄露用户的身份：</p>
+<ul>
+<li>
+<p>如果我们优先考虑系统的效率和 Gas 费用，那么 SNARK 可能是一个更好的选择，因为它可以生成更小的证明并且验证速度更快。然而，</p>
+</li>
+<li>
+<p>如果我们更关心系统的透明性和安全性，那么 STARK 可能会是一个更好的选择，尽管它的证明大小更大，验证时间更长，但是它不需要信任的生成阶段，并且基于较弱的安全假设。</p>
+</li>
+</ul>
+<p>总的来说，SNARK 和 STARK 各有千秋，具体使用哪种技术取决于应用的特定需求和场景。  </p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_0ldip9w4h0.png" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h2 id="did身份系统中的参与方">DID 身份系统中的参与方</h2>
+<p>主要包括 VC 持有者 Holder、签发方 Issuer、验证者 Verifier。</p>
+<p>Holder 是某一 DID 的拥有者，VC 的持有者。他们是唯一有权共享其凭证，且唯一有权选择他们愿意共享其自身身份信息的个人或组织。</p>
+<p>Issuer 是 VC 的签发方，通常由受信任的组织扮演，比如 DAO、政府、行业协会。需要注意的是，即使 Issuer 创建并签发了 VC，但他并不拥有 VC 的使用权，因为需要其对应的 DID 的私钥进行授权签名才能使用，而 Issuer 并不拥有 Holder 的私钥。但是，对某些类型的 VC 而言，Issuer 拥有将其吊销的权利。例如，如果发现某社区成员作恶，DAO 社区可以撤回曾经对他颁发的荣誉证书，或是交管局在处理违章时有权吊销已经签发给某个司机的数字驾照。</p>
+<p>Verifier 是 VC 的验证和接收方，他们只有在 Holder 授权同意的情况下才可验证相应的 DID 和 VC 并知晓 Holder 是否拥有某些属性或满足某些条件（如用户合规），从而使 Holder 通过其 DID 享受他们提供的某种有限定条件的服务。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_pjsqiasnoa.png" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<p>我们举例来理解以上三者的关系：</p>
+<p>（Web 2）比如，入职背调时，公司要验证潜在新员工的求职信息以确定其是否具有相应学历背景、过往工作经历是够属实、以及是否是合法公民等；此时公司即是 Verifier，发放学历证书的教育机构以及发放职业证书的前雇主即是 Issuer，持有这些证书的新员工即是 Holder。</p>
+<p>（Web 3）比如，mockDAO 的某项社区提案要求仅 Level&gt;2 的社区成员才可参与投票，这个过程中 mockDAO 需要验证事前发放的成员证书（VC）来确认他们是否满足这些条件；此时，mockDAO 即是 Issuer 也是 Verifier，拥有成员证书的社区成员是 Holder。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_4y6wswr17q.png" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h2 id="为什么需要-didvc-去中心化身份系统">为什么需要 DID+VC 去中心化身份系统</h2>
+<p>DID+VC 身份系统具有非常广泛的应用场景，此处笔者举出了 6 种 Web3 中常用的应用场景：</p>
+<h3 id="1-通用且安全的登录">1. 通用且安全的登录</h3>
+<p>用户可通过一个 DID 实现对所有平台的直接登录，且由平台或合约授权的 VC 可以控制用户的访问权限，如此能够打通平台间的壁垒，不再是传统的登陆不同平台需要不同的「账号 + 密码」；同时，用户还可自由地向平台展示不同的 VC 以证明自己的某些条件，改善用户登录体验和信息暴露意愿。</p>
+<p>另外，Web3 中惯用的钱包登录致使钱包与平台的交互会被公布在链上，刺激部分平台可能通过链上数据（如财产状况）来为用户提供歧视化的服务。使用 DID 登录能杜绝这一情况的发生。</p>
+<h3 id="2-kyc-认证">2. KYC 认证 </h3>
+<p>从更长远、广泛的角度来讲，所有涉及身份信息应用的现实场景或线上场景都可以使用 DID——比如许多在线服务，包括部分加密行业的交易所、钱包，需要我们扫描上传身份证件以完成 KYC 认证——它们通常需要凭借繁琐的文档和电子记录来验证身份，昂贵又耗时，且可能导致用户隐私的泄露，并且也存在服务提供商无法验证证明真实性的情况。</p>
+<p>然而，在 DID 身份系统中，服务商是在经用户允许的情况下通过 VC 来验证用户资格的，用户的敏感信息可以有选择的或完全隐秘、或部分、或全部共享，所以相较传统 KYC 认证更加可信，同时也大大减少了用户与组织的沟通成本。</p>
+<p>即使在现实生活中，DID+VC 的身份系统可以帮助贷款公司轻松验证申请人的财务凭证，同时也能尊重用户想要保持某些数据私密性的意愿；员工尽职调查中，既便于雇员调取资质材料并做好妥善保管，也保证了材料在流转的过程中不被篡改，同时也可避免因验证过程中可能存在诸多不便而难以验证信息真伪的情况。等等。</p>
+<h3 id="3社区治理">3.社区治理</h3>
+<p>（1）以保护隐私的方式完成社区身份和贡献数据管理：</p>
+<p>Web3 的很多平台和社区采用了中心化的模式来管理成员的身份和贡献数据，即使有一些组织尝试将其上链，但 Gas 费已然会成为组织运营的一笔不小的成本，且上链后的内容即使得到所有者的许可，也无法再进行修改，所有者的隐私很难得到保护。将授权密钥和协议与 DID+VC 身份系统关联，能够便利而隐秘地完成身份和贡献数据管理，充分保护所有者的数据主权和隐私。</p>
+<p>（2）DAO 的高效治理</p>
+<p>前文讲到的 mockDAO 投票资质认证的例子，也很好地说明了基于 DID+VC 身份系统可以实现 DAO 等组织的高效管理，节约项目方的综合成本，用户操作体验也更简洁丝滑。而由于 VC 的保管、使用权完全在用户手中，所以社区成员也可用 VC 来证明自己对某个项目或 DAO 的贡献，大大减少他们与组织的沟通成本。</p>
+<h3 id="4-反女巫攻击">4. 反女巫攻击</h3>
+<p>女巫攻击是指小部分人通过控制大量机器人来模拟人的行为，从而达到干涉组织运行以牟取利益的目的。在很多空投、投票治理中很容易见到此类攻击。DID 系统可以确保 VC 只被颁发给真实有效的用户，用户仅能通过出示并验证凭证的方式来获得参与这些活动与的资格，同时隐私也不会被泄露。</p>
+<h3 id="5-反钓鱼攻击">5. 反钓鱼攻击</h3>
+<p>在助记词、私钥处于保密状态时，用户的数字资产通常是安全的，但黑客利用人为错误或中心化平台发起攻击，如利用 Discord、邮箱、Twitter、交易平台发布虚假信息，或通过伪造网站引导用户错误操作来实现。用户除了需要提高警惕、细心核对交易信息、保护好账户敏感信息以外，更重要最根本且最行之有效的是能够及时验证未知信息是否源自于某真实组织本身，这个验证过程涉及到</p>
+<p>（1）确定发布信息的组织的身份真实有效性，是非假冒的、非已注销的；</p>
+<p>（2）确认信息里的所有内容均出自该真实有效的组织；</p>
+<p>就第一点而言，从用例层面出发，用户可通过类似「天眼查」的可信黄页知悉组织存在的合法依据和官方身份信息，或通过各大社交平台的「蓝 V」标识来相信组织公共账号及其公布的内容的真实性。但这两种方式都是人工的、中心化的、低效的认证过程，平台也无法及时更新项目的发展、注销、所有权更改状态，无法验证即将或已离职高层的发言是否能代表组织的意图。</p>
+<p>自技术层面，可通过证书签发机构（CA）的公钥基础设施（PKI）体系，或通过菲尔·齐默尔曼开发的 PGP 与 Web of Trust 个人密钥系统来完成身份真实有效性的认证。前者是完全中心化的，应用范围也局限于网站的 SSL/TLS 加密通信之中，各类 HTTPS 网站就是用了这种证书进行网站身份验证。后者则要求事先明确知晓交互对象的 PGP 公钥，会存在一定的安全性和可扩展性顾虑，且相互之间知晓 PGP 公钥这件事本身就存在没有明确的方法检查身份的真实性和有效性，也没有处理错误认证的惩罚机制，且由于涉及密码学基本原理及命令行操作使得普通用户的使用友好性极差，难以为一般组织或个人信誉赋能并形成网络效应。</p>
+<p>就第二点——「确定信息里的所有内容均出自某真实有效的组织」——面对海量信息，尤其是涉及会发生钱包、资产交互的信息，无论在 Web2 或 Web3 都需要一个有效验证的路径来帮助组织、名人都需要一个官方能够及时辟谣，帮助用户及时验证的信息的政委，以维护声誉并、保护信息和资产安全。</p>
+<p>Web3 一直缺乏相应解决以上两点问题的反欺诈身份验证方式和反欺诈的可验证信息表达路径。直到 DID+VC 身份系统的出现，为他们提出了一种解决思路。</p>
+<p>因为一个主体的 DID 可以是完成了 KYB、KYC 认证的，其历史通过 VC 记录并验证，但在这个认证、记录、验证的过程中，除了用户自己和签发 VC 的具有法律责任的公信机构，无一人知晓用户的隐私个人隐私数据</p>
+<p>抑或是，针对那些对 KYB 感到敏感的组织而言，可通过将其面向公众的官方渠道与其 DID 相关联认证来授权一个 DID 的官方属性，自此有且仅有经该 DID 发布的信息是具有公信度（虽然无法完全具有法律保障，但信誉也是社会认可中非常重要的一个要素），使用户更愿意选择相信其发布的信息，帮助真假 DID 的识别。</p>
+<h3 id="推动-defi-发展">推动 DeFi 发展</h3>
+<p>用户的所有链上行为都可以被写入 VC，逐渐积累形成自己的链上信用以作为身份的一种重要属性，也可为用户获取第三方服务提供便利性。DID+VC 身份系统可以保护用户隐私的方式反应用户的链上经济行为，并将其以 VC 的方式被记录、验证、出示，既能帮助 DeFi 判断组织或个体用户的链上金融信用，也能帮助用户获得类似传统金融那样的信用贷款服务，代币质押模式或将被削弱或替代，为当前 DeFi 生态带来更好的流动性和资本效率。</p>
+<p>现阶段，DeFi 信贷业务的扩张主要受限于链上身份对应真实身份的识别。如若 DeFi 要准确有效地与用户链下金融数据交互，以帮助评定用户链上信用，甚至追偿链上失信行为，KYC 认证则是不可避免的，但这可能使 Web 3 的原住民们感到不适，因为涉及隐私信息暴露隐患以及认证机构的道德隐患。</p>
+<p>另一方面，Web3 用户的信用水平难以判断和衡量，同时也成为了阻碍 DeFi 实现低抵押率信贷业务的主要原因之一 ，所以只能通过提高用户抵押率或超额抵押来保障项目自身资金安全，却又与此同时降低了 DeFi 生态的资金利用效率，削弱了加密生态的整体流动性的同时，也将大多数希望利用信用杠杆的加密用户者拒之门外，然而，对于这部分人群来讲，他们贷款正是因为是缺少资金或缺少可抵押的资产，且由于链下信用系统的成熟和应用范围限制，他们可能因现实世界的信用记录不够丰富而难以获得理想的额度。</p>
+<p>基于 DID+VC 身份系统能够为以上 DeFi 信贷业务问题提供了一种潜在解决方案 —— 通过具有多种出示功能的、完全由用户掌控的 VC， 既可（1）降低信贷机构完成过往信用数据收集并验证的成本，同时，即使未来 DeFi 与链下数据交互被强制实施 KYC 认证；也能（2）保证用户数据验证和出示过程中的隐私诉求，除认证 KYC 的公信机构、认证相应金融数据的机构和用户自身，无人知晓用户的任何相关隐私数据，如若出现泄露也有明确的对应信息追责路径。如此 DeFi 应用程序便可以轻松地为不同的用户提供针对性的服务，如，通过用户的 DID 和可验证数字凭证来验证用户过往链上链下信用情况，若还款记录良好则可获得低利息的信用贷款或低质押率贷款。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/7_2u4wzhs8jq.jpeg" alt="全面解读DID身份系统：现状、概念与重要性"></p>
+<h2 id="结-语">结 语</h2>
+<p>DID+VC 身份系统是 Web3 走向大众的基石。</p>
+<p>正如开篇所说的，我们对于区块链或者说对 Web3 的期待都来源于其对抗特权与非自愿审查的能力，但这并不意味着完全不需要信任。我们只是想要或削弱或消除对那些会出卖、篡改我们信息的中心机构的信任，想要通过数据自主权来达到这样的目的；但，与此同时，我们同样需要具有公信力的、具有法律义务和责任的机构，比如公安、政府，来认证网络中各色各样的组织和个体身份真实可信性，甚至信息、物件的真实可信性，需要他们来监督网络中的各类实体（组织、个人、信息），以避免和监督因身份信息伪造带来的欺诈事件，并在事后能实施法律问责程序，切断信息泄漏的链条，追回部分或全部的经济损失。这些都需要监管的加持，需要 KYC、KYB 的实施。即使一个人能同时拥有多个 DID，但我们的真实身份只有一个，当某个人的多个 DID 都和他的现实唯一身份关联、认证，才能实质性的杜绝 Web2 和 Web3 中的因信息盗窃而产生的欺诈事件；也才能让 Web2 的数据一定要以某种方式在 Web3 的世界里使用起来，才能得以丰富链上 DID 的应用场景。在人类进入赛博世界的过渡期，DID 将会承载 Web2 身份与社会关系在 Web3 世界的映射。</p>
+<p>当然无论是安全多方计算还是同态加密抑或零知识证明，如果能大规模的实现基于这些加密技术的、由具有法律责任的公信机构完成的 K YC 认证，可以说 Web3 是比 Web2 更安全的，因为目前我们的部分 KYC 认证以及非常重要的身份隐私数据都是由许多商业机构自行掌控的。且当某一组织、个人的 DID 在网络中具有一定的辨识度时，更加具有可读性的 DID 可以为他们代言，当然这条路很很长，在这个过程中也或许会涌现出其他的解决方案，所以就暂不做过多讨论。</p>
+<p>DID 身份系统通过密码学的方式以及系统的技术交互逻辑，让用户掌握了自己身份数据的所有权，突破了传统互联网中信息被滥用的痛点，提高了组织和黑客的「作恶」成本，在给予用户数据主权的同时赋予了用户安全感。让人们看到了理想的 Web3 中「用代码代替人治」构成的 DeSoc 数字社会的曙光；可以揉合 DeFi、DAO、GameFi 等赛道的用户识别问题，解决链上 KYC 隐私保护问题、改革社区治理方式、防范女巫和钓鱼攻击等问题，使 Web3 成为一个比 Web2 安全、对用户更包容、更尊重用户权利和意愿的社会。</p>
+<p>当然，这一美好愿景的实现还需要一套标准的跨链、跨平台甚至脱链的协议来加持，也需要无数用户和平台乃至线下机构的认可，以及需要形成使用的网络效应。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54416/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">区块链，并未离去</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54457/">
+                <span class="next-text nav-default">权威媒体聚焦：波场TRON黑客松第五季与开发者社区活动震撼启动</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前-言">前 言</a></li>
+    <li><a href="#身份隐私数据现状">身份隐私数据现状</a></li>
+    <li><a href="#did归还用户的数据主权s">DID——归还用户的数据主权 S</a>
+      <ul>
+        <li><a href="#什么是-did">什么是 DID</a></li>
+      </ul>
+    </li>
+    <li><a href="#vc线上可信赖的身份信息">VC——线上可信赖的身份信息</a>
+      <ul>
+        <li><a href="#什么是-vc">什么是 VC</a></li>
+        <li><a href="#vc-的存储方式">VC 的存储方式</a></li>
+        <li><a href="#vc-的出示方式">VC 的出示方式</a></li>
+        <li><a href="#zkp-浅析">ZKP 浅析</a></li>
+      </ul>
+    </li>
+    <li><a href="#did身份系统中的参与方">DID 身份系统中的参与方</a></li>
+    <li><a href="#为什么需要-didvc-去中心化身份系统">为什么需要 DID+VC 去中心化身份系统</a>
+      <ul>
+        <li><a href="#1-通用且安全的登录">1. 通用且安全的登录</a></li>
+        <li><a href="#2-kyc-认证">2. KYC 认证 </a></li>
+        <li><a href="#3社区治理">3.社区治理</a></li>
+        <li><a href="#4-反女巫攻击">4. 反女巫攻击</a></li>
+        <li><a href="#5-反钓鱼攻击">5. 反钓鱼攻击</a></li>
+        <li><a href="#推动-defi-发展">推动 DeFi 发展</a></li>
+      </ul>
+    </li>
+    <li><a href="#结-语">结 语</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

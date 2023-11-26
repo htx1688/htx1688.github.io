@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          以太坊转PoS后如何缓解MEV的影响 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="这就是为什么我们说 MEV 不容易被抵消。虽然存在潜在的缓解措施，但它们需要对以太坊应用程序的架构方式以及用户与之交互的方式进行结构性更改。" />
+<meta name="keywords" content="MEV" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/45477/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="以太坊转PoS后如何缓解MEV的影响" />
+<meta property="og:description" content="这就是为什么我们说 MEV 不容易被抵消。虽然存在潜在的缓解措施，但它们需要对以太坊应用程序的架构方式以及用户与之交互的方式进行结构性更改。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/45477/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="以太坊转PoS后如何缓解MEV的影响">
+<meta itemprop="description" content="这就是为什么我们说 MEV 不容易被抵消。虽然存在潜在的缓解措施，但它们需要对以太坊应用程序的架构方式以及用户与之交互的方式进行结构性更改。"><meta itemprop="datePublished" content="2022-12-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5081">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="以太坊转PoS后如何缓解MEV的影响"/>
+<meta name="twitter:description" content="这就是为什么我们说 MEV 不容易被抵消。虽然存在潜在的缓解措施，但它们需要对以太坊应用程序的架构方式以及用户与之交互的方式进行结构性更改。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">以太坊转PoS后如何缓解MEV的影响</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-12-12">
+      2022-12-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5081 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>本期篇幅较长，为了方便大家阅读可预览目录：</strong></p>
+<p>温习：什么是最大可提取价值 MEV</p>
+<p>Part 1 ：以太坊 POS 中 MEV</p>
+<p>验证者中心化</p>
+<p>许可内存池</p>
+<p>Part 2 ：MEV 两种解决方案</p>
+<p>Proposer -Builder Separation</p>
+<p>PBS 如何减轻 MEV 的影响？</p>
+<p>Builder API</p>
+<p>Builder API 如何减轻 MEV 的影响？</p>
+<p>Part 3 ：MEV 是以太坊独有的吗？</p>
+<p>Part 4 ：MEV 遵循复杂性</p>
+<p>Part 5 ：为什么说 MEV 很难修复</p>
+<p><strong>正文开始，首先我们举例回顾一下什么是 MEV？</strong></p>
+<p>例如，在大量交易导致价格下滑后，Uniswap 上有 10, 000 美元的套利机会。套利机器人注意到机会并提交交易以捕获它，向矿工提供 10 美元的交易费。可能会发生以下两种情况之一：</p>
+<ul>
+<li>
+<p>矿工将复制并审查套利者的交易，以便自己抓住机会</p>
+</li>
+<li>
+<p>其他机器人会注意到并出价更高的 txfee，开始一场争夺套利权的竞标战。拍卖被称为“优先 Gas 拍卖”（Priority Gas Auction：PGA）</p>
+</li>
+</ul>
+<p>10, 000 美元的潜在利润是 MEV。如果矿工没有捕获它，并且开始了 PGA，拍卖成交的价格与可用的总 MEV 之间的差额就是获胜交易者的利润（例如，如果向矿工支付了 7, 000 美元的费用，则剩余的 3, 000 美元留给交易者）。</p>
+<p>在 MEV 系列的<strong>第一篇文章</strong> 里我们详细介绍了 MEV 的形式及其影响，接下来我们继续讨论 MEV 对以太坊的影响。</p>
+<p>Part.1 以太坊 PoS 中的 MEV</p>
+<p>在上一篇文章里，我们介绍了 MEV 对整体用户体验和共识层安全性有负面影响。但以太坊向权益证明共识的过渡（即合并）中可能会引入新的 MEV 相关风险：</p>
+<h3 id="eth-就添加到信标链的区块的有效性达成共识由于-32-个-eth-可能对许多人来说是遥不可及的加入一个质押池staking-pool可能是一个更可行的选择然而独立质押者solo-stakers的良好分布是最理想的因为它减轻了验证者的中心化并提高了以太坊的安全性">ETH ）就添加到信标链的区块的有效性达成共识。由于 32 个 ETH 可能对许多人来说是遥不可及的，加入一个质押池（staking pool）可能是一个更可行的选择。然而，独立质押者（solo stakers）的良好分布是最理想的，因为它减轻了验证者的中心化并提高了以太坊的安全性。</h3>
+<p>然而，MEV 提取被认为能够加速验证者的中心化。这部分是因为，由于验证者提出区块的收入低于之前矿工的收入，MEV 提取可能会极大地影响合并后验证者的收入。</p>
+<p>更大的质押池可能会有更多资源投资于必要的优化以捕捉 MEV 机会。这些池提取的 MEV 越多，他们就有越多的资源来提高其 MEV 提取能力（并增加整体收入），从根本上创造规模经济。由于可支配的资源较少，独立质押者可能无法从 MEV 机会中获利。这可能会对独立验证者施加压力，加入强大的质押池以增加收入，从而降低以太坊的去中心化程度。</p>
+<h3 id="许可内存池">许可内存池  </h3>
+<p>为了应对三明治攻击和抢先交易攻击，交易者可能会开始与验证者进行链下交易以保护交易隐私。交易者代替将潜在的 MEV 交易发送到公共内存池（mempool），而是直接将其发送给验证者，验证者将其包含在一个区块中并与交易者分享利润。</p>
+<p>“暗池”（Dark pools）是这种安排的放大版本，其功能是经过许可的、仅限访问的内存池，向愿意支付一定费用的用户开放。这种趋势将减少以太坊的无许可和去信任，并有可能将区块链转变为有利于出价最高者的“pay-to-play”机制。许可内存池（Permissioned mempools）也会加速上一节中描述的中心化风险。运行多个验证者的大型池可能会受益于为交易者和用户提供交易隐私，从而增加他们的 MEV 收入。</p>
+<p>Part.2 MEV 的两种解决方案</p>
+<p>在合并后的以太坊中解决这些与 MEV 相关的问题是一个核心研究领域。迄今为止，为了减少 MEV 在 合并后对以太坊的去中心化和安全性的负面影响，提出了两种解决方案，分别是Proposer-Builder Separation (PBS)和 Builder API。</p>
+<h3 id="proposer-builder-separation">Proposer-Builder Separation  </h3>
+<p>Proposer-Builder Separation (PBS) 旨在减轻 MEV 的影响，尤其是在共识层。PBS 的主要特点是区块生产者和区块提议者（Proposer）规则的分离。验证者仍然负责区块提议和投票；但区块构建者——block builders，则负责排序交易和构建区块。</p>
+<p>在 PBS 下，一个区块 builder 创建一个交易包（transaction bundle），并出价将其包含在信标链区块中（作为“执行负载”（execution payload））。选择提议下一个区块的验证者然后检查不同的出价并选择费用最高的交易包。PBS 实质上创建了一个拍卖市场， builders 与验证者协商出售区块空间。</p>
+<p>当前的 PBS 设计使用提交-显示方案（commit-reveal scheme ），其中 builders 仅发布对区块内容（区块头）的加密承诺及其出价。在接受中标后，Proposer 创建一个包含区块头的已签名区块提案。区块 builder 在看到已签名的区块提案后应发布完整的区块主体，并且在最终确定之前还必须收到来自验证者的足够证明。</p>
+<h3 id="pbs如何减轻-mev-的影响">PBS 如何减轻 MEV 的影响？ </h3>
+<p>通过从验证者的权限中移除 MEV 提取，协议内 PBS 减少了 MEV 对共识的影响。相反，运行专用硬件的区块 builders 将抓住未来的 MEV 机会。</p>
+<p>不过，这并不完全排除验证者与 MEV 相关的收入，因为 builders 必须出高价才能让验证者接受他们的区块。然而，随着验证者不再直接专注于优化 MEV 收入，时间强盗（time-bandit）攻击的威胁减少了。</p>
+<p>PBS 也降低了 MEV 中心化风险。例如，使用 commit-reveal 方案消除了 builders 信任验证者不会窃取 MEV 机会或将其暴露给其他 builders 的需要。这降低了独立质押者从 MEV 中受益的门槛，否则，builder 将倾向于青睐在链下享有声誉的大型池并与他们进行链下交易。</p>
+<p>同样，验证者不必相信 builders 不会因为支付是无条件的而扣留区块主体或发布无效区块。即使提议的区块不可用或被其他验证者宣布无效，验证者的费用仍会处理。在后一种情况下，区块被简单地丢弃，迫使区块 builder 损失所有交易费用和 MEV 收入。</p>
+<h3 id="builder-api">Builder API  </h3>
+<p>虽然提 PBS 有望减少 MEV 提取的影响，但实现它需要更改共识协议。具体来说，信标链上的分叉选择规则需要更新。Builder API 是一种临时解决方案，旨在提供 PBS 的有效实施，尽管具有更高的信任假设。</p>
+<p>Builder API 是 Engine API 的修改版本，共识层客户端使用它来从执行层客户端请求执行负载。正如诚实验证者规范中所概述的那样，被选为区块提议职责的验证者从连接的执行客户端请求一个交易包，它们将交易包含在提议的信标链区块中。</p>
+<p>Builder API 还充当验证者和执行层客户端之间的中间件；但它是不同的，因为它允许信标链上的验证者从外部实体获取块（而不是使用执行客户端在本地构建块）。</p>
+<p>Builder API 的工作原理如下：</p>
+<ul>
+<li>
+<p>Builder API 将验证者连接到运行执行层客户端的区块 builder 网络。就像在 PBS 中一样，builder 是专门的团体，它们投身于资源密集型区块建设，并使用不同的策略来最大化从 MEV + priority tips 中获得的收入。</p>
+</li>
+<li>
+<p>验证者（运行共识层客户端）请求执行有效载荷以及来自 builder 网络的出价。来自 builder 的投标将包含执行有效负载块头——对有效负载内容的加密承诺——以及支付给验证者的费用。</p>
+</li>
+<li>
+<p>验证者审查传入的出价并选择费用最高的执行负载。使用 Builder API，验证者创建一个“blinded”的 信标块提案，其中仅包含它们的签名和执行有效负载块头，并将其发送给 builder。</p>
+</li>
+<li>
+<p>运行 Builder API 的 builder 预计会在看到 blinded 块提议后，会响应完整的执行负载。这允许验证者创建一个“签名的”信标块，它们在整个网络中传播。</p>
+</li>
+<li>
+<p>使用 Builder API 的验证者仍然需要在本地构建区块，以防区块 builder 未能及时响应，这样他们就不会错过区块提案奖励。但是，验证者不能使用现在公开的交易或另一组交易创建另一个区块，因为这相当于模棱两可（在同一个插槽内签署两个区块），这是一种严重的错误。</p>
+</li>
+</ul>
+<p>MEV-Boost 是 BuilderAPI 的一个示例实现（有关 MEV-Boost 下期内容我们会单独介绍），它是对 Flashbots 拍卖机制的改进，旨在抑制以太坊上 MEV 的负面外部性。Flashbots 拍卖允许矿工在工作量证明中将构建有利可图的区块的工作外包给称为搜索者：Searchers的专业团体。</p>
+<p>Searchers 寻找有利可图的 MEV 机会，并向矿工发送交易包以及包含在区块中的密封价格投标。运行 mev-geth（go-ethereum (Geth) 客户端的分叉版本）的矿工只需选择利润最高的交易包并将其作为新区块的一部分进行开采。为了保护矿工免受垃圾邮件和无效交易的影响，交易包在到达矿工之前通过中继器 Relayers 进行验证。</p>
+<p>MEVBoost 保留了与原始 Flashbots 拍卖相同的运作方式，尽管具有专为以太坊转向权益证明而设计的新功能。Searcher 仍然会发现有利可图的 MEV 交易，并将其包含在区块中，但是称为 builder 的新的专业团体，负责将交易聚合并捆绑到区块中。builder 接受来自 Searcher 的密封价格出价并运行优化以找到最有利可图的订单。</p>
+<p>Relayers 仍然负责在将交易包传递给提议者之前验证交易包。然而，MEV Boost 引入了托管，负责通过存储 builder 发送的区块主体和验证者发送的区块头来提供数据可用性。在这里，连接到中继器的验证者请求可用的执行有效载荷，并使用 MEV Boost 的排序算法来选择具有“最高出价 + MEV 费用”的有效载荷标头（payload header）。</p>
+<h3 id="builder-api-如何减轻-mev-的影响">Builder API 如何减轻 MEV 的影响？ </h3>
+<p>Builder API 的核心优势在于它有可能使对 MEV 机会的访问民主化。使用 commit-reveal 方案消除了信任假设，并降低了验证者寻求从 MEV 中获益的进入门槛。这应该会减轻独立质押者与大型质押池整合以提高 MEV 利润的压力。</p>
+<p>Builder API 的广泛实施将鼓励区块 builder 之间更激烈的竞争，从而增加审查阻力。当验证者审查来自多个 builder 的出价时，意图审查一项或多项用户交易的 builder 必须出价高于所有其他非审查 builder 才能成功。这大大增加了审查用户的成本并阻碍了这种做法。</p>
+<p>一些项目，如 MEV Boost，使用 Builder API 作为整体结构的一部分，旨在为某些方提供交易隐私，例如试图抢先交易/三明治攻击的交易者。这是通过在用户和区块 builder 之间提供私人通信渠道来实现的。与前面描述的许可内存池不同，这种方法是有益的，原因如下：</p>
+<ul>
+<li>
+<p>市场上多个 builder 的存在使得审查变得不切实际，这对用户有利。相反，中心化和基于信任的暗池的存在会将权力集中在少数区块 builder 手中，并增加审查的可能性。</p>
+</li>
+<li>
+<p>Builder API 软件是开源的，任何人都可以提供区块 builder 服务。这意味着用户不会被迫使用任何特定的区块 builder，并提高了以太坊的中立性和无许可性。此外，寻求 MEV 的交易者不会通过使用私人交易渠道无意中为中心化做出贡献。</p>
+</li>
+</ul>
+<p>Part.3 MEV 是以太坊独有的吗？</p>
+<p>我们不禁要问：MEV 是以太坊独有的吗？</p>
+<p>不，假设 MEV 也可以在比特币上看到。审查闪电通道或双花代币的动机在技术上是 MEV。然而，我们的假设是，与以太坊等区块链相比，比特币本质上更不容易受到 MEV 的影响。</p>
+<p>其原因在于各自区块链的复杂性和“状态性”：</p>
+<ul>
+<li>
+<p>MEV 在给定区块链上的累积速度通常与其应用层行为的复杂性成正比。</p>
+</li>
+<li>
+<p>任意灵活的协议，如以太坊，不能限制这种复杂性，并且随着时间的推移，它固有地倾向于更大的复杂性。</p>
+</li>
+<li>
+<p>如果不改变 Ethereum 的用户体验，MEV 激励措施就无法轻易减轻。</p>
+</li>
+</ul>
+<p>这就是为什么我们说以太坊的复杂性可能是一个诅咒。</p>
+<p>Part.4 MEV 遵循复杂性</p>
+<p>在某种纯粹的理论意义上，即使是比特币也无法限制其潜在的 MEV 敞口。然而，比特币的设计很好地阻止了意外的高 MEV 用例，在实践中很少见。这似乎不太可能在未来发生变化，因此我们预计 MEV 不会成为比特币的更大问题。</p>
+<p>相比之下，我们可以观察到以太坊上的 MEV 表面呈指数级增长，这主要是由于通过 DeFi 应用程序的大量价值流动。这些看起来很有前途的金融基础也可以被看作是以太坊的寄生虫：编织了一个无边无际的 MEV 网络，并一天天变得越来越大、越来越复杂。</p>
+<h2 id="part5mev很难修复">Part.5 MEV 很难修复</h2>
+<p>最后，很自然地会问以太坊是否可以建立一种机制来抵消 MEV 进入协议。简而言之，不会，至少不会改变以太坊的开发者和/或用户体验。</p>
+<p>任何阻止矿工/验证者获得收入流的尝试都可能会刺激协议外市场的创建。例如，如果所有的交易都只允许支付一个统一的利率，我们预计矿工/验证者会与交易者串通，接受支付获得交易优先权。同样，如果所有交易费用都被销毁或支付给一个“公共罐子”，矿工们/验证者只需单独收取费用。</p>
+<p>这就是为什么我们说 MEV 不容易被抵消。虽然存在潜在的缓解措施，但它们需要对以太坊应用程序的架构方式以及用户与之交互的方式进行结构性更改。</p>
+<p>参考文章</p>
+<p><a href="https://research.paradigm.xyz/MEV">https://research.paradigm.xyz/MEV</a></p>
+<p><a href="https://ethereum.org/en/developers/docs/mev/#mev-in-ethereum-proof-of-stake">https://ethereum.org/en/developers/docs/mev/#mev-in-ethereum-proof-of-stake</a></p>
+<p>来源：星球日报</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45463/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">以太坊扩容方案Fuel计划于2023年推出完整主网</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/45468/">
+                <span class="next-text nav-default">元宇宙中虚拟货币法律规制</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#eth-就添加到信标链的区块的有效性达成共识由于-32-个-eth-可能对许多人来说是遥不可及的加入一个质押池staking-pool可能是一个更可行的选择然而独立质押者solo-stakers的良好分布是最理想的因为它减轻了验证者的中心化并提高了以太坊的安全性">ETH ）就添加到信标链的区块的有效性达成共识。由于 32 个 ETH 可能对许多人来说是遥不可及的，加入一个质押池（staking pool）可能是一个更可行的选择。然而，独立质押者（solo stakers）的良好分布是最理想的，因为它减轻了验证者的中心化并提高了以太坊的安全性。</a></li>
+        <li><a href="#许可内存池">许可内存池  </a></li>
+        <li><a href="#proposer-builder-separation">Proposer-Builder Separation  </a></li>
+        <li><a href="#pbs如何减轻-mev-的影响">PBS 如何减轻 MEV 的影响？ </a></li>
+        <li><a href="#builder-api">Builder API  </a></li>
+        <li><a href="#builder-api-如何减轻-mev-的影响">Builder API 如何减轻 MEV 的影响？ </a></li>
+      </ul>
+    </li>
+    <li><a href="#part5mev很难修复">Part.5 MEV 很难修复</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          ERC-4337：探索账户抽象的五个主要技术组件 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="2023年3月1日，ERC-4337上线以太坊主网，增强了智能合约代表用户进行交易的能力。但实际上，到底发生了什么变化？" />
+<meta name="keywords" content="ERC-4337" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51584/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="ERC-4337：探索账户抽象的五个主要技术组件" />
+<meta property="og:description" content="2023年3月1日，ERC-4337上线以太坊主网，增强了智能合约代表用户进行交易的能力。但实际上，到底发生了什么变化？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51584/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="ERC-4337：探索账户抽象的五个主要技术组件">
+<meta itemprop="description" content="2023年3月1日，ERC-4337上线以太坊主网，增强了智能合约代表用户进行交易的能力。但实际上，到底发生了什么变化？"><meta itemprop="datePublished" content="2023-05-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4702">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ERC-4337：探索账户抽象的五个主要技术组件"/>
+<meta name="twitter:description" content="2023年3月1日，ERC-4337上线以太坊主网，增强了智能合约代表用户进行交易的能力。但实际上，到底发生了什么变化？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">ERC-4337：探索账户抽象的五个主要技术组件</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-19">
+      2023-05-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4702 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Eden Network，翻译：金色财经xiaozou</p>
+<p>2023年3月1日，ERC-4337上线以太坊主网，增强了智能合约代表用户进行交易的能力。但实际上，到底发生了什么变化？</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/24_f5tqnb4row.png" alt="asVqot3KJ6IkLjG9W6RDOAYkG7WECzG1m66aLbW2.png" title="7022455"></p>
+<p>ERC-4337并没有触及以太坊所依赖的核心共识层，而是添加了一个层，使开发人员有机会从根本上改变用户的链上交互和交易方式。</p>
+<p>本文，我们将研究ERC-4337引入的五个主要技术组件，以及它们是如何协同工作执行用户交易的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/24_nohh5b7la9.png" alt="8CieXfF2LkrvkPyckvkoZXYqSaRDCgnv3FAu3Cdq.png" title="7022458"></p>
+<p>ERC-4337标准有五个关键组件值得关注：<strong>UserOperation</strong> <strong>、Bundler</strong> <strong>、EntryPoint</strong> <strong>、Aggregator</strong> <strong>和Paymaster</strong> 。</p>
+<p><strong>1</strong> <strong>、</strong> <strong>UserOperation</strong></p>
+<p><strong>简单来说：</strong> UserOperation捕捉用户的意图和操作，包括与发送方、有效负载和gas费相关的信息。由于它的设计是为了避免更改共识，以太坊团队选择创建一个全新的结构，以获取代表用户发送的交易所包含的全部必要元素。</p>
+<p>为了避免混淆，他们特意没有将其称为“交易”。</p>
+<p><strong>更具体地说：</strong> 智能合约钱包现在可以创建叫做UserOperation（userOp）的伪交易对象，代表用户所期望的交易意图，而无需初始化传统交易。</p>
+<p>UserOperation不能访问任何在模拟和执行之间可能发生变化的信息，例如当前区块时间、哈希值、区块号等。这是为了确保它的有效性，并且能够为其链上交易执行支付费用。</p>
+<p>UserOperation同样只允许访问与发送方地址相关的数据。</p>
+<p><strong>与交易类似：</strong> UserOperation包含sender、to、calldata、maxFeePerGas、maxPriorityFee、signature和nonce字段。</p>
+<p><strong>与交易不同：</strong> nonce和signature字段的使用不是由协议定义的，而是由各帐户实现定义的。</p>
+<p><strong>UserOperation</strong> <strong>内存池</strong></p>
+<p><strong>简单来说：</strong> UserOperation内存池是一个等待网络处理的未执行UserOperations的池。UserOperations被发往UserOperation内存池，而非传统的公共内存池。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/24_q85v79h398.png" alt="ptucICRJTVhw4WfbgZFvmGhDRKgCd59HXqTP3rgU.png" title="7022459"></p>
+<p><strong>更具体地说：</strong> UserOperation内存池是任一个UserOperation作为真正交易上链之前的最后一个“停靠站”，然后，称为bundler（下文将详细介绍）的新质押者可以从该内存池里提取各UserOperation，充当了EOA角色，支付gas费并将UserOperations发送到共识层作为交易执行。</p>
+<p>这是一个专用的高级UserOperation内存池，仅供UserOperations使用，也称为canonical内存池。该内存池遵循并严格执行ERC-4337规则。ERC也允许为UserOperations提供不遵循canonical内存池规则的替代内存池（alt-mempool）。</p>
+<p>遵守ERC规则的UserOperations被发送到canonical内存池。那些不遵守ERC规则的可以被发送到其他规则不同的替代内存池。这些替代内存池中的UserOperations仅被发送给该池的参与者。</p>
+<p>Bundlers可以通过加入白名单或加入另一个不同ID的替代内存池来应对canonical内存池的异常情况。Bundlers可以自由加入canonical内存池（他们必须无一例外地遵守ERC规则）及替代池。</p>
+<p><strong>注：</strong> UserOperations内存池的最终版本尚未完全定义，因此预计会有进一步的变化。然而，一个完全去中心化的内存池对于协议的采用和健康来说是必不可少的。</p>
+<p><strong>2</strong> <strong>、</strong> <strong>Bundler</strong></p>
+<p><strong>简单来说：</strong> Bundler充当着它从canonical内存池和替代内存池中所提取的全部UserOperations的EOA的角色，Bundler将UserOperations发送到EntryPoint合约进行验证和完整性检查，然后，最后进入我们在ERC-4337出现之前的世界里所习惯的交易流程。</p>
+<p><strong>更具体地说：</strong> Bundler是一个专门的操作员，它监听UserOperation内存池和所有内存池，提取多个UserOperations，将它们打包在一起，并将交易包发送给EntryPoint合约执行。这看起来非常像从EOA到智能合约的交易，其中UserOperations的执行就如内部交易。“from”地址将是Bundler，“to”地址将是EntryPoint合约。</p>
+<p>Bunders选择将哪些UserOperations对象包含在他们的打包交易中，基于与今天以太坊的区块建设者所使用的类似的价值最大化逻辑。</p>
+<p><strong>成为</strong> <strong>Bundler</strong> <strong>的经济模型</strong> <strong>/</strong> <strong>动机是什么？</strong></p>
+<p>交易上链时，Bundler充当“from”地址，正因如此，Bundler将使用ETH为交易包支付gas费。Bundler作为所有单个UserOperation执行的一部分，随后会获得费用补偿。</p>
+<p>在接收UserOperation之前，Bundler将模拟它来验证签名，确保UserOperation可以支付费用，并确保UserOperation在模拟和执行时以相同的方式运行。要靠Bundler来避免包含验证失败的UserOperations，避免吸收那些无法支付的gas成本。</p>
+<p><strong>注意</strong> ：在ERC-4337框架中，区块建设者也可以充当Bundlers角色，以提供更强大的执行保证，但这并不是必需的。如果没有这种更强大的执行保证，交易包将被发送到公共池，并且有可能发生抢先交易，导致交易包交易失败。</p>
+<p><strong>3</strong> <strong>、</strong> <strong>Paymaster</strong></p>
+<p><strong>简单来说：</strong> Paymaster是一个可选的质押者，可以为其他用户的交易支付费用。为什么？Paymaster可以为以太坊交易带来许多有趣的新功能，例如：</p>
+<p>应用开发者可以很容易地为他们的用户补贴费用，例如作为一种获客手段。</p>
+<p>用户可以使用ERC-20代币或信用卡或其他订阅服务等链下支付方式轻松支付gas费。</p>
+<p><strong>更具体地说：</strong> ERC-4337流程并没有强制要求必须使用paymaster。UserOperation使用paymaster通常有以下两种选择：</p>
+<p><strong>验证Paymaster</strong> ：这些paymaster提供与链下流程相关联的gas抽象。例如，它可以让用户用信用卡或订阅服务支付交易费用，而不会损害他们的账户托管。</p>
+<p><strong>存款Paymaster</strong> ：这些paymaster提供与链上ERC-20代币相关联的gas抽象。</p>
+<p>Paymaster要么必须限制其存储使用，要么必须进行质押。</p>
+<p><strong>注：</strong> 为了防止滥用，系统将降低速度或暂时封禁提交大量无效UserOperations的Paymaster。为了防止实体的“女巫攻击”，全局实体需要在系统中进行质押，这使得拒绝服务（DoS）攻击的成本很高。该质押不会被罚没，可随时提取，但会受延迟限制。不访问全局存储的全局实体例外。</p>
+<p><strong>4</strong> <strong>、</strong> <strong>Aggregator</strong></p>
+<p><strong>简单来说：</strong> Aggregator是一类特殊的参与者，利用helper智能合约来处理批量UserOperation签名，并将它们转换成一个签名，也就是将其聚合。</p>
+<p><strong>更具体地说：</strong> Aggregator是一个受合约帐户信任的helper智能合约，用于验证聚合签名。UserOperations包由Aggregator在单个步骤中进行验证，而不是单独验证每个签名。Aggregator旨在提高大规模交易处理的效率和成本。</p>
+<p><strong>当前的现实：</strong> ERC-4337的交易量还不够高，不足以显现签名聚合的好处，但交易量正在快速增长，一旦达到临界值，Aggregator就会成为一个关键的利益相关者，促进大规模交易。</p>
+<p>压缩的实现过程超出了本文的讨论范围。然而，它已经整合进ERC-4337的设计中。最流行的压缩方法就是使用BLS签名聚合。</p>
+<p>从用户的角度来看，他们看不出有任何不同，但是开发人员需要在智能帐户中部署BLS签名逻辑。</p>
+<p><strong>5</strong> <strong>、</strong> <strong>EntryPoint</strong></p>
+<p><strong>简单来说：</strong> EntryPoint合约是一个单例合约，验证并执行发送给它的UserOperations包。它检查并确保由bundler发送的提交到链上的所有UserOperations都是真实有效的。</p>
+<p><strong>更具体地说</strong> ：EntryPoint合约是所有符合ERC-4337标准的智能合约钱包必须使用的全局入口点，以便在EVM上进行交易。这一概念类似于单个质押存款合约。</p>
+<p>EntryPoint的使用简化了智能合约钱包使用的逻辑，将确保安全所需的更复杂功能推至入口点，而不是钱包本身。其核心目的是防止钱包在进入网络之前进行不必要或未经授权的操作。</p>
+<p><strong>EntryPoint</strong> <strong>序列</strong></p>
+<p>下图展示了EntryPoint是如何管理Bundler发送的UserOperation包的。通常有两个阶段，但在使用aggregator的情况下，会增加一个阶段。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/24_k892v1sp52.png" alt="Ur1670sLDU3ahIdKxIRcO91jbU3wG2EuNNrlvBHw.png" title="7022460"></p>
+<p>EntryPoint序列相对简单，有两个阶段：</p>
+<p>如果存在aggregator：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/24_y6paas8os6.png" alt="C3LlSX1OXgIerv1wpoiwyd2GssJ4yz0SHVUlvnuh.png" title="7022461"></p>
+<p>如果没有aggregator：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/24_9wawdhvdkf.png" alt="72y3dHtHC7atemXRo8tiFQAtXN7FrAWkYZGmKU4y.png" title="7022462"></p>
+<p>序列中的每个循环都有自己的角色，如下：</p>
+<p><strong>循环1</strong> <strong>：Aggregator</strong> <strong>循环</strong></p>
+<p>如果一个交易包使用了aggregator，那么EntryPoint会首先检查aggregator。由Entry Point来验证签名。</p>
+<p><strong>循环2</strong> <strong>：验证循环</strong></p>
+<p>首先，它会检查合约帐户是否存在。如果不存在，它就会创建一个。</p>
+<p><strong>如果没有定义paymaster</strong> <strong>：</strong> 序列验证Contract Account在EntryPoint中是否有足够的存款来支付gas费。如果存款充足，它就会为UserOperation付费。</p>
+<p><strong>如果定义了paymaste</strong> r：序列验证paymaster在EntryPoint合约中是否有足够的存款。如果存款充足，那么合约将验证UserOperation。</p>
+<p><strong>循环3</strong> <strong>：执行循环</strong></p>
+<p>它使用callData调用合约帐户。</p>
+<p>如果定义了paymaster，它将调用paymaster中的自定义费用逻辑。</p>
+<p>只有在UserOperation通过序列循环的考验后，才能最终上链。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/24_h9rmofprzw.png" alt="z8ALblSRscHuqiq4SLLLLAQrSXMGtqy2xtXZdr0j.png" title="7022463"></p>
+<p><strong>结论：</strong></p>
+<p>虽然为了避免混淆，ERC-4337特意使用了不包含“交易”字眼的用语，但实际上，它可以被视为用户交易上链的替代流程。一旦把所有组成部分连接起来，协议就有能力向现有EOA交易流程引入新的用户意图层。</p>
+<p>AA（账户抽象）钱包的用户将把他们的意图传递给UserOperations内存池。Bundlers将这些意图转换为网络可以像以前一样处理的签名交易。</p>
+<p>虽然对于开发者来说，这看起来像是一个有额外步骤的“交易”，但对于用户来说，这就是手动输入用户名/密码并将其记在笔记本上以确保安全，或使用OAuth只点击几下就可访问web3应用程序之间的区别。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51531/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">DePIN赛道全貌：是破坏式创新还是“空中楼阁”？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51572/">
+                <span class="next-text nav-default">Filecoin和IPFS检索用户端Lassie正式上线</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

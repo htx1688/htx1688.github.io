@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          用小学数学知识理解 RSA 加密算法的数学原理 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="从自然数开始，一直讲明白了 RSA 非对称式加密的细节。" />
+<meta name="keywords" content="加密算法" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41710/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="用小学数学知识理解 RSA 加密算法的数学原理" />
+<meta property="og:description" content="从自然数开始，一直讲明白了 RSA 非对称式加密的细节。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41710/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="用小学数学知识理解 RSA 加密算法的数学原理">
+<meta itemprop="description" content="从自然数开始，一直讲明白了 RSA 非对称式加密的细节。"><meta itemprop="datePublished" content="2022-08-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3519">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="用小学数学知识理解 RSA 加密算法的数学原理"/>
+<meta name="twitter:description" content="从自然数开始，一直讲明白了 RSA 非对称式加密的细节。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">用小学数学知识理解 RSA 加密算法的数学原理</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-19">
+      2022-08-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3519 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<blockquote>
+<p>从自然数开始，一直讲明白了 RSA 非对称式加密的细节。</p>
+</blockquote>
+<p>原文标题：《用吃奶的劲试着解释加密算法的数学原理》</p>
+<p>撰文：王建硕</p>
+<p>前不久 Jason 同学邀请复旦大学数学系的梅同学给希望了解 Web3 的朋友们上了 5 节硬核的数学课。从自然数开始，一直讲明白了 RSA 非对称式加密的细节。我再回顾一下，尝试解释这个其实还挺复杂的事儿。</p>
+<p>（前方数学预警，但是我保证努力限制在小学数学知识范围以内）</p>
+<h3 id="大数无法分解">大数无法分解</h3>
+<p>3 * 7 算出 21 容易吗？容易。反过来，21 是哪两个数的乘积？也不难，但肯定比算 3 * 7 麻烦。</p>
+<p>同理 967 * 379 = 366493 容易。反过来，366493 是哪两个数乘积？难多了。</p>
+<p>随着乘积的不断变大，算乘法的难度略微增大，算是这个数是由哪两个数相乘的难度陡峭的增加。</p>
+<p>一个一百位数字的数和一百位数字的数相乘，手工算不容易，但对计算机来说不难，结果是一个大约两百位数字的数字。</p>
+<p>反过来，把这个 200 位的数字分解？基本上现在能想到的办法就是近似于一个一个的试。别说算乘法了，光从一数到 80 位的数字，按照现在的计算水平，就要消耗掉一个中等恒星一生的能量了。所以，简单结论是，超级大的数字做分解不可能。</p>
+<p>就利用这个简单的原理，加上听起来故弄玄虚的欧拉定理，就是一个精妙绝伦的 RSA 加密算法。</p>
+<h3 id="n-进制取个位">n 进制取个位</h3>
+<p><strong>这个东西的数学名称叫「取模」，就是算「一个数除以 n 以后的余数是几」。</strong></p>
+<p>不过我们不用这个名字。我自己发明的一个混杂了数学和计算机的概念，叫做 n 进制取个位。比如 n = 8，八进制下只取个位，超过的十、百、千位数就直接扔掉，那么 15 这个数本来八进制就是 17，只取个位，就是 7。所以，我们规定，15 在八进制个位模式下，就等于 7。同样，23，31 等，在 8 进制取个位下，都等于 7。这个「等于」，不是绝对数字的相等，而是经过了 n 进制取个位，我们用 ≡ 表示这种特殊的等于_（正规说法叫做「模 n 同余」，可以忽略）_。</p>
+<p>这样，如果 n 是 4 万公里的话，数字的世界变成像地球一样，是一个循环。在赤道上可以向东走 1 万公里，和向西走 3 万公里结果是一样的，甚至向西走 7 万，11 万，15 万公里的终点是一样的，就是一圈一圈的转就是了。所以 4 万进制取个位， 1 万 ≡ -7 万 ≡ -11 万 ≡ -15 万。注意，毕竟走 7 万公里和走 11 万公里不相等 ( = )，但是在地球赤道上走，他们的效果相等 ( ≡ )。</p>
+<p>例子：比如在 20 进制取个位下，3 * 7 的结果就是 1 （本来是 21，结果走过头了， 又绕回来，回到了 1 ）。</p>
+<h3 id="连着乘两个数就是它本身">连着乘两个数就是它本身</h3>
+<p>这有啥用呢？神奇的事情在于，<strong>在 20 进制取个位下，任何数乘以 3 再乘以 7，就相当于乘以 1，就是这个数本身！</strong></p>
+<p>比如 12 * 3 = 36 ；36 % 20 = 16; 16 * 7 = 112; 112 % 20 = 12</p>
+<p>变回原来了。神奇吗？</p>
+<p>在 20 进制取个位下，你把一个数乘以 3，我不用除以 3，而是继续乘以 7 ，就是原来那个数。不仅仅是 7，我把乘 3 的数字乘以 67，127，或者 187。。。。它都会回到原来那个数，只是转的圈数多了些。</p>
+<p>这就使得，如果两个数在一个 n 进制取个位下乘积为 1，这两个数不就是一个很好的加密和解密的工具吗？</p>
+<p>比如数字大一点，在 366492 进制取个位下，任何数乘以 967 得到的数再乘以 379，就是它本身。</p>
+<h3 id="公钥和密钥">公钥和密钥</h3>
+<p>如果我把 e = 967 当做公钥，d = 379 当做密钥，我只需要告诉别人（ e = 967, n = 366492）这两个数字，别人乘积以后交给我，我再乘以 d ，然后。。。。</p>
+<p>不过有一个小问题，如果给出了（e = 967, n = 366492）这两个数，别人除以 e 不就得到了我的秘钥 d 吗？毕竟，你可以算乘法，别人就可以算除法，而且难度差不多。我们把这个办法成为露馅儿加密法。</p>
+<p>接下来要做的事情，就是想办法把这自己的密钥藏起来，让别人拿到 n 进制数，还有公钥 e，没有办法算出我的密钥，但是依然可以用 e 加密，我可以用私钥 d 解密不就好了？</p>
+<h3 id="欧拉定理">欧拉定理</h3>
+<p>我们引入 φ(n) 。它的定义可厉害了，是「小于 n 的正整数中和 n 互质的数的个数」。这个定义忽略就好，只要知道，如果 n 是两个素数 p, q 的乘积的话， φ(n) = (p-1)(q-1)。</p>
+<p>欧拉发现了一个惊天大秘密，居然在 n 进制取个位下，如果 m 和 n 互为质数，m 的 φ(n) 次方 居然等于 1：</p>
+<p>m ^ φ(n) ≡ 1</p>
+<p>两边都取 k 次方：</p>
+<p>m ^ (k * φ(n)) ≡ 1</p>
+<p>两边都乘以 m ：</p>
+<p>m ^ (k * φ(n) + 1) ≡ m</p>
+<p>k * φ(n) + 1 是啥意思？就是这是一个「除以  φ(n) 余数为 1 」的数字。也就是说，只要找到 e*d 这两个数，使得他们的乘积除以 φ(n) 余数为 1 就好。这个好找，有一个叫做辗转相除法的方法，不过这里先略过。我们一般常常把 e 固定的设为 65537，然后就可以找到一个满足的 d。</p>
+<p>最后，也就是最惊艳的一步，如果我们能够找到这样的 e, d，我们把 e 和 n 告诉整个世界，让他们在 n 进制取个位下，把要加密的数字 m 取 e 次方发给我，我对这个数再进行 d 次方，我就能得到 m。</p>
+<p>(m ^ e) ^ d ≡ m</p>
+<h3 id="重新梳理">重新梳理</h3>
+<p>到现在大家应该已经无一例外的晕厥了。这很正常。我们再理一下就清楚了。</p>
+<p>就是说，如果我能无论用什么方法，找到一个进制 n，在这个 n 进制取个位下，能够找到两个数字 e 和 d，e 公开给整个世界，d 留给自己，同时还能让任何数字 m 的 e 次方的 d 次方还等于原来这个 m，加密解密算法不就成立了吗？就跟最早我说的那个乘以一个数，再乘以另一个数，总等于原来的数字一样？</p>
+<p>但露馅儿加密法两个乘法的算法的明显的漏洞在于，e 和 n 给出了，d 也就给出了。</p>
+<p>在这个新的算法中，e 给出了。n 给出了，但 e * d  ≡ 1 的进制，不是简单地 n，而是和 n 同源，但是不同的 φ(n) 。正因为进制改了，所以也不能用露馅儿加密法里面的两次乘法，而借用欧拉的惊天发现，做了两次幂运算。</p>
+<p>从 n 能不能算出来  φ(n) 呢？如果有能力分解 n 当然 φ(n) 唾手可得，把两个因子各自减一再乘起来就好。</p>
+<p>但是从 n 能不能轻易地找到 p 和 q 呢？根据最早的大数不可分解，要想找到 100 个太阳烧掉都不够用，p 和 q 好像是脚手架，算出来 n，算出来 φ(n) 就扔掉了。 那么  φ(n) 就是一个秘密。如果 φ(n) 是个秘密，有了 e 也找不到 d。</p>
+<p>所以，整个算法是无比精巧的安全。</p>
+<h3 id="举例子">举例子</h3>
+<p>我们找两个脚手架数字：p = 2, q = 7，算出 n = 2 * 7 = 14,  φ(n) = (2 - 1) * (7 - 1) = 6 。那两个脚手架数字 p, q 在算出 n 和 φ(n) 后就退休了。找在 6 进制取个位下，e * d ≡ 1 好办，e = 5, d = 11 就行 （ 5 * 11 = 55 = 6 * 9 + 1 ≡ 1）。</p>
+<p>这样，公布给全世界的数字就是 (e = 5, n = 14)，保留给自己的就是 d = 11。φ(n) 千万也不能告诉任何人。φ(n) 就如同总统，n 如同他的影子。世界只能看到他的影子，看不到总统本人。好在影子在世间行走不怕暗杀，总统躲在防空洞里是安全的。</p>
+<p>我们来试一下，在 14 进制个位模式下，如果要传递的数字 m = 2，别人把 m ^ e 算出来，就是 2 ^ 5 = 32 = 2 * 14 + 4 ≡ 4</p>
+<p>现在，4 就可以大大咧咧的在互联网上随便传输了。只有我知道有一个秘密是 11 。我拿到以后，算 4 的 11 次方，4 ^ 11 ≡ 4,194,304 % 14 ≡ 2 ，不就是别人要给我的那个数字吗？前提是，我们认为 别人从 n = 14 无法分解成 2 * 7，否则就全露馅了。</p>
+<p>14 肉眼可以看出等于 2 * 7。</p>
+<p>这个数 n：</p>
+<p>8244510028552846134424811607219563842568185165403993284663167926323062664016599954791570992777758342053528270976182274842613932440401371500161580348160559 </p>
+<p>是 p</p>
+<p>91119631364788082429447973540947485602743197897334544190979096251936625222447</p>
+<p>乘以 q</p>
+<p>90480063462359689383464046547151387793654963394705182576062449707683914045697</p>
+<p>计算机眼也看不出来。 p 和 q 如同两位门神，死死的守住了获取它们后面的秘密的入口。但是从 p，q 算出 φ(n) ，以及 e，d，却都是举手之劳。</p>
+<p>如果知道 n 的组成是 p，q，我们按照上面的算法可以选出来 e 和 d：</p>
+<p>65537</p>
+<p>2545549238258797954286678713888152865623498585866759298032549597771444725977268190722532488574321463855938811396613702406984581214587037347197409962813953</p>
+<p>也就是说，这个游戏，任何人要把一个数字 m 传给我，只需要在 n 进制取个位下，对它进行 65537 次幂（m ^ 65537），我再把它进行 d 次幂，我就拿回了原来的数字。</p>
+<p>这个精巧的算法，就是 RSA 加密算法。</p>
+<p>希望有人能够看明白。我真的是尽力了。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41706/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">以太坊合并最全投资指南：ETH 被市场提前定价了吗？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41733/">
+                <span class="next-text nav-default">在元宇宙里摸一天鱼 是怎样的体验？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#大数无法分解">大数无法分解</a></li>
+        <li><a href="#n-进制取个位">n 进制取个位</a></li>
+        <li><a href="#连着乘两个数就是它本身">连着乘两个数就是它本身</a></li>
+        <li><a href="#公钥和密钥">公钥和密钥</a></li>
+        <li><a href="#欧拉定理">欧拉定理</a></li>
+        <li><a href="#重新梳理">重新梳理</a></li>
+        <li><a href="#举例子">举例子</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

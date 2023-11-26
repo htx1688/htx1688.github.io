@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          为什么Web3需要ZK身份？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在这篇文章中，我们将论证新的加密基元，如 zkSNARKs，对构建具有这些特性的身份系统至关重要。" />
+<meta name="keywords" content="Web 3.0" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40297/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="为什么Web3需要ZK身份？" />
+<meta property="og:description" content="在这篇文章中，我们将论证新的加密基元，如 zkSNARKs，对构建具有这些特性的身份系统至关重要。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40297/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-18T00:00:00+00:00" />
+
+<meta itemprop="name" content="为什么Web3需要ZK身份？">
+<meta itemprop="description" content="在这篇文章中，我们将论证新的加密基元，如 zkSNARKs，对构建具有这些特性的身份系统至关重要。"><meta itemprop="datePublished" content="2022-07-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5085">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="为什么Web3需要ZK身份？"/>
+<meta name="twitter:description" content="在这篇文章中，我们将论证新的加密基元，如 zkSNARKs，对构建具有这些特性的身份系统至关重要。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">为什么Web3需要ZK身份？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-07-18">
+      2022-07-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5085 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者: 0xPARC</p>
+<p>创作者：xinyang</p>
+<p>审核者：DAOctor</p>
+<p>原文: ZK Identity: Why and How (Part 1)</p>
+<p>这篇文章是作为系列文章中的第一篇，介绍了为什么密码学的进步对于实现新的身份基元非常重要。在这篇文章中涵盖了“为什么”；下篇文章将解释“如何做”。</p>
+<p>在线身份系统的设计在过去几年中一直是激烈辩论的主题。现代数字身份系统已经实现了新的和复杂的在线互动和社区。不幸的是，这些系统中的许多也有明显的弱点。</p>
+<p>这些弱点许多可以归因于中心化身份系统设计的固有限制。首先，这些系统通常是围绕中心控制点建立的，因此也是中心故障点。现代电子商务、社交媒体和消息平台很容易受到来自强大行为者（如专制政府）的压力或干扰，或受到恶意黑客的技术攻击；当中心运营商被胁迫或被黑客攻击时，除中心运营商外的多方也会面临风险。其次，这些系统依赖于权力集中在运营商手中，他们不可能与所有用户完全一致（财务上、社会上或道德上）——例如，拥有多样化全球受众的私人社交媒体公司必须经常决定什么是不合理的审查行为，什么是符合公共安全利益的行为，尽管他们往往没有恰当的能力来进行判断。</p>
+<p>去中心化和加密机制并不是神奇的灵丹妙药，但它们确实提供了一些有用的工具，而且它们扩大了数字身份系统的设计空间。随着我们更多的社会和经济生活转移到网上，设计安全、保护隐私和用户控制的身份系统将变得越来越重要。<strong>在这篇文章中，我们将论证新的加密基元，如 zkSNARKs，对构建具有这些特性的身份系统至关重要。</strong></p>
+<p>就其核心而言，zkSNARKs 是有用的，因为它们使数字系统的用户能够产生任意复杂的可信声明，而无需依赖受信方。所有的身份系统都是围绕着产生可信的身份和名誉声明的一些机制而建立的——通常是相当复杂的声明，附在一个受信任的权威机构，如政府或公司的证明上。通过将 zkSNARK 结构应用于关于身份和名誉的声明，我们可以重新构建数字身份系统，并将控制权和数据保管权交到用户手中。</p>
+<h2 id="可信的声明claim">可信的声明（claim）</h2>
+<p>由于 zkSNARKs 在精确的、以数学方式定义的”声明”上运作，我们必须首先精确地分解身份系统中涉及的声明的性质。</p>
+<p>与一个完全未知和不信任的对手方做生意是很难的。常识告诉我们，随着交易方之间信任度的降低，合作的可能性也会降低；博弈论告诉我们，在一次性的囚徒困境中，最佳策略总是叛变。你更愿意从一个与你的社交圈紧密相连的亲密朋友那里购买一辆二手车，而不是从一个从外地赶来的不确认是否可信的58同城卖家那里购买，他甚至不会告诉你他的名字。</p>
+<p>为了建立彼此之间的信任，我们需要能够提出可信的声明：关于我们身份和名誉的声明，让与我们交往的人觉得可信。如果上面的58同城卖家向你保证他“以前卖过很多车，每个人都喜欢我的车，请相信我”，这并不是一个真正可信的说法。但是，如果这种说法与你所知道的一个受欢迎的网站上经过验证的买家的五星评价结合在一起，就会感觉更可信。</p>
+<p>可信声明的想法听起来理所应当，但建立一个产生可信声明的机制（在这个例子中，一个受欢迎的分类网站）并使之合法化，并不是一件容易的事。在传统模式中，我们通常的解决方案是将记录管理委托给一个可信的权威机构，这样他们就可以证明我们关于身份和名誉的声明，并赋予它们可信度。这个机构必须随着时间的推移（通常是在对抗性环境中）证明他们的合法性和可信度，并维护大规模生成和分发证明的基础设施。</p>
+<p>至关重要的是，在大多数模型中，中心机构的证明是使声明可信的原因。这是一个有效的政府身份证，所以我是一个公民；这是我的追随者的准确名单，所以我是一个社会影响者；这些是一组经过验证的评论和评级，所以我是一个值得信赖的在线零售企业。</p>
+<p>可信声明的另一个应用处在堆栈的更低层次。首先，你怎么知道与你互动的人或企业向你提出的是关于他们自己的声明，而不是冒用了其他人？很多系统需要依赖可信机构，这些机构承担着证明身份本身以外的更基本功能。一个 API 访问令牌，一个政府颁发的护照，或者当你访问一个网站时由证书颁发机构生成的签名链，都是对身份声明的证明。</p>
+<p>有用的身份系统允许参与者提出非常广泛而复杂的可信声明。</p>
+<ul>
+<li>
+<p>（数字方式）当你通过Doordash订餐时，Doordash 网络服务器对你作出可信的声明（“我是 Doordash 网络服务器”，通过一连串的 DNS 签名）；你通过第三方身份提供者对你的身份向 Doordash 作出可信的声明（“我是Doordash用户，应该被允许访问这个账户保存的信用卡”，通过用“谷歌登录”）。你通过各种金融机构向 Doordash 提出关于未来付款的可信声明（“我有钱向你支付我的订单，这笔款项将很快到达”，通过一个不拒绝交易的信用卡供应商）。</p>
+</li>
+<li>
+<p>（物理方式）当你贷款买房时，你隐含地向银行、房地产经纪人、卖家和政府提出了大量关于你的身份和名誉的可信声明。</p>
+</li>
+<li>
+<p>（混合）当你申请工作时，你通过利用许多不同的证明系统向你的潜在雇主提出可信的声明。通过引用来自教育机构或专业认证机构的证件（学位、证书），来自合作过的其他同事，以及来自以前的公司的证明，你声称你有足够的培训和相应性格来胜任这份工作。社会媒体和其他在线账户提供者，可以为关于你是什么样的人的隐性声明提供进一步证明。</p>
+</li>
+</ul>
+<h2 id="隐私">隐私</h2>
+<p>几乎所有的身份系统本质上都需要隐私来实现预期的功能，这一事实使情况更加复杂。</p>
+<p>隐私是很重要的，因为道德和意识形态的原因，有时是有争议的；但更根本的是，作为一个简单的系统设计问题，它往往是必要的。例如，几乎所有的身份系统都依靠秘密数据的概念来产生可信的身份声明——密码、社会安全号码、私人钥匙、信用卡密码、账户恢复问题等等。出于明显的原因，这些数据必须被保密。此外，用完全透明的数据产生可信声明的过程可能有负外部性，或者至少是复杂的外部性；隐私保障可以防止这些。例如，如果你不得不出示你的整个财务历史，只是为了在一个在线市场上购买或出售物品——银行报表、信用卡交易、贷款支付，以及其他工作——对手可以使用这些信息来进行与原始交易无关的超范围互动（负面例子包括广告，甚至骚扰和勒索）。隐私“沙盒”提供一次性互动，很好地定义和限制其范围，这样我们就可以从简单和可理解的构件中建立更复杂的系统。</p>
+<p>在需要隐私的传统系统中，我们不得不把更多的权力下放给中心机构——在这样的系统中，中心机构存储私人数据，并对关于这些数据的可信声明作保，而这些声明几乎不可能被验证。</p>
+<h2 id="密码学的作用">密码学的作用</h2>
+<p>到目前为止，我们所讨论的所有关于可信声明生成和身份系统的模型都涉及一个中心化的行为者。正如我们所讨论的，我们有很多理由想寻求一个不依赖强大的记录者或管理者的系统。</p>
+<p>但我们面临很明显的问题：我没有你的数据，我怎么能相信你的说法？如果你把你的数据发给我，我怎么知道这些数据是有效的？如果你想对私人数据作声明，我们又该怎么办？这正是密码学发挥作用的地方。</p>
+<p>从我们的角度来看，在过去的五十年里，大部分的应用密码学（和共识）都是一个逐步扩大的项目，即在各种资源限制和隐私条件下，在没有可信的权威的情况下，可以做出哪些可信的声明。</p>
+<ul>
+<li>
+<p>数字签名方案允许我通过用相同的私钥签署一系列信息，对我在网上的身份的一致性提出可信的声明，且跨越一系列不同的行动。“我被授权向 Alice 的信用卡收费。”</p>
+</li>
+<li>
+<p>团体签名方案允许我对身份做出更复杂的隐私保护声明。“我是这个校友组织的成员，但我不会告诉你是哪个成员。”</p>
+</li>
+<li>
+<p>签名聚合、多签名和阈值签名方案使我能够在各种不同的资源限制下对群体行为做出声明。“这个大的集体机构——而不仅仅是一个冒失雇员——已经授权从我们的金融账户中转移货币。”</p>
+</li>
+<li>
+<p>共识方案和可编程的智能合约让我能够对未来的行动做出可信的、不可逆转的承诺。“如果你向我发送数字资产A，我将立即向你发送数字资产B作为交换。”</p>
+</li>
+</ul>
+<p>从历史角度看，进展是缓慢的——这些加密基元中的每一个都定义了一种新的、范围严格的声明，其结构是高度明确的。然而，在过去的几年里，这种情况已经改变了。</p>
+<p>今天令人振奋的是，由于 SNARKs 的存在，我们现在有了有效地提出任意可信声明的机制。由于 zkSNARKs 的零知识属性，我们还可以完全按照我们的喜好调整声明的隐私保证。</p>
+<p>下面是几个例子，说明你可以用 zkSNARK 做出什么样的声明，这在以前是不可能的。</p>
+<ul>
+<li>
+<p>“我是一个值得信赖的债务人。我已经及时偿还了三家值得信赖的银行的大笔贷款，尽管我不会透露这些银行或贷款的用途。”</p>
+</li>
+<li>
+<p>“我是一个受人尊敬的社区成员。虽然我是以匿名方式写这篇帖子，但在我的命名账户下，我在这个论坛上已经积累了超过10000次的支持率。”</p>
+</li>
+<li>
+<p>“我是一个长期的加密代币收集者。我控制的以太坊地址集体持有至少两个来自黑暗森林瓦尔哈拉系列的NFT，以及至少100ETH。”</p>
+</li>
+</ul>
+<p>这些声明可以被组合、组成，甚至以任意复杂的方式进行编程。</p>
+<p>虽然所有这些在理论上都是可能的，但我们仍有很长的路要走。为下一代应用制作一套强大的 ZK 身份识别工具，需要在性能、可靠性、开发者经验和应用设计模式方面做出实质性的改进。在下一篇文章中，我们将讨论我们对未来道路的理解。</p>
+<h2 id="补遗身份中包含什么">补遗：身份中包含什么？</h2>
+<p>为了了解密码学在哪些方面可以用于建立一个身份系统，将身份系统的概念分解为其关键组成部分是很有用的。</p>
+<p>在分析一个特定的身份系统时，我们可以问以下一些问题。</p>
+<ul>
+<li><strong>身份的原子单位是什么？</strong></li>
+</ul>
+<p>物理世界：身份往往与法律上的人格相关。换句话说，身份的原子单位是个人，或公司。</p>
+<p>网络空间：身份可以是谷歌/脸书/推特账户；与证书机构相关的公钥/私钥对；一些基于以太坊的代币的持有人（可能不与具体地址挂钩！）；以及其他。</p>
+<ul>
+<li><strong>什么构成有效的身份证据或证明？谁可以签发身份证明？谁可以撤销与身份证明相关的特权？</strong></li>
+</ul>
+<p>物理世界：一个有效的证明可能看起来像国家颁发的身份证或营业执照。政府最终拥有持有有效身份证明所带来的特权的权力：例如，政府可以撤销你的护照。</p>
+<p>网络空间：一个有效的证明可能是 FB 提供的 OAuth 令牌，或一个有效的数字签名（或签名链）。各种服务提供商对各种证明拥有权力：例如，Twitter 可以禁止你的账户。</p>
+<ul>
+<li><strong>谁保管与你的身份相关的辅助数据？谁可以访问这些数据，以及谁控制这种访问？</strong></li>
+</ul>
+<p>物理世界：辅助数据由政府机构和官僚机构、私人服务提供者（银行、信用评分机构）和私交（你的个人网络）共同持有。</p>
+<p>网络空间：在中心化模式中，辅助数据由大型科技公司持有。在去中心化模式中，辅助数据由你控制的客户端软件（浏览器、个人网络服务器）以及去中心化存储网络（例如，区块链中的历史交易数据或智能合约状态）共同持有。</p>
+<ul>
+<li><strong>哪些记录、文件或证明是名誉和可信度的信号？谁决定这些信号以及如何解释这些信号？谁能接触到决定名誉的基础输入数据？谁可以访问这些信号？</strong></li>
+</ul>
+<p>物理世界：信用评分报告、背景调查、社会推荐信、就业信、证书和荣誉以及头衔。</p>
+<p>网络空间：NFT所有权，账户年龄和早前活动，证明网络，Reddit 或其他论坛点赞数。</p>
+<p>其中一些概念相互融合：身份、名誉和身份证明是密切相关的，而且不容易分割。例如，在一些系统中，身份的原子单位甚至被定义为“中心机构可以提供有效证明的”——一个不存储在Facebook 数据库中的 Facebook 账户的概念是不存在的。</p>
+<p>一般来说，我们在这组系列文章中使用的身份指的是一个实体（一个人、一个组织、一个机器人）的持久性标签，并代表该实体的法律人格、公钥、账户ID等。我们用名誉来指关于实体过去行为的声明（“Alice 总是遵守她的诺言”，“Bob 总是按时支付他的信用卡账单”，“舒适的家 总是在其 Airbnb 房源上使用准确的图片”）。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40319/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">晚间必读5篇 | 经济日报：莫把数字藏品当生财产品</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40323/">
+                <span class="next-text nav-default">以太坊合并的理想与现实</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#可信的声明claim">可信的声明（claim）</a></li>
+    <li><a href="#隐私">隐私</a></li>
+    <li><a href="#密码学的作用">密码学的作用</a></li>
+    <li><a href="#补遗身份中包含什么">补遗：身份中包含什么？</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

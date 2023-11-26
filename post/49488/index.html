@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深入分析Restaking对当前ETH生态系统的影响 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="再质押协议扭曲了内在质押反馈循环。从长远来看，以太坊可能无法通过调整 APR 来抵制高质押参与率和中心化力量。" />
+<meta name="keywords" content="质押" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49488/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深入分析Restaking对当前ETH生态系统的影响" />
+<meta property="og:description" content="再质押协议扭曲了内在质押反馈循环。从长远来看，以太坊可能无法通过调整 APR 来抵制高质押参与率和中心化力量。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49488/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-10T00:00:00+00:00" />
+
+<meta itemprop="name" content="深入分析Restaking对当前ETH生态系统的影响">
+<meta itemprop="description" content="再质押协议扭曲了内在质押反馈循环。从长远来看，以太坊可能无法通过调整 APR 来抵制高质押参与率和中心化力量。"><meta itemprop="datePublished" content="2023-04-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3119">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入分析Restaking对当前ETH生态系统的影响"/>
+<meta name="twitter:description" content="再质押协议扭曲了内在质押反馈循环。从长远来看，以太坊可能无法通过调整 APR 来抵制高质押参与率和中心化力量。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深入分析Restaking对当前ETH生态系统的影响</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-10">
+      2023-04-10
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3119 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《 Endgame Perils of Restaking 》</p>
+<p>原文作者：Tripoli</p>
+<p>原文编译：czgsws</p>
+<p>再质押协议可能为验证者带来可观收益，但它们的成功有可能损害以太坊自我调节质押参与和缓和中心化力量的能力。我们认为，合乎逻辑的最终目标是将验证者群体限制在一定规模。</p>
+<hr>
+<h2 id="以太坊的长期挑战是让更少的人参与质押">以太坊的长期挑战是让更少的人参与质押</h2>
+<p>不太了解的人普遍认为，在以太坊的最后阶段，质押参与规模将向 Solana 和 Cardano 之类的链靠拢，这两条链都有大约 70% 的 Token 供应投入质押且处于非活动状态。然而，以太坊开发者社区对此有深刻的共识，他们认为这不是一个好的结果。</p>
+<p>从某种意义上说，比特币极简主义者对以太坊货币政策的看法是正确的，它并非一成不变，未来可能会发生变化。然而，他们的方向是错误的，以太坊不会出现过度通胀，抵押需求很有可能会远高于预期，而相应的奖励回报将有所下降。</p>
+<p>坚信以太坊将合规化的读者可能认为，更多的质押参与者对以太坊是一个利好，但应记得，权益证明会与货币政策反着来。更高的发行量（因此有更高的质押收益）不会降低持有者 Hold 的可能性；相反，它鼓励持有者质押其资产并实现更高的年化收益率。</p>
+<p>例如，人们声称 EIP-1559 是一个非常稳健的货币方案，但 1559 实际上降低了质押 APR 并鼓励网络活动而不是质押/持有。</p>
+<p>EigenLayer 等再质押协议提供以太坊协议外的收益，扭曲市场激励，并破坏了以太坊的货币政策控制。这些协议描绘了加密资产可能出现超级金融化终局的令人担忧的局面。</p>
+<h2 id="垄断性动态">垄断性动态</h2>
+<p>以太坊的货币政策包括一个内在的负反馈循环，以防止质押过度：随着越来越多的人将其 ETH 锁定在合约中，收益率会降低。这会减少额外的质押活动，并降低选择使用该链的机会成本。</p>
+<p>我发现将各种质押者想象成单一或小群体的垄断者，并计算他们能够从非质押者中提取的最优实际收益和他们将锁定的供应份额，是分析这个反馈循环的一种有用方法。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/6_688jng7fud.png" alt="深入分析Restaking对当前ETH生态系统的影响"></p>
+<p>我曾在过去讨论过这个模型，但为了让读者回忆起提取实际收益曲线的工作原理，我们应该意识到质押奖励纯粹来自其他持有者和验证者的稀释。如果个人拥有并质押了流通中的所有 ETH，那他们只是在自我稀释，因此获得零实际收益。同样，如果没有质押者来保护网络，那么就没有人获得收益。这两种边界条件在 0% 和 100% 质押供应时意味着最大的收益提取点，我们在上面的图中绘制出来。</p>
+<p>与该峰值的任何偏差都表示对非质押者利益的征收低于最高额度。我们将上图中的峰值看作是长期自由市场可能推动质押参与的最低点，大约为 33% 。</p>
+<p>与以太坊的发行时间表形成鲜明对比的是 Solana 的发行是预先设定的，与验证者的数量无关。因此，为了最大限度地提取，垄断利益相关者理想情况下会持有尽可能少的供应 (以尽量减少自我稀释)。 然而，在实践中，每个人都可以轻松地委托他们的质押，发行量仍然存在，生态系统仍在发展中，因此我们观察到非常高的参与率。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/6_r194q8lgjs.png" alt="深入分析Restaking对当前ETH生态系统的影响"></p>
+<h2 id="成本和风险的作用">成本和风险的作用</h2>
+<p>本文主要讨论增加质押收益的因素，但需要注意的是，运营成本和风险调整同样重要。随着「上海」升级的到来，参与质押的风险状况将发生显著变化，届时可能需要进行更细致的讨论。</p>
+<p>对于这个分析， 我们将通过允许读者选择折现率来结合运营成本和风险调整。 这提供了一定的灵活性；例如， 25% 的费率可能代表中心化交易平台的质押费用、带有 15% 费率的流动性质押 Token（LST）以及额外的 10% 合约风险折扣，或者家庭质押者可能遇到任何类型问题的折扣。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/6_d9vhuawme1.png" alt="深入分析Restaking对当前ETH生态系统的影响"></p>
+<p>需要注意的一点是，费用是以名义价值收取的，但质押者应该感兴趣的收益是以实际价值衡量的。当我们调整费用时，实际收益不再趋近于零，而是在高费率或高质押参与度时变为负值。名义费用和实际收益之间的脱节将垄断均衡转移到更低的参与率。</p>
+<p>在下面的图表中，我们为不同费率生成了配置文件。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/6_cqhztzq0bg.png" alt="深入分析Restaking对当前ETH生态系统的影响"></p>
+<p>在启用验证者提款之前，有人可能会争辩说接近 50% 的折扣率是合适的， 但我们并不是要表明生态系统目前接近于有意义的均衡。</p>
+<h2 id="再质押和外部收益的作用">再质押和外部收益的作用</h2>
+<p>再质押，这个术语用于描述质押生态系统中的各种活动。 当人们在讨论 LST 时，例如 Lido 的 stETH 或 Rocket Pool 的 rETH，再质押通常是指将质押奖励反馈到生态系统中以创建更多的验证者并增加协议获得的收益。此外，在 2022 年初，再质押通常是用来描述循环 stETH 交易的术语，这些交易失控了。公司将 ETH 存入 Lido，以获取 stETH，然后抵押这些 stETH Token 以获取杠杆，并重新质押以获得额外的收益。本文不讨论这两种再质押方法中的任何一种。</p>
+<p>如今，再质押最常见的是像 EigenLayer 这样的协议，这是一系列智能合约，允许以太坊质押者重新质押他们的质押品来保护二级应用程序或协议。通过选择由智能合约定义的自定义附加条件，质押者将很快能够获得超出以太坊货币政策的收益率。</p>
+<p>使用类似于 EigenLayer 的协议进行再质押或使用循环的 LST 交易之间的关键区别在于内部和外部收益的概念。虽然这两种方法都增加了收益和风险，但循环质押受以太坊货币政策中嵌入的负反馈循环所限制。相比之下，以太坊协议无法阻止用户使用外部收益协议。</p>
+<p>结果是，循环质押将均衡点移动到更低的质押供应量百分比，而外部再质押将均衡点移动到更高的质押供应量百分比。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/6_7cajt8otwe.png" alt="深入分析Restaking对当前ETH生态系统的影响"></p>
+<p>当我们为不同的外部再质押收益建模不断演变的均衡点时，结果是惊人的。 由于外部收益不会自我稀释，即使是增加少量收益也可能对质押生态系统产生巨大的影响。 像 EigenLayer 这样的协议收益率如果仅为 1% ，都能让最佳的抵押动态被推到难以维持的水平。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/6_8eslmg91rs.png" alt="深入分析Restaking对当前ETH生态系统的影响"></p>
+<p>以太坊研究社区通常认为采用最低可行发行量政策是遏制高质押参与率的关键。这个想法是，如果太多人想质押，降低收益将使质押变得不那么有吸引力，同时也可以改善加密资产的货币属性。</p>
+<p>由于网络的竞争性质，最低可行发行量政策可能仍会产生期望的效果，但在垄断优化问题中，再质押将颠覆结果。在这个动态中，降低协议发行量减少了自我稀释的影响，并鼓励垄断者质押更多的 Token 并利用外部收益。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/6_a5zlzsbvk7.png" alt="深入分析Restaking对当前ETH生态系统的影响"></p>
+<p>为了重新获得垄断均衡并降低大型参与者的最佳质押水平，正确的博弈理论策略将转向增加质押 APR，对其他持有人的征收更多价值，而不是获得再质押奖励。</p>
+<p>低发行量和高参与度可能对网络来说是可以接受的结果， 但监测质押的中心化程度的变化非常重要。例如，如果 Lido 与 EigenLayer 的整合是市场上最受欢迎的结果，那么最低可行发行量或许也不会是一个有效的解决方案。</p>
+<h2 id="结论">结论</h2>
+<p>再质押协议扭曲了内在质押反馈循环。从长远来看，以太坊可能无法通过调整 APR 来抵制高质押参与率和中心化力量。</p>
+<p>解决这个问题的核心方案已经被讨论了多年，Data Always 认为，最终需要对活跃验证者数量设定一个上限。要继续关注这个讨论，人们应该关注以太坊的 Robust Incentives Group，以及 Anders 和 Barnab 在拍卖验证者插槽方面的工作。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49487/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">三月加密投融资一览：资金总体趋势及典型代表项目</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49499/">
+                <span class="next-text nav-default">数据：超1.87亿枚BIT将于本周解锁，价值约9640万美元</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#以太坊的长期挑战是让更少的人参与质押">以太坊的长期挑战是让更少的人参与质押</a></li>
+    <li><a href="#垄断性动态">垄断性动态</a></li>
+    <li><a href="#成本和风险的作用">成本和风险的作用</a></li>
+    <li><a href="#再质押和外部收益的作用">再质押和外部收益的作用</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

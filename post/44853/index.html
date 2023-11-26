@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Owocki：女巫攻击的特征、设计空间和开放讨论 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在这篇文章中，owocki将尝试阐明过去2年半时间对Gitcoin Grant的观察，并提出对女巫抵抗设计的观点。" />
+<meta name="keywords" content="女巫攻击" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/44853/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Owocki：女巫攻击的特征、设计空间和开放讨论" />
+<meta property="og:description" content="在这篇文章中，owocki将尝试阐明过去2年半时间对Gitcoin Grant的观察，并提出对女巫抵抗设计的观点。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/44853/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="Owocki：女巫攻击的特征、设计空间和开放讨论">
+<meta itemprop="description" content="在这篇文章中，owocki将尝试阐明过去2年半时间对Gitcoin Grant的观察，并提出对女巫抵抗设计的观点。"><meta itemprop="datePublished" content="2022-11-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-11-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4722">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Owocki：女巫攻击的特征、设计空间和开放讨论"/>
+<meta name="twitter:description" content="在这篇文章中，owocki将尝试阐明过去2年半时间对Gitcoin Grant的观察，并提出对女巫抵抗设计的观点。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Owocki：女巫攻击的特征、设计空间和开放讨论</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-11-22">
+      2022-11-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4722 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>在这篇文章中，owocki将尝试阐明过去2年半时间对Gitcoin Grant的观察，并提出对女巫抵抗设计的观点。</p>
+<p><strong>首先，owocki做出以下界定</strong></p>
+<ul>
+<li>
+<p>女巫抵抗是一个需要解决的重要问题。</p>
+</li>
+<li>
+<p>女巫抵抗是一种对抗性游戏。</p>
+</li>
+<li>
+<p>女巫抵抗是一个迭代游戏。</p>
+</li>
+<li>
+<p>女巫抵抗是一种进化游戏。</p>
+</li>
+<li>
+<p>女巫抵抗是各种对手之间的无限进化迭代游戏。</p>
+</li>
+<li>
+<p>解决女巫抵抗的标准是什么？</p>
+</li>
+</ul>
+<p><strong>本文大纲</strong></p>
+<p>什么是女巫攻击？</p>
+<p>解决这个问题好处</p>
+<p>遇见对手/女巫</p>
+<p>解决此问题的理想方法的标准</p>
+<ul>
+<li>
+<p>标准 0：大型社会系统的复杂性</p>
+</li>
+<li>
+<p>标准 1：以隐私为中心和主权的需要</p>
+</li>
+<li>
+<p>标准 2：需要避免财阀统治</p>
+</li>
+<li>
+<p>标准 3：共谋</p>
+</li>
+<li>
+<p>标准 4：建立系统防御能力的需要</p>
+</li>
+<li>
+<p>标准 5：需要建立网络效应</p>
+</li>
+<li>
+<p>标准 6：通过模块化和可分叉性实现创新并防止捕获</p>
+</li>
+<li>
+<p>标准 7：通过权力下放促进创新和防止捕获</p>
+</li>
+<li>
+<p>标准 8：该游戏的进化性质</p>
+</li>
+</ul>
+<p>展望</p>
+<p><strong>一、女巫攻击</strong></p>
+<p>许多旨在民主决定结果的系统，如 Gitcoin Grants，都假设每个参与者都是独一无二的人。</p>
+<p>这使它们容易受到女巫攻击，不良行为者会创建大量匿名身份来破坏服务的声誉系统并获得不成比例的影响力。</p>
+<p>女巫攻击破坏了基于区块链的民主多元化进程的合法性</p>
+<p><strong>二、</strong> <strong>解决这个问题好处</strong></p>
+<p>Grants DAO能否实现其核心使命取决于机制的设计，如Gitcoin、DoraHacks。Quadratic Funding是Gitcoin、DoraHacks通常采用的机制。其资助的成功与否，抗女巫攻击是重要的决定性因素之一。 </p>
+<p>没有抗女巫攻击，Gitcoin Grant是空中楼阁。抗女巫是 Gitcoin Grant 合法性的基石，缺乏对该问题的理解是其发展的制约因素。</p>
+<p>目前，DAO 生态系统是围绕1token1vote或1人1票方案构建的。如果女巫攻击得到解决，生态系统可以转向更多建立在一人一票基础上的系统，并促使DAO系统走向规模化。</p>
+<p>解决女巫攻击问题可以解锁的用例，例如：</p>
+<ul>
+<li>
+<p>二次方资金</p>
+</li>
+<li>
+<p>二次方投票</p>
+</li>
+<li>
+<p>基尼系数测量</p>
+</li>
+<li>
+<p>全民基本收入</p>
+</li>
+<li>
+<p>一人一票的 DAO</p>
+</li>
+<li>
+<p>数据集合</p>
+</li>
+<li>
+<p>抗女巫空投</p>
+</li>
+</ul>
+<p><strong>三、</strong> <strong>常见的女巫</strong></p>
+<p><em>脚本小子</em></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_jav8k7kosu.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><em>个体女巫</em></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_ree0devhmc.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><em>理性经济行为者</em></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_nuh08lc6gv.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_fk1nvqrt4e.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><em>有组织的女巫活动</em></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_o0j7oc75dl.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><strong>四、</strong> <strong>解决此问题的理想方法的标准</strong></p>
+<p><strong>标准 0：大型社会系统的复杂性</strong></p>
+<p>每一种攻击类型都有着不同的复杂程度。脚本小子可能缺乏发动复杂攻击的技能、组织和信念，而有组织的女巫攻击可能拥有近乎无限的预算、技能、组织和信念来攻击系统。更复杂的对手将随着时间的推移而成长和演变，这需要 (1) 持续保持警惕或 (2) 代表作为数字身份提供者的 DAO 的系统性反脆弱性。</p>
+<p>不同的对手可能会尝试彼此不同的攻击。一些对手可能追求的方案在生物识别身份+政府身份反措施面前无懈可击，但在时间攻击反措施面前却很脆弱。其他对手可能会尝试一些对信任网和基于存在的反措施无能为力的东西，但却容易受到生物识别反措施的影响。</p>
+<p>由于对手的类型各不相同，最全面的反欺诈方法将集合不同类型的反制措施，以抵御Sybil/欺诈。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_zc6f53k6zj.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><strong>标准1：以隐私为中心和主权的需要</strong></p>
+<p>建立一个可以解决Sybil攻击的系统的挑战是管理身份信息。身身份信息对于识别女巫攻击者至关重要。</p>
+<p>但是，对身份的需求也有反作用力。</p>
+<p>在一个对数据的控制是一种责任的世界里，任何上述系统的设计者都必须避免成为一个数据蜜罐。</p>
+<p>基于 web3 的 DID 系统的另一个要求是让用户拥有主权（用户可以拥有/管理/删除他们的数据）和隐私保护。例如，当一个 dapp 发现一个用户是否是唯一用户时，他们不应该在没有明确同意的情况下发现更多关于用户的信息。</p>
+<p><strong>标准 2：需要避免财阀主义</strong></p>
+<p>抵御Sybil的能力是一个谱系，从抵御脚本小子到抵御有组织的女巫。</p>
+<p>一个已经被踢来踢去的管理指标是信任奖金的想法。基本上，你只是根据一些百分比来放大或抑制二次匹配。例如，一个用户有</p>
+<p>100%的信任奖金+100美元的匹配将能够分配100美元的匹配。</p>
+<p>50%的信托奖金+100美元的匹配将能够分配50美元的匹配</p>
+<p>150%的信托奖金+100美元的匹配将能够分配150美元的匹配。</p>
+<p>以此类推&hellip;&hellip;</p>
+<p>TrustBonuses的作用在gitcoin中已经过时。它是 cGrants 时代的遗留概念，仅适用于 QF 产品（其他抗女巫攻击的 dapp 不会有信任奖励，因为没有二次方匹配） .</p>
+<p>有一种方法可以让我们转向一个更容易管理的指标，那就是人格分数=造假成本=伪造用户身份所需的美元成本。对于一个系统范围内的KPI，这将使TCF=系统中的总伪造成本，这是 DAO 为引导抗女巫经济而追求的最终 KPI。</p>
+<p>随着护照的人格化分数的增加，它对某些类型的女巫的抵抗力也会增强。这里是按女巫的复杂程度对人格分数的一个粗略估计。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_4nhc2zmri3.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p>伪造的成本是通过连接多个账户建立的。一个非常初级的例子。</p>
+<p>如果一个用户连接twitter（默认0.10美元的造假成本）</p>
+<p>和一个用户连接POH (默认00美元的伪造成本)</p>
+<p>一个用户连接了BrightID (默认10美元的伪造成本)</p>
+<p>那么该用户身份的总伪造成本为110.10美元。</p>
+<p>伪造的成本是价值如何在Passport用户的生态系统中传递的。如果我正在设计一个dapp，并且我知道这个用户的伪造成本是110.10美元，那么我可以合理地奖励这个用户价值高达110.10美元的女巫攻击奖励。</p>
+<p>所以在 gitcoin 的情况下，它可以给出价值 110.10 美元的匹配。Rabbithole（如果它与 Passport 集成）可以提供价值 110.10 美元的奖励。POAP（如果它与 Passport 集成）可以提供价值 110.10 美元的 POAP Gas费，等等。</p>
+<p>人格分数背后的关键见解是，在一个对抗性的世界中，Gitcoin 想要防范的对手的复杂程度各不相同。我们不是将女巫抵抗视为二元（是/否），而是将女巫抵抗视为一个范围，使问题更易于管理。</p>
+<p>从概念上讲，您可以使用当前的 TrustBonus 架构返回 PersonhoodScores，例如，您的信任红利 * 您的匹配金额 = 当前风险金额。</p>
+<p>IMO cGrants 是反向架构的。更有意义的是，从人格分数开始 + 引导用户通过计算他们的信任奖励来增加它或减少他们的贡献。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_c0md699jiz.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p>这让我想到了 PersonhoodScores 的一个主要问题。它将女巫抵抗置于经济术语中。如果女巫抵抗游戏的设计者不小心，这可能会给系统带来非常反乌托邦的属性。</p>
+<p>如果把系统的TCF（Total Cost of Forgery）和系统的资金量挂钩，那么只有富人才有身份，那是反乌托邦</p>
+<p>如果普通公民没有办法在没有钱的情况下可靠地创造足够高的人格分数，那就是反乌托邦。</p>
+<p>出于这个原因，优先考虑不会过滤掉没有财富的公民的验证机制可能很重要。跟踪系统中活跃的金钱身份与非金钱身份的数量可能很重要。这些系统的例子有：BrightID、人性证明、生物识别系统。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_kvvd7sngo9.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><strong>标准 3：共谋</strong></p>
+<p>假设您已经构建了完美的女巫抵抗身份系统。</p>
+<p>或者一个足够好的系统。一个足够好的 IMO 是一个系统，其中 TCF（伪造的总成本）大于系统公民可以利用它的奖励金额。</p>
+<p>因此，一个足够好的抗女巫攻击身份系统是一个</p>
+<p>有 3,000,000 美元的 TCF 和 2,999,999 美元的匹配池。</p>
+<p>或者，在一个护照由多个 dApp 实施的世界中，TCF 为 3,000,000 美元，所有这些 dapp 的总经济机会为 2,999,999 美元。</p>
+<p>或者，也许 DAOI 决定愿意接受 10% 的欺诈风险，因此当它拥有 3,000,000 美元的 TCF 时，它支持 Passport 生态系统中所有 dapp 的总经济机会为 3,299,999 美元。</p>
+<p>在这种情况下，您仍然必须应对合谋攻击。</p>
+<p>真正足够好的系统是 TCB（贿赂总成本）+ TCF（伪造总成本）大于系统公民可利用它的奖励金额。</p>
+<p><strong>标准 4：建立系统防御能力的需要</strong></p>
+<p>关于股权证明和工作证明的设计方式，我发现最鼓舞人心的一件事是它们通过承认对手的存在+从根本上使系统设计向防御性和抗脆弱性倾斜来发挥作用。PoW/Pow，它们都归结为一个简单的原则，即让系统的防御成本比攻击成本低得多。</p>
+<p>在 PoW 中，使用我的挖矿硬件来挖下一个区块比尝试 51% 攻击网络更有利可图（风险也更小）。</p>
+<p>在 PoS 中，使用我的挖矿硬件来挖下一个区块比尝试 51% 攻击网络更有利可图（风险也更小）。</p>
+<p>这让我得出以下标准：在 Gitcoin Passport 中，合法参与网络应该比攻击网络更有利可图（风险更小）。</p>
+<p><strong>标准 5：需要建立网络效应</strong></p>
+<p>如果你建立了一个最完美的抗女巫攻击的生态系统，却没有人使用它。这被称为 n 边网络中的冷启动问题。</p>
+<p>passport 的飞轮可以这样增长：使用 Gitcoin Passport 的用户越多，Passport 的 TCF 增加的越多，与它集成的 dApp/stamps 就越多，它提供的实用性就越高，这会导致更多的用户使用它（并且循环重复）。</p>
+<p>如何冷启动这个网络？ </p>
+<p>通过正确的配置——当这个飞轮旋转时，由于网络从根本上呈指数增长，TCF 应该开始呈指数增长。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_ootoz2tlqo.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><strong>标准 6：通过模块化和可分叉性实现创新并防止捕获</strong></p>
+<p>我认为 Gitcoin Passport 真正重要的一件事是它的可分叉性。</p>
+<p>不同意 Gitcoin 的（邮票|评分算法|关注女巫抵抗），可以选择分。随着时间的推移，人们可以建立一个冲压工具市场，围绕 Gitcoin Passport 评分算法。如此丰富的生态系统是去中心化社会网络效应的基础。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_7pl46mcq49.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_1u13wf8igy.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_uzp0t35sm2.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p>一个伟大的 devrel 活动可以在 Passport 协议之上实现去中心化创新。它邀请来自世界各地的贡献，并将 Passport 变成一个 schelling 点，以解决 sybil 阻力并创造跨越社会距离的多元合作，随着时间的推移变得更加强大。</p>
+<p>一个伟大的 devrel 活动，将作为一个模因 schelling 点，吸引那些想要解决这个问题的人 + 使他们能够贡献他们的资源（编码技能、资金、反欺诈数据分析等）来解决这个问题。</p>
+<p><strong>标准 7：通过权力下放促进创新和防止捕获</strong></p>
+<p>随着 Gitcoin 随着时间的推移逐渐去中心化，我认为它将从中心化转变为基于代码库的去中心化和模块化协议集。</p>
+<p>它将从社交软件转移到信任软件。</p>
+<p>“社交软件——通过人际关系创造保证的机制，会产生高昂的社会协调成本”</p>
+<p>“信任软件 ——通过技术创造保证的机制，产生较低的社会协调成本”</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_bod5wst9qt.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p>“通过使用区块链作为我们的底层保证机制，可以通过代码而不是依赖人类协调的纯粹记录的原则来编纂组织治理。在这样做的过程中，我们通过最大限度地减少对人的信任和最大限度地提高对技术的信任，在各方之间建立更大的信任。”</p>
+<p><strong>标准 8：该游戏的进化性质</strong></p>
+<p>高尔定律指出，所有有效的复杂系统都是从更简单的有效系统演化而来的。</p>
+<p>对于 Gitcoin Grants，简单的规则就是二次方资助。基本上。</p>
+<p>资金不断筹集到匹配池中，并进行匹配。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_2lwiahk523.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1122/18_8kwq2acmwz.png" alt="Owocki：女巫攻击的特征、设计空间和开放讨论"></p>
+<p>Gitcoin Grants 的主要既定目标是资助公共物品。但是如果你从某个角度来看，因为 Gitcoin Grants 需要抗女巫攻击，所以 Gitcoin Grants 的每一轮实际上都是一个巨大的红队/蓝队练习，用于测试数字原生女巫抵抗技术的战斗。</p>
+<p>Gitcoin 的女巫抵抗将随着攻击者的发展而发展。重要的是将其视为一种进化游戏，并认识到生态系统是流动的，对手会来来去去（并可能变得更先进）。</p>
+<p><strong>五、</strong> <strong>未来是什么样子</strong></p>
+<p>设想69round</p>
+<ul>
+<li>
+<p>系统对许多类型的攻击具有抗脆弱性。</p>
+</li>
+<li>
+<p>保护隐私并尊重用户的主权</p>
+</li>
+<li>
+<p>避免富豪统治/反乌托邦结果</p>
+</li>
+<li>
+<p>避免勾结</p>
+</li>
+<li>
+<p>具有抗脆弱性的系统，因为防御成本低于攻击成本。</p>
+</li>
+<li>
+<p>具有网络效应</p>
+</li>
+<li>
+<p>促进创新</p>
+</li>
+<li>
+<p>防止捕获</p>
+</li>
+<li>
+<p>拥抱这个问题的进化本质</p>
+</li>
+</ul>
+<p>备注：本文对部分敏感词汇进行删减，全文内容请查看：</p>
+<p><a href="https://gov.gitcoin.co/t/knowledge-transfer-characterizing-the-sybil-resistance-problem/11235">https://gov.gitcoin.co/t/knowledge-transfer-characterizing-the-sybil-resistance-problem/11235</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/44851/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Opensea链上版税工具引争议 以版税之名行垄断之实？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/44832/">
+                <span class="next-text nav-default">Web3：价值投资的范式转移</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          探讨侧链与Rollup：架构、安全保证、扩展性能方面的异同 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文概述了 Rollups 和侧链，并探讨了它们在架构、安全保证、扩展性能等方面的差异。" />
+<meta name="keywords" content="側鏈, Rollup, 金色百科" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55804/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="探讨侧链与Rollup：架构、安全保证、扩展性能方面的异同" />
+<meta property="og:description" content="本文概述了 Rollups 和侧链，并探讨了它们在架构、安全保证、扩展性能等方面的差异。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55804/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-27T00:00:00+00:00" />
+
+<meta itemprop="name" content="探讨侧链与Rollup：架构、安全保证、扩展性能方面的异同">
+<meta itemprop="description" content="本文概述了 Rollups 和侧链，并探讨了它们在架构、安全保证、扩展性能等方面的差异。"><meta itemprop="datePublished" content="2023-07-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5273">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="探讨侧链与Rollup：架构、安全保证、扩展性能方面的异同"/>
+<meta name="twitter:description" content="本文概述了 Rollups 和侧链，并探讨了它们在架构、安全保证、扩展性能等方面的差异。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">探讨侧链与Rollup：架构、安全保证、扩展性能方面的异同</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-27">
+      2023-07-27
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5273 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者： Emmanuel Awosika；编译：深潮 TechFlow</p>
+<p>侧链和 Rollups 是解决区块链可扩展性问题的两种方案。这两种解决方案的核心思想是将计算从资源受限的区块链（如以太坊）转移到专为规模化优化的独立区块链上。这种方法带来了一些好处，比如降低每笔交易的成本，减少延迟，提高整体吞吐量。但相似之处仅此而已。</p>
+<p>侧链和 Rollups 在其扩展方法上根本不同，并且在设计决策和权衡上也有所不同。对于希望利用这两种解决方案构建可扩展的 dapp 的开发者来说，了解它们的区别非常重要。</p>
+<p>本文概述了 Rollups 和侧链，并探讨了它们在架构、安全保证、扩展性能等方面的差异。</p>
+<h3 id="什么是侧链"><strong>什么是侧链？</strong></h3>
+<p><strong>侧链是与另一个区块链（称为“主链”）并行运行的区块链网络。</strong> 通常，侧链通过一个双向跨链桥与主链连接，允许在两个网络之间转移资产，以及可能的任意数据，如合约状态、Merkle 证明和特定交易的结果。</p>
+<p>大多数侧链都有自己的共识机制和验证者，与主链分开。这使得侧链能够在不依赖其他区块链的情况下结算和完成交易。然而，这也意味着桥接到侧链的资金的安全性取决于存在强大的加密经济激励，以防止验证者之间发生恶意行为。</p>
+<h3 id="侧链的类型"><strong>侧链的类型</strong></h3>
+<p><strong>与 EVM 兼容和非 EVM 侧链：</strong> EVM 兼容的侧链使用了以太坊虚拟机（Ethereum Virtual Machine）的自定义实现，该虚拟机是在以太坊上部署智能合约的执行环境。实际上，大多数这些区块链最初都是以 go-ethereum（也称为 Geth，以太坊协议的最流行实现）为基础进行分叉的。</p>
+<p>尽管保留了以太坊设计的大部分特性（如对智能合约的支持），EVM 兼容的侧链在其他方面进行了优化，特别是共识机制，以提高执行效率和吞吐量。如今，EVM 兼容的侧链运行着大部分使用 Solidity 等 EVM 语言编写的智能合约，同时降低了去中心化应用用户的成本和延迟。</p>
+<p>非 EVM 侧链实现了不同的虚拟机架构，无法在没有大量代码重构的情况下运行以太坊原生的 dapp。在非 EVM 链上构建的开发者无法使用熟悉的 EVM 开发环境和工具（如 Truffle、Remix、Hardhat），可能需要学习其他语言（如 Rust 或 Golang）来创建 dapp。</p>
+<p>注意：Avalanche、Fantom、Celo 和 Palm 是 EVM 兼容的侧链的示例。NEAR、Solana 和 Algorand 是非 EVM 侧链的示例。</p>
+<p><strong>提交链和 Optimistic 侧链</strong> ：并非每个侧链都完全依赖自身的安全性；一些侧链，尤其是提交链和 Optimistic 链，依赖于主链提供某些安全保证。提交链定期向另一个区块链提交加密承诺（例如区块头）以更新其最新状态。主链无法验证这些状态证明，因为它无法访问侧链的状态，但它确保诚实的参与者可以在确认之前对无效的区块头提出质疑。</p>
+<p>通常，这是通过在主链上实现一个智能合约来完成的，该智能合约处理侧链验证者的奖励、质押、轮换和惩罚。如果验证者犯下可证明的违规行为（例如在相同高度签署两个区块），任何人都可以将证据提交给智能合约，并削减该验证者的质押。</p>
+<p>Optimistic 链的运作方式类似，要求验证者定期将区块头提交到主链上的智能合约。然而，Optimistic 链没有单独的共识机制——区块头被简单地假设为有效，直到受到防欺诈的挑战。因此，Optimistic 链可以在只有一个（诚实的）验证者的情况下运行，而提交侧链需要多个验证者才能正常运行。</p>
+<p>在这两种情况下，诚实的参与者可以向父区块链证明侧链上发生的恶意行为。这样，即使侧链的大多数验证者都作恶，用户仍然可以获得一定的安全保证。</p>
+<p>但需要注意的是，诚实的参与者无法在没有访问存储在区块中的状态数据的情况下证明恶意行为。然而，由于主链只接收来自侧链的区块头（而不是区块体），它无法保证区块的可用性。这使得不诚实的区块提议者可以通过隐藏区块数据来进行不诚实的行为，例如从跨链桥中窃取资金。</p>
+<p>这个问题被称为数据可用性问题，它是所有侧链（不仅仅是提交链、Optimistic 侧链和 Rollups）在安全性属性上的差异的核心。</p>
+<h3 id="什么是-rollup"><strong>什么是 Rollup？</strong></h3>
+<p><strong>Rollup 通过在单独的执行环境中处理交易来提高底层区块链的可扩展性。与侧链类似，Rollup 具有用于在父区块链和 Rollup 之间转移资产的跨链桥。它们还实施了优化措施，以提高用户的计算速度和成本效益。</strong></p>
+<p>然而，Rollup 会定期将区块提交到主链中，从而继承了主链的安全性和去中心化特性。这意味着父区块链为 Rollup 提供了以下安全属性的保证：</p>
+<ol>
+<li>
+<p><strong>可用性</strong> ：Rollup 区块的可用性得到保证，因为数据存储在更去中心化和安全的父网络上。例如，用户可以始终向跨链桥合约证明 Rollup 状态的详细信息（例如拥有某些代币），并在 Rollup 验证者隐藏交易数据时提取资金。</p>
+</li>
+<li>
+<p><strong>有效性</strong> ：只有满足由母链强制执行的有效性条件的 Rollup 区块才能最终确定。</p>
+</li>
+<li>
+<p><strong>存活性</strong> ：由于 Rollup 数据存储在基础层上，任何人都可以重建 Rollup 的最后一个有效状态并生成新的区块。此外，用户可以通过将交易发送到 Rollup 的链上智能合约来强制将其包含在 Rollup 中。</p>
+</li>
+</ol>
+<h3 id="rollup-的类型"><strong>Rollup 的类型</strong></h3>
+<p>Rollup 有两种形式：<strong>Optimistic 型和零知识型。</strong> 零知识型 Rollup（也称为有效性 Rollup）将区块与证明一起提交到母链，以确认链下交易的正确执行。如果证明在链上通过验证，该区块将在基础层上最终确定。</p>
+<p>Optimistic 型 Rollup 提交的区块没有任何证明来证明链下计算的有效性。除非另一方通过“欺诈证明”对某个交易的结果提出质疑，否则区块被简单地假定为有效。欺诈证明采用验证游戏的形式，在母链的介入下，两方争议某个计算，直到发现不诚实的一方。</p>
+<p>Optimistic 型 Rollup 以状态转换大部分有效的 Optimistic 假设命名。然而，这种 Optimistic 假设与加密经济激励相结合，保证了除非一个无效的区块长时间未被质疑，否则它将永远不会被主链最终确定。</p>
+<p>注意：Arbitrum 和 Optimism 是 Optimistic 型 Rollup 的示例。</p>
+<p>EVM 兼容性是 Optimistic 型和零知识型 Rollup 之间的另一个值得注意的区别。虽然 Optimistic 型 Rollup 是 EVM 兼容的，但零知识型 Rollup 在 EVM 兼容性方面有所不同。由于在证明电路中证明原生 EVM 指令是复杂且资源密集的，一些有效性 Rollup 使用了针对更高效证明进行优化的自定义虚拟机指令集。</p>
+<p>对于与 EVM 兼容的 ZK-Rollup，我们将其执行环境描述为“零知识 EVM”（ZK-EVM）。ZK-EVM 可以在链下执行以太坊智能合约，并证明计算的所有部分都被正确执行。因此，与依赖加密经济激励和诚实假设来防止无效执行的 Optimistic 型 Rollup 相比，ZK-Rollup 被认为更安全。</p>
+<p>Linea 是一个具有完整 EVM 支持的第二层有效性 Rollup 的示例，它允许开发者重用以太坊基础设施和工具来构建 dapp。相比之下，在非 EVM 的 ZK-Rollup（如 StarkNet）上部署需要（a）使用不同的堆栈构建智能合约，或者（b）修改代码库以在 StarkNet 虚拟机中运行。</p>
+<h3 id="侧链与-rollup-有何不同"><strong>侧链与 Rollup 有何不同？</strong></h3>
+<p><strong>吞吐量</strong> ：侧链的平均交易处理量通常比 Rollup 更高，因为它们不依赖于主链的共识和数据可用性。例如，侧链可以实现较大的区块大小和极快的区块时间，以获得更高的吞吐量，而 Rollup 无法做到这一点。</p>
+<p>Rollup 必须避免处理过多的交易，以至于交易批次无法适应单个主链区块。否则，这将重新引入基础层的拥堵，并使其难以跟上 Rollup 产生的区块。因此，Rollup 的母链数据带宽对其吞吐量施加了有效限制。</p>
+<p>即使是部分依赖于主链安全性的侧链（如提交链和 Optimistic 链），其吞吐量仍然优于 Rollup。</p>
+<p><strong>成本</strong> ：与 Rollup 相比，用户在侧链上的交易可能支付更少费用。与侧链和 Rollup 之间的其他区别一样，这一点与 Rollup 依赖母链进行结算和最终性有关。以下是 Rollup 产生的一些运营成本（这些成本由用户承担）：</p>
+<ul>
+<li>
+<p><strong>数据存储</strong> ：将 Rollup 区块提交到基础层会产生固定成本（将交易包含在区块中的成本）和可变成本（基于 Rollup 区块的大小）。因此，Rollup 会向用户收取计算和数据费用，数据量较大的交易支付更多费用，反之亦然。</p>
+</li>
+<li>
+<p><strong>证明生成和验证</strong> ：零知识 Rollup 需要为基础层的验证生成有效性证明，这会产生额外的成本。验证有效性证明需要消耗大量资源，例如在以太坊上目前的成本约为 500,000 Gas。</p>
+</li>
+</ul>
+<p>纯侧链不会产生上述成本，因此使用它们的费用更低。提交链或 Optimistic 侧链可能会产生一些额外的成本，例如提交区块头，但这些成本可以忽略不计。此外，可以通过在单个交易中累积多个区块头来降低成本。</p>
+<p><strong>最终性</strong> ：完全负责其安全性的侧链具有即时最终性，一旦获得大多数验证者的批准，区块就无法撤销。然而，提交链或 Optimistic 侧链不适用于此规则，因为它们必须考虑可能延迟区块头最终化的挑战。</p>
+<p>通常情况下，Rollup 的最终性时间比纯侧链更长，原因各不相同。例如，Optimistic Rollup 会延迟确认交易，以确保诚实的参与者有足够的时间来挑战无效的状态更新。</p>
+<p>有效性 Rollup 具有即时最终性（一旦验证通过），但与纯侧链相比，其最终性时间更长。由于生成和验证有效性证明的成本较高，序列化者更倾向于在生成和提交批次的有效性证明之前积累大量交易。</p>
+<p><strong>安全性</strong> ：Rollup（Optimistic 或零知识）的安全性由底层区块链保证，减少了用户的信任假设。正如前面所解释的，Rollup 依赖于（经济上安全的）主链进行共识和数据可用性（与侧链不同）。这降低了审查、冻结提款、无效执行等风险。</p>
+<p>纯侧链负责其安全性。然而，启动多样化和可靠的验证者可能很困难，这就是为什么侧链被认为比 Rollup 更不安全的原因。</p>
+<p>提交链和 Optimistic 侧链比纯侧链稍微更安全，但用户必须信任验证者和提议者的数据可用性。如果在不承担惩罚的情况下进行数据隐藏攻击，提交链和 Optimistic 侧链将没有任何安全保证。</p>
+<p><strong>跨链桥</strong> ：Rollup 和侧链（大多数情况下）使用相同的资产桥接方案：在主链上的智能合约中锁定 X 代币，并在子链上为用户铸造 X 代币。它们的区别在于桥接合约中存入的资金如何得到保障。</p>
+<p>由于 Rollup 专用于特定的基础层区块链，通常会有“规范桥接”连接两者。存入 Rollup 桥接的资金由母链保障：</p>
+<ul>
+<li>
+<p>只有在验证与包含退出交易的批次相关的证明在链上得到验证后，才能提取存入有效性 Rollup 的资金。</p>
+</li>
+<li>
+<p>对于 Optimistic Rollup，只有在包含用户提款交易的区块在争议窗口（约 1-2 周）结束后未被挑战，用户才能提取资金。</p>
+</li>
+</ul>
+<p>相反，存入侧链桥接的资金的安全性取决于其设计。例如，如果侧链与另一个区块链有一个规范跨链桥，那么桥接资金的安全性与验证者的诚实程度相关。另一个问题是桥接是否由整个验证者（例如，Polygon PoS 桥）或一小组外部验证者（例如，Avalanche-Ethereum 桥）进行验证。</p>
+<p>Rollup 和侧链桥接之间的最终性时间差异也解释了它们之间的差异。举例来说，Optimistic Rollup 用户在将资金桥接回主链时会遇到更多延迟，因为需要等待争议窗口。使用侧链，一旦收到最终确定的区块头（以及必要时有效的 Merkle 证明），用户就可以从跨链桥合约中提取资金。</p>
+<h3 id="在rollup和侧链之间进行选择"><strong>在Rollup和侧链之间进行选择</strong></h3>
+<p>在部署智能合约时，选择使用 Rollup 还是侧链取决于您的目标、用户反馈和项目需求。以下是在不同情况下使用 Rollup、侧链或两者的优势。</p>
+<p><strong>何时使用 Rollup</strong> ：</p>
+<ol>
+<li>
+<p>您的用户希望获得最高的安全保证。</p>
+</li>
+<li>
+<p>您的用户可以容忍稍高的成本和增加的延迟/最终性。Rollup 的成本比以太坊低得多，速度更快（数量级上），但在这些指标上无法与侧链相媲美。</p>
+</li>
+<li>
+<p>您（或您的用户）希望与母链生态系统（例如以太坊）建立更紧密的关系。</p>
+</li>
+<li>
+<p>您计划改进 Rollup 上 DApp 用户的用户体验。这可能意味着使用流动性提供者来减少从 Optimistic Rollup 中提取资金的延迟，或者实施代码优化来减少用户与您的智能合约交互时生成的交易数据。</p>
+</li>
+<li>
+<p>您希望在构建 DApp 时使用 EVM 工具和基础设施。大多数 Rollup 兼容 EVM，并使用与以太坊相同的工具、客户端软件和节点 API。</p>
+</li>
+</ol>
+<p><strong>何时使用侧链</strong> ：</p>
+<ol>
+<li>
+<p>您的用户希望以最低的费用进行交易。</p>
+</li>
+<li>
+<p>您的用户希望交易快速处理，特别是在桥接资金时。</p>
+</li>
+<li>
+<p>您的用户可以容忍增加的信任假设和较低的安全保证。</p>
+</li>
+<li>
+<p>您（或您的用户）不认为与主链生态系统的紧密关系是首要任务。</p>
+</li>
+<li>
+<p>您可以学习使用一组新的编程语言、工具和基础设施来构建 DApp（如果使用非 EVM 侧链）。</p>
+</li>
+</ol>
+<p><strong>何时同时使用侧链和 Rollup</strong> ：</p>
+<ol>
+<li>
+<p>您的项目已经在一个区块链上建立了强大的网络效应，并准备同时扩展到多个生态系统（例如，为了利用流动性）。</p>
+</li>
+<li>
+<p>您希望迎合不同类型的用户，并避免疏远市场的一方。</p>
+</li>
+<li>
+<p>您的项目有足够的资源来处理跨链扩展。这可能意味着有不同的团队负责在不同的区块链平台上部署您的 DApp。</p>
+</li>
+</ol>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55860/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">算力狂欢，谁是“中国版”英伟达？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55816/">
+                <span class="next-text nav-default">头部CEX造富效应哪家强？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#什么是侧链"><strong>什么是侧链？</strong></a></li>
+        <li><a href="#侧链的类型"><strong>侧链的类型</strong></a></li>
+        <li><a href="#什么是-rollup"><strong>什么是 Rollup？</strong></a></li>
+        <li><a href="#rollup-的类型"><strong>Rollup 的类型</strong></a></li>
+        <li><a href="#侧链与-rollup-有何不同"><strong>侧链与 Rollup 有何不同？</strong></a></li>
+        <li><a href="#在rollup和侧链之间进行选择"><strong>在Rollup和侧链之间进行选择</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

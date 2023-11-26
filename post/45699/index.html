@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          复盘8个常见的DeFi经济模型攻击案例 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Defi 大约 50% 的漏洞发生在跨链桥上，其次为借贷，交易平台和机枪池。" />
+<meta name="keywords" content="黑客攻击" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/45699/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="复盘8个常见的DeFi经济模型攻击案例" />
+<meta property="og:description" content="Defi 大约 50% 的漏洞发生在跨链桥上，其次为借贷，交易平台和机枪池。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/45699/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-20T00:00:00+00:00" />
+
+<meta itemprop="name" content="复盘8个常见的DeFi经济模型攻击案例">
+<meta itemprop="description" content="Defi 大约 50% 的漏洞发生在跨链桥上，其次为借贷，交易平台和机枪池。"><meta itemprop="datePublished" content="2022-12-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4200">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="复盘8个常见的DeFi经济模型攻击案例"/>
+<meta name="twitter:description" content="Defi 大约 50% 的漏洞发生在跨链桥上，其次为借贷，交易平台和机枪池。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">复盘8个常见的DeFi经济模型攻击案例</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-12-20">
+      2022-12-20
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4200 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《Foresight Ventures：「正义」的攻击，复盘常见的 DeFi 经济模型攻击》</p>
+<p>原文作者：Jonas，Foresight Ventures</p>
+<p>在加密行业的黑暗森林里，Defi 已成为黑客的提款机，今年迄今损失总金额已超过 30 亿美元。一是因为 Defi 平台持有大量资金，攻击成功的回报很高。二是因为大多数 Defi 协议代码都是开源，更易受到网络安全威胁。三是因为 Defi 通常生态互连，放大攻击的便利性。</p>
+<p>Token Terminal 报告显示，Defi 大约 50% 的漏洞发生在跨链桥上，其次为借贷，交易平台和机枪池。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_nu5d67olkk.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_j73zgiqnso.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<p>对 Defi 的经济模型攻击更有研究价值，特别是一些机制在极端情况下的走向，很有利于我们理解Token经济学。某种意义上，如果黑客通过钓鱼、撞库等社会工程学手段来盗取资产，算是不义之财。而类似地通过 Defi 的规则来套利，就堪称明火执仗地赚钱，手段高明但无可置喙。</p>
+<h3 id="币价操纵通过合约变现">币价操纵，通过合约变现</h3>
+<p>价格操纵是 Defi 中最早和最常见的漏洞。而随着链上衍生品兴起，攻击的盈亏比变得很高。</p>
+<h4 id="案例-1mango">案例 1：MANGO</h4>
+<p>22 年 10 月 Solana 链去中心化合约平台 Mango 遭遇攻击。</p>
+<p>成功要素：山寨币合约仓位没有限制</p>
+<p>攻击流程：</p>
+<p>a) 建仓：攻击者首先向 Mango 交易平台 A、B 地址分别各转入 500 万美元。而后黑客通过 A 地址在 Mango 上利用合约做空 Token MANGO；同时在 B 地址上做多 MANGO。多空双开的原因在于，虽然 Mango 平台对山寨币合约仓位没有限制，但是深度较差，如果不和自己作对手盘，仓位就很难开到这么高。</p>
+<p>b) 操纵价格：攻击者使用更多资金购买 MANGO Token ，在 10 分钟内将其价格从 2 美分升至 91 美分。因为 MANGO 是一种流动性低的 Token ，这使得攻击者能够快速操纵价格。</p>
+<p>c) 变现：此时攻击者的多头仓位收益为 4.2 亿美元，再利用账户净资产从 Mango 平台进行借贷，好在流动性不足最终只借出 1.1 亿美元。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_pa5ekwcm5s.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<h4 id="案例-2gmx">案例 2：GMX</h4>
+<p>22 年 9 月 Arbitum 链去中心化合约平台 GMX 遭遇攻击。</p>
+<p>成功要素：0 滑点机制，攻击成本低</p>
+<p>攻击流程：</p>
+<p>a) 建仓：攻击者在 GMX 上反复开大量 Token AVAX 多头和空头的头寸。</p>
+<p>b) 操纵价格：由于 GMX 是 0 滑点，因此预言机的喂价约等于执行价，但是 GMX 上的大额头寸会影响到其它交易平台的 AVAX/USD 价格，然后预言机才反应过来并喂价给 GMX。0 滑点意味着攻击者在任何时刻都拥有无限流动性。举个极端例子，如果在 GMX 上做多 10 亿美金的 AVAX，照理说这么大的资金量会拉高实际交易的价格，但 GMX 的机制是 0 滑点，所以还是按照预言机的喂价来开仓。但这个体量的交易会拉高其它交易平台 AVAX 的价格，假设涨了 20%，预言机才会把最新的价格反馈到 GMX 上，此时就可以按 AVAX 涨了 20% 的价格来平仓，并把赚到的 AVAX 提取到其它交易平台卖出。</p>
+<p>c) 变现：此时攻击者平仓盈利，攻击者赚到的 AVAX，就是 GLP 持有者亏损的 AVAX。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_h76m8rfcgo.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<h3 id="利用预言机错误通过抵押借贷变现">利用预言机错误，通过抵押借贷变现</h3>
+<p>这类攻击执行起来非常复杂，但其模式类似，即依赖价格喂价的系统会临时操纵喂价以扭曲协议的内部核算。然后将资金以优惠的利率进行存入，然后在将预言机重置为正常值后立即以另一种货币或同一种货币提走。</p>
+<h4 id="案例-3ankr">案例 3：ANKR</h4>
+<p>22 年 12 月 Bsc 链借贷协议 Helio 遭遇攻击。</p>
+<p>成功要素：预言机喂价不及时</p>
+<p>攻击流程：</p>
+<p>a) 预言机错误：Bsc 链质押项目 Ankr 被黑客直接利用合约漏洞，凭空铸造 10 万亿个 aBNBc，导致 aBNBc 价格几近归零。而借贷协议 Helio 预言机喂价是采用 6 小时平均加时权重的设置。</p>
+<p>b) 建仓：攻击者使用 10 个 BNB 买了 Ankr 超发的 18 万个 aBNBc，之后将 aBNBc 交换为 Hello 的 hBNB。</p>
+<p>c) 抵押借贷：攻击者以 hBNB 为抵押品在 Helio 中进行借贷，借贷出 1644 万稳定币 HAY。</p>
+<p>d) 变现：攻击者将稳定币 HAY 交换成 BNB 和 USDC 等约 1500 万美元等值资产，进行提现。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_qt8ys0ceb1.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<h4 id="案例-4xvs">案例 4：XVS</h4>
+<p>22 年 5 月 Bsc 链借贷协议 Venus 遭遇攻击。</p>
+<p>成功要素：预言机喂价不及时</p>
+<p>攻击流程：</p>
+<p>a) 预言机错误：LUNA 增发崩盘时，Chainlink 对 LUNA 的价格反馈达到价格下限，被以 0.107 美元价格暂停。但 Bsc 链上借贷协议 Venus 的 LUNA 市场却在继续运行，喂价正是来自 Chainlink。当 LUNA 价格约为 0.01 美元时，团队才暂停协议。</p>
+<p>b) 建仓：套利者从二级市场大量增发后的 LUNA，并提到 Bsc 链。</p>
+<p>c) 抵押借贷变现：套利者在 Venus 上以 LUNA 为抵押品进行借贷，借贷出约 1400 万美元等值资产，进行提现。</p>
+<h4 id="案例-5bzrx">案例 5：BZRX</h4>
+<p>20 年 5 月 Bsc 链借贷协议 bZx 遭遇攻击。</p>
+<p>成功要素：预言机价格来源单一</p>
+<p>攻击流程：</p>
+<p>a) 建仓：首先攻击者通过闪电贷从去中心化合约平台 DYDX 借出 1 万个 ETH，使用其中 5500 个 ETH 在借贷平台 Compound 借出 112 个 WBTC。</p>
+<p>b) 预言机错误：bZx 是保证金交易协议，用户可以抵押一种币作为保证金，在杠杆借出另一种币，这两个币的浮动汇率，bZx 需要预言机来喂价，并单一依赖 Uniswap 上价格。攻击者使用 1300 个 ETH 到 bZx 上开了 5 倍 ETH 空单（即使用其中 5637 个 ETH 兑换 WBTC），由于 Uniswap 池子可兑换的 WBTC 有限，WBTC 价格被拉高至正常值的 3 倍。</p>
+<p>c) 变现：攻击者再把从 Compound 借到的 112 个 WBTC 卖出，共获利 36 万美元。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_rpjiosl2b7.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<p>预言机操纵始终是 Defi 攻击的重灾区，相似案例还有 Vee Finance、 Harvest Finance、Value Defi、Warp Finance 等等、此处就不一一列举了。</p>
+<h3 id="做空-defi-杠杆导致死亡螺旋">做空 Defi 杠杆，导致死亡螺旋</h3>
+<p>熊市中流动性逐渐匮乏，非主流资产价格深度不足、波动变大。大规模做空可能是由 Defi 杠杆清算和资本做空共同推动的。</p>
+<h4 id="案例-6luna">案例 6：LUNA</h4>
+<p>22 年 5 月 Terra 链的稳定币 UST 遭遇攻击。</p>
+<p>成功要素：资金盘在熊市遇到流动性挤兑</p>
+<p>攻击流程：</p>
+<p>a) 建仓：攻击者认为 LUNA-UST 机制无法长期维持。Terra 通过 Anchor 给出的高收益率是一种引流的策略，吸引用户更多使用 UST。但是 20% 的收益率是不可持续的。当利率水平从 20% 下降至 7-12% 之间，会有价值约 90 亿美元的 LUNA 离开，但是由于 LUNA/UST 的流动性并不够好，估计约有 50 亿美元的 UST 会遭遇退出困境。如果想让 50 亿美元的 UST 兑换成 LUNA 并安全离开市场，可能需要 400 亿美元的 LUNA 市值，而当时 LUNA 的最大市值才不过 400 亿美元。似乎 Terra 方面已经耗尽了储备，没钱维持 UST 的稳定，或者是放弃了维持 UST 的稳定。因此观察是否还可持续的窗口，是 Curve 上的 UST Pool 是否出现不平衡的情况。因此当 Terra 从 Curve 移除 1.5 亿美元流动性，为 4pool 做准备时，较小的流动性池规模意味着 UST 出售对价格的影响比平时更大。攻击者开始抛售价值 2.85 亿美元的 UST，令稳定币开始脱锚。</p>
+<p>坊间传言攻击者 Alameda 在 UST 崩溃前从 Voyager 借了 9 位数的 BTC，砸盘做空 BTC 以阻击 Terra 储备金。同时 Genesis Trading 向 Alameda 提供 10 亿美元 UST，为针对 UST 脱锚的攻击提供了子弹。</p>
+<p>b) 杠杆循环清算：</p>
+<p>UST 是算法稳定币，使用简单的铸造和销毁机制来保持稳定性。要铸造 UST，必须销毁等价值的 LUNA；同样用户也可以通过销毁 UST 来兑换等值的 LUNA。随着 UST 的下跌，假设的死亡螺旋成为现实，投资者以越来越低的价格销毁 UST 换取 LUNA，从而使未偿还的 LUNA 供应过度膨胀。事实上，LUNA 的供应量在短短几天内就从不到 3.5 亿枚增加到 6.5 万亿枚以上。</p>
+<p>同时 UST 在 Abracadabra 遭到大规模清算。去年 11 月，Abracadabra 为 UST 启动了 Degenbox 策略，用户抵押 UST 借贷 MIM，通过循环抵押可以极大提高收益率。只要 UST 维持在 1 美元，这个策略基本上是无风险的，然而一旦 UST 脱钩，用户的抵押品价值降低面临被清算的风险。UST 价格到 0.97 会爆一批，低于 0.9 能爆掉 50% 以上用这个策略的人。循环往复，UST 价格越低，爆仓的人越多。</p>
+<h4 id="案例-7crv">案例 7：CRV</h4>
+<p>22 年 11 月以太坊链去中心化稳定币交易平台 Curve 遭遇攻击。</p>
+<p>成功要素：借贷协议可抵押长尾资产</p>
+<p>攻击流程：</p>
+<p>a) 建仓：Curve 的 Token 锁仓机制加上贿选机制，造成流动性严重不足。攻击者先在交易平台开 CRV 高倍率空单。</p>
+<p>b) 借贷做空：攻击者前后在 AAVE 共抵押 6360 万个 USDC，借出 9200 万个 CRV 砸盘做空。由于 CRV 价格暴跌，借贷协议 AAVE 上的 USDC 抵押物可以继续借出更多的 CRV 做空。</p>
+<p>c) 杠杆循环清算：由于 CRV 本身是借贷协议抵押品，价格的快速下跌也引发了大量 CRV 被清算，或将引起死亡螺旋的连锁反应。攻击者意图击穿 CRV 创始人抵押仓位清算线，将其爆仓。虽然后来在创始人和社区联合下做空失败爆仓，但操作思路还是值得学习借鉴。</p>
+<h3 id="闪电贷治理攻击">闪电贷治理攻击</h3>
+<p>Defi 攻击已不仅限于操纵价格了，若协议防线不足，治理机制漏洞也可能被攻击者利用。</p>
+<h4 id="案例-8bean">案例 8：BEAN</h4>
+<p>22 年 4 月以太坊链去中心化稳定币 Beanstalk 遭受攻击。</p>
+<p>成功要素：未对可投票资金添加时间锁</p>
+<p>攻击流程：</p>
+<p>a) 提案：攻击者在攻击前一天发布恶意提案，提案通过以后将会从 Beanstalk 合约中提取资金。</p>
+<p>b) 建仓：攻击者通过闪电贷获得了 3.5 亿个 DAI、5 亿个 USDC、1.5 亿个 USDT、3200 万个 BEAN 和 1100 万个 LUSD 作为资金储备，从而积累了大量该协议的治理 Token 。</p>
+<p>c) 投票：攻击者用 BEAN3CRV-f 和 BEANLUSD-f 来对提案发起投票，从而导致提案通过。攻击者获得 24830 个 ETH 和 3600 万个 BEAN 稳定币，获利约 8000 万美元。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_zzd6n8rk16.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/23_8wrg6wuriq.png" alt="复盘8个常见的DeFi经济模型攻击案例"></p>
+<p>虽然是熊市，但是 Defi 市场仍保持一定的活力。从锁仓量来看，如果加密市场以原生资产 ETH 而非美元计价，那么 22 年 Maker DAO、Lido 等头部项目的 TVL 仍将实现正增长。即使以美元计算，Defi 市场仍然保持 400 亿美元以上的 TVL，比 21 年前要好得多，这意味着 Defi 市场已成为加密市场不可或缺一部分。</p>
+<p>这轮牛市是 Defi 的繁荣起点，随着该行业的崛起成为人们关注的焦点，攻击者也相应地将注意力转向了这一领域。从上面的攻击中可以清楚地看出，攻击 Defi 协议并没有单一的方法，而是一些常见的攻击向量，导致一些年轻的 Defi 项目沦为了牺牲品。到目前为止，这些日益增长的攻击造成的损失还不是灾难性的。然而，随着生态系统的持续发展和总锁仓量的增长，涉及的资金将变得更多，攻击将更有利可图，未来将会看到更复杂的 Defi 攻击。实践出真知。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45695/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">复盘 4 种常见的 DeFi 经济模型攻击</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/45712/">
+                <span class="next-text nav-default">金色Web3.0日报 | 浙江发布元宇宙发展计划 目标到2025年产业规模逾2000亿元</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#币价操纵通过合约变现">币价操纵，通过合约变现</a></li>
+        <li><a href="#利用预言机错误通过抵押借贷变现">利用预言机错误，通过抵押借贷变现</a></li>
+        <li><a href="#做空-defi-杠杆导致死亡螺旋">做空 Defi 杠杆，导致死亡螺旋</a></li>
+        <li><a href="#闪电贷治理攻击">闪电贷治理攻击</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

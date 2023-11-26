@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          打造支付宝级Web3用户体验 一文了解Cwallet背后的产品逻辑 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Cwallet在提供钱包基础功能的同时，正通过定制Web2和Web3用户体验和习惯的多功能工具，成为用户与链上应用无缝交互的桥梁。" />
+<meta name="keywords" content="钱包" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/47456/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="打造支付宝级Web3用户体验 一文了解Cwallet背后的产品逻辑" />
+<meta property="og:description" content="Cwallet在提供钱包基础功能的同时，正通过定制Web2和Web3用户体验和习惯的多功能工具，成为用户与链上应用无缝交互的桥梁。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/47456/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="打造支付宝级Web3用户体验 一文了解Cwallet背后的产品逻辑">
+<meta itemprop="description" content="Cwallet在提供钱包基础功能的同时，正通过定制Web2和Web3用户体验和习惯的多功能工具，成为用户与链上应用无缝交互的桥梁。"><meta itemprop="datePublished" content="2023-02-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5480">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="打造支付宝级Web3用户体验 一文了解Cwallet背后的产品逻辑"/>
+<meta name="twitter:description" content="Cwallet在提供钱包基础功能的同时，正通过定制Web2和Web3用户体验和习惯的多功能工具，成为用户与链上应用无缝交互的桥梁。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">打造支付宝级Web3用户体验 一文了解Cwallet背后的产品逻辑</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-17">
+      2023-02-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5480 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>用户下载钱包通常不是为了用钱包本身，而是为了通过钱包去触达更多的实际应用场景。<strong>Cwallet在提供钱包基础功能的同时，正通过定制Web2和Web3用户体验和习惯的多功能工具，成为用户与链上应用无缝交互的桥梁。</strong></p>
+<p>2010年，以太坊创始人Vitalik Buterin因最爱的游戏《魔兽世界》中的虹吸技能被游戏商取消后怒删游戏，转身探索个人可掌握资产的去中心化网络。时隔12年，交易所FTX暴雷下用户资产的肆意挪用，再次证明了充分掌握个人资产所有权的必要性，而钱包在资产安全存储上扮演着重要角色。</p>
+<p>与此同时，由于兼容所有Web3应用，钱包可让用户无缝享受任何Web3服务，这使得这一重要基建正成为Web3应用的流量和分发平台。但普通用户对加密钱包的学习曲线门槛仍较高且过程繁琐。当下，Web3钱包正通过日渐丰富的产品和逐步完善的架构来提升用户体验，以捕获更多流动性。例如首个托管和非托管组合加密钱包Cwallet正通过叠加不同的产品模块，聚合多种功能和玩法，以及赋予社交属性，助力用户轻松开启Web3世界的探索之旅。</p>
+<h3 id="降低web3准入门槛打造高效交易体验"><strong>降低Web3准入门槛，打造高效交易体验</strong></h3>
+<p>用户门槛的降低是应用被大规模采用的基石，计算机就是个例子。由于早期的计算机使用的只有命令行界面，这也使得其沦为极客的玩物。直到上世纪70年代，美国施乐公司研发出第一个图形用户界面，使得计算机实现了字符界面向图形界面的转变，计算机操作门槛大幅下降，并在被苹果公司推广使用后得到大规模普及，且办公软件、游戏等电脑应用还被更广泛用于日常生活中。</p>
+<p>加密钱包同样如此。数年来开发者们一直在努力降低高门槛，但对于Web2用户而言，当前钱包在助记词、私钥、签名等仍有着较高的学习成本，这在很大程度上限制了Web3的普及。而Web3的普及不仅仅在于创新应用的出现，足够的用户存量是关键。</p>
+<p>钱包是Web3生态的用户入口。但对于普罗大众而言，如果钱包在资产安全上不能做到对标银行等级以及易用性上无法与支付宝等产品媲美，那么将很难吸引他们参与到Web3世界。基于这种认知，Cwallet为用户提供高效交易体验的同时，还降低了操作门槛。作为一站式钱包，Cwallet支持电子邮件、电话、Apple ID、第三方平台这类颇具Web2基因的一键登录方式，极大降低了新用户的准入门槛。</p>
+<p><img src="https://cdn-img.panewslab.com/panews/2023/02/17/images/5mCp8WU6L6.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>不仅如此，Cwallet还通过提供托管和非托管整合服务，为所有用户交易带来安全性、便捷性和灵活性。其中，托管钱包允许用户随时随地发送、接收、兑换和管理个人加密资产，且可大幅降低钱包创建的复杂性、私钥丢失风险等，特别是对刚迈入Web3大门的新手用户非常友好。非托管型钱包则可满足用户对个人资产安全和隐私需求，资产百分百掌控在自己手中。当然，中心化钱包和去中心化钱包可一键式无缝切换，以满足不同用户对于资产操作的不同需求。</p>
+<p>当然，加密资产迈向大众之际，各类钱包安全事件也让在很大程度上“劝退”圈外用户。为此，Cwallet通过采用2FA身份验证、多方云计算 (MPCC) 协议、端到端加密原则、签署交易的多签名等先进技术和风控机制为用户资产安全保驾护航。即便是中心化钱包，用户依旧可以安全掌控自己的资金。简单易上手的钱包工具以及过硬的技术保障也让Cwallet斩获数百万名用户的青睐。根据各平台社群调研发现，Cwallet的每日活跃用户数相当可观，遍布东南亚及南美洲等地。</p>
+<p>此外，随着新公链层出不穷，加密世界已形成“多链共存”的局面，这也对钱包的资产配置便捷性和可组合性提出更高要求。目前，Cwallet已支持ERC-20、BEP-20、Layer2、Solana、Polygon等超50条链，以及超800个主流代币及冷门的潜力型代币，这也意味着用户在无需创建多个类型钱包的情况下，无论想在哪个主网上进行交互，只需通过Cwallet就可轻松管理多种加密资产。</p>
+<p>值得一提的是，为了提高用户交易的便捷性，Cwallet还内置了闪兑服务，并集成了不少主流的CEX和DEX。用户无需将资产提取至交易平台，便可根据其从流动性提供商找到的最佳兑换路线，以及实时分析多个交易所的众多汇率和价格后提供的最佳汇率，以零服务费进行一键资产兑换，且无最低兑换金额限制，甚至Cwallet账户之间转账也无需Gas费。这种化繁为简的功能不仅有效减少了用户的操作难度和成本，且让交易更安全高效。目前，Cwallet已支持一键闪兑BTC、ETH、USDT等逾300种加密货币。</p>
+<p><img src="https://cdn-img.panewslab.com/panews/2023/02/16/images/jRT99W4Q1x.png" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>不过，放眼市面上大部分Web3钱包，均提供中心化或者去中心化版本的功能。那么， Cwallet如何在芸芸众多钱包中突围而出，并保持竞争力？从交互体验出发，Cwallet贴合Web2和Web3用户习惯的多功能工具成为差异化竞争的利器。</p>
+<h3 id="如何打造web3的支付宝探索钱包工具的的应用场景"><strong>如何打造Web3的支付宝？探索钱包+工具的的应用场景</strong></h3>
+<p>从“支付就用支付宝”到“生活好，支付宝”，支付宝Solgon变化背后是该平台从最初简单的支付工具升级为数字生活开放平台，多功能的接入使其成为服务业“新基建”，并逐渐成为深入人们生活的常用工具。</p>
+<p>随着Web3时代加速到来，加密钱包也在不断完善功能以满足日益丰富的用户和场景需求，从最初的资产管理的载体迭代升级链上身份、智能合约交互、社交、DAO投票等多场景的必备工具，功能单一的钱包则日渐式微。</p>
+<p>除了资产存储和交易等基础服务，Cwallet在钱包内上构建了多功能工具，不仅可以满足Web3业务需求并提升营销效率，还助力加密货币渗透到人们的日常生活之中。</p>
+<ul>
+<li><strong>机器人</strong></li>
+</ul>
+<p>Cwallet的多功能的Crypto Wallet机器人是专为Web3社区设计的。在无需任何技术门槛的情况下，用户可以通过Cwallet机器人免费的开发者API，无需编程技术和过多时间成本，分分钟一键创建自己的专属机器人，自定义机器人昵称及头像。该机器人成功地将钱包属性和社交属性合二为一，除了通过指令轻松交互掌握账户资产实时情况外，还可以发送有趣的红包和空投指令以活跃社群，增强用户和品牌方的粘性。不仅如此，Cwallet更有后台面板来实时监控社群情况，可以清晰地通过数据记录社群增长情况并提供必要的导向性建议。同时，付费订阅可以帮助创作者实现内容变现，资产验证功能则可为项目方筛选精准用户。多种群组管理模式则能为各Crypto社区的发展助力增益，成为提供拉近用户和Web3距离的最佳路径。</p>
+<p><img src="https://cdn-img.panewslab.com/panews/2023/02/17/images/2kIj5uSVhW.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>简单来说，Crypto Wallet机器人的多项功能，不仅可实现社群裂变，成为用户增长的秘密武器，还能通过日常Token的互动提高代币的流动性，甚至还利用自定义的bot建立品牌知名度。</p>
+<p>目前，Crypto Wallet机器人已经触达社区超3000万，每日活跃用户超3700万人，机器人交互次数超2000万，并且已集成Telegram、Discord和Twitter多个社交平台，未来还将支持Twitch、YouTube和Instagram。</p>
+<p><img src="https://cdn-img.panewslab.com/panews/2023/02/16/images/YJ5176piGu.png" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<ul>
+<li><strong>抽奖工具</strong></li>
+</ul>
+<p>当前，Giveaway抽奖是各个Web3项目引流的首选方式，包括Web3羊毛党通常会在不同的赏金平台肝任务，这样不仅能活跃社区也能吸引更多用户。真实的用户涌入及流量增长使得Gleam等各类任务平台应运而生，但各家在功能上存在不同程度的差异。Cwallet定位于工具，面向Web2品牌及Web3社区推出了Web2.5的全功能Cwallet Giveaway。项目方可轻松在数分钟内创建抽奖活动，自定义抽奖主题、奖品类型、全品类任务要求等相关信息。</p>
+<p>参与方式上，Gleam仅允许用户使用Facebook和电子邮件等登录，相比之下Cwallet的参与方式更加多样化，包含电子邮箱、电话、Twitter及主流钱包，实现了Web2与Web3的结合；使用门槛上，Gleam在活动设计中有不少限制，如无法收集到使用者的邮箱及设置语言等，且项目方需付费才能解锁更多功能，而Cwallet则能提供完全免费的服务。除了完善并升级Twitter、Telegram、Discord、Facebook、YouTube及Mirror等常用Web2平台的各类任务外，该工具还升级了钱包地址收集、资产证明等链上任务场景，还可对合格用户进行更细分化筛选（如链上交易频率、玩家等级、特定NFT/SBT持有者等。</p>
+<p><img src="https://cdn-img.panewslab.com/panews/2023/02/17/images/HHGd4Y499v.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>Giveaway支持任务类型</p>
+<p>从参与者角度来说，Gleam的任务是逐项检查，操作较为繁琐，而Cwallet会在用户参与任务后一键验证每个任务的完成情况。值得一提的是，为防止出现暗箱操作的行为，Cwallet采用了可证明公平的精密设计。基于不可预测的区块链算法和开源随机算法，Cwallet分配给每位参与者一个独立的PID并公示，以确保抽奖结果绝对随机且无法被修改，公平公正公开。活动创建者的联系方式验证及领奖引导也极大可能的避免了虚假活动的泛滥，最大程度的保证了抽奖的随机与可靠，提高了用户参与的积极性。此外，为避免羊毛党抢占奖励份额，Cwallet还引入了的可自定义的API回调任务验证，账号锁定，及反机器人的精确检测，为组织者吸引更为真实的流量。</p>
+<p><img src="https://cdn-img.panewslab.com/panews/2023/02/17/images/BtWQ1Vtnj1.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>由此来看，相比其他平台复杂的项目审核机制和高昂的费用等，Giveaway可满足更多项目方的营销需求，大幅提升效率并降低参与门槛，将成为加密项目方的有力营销工具。特别对处于起步阶段的新项目而言，Giveaway将为他们精准捕获真实流量以及带来更好的营销效果。而对于参与用户而言，Giveaway将为他们带来更为高质量的任务，且可证明公平开奖机制可为他们创造更为公平和公信力的竞争环境，轻松玩赚各类任务。Web3生态的本质是项目方和用户方的“双向奔赴”，这也是Cwallet Giveaway的目的。</p>
+<ul>
+<li><strong>其他小工具</strong></li>
+</ul>
+<p><img src="https://cdn-img.panewslab.com/panews/2023/02/17/images/h8A89n0K8t.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>此外，Cwallet还推出了与现实日常生活结合的多项特色实用功能。例如：</p>
+<p><strong>Tipbox</strong> <strong>打赏码：</strong> 免费的收款码可让用户无需提供冗长的区块链地址，灵活用于内容打赏、薪酬接收、网上购物、转账等；</p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/28_sbi0nslf3p.png" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p><strong>Bulk Payment</strong> <strong>批量支付:</strong> 可以一键发送Token或NFT等，现已支持超50个区块链和逾800种加密资产，可用于自动发薪、DAO费用管理等多个场景；</p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/28_0uv8p924ia.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>Mobile Refill话费充值:满足各地域用户日常所需，可快速用加密货币实现移动充值。目前已支持40多个国家的任意号码和200多种运营商。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/28_a57ajmujvf.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>Cwallet近期还上线了加密支付解决方案CCPayment，为各类个人及商户提供免费且开源的API服务，接入方式简单，币种丰富，最令人惊讶的是，它仅收取支付金额的0.03%作为服务费，低于市场上任何其他平台收取的服务费。在官网底部，我们可以看到Cwallet团队已获得了立陶宛的虚拟资产服务提供商（VASP）牌照认证，并悄悄列出了未来的法币买卖入口。由此，我们不难看出Cwallet想要攻占市场并打造Web3支付宝级应用的野心。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/28_b6unjw3vlq.jpg" alt="打造支付宝级Web3用户体验，一文了解Cwallet背后的产品逻辑"></p>
+<p>产品即场景，场景即生态，只有深耕场景化应用的钱包才可为Web3生态发展提供广阔的土壤。</p>
+<p>Cwallet这种乐高式产品逻辑是当下Web3的核心价值，在提升效率和范式创新上发挥了重要作用。知名风投a16z创始人Chris Dixon曾表示，“可组合性之于软件，就像复利之于金融一样，软件的未来在于可组合性。像乐高积木一样混合和匹配软件组件的能力&hellip;&hellip;每个软件组件只需要编写一次，此后可以简单地重复使用”。Gartner研究副总裁Monika Sinha也曾指出，业务可组合性是组织波动性的解毒剂。在具有高可组合性的组织中，63%的首席信息官表示，与同行或竞争对手相比，其业务绩效更胜一筹，同时组织也能够通过技术更好地追求新的价值流。</p>
+<p>总而言之，当下加密货币正获得主流市场越来越多的认可和使用场景，而加密钱包作为流量入口已不再仅扮演着传统意义上资产管理的基础角色，功能的丰富度和实用性使其成为了捕获Web3流量关键组件，甚至还成为各应用扩大市场体量及突破发展桎梏的关键之一。在资产存储的基础上，Cwallet通过搭建不同的工具模块，将为普通用户铺设了一条低门槛的加密高速路，让他们轻松快捷参与加密金融世界，并将加密服务融合至日常生活消费中，或成为Web2用户在Web3各场景交互的重要入口。虽然多线进程功能叠加开发的难度不言而喻，但Web3世界需要一款足够丝滑的的现象级应用，将加密理念普及至全球每个角落</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/47454/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">错过 BLUR 拍断腿？没必要</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/47473/">
+                <span class="next-text nav-default">单体区块链缺点日益突出 模块化才是未来？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#降低web3准入门槛打造高效交易体验"><strong>降低Web3准入门槛，打造高效交易体验</strong></a></li>
+        <li><a href="#如何打造web3的支付宝探索钱包工具的的应用场景"><strong>如何打造Web3的支付宝？探索钱包+工具的的应用场景</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Curve稳定币crvUSD：机制、部署、测试和影响全分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Curve的crvUSD有可能掀起新一波超级Dapp浪潮" />
+<meta name="keywords" content="curve" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51582/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Curve稳定币crvUSD：机制、部署、测试和影响全分析" />
+<meta property="og:description" content="Curve的crvUSD有可能掀起新一波超级Dapp浪潮" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51582/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="Curve稳定币crvUSD：机制、部署、测试和影响全分析">
+<meta itemprop="description" content="Curve的crvUSD有可能掀起新一波超级Dapp浪潮"><meta itemprop="datePublished" content="2023-05-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8958">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Curve稳定币crvUSD：机制、部署、测试和影响全分析"/>
+<meta name="twitter:description" content="Curve的crvUSD有可能掀起新一波超级Dapp浪潮"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Curve稳定币crvUSD：机制、部署、测试和影响全分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-19">
+      2023-05-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8958 字 -
+        预计阅读 18 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Charles Yu，Galaxy；翻译：金色财经0x25</p>
+<h2 id="要点">要点：</h2>
+<ul>
+<li>
+<p>5月17日，Curve正式上线了crvUSD 的用户界面，标志着crvUSD稳定币的正式公开发布。</p>
+</li>
+<li>
+<p>crvUSD 背后的主要思想是其新颖的清算机制“LLAMMA”，它将借款人的抵押品转变为 LP 头寸来实现持续的抵押品再平衡，并使用特殊用途的 AMM（“软清算”）作为一种对借款人友好、波动较小的方案来替代通常在其他借贷平台上的强制清算流程。</p>
+</li>
+<li>
+<p>在正式公开发布之前，crvUSD 合约于 23 年 5 月 3 日首次部署在主网上，因为 Curve 团队正在使用真实资金进行“生产测试”。在正式公开发布之前的两周内，需要多次重新部署 crvUSD 来修补错误并实施新的优化。虽然一些评论家认为在推出新产品之前有更谨慎的方法来进行测试，但由于团队致力于构建不可篡改的协议，这些做法可能是必要的。</p>
+</li>
+<li>
+<p>一些社区成员还质疑以 Frax 的 LST frxETH 作为唯一受支持资产启动稳定币的决定，因为与市场领导者 Lido、Coinbase 和 Rocket Pool 相比，其市场规模要小得多。Curve 团队指出，接下来将支持 Lido 的 stETH，并且将通过治理添加其他受支持的抵押品类型。</p>
+</li>
+<li>
+<p>Curve 团队一直在突破新的 DeFi 创新的界限，通过 crvUSD，Curve 有可能在整个 DeFi 中设定新的标准，包括帮助建立 ETH LST 作为默认基础代币，激励借贷平台采用更有利的清算做法，推动去中心化稳定币将变得更加去中心化，并且它有可能掀起新一波超级 Dapp 浪潮，因为其他主要的 DeFi 协议希望推出新产品，包括 Aave 及其即将发布的 GHO 稳定币。</p>
+</li>
+<li>
+<p>尽管自几天前推出以来 ，crvUSD 的铸造量一直相对温和，但预计 crvUSD 将对Curve 上的收益率提升和投票指标产生巨大影响，并提升排名以与当今领先的稳定币竞争。</p>
+</li>
+</ul>
+<h2 id="前言">前言</h2>
+<p>Curve Finance 是领先的 DEX，其针对廉价、低滑点交易进行了优化，特别是稳定交易对（例如，在价格相似的资产之间进行交换，例如 USDT:USDC 和 WETH:stETH）。Curve 首创了 StableSwap AMM 模型，与常用的恒定乘积法（x*y=k）相比，这是一种更有效的平衡流动性池的方法。Curve 后来通过 Curve V2 将其核心稳定的 AMM 扩展到波动性更大的交易对，引入了自动集中流动性（automatic concentrated liquidity）的概念。Curve 最受欢迎的两个交易池是 3pool (USDT / USDC / DAI) 和 tricrypto2 (USDT / wBTC / WETH)。</p>
+<p>Curve 协议是去中心化的，由 Curve DAO 管理。CRV 代币持有人可以为 veCRV 投票托管或锁定他们的 CRV，这使持有人能够参与治理并赚取协议产生的交易费用的 50%。veCRV 持有者主要是 DAO，旨在利用其投票权通过计量权重投票指导 CRV 排放来帮助引导流动性。通过计量权重投票争夺流动性的斗争为“Curve战争”奠定了基础，在这种情况下，拥有大量 veCRV 的第三方平台会接受贿赂以支持某些计量权重。</p>
+<p>如今，Curve 是以太坊上排名前三的 DEX，但在整体 DEX 交易量上远远落后于 Uniswap。然而，对于稳定交易对，Curve 在历史上一直领先于 Uniswap 和其他 DEX，尽管 Uniswap 这一指标在过去几个月超过了 Curve。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_er3pkmseud.png" alt="6DpoNu66xVNk3shqbC9qbYulQzV3ALG3fsJjoMaX.png" title="7022334"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_38m3m3llvm.png" alt="fcNB3VQoJE0tkZssYzUR5dZlwVb0ynefBlX5ZNq8.png" title="7022335"></p>
+<p>Curve Finance 创始人Michael“@michwill”Egorov 最初在 2022 年 7 月的一次会议上发表演讲时透露，Curve 正在探索推出稳定币，随后于 2022 年 11 月发布了crvUSD 白皮书。5月 17 日，也就是白皮书发布大约六个月后， Curve正式推出crvUSD 的用户界面，标志着其稳定币的正式公开发布。</p>
+<h2 id="crvusd稳定币">crvUSD 稳定币</h2>
+<p>crvUSD 是建立在 Curve 上的 CDP 式稳定币（collateral-debt position，抵押债务头寸；类似于 MakerDAO 的 DAI）；用户可以通过存入不稳定的抵押品（例如，ETH 或 ETH 的流动性抵押衍生品）并借入来铸造crvUSD 。</p>
+<p>crvUSD 与 DAI 和其他超额抵押稳定币的区别在于其新颖的清算机制，称为LLAMMA（Lending-Liquidating AMM Algorithm，借贷清算 AMM 算法）。LLAMMA 为借款人提供软的、持续的清算，因为抵押品价值相对于债务头寸下降，而不是像 Maker 或 Aave 等其他借贷平台上典型的完全、离散的清算。LLAMMA 通过在特殊用途的 AMM 中有效地将一个人的抵押品转变为 LP 头寸（易变资产和稳定币对）来实现这一目标，随着价格波动逐渐重新平衡。与瞬时清算导致借款人 100% 损失相比，LLAMMA 机制限制了借款人面临的潜在损失（&lt; 100% 损失），并限制了协议承担的累积坏账风险。</p>
+<p>例如，当借款人存入 ETH 抵押品并以此为抵押借入 crvUSD 时，抵押品将全部为 ETH。但如果 ETH 价格下跌，该协议将逐步将一部分抵押品转换为 crvUSD。如果 ETH 的价格回升，则现金可用于通过使用 crvUSD 回购 ETH 来重新抵押或“清算”借款人的 LP 头寸。如果 ETH 的价格大幅下跌并且抵押品接近清算门槛，那么整个抵押品头寸可能会转换为 crvUSD，这应该足以覆盖借款人的债务头寸。</p>
+<p>LLAMMA 的专门 AMM 遵循与 Uniswap V3 池类似的设计，其中流动性可以跨段/区间（称为curve上的band）集中——两个平台之间集中流动性的主要区别在于 Uniswap 使用户能够指定他们集中的流动性范围，而 Curve 在算法上将 LP 的流动性集中在内部预言机价格周围。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_gk7h3g7zci.png" alt="1KEXa7VR945Dw7Bq8YnNTYDJkcsEEqOazzihF7kZ.png" title="7022338"></p>
+<p>在每个集中的流动性段/波段，有一个上限和一个下限价格范围 [Pcu, Pcd]——如果头寸的价格超出这个范围，那么 LP 头寸将完全在单一资产中（例如，全部在 ETH 或 crvUSD 中）；如果价格落在范围内（Pcd &lt; P &lt; Pcu），那么借款人将处于“软清算模式”并且 LP 头寸将是两种资产的组合。</p>
+<p>以 ETH-crvUSD 为例：</p>
+<ul>
+<li>
+<p>对于 Uniswap V3：如果 ETH 价格高于集中流动性区间的上限（P &gt; Pcu），则 LP 将完全为 crvUSD（随着价格上涨而出售 ETH 换取 crvUSD）；如果 ETH 价格低于下限（P &lt; Pcd），则 LP 将全部为 ETH。</p>
+</li>
+<li>
+<p>对于 Curve 上的 LLAMMA：Curve AMM 旨在在 ETH 价格下跌时减少对 ETH 的敞口，因此 LP 的余额构成将与 Uniswap V3 相反——如果 ETH 价格高于上限（P &gt; Pcu），则LP 将全部为 ETH ；如果 ETH 价格低于下限（P &lt; Pcd），则 LP 将完全以 crvUSD 形式存在。因此，在 LLAMMA 下，波段内内部代币余额的变化将与 Uniswap V3 下的变化相反。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_e4sv52pkni.png" alt="qqNe2fr1GptQOSaVWBxGqZJzramcsOreJe920HO3.png" title="7022339">个人 crvUSD 借款人头寸全部汇总到一个池中，用于管理抵押品余额。池内出售和回购抵押资产的再平衡过程由外部交易者或套利者进行。为了使连续软清算按预期运行，必须知道抵押品 ETH 的外部价格——LLAMMA 从包括 Uniswap Twap Oracle、Chainlink 和 Tricrypto 在内的外部预言机组合中提取价格数据（预言机价格或 P_ORACLE），并应用 EMA （指数移动平均线）以减少价格波动并限制操纵预言机价格的潜在风险。</p>
+<p>重要提示：虽然支持 crvUSD 债务头寸的抵押品池包括 crvUSD 本身，但价格预言机基于 ETH/USD 价格而不是 ETH/crvUSD（因此 crvUSD 本身并没有得到有效支持）。</p>
+<p>LLAMMA 下的 AMM 是专门设计的，外部价格数据（P_ORACLE）的变化会导致 LLAMMA 池（P_AMM）中的价格出现更大的偏差，以激励套利者重新平衡池并执行部分清算或去清算池的资产。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_jc76e2i1pl.png" alt="d8EcGUQGLkwMivLrS6OzxbEN8ii5BpsQUumIb932.png" title="7022340"></p>
+<ul>
+<li>当 Uniswap 上存在 ETH 抛售压力且 P_ORACLE 下跌时，P_AMM 将以更快的速度下跌（导致 P_ORACLE &gt; P_AMM），这为套利者提供了从 LLAMMA 存入 crvUSD 换出 ETH 抵押品的机会，直到价格再次平衡（ P_ORACLE = P_AMM）。</li>
+<li>当 P_ORACLE 增加时，P_AMM 将以更快的速度增加（导致 P_AMM &gt; P_ORACLE），这为套利者提供了将 ETH 存入 LLAMA 池以换取更多 crvUSD 的机会，直到 P_ORACLE = P_AMM 再次出现。</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_i8pn83gvzu.png" alt="NePkaw3JnQuXdhXgd63sD6cp5RdWQl8C6hzXBVAJ.png" title="7022341"></p>
+<p>对于处于软清算模式的借款人，提取抵押品或借入更多 crvUSD 的选项变得不可用。要在处于清算模式后重新启用提款，借款人可以：等待清算、偿还贷款或自行清算（使用抵押品和快速贷款偿还贷款）、添加更多抵押品或等待完全清算并以crvUSD取款。</p>
+<p>如前所述，LLAMMA 的清算机制避免了可能导致市场大幅波动的大规模清算，并且它能够在不对抵押品价值造成重大无常损失的情况下实现抵押资产的再平衡。尽管如此，作为不断进行再平衡的LP，借款人仍面临着价格波动带来的一些财务风险。如果外部 Oracle 价格剧烈波动或套利者干预不够及时（例如，当 P_ORACLE 和 P_AMM 之间的价格偏差较小时，gas 价格高的时期可能会导致获利套利机会减少），则可能会造成更大的价值损失。 然而，借款人可能会在某些情况下获得抵押品价值的收益，例如当价格朝着一致的方向移动时。</p>
+<p>请参阅0xreviews的 crvUSD 模拟器和0xstan的图表以了解再平衡机制的可视化。</p>
+<h2 id="其他挂钩稳定机制pegkeepers和货币政策">其他挂钩稳定机制——PegKeepers 和货币政策</h2>
+<p>由于市场波动或流动性突然变化，crvUSD 仍会受到价格波动的影响。LLAMMA 是维持 crvUSD 与 1 美元挂钩的第一道也是主要的防线，因为该机制旨在使所有 crvUSD 债务得到充分抵押，并激励套利者限制 LLAMMA 流动性池中抵押品价格与外部价格来源的不匹配（所以随着时间的推移让P_AMM ~ P_ORACLE ）。</p>
+<p>其他可用于维持crvUSD 与 1 美元挂钩的工具包括：</p>
+<ul>
+<li>自动稳定器（&lsquo;PegKeeper&rsquo;）。 PegKeepers 具有铸造/销毁功能，可以在价格偏差期间降低或提高 crvUSD 价格（类似于 FRAX 的 AMO 或“算法市场运营”控制器）。当由于对稳定币的需求暂时增加而导致 crvUSD 的交易价格高于 1 美元时，PegKeepers 可以铸造无抵押的 crvUSD 单边存入稳定交换池，使价格回到 1 美元。当 crvUSD 因任何原因交易价格低于 1 美元时，PegKeeper 可以从池中提取 crvUSD 并销毁稳定币。稳定器和 AMO 模块可以帮助维持稳定币的挂钩，而无需依赖大型资本密集型 PSM 池。在 crvUSD 发布时，创建了四个 PegKeeper 合约。合约中定义的 PegKeeper 动作可以被任何外部调用者调用，使他们能够以 LP 代币的形式赚取利润。如下图所示：</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_kg7riw7tgr.png" alt="Hd1dmwVnTJMEpmLcyNd79dzAYcFCJp0jcUlsIA4G.png" title="7022342"></p>
+<ul>
+<li>货币政策（利率）。利率已纳入 AMM。随着时间的推移，利率会增加贷款的规模。根据白皮书，crvUSD 的借贷利率将根据 crvUSD 围绕其挂钩的变化进行动态调整（随着 crvUSD 升至 1 美元以上，借贷利率下降，以激励用户借贷，进而增加 crvUSD 的供应；或者，当 crvUSD 低于 1 美元时，借贷利率可以快速增加，以激励借款人偿还贷款并减少 crvUSD 的供应以提高其价格）。借款利率公式为：rate = rate0 * exp(-(p - 1) / sigma) * exp(-peg_keeper_debt / (total_debt * peg_keeper_target_fraction))变量包括：PegKeeper 产生的总债务，用户通过 Controller 产生的总债务，记录两者的比率，crvUSD 的价格，以及基准利率 0。</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_0mf8jdnqqu.png" alt="RZHtGKBtj7D42guAk0oljIM4WC8wvcPFbZ0iYKcq.png" title="7022346"></p>
+<h2 id="crvusdllamma总结">crvUSD / LLAMMA 总结</h2>
+<p><strong>crvUSD / LLAMMA 总结</strong></p>
+<ul>
+<li>
+<p>LLAMMA 是 Curve 用来管理 crvUSD 稳定币抵押的主要算法。LLAMMA 将借款人的抵押品转变为 LP 头寸，使其能够使用专门的 AMM 以连续的抵押品再平衡取代离散清算。</p>
+</li>
+<li>
+<p>LLAMMA 通过将抵押品拆分到不同的价格范围或“区间”来减少清算期间的损失。根据借款人的风险状况和抵押资产的价格波动，可以出售和回购每个价格区间内的抵押品，以帮助维持债务头寸的充分抵押。</p>
+</li>
+<li>
+<p>如果 ETH 抵押品的价格下跌并低于借款人价格区间的上限，LLAMMA 会激励活跃价格区间中的一部分抵押品在“软清算”中出售以换取 crvUSD。如果抵押品价格随后上涨，则 crvUSD 将换回 ETH 抵押品。</p>
+</li>
+<li>
+<p>LLAMMA 系统严重依赖套利交易者来加强 crvUSD 的挂钩。它将价格发现外包给外部价格预言机（例如 Uniswap TWAP Oracle），并通过用于 AMM 流动性池的定价机制产生套利机会，与外部池相比，放大了 LLAMMA 流动性池中的价格变化，激励套利者重新平衡池，从而执行“软清算”。</p>
+</li>
+<li>
+<p>当抵押品价格下跌且借款人进入清算模式时，借款人将可以选择偿还贷款或自行清算（使用抵押品和闪电贷偿还贷款），或者在更极端的情况下，如果借款人的健康评分变成负数（这更有可能由应计利息而不是价格行为触发），外部清算人可以介入，这将实现为一个原子操作，清算人将取出借款人的 LP 抵押品并偿还他们的全部债务。</p>
+</li>
+<li>
+<p>除了主要的 LLAMMA 机制外，Curve 还有其他工具来维护 crvUSD，包括具有铸币/销毁功能的 PegKeepers，以在其价格偏离 1 美元时影响 crvUSD 的供应，以及货币政策，它使用利率来鼓励更多的借贷或还款活动来影响稳定币供应和价格。</p>
+</li>
+</ul>
+<p><strong>使用 crvUSD / LLAMMA 的注意事项</strong></p>
+<ul>
+<li>
+<p>LLAMMA 为借款人提供了更有利的清算机制，并允许对保证金头寸进行更被动的管理。软清算只会改变抵押品的构成，而不是偿还部分债务——因此，通过保留抵押品价格上涨带来的上行潜力，软清算应该会给接近清算水平的借款人带来整体较小的财务损失（借款人不会因软清算而受到任何经济处罚）。</p>
+</li>
+<li>
+<p>连续清算避免了潜在的市场波动和滑点损失，而这些波动和滑点可能来自剧烈的一次性清算。</p>
+</li>
+<li>
+<p>与其他 AMM 相比，LLAMMA LP 头寸不会面临相同水平的无常损失风险——随着价格波动并在恢复最初损失价值后，借款人的 LP 将被去清算。有些情况可能会导致无常收益，这表明 crvUSD 可以用作对冲工具。</p>
+</li>
+<li>
+<p>crvUSD 可以在没有像 MakerDAO 的 DAI 那样大量依赖 USDC PSM 的情况下维持其挂钩。</p>
+</li>
+<li>
+<p>AMM 有自己的流动性，减少了对外部流动性来源的依赖（仍然依赖于可能受到操纵的外部价格预言机）。它还利用 Curve 的其他流动性来源，并有助于将更多流动性引导至 Curve 池。</p>
+</li>
+<li>
+<p>LLAMMA 重新平衡推动了更多的总量并积累了利息收入，从而导致 LP、veCRV 持有者和协议的费用增加，从而产生飞轮效应。</p>
+</li>
+<li>
+<p>缺点：由于抵押品头寸在 LLAMA 下变成了 LP 头寸，存款人会因不断的再平衡而面临做市损失，在极端价格波动和高 gas 费用期间抵押品有可能遭受更大的价值损失，以及 Curve 合约的复杂性可能导致相对较高的gas价格，这可能会减缓主动再平衡的发生。</p>
+</li>
+</ul>
+<h2 id="crvusd部署回顾">crvUSD 部署回顾</h2>
+<p>第一份 crvUSD 合约于 5 月 3 日在主网上推出。Curve 创始人 Michael Egorov 获得了100 万美元的首笔 crvUSD 贷款。Curve 爱好者首先在链上注意到部署的合约。作为回应，Curve 团队通过 Twitter分享说，尽管合约已经启动，但 crvUSD 的正式部署尚未最终确定：“正如许多人所想的那样，crvUSD 智能合约的部署已经发生。这还没有最终确定，因为 UI也需要部署，敬请期待！</p>
+<p>尽管 UI 没有上线，但这并没有阻止某些用户与合约进行交互。随着第二天第二个合约部署的宣布，Curve 团队联系了一位将50k USDC换成crvUSD 的用户，以退还他们过时的代币，该用户立即退还这些代币以换取 USDC。</p>
+<p>第二次部署两天后，部署了 crvUSD 合约的第三次迭代，以解决某些情况下 gas 异常高的问题。由于团队通过套利交易对 Egarov 的 100 万美元风险头寸现场测试了软清算机制，因此这份新合约已经保留了大约一周。该团队宣布，现场测试的结果是，PegKeepers 被触发是为了稳定 crvUSD，并且借款人的价值损失完全在预期范围内。</p>
+<p>最后（至少现在）， crvUSD 合约的第四次迭代于 23 年 5 月 14 日部署，它为借款人增加了新的优化，以防止抢跑交易造成的滑点价值损失，并进行了其他几个错误修复和参数调整。有关更多技术细节，请参阅创始人@michwill 的提交列表。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_gmg9k5fr4h.png" alt="hEkyCAgFGbdummBN3VtmfHOELb5EB61iBxrw3Cb2.png" title="7022349"></p>
+<h2 id="生产测试">生产测试</h2>
+<p>虽然以太坊上的智能合约默认情况下是不可篡改的，但许多 DeFi 协议依赖于 DAO/多重签名管理的代码，这些代码利用可升级的代理合约来更改执行合约功能的逻辑——这对于开发人员对已部署合约进行修复错误或添加新功能很有用。通常，DeFi 团队可以在大多数用户甚至没有注意到的情况下实施这些更改。然而，拥有可升级的代理合约也提供了一定程度的可篡改性，这带来了新的安全风险，并可能使恶意方能够利用用户资金。</p>
+<p>纵观其历史，Curve 团队一直坚定地致力于不可篡改路线，并选择在大多数情况下放弃使用可升级合约——这意味着用户资金不能通过代币智能合约的可升级性来利用（注意：唯一的管理员Curve DAO 可以做出的改变是增加 A（amplification）因子；合约不能被Factory管理员杀死）。这也意味着 Curve 无法在不完全重新部署智能合约的情况下轻松修补新发现的错误。正如 Curve 团队在 Twitter 上回忆的那样，启动稳定币池子时需要进行多次重新部署：“稳定币池子在 2020 年 1 月重新启动了 3 次。第一个加密池在polygon上重新启动了 3 次（这就是为什么被称为 atricrypto3）。稳定币是一个复杂得多的系统。那有什么惊喜呢？需要确保一切正常！”</p>
+<p>通常需要在主网上进行测试，以测试新的对抗性条件，并使用真实资金进行测试，找到新的 gas 优化领域，并众包代码审查。即使在花费所有时间思考所有边缘案例之后，团队也极不可能在 crvUSD 等新颖复杂的应用程序的首次主网上线时就把所有事情都做好。</p>
+<p>因此，现在 crvUSD 前端已经正式上线，即使发现更多的错误需要重新部署更多的代币合约，这对 crvUSD 的安全性和优化来说是一个令人鼓舞的迹象。鉴于稳定币的关键任务性质以及 Curve 作为最受欢迎的稳定币对交易场所的重要性，必须对所有可预见的风险进行充分的测试，最终为 crvUSD 的安全性提供更大的保证。</p>
+<h2 id="到目前为止的学习观察">到目前为止的学习/观察</h2>
+<p>每次部署新的代币合约后，创始人@michwill 通常会以 sfrxETH（FRAX 的质押 ETH 代币，产生质押收益）抵押头寸贷出100 万美元的 crvUSD 债务头寸，然后借入更多的 crvUSD 以承担接近风险的风险头寸（最大可能的LTV ），以便通过套利交易实时测试软清算过程。由于债务头寸是在 23 年 5 月 6 日第三次部署时启动的，因此 sfrxETH 抵押品的价格在 2070 美元左右，后于 5 月 12 日跌至约 1820 美元的低点（下跌约 12%）。</p>
+<p>@michwill 报告说，10 个价格区间中的第一个已从 sfrxETH 完全清算到 crvUSD，而第二个区间内的抵押品价值由于再平衡损失而下跌。根据Curve 团队对清算事件的回顾，“唯一的头寸是‘软清算’大约一周，损失了几个百分点的价值。这完全在预期范围内”。总体而言，mich指出，他的起始值仅损失了 0.5%，这与白皮书下图所示的历史回溯测试一致：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_ehgp97m0t7.png" alt="duU55gCAoZveDTQiY3fckxGrkjUzDQ8ZrsavynEG.png" title="7022351">Curve 团队还报告称，在此测试期间，“DAO 在那一周从 CDP 和为稳定 crvUSD（尤其是后者）中产生的约 150 万 crvUSD 中获得的收益约为 2000 美元。这些是“测试收入”，因此它们不会转化为费用分配，但它们测试了生产中的可能性”。150 万美元资本每周 2000 美元费用相当于约 7% 的年收益率，这是一个不平凡的利率或回报（尽管我们承认，推断一周的数据价值没有多大意义，因为大部分费用是从稳定 crvUSD 和mich有意测试具有高杠杆债务头寸的再平衡机制）。</p>
+<p>根据最新（第四次）部署的Github 存储库，在启动时围绕 crvUSD 设置了一些借款和费用结构的参数：</p>
+<ul>
+<li>
+<p>支持的抵押资产：发布时仅支持 sfrxETH</p>
+</li>
+<li>
+<p>使用的预言机：TriCrypto、Chainlink ETH 和 Uniswap Twap 预言机</p>
+</li>
+<li>
+<p>稳定费：0.01%</p>
+</li>
+<li>
+<p>政策利率：如果 PegKeepers 为空，则为 10%；达到目标分数时为 4%</p>
+</li>
+<li>
+<p>Policy Sigma = 2% 在达到目标债务比例时</p>
+</li>
+<li>
+<p>保单债务比例= 10 * 10**16 # 10%</p>
+</li>
+<li>
+<p>市场费用：0.6%</p>
+</li>
+<li>
+<p>市场管理费：0%（占掉期收取的总费用的百分比）</p>
+</li>
+<li>
+<p>市场贷款折扣：9%（+2% 来自 4x 1% 银行 = 100% - 11% = 89% LTV）</p>
+</li>
+<li>
+<p>市场清算折扣：6%</p>
+</li>
+<li>
+<p>sfrxETH – 市场债务上限：10m</p>
+</li>
+<li>
+<p>PegKeepers：4</p>
+</li>
+<li>
+<p>Rtokens（储备代币）：USDC、USDT、USDP、TUSD</p>
+</li>
+<li>
+<p>初始 PK 资金：250 万（= market_debt_ceiling // len(rtokens)）</p>
+</li>
+</ul>
+<p>注意：## Swap费用支付给借款人（通过 LLAMMA），没有管理费，借款人支付的利息被纳入 AMM，AMM 通过 fee_receiver 合约最终支付给 veCRV 持有人。</p>
+<p>根据Github上部署日志的相关合约：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_fm2wk5ws3g.png" alt="U0flON8PfSftIJitvV78ndKtsn4wnaGiFRnngzAR.png" title="7022353"></p>
+<h2 id="一些社区反馈">一些社区反馈</h2>
+<p>一些 社区成员质疑仅从 sfrxETH 启动 crvUSD 的决定，认为 frxETH 在 ETH Liquid Staking 提供商中是一个相对较小的市场。frxETH 远远落后于 Lido 的 stETH 和 RocketPool 的 rETH。其他人对 Frax 团队未能兑现其取消多重签名并转向纯粹的链上治理的承诺表示担忧。</p>
+<p>Curve 团队在 Twitter 上回应说，“因为 frxeth 池是当时唯一拥有良好预言机的池子”，还指出：“stETH 是下一个，上限更大（这个市场的上限是 1000 万）”。然后，应社区的要求，Curve 团队随后在其官方文档中添加了以下关于 crvUSD 抵押品选择的说明：“在测试 $crvUSD 时，该团队为 $sfrxETH 创建了一个市场，市值较小（$10MM）因为它有一个兼容的预言机。预计 DAO 将批准其他形式的抵押品。”</p>
+<p>自推出 FraxBP 池子以来，Frax DAO 一直与 Curve 密切合作（FraxBP 池子目前拥有约 5 亿美元的 TVL，超过 Curve 在以太坊上的 3pool）。虽然 Curve 关于选择frxeth 池子预言机在技术上可能是有效的，但考虑到 FRAX 作为DAO CVX 排行榜的领导者对 Curve 的政治影响，人们质疑以 frxETH 作为唯一市场启动的决策过程当然值得探索，这可能会违背Curve 团队对信任最小化和去中心化的承诺。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_t9hkusmg37.png" alt="0Lqk32iURMQpsGutIemTlmqDWd05A1OdFyNVHSOh.png" title="7022354"></p>
+<p>很明显，Curve 作为最受欢迎的稳定资产对交易平台，在整个 DeFi 市场具有很大的影响力。自从第一个 crvUSD 合约部署在主网上以来，frxETH 一直是市场上增长最快的 ETH LSD 代币之一，自 5 月 3 日以来的短短两周内上涨了约 17%，总质押 ETH 总量超过 20 万。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0519/16_hgbo28134h.png" alt="t3y1N26QXA6pEhjT8Xh6KnbujNz1Rkjfyz99EnMH.png" title="7022355"></p>
+<h2 id="结论crvusd可能会产生深远的影响">结论——crvUSD 可能会产生深远的影响</h2>
+<p>crvUSD 的推出恰逢其时。最近几个月，主要的法币支持的稳定币遇到失败和挫折（例如，在美国证券交易委员会和纽约金融监管机构审查后，Paxos 下令减少 BUSD 发行；在 Circle 确认在硅谷银行有超过 30 亿美元存款后，USDC脱钩至0.88 美元），已经说明了去中心化、可预测和功能性稳定币的优势。即使是领先的 DeFi 原生稳定币也受到 USDC 脱钩的负面影响，包括 MakerDAO 的 DAI 和 Frax 的 FRAX。Curve 显然应用了从过去稳定币的失败中吸取的教训，提出了一种新颖而深思熟虑的机制来构建更具弹性的 crvUSD。</p>
+<p>Curve 团队一直在推动新的 DeFi 创新的边界，现在通过将新的稳定币集成到其现有产品套件中，他们可以为去中心化稳定币和借贷协议建立一套新的标准。Curve 放宽仅将 FRAX 的 sfrxETH 作为唯一受支持的抵押品市场的决定，并表示接下来将增加对 Lido 的 stETH 的支持——此举可能有助于将 ETH LSD 确立为 DeFi 的默认基础代币。Curve 也有可能掀起新一波超级Dapps 浪潮，因为其他领先的 DeFi 协议希望推出新产品，包括 Uniswap 及其移动钱包和 NFT 做市愿望，Blur 及其 NFT 借贷产品，以及 Aave 及其即将推出的产品 GHO 稳定币。</p>
+<p>尽管自几天前推出以来，crvUSD 的铸造量一直相对温和，但我们预计 crvUSD 将对Curve上的收益率提升和投票产生重大影响，并提升排名以与当今领先的稳定币竞争。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51532/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">ChatGPT突然上线APP！iPhone可用、速度更快，GPT-4用量限制疑似取消</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51531/">
+                <span class="next-text nav-default">DePIN赛道全貌：是破坏式创新还是“空中楼阁”？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#要点">要点：</a></li>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#crvusd稳定币">crvUSD 稳定币</a></li>
+    <li><a href="#其他挂钩稳定机制pegkeepers和货币政策">其他挂钩稳定机制——PegKeepers 和货币政策</a></li>
+    <li><a href="#crvusdllamma总结">crvUSD / LLAMMA 总结</a></li>
+    <li><a href="#crvusd部署回顾">crvUSD 部署回顾</a></li>
+    <li><a href="#生产测试">生产测试</a></li>
+    <li><a href="#到目前为止的学习观察">到目前为止的学习/观察</a></li>
+    <li><a href="#一些社区反馈">一些社区反馈</a></li>
+    <li><a href="#结论crvusd可能会产生深远的影响">结论——crvUSD 可能会产生深远的影响</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

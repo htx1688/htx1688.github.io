@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解ZkSync：zkEVM、Layer3及愿景 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="​ZkSync 长期以来一直是零知识密码学的先驱，他们在扩展以太坊的道路上继续开拓。" />
+<meta name="keywords" content="zkSync, zkEVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43863/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解ZkSync：zkEVM、Layer3及愿景" />
+<meta property="og:description" content="​ZkSync 长期以来一直是零知识密码学的先驱，他们在扩展以太坊的道路上继续开拓。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43863/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-26T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解ZkSync：zkEVM、Layer3及愿景">
+<meta itemprop="description" content="​ZkSync 长期以来一直是零知识密码学的先驱，他们在扩展以太坊的道路上继续开拓。"><meta itemprop="datePublished" content="2022-10-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4767">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解ZkSync：zkEVM、Layer3及愿景"/>
+<meta name="twitter:description" content="​ZkSync 长期以来一直是零知识密码学的先驱，他们在扩展以太坊的道路上继续开拓。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解ZkSync：zkEVM、Layer3及愿景</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-26">
+      2022-10-26
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4767 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>ZkSync 长期以来一直是零知识密码学的先驱，他们在扩展以太坊的道路上继续开拓。</strong> 他们在 10 月底之前在主网上推出了第一个 zkEVM，这可以为他们提供显着的先发优势，并使他们能够建立强大的网络效应。</p>
+<p>原文：《ZkSync: A Peek into the Future of Ethereum》by Sam Martin</p>
+<p>编译：Crush</p>
+<p>*全文约 3900字，预计阅读时间为 8分钟</p>
+<p>关键要点：</p>
+<ul>
+<li>
+<p>由于缺乏智能合约支持，与其他通用 L2 相比，ZkSync 1.0 的采用率低，使得 rollup 在代币转移和交换之外的效用最小</p>
+</li>
+<li>
+<p>Matter Labs 团队的目标是于10 月 28 日在主网上推出他们的 alpha zkEVM，这使他们成为第一个推出兼容 EVM 的通用智能合约 ZK rollup 的团队</p>
+</li>
+<li>
+<p>第一个启动 zkEVM 的团队可能会获得显著的先发优势，特别是如果以太坊交易费用的飙升将用户推离基础层</p>
+</li>
+<li>
+<p>zkSync 团队相信他们在降低硬件要求方面取得了重大突破，这样能更容易成为证明过程的积极参与者</p>
+</li>
+<li>
+<p>zkSync 的最终目标是通过他们的证明技术和蓬勃发展的 L3 生态系统驱动的意志，同时保持以扩展以太坊为焦点的目标</p>
+</li>
+</ul>
+<p>由 Matter Labs 于 2020 年推出的 ZkSync 1.0 是一种零知识 Rollup（ZKR），它依赖于以太坊的安全性，主要用于代币交换或转移。</p>
+<p>它不支持智能合约，因此今天 zkSync 1.0 上可用的产品是有限的，导致相对于其他以太坊扩展解决方案的采用率较低。Matter Labs 团队希望通过在 10 月 28 日在主网上启动他们的 alpha zkSync 2.0（一个 zkEVM）来解决这个问题。</p>
+<p>此外，Matter Labs 宣布将在 2023 年第一季度在测试网上推出 L3。</p>
+<h3 id="01zksync-10">01、ZkSync 1.0</h3>
+<p>尽管缺乏对智能合约的支持，ZkSync 1.0 已经成功吸引了超过 5400万美元的资金。zkSync 上的大部分 TVL 是 ETH 和各种稳定币，因为网络上除了代币转移和交换之外缺乏实用性，而且 NFT 铸造未能获得显著的吸引力。</p>
+<p>（推荐阅读：《PAData：zkSync链上交易次数骤增突破16万次，日新增存款地址超6000个》）</p>
+<p>许多拥有 Rollup 资金的用户可能会为不可避免的代币空投做准备，这应该可以捕捉到 zkSync 经济的未来增长。Optimism 和 Arbitrum 是两个最受欢迎的以太坊扩展解决方案，鉴于它们已经支持智能合约这一事实，它们看到了更多的用户活动。</p>
+<p>虽然日交易量不是一个完美的指标，但它却侧面反映了 zkSync 因为不支持智能合约而错过的交易量有多少。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1026/8_msqfyowmwz.png" alt="详解ZkSync：zkEVM、Layer3及愿景"></p>
+<p>zkSync 上的所有资金都在以太坊上的智能合约中得到保护，计算和存储在链下执行。交易被成批打包，在以太坊上结算，以在所有 L2 交易者之间平摊 Gas 成本，然后同时结算。</p>
+<p>Rollup 中发生的所有状态更改都作为 Calldata（调用数据） 以及确保状态更改有效的 SNARK 证明发布到以太坊。发布到以太坊的调用数据使任何人都可以重建 L2 状态，并且这比将整个 L2 状态存储在 EVM 上要便宜得多。</p>
+<p>与以太坊基础层相比，SNARK 能够以经济高效且及时的方式（即时确认和 15 分钟完成）验证大批量交易，并为 zkSync 提供巨大的交易吞吐量（例如 2000 tps 和 15 tps 的差距）。</p>
+<p>ZKR 提供了许多优于其他扩展架构的优势。ZKR 继承了以太坊的安全性，而像 Ronin 网络这样的侧链则受制于其自身验证器集中的漏洞。</p>
+<p>ZKR 也不依赖像 Optimism 或 Arbitrum 这样的欺诈证明，诚实的第三方必须监控区块中的恶意交易，并需要 7 天的挑战期来延迟资金提取。</p>
+<p>此外，无论验证者集（validator set）的状态如何，ZKR 上的资金总是可以由其合法所有者取回，这与要求验证者安全监控提款的等离子链（plasma chains）的情况不同。</p>
+<h3 id="02zkevm-的机会">02、zkEVM 的机会</h3>
+<p>Scroll、zkSync 和 Polygon 之间的 zkEVM 竞赛一直在升温，但 zkSync 看起来会在 10 月底推出其主网 alpha 版。先发优势对于团队取得成功有着不小的潜在影响，这一点是无法忽略的。</p>
+<p>MATIC 于 2017 年作为首批 EVM 兼容链之一推出，然后于 2021 年 2 月更名为 Polygon，并在以太坊交易费用飞涨的情况下吸引了大量 dApp 和用户。</p>
+<p>通过重新部署类似的代码，将应用程序迁移到 EVM 兼容链相对容易。无论哪个团队率先推出 zkEVM，都可能会看到 dApp 部署和用户活动的爆炸式增长，从而像 Polygon 在 2021 年那样建立强大的网络效应。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1026/8_69aihkwgc1.png" alt="详解ZkSync：zkEVM、Layer3及愿景"></p>
+<p>如前所述，侧链的安全性不如 ZKR，而领先的 ETH L2、Arbitrum 和 Optimism 都是 Optimism Rollup，其官方桥需要 7 天的退出期。L2 的采用继续占据上风，L2 支付给以太坊的总 gas 一直呈上升趋势。鉴于 zkEVM 的安全性和 UX 优于其以太坊侧链和Optimism Rollup 同行，zkEVM 的推出将成为这一趋势的顺风车。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1026/8_r6c5gk088v.png" alt="详解ZkSync：zkEVM、Layer3及愿景"></p>
+<h3 id="03zksync-的愿景">03、ZkSync 的愿景</h3>
+<p>ZkSync 2.0 的主网 alpha 发布将仅限于注册项目以参与公平发布的开发者。选择排除用户是为了确保 dApp 团队有足够的时间来确保其产品的顺利运行，保护用户免受任何错误的影响，并给 Matter Labs 团队更多的时间来迭代他们的 zkEVM 的设计。</p>
+<p>值得注意的是，Starkware 的 Starknet 是另一个处于 alpha 阶段的通用 ZKR 智能合约链，Starknet 使用他们自己的针对 ZKR 优化的语言 Cairo，而不是专注于 EVM 兼容性。</p>
+<p>然而，Wrap 正在开发一个 Solidity 到 Cairo 的转译器，它可以将其放入与 zkSync 的 zkEVM 类似的存储桶中。Cairo 的开发人员工具、最佳安全实践和开源库将远远落后于 Solidity。</p>
+<p>此外，Polygon 于 10 月 10 日在测试网上启动了他们的 zkEVM，尽管 zkSync 已经在测试网上运行了大约 9 个月。</p>
+<p>ZkSync 通过将以太坊上的高级智能合约源代码 Solidity 编译为 Yul 来实现 EVM 的兼容性；Yul 一种中间语言，可以编译成不同虚拟机的字节码。</p>
+<p>然后使用 LLVM 编译器框架将 Yul 代码重新编译为为 zkSync 的 zkEVM 设计的自定义、电路兼容的字节码集。这种方法绕过需要通过直接从更高级别的代码开始对 EVM 执行中的所有步骤进行 zk 证明，从而在保持高性能的同时更容易分散证明过程。</p>
+<p>未来可以通过构建新的编译器前端来添加对 Rust、Javascript 或其他语言的支持，从而为其 zkEVM 架构增加灵活性。需要指出的是，zkEVM 与 EVM 兼容，在字节码级别上并不等同。</p>
+<p>因此，虽然几乎所有的以太坊智能合约代码都可以直接移植到 rollup 中，但在某些异常情况下，一些代码需要更改并可能需要重新审核，以及调试工具。如果不进行细微调整就无法兼容。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1026/8_kzpvcsbnra.png" alt="详解ZkSync：zkEVM、Layer3及愿景"></p>
+<p><strong>帐户抽象</strong></p>
+<p>与以太坊的默认行为相比，正在zkEVM中实现的一个主要改进是账户抽象的想法。以太坊的核心架构支持两种类型的账户：外部拥有账户（EOA），即由私钥控制的公共地址，可用于签署交易（例如 Metamask 钱包），以及根据底层代码操作且无法发起的合约账户交易。这里的主要目标是将持有代币的账户与授权交易的签名者分离。</p>
+<p>zkSync 的 zkEVM 中的 EOA 当然能够发起交易，但也能够像以太坊上的智能合约账户一样在其中实现任意逻辑。这就是所谓的“账户抽象”，与EIP-4337非常相似，只是稍作修改，为用户提供更流畅的体验。</p>
+<p>可以补偿其他账户交易的账户称为 Paymasters。在实践中，Paymaster 账户应启用协议以代表其用户以 ETH 或各种 ERC-20 代币支付交易费用。</p>
+<p>随着应用场景的发现，帐户抽象可以为钱包提供商开辟一条新的创新途径。值得注意的是，这是一个仍在迭代中的新颖想法，用户应谨慎对待。</p>
+<p><strong>zkPorter</strong></p>
+<p>zkEVM 竞赛是目前 L2 的主要叙事，但值得商榷的是 zkSync 的 zkPorter。虽然 zkEVM 将为以太坊带来一个数量级的扩展，但仍然需要 ZKR 将数据发布到以太坊基础层，这降低了它们的潜在规模。</p>
+<p>zkPorter 的引入将 zkSync 的 zkEVM 牢牢地置于意志范畴，这意味着用户可以决定将他们的数据存储在链上还是链下。优先考虑安全性而不是吞吐量和极低交易费用的用户将选择在 Rollup 上进行活动以保证数据可用性。</p>
+<p>那些优先考虑吞吐量和降低交易费用而不是安全性的用户将在 zkPorter 上进行他们的活动，在 zkPorter 上发布数据并在链下可用。</p>
+<p>所有 zkPorter 交易数据都将发布到 Guardian 网络，这是一个由最终的 zkSync 代币保护的 PoS 网络。Guardian 将通过签署区块来跟踪 zkPorter 端的状态，以确认数据可用。</p>
+<p>恶意行为的 Guardian 将被削减，这为数据可用性提供了加密经济保证。与 Optimistic rollups 相比，如果数据被移出链外，恶意操作者将能够窃取 rollup 上的任何资金，而恶意的 Guardian 只能冻结 zkPorter 状态，这反过来又会冻结他们自己的资金。</p>
+<p>此外，购买所有非质押的 zkSync 代币来发动此类攻击将花费大量资金，并在此过程中导致重大滑点。</p>
+<p>zkSync 在 ZKR 和 zkPorter 方面采用的双账户方法将为用户提供一个全方位的目的地来进行他们的活动，同时保持高安全性保证。ZKR 和 zkPorter 双方的智能合约和账户将完全可以相互组合。</p>
+<p>例如，Aave 可以在 ZKR 上启动他们的合约代码以获得最大的安全性，但用户仍然可以通过他们在 zkPorter 端的账户与合约进行交互，以实现更低的费用和更高的吞吐量。zkPorter 的最终设计仍在进行中，因此计划可能会发生变化。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1026/8_b4hr3jk98l.png" alt="详解ZkSync：zkEVM、Layer3及愿景"></p>
+<p><strong>Layer 3</strong></p>
+<p>虽然没有太多的信息披露，但 Matter Labs 最近宣布了他们的目标，即在 2023 年第一季度推出由其 zkEVM 提供支持的 layer3。</p>
+<p>被称为“机会”的 ZKR L3 很可能是有史以来第一个在测试网上推出的 L3。我们的愿景是拥有无数个完全可定制的“HyperChain”，它们都通过本地桥梁相互连接，从而将安全互操作性的理念变为现实。</p>
+<p>Pathfinder 将是高度实验性的，但它是新区块链扩展架构研发的合乎逻辑的下一步。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1026/8_r67gbmbgeb.png" alt="详解ZkSync：zkEVM、Layer3及愿景"></p>
+<p>构建 L3 验证的第三方将能够选择他们公开可用的数据，从而为用户提供隐私。这些团队还将被授权推出自己的代币，以捕捉他们正在构建的东西的利好。</p>
+<p>这些代币还可以在分散其证明过程、排序器或数据可用性解决方案方面发挥关键作用。在可定制性方面，可以在 Cosmos 的应用程序特定链和 zkSync 的 L3 之间进行比较。</p>
+<p>主要区别在于后者支持以太坊的安全性以及链之间完全可互操作的资产，而无需像 IBC 这样的通用消息传递协议。</p>
+<p>ZkSync 希望通过靠着自己的突破性研究，即在不牺牲性能的情况下降低参与证明过程的硬件要求，能够成为这个行业的标准。</p>
+<p>这会将他们的 ZKR、zkPorter 和所有其他 zkSync L3 放在同一条道路上，并消除反复被利用的桥接攻击向量。尽管这一愿景雄心勃勃，但它将使交易成本和速度、开发人员和用户体验、互操作性和安全性提高 10-100 倍。</p>
+<p>剩下的主要问题有两个：在字节码级别上不等同于 EVM 的 L2 能否成为行业标准，竞争用户意识份额的 L2 和 L1 团队是否会抛开差异，将区块链扩展到大众？</p>
+<h3 id="04最后的想法">04、最后的想法</h3>
+<p>ZkSync 长期以来一直是零知识密码学的先驱，他们在扩展以太坊的道路上继续开拓。他们在 10 月底之前在主网上推出了第一个 zkEVM，这可以为他们提供显着的先发优势，并使他们能够建立强大的网络效应。</p>
+<p>他们在 zkPorter 和 ZKR 上使用可互操作帐户双管齐下的方法是一种独特的策略，这对开发人员和用户最终都有利。Matter Labs 为所有链创建标准证明者的愿景雄心勃勃，如果他们真的开发了到目前为止最先进的证明者，那将大获成功。</p>
+<p>这将为具有合理主权、高性能和安全互操作性的 L3 生态系统打开大门。与他们的策略相关的主要风险是他们为 zkEVM 选择的底层架构：在高级智能合约代码级别的以太坊兼容 ZKR，而不是字节码级别的 EVM 等效性，或者通过创建一种新的编程语言并完全消除 EVM 兼容性。</p>
+<p>有团队在研究上述所有三种策略，只有时间才能证明哪种以太坊的拓展方案是对的。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43876/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">万字长文：全面解读新公链新生态</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43879/">
+                <span class="next-text nav-default">新加坡将禁止散户投资者使用信用卡交易加密货币</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#01zksync-10">01、ZkSync 1.0</a></li>
+        <li><a href="#02zkevm-的机会">02、zkEVM 的机会</a></li>
+        <li><a href="#03zksync-的愿景">03、ZkSync 的愿景</a></li>
+        <li><a href="#04最后的想法">04、最后的想法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

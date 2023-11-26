@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          闪电网络中的 “洋葱路由” 是什么 及其工作原理 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="闪电网络协议中的支付消息传输部分由 BOLT#4 描述，也叫 “洋葱路由协议（Onion Rounting Protocol）”。" />
+<meta name="keywords" content="Lightning" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/52044/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="闪电网络中的 “洋葱路由” 是什么 及其工作原理" />
+<meta property="og:description" content="闪电网络协议中的支付消息传输部分由 BOLT#4 描述，也叫 “洋葱路由协议（Onion Rounting Protocol）”。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/52044/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-27T00:00:00+00:00" />
+
+<meta itemprop="name" content="闪电网络中的 “洋葱路由” 是什么 及其工作原理">
+<meta itemprop="description" content="闪电网络协议中的支付消息传输部分由 BOLT#4 描述，也叫 “洋葱路由协议（Onion Rounting Protocol）”。"><meta itemprop="datePublished" content="2023-05-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5388">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="闪电网络中的 “洋葱路由” 是什么 及其工作原理"/>
+<meta name="twitter:description" content="闪电网络协议中的支付消息传输部分由 BOLT#4 描述，也叫 “洋葱路由协议（Onion Rounting Protocol）”。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">闪电网络中的 “洋葱路由” 是什么 及其工作原理</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-27">
+      2023-05-27
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5388 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：LORENZO  编译：btcstudy</p>
+<p>一个网络中的计算机依据协议跟彼此交流。在这里，“协议” 指的是一套规则系统，指定了消息应该如何传输和解读。闪电网络协议中的支付消息传输部分由 BOLT#4 描述，也叫 “洋葱路由协议（Onion Rounting Protocol）”。</p>
+<p>洋葱路由是一种先于闪电网络 25 年诞生的技术。它也被用在 Tor 中，正是 “Tor” 这个名字（“The Onion Router”）的由来。闪电网络使用的是一个稍微修改之后的版本，叫做 “基于来源的洋葱路由”，缩写是 “SPHINX”。在这篇文章中，我们就要讲讲洋葱路由是怎么工作的。</p>
+<h2 id="为什么要使用洋葱路由">为什么要使用洋葱路由？</h2>
+<p>世界上存在许多不同的通信协议，但因为闪电网络是一个支付网络，选择一个尽可能少揭示正被转发的支付的信息的协议，就是合理的。</p>
+<p>如果闪电网络使用跟互联网一样的协议，每一个中间人都会知道谁是支付的发送者、谁是接收者、整条路径上的其他中间人是谁。洋葱路由是一个好的选择，因为其特性保证了中间节点：</p>
+<ul>
+<li>
+<p>只知道自己的上一个节点（谁给自己发来了消息）和下一个节点（要把消息转发到哪里去）。</p>
+</li>
+<li>
+<p>不知道整条路径的长度；</p>
+</li>
+<li>
+<p>不知道自己在路径中的位置。</p>
+</li>
+</ul>
+<h2 id="概述洋葱路由">概述洋葱路由</h2>
+<p>我们用包裹作为类比，解释一下洋葱路由是怎么工作的。</p>
+<p>假设 Alice 要给 Dina 支付。首先，Alice 要为自己的支付找出一条可行的路径：</p>
+<p>Alice → Bob → Chan → Dina</p>
+<p>然后，她构造出一个 “洋葱”。她要从 Dina 开始（从路径的末端开始）。她把一个秘密消息（支付内容）放在一个发送给 Dina 的包裹中，并且使用一个只有她和 Dina 知道的密钥来上锁。现在，她把这个包裹放到另一个准备发送给 Chan 的包裹中，并且使用只有她和 Chan 知道的密钥，给这个发送给 Chan 的包裹上锁。对以此类推。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_osp459feqd.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p>Alice 把最终的洋葱（包裹）发给路径上的第一个中间人，Bob。Bob 使用自己的密钥解锁自己的包裹，然后看到下一个包裹是发送给 Chan 的。于是他把包裹转发给 Chan。Chan 也一样，解开包裹之后，把里面那个包裹转发给 Dina。最后，Dina 打开属于自己的包裹，发现其中的支付消息。</p>
+<p>在洋葱路由中，像 Bob 和 Chan 这样的中间人，并不知道给 Dina 的信息的内容，也不知道整条支付路径的长度。他们唯一知道的，就是给他们转发这个包裹的人，以及下一个接收包裹的人。这保证了消息的隐私性和路径的机密性。每一个中间人都只能触及专门为 TA 制作的那一层消息。</p>
+<p>在闪电网络的基于来源的洋葱路由中，发送者选择支付路径，并为这条路径构造出完整的洋葱，这可以被视为隐私漏洞（译者注：接收者的网络位置必须向发送者曝光）。别的路由方案比如 “盲化路由”（中文译本），通过向发送者混淆部分支付路径来解决这个问题。不过，在这篇文章中，我们专讲 SPHINX。</p>
+<h2 id="组装洋葱">组装洋葱</h2>
+<p>现在，我们来了解一下洋葱路由的规范。在一开始，我们需要定义这些东西：</p>
+<ul>
+<li>
+<p>发送者是 “最初节点”（Alice）；</p>
+</li>
+<li>
+<p>接收者是 “最终节点”（Dina）；</p>
+</li>
+<li>
+<p>支付路径上的每一个中间节点都是一 “跳”（Bob 和 Chan）；</p>
+</li>
+<li>
+<p>每一跳之间的通信信息，叫做 “跳的负载”。</p>
+</li>
+</ul>
+<h3 id="建构跳的负载">建构跳的负载</h3>
+<p>一旦 Alice 选出了一条支付路径，她就从 gossip 协议中获得每一条支付通道的信息，以创建每一跳的负载，本质上这就是在告诉每一跳，如何为正在转发的支付创建 HTLC（哈希时间锁合约）。</p>
+<p>为了建立一个合适的 HTLC，每一跳都需要：</p>
+<ul>
+<li>
+<p>需要转发的数额；</p>
+</li>
+<li>
+<p>支付的秘密值；</p>
+</li>
+<li>
+<p>继续发送洋葱的支付通道的 ID；</p>
+</li>
+<li>
+<p>时间锁的长度。</p>
+</li>
+</ul>
+<p>这些数据中的大部分，都来自 “通道更新” 消息，这样的消息包含了关于路由手续费、事件所要求、支付通道 ID 的信息。需要转发的总数额，是支付的数额加上后续每一跳所收取的手续费总和；而支付的秘密值则是由 Dina 计算出来并嵌进支付发票中的（由洋葱消息告知路径上的每一跳）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_84ztzi7iqz.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_zsc0gafq4n.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p>Alice 从最终节点 Dina 开始。她在包裹中包含转发数额、时间锁时长数值、支付秘密值以及支付数额。注意，她不需要再加入通道 ID，因为 Dina 就是最终节点，不需要再将支付转发给其他人。</p>
+<p>乍看起来，提供转发数额是多余的，因为这个数额跟支付数额是一样的，但是，多路径（multipath）支付会将支付总额通过多条路径送达，那时候两个数值就会不一致。</p>
+<p>在 Chan 的负载中，Alice 加入 Chan 跟 Dina 的通道 ID。她还添加了转发数额以及时间锁数值。最后，Alice 创建给 Bob 的负载。Chan 为通过自己跟 Dina 的通道的支付收取 100 聪，因此，Alice 需要告诉 Bob 的转发数额是支付额加上手续费。根据 Chan 的通道更新消息，时间锁的数值也提高了 20（以区块为单位）。最后，Alice 也要考虑 Bob 的手续费和时间锁要求，给他一个时间锁长度为 700040、价值为 100200 聪的 HTLC。</p>
+<h3 id="共享秘密值与密钥生成">共享秘密值与密钥生成</h3>
+<p>下一笔，Alice 通过为每一跳（包括最终节点）生成一个共享秘密值（shared secret），准备好洋葱。这个共享秘密值可以由 Alice 和目标那一跳各自生成出来，办法就是用自己的私钥与对方的公钥相乘。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_brkio7sqme.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p>共享秘密值对洋葱路由来说是必要的，这让 Alice 和每一跳可以推导出相同的密钥。然后，Alice 使用这些密钥来混淆洋葱的每一层，而那一跳则使用密钥来解开混淆。</p>
+<p>为了保护 Alice 的隐私，她会为一个洋葱创建一个一次性的会话密钥，而不是使用自己的节点公钥，以推导共享秘密值。她给第一跳使用这个会话密钥，然后，对后续的每一跳，Alice 都将最新的密钥乘以一个盲化因子，从而确定性地随机化密钥。这些用来创建共享秘密值密钥，我们叫做 “临时密钥” 。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_u3sbaul9ts.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p>Bob、Chan 和 Dina，都需要跟 Alice 得到相同的秘密值，因此，他们需要知晓用在自己的会话中的临时密钥。Alice 只将第一个密钥放到洋葱中，以节约消息的体积。每一跳都计算下一个临时密钥，并将它嵌在给下一个节点的洋葱中。各跳可以使用自己的公钥和共享秘密值计算出 Alice 所用的盲化因子，从而确定下一个临时密钥。</p>
+<p>如前所述，共享秘密值会被用来生成一些密钥，Alice 和对应跳可以用这些密钥对洋葱做一些操作。我们来看看每一个密钥的用途。</p>
+<p><strong>Rho key</strong></p>
+<p>Rho key 被 Alice 用来加密一层洋葱；这样会混淆负载的内容，使外人无法解读。只有 rho key 的主人可以解密负载。这就是收到洋葱的节点要做的事：使用跟 Alice 的共享秘密值推导出 rho key，然后解密洋葱、阅读内容。</p>
+<p><strong>Mu key</strong></p>
+<p>Alice 使用 mu key 来为每一个负载创建一个校验和。她也会把校验和交给接收洋葱的那一跳。反过来，这一跳会使用 mu key 生成所收到的负载的校验和，检查是否与 Alice 给出的相匹配。这是为了检查负载的完整性，验证它没有被篡改过。</p>
+<p><strong>Pad key</strong></p>
+<p>这个密钥仅为 Alice 所用，用来生成随机的 “垃圾” 数据。这些数据也是洋葱的一部分，而且它跟支付路径的长度、洋葱已经通过多少跳无关，它让洋葱总是保持相同的体积，即使其某些内容需是无关紧要的。这就是洋葱路由如何隐藏路径长度的，实际上就是在保护发送者和接收者的隐私。</p>
+<p><strong>Um key</strong></p>
+<p>这个密钥也用来检查洋葱内包含的数据的完整性，但仅在回传错误时使用。没错，它叫做 “um” 是因为这是 “mu” 的倒写。在支付出错的情形中，发现错误的那一跳将使用 um key 创建一个校验和，当前一个节点收到这个报错时，也使用 um key 来验证消息的完整性。</p>
+<h3 id="封装洋葱层">封装洋葱层</h3>
+<p>最终的洋葱包裹看起来是这样的：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_ywd59rabnm.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p>现在，Alice 拥有了给每一跳的负载，以及给每一跳的共享秘密值。我们来看看 Alice 如何将这些信息转化为最终的洋葱。她先从最终节点开始，然后一步一步往回推。</p>
+<p>她先创建一个空的、长为 1300 字节的域，这也是所有洋葱负载的总长。然后，她使用 pad key创建一段长为 1300 字节的随机串，这就是对任何一跳都没用的垃圾。做这一步，是为了确保每一层洋葱看起来都是一样的，所以既无法看出路径的总长（有多少跳），也看不出谁是发送者、谁是接收者。</p>
+<p>然后，她给需要使用的负载创建一个校验和，并放在负载的末尾。在给最终节点的消息中，校验和全部为 0，以告知 Dina，她就是这个洋葱的最终接收者。把校验和添加到负载的末尾之后，Alice 就把负载（以及校验和）放到垃圾的开头，并删去整条消息超过 1300 字节的部分，以保证整个消息的长度就是 1300 字节。</p>
+<p>然后，Alice 使用 rho key 创建一个随机字节串，并对上一步得到的洋葱负载使用异或（XOR）运算，得到混淆后的负载。负载的原文可以通过对混淆文使用这个随机字节串的 XOR 运算得到（译者注：换言之，这里的 XOR 就是对称加密的算法，而随机字节串就是密钥）。XOR 操作会逐比特对比洋葱负载和（由 rho key 生成的）随机字节串，仅当其中一个数据的比特是 1 时，才会输出 1；这就得出了一个混淆后的负载。XOR 操作巧妙的地方在于，只要你得到了对的那个随机字节串以及混淆后的负载，只需用两者再次运行 XOR 操作，就可以得到混淆之前的负载。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_5y97qpah35.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p>因为收到洋葱的节点可以推导出相同的 rho key，可以他们可以生成跟 Alice 一样的随机字节串。这就是沿路的各个节点可以解开混淆、读到内容的办法。</p>
+<p>准备好一跳的混淆洋葱后，Alice 就给下一个节点重复相同的步骤。关键区别在于，完成 Dina 的洋葱之后，她就不再需要生成垃圾了。她只需在有用的负载和校验和之后接上上一步所生成的混淆洋葱，再剪去超过 1300 字节的部分。下面这个 GIF 演示了整个过程：https://youtu.be/FzedRXqZDyY</p>
+<p>最后，Alice 拿到最终的混淆洋葱并添加一个校验和，这样 Bob 就可以验证这个洋葱的完整性。然后，Alice 加入会话公钥，这样 Bob 就可以使用这个公钥来计算共享秘密值。最后，她还要加上一个表示版本的字节，告知其它节点如何解读其中的数据。对 BOLT#4 所描述的版本来说，版本字节应为 0。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_hpkuhfqzvm.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<h2 id="转发洋葱">转发洋葱</h2>
+<p>为了发送这个洋葱包裹，发送者创建一条 <code>update_add_htlc</code> 消息，包含下列字段：</p>
+<ul>
+<li>
+<p>通道 ID：这个消息所关乎的具体通道。</p>
+</li>
+<li>
+<p>ID：这个 HTLC 的标识符。</p>
+</li>
+<li>
+<p>数额：这个 HTLC 的价值。</p>
+</li>
+<li>
+<p>支付哈希值：由支付的接收方创建。</p>
+</li>
+<li>
+<p>过期时间：这个 HTLC 将在一定区块之后过期。</p>
+</li>
+<li>
+<p>洋葱包裹：为这笔支付创建的洋葱，也就是上面讲到的东西。</p>
+</li>
+<li>
+<p>额外的数据：用来指定额外的数据。</p>
+</li>
+</ul>
+<p>准备好消息后，Alice 就把消息发送个 Bob。收到消息后，Bob 就可以开始解码属于自己的洋葱了。他先从洋葱包裹中获得会话密钥，然后使用它推导出跟 Alice 的共享秘密值。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0527/7_wqrqgo2yue.png" alt="闪电网络中的 “洋葱路由” 是什么  及其工作原理"></p>
+<p>有了共享秘密值，Bob 生成 mu key，以验证嵌在洋葱包裹中、负载的校验和。如果负载没有被篡改过，校验和应该能匹配上。</p>
+<p>为了防止路径中的其他节点知道路径有多长，Bob 会在洋葱包裹内增加一个 1300 字节长、充满了 0 的字段。然后，Bob 从 rho key 中生成一个 2600 字节长的随机字节串。Bob 使用这个随机字节串，对填充了 0 的洋葱负载作 “异或” 运算。</p>
+<p>还记得我怎么跟你说混淆洋葱负载的吗？使用混淆后的洋葱负载作为输入，跟相同的字节串运行 “异或” 操作，就能得到混淆前的洋葱负载。因为 Alice 和 Bob 使用相同的共享秘密值，生成了相同的 rho key，Bob 可以解开混淆。这样做的额外好处是，它又将 1300 字节长的填充字符变成了随机字节。</p>
+<p>Bob 解开混淆的负载中包括了他这一跳的负载数据以及一个指纹。Bob 保存这个指纹，以便将它添加到发送给 Chan 的洋葱包裹中。在 Bob 将属于自己的负载从洋葱消息中分离出来后，他将洋葱包裹转回 1300 字节的原始大小，并跟 Alice 一样随机化自己的会话密钥。最后，Bob 加上版本字节、会话密钥以及他准备放在洋葱负载中的指纹，就通过 <code>update_add_htlc</code> 消息将洋葱包裹转发给 Chan。</p>
+<p>这个过程会一直持续，直至消息送到最终节点，Dina。当 Dina 收到 <code>update_add_htlc</code> 消息时，她可以揣进到自己所生成的秘密值的哈希值，这说明这个 HTLC 就是要发给她的。因此，Dina 只需检查指纹、解开洋葱消息、揭晓属于自己的负载。这个动图演示了整个过程：https://youtu.be/NhHAE6m9L6A</p>
+<h2 id="故障处理">故障处理</h2>
+<p>我们介绍的是一个成功案例，也就是一切都按部就班的案例，但如果这个过程发生了一些错误，那就必须一路回传一条消息，以通知所有节点出了问题。这个过程跟常规的洋葱路由类似。发现一个错误的故节点需要从共享秘密值中推导出 um key，并使用它生成一个随机字节串，然后使用异或运算来混淆返回的洋葱包裹。</p>
+<p>发现错误的节点将给支付路径的上一个节点回传一条消息。每一跳都使用 um key 和 ammag key 作相同的操作，直到发送者收到这个包裹。最后，发送者分别使用 ammag key 和 um key 解开包裹的混淆并验证。</p>
+<p>错误可能由洋葱包裹、节点或通道引起。如果你经常使用闪电网络，你可能遇到过这样的错误，比如 “通道不可用” 或 “手续费不足”。</p>
+<p><em>参考文献</em></p>
+<p><em>Mastering the Lightning Network</em></p>
+<p><em>BOLT #4: Onion Routing Protocol</em></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/52040/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">全链游戏面面观：空中楼阁还是沙漠绿洲</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/52045/">
+                <span class="next-text nav-default">数据回顾比特币铭文爆发的「疯狂一周」</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么要使用洋葱路由">为什么要使用洋葱路由？</a></li>
+    <li><a href="#概述洋葱路由">概述洋葱路由</a></li>
+    <li><a href="#组装洋葱">组装洋葱</a>
+      <ul>
+        <li><a href="#建构跳的负载">建构跳的负载</a></li>
+        <li><a href="#共享秘密值与密钥生成">共享秘密值与密钥生成</a></li>
+        <li><a href="#封装洋葱层">封装洋葱层</a></li>
+      </ul>
+    </li>
+    <li><a href="#转发洋葱">转发洋葱</a></li>
+    <li><a href="#故障处理">故障处理</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

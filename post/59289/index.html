@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深度解析Flatcoins稳定币：概念、设计和挑战 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文是对“Flatcoins”的探索，Coinbase 将其视为可根据通货膨胀率进行调整的算法半稳定币。这个特定的用例提出了一个有趣的控制理论设计挑战。" />
+<meta name="keywords" content="穩定幣" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59289/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深度解析Flatcoins稳定币：概念、设计和挑战" />
+<meta property="og:description" content="本文是对“Flatcoins”的探索，Coinbase 将其视为可根据通货膨胀率进行调整的算法半稳定币。这个特定的用例提出了一个有趣的控制理论设计挑战。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59289/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="深度解析Flatcoins稳定币：概念、设计和挑战">
+<meta itemprop="description" content="本文是对“Flatcoins”的探索，Coinbase 将其视为可根据通货膨胀率进行调整的算法半稳定币。这个特定的用例提出了一个有趣的控制理论设计挑战。"><meta itemprop="datePublished" content="2023-09-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4858">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深度解析Flatcoins稳定币：概念、设计和挑战"/>
+<meta name="twitter:description" content="本文是对“Flatcoins”的探索，Coinbase 将其视为可根据通货膨胀率进行调整的算法半稳定币。这个特定的用例提出了一个有趣的控制理论设计挑战。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深度解析Flatcoins稳定币：概念、设计和挑战</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-17">
+      2023-09-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4858 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>编译：MarsBit</p>
+<p>本文是对“Flatcoins”的探索，Coinbase 将其视为可根据通货膨胀率进行调整的算法半稳定币。这个特定的用例提出了一个有趣的控制理论设计挑战。</p>
+<p>**<strong>简介：什么是</strong> <strong>Flatcoins</strong> <strong>？</strong> **</p>
+<p>Flatcoins 是一种新兴的代币经济学概念，其中利息代币作为一种价值储存手段，会随着时间的推移调整其估值以跟踪通货膨胀的变化。既定目标是保护代币持有者和/或特定利益群体（例如平台用户）的购买力。</p>
+<p>Flatcoin 的一个简单例子是虚构的“i-DAI”：一种通货膨胀校正 DAI。i-DAI 将与参考时间挂钩，其价格将根据通货膨胀的变化实时调整，从而保存 i-DAI 持有者的购买力。下表展示了这种程式化的行为。正如我们将在本文中看到的那样，<strong>尽管 i-DAI 目前只是一个虚构的故事，但它可以通过使用基于控制器的稳定币（CBS）变成现实</strong> ，该稳定币已经通过示例在生产中存在像 RAI 一样。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0917/14_uu5apzf611.png" alt="通货膨胀"></p>
+<p>该表格显示了 DAI 和 i-DAI（一种虚构的经通胀调整的 DAI）之间的估值差异。(*)DAI 中的巨无霸价格是一个虚构的示例，用于说明 CPI 对商品的影响。</p>
+<p><strong>什么是通货膨胀？</strong></p>
+<p>在经济学中，<strong>通货膨胀</strong> <strong>被理解为商品和服务价格的普遍上涨</strong> ，导致用于计价的货币持有者的<strong>购买力下降。</strong> 在 web3 中，通货膨胀经常（相当令人困惑）用来描述代币供应扩大的影响，尽管这种现象在传统经济术语中更准确地描述为“稀释” 。在本文的其余部分中，我们将坚持之前的通货膨胀定义。</p>
+<p>在通货膨胀环境中，货币持有者的购买力可能会下降，从而损害对该货币和整个经济体系的信任。因此，通货膨胀被认为是任何经济体的一个关键指标，世界各地的中央银行都有特定的任务，要求其管理的法定货币的年通货膨胀率保持在较低水平（通常在 2% 至 4% 左右）。然而，正如当前全球经济的最新经验所表明的那样，这并非易事。</p>
+<p>鉴于近期全球经济的通胀压力，Coinbase 提出设计一种经过通胀调整的“Flapcoins”。Flatcoins 的既定目标是“<strong>保持购买力的稳定性，同时具有</strong> 对传统金融体系造成的经济不确定性的弹性”。再说一遍，这不是一件容易的事——接下来让我们来看看 Flatcoins 设计中固有的一些挑战。</p>
+<p><strong>Flatcoin 设计挑战</strong></p>
+<p>Flatcoins 是一个独特的设计主张，因此它包含几个需要单独和同时解决的挑战。我们将在本文后面深入探讨其中一些挑战的细节。核心挑战是准确感知通货膨胀并制定适当的激励措施。</p>
+<p>具体而言，通货膨胀与经济学中的许多概念一样，在复杂自适应系统的范式内运行。这意味着不同因素和变量之间存在大量的动态相互作用，包括影响通货膨胀原因和影响的不可预测的人类行为。这对 Flatcoins 设计提出了挑战，任何实施都需要注意许多考虑因素，包括但不限于：</p>
+<ul>
+<li>
+<p>通货膨胀指数的低时间粒度</p>
+</li>
+<li>
+<p>传感器测量时空调节的困难</p>
+</li>
+<li>
+<p>传感器融合的复杂性和有效的控制器设计</p>
+</li>
+<li>
+<p>通过适当的激励措施推动平币经济变革的挑战</p>
+</li>
+</ul>
+<p>**<strong>可行的</strong>  <strong>Flatcoins</strong>  <strong>设计：基于控制器的半稳定币</strong> **</p>
+<p>构建 Flatcoins 的一个有前途的方法是重用目前部署中的一些最成功的稳定币：这些稳定币基于使用控制器作为感知价格变化和重新调整参与者激励的方式的概念，以便所持有的代币价值趋于跟踪一个参考值。</p>
+<p>这就是基于控制器的稳定币（CBS），RAI 就是这一类代币的一个部署实例。RAI 的灵感来源于类似的理论和实践问题——RAI 采用控制器的理由之一是，有研究表明，中央银行在控制通货膨胀时的历史行为可以用 PID 控制器来很好地描述。Hawkings 等人 2014 年的理论研究和 Shepherd 等人 2019 年的实证研究都证明了这一点。</p>
+<p>鉴于 RAI 作为一种基于控制器的稳定币所表现出的稳定性，接下来我们将把 RAI 作为一个案例进行研究，并介绍一种可行的基于 CBS 的 Flatcoins 设计的组成部分。</p>
+<p><strong>RAI 作为案例研究</strong></p>
+<p>RAI 是一种 CBS，它倾向于仅通过使用由无监督的 PI 控制器引导的经济激励措施以及在任何时间点“感知” RAI/USD 价格的预言机来跟踪美元价值。</p>
+<p>在用户体验方面，RAI允许用户以ETH作为抵押品在RAI中进行超额抵押贷款。未偿债务以 RAI 计价，该债务的利率（或赎回率，在 RAI 生态系统中称为）由实施的 PI 控制器定义。可获得的贷款金额由所谓的赎回价格决定，实际上，赎回价格往往会密切跟踪 RAI 市场价—— 差异通常约为 1%。</p>
+<p>利率调整的逻辑基于 RAI 的市场价格（以每美元 RAI 计价）和 RAI 赎回价格（也以每美元RAI计价）之间的差异。当赎回价格高于市场价格时，利率往往会上升。当它低于时，它往往会减少（甚至变为负值！）。</p>
+<p>即使没有挂钩并使用波动性资产（ETH）作为抵押品，RAI 的价格也相当稳定，这是因为它的反周期激励。市场价格由 RAI 买家和卖家的二级市场决定，因此具有波动性，赎回价格由 PI 控制器决定，因此具有阻尼性。因此，当两个价格之间<strong>存在较大差异时，理性用户就会有套利的动机。</strong></p>
+<p>具体来说，当市场价格高于赎回价格时，合理的做法是获取 RAI 贷款，将其出售给二级市场以获取利润，等待两个价格趋同，然后从二级市场购买 RAI 以偿还债务中立立场。如果市场价格长期高于 RP，这尤其方便，因为赎回率可能会变为负值，从而产生套利利润和利率利润。无论如何，从系统中获利往往会使 RAI 代币市场价格保持稳定。</p>
+<p>对于相反的情况（赎回价格高于市场价格），有利可图的行动是从二级市场购买尽可能多的 RAI 并持有直到价格收敛，或者用它来平仓任何未平仓的 RAI 头寸。第一个行动倾向于减少市场上流通的 RAI，第二个行动将销毁 RAI。两者都会促使系统走向市场价格趋同。</p>
+<p>RAI 背后的控制器的优点在于，所有这些控制器引发的激励都是由外部基准驱动的，即通过外部预言机获取的 RAI/USD 价格。<strong>RAI 并不直接依赖于拥有任何美元股票或流动性池来实现其价格稳定。</strong></p>
+<p>对于设计 Flatcoins，RAI 设计代表了构建 MVP 的自然点，并且<strong>需要两件事：1）通货膨胀预言机，以及 2）用于</strong> 通货膨胀测量的适当调整的控制器。</p>
+<p><strong>有关 RAI 的更多资源：</strong></p>
+<ul>
+<li>
+<p>反射金融</p>
+</li>
+<li>
+<p>召唤财神。将控制理论应用于…… | 通过块科学 | 反射器| 中等的</p>
+</li>
+<li>
+<p>研讨会 #1：RAI 研讨会 — 为金钱之神建模</p>
+</li>
+<li>
+<p>GitHub — BlockScience/reflexer: Reflexer 实验室，RAI</p>
+</li>
+<li>
+<p>GitHub — BlockScience/reflexer-digital-twin：基于 cadCAD 的工具包，用于执行 GEB 部署的自动化例行测试和未来预测</p>
+</li>
+</ul>
+<p><strong>去中心化控制的挑战</strong></p>
+<p>确定调优控制器和通货膨胀预言机是基于 MVP CBS 的 Flatcoin 的关键组件后，我们可以着手提炼围绕这两者的挑战。</p>
+<p>由于通货膨胀的空间、时间和成分特性（如本文后面所述），全面测量通货膨胀从根本上来说是去中心化控制系统设计的一个挑战。</p>
+<p>从控制理论的角度来看，平币设计挑战可以理解如下：</p>
+<ol>
+<li>
+<p>存在一个地理分布的**“工厂”** ，即商品和服务的市场，它在不同时间、不同地点发出不同商品的价格信号。</p>
+</li>
+<li>
+<p>第一步是设计一组<strong>传感器</strong> ，拾取相关信号（以正确的频率，从适当的位置），并在适当的时间和空间尺度上将它们融合在一起。</p>
+</li>
+<li>
+<p>然后，这些信号可以被输入<strong>控制器</strong> ，以便被处理成足够丰富的世界<strong>模型，目标是估计系统所需的市场干预，从而使平币价值按预期发展。</strong></p>
+</li>
+<li>
+<p>然后，该系统将要求<strong>执行者</strong> 提供激励措施，推动二级市场调整平币价值以与通货膨胀保持一致。</p>
+</li>
+</ol>
+<p>在下一节中，我们将探讨控制理论的一些基础知识，以进一步解决设计问题。</p>
+<p><strong>了解复杂自适应系统中的控制理论</strong> <strong>定义环境</strong></p>
+<p>在控制理论中，系统的“边界”或<strong>环境必须始终被定义。</strong> 可以定义一个模型，该模型可以充分理解这些边界内的世界，以便在该系统内做出受控决策。下面我们将探讨控制系统的各个部分。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0917/14_u5uls6o23t.png" alt="通货膨胀"></p>
+<p>控制系统及其组件的程式化图。</p>
+<p><strong>工厂</strong> 是指被控制的物理或数学系统。这可以是机械系统、电路，甚至生物系统。工厂最初指的是工厂和生产工厂，这些工厂配备了恒温器和其他用于调节温度控制的传感器。</p>
+<p><strong>传感器</strong> 是测量植物行为或环境某些方面的设备，例如温度、压力或组件位置。在这种情况下，传感器需要在适当的位置捕捉相关商品和服务的价格变化，以便计算和调整通货膨胀的变化。</p>
+<p><strong>执行器</strong> 是影响工厂未来行为的设备，例如电机、阀门、加热器或经济激励措施，以确保通胀调整后的代币价格适当演变。</p>
+<p><strong>控制器</strong> 是控制系统的大脑，处理来自传感器的信息并使用该信息来调整执行器的行为以实现期望的结果。控制器根据系统的当前状态和期望的结果计算要采取的适当操作，使用算法和数学模型来帮助管理系统的性能。</p>
+<p>传感器、执行器和控制器共同构成了工厂控制系统的基本构建模块，可用于调节和自动化各种过程，甚至在具有不可预测的人类交互的系统中也是如此。</p>
+<p><strong>深入探讨 Flatcoin 挑战</strong> <strong>通货膨胀调整的困难</strong></p>
+<p>任何旨在跟踪通货膨胀率以减轻其对购买力影响的代币都必须回答一些有关使用哪些“传感器”和信息源的难题，例如：“通货膨胀在哪里？”或“为谁？” ，以及“哪些商品和服务？”</p>
+<p><img src="https://img.bibiqing.com/news/2023/0917/14_1fc7yu0w3g.png" alt="通货膨胀"></p>
+<p>显示美国消费者价格指数（CPI）中列出的不同商品的价格变化，并与黑色的官方 CPI 指数进行比较。（来源）</p>
+<p>正如经济学家布莱尔·菲克斯精彩地阐释的那样，<strong>通货膨胀不仅仅是“一件事</strong> ”。当然，通货膨胀指数是存在的，例如 GDP 平减指数或消费者和生产者价格指数（分别为 CPI 和 PPI），但这些<strong>指标彼此之间差异很大，并且取决于其他标准</strong> （例如地理位置） 、行业或部门）。<strong>指数通常还存在时间粒度较差的问题</strong> ，大多数指数最多每月更新一次，而购买力的变化可能对日常生活产生直接影响（例如杂货或汽油购买）。</p>
+<p>Flatcoins 的设计（顾名思义）将在价格变化的情况下保持“扁平”的购买力状况，因此在 实施之前必须仔细考虑其预期范围和影响范围。经过通货膨胀调整的代币可能必须在较长时间内<strong>应对某些地理区域或部门的高水平价格波动，例如恶性通货膨胀，同时针对其他地区的低波动性和缺乏通货膨胀进行调整</strong> 。</p>
+<p>此外，选择哪种通胀指标具有挑战性，因为即使在国家、地区或大都市层面，通胀也可能存在很大差异。消费者物价指数等标准化通胀指标并未考虑到由不同职业、投资、社会经济或人口构成组成的群体之间购买力的差异。</p>
+<p>最后，从实施的角度来看，考虑到这种代币对潜在操纵的敏感性，准确而及时地测量通货膨胀会带来一个特别困难的预言机问题，这增加了设计挑战的复杂性。由于平币系统的执行器将取决于预言机子系统的可靠性（和“无懈可击”），因此它们的设计也远非简单。</p>
+<p>**<strong>走向生产中的</strong>  <strong>Flatcoins</strong> <strong>：前进的提案</strong> **</p>
+<p>这个特定问题的时空难度相当大，从使用控制论方法为算法监管的代币经济创造适当激励的角度来看，有一些开放的设计问题可能非常值得解决。</p>
+<p>本着敏捷方法论的精神，我们建议采用功能最小化的 PoC 设计和试点实施，以达到满足初始要求的初始设计目标。随着设计挑战的不断迭代，在进一步规范和确定优先级后，PoC 的设计功能可以升级到更复杂的实现。</p>
+<p>一个出发点是首先限制膨胀的空间部分。一个简单且值得推荐的概念验证（PoC）设计是从单一货币市场和标量价格指数中的区域指数 Flatcoins 开始的，尽管这种简单的设计可能会面临各种套利挑战。</p>
+<p>在更长的设计时间尺度上，全球综合指数通胀代币将解决这些套利困难，从而拥有更强大的用例，但需要更多的概念化和设计来解决本文中提出的无数挑战。随着第一个 PoC 的部署和评估，可以为传感器、控制器和执行器的增量研究和开发提出更多的要求和能力。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59301/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">上海元宇宙重大应用场景“英雄帖”有下文 百度支付宝等竞逐 成果照入现实</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59284/">
+                <span class="next-text nav-default">深入与解读Vitalik默克尔树的改进方案和对CEX发展的影响</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

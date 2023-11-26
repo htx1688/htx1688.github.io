@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Uniswap 顶流之路：机制、决策与风险分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Uniswap 凭借着简洁、创新和安全的优势成为了 DEX 赛道上的头部协议，期间虽遭遇多番挑战，但依然捍卫着其龙头桂冠。" />
+<meta name="keywords" content="Uniswap" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42148/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Uniswap 顶流之路：机制、决策与风险分析" />
+<meta property="og:description" content="Uniswap 凭借着简洁、创新和安全的优势成为了 DEX 赛道上的头部协议，期间虽遭遇多番挑战，但依然捍卫着其龙头桂冠。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42148/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-31T00:00:00+00:00" />
+
+<meta itemprop="name" content="Uniswap 顶流之路：机制、决策与风险分析">
+<meta itemprop="description" content="Uniswap 凭借着简洁、创新和安全的优势成为了 DEX 赛道上的头部协议，期间虽遭遇多番挑战，但依然捍卫着其龙头桂冠。"><meta itemprop="datePublished" content="2022-08-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-31T00:00:00+00:00" />
+<meta itemprop="wordCount" content="11730">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Uniswap 顶流之路：机制、决策与风险分析"/>
+<meta name="twitter:description" content="Uniswap 凭借着简洁、创新和安全的优势成为了 DEX 赛道上的头部协议，期间虽遭遇多番挑战，但依然捍卫着其龙头桂冠。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Uniswap 顶流之路：机制、决策与风险分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-31">
+      2022-08-31
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 11730 字 -
+        预计阅读 24 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>Uniswap 凭借着简洁、创新和安全的优势成为了 DEX 赛道上的头部协议，期间虽遭遇多番挑战，但依然捍卫着其龙头桂冠。</strong></p>
+<p>原文标题：《Uniswap 的顶流之路：过去、现在及将来》</p>
+<p>撰文：J.A.E</p>
+<h2 id="in-brief">In Brief</h2>
+<p><strong>Uniswap 是一项基于以太坊的去中心化交易协议，通过智能合约自动执行代币互换，利用算法实现了交易的去中心化与无信任化。</strong> Uniswap 自发布后就成为了 DEX 赛道的龙头，期间虽然几度遭遇实力强劲的挑战者，但始终都捍卫着其市场地位。起初，Uniswap 帮助以太坊克服了流动性问题，随后又上线了诸多 Layer 2 改善了其在以太坊拥堵时交易效率低下的现象。</p>
+<p>Uniswap 是 DEX 赛道的先驱之一，其在 V1 时期推广了恒定乘积曲线，引导 AMM 机制走向主流，但由于处在开发早期，做市算法暴露出交易便捷性、市场操纵及价格不稳定等方面的弊端。</p>
+<p>V2 时期，Uniswap 不仅针对 V1 的问题进行了改进，也普及了币币交易，提高了长尾资产的交易便捷性。同期，Sushiswap 发动吸血鬼攻击，一度导致 Uniswap 上的流动性大量外迁，令其陷入相当被动的局面。随后，Uniswap 发行了协议代币 UNI 作为反击，重新夺回了市场份额。另外，考虑到协议的长远发展，V2 中还新增了费用开关的隐藏功能。如今，协议收费试点已经开启，效果如何需要持续追踪。</p>
+<p>V3 时期，Uniswap 在流动性、收费等级及预言机喂价方面进行了大量革新，使其设计在 DeFi 市场中独具一格，同时也大幅提高了 LP 的资金效率。虽然 V3 流动性凭证的改变降低了其可组合性，但目前已经有大量协议建立在 V3 的基础上开发，Uniswap 从一个细分赛道协议转型成了 DeFi 市场的底层设施。此外，在加密行业步入熊市后，V3 表现也在各大 DEX 中最具稳定性，TVL 极高的同时保持着平稳的波动，并未出现暴跌现象。</p>
+<p>Uniswap 共计完成了 3 轮融资，总金额约 1,210 万美元，资方背景强大，多为业内知名机构。V1 版本的开发受益于以太坊基金会的 10 万美元赠款；种子轮融资收到了由 Paradigm 领投的 100 万美元；A 轮融资则获得了 a16z 领投的 1,100 万美元。</p>
+<p>Uniswap 在市场份额、锁仓量、交易量、资金效率、供给侧收入和代币持有者人数方面始终保持着稳定的增速，相较于同赛道内的其它 DEX，具有较大的领先优势。Uniswap 简洁安全的特性塑造起了强大的品牌效应与竞争壁垒，对于加密用户而言，其也更具吸引力。</p>
+<p>不久前，Uniswap 收购了 Genie，随后又宣布将集成 Sudoswap。两者都是各自赛道内的头部协议，与 Uniswap 合作所产生的化学反应值得拭目以待。但是，Uniswap 此前并未有过 NFT 业务的深度运营经验，因此新业务的拓展能否达到预期仍有待观察，集成也可能会放大代码风险。另外，Tornado Cash 最近遭到监管制裁的问题后续或将波及到 Uniswap。</p>
+<p>Uniswap 凭借着简洁、创新和安全的优势成为了 DEX 赛道上的头部协议，期间虽遭遇多番挑战，但依然捍卫着其龙头桂冠。最近，Uniswap 费用开关试点与开展 NFT 业务的举动引发了市场的热议，开启协议收费对协议的未来发展到底有无裨益？收购 Genie 的原因又究竟是何？本报告将全面研究 Uniswap 的发展历程、机制和优劣。</p>
+<h2 id="1-项目概况"><strong>#1 项目概况</strong></h2>
+<h3 id="11-项目简介"><strong>1.1 项目简介</strong></h3>
+<p>Uniswap 是一个去中心化交易协议，改善了以太坊的流动性问题，且在上线了 Optimism、Arbitrum 和 Polygon 等 Layer 2 后提升了其交易速度。Uniswap 在 V1 时期推广了恒定乘积曲线，其它 DEX 大都跟进效仿其做市算法；V2 时期，Uniswap 普及了币币交易，提高了长尾资产的交易便捷性；V3 时期，其集中流动性与弹性收费等级的设计又在 DeFi 市场中别具特色。</p>
+<h3 id="12-基本信息"><strong>1.2 基本信息</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_ij6wfk6jn0.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h2 id="2-项目分析"><strong>#2 项目分析</strong></h2>
+<h3 id="21-项目团队"><strong>2.1 项目团队</strong></h3>
+<p>Hayden Adams—Uniswap 创始人，以太坊开发者，此前创办 Ethereum Programming Services LLC，曾在西门子从事开发工作。</p>
+<p>Noah Zinsmeister—Uniswap 首席工程师；Web3-react 创建者；ERC-1484（一项数字身份协议）合著者。2016 年毕业于哥伦比亚大学，拥有经济学 - 数学学士学位。此前在纽约联邦储备银行货币支付研究部门担任了近两年高级研究分析师，后在 Hydrogen 担任工程职务，负责编写智能合约与开发开源区块链工具。</p>
+<p>Ashleigh Schap—Uniswap 顾问，此前在 MakerDAO 负责商务拓展。</p>
+<p>Ian Lapham—Uniswap 开发工程师，同时也在 John Hancock 从事区块链开发。</p>
+<p>Mike Demarais—Rainbow 联合创始人，参与了 Uniswap 的开发，此前在 Balance.io 担任工程师。</p>
+<p>Callil Capuozzo—现任 Uniswap 设计主管，此前在微软、谷歌担任设计师，曾在 FOAM 网站钻研以太坊，随后进入加密行业。</p>
+<p>Moody Salem—Uniswap 软件开发工程师，曾在 Google、Amazon 等从事开发工作。</p>
+<p>Matteo Leibowitz—现任 Uniswap 战略主管，此前在 The Block 从事数据分析研究，也曾是 CryptoChat.us 创始人兼责任编辑。</p>
+<p>Erik Bjäreholt—Superuser Labs 联合创始人，Activity WatchIt、Uniswap-Python 开发者。</p>
+<h3 id="22-项目资金"><strong>2.2 项目资金</strong></h3>
+<p><strong>Uniswap 共完成了 3 轮融资，总金额 1,210 万美元，投资机构大多为业内知名 VC，阵容豪华。</strong> 以太坊基金会赠予其 10 万美元，主要用于 V1 版本的开发；种子轮融资由 Paradigm 领投 100 万美元，但官方并未披露具体融资规模；2020 年 8 月，官方正式宣布获得由 a16z 领投的 1,100 万美元 A 轮融资。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_pi1m9qzrd3.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h3 id="23-产品解析"><strong>2.3 产品解析</strong></h3>
+<h3 id="231-uniswap-v1-引领-amm-走向主流">2.3.1 Uniswap V1: 引领 AMM 走向主流</h3>
+<p>Uniswap V1 是一个基于以太坊区块链的去中心化交易所（DEX），支持无信任的代币互换，所有交易均通过智能合约自动执行，用户无需依靠某个中间商发出交易指令也无需将资金托管给某个受信任的第三方。</p>
+<p>2018 年初，Vitalik Buterin 在 Ether Research 上发表了一篇关于将 x * y = k 等式应用在 DEX 上的文章，随后被 Uniswap V1 采纳为做市算法，也为后来 AMM DEX 的发展奠定了基础。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_ustblgmrkf.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>Uniswap 上存在着三种角色：第一是流动性提供者（LP），目的是赚取交易者的手续费；第二是交易者，其为 DEX 上的买方和卖方；三是套利者，当 DEX 价格和市场价格出现偏差时，其将通过交易获利，进而平衡 DEX 上的价格。</p>
+<p><strong>2.3.1.1 Uniswap V1 的优势</strong></p>
+<p>Uniswap V1 因其多项优势引起了整个 DeFi 市场的瞩目。</p>
+<p>1) 用户体验良好</p>
+<p>恒定乘积做市算法能够提供无限价格范围报价，小额交易滑点低。另外，不同于传统金融市场要求做市商拥有执业牌照，任何人在 Uniswap 上都能提供流动性；</p>
+<p>2) 激励机制简明合理</p>
+<p>通过向交易者收取 0.3% 的手续费作为 LP 的激励，分成是基于其提供的代币数量相对于整个流动性池供应量的比例；</p>
+<p>3) 底层设计较为简单</p>
+<p>仅需智能合约及算法部署完毕，便可自动化执行，大幅降低了运营成本；</p>
+<p>4) 无须许可</p>
+<p>任何代币均能上市交易，满足了用户对长尾资产的需求；</p>
+<p>5) 进入壁垒低</p>
+<p>用户无需注册或 KYC，仅需 EVM 钱包即可交易；</p>
+<p>6) 可组合性强</p>
+<p>各类借贷、杠杆、期权协议均可集成 Uniswap；</p>
+<p>7) 交易成本大幅降低</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_9i79yss7w7.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p><strong>2.3.1.2 Uniswap V1 的弊端</strong></p>
+<p>虽然 Uniswap 自身优势众多，但由于发展时间尚短，期间也浮现出了不少问题。</p>
+<p>1) 在实际运行过程中，受限于以太坊的吞吐量与处理速度，Uniswap 遭遇过<strong>价格操纵</strong> 的情况；</p>
+<p>2) 起始阶段，Uniswap 的交易规模在整个加密市场占比较小，流动性深度不足，经常出现<strong>价格剧烈波动</strong> 的现象；</p>
+<p>3) <strong>Uniswap V1 不支持币币交易</strong> ，如果交易者想将 DAI 兑换成 USDC，必须先把 DAI 兑换成 ETH，再把 ETH 兑换成 USDC。交易者需要支付两笔手续费和 Gas 费，不仅流程繁琐而且提高了交易成本，也导致了对 ETH 的价格依赖。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_51s495bz0q.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h3 id="232-uniswap-v2反制吸血鬼攻击">2.3.2 Uniswap V2：反制吸血鬼攻击</h3>
+<p>Uniswap V1 在暴露出交易便捷性、市场操纵及价格稳定三方面的不足后，开发团队专门在 V2 中进行了改进。</p>
+<p><strong>2.3.2.1 上线 ERC-20 代币交易对</strong></p>
+<p>通过组建 ERC-20 代币的流动性池，代币兑换不再需要 ETH 作为中转代币来桥接。移除此限制后可减少一半的交易次数，同时也节省了 Gas 费，币币交易的便捷性得到大幅提升。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_edp3mdm1ps.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p><strong>2.3.2.2 添加价格语言机</strong></p>
+<p>Uniswap V1 的价格由函数曲线决定，可以在短期内产生极大的波动，因此时常偏离市场价格，也更易被操纵。<strong>V2 通过引入价格预言机提升其去中心化程度及价格操纵的成本与难度。</strong></p>
+<p>Uniswap V2 会在交易发起之前，测量代币对在区块开始时的市场价格，而市场价格则会锚定前一个区块中的最后一笔成交价。如果攻击者试图操纵价格，需要在前一个区块完成最后一笔交易，并连续挖出两个区块，且期间没有套利者参与，否则无法确保获利，<strong>大幅提升了价格操纵的难度</strong> 。</p>
+<p>此外，<strong>V2 还在智能合约中设定了时间加权平均价格（TWAPS）的变量</strong> ，该变量是将累积价格（持续时间内每个区块的代币价格）除以时间戳持续时间（结束时间戳减去开始时间戳）以计算一段时间内的平均价格。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_gzf2p2otuu.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>TWAPS 喂价能够降低市场崩盘和价格剧烈波动的影响，攻击者的操纵成本也会随着流动性的提升与平均时长的增加而增加。</p>
+<p>但是，TWAPS 是对成交价进行事后修正，无法精确地反应市场价格。对于主流币对而言，Uniswap V2 无法掌握定价权，仍需依赖其它交易所。</p>
+<p><strong>2.3.2.3 支持闪兑</strong></p>
+<p><strong>闪兑功能允许用户在 Uniswap V2 上提取任意数量的 ERC-20 代币，且无预付成本，仅需在交易结束时支付 0.3% 的费用。</strong> 用户获得代币后，可进行任意操作，但必须在交易完成时归还代币。闪兑交易具有原子性，若结束无法归还代币，则所有交易将被回滚。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_qjylcwnv4s.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>闪兑的应用场景主要有两方面：</p>
+<p>1) 零成本套利</p>
+<p>由于加密市场的交易场所极为分散，不同平台上存在套利空间，但如果前期资本不足，用户即便发现了套利机会也无法执行。</p>
+<p>对于套利者而言，闪兑的价值在于，不仅无需前期资本，也简化了交易流程，大幅提高了套利效率。</p>
+<p>举个例子，假设用户发现在 Uniswap 上 200 DAI 即可买入 1 ETH，Oasis 上则能以 220 DAI 卖出 1 ETH，进而获得 20 DAI 的利润，但其钱包里却没有 DAI。</p>
+<p>通过 V2 的闪兑，用户可以同步从 Uniswap 提取 1 ETH，在 Oasis 上以 220 DAI 出售，随后在 Uniswap 上用 200 DAI 偿还 ETH。在此过程中，用户钱包中不需要任何一个 DAI，却完成了 20 DAI 的套利。</p>
+<p>2) 提升加杠杆效率</p>
+<p>在常规的循环抵押借贷中，用户需要全程手动加杠杆，不仅流程极为繁琐，还支付了大量额外的 Gas 费。另外，由于摩擦成本的存在，杠杆倍数也会被动降低。</p>
+<p>然而，闪兑直接将整个加杠杆过程聚合成一笔交易，不仅大幅简化了交易流程，也降低了 Gas 费，助力用户直接借用到极限杠杆。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_8i4g88spnd.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p><strong>2.3.2.4 发行协议代币 UNI，反击 Sushiswap</strong></p>
+<p>2020 年 8 月，Sushiswap 突然被发布，并对 Uniswap 展开了吸血鬼攻击。</p>
+<p>Sushiswap 是 Uniswap 的分叉，且引入了流动性激励机制。Uniswap LP 可直接在 Sushiswap 上质押其 LP-Token，并获得 SUSHI 代币奖励。在特定时刻，协议会自动将 Uniswap LP-Token 转化为 Sushiswap LP-Token，并将 Uniswap 的流动性迁移到 Sushiswap 上。</p>
+<p>上线短短一周，将近 20 亿美元的 Uniswap-LP-Token 就被质押到了 Sushiswap 上。同期，SUSHI 的市值也迅速上升，接近 3 亿美元。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_iz99via4gq.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>Sushiswap 不仅迅速壮大了自身，同时也削弱了 Uniswap 的统治力。若是 Sushiswap 上的交易深度高于 Uniswap，滑点将进一步降低，为交易者提供更优质的交易体验，继而吸引更多的用户，扩大网络效应。</p>
+<p>随着 Uniswap 生态的发展，LP 数量大幅增加，早期 LP 的收益逐渐被摊薄。而 Uniswap LP 只有在提供流动性时才能赚取资金池的交易费，一旦撤出流动性，将不再获得相应收入。此外，其 LP 还要承担无常损失的风险。反观 Sushiswap LP，不仅能获得交易费，还能收到额外的 SUSHI 代币作为流动性激励。与 Uniswap 不同的是，即使 Sushiswap LP 撤出流动性，其持有的 SUSHI 代币也拥有分红权，可捕获协议长期增长的内在价值。 </p>
+<p>同年 9 月，Sushiswap TVL 一度远高于 Uniswap，令其痛失约 70% 的流动性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_mi4969vik9.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>形势已经到了 Uniswap 不得不反击的阶段，若再不推出协议代币，其市场地位或将不保。</p>
+<p>同月，Uniswap 发行了其治理代币 UNI，向早期用户空投，并向 USDT/ETH、USDC/ETH、DAI/ETH 及 WBTC/ETH 四个流动性最强、交易量最高的资金池提供挖矿奖励。</p>
+<p>在四大资金池上启动挖矿后，大量流动性又回流到了 Uniswap 上，TVL 更胜以往。Uniswap 也通过反制 Sushiswap 的吸血鬼攻击，进一步巩固了其王座。</p>
+<p><strong>2.3.2.5 隐藏彩蛋——费用开关</strong></p>
+<p>Uniswap V2 新增了协议收费机制，也称为费用开关。当机制关闭时，LP 获得 0.3% 的收入。而当机制开启时，协议将抽取 0.05% 的费用，LP 的收入则下降为 0.25%。若要开启收费机制，社区必须通过治理投票。</p>
+<p>开发团队的初衷是通过费用开关支持 Uniswap 的长期增长和可持续性，协议也会获得巨大的收益。理想状态下，收益投入协议本身将提升其采用率，进而使 LP 收取更多交易费用以弥补前期损失。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_p9uvo3z3s6.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>协议收费机制在 V2 一直处于关闭状态，却在 Uniswap V3 阶段被提议开启。社区内支持方观点认为，开启协议收费向代币持有者分红、充实协议金库、建立协议自身的流动性或资助开发等行为将更有利于 Uniswap 的长期发展。而反对方则认为，协议收费可能会埋下流动性大量外逃的隐患。</p>
+<p>部分社区成员也意识到了在交易量最大的主流资金池上直接打开费用开关的风险，因此通过了试点提案的投票。试点选择的流动性池包括 DAI-ETH（0.05%）、ETH-USDT（0.3%）与 USDC-ETH（1%），分别是三大池在不同收费等级中交易量最低的一档，且恰好涵盖了各个收费等级。</p>
+<p><strong>我们认为，开启协议收费并不会导致 Uniswap 损失大量流动性。</strong> V3 版本的交易费用等级分为四档，协议收费则是从 LP 的费用收入中抽取 10%-25%。即便打开费用开关，Uniswap 在费用模式方面依然存在较大优势。以 0.3% 费用等级为例，若是协议收费参数在 17% 以下，虽然 LP 费用收入有所减少，但仍然高于在其它 DEX 上提供流动性的回报。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_pk5lb6y49j.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>经过测算，即便打开费用开关，也不会导致 LP 收益率大幅降低。另外，Uniswap 兼有品牌效应、流动性深度及交易量等方面的优势，一定程度上可对冲 LP 回报减少的影响。<strong>因此，我们推测启用协议收费并不会引发大量流动性外逃的风险。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_un23e0y4fb.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>根据提案，试点将运行 120 天，协议收费机制究竟是否有利于 Uniswap 未来发展需要持续关注后续的具体情况。</p>
+<h3 id="233-uniswap-v3基础架构大革新">2.3.3 Uniswap V3：基础架构大革新</h3>
+<p>Uniswap V3 在流动性、收费等级、预言机功能等方面进行了大量创新，大幅提升了 LP 的资金效率。</p>
+<p><strong>2.3.3.1 集中流动性——资本效率大幅提高</strong></p>
+<p>在 Uniswap V3 中，LP 可将其资金集中在自定义价格范围内，在期望的价格区间内提供更多的流动性，其可在一个资金池中组合任意数量、不同价格范围的集中流动性仓位。例如，ETH/DAI 池中的 LP 可选择将 200 美元分配到 1,600-2,000 美元的价格范围内，并在 1,700-1,800 美元的价格范围内分配额外的 100 美元，交易费按 LP 在给定价格区间贡献的流动性比例分配。</p>
+<p>而在 Uniswap V2 中，流动性沿着价格曲线均匀分布，为整个 0 到无穷大价格区间提供流动性。然而，对于大多数资金池而言，大部分流动性实际上处于闲置状态。例如，V2 DAI/USDC 币对仅保留了约 0.5% 资金在 0.99-1.01 美元间的交易。V2 LP 只能从其资本的一小部分赚取交易费，并且收入很可能无法覆盖其提供流动性而承担的无常损失。此外，由于流动性分散在整个价格范围，在某些价格区间内交易者通常会受到滑点的影响。</p>
+<p><strong>通过集中流动性，LP 可以更少的资本在指定价格范围内提供与 V2 相同的流动性深度，不仅降低了风险敞口，也提高了资本效率。</strong> 举个例子，如果某用户拥有 80 万美元，并希望在 Uniswap V3 上提供流动性。该用户创建了一个 ETH 价格区间位于 1,200-2,800 美元的集中流动性头寸。相比之下，V3 仅需质押 15 万美元即可达到需在 V2 上锁仓将近 79 万美元的流动性深度，并赚取相同的交易费，资本效率提升了 5.24 倍。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_gfjebcreuh.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p><strong>V3 的集中流动性机制大幅降低了用户提供流动性需要承担的价格风险。</strong> 假设一种极端情况，如果 ETH 归零，且流动性全部是以 ETH 计价，该用户在 V3 上仅会损失 15 万美元，而在 V2 上将基本丧失所有资金。如果在 V3 上提供流动性，用户还能够将富余的 65 万美元投资于其它资产以对冲币价下行的风险。</p>
+<p><strong>另外，Uniswap V3 还新增了范围订单功能，类似于 CEX 的限价挂单。</strong> 当 DAI 的市场价格低于 1.001 USDC 时，LP 可将 1000 万美元 DAI 添加到 1.001-1.002 DAI/USDC 范围内；当交易价格高于 1.002 DAI/USDC 时，LP 的流动性将完全转换为 USDC；而当 DAI/USDC 再次低于 1.002 时，LP 必须提取其流动性以避免自动转换回 DAI。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_u79vh9gggh.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>虽然集中流动性机制具有显著的优势，但也面临着潜在的四大问题。</p>
+<p>1) <strong>集中流动性的聚合功能线可能会增加做市算法的复杂度，导致 Gas 成本上升。</strong> 后续 Uniswap V3 上线 Optimism 和 Arbitrum 等 Layer 2 在一定程度上缓解了该现象；</p>
+<p>2) <strong>对于非稳定币对而言，LP 如何选取合理的价格范围会是一大难题。</strong> 当价格长期脱离选定范围时，LP 将无法捕获相应的交易费。不过，只要 LP 采取主动管理的策略，积极调整做市区间，就能解决该问题；</p>
+<p>3) <strong>当大量流动性均集中在理论上的合理价格范围时，区间以外的流动性深度将大打折扣</strong> 。套利者或可利用该漏洞在价格接近区间边缘时发起流动性攻击，造成价格失衡，继而进行套利。然而，DEX 本就需要套利者的存在，且若非代币机制本身的问题，长期来看，其价格大概率将回归到合理的价格区间；</p>
+<p>4) <strong>流动性凭证的可组合性或将受限。</strong> 作为每个 LP 自定义价格曲线的凭证，流动性头寸具备不可替代的特性，因此 LP-Token 将不再是 ERC-20 代币，而是转化为基于 ERC-721 标准的 LP-NFT。此外，交易费也不会再自动复投回流动性池。但是，Uniswap 目前已经逐渐成为 DeFi 市场的重要底层设施，大量协议直接建立在其基础上开发，用户可通过外部协议进行头寸互换和策略组合，进而实现 DeFi 乐高与费用复投等功能。</p>
+<p><strong>总体而言，集中流动性机制的利大于弊，且其短板均有相应的改善措施。</strong></p>
+<p><strong>2.3.3.2 弹性费用等级——LP 风险与收入成正比</strong></p>
+<p><strong>LP 的交易费收入也将随其承担风险的提高而提高。</strong> Uniswap V3 中设置了四个费用等级——0.01%、0.05%、0.30% 和 1.00%，相对于 V2 中固定的 0.30% 交易费率，为 LP 提供了更多样化的选择。虽然不同的费用等级或许会导致一定程度上的流动性分散，但大多数币对预计将根据 LP 预期收敛到其中一个费用等级，进而规范市场。例如，LP 在 USDC/USDT 等法币挂钩稳定币对中承担的风险相对最小，费用等级预计将收敛到 0.01%；DAI/FRAX 等非法币挂钩稳定币对中承担的风险略微提升，费用等级预计将收敛到 0.05%；WBTC/ETH 等主流币对承担的风险更上一层，费用等级预计将收敛到 0.30%；而长尾币对承担的风险相对最大，费用等级预计将收敛到 1.00%。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_u355hspq0b.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p><strong>2.3.3.3 预言机升级——喂价成本大幅降低</strong></p>
+<p>Uniswap V3 对 TWAP 预言机进行了重大改进，通过存储一个累积和的数组，可在单个链上调用中计算过去约 9 天内的任意 TWAP，而非局限于一个短周期。</p>
+<p>V2 预言机的工作原理则是存储每秒 Uniswap 对价格的累积总和，价格总和会在一个周期的开始和结束各检查一次，以计算该周期内的精确 TWAP。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_ubeysvfdnd.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p><strong>历史价格累加大幅降低了精准喂价的成本，且提升了预言机攻击的难度。</strong> 基于此次升级，交易者在 Uniswap 上用于保持预言机更新所付出的 Gas 成本相对于 V2 下降了约 50%，同时也大幅降低了在外部智能合约中计算 TWAP 的成本。</p>
+<h3 id="24-项目历程"><strong>2.4 项目历程</strong></h3>
+<h3 id="241-路线图">2.4.1 路线图</h3>
+<p>历时 3 年，Uniswap 已经完成了 3 次版本迭代，并上线了 Layer 2 以提升其交易速度及降低用户成本。如今，Uniswap 毅然踏上了探索 NFT 业务的旅途。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_081dqkc1qf.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h3 id="242-协议表现">2.4.2 协议表现</h3>
+<p>Uniswap V1 上的流动性高峰分别出现在 2020 年 2 月与 5 月，最高点达到 8,346 万美元。如今，V1 上的流动性稳定在 800 万美元左右。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_4yyct9fqn0.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>Uniswap V1 上的交易量历史高峰发生在 2020 年 10 月 14 日，高达 1.92 亿。如今，每日交易量降至 10 万左右，每日交易次数约百次上下，交易品种均为长尾资产和稳定币。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_9bllkzynqv.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>Uniswap V2 上的流动性曾经历为期三个月的短暂上涨，期间一度达到历史高峰，将近 62 亿美元。随后，流动性呈现持续下跌态势，但始终维持在 12 亿美元左右。V2 上的每日交易量也在逐渐下降，最高点出现在 2022 年 5 月 15 日，高达 375 亿美元。目前，其每日交易量平均维持在 5,000 万美元以上。虽然 V2 已经不是 Uniswap 的交易主场，但若是将其单独列入 DEX 赛道排名，V2 依然在细分市场中占据着举足轻重的地位。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_tmea3sc1st.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>Uniswap V3 的 TVL 保持着持续上涨趋势，目前达到约 42 亿美元，每日交易量稳定在 10 亿美元左右，约为 V2 的 20 倍。从其 TVL 增量来看，我们推测 V2 上损失的流动性很有可能大部分都迁移到了 V3。由此可见，V3 已经取代 V2 成为 Uniswap 上的主要交易场所。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_95vnod608w.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>供给侧收入即 LP 的费用收入，由于 UNI 代币并不具备价值捕获功能，因此所有的交易费都会分配给 LP。供给侧收入在以往 2 年内呈稳步上涨趋势，LP 的累计费用收入高达 23 亿美元。</p>
+<p><strong>然而，社区关于开启协议收费的提案在不久前获得通过，未来的供给侧收入可能会经历一定程度的下降，而协议收入或将上升。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_kc8q8lnl4z.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h3 id="243-用户数据">2.4.3 用户数据</h3>
+<p>2022 年 8 月，UNI 持有者将近 32 万人，较之 2020 年同期，涨幅高达 4.68 倍，年均复合增长率约为 116.29%。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_88w0hdu32m.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>同月 26 日，Uniswap 上的用户总人数达到 2,400 万，突显了其强大的头部效应，且自 2020 年 8 月以来，始终保持着稳定的增速。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_moe0d6gbme.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h2 id="3-经济模型"><strong>#3 经济模型</strong></h2>
+<h3 id="31-代币供给和分发"><strong>3.1 代币供给和分发</strong></h3>
+<p>10 亿枚 UNI 将会在 4 年内释放完毕，代币分配计划如下：</p>
+<ul>
+<li>
+<p>60%（600,000,000 UNI）给予 Uniswap 社区成员；</p>
+</li>
+<li>
+<p>21.266%（212,660,000 UNI）给予团队成员和未来员工，4 年线性解锁；</p>
+</li>
+<li>
+<p>18.044%（180,440,000 UNI）给予投资者，4 年线性解锁；</p>
+</li>
+<li>
+<p>0.69%（6,900,000 UNI）给予顾问，4 年线性解锁。</p>
+</li>
+</ul>
+<p>四年后，协议的永久通胀率将为每年 2%，以保证 Uniswap 的长期发展，与 UNI 持有者能够获取被动收益。</p>
+<p>协议向早期用户与 LP 空投代币后，治理金库将保留 43% 的 UNI 供应，分配向开发者赠款、社区提案、流动性挖矿或其它计划。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_nvhf0kb4qm.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>从代币集中度来看，前 100 名地址贡献了 85.32% 的份额，前 10 名地址占比为 51.21%，其中协议自身在前十中占据了半数，合计份额高达 44.16%。<strong>因此，UNI 的集中度并不高，代币遭到恶意抛售的可能性也较小。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_kbb8kk9ygb.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h3 id="32-代币赋能与应用"><strong>3.2 代币赋能与应用</strong></h3>
+<p>1) 社区治理</p>
+<p>2) 管理协议金库</p>
+<p>3) 费用开关切换</p>
+<p>4) Uniswap.eth ENS 名称</p>
+<h2 id="4-项目前景"><strong>#4 项目前景</strong></h2>
+<h3 id="41-运营分析"><strong>4.1 运营分析</strong></h3>
+<p>Uniswap 的社交媒体用户数量持续上涨，其推特粉丝数量超过 91 万人，Reddit 订阅用户数量高达 6 万人，较之 2021 年同期，分别增长了 52.9%、23.6%。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_y833i24hhd.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h3 id="42-竞争分析"><strong>4.2 竞争分析</strong></h3>
+<p><strong>Uniswap 最主要的三项竞争优势分别为简洁、创新和安全，</strong> 其在以太坊上的直接竞争对手就是 Sushiswap 与 Curve。</p>
+<p>Sushiswap 自吸血鬼攻击以来，始终被 Uniswap 所压制，其在 DEX 业务尚未取得领先的情况下，还分心拓展借贷业务，结果表明，多元化战略并未奏效。另外，在 V3 开创集中流动性机制后，Sushiswap 也未革新其做市算法，创新能力较为欠缺。</p>
+<p>反观 Curve 凭借其创新的做市机制，抢夺了大量稳定币及锚定资产的流动性，TVL 骤升，一度远超 Uniswap。然而，Curve 的做市机制存在资产类别上的局限性，难以满足长尾代币的交易需求，一定程度上影响了其发展。此外，Curve 上爆发的几起重大脱锚事件直接将加密行业拖入熊市，也引发了市场对其安全性的质疑。随后，Curve TVL 一路暴跌，被 Uniswap 反超。</p>
+<p>总体来看，Uniswap 的市场地位较为稳固，Sushiswap 及 Curve 也无法对其形成重大威胁。目前，Uniswap TVL 高达 63 亿美元，在 DEX 赛道内位列榜首。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_ws99t5pzoi.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>以 7 日交易量为基准，Uniswap 市场份额高达 69%，平均 24 小时交易量稳定在十亿美元量级以上，两项指标均位列赛道第一，且遥遥领先于其它竞争对手，或将进一步加强其网络效应。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_h8aik34sni.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>从 TVL 及日交易量，我们可以推断出 DEX 的资金效率。经过测算，Uniswap 的资金效率约为 16.13%，大幅高于其它 DEX，也在一定程度上反映了 Uniswap V3 集中流动性机制的有效性。更高的资金效率意味着 LP 提供的流动性被利用的概率更高，提升了其做市意愿。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_sm21whbu1t.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>另一方面，更高的资金效率也意味着 LP 赚取更多交易费用的机会更大。因此，Uniswap 不仅对 LP 更具吸引力，其供给侧收入相对于其它 DEX 也更高。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_10878j2uee.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>从代币 UNI 的持有者人数来看，Uniswap 身为赛道龙头，虽然协议代币并未赋能，但其强大的品牌效应即是本身的壁垒之一。目前，UNI 持币者数量约 32 万人，远远高于其它 DEX 协议代币的持有者人数。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_65g2d85c9v.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<h2 id="43-前景分析"><strong>4.3 前景分析</strong></h2>
+<p>Uniswap 市场地位较为稳固，同类协议难以对其形成威胁，前景似乎一片大好。然而，等到下一轮牛市到来，存在三类可能性或将撼动 Uniswap 的统治。</p>
+<p><strong>1) 新公链超越以太坊</strong></p>
+<p>当前的加密熊市正在孕育一波新公链，其中原 Diem 项目团队开发的 Aptos 与 Sui 均获得了极高的市场关注度。该团队成员大多是具有 Meta 背景的技术精英，并新建了编程预言，因此公链的性能表现或许将更优于以太坊。另外，团队也获得了众多知名风投机构的资本加持，为生态发展奠定了坚实的基础，未来可能会打破以太坊的垄断局面，进而威胁到依托于其生态之上的 Uniswap。</p>
+<p><strong>2) 交易范式的再度变革</strong></p>
+<p>上一轮牛市中，Uniswap 爆发正是因其推翻了订单簿模式，并推广 AMM 机制成为了 DEX 赛道的主流交易范式。此后，Uniswap 也从未停下在做市算法上不断精进的脚步，持续扩大其市场份额。但是，如果在下一轮牛市再度出现颠覆性的交易范式，Uniswap 的王座也许会再度陷入岌岌可危的境地。</p>
+<p><strong>3) 新资产类别的崛起</strong></p>
+<p>在 NFT 引起大众注意之前，DeFi Summer 是属于 FT（Fungible Token，可替代的代币）的狂欢。自 NFT 获得市场瞩目以后，虽曾多次引发极高的关注度，但并未出现如 DeFi Summer 一般的盛景。如今，随着 NFT 的主流程度越来越高，应用场景日渐丰富，下一波牛市很有可能将见证到 NFT Summer 的辉煌。</p>
+<p><strong>目前来看，前两种可能性尚未显露痕迹，而新资产类别的异军突起或许将成为下轮牛市的主流叙事之一。</strong></p>
+<p>2022 年 6 月，Uniswap 宣布收购 NFT 市场聚合器 Genie。实际上，Uniswap 并不是第一次涉足 NFT 赛道。早在 2019 年春季，其就曾推出过 NFT 流动性池 Unisocks。Uniswap 此次再度入场，可能正是为了提前布局 NFT 在下一波牛市的崛起。</p>
+<p>NFT 市场聚合器在产品特性上普遍存在两个问题，1）NFT 交易者需要将 ERC-20 代币换成 ETH 才能购买 NFT；2）受到使用惯性的影响，NFT 市场聚合器的用户基数难以扩大。Genie 相比于 Opensea，正如 1inch 相较于 Uniswap。当选择交易平台时，DeFi 用户大多会倾向于使用 Uniswap，NFT 用户也同样更倾向于使用 Opensea。</p>
+<p>然而，Genie 或可借助 Uniswap 的加持，补足其短板。Genie 能够聚合各大 NFT 市场上的商品，两者兼并简化了 NFT 的交易流程，实现了非 ETH 代币直接购买 NFT 的可能性，同时也降低了交易者的摩擦成本。对于 NFT 交易者而言，Uniswap 上的流动性深度及一站式交易体验或将更优于 Opensea。另外，Uniswap 在用户体验方面也拥有良好的记录，团队或许能将其丰富的经验引入到 Genie 的产品开发上。最重要的一点是，Uniswap 早已建立起强大的品牌效应，能够充当流量入口为 Genie 导流，以获得更高的市场关注度。<strong>综上所述，Uniswap 有可能借助自身的竞争优势将用户惯性衍生到 Genie 上，进而扩大其用户基础，引发协同效应。</strong></p>
+<p>在 Uniswap 收购 Genie 之前，NFT 交易平台龙头 Opensea 为防止 NFT 市场聚合器抢占市场份额，直接防御性收购了其赛道龙头 Gem，两者在各自赛道内本就具有极大的先发优势，如今更是强强联合。虽然 Genie 在赛道内仅次于 Gem，但仍与其差距明显。</p>
+<p>目前，Genie 总交易量超过 12.5 万笔，仅为 Gem 的 28.3%。自 6 月中旬起，两者的总交易量增速均有所下降，但 Genie 的降幅更高于 Gem，总交易量甚至呈现趋于平缓的态势。此外，Genie 的新增地址数量超过 4.5 万个，约为 Gem 的 40.4%。<strong>Genie 用户增速在各阶段逐渐下降，反观 Gem 却保持得较为稳定。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_u2ukhdvc89.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p><strong>另外，Genie 在 NFT 交易市场中占据了约 0.2% 的份额，大幅落后于 Gem。</strong> 期间，Gem 的市场份额骤降，但 Genie 的跌幅有限，表明其用户粘性可能更强。然而，Genie 最致命的一点是，其聚合的交易绝大部分都发生在 Opensea 上，相当于命脉被竞争对手所掌控。Opensea 原本就是家中心化公司，若是后续将订单优先匹配给 Gem 或直接拒绝集成，Genie 或将面临交易量暴跌的潜在风险。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0831/16_00ysn5knyb.png" alt="Uniswap 顶流之路：机制、决策与风险分析"></p>
+<p>从数据上来看，Genie 在各个维度都暂未出现可以追赶上 Gem 的迹象。Uniswap 究竟能否助力 Genie 崛起，打破 Opensea×Gem 在 NFT 市场的垄断局面，依然有待观察。</p>
+<p>在 Uniswap 收购 Genie 的一个月后，其又宣布将集成 NFT 交易所 Sudoswap，但尚未发布具体细节。如 Uniswap 革新了 DeFi 市场的交易模式一般，Sudoswap 也同样对 NFT 交易进行了范式创新。Uniswap 携手 NFT 赛道的头部 AMM 共同发力，使其在 NFT 业务上的后续进展值得期待。</p>
+<h2 id="5-项目风险"><strong>#5 项目风险</strong></h2>
+<p><strong>1) 开启协议收费效果不及预期</strong></p>
+<p>如果打开费用开关后，协议情况并未朝着积极走向发展，由于 LP 交易费用收入下降，虽然 Uniswap 相较于竞争对手依然具有一定的优势，但还是存在流动性外逃的可能性。</p>
+<p><strong>2) NFT 业务拓展不及预期</strong></p>
+<p>虽然 Uniswap 早期曾短暂上线过 NFT 流动性池，但其并不具备 NFT 业务的深度运营经验，DEX 的成功经验能否有助于 NFT 业务的开拓有待商榷。</p>
+<p><strong>3) 代码风险</strong></p>
+<p>Uniswap 后续将集成 Genie 与 Sudoswap，合约交互的复杂程度或将上升，同时也提高了出现合约漏洞招致黑客攻击的可能性。</p>
+<p><strong>4) 监管风险</strong></p>
+<p>Tornado Cash 已经被制裁，所有中心化机构发行的数字资产同样面临着被监管制裁的可能性。一旦发生，大量稳定币可能会从 Uniswap 出逃，造成其流动性深度大幅降低。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42108/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Tornado Cash 制裁只是冰山一角？美国众议院委员会调查 Coinbase、FTX、币安</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42126/">
+                <span class="next-text nav-default">V 神发布新作 如何领取其首个新书灵魂绑定代币？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#in-brief">In Brief</a></li>
+    <li><a href="#1-项目概况"><strong>#1 项目概况</strong></a>
+      <ul>
+        <li><a href="#11-项目简介"><strong>1.1 项目简介</strong></a></li>
+        <li><a href="#12-基本信息"><strong>1.2 基本信息</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#2-项目分析"><strong>#2 项目分析</strong></a>
+      <ul>
+        <li><a href="#21-项目团队"><strong>2.1 项目团队</strong></a></li>
+        <li><a href="#22-项目资金"><strong>2.2 项目资金</strong></a></li>
+        <li><a href="#23-产品解析"><strong>2.3 产品解析</strong></a></li>
+        <li><a href="#231-uniswap-v1-引领-amm-走向主流">2.3.1 Uniswap V1: 引领 AMM 走向主流</a></li>
+        <li><a href="#232-uniswap-v2反制吸血鬼攻击">2.3.2 Uniswap V2：反制吸血鬼攻击</a></li>
+        <li><a href="#233-uniswap-v3基础架构大革新">2.3.3 Uniswap V3：基础架构大革新</a></li>
+        <li><a href="#24-项目历程"><strong>2.4 项目历程</strong></a></li>
+        <li><a href="#241-路线图">2.4.1 路线图</a></li>
+        <li><a href="#242-协议表现">2.4.2 协议表现</a></li>
+        <li><a href="#243-用户数据">2.4.3 用户数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-经济模型"><strong>#3 经济模型</strong></a>
+      <ul>
+        <li><a href="#31-代币供给和分发"><strong>3.1 代币供给和分发</strong></a></li>
+        <li><a href="#32-代币赋能与应用"><strong>3.2 代币赋能与应用</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#4-项目前景"><strong>#4 项目前景</strong></a>
+      <ul>
+        <li><a href="#41-运营分析"><strong>4.1 运营分析</strong></a></li>
+        <li><a href="#42-竞争分析"><strong>4.2 竞争分析</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#43-前景分析"><strong>4.3 前景分析</strong></a></li>
+    <li><a href="#5-项目风险"><strong>#5 项目风险</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

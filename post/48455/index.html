@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深度剖析SVB崩溃：起源、陷阱、细节和连锁反应 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="SVB对债务证券极其严重的管理不善将在全系统范围内产生影响" />
+<meta name="keywords" content="SVB" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/48455/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深度剖析SVB崩溃：起源、陷阱、细节和连锁反应" />
+<meta property="og:description" content="SVB对债务证券极其严重的管理不善将在全系统范围内产生影响" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/48455/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-14T00:00:00+00:00" />
+
+<meta itemprop="name" content="深度剖析SVB崩溃：起源、陷阱、细节和连锁反应">
+<meta itemprop="description" content="SVB对债务证券极其严重的管理不善将在全系统范围内产生影响"><meta itemprop="datePublished" content="2023-03-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5730">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深度剖析SVB崩溃：起源、陷阱、细节和连锁反应"/>
+<meta name="twitter:description" content="SVB对债务证券极其严重的管理不善将在全系统范围内产生影响"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深度剖析SVB崩溃：起源、陷阱、细节和连锁反应</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-14">
+      2023-03-14
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5730 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>文/Genevieve Roch-Decter，Grit Capital创始人；译/金色财经xiaozou</p>
+<p>目录</p>
+<p>1、SVB 概述：他们做什么的，在行业中扮演什么角色</p>
+<p>2、崩溃起源 ：FTX，Silvergate</p>
+<p>3、陷阱 ：激增的存款超过了贷款机会</p>
+<p>4、发生了什么：细节分析</p>
+<p>5、连锁反应 ：传染与遏制</p>
+<p>6、倒闭：FDIC 介入</p>
+<p><strong>1、SVB概览：他们是做什么的？在行业中扮演什么角色？</strong></p>
+<p>SVB和你想的一样。为科技公司提供银行服务。</p>
+<p>我来进行以下快速概述。</p>
+<p>银行的业务前提很简单，直到不再行得通。银行应该吸收存款，支付一定利率，然后以高于他们所支付利率的利率将这些钱（甚至比他们吸收的还要多）贷出去。差价即银行利润。他们在此基础上附加了一系列服务和费用，但这就是关键。</p>
+<p>SVB一直以来作为一家金融服务公司、银行控股公司和金融控股公司在运营。银行业务提供商业和私人银行产品和服务。公司及其子公司提供资产管理、私人财富管理、基金管理、并购咨询服务、风险投资和私募股权投资服务。</p>
+<p>采用全场紧逼战术提供一站式服务。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_zysisaotw3.png" alt="1a82d7b4e0412001b800360062c47f31" title="6887261"></p>
+<p>他们有四条核心业务线：</p>
+<p>●银行业务：提供商业银行业务、流动性管理、全球商业解决方案和全球资金银行业务。客户群体分为收入在500万美元以下的初创公司、收入在500-7500万美元的风险投资公司和收入超过7500万美元的企业。他们还为另一方提供银行服务：投资人（PE和VC）。</p>
+<p>●证券业务：即投资银行部门。凭借深厚的专业领域知识已经达成了1116笔交易，筹资2220亿美元，覆盖3500家公司。</p>
+<p>●资本业务：即资产管理部门，比如基金中的基金、直接基金和信贷基金，将投资打包出售给LP。他们声称已为760多家独角兽公司提供资金，资产管理规模达92亿美元。</p>
+<p>●私人业务：为私人客户量身定制解决方案。包括高净值咨询、税务规划、慈善计划、房屋净值信用额度、证券借贷和私人股票借贷。一旦科技富翁大获成功，就把他们留在体系内。该部门拥有159亿美元的资产管理规模，132亿美元的平均存款以及146亿美元的平均贷款。</p>
+<p>关于这个问题的细节可以写一整篇文章，但要点是，他们是一家提供全方位服务的银行，在整个生命周期内为科技公司和员工提供支持。</p>
+<p>本质上，这些家伙什么都做——当涉及到技术时，他们无处不在。</p>
+<p>现在让我们切入问题的要害。</p>
+<p><strong>2、FTX、Silvergate的崩溃余波</strong></p>
+<p>经济过剩时期，到处都是海滩游客。只是我们不知道，美联储主席鲍威尔拉动了涨潮。</p>
+<p>我重提这点的原因是我上文说过的：</p>
+<p>银行的业务前提很简单，直到不再行得通。银行应该吸收存款，支付一定利率，然后以高于他们所支付利率的利率将这些钱（甚至比他们吸收的还要多）贷出去。差价即银行利润。</p>
+<p>资产/负债不匹配最终总会让你吃苦头。当你为存款支付过高的利率时（资金流出），你必须更积极地创造收益（资金流入）。这便造成了FTX倒闭。</p>
+<p>下一个倒闭的是Silvergate Capital，该公司上周三宣布将逐步缩减业务，并自愿清算其银行。</p>
+<p>在FTX倒闭后，Silvergate公布了近10亿美元的亏损，其数字资产客户存款总额在第四季度从119亿美元下降到38亿美元。</p>
+<p>发生大量的存款/银行挤兑。</p>
+<p>在资金流入/流出这一简化程序中，这让你不得不卖掉大量资产以应付提款。现在用以赚取收益的资产更少了。资产/负债不匹配了。</p>
+<p>那么，Silvergate是否预示了SVB的结局？</p>
+<p>就存款崩溃导致资不抵债而言，答案是肯定的，但就银行挤兑的根本原因而言，答案是否定的。</p>
+<p>虽然Silvergate确实必须贱卖债务证券，以维持资产负债表的流动性并满足提款需求，但根本原因是它与FTX的关联。</p>
+<p>而SVB崩溃的根本原因又有不同——信息传播速度。</p>
+<p><strong>3、陷阱：激增的存款超过了贷款机会</strong></p>
+<p>SVB在短时间内经历了大量存款流入，从2019年底的618亿美元增加到2021年底的1892亿美元。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_0gk5qn6lf7.png" alt="3568e38ee7ded968b7d90905a1992ed8" title="6887262"></p>
+<p>更多资金流入，你会想——这真是太好了！</p>
+<p>但是切记，当你有存款进入时，你从这些存款中获得的收益必须大于你所支付的利息。问题在于SVB无法以足够快的速度扩张其贷款规模，以从这些资金流入中产生想要的收益。</p>
+<p>相反，他们用这些存款购买了超过800亿美元的抵押证券（MBS），充盈其持有至到期（HTM）投资组合。这些MBS中约97%的期限为10年以上，加权平均收益率不到2%。以下内容来自于他们的10-k报告：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_g4suznd5kr.png" alt="2c925c5e1d2cf12c74504f886e96fc55" title="6887263"></p>
+<p>问题是，随着美联储2022年介入并提高利率（高利率一直持续到2023年），SVB的MBS投资组合价值暴跌。随着利率上升，固定收益价格下降——造成头寸公允价值损失。此外，投资者可以在市场上许多其他地方寻得收益。看看3个月期短期国库券利率就知道了。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_iwkst7ubkh.png" alt="7cc58118f0eeea8df16ec0be82f361bc" title="6887264"></p>
+<p>持有MBS头寸是不负责任的做法，尤其是在没有利率对冲的情况下，高层管理人员应该也将丢掉工作。</p>
+<p>只要SVB能够维持他们的存款，这原本就不是流动性问题，因为这些证券的回报将远超它们的成本（如果你持有至期满——这是不可能发生的）。</p>
+<p><strong>4、发生了什么：细节分析</strong></p>
+<p>现在是谈论大家最喜欢的话题的重要时刻：会计。</p>
+<p>你需要了解两件事。</p>
+<p>●持有至到期（HTM）：HTM证券只有在期限为一年或更短的情况下才被列为流动资产。期限超过一年的证券被列为长期资产，并以摊余成本——即初始收购成本加上迄今为止发生的任何额外成本——出现在资产负债表上。</p>
+<p>●可供出售证券（AFS）：可供出售证券（AFS）是一种债券或股权证券，购买目的是在期满前出售，或在没有到期日的情况下长期持有。会计准则要求公司在购买任何债务或股权证券时，都必须将其分类为持有至到期、持有用于交易或可供出售。可供出售证券按公允价值报告；各会计期之间的价值变动包含在资产负债表权益部分的累计其他综合收益中。</p>
+<p>我深入研究了10-k文件，精选出了重要内容，以节省你的时间和精力。</p>
+<p>如果你看一下截至2020年底的这两项数据，貌似根本不是问题，因为P/L相对于头寸规模来说还很小。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_ysyyb0gnk5.png" alt="912aa39aa05f614321c9711cdeb53cd5" title="6887265"></p>
+<p>2022年情况就不同了。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_jqksshhg3b.png" alt="bb32e84830a2ae293cb85a3d426326d7" title="6887266"></p>
+<p>由于利率变动，这两项都开始出现巨大亏损。</p>
+<p>这就是引发这场灾难的关键因素——SVB提醒所有人关注这个问题，搬起石头砸了自己的脚。</p>
+<p>周三下午，SVB宣布，他们已经出售了210亿美元的可供出售证券（AFS），亏损了18亿美元，并正在以股权和债务筹集另外的22.5亿美元。这让投资者深感意外，他们一直以为SVB有足够的流动性，不会出售其AFS投资组合。</p>
+<p>他们偏离既定轨道的消息一经传出，股权融资也随之失败。</p>
+<p>下面提供了另一种角度，来看待对情况无所助益的客户总资金流。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_kp33s37t3h.png" alt="25a31c6b042604f2341c259f59f01f81" title="6887267"></p>
+<p>随着刺激措施带来的资金涌入科技/风险投资领域，我们在2021年迎来了大规模的资本流入。今年年初，风投和创始人们因此存入了大量资金。</p>
+<p>然而，从科技投资的本质来看，它们是预先消耗现金流的，因此整个投资组合的现金消耗也开始增长。如果他们看到J曲线的另一面，这本身是可持续的，但由于固定收益投资的崩溃，最终还是没能撑过去。随着这些公司消耗现金流，进一步刺激了提现，以满足短期现金需求。</p>
+<p>相比之下，SVB的客户平均现金消耗速度是2020年的两倍。这个窟窿需要在某个点被堵住，最后通过SVB提款堵住了。</p>
+<p>因此，在整个崩溃之前，对存款的自然侵蚀就已呼之欲出。</p>
+<p><strong>5、连锁反应：传染vs遏制</strong></p>
+<p>随着投资者对Silvergate出乎意料的存款外流越来越紧张不安，SVB将行业又向下拉了一把。引发存款担忧的是SVB宣布重组资产负债表，出售210亿美元的AFS证券，以提高资产敏感性，他们计划同时增加150亿美元的定期借款，以部分抵消存款下降。</p>
+<p>随着存款beta值走高（此前KEY下调了NII），市场越来越担心整个行业的净利息收入（NII）轨迹，人们自然会怀疑，在利率持续走高的环境下，银行是否有任何切实的能力影响储户的行为。很简单，加息对美国银行来说已经从“好事”变成了“坏事”。别处的收益吸引力更大。</p>
+<p>市场挥之不去的担忧是，如果利率持续走高，存款beta值上升，我们可能会在今年继续看到出现这些被迫的资产负债表重组。人们的担忧还集中在存款从无息存款向有息存款的更广泛的转变上，这种组合将构成巨大的融资成本压力。记住，存款是这些银行成本最低的资金来源。</p>
+<p>那么还有谁会遭殃？</p>
+<p>上周五，我们看到第一共和银行（FRC）等“资产敏感型”地区银行出现严重做空。那些被认为更侧重服务科技公司的银行，如PacWest Bancorp（PACW）、Western Alliance（WAL）和Signature Bank（SBNY）也受到了严重影响：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_o45jjgrm1z.png" alt="7b5959fae4a3b0723922e3990675fbcf" title="6887268"></p>
+<p>让我们深入研究其中的一个，知名空头Marc Cohodes是这样抨击它的：</p>
+<p>Signature Bank</p>
+<p>在周四的Twitter Spaces直播中，空头Marc Cohodes接受了Bear Cave Newsletter的Edwin Dorsey的采访。Dorsey此前曾发布一份关于Silvergate的简短报告。</p>
+<p>在FTX和Silvergate估值暴跌之前，Cohodes曾向投资者发出有关这两家公司的警告。他认为Signature Bank将是下一个倒闭的银行，并表示“这个故事将发展得越来越大，这是一个全球范围的洗钱故事”。他说，Signature还有25%的存款与加密货币行业有关。</p>
+<p>因此，从表面上看，与其说Signature深陷于其长期固定收益投资的离轨偏航中，不如说它不仅陷入了地区银行抛售，而且似乎与特定的加密货币抛售更加密切相关。</p>
+<p>低于25万美元的存款</p>
+<p>在利率上升的环境下，用可变利率资金（非核心消费者存款）为长期按市值计价证券提供资金，这种资产负债表问题是有害的，SVB的股票表现就证明了这一点。对于一家与SVB的融资组合类似的银行来说，最大的风险是超25万美元的存款外流：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_5to4yuamee.png" alt="725c3aca2bececf24c9342cc662cf9f7" title="6887269"></p>
+<p>这就是FDIC保险的用武之地（下文将详细介绍）。存款低于25万美元的银行最容易出现系统性风险，因为联邦存款保险公司（FDIC）为存款不超25万美元的账户提供保险保障。如果你看表格底部，就会发现SVB在这一项只有2.7%的存款。</p>
+<p>比较证券/资产组合</p>
+<p>既然我们知道银行挤兑的原因是债务证券头寸严重不足，那么重要的是接下来要检查哪些银行的资产构成中包含大部分证券：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_vifwbhqv3z.png" alt="922e26ef49af6bdb8b4bee1c7695c914" title="6887270"></p>
+<p>再一次，SVB和SI显示持有证券比重过高。</p>
+<p>到期或重新定价证券占资产的百分比</p>
+<p>最后一个关键图表是看到期/重新定价证券余额与资产的比重。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0314/12_lm90zrvrm9.png" alt="20ffbc24cebf77504a63eb5fb40d4710" title="6887271"></p>
+<p>结果再一次显示SVB该占比严重不足。</p>
+<p>然而，这些图表也显示，当涉及到所面临的资产负债表风险时，大多数其他银行（尤其是较大的机构）都各有各的问题。</p>
+<p>我们也应该提醒自己，与金融危机之前的时代相比，该行业在流动性、资本、信贷和管理质量方面已经发生了重大变化。在流动性方面，流动性覆盖率（LCR）是巴塞尔协议III的一项要求，根据该要求，银行必须持有一定数量的高质量流动资产，足以为30天的现金流出（存款挤兑）提供资金。这段时间通常被认为足以“稳定船只”。所有大型银行的LCR都超过了100%的最低要求。</p>
+<p>6、倒闭：FDIC借入</p>
+<p>上周五中午前不久，FDIC决定关闭SVB。一家全面倒闭的银行，美国历史上倒闭的第二大银行。值得注意的是，该机构没有等到业务结束（这是通常的做法）。FDIC无法立即为该银行的资产找到买家，表明了储户套现的速度有多快。</p>
+<p>对于银行来说，FDIC为不超过25万美元的存款提供保险保障。正如你在上面的图表中看到的，这只覆盖了SVB总存款的2.7%。FDIC表示，在SVB存款超过这一额度的储户，其未投保余额将获得破产管理证书，这意味着他们可能不会很快取出全部存款。</p>
+<p>银行全面倒闭会严重影响初创公司的短期现金危机。以下是创始人/公司上周末采取的一些紧急措施：</p>
+<p>●为了支付工资和应对其他需求，纷纷出售二级股票并进行融资交易。</p>
+<p>●根据其公司未来的收入借入新的贷款。</p>
+<p>●上周五，创始人们打了一整天电话，试图出售他们的个人股票，以充实个人现金头寸。</p>
+<p>●风险投资机构提供短期现金。Menlo Ventures正计划向需要发工资的投资组合公司提供贷款，其他大型风险投资公司已经承诺或正计划这么做。</p>
+<p>这对整个生态来说无疑是痛苦的一击。</p>
+<p>因此，要求政府干预的呼声越来越高，但情况似乎并不会如此发展：</p>
+<p>资产管理公司Unlimited的联合创始人兼首席投资官Bob Elliott表示：“最大的问题是，联邦存款保险公司和美联储是否会让未投保的储户实现全额提款，或者至少接近全额提款。”“如果SVB Financial问题解决不好，就会出现系统性风险，即未投保储户将逃离小银行。”</p>
+<p>Bob Elliot一直被视为真相的来源，每个人都应该看看他的精彩推文，尤其是这一篇：</p>
+<p><a href="https://twitter.com/BobEUnlimited/status/1634539450557505537">https://twitter.com/BobEUnlimited/status/1634539450557505537</a></p>
+<p><strong>结论</strong></p>
+<p>我们真切地感受到了利率大幅上升带来的连锁反应。SVB对债务证券极其严重的管理不善将在全系统范围内产生影响，因为现在信息传播是即时的，网上银行的出现更进一步实现提速，点击一下按钮就可以提款了。</p>
+<p>当从众心理被恐惧所主导时，许多对技术创新至关重要的个人和公司也将消失。全要素生产率一直是美国GDP增长的主要驱动力。动摇这一基础核心，我们就已经让自己落后了。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/48434/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">三家加密友好银行崩盘 业内人士都怎么看？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/48419/">
+                <span class="next-text nav-default">损失过亿级的不止SVB Euler Finance 1.95亿美元黑客事件刚刚上演</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

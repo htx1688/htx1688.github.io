@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          以太坊背后的权力机器：MEV与PBS - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制过去。" />
+<meta name="keywords" content="ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46722/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="以太坊背后的权力机器：MEV与PBS" />
+<meta property="og:description" content="谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制过去。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46722/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="以太坊背后的权力机器：MEV与PBS">
+<meta itemprop="description" content="谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制过去。"><meta itemprop="datePublished" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="11672">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="以太坊背后的权力机器：MEV与PBS"/>
+<meta name="twitter:description" content="谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制过去。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">以太坊背后的权力机器：MEV与PBS</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-01-29">
+      2023-01-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 11672 字 -
+        预计阅读 24 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制过去。—《一九八四》</p>
+<p>2007年，加拿大皇家银行的交易员胜山发现了一件令他感到困惑的事情，当他在交易终端按下买入键的一瞬间，所有的订单消失了。</p>
+<p>而在区块链的世界里也发生了一件相似的事情。2022年6月， Scott Bigelow在以太坊主网上面部署了一个加密合约并往里存入了0.035个以太币，只有他一个人知道取出合约内存款的密码。而就在他往合约发送密码信息的一瞬间，<strong>合约里的以太币消失了</strong> 。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_5nlldag3wq.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>毫无疑问的是，他们都遇到了抢跑者。胜山想要下的订单分布在各个不同的交易所，因为地理位置的缘故，每一个订单所到达交易所的时间是有微小差异的，高频交易者通过更快的光纤网络提前知道了第一笔买入单，从而在胜山的订单下到其他交易所之前把订单都给买光。</p>
+<p>Scott的密码信息尽管只有他一个人知道，可当他的交易信息被各个节点广播前，就被抢跑者在内存池子中所嗅探到，并且复制了他的密码以更高的gas费用抢先把合约里的钱抢走。这些抢跑机器人仅仅只是这些“捕食者”活动的冰山一角。不同于传统金融的高频交易，在区块链这个无准入机制的黑暗森林中，已然出现了更为精巧残忍的策略，并且被广泛的应用于defi、nft各个领域。</p>
+<p>本文将从以太坊底层原理的角度来展示mev机器人、flashbots在其中所担任的角色；pbs架构对后续加密生态的影响和对未来各个角色的演进预测。共分为三个章节：</p>
+<p><strong>第一章节为原理解读。</strong></p>
+<p><strong>第二章节阐述了mev的生态格局、投资以及创业机会。</strong></p>
+<p><strong>第三章节是对未来构建者-提议者分离架构的预测和展望。</strong></p>
+<p><strong>1、产业链</strong></p>
+<p>要想完全彻底的理解现在的pbs生态（提议者-构建者分离），我们可以从用户端发出一笔的视角来看待：“当一个用户在按下与去中心化应用交互的那一瞬间再到在共识层上完全确立，这一个过程到底发生了什么？”</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_tets2ad3jj.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>为了方便理解，我将这些环节拆分成了几个步骤：</p>
+<p><strong>用户交易（transaction）：</strong> 当我们在钱包里进行转账或是在某个去中心化交易所里进行代币的兑换亦或是mint某个nft，从链上的数据结构来看都是类似的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_esdkyvl7dc.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>如上图所示就是对一个nft合约进行mint所需要的信息，其中最重要的信息就是data，在上图data里面0x1249c58b就是对mint（）这个function的调用。而如果我们把data里面的数据换成 0x那么就代表一个普通的转账。通过这些data和value的数据，我们可以清晰地判断用户这一笔交易的意图和作用。</p>
+<p><strong>内存池（mempool）</strong> <strong>：</strong> 当用户使用公共的节点远程调用服务时（例如metamask默认使用infura的以太坊节点调用服务），交易会跑到内存池子里。内存池是在节点收到交易并且把他包含到区块的一个缓冲区，其作用就是帮助节点对各类交易进行检查，并且判断交易的输出和签名的合法性、有效性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_c9yomu8mw1.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>内存池里的交易对每一个节点来说是不同的，但是对于整个区块链网络上来说，他所包含的数据却是公共的。换言之，只要有人能够在全球各地云服务器上架设节点，他就可以获得大部分的内存池数据。内存池数据的滥用，对于普通用户来说是极其不友好的。正如我在开头所讲述的案例中一样，套利者可以提前知道用户的交易意图从而进行获利。这一获利的过程我们称之为mev（最大可提取价值）。</p>
+<p><strong>搜索者（seacher）</strong> ：也称为以太坊机器人操作员，目前我们所了解的套利者、nft-mint机器人都可以归类到搜索者这一个范畴。搜索者和flashbots息息相关，在flashbots开源了他们的拍卖组件之后，搜索者可以通过发送捆绑包的方式，将自己的交易或者是内存池的交易按顺序拼接起来，并且指定某个区块构建者让他们把这个捆绑包里的交易包含在区块里，从而避免其交易在公共内存池之中被嗅探到。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_0ci2fqsssg.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>Flashbots 实际上是创立了一种全新的交易信息通道，他使得一些用户能够直接的和区块构建者进行通讯。例如下面的例子，我通过flashbots将上图mint的交易内容直接传递给区块构建者从而规避了我的mint信息提前被人知道。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_zyj0bjnba9.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>搜索者也需要支付一定的价格从而然他们的捆绑包变的更加有吸引力。例如通过调高gas的费用，或者直接将以太币转移到构建者的coinbase地址。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_u9rh3k0hzs.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>借由捆绑包的机制，搜索者拥有在小范围内改变交易排序的能力。并且从机制上可以保证排好顺序的交易有不被插队的可能性。通过排列组合外部的交易和自己产生的合约调用交易，就组成mev领域里面各种各样的攻击策略。例如抢跑、后跑、三明治攻击、jit机器人、时间盗贼攻击和叔块盗贼攻击等等。</p>
+<ul>
+<li>
+<p>抢跑：通过抢先并且复制对手的交易策略来获得利润。例如抢在普通用户面前以更高的gas费用抢先mint到nft，抢占人类用户的mint份额等等。</p>
+</li>
+<li>
+<p>后跑：通过争抢某个交易的后续位置从而获得利润。机器人通过监控某些代币在uniswap上面创建新交易对后，在其部署完池子后创建大量买入交易。该策略是成为第一个购买代币的人。同理，机器人也可以通过监控nft项目方激活nft合约mint（）的那一笔交易来成为第一个mint nft的人。现有市面上所存在的nft 抢mint机器人大多都遵循这样的原理和架构来设计。</p>
+</li>
+<li>
+<p>三明治攻击：当一个用户想要在某个去中心化交易所中换取代币a时，机器人可以创建两个交易并且利用捆绑包功能将受害者的交易夹在其中。机器人的第一笔交易购买了代币a，受害者的交易接下来推高的代币a的价格，第三笔交易再将相同数量的代币a卖出从而获得利润。利润取决于受害者交易所设置的滑点。</p>
+</li>
+<li>
+<p>Jit 机器人（just in time）：这种模式出现在uniswap v3的代币池子中，因为v3本身的集中流动性特性，使得用户可以在某个极小的区间内设置一笔lp。当一个用户想要在v3进行大量代币交易时，立刻发起一笔添加流动性的交易和一笔销毁流动性的交易。将用户的交易夹在其中，从而获取这一笔交易产生的流动性收入。这种模式需要jit机器人提前计算好前后交易的头寸变化，使得用户的交易刚好落在其设计的流动性区间内。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_930k5go9au.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>由于篇幅有限，我不在这篇文章里面介绍详细攻击的手法和步骤，感兴趣的读者可以访问这里（https://www.mev.wiki/attack-examples）。并非所有的搜索者都是套利者。我们也可以利用这些机制来做一些好事。</p>
+<ul>
+<li>转移服务：有一些黑客会利用用户被盗钱包中的nft来进行钓鱼，通常这个钱包里面的eth是不够支付转移的gas费用的。当受害者想要转入gas来进行转移时，黑客就会使用脚本把gas费转走。我们可以使用flashbots赶在黑客把你转入的gas费用拿走之前，将私钥被盗钱包中的nft取回来。设立一笔转入被黑钱包的交易，再创建一个从被害钱包转出的交易，将这两笔交易放在捆绑包中并且发送给区块构建者。由于这两笔交易在区块上是连续的，黑客没有办法阻止你转出被盗的nft。</li>
+</ul>
+<p>当一个搜索者完成了捆绑包（bundle）的构建时，他可以将这个捆绑包发送到其指定的区块构建者中。</p>
+<p><strong>区块构建者（block builder）</strong> ：得益于flashbots在2022年11月份将区块构建的架构开源，我们可以知道区块构建者内部的架构设计。一个完整的区块构建客户端由两个不同的节点组成，包含了一个区块构建规格的geth执行层节点程序，以及一个改动过的prysm共识层节点。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_qa0a9bk5cz.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>区块构建者需要开放一个rpc端点，使得搜索者能够将捆绑包发送到指定的构建者之中。构建者本身分为矿工（geth）和构建（prysm）两个模块，矿工模块通过算法程序来选取符合其程式要求的捆绑包以及从内存池中选取交易并将其塞入创建好的区块之中。构建者模块在不断的与中继器和矿工模块沟通的同时开始生成块的数据，其中包括了块的哈希值、收款地址、和额外信息（通常构建者会在里面写上自己的名字）。并且设立一笔交易，将整个区块的收益以转账的方式发送给验证节点的收款地址。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_0492mg8f0v.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p><strong>中继器（relay）</strong> ：区块构建者需要一个信任的第三方来将其发送的区块送到验证者手上而不被泄露，同样的验证者也需要一个信任的中继层来帮其确保区块的合法性。当然不同的中继器其特点和特点都有所不同，一个验证者借由mev-boost来接入多个中继器从而获得最多的区块选择权。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_33fso6tszm.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>从上述架构上，我们可以发现中继器也需要运行共识层节点和执行层节点用来接受和送出区块信息。中继器的外部有两个api分别对接区块构建者和mev-boost。这样的架构能够在保证区块信息不被泄露的情况下，最大化的降低提议者和构建者的沟通和信任成本。</p>
+<p><strong>提议者：</strong> 在以太坊合并之后，新的共识层被添加进了网络。提议者的架构由四个客户端组成：执行层节点、共识层节点、验证人（32eth）、mev-boost。这也是目前大部分以太坊节点质押商的底层架构。原先的节点质押商由前三个软件组成，可以把mev-boost理解成一个插件，用来协调两个节点的沟通并且从中继层获取额外的区块信息。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_scud0o54vh.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>这样的架构实际上是将原有提议者构建区块的能力剥离出来，使得提议者只需要提议从mev-boost的区块并且将其添加到信标链上即可。同样的，mev-boost可以连接多个中继层，从而让提议者的利益实现最大化。最终搜索者和区块所产生的收益通过这整一个架构支付给提议者即——以太坊质押者。</p>
+<p><strong>交易链条：</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_62hnnc3z4a.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>当一个用户发起一笔交易时，首先会进入公共内存池，如果这是一笔普通的交易，那就会在等待一段时间之后被区块构建者放入其创造的区块中、如果这是一笔被搜索者盯上的交易，就会以捆绑包的形式进入区块中。再经过中继层、最终被区块提议者签署证明并将其广播到网络。用户也可以使用区块构建者的私人节点，从而避开公共内存池。</p>
+<p><strong>收益链条：</strong> 搜索者在内存池中寻找能够捕获利益的交易，将这一笔交易打捞起来并与自身创建的交易组合并且放入捆绑包中。搜索者获得的利润会直接进入其钱包内，而为了让这笔交易能够被区块构建者打包入区块，搜索者需要支付一笔的手续费给区块构建者（通过gas 或者coinbase transfer）。</p>
+<ul>
+<li>
+<p><strong>区块构建者的收益 = 交易费用（gas）+ 搜索者支付手续费-销毁的gas费用</strong></p>
+</li>
+<li>
+<p><strong>区块构建者的利润 = 交易费用（gas）+ 搜索者支付手续费-销毁的gas费用 - 区块构建者给验证人的费用（成本）</strong></p>
+</li>
+<li>
+<p><strong>Mev-boost收益 = 区块里的最后一笔转账 = 区块构建者给验证人的费用（成本）</strong></p>
+</li>
+</ul>
+<p>我们以16489407区块为例，从ethscan上显示他整体的区块奖励为0.129830707718222266 Ether，这并不是他实际的区块构建利润，仅仅只是交易费用-销毁的gas费用。从flashbots的地址中可以查询到coinbase.transfer的记录，可以看到搜索者给其支付了两笔笔合计0.16601722521 ether的手续费。当然这个区块实际上存在6个捆绑包，只不过剩下的4个捆绑包是以gas费的形式来支付的。篇幅有限笔者在这里不详细赘述，未来会开一篇文章详细介绍如何计算一个区块的mev收益。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_hgkmhy19og.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>在这个区块的最后一笔转账，构建者给了验证人一笔0.295569746890668 Ether的转账。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_74e870b91a.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>通过计算得到：</p>
+<p><strong>区块构建者收益 = 0.129830707718222266 +0.16601722521=0.29584793292 ether</strong></p>
+<p><strong>区块构建者利润 = 0.29584793292-0.295569746890668 =0.00027818602 ether</strong></p>
+<p>从这里我们可以看到，区块构建者的利润并没有我们想象的那么高，能够获取mev大部分收益的依然是安装了mev-boost的节点验证人。需要注意的是，这里的收益不包括节点质押的收益。一个节点质押商的收益分为共识层收益和mev-boost收益。Mev-boost收益对于验证人来说是现金，如果质押者的运气比较好那么他在安装完boost之后就能从收费地址直接获得以eth为结算的收益。而共识层的收益是有账期的，需要等到上海升级之后才能够取出。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_056b95n43s.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>从整体的技术架构和链路上来看，现有的pbs架构设计并不简洁。Pbs本身也是以太坊在the scourge阶段之前的过渡。而对于中继层和构建层之间的勾结和区块构建者的中心化目前也没有完全解决的方法。这也是flashbots 在之后推出suave的一个主要原因。</p>
+<p><strong>2、生态格局与投资机会</strong></p>
+<p>上一章节通过底层架构的实现来对mev的链条进行分类和整理。而在生态之中的项目方往往占据了多个领域和方向来实现盈利和创造，当然这个领域仍然处于非常早期的阶段，目前并没有出现非常明确的商业模式和赛道头部玩家。对于判断这些早期项目，笔者大致划分了几个赛道（不涉及节点质押商），并且从三个方面进行衡量：能否从中获得利润、是否具备大规模商业化的条件以及是否具备可持续性。</p>
+<p>搜索者：根据其功能和获取利润的来源，其中也分为套利者、三明治攻击者以及清算者。其盈利领域涵盖了去中心化交易、借贷、nft交易、闪电贷等等。从eigenphi所提供的数据中可以看到，搜索者本身的收益分配极度不对等。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_o205ewzjqd.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>绝大部分的套利利润集中在0.27美元这个位置，而只有极其少数的套利利润可以超过1000美元。同时搜索者也要面临被同行以设下陷阱从而被反向套利的风险（沙门氏菌代币）。Nathan Worsley 在mevday演讲中所述：“这个领域需要非常顶尖的人才来进行团队配合，20个小团队占据了绝大部分的市场份额，套利的策略变的越来越复杂并且竞争十分激烈。”</p>
+<p>搜索者竞争激烈的原因很大一部分来自于区块链网络的公开性和无准入性，一方面他们需要更好的服务器和更快的信息传输通道来获得最新的内存池数据，另一方面也需要巧妙的算法和策略使得自己在获取收益的同时不被他人所捕获。毫无疑问，搜索者领域是一个能够获得利润和拥有可持续性的赛道，但是这个领域并不具备面向普罗大众商业化的可能性，更像是加密领域的量化交易。对于大型投资机构来说，投资一个链上量化交易团队的回报率可能不是很高。但对于熟悉量化交易和智能合约开发的小型创业团队和个人而言，这可能是切入加密领域相对较好的实践。例如成立一个加密量化基金，并且承诺xx%的回报。当然，这个领域也并非一成不变的。从jit机器人在近段时间的交易量激增的数据总可以看到。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_s76u2uaa3e.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>随着链上交易用户的增多和各类新defi协议的出现，未来将会存在大量新的获取利润的机会。这是对团队本身的执行力和链上协议的理解能力的一种考验。</p>
+<p>构建者：根据目前的链上数据，构建者的市场面临着较为激烈的竞争。并且有越来越多的节点服务商进入了这个市场。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_90sf5fcegk.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>例如：BloXroute、manifold、blocknative、beaverbuild、0x69、edennetwork、lightspeed、eth-builder等。上图最左侧的为构建者的区块占有量，中间为中继层占有量、右边为验证人占有量，flashbots并不是最大的区块构建者，确是当前最大的中继服务商。笔者在22年12月份统计了从合并以来的60万个区块数据。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_5s8n2qsqhb.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>其中0x69这位区块构建者的市场占有率正在逐渐攀升，并有超过flashbots构建者的趋势。需要指出的是，区块占有率并不代表其区块的利润。支付给验证人的mev收入是由区块构建者决定的，也就意味着构建者可以通过补贴的方式快速获取验证人的青睐。这些项目方也提供中继器的服务，中继器目前最大的市场占有者为flashbots，目前没有中继器获取利润的数据。Ultrasound 和 Agnostic 是唯二没有运行自己的区块构建服务的中继器。</p>
+<p>在这个领域bloXroute、manifold、blocknative、eiden network是为数不多的在公开市场上融资的项目方。其中eden network 和manifold只提供区块构建和中继器服务，而bloxroute和blocknative在提供区块构建服务的同时也提供了其他的服务。Bloxroute根据验证人的需求，提供了不同的中继接口，例如最大化利润中继和常规中继等。从功能上看，bloxroute更贴近验证人用户和项目方，例如提供节点保护服务和更快速的交易发起服务。而blocknative更多的是面向搜索者和一些defi项目方，例如内存池和交易模拟服务。</p>
+<p><strong>市场规模</strong></p>
+<p>我们可以通过未来区块的生产量测算市场规模，现有的区块构建者构筑每一个块的利润大约在0.0005个以太。以太坊平均一天的区块产出大约为7000个区块。那么未来在以太坊的整体的区块构建利润为1200个以太，这个收益实际上是非常低的（整体执行层层的收益在25万个以太左右），这也是这些项目方会有其他业务来作为收入的原因。影响区块构建利润的因素有很多，当前的数据并不能代表未来。例如区块构建者为了抢占市场主动降低利润，或者现有交易量不足从而影响捆绑包的数量等等。从整体利益链条来看，区块构建者的收益更为可控。其技术架构也具备了大规模部署和运行的可能。对于项目方而言，在构建区块服务的基础上可以添加更多的付费服务，使得区块构建和中继服务成为一个吸引开发者和协议层导流的选项（类似web3基础设施免费提供节点调用）。</p>
+<p><strong>SAAS服务</strong> ：市场上也存在一些给搜索者和研究者提供服务的商业模式，例如提供mev数据分析eigenphi 和上文提到的内存池数数据服务的blocknative。另外一种则是更快的私人节点调用服务和节点隐蔽服务，使得搜索者能够隐蔽快速的进行节点调用和通信。</p>
+<p><strong>抗MEV服务</strong> ：目前也存在一些抗抢跑和三明治攻击的去中心化交易所，例如1inch 和cowswap提供的私人交易服务等。其原理和私人rpc服务类似，将用户的这一笔交易单独的发送到区块构建者之中，使得这笔交易不经过内存池。</p>
+<p><strong>订单回馈服务</strong> ：这一种模式在传统证券交易市场中较为常见。Robinhood就是利用这种服务来实现盈利的，当散户通过其软件上下单时。Robinhood会将这笔委推单交给做市商，做市商在市场上进行交易时也会支付给Robinhood现金。链上交易也可以遵循这样的原理，例如rook协议。用户可以在rook专属的去中心化交易所上下单，但是这笔交易并不会直接在链上执行，而是现在内部拍卖给rook的保管人（keeper）。一旦竞标成功，保管人就拥有将用户交易放入其捆绑包的权力，从而利用用户的交易来进行mev活动并且获取利润。在这笔交易结束后，用户获得了拍卖的一部分rook代币、保管人获得了mev的利润。在这个环节中，保管者实际上担任的是搜索者的身份，只不过其订单来源不再是过去的内存池而是rook协议自己建立的私有暗池。从价值分配的角度来说，用户能够在完成订单的同时获取一部分mev的收益。</p>
+<p><strong>加密暗池服务</strong> ：笔者也构思了一种商业模式，新的去中心化协议可以在建立交易服务的同时构建一个协议专属的区块构建层和中继层。用户使用该协议所产生的所有交易都将进入这个暗池。搜索者需要通过支付费用来获得专属的订单流从而进行套利。协议层则可以将搜索者支付的费用回馈给用户例如空投和免gas服务从而吸引更多的用户进入暗池交易。</p>
+<ul>
+<li>例子：钱包供应商可以设立一个专属的暗池节点，使得所有使用该钱包的转账和交易都通过这个暗池来执行：a用户在sushi swap上面将a代币换取b代币；b用户则在uni swap上面将b代币换取a代币。这两笔订单组合的一瞬间会导致uni 和sushi两个交易所的a-b交易兑换率失衡。套利者可以将这两笔订单拍卖下来并且将自己的套利策略捆绑起来实现闪电贷套利等等。当然，这两笔交易必须要达到一定量级才可以实现不同池子的兑换失衡。也只有当交易规模达到一定量级时才可以实现，例如做市商拍卖下20笔用户的订单来完成一笔巨大的套利。当然这一种模式也存在大量的风险，例如用户本身的交易损失和区块构建者的过度中心化。</li>
+</ul>
+<p>SUAVE： 通过建立一个独立的内存池和区块构造网络，使得未来所有的订单流和区块都能够被搜索者和验证者公开竞标和访问并且横跨多链架构。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_r9hpqpm95i.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>目前suave的架构设计仍然处于讨论阶段，笔者认为suave极有可能会推出自己专用的节点客户端。如果沿用现有的pbs设计，为了实现与L2层的通信，那就必须在使用现有的架构上增加与L2节点的通信。也就是说通过部署多个链节点的方式来进行交易消息的验证，这种设计方式过于臃肿和复杂，还不如重新开发出一套兼容所有evm生态的轻节点客户端从而实现其文档中描述的模块化功能。</p>
+<p>从整体利益分配的角度来看，当前大部分的mev利润都交给了搜索者和节点验证人。用户往往是受害者而非获益人。从投资的角度来看，抗mev和订单流交易很有可能是未来一个相对可靠和确定性较高的商业模式，一方面能够利用mev捕获的收益来吸引更多的普通用户参与，另一方面也可以让搜索者加入放大订单流的价值。</p>
+<p>毫无疑问，flashbots是该领域的头部玩家，当前大部分的架构设计和代码都是由其开源，并且引领整个行业的走向。笔者认为，这个领域的机会并不在于套利和质押，在于谁能够拥有区块构建和分配交易的能力。这种能力的价值不在于经济层而在于整个以太坊生态的权力层——谁掌握了区块内交易的排序谁就掌握了权力分配，而谁掌握了权力分配谁就能够重塑整体网络的利益价值分配。过去的用户代币流通价值是通过智能合约和一笔笔交易来进行分配的，而未来的价值则通过组合这些订单流的区块构建者来分配。<strong>换言之，我们将从争夺单比交易价值的时代走向未来争夺区块空间资源的时代。</strong></p>
+<p><strong>3、对未来的展望和担忧</strong></p>
+<p>在经典物理学的年代，人们对于事物的认知是连续的。我们从a点走到b点，必然要经历无数个中间时刻，时间是连续的，距离的变化也是连续的。直到普朗克在1901在他这篇论文《论正常光谱的能量分布定律》提出了能量不连续而是一份份可分割的假设之后，才掀开量子力学的冰山一角。</p>
+<p>许多用户对mev难以理解原因就在于，从我们人类的角度来看，我们认定发送出的这一笔订单是能够按照时间顺序被同时执行的，是连续的。在区块网络的角度来看，用户的意图和行为是由一笔笔不可分割的订单排列而成的，是不连续的。搜索者能够在用户发送交易之后捕获这一笔交易并且重新排序以获得利益。在宏观程度上，我们可以近似认为，搜索者借由捆绑包实现了小范围内操纵时间的能力。举一个不恰当的例子，从用户的视角来看，自己的交易被三明治攻击，近似于是被来自未来和过去的搜索者同时抢跑了。本文所阐述的案例都发生在以太链上，但有一点笔者可以肯定的是，只要区块内包含的依然是非连续的不可分割的订单排列，mev就一定会发生。</p>
+<p>中心化的趋势：</p>
+<p>区块构建的权力对未来协议层的影响是深远的。如同《1984》所言：“谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制过去。”从1月3日到27日，超过百分之80%的区块仅被5个区块构建者所创造。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_0898hzohww.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>值得一提的是，在区块构建客户端里有一个特殊的功能，构建者可以通过设立黑名单的方式使得某些地址不被包括到该区块之中。这也就意味着未来构建者拥有了审查交易的能力，当某些不符合其规范的用户发起交易时，他的这笔交易将处于pending的状态永远无法抵达真实的网络。Tornado-cash事件是各大节点服务商对其发动的节点级审查，而构建者发动的是内存池级别的审查。当然，随着越来越多用户和项目方的参与，未来区块构建的去中心化程度提升会冲淡这一种审查带来的影响。但是区块构建中心化所带来的潜在危害仍然不可小觑。笔者构思了几种可能性供读者参考。</p>
+<p><strong>执法者区块：</strong> 假设未来大部分的构建者和节点服务商都被单一实体所控制，那么我们将正式进入一个由实体法则所操纵的区块链网络。在这里所有交易（智能合约、转账、授权、交互）的部署都会被多次审查和批复。节点调用方审核交易发起者的钱包地址和ip，确认无误之后。发起的交易将进入监控非公开的内存池，搜索者承担执法功能，用来判断这笔交易内容的合法性。根据交易的内容和信息进行分级和标记，并将其囊括到捆绑包之后发送到不同的构建者上。构建者可根据交易种类和功能将不同级别的交易放入到拥有不同优先级的区块中，再经由广播由验证人来进行审核。一些不符合实体规则的交易则会被丢弃在内存池子之中，不允许任何搜索者和构建者进行打捞，直到用户自行取消。这种情况下，黑客和盗窃活动将被降低到最小化，但是用户失去了最大限度的对区块链网络的访问，遏制了创新和信息的表达。</p>
+<p><strong>企业级区块：</strong> 假设未来的构建者和节点商被少数几个商业巨头所垄断，我们将进入争夺区块资源的零和博弈时代。用户和开发者尽管获得了相对的自由，却受制于多个巨头协议无法灵活选择交易的对象，甚至用户的订单流在暗池中被明码实价的拍卖从而被剥削和利用。我们将面临最大程度的恶意商业竞争，例如构建者出售审查权和构建权来获得利益。某些协议可以通过买断竞争对手的订单流从而使得对手的用户交易发生一定程度的延迟和阻断。例如当用户在某个nft交易所买卖时，当他拍下订单的时候，这笔交易被对手方放入了区块的最末端，对手方的用户就可以抢先拍下这个nft使得原用户的交易失败。dex协议也可以通过和构建者者达成交易，将对手方的所有交易放入到一个区块之中，造成短暂的代币池失衡，从而无效化对手用户的交易。这种情况下，商业活动依然存在，但是用户和开发者不得不按规则选边站，从而遏制了商业创新。</p>
+<p><strong>篡改历史：</strong> 在构建者和节点过于集中的情况下，质押证明链可以通过重组攻击来删除过去不想要的区块。而工作证明链可以通过时间盗贼攻击来改变时间线从过去重新挖掘区块。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/12_im41pts6kg.png" alt="以太坊背后的权力机器：MEV与PBS"></p>
+<p>这种情况下，权力机器拥有了改变过去的能力，从而将不利于他们的历史删除。</p>
+<p><strong>破坏现实：</strong> 现有的区块链网络上的交易都集中在转账、合约部署、交易代币等功能，并没有对现实世界产生实际的影响。假设未来出现了某种物联网设备和区块链网络高度集成的产品，那么订单的操纵将会干扰到现实世界中某些设备的参数设置从而影响真实世界人们的生活。在传统网络安全行业中已经发生过一次类似的事件：2021年5月份的殖民管道勒索软件事件，间接导致了北美多家航空公司的喷气燃料短缺。</p>
+<p><strong>照亮黑暗森林</strong></p>
+<p>上述案例是在非常极端情况下才会有的事件走向，后续suave架构的上线以及参与者的涌入会减轻私人订单流滥用和构建者中心化的影响。这里的前提是充分的自由市场竞争和对开拓创新者的保护。很难想象，如果没有各领域参与者对代码的开源以及各机构研究者对mev数据的开放，我们将会迎来多么封闭和黑暗的环境。开发者和研究者对代码和数据不断的贡献才让我们在这黑暗森林之中看到一丝曙光。</p>
+<p><strong>真正开放且公正的mev市场</strong> ：允许所有的搜索者和构建者参与，用户可以自由的选择他们的交易走向。搜索者和构建者能够充分的竞争并且在最大程度上回馈协议层的用户。而协议能够利用订单流实现效率和区块资源的最大化利用。</p>
+<p>也许未来加密世界的中心化不可避免，如同早期互联网开放的理念和现在的封闭背道而驰一样。但这并不代表我们可以否定对未来去中心化网络的追寻和向往。历史发展是螺旋式上升的，正是过去开拓者的不断创新和试错，才为后来者带来了经验和教训。正如尼采所言：“<em>他沉沦，他跌倒”。你们一再嘲笑，须知，他跌倒在高于你们的上方。他乐极生悲，可他的强光紧接你们的黑暗。</em></p>
+<p>一个公平的市场化竞争环境是孕育创新的土壤，而更为有效的利益分配机制和去中心化的架构是达成实现的基石。搜索者和区块构建的技术是中立的，其对环境的影响取决于人们如何使用它。换言之，谁控制了现在，谁就同时掌控了未来和过去。达成照亮黑暗森林的条件不只取决于资本；也不只取决于计划，决定权在当下的所有人手上。</p>
+<p><strong>参考阅读</strong></p>
+<p>Mev 的过去和现在</p>
+<p><a href="https://twitter.com/lightclients/status/1533915131536605185?s=20&amp;t=">https://twitter.com/lightclients/status/1533915131536605185?s=20&amp;t=</a>_CJ0Qg5sKysDHyiD2kxG1g</p>
+<p>mev-boost架构预告</p>
+<p><a href="https://www.youtube.com/watch?v=sZYJiLxp9ow">https://www.youtube.com/watch?v=sZYJiLxp9ow</a></p>
+<p>mev所造成的过度中心化问题</p>
+<p><a href="https://www.youtube.com/watch?v=GmBqoBr6yl4">https://www.youtube.com/watch?v=GmBqoBr6yl4</a></p>
+<p>coinabse 宣布采用mev-boost作为自己的质押节点组件</p>
+<p><a href="https://twitter.com/CoinbaseCloud/status/1587453502980296708?s=20&amp;t=">https://twitter.com/CoinbaseCloud/status/1587453502980296708?s=20&amp;t=</a>_CJ0Qg5sKysDHyiD2kxG1g</p>
+<p>模拟抢跑实验</p>
+<p><a href="https://www.youtube.com/watch?v=UZ-NNd6yjFM&amp;t=771s">https://www.youtube.com/watch?v=UZ-NNd6yjFM&amp;t=771s</a></p>
+<p>恢复服务源代码</p>
+<p><a href="https://github.com/microbecode/flashbot/blob/master/src/index.ts">https://github.com/microbecode/flashbot/blob/master/src/index.ts</a></p>
+<p>jit 机器人</p>
+<p><a href="https://uniswap.org/blog/jit-liquidity">https://uniswap.org/blog/jit-liquidity</a></p>
+<p>eigenphi 对unisawp上mev的报告</p>
+<p><a href="https://eigenphi.io/report/mev-impact-on-uniswap">https://eigenphi.io/report/mev-impact-on-uniswap</a></p>
+<p>套利机器人实践</p>
+<p><a href="https://github.com/libevm/subway">https://github.com/libevm/subway</a></p>
+<p>pbs架构的讨论</p>
+<p><a href="https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177">https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177</a></p>
+<p><a href="https://barnabe.substack.com/p/pbs">https://barnabe.substack.com/p/pbs</a></p>
+<p>开源的区块构建者架构</p>
+<p><a href="https://github.com/flashbots/builder">https://github.com/flashbots/builder</a></p>
+<p>重组攻击的论文</p>
+<p><a href="https://arxiv.org/abs/2110.10086">https://arxiv.org/abs/2110.10086</a></p>
+<p>重组攻击详细视频</p>
+<p><a href="https://www.youtube.com/watch?v=xcPxwhrg3Ao">https://www.youtube.com/watch?v=xcPxwhrg3Ao</a></p>
+<p>中心化mev的危害</p>
+<p><a href="https://medium.com/@simbro/mev-driven-centralization-in-ethereum-ec829a214f18">https://medium.com/@simbro/mev-driven-centralization-in-ethereum-ec829a214f18</a></p>
+<p>殖民管道攻击</p>
+<p><a href="https://www.techtarget.com/whatis/feature/Colonial-Pipeline-hack-explained-Everything-you-need-to-know">https://www.techtarget.com/whatis/feature/Colonial-Pipeline-hack-explained-Everything-you-need-to-know</a></p>
+<p>普朗克常数</p>
+<p><a href="http://strangepaths.com/files/planck1901.pdf">http://strangepaths.com/files/planck1901.pdf</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/46751/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文盘点2023年Web3令人兴奋的8件大事</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46752/">
+                <span class="next-text nav-default">中国元宇宙四大独角兽 都是什么来头？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

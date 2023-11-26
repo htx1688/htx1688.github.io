@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          L2桥接风险架构 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="我们的总目标在于，能够快速将某一解决方案「分类」到具有相似特征的某特定解决方案类别中，同时可以足够细致地向用户呈现他们使用这些桥接时需要接受的安全假设有哪些。" />
+<meta name="keywords" content="技术" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/44229/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="L2桥接风险架构" />
+<meta property="og:description" content="我们的总目标在于，能够快速将某一解决方案「分类」到具有相似特征的某特定解决方案类别中，同时可以足够细致地向用户呈现他们使用这些桥接时需要接受的安全假设有哪些。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/44229/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="L2桥接风险架构">
+<meta itemprop="description" content="我们的总目标在于，能够快速将某一解决方案「分类」到具有相似特征的某特定解决方案类别中，同时可以足够细致地向用户呈现他们使用这些桥接时需要接受的安全假设有哪些。"><meta itemprop="datePublished" content="2022-11-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-11-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3385">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="L2桥接风险架构"/>
+<meta name="twitter:description" content="我们的总目标在于，能够快速将某一解决方案「分类」到具有相似特征的某特定解决方案类别中，同时可以足够细致地向用户呈现他们使用这些桥接时需要接受的安全假设有哪些。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">L2桥接风险架构</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-11-05">
+      2022-11-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3385 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>我和来自 Socket 的 Vaibhav Chellani 想要提议一个用来评估不同桥接架构安全概况的风险架构。</p>
+<p>与各种 L2 的风险框架一样，我们的总目标在于，能够快速将某一解决方案「分类」到具有相似特征的某特定解决方案类别中，同时可以足够细致地向用户呈现他们使用这些桥接时需要接受的安全假设有哪些。</p>
+<p>我们主要关注在以太坊和其他链之间的桥接，因为我们即将在 l2beat.com 上介绍这些 (译者注：目前桥接一栏已上线)，但是，关于这些解决方案安全性的基本推理也适用于任何链与另一条链的桥接。此刻，我们正在寻找更广泛社区对这个提议框架的反馈。</p>
+<h3 id="桥接类型">桥接类型</h3>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_nuviyu76e5.png" alt="L2桥接风险架构"></p>
+<p>对于终端用户来说，资产桥接是指从来源链（source chain）接收某种资产的存款，并将这笔资产打给处于目标链（destination chain）上的用户。</p>
+<p>比如，典型的桥接流程就是，Alice 将资金转至 A 链的桥接合约，而后 Alice 在 B 链上收到来自桥接的资金。</p>
+<p>广泛来说，这种流程有<strong>两种发生方式：</strong></p>
+<p><strong>· 基于消息传递的 Token 桥接</strong> ——这些桥接能让流动性以消息传递的形式跨链流动。一般，它们允许一笔资产在来源链上锁定或销毁后，在目标链上铸造出来。<strong>例子：</strong> Rollup 桥接、Polygon 原生桥接、Anyswap（anyCall）和 Axelar 网络。</p>
+<p><strong>· 流动性网络</strong> ——也有桥接会兑换一些已铸造出来的资产。他们允许用户将资产转移至另一些链上，并假设这些资产已通过「消息传递」桥接（Message Bridge）提前将资产转移过去。<strong>例子：</strong> 基于 Nomad 桥接的 Connecxt、基于 Hop Optimistic Bridge 的 Hop、一些其他 HTLC（Hash Time-Lock Contract，哈希时间锁合约）和条件式转账（如 nova 等）。</p>
+<h4 id="消息传递型桥接的安全性">消息传递型桥接的安全性</h4>
+<p>在这一部分，我们会试着阐释这些被多个桥接协议使用的验证跨链消息的不同方式。如上图所示，Token 桥接会利用消息传递型桥接的安全性。</p>
+<p><strong>· 轻客户端验证状态有效性</strong></p>
+<p><strong>描述：</strong> 在目标链上验证来源链状态转换有效性的桥接。该验证过程通过零知识证明实现 (状态转换过程伴随着一个 zk 证明的生成) 或是欺诈证明系统完成 (允许独立的验证者就新状态根的有效性提出争议）。</p>
+<p><strong>例子：</strong> 所有 Rollup 都算是这里的例子，L1 会通过 FraudProof（欺诈证明）或 ValidityProof（有效性证明）验证 L2 的状态转换。</p>
+<p><strong>· 轻客户端验证共识</strong></p>
+<p><strong>描述：</strong> 在目标链上验证来源链共识的桥接。这取决于来源链所使用的共识机制，通常包括对当前验证者委员会的 quorum 签名的检查，如果其来源链使用的是 PBFT 式的提议和投票（propose-and-vote）共识协议（如 Tendermint、HotStuff、Casper FFG 协议）。或者，如果来源链使用 PoW 协议或「最长链」式的 PoS 协议（如 Ouroboros、ETH 2.0 LMD Ghost 等），则使用相关的分叉规则检查最长链。</p>
+<p><strong>例子：</strong> NEAR Rainbow 桥接（忽略与 NEAR 签名机制验证过程的复杂性相关的 Optimistic 构成部分），Polygon 的 PoS 桥接（检查 Heimdall 链的共识）以及 Cosmos IBC（验证另一条 Cosmos 链的签名）。</p>
+<p><strong>· 外部验证者集</strong></p>
+<p><strong>描述：</strong> 使用外部验证者作为事实来源的桥接，即形成一个独立委员会的验证者们，而不是来源链和目标链上的验证者。这取决于这些验证者所采用的实现，他们可能会使用 MultiSig（多签）、运行共识算法（通常是来自提议和投票的一类的算法）、使用 Threshold Signature 机制（TSS，门限签名机制）或 SGX 等……无论它们使用什么技术，都属于这种验证方式。</p>
+<p><strong>例子：</strong> Wormmhole、Multichain、Axelar、DeBridge、Synapse、Stargate。</p>
+<p><strong>· 乐观式验证</strong></p>
+<p><strong>描述：</strong> 具有挑战期（challenge period，译者注：指其他验证者发现桥接消息无效时，可以对其有效性进行挑战的时间段）的桥接。</p>
+<p>这类验证方式中的诚实一方会在此期间内避免纳入欺诈信息。然而，这里有几个关键参数需要考虑：</p>
+<p>1. 挑战期时长：越长越好</p>
+<p>2.Watcher 集规模：无需许可 &gt; 需要许可</p>
+<p><strong>例子：</strong> Hop Protocol、Connext Amarok、Across、Nomad Token Bridge。</p>
+<p><strong>· 混合验证方式</strong></p>
+<p><strong>描述：</strong> 有一种混合以上各种验证方式的结构。</p>
+<h4 id="流动性网络的安全性">流动性网络的安全性</h4>
+<p>除了真的跨链发送资产以外，还有另一种的方法：跨链兑换（swap），只通过易手而不用跨链移动资产，就能进行跨链兑换。（译者注：易手即一方资产成为另一方所有，即资产所有者发生更换。）</p>
+<p>举个简单的例子：A 链上的 Alice 想要将资产转至 B 链。Bob（流动性提供者，LP）在 B 链上已经有了一样价值的资产，他用自己在 B 链上的这笔资产为 Alice 在 A 链上的余额提供兑换服务，并收取服务费。最终，Alice 会获得 B 链上的那笔资产，Bob 则能获得 A 链上的那笔资产 + 服务费。</p>
+<p>这部分仅描述了「兑换」协议的安全性，即 LP 在接受了你在来源链上的存款后，有多大可能会携款潜逃。这些兑换资产拥有铸造出它们的消息传递型桥接的安全性。</p>
+<p>也有一些<strong>其他兑换资产的方式：</strong></p>
+<p><strong>·</strong>  HTLC: 又称哈希时间锁合约，可以用于跨链两方之间进行原子兑换资产。通常只需要用户做两步操作，一是锁定，二是解锁。可能发生的失败情况是，你的资金会在固定的「休眠」期限内被锁定。<strong>例子：</strong> Connext NXTP、Liqualit。</p>
+<p><strong>·</strong>  条件式转账（Conditional Transfer）：允许 LP 通过捷径消息桥接，以此让 LP 可以在任何桥接资金时，立即为终端用户提供资金，并从消息传递桥接中接收资金。在失败情况下，如果没有 LP 提供流动性，则会激活慢速路径（slow path）。<strong>例子：</strong> Hop、Connext Amarok、MakerDAO Teleport。</p>
+<p><strong>·</strong>  外部验证者：让用户可以将资金转至受信任的桥接提供者处，提供者会承诺释放资金至另一条链上。这里可能出现的失败情况是，你的资金会丢失。<strong>例子：</strong> Binance</p>
+<h3 id="抗审查性">抗审查性</h3>
+<p>我们将了解桥接发出的单条消息被审查可能性有关的安全假设。更实际地，我们也将探究单条消息 (Token 转账) 是否会被桥接所审查或是忽视，如果会被审查，用户的资金会有什么后果（这些资金会被返还给用户，还是卡在「转账中」的状态里）。</p>
+<p>典型的解决方案：</p>
+<p><strong>·</strong>  利用基础链的抗审查性（例如，一些 Rollup）</p>
+<p><strong>·</strong>  依赖于验证者集的诚实</p>
+<h3 id="总体活性故障">总体活性故障</h3>
+<p>在总体的活性故障方面，我们将来看看「关闭」桥接的后果。例如，对于使用外部验证者集的桥接，我们可以看看在这些验证者长时间离线（可能是无限期离线）的事件中用户资金的安全性。一般可能发生的情况包括：</p>
+<p><strong>·</strong>  激活慢速路径：默认模式为慢速路径，不会损失资金</p>
+<p><strong>·</strong>  自己进行质押：用户可以质押参与网络，成为验证者并自己处理卡住的转账事物</p>
+<p><strong>·</strong>  冻结：暂停系统，直到桥接运行方上线之前无法运行</p>
+<h3 id="流动性">流动性</h3>
+<p>在这一部分，我们将试着分析桥接资产可用的流动性。桥接可以铸造资产吗，需要 LP 吗，用户可以一直提款或转移他们选择的任意数量 Token 吗，或者他们依赖于外部的 LP，并且桥接可能会「耗完资金」。</p>
+<p><strong>·</strong>  不受限制（桥接可以铸造原生/权威 Token）</p>
+<p><strong>·</strong>  需许可（由桥接运营商提供流动性）</p>
+<p><strong>·</strong>  无需许可（任何 LP 可以提供流动性）</p>
+<h3 id="其他思考和指标">其他思考和指标</h3>
+<p><strong>·</strong>  可升级性</p>
+<p><strong>·</strong>  需许可的行动者</p>
+<p><strong>·</strong>  过去 24 小时内转账量</p>
+<p><strong>·</strong>  过去 24 小时内的 unique transfer（独立地址转账）</p>
+<p><strong>·</strong>  可用的流动性</p>
+<p><strong>·</strong>  支持的 Token/区块链</p>
+<p>原文标题：《L2 桥接风险架构》</p>
+<p>原文来源：bartek.eth，ETH 中文</p>
+<p>来源：区块律动</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/44233/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Fuel：模块化执行案例（第 2 部分）</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/44230/">
+                <span class="next-text nav-default">Musk发文提及People，PEOPLE短时上涨27%</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#桥接类型">桥接类型</a></li>
+        <li><a href="#抗审查性">抗审查性</a></li>
+        <li><a href="#总体活性故障">总体活性故障</a></li>
+        <li><a href="#流动性">流动性</a></li>
+        <li><a href="#其他思考和指标">其他思考和指标</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

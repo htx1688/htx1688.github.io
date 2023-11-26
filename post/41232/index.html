@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Delphi Digital：Rollup 完全指南 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="深入探讨以太坊和 Celestia 上的 Rollup 的设计空间。" />
+<meta name="keywords" content="Rollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41232/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Delphi Digital：Rollup 完全指南" />
+<meta property="og:description" content="深入探讨以太坊和 Celestia 上的 Rollup 的设计空间。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41232/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-08T00:00:00+00:00" />
+
+<meta itemprop="name" content="Delphi Digital：Rollup 完全指南">
+<meta itemprop="description" content="深入探讨以太坊和 Celestia 上的 Rollup 的设计空间。"><meta itemprop="datePublished" content="2022-08-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="32224">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Delphi Digital：Rollup 完全指南"/>
+<meta name="twitter:description" content="深入探讨以太坊和 Celestia 上的 Rollup 的设计空间。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Delphi Digital：Rollup 完全指南</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-08">
+      2022-08-08
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 32224 字 -
+        预计阅读 65 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<blockquote>
+<p>深入探讨以太坊和 Celestia 上的 Rollup 的设计空间。</p>
+</blockquote>
+<p>撰文：Delphi Digital</p>
+<p>Vitalik 为我们贡献了神作《Rollup 不完全指南》，而我将向您展示《Rollup 完全指南》。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_ug5sko9fqn.gif" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>好吧，实际上它也不完整，但听起来比较牛 X，所以我决定用这个名字。这份报告只分析了以太坊和 Celestia 上的 Rollups 的设计空间。我强烈推荐我最近的以太坊报告作为阅读背景。</p>
+<p>在这份报告中，我介绍了我最熟悉的两个项目，但实际上还有很多其他团队正在构建。Polygon（Avail）、Tezos 和 Milkomeda 等也在 Rollup 堆栈游戏中。事实上，Tezos 很可能是首个推出「enshrined」Rollup 的，而 Polygon Avail 在架构上与 Celestia 惊人地相似。</p>
+<p>首先，什么是「模块化」区块链？在这一点上，目前它主要还是一个 meme，有很多分歧，但为了简单起见，我将定义我如何使用这个术语。当然，关于正确与否，你们可以在我的推特评论中进行讨论。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_gsjwdydc27.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>模块化堆栈将以下任务剥离成独立的技术组件：</p>
+<ul>
+<li>
+<p>数据可用性（DA）&ndash; 确保 Rollup 区块头后面的交易数据已经公布并可用，以便任何人都可以重新创建状态。</p>
+</li>
+<li>
+<p>共识 &ndash; 至少就交易及其排序达成协议。</p>
+</li>
+<li>
+<p>结算 &ndash; 根据实施情况而变化，但任务可以包括验证 / 仲裁证明和协调跨链资产转移 / 任意信息传递。</p>
+</li>
+<li>
+<p>执行 &ndash; 计算采取前状态→运行交易→过渡到后状态。</p>
+</li>
+</ul>
+<p>以太坊可以处理其中的每一个问题。它提供了统一的 DA、共识和结算层，具有普遍的执行力。当你在 L1 上进行交易时，以太坊就像任何单体链一样行事。另外，Rollups 可以处理执行，由以太坊提供 DA、共识和结算。</p>
+<p>Celestia 只提供 DA 和共识。在 L1 Celestia 上没有 Uniswap，也没有 L1 的验证 / 仲裁证明。Celestia 没有奉行的结算层或智能合约执行。L1 的功能仅限于 Celestia 代币转移和验证器集管理。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_qvves2ssty.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>请注意，像 Validiums 和 Celestiums 为 DA 和结算使用独立层的可能性也是存在的。任何结算层都可以使用，只要它接受 Celestia 提供的数据证明就可以了。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_3m8p7dzaoy.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>然而，这些都不是 Rollup，但它们带来了有意义的额外安全假设。本报告将重点讨论实际的「Rollup」堆栈。我将首先分解经济因素，然后深入研究每个堆栈。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_tq2rs6140b.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>文中使用的部分缩写，如下所示：</p>
+<ul>
+<li>
+<p>SCR&ndash; 智能合约 Rollup</p>
+</li>
+<li>
+<p>ER - Enshrined Rollup</p>
+</li>
+<li>
+<p>SR - 主权 Rollup</p>
+</li>
+</ul>
+<h2 id="第一部分模块化经济学">第一部分：模块化经济学</h2>
+<p>此前，我曾写过关于 L1 价值捕获（费用和其他形式的 MEV）的重要性。依赖于经济安全的资产需要一个高价值的抵押品。收入为制定有吸引力的货币政策（实际收益率、低且可预测的通胀等）提供了燃料。价值获取→良好的货币政策→货币溢价→高经济安全。费用和其他 MEV 启动了第 1 步。</p>
+<h3 id="rollup-费用">Rollup 费用</h3>
+<p>让我们从第一性原理来分析一个 Rollup 交易。这张简化图描述了适用于 Ethereum optimistic Rollups（ORU）和 zk-Rollups（ZKR）的部分。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_lyh12na64e.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<ul>
+<li>
+<p>定序器接收并订购交易。用户将很快能得到其交易最终被记录在 L1 上的软确认（如果他们相信定序器的反馈）。定序器只被用于订购和交易完成。它们无法提交无效的交易。</p>
+</li>
+<li>
+<p>确定性的状态转换函数处理每个交易并更新 L2 状态，创建一个 L2 区块。这些区块可以比 L1 区块产生得更快。</p>
+</li>
+<li>
+<p>每隔一段时间就有一批交易被压缩并发送到 L1。目前存储为 calldata，但最终 Rollups 将使用数据 blobs。</p>
+</li>
+</ul>
+<p>用户在应用状态转换并执行其交易时被收取 L2 gas。L1 gas 是在之后处理批量交易时支付的。L1 和 L2 gas 价格根据各自的拥堵情况而不同。因此，用户在两种 gas 中产生费用，而且有时间错配。定序器在知道批量交易的全部内容、压缩程度或发布时 L1 的基本费用是多少之前，就承诺进行交易并收取 L2 费用。</p>
+<p>L2 会尽力猜测其 L1 的费用会是多少，并相应地向用户收费。市场平静时，L2 平均只在 L1 成本的基础上收取很小的利润。但当 Rollup 变得受制于他们自己的执行环境（而不是 L1 成本）时，这个幅度就会上升。收费市场激增的定价作用于需求。更高的利润率对应着当地需求的激增。</p>
+<p>我们在 Arbitrum 最近的激增中清楚地看到了这一点，尽管其利润率在其他方面一直很稳定。Arbitrum 最近的瓶颈是 L2 执行（而不是 L1 成本），因此其本地收费市场开始启动：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_kd6cs3y2kw.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>我们看到 Optimism 也有类似的趋势，不过变数更大：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_hvieesgwtl.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>今天 Rollups 的 L1 成本主要是 calldata。即使是 ZKRs，Polygon 将交易数据发布到以太坊上的费用估计也占总成本的〜90%（这主要是 calldata），此外〜10% 用于证明。随着 EIP-4844 可能会在明年的上海硬分叉中出现，这些成本将大幅下降。它增加了 DA 的吞吐量，并为以太坊的 DA 层和结算层实现了独立的 EIP-1559 收费市场。DA 的供过于求意味着费用达到了底线。之后，danksharding 会使 DA 更加丰富。有着任何合理活动的 Rollup 将大大增加这些利润率。</p>
+<p>最后 &ndash; 上面的数据不包括任何 MEV（常规交易费用之外）。在现实中，Rollup 代币能够从 MEV 中积累大量的价值（关于这一点，很快就会有更多信息）。</p>
+<h3 id="固定成本与可变成本">固定成本与可变成本</h3>
+<p>ORU 将压缩的完整 L2 交易数据（带签名）、L2 状态根和欺诈证明（仅在发生争议时）发布回 L1。虽然完整的交易数据被存储在以太坊的历史中，但交易数据的哈希值被添加到其状态中。如果欺诈证明被发送，那么它可以根据先前存储的哈希值检查包含证明，作为欺诈证明的一部分。</p>
+<p>ZKRs 不需要将全部交易数据发布到 L1。只要发布状态差异就足够了（他们选择这样做是因为它更便宜）。想象一下，Alice 和 Bob 在这批交易中来回交易 1 个 ETH&ndash;ZKRs 只需要在最后发布状态变化（谁拥有这 1 个 ETH，谁没有），而 ORU 则需要发布每笔交易。状态差异足以重构状态。ORU 必须包括所有交易，以备欺诈证明之需。ZKR 验证者还必须包括一个有效性证明，与每个批量处理一起证明相关的状态根是有效的。</p>
+<p>无论它们必须向以太坊支付的交易活动如何，SCR 都有固定成本：</p>
+<ul>
+<li>
+<p>状态承诺</p>
+</li>
+<li>
+<p>有效性证明（仅适用于 ZKRs）</p>
+</li>
+</ul>
+<p>此外，它们还有可变成本，随着交易活动的增加而增加。</p>
+<ul>
+<li>交易数据（加上 ORU 的签名）</li>
+</ul>
+<p>在支付给 L1 的这些费用之上，Rollup 收取必要的 L2 gas 费用和成本的激增定价，以支付 Rollup 运营商的费用。更详细的分析可点击此处查看。</p>
+<p>注意这里的时间 / 成本权衡。频繁结算意味着 L1 更早给出真正的最终结果。然而，等待更长的时间来结算，在更多的交易中摊销这些固定成本 = 对 Rollup 用户来说是更便宜的交易。Rollup 结算要平衡好足够的安全以及给到用户较低保证（预先确认）的低价费用。</p>
+<p>让我们以 Optimism 为例。作为背景，Optimism 上，定序器和提议者需要为两个智能合约发布信息：</p>
+<ul>
+<li>
+<p>Canonical Transaction Chain (CTC）合约 &ndash; 由定序器提交的交易批次的仅有附录的日志</p>
+</li>
+<li>
+<p>State Commitment Chain（SCC）合约‌ &ndash; 提议者确认是 CTC 中每个交易结果的提议状态根的日志</p>
+</li>
+</ul>
+<p>Optimism 的成本分解如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_9ae0q8ysar.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>将交易批次发布到 Canonical Transaction Chain（CTC）上会产生两种成本：</p>
+<ul>
+<li>
+<p>可变成本 - L1 CTC（交易批次）提交者使用的 Calldata gas，与交易批次的大小大致呈线性关系</p>
+</li>
+<li>
+<p>间接成本 - 向 CTC 发布信息也会产生少量的非 calldata 成本</p>
+</li>
+</ul>
+<p>向 State Commitment Chain（SCC）发布状态根所使用的 gas 是纯粹的间接成本（注意这个成本的一部分也使用了 L1 calldata）。根据上述两种成本将其分割开来，你会得到这样的结果：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_tta5zp68h3.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>这些间接成本可能比你预期的要高 &ndash; 在未来几个月内仍有许多低效率的问题需要解决。像 Bedrock 这样的优化将大大改善数据压缩，它将使固定成本下降到几乎可以忽略不计。每个批量交易的 gas 成本可以从每批约 28 万不包括 calldata 下降到每批约 2.1 万 gas。SCC 将被 L2 OutputOracle 取代，CTC 将被移除。L2 区块将使用非合约地址保存到以太坊上，从而大大减少链上足迹，并将 gas 成本降到最低。</p>
+<p>同样地，Arbitrum 每批产生的 gas 成本约为 37.5 万，这将被 Nitro 大大减少。</p>
+<p>将这一切都联系起来，就可以描述 Rollup 的价值流。下图来自 Barnabé Monnot 的一篇伟大的文章：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_13fbe8bshe.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>他最近也谈到了这个话题。</p>
+<h3 id="基础层费用---以太坊">基础层费用 - 以太坊</h3>
+<p>以太坊的费用来自：</p>
+<ul>
+<li>
+<p>L1 执行和结算 - 比如去到 L1 的 Uniswap，用一些 USDC 交换 ETH。</p>
+</li>
+<li>
+<p>来自 Rollups 的结算 - Rollups 向 L1 发布证明。以太坊还负责处理 Rollups 和 L1 之间的信任最小化的桥接问题。</p>
+</li>
+<li>
+<p>来自 Rollups 的 DA - Rollups 使用 calldata 向 L1 发布数据。</p>
+</li>
+</ul>
+<p>独立的单体链的费用上限为：</p>
+<blockquote>
+<p>费用 = 吞吐量 x 用户将为单个交易支付的美元</p>
+</blockquote>
+<p>相比之下，模块化 DA 和结算层（如 Ethereum）有一个更高的费用上限：</p>
+<blockquote>
+<p>费用 = 吞吐量 x 用户将为聚合交易支付的美元</p>
+</blockquote>
+<p>与单个用户为占用相同区块空间的 L1 交易支付的费用相比，Rollup 可以向以太坊支付更大的单笔费用来结算许多交易（例如，一个证明保障了许多区块，结算许多聚合的 DeFi 池交易等）。假设有足够的需求，为以太坊引入新的费用支付者（Rollups），每笔交易的边际效用更高，从长远来看，将会增加价值。</p>
+<p>然而，请注意，以太坊如今的收入是这样的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_4n2huyuscr.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>以太坊距离成为 Rollup 的主要结算或 DA 层还有很长的路要走。支付给 L1 的绝大多数费用来自原生 L1 的执行：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_o1vcjf8slq.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>因此，虽然模块化的基础层能够从 Rollup 的需求中提取有意义的收入，但在这么做之前，我们需要有大量的需求。至关重要的是，以太坊的 Rollup 收费是对其原生 L1 执行的补充，而不是仅仅依赖于它。</p>
+<p>这种价值的获取从何而来是一个争论点。以太坊和 Celestia 社区的许多人认为 DA 最终会有惊人的价值。Dankrad 最近在我主持的他和 John Adler 的播客中发表了他的观点。</p>
+<blockquote>
+<p>「资产……需要从一些……产生收益的手段中获得安全性。因此，我认为目前只有两个，那就是结算层和数据可用性层。我认为短期内，我们可能会看到，结算层仍然产生更多的价值。</p>
+</blockquote>
+<blockquote>
+<p>我们已经看到，过去我们在以太坊上有大量的费用，在其他结算层上也有一些。但长期来看，我相信最有价值的资产将只是在数据的可用性上，区块空间将成为去中心化经济中最有价值的资产。」</p>
+</blockquote>
+<p>Rollup 应该愿意为优质 DA 支付什么，这是一个有趣的争论。然而，现实情况是，DA 很快就会在以太坊扩展和替代 DA 解决方案之间大规模地供过于求。关于数据可用性的规模，可参见下图：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_8t13tpsf30.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>以太坊区块目前的平均数据为～90 KB，其中 calldata~10 KB。DA 供应冲击迫在眉睫，Rollup 将继续大大改善数据压缩。当数据 blobs 有了自己的收费市场，供应 &lt; 需求，DA 费用就会达到底线。</p>
+<p>Rollup 用户将支付更高的费用，但主要的瓶颈可能是 Rollup 自己的原生执行环境（基于目前 EIP-4844 的数量级活动和 DA 带宽）。当你在你喜欢的 Rollup 上进行代币交换时，DA 将不再是你的主要成本。超级便宜的费用将推动增量活动，更多的 Rollup 出现，等等。只有当 DA 饱和到目标时，EIP-1559 机制才会启动，将费用拉出下限。然而，Rollup 有许多即将进行的优化，这将加强它们目前受限的本地执行。如果这一点也没了，那么最终可能会使 DA 再次成为一个更大的成本。</p>
+<p>对于以太坊开始收取任何有意义的 DA，你需要超过 1.3 MB/s（假设目前的 danksharding 规格）的实际有价值的数据，要求最高的安全性。即使你达到了 1.3 MB/s，溢出的数据也可以直接去到其他地方。Celestia、DataLayr、DACs、Adamantiums、Polygon Avail 等替代品将提供大量的廉价 DA。只有最安全的交易才需要完整的以太坊安全。另外，DA 的吞吐量可以安全地增加（有更多的验证者），所以 1.3 MB/s 并不是一个基本的限制。</p>
+<p>我有信心，至少在几年内，与以太坊强大的结算层相比，DA 费用收入将可以忽略不计。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_on4fo4elys.gif" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>最后，原生智能合约的执行也可以为 ETH 质押者提供比 Celestia 更多的价值 &ndash;ETH 可以作为一种生产性资产来赚取额外收益。特别的，EigenLayer‌ 是一个创新的解决方案，它将允许 ETH 的「重新质押」。ETH 质押者将能够使他们的份额受到额外的罚没条件。他们将确保寻求利用 ETH 经济安全的新应用，其费用收入将计入 ETH（非常类似于 Cosmos 的链间安全概念，将价值计入 ATOM）。</p>
+<h3 id="基础层费用---celestia">基础层费用 - Celestia</h3>
+<p>Celestia 的唯一的费用是 DA。Rollups 处理结算。在同一个播客中，John 就 dYdX 决定从 StarkEx 转移到 Cosmos 提出了一个有趣的观点。基础层应该为经济安全积累尽可能多的价值，但经济上理性的应用程序希望为自己积累尽可能多的价值。在其他条件相同的情况下，它们宁愿不向结算层支付租金。DA 是共享安全的最低成本。这对 Celestia 来说累积的价值较少，但它可以激励更多的 Rollup 留下来，因为它更便宜。</p>
+<p>对于这种说法，我不太同意，原因是我前面强调的。支付给结算层的成本实际上是比较低的。对于 ZKRs 来说，成本接近于 0，因为固定成本在许多交易中被摊销，除了被结算的交易，用户可以支付这些交易（所以 Rollup 并没有支付这个费用）。而对于 ORU，则没有真正的结算成本。因此，我认为这个等式中的这部分成本可以忽略不计 &ndash; 团队会根据他们的特殊需求在 SR 或使用结算层之间做出选择。两者都有有趣的技术和社会论据，我将在后面进行挖掘。</p>
+<p>如果 Celestia 在较大的蛋糕上切得较少的商业模式是成功的，那么请注意价值捕获的百分比也可能很重要。如果基础层只获取了相对于它所保障的价值来说微不足道的价值，那么安全杠杆就会变得很不舒服。也许你对 10 亿美元的赌注确保 200 亿美元的价值感到舒服（以太坊的安全比率目前是～20 倍），但你对 1000 亿美元感到舒服吗？2000 亿美元呢？没有正确的答案。一个在经济上自给自足的基础层，即使没有 Rollup 收入，也不会有这种担忧。</p>
+<p>仅仅依靠 DA 是否能提供足够的价值捕获来建立经济安全还有待观察。DA 是有价值的，但它是一种我们知道如何很好地将其规模扩大的资源。要想改变这种情况，需要进行范式转变。但从 5 年以上的时间来看，我认为没有人能够合理地预测。</p>
+<p>所以这正是我现在要做的事情。粗略计算，DA 的数据可能看起来像今年这样：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_qadsd3k4ck.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>还不错，有 300 亿美元！</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_lkghrc99rr.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>从我们今天的情况来看，每笔交易 13 个字节将是一个有意义的优化，但这只是可能。例如，Polygon Hermez 预计，他们最终将只需要每笔交易 14 个字节。在目前 1.3 MB/s 的 danksharding 规格下，你可以得到漂亮的 100k TPS‌。但请注意，目前大多数的 Rollups 远没有达到每笔交易 13 个字节，你只能通过像 ZKRs 那样发布状态差异来达到这一低数值。如果你像 ORU 那样发布完整的交易数据，那数值会高得多，甚至有些 ZKRs 也会选择发布完整的交易数据。非常乐观的是，每个 Rollup 都会在 DA 效率的下限附近运行。</p>
+<p>请注意，我在这里假设的 0.01 美元 /tx 只是针对 DA。这并不包括其他 L2 交易费用的考虑。有价值的房地产（例如，DeFi 中心的 Rollup）当然可以收取溢价，但更便宜的州往往收取更低的执行费用。这甚至可能是足够的缓冲，以清除 Vitalik 的 0.05 美元的测试‌。</p>
+<p>从长远来看，考虑这些利润率如何叠加 L2 费用将是很重要的（即，为 DA 支付的百分比是多少）。如果翻转许多链变得很容易，而且桥接变得很好，以至于特定应用的 Rollup 最终变得有意义，那么执行可能变得相对便宜。这就给 DA 留下了一些空间，以获得一些费用。重要的桥接发展也会对 SR 是否比共享结算层更有意义，以及 DA 的总体粘性有很大影响。</p>
+<p>作为参考，以太坊在 2021 年获得了约 100 亿美元的费用，其高峰期的月份年化运行率超过 200 亿美元（注意这不包括其他形式的 MEV）。像 300 亿美元 / 年的东西可能意味着几千亿的市值？但这就够了吗？我不知道。就个人而言，我希望民族国家级别的安全要高得多，所以这就涉及到了一个哲学上的辩论。在这种规模下，你需要确保数万亿美元的经济活动的安全，所以我想要更多。</p>
+<p>请注意以太坊和 Celestia 在这里的区别。对每一个人来说，「有意义」意味着不同的事情。也许以太坊总收入的 10% 是有意义的，也许是 20%。反正它有结算层为其支付账单。而对于 Celestia 来说，这很简单 &ndash; 它必须足以资助其整个安全预算，以保护建立在它之上的一切。</p>
+<p>现实情况是，我们不应该对这些数字持怀疑态度。它们完全是在一个超级优化的 Rollup 世界中编造出来的，让你在很长的时间范围内有一个数量级的感觉。</p>
+<p>Celestia 在引导经济安全方面面临着一个障碍，它的价值获取很少。我们习惯于将创业公司的估值作为对未来增长的赌注，但当整个商业模式（DA）取决于范式的转变，以积累足够的价值来实现经济安全时，这是一个公认的风险主张。</p>
+<h3 id="模块化堆栈中的-mev">模块化堆栈中的 MEV</h3>
+<p>MEV 是一个很深的兔子洞，所以我在这里就简短点聊。</p>
+<p>让我们从基础知识开始。MEV 仍未完全正式定义，但我在此将其简化为区块生产者可以提取的所有潜在价值（包括常规交易费用、套利、清算等）。</p>
+<p>简化后的 L1 以太坊 MEV 将与协议内 PBS（或中期 MEV- boost）类似：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_v95scslhv5.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>搜索者将交易捆绑在一起，并向建设者出价要求将其纳入交易。建设者汇总搜索者的出价，并为验证者所包含的整个区块出价。在一个有效的市场中，搜索者将其大部分收入出价给建设者，而建设者再将其大部分收入出价给验证者。因此，ETH 捕获了大部分的 MEV。</p>
+<p>至于 Rollup，看起来则有点不同，但类似的概念适用。下面这个简化的例子是 Optimism 为定序权运行了一个 MEV 拍卖（MEVA）：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_j6qjzyyo6c.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>同样，搜索者将交易捆绑起来，并向定序者出价要求将其纳入。定序者汇总搜索者的出价，并出价将整个区块纳入 MEVA。在一个有效的市场中，搜索者将他们的大部分收入出价给定序者，定序者再将他们的大部分收入出价给 MEVA。如果 Rollup 使用质押来选择领导者，你也可以插入验证器来代替 MEVA。在任何一种情况下，Rollup 都会捕捉到大部分的 MEV。这可以累积到代币上，也可以为公共物品等提供资金（就像 Optimism 那样）。</p>
+<p>在其他条件相同的情况下，将交易从 L1 转移到 Rollup 并不改变 MEV 的数量。它只是改变了它的获取方式和谁得到它。在这个简化的模型中，MEV 的获取现在已经从 L1 资产推到了 L2 资产。</p>
+<p>但说实话，有那么简单吗？</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_vl097s2q1s.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>抱歉，我不知道，其他人也不知道。因此，如果你是一个好奇的家伙，这是一个很好的研究领域。有多少 MEV 会泄漏到共享 DA 和 / 或结算层？Rollup 运营商是否会开始为他们在 L2 上执行的 MEV 向 L1 支付？如果出现了类似于跨域 Flashbots 的东西，我们可以收集更多的具体数据。但现在，让我们先看看一些假设。</p>
+<p>最简单的想法是，它将永远累积到堆栈的底部。例如，看看一个有着 Celestia DA + 结算 Rollup + 递归 Rollup 的堆栈。递归 Rollup 可能依赖于结算 Rollup 的跨链 MEV，但 DA 层可能能够审查和延迟结算 Rollup 的区块，要求从该 MEV 中获取一部分。这种谈判取决于社会规范，可能是难以逾越的界线（类似于 PoW 中的时间强盗攻击）。权力是存在的，但这种谈判会发生吗？也许 L1 想吃上这顿 L1 的午餐，也许不想。</p>
+<p>然后是更复杂的跨链 MEV。在下面的例子中：</p>
+<ul>
+<li>
+<p>R = Rollup</p>
+</li>
+<li>
+<p>B = 区块</p>
+</li>
+<li>
+<p>S = 交换</p>
+</li>
+</ul>
+<p>R1 和 R2 有着协调的定序器，共享同一个 DA 层，允许原子式跨链 MEV。每个 Rollup 都可以提交区块，其接受程度取决于另一个 Rollup。例如，只有在 R2 B2（包括 S2）完成的情况下才接受 R1 B1（包括 S1），反之，R2 的条件也是如此。同样，一个 Rollup 可以向其 DA 层提交两个区块，一个是基本情况，另一个是只有在满足另一个 Rollup 的某些条件时才会被包括在内。这里引入的原子性可能是相当强大的，而观察它如何影响 MEV 价值累积的动态是有趣的。</p>
+<p>重要的是，这对价值累积来说是一张天书。如果有比我们目前所知道的更多的 MEV 泄漏出来，那么这可能会给 Celestia 带来巨大的价值。这将有助于补贴安全预算。</p>
+<h3 id="da-层的经济安全">DA 层的经济安全</h3>
+<p>现在让我们来看看为什么我们甚至关心 DA 层的经济安全。</p>
+<p><strong>33% 攻击</strong></p>
+<p>这很简单 &ndash; 也就是将链暂停。如果 Tendermint 没有必要的票数，它就无法取得进展（失效），无法最终完成（⅔）。依赖于 Celestia 的 Rollups 不会喜欢这个。</p>
+<p>以太坊运行 Gasper 来达成共识。因此，即使 &gt;⅓ 的份额有问题，以太坊也会继续运行，保持有效性。然而，如果没有必要的投票，这个账本就不能最终完成。如果有问题的 &gt;⅓ 干脆不投票，那么它们将因为 inactivity leak‌机制（消极惩罚机制）而遭到额外的惩罚，直到协议最终能够再次最终确定。</p>
+<p><strong>67% 攻击</strong></p>
+<p>首先 - 有效性条件是共识的一部分。因此，即使你控制了 100% 的份额，你也不能开始凭空印制一堆 Celestia 代币 /Ether，窃取资金等等。诚实的节点会拒绝这样做，因为这是无效的。不过你可以试试这些：</p>
+<p>双重签名 &ndash; 在 Gasper 中可以重组（Re-orgs），但在 Tendermint 中不可以。不过你还是可以进行双签，造成混乱。这条链会停止，并恢复到社会共识。可以证明，至少有 ⅓ 的质押在同一区块高度上双签，并将在协议中被罚没。因此，你可以这样做，但代价是昂贵的（如果质押的价值很高）。</p>
+<p>数据扣留攻击 &ndash; 最终完成一个区块，但从不提供其背后的数据。隐瞒数据是一种不可归属的过失，因此不能在协议中被罚没。需要社会协调，通过硬分叉在协议外惩罚攻击者。这可能是对 Rollup 的最坏攻击。你将无法为一个无效的 ORU 提交欺诈证明，你也无法为一个 ZKR 重新创建状态。值得庆幸的是，我们有数据可用性采样（DAS）节点。他们只是检查数据是否可用，所以即使共识签署了区块，他们也知道要拒绝它。</p>
+<p>防欺诈审查 &ndash; 审查的 DA 层可以恶意地在不同的 Rollup 上桥接资金（即使是同一 DA 安全区域内的 Rollup）。这并不能通过运行 DAS 节点来保护。这个问题有点微妙，所以我举个例子。</p>
+<p>SR1（主权 Rollup）是 Celestia 上的一个 ORU，它想为 SR2 桥接资金。一种选择是直接将对方的轻型客户嵌入到每个 Rollup 中，并以 P2 P 方式分发证明。这里没有通过恶意共识的审查攻击载体（存在其他攻击载体，如日蚀攻击）。另外，SR1 可以在想要桥接时，直接将欺诈证明发布到 SR2 的命名空间 Merkle 树上。这实际上是把同步假设（在 P2 P 桥接的情况下）换成了 Celestia 的诚实多数假设（在向 Celestia 发布的情况下）。SR2 只是在自己的 NMT 上寻找它已经在跟踪的证明，并在看到它时执行。然而，现在这允许 SR1 恶意桥接资金到 SR2，而 Celestia 可以在 DA 层审查你的证明。以太坊也可以审查发送到智能合约的欺诈证明，这就是为什么他们的 ORU 需要这么长的超时周期的原因。</p>
+<p>数据扣留和审查攻击并不直接影响 DA 层本身，但它们是依赖 DA 层的 Rollup 的攻击媒介。</p>
+<p>TLDR&ndash;DA 层需要经济安全。随着不同程度的份额被接管，你可以做出不良行为。很多人都混淆的一个关键点是 &ndash; 仅仅因为某些东西是可以安全依靠的，并不意味着它是有价值的。你必须首先建立一个有价值的资产，然后才能依靠它来获得有意义的经济安全。确保系统安全的资产需要某种方式来累积价值和 / 或货币溢价。</p>
+<p>如果你想见证我们这个时代的伟大模块化战争，可以阅读这个 thread。在 Treeverse 上打开它，花一整天的时间来筛选研究它。本报告的绝大部分内容（说实话，我的大部分加密货币知识）都来自于我在看推特混乱时做笔记的过程。</p>
+<h3 id="总结">总结</h3>
+<p>创收是建立经济安全的一个关键组成部分，因此了解模块化堆栈中的价值流对设计至关重要。基础层原生资产需要被设计为价值捕获（费用和其他 MEV）和 / 或成为好的货币。</p>
+<p>就目前的情况而言，DA 捕获的价值可以忽略不计。在可预见的未来，这种情况仍将存在。Rollup 执行层目前捕获的价值相对较小。随着某些层变得流行，并可能包含高价值的金融交易，它们可能会看到有意义的收入。在可预见的未来，具有高价值交易的优质通用结算层可能会占主导地位（甚至可能是 L2 结算层，就像 StarkNet 计划在 L2 层上增加许多 L3)。</p>
+<p>这是《硅谷》中的 Russ，他把广播放到了互联网上。不要像 Russ 一样。</p>
+<h2 id="第二部分以太坊-rollup-堆栈">第二部分——以太坊 Rollup 堆栈</h2>
+<p>近期，Mustafa（Celestia Labs）在文章中‌给出了 Rollups 最简洁的定义，我在这里引用一下：Rollup 是一个区块链将其区块发布到另一个区块链，并继承该区块链的共识和 DA。</p>
+<p>Rollup 中存在各种角色，如排序者（sequencer）、提议者（proposer）、证明者（prover）和挑战者（challenger），这取决于实际的部署情况。我把他们统称为「运营者」（operators）。运营者结合用户交易，定期向基础层发布数据。他们还向最新的 Rollup 状态（例如，Merkle 根）提交 commitment。</p>
+<p>任何人都可以使用压缩的交易数据（只要它是可用的）来重新创建状态，并检查一个状态转换是否有效。Rollup 轻客户端不会下载和执行完整的交易数据，所以他们依靠欺诈 / 有效性证明来保证状态转换的有效性。</p>
+<h3 id="以太坊智能合约-rollup">以太坊——智能合约 Rollup</h3>
+<p>这都能在当前的以太坊中看到（例如 Arbitrum、Optimism、StarkNet、zkSync 等）。他们是这样运作的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_8kssjsmpv8.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>智能合约 Rollups（SCR）有效地运作在众多的 L1 智能合约中。Rollup 执行是在链下处理的，运营者定期发布数据到 L1。智能合约根据需要验证证明 / 仲裁争端。他们还跟踪所有的 Rollup 状态根和交易数据，以便他们可以重新计算状态：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_17yd3qm382.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_lv4l2rydlz.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>欺诈（ORU）或有效性（ZKR）证明然后确认状态转换的有效性。运营者在 L1 智能合约中发布保证金，以发布区块。如果这个区块或证明是无效的，他们的保证金可以被罚没，交易将不会被最终确定。这对 ORU 来说可能需要一个多星期的时间，但有效性证明可以立即敲定最终的结果。</p>
+<p>提交和仲裁一个欺诈证明实际上是相当快的。ORU 需要这么长的时间，主要是因为 L1 智能合约需要接收证明，而这可能会被审查。在 L1 审查证明的情况下，我们需要时间通过社会共识来协调。</p>
+<p>这些智能合约也作为信任最小化的双向桥梁，在 Rollup 和 L1 之间发挥作用。这是他们的关键优势之一。它是信任最小化的，因为 Rollup 暗中对以太坊进行了完整的验证，而 L1 上的智能合约则承担了 Rollup 轻客户端（接收由欺诈 / 有效性证明保护的区块头）的角色。</p>
+<p>现在到了 FUD 的时候了。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_p4y72rrn2m.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>这些始终是智能合约。就在最近，我们才刚刚见证了可怕的跨链桥攻击‌（主要原因都是漏洞，与密钥被破解或者经济攻击无关）。Rollups 也不能做到免疫。这个合约是一个非常特殊的信任最小化的双向桥，但它仍然是桥。就算你的代码里出现小小的失误，都可能让你损失惨重。</p>
+<p>这就是为什么很多 Rollup 团队‌都紧紧抓住他们的升级密钥不松手。通常有一个多签委员会，有一个升级通知期，在其他情况下，代码甚至可以由团队任意改变而不做通知。</p>
+<p>在安全和去信任化之间，要对升级时机进行平衡。如果你发现了一个 bug，你可能不想在管理论坛上大肆宣扬并等待一个月的时间，而是想要马上修复它。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_so2fm0b75j.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>有一个想法是具备延迟升级功能，但增加一个停止选项，可以立即停止 Rollup。虽然暂停 Rollup 令人面上无光，但确实能够减少对升级密钥持有者的信任。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_t0q285v7bd.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>Bartek（Maker 基金会）最近就这个话题和 L2 Beat 的风险框架做了一个很棒的 Rollup FUD 演讲，链接在这里‌。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_opz1g4eogw.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>我明白，Rollup 的成熟需要时间。我想说的是，我们要现实地看待目前我们处于什么阶段。如中心化的排序者和欺诈证明（如果有的话）一样，这些团队打算逐步实现去中心化。</p>
+<p>移交升级密钥有两种选择：</p>
+<p>1. 永远不变的 Rollup——没有人可以升级智能合约（除非 L1 分叉）。这是一个巨大的牺牲。基本上你已经接受了这个 Rollup 最终会被废弃的事实，而你要从头开始部署另一个实例。希望做到等同 EVM（以太坊虚拟机）的 Rollup 绝对不能这样做。当 L1 发生变化时，他们必须升级自己的虚拟机，以保持一致。Fuel v1 是目前以太坊上唯一永远不变的 Rollup。</p>
+<p>2. 去中心化的治理——这是我实际期望的。虽然它在 L1 交易的基础上增加了信任假设，但 Rollup 治理现在控制着升级密钥。在升级生效之前，智能合约 Rollups（SCR）可以建立在延迟的基础上（设置比 Rollup 的提款期长）。不喜欢这项升级？那么你可以安全地退出。这是信任的最小化，因为你现在只是根据同步假设来进行 Rollup 治理（而不是诚实的多数假设）。你只是假设你看到了计划中的升级并在那之前退出。</p>
+<p>在这里，一些主要的 Rollup 团队就他们关于去中心化的想法进行了很好的对话。</p>
+<p>回到最后一点——Rollup 的退出。一个安全退出的 L1 执行层是一个很好的退路。以太坊有这个选项，但 Celestia 没有。他们在个别情况下是很实用的，但在未来 L1 gas 为 1000 美元 / 每笔交易的情况下，会迅速迫使成千上万的用户带着少量的资金回到 L1 上，这似乎并不理想。一个应该被更多探索的领域是设计退出到另一个 Rollup 的可能性。</p>
+<p><strong>要点概述</strong></p>
+<p>信任最小化的双向桥是非常有价值的——有一个巨大的生态系统，所有的 Rollup 都在挖掘共享的流动性和互操作性。大多数情况下，将安全假设浓缩到一个超安全的基础层是很好的。</p>
+<p>但智能合约的错误和可升级性目前还有点吓人。不可变的 Rollup 减轻了许多担忧，但这是一个不值得付出的代价。</p>
+<p>最终，战斗力强的合约与精心设计的治理（有升级延迟）将是接近 L1 本身安全性的一个最好的解决方案。</p>
+<h3 id="以太坊智能合约结算-rollup-与智能合约递归-rollup">以太坊——智能合约结算 Rollup 与智能合约递归 Rollup</h3>
+<p>StarkNet 有一些相当酷的分形扩容计划，在此作为一个具体的例子：</p>
+<ul>
+<li>
+<p>今天——StarkEx、dYdX、Sorare 和 Immutable X 已经在大范围地运行。但它们并不是通用的或可组合的。它们是通过与 StarkWare 的合约协议建立的孤岛。</p>
+</li>
+<li>
+<p>很快——StarkNet 就会出现。像我们习惯的智能合约 Rollups（SCR）一样，是一个通用的无需许可的 Rollup。</p>
+</li>
+<li>
+<p>以后——分形扩容。StarkEx（和其他 L3）可以部署在 StarkNet 之上：</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_z2gb4squvz.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>现阶段，L2 和 L1 之间的关系是这样的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_rywls94jhw.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>有了 L3 之后就是这样的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_tsb8i9rm75.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>递归证明是一个相当令人心动的扩容路径。L2 上的验证者合约可以接受许多 L3 有效性证明，创建一个有效性证明，证明它验证了这些证明，并将这个证明发布到以太坊。在以太坊这样一个受到 gas 限制的环境中，这种效率很重要。L3 也可能会尝试使用链下 DA 解决方案，以进一步降低成本（尽管有更强的安全假设）。</p>
+<p><strong>针对特定应用的 Rollup</strong></p>
+<p>这些 L3 自然适合特定应用的 ZKRs。L3 很大一部分的吸引力在于能够控制自己的环境，远离「嘈杂的邻居」，同时通过 L2 结算层保留其网络效应。随着桥和互操作性的不断改善，我希望看到更多的特定应用的 ZKRs 部署。他们将保留共享执行环境的大部分优势，但摆脱了弊端。</p>
+<p>此外——给我看激励措施，我就给你看结果。针对特定应用的 Rollup 与直接部署智能合约相比，捕获了更多的价值，因为你的代币现在捕获了执行费用和其他 MEV。但是，如果离开一个共享的执行环境会使你被孤立，这就不值得权衡了。这就是为什么（正如我之前所说）更好的桥、流动性共享等对于这一趋势的发展至关重要。</p>
+<p><strong>要点概述</strong></p>
+<p>递归 Rollup 提出了一个非常有吸引力的价值主张，特别是对于特定应用的使用案例。你可以在一个灵活的环境中获得更大的规模，同时保留网络效应。L2 可以作为一个比以太坊目前所能做到的更可扩展的结算层。只要他们的数据被发回到 L1，他们就会有类似 L2 的安全保证——他们就能够重新创建状态并退出。</p>
+<h3 id="以太坊enshrined-rollups">以太坊–Enshrined Rollups？</h3>
+<p>疯狂之处在于，Enshrined Rollups (ER) 有点未来主义。其中饱含争议，这使它们更加有趣。</p>
+<p>您可能已经在 Twitter 上听到 ER 被翻来覆去的讨论，但实际上并不知道它们是什么，因为没有人广泛地写过关于它们（除了 Justin Drake‌，他在本节中为我提供了很多帮助）的文章。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_m4i2wpjsv9.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>ER 直接构建在 L1 规范中，而不是作为智能合约部署。这消除了恶意治理 / 多重签名升级或 bug 风险（以太坊本身外部）。它们遵循着硬分叉范围内基础层的社会共识。</p>
+<p>在以太坊合并（The Merge）时，执行层（Eth1）将与共识层（Eth2）合并。执行层（结算由共识层完成）可以升级为一个 enshrined Rollup（ER）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_k873fiu5j0.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>Enshrined Rollups–Optimistic Rollup vs. zkEVM</strong></p>
+<p>相比之下，Optimistic Rollup（ORU）过渡到 ER 可能是最快的。由于以太坊路线图中已经存在弱无状态，您可以轻松添加欺诈证明。最简单的欺诈证明是将区块本身隔离分发以重新执行（现在将包括见证人以及前 / 后状态根、交易等）。然而，欺诈证明和交易最终性存在冲突，所以效果并不理想。</p>
+<p>一个雄心勃勃的「计划」是直接迈向 enshrined ZKRollup（ZKR）。以太坊基金会已经有一个由 Barry Whitehat 领导的团队，目前正在构建一个 zkEVM。需要注意的是，这是一项艰巨的任务，可能需要数年时间。</p>
+<p>无论是 ORU 还是 ZKR，关键是全节点不再需要执行交易（除非有欺诈证明）。这也适用于共识节点——提议者和委员会中的任何人都不会执行交易。</p>
+<p><strong>第 1 步–将结算层升级为 Enshrined zkEVM Rollup</strong></p>
+<blockquote>
+<p>「结算层升级为 Enshrined zkEVM Rollup。整个以太坊生态系统——可能有数千个 Rollup/volition 和数百万 TPS——将由一个简洁的 ZKP 验证。哈利路亚。」</p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_v2uks8b3ld.png" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>这是一个没有争议的步骤（一旦技术安全、易于理解等）。我们今天所知道的单实例 EVM 升级为状态根等效 zkEVM。这意味着每个 L1 区块都带有一个 SNARK，用于证明状态根是有效的。</p>
+<p>尽管已有一些公开的实施细节，不过仍需数年。关于证明分发，您现在有两种选择：</p>
+<ul>
+<li>
+<p>Sidecar–SNARK（或 SNARK，实现细节）只是作为 sidecar 发送，人们可以隐式地验证它。</p>
+</li>
+<li>
+<p>链上——SNARK 实际上是链上的，智能合约可以很容易地访问证明本身来验证它。</p>
+</li>
+</ul>
+<p>最终，共识有两层——社交和代码。Sidecar 方法倾向于社会依赖，而链上方法倾向于代码。</p>
+<p><strong>性能瓶颈</strong></p>
+<p>如前所述，ER 消除了全节点重新执行交易的需要。这使得同步到链更容易，并且它还消除了验证者的计算瓶颈。目前验证者存在几个共识瓶颈：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_rjpbzfs2n4.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>弱无状态已经打破了存储和磁盘 I/O——清除了我们今天的主要瓶颈。但是在这个阶段，全节点仍然需要执行每笔交易。为每个区块的有效性获取一个 SNARK 也会导致计算失败。无状态和 zkEVM 都代表着在消除更多瓶颈时提高 gas 限制的机会。带宽是唯一剩下的主要资源需求（这也与尼尔森定律成比例）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_19iq7ick2s.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>zkEVM Enshrined Rollup 的好处</strong></p>
+<ul>
+<li>
+<p>更简单的共识——无状态（没有欺诈证明）仍然需要全节点执行，但 zkEVM 消除了这个瓶颈。执行客户端可以将数千行对共识至关重要的 EVM 执行代码换成更简单的 SNARK 验证代码。</p>
+</li>
+<li>
+<p>无状态见证人——无状态允许共识节点停止保持状态。他们现在收到见证人（Verkle 证明），证明每个区块中的正确状态访问以及交易。zkEVM 也消除了这种需求——状态差异就足够了。这提高了验证者的共识带宽效率，允许更高的 gas 限制。</p>
+</li>
+<li>
+<p>更安全的轻客户端——轻客户端使用 SNARK 过滤无效状态根的速度比使用欺诈证明要快得多。这允许更安全和 / 或更快的以太坊到竞争性 L1 桥。</p>
+</li>
+</ul>
+<p><strong>第 2 步–部署大量并行 zkEVM Enshrined Rollup</strong></p>
+<p>哦，你以为执行分片设计取消了，是吗？这是接下来要讲的——ER。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_qy1qworkzv.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>升级单实例 EVM 后，部署多个（例如 64 个）并行 zkEVM ER 并不难。这是同构 L1 执行分片的一种形式。这也是一个疑问，是否很快就会需要这种分片。作为 zkEVM ER，单实例吞吐量可以比当前容量增加几个数量级。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_hte7s1v6pg.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>典型的执行分片与 ER 之间的区别似乎很模糊，而且 Twitter 上对此进行了很多混乱的辩论。关键点再次是全节点不需要执行 ER 块。因此，具有 zk 证明的状态根的执行分片可以是 ER。您可以获得与常规 SCR 相同的可扩展性和功能（提议者只需要接受证明并检查 DA），但您会获得 Rollup 在共识中的优势（稍后将详细说明）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_j73koaasdg.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>旧的执行分片将以太坊验证者集的子集分配给每个分片。每个整体分片将处理自己的执行、共识和 DA，然后检查点返回到信标链。</p>
+<p>zkEVM ER 只处理执行（使其效率更高），类似于我们今天看到的 Rollup。他们依靠信标链来达成共识、结算（发布证明）和 DA（他们会消耗数据 blobs）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_o45udappf9.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>另一个实施细节与委员会有关。可以在每个汇总中都有一个提议者委员会来验证 SNARK，然后将其发送到主要结算 Rollup。或者，您可以跳过委员会，让 Rollup 区块生产者将 SNARK 直接发送到所有提议者操作的主链。</p>
+<p>无论哪种方式，提议者都只是接受最高出价，检查 DA，并验证每个 Rollup 区块随附的 SNARK 作为额外字段。你可以把它想象成一个大区块。它看起来像这样：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_scs8jf407h.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>zkEVM Enshrined Rollups 的优势</strong></p>
+<p>升级当前的结算层似乎很明显，但是将所有这些其他 zkEVM 与仅仅作为 zkEVM SCR 相比，有什么好处呢？</p>
+<ul>
+<li>
+<p>社会一致性——ER 继承了 L1 社会共识。SCR 目前有中心化的运营商持有升级密钥，最终这种风险将在于 Rollup 治理。</p>
+</li>
+<li>
+<p>经济一致性——所有 ER 费用和 MEV 都计入 ETH。核僵尸启示第三次世界大战经济安全。</p>
+</li>
+<li>
+<p>补贴证明验证–ER 可以补贴证明验证的成本，而 SCR 则必须支付 EVM gas 进行结算。无论如何，此时验证 SNARK 将非常便宜。这缓解了今天汇总工作的问题。例如，像 Arbitrum 这样的汇总会延迟结算，以避免有时会出现 L1 gas 峰值。</p>
+</li>
+<li>
+<p>最佳结算延迟——共识可以为每个 ER 块强制执行 SNARK 证明，从而提供每个块的结算延迟。</p>
+</li>
+<li>
+<p>最佳活性——中心化 Rollup 排序器可能会活动下降（我们已经看到这种情况发生）。SCR 还可以选择让排序器达成自己的共识，以提供预先确认（StarkNet 将采用这种方式）。这会受到次优活性的影响，因为外部共识可能会失败，并且 L1 逃生舱口仅在超时后才会激活。</p>
+</li>
+<li>
+<p>状态根 EVM 等效性——当前的工具和轻客户端将开箱即用。今天的 SCR 主要针对与 Solidity 兼容的 VM（例如 zkSync）或字节码等效的 EVM（例如 Scroll），而不是完整的 EVM 状态根等效性。</p>
+</li>
+<li>
+<p>网络效应——将 EVM 的网络效应从其已经处于领先地位的地位进一步提升。允许开发人员围绕一个标准联合起来是很有价值的。（尽管相反，试验新的虚拟机也可能产生令人兴奋的可能性）。</p>
+</li>
+<li>
+<p>最大化 gas 效率——ER 使用原生操作码，因为它们内置在协议中。相反，SCR 可能不得不解决 VM 效率低下的问题。</p>
+</li>
+</ul>
+<p><strong>zkEVM Enshrined Rollups 的缺点</strong></p>
+<p>但它们并不完美：</p>
+<ul>
+<li>
+<p>没有公共产品融资——像 Optimism 这样的私有 Rollup 可以自行决定将其收入重新用于资助公共产品。ER 将仅限于资助 L1 安全和销毁 ETH。</p>
+</li>
+<li>
+<p>次优压缩——SCR 目前在链上的结算频率远低于每个区块，从而实现更好的数据压缩。他们还可能有自定义或经常更新的字典，以改进数据压缩。</p>
+</li>
+<li>
+<p>VM 不灵活——以太坊 ER 很可能是一种 EVM。SCR 能够采用其他流行的 VM（例如，WASM、RISC-V、MIPS）或创建一个新的 VM（例如，Cairo、FuelVM）。定制的 zkVM 可能能够比 zkEVM 实现更好的数据压缩。</p>
+</li>
+<li>
+<p>更难的预确认——SCR 可能会选择有一个中心化的排序器，它提供即时（~100 毫秒）的预确认，以获得更好的用户体验。这通过 ER 的去中心化排序更难实现。</p>
+</li>
+<li>
+<p>后发（last mover）——由于 L1 的保守性，ER 做出任何改变的速度都非常缓慢。各种升级将需要通过治理过程（EIP 和分叉）实现。为了避免电路错误，可能需要冗余的多电路设置（例如，2-of-3 签名）或繁重的正式验证。</p>
+</li>
+<li>
+<p>潜在增加的构建者成本——构建者现在必须创建一个证明，除非排序器和证明者被分成不同的角色（这是可能的，实现细节）。以太坊也可以决定发行 ETH 来抵消 ER 证明成本。这就涉及到「区块构建最终将有多专业化？」的问题。我目前期望有意义的中心化无论如何（由于经济激励，正如我之前所写的那样），但我们不确定。实施后，证明也将大大降低成本和速度。</p>
+</li>
+<li>
+<p>Justin 将不得不重做他的预测，因为太多的 ETH 会被销毁。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_ijvrklot8f.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>zkEVM Enshrined Rollups 的投机优势</strong></p>
+<p>跨多个 ER 运行（或可能构建所有 Rollup 区块、结算和数据）的构建者可以提供 ZKR 之间的同步互操作性。</p>
+<p>例如，构建者可以提供抵押品并承诺包含您的同步交易。如果他们接受您的出价但未能执行交易，他们将失去保证金。crLists 还可以帮助提供预确认，因为提议者（他们也可以选择与抵押品绑定）将能够强制包含交易。</p>
+<p>经济激励措施导致构建者跨 Rollup 运营——我们今天已经看到跨链 MEV 的这种中心化力量。这些同步互操作性的软确认是用户想要的，他们会为此付费。如果你能够提供这项服务，你可以赚更多的钱。如果你能比其他人赚更多的钱，你就会成为最好的构建者。</p>
+<p>请注意，即使在此之前，ZKR 也会对 L1 进行同步调用，类似的动态也在发挥作用。新的 danksharding 设计保留了这种可能性，因为一切都在一个区块中得到确认。例如，您可以将资金桥接到 L1，然后在同一个区块中与这些资金执行交换。但是，要提供这项服务，您需要控制 L1 和 L2 区块的生产，以确保两条腿都能执行（即，只有在此 swap 紧随其后执行时才桥接这些资金）。这是跨 Rollup 和 L1 的区块构建者的一种中心化力量。</p>
+<p><strong>反对 Enshrined Rollups 的论点——可信中立</strong></p>
+<p>将单实例 EVM 升级到 zkEVM 似乎是一件轻而易举的事（如果我们对这项技术感到满意的话）。64 个 Enshrined Rollups 的下一步是更具争议性的部分。</p>
+<p>「事实证明，区块链中的大部分内容都属于观点，而不是技术内容。」针对 ER 的案例在这里也不例外。这是一个有趣的以太坊开发者、Celestia 开发者和以太坊垃圾贴，他们在双方都做出了很好的案例。这里有很多分歧。有些人担心 ER 会对 SCR 这样做：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_laolaelgn1.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>该论点认为，ER 本质上会与以太坊试图培养的 SCR 竞争，从而损害其可信的中立性。SCR 会感觉像是「二等公民」。它可能「限制以太坊结算层的可信中立性，削弱其对非 ER 的社会经济保障。」这与关于 Cosmos Hub 极简主义的辩论类似。基础层功能 / 极简主义的这种有趣平衡也是 Vitalik 之前讨论‌过的。</p>
+<p><strong>Enshrined Rollups 的依据——可信中立</strong></p>
+<p>相反，一些人认为 ER 可以通过防止任何商业 Rollup 团队变得过于占主导地位来保护以太坊的可信中立性。假设「Rollup Labs A」变得太成功了，他们的 Rollup 挤占了其他所有人。如此依赖一个私人团队可能会严重影响以太坊的可信中立性和网络效应。来自 ER 的中性平衡可以缓解这种情况。</p>
+<p>更进一步，一个成功的 Rollup 生态系统甚至可以脱离他们的以太坊联盟。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_9s0n1uw14j.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>这是 Ali Atiia 过去提出的论点‌：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_zaebqdo0i2.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>当前的以太坊扩展计划主要是作为具有约束结算层的 SCR 的 DA 层。以太坊依靠 Rollup 来进行可扩展的计算。但是，SCR 可以切断「老旧的中间人」并引入他们自己的 Rollup 本地资产。</p>
+<p>引用的假设示例是 Optimism、Circle (USDC)、MakerDAO (DAI) 都拥有相同的投资者。投资者促进协议的交叉授粉，本地部署的资产更便宜，用户体验更好。因此，Circle 和 MakerDAO 在 Optimism 上分别部署 USDC 和 DAI 具有经济意义。一旦 Rollup 建立了足够的本地资产、DeFi 和安全性，他们可能会决定以太坊不再为他们提供足够的价值。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_odnjbvsgdn.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>为了建立粘性，以太坊需要一个更好的结算层。单独的 DA 可能不够粘。要构建最佳结算层，您需要可扩展性和共享流动性。ER 使 SCR 之间的通信大大提高了效率。我们今天听到的「超大规模」L3 可能会在以太坊 ER 之上一层变得更加可行。ER 成为使用价值最高的 dApp = 大量流动性进行主权和机构结算的首选场所。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_9i731tssp8.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>对 Enshrined Rollups（ER）的个人看法</strong></p>
+<p>ER 不会威胁以太坊的可信中立性。是的，活动将发生在理论上可能已转到 SCR 的 ER 上。但这与反对以太坊 SCR 的论点完全相同，并且继续被许多单一的竞争性 L1 支持者传播。SCR 不会寄生于以太坊——它们是协同的。ER 不会寄生于 SCR——它们是协同的。以太坊最好用 SCR，而 SCR 最好用 ER。</p>
+<p>ER 把这个馅饼做的比他们自己吃到的要多得多。</p>
+<p>SCR 将永远是创新和更高扩展的家园，因此它们将继续承载绝大多数 Rollup 活动。ER 旨在确保以太坊能够履行其保持最佳结算层的承诺：</p>
+<ul>
+<li>
+<p>信任最小化的桥接和获得最大的共享流动性池</p>
+</li>
+<li>
+<p>更高的扩展使得位于顶部的 SCR 的桥接成本大大降低，开辟了令人难以置信的令人兴奋的新可能性</p>
+</li>
+</ul>
+<p>尽管其他人也有类似的看法‌，但我并不认同 Ali 对以太坊会脱离的担忧：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_rzlu014ff2.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>如果 Rollup 是经济上理性的参与者，他们有一个简单的等式来衡量：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_b3l934wzej.png" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>ER 在两个方向上都更加有利地倾斜了这种扩展——它们使以太坊成为更好的结算层，并且它们为顶部的 SCR 提供了更低的成本。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_rvzhu0dc4o.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>将 Rollup 拆分为孤立的 L1（具有不安全的桥）会大大缩小这个馅饼，而您得到的回报只是略微提高了利润率（节省了廉价的结算费用）。此外，你现在需要补贴自己的安全性，很可能是通过发放通胀性区块奖励。这没有经济意义。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_3m6e7cisb8.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>关于为什么 Rollup 会离开以太坊的一个潜在经济合理的论点是他们是否可以建立更好的结算层。那么理论上你可能会得到一个更大的馅饼。我认为任何人都有机会的唯一方法是使用以下方法：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_j2r8e7kzjq.png" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>然而，你在后半部分网络效应、去中心化和可信的中立性方面做出了巨大的牺牲。在以太坊之上构建一个结算层更有意义，就像 StarkNet 对他们的 L2 所做的那样。您将获得两全其美的优势——一个高价值的金融结算层，保留了以太坊的巨大优势，而且价格非常低廉。</p>
+<p><strong>协议复杂性</strong></p>
+<p>Vitalik 在他最近的 EthCC 演讲中谈到了一个非常重要的话题。以太坊正在进入其最快速的创新时期。未来几年计划了很多好东西。然而，复杂性的分层意味着更多的风险，即使是以太坊开发者也越来越难以跟上创新的速度。虽然以太坊不需要完全技术僵化，但它最终会稍微刹车：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_ht5r0m9ojn.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>公平地指出，添加 zkEVM ER 并不完全像是在公园里散步那样轻松。然而，在我看来，它们是以太坊雄心勃勃的路线图的最后一步，在曲线图的顶部附近，曲线趋于平稳。有一天我们会放慢速度，但现在还不到时候。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_2m37g1jo9y.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>要点概述</strong></p>
+<p>我最喜欢的类比是 ER 是公共部门，而 SCR 是私营部门。SCR 仍然是创新和大多数 Rollup 活动的所在地。ER 是缓慢而稳定的可预测基础层，可在其上运行，提供最大的安全性。两者和谐共处。与它们蚕食的任何边际活动相比，ER 为 SCR 增加的价值要多得多。</p>
+<p>以太坊已经有了一个令人信服的扩展 DA 计划。但这并不意味着它应该满足于其结算层。以太坊也可以而且应该在这里竞争。zkEVM ER 提供了扩展 L1 以太坊的最佳途径，将其定位为主要的结算层。</p>
+<p>ER 与以太坊的经济和社会一致性保持了其可信的中立性，创造了一个令人难以置信的凝聚力系统。健壮货币产生下一级经济安全，补贴整个生态系统的安全。</p>
+<p>反对 ER 的唯一论据是围绕中立和竞争的「社会」论据。虽然我理解这些担忧，但我认为它们通常被夸大了。当技术准备就绪时，以太坊当然应该追求一个 zkEVM ER，然后再评估并行实例。</p>
+<p>你不认为以太坊的基础层会一直很弱并且吞吐量一直很低，对吧？</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_2m8tris6u7.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<h3 id="以太坊结算和数据可用性da层">以太坊–结算和数据可用性（DA）层</h3>
+<p>现在我们对这些 Rollup 如何工作有了更好的理解，让我们回到他们实际需要的基础层。</p>
+<p>数据可用性（DA）是显而易见的——让它超级便宜，提供很多，使它易于使用 DAS 进行验证。以太坊和 Celestia 都旨在以一种或另一种方式做到这一点。</p>
+<p>我关于结算的一般论点——我不认为最好的结算层将仅限于验证 / 仲裁证明和桥接代币的核心功能。以太坊应该保留一个丰富的通用本地执行环境。这将是大型 DeFi 所在的地方，这些 DeFi 在每笔交易的基础上都对价格不敏感。这为 SCR 提供了巨大的网络效应、流动性和建立的安全性。</p>
+<p>以太坊应该长期关注如何扩展结算层（无状态，zkEVM）。</p>
+<p><strong>DeFi 池化</strong></p>
+<p>也许你们中的一些人有私人飞机，但我们大多数人都乘坐商业飞机。我需要和其他人分摊账单。这有点像 DeFi 池化‌。</p>
+<ul>
+<li>
+<p>分散的流动性是不好的——所以最好将流动性集中在一个地方（比如以太坊）。</p>
+</li>
+<li>
+<p>但费用高昂也不好——所以我们是否需要打破流动性以避免拥堵？</p>
+</li>
+<li>
+<p>不——我们只是在 L2 上进行商业化飞行。</p>
+</li>
+</ul>
+<p>如果我想向 Yearn 存入 100,000 美元，支付 10 美元费用是可以接受的。但是为 100 美元的存款支付 10% 作为费用是没有意义的。相反，L2 可以容纳 1000 名想要将 100 美元存入 Yearn 的人，将他们捆绑在一起，然后只需进行一次 L1 存款！所有这些都无需用户支付 L1 gas 费——您只需支付 0.01 美元的费用份额。事实上，这正是 Argent 已通过 zkSync 提供的。</p>
+<p>Aave 也在探索这一点，作为其在 StarkNet 上部署的一部分。他们将开发一个智能合约来汇总 L2 用户存款，然后将它们存入 L1。该合约将根据用户在池中的比例将 aToken 从 Aave L1 分配给 StarkNet 用户。该合约将汇总用户的 aToken，并在赎回抵押品时将其存入 L1 Aave。</p>
+<p>这是一个过度简化的版本：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_5a02qp1m52.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>去中心化 AMM (dAMM)</strong></p>
+<p>dAMM 是 StarkWare 去年与 Loopring 合作首次提出‌的。我将在这里总结他们的设计。但是，请注意，这是一个具有开放设计问题的积极研究领域。目前还没有已上线的实现，未来的设计可能看起来与这个完全不同。</p>
+<p>dAMM 是一种 L2 AMM，它在由 L1 合约强制执行的单个 L1 池中聚合流动性。执行发生在多个异步共享流动性的 ZKR 上。LP 在参与 L2 交易的同时为 L1 AMM 服务，让他们接触更多交易。（更高的交易量）/（相同的流动性）= 更高的费用 % → 更好的资本效率。</p>
+<p>异步性 = L2 s 可以处理交易，而无需使用相同的 dAMM L1 流动性池与其他 L2 s 进行强制通信。这是使共享 AMM 成为可能的关键。</p>
+<p>这是通过将流动性池与定价状态分开来实现的。因为资金和状态是解耦的，你可以有多个状态（用于多个 ZKR）使用同一个流动资金池。每个 ZKR 都有自己的 dAMM 状态。</p>
+<p>合约同意提供 L2 状态提供的任何价格，只要 L1 合约有足够的流动性来完成报价。由于套利，所有状态都应该恢复到均衡比率。</p>
+<p>这解决了在 L2 之间共享 AMM 的主要障碍——如果用户可以同时交易，则存在并发风险。否则，这可能会使每个 L2 无法知道它是否可以安全地完成结算。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_9z8qrccvvi.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>无常损失 (IL)</strong></p>
+<p>LP 在 dAMM 中面临更大的 IL 风险——风险随着 LP 所接触的市场数量线性增长。因此，在最坏的情况下，LP 会受到他们在常规 UniswapV2 AMM 下遭受的 IL 的 n 倍。这对于稳定的货币对（例如，在 Curve 中）无关紧要，但对于其他池来说可能会很高。这可以使用智能合约中称为 dAMM「健康因子」的参数来缓解，该参数限制了最大 IL LP 可能遭受的损失。这个健康因子可以保证 dAMM 流动性比率不会降得太低。</p>
+<p><strong>L1 &lt;&gt; L2 同步交易</strong></p>
+<p>这种设计可以支持 L1 和 L2 上的多个独立市场，它们都共享相同的流动性。通过允许将 L1 LP 代币（例如，来自 UniSwap ETH/DAI）直接存入 dAMM 上的相应池（例如，ETH/DAI），L1 流动性（例如，在 Uniswap 上交易）可以用作 dAMM 流动性。</p>
+<p>dAMM 可以支持 L1 交易，但无法再轻易减轻健康因素。不过，有限合伙人可以选择承担这种额外的风险，并将自己暴露在 L1 交易中。</p>
+<p><strong><em>粘性</em></strong></p>
+<p>Vitalik 已经明确表达了他的想法，即与结算共享一个 DA 层确实很棘手：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_5rsibse7ha.png" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>这在很大程度上可以追溯到 Vitalik 的著名帖子，关于为什么未来是多链而不是跨链的。大致来讲，受信任的成对跨链桥意味着对连接链的 51% 攻击 = 你的桥被攻击（许多桥实际上更糟）。如果您在以太坊结算但将数据发布到其他地方（例如，在 Celestium 中），类似的原则也适用。如果 Celestia 在这里受到多数攻击，那你又要倒霉了。</p>
+<p>共享 DA 层和结算层的 Rollup 避免了这些问题，因为它们彼此之间建立了信任最小化的桥接（也可以仅使用 DA 而没有共享结算层的信任最小化桥接，稍后会谈到）。如果以太坊没有受到 51% 的攻击，你就不能单独对 Rollup 进行 51% 攻击。即使以太坊受到 51% 攻击和逆转交易，它的 Rollup 也会被逆转，二者保持一致。因此，您可以安全地持有在一个 Rollup 上发布并在另一个 Rollup 上封装的资产。</p>
+<p>所以共享一个 DA 和结算层可以提供最好的安全性。但是，如果您决定使用以太坊作为结算层，然后提供另一个 DA 源（例如，像 zkPorter、validium、celesium 等这样的 volition），那么有什么好处 / 权衡呢？你仍然可以使用与任何 Rollup 相同的桥和连接到 L1——你共享流动性、DeFi 池化等。对于 volition，链下（例如 zkPorter）和链上（例如 zkSync）DA 模式共享相同的状态并且是完全可组合的。当您希望数据存储在链上或链下时，您只需在用户级别进行选择。</p>
+<p>单独的结算在很大程度上提供了网络效应，而 DA 则增加了全面的安全性。通过共享 DA 可以安全地优化这些网络效应。例如，您可以更轻松地跨 Rollup 实现销毁和铸币机制，允许您跨链本地部署代币。但是，如果具有非常不同的信任区域，那就不会这么容易。</p>
+<p>最终，我们可以看到这里有一个安全范围。许多以太坊 Rollup、validiums 等将使用以太坊进行结算——但并非所有这些都将使用其 DA。DA 至少在某种程度上更加商品化，它将是一种丰富的资源。</p>
+<p><strong>桥接</strong></p>
+<p>这是不同层的网络效应有多强的最大百搭牌。现实情况是，我们在理解 Rollup 未来如何相互通信方面还处于难以置信的早期阶段，这可能会对这些堆栈的发挥方式产生有意义的影响。有很多理论上是可能的，很多未解决的问题，还有很多棘手的工程问题。例如，Slush 正在为 ZKR 开发一些最令人兴奋的桥接可能性。未来我们可能会看到 ZKR 之间的原子可组合性。</p>
+<h2 id="第三部分celestia-rollup-堆栈">第三部分，Celestia Rollup 堆栈</h2>
+<h3 id="celestia主权-rollup">Celestia–主权 Rollup</h3>
+<p>如果 ER（Enshrined Rollup）是 Rollup 频谱的一端，那么主权 Rollup（SR）就是频谱的另一端。有些人认为这两种 Rollup 都是虚构出来的，但我认为它们都很酷。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_b48g79zl80.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>主权 Rollup（SR）仍然将交易数据发布到 DA 和共识基础层（只是就交易顺序达成一致，而不是有效性），但它们在 Rollup 中处理结算客户端。全节点和轻节点从它们的 P2P 网络下载区块，并且它们还在 Celestia 上检查数据可用性（DA）。欺诈证明围绕主权 Rollup（SR）的 P2P 层发送，供轻节点查看。有效性证明也可以围绕 P2P 层发送。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_d83m03lo2d.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>或者，ZK Rollup 可以将其有效性证明与 Rollup 区块一起直接发布到 Celestia。Celestia 将无法验证证明，但跟踪 Celestia 的 Rollup 轻客户端将能够轻松地做到这一点。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_su4slkn6c9.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>Celestia 将以太坊智能合约 Rollup （SCR）称为「婴儿链‌」，因为正确的 Rollup 链是由 L1 智能合约决定的。相反，主权 Rollup（SR）节点为自己决定正确的区块链。它们在 Celestia 上检查 DA，然后在本地验证分叉选择规则。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_6lhae7t4et.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>请注意，这现在只是一个信任最小化的单向跨链桥。验证 Rollup 有效性的智能合约为你提供了一个信任最小化的跨链桥。理论上，你可以将 Celestia 代币发送到 Rollup，但它永远无法返回（不是一个好主意）。Celestia 的代币会有限制，这一点我们稍后再谈。</p>
+<p><strong>主权</strong></p>
+<p>「主权」是指在不失去安全性的情况下，在任何时候随意分叉的权利。你的 DEX 被黑了吗？一些鲸鱼玩弄了你的空投？</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_53mhkmjk2s.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<blockquote>
+<p>「不引入一个神圣结算层，主要是社会特点而非技术特点，这意味着 Rollup 的社区之间存在一个社会合约，即 Rollup 的交易有效性规则由社区定义，而不是不可变的 L1 合约。在实践中，这意味着到 Rollup 的跨链桥，必须是可变的，以便有一个升级路径，承认主权 Rollup 上的硬分叉‌。」</p>
+</blockquote>
+<p>「智能合约 Rollup」仍然能分叉，但是关于什么是规范链的决定权，委托给了 L1 智能合约。这依赖于多重签名 / 中心化团队（今天的情况）、Rollup 的多数治理（去中心化的方式），或者它们变得不可变并丧失这一权利（或者 L1 可能分叉，但可能性不大）。请注意，此升级过程受链上治理的多数规则约束。链下协调可以部署一个新的 「智能合约 Rollup」 实例，但你要从头开始绘制链上记录。而「主权 Rollup」能够通过链下治理在无许可的情况下分叉，即使是少数人。但是，根据你的跨链连接情况，这个分叉可能不是很有用（稍后会详细介绍）。</p>
+<p><strong>围绕主权和分叉的考虑</strong></p>
+<p>理论上你总是可以分叉一个主权 Rollup（SR），但实际很多情况下这不会很好。因此，让我们了解这种主权在哪些地方是特别有用的，在哪些地方则是没用的。</p>
+<p>主权的一个阻力是主权 Rollup（SR）（或任何链）对有意义的中心化资产的依赖。如果 USDC 不支持，那么严重依赖于 USDC 的永续合约交易所就会有一个无用的分叉。</p>
+<p>部署在通用主权 Rollup（SR）上的智能合约也有类似的情况。大型社区的社会经济联系更加模糊。假设你在以太坊上的 DEX 被黑客攻击，你可以自由地分叉区块链，并恢复它，但如果所有其他用户和 dApp 都留在原始链上，那分叉也就毫无意义了。主权 Rollup（SR）作为一个整体当然有权进行分叉和更改，但作为共享链上的单个合约，你将没有太大的权力。因此，特定于应用的主权 Rollup（SR）最有可能获得主权的最大好处。</p>
+<p>主权对于一个拥有强大社区的项目而言可能也很有价值，但我认为当今大多数项目都缺乏这一点。很难预测 crypto 的未来会是什么样子，但目前大部分都是 DeFi。由纯粹的财务和交易关系驱动的应用可能会看重给定 Rollup 堆栈的其他技术优势，而不是主权，因此，主权 Rollup（SR）需要在功能方面和智能合约 Rollup（SCR）展开竞争，这在很大程度上取决于主权 Rollup（SR）跨链桥的效果，而目前我们对此还是不清楚的（稍后将详细介绍）。</p>
+<p>如果是不可更改的，分叉信任最小化跨链桥的 Rollup 就会变得非常棘手（例如，如果 SRa 的桥逻辑是 SRb 共识规则的一部分）。这意味着所有链接的 Rollup 都需要同步硬分叉。这将使诸如 DeFi（将连接到很多其他链）之类的 Rollup 使用变得非常困难。</p>
+<p>但如果跨链桥不是神圣的，主权 Rollup B 在 主权 Rollup A 分叉时不必分叉，即使它们有一个信任最小化的跨链桥。Rollup 可以简单地运行一个智能合约，该合约解释每个跨链连接的 Rollup 的状态并验证它们的有效性证明。你将所有内容（包括分叉选择规则）烘培（bake）到证明中，因此区块链只能有一个规范版本，这类似于今天以太坊上的智能合约 Rollup（SCR），如果它们通过治理升级，与它们交互的智能合约也可能需要升级。</p>
+<p><strong>灵活性</strong></p>
+<p>主权 Rollup（SR）的另一个好处在于，它们赋予了开发者更多的执行环境灵活性。以太坊的智能合约 Rollup（SCR）受限于结算层处理欺诈证明或有效性证明的能力，这在某些情况下可能会带来挑战。</p>
+<p>主权 Rollup（SR）不受任何特定虚拟机（例如 EVM）可解释的欺诈证明或有效性证明的约束。正如我们在新的 L1 中看到的那样，这种执行不可知论可促进设计 VM 的更多创新。</p>
+<p>不过，这并非没有困难。信任最小化跨链连接到其他主权 Rollup（SR），需要它们去解释你的执行环境并验证证明。因此，你可能会因为过于有创意而带来互操作性挑战。而统一标准就可以避免这种情况。</p>
+<p><strong>主权 Rollup 中的欺诈证明</strong></p>
+<p>首先，欺诈证明有两种形式：</p>
+<p>非交互式（又名单轮）：挑战者提交欺诈声明，通过完全执行两个断言状态之间的所有状态转换来检查该声明。这将 Rollup 执行限制为可由轻客户端（例如智能合约）重新执行的内容。在主权 Rollup（SR）中，轻客户端通过 P2P 层接收证明来执行它。</p>
+<p>交互式：挑战者提交欺诈声明，响应者为自己辩护。这两者会玩一个交互式验证游戏（IVG），挑战者要求响应者将他们的声明分成更小的声明，然后他们反复缩小对单个指令的分歧。而有「人」会「仲裁」这场争议，它可以是以太坊智能合约（用于智能合约 Rollup）或 P2P 轻客户端（用于主权 Rollup）。最后，轻客户端运行该单一指令来检查欺诈。如果任何一方停止响应，则另一方获胜。这比单轮欺诈证明更复杂，但检查欺诈会更有效。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_k4tgns9ots.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>作为参考，Arbitrum 就是使用的交互式验证游戏（IVG），Optimism 最初的计划是运行单轮欺诈证明方案，但他们后来也决定采用 IVG 方案。你可以在此处‌查看他们的新设计最新概述。</p>
+<p>现在，我们将关注这些与主权 Rollup（SR）的关系。通过 P2P 分发欺诈证明的一个好处是更快的轻客户端终结性。在正常情况下，这里的同步延迟可能低于将其包含在链中，并且你不再需要担心 L1 矿工 / 验证器审查你的欺诈证明。你可以避免智能合约 Optimistic Rollup 的长延迟时间。</p>
+<p>斯坦福研究小组最近提出了一种在 Celestia 这样的「脏账本」上玩 IVG 的方法‌。你可以在这里‌观看概述。请记住，Celestia 接受任何原始信息，它不会检查「无效」交易，因此这是一个「脏」账本。Rollup 本身决定了其区块链的有效性。但是这里有一些问题已经被发现。</p>
+<p>假设一个挑战者想要证明交易 Tc 是一笔双花交易。他们提交证据证明这笔钱已经用于交易 Tb。这对于证明欺诈似乎是合理的，但如果存在一些 Ta 能证明 Tb 实际上是无效的呢？如果交易 Tb 无效，那么交易 Tc 可能完全有效。有了一个脏账本，你永远不会知道真实的状态，除非你回到链的起源并重放每一笔交易。这意味着挑战者和响应者都必须是存档节点，而这种负担是非常繁重的。</p>
+<p>这不同于以太坊这样的「干净」账本，其中智能合约将拒绝任何无效交易。你知道最新确认的链末端在新提议状态之前是有效的。</p>
+<p>为了减少存档节点的需求，你可以引入新的弱主观性假设。假设你只要求挑战者和响应者保留 3 周的数据。但与智能合约 Optimistic Rollup 的挑战者和响应者相比，即使这样也会大大增加节点要求：</p>
+<ul>
+<li>
+<p>智能合约 Rollup（SCR）挑战者 / 响应者需要存储实际争议期间的状态；</p>
+</li>
+<li>
+<p>主权 Rollup（SR）挑战者 / 响应者需要在整个弱主观性期间存储所有不同的历史状态；</p>
+</li>
+</ul>
+<p>这显著增加了它们的要求，这使得主权 Rollup（SR）的可扩展性降低。为了限制挑战者 / 响应者的要求，需要限制区块空间。</p>
+<p>IVG 游戏的 主权 Rollup（SR）中还有一个更强的同步假设：</p>
+<ul>
+<li>
+<p>智能合约 Rollup（SCR）假设存在一个诚实的挑战者，他将向智能合约提交欺诈证明，然后将对其进行仲裁以供所有人查看。你假设没有日蚀攻击（eclipse attack）来完全切断网络提交欺诈证明，并且你看到了欺诈证明。</p>
+</li>
+<li>
+<p>主权 Rollup（SR）假设每个轻节点都连接到可证明欺诈的诚实挑战者和响应者。这些挑战者和响应者受限于他们可以连接多少轻客户端，因此你现在假设了更多的同步连接。而 IP 也很容易受到女巫攻击。</p>
+</li>
+</ul>
+<p>主权 Rollup（SR）可能会使用单轮欺诈证明方案（这是 Cevmos 计划使用的）。这些操作的假设要弱得多，因为轻客户端可以从诚实的挑战者那里收到欺诈证明并不断传递。轻客户端在保持连接的同时，不再位于挑战者和响应者之间。你只需要从任何人那里收到欺诈证明，然后你就可以自己检查。请注意，单轮欺诈证明方案可能会引入更高的延迟，因为它们的执行速度较慢。相比 IVG，单轮欺诈证明方案还会面临更大的攻击面‌。</p>
+<p><strong>基于委员会的跨链桥 vs 基于证明的跨链桥</strong></p>
+<p>主权 Rollup（SR）增加了额外的跨链桥设计考虑因素，但对于其他 Celestia Rollup，信任最小化或可信跨链桥仍然是可能的。在 Mustafa 最近撰写的这篇博客文章‌中，你可以阅读有关某些特定设计可能性的更多详细信息，我将在这里对其中的大部分内容进行一个总结：</p>
+<ul>
+<li>
+<p>基于委员会的跨链桥（一个委员会证明区块的有效性），这并不是信任最小化的，委员会理论上可以窃取资金。IBC 是基于委员会的跨链桥的一个例子（委员会是源链的验证者集）。你还可以有一个由跨链桥提供商运营的委员会来证明多个区块链。</p>
+</li>
+<li>
+<p>基于证明的跨链桥，为了使跨链桥的信任最小化，主权 Rollup A 和主权 Rollup B 必须能够相互验证欺诈证明 / 有效性证明，因此，它们必须能够解释彼此的状态机。这比基于委员会的跨链桥更复杂。</p>
+</li>
+</ul>
+<p><strong>点对点结算 vs 链上结算</strong></p>
+<p>对于基于证明的跨链桥，这里有两种选择：</p>
+<p>P2P 结算——主权 Rollup A 和主权 Rollup B 都运行嵌入在其区块链中的轻客户端。它们通过 P2P 网络接收区块头和相关的欺诈证明 / 有效性证明。两个主权 Rollup（SR）都有一个跨链桥合约，允许通过锁定和铸造机制进行资产转移。跨链桥合约由每条链的定序器或验证器监控（直接或间接通过中继器）以执行转移。</p>
+<p>链上结算——主权 Rollup A 和主权 Rollup B 都运行彼此的轻客户端，这些客户端以链上智能合约的形式实现。这些智能合约接收区块头和欺诈证明 / 有效性证明。而这就是以太坊智能合约 Rollup（SCR）的工作方式。</p>
+<p><strong>静态跨链 vs 动态跨链</strong></p>
+<p>静态跨链——必须通过链升级或硬分叉显式地添加跨链桥。主权 Rollup A 和主权 Rollup B 必须支持彼此的执行环境来解释它们的欺诈证明 / 有效性证明。</p>
+<p>示例：主权 Rollup A 是一个想要跨链连接到 主权 Rollup B 的 Optimistic Rollup。主权 Rollup A 的状态机直接用 Golang 编写（例如使用 Cosmos SDK），主权 Rollup B 是一个不理解这一点的 EVM 链。主权 Rollup B 必须升级其节点软件，以将主权 Rollup A 的状态机作为库包含在内，以验证主权 Rollup A 的欺诈证明。主权 Rollup B 不能只是自动添加主权 Rollup A 的状态机代码，因为它可能会带来安全风险。这同样适用于连接链无法理解的有效性证明。无论哪种情况，都需要社会共识或治理来通过链升级添加这座跨链桥。</p>
+<p>动态跨链——如果主权 Optimistic Rollup A 是在沙盒智能合约环境（例如 EVM 或 CosmWasm）中编写的，那么主权 Rollup B 可以允许将主权 Rollup A 的状态机代码直接添加到它自己的代码中。这可以在没有任何社会共识或治理的情况下完成，例如使用智能合约。这同样适用于能够理解彼此有效性证明的 ZK Rollup。</p>
+<p><strong>可升级跨链桥 vs 不可升级跨链桥</strong></p>
+<p>智能合约 Rollup 将以太坊奉为决定其有效性的神圣结算层，而主权 Rollup 跨链桥是没有这种待遇的，它们是必须可变的，具有升级路径。也就是说，主权 Rollup B 必须承认主权 Rollup A 的有效性由其社区决定。主权 Rollup A 可随时通过社会共识进行分叉，而无需链上治理或硬分叉结算层。</p>
+<p>让我们来看看这个例子，主权 Rollup A 正在进行硬分叉，主权 Rollup B 需要为主权 Rollup A 升级它的轻客户端。这里有几种方法，而它们会影响跨链桥是否是信任最小化的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_1c81woulv7.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>成对跨链桥 vs 轴辐式跨链桥</strong></p>
+<p>共享结算层上的 Rollup 只需要 N 个连接到结算层的跨链桥。但是，成对的主权 Rollup 跨链桥会导致 N^2 个用于 N 个 Rollup 相互连接的跨链桥。它们还会缺乏一个结算层的共享流动性和 DeFi。</p>
+<p>资产的路径依赖性还有另一个问题。如果我从链 A → B → C 转移资产，则该资产不能与从链 A → D → C 转移的资产互换（除非它原生部署在所有链上，并且你使用了一种燃烧和铸造机制）。这再次分散了流动性，其解决方式是通过共享结算层来连接起来。</p>
+<p>轴辐式（hub-and-spoke）模型减轻了很多复杂性，即很多主权 Rollup 连接到一个中心 hub 主权 Rollup。这种方式将跨链桥的开销减少到了 N 数量级。中心 hub 可以成为共享流动性和跨链通信的焦点。在这方面，它的功能与共享结算层非常相似。</p>
+<p>这类似于 Cosmos 生态系统中应该如何展开的辩论。最初的「计划」是让 Cosmos Hub 作为焦点，所有 zone 区块链通过 IBC 和 Cosmos Hub 进行通信。但实际上，完全成对的跨链桥出现了。每个 zone 区块链只是与它们想要与之交互的任何区块链创建一个 IBC 连接。</p>
+<p>一个 hub 将扮演以太坊结算层今天所做的很多有价值的角色。它将承载有价值的 DeFi 和流动性，同时协调跨链消息传递，而这可能会捕获大量的价值。然而，与以太坊的结算层不同，这并没有为 Celestia 生态系统提供经济保障，Celestia 协议中并没有部署一个神圣结算层 。</p>
+<p><strong>聚合 ZK 跨链桥</strong></p>
+<p>我把最好的部分留到最后，也就是使用有效性证明聚合的具有线性复杂性的 All-to-all 跨链桥。如果这是可行的，那么以下想法可能会改变 Rollup 拓扑的游戏规则，从而大大提升主权 Rollup 的吸引力。感谢 Sovereign Labs‌ 的 Preston Evans 和 Cem Özer，他们最近才将这个想法结合在一起。</p>
+<p>让我们来看一个例子：主权 Rollup 1 想要和主权 Rollup 2 - 主权 Rollup N 跨链连接起来。</p>
+<p>简单的解决方案——如前所述，显而易见的选择是让主权 Rollup 1 运行 N-1 个轻客户端，每条链一个轻客户端，并为每条链验证一个证明。这种跨链桥的复杂性是 N^2 的，非常棘手，因此我们需要采用上述的轴辐式（hub-and-spoke）模型。那我们可以做得更好吗？我认为，答案是 yes 。</p>
+<p>更好的解决方案：</p>
+<ul>
+<li>
+<p>主权 Rollup 1 的聚合器接收 主权 Rollup 2 - 主权 Rollup N 的证明。聚合器为每条链运行一个轻客户端，但现在这是在链下完成的，因此成本要低得多。</p>
+</li>
+<li>
+<p>（无需信任的）证明者进行验证，然后将所有 N 条链的证明聚合成一个证明。这种聚合基本上是免费的，因为链下验证证明非常便宜。</p>
+</li>
+<li>
+<p>聚合器仅将单个证明推送到链上的智能合约。</p>
+</li>
+<li>
+<p>主权 Rollup 1 验证这个单一证明的时间，与验证任何单个主权 Rollup 的证明所需的时间相同。</p>
+</li>
+</ul>
+<p>链上验证者合约将包含从 chainId 到 SR2 - SRN 状态根的映射。每当它验证一个新的聚合证明时，它都会更新 SR2–SRN 的状态根。唯一剩余的 N^2 数量级复杂性现在在状态根中（每条链都在跟踪其他链的状态根，但这里的常数会很小）。SR1 消除了运行 N-1 个轻客户端和验证 N-1 个证明的 N^2 复杂性。每个 Rollup 都可能运行自己的 prover，但理论上你也可以拥有一个证明者聚合并将证明发送到所有 N 个 主权 Rollup。</p>
+<p>关于其他主权 Rollup 状态机的可解释性有一些假设，但这些问题是可以解决的。你跨链连接到的每种类型的替代 VM , 都需要其自己的解释器智能合约。假设 SR1 是连接到 3 个 EVM、3 个 Move 和 3 个 Sealevel SR 的 EVM 链。它需要运行两份解释器合约，一份用于 Move 链，另一份用于 Sealevel 链。</p>
+<p>拥有一个 DeFi「中心」（例如，在轴辐式模型或共享结算层中）可能仍然是有益的，集中流动性是有价值的。但是这个 hub 不再依赖于结算和两跳 (two-hop) 跨链桥。这消除了使用诸如 StarkNet 之类的东西作为具有高流动性的可扩展结算层的 L3 延迟。你已将堆栈展平，并在所有 Rollup 之间创建了较短的路径。</p>
+<p>此外，不再有锁定的结算层。这个作为 DeFi 焦点的 hub 枢纽可以随着时间的推移而发展，并随着技术的进步逐渐转变为其他链。你不再受限于结算层的遗留技术。</p>
+<p>最后一点是，这仍然是一个非常新的想法，它需要继续接受审查，而这可能需要数年的时间才能够建成。</p>
+<p><strong>以太坊主权 Rollup</strong></p>
+<p>主权 Rollup 的创意肯定是出自 Celestia，但请注意，你也可以轻松地使用以太坊的 DA 层而忽略掉结算层。一旦 data blobs 格式在 EIP-4844 落地之后获得了自己的廉价费用市场，那这将是有效的，你可以获得相同的好处和权衡，但有一些地方是不同的：</p>
+<ul>
+<li>
+<p>更高的经济安全性——由于以太坊结算层，它的经济安全性远高于 Celestia。以太坊结算层补贴 DA 的安全成本，而 DA 是利他提供的。</p>
+</li>
+<li>
+<p>与以太坊 Rollup 的信任最小化跨链桥——回想一下，主权 Rollup 可以构建成对的信任最小化跨链桥，Rollup 共享相同的 DA 层（这会更难）。你现在可以通过以太坊 Rollup 而不是 Celestia Rollup 获得此选项。</p>
+</li>
+<li>
+<p>更好的活性（liveness）——以太坊的共识机制 Gasper 即使在 33% 攻击的情况下也可以保持活性，尽管它不会最终确定（如前所述）。这对于 Rollup 所依赖的基础层很有价值。</p>
+</li>
+<li>
+<p>较慢的最终确定性——虽然 Gasper 为你提供了更好的活性，但它在最终确定性上进行了权衡。以太坊的确定速度要比 Tendermint（可立即完成）慢得多。以太坊研究人员正在积极研究单 slot 的确定，但关于实施还需要相当长的时间。</p>
+</li>
+<li>
+<p>没有最小化开销——Celestia 的主权 Rollup 只需要运行 Celestia 轻客户端，但以太坊主权 Rollup 必须运行以太坊全节点才能获得同样的保证。它们必须检查所有 L1 执行的有效性以了解规范链，因为有效性规则是共识规则的一部分。然而，一旦以太坊实施轻客户端 DAS（可能需要几年的时间），那么情况将不再如此。那么即使在以太坊诚实多数假设失败的情况下，一个轻客户端也就足够了，它也不会导致主权 Rollup 的安全故障，因为 DA 仍然可以在分叉中得到保证。</p>
+</li>
+</ul>
+<p><strong>要点提炼</strong></p>
+<p>主权对于不想引导自己的 L1 验证器集，且具有明确社会联盟的社区来说是非常有用的。然而，如果这些主权 Rollup 以信任最小化的方式跨链连接到很多其他链，则在分叉期间会导致复杂性。相对孤立的非金融应用可能会是一个更为利基的市场，但目前它们并没有广泛存在。</p>
+<p>纯粹的金融应用可能会更看重 Rollup 堆栈的其他技术优势，因此主权 Rollup 需要在功能方面与智能合约 Rollup 展开竞争。轴辐式模型减轻了不共享结算层的许多缺点，但这引入了很多复杂性。到目前为止，最引人注目的跨链桥愿景是我上面描述的聚合 ZK 跨链桥。如果成功的话，这将提供一条非常有趣的路线。</p>
+<h3 id="celestia主权结算-rollup--智能合约递归-rollup">Celestia–主权结算 Rollup &amp; 智能合约递归 Rollup</h3>
+<p>很多 Celestia Rollup 不想要放弃共享结算层，你会看到它在以太坊 Rollup 生态系统中的强大功能，并且你也希望如此。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_eafcik4qp4.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>进入 Celestia 的结算 Rollup。这些是专门为非主权递归 Rollup 而设计的 SR。递归 Rollup 将智能合约放在结算 Rollup 上，为它们提供信任最小化的双向跨链桥。这些递归 Rollup 将证明、状态更新和交易数据发布到结算 Rollup。结算 Rollup 批处理递归 Rollup 的数据，并将其发布到 Celestia。</p>
+<p>现在，你避免了我们刚刚讨论的主权 Rollup 的所有跨链桥权衡，并且你避免了围绕 P2P 证明结算的复杂性。N 个信任最小化的跨链桥连接至共享结算层，允许轻松跨链连接代币。</p>
+<p>如果结算 Rollup 是欺诈 / 有效性可证明的，则验证结算 Rollup 的有效性对于顶部的递归 Rollup 来说开销最小。例如，Cevmos‌ 打算成为一个结算 Rollup，它是一个简化的单轮欺诈可证明 EVM。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_z0h4qcfpbw.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p><strong>受限结算层 vs 通用结算层</strong></p>
+<p>现在，你的结算 Rollup 是否应该是一个仅针对发布证明和代币转移而进行优化的受限环境？如果是的话，递归 Rollup 将获得更便宜的费用，它们不再是在昂贵的通用执行环境中与 DeFi、NFT 等竞争。</p>
+<p>有几种方法可以做到这一点：</p>
+<ul>
+<li>
+<p>合约被列入白名单的许可结算 Rollup；</p>
+</li>
+<li>
+<p>更改某些指令的 gas 成本，以严重阻止除证明和转账以外的任何活动；</p>
+</li>
+</ul>
+<p>如果你走的是这条路，那你就会失去所有丰富的 DeFi 用例（例如，DeFi 池、dAMM 等），并使建立流动性变得更加困难。相比 Cevmos，StarkNet 当然是采取的相反路线。StarkNet 将是递归 StarkEx Rollup 的通用结算 Rollup。另一个区别是，StarkNet 是一个智能合约 Rollup，因此它最终会回到以太坊结算，并保留一个信任最小化的双向跨链桥（与之相比，Cevmos 是一个主权 Rollup，它没有到底层的信任最小化的双向跨链桥）。</p>
+<p>另一个论点是，支付给一个结算层的大规模 Rollup 的日常运营成本无论如何都很低。即使是今天的智能合约 Rollup，它们支付给以太坊结算层的费用也很少，而随着即将到来的优化，这将进一步减少。任何其他结算层的成本都要低得多，约束也要小得多（尤其是一个结算 Rollup）。随着更有效证明的出现以及在更多交易中摊销，这些成本将进一步下降。以太坊还将通过无状态（statelessness）、状态到期以及 zkEVM 技术潜在地扩展其结算层（尽管是在未来几年）。</p>
+<p>尽管如此，没有什么能够阻止你在 Cevmos (L2) 之上部署通用结算 Rollup (L3)，而递归汇总 (L4）则位于通用结算 Rollup 之上。这是可能的，但现在你正在一路延伸到 L3，以获得任何类型的富（rich）信任最小化共享流动性和 DeFi（你通常只能在 L1 以太坊获得）。你可能需要依赖额外的层来抵抗审查。</p>
+<p>四层方案的优点：</p>
+<p>更有效的资源定价——针对某些用例，对某些资源进行更优化的定价。例如，如果 Celestia 版本的 ENS 只是想要一个地方来结算证明和转移代币，它不需要多付钱来将证明发布到与 DeFi 竞争且没有价值的通用执行环境。</p>
+<p>四层方案的缺点：</p>
+<p>社会经济碎片化‌——例如，基础层和两个结算 Rollup 现在建立了自己的经济安全，而不是将其集中在一个地方。这使得在堆栈的任何部分建立安全性变得更加困难，从而产生薄弱环节。此外，受限结算 Rollup 可能产生的价值会很小（它们更像是一座桥梁，而不是典型的通用 Rollup）。</p>
+<p>活性下降和审查阻力——如果这个堆栈的任何部分出现故障，则位于其顶部的 Rollup 可能就不走运了。不幸的是，上述观点加剧了这种情况。下面将详细介绍这一点，因为它有细微差别。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_a6u9u9c7vh.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>智能合约 Rollup 强制交易包含是很好理解的。通常，你可以允许任何 L2 用户直接向 L1 合约提交交易。如果定序器在某个预定窗口后（比如一天）没有提交，则定序器将无法再提交没有它的区块。提交区块将变得无需许可，你可以单独强制撤回到 L1。对于用户来说，这比批量处理其他 L2 提款要更昂贵，但它确实有效。</p>
+<p>现在是主权结算 Rollup 之上的递归 Rollup。如果结算 Rollup 对你进行审查，则需要有一种方法强制将其包含在你自己的 Rollup 中。不过，你仍然可以从 L1 DA 层继承审查保证。你可以在递归 Rollup 中强制执行一条规则，以便必须处理发布到你在 Celestia 上的命名空间的 tx，才能使 Rollup 区块有效。用户可以单独强制交易进入 DA 层，这将由执行层费用排序。这不依赖于结算 Rollup，但需要内置到 Rollup 的状态转换规则中。这就成了 1 of N 诚实假设的情况，如果定序器不包含你的交易，你可以提交欺诈证明，表明他们必须提交该交易。</p>
+<p>关于活性（liveness），如果递归 Rollup 的定序器本身失败，那么你仍然可以退出结算 Rollup（就像你今天在以太坊上做的那样）。但如果一个结算 Rollup 活性失效，则你的递归 Rollup 就倒霉了，你也只能跟着宕机。</p>
+<p><strong>要点提炼</strong></p>
+<p>你可以权衡主权的好处，然后重新获得共享结算层的实际好处。然而，向堆栈中添加越来越多的层，可能会开始让人感到不舒服。</p>
+<h3 id="celestia神圣-rollup">Celestia–神圣 Rollup？</h3>
+<p>如果说以太坊神圣 Rollup 是推测，那么 Celestia 的神圣 Rollup 距离现实就更远了。目前 Celestia 并没有这方面的计划，这只是提供了一个思路。我认为在 Celestia 中加入一个通用的神圣 Rollup 是一个潜在有吸引力的选择，让我来解释一下。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_a367zd8kpw.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>我们已经讨论了结算层对于共享流动性、信任最小化的双向跨链桥等的价值。但在我看来，将其纳入基础层本身也是特别重要的，原因有两个：</p>
+<ul>
+<li>
+<p>价值捕获，设计良好的通用 Rollup 可能比 DA 层捕获更多的价值。由于基础层资产之上的整个堆栈都依赖于经济安全，因此这一点至关重要。</p>
+</li>
+<li>
+<p>原生资产效用，这使得基础资产变得更有用。ETH 可以用于 L1 上的 DeFi 等，也可以通过一个信任最小化的双向跨链桥连接到任何特定的神圣 Rollup 或智能合约 Rollup，使其能够作为货币在整个生态系统中流通。而 Celestia 缺少这种信任最小化的双向跨链桥，无法将其发送到任何地方，除了在 Celestia 区块链上进行质押或转账之外，你无法做任何事情。这有效地放弃了 Celestia 成为一种「货币」的愿景，而这仍然可以说是 crypto 中最大的叙事。</p>
+</li>
+</ul>
+<p>当然，你还有几个剩余的选项可以在其他地方代表 Celestia 的代币。</p>
+<ul>
+<li>
+<p>多重签名跨链桥：一个小型的第三方外部委员会必须批准所有交易，这个想法并没有让人兴奋。</p>
+</li>
+<li>
+<p>托管（例如 WBTC）：希望我不用解释这一点的问题。这基本上只是一个糟糕的 1/1 多重签名，并且没有加密经济处罚。</p>
+</li>
+<li>
+<p>轻客户端跨链桥（例如 IBC）：这不是信任最小化的，因为你依赖于链接区块链的诚实多数假设。并且与 Celestia 的 IBC 连接数量（如果有的话），也必须保持在最低限度，以最大限度地降低复杂性并防止对 Celestia 的状态机造成巨大负担。</p>
+</li>
+<li>
+<p>神圣结算 Rollup：这可以给 Celestia 带来信任最小化的双向跨链桥，以及增强的资产效用和更高的经济安全性。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_ejlq7iqzri.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>要获得一个信任最小化的跨链桥，需要对链接区块链的状态转换进行 DA 验证和欺诈 / 有效性证明。以太坊智能合约 Rollup 之所以能做到这一点，是因为他们的智能合约验证了 Rollup 的状态转换。而 Celestia 无法支持这类跨链桥的智能合约，因此它必须将 Rollup 纳入核心协议中才能实现这一点。</p>
+<p>Celestia Rollup 可以通过这个结算 Rollup 拥有一个信任最小化的双向跨链桥，这使得它们之间的通信变得更容易，并允许 Celestia 代币在整个生态系统中流动。</p>
+<p>缺点是，这增加了 Celestia 的复杂性。验证器现在必须确保其有效性，非共识节点将验证其状态转换。这将在一定程度上增加它们下载神圣 Rollup 数据的带宽要求。然而，由于这是一个包含欺诈 / 有效性证明的神圣 Rollup，所以这种验证的开销最小化——任何验证器或非共识节点都不需要执行。</p>
+<p>最终，我认为这是一个自由的选择。我认为下行空间非常有限，而上行空间非常大：</p>
+<ul>
+<li>
+<p>最坏的情况：根本不需要结算层（因此它不会起到这个作用），因为主权 Rollup 获胜了，而这个神圣 Rollup 被其他主权 Rollup 击败了。然后这个神圣 Rollup 也不会非常活跃，也不会为你的安全预算买单。但至少，你可以为你的代币获得一个信任最小化的双向跨链桥，现在可以在整个生态系统中广泛使用，那么这也是一种胜利。</p>
+</li>
+<li>
+<p>中等情况：主权 Rollup 胜出了，不需要结算层。好吧，这可能只是该生态系统中的又一个 Rollup，除非它可能具有强大的谢林点并获得有意义的活动。这有助于为安全预算提供资金，并为 Celestia 提供一个信任最小化的双向跨链桥。</p>
+</li>
+<li>
+<p>乐观情况：智能合约 Rollup 胜出，它们真的想要一个结算层。这可能是具有高流动性和活跃度的生态系统的一个非常活跃的焦点。这有助于确保可持续的价值捕获机制，为更广泛的 Celestia Rollup 生态提供安全保障。当然，还实现了信任最小化的双向跨链桥。</p>
+</li>
+</ul>
+<p>也许主权 Rollup 会吞噬整个 Celestia 世界，而 DA 积累了大量的价值来保护一切。DA 价值捕获牛市是，即使有大量 DA 供应，对一个生态系统的网络影响也是巨大的。结果是，主权 Rollup 为优质「房地产」支付了费用，以在该生态系统中获得信任最小化的跨链桥。</p>
+<p>即便如此，我们知道如何将 DA 扩展到非常极端的长度，并且可能需要实施人为定价来产生收入。或者它可能是自然发生的，因为有大量的需求。在任何一种情况下，都会有许多其他的 DA 层以低得多的成本提供更高的吞吐量，并且很可能实现负载平衡。例如，以太坊的安全预算由其结算层补贴（至少目前如此），它不需要人为提高 DA 价格。而其他更便宜的 DA 替代品也将存在。</p>
+<p>反对「神圣 Rollup」的另一个理由是「可信的中立性」。也就是说，其他 Rollup 会害怕部署在 Celestia 上，因为基础层正在与它们竞争，所以它不可能是中立的。我一般不同意这个论点。如果我们认为法国的未来是我们今天所见事物的 5 倍，那么我们真的需要想得更大。除了一个 Rollup 之外，还有更多的空间，Rollup 们将继续愉快地部署在 Celestia 上。</p>
+<p>或者，这个「神圣 Rollup」可以成为每个 Celestia Rollup 决定使用的结算层。那它的粘性会很强，并且难以替换。即使在技术上可以使用更好的结算层，采取行动也可能为时已晚。</p>
+<p>如果 DA 确实积累了大量价值，而「主权 Rollup」吞噬了这个 Celestia 世界，那就太好了。但在我看来，这种情况的可能性不是很大。很难预测大多数未来的应用究竟需要一些什么，以及 ZK 聚合跨链桥等技术如何从这里展开。在任何这些因素不确定的情况下，「神圣 Rollup」似乎都有优势。</p>
+<p><strong>要点提炼</strong></p>
+<p>可以理解的是，这里的很多决策都是由社区驱动的。不过，在我看来，实际的好处有助于在 Celestia 中部署一个「神圣 Rollup」。当然，「主权 Rollup」仍然可以随心所欲地部署在 Celestia 上！就像「主权 Rollup」可以使用以太坊并忽略结算层一样，它们也可以忽略 Celestia 的「神圣 Rollup」。而不部署「神圣 Rollup」，似乎是一种代价非常昂贵的美德行为。</p>
+<p>总的来说，我认为，从技术角度来看，将通用的「神圣 Rollup」纳入 Celestia 要比从技术视角去实现的效果要好得多，而从社会视角来看，这可以说是不利的。我喜欢这种情况下的技术探索，但请记住「区块链中的大部分东西都是观点，而不在于技术‌。」</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_fzhs319gr0.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<h3 id="结论性想法">结论性想法</h3>
+<p>抱歉，我只想再引用一句我喜欢的播客语录，回到 John 在不同的 Rollup 堆栈问题上给出的一句评论：</p>
+<blockquote>
+<p>「无论我是否期待其中一种堆栈会比另一种更流行，我都不会说我期待任何事，除了期待意外。这个世界充满了惊喜，我无法真正预测哪一个会被更多人使用。」</p>
+</blockquote>
+<p>这里摆的都是事实。我会有看法，其他人也有自己的意见。但这就是重点，它们都是意见。我在这里描述的任何的内容，都没有说其中一种堆栈要比另一种更好。这都是权衡，我希望真正聪明的人能在我这里描述的一切基础上再接再厉，只有时间才能证明它们最看重的是什么，或者什么会产生价值。</p>
+<p>如果你仍然不认为 Rollup 很酷，老实说，这不再是我的问题了。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0808/25_b7dysqgtgp.jpg" alt="Delphi Digital：Rollup 完全指南"></p>
+<p>感谢 Justin Drake、Dankrad Feist、Preston Evans、Cem Özer、Nick White、Mustafa Al-Bassam、Ismail Khoffi 以及 Josh Bowen 提供的评论和见解。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41203/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">DCG创始人：ETH矿工应该转移到ETC，以实现长期收入最大化</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41208/">
+                <span class="next-text nav-default">DID 的醍醐灌顶时刻：将数字化进行到底</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#第一部分模块化经济学">第一部分：模块化经济学</a>
+      <ul>
+        <li><a href="#rollup-费用">Rollup 费用</a></li>
+        <li><a href="#固定成本与可变成本">固定成本与可变成本</a></li>
+        <li><a href="#基础层费用---以太坊">基础层费用 - 以太坊</a></li>
+        <li><a href="#基础层费用---celestia">基础层费用 - Celestia</a></li>
+        <li><a href="#模块化堆栈中的-mev">模块化堆栈中的 MEV</a></li>
+        <li><a href="#da-层的经济安全">DA 层的经济安全</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#第二部分以太坊-rollup-堆栈">第二部分——以太坊 Rollup 堆栈</a>
+      <ul>
+        <li><a href="#以太坊智能合约-rollup">以太坊——智能合约 Rollup</a></li>
+        <li><a href="#以太坊智能合约结算-rollup-与智能合约递归-rollup">以太坊——智能合约结算 Rollup 与智能合约递归 Rollup</a></li>
+        <li><a href="#以太坊enshrined-rollups">以太坊–Enshrined Rollups？</a></li>
+        <li><a href="#以太坊结算和数据可用性da层">以太坊–结算和数据可用性（DA）层</a></li>
+      </ul>
+    </li>
+    <li><a href="#第三部分celestia-rollup-堆栈">第三部分，Celestia Rollup 堆栈</a>
+      <ul>
+        <li><a href="#celestia主权-rollup">Celestia–主权 Rollup</a></li>
+        <li><a href="#celestia主权结算-rollup--智能合约递归-rollup">Celestia–主权结算 Rollup &amp; 智能合约递归 Rollup</a></li>
+        <li><a href="#celestia神圣-rollup">Celestia–神圣 Rollup？</a></li>
+        <li><a href="#结论性想法">结论性想法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          从账户抽象(AA) 到 ERC4337 新一代Web3合约金库 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在本文中，我们将深入了解帐户抽象的优越性，以及以太坊 ERC-4337 目前是怎样模拟账户抽象的，并将探索如何通过AA帮助构建新一代WEB3 DApp的未来前景。" />
+<meta name="keywords" content="账户抽象" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49551/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="从账户抽象(AA) 到 ERC4337 新一代Web3合约金库" />
+<meta property="og:description" content="在本文中，我们将深入了解帐户抽象的优越性，以及以太坊 ERC-4337 目前是怎样模拟账户抽象的，并将探索如何通过AA帮助构建新一代WEB3 DApp的未来前景。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49551/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-11T00:00:00+00:00" />
+
+<meta itemprop="name" content="从账户抽象(AA) 到 ERC4337 新一代Web3合约金库">
+<meta itemprop="description" content="在本文中，我们将深入了解帐户抽象的优越性，以及以太坊 ERC-4337 目前是怎样模拟账户抽象的，并将探索如何通过AA帮助构建新一代WEB3 DApp的未来前景。"><meta itemprop="datePublished" content="2023-04-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3552">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从账户抽象(AA) 到 ERC4337 新一代Web3合约金库"/>
+<meta name="twitter:description" content="在本文中，我们将深入了解帐户抽象的优越性，以及以太坊 ERC-4337 目前是怎样模拟账户抽象的，并将探索如何通过AA帮助构建新一代WEB3 DApp的未来前景。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">从账户抽象(AA) 到 ERC4337 新一代Web3合约金库</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-11">
+      2023-04-11
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3552 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>Metagravity</p>
+<p>账户抽象代表了以太坊生态系统的重大进步，增强了其安全性和价值。它引入了一种新的范例，使区块链账户变得可编程，这对去中心化应用程序 (dApp) 开发具有深远的影响。在本文中，我们将深入了解帐户抽象的优越性，以及以太坊 ERC-4337 目前是怎样模拟账户抽象的，并将探索如何通过AA帮助构建新一代WEB3 DApp的未来前景。</p>
+<p>YieldDAO Labs / 2023–04-10</p>
+<blockquote>
+<p>账户抽象代表了以太坊生态系统的重大进步，增强了其安全性和价值。它引入了一种新的范例，使区块链账户变得可编程，这对去中心化应用程序 (dApp) 开发具有深远的影响。在本文中，我们将深入研究帐户抽象的复杂性，以及以太坊 ERC-4337 目前是怎样模拟账户抽象的，并将探索如何通过AA帮助构建新一代WEB3 DApp的未来前景。</p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2023/0411/3_oj44t1qg1f.png" alt="从账户抽象(AA) 到 ERC4337，新一代Web3合约金库 "></p>
+<h3 id="账户抽象的历史">账户抽象的历史</h3>
+<p>以太坊网络有两种类型的账户：<strong>合约账户（CA）</strong> 和<strong>外部拥有账户（EOA）</strong> 。</p>
+<p>账户抽象主要关注 EOA，它具有 3 个关键属性：</p>
+<ul>
+<li>
+<p>代表可用 ETH 的余额、</p>
+</li>
+<li>
+<p>确保交易唯一性的随机数，</p>
+</li>
+<li>
+<p>以及用于网络识别的地址。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0411/3_qszrf1hght.png" alt="从账户抽象(AA) 到 ERC4337，新一代Web3合约金库 "></p>
+<p>以太坊上的每个账户都链接到一个称为<strong>签名者 ( Singer )</strong> 的加密对象，它作为授权来保护账户的 ETH 免遭未经授权的使用。</p>
+<p>签名者，也称为密钥对，由私钥和公钥组成。私钥对数字消息进行签名，而公钥验证签名是否与私钥相对应。</p>
+<p>然而，目前系统架构让 以太坊用户面临因小错误而丢失账户和资金的风险。这个风险源于私钥，如果私钥丢失，将导致用户帐户及资产丢失。</p>
+<h3 id="帐户抽象有何帮助">帐户抽象有何帮助？</h3>
+<p>账户抽象是一种革命性的方法，通过将账户授权与传统的私钥所有权分离来增强账户授权。通过这种模式，每个账户都可以转化为智能合约，使用户能够部署和使用具有自定义授权逻辑的账户，以满足他们的独特需求。</p>
+<p>Account Abstraction 通过抽象授权逻辑，将合约账户和外部拥有账户整合到一个统一的系统中，使用户账户更具可编程性。它消除了将签署交易逻辑硬编码到帐户中的限制，允许其被抽象出来。这是它被称为帐户抽象的主要原因。</p>
+<h3 id="帐户抽象如何与私钥交互">帐户抽象如何与私钥交互？</h3>
+<ul>
+<li>
+<h3 id="是否可以恢复丢失的私钥"><strong>是否可以恢复丢失的私钥？</strong></h3>
+</li>
+</ul>
+<p>答案是“不”，不可能恢复丢失的私钥。但是，可以使用特定逻辑对智能合约进行编程以处理丢失的密钥。例如，如果原始密钥在一段时间内未与合约交互，可以设计为允许另一个授权密钥接管。</p>
+<ul>
+<li><strong>有人可以拥有带帐户抽象的无钥匙钱包吗？</strong></li>
+</ul>
+<p>使用帐户抽象，可以在不需要私钥的情况下对用户进行身份验证。智能合约可以设计为实现用户安全的替代身份验证方法，从而消除对私钥的需求。</p>
+<h3 id="什么是-eip-4337-以及它如何改进智能合约钱包">什么是 EIP-4337 以及它如何改进智能合约钱包？</h3>
+<p>EIP-4337 代表了以太坊智能合约钱包的重大进步。它通过启用对所需的一些链上和链下基础设施的多重调用，简化了编写和操作智能合约钱包的过程。</p>
+<p><strong>用户可以利用UserOperations</strong> 在更高级别的内存池上操作，而不是进行交易。这一进步使开发人员能够以最少的编码工作编写自定义智能合约钱包，而不必担心补贴交易费用。</p>
+<p>直到最近，钱包还主要通过外部账户 (EOA) 进行交易，目前的发展趋势是以AA(账户抽象)的方式通过智能合约钱包进行交易，期望显著提升Web3 的用户体验。EIP-4337 旨在模拟AA帐户抽象，并且无需对以太坊协议进行任何更改，本质是一种标准化的智能合约钱包。然而，它并没有消除EOA外部拥有的账户，建立在 EIP-4337 之上的钱包在以太坊网络上仍然被视为二等公民。</p>
+<p>完整的 ERC-4337 规范可以在这里找到_EIP-4337_，下表中总结了ERC4337可能带来的未来前后端改进。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0411/3_nkhyu636ln.png" alt="从账户抽象(AA) 到 ERC4337，新一代Web3合约金库 "></p>
+<h3 id="账户抽象有什么好处">账户抽象有什么好处？</h3>
+<p>账户抽象为以太坊生态系统提供了多项好处，其中一些如下：</p>
+<ol>
+<li>
+<p><strong>Multicall：</strong> 在以太坊上的传统 dApp 中，每个链下交易都需要一个新的交易，由于高昂的 gas 费用，这可能既耗时又昂贵。使用帐户抽象，可以将多个事务捆绑到一个称为多重调用的原子事务中。这种方法为用户节省了时间并降低了交易成本。</p>
+</li>
+<li>
+<p><strong>会话密钥：</strong> 代表了用户体验 (UX) 的重大突破。会话可以通过多种方式定义，包括给定的持续时间、最大气体量、最大交易量或特定功能。此功能使用户可以更轻松地管理他们的帐户和执行交易，而不必担心底层技术的复杂性。</p>
+</li>
+<li>
+<p><strong>社交恢复：</strong> 社交恢复是一种在用户丢失帐户时保护用户的机制。与MetaMask 等钱包的助记词典型恢复方法不同，社交恢复使用户能够授权新密钥作为合法钱包所有者，无需记住或找回丢失的私钥。此功能增强了以太坊帐户的安全性和可用性。</p>
+</li>
+</ol>
+<h3 id="账户抽象的未来发展">账户抽象的未来发展</h3>
+<p>2023 年 3 月以太坊ERC-4337 发布，为通过帐户抽象打造类似传统 互联网Web2用户体验（登录、再参与、帐户恢复…）铺平了道路。什么时候才能真正改善WEB3用户体验，实现更高的再参与率和更低的流失率呢？</p>
+<p>钱包和 DApp 需要至少三个月的时间来开发，三个月的时间来推广，一个月的时间来创建可衡量的用户数据以迭代改进。按此估计，到 2023 年第四季度，我们应该可以见证 Web3 用户指标的重大变化；当然，这种变化也可能在其他领域提前出现，比如Lens 等Web3 社交应用领域。</p>
+<p>另一方面，ERC-4337 是 Web3 UX 的一项出色进步，也将是 Web3 消息传递的沃土，ERC-4337 将显著改善 Web3 应用的通用用户体验，为更多原生 Web3 对话创造环境，目前我们看到的类似协议包括XMTP、PUSH 等等…</p>
+<h4 id="a-钱包用户">A. 钱包用户：</h4>
+<p>迄今为止，钱包已被强制要求优先考虑去中心化和自我保管而不是用户体验，但需求是发明之母：“既然 ERC-4337 使之成为可能，钱包能否转向更好的用户体验？” 考虑到迄今为止的糟糕的用户体验，开发更好用户体验和更安全的钱包有机会获得新增扩的市场份额。</p>
+<p>在便利性和安全性上，我们看到_SAFE.IO_作为先行者，推出了第一个AA合约保险箱<strong>SafeVault</strong> ，包括一系列有趣的特性，试图解决WEB3钱包的传统典型问题，如：基于时间的账户恢复功能（解决助记词遗忘和丢失的问题），合约金库的隔离安全功能（帮助解决助记词被盗的问题），基于 NFT 的账户授权功能（解决钱包管理权限无法分享与转移的问题）…… 这只是一个集成AA账户部分抽象特性的典型案例，我们期望看到今年有更多优秀用户体验的创新钱包出现。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0411/3_t8fg3zte0o.png" alt="从账户抽象(AA) 到 ERC4337，新一代Web3合约金库 "></p>
+<h4 id="b-垂直dapp用户"><strong>B. 垂直Dapp用户：</strong></h4>
+<p>Web3 还没有出现第一个十亿用户，因为还没有一个“iPhone 时刻”或“杀手级应用”来吸引和留住第一个十亿用户。Web3 拥有 1 亿用户，考虑到 2.5% 的低迷再参与率，钱包和区块链大概率无法让我们直接到达这个里程碑。可能需要一个新的消费者级应用程序来推动大众吸引力，例如:</p>
+<ul>
+<li>
+<p>去中心化社交媒体应用，如 Lens 或 Farcaster</p>
+</li>
+<li>
+<p>去中心化游戏应用程序。</p>
+</li>
+<li>
+<p>类似于“Web3 中的亚马逊”的去中心化购物应用程序。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0411/3_znkle2ps7r.png" alt="从账户抽象(AA) 到 ERC4337，新一代Web3合约金库 "></p>
+<p>虽然钱包有多年的领先优势，但是 Web3 Social 是最有可能在加密钱包之前赢得 1 亿高频用户的垂直领域，这可能是基于社交网络的病毒式传播行为。您和您的朋友通过钱包买卖加密货币并不具备同样的传播能力。Defi 是 Web3 中一个重要的早期采用者垂直领域，但目前为止， Defi 还不是一个大规模采用的垂直领域。</p>
+<p>垂直 dApp 可以吸引比钱包更多的用户，如果这种情况发生，你会看到更多垂直 DApp 运营商会自己开发钱包以提高用户保留率。例如，领先的去中心化交易所 UniSwap 刚刚宣布推出自己的钱包。 Coinbase 是一个中心化交易所，也在 2022 年推出了自己的钱包，这证明了如果钱包不改善用户体验，垂直 dApp 将会试图取而代之。</p>
+<h3 id="结论">结论</h3>
+<p>总之，账户抽象是WEB3用户体验的一项重大进步，允许可编程的区块链账户和可定制的授权逻辑。多重调用、会话密钥和社交恢复等功能使以太坊更加用户友好和高效；无论是在垂直 dApp 还是在钱包之间。那些首先部署更好的用户体验的供应商将获得先发优势。</p>
+<p>ERC-4337 也是以太坊协议 2023 年 3 月的重要更新之一，EIP-4337 进一步简化了编写和操作智能合约钱包（AA）的过程。AA帐户抽象必将是以太坊和区块链技术走向未来的一个重要赛道。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49543/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">比特大陆因税务违法被罚2400余万元</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49568/">
+                <span class="next-text nav-default">大模型带动智能化发展 仿生机器人赛道的未来和机会</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#账户抽象的历史">账户抽象的历史</a></li>
+        <li><a href="#帐户抽象有何帮助">帐户抽象有何帮助？</a></li>
+        <li><a href="#帐户抽象如何与私钥交互">帐户抽象如何与私钥交互？</a></li>
+        <li><a href="#是否可以恢复丢失的私钥"><strong>是否可以恢复丢失的私钥？</strong></a></li>
+        <li><a href="#什么是-eip-4337-以及它如何改进智能合约钱包">什么是 EIP-4337 以及它如何改进智能合约钱包？</a></li>
+        <li><a href="#账户抽象有什么好处">账户抽象有什么好处？</a></li>
+        <li><a href="#账户抽象的未来发展">账户抽象的未来发展</a></li>
+        <li><a href="#结论">结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

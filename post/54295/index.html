@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          最新发现：BRC-20交易并不适用BTC-UTXO标签模型 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="PSBT对BRC20地址标签有何影响？" />
+<meta name="keywords" content="BRC-20, UTXO" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54295/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="最新发现：BRC-20交易并不适用BTC-UTXO标签模型" />
+<meta property="og:description" content="PSBT对BRC20地址标签有何影响？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54295/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-04T00:00:00+00:00" />
+
+<meta itemprop="name" content="最新发现：BRC-20交易并不适用BTC-UTXO标签模型">
+<meta itemprop="description" content="PSBT对BRC20地址标签有何影响？"><meta itemprop="datePublished" content="2023-07-04T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-04T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5124">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"/>
+<meta name="twitter:description" content="PSBT对BRC20地址标签有何影响？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">最新发现：BRC-20交易并不适用BTC-UTXO标签模型</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-04">
+      2023-07-04
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5124 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Jason Jiang，欧科云链</p>
+<p>在Web3世界，链上活动所产生的数据直接对应着价值流动，掌握链上数据就能发现更多Alpha。加上近年加密市场频繁遭遇风险事件，个人和机构用户对链上数据也愈加敏感。<strong>链上数据已成为洞悉加密世界必不可少的“利器”</strong> 。但面对近来风头正盛的BRC20交易，我们对其进行地址标签分析时，却发现此前的BTC-UTXO模型却似乎并不完全适用。那问题究竟出在哪儿？又该如何解决？</p>
+<h3 id="brc20交易与psbt"><strong>BRC20交易与PSBT</strong></h3>
+<p>分析问题前，首先要了解BRC20基本情况。2023年1月，比特币核心贡献者Casey Rodarmor提出“序数理论”（Ordinals Theory），允许用户在比特币最小单位“聪”上写入任意文件（不超过4MB的图像、文本、视频等）。随后，匿名分析师@domodata基于Ordinals协议创建BRC20代币标准。这是一种实验性代币标准，允许任何人在比特币网络发行代币。</p>
+<p><strong>Ordinals协议和BRC20标准给比特币生态创造了价值转移之外的全新用例，使其在减半之后有了另一种极具吸引力的叙事逻辑</strong> 。作为最古老的区块链生态，比特币因此焕发无限活力，BRC20代币也在2023年上半年成为广受关注的赛道：截至2023年6月29日，BRC20相关代币已超过6000种，市值超过6亿美元。</p>
+<p>但与以太坊 ERC20 部署智能合约后可立即发行和传输代币不同，BRC20并不是实际意义上的代币，而是记录特定文本的“聪”，因此需要单独索引器来了解 BRC20 代币的状态或余额。同时，BRC20是以公钥脚本中的JSON 数据包为承载体，相关代币合约部署以及代币铸造、转移都需要利用Ordinals协议将铭文设置为JSON数据格式来实现。</p>
+<p><strong>由于比特币公钥脚本只存储数据，并不支持智能合约指令执行程序，所以BRC20代币也无法构建相关协议实现自动交割，理论上只能通过集中托管或OTC完成交易</strong> 。这些方式不论交易效率和信任程度都不尽如人意，于是PSBT（Partially Signed Bitcoin Transactions，部分签名比特币交易）开始被用于BRC20相关交易中。</p>
+<p>所谓PSBT，是由BTC核心开发者Andrew Chow提出的一项提高未签名交易便捷性的标准。它可以创建一个未完全签名的交易以及一些其他数据来协助未签名交易的传输，促进未签名交易的可移植性，让多方能在不同时间、不同场合（软件或硬件钱包）更便捷地对同一笔交易进行签名。在一笔多签交易中，Creator只需先创建一个PSBT标识要花费的UTXO和接收UTXO的output，再将这个PSBT复制到可签名的程序中，通过Combiner将多个PSBT集成到一个PSBT中并发给每个参与者，各方完成签名后即可完成完整交易。</p>
+<p>简言之，<strong>PSBT允许用户仅对部分input进行签名，以帮助BRC20代币在没有智能合约的情况下实现交易的去信任化</strong> 。包括UniSat和其他Ordinals市场都在利用PSBT技术使买卖双方能以无需信任和非托管方式进行交易。</p>
+<h3 id="为何brc20交易具有特殊性"><strong>为何BRC20交易具有特殊性？</strong></h3>
+<p>这是因为，如今我们在对比特币地址标签进行解析时，主要基于UTXO特性的Common Spending和One-Time-Change等原则进行追溯。其中，<strong>Common Spending原则是指，如果一笔BTC交易同时有多个输入地址，那么可认定这些input地址属于同一个实体，因为只有他/它有所有的私钥才能将这些地址放在同一交易中</strong> 。</p>
+<p>但在使用PSBT进行BRC-20交易时，整个PSBT广播前都会在链下协调好买卖方在Input与Output确认后再完成签名，因此在输入中可能会有买方、卖方、平台等多个角色，并存在一个具体参与方（物理上）同时担任多个角色的可能性，因此采用Common Spending原则的标签模型并不能兼容此类交易。</p>
+<p>以具体的BRC20 Token交易为例。目前常见的BRC20交易涉及Token合约部署（Deploy）、铸造（Mint）和转移（Transfer）三种主要类型。</p>
+<p>（1）在Deploy和Mint过程中，代币转账没有发送方地址而只有接收方地址，其BTC转账交易的Input和output地址最多只有一个，所以无法用基于Common Spending原则的模型进行标签拓展。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_2gedf5pfec.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>（ordi的deploy交易-代币转账）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_e5hs3w5tr5.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>（ordi的deploy交易-BTC转账）</p>
+<p>（2）在BRC20代币的Transfer过程中，Input地址通常会有多个，我们可以通过查看交易的代币转账来辨别本次交易的买方和卖方地址。例如，在下面这笔ordi的Transfer交易（https://www.oklink.com/cn/btc/tx/bc2ac0be40b33cfaf0dedf7bafc97de113ce56e2e6dc7caf67c116f00d1dc849）中，代币发送方（bc1p&hellip;hdjn）为交易的卖方，代币接收方（bc1p&hellip;wftk）为交易的买方。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_k6dswidoul.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>但在BTC转账交易的Input里会存在多个地址，其中有卖方地址，也可能会有买方地址和疑似第三方平台的地址：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_vhqjq1rnwe.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>经过分析，我们发现在BRC20的Transfer过程中，<strong>尽管输入脚本类型大部分是单签（也存在少数多签情况），但由于可能应用PSBT技术，将卖方和第三方平台地址等共同添加到input中来实现多签，所以会导致input中多个地址虽然看起来是单签，但实际上却并不属于同一个实体/个人</strong> ，因此也无法采用Common Spending原则进行判断。</p>
+<p>综上，BRC20交易的特殊性主要体现在：在Deploy和Mint过程中最多只会出现一个input地址，无法满足“Common Spending”原则的前提条件。<strong>在Transfer过程中，由于input地址中有可能包含多种角色，如果用基于“Common Spending”原则的UTXO模型对交易地址进行标签拓展，可能会将买方、卖方和第三方平台打上相同标签，导致标签错误，从而会误导其他主体对BRC20市场的判断，甚至会影响比特币地址标签的整体准确性和可信性</strong> 。</p>
+<h3 id="如何消除brc20对-utxo标签模型的影响"><strong>如何消除BRC20对</strong> <strong>UTXO标签模型的影响？</strong></h3>
+<p>为了消除BRC-20交易带来的负面影响，在拓展BTC-UTXO标签模型的过程中，我们可以选择通过特定筛选机制识别和剔除相关交易，以保证整个BTC- UTXO标签库的准确性。同时考虑到，多重签名对基于“Common Spending”原则的BTC-UTXO标签拓展模型的影响，我们也需要对相关交易的input和output脚本进行解析，以过滤多签地址，从而在理论上支持UTXO标签拓展不受影响。</p>
+<p>其中，识别多签主要是通过查看其锁定脚本中是否包含多个公钥和对应的签名条件。多签锁定脚本通常包含类似于&quot;OP_CHECKMULTISIG&quot; 或 &ldquo;OP_CHECKMULTISIGVERIFY&rdquo; 的操作码，并且需要满足多个签名条件才能解锁资金。如果在输出脚本中发现包含多个公钥和对应签名条件，那么这个输出就是一个多重签名输出。同样地，如果输入脚本包含了多个签名，那么这个输入就是一个多重签名输入。</p>
+<p>需要注意的是，在进行脚本类型解析时，我们首先要判断交易是否为隔离见证交易。如果是隔离见证交易则需要对Witness信息进行解析。以下为常见的非隔离见证交易脚本和隔离见证交易脚本列表：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_8v8js6rozp.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>以非隔离见证交易脚本Pay-to-Public-Key-Hash (P2PKH)为例。这是最常见的比特币交易类型之一。在 P2PKH 交易中，发送方需要提供接收方的公钥哈希作为交易输出脚本。接收方需要提供与该公钥相对应的私钥来解锁输出。在对P2PKH进行解析时，主要规则为：</p>
+<p>输入脚本：包含签名信息以及公钥；script.getChunks().size() == 2；</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_up01iqo3kq.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>输出脚本：OP_DUP + OP_HASH160 + pubkeyHash + OP_EQUALVERIFY + OP_CHECKSIG；判断是否以OP_DUP开头并且以OP_CHECKSIG结尾。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_sbzabdla46.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>在隔离见证交易中，以P2WPKH为例。这是一种使用隔离见证技术的交易类型，它可以提高交易的效率和安全性。在 P2WPKH 交易中，发送方需要提供接收方的公钥哈希作为输出脚本。在对这类交易进行解析时，其规则为：</p>
+<p>输入脚本：EMPTY</p>
+<p>witness：签名 + pubkey；判断时首先获取input script是否为EMPTY，然后判断witness.getPushCount() == 2</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_mwhhrvp2t3.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>输出脚本：0 + 20byte witness program；判断时首先判断是否以0开头，之后判断witness program长度是否为20byte。（注：P2WPKH的output script中witness program长度规定为20byte。）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_gpgdshk8uf.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>除了依据不同交易的输入输出脚本特征对多签地址进行识别，我们也可以根据相关特征对BRC20交易进行筛选。根据调研，BRC20交易采用PSBT技术通过线下签名的形式完成，其隔离见证类型为Witness里以83为结尾的半签名。</p>
+<p>就如同下面这笔交易：</p>
+<p><strong>（https://www.oklink.com/cn/btc/tx/cbb6bbd6a828b15afe01ec77eab3e96a83be3d5ff56d99caf8185af79c3d1b53）</strong></p>
+<p><strong>Address:bc1pd6pd4pdzx2an8w8pg8dlst8329ck8t8a6ehqqatglfstqmf3f9yss9yz7y</strong></p>
+<p><strong>Winess：[&ldquo;1b003b4099402cde95be79ab7f4b488c74058c0f620cf4cbeb37a90ca871c4a499334a1262f24fdbe484d7511a54a04aa0d693b02159b603021942cb74f55e9d83&rdquo;]</strong></p>
+<p>Witness里有以83结尾的半签名，所以理应将其视为BRC20相关交易。</p>
+<p>在识别各类多签地址及BRC20之后，我们就可以根据一定的规则对多签地址和BRC20交易进行剔除，从而保证BTC- UTXO标签拓展模式的可行性和可信性。其基本思路如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0704/17_vb3ilifymo.png" alt="最新发现：BRC-20交易并不适用BTC-UTXO标签模型"></p>
+<p>值得注意的是，<strong>当前全球主要链上数据服务商在拓展UTXO标签时，大都会考虑多重签名所带来的影响，但还未有其他机构关注或提出BRC20交易可能导致UTXO标签错误的问题。</strong></p>
+<h3 id="弥合信息差-在海量链上数据寻找价值增量"><strong>弥合信息差</strong> <strong>在海量链上数据寻找价值增量</strong></h3>
+<p>Web3世界对大多数人来说是陌生且神秘的，洞察Web3世界最重要的工具就是链上标签。标签解析能力也因此成为评估链上数据分析商竞争力的核心指标。但当我们真的选择链上数据服务商时，除了要关注链上标签的数量，还要关注标签的质量：标签是否准确？更新是否及时？&hellip;&hellip;一个错误的标签带来的负面影响有时候远比没有标签的影响更大。基于此前积累的标签技术能力和对BRC20市场的深入理解，欧科云链团队此次发现并提出BRC20交易对UTXO标签模型的影响，其目的就是希望引起市场重视，提升比特币地址标签的可信性和可用性，让链上标签的质量更过硬。</p>
+<p>除了标签解析，全球链上数据服务市场在拥有<strong>至少百亿美元级别的</strong> 巨大发展潜力的同时，也需要持续创新以提升产品与服务质量。<strong>链上数据服务商不可能再像Reuters和Bloomberg等传统金融数据服务商那样，通过直接贩卖即时数据和信息获利，只能转向在海量链上信息中探寻更多增量价值，以更好的技术创新与服务创新吸引用户</strong> 。只有根植于链上数据并有效结合链下信息，实现与虚拟与现实的有机结合，同时具有敏锐市场分析与数据洞察能力，链上数据分析服务才能适应加密创新与Web3市场发展。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54283/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">正版百度文心一言APP上架苹果商店，免费体验120&#43;玩法，PPT大纲Excel公式一键生成</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54219/">
+                <span class="next-text nav-default">2023 年上半年加密市场十大事件</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#brc20交易与psbt"><strong>BRC20交易与PSBT</strong></a></li>
+        <li><a href="#为何brc20交易具有特殊性"><strong>为何BRC20交易具有特殊性？</strong></a></li>
+        <li><a href="#如何消除brc20对-utxo标签模型的影响"><strong>如何消除BRC20对</strong> <strong>UTXO标签模型的影响？</strong></a></li>
+        <li><a href="#弥合信息差-在海量链上数据寻找价值增量"><strong>弥合信息差</strong> <strong>在海量链上数据寻找价值增量</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

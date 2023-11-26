@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          如何将交互式的零知识证明（zk proof）协议改造为非交互式 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="许多的零知识证明算法在设计之初都依赖证明者和验证者双方的交互，但是这种交互式证明协议不适合用在追求高效，网络通讯开销大的应用场景下。" />
+<meta name="keywords" content="零知识证明" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/48620/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="如何将交互式的零知识证明（zk proof）协议改造为非交互式" />
+<meta property="og:description" content="许多的零知识证明算法在设计之初都依赖证明者和验证者双方的交互，但是这种交互式证明协议不适合用在追求高效，网络通讯开销大的应用场景下。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/48620/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="如何将交互式的零知识证明（zk proof）协议改造为非交互式">
+<meta itemprop="description" content="许多的零知识证明算法在设计之初都依赖证明者和验证者双方的交互，但是这种交互式证明协议不适合用在追求高效，网络通讯开销大的应用场景下。"><meta itemprop="datePublished" content="2023-03-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3322">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何将交互式的零知识证明（zk proof）协议改造为非交互式"/>
+<meta name="twitter:description" content="许多的零知识证明算法在设计之初都依赖证明者和验证者双方的交互，但是这种交互式证明协议不适合用在追求高效，网络通讯开销大的应用场景下。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">如何将交互式的零知识证明（zk proof）协议改造为非交互式</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-19">
+      2023-03-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3322 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h1 id="前言">前言</h1>
+<p>密码学当中的零知识证明技术在 web3 世界有着广泛的应用，包括进行隐私计算、zkRollup 等等。其中 Layer2 项目 FOX 所使用的 FOAKS 就是一个零知识证明算法。在上述的一系列应用当中，对于零知识证明算法而言，有两方面属性极为重要，那就是算法的效率以及交互性。</p>
+<p>算法效率的重要性不言而喻，高效的算法可以明显的降低系统运行时间，从而降低客户端延迟，显著的提高用户体验和效率，这也是 FOAKS 致力于实现线性证明时间的一个重要原因。</p>
+<p>另一方面，从密码学的角度来讲，零知识证明系统的设计往往依赖证明者和验证者的多轮交互。例如在许多介绍零知识证明的科普文章当中都会使用的“零知识洞穴”的故事当中，证明的实现就依赖于阿里巴巴（证明者）和记者（验证者）多轮的信息传递交互才能实现。但是事实上，在许多应用场景当中，依赖交互会使得系统不再可用，或者极高的增加延迟。就像在 zkRollup 系统当中，我们期望证明者（也就是 FOX 当中的 folder）能够在本地，不依赖于和验证者交互的情况下就计算出正确的证明值。</p>
+<p>从这个角度说，如何将交互式的零知识证明协议改造为非交互式，就是一个很有意义的问题。在这篇文章当中，我们将介绍 FOX 使用经典的 Fiat-Shamir 启发式（heuristic）来生成 Brakedown 中的挑战从而实现非交互式协议的过程。</p>
+<h1 id="零知识证明中的-challenge">零知识证明中的 Challenge</h1>
+<p>零知识证明算法随着应用的铺开而变得异常火爆，近些年也诞生了包括 FOAKS、Orion、zk-stark 等在内的各种算法。这些算法，以及密码学界早期的 sigma 协议等的核心证明逻辑都是证明者（Prover）先将某个值发送给验证者（Verifier），验证者通过本地随机数产生一个挑战（Challenge），将这个随机产生的挑战值发给证明者，证明者需要真的有知识才能以大概率做出通过验证者的响应。例如在零知识洞穴当中，记者抛一个硬币，告诉阿里巴巴从左侧出来还是从右侧出来，这里的“左和右”就是对阿里巴巴的挑战，他如果真的知道咒语，就一定可以从要求的方向走出来，否则就有一半的概率失败。</p>
+<p>这里我们注意到，Challenge 的生成是一个很关键的步骤，它有两个要求，随机和不可被证明者预测。第一点，随机性保证了它的概率属性。第二点，如果证明者可以预测挑战值那就意味着协议的安全性被破坏了，证明者没有知识也可以通过验证，可以继续类比，阿里巴巴如果能预测记者要求他从哪边出来，他即使没有咒语也可以提前进入那一边，结果表现出来一样可以通过协议。</p>
+<p>所以我们需要一种办法，能够让证明者自己本地生成这样一个不可预测的随机数，同时还能够被验证者验证，这样就可以实现非交互式的协议。</p>
+<h1 id="哈希函数hash-function">哈希函数（Hash Function）</h1>
+<p>哈希函数的名字对我们来说或许并不陌生，无论是在比特币的共识协议 POW 当中担任挖矿的数学难题，还是压缩数据量，构造消息验证码等等，都有哈希函数的身影。而在上述不同的协议当中，其实是运用了哈希函数的各种不同性质。</p>
+<p>具体来讲，安全的哈希函数的性质包括以下几点：</p>
+<p>压缩性：确定的哈希函数可以将任意长度的消息压缩成为固定长度。</p>
+<p>有效性：给定输入 x，计算输出 h（x）是容易的。</p>
+<p>抗碰撞性：给定一个输入 x1，希望找到另一个输入 x2，x1x2，h（x1）= h（x2），是困难的。</p>
+<p>注意，如果哈希函数满足抗碰撞性，那么必然满足单向性，也就是说给定一个输出 y，要找出 x 满足 h（x）= y 是困难的。在密码学当中，还不能构造出理论上绝对满足单向性的函数，但是哈希函数在实际应用当中可以基本视作单向函数。</p>
+<p>这样一来，可以发现上述的几种应用分别对应于哈希函数的几点不同的性质，同时我们说，哈希函数还有一个很重要的作用是提供随机性，虽然密码学理论当中要求的完美的随机数生成器目前也无法构造，但是哈希函数在实际当中同样可以充当这个角色，这就为我们后文介绍的 Fiat-Shamir 启发式（Heuristic）的技巧提供了基础。</p>
+<h1 id="fiat-shamir-启发式heuristic">Fiat-Shamir 启发式（Heuristic）</h1>
+<p>事实上，Fiat-Shamir 启发式（Heuristic）就是利用哈希函数来对前面生成的脚本进行哈希运算，从而得到一个值，用这个值来充当挑战值。</p>
+<p>因为将哈希函数 H 视作一个随机函数，挑战是均匀随机的被选择，独立于证明者的公开信息和承诺的。安全分析认为 Alice 不能预测 H 的输出，只能将其当作一个 oracle。在这种情况下，Alice 在不遵循协议的情况下做出正确响应的概率 ( 特别是当她不知道必要的秘密时 ) 与 H 的值域的大小成反比。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/1_mt34dwfjww.png" alt="如何将交互式的零知识证明（zk proof）协议改造为非交互式"></p>
+<p>图 1: 利用 Fiat-Shamir Heuristic 实现非交互式证明</p>
+<h1 id="非交互式-foaks">非交互式 FOAKS</h1>
+<p>在本节，我们具体展示 Fiat-Shamir 启发式在 FOAKS 协议当中的应用，主要是用来产生 Brakedown 部分的挑战，从而实现非交互式的 FOAKS。</p>
+<p>首先我们看到，在 Brakedown 生成证明的步骤当中，需要挑战的步骤是“近似性检验”以及 Merkle Tree 的证明部分（读者可以参考之前的文章《一文了解 FOAKS 当中的多项式承诺协议 Brakedown》）。对于第一点原本的过程是证明者在这里需要验证者产生的一个随机向量，计算过程如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/1_vaq2takejh.png" alt="如何将交互式的零知识证明（zk proof）协议改造为非交互式"></p>
+<p>图 2: 非交互证明 FOAKS 中的 Brakedown Checks</p>
+<p>现在我们使用哈希函数，让证明者自己产生这个随机向量。</p>
+<p>令γ0=H(C1,R, r0,r1)，对应的，在验证者的验证计算当中，也需要增加这个计算出γ0的步骤。根据这样的构造，可以发现，在生成承诺之前，证明者并不能提前预测挑战值，于是不能提前根据挑战值来对应的“作弊”，也就是对应的生成假的承诺值，同时，根据哈希函数输出的随机性，这个挑战值也满足随机性。</p>
+<p>对于第二点，令 Î =H(C1,R, r0,r1,c1,y1,cγ0,yγ0)。</p>
+<p>我们使用伪代码给出改造后非交互式的 Brakedown 多项式承诺当中的证明和验证函数，这也是 FOAKS 系统当中使用的函数。</p>
+<ol>
+<li>
+<p><strong>function</strong>  PC. Commit(ϕ)：</p>
+</li>
+<li>
+<p>Parse was a k × k matrix. The prover locally computes the tensor code encoding C1，C2 ，C1 is a k × n matrix，C2 is a n × n matrix.</p>
+</li>
+<li>
+<p><strong>for</strong>  i ∈ [n] <strong>do</strong></p>
+</li>
+<li>
+<p>Compute the Merkle tree root Roott=Merkle.Commit(C2[:,i])</p>
+</li>
+<li>
+<p>Compute a Merkle tree root R=Merkle.Commit([Root0,&hellip;&hellip;Rootn-1]),and output R as the commitment.</p>
+</li>
+<li>
+<p><strong>function</strong>  PC. Prover(ϕ, X, R)</p>
+</li>
+<li>
+<p>The prover generates a random vector γ0 ∈ Fk by computing: γ0 =H(C1,R, r0,r1)</p>
+</li>
+<li>
+<p>Proximity:</p>
+</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0319/1_60o685ffw6.png" alt="如何将交互式的零知识证明（zk proof）协议改造为非交互式"></p>
+<ol>
+<li>Consistency:</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0319/1_ssqe48f3pw.png" alt="如何将交互式的零知识证明（zk proof）协议改造为非交互式"></p>
+<ol>
+<li>
+<p>Prover sends c1,y1,cγ0,yγ0 to the verifier.</p>
+</li>
+<li>
+<p>Prover computes a vector Î as challenge, in which Î = H(C1,R, r0,r1,c1,y1,cγ0,yγ0)</p>
+</li>
+<li>
+<p><strong>for</strong>  idx ∈ Î <strong>do</strong></p>
+</li>
+<li>
+<p>Prover sends C1 [:,idx] and the Merkle tree proof of Rootidx for C2 [:,idx] under R to verifier</p>
+</li>
+<li>
+<p><strong>function</strong>  PC. VERIFY_EVAL(ΠX,X,y= ϕ (X),R)</p>
+</li>
+<li>
+<p>Proximity: ∀idx ∈ Î, Cγ0 [idx] == &lt;γ0, C1[:,idx]&gt; and Ec(yγ0) == Cγ0</p>
+</li>
+<li>
+<p>Consistency: ∀idx ∈ Î, C1 [idx] == &lt;γ0, C1[:,idx]&gt; and Ec(y1) == C1</p>
+</li>
+<li>
+<p>y==1, y1&gt;</p>
+</li>
+<li>
+<p>∀idx ∈ Î, Ec ( C1[:,idx]) is consistent with ROOTidx, and ROOTidx’s Merkle tree proof is valid.</p>
+</li>
+<li>
+<p>Output <strong>accept</strong>  if all conditions above holds. Otherwise output <strong>reject</strong> .</p>
+</li>
+</ol>
+<h1 id="结语">结语</h1>
+<p>许多的零知识证明算法在设计之初都依赖证明者和验证者双方的交互，但是这种交互式证明协议不适合用在追求高效，网络通讯开销大的应用场景下，比如链上数据隐私保护和 zkRollup 等等。通过 Fiat-Shamir 启发式（Heuristic），可以在不破坏协议安全性的条件下让证明者本地生成随机数“挑战”，并且可以被证明者验证。根据这种方法，FOAKS 同样实现了非交互式的证明，并应用在系统当中。</p>
+<h2 id="参考文献">参考文献</h2>
+<p>1.Fiat, Amos; Shamir, Adi (1987). &ldquo;How To Prove Yourself: Practical Solutions to Identification and Signature Problems&rdquo;. Advances in Cryptology — CRYPTO&rsquo; 86. Lecture Notes in Computer Science. Springer Berlin Heidelberg. 263: 186–194. doi:10.1007/3-540-47721-7_12. ISBN 978-3-540-18047-0.</p>
+<p>2.https://www.cnblogs.com/zhuowangy2k/p/12246575.html</p>
+<p>撰文：康水跃，Fox Tech CEO；孟铉济，Fox Tech 首席科学家</p>
+<p>来源：DeFi之道</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/48616/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">区块链上的DID：去中心化标识如何掌管线上身份的未来</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/48627/">
+                <span class="next-text nav-default">瑞银拟以最高10亿美元的价格收购瑞信</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#参考文献">参考文献</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文速览EigenLayer白皮书：共识层的扩容 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="被众多一线投研机构视为2023年以太坊最重要的创新，有可能开启以太坊新叙事方向的Eigenlayer终于披露了其V1版白皮书。" />
+<meta name="keywords" content="EigenLayer, ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/47648/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文速览EigenLayer白皮书：共识层的扩容" />
+<meta property="og:description" content="被众多一线投研机构视为2023年以太坊最重要的创新，有可能开启以太坊新叙事方向的Eigenlayer终于披露了其V1版白皮书。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/47648/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文速览EigenLayer白皮书：共识层的扩容">
+<meta itemprop="description" content="被众多一线投研机构视为2023年以太坊最重要的创新，有可能开启以太坊新叙事方向的Eigenlayer终于披露了其V1版白皮书。"><meta itemprop="datePublished" content="2023-02-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5687">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文速览EigenLayer白皮书：共识层的扩容"/>
+<meta name="twitter:description" content="被众多一线投研机构视为2023年以太坊最重要的创新，有可能开启以太坊新叙事方向的Eigenlayer终于披露了其V1版白皮书。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文速览EigenLayer白皮书：共识层的扩容</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-22">
+      2023-02-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5687 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>北京时间2月21日下午，被众多一线投研机构视为2023年以太坊最重要的创新，有可能开启以太坊新叙事方向的Eigenlayer终于披露了其V1版白皮书。</p>
+<p><strong>Eigenlayer是建立在以太坊上的再质押（Re-staking）协议</strong> ，以太坊节点可以通过EigenLayer将质押的ETH进行二次质押来获得额外收益，同时也可将以太坊共识层效用向外传递到各类中间件、数据可用性层、侧链等协议，让它们以更低的成本享受到以太坊级别的安全性。</p>
+<p><img src="https://miro.medium.com/max/1400/1*opvSwBxdkse4LcJcgutKFw.jpeg" alt="一文速览EigenLayer白皮书：共识层的扩容"></p>
+<p>Bixin Ventures第一时间对这份姗姗来迟的白皮书进行了解读，聚焦Eigenlayer的基本原理、运行机制、安全保证、治理框架、应用场景、商业化前景等核心内容。我们随后也会对EigenLayer进行更加深入的分析，欢迎订阅Bixin Ventures的Twitter和Medium专栏，及时获取更多项目的深度解读和一手调研。</p>
+<p>随着白皮书的发布，EigenLayer也计划于明日上午9点（PT）组织社区Space，大家也可以在Space中提问和了解更多关于EigenLayer的信息。</p>
+<h1 id="1-碎片化的可信网络">1. 碎片化的可信网络</h1>
+<p>目前，数以千计的去中心化应用（DApps）构建在以太坊之上，整个生态也在不断发展壮大。一个可信的去中心化底层网络价值基础源于：开发者不需要任何声誉或信任，就可以让其开发出来的DApp被任何信任该底层区块链并验证的人采用。Rollup是以太坊性能扩展的重要方向：不使用EVM执行交易，最终还是回到以太坊进行结算。虽然不同的Layer2 采用不同的安全验证方式，但是人们信任基于以太坊的Layer2。</p>
+<p>然而，任何不在EVM之上部署或证明的模块，都无法利用以太坊可信底层的安全性，比如基于新共识协议的侧链、数据可用层（DA）、新的虚拟机、预言机和可信执行环境等等，一般来说，它们需要搭建自己独立的AVS（主动验证系统），为自己的系统安全负责。目前的AVS生态存在一些缺点：</p>
+<ul>
+<li>
+<p>搭建一个新的AVS意味着要搭建一个新的可信网络，这并非易事；</p>
+</li>
+<li>
+<p>新的AVS意味着用户在支持以太坊交互费用的同时，还需要额外支付一笔AVS费用，这会导致价值流失；</p>
+</li>
+<li>
+<p>对验证者来说，进入一个新的验证系统意味着要承担一定的机会成本和风险敞口；</p>
+</li>
+<li>
+<p>当前AVS体系对一些DApps来说，安全系数被削弱了。这体现在一些依赖中间件的DApps的安全因为同时依赖于以太坊和中间件的信任假设，攻击中间件的成本较低而遭遇风险的可能性增加。</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1400/0*0Bvb5I5jilUeXcf6" alt="一文速览EigenLayer白皮书：共识层的扩容"></p>
+<h1 id="2-再质押和自由市场治理">2. 再质押和自由市场治理</h1>
+<p>EigenLayer引入了2个新概念，即再质押和自由市场治理来实现将以太坊的安全性扩展到其他系统以及提升治理的效率。</p>
+<ul>
+<li>再质押</li>
+</ul>
+<p>EigenLayer允许用户将质押在以太坊上的ETH二次质押在EigenLayer上，这些二次质押的资产可以用于数据可用性层、预言机、中间件、Layer2等。验证者通过对其提供安全和验证服务，也可以获得相应奖励。</p>
+<ul>
+<li>自由市场治理</li>
+</ul>
+<p>EigenLayer让验证者可以根据自己的风险偏好自由选择参与哪些模块，但验证者获得利润的前提是需要确保安全。EigenLayer的治理模式有两点好处，第一是将稳健的底层区块链融入快速和高效的元素，第二是可选择的验证者模式可以使新的模块在验证者中去争取其他的资源，从而更好的平衡安全性和性能。</p>
+<p>EigenLayer上的AVS可以租用以太坊验证者的安全服务，有以下好处：</p>
+<ul>
+<li>
+<p>一个新的AVS可以通过以太坊的验证者增强经济安全性</p>
+</li>
+<li>
+<p>使用以太坊的安全增强的费用总体来讲是最低的</p>
+</li>
+<li>
+<p>在EigenLayer的安全模式增加了破坏的成本（130亿美元）</p>
+</li>
+<li>
+<p>价值积累：让ETH质押者获取AVS中的收益</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1232/1*026nH42xzk3jVCuGJD1uBA.png" alt="一文速览EigenLayer白皮书：共识层的扩容"></p>
+<h1 id="21-支持多种质押模式">2.1 支持多种质押模式</h1>
+<p>EigenLayer提供多种质押方式类似于Lido的流动性质押（Liquid Staking）以及超流动性质押（Superfluid Staking），其中超流动性质押可以允许LP对的质押，具体而言：</p>
+<ul>
+<li>
+<p>直接质押，将质押在以太坊上的ETH直接质押到EigenLayer上</p>
+</li>
+<li>
+<p>LSD质押，已经质押在Lido或Rocket Pool的资产再次质押到EigenLayer上</p>
+</li>
+<li>
+<p>ETH LP质押，将质押在DeFi协议中的LP Token再次质押到EigenLayer上</p>
+</li>
+<li>
+<p>LSD LP质押， 比如 Curve的stETH-ETH LP Token再次质押到EigenLayer上</p>
+</li>
+</ul>
+<h1 id="22-委托人">2.2 委托人</h1>
+<p>针对那些对EigenLayer感兴趣但不想作为节点运营商（operator）的再质押者，可以将他们的权利委托给其他的节点运营商，这些节点运营商再将代币质押到以太坊中，将获得收益的部分分配给这些再质押者。EigenLayer提供两种模式：</p>
+<ul>
+<li>
+<p>单独质押模式：质押者提供验证服务，可以直接加入AVS，或者将操作委托给其他运营商同时自己继续为以太坊进行验证</p>
+</li>
+<li>
+<p>信任模式：选择信任的运营商来操作，如果选择的运营商没有按照约定的执行，那么其作为委托人的利益将会受到处罚。此外，再质押者需要考虑和委托人的费用比例，这里有望形成一个新的市场，每个EigenLayer运营商将在以太坊上建立一个委托合约，该合约规定如何将费用分配给委托人。</p>
+</li>
+</ul>
+<h1 id="3-罚没">3. 罚没</h1>
+<h1 id="31-罚没机制设计">3.1 罚没机制设计</h1>
+<p>加密经济的安全性量化了攻击网络的成本，该成本被称为“破坏成本（Cost-of-Corruption）”。当破坏成本大于可能的破坏收益（Profit-from-Corruption）时，系统便获得了很强的安全性。EigenLayer的罚没机制会提高破坏成本并让加密网络更加安全。</p>
+<h1 id="32-不使用同质化权证">3.2 不使用同质化权证</h1>
+<p>EigenLayer不会发出同质化代币作为质押权证，因为每一个用户可以都会有不同委任质押的选择，因此也拥有了不同的罚没风险；同时，如果用同质化代币去保证每一个仓位的透明性会造成仓位拥有方与节点运行商的冲突。</p>
+<h1 id="33-与合并挖矿的异同">3.3 与合并挖矿的异同</h1>
+<p>EigenLayer再质押的概念与Bitcoin/Namecoin, Bitcoin/Elastos, Bitcoin/RSK and Litecoin/Dogecoin的合并挖矿概念相似。合并挖矿可以省去不少成本，因为矿机在同样的加密机制下可以让其不同的PoW区块链同时进行挖矿。对于PoS的区块链来说验证者最大的成本便是质押成本，而再质押可以让质押资金被利用于不同的执行层上。</p>
+<p>然而合并挖矿与再质押的相似处也就仅此而已。假设对于PoS与PoW都有一部分的主要公链验证者同时是多条链的验证者（也就是PoW出现合并挖矿、PoS出现再质押），当他们对于较小的公链进行攻击时（例如：故意签错状态根导致跨链资产出现问题），那就会有两种情况发生：</p>
+<ul>
+<li>
+<p>在通过再质押合并的PoS链中，可以采取以下措施：在主链上可以对不正确的状态转换根发布欺诈证明，恶意验证者的质押资金将被罚没。</p>
+</li>
+<li>
+<p>对于 PoW 公链，即使主链上的所有矿工都选择合并挖矿的链，也不存在显著的加密经济安全性。主要原因是无法采取罚没的选项 — — 我们无法罚没将导致恶意矿工的挖矿硬件失效或被移除，矿工的硬件仍将具有价值。</p>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1400/0*QlaD1D52iB1K7K5T" alt="一文速览EigenLayer白皮书：共识层的扩容"></p>
+<h1 id="34-风险管理">3.4 风险管理</h1>
+<p>EigenLayer中存在两类风险：</p>
+<ul>
+<li>
+<p>许多运营商可能串通同时攻击一组AVS；</p>
+</li>
+<li>
+<p>AVS可能存在非预期的罚没漏洞（slashing vulnerabilities），如诚实节点可能被罚没。</p>
+</li>
+</ul>
+<h1 id="341-运营商串通">3.4.1 运营商串通</h1>
+<p>在现实中，只有一部分运营商选择加入给定的AVS，其中一些运营商可能串通从一组AVS中窃取资金，然后会出现复杂的攻击。</p>
+<ul>
+<li>
+<p>一种解决方案是限制任何特定AVS的破坏收益。这个解决方案取决于那些AVS的设计者。 例如，</p>
+</li>
+<li>
+<p>桥可以限制罚没周期内的价值流动，</p>
+</li>
+<li>
+<p>预言机可以限制该周期内交易的总价值，等等。</p>
+</li>
+<li>
+<p>另一个解决方案是EigenLayer可以主动增加AVS的破坏成本。 EigenLayer创建一个开源的仪表板，构建在EigenLayer上的AVS可以监控参与其验证任务的一组运营商是否也在许多其他AVS中再质押。 AVS可以在其合约中制定规范，仅激励参与少量AVS的EigenLayer运营商。</p>
+</li>
+</ul>
+<h1 id="342-意外罚没">3.4.2 意外罚没</h1>
+<p>在AVS及其相关基础设施和合约经过实际测试之前，许多罚没风险需要控制以避免产生更大的叠加风险。 一种风险是AVS创建时的意外罚没漏洞（例如，代码bug），这种漏洞一旦触发会导致诚实运营商损失资金。</p>
+<p>我们在这里提出两条解决方案：</p>
+<ul>
+<li>
+<p>安全审计：必须像审计智能合约一样审计AVS代码库。</p>
+</li>
+<li>
+<p>对罚没的一票否决能力（veto）：EigenLayer中有一个治理层，其主要由以太坊和EigenLayer社区的重要成员组成，它有能力通过多重签名否决罚没决定。</p>
+</li>
+</ul>
+<h1 id="35-治理框架">3.5 治理框架</h1>
+<p>EigenLayer使用了一个基于声誉的委员会进行治理，该委员会由以太坊和EigenLayer社区中的知名人士组成。 该委员会将负责对EigenLayer合约进行升级，审查和否决罚没事件，并允许新的AVS进入罚没审查过程。</p>
+<p>AVS可以利用这个委员会来向EigenLayer中的再抵押者保证他们不会受到恶意罚没或错误罚没。 同时，AVS开发人员可以对与AVS相关的代码库进行实际测试。 一旦成熟并获得再质押者的信任，AVS就可以停止使用委员会作为后备。AVS在EigenLayer上面创建时可能需要委员会进行安全审计和其他尽职调查，包括检查验证者为AVS服务的系统要求等。</p>
+<h1 id="36-最大化安全性的同时最小化中心化风险">3.6 最大化安全性的同时最小化中心化风险</h1>
+<p>我们注意到，当使用EigenLayer再抵押的所有ETH都用于保护一个AVS时，这个AVS可以获得最大的安全性。 然而，这有两个障碍：</p>
+<ul>
+<li>
+<p>AVS给运营商的预期收入是否能高过运营成本；</p>
+</li>
+<li>
+<p>运营商是否有足够的计算资源来参与AVS的验证。</p>
+</li>
+</ul>
+<p>EigenLayer提出了两种可能的模块设计模式，以减轻这些担忧：</p>
+<ul>
+<li>
+<p>超大规模AVS（Hyperscale AVS）：在超大规模 AVS 中，总计算工作量分配给所有N个参与的运营商。这样存储成本以及节点吞吐量要求都会降低，而系统本身可以通过聚合多个节点的性能来实现高吞吐量。</p>
+</li>
+<li>
+<p>轻量级AVS （Lightweight AVS）：一些任务的成本很低，所需的计算基础设施也很低，任务可以由所运营商冗余执行，例如验证zk-proof等。</p>
+</li>
+</ul>
+<h1 id="4-eigenlayer生态">4. EigenLayer生态</h1>
+<h1 id="41-实现新的应用场景">4.1 实现新的应用场景</h1>
+<p>EigenLayer通过提供AVS服务可以支持很多类型协议，包括：数据可用性层、去中心化定序器（sequencer）、连接以太坊的轻节点桥、Rollup之间更快的桥、预言机、事件驱动的激活功能、MEV管理、低延迟的侧链、帮助以太坊实现single slot最终性等。</p>
+<h1 id="42-利用质押者的异质性大幅扩展区块空间">4.2 利用质押者的异质性，大幅扩展区块空间</h1>
+<p>以太坊的节点在计算能力，风险收益偏好，特征方面都存在异质性：</p>
+<ul>
+<li>
+<p>区块链为了去中心化考虑会根据最弱的节点性能设置区块限制，性能更强的节点可以将多余的资源通过EigenLayer提供给其他协议使用</p>
+</li>
+<li>
+<p>风险偏好更高的节点可以选择风险更大，收益流动性更差但是收益率更高的协议提供验证</p>
+</li>
+<li>
+<p>通过跟可验证凭证（verifiable credentials），SBT等技术结合，不同协议可以根据节点特征选择更适合的节点提供验证</p>
+</li>
+</ul>
+<h1 id="43-打破民主和灵活性间的平衡">4.3 打破民主和灵活性间的平衡</h1>
+<p>以太坊的更新目前通过稳健的链下民主治理方式缓慢推进，EigenLayer可以让创新快速地部署在以太坊的可信层上，像一个测试网一样为以太坊主网的创新提供测试和经验，避免了以太坊在快速创新和民主治理之间的取舍。</p>
+<h1 id="44-推进以太坊质押者的去中心化进程">4.4 推进以太坊质押者的去中心化进程</h1>
+<p>EigenLayer为AVS提供了一个将去中心化货币化的市场，AVS可以指定只有以太坊个人节点（home validators）可以参与任务，这样可以帮助AVS保持去中心化。同时，个人节点可以获得额外的收益，激励更多用户运行以太坊个人节点，提高主网的去中心化程度。</p>
+<h1 id="45-支持多代币的节点群">4.5 支持多代币的节点群</h1>
+<p>EigenLayer允许协议的AVS指定自己的节点群（quorums）与再质押ETH的节点群共同运行，例如A协议可以选择使用两个节点群，一个节点群需要重新质押ETH，另一个节点群则需要质押协议代币$A，当两个及节点群均同意某个事项有效时，协议A最终同意该事项生效。这样的机制可以帮助协议代币$A获得实用性，为协议积累价值。</p>
+<h1 id="46-商业模式">4.6 商业模式</h1>
+<p>协议使用EigenLayer可以采用的商业模式包括：</p>
+<ul>
+<li>
+<p>纯钱包模式：协议在EigenLayer上面部署一个AVS提供服务，用户支付费用获得服务，收入一部分支付给协议的钱包，另一部分支付给EigenLayer中的ETH再质押者。</p>
+</li>
+<li>
+<p>代币化费用：协议在EigenLayer上面部署一个AVS作为协议，用户支付费用获得服务，收入一部分支付给协议代币持有者，另一部分支付给EigenLayer中的ETH再质押者。</p>
+</li>
+<li>
+<p>使用协议原生代币支付：协议在EigenLayer上面部署一个AVS作为协议，用户需要支付协议代币获得服务，收入一部分支付给协议代币持有者，另一部分支付给EigenLayer中的ETH再质押者。</p>
+</li>
+<li>
+<p>双币质押：协议指定协议代币和ETH的两个节点群共同运行，这样可以帮助协议代币获得实用性，使用ETH也防止协议代币价格下降时对经济安全性的损害。</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/47623/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">香港将成立虚拟资产发展专责小组</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/47658/">
+                <span class="next-text nav-default">以色列央行发布稳定币规范，要求储备金率需高于100%</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

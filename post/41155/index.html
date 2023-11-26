@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Delphi Digital：Rollup 完全指南 Part1——模块化经济学 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="文章主要分为三个部分，分别为模块化经济学、以太坊 Rollup 堆栈和 Celestia Rollup 堆栈。" />
+<meta name="keywords" content="Rollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41155/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Delphi Digital：Rollup 完全指南 Part1——模块化经济学" />
+<meta property="og:description" content="文章主要分为三个部分，分别为模块化经济学、以太坊 Rollup 堆栈和 Celestia Rollup 堆栈。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41155/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="Delphi Digital：Rollup 完全指南 Part1——模块化经济学">
+<meta itemprop="description" content="文章主要分为三个部分，分别为模块化经济学、以太坊 Rollup 堆栈和 Celestia Rollup 堆栈。"><meta itemprop="datePublished" content="2022-08-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9579">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"/>
+<meta name="twitter:description" content="文章主要分为三个部分，分别为模块化经济学、以太坊 Rollup 堆栈和 Celestia Rollup 堆栈。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Delphi Digital：Rollup 完全指南 Part1——模块化经济学</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-06">
+      2022-08-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9579 字 -
+        预计阅读 20 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>注：8 月 5 日，加密研究员 Jon Charbonneau 在 Delphi Digital 上发布了《Rollup 完全指南》，从其熟知的以太坊和 Celestia 的两个项目出发，详实阐述了 Rollup 的技术和经济。对此，V 神给予了赞赏，称这是一本关于 Rollup 的“好书”。</p>
+<p>文章主要分为三个部分，分别为模块化经济学、以太坊 Rollup 堆栈和 Celestia Rollup 堆栈。</p>
+<p>以下是文章的简介及第一部分——模块化经济学，由 DeFi 之道编译。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_ss4l8suwo8.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<h1 id="简介"><strong>简介</strong></h1>
+<p>Vitalik 为我们贡献了神作《Rollup 不完全指南》，而我将向您展示《Rollup 完全指南》。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_37w35kirrt.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>好吧，实际上它也不完整，但听起来比较牛X，所以我决定用这个名字。这份报告只分析了以太坊和 Celestia 上的 rollups 的设计空间。我强烈推荐我最近的以太坊报告作为阅读背景。</p>
+<p>在这份报告中，我介绍了我最熟悉的两个项目，但实际上还有很多其他团队正在构建。Polygon（Avail）、Tezos 和 Milkomeda 等也在 Rollup 堆栈游戏中。事实上，Tezos 很可能是首个推出“enshrined”rollup 的，而 Polygon Avail 在架构上与 Celestia 惊人地相似。</p>
+<p>首先，什么是“模块化”区块链？在这一点上，目前它主要还是一个 meme，有很多分歧，但为了简单起见，我将定义我如何使用这个术语。当然，关于正确与否，你们可以在我的推特评论中进行讨论。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_b2ite5f33v.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>模块化堆栈将以下任务剥离成独立的技术组件：</p>
+<ul>
+<li>
+<p>数据可用性（DA）&ndash; 确保 rollup 区块头后面的交易数据已经公布并可用，以便任何人都可以重新创建状态。</p>
+</li>
+<li>
+<p>共识 &ndash; 至少就交易及其排序达成协议。</p>
+</li>
+<li>
+<p>结算 &ndash; 根据实施情况而变化，但任务可以包括验证/仲裁证明和协调跨链资产转移/任意信息传递。</p>
+</li>
+<li>
+<p>执行 &ndash; 计算采取前状态→运行交易→过渡到后状态。</p>
+</li>
+</ul>
+<p>以太坊可以处理其中的每一个问题。它提供了统一的 DA、共识和结算层，具有普遍的执行力。当你在 L1 上进行交易时，以太坊就像任何单体链一样行事。另外，rollups 可以处理执行，由以太坊提供 DA、共识和结算。</p>
+<p>Celestia 只提供 DA 和共识。在 L1 Celestia 上没有 Uniswap，也没有 L1 的验证/仲裁证明。Celestia 没有奉行的结算层或智能合约执行。L1 的功能仅限于 Celestia 代币转移和验证器集管理。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_guis3upmhr.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>请注意，像 Validiums 和 Celestiums 为 DA 和结算使用独立层的可能性也是存在的。任何结算层都可以使用，只要它接受 Celestia 提供的数据证明就可以了。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_wr5e1earpp.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>然而，这些都不是 rollup，但它们带来了有意义的额外安全假设。本报告将重点讨论实际的 &ldquo;rollup&rdquo; 堆栈。我将首先分解经济因素，然后深入研究每个堆栈。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_c46h9byn3g.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>文中使用的部分缩写，如下所示：</p>
+<ul>
+<li>
+<p>SCR&ndash; 智能合约 rollup</p>
+</li>
+<li>
+<p>ER - Enshrined rollup</p>
+</li>
+<li>
+<p>SR - 主权 rollup</p>
+</li>
+</ul>
+<h1 id="第一部分模块化经济学"><strong>第一部分：模块化经济学</strong></h1>
+<p>此前，我曾写过关于 L1 价值捕获（费用和其他形式的 MEV）的重要性。依赖于经济安全的资产需要一个高价值的抵押品。收入为制定有吸引力的货币政策（实际收益率、低且可预测的通胀等）提供了燃料。价值获取→良好的货币政策→货币溢价→高经济安全。费用和其他 MEV 启动了第 1 步。</p>
+<h2 id="rollup-费用"><strong>Rollup 费用</strong></h2>
+<p>让我们从第一性原理来分析一个 rollup 交易。这张简化图描述了适用于 Ethereum optimistic rollups（ORU）和 zk-rollups（ZKR）的部分。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_z6hz547s7s.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<ol>
+<li>
+<p>定序器接收并订购交易。用户将很快能得到其交易最终被记录在 L1 上的软确认（如果他们相信定序器的反馈）。定序器只被用于订购和交易完成。它们无法提交无效的交易。</p>
+</li>
+<li>
+<p>确定性的状态转换函数处理每个交易并更新 L2 状态，创建一个 L2 区块。这些区块可以比 L1 区块产生得更快。</p>
+</li>
+<li>
+<p>每隔一段时间就有一批交易被压缩并发送到 L1。目前存储为 calldata，但最终 rollups 将使用数据 blobs。</p>
+</li>
+</ol>
+<p>用户在应用状态转换并执行其交易时被收取 L2 gas。L1 gas 是在之后处理批量交易时支付的。L1 和 L2 gas 价格根据各自的拥堵情况而不同。因此，用户在两种 gas 中产生费用，而且有时间错配。定序器在知道批量交易的全部内容、压缩程度或发布时 L1 的基本费用是多少之前，就承诺进行交易并收取 L2 费用。</p>
+<p>L2 会尽力猜测其 L1 的费用会是多少，并相应地向用户收费。市场平静时，L2 平均只在 L1 成本的基础上收取很小的利润。但当 rollup 变得受制于他们自己的执行环境（而不是 L1 成本）时，这个幅度就会上升。收费市场激增的定价作用于需求。更高的利润率对应着当地需求的激增。</p>
+<p>我们在 Arbitrum 最近的激增中清楚地看到了这一点，尽管其利润率在其他方面一直很稳定。Arbitrum 最近的瓶颈是 L2 执行（而不是 L1 成本），因此其本地收费市场开始启动：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_f2gnndaalm.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>我们看到Optimism也有类似的趋势，不过变数更大：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_gnu1jv4hl4.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>今天 Rollups 的 L1 成本主要是 calldata。即使是 ZKRs，Polygon 将交易数据发布到以太坊上的费用估计也占总成本的〜90%（这主要是 calldata），此外〜10% 用于证明。随着 EIP-4844 可能会在明年的上海硬分叉中出现，这些成本将大幅下降。它增加了 DA 的吞吐量，并为以太坊的 DA 层和结算层实现了独立的 EIP-1559 收费市场。DA 的供过于求意味着费用达到了底线。之后，danksharding 会使 DA 更加丰富。有着任何合理活动的 Rollup 将大大增加这些利润率。</p>
+<p>最后 &ndash; 上面的数据不包括任何 MEV（常规交易费用之外）。在现实中，rollup 代币能够从 MEV 中积累大量的价值（关于这一点，很快就会有更多信息）。</p>
+<h3 id="固定成本与可变成本"><strong>固定成本与可变成本</strong></h3>
+<p>ORU 将压缩的完整 L2 交易数据（带签名）、L2 状态根和欺诈证明（仅在发生争议时）发布回 L1。虽然完整的交易数据被存储在以太坊的历史中，但交易数据的哈希值被添加到其状态中。如果欺诈证明被发送，那么它可以根据先前存储的哈希值检查包含证明，作为欺诈证明的一部分。</p>
+<p>ZKRs 不需要将全部交易数据发布到 L1。只要发布状态差异就足够了（他们选择这样做是因为它更便宜）。想象一下，Alice 和 Bob 在这批交易中来回交易 1 个 ETH&ndash;ZKRs 只需要在最后发布状态变化（谁拥有这 1 个 ETH，谁没有），而 ORU 则需要发布每笔交易。状态差异足以重构状态。ORU 必须包括所有交易，以备欺诈证明之需。ZKR 验证者还必须包括一个有效性证明，与每个批量处理一起证明相关的状态根是有效的。</p>
+<p>无论它们必须向以太坊支付的交易活动如何，SCR 都有固定成本：</p>
+<ul>
+<li>
+<p>状态承诺</p>
+</li>
+<li>
+<p>有效性证明（仅适用于 ZKRs）</p>
+</li>
+</ul>
+<p>此外，它们还有可变成本，随着交易活动的增加而增加。</p>
+<ul>
+<li>交易数据（加上 ORU 的签名）</li>
+</ul>
+<p>在支付给 L1 的这些费用之上，rollup 收取必要的 L2 gas 费用和成本的激增定价，以支付 rollup 运营商的费用。更详细的分析可点击此处查看。</p>
+<p>注意这里的时间/成本权衡。频繁结算意味着 L1 更早给出真正的最终结果。然而，等待更长的时间来结算，在更多的交易中摊销这些固定成本 = 对 rollup 用户来说是更便宜的交易。rollup 结算要平衡好足够的安全以及给到用户较低保证（预先确认）的低价费用。</p>
+<p>让我们以 Optimism 为例。作为背景，Optimism 上，定序器和提议者需要为两个智能合约发布信息：</p>
+<ul>
+<li>
+<p>Canonical Transaction Chain (CTC）合约 &ndash; 由定序器提交的交易批次的仅有附录的日志</p>
+</li>
+<li>
+<p>State Commitment Chain（SCC）合约‌ &ndash; 提议者确认是 CTC 中每个交易结果的提议状态根的日志</p>
+</li>
+</ul>
+<p>Optimism 的成本分解如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_0lssijqzhc.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>将交易批次发布到 Canonical Transaction Chain（CTC）上会产生两种成本：</p>
+<ul>
+<li>
+<p>可变成本 - L1 CTC（交易批次）提交者使用的 Calldata gas，与交易批次的大小大致呈线性关系</p>
+</li>
+<li>
+<p>间接成本 - 向 CTC 发布信息也会产生少量的非 calldata 成本</p>
+</li>
+</ul>
+<p>向 State Commitment Chain（SCC）发布状态根所使用的 gas 是纯粹的间接成本（注意这个成本的一部分也使用了 L1 calldata）。根据上述两种成本将其分割开来，你会得到这样的结果：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_z490ajoihd.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>这些间接成本可能比你预期的要高 &ndash; 在未来几个月内仍有许多低效率的问题需要解决。像 Bedrock 这样的优化将大大改善数据压缩，它将使固定成本下降到几乎可以忽略不计。每个批量交易的 gas 成本可以从每批约 28 万不包括 calldata 下降到每批约 2.1 万 gas。SCC 将被 L2 OutputOracle 取代，CTC 将被移除。L2 区块将使用非合约地址保存到以太坊上，从而大大减少链上足迹，并将 gas 成本降到最低。</p>
+<p>同样地，Arbitrum 每批产生的 gas 成本约为 37.5 万，这将被 Nitro 大大减少。</p>
+<p>将这一切都联系起来，就可以描述 rollup 的价值流。下图来自 Barnabé Monnot 的一篇伟大的文章：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_2l92dugi7y.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>他最近也谈到了这个话题。</p>
+<h3 id="基础层费用---以太坊"><strong>基础层费用 - 以太坊</strong></h3>
+<p>以太坊的费用来自：</p>
+<ol>
+<li>
+<p>L1 执行和结算 - 比如去到 L1 的 Uniswap，用一些 USDC 交换 ETH。</p>
+</li>
+<li>
+<p>来自 Rollups 的结算 - Rollups 向 L1 发布证明。以太坊还负责处理 rollups 和 L1 之间的信任最小化的桥接问题。</p>
+</li>
+<li>
+<p>来自 Rollups 的 DA - Rollups 使用 calldata 向 L1 发布数据。</p>
+</li>
+</ol>
+<p>独立的单体链的费用上限为：</p>
+<blockquote>
+<p>费用 = 吞吐量 x 用户将为单个交易支付的美元</p>
+</blockquote>
+<p>相比之下，模块化 DA 和结算层（如 Ethereum）有一个更高的费用上限：</p>
+<blockquote>
+<p>费用 = 吞吐量 x 用户将为聚合交易支付的美元</p>
+</blockquote>
+<p>与单个用户为占用相同区块空间的 L1 交易支付的费用相比，Rollup 可以向以太坊支付更大的单笔费用来结算许多交易（例如，一个证明保障了许多区块，结算许多聚合的 DeFi 池交易等）。假设有足够的需求，为以太坊引入新的费用支付者（rollups），每笔交易的边际效用更高，从长远来看，将会增加价值。</p>
+<p>然而，请注意，以太坊如今的收入是这样的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_3eca86solg.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>以太坊距离成为 rollup 的主要结算或 DA 层还有很长的路要走。支付给 L1 的绝大多数费用来自原生 L1 的执行：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_l701ffytbh.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>因此，虽然模块化的基础层能够从 rollup 的需求中提取有意义的收入，但在这么做之前，我们需要有大量的需求。至关重要的是，以太坊的 rollup 收费是对其原生 L1 执行的补充，而不是仅仅依赖于它。</p>
+<p>这种价值的获取从何而来是一个争论点。以太坊和 Celestia 社区的许多人认为 DA 最终会有惊人的价值。Dankrad 最近在我主持的他和 John Adler 的播客中发表了他的观点。</p>
+<blockquote>
+<p>“资产……需要从一些……产生收益的手段中获得安全性。因此，我认为目前只有两个，那就是结算层和数据可用性层。我认为短期内，我们可能会看到，结算层仍然产生更多的价值。<br>
+我们已经看到，过去我们在以太坊上有大量的费用，在其他结算层上也有一些。但长期来看，我相信最有价值的资产将只是在数据的可用性上，区块空间将成为去中心化经济中最有价值的资产。”</p>
+</blockquote>
+<p>Rollup 应该愿意为优质 DA 支付什么，这是一个有趣的争论。然而，现实情况是，DA 很快就会在以太坊扩展和替代 DA 解决方案之间大规模地供过于求。关于数据可用性的规模，可参见下图：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_ul7a0mpgcr.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>以太坊区块目前的平均数据为～90 KB，其中 calldata~10 KB。DA 供应冲击迫在眉睫，rollup 将继续大大改善数据压缩。当数据 blobs 有了自己的收费市场，供应 &lt; 需求，DA 费用就会达到底线。</p>
+<p>Rollup 用户将支付更高的费用，但主要的瓶颈可能是 rollup 自己的原生执行环境（基于目前 EIP-4844 的数量级活动和 DA 带宽）。当你在你喜欢的 rollup 上进行代币交换时，DA 将不再是你的主要成本。超级便宜的费用将推动增量活动，更多的 rollup 出现，等等。只有当 DA 饱和到目标时，EIP-1559 机制才会启动，将费用拉出下限。然而，rollup 有许多即将进行的优化，这将加强它们目前受限的本地执行。如果这一点也没了，那么最终可能会使 DA 再次成为一个更大的成本。</p>
+<p>对于以太坊开始收取任何有意义的 DA，你需要超过 1.3 MB/s（假设目前的 danksharding 规格）的实际有价值的数据，要求最高的安全性。即使你达到了 1.3 MB/s，溢出的数据也可以直接去到其他地方。Celestia、DataLayr、DACs、Adamantiums、Polygon Avail 等替代品将提供大量的廉价 DA。只有最安全的交易才需要完整的以太坊安全。另外，DA 的吞吐量可以安全地增加（有更多的验证者），所以 1.3 MB/s 并不是一个基本的限制。</p>
+<p>我有信心，至少在几年内，与以太坊强大的结算层相比，DA 费用收入将可以忽略不计。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_bcg75ycfln.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>最后，原生智能合约的执行也可以为 ETH 质押者提供比 Celestia 更多的价值 &ndash;ETH 可以作为一种生产性资产来赚取额外收益。特别的，EigenLayer‌r 是一个创新的解决方案，它将允许 ETH 的 &ldquo;重新质押&rdquo;。ETH 质押者将能够使他们的份额受到额外的罚没条件。他们将确保寻求利用 ETH 经济安全的新应用，其费用收入将计入 ETH（非常类似于 Cosmos 的链间安全概念，将价值计入 ATOM）。</p>
+<h3 id="基础层费用---celestia"><strong>基础层费用 - Celestia</strong></h3>
+<p>Celestia 的唯一的费用是 DA。Rollups 处理结算。在同一个播客中，John 就 dYdX 决定从 StarkEx 转移到 Cosmos 提出了一个有趣的观点。基础层应该为经济安全积累尽可能多的价值，但经济上理性的应用程序希望为自己积累尽可能多的价值。在其他条件相同的情况下，它们宁愿不向结算层支付租金。DA 是共享安全的最低成本。这对 Celestia 来说累积的价值较少，但它可以激励更多的 rollup 留下来，因为它更便宜。</p>
+<p>对于这种说法，我不太同意，原因是我前面强调的。支付给结算层的成本实际上是比较低的。对于 ZKRs 来说，成本接近于 0，因为固定成本在许多交易中被摊销，除了被结算的交易，用户可以支付这些交易（所以 rollup 并没有支付这个费用）。而对于 ORU，则没有真正的结算成本。因此，我认为这个等式中的这部分成本可以忽略不计 &ndash; 团队会根据他们的特殊需求在 SR 或使用结算层之间做出选择。两者都有有趣的技术和社会论据，我将在后面进行挖掘。</p>
+<p>如果 Celestia 在较大的蛋糕上切得较少的商业模式是成功的，那么请注意价值捕获的百分比也可能很重要。如果基础层只获取了相对于它所保障的价值来说微不足道的价值，那么安全杠杆就会变得很不舒服。也许你对 10 亿美元的赌注确保 200 亿美元的价值感到舒服（以太坊的安全比率目前是～20 倍），但你对 1000 亿美元感到舒服吗？2000 亿美元呢？没有正确的答案。一个在经济上自给自足的基础层，即使没有 rollup 收入，也不会有这种担忧。</p>
+<p>仅仅依靠 DA 是否能提供足够的价值捕获来建立经济安全还有待观察。DA 是有价值的，但它是一种我们知道如何很好地将其规模扩大的资源。要想改变这种情况，需要进行范式转变。但从 5 年以上的时间来看，我认为没有人能够合理地预测。</p>
+<p>所以这正是我现在要做的事情。粗略计算，DA 的数据可能看起来像今年这样：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_tnvo60fvlt.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>还不错，有 300 亿美元！</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_tm9n5zdeuc.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>从我们今天的情况来看，每笔交易 13 个字节将是一个有意义的优化，但这只是可能。例如，Polygon Hermez 预计，他们最终将只需要每笔交易 14 个字节。在目前 1.3 MB/s 的 danksharding 规格下，你可以得到漂亮的 100k TPS‌。但请注意，目前大多数的 rollups 远没有达到每笔交易 13 个字节，你只能通过像 ZKRs 那样发布状态差异来达到这一低数值。如果你像 ORU 那样发布完整的交易数据，那数值会高得多，甚至有些 ZKRs 也会选择发布完整的交易数据。非常乐观的是，每个 rollup 都会在 DA 效率的下限附近运行。</p>
+<p>请注意，我在这里假设的 0.01 美元/tx 只是针对 DA。这并不包括其他 L2 交易费用的考虑。有价值的房地产（例如，DeFi 中心的 rollup）当然可以收取溢价，但更便宜的州往往收取更低的执行费用。这甚至可能是足够的缓冲，以清除 Vitalik 的 0.05 美元的测试‌。</p>
+<p>从长远来看，考虑这些利润率如何叠加 L2 费用将是很重要的（即，为 DA 支付的百分比是多少）。如果翻转许多链变得很容易，而且桥接变得很好，以至于特定应用的 rollup 最终变得有意义，那么执行可能变得相对便宜。这就给 DA 留下了一些空间，以获得一些费用。重要的桥接发展也会对 SR 是否比共享结算层更有意义，以及 DA 的总体粘性有很大影响。</p>
+<p>作为参考，以太坊在 2021 年获得了约 100 亿美元的费用，其高峰期的月份年化运行率超过 200 亿美元（注意这不包括其他形式的 MEV）。像 300 亿美元/年的东西可能意味着几千亿的市值？但这就够了吗？我不知道。就个人而言，我希望民族国家级别的安全要高得多，所以这就涉及到了一个哲学上的辩论。在这种规模下，你需要确保数万亿美元的经济活动的安全，所以我想要更多。</p>
+<p>请注意以太坊和 Celestia 在这里的区别。对每一个人来说，“有意义”意味着不同的事情。也许以太坊总收入的 10% 是有意义的，也许是 20%。反正它有结算层为其支付账单。而对于 Celestia 来说，这很简单 &ndash; 它必须足以资助其整个安全预算，以保护建立在它之上的一切。</p>
+<p>现实情况是，我们不应该对这些数字持怀疑态度。它们完全是在一个超级优化的 rollup 世界中编造出来的，让你在很长的时间范围内有一个数量级的感觉。</p>
+<p>Celestia 在引导经济安全方面面临着一个障碍，它的价值获取很少。我们习惯于将创业公司的估值作为对未来增长的赌注，但当整个商业模式（DA）取决于范式的转变，以积累足够的价值来实现经济安全时，这是一个公认的风险主张。</p>
+<h2 id="模块化堆栈中的-mev"><strong>模块化堆栈中的 MEV</strong></h2>
+<p>MEV 是一个很深的兔子洞，所以我在这里就简短点聊。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_rcsnppgc0d.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>让我们从基础知识开始。MEV 仍未完全正式定义，但我在此将其简化为区块生产者可以提取的所有潜在价值（包括常规交易费用、套利、清算等）。</p>
+<p>简化后的 L1 以太坊 MEV 将与协议内 PBS（或中期 MEV- boost）类似：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_wpzdbi7919.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>搜索者将交易捆绑在一起，并向建设者出价要求将其纳入交易。建设者汇总搜索者的出价，并为验证者所包含的整个区块出价。在一个有效的市场中，搜索者将其大部分收入出价给建设者，而建设者再将其大部分收入出价给验证者。因此，ETH 捕获了大部分的 MEV。</p>
+<p>至于 Rollup，看起来则有点不同，但类似的概念适用。下面这个简化的例子是 Optimism 为定序权运行了一个 MEV 拍卖（MEVA）：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_r63cbf97zt.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>同样，搜索者将交易捆绑起来，并向定序者出价要求将其纳入。定序者汇总搜索者的出价，并出价将整个区块纳入 MEVA。在一个有效的市场中，搜索者将他们的大部分收入出价给定序者，定序者再将他们的大部分收入出价给 MEVA。如果 rollup 使用质押来选择领导者，你也可以插入验证器来代替 MEVA。在任何一种情况下，rollup 都会捕捉到大部分的 MEV。这可以累积到代币上，也可以为公共物品等提供资金（就像 Optimism 那样）。</p>
+<p>在其他条件相同的情况下，将交易从 L1 转移到 rollup 并不改变 MEV 的数量。它只是改变了它的获取方式和谁得到它。在这个简化的模型中，MEV 的获取现在已经从 L1 资产推到了 L2 资产。</p>
+<p>但说实话，有那么简单吗？</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_sakdhyg0dt.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>抱歉，我不知道，其他人也不知道。因此，如果你是一个好奇的家伙，这是一个很好的研究领域。有多少 MEV 会泄漏到共享 DA 和/或结算层？Rollup 运营商是否会开始为他们在 L2 上执行的 MEV 向 L1 支付？如果出现了类似于跨域 Flashbots 的东西，我们可以收集更多的具体数据。但现在，让我们先看看一些假设。</p>
+<p>最简单的想法是，它将永远累积到堆栈的底部。例如，看看一个有着 Celestia DA + 结算 rollup + 递归 rollup 的堆栈。递归 rollup 可能依赖于结算 rollup 的跨链 MEV，但 DA 层可能能够审查和延迟结算 rollup 的区块，要求从该 MEV 中获取一部分。这种谈判取决于社会规范，可能是难以逾越的界线（类似于 PoW 中的时间强盗攻击）。权力是存在的，但这种谈判会发生吗？也许 L1 想吃上这顿 L1 的午餐，也许不想。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_vorz7kkspe.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>然后是更复杂的跨链 MEV。在下面的例子中：</p>
+<ul>
+<li>
+<p>R = Rollup</p>
+</li>
+<li>
+<p>B = 区块</p>
+</li>
+<li>
+<p>S = 交换</p>
+</li>
+</ul>
+<p>R1 和 R2 有着协调的定序器，共享同一个 DA 层，允许原子式跨链 MEV。每个 rollup 都可以提交区块，其接受程度取决于另一个 rollup。例如，只有在 R2 B2（包括 S2）完成的情况下才接受 R1 B1（包括 S1），反之，R2 的条件也是如此。同样，一个 rollup 可以向其 DA 层提交两个区块，一个是基本情况，另一个是只有在满足另一个 rollup 的某些条件时才会被包括在内。这里引入的原子性可能是相当强大的，而观察它如何影响 MEV 价值累积的动态是有趣的。</p>
+<p>重要的是，这对价值累积来说是一张天书。如果有比我们目前所知道的更多的 MEV 泄漏出来，那么这可能会给 Celestia 带来巨大的价值。这将有助于补贴安全预算。</p>
+<h2 id="da-层的经济安全"><strong>DA 层的经济安全</strong></h2>
+<p>现在让我们来看看为什么我们甚至关心 DA 层的经济安全。</p>
+<h3 id="33-攻击"><strong>33% 攻击</strong></h3>
+<p>这很简单 &ndash; 也就是将链暂停。如果 Tendermint 没有必要的票数，它就无法取得进展（失效），无法最终完成（⅔）。依赖于 Celestia 的 Rollups 不会喜欢这个。</p>
+<p>以太坊运行 Gasper 来达成共识。因此，即使 &gt;⅓ 的份额有问题，以太坊也会继续运行，保持有效性。然而，如果没有必要的投票，这个账本就不能最终完成。如果有问题的 &gt;⅓ 干脆不投票，那么它们将因为 inactivity leak‌机制（消极惩罚机制）而遭到额外的惩罚，直到协议最终能够再次最终确定。</p>
+<h3 id="67-攻击"><strong>67% 攻击</strong></h3>
+<p>首先 - 有效性条件是共识的一部分。因此，即使你控制了 100% 的份额，你也不能开始凭空印制一堆 Celestia 代币/Ether，窃取资金等等。诚实的节点会拒绝这样做，因为这是无效的。不过你可以试试这些：</p>
+<p>双重签名 &ndash; 在 Gasper 中可以重组（Re-orgs），但在 Tendermint 中不可以。不过你还是可以进行双签，造成混乱。这条链会停止，并恢复到社会共识。可以证明，至少有 ⅓ 的质押在同一区块高度上双签，并将在协议中被罚没。因此，你可以这样做，但代价是昂贵的（如果质押的价值很高）。</p>
+<p>数据扣留攻击 &ndash; 最终完成一个区块，但从不提供其背后的数据。隐瞒数据是一种不可归属的过失，因此不能在协议中被罚没。需要社会协调，通过硬分叉在协议外惩罚攻击者。这可能是对 rollup 的最坏攻击。你将无法为一个无效的 ORU 提交欺诈证明，你也无法为一个 ZKR 重新创建状态。值得庆幸的是，我们有数据可用性采样（DAS）节点。他们只是检查数据是否可用，所以即使共识签署了区块，他们也知道要拒绝它。</p>
+<p>防欺诈审查 &ndash; 审查的 DA 层可以恶意地在不同的 rollup 上桥接资金（即使是同一 DA 安全区域内的 rollup）。这并不能通过运行 DAS 节点来保护。这个问题有点微妙，所以我举个例子。</p>
+<p>SR1（主权 rollup）是 Celestia 上的一个 ORU，它想为 SR2 桥接资金。一种选择是直接将对方的轻型客户嵌入到每个 rollup 中，并以 P2 P 方式分发证明。这里没有通过恶意共识的审查攻击载体（存在其他攻击载体，如日蚀攻击）。另外，SR1 可以在想要桥接时，直接将欺诈证明发布到 SR2 的命名空间 Merkle 树上。这实际上是把同步假设（在 P2 P 桥接的情况下）换成了 Celestia 的诚实多数假设（在向 Celestia 发布的情况下）。SR2 只是在自己的 NMT 上寻找它已经在跟踪的证明，并在看到它时执行。然而，现在这允许 SR1 恶意桥接资金到 SR2，而 Celestia 可以在 DA 层审查你的证明。以太坊也可以审查发送到智能合约的欺诈证明，这就是为什么他们的 ORU 需要这么长的超时周期的原因。</p>
+<p>数据扣留和审查攻击并不直接影响 DA 层本身，但它们是依赖 DA 层的 rollup 的攻击媒介。</p>
+<p>TLDR&ndash;DA 层需要经济安全。随着不同程度的份额被接管，你可以做出不良行为。很多人都混淆的一个关键点是 &ndash; 仅仅因为某些东西是可以安全依靠的，并不意味着它是有价值的。你必须首先建立一个有价值的资产，然后才能依靠它来获得有意义的经济安全。确保系统安全的资产需要某种方式来累积价值和/或货币溢价。</p>
+<p>如果你想见证我们这个时代的伟大模块化战争，可以阅读这个 thread。在 Treeverse 上打开它，花一整天的时间来筛选研究它。本报告的绝大部分内容（说实话，我的大部分加密货币知识）都来自于我在看推特混乱时做笔记的过程。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_7pan2ytoee.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<h2 id="总结"><strong>总结</strong></h2>
+<p>创收是建立经济安全的一个关键组成部分，因此了解模块化堆栈中的价值流对设计至关重要。基础层原生资产需要被设计为价值捕获（费用和其他 MEV）和/或成为好的货币。</p>
+<p>就目前的情况而言，DA 捕获的价值可以忽略不计。在可预见的未来，这种情况仍将存在。Rollup 执行层目前捕获的价值相对较小。随着某些层变得流行，并可能包含高价值的金融交易，它们可能会看到有意义的收入。在可预见的未来，具有高价值交易的优质通用结算层可能会占主导地位（甚至可能是 L2 结算层，就像 StarkNet 计划在 L2 层上增加许多 L3)。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0806/25_67hrd3rgb9.png" alt="Delphi Digital：Rollup 完全指南 Part1——模块化经济学"></p>
+<p>这是《硅谷》中的 Russ，他把广播放到了互联网上。不要像 Russ 一样。</p>
+<p>来源：DeFi之道</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41144/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">DeBridge Finance指责被攻击未遂事件与朝鲜黑客Lazarus有关</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41156/">
+                <span class="next-text nav-default">Delphi Digital：Rollup 完全指南 Part2——以太坊 Rollup 堆栈</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rollup-费用"><strong>Rollup 费用</strong></a>
+      <ul>
+        <li><a href="#固定成本与可变成本"><strong>固定成本与可变成本</strong></a></li>
+        <li><a href="#基础层费用---以太坊"><strong>基础层费用 - 以太坊</strong></a></li>
+        <li><a href="#基础层费用---celestia"><strong>基础层费用 - Celestia</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#模块化堆栈中的-mev"><strong>模块化堆栈中的 MEV</strong></a></li>
+    <li><a href="#da-层的经济安全"><strong>DA 层的经济安全</strong></a>
+      <ul>
+        <li><a href="#33-攻击"><strong>33% 攻击</strong></a></li>
+        <li><a href="#67-攻击"><strong>67% 攻击</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#总结"><strong>总结</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

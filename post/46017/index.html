@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Move 如何避免闪电贷重入攻击？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本篇从闪电贷这一最具特色的应用角度出发，分析了以太坊和 Move 分别如何实现闪电贷，Move 怎样规避了闪电贷攻击？" />
+<meta name="keywords" content="闪电贷, Moves" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46017/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Move 如何避免闪电贷重入攻击？" />
+<meta property="og:description" content="本篇从闪电贷这一最具特色的应用角度出发，分析了以太坊和 Move 分别如何实现闪电贷，Move 怎样规避了闪电贷攻击？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46017/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-30T00:00:00+00:00" />
+
+<meta itemprop="name" content="Move 如何避免闪电贷重入攻击？">
+<meta itemprop="description" content="本篇从闪电贷这一最具特色的应用角度出发，分析了以太坊和 Move 分别如何实现闪电贷，Move 怎样规避了闪电贷攻击？"><meta itemprop="datePublished" content="2022-12-30T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-30T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6016">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Move 如何避免闪电贷重入攻击？"/>
+<meta name="twitter:description" content="本篇从闪电贷这一最具特色的应用角度出发，分析了以太坊和 Move 分别如何实现闪电贷，Move 怎样规避了闪电贷攻击？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Move 如何避免闪电贷重入攻击？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-12-30">
+      2022-12-30
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6016 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>撰文： 宋嘉吉、任鹤义</p>
+<p>来源：吉时通信</p>
+<p>摘要：上一篇报告从底层语言特点，对比了 Move 和 Solidity（以太坊）的优势和特点。作为 Web3 的基础性研究，本篇从闪电贷这一最具特色的应用角度出发，分析了以太坊和 Move 分别如何实现闪电贷，Move 怎样规避了闪电贷攻击？</p>
+<p>以太坊合约之间的交互是通过互通消息实现的状态一致，且允许重入、动态调用，这一特点为实现闪电贷提供了基础。期间，合约之间的函数可以互相来回调用——调用过程中会发生控制权转移。如果 DeFi 项目平台合约有漏洞，套利者能够利用其合约的恶意代码调用相应函数进行资产盗取——利用合约之间的状态同步信息差，在一个流程未结束时双花资产（以太坊资产只是赋值），或者重复执行函数（本该不被允许的逻辑）进行盗取。</p>
+<p>重入攻击的前提是攻击者部署的合约存在恶意代码，但最核心的因素是：</p>
+<ul>
+<li>
+<p>以太坊合约调用时控制权存在转移，这为恶意合约提供了主动权；</p>
+</li>
+<li>
+<p>且流程在结束之前可以重入（重复调用），恶意合约可以利用漏洞反复调用函数实现资产盗取（如一笔取款流程未结束时反复提取很多次）；</p>
+</li>
+<li>
+<p>加上以太坊账户资产是以数值余额的形式存在，因此存在反复盗取资产（双花）的可能，或者在流程结束之前恶意合约就可以修改相关账户资产余额数值实现盗取。</p>
+</li>
+</ul>
+<p>Move 提出了闪电贷的新一种运行流程——烫手山芋模式，根本上弃用可重入。「烫手山芋（hot-potato）」模式是一种没有 key、store、copy 和 drop 能力的结构，是 Move 程序在交易执行期间仅使用一次的结构。由于没有 drop、key 或 store 能力，因此烫手山芋只能通过调用「销毁」函数来完结流程——这就如其名所示意的一样，这是一块烫手山芋，在流程中任何处置都是「烫手」的，只能交给销毁函数来完结。具体流程如下：</p>
+<ol>
+<li>
+<p>闪电贷智能合约在工作时会创建了「烫手山芋」（hot-potato）的收据（receipt）；</p>
+</li>
+<li>
+<p>套利者向闪电贷合约贷款时，闪电贷合约发送贷款资金和一个烫手山芋收据（receipt）；</p>
+</li>
+<li>
+<p>套利者利用贷款资金进行套利操作；</p>
+</li>
+<li>
+<p>套利者还款时，调用还款函数（repay），将资金和收据（receipt）发给还款函数，收据被还款函数接收后销毁。</p>
+</li>
+</ol>
+<p>闪电贷完成的前提的最后正确还款、流程结束，在流程结束之前恶意合约可以在以太坊系统实现重复调用、修改相应的资产账户赋值实现盗取。Move 系统闪电贷流程结束的前提除了正确归还资金之外，还需要将烫手山芋这个资源进行一次性回收销毁处理，这确保了闪电贷的原子性。</p>
+<p><em>风险提示：区块链商业模式落地不及预期；监管政策的不确定性。</em></p>
+<h2 id="1核心观点">1. 核心观点</h2>
+<p>闪电贷作为以太坊 DeFi 生态最具特色的应用，其基础是以太坊使用的 Solidity 语言允许动态调用和重入。虽然这种动态调用是智能合约开放性、可组合性的重要体现，但其带来的控制权转移和对合约函数的重复调用带来了不小的安全隐患，行业内利用闪电贷攻击有漏洞的 DeFi 资金池事件时有发生。由于 Move 语言不允许动态调用和重入，它使用一种「烫手山芋」模式很简单地实现了闪电贷，因此完全可以避免以太坊那样的安全问题。</p>
+<p>两种系统在生态应用的工作模式有着明显的区别，这种差别的根本在于 Move 底层语言的特点，我们在前一篇报告《Web3 底层语言：Move 弥补了 Solidity 哪些不足？》已有详述。本篇报告从闪电贷应用角度来比较一下两者实现应用的不同玩法。</p>
+<h2 id="2以太坊闪电贷的基础动态调用与可重入">2．以太坊闪电贷的基础：动态调用与可重入</h2>
+<p>闪电贷（Flash Loan）是一种原生的 DeFi 新产物，可以理解为极速贷款。用户只需要在同一笔交易（区块）中完成借贷、套利、偿还并支付一笔手续费，由于是原子交易，那么借款人无需抵押任何资产即可实现借贷，提供了一种无本金套利方案。</p>
+<p>我们在上一篇报告《Web3 底层语言：Move 弥补了 Solidity 哪些不足？》中提到的：</p>
+<p>「对于模块化和合约组合性方面，Solidity（如以太坊）上面的 Contract 合约通过 library（相当于静态库）进行消息的传递，从而实现 Contract 合约之间的调用、交互。而 Move 语言使用了模块 (module) 和脚本 (script) 的设计，前者类似于 Contract 合约，Move 语言的合约组合性则是模块之间的组合，通过传递资源（即前文提到的 resources）。关于组合性方面，Solidity 和 Move 的区别非常明显。」</p>
+<p>以太坊合约之间的交互是通过互通消息实现的状态一致，且允许重入、动态调用，就是说合约之间的函数可以互相来回调用——调用过程中会发生控制权转移。这一特点为实现闪电贷提供了基础。</p>
+<p>具体来说，在一个以太坊交易中，可以进行转账操作以及其他一些列合约操作，通过调用智能合约中的功能函数，执行多项复杂功能——也就是说，一笔基于以太坊的交易可以融合一系列复杂交易：将借款、套利、偿还等一系列交易操作融合到一起成为可能。Flash Loan 中所有操作都在一个区块时间中完成，按照现在的以太坊的出块速度，Merge 后也就是 12 秒——核心并非是 12 秒，而是这一系列的交易要能够最终盈利并偿还，如果没有做到这一点，这笔交易就不会被打包写入区块，相当于借款人借款、套利（失败）这些操作并不是有效交易，只是临时状态——即原子交易。因此，用户必须通过编程将需要执行的所有步骤形成一项智能合约交易并完成借贷、使用和偿还的三个步骤。</p>
+<p>上述复杂的交易操作由几个合约之间的动态调用实现，且这种调用是可重入的（也就是可以反复调用）。</p>
+<p>目前用户也可以通过如 FURUCOMBO 这一类第三方项目，对闪电贷完成更简易的插件性编程，无需实际编写代码完成智能合约的设计，最终实现闪电贷需要的全套操作。具体的套利流程如下图所示（利用 FURUCOMBO 平台，具体兑价均为示例），目前 Kyberswap 平台上的价格情况 1 sUSD =0.9927 DAI，而 Uniswap 上 1 DAI=1.2411 sUSD，用户发现这两个平台的 DAI-sUSD 交易对价格存在较大的套利空间，即可通过 FURUCOMBO 的界面，设计套利过程。包括：1、从 AAVE 借贷平台的闪电贷功能借出 100 DAI；2、通过 Uniswap 将 100 DAI 兑换成约 122 个 sUSD 代币；3、通过 Kyberswap 平台将 sUSD 代币兑换成约 122 DAI 代币；4、偿还从 AAVE 借出的 100 DAI 代币以及手续费 0.09 DAI；5、整个利用闪电贷的套利流程在一个以太坊交易内完成，并获利约 22 DAI。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1230/4_lno399bfhh.png" alt="Move 如何避免闪电贷重入攻击？"></p>
+<p>如果在这一笔以太坊交易内借贷的资金没有得到偿还，那么整笔借贷交易不会被打包进入区块中，相当于借贷并没有实际发生，所以借贷方的资金不会受任何影响——中间的借贷和套利过程只是临时状态，并未被矿工打包确认。基于闪电贷的特性和时效要求，目前其最广泛的应用是套利交易。套利者无需自身使用资产进行套利操作，只需要通过闪电贷获得所需的资金量完成套利交易，并及时偿还借贷的资金。这极大的降低了套利者的准入门槛，因为理论上任何一个人都可以成为套利者，并且拥有没有上限的套利资金进行操作。</p>
+<p>从上述流程可以看到，以太坊合约控制权在 FURUCOMBO 闪电合约 - 套利者账户合约 -Uniswap 合约 -Kyperswap 合约 - 闪电贷合约之间切换，且可以进行动态调用相应的函数，如果 DeFi 项目平台合约有漏洞，套利者能够利用其合约的恶意代码调用相应函数进行资产盗取——利用合约之间的状态同步信息差，在一个流程未结束时双花资产（以太坊资产只是赋值），或者重复执行函数（本该不被允许的逻辑）进行盗取。</p>
+<p>对于 Move 生态，由于资产并非简单的赋值，且禁止动态调用和可重入，从根本上杜绝了风险，其具体实现我们在后面会阐述。</p>
+<h2 id="3-move-与-solidity-闪电贷的具体实现有怎样的区别">3. Move 与 Solidity 闪电贷的具体实现有怎样的区别？</h2>
+<h3 id="31以太坊闪电贷双刃剑动态调用和可重入性">3.1．以太坊闪电贷双刃剑：动态调用和可重入性</h3>
+<p>从实现方式上来看，以太坊 EVM（基于 Solidity）具有动态调度，可以通过可重入实现闪电贷。如我们在上一篇报告《Web3 底层语言：Move 弥补了 Solidity 哪些不足？》中提到的：</p>
+<p>「以太坊（Solidity）的资产是由相应的合约控制，如果把 Token A 合约比喻为保险箱，保险箱会给所有用户分配一个数值余额，来表达用户所有拥有的 Token A 资产数量，但资产本身还是放在 Token A 合约的保险箱内。而 Move 用户账户本身就是一个单独的大保险箱，由用户自己控制，所有的 Token 资产都放在这个保险箱内。且这些 Token 并不是以数字的形式存在，而是不可复制的、权限受用户控制的资源（类型）。」</p>
+<p>因此以太坊 EVM 实现闪电贷套利的流程是：</p>
+<ol>
+<li>
+<p>用户将调用控制权交给闪电贷合约；</p>
+</li>
+<li>
+<p>闪电贷合约调用来自外部的套利合约程序中的执行函数，将请求的借款金额发送给套利合约，套利合约进行套利操作；</p>
+</li>
+<li>
+<p>套利合约完成套利，将借款归还给闪电贷合约，执行函数完成工作，控制权还给闪电贷合约；</p>
+</li>
+<li>
+<p>闪电贷合约检查还款金额是否正确，正确则套利交易成功，否则失败。</p>
+</li>
+</ol>
+<p>在上面这个过程中，相应的函数是动态调用的，闪电贷合约需要检查归还金额是否正确才会结束，因此控制权的转移过程是随时可以发生的，也就是可重入的——同时需要注意的事，以太坊账户资产是以数值余额的形式存在，重入会带来双花的可能，这也是存在漏洞的地方。调用外部合约的主要危险之一是它们可以接管控制，而这些来自外部的合约程序一旦有漏洞，攻击者可以通过反复调用实现攻击，即可重入攻击。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1230/4_z99s7833mh.png" alt="Move 如何避免闪电贷重入攻击？"></p>
+<p>可重入攻击造就了以太坊历史上最严重攻击之一，直接导致了以太坊分叉，即 2016 年 6 月 17 日的 The DAO 崩溃事件。黑客部署了一个合约，作为「投资者」在 The DAO 中储存一些 ETH。然后黑客通过调用 The DAO 合约中的 withdraw 函数，使得 The DAO 合约给黑客提款，由于黑客合约（fallback 函数）存在恶意漏洞——其没有结束的逻辑，于是 The DAO 始终未能完成提款（此时 The DAO 并不知道黑客收到了提款并将其账户余额变为 0）并拿回控制权，黑客通过不断调用 withdraw 函数发送超过其初始存款 ETH 数量。</p>
+<p>在闪电贷攻击事件中，攻击者往往通过恶意合约实现可重入攻击。如 2022 年 3 月 16 日，黑客通过闪电贷借款，利用借贷项目 Hundred Finance 的漏洞实时重入攻击，最终获利约 2363 ETH。具体流程并不复杂，由于 Hundred Finance 是先转账后记账，黑客通过闪电贷借款，利用攻击合约存入 Hundred Finance 借款池实现抵押贷款，而攻击合约部署的 onTokenTransfer 函数在记账之前实现重复调用借款函数（重入攻击），以一笔抵押资产不断从不同借款池提取借款，由于是先转账后记账，当记账时（流程结束）黑客已经实现了攻击并获利。攻击的核心是：流程未结束之前，攻击者合约可以反复调用相关函数实现资产盗取。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1230/4_aufsiglsvi.png" alt="Move 如何避免闪电贷重入攻击？"></p>
+<p>就好比说，攻击者合约将资产抵押给 A 银行（项目 A 借款池 ) 进行贷款，银行 A 在未完成记账结算之前就开始放款，而银行 A 完成记账结算流程意味着闪电贷交易要成功（原子性），这时候资产被 A 入库记账。但由于银行 A 和其他银行之间的信息不同步（合约函数之间的状态不同步），攻击者在 A 银行还未完成资产入库记账时（即被攻击合约贷款流程未结束时，这时候闪电贷工作流程还未结束，合约函数调用还可以进行），再次以该资产在 B、C 等其他银行进行抵押贷款（重入），待流程结束，攻击者已经完成闪电贷攻击并获利。</p>
+<p>重入攻击的前提攻击者部署的合约存在恶意代码，但最核心的因素是：</p>
+<ul>
+<li>
+<p>以太坊合约调用时控制权存在转移，这为恶意合约提供了主动权；</p>
+</li>
+<li>
+<p>且流程在结束之前可以重入（重复调用），恶意合约可以利用漏洞反复调用函数实现资产盗取（如一笔取款流程未结束时反复提取很多次）；</p>
+</li>
+<li>
+<p>加上以太坊账户资产是以数值余额的形式存在，因此存在反复盗取资产（双花）的可能，或者在流程结束之前恶意合约就可以修改相关账户资产余额数值实现盗取。</p>
+</li>
+</ul>
+<p>「可重入」是实现闪电贷的基础，然而一旦目标合约有漏洞，攻击者便可以实施重入攻击。这在我们前一篇报告中有详述。</p>
+<h3 id="32move-的烫手山芋没有重入的闪电贷">3.2．MOVE 的「烫手山芋」：没有重入的闪电贷</h3>
+<p>Move 语言禁止动态调用和可重入，这从根本上杜绝了重入攻击。但 Move 系统的资产作为资源类型，一旦借出就相当于发生了真实转移，该如何确保闪电贷顺利还款呢？</p>
+<p>Move 提出了闪电贷的新一种运行流程——烫手山芋模式，根本上弃用可重入。「烫手山芋（hot-potato）」模式是一种没有 key、store、copy 和 drop 能力的结构，是 Move 程序在交易执行期间仅使用一次的结构。由于没有 drop、key 或 store 能力，因此烫手山芋只能通过调用「销毁」函数来完结流程——这就如其名所示意的一样，这是一块烫手山芋，在流程中任何处置都是「烫手」的，只能交给销毁函数来完结。具体流程如下：</p>
+<ol>
+<li>
+<p>闪电贷智能合约在工作时会创建了「烫手山芋」（hot-potato）的收据（receipt）；</p>
+</li>
+<li>
+<p>套利者向闪电贷合约贷款时，闪电贷合约发送贷款资金和一个烫手山芋收据（receipt）；</p>
+</li>
+<li>
+<p>套利者利用贷款资金进行套利操作；</p>
+</li>
+<li>
+<p>套利者还款时，调用还款函数（repay），将资金和收据（receipt）发给还款函数，收据被还款函数接收后销毁。</p>
+</li>
+</ol>
+<p>我们在前一篇报告中已经分析过，账户资产和收据（receipt）都是一种资源类型，「不能复制、丢弃或重用，可以被安全地存储和转移」，因此收据（receipt）必须被处理（且只能使用一次），而非像以太坊那样的对账户进行数值赋予处理就行。因此烫手山芋模式可以确保被借出的资产（资源类型，一旦借出就真实发生转移了）必须被归还。收据（receipt）作为烫手山芋，就好比是定时一个引爆器（这里的定时，是闪电贷套利作为一个原子交易的「时间」，并非具体的时长），资金和引爆器一起绑定被借出，而任何一方都无法收留引爆器，它必须被还回原处得以拆除——否则交易都无法完成，因此闪电贷资金可以确保会被归还。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1230/4_ayg5s6gvmr.png" alt="Move 如何避免闪电贷重入攻击？"></p>
+<p>闪电贷完成的前提的最后正确还款、流程结束，在流程结束之前恶意合约可以在以太坊系统实现重复调用、修改相应的资产账户赋值实现盗取。Move 系统闪电贷流程结束的前提除了正确归还资金之外，还需要将烫手山芋这个资源进行一次性回收销毁处理，这确保了闪电贷的原子性。</p>
+<p>从应用角度看，Web3 的底层代表要在保证开放性、可重构的基础上提高代码安全性。在 Web3 中，代码不仅包含信息，还直接涉及资产调用，保证用户资产安全是重中之重，否则 Web3 将是黑暗森林。以太坊的生态让大家看到了智能合约的活力，下一个时代将在此基础上向安全性、合规性继续演进，这也是我们当下关注 Web3 底层语言进化的核心逻辑，或者这孕育着下一轮的创新浪潮。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45993/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">FBI正在调查3Commas数据泄露事件</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46025/">
+                <span class="next-text nav-default">Web3创始人的成功之道</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1核心观点">1. 核心观点</a></li>
+    <li><a href="#2以太坊闪电贷的基础动态调用与可重入">2．以太坊闪电贷的基础：动态调用与可重入</a></li>
+    <li><a href="#3-move-与-solidity-闪电贷的具体实现有怎样的区别">3. Move 与 Solidity 闪电贷的具体实现有怎样的区别？</a>
+      <ul>
+        <li><a href="#31以太坊闪电贷双刃剑动态调用和可重入性">3.1．以太坊闪电贷双刃剑：动态调用和可重入性</a></li>
+        <li><a href="#32move-的烫手山芋没有重入的闪电贷">3.2．MOVE 的「烫手山芋」：没有重入的闪电贷</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

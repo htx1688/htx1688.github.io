@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          最全最细的零知识 (ZK) 证明解读 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="零知识 (ZK) 证明就像三箭资本的 Su Zhu 和 Kyle Davies一样，他们出生于上世纪八十年代，但直到最近才成为热门话题。" />
+<meta name="keywords" content="零知识证明" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41715/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="最全最细的零知识 (ZK) 证明解读" />
+<meta property="og:description" content="零知识 (ZK) 证明就像三箭资本的 Su Zhu 和 Kyle Davies一样，他们出生于上世纪八十年代，但直到最近才成为热门话题。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41715/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="最全最细的零知识 (ZK) 证明解读">
+<meta itemprop="description" content="零知识 (ZK) 证明就像三箭资本的 Su Zhu 和 Kyle Davies一样，他们出生于上世纪八十年代，但直到最近才成为热门话题。"><meta itemprop="datePublished" content="2022-08-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8100">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="最全最细的零知识 (ZK) 证明解读"/>
+<meta name="twitter:description" content="零知识 (ZK) 证明就像三箭资本的 Su Zhu 和 Kyle Davies一样，他们出生于上世纪八十年代，但直到最近才成为热门话题。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">最全最细的零知识 (ZK) 证明解读</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-19">
+      2022-08-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8100 字 -
+        预计阅读 17 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原标题：未来10年Web3/区块链最重要的解决方案之一，花10分钟了解一下？</p>
+<p>零知识 (ZK) 证明就像三箭资本的 Su Zhu 和 Kyle Davies一样，他们出生于上世纪八十年代，但直到最近才成为热门话题。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_ilpbg7k599.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>你可能听说过很多关于它们的信息，但 ZK 证明到底是什么？</p>
+<p>你也许了解了基础知识，但想知道使用 ZK 证明最有前途的项目是什么？</p>
+<p>现在就让我们通过ZK证明的<strong>概述、应用项目和底层技术</strong> 来回答这些简单又复杂的问题。</p>
+<p><strong>概述</strong></p>
+<p><strong>1.什么是 ZK 证明？</strong></p>
+<p>ZK 证明使用密码学允许某人（证明者）向其他人（验证者）证明事实是百分百真实的，但除了特定真实性的陈述之外，不会透露任何额外信息。即能保守秘密，又能让人相信你。<br>
+<strong>另一个比较通俗的定义是</strong> ：ZK证明本质上是让某人证明他们知道或拥有某些东西，而不会泄露他们知道或拥有什么的任何信息。</p>
+<p>也许举几个例子会更有助于理解：</p>
+<p>可以使用 ZK 证明来证明我拥有某个 NFT 的事实，而无需透露我拥有哪一个、购买时间或所花金额。</p>
+<p>可以使用 ZK 证明来证明将Token从账户 A 发送到账户 B 的以太坊交易的有效性，而无需透露任一账户的Token余额或发送的金额。</p>
+<p>ZK 证明在1985 年 MIT 的一篇研究论文中第一次出现。像许多技术一样，ZK 证明首先引起了大量理论论证，然后在进一步发展和完善后逐渐找到实际运用。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_03cpnq1ykg.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>麻省理工学院研究复杂加密问题的研究人员</p>
+<p><strong>最早的 ZK 证明是交互式的。</strong> 为了证明某事，你必须和验证者玩一个问答游戏。就像测谎仪测试——<strong>验证者不断对证明者所拥有的“知识”进行一系列提问。通过不停的提问，让验证者相信证明者的确知道这些”知识”。</strong> 但是这样的方法并不能使人相信证明者和验证者都是真诚的，因为两者可以提前串通，以便证明者可以在不知道答案的情况下依然通过验证。</p>
+<p><strong>后来发展到非交互式的。</strong> <strong>非交互式是证明者现在可以生成一个东西，一段数据，作为他的 ZK 证明提交给验证者，而无需多轮沟通</strong> 。这种ZK 证明不太像游戏/仪式/协议，而更像是可以由证明者生成并提交给验证者的不可伪造物品，避免了证明者和验证者串通的可能性。</p>
+<p><strong>2.ZK 证明有什么用？</strong></p>
+<p>目前ZK证明有两个主要的用途：</p>
+<ul>
+<li>
+<p><strong>隐私：在区块链上进行活动时尽量减少公开的数据量。</strong> Zcash就是一个很好的例子：</p>
+<p>与比特币一样，Zcash 交易数据需要发布到公共区块链；但与比特币不同的是，Zcash 提供了机密交易和财务隐私的选择，利用零知识证明允许在不透露发送者、接收者或交易金额的情况下验证交易。</p>
+<p>其他利用 ZK 证明保护隐私的项目有Iron Fish、World coin和前两天被监管的Tornado Cash。</p>
+</li>
+<li>
+<p><strong>可扩展性：允许在链下执行密集计算，使成本更低，然后创建一个简洁的证明，表明计算是被诚实执行的，可以在链上发布。</strong></p>
+<p>链上和链下各司其职，变得专业化，专注于他们最擅长的事情。<strong>我们可以使用集中式、高性能、脱链系统快速有效地处理一大堆交易，然后使用去中心化、不可变、去信任的区块链作为记录谁拥有什么的最终事实来源。</strong></p>
+</li>
+</ul>
+<p>ZK 证明相对于所有链下交易的有效性证明而言计算起来非常小，并且验证速度非常快。<strong>这要归功于一个几乎神奇的属性：一旦他们创建了一个证明说“是的，这数十亿次计算都被 100% 证明是正确的”，验证者可以确认证明是正确的，而无需自己再进行数十亿次计算。</strong></p>
+<p>有很多 ZK rollup 项目专注于可扩展性，还有一些项目希望同时提供隐私和可扩展性，包括Aztec和Espresso Systems 。</p>
+<p><strong>3.炒作</strong></p>
+<p>ZK 证明是一种通用技术。过去的几次区块链牛市无疑推动了对 ZK 研发的投资，但 ZK 证明的第一个实际应用出现在中本聪发布比特币白皮书之前。链下世界中有许多令人兴奋的ZK证明应用——比如身份管理、最低年龄验证、匿名凭证、金融资产的评级和风险评估以及数字投票。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_tekqjyispt.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>对于链上和链下应用程序的所有 ZK证明炒作，如果能够推动技术向前发展出新的用途，那是一件好事。但是这种期望是周期性的。当 ZK证明被炒得火热的时候，人们给予大量关注，但是当意识到技术也不是 100% 完美的时候，人们的情绪不可避免地会变得冷淡。</p>
+<p><strong>应用项目</strong></p>
+<p><strong>1.用户视角下的ZK Rollups</strong></p>
+<p>前面已经提到了 ZK-rollups 如何运作的：<strong>它不需要在以太坊上运行缓慢且收费昂贵的计算，而是在链下进行这项工作（即在第 2 层（L2）区块链上）：创建一个证明说你诚实地进行了所有交易，然后在以太坊上发布证明。</strong></p>
+<p>这对用户来说实际上是什么样的呢？</p>
+<p>首先，你找到一个你感兴趣的 ZK rollup 项目。每个项目都有自己独立的应用程序和项目生态系统，所以找一个你喜欢的 DeFi 或 NFT 协议。<br>
+假设 L2 在其 L1 结算层使用以太坊。它将在L1以太坊上拥有一个或几个智能合约，这些合约可以完成一些重要的工作：</p>
+<p><strong>存储有关 L2 链上正在发生的事情的所有相关数据（账户余额等）。该合约可能不会看到 L2 块的实时视图，因为 L2 交易在被提交到以太坊上的汇总中之前不会被视为官方交易；</strong></p>
+<p><strong>检查托管证明以确保它们是合法的代码。当汇总提交到以太坊时，验证者智能合约会确保汇总的证明有效，然后再在 L1 上正式发布。</strong></p>
+<p><strong>也许一些类比可以让你更好理解：</strong> 验证者就像保镖一样，确保来自 L2 的汇总在进入以太坊之前是有效的。或者，在 L2 上产生的区块就像是发表一些关于我有独立科学论文的粗略声明，然后被验证者检查并提交到以太坊就像是经过同行评审并在受人尊敬的期刊上发表。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_vs7gzk1638.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>这听起来好像并不是很简单，但了解 ZK rollup 架构的基础知识是理解ZK rollup 项目交互的关键基础。<strong>基本的用户流程可能如下所示：</strong></p>
+<p>（1）向rollup项目在以太坊上的智能合约发送一些 ETH，用于存储/锁定您的资金。</p>
+<p>（2）短暂延迟后，L2 链会收到您已锁定这些资金，并会解锁等值的硬币供您在 L2 上使用。这是一个非常典型的桥接体验。</p>
+<p>（3）您可以在 L2 上随意使用您的Token。你可以交换，投资，或者用来购买 NFT。然后定期（通常以分钟为单位）将rollup发送到以太坊，表示你在 L2 上最近发生的所有活动都已经完成。</p>
+<p>（4）现在您决定要将资金提取回以太坊，因为您在 L2 赌场玩得很开心，但现在您想将筹码（L2 上的硬币和Token）兑现为真钱（ETH 和 L1 Token）。为此，您将 L2 Token发送到 L2 链上的销毁地址，并等待证明该行动的rollup汇总在以太坊上发布。发布完成后，您被锁定在以太坊智能合约中的资金就会被解锁，返回到您的钱包。</p>
+<p><strong>2.ZK rollup VS. Optimistic rollups</strong></p>
+<p>本篇文章不会详细介绍ZK rollups 和 Optimistic rollups，因为有很多文章对此进行比较，但这里有一句话总结：<strong>Optimistic rollups 对发布到 L1 的交易采取“在被证明有罪之前是无辜的”的方法（默认情况下，所有交易都被认为是有效的，但是任何观察到错误 rollup 的人都可以将其调回并获得奖励），而 ZK rollups，正如我们已经可见，在进入L1之前都被认为不可信，要求所有链下计算在进入 L1 之前使用有效性证明来验证自己。</strong></p>
+<p>每种方法都有利有弊，但 ZK rollups 的一个主要好处是用户可以更快地将资金提取到 L1。在从Optimistic rollups中提款后，必须等待挑战期到期（大约 7 天）才能解锁资金，因为需要等待被验证。<br>
+不过V神长期看好 ZK 路线：</p>
+<blockquote>
+<p>总的来说，我自己的观点是，在短期内，<strong>Optimistic rollups</strong> 可能会在通用 EVM 计算中胜出，而 ZK rollups可能会在简单的支付、交换和其他特定于应用程序的用途中胜出，但在随着 ZK-SNARK 技术的改进，中长期 ZK rollups将在所有用途中胜出。</p>
+<p>—维塔利克（2021 年 1 月）</p>
+</blockquote>
+<p><strong>3.Rollups vs. Validiums vs. Volitions</strong></p>
+<p>另一种类似rollup的扩容解决方案是validiums。<br>
+<strong>Volitions是混合扩容解决方案，让用户能够在“zk rollup模式”和“validium 模式”之间进行选择。</strong></p>
+<p>当ZK rollups发布到 L1 上时，它既包括证明L2 上的所有活动都是合法的，也包括自上次汇总以来 L2 上账户余额所有变化的情况。这一点至关重要，因为当您想从 L2 中提取资金时，您需要之前的情况来说明“这是我在 L2 上所做的，这意味着我应该能够提取特定数量的硬币和Token。”</p>
+<p><strong>还有一种叫做validium的东西，它算是另一种类似rollup的扩容解决方案。</strong></p>
+<p>Validiums 的工作方式与传统的ZK rollups几乎相同，并且它们具有更便宜和更具可扩展性的额外好处。</p>
+<p>不过问题是，不够安全。</p>
+<p>在 L1 上发布的 Validiums 不包括在 L2 上拥有资金的所有数据——即将资金提取到以太坊上的数据也是未知。相反，数据存储在链下。如果信任存储该数据的个人/网络/公司，这不是问题，但最好确定他们绝对是可靠的。因为如果你在 L2 上存储了 100 万美元，然后存储这些数据的项目方被黑客入侵并丢失了数据，或者被政府冻结，或者因为你在 Twitter 上说了愚蠢的话而对你进行惩罚，那么你可能会失去你的钱…</p>
+<p>或者，更准确地说，它被锁定了。</p>
+<p>有机会在这里用一句精辟的“不是你的钥匙，不是你的硬币”类型的口头禅，来传播对有效性潜在风险的认识，但我能想到的最好的办法是“如果数据不可用，你的硬币就是可攻击的”。因此，项目最好能够很好地跟踪他们的汇总数据。</p>
+<p><strong>而某些项目正在使用volitions混合扩容解决方案，让用户能够在“zk rollup模式”和“validium 模式”之间进行选择。</strong> 这也被宣传为两种选择之间的折衷方案——项目将它们吹捧为“拥有你的蛋糕并吃掉它”或“世界上最好的”的一种方式。因此了解 rollups 和 validiums 之间的区别很重要。<strong>当 L2 向 L1 链提交证明时，它们允许用户选择取款所需的数据是否也发布在 L1 上，或者是否存储在其他地方。</strong></p>
+<p>总的来说，Validiums 比 ZK-rollups 便宜，但让你的资金在 L2 上有冻结的风险。那些用volitions的项目会让你在Validiums 还是 ZK-rollups之间进行选择 。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_gkh0559p67.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>资料来源：StarkWare</p>
+<p><strong>4.ZK项目</strong></p>
+<p>使用 ZK 技术的项目太多了，无法一一列出，但这里有一些主要类别和项目。</p>
+<p><strong>（1）zkEVM</strong></p>
+<p>在过去的一个月里，几个不同的项目都通过推出所谓的zkEVM登上了头条。这些协议之间的竞争被称为“ zkEVM 战争”和“ ZK Rollup Race ”，人们很快就发现，每个协议都声称已经击败了其他协议：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_1ojk3ia75u.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>三个主要参与者是Scroll 、Matter Labs （zkSync 的创建者）和Polygon 。</p>
+<p><strong>zkEVM 很重要，因为它们允许 ZK rollups 支持比目前更多的应用程序</strong> 。第一波 ZK rollups允许在超级可扩展且廉价的 L2 上执行基本操作——比如发送 ETH 和转移Token。但是使用 zkEVM，开发人员可以编写任意复杂的智能合约代码并将其部署到 ZK 驱动的 L2 上。最重要的是，他们可以使用他们在以太坊本身上使用的相同的 Solidity 代码来做到这一点。这意味着 ZK-rollup L2s 现在可以发展成为疯狂、复杂、可组合的狂野西部链，既充满了机遇但是也充满了混乱。</p>
+<p><strong>（2）Polygon</strong></p>
+<p>Polygon正在构建真正数量惊人的缩放解决方案。老实说，很难跟踪它们。他们被描述为“瑞士军刀的缩放”，大概是基于这个模型：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_jt4qat0h7i.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p><strong>这是他们目前的产品线，其中四个提到了ZK证明（包括上文提到的zkEVM）：</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_71v1a6oazj.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>每个项目的更多信息都可以在他们的网站上找到，Polygon的文档非常好， 所以在这里就不重复细节。</p>
+<p><strong>（3）StarkWare</strong></p>
+<p>StarkWare是一家构建 ZK 扩展技术的公司，由真正的 ZK 巨头 Eli Ben-Sasson 创立。<strong>Eli 共同发明了 STARKs（一种高级的 ZK 证明）</strong> ，并且是 Zcash 的创始科学家。<strong>他们有两个主要产品：</strong></p>
+<p><strong>StarkEx：允许每个应用程序构建自己的个人、许可的 ZK 系统</strong> 。例如，dYdX（一个Layer 2 上运行的去中心化的智能合约交易平台）和 Immutable （第一个 Layer 2 的 NFT 交易平台）已经使用 StarkEx 分别为永续交易（永续交易类似于股票,只要这只股不退市,您可以一直持有）和 NFT 建立了自己的特定应用 ZK 项目。但是这些应用程序是孤立的——项目之间没有可组合性，因此一个 StarkEx 项目不能直接与另一个项目“对话”。</p>
+<p><strong>StarkNet：一种更新的产品，类似于通用区块链。</strong> 任何开发人员都可以创建智能合约并将其部署在 StarkNet 上——它是无需许可的，例如 StarkEx。项目之间是完全可组合的，所有交易都在以太坊上汇总和结算。我怀疑你很快就会听到很多关于 StarkNet 的消息，因为它的Token计划在 9 月推出?。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_8rkkz4ftff.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p><strong>（4）BTC &amp; ETH</strong></p>
+<p><strong>Zcash，前面已经提到过几次，是隐私币领域的主要链。</strong> 鉴于它与比特币的相似之处，我们是否会看到 BTC 本身采用 ZK 证明来实现隐私还未可知？那么以太坊呢——它是否可以从 L2 的剧本中借鉴一页来使用 ZK 证明来实现可扩展性？简而言之：BTC 不行，ETH 可以。</p>
+<p>创造比特币的早期密码朋克非常注重隐私。Zcash 的联合创始人 Zooko认为，鉴于大多数高级用户现在接受链上取证允许交易追溯到现实生活中的身份，因此 BTC 在隐私方面已经迷失了方向。<strong>众所周知，比特币社区并不乐于接受新功能，</strong> 因此短期内可能不会有重大的隐私升级，Zooko 预测 BTC 最终会因此而走向末路！！！</p>
+<p>有趣的是，在对被称为 BitcoinTalk 论坛的神圣文本进行了一些调查之后，我发现其中一个讨论中只有中本聪本人提到了 ZK 证明。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_c8k4wvqc2e.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>比特币 maxis 检查 bitcointalk.org 的神圣经文</p>
+<p>不幸的是，<strong>在当时讨论时，ZK 证明还不够先进，无法支持 Zcash（是首个使用零知识证明机制的区块链系统） 级别的功能</strong> ，这就是中本聪将它们注销的原因：</p>
+<blockquote>
+<p>这是一个非常有趣的话题。如果找到解决方案，比特币更好、更容易、更方便的实施将是可能的。&hellip;&hellip;在这种情况下，很难想到如何应用零知识证明。（2010 年 8 月 11 日）</p>
+</blockquote>
+<p>当一起谈到比特币和 ZK 证明时，时机是不对的。当时比特币很年轻很好改造的时候，密码学太原始而无法实施，而现在应对复杂的升级，比特币的又有太多妨碍的惯性。或许这就是生活。C’est la vie.</p>
+<p>不过，<strong>在实施新技术方面，以太坊更加进步。</strong> 在最近关于 zkEVMs 的一篇文章中，<strong>V神提到 ZK 证明可以“更容易验证以太坊链本身”，并大声疾呼以太坊的隐私和扩展探索团队正在为此工作。</strong> 毕竟，L2s 没有理由垄断 ZK 技术。但也不要过于自信了——相对于更小、更灵活的项目，以太坊的发展速度非常缓慢。</p>
+<p><strong>底层技术</strong></p>
+<p><strong>1.SNARKs——一项突破</strong></p>
+<p><strong>SNARK 是一种 ZK 证明，于 2011 年首次出现，并帮助实现了许多现实的应用程序。目前大多数 ZK 项目都利用 SNARK。</strong><br>
+SNARK 代表“简洁的非交互式知识论证”（英文全称Zero-Knowledge Succinct Non-Interactive Argument ofKnowledge），这是一个很好的技术，但了解它们的作用更有用：</p>
+<ul>
+<li>
+<p><strong>“简洁</strong> ”意味着证明比它们所代表的所有计算总和要小得多。例如，可以获取需要在以太坊区块链上单独记录的一大堆交易，并创建一个仅用几百字节证明其有效性的 SNARK。</p>
+</li>
+<li>
+<p><strong>“非交互式”</strong> 意味着您可以使用一台计算机生成一个证明，该证明可以作为某物（例如您在 L2 区块链上的账户余额）的不可伪造证明，您可以将该证明提交给另一台计算机/智能合约将验证它。</p>
+</li>
+<li>
+<p><strong>ZK：</strong> 像所有 ZK 证明一样让您在分享尽可能少的信息的同时证明某些事情。</p>
+</li>
+<li>
+<p><strong>速度：</strong> 由于这些证明非常小，因此可以非常快速地进行验证。</p>
+</li>
+<li>
+<p><strong>安全性：</strong> SNARK的一个主要缺点是进行证明的计算机和进行验证的计算机必须就一组称为公共参考字符串 (CRS)的参数达成一致。要制作 CRS，您需要使用随机源（熵），而这些随机数非常强大。如果坏人发现了他们，他们可以创建任意证据并欺骗验证者认为它是有效的。这就是为什么任何使用 SNARK 的合法项目都会确保在使用这些随机数后立即销毁它们。</p>
+</li>
+</ul>
+<p><strong>2.STARK VS. SNARK</strong></p>
+<p>STARK是SNARK 的小兄弟，其中字母“N”变成了“T”，其中“T“是“Transparent”，代表“透明的”。（Zero-Knowledge Succinct Transparent-Interactive Argument ofKnowledge，中文意思：简洁化的全透明零知识证明）</p>
+<p>它们各自有不同的优缺点。这里说一下这两种 ZK 证明之间的主要区别：</p>
+<ul>
+<li>
+<p><strong>证明大小：</strong> STARK 比 SNARK 大，这也意味着它们在以太坊上验证的成本更高，因为更大的证明 = 更多的计算 = 更高的gas费。</p>
+</li>
+<li>
+<p><strong>可扩展性：</strong> 通常认为 STARK 比 SNARK 更有效，具体取决于实现情况。证明和验证 STARK 的复杂度规模相对于被证明的计算复杂度呈拟线性增长，而SNARK的复杂度呈线性增长。这意味着在证明更大的计算量时，STARKs 比 SNARKs 具有更大的优势。</p>
+</li>
+<li>
+<p><strong>生态系统和项目：</strong> 使用 SNARK 的项目比使用 STARK 的项目多得多，因为 SNARK 的存在时间更长。</p>
+</li>
+<li>
+<p><strong>递归：</strong> SNARK 支持递归——您可以创建一个父 SNARK 来证明多个子 SNARK——这是许多扩展解决方案使用的主要功能。STARK 不支持递归。</p>
+</li>
+<li>
+<p><strong>量子安全：</strong> SNARK 使用椭圆曲线密码术，这不是量子安全的。量子计算的进步可能会使基于 SNARK 的系统容易受到攻击。STARK 不易受到攻击，因为它们的加密方案依赖散列函数。</p>
+</li>
+<li>
+<p><strong>可信设置：</strong> 如前所述，SNARK 在创建 CRS 期间需要可信设置。STARK 通过利用可公开验证的随机性来生成证明者和验证者共享的参数，从而避免了这个不便的问题。</p>
+</li>
+</ul>
+<p>需要注意的是，这些特点在不断发展。最近出现了新的基于 SNARK 的方案，以解决传统 SNARK 的弱点。</p>
+<p><strong>3. zkEVM 权衡</strong></p>
+<p>对于任何关心 zkEVM 产品细节方面的人（尤其是开发人员）来说，值得强调的是，并非所有的 zkEVM 都是一样的。</p>
+<p><strong>这些项目必须在与以太坊的兼容性和性能之间做出权衡。</strong> 所谓的“EVM 兼容”，即zkEVM 能够验证在与普通以太坊完全相同的环境中运行的程序。</p>
+<p>例如，Scroll 不仅与 Solidity 编程语言等高级抽象层的 EVM 兼容，它还与字节码级别的 EVM 兼容。这一点很重要，因为它使 Scroll 上的开发体验与在以太坊本身上开发体验几乎没有区别，有区别的是使用检查单个操作码的复杂调试器工具。它还允许重复使用熟悉且经过实战考验的以太坊客户端，例如 geth，这意味着 zkEVM 可以草拟对以太坊本身的升级，而只需从项目中进行最少的额外工作。</p>
+<p>这些zkEVM采用以Solidity编写的智能合约代码，采用这种方法可以让代码更有效地运行，但它抛弃了很多以太坊现有的基础设施。例如，众所周知，geth客户端具有某些限制，这就是为什么像zkSync这样的团队已经用其他用Rust编写的软件替换了它。</p>
+<p>将此与“与 EVM 兼容”的zkEVM 进行比较，后者在与 EVM 协调方面并不那么严格。zkSync 团队的一位成员这样描述了这两种类型的 zkEVM：<strong>如果您在 Windows 计算机上运行 Photoshop 软件，并且现在想在 Mac 上运行它，您可以重新编译 Photoshop代码使其针对 Mac 进行优化，或者 在您的 Mac 上运行 Windows 模拟器，并让该模拟器运行 Windows 版本的 Photoshop。很明显，前者会更有效率。</strong></p>
+<p>诚然，这种观点是有偏见的，并且忽略了更高兼容性所带来的一些好处，但这是一个很好的类比。在这一点上，现在说哪种方法最终会证明更好的策略还为时过早但我们应该很高兴有各种各样的实验现在同时进行。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_him9kpv156.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>随着 对ZK证明以及其他新兴加密技术的热议，让我相信我们可能正处于“加密，而不是区块链”的风口浪尖，类似于过去几年的“区块链，而不是比特币”的叙事情况一样。甚至一些比特币 和 Web3/区块链怀疑论者也指出，创新 ZK 证明技术的持续发展是（他们认为）原本毫无价值的替代链的一种救赎。</p>
+<p><strong>综上所述——ZK 证明的出现令人兴奋。</strong></p>
+<p>但是也许也会出现惊人的反差，说不定所有这些月球数学完全是虚构的，我们被一个全行业的阴谋所欺骗。毕竟，很多 ZK 证明的密码学解释听起来emmm……</p>
+<p><img src="https://img.bibiqing.com/news/2022/0819/18_7q3y2ft1st.png" alt="最全最细的零知识 (ZK) 证明解读"></p>
+<p>原文链接：https://internbreakdowns.substack.com/p/intern-breakdown-4-zero-knowledge<br>
+原文标题：Zero-Knowledge Proofs<br>
+原文作者：Mark Bissell and CMS Intern</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41711/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">最佳 DeFi 代币模型：治理代币 or 生产性代币 or veToken？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41654/">
+                <span class="next-text nav-default">“最强组合” 诞生：银行和 DeFi 如何携手打造去中心化经济？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

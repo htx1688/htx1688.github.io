@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Unicode 视觉欺骗攻击深度解析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="同形异意攻击（Homoglyph Attack）是非常古老的一种视觉欺骗攻击方式。" />
+<meta name="keywords" content="安全漏洞" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42949/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Unicode 视觉欺骗攻击深度解析" />
+<meta property="og:description" content="同形异意攻击（Homoglyph Attack）是非常古老的一种视觉欺骗攻击方式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42949/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="Unicode 视觉欺骗攻击深度解析">
+<meta itemprop="description" content="同形异意攻击（Homoglyph Attack）是非常古老的一种视觉欺骗攻击方式。"><meta itemprop="datePublished" content="2022-09-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5878">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unicode 视觉欺骗攻击深度解析"/>
+<meta name="twitter:description" content="同形异意攻击（Homoglyph Attack）是非常古老的一种视觉欺骗攻击方式。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Unicode 视觉欺骗攻击深度解析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-23">
+      2022-09-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5878 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>一、前言</strong></p>
+<p>2022 年 9 月 13 日，Unicode 15.0 正式版发布。在 Unicode 15.0 中增加了 4,489 个字符，总共字符数量达到了 149,186 个。这些新增内容包括 2 个新脚本，总共脚本数量达到 161 个，以及 20 个新的表情符号字符。同时，<strong>几个重要的 Unicode 规范也随着 15.0 版本进行了更新，这其中就包括 Unicode 安全机制（UTS#39）这个规范，它意在减少因 Unicode 字符视觉欺骗带来的同形异意攻击（Homoglyph Attack）。</strong></p>
+<p><strong>同形异意攻击（Homoglyph Attack）是非常古老的一种视觉欺骗攻击方式。</strong> 在机械打字机时代，很多打字机为了简化设计和降低制造及维护成本，键盘上没有单独的 1 和 0。打字员会使用小写字母 L 和大写字母 i 来代替数字 1，使用大写字母 O 来代替数字 0。当这些相同的打字员在 70 年代和 80 年代初转变为计算机键盘操作员时，他们的旧键盘习惯在他们的新职业中继续存在，并成为极大混乱的源泉。这应该是视觉混淆、同形异意攻击集中爆发的一个时期。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_isw6qdfzgy.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>在此之后，打字机被文字处理器所代替，信息化时代逐步到来，字符编码也开始由 ASCII 字符集逐渐扩充到 Unicode 字符集。我们开始使用浏览器或其他应用客户端来呈现文本，那些在某些语境中不适合使用同形字书写 URL、公式、源代码、ID 等等，其相似的外观继续使得用户可能在视觉上无法区分。</p>
+<p>Unicode 视觉欺骗取决于视觉上可以混淆的字符串：两个 Unicode 字符串外观上非常相似，在通常的屏幕分辨率下，它们以小尺寸的普通字体出现，很容易让人们误认为是另一个。视觉混淆没有明显的规则：当尺寸足够小时，许多字符都看起来像其他字符。“屏幕分辨率下的小尺寸”是指大多数脚本使用 9-12 像素的字体。易混淆性还取决于字体的风格：对于传统的希伯来字体，许多字符只能通过细微的差别来区分，而这些细微差别可能在小尺寸时丢失。在某些情况下，字符序列也可用于欺骗：例如，“rn”（“r”后跟“n”）在许多 sans-serif 字体中与“m”在视觉上混淆。</p>
+<p>近些年来，因 Unicode 编码欺骗发生了很多恶意攻击事件，人为或编译器或 AI 都可能因 Unicode 欺骗产生错误的判断和解析。例如 2021 年有研究人员在谷歌等商业系统中使用 Unicode 的这些特殊字符对 NLP 模型进行对抗攻击。他们通过一些不可察觉的编码注入——比如一个不可见字符、同形符、重新排序或删除的操作字符，可以显著降低一些模型的性能，大多数模型都可能在功能上失灵（https://arxiv.org/abs/2106.09898）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_wco7suy623.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>2022 年 Trezor 这款知名的硬件钱包出现了大量的网络钓鱼网站，钓鱼链接https://suite.trẹzor.com。这个钓鱼链接和真实 Trezor 官方网站 trezor.io 极为相似。（此案例来源于《区块链黑暗森林自救手册》：https://github.com/slowmist/Blockchain-dark-forest-selfguard-handbook/blob/main/README_CN.md）</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_t4u66ogi1w.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>虽然基于客户端的尤其是浏览器端的抵御视觉欺骗的防御措施一直在完善，但并没有办法完全封堵住这种攻击。第一，视觉欺骗是一种很难被完全消亡的攻击，因为在足够小的尺寸情况下人自身的生理视觉体系也是无法分辨的；第二，Unicode 字符集非常庞大，并且在不断的增加；第三，需要标准组织、浏览器开发商、域名注册商等多方共同协作去完成。</p>
+<p>本文主要研究当下 Unicode 中因字形渲染、混合脚本、PunyCode、双向文本、组合字符引起的视觉欺骗问题，结合作者发现的不同类型的 Unicode 视觉欺骗漏洞，分享漏洞挖掘过程方法并给出一些防御的思路。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_ftqdmvq5m0.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p><strong>二、字形渲染带来的安全风险</strong></p>
+<p>当字体或渲染引擎对字符或字符序列的支持不足时，就使得本应该在视觉上可以区分的字符或字符序列出现新的问题&ndash;视觉混淆。尤其是这些字符被做为关键的信息出现时，比如在浏览器重要的安全指示器地址栏中，这种视觉欺骗的危害就会显而易见。浏览器厂商对于地址栏上的 IDN 欺骗问题，一直在做积极的防御，通常是在浏览器里维护一个重要域名列表，如果一个域名和列表中的域名同形异议，则将其转化为 Punycode 编码显示。</p>
+<p>渲染支持不足，直接导致每一个字符的字形含义往往超出我们的预期，这种不确定性使得视觉欺骗随时都可能发生。那么字形到底是什么，它和字型、字符、字体有什么关系，包括 Unicode 中越来越火的 Emoji 表情它是字符吗？其中一些基本的名词概念非专业人士经常混淆，我们先简要了解下。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_ekbwgvuadc.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p><strong>字体（英语：Typeface）</strong> 指的是一组字符的设计，通常包括字母、一组数字和一组标点符号。也常包括表意字符以及制图符号。每个字体都是字形的集合，比如宋体、黑体等。 有些字体技术非常强大，比如 TrueType/OpenType，它们可以根据分辨率、系统平台、语言等来选择显示最佳的形状。但是，它也可以用于安全攻击，因为它足够强大，可以在打印时将屏幕上的“$ 100.00”外观更改为“$ 200.00”。 此外，层叠样式表（CSS）可以更改为不同的字体，用于打印与屏幕显示，这可以使用更多可混淆字体。这些问题并非特定于 Unicode。为了降低此类漏洞利用的风险，程序员和用户应该只允许可信任的字体。</p>
+<p><strong>字型（英语：font；传统英式英语：fount）</strong> 是指印刷行业中某一整套具有同样样式和尺码的字形，例如一整套用于内文的宋体 5 号字、一整套用于标题的 10 号字就叫一套字型。电脑早期用点阵字，仍然有字型概念，同样一套风格如中易宋体，一套字型是指一整套 15×16 像素或一整套 24×24 像素的字。矢量字型出现后，同一套风格字型已不用制作不同像素字型，只需制作一套即可随意缩放，“字型”与“字体”之间的界限开始模楜。一般的英语使用者同样分不清“字型”（Font）与“字体”（Typeface）的分别。</p>
+<p><strong>字形（英语：glyph）</strong> ，又称字图或书形，是指字的形体。中华人民共和国国家标准 GB/T 16964《信息技术·字型信息交换》中定义字形为“一个可以辨认的抽象的图形符号，它不依赖于任何特定的设计”。在语言学中，字（character）是语意的最基本单位，即语素；字形是指为了表达这个意义的具体表达。同一字可以有不同的字形，而不影响其表达的意思，例如拉丁字母第一个字母可以写作 a 或 ɑ，汉字中的“強／强”、“戶／户／戸”。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_h49okg4r5f.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>在复杂的脚本（如阿拉伯语和南亚语脚本）中，字符可能会根据周围的字符更改形状。</p>
+<p>（1）字形可以随周围环境所改变</p>
+<p>3 个 arabic letter heh (U+0647) 组合在一起</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_s5vbwdjo79.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>（2）多个字符可以产生一个字形</p>
+<p>f = latin small letter f (U+0066)</p>
+<p>i = latin small letter i (U+0069)</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_zv3nqu06t0.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>我们来看一个和视觉有关的，当多个不同字符组合后可能视觉外观是相同的。例如字符 U + 0BB6 SHA 和 U + 0BB8 SA 通常非常不同。但这两个组合的字符序列，视觉感官上完全相同。底层的二进制是不同的。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_ipy894os9v.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>其实多字符组合不仅仅是视觉欺骗，有时这种多字符组合也可以导致系统内存崩溃。CVE-2018-4124 这个漏洞可导致 macOS High Sierra 10.13.3 在处理恶意制作的字符串时致堆损坏。జ్ఞా 的原始序列是 U+0C1C U+0C4D U+0C1E U+200C U+0C3E，这是一个泰卢固语字符序列：辅音 ja (జ)、virama (్)、辅音 nya (ఞ)、零-width 非连接符和元音 aa (ా)。当 macOS 在处理 జ్ఞా 这个字符序列时，即可导致系统崩溃。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_8g5sqvodfl.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p><strong>表情符号（英文：Emoji）</strong> 是象形文字（图形符号），通常以彩色卡通形式呈现并在文本中内联使用。它们代表面部，天气，车辆和建筑物，食物和饮料，动物和植物，或代表情感，感觉或活动的图标。Emoji 已经无处不在，它正在成为跨越不同文化的所有人通用的语言。但不同人对 Emoji 的使用理解以及各个操作系统碎片化的支持，也使得带来了一些问题。比如：短期内你也不会看到步枪的表情符号，U+1F946。Unicode 组织包括苹果和微软都反对加入步枪符号。手枪和其他武器的 Emojis 已经使人们陷入了法律的困扰。之前一家法国法院裁定手枪表情符号可能构成死亡威胁，将一名把枪的表情发给前女友的男子判处三个月监禁。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_zfehgizvcf.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>在浏览器地址栏中直接渲染 U+1F512 这个编码也是相当危险的。因为它和 HTTPS 安全小锁外观上非常相似。攻击者可以对其进行安全小锁的伪造。U+1F512 编码曾在 Chrome/Firefox 浏览器中出现过这样的安全问题。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_suks3mhifm.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p><strong>三、混合脚本带来的安全风险</strong></p>
+<p>混合脚本是有很多合法的用途的，例如 Ωmega。但视觉上容易混淆的字符通常不会放在一个脚本中。在视觉上容易混淆的字符为欺骗提供了许多机会，例如下面这两个域名，希腊小写字母 Omicron 和拉丁文 o 外观是非常相似的。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_6mosory29d.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>很久之前，域名只允许包含拉丁字母 A-Z，数字和一些其他字符（ASCII 字符集）。之后大家发现，仅仅支持 ASCII 码的域名可能是有问题的，因为世界上还有很多非拉丁文语系的国家和地区，他们也渴望在域名中使用自己的语言符号。后来经过多次提案讨论，在 2003 年发布了国际化域名的规范 [rfc3490]，它允许大多数的 Unicode 在域名中使用，普遍将这个规范称为 IDNA2003。之后在 2010 年批准发布了对 IDNA2003 的修订版 [rfc5895]，称这个修订版为 IDNA2008。但 IDNA2003 和 IDNA2008 并没有有效的解决国际化域名中的某些问题。随后，Unicode 联盟发布了 [UTS-46] 解决了某些兼容性的问题。</p>
+<p>在 IDNA 中使用 PunyCode 算法来实现非 ASCII 域名到 ASCII 域名的转换。PunyCode 算法可以将任何一个非 ASCII 的 Unicode 字符串唯一映射为一个仅使用英文字母、数字和连字符的字符串，编码的域名在前面都加上了 xn&ndash; 来表明这是一个 PunyCode 编码。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_yidfcgztve.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>国际化域名（IDN）是在 Unicode 中定义的任何字符集或脚本中注册的二级或三级域名或 Web 地址。直到 2009 年底之前，顶级域名仅限于拉丁字母 a-z，之后随着 Web 全球化发展，IDN TLDs 也开始逐渐推广和普及，这加速了全球化进展的同时，也带来了一些安全风险，这点在后面我们会谈到。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_owjrjareso.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_w7fcu77s4p.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>在前文中我们已经了解到，Unicode 15.0 中的字符总量 149,186 个，脚本数 161 个。这些脚本中大部分都可以被用于域名注册，并且数量还在增加中。以顶级域名（TLD）COM 为例，Verisign 制定了 IDN 注册的策略，规定了允许和禁止的代码点。并制定了 IETF 标准、对特定语言的限制、对脚本混淆的限制、ICANN 受限 Unicode 代码、特殊字符这五条验证规则，遵循这五条规则的 IDN 被认为是有效的注册。</p>
+<p>在这五条 IDN 注册规则中，我们会重点关注“脚本混淆的限制”这条规则，因为这对发现 IDN 上的视觉欺骗问题有帮助意义。</p>
+<p>【<strong>对脚本混淆的限制</strong> 】</p>
+<p>Verisign 不允许使用混合的 Unicode 脚本进行注册。如果 IDN 中包含两个或多个 Unicode 脚本代码，将拒绝注册。例如拉丁文脚本中的字符不能和任何西里尔字符在同一个 IDN 中使用。IDN 中的所有代码必须来自同一个 Unicode 脚本。这样做是为了避免混淆的代码出现在同一个 IDN 中。</p>
+<p>下表列出了允许使用的 Unicode 脚本。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_pu09zqt2uo.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>列举我之前发现的一个漏洞，[CVE-2018-4277] Spoof All Domains Containing ‘d’ in Apple Products 。我在研究中发现，在苹果产品中编码 latin small letter dum (U+A771) 渲染的字形和 latin small letter d (U+0064) 极为相似。从 Unicode 中 (U+A771) 的字形标准可以发现（http://www.unicode.org/charts/PDF/UA720.pdf），d 后面应该还有一个小撇，但是在苹果产品中把这个完全忽略掉了。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_46n2kuah94.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_s6hsosmh3o.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>接下来，我去注册了一个真实的域名，使这个 IDN Spoof 可以正常运行。我们知道在 Verisign 制定的 IDN 注册的规则中，不允许使用混合的 Unicode 脚本进行注册。如果 IDN 中包含两个或多个 Unicode 脚本代码，将拒绝注册。而（U+A771）也是属于 Latin，应该是符合域名注册商规则的。于是域名成功注册成功了。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_n2a2dteaml.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_4woq56ocbn.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>我又注册了一个 SSL 证书，使这个 IDN Spoof 看的会更加真实完美。效果如下，Safari 并没有将这个域名转化为 punycode 显示，所以我们成功了。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_mkjycncduo.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>到这里我们确定了整个欺骗流程是完全可行的，那么攻击者可以伪造域名中有 d 的所有域名。在 Ggoogle 统计的 Top 10k 域名中，大约有超过 25% 的网站域名中有d这个字符。这些网站的域名都可以被伪造。</p>
+<p><a href="https://chromium.googlesource.com/chromium/src/+/master/components/url">https://chromium.googlesource.com/chromium/src/+/master/components/url</a>_formatter/top_domains/alexa_domains.list</p>
+<p>•linkedin.com</p>
+<p>•baidu.com</p>
+<p>•jd.com</p>
+<p>•adobe.com</p>
+<p>•wordpress.com</p>
+<p>•dropbox.com</p>
+<p>•godaddy.com</p>
+<p>•reddit.com</p>
+<p>…………</p>
+<p>【<strong>苹果修复的补丁</strong> 】</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_91diqlrpim.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>【<strong>受影响产品</strong> 】</p>
+<p>watchOS 4.3.2  https://support.apple.com/zh-cn/HT208935</p>
+<p>iOS 11.4.1  https://support.apple.com/zh-cn/HT208938</p>
+<p>tvOS 11.4.1 https://support.apple.com/zh-cn/HT208936</p>
+<p>macOS High Sierra 10.13.5  https://support.apple.com/zh-cn/HT208937</p>
+<p><strong>四、双向文本带来的安全风险</strong></p>
+<p>某些字符（例如阿拉伯语和希伯来语脚本中使用的字符）具有固有的从右到左的书写方向。当这些字符与从左到右显示的其他脚本或符号集的字符混合时，生成的文本称为双向（缩写为 bidi）。文档的内存表示（逻辑顺序）与双向文本的显示外观（可视顺序）之间的关系由 UAX#9：Unicode 双向算法 [UAX9] 管理。</p>
+<p>由于某些字符具有弱或中性的方向性，而不是强左向右或从右到左，因此 Unicode 双向算法使用一组精确的规则来确定最终的视觉呈现。然而，任意文本序列的呈现，可能导致文本序列无法清晰地被阅读，或者可能在视觉上混淆。</p>
+<p>在一个 URL 中，经常会遇到多种方向性（弱性、中性、强性）的字符同时存在的情况。虽然 Unicode 双向算法使用一组精确的规则来确定最终的视觉呈现，但是多种方向性的文本序列在呈现时，还是可能导致文本序列无法清晰地被阅读，或者可能在视觉上混淆。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_13lzfjdl6a.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>Chrome 之前出过这样一个漏洞，在 Chrome 里访问：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_p5wqn0k8bd.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>在地址栏中实际渲染为：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_3wps1oil0s.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>CVE-2018-4205 是我之前发现的一个漏洞，利用了 RTL 和空白符导致了 URL 地址栏欺骗。下面就以这个漏洞为例进行讲解。</p>
+<p>（1）构造 POC-1</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_2otbztcdt7.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>访问 <a href="http://www.apple.com.xn--ggbla3j.xn">http://www.apple.com.xn--ggbla3j.xn</a>&ndash;ngbc5azd/。可以看到</p>
+<p>Chrome/Firefox/Safari三个浏览器地址栏，显示都是一样的。Edge 显示 punycode。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_h2cvf8fw3s.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>（2）构造 POC-2</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_7ly1hqw6sz.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>在四个浏览器中访问 POC-2，我们此时已经发现了问题。在 Safari 中出现了 RTL 和空白字符。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_kh6udccdg3.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<p>（3）构造 POC-3</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/1_zcv3p64eg9.png" alt="Unicode 视觉欺骗攻击深度解析"></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42944/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">PoS 是谎言么</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42948/">
+                <span class="next-text nav-default">V神 ：DAO不是公司 自治组织中的「去中心化」很重要</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

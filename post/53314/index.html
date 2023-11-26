@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深度研究Proto-danksharding及其运行原理 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Proto-danksharding降低了rollup的成本，并主要让rollup用户和运营商受益。" />
+<meta name="keywords" content="EIP 4844, Proto-danksharding, ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53314/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深度研究Proto-danksharding及其运行原理" />
+<meta property="og:description" content="Proto-danksharding降低了rollup的成本，并主要让rollup用户和运营商受益。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53314/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-16T00:00:00+00:00" />
+
+<meta itemprop="name" content="深度研究Proto-danksharding及其运行原理">
+<meta itemprop="description" content="Proto-danksharding降低了rollup的成本，并主要让rollup用户和运营商受益。"><meta itemprop="datePublished" content="2023-06-16T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-16T00:00:00+00:00" />
+<meta itemprop="wordCount" content="12716">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深度研究Proto-danksharding及其运行原理"/>
+<meta name="twitter:description" content="Proto-danksharding降低了rollup的成本，并主要让rollup用户和运营商受益。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深度研究Proto-danksharding及其运行原理</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-16">
+      2023-06-16
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 12716 字 -
+        预计阅读 26 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Christine Kim，Galaxy Digital研究副总裁；翻译：金色财经xiaozou</p>
+<p>以太坊合并和上海升级完成后，以太坊已经成功地从工作量证明过渡到权益证明共识协议。以太坊发展路线图上的下一个大事件是名为proto-danksharding的以太坊改进提案（EIP）4844。该代码更新旨在提高运行在以太坊上的rollup的可扩展性。EIP 4844以以太坊核心开发者“Protolambda”和Dankrad Feist的名字命名，引入了blob新交易类型，增加了以太坊区块的数据和存储需求，并创建了一个新的收费市场，将blob与常规交易分开定价。</p>
+<p><strong>R</strong> <strong>ollup</strong> 协议依赖于以太坊等第1层区块链获取<strong>数据可用性（D</strong> <strong>A</strong> <strong>）</strong> （广泛传播和临时存储批量交易数据的功能）。一般来说，依赖以太坊获取DA的基于智能合约的rollup也依赖以太坊进行<strong>交易结算</strong> （验证）。这些rollup专用于从DA层（如以太坊）读取数据，并执行有效的交易和智能合约代码。构建在以太坊之上的rollup依赖于将批量交易数据包含入以太坊区块以实现交易的<strong>最终确定性</strong> 。<strong>排序器（Se</strong> <strong>quencer</strong> <strong>）</strong> 以一种经济有效的方式对用户的交易进行批处理和压缩，以便提交给DA层。</p>
+<p>通常，向以太坊发布大量数据的成本很高，部分原因是网络将数据作为交易历史部分内容永久存储在一个名为“CALLDATA”的字段中。通过EIP 4844，将为rollup额外创建每区块512KB或768KB数据空间。以太坊核心开发人员正在权衡应为blob交易创建多少额外空间。重要的是，发布到该空间的数据将存储大约三周时间。由于通过blob交易验证的数据是短期存储的，以及blob交易收费市场独立于其他类型的交易，理论上，将数据发布到以太坊的rollup成本将大大降低。随着时间的流逝，开发人员计划引入数据采样技术，使blob数据不需要全部下载以供以太坊全节点验证，从而进一步降低rollup的成本。Proto-danksharding是实现完全danksharding的先锋力量和“原型”，它将使以太坊节点能够只下载blob数据块就能确定完整blob的可用性。</p>
+<p>本文将深入探讨EIP 4844的运行原理、proto-danksharding的局限性、EIP 4844向完全danksharding发展的计划，以及如果按照2023年秋季的计划实施，代码更新对终端用户和去中心化应用程序（dapp）开发人员的直接好处及相关考量。鉴于proto-danksharding的重心是支持第2层rollup生态系统以及模块化扩展以太坊，下一次以太坊升级中代码更新的实现将成为模块化区块链理论大规模应用于世界上最大的公共区块链之一的重要试验场。</p>
+<p><strong>1、背景介绍</strong></p>
+<p>EIP 4844被视为以太坊的可扩展性升级。然而，值得注意的是，代码更新并没有实质性地增加或改进以太坊本身的交易能力。Proto-danksharding降低了向以太坊发布大量数据的成本，从而降低了rollup的运营成本。EIP 4844之所以被视为以太坊可扩展性的提升，是因为它使运行在以太坊之上的第2层网络更具成本效益，但代码更新并没有提高以太坊作为交易和智能合约代码执行的通用区块链的可扩展性。</p>
+<p>过去四年里，像Arbitrum、Optimism、StarkNet、zkSync和Polygon zkEVM等以太坊rollup的交易活动一直在增长。L2Beat.com估计，在所有第2层网络上实现的每秒交易量（TPS）的总和是以太坊日均TPS的3.8倍。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_ni1szp0p4s.png" alt="r2JYY05KVSWp9xiL7q9nqB6cxnI01fSWougPovBR.png" title="7051999"></p>
+<p>根据Blockworks Research通过Dune Analytics提供的数据，与直接将代码和交易部署到以太坊的成本相比，rollup为终端用户和dapp开发者节省了99%以上的gas费用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_47fmbo11hu.png" alt="1fz3gUU2S2wfC908wKveiGgXFmhbEHYljxqLCJYL.png" title="7052000"></p>
+<p>截至2023年6月13日，在两个最受欢迎的以太坊rollup（Optimism和Arbitrum）上发送交易的成本约为0.03美元至0.05美元。然而，在链上活动频繁和网络拥塞的情况下，成本有时会飙升至1美元以上。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_6trwdygrqp.png" alt="tbEFh1HYmW5PN6WlCw5kTHwTWEKbSzmO2nsiVJcn.png" title="7052001"></p>
+<p>EIP 4844的目标是通过引入称为二进制大对象（blob）的新交易类型来降低rollup成本。以下是由EIP 4844定义的blob交易生命周期的逐步说明：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_euz92hv6pw.png" alt="baJKnHYchykhZMdnS6YLG4UxxvQrjBqrmObDh41f.png" title="7052002"></p>
+<p>EIP 4844不会影响提交给以太坊内存池的常规交易包含入块的方式，也不会影响决定以太坊区块空间定价的收费市场，但EIP 4844确实会增加以太坊区块的存储需求。额外的数据空间被用于将blob交易附加到区块上。blob就像车斗，可以附加到以太坊区块上处理常规交易，而不会影响或挤占现有的区块空间。Blob区块空间将根据自身收费市场进行拍卖，模仿EIP 1559的收费市场设计。最初，blob交易几乎是零成本的。此后，每确认一个超过一半blob块空间（至少256KB）的区块，blob交易的成本就会增加12.5%。blob块空间未充分利用的话，也就是被填充的区块空间低于50%的话，每个区块的blob成本将降低12.5%。</p>
+<p>Blob交易不会无限期地存储在以太坊上，而是存储在以太坊的共识层（CL）信标链上，并在三周后从CL节点上删除。Proto-danksharding将支持每个区块最多四个blob，每个blob最多可以包含128KB的额外数据。每区块最高512KB blob空间的限制可能会根据正在进行的EIP 4844测试进行调整。开发人员正在积极讨论将blob的最高限额从4个增加到6个的可能性。每个blob都是一个rollup排序器确认一笔批量交易到以太坊的机会。以太坊每天大约生产7,094个区块，在EIP 4484之后，假设每区块限制为最多4个blob，则每天最多可以处理28,376个blob。（这是理论上的最大值，在实践中可能永远不会达到，因为会受到blob费用动态的影响。连续处理每区块最大数量blob的成本对于排序器来说是非常昂贵的。）</p>
+<p>在过去的六个月里，在交易活动排名第二的以太坊rollup上运行的排序器，每天向以太坊提交的交易包大约为3126个。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_snbrbht5u4.png" alt="iEZxj8gtRwXonvndZw8PywXTJbdVm2VwFg0gjYXv.png" title="7052003"></p>
+<p>Arbitrum确认的交易负载约为Optimism的两倍，与Optimism一样，同样依赖于排序器通过CALLDATA向以太坊发布数据以完成交易。以太坊上流行的rollup包括但不限于Polygon zkEVM、zkSync和StarkNet。在Optimism上，超过90%的收费来自第1层CALLDATA费用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_0la7if3mo0.png" alt="bZPGv2UVjijDAIWM78CMad5xiAeFNAVG8mU3Qu9U.png" title="7052004"></p>
+<p>引入专用数据存储空间（无论刚开始空间有多小）的目的是降低将以太坊作为所有以太坊rollup的DA层的使用成本。保守地说，rollup开发人员估计，激活EIP 4844后，rollup费用将减少100%到900%。然而，这些估算可能会根据proto-danksharding启动前后的几个月里rollup采用和活动的增加而发生变化。</p>
+<p>虽然在EIP 4844激活之初，blob交易的成本可能比常规交易便宜，但如果运行在以太坊上的rollup数量增加，blob交易成本有可能迅速攀升。此外，虽然每个blob都意味着某个排序器有机会发布多达128KB的数据，但对于rollup排序器来说，可以通过协调，使单个blob包含来自多个rollup的数据。以太坊开发人员意识到，由于每个区块的blob数量有限，并且单个交易包可能不能充分利用每个blob交易可用的全部128KB数据空间，因此可能会出现blob定价的二级市场。虽然防止链下二级市场的出现是优先事项（而非通过引入更高级别的协议复杂性来防止这种可能性），但目前开发人员正对通过EIP 4844引入blob持“观望”态度，并打算在未来对EIP 4844进行进一步优化。</p>
+<p>Proto-danksharding为引入更先进的技术奠定了基础，这些技术可以在不增加节点计算负载的情况下进一步降低blob成本。blob的完整愿景是“full danksharding”（完全danksharding），将每个区块的最大blob数量从4个增加到64个。</p>
+<p><strong>（1）完全</strong>  <strong>Danksharding</strong></p>
+<p>4个blob可使以太坊区块大小增加512KB。6个blob可使以太坊区块大小增加768KB。如前所述，额外的区块空间严格专用于blob交易，不像常规区块空间那样永久存储数据。EIP 4844的完整愿景是向以太坊引入多达64个blob，并且不会大幅增加节点用于区块验证的计算负载。为了实现完全danksharding，以太坊需要实现两项技术:数据可用性采样（DAS）和纠删码技术（erasure encoding）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_9cdse7gicu.png" alt="4nhd9lQN7I86wmtXjsNZsSNNPOke2Q5Pyb5BuVA9.png" title="7052005"></p>
+<p>· <strong>数据可用性采样（D</strong> <strong>AS</strong> <strong>）</strong></p>
+<p>在验证第2层rollup交易时，DAS的目标是确保排序器打包的所有数据都已发布到链上。随机选择全节点从一个blob上下载一段数据并生成数据可用性证明。完整节点数据采样的次数越多，在不保留重要数据的情况下从排序器获得所有数据的概率确定性就越大。对于节点来说，数据采样过程涉及到的计算量比下载整个blob数据要少，但理论上可以保证数据的可用性。与proto-danksharding一样，在完全danksharding下进行blob数据采样将确保来自排序器的交易已被验证并发布到链上，供任何用户或网络利益相关者评估。然后，用户和利益相关者会在一段时间内来查看这些交易，确认它们已经在如以太坊这样的DA层上完成，并在前一批交易的基础上构建新批次的交易。</p>
+<p>通过DAS，以太坊开发人员相信他们将能够在不增加节点计算负载的情况下增加blob数量和发布到以太坊上的数据量。此外，开发人员还打算通过在未来升级中实现历史失效（history expiry）等建议来进一步减少节点的计算负载。用以太坊研究人员Dankrad Feist的话来说，随着时间的流逝，以太坊将被用作“一个公共公告板，而非一个存档系统”，将保留交易历史完整副本的责任移交给经常使用这些数据的网络利益相关者，如第2层 rollup和区块链基础设施公司（如Infura、Alchemy和Blockdaemon）。通过EIP 4844引入blob是一个早期范例，告诉我们有一天所有交易都有可能存储在以太坊上。</p>
+<p>· <strong>纠删码技术（Erasure</strong>  <strong>E</strong> <strong>ncoding）</strong></p>
+<p>纠删码技术是提高数据采样能力的一种技术。如果一个恶意排序器扣留一小部分区块数据（比如说1%到49%之间的blob数据），那么交易采样可能会导致某些样本证明在一开始就被返回为正确值，而非错误值。纠删码技术确保了至少验证blob的一半数据就可以重建blob的其余部分。这种技术只有在数据被表示为多项式（由两个以上代数项组成的表达式）时才有效。最常见的纠删码技术形式基于里德-所罗门码（RS），这是一种高级数学公式，可以根据足够的已知数据解决缺失的数据。直观地说，单靠采样可能并不能有效地保证大量数据的可用性，特别是在假设有某个数据块被恶意排序器扣留的情况下。纠删码技术为blob引入了数据冗余，因此恶意排序器必须扣留明显大份额的blob数据才能成功保留任一数量数据。</p>
+<p>DAS与纠删码技术相结合是完全danksharding背后的技术支撑。这些技术与某些DA层（如Polygon Avail和Celestia）背后的技术相同。在很多方面，支持模块化区块链计算的愿景（其他区块链项目正在进行小规模测试），将在以太坊上通过proto-danksharding进行大规模的部分测试，并通过完全danksharding进行正式测试。</p>
+<p><strong>（2）KZG承诺</strong></p>
+<p>在以太坊上实现DAS和纠删码技术之前，完全danksharding需要实现KZG承诺方案。Kate Zaverucha Goldberg（KZG）承诺是一种零知识（ZK）证明系统，它可以在不揭示整个多项式的情况下对多项式进行评估。如果像blob这样的大数据对象首先被表示为多项式，那么它们可以被计算机高效操作和证明。EIP 4844着重引入KZG承诺，作为blob验证和证明生成过程的一部分。对于依赖于ZK证明的第2层rollup，KZG承诺可以表示对交易的计算和rollup协议状态。在EIP 4844情境中，KZG承诺可以检查blob的属性，而无需读取整个blob交易。</p>
+<p><strong>（3）KZG</strong>  <strong>Ceremony</strong></p>
+<p>用于验证blob的KZG承诺方案依赖于由可信设置（trusted setup）一次性生成的秘值。一些加密协议，如Zcash、Tornado Cash和Filecoin，都依赖于可信设置来安全地生成一个秘值，用于链上计算循环。EIP 4844的可信设置ceremony于2023年1月启动，已经收到了来自以太坊社区的近10万份贡献。背景补充：可信设置ceremony是一个一次性流程，用于从多方贡献中生成用于加密协议的数据。在可信设置ceremony中组合多方贡献熵的目标是生成一个几乎不可能再生成或猜测的秘值。由可信设置ceremony创建的最终值不能重复产出是非常重要的。</p>
+<p>KZG ceremony将于2023年5月开放贡献，并可能在EIP 4844在主网激活前的几个月关闭。大多数ceremony贡献都是通过以太坊基金会资助的公共网站提供的，用户通过他们的以太坊地址连接到该网站，并自动运行计算，其随机性有助于提高秘值安全。此外，还有其他通过独特事件创建的贡献，涉及到音乐、大型群体、动物、甚至是弹珠联动装置。</p>
+<p><strong>2、好处及影响</strong></p>
+<p>在以太坊上引入blob和在比特币上引入隔离见证（segwit）有很多相似之处。这两个代码更新都引入了对链上数据存储方式的修改，导致有效区块大小的增加，并支持第2层协议。然而，segwit和EIP 4844之间的主要区别之一就是这些代码更新的预期长期影响。虽然segwit旨在解决协议代码中的即时漏洞问题，并在短期内支持闪电网络的创建，但EIP 4844的动机是为进一步的扩展优化（如DAS）奠定基础，并最终成为最优化的DA层。Proto-danksharding增强了以太坊支持L2 rollup及服务rollup排序器的能力，同时鼓励终端用户在rollup上进行交易，而不是直接在以太坊上进行交易。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_asypn1f0r8.png" alt="wEwWAIoB3k5BcELBwTFkUCFdT8ZqRqAvI4tZhMcp.png" title="7052006"></p>
+<p>与填充常规以太坊区块空间的数据相比，blob区块空间有几个关键区分属性。首先，由于其短期性，blob交易预计比常规交易的gas费更低。其次，虽然dapp、开发人员和终端用户可以通过以太坊执行层（EL）轻松检索存储在以太坊区块中的常规交易数据，并通过以太坊虚拟机（EVM）（以太坊的执行环境）执行智能合约与这些交易交互，但blob数据将相对难以检索和交互。Blob数据将存储在以太坊的CL中，因此只能用于有限的一组操作，即交易确认和最终确定。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_3ly0drn2fs.png" alt="YXpHgf7OiYXUqYdosvalVf58P1iGGTO7FabxO5oD.png" title="7052007"></p>
+<p>展望未来，关注EIP 4844影响的指标之一就是rollup费用的减少。在以太坊交易中使用CALLDATA字段将批量交易数据发布到以太坊，每字节消耗16 gas。另一方面，blob的成本一开始基本上是免费的，然后逐步攀升。除了blob的成本之外，关于EIP 4844影响的另一个值得关注的指标是全节点上的数据传播负载。常规以太坊交易的大小小于1KB，这意味着以太坊节点可以轻松地传播这些数据，不需要使用高带宽。然而，单个blob交易的大小可以达到128 KB，这意味着blob需要节点进行更多的计算才能传播。</p>
+<p>下表总结了与评估EIP 484416 影响有关的几项指标：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_1jyu53c6hg.png" alt="gyt0uAwc8MJX7qDzxzJV8RQjzyClrNOiOpyyeMmu.png" title="7052008"></p>
+<p>就像比特币的Taproot升级一样，除了处理第2层rollup交易这一预期用例外，很难预测blob交易和blob区块空间将被以何种方式使用。鉴于过去几年L2 rollup的采用并不稳定，且易受极端波动的影响，很难准确预测EIP 4844将降低多少L2 rollup成本。过去的几年里，L2 rollup本身也经历了重大的升级和改进。去年8月，Arbitrum Nitro完成了Nitro升级，宣称该升级将交易吞吐量提高了7倍以上。Optimism于2023年6月6日完成了Bedrock升级，旨在为终端用户降低10%的费用，并推出了其他几项用户体验相关改进。</p>
+<p>由于构建在以太坊之上的rollup的容量和功能在不断发展，很难准确预测EIP 4844将在多大程度上影响第2层rollup的费用和活动。总之，EIP 4844对以太坊的预期好处如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_413d1p37r9.png" alt="1DZT3PoOZoUe5GN2xIMUnIZmrBnmx2sUyl8Osry1.png" title="7052009"></p>
+<p><strong>3、相关考量</strong></p>
+<p>EIP 4844的想法是在2022年2月的以太坊ETHDenver大会上提出的。首个EIP 4844测试网络于2022年8月启动。从那以后，以太坊客户端团队对代码进行迭代，并推出了四个额外的测试网络。随着开发人员努力推出他们的第六个专用测试网，围绕EIP 4844的实现出现了明显顾虑和悬而未决的问题。截至2023年5月，关于EIP 4844实现正在进行的相关讨论包括：</p>
+<p>· <strong>De-SSZify</strong>  <strong>EIP 4844规范：</strong> 几个月来，开发人员一直在讨论序列化新的blob交易类型的最佳方式。最初，开发人员倾向于通过blob交易向EL层引入SSZ格式的早期迭代。不同于CL，以太坊EL传统上依赖于RLP序列化格式。最终，开发人员计划将所有交易类型从RLP格式升级到SSZ格式，但考虑到从RLP升级到SSZ的路径仍然不明确，而且肯定还没有准备好在Cancun升级中实现，开发人员决定从EIP 4844中移除SSZ，至少是从EL端移除。</p>
+<p>· <strong>KZG承诺加密库：</strong> 人们一直在关注KZG承诺加密库的情况。这些库提供了由EIP 4844的多项式承诺规范定义的KZG函数的实现。然而，该库的一些主要方面正在经历更新，这使得以太坊客户端团队难以使用这些库并将其整合进他们的代码库中。</p>
+<p>· <strong>通过Geth (EL)客户端进行测试：</strong> EIP 4844的测试基于Geth（EL）客户端的分支版本。开发人员正积极致力于将EIP 4844的测试迁移至Geth主代码库。</p>
+<p>· <strong>MEV-</strong> <strong>B</strong> <strong>oost测试：</strong> MEV建设者和中继节点还没有开始全面试验blob交易。开发人员正努力在EIP 4844开发过程中将MEV-Boost相关软件的测试尽早纳入其中。</p>
+<p>· <strong>Blob收费市场设计：</strong> Blob收费市场基于EIP 1559设计。基于区块空间容量，EIP 1559将交易的gas成本在两个方向上都增加了12.5%。然而，EIP 1559在以太坊上的实现给区块大小带来了高度波动性。为了避免blob区块空间被用来产生同样的结果，开发人员正在考虑blob gas费的替代参数。</p>
+<p>· <strong>从区块传播中解耦blob：</strong> Blob是以太坊节点间传播的更重头的数据。因此，开发人员正在研究将blob传播与区块传播解耦的策略，以便交易处理速度不会因blob活动而变慢。</p>
+<p>· <strong>链重组期间的blob交易内存池：</strong> 在链重组期间，常规交易被重新插入到区块中。由于blob从区块传播中解耦，没有直接的方法来保证内存池中的所有blob在重组后都会被重建。开发人员正在考虑在临时链分裂的情况下处理blob交易的方法。</p>
+<p>· <strong>处理blob交易流失：</strong> 与提交到内存池后可以很容易被用户取消的交易不同，blob交易的传播相当困难且耗费资源，广播后不应该那么容易被取消或替换。开发人员可能会对在blob交易提交到内存池后使blob交易无效的行为实施处罚。</p>
+<p>下一次以太坊升级根据范围命名，在EL上被称为Cancun，在CL上被称为Deneb，暂定于2023年秋季或冬季的某个时候在以太坊主网上激活EIP 4844。以太坊的任何升级都需要大量测试和协调。自以太坊合并以来，以太坊协议已经扩展并变得更加复杂。以下是为迎接Cancun升级而必须更新的以太坊协议部分内容和相关软件的说明。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_cobutynmvy.png" alt="yOKk82NQHupsCw07upYIz8Q6sHt7ViDumz4mWrNo.png" title="7052010"></p>
+<p>除EIP 4844外，还有以下四个EIP将在Cancun升级中启动：</p>
+<p>· <strong>EIP 6780，仅在同一交易中S</strong> <strong>ELFDESTRUCT</strong> <strong>：</strong> 该EIP改变了SELFDESTRUCT操作码的功能，使SELFDESTRUCT操作码可以在对现有智能合约影响最小的情况下被弃用。</p>
+<p>· <strong>EIP 1153，瞬态存储操作码：</strong> 该EIP引入了瞬态存储操作码，其行为与存储操作码相同，只是每次交易后都会丢弃数据，从而为终端用户带来更简洁的智能合约设计并节省gas费。</p>
+<p>· <strong>EIP 4788，EVM中的信标链区块根：</strong> 在EL区块头中公开信标链区块根，以允许EVM中的CL状态证明。这将改进质押池、再质押结构、智能合约桥、MEV协议等的信任假设。</p>
+<p>· <strong>EIP 5656，内存复制指令：</strong> 引入了一个新的EVM指令，用于复制内存区域，以提供在以太坊上构建数据结构及部署计算繁重操作的有效手段。</p>
+<p>与上海升级的过程类似，以太坊核心开发人员正在优先激活EIP 4844，作为进入Cancun升级的主要代码更新。因此，由于EIP 4844的复杂性以及彻底测试代码更新所需的大量时间和工作，开发人员决定拒绝除上述四个EIP之外的所有其他Cancun升级EIP提案。这样做的目的是使Cancun升级尽可能精简，只包括那些复杂性最小或紧急程度最高的EIP。EIP 4844高于其他EIP的紧迫性优先级早在合并升级后就被取消了，这是一个有争议的话题，突出了以太坊可扩展性之外的改进需求。</p>
+<p><strong>对EIP 4844的需求</strong></p>
+<p>EIP 4844升级将降低终端用户发送交易及在rollup上部署智能合约的成本。虽然有几轮交易活动高峰导致了交易费用增加到1美元以上，但自2022年1月以来，rollup以及以太坊的费用一直相对较低。截至2023年6月14日，在大多数L2 rollup上转移ETH的成本往往低于0.20美元。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_fbpqe7l6sg.png" alt="qE5BiVCXNlLPsdP2snUndrFLoW1vas0pUmMSiLvm.png" title="7052011"></p>
+<p>以太坊上如果没有高昂的费用或交易拥堵，经济活动几乎就失去了转向rollup的金融激励。基于以太坊8年的链上活动历史，费用上涨只是个时间问题，再次强调了对以太坊扩展解决方案的需求。然而，短期内，如果没有催化剂事件或没有叙事驱动链上活动，EIP 4844不太可能进一步降低以太坊费用。</p>
+<p>即使在今年EIP 4844激活前后，确实出现了推动以太坊和基于以太坊的dapp的经济活动和增长的催化剂，也不清楚充斥以太坊的交易活动是否会有有意义的数量转移，以利用成本节约的优势。虽然rollup使用起来比以太坊便宜（即使在今天也要便宜得多），但rollup还处于发展的初级阶段，还不能为用户提供与以太坊相当的安全性、可用性或去中心化水平。今天以太坊上的大多数rollup可能永远不会达到与L1相当的水平，因为rollup技术的创新和新的rollup设计会让当前的rollup过时。</p>
+<p>以太坊是世界上最安全、去中心化程度最高的通用区块链，支持成千上万的dapp，这些dapp通过ERC-20和ERC-721等标准也可以实现互操作和组合。尽管rollup开发人员正在设计支持最小化信任桥接的证明系统，并努力增强客户多样性以消除对多签钱包的依赖，但这些努力将需要数年的时间进行开发和部署。在当前发展阶段，rollup正与可替代的第1层区块链展开竞争，这些区块链在网络正常运行时间、最终确定性或互操作性方面也没有像以太坊那样为用户和交易活动提供高度保证。今天的rollup并不是以太坊的一个有吸引力的替代方案。</p>
+<p>随着时间的流逝，rollup预计会变得越来越有吸引力，但在它们能够拥有更高程度的去中心化、可用性和安全性之前，像EIP 4844这样的代码更新不太可能凭一己之力推动rollup的采用或活动。对于大多数以太坊的终端用户来说，EIP 4844对他们的使用体验几乎没有任何影响。对于已经使用rollup或因为proto-danksharding转而使用rollup的少数终端用户来说，其影响结果将是更便宜的费用，而对rollup安全性或互操作性方面并没有有意义的改进。</p>
+<p>可以说，将排序器从使用CALLDATA迁移到blob数据将为以太坊终端用户释放常规区块空间。过去的3年里，只有平均2%的可用区块空间被L2 rollup使用。因此，rollup从使用CALLDATA迁移到blob数据对可用区块空间的影响很小。其次，以太坊终端用户对rollup的使用增加可能会导致桥接活动成比例增加，随后可能会抵消排序器区块空间使用的微小减少。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_si10zdg5sh.png" alt="6r1YoYzJEOgo5b9Reilv8DSrUeIjJt3w7cSRwDlD.png" title="7052012"></p>
+<p><strong>EIP 4844的紧迫性</strong></p>
+<p>过去的12个月里，加密行业经历了一系列的协议失败、黑客攻击、高调破产和刑事诉讼的冲击。更广泛地说，新冠疫情后的宏观经济状况——全球若干国家（最重要的是美国）的通货膨胀率上升和利率上升——也导致了加密市场和传统金融市场的经济活动普遍下降。此外，美国证券交易委员会（SEC）等政府机构对加密行业的监管审查越来越严格，其针对目标是基于区块链的应用和服务，其中最有价值和最受欢迎的应用和服务运行在以太坊上。以下是自2023年初以来与加密行业相关的监管新闻头条：</p>
+<p>· 今年2月，加密货币交易所Kraken因通过其质押服务出售未注册证券而被美国证券交易委员会起诉，导致他们关闭了在美国的质押服务。</p>
+<p>· 今年3月，欧洲议会成员（MEP）针对一项反洗钱法案投出了赞成票，该法案要求去中心化自治组织、去中心化金融协议和NFT市场履行与传统银行和金融机构相同的用户尽职调查。</p>
+<p>· 同月，纽约总检察长（NYAG）对加密货币交易所KuCoin提起诉讼，并在同一诉讼中将ETH列为证券。</p>
+<p>· 今年4月，美国财政部发布了一份类似的报告，确认去中心化的金融协议有必要遵守美国的反洗钱和制裁法。</p>
+<p>· 今年6月，美国证券交易委员会起诉全球最大的加密货币交易所币安（Binance）违反联邦证券法。</p>
+<p>· 同月，美国商品期货交易委员会（CFTC）赢得了针对去中心化自治组织（DAO）Ooki DAO提供未注册商品的诉讼。</p>
+<p>在加密货币熊市期间以及对全球经济衰退担忧加剧的情况下，世界各地的立法者和监管机构继续评估政策和规则能够影响以太坊访问和以太坊活动的程度，以及应该实施多大程度的影响。为了让以太坊实现成为世界计算机的愿景，以太坊核心开发人员不仅要在协议层面上，而且要在应用层面上，努力缓解中心化趋势，加强抗审查的质量，这一点非常重要。</p>
+<p>过去一年里，以太坊基金会和其他备受瞩目的以太坊利益相关者对最大可提取价值（MEV）现象越来越关注，正是因为受到了MEV中心化的影响。为了减轻MEV的负面外部性，以太坊核心开发人员与Flashbots合作开发了MEV-Boost，这是一个额外的软件，用于以太坊上的验证者在合并后运行以获得MEV，而不会受MEV的力量驱使而中心化。然而，MEV-Boost只是短期内解决MEV问题的权宜之计，并且具有自身的中心化效应，这种中心化效应可以通过实现MEV-Boost的协议内版本来减轻，称为协议内提议者建设者分离（PBS）。</p>
+<p>在某种程度上，将EIP 4844作为Cancun升级的主要代码更新，反映了以太坊核心开发人员对通过rollup实现可扩展性的优先考量，可扩展性要优先于其他长期计划和目标。在Cancun升级后的未来升级中，具有与proto-danksharding相似复杂性的其他EIP的优先级降低是围绕EIP 4844的另一个考量，这表明以太坊核心开发人员迫切需要推进以太坊作为DA层的使用，为即将到来的未来做准备，届时，交易执行主要在rollup上进行，而不是以太坊上。</p>
+<p>鉴于近期的政治、监管和链上活动的最新趋势，PBS和其他EIP提案旨在增强以太坊的抗审查性，但将proto-danksharding的优先级置于它们之前并非完全基于需求或紧迫性，还基于EIP的完备情况。以太坊虚拟机（EVM）可用性的大规模升级（EVM对象格式“EOF”）没有包含在以太坊大合并、上海升级或者最近的Cancun升级中，是因为以太坊核心开发人员一致认为对代码更新准备不足。EIP 4788升级旨在优化EVM对信标链的信任最小化访问，以支持去中心化的质押池，以及构建在以太坊之上的其他dapp。EIP 4788经受了严格的Cancun升级准备评估，并于2023年6月8日被纳入升级。</p>
+<p>以下是提议纳入Cancun升级中的EIP及其截至2023年6月的状况：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0616/26_7ptzhwf1bs.png" alt="7decM6eTFbin9xawBA9cOc5KNZiuKdLXiS4nWIHB.png" title="7052013"></p>
+<p>EIP 4844强调了通过模块化实现长期可扩展性的想法，尽管rollup技术才刚出现。基于持续的研究和新技术的出现，模块化区块链设计可能会在接下来的几年里发生巨大变化。如上所述，EIP 4844是实现完全danksharding的先锋力量，以太坊需要实现完全danksharding，才能作为DA层与那些高度优化的DA层（如Celestia）展开竞争。基于EIP 4844对以太坊的影响，以太坊实现完全danksharding的时间和想法可能会发生改变。</p>
+<p><strong>4</strong> <strong>、结论</strong></p>
+<p>EIP 4844并不是以太坊可扩展性的变局者，因为它不会降低以太坊终极用户的费用。Proto-danksharding降低了rollup的成本，并主要让rollup用户和运营商受益。EIP 4844通过模块化及将交易执行活动卸载到其他协议，使以太坊走上了一条有意义的扩展之路。Proto-danksharding的好处将主要通过支付以太坊区块空间的rollup排序器来识别。Proto-danksharding的次要影响将是对终端用户和dapp开发人员来说，随着时间的流逝，他们最终会从以太坊迁移到rollup上进行交易。</p>
+<p>自2022年以来，rollup交易活动有所增加，费用有所下降。此外，还有一些突破性的创新增加了以太坊核心开发人员和其他以太坊利益相关者对rollup作为可扩展区块链设计的未来技术的信心。然而，在不久的将来，rollup不太可能实现全部潜力，或准备好接受大规模采用，当然也不会在2023年第三季度或第四季度启动EIP 4844。EIP 4844之后，如果没有将交易活动有意义地迁移到rollup上，proto-danksharding将不会影响或降低以太坊的费用。以太坊的终端用户仍然会受到同样的高费用波动和网络拥塞的影响，除非他们通过rollup排序器提交交易，而rollup排序器通常是中心化的，由单个实体操作。</p>
+<p>Proto-danksharding不是解决以太坊可扩展性问题的灵丹妙药，而应将其视为将以太坊转变为模块化区块链的第一步，模块化区块链主要通过L2 rollup支持交易执行。EIP 4844为将来实现完全danksharding和在DAS中使用多项式承诺奠定了基础。从许多方面来说，EIP 4844是对模块化区块链理论投出的信任票，并将鼓励在以太坊上进行进一步的rollup实验。模块化作为扩展区块链的解决方案，从根本上重新定义了以太坊的主要功能，从为终端用户和dapp开发人员服务的通用区块链转变为服务于排序器的DA层。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53310/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">人工智能有多香？GitHub调查发现美国超九成码农已投向AI怀抱</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/53279/">
+                <span class="next-text nav-default">师从中美各路AI大神，获张一鸣关注，估值3亿美元…天才杨植麟终于拥有了他的公司</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

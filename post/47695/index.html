@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文浅析 DeFi 大规模采用的催化剂：ERC-4626 的未来 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Vault 在 2022 年席卷了 DeFi 领域。" />
+<meta name="keywords" content="DeFi" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/47695/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文浅析 DeFi 大规模采用的催化剂：ERC-4626 的未来" />
+<meta property="og:description" content="Vault 在 2022 年席卷了 DeFi 领域。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/47695/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文浅析 DeFi 大规模采用的催化剂：ERC-4626 的未来">
+<meta itemprop="description" content="Vault 在 2022 年席卷了 DeFi 领域。"><meta itemprop="datePublished" content="2023-02-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3766">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文浅析 DeFi 大规模采用的催化剂：ERC-4626 的未来"/>
+<meta name="twitter:description" content="Vault 在 2022 年席卷了 DeFi 领域。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文浅析 DeFi 大规模采用的催化剂：ERC-4626 的未来</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-23">
+      2023-02-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3766 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E8%A7%82%E7%82%B9/"> 观点 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Frogs Anon</p>
+<p>编译：DeFi 之道</p>
+<p>毫无疑问，自 Compound 在 2020 年启动 DeFi 夏季以来，DeFi 已经取得了长足的进步。但下一步是什么？DeFi 可以为用户提供哪些 TradFi 没有的实用服务？或者更好的是，DeFi 现在是否有任何产品可以真正开始从 TradFi 手中夺取市场份额？我相信有，并且我认为这个产品就是“Vault（金库）”。</p>
+<p>Vault 在 2022 年席卷了 DeFi 领域，所以如果你一直在这个生态系统周围工作，你可能对它们很熟悉。但是，你可能不太熟悉 ERC-4626 标准，<strong>我认为它将成倍地加速 DeFi 的采用和效率。</strong> 稍后，我们将研究一些开始使用这些代币推动发展的协议。但首先，让我们介绍有关 Vault 和 ERC-4626 标准的基础知识。</p>
+<h3 id="内容">内容</h3>
+<p>1.什么是 Vault？</p>
+<p>2.什么是 ERC-4626？</p>
+<p>3.Rodeo Finance</p>
+<p>4.FactorDAO</p>
+<p>5.Fuji Finance</p>
+<p>6.结论</p>
+<h2 id="什么是-vault">什么是 Vault？</h2>
+<p>简单地说，Vault 是用户可以存入代币的智能合约，然后运行预先确定的策略来投资这些存款。Vault 是去中心化金融的从零到一的创新，它们是 DeFi 增值最明显的例子之一。为什么？因为在所有用例中，它们都是可用的、通用的和透明的。</p>
+<ul>
+<li>
+<p>可用性—— Vault 非常易于使用。</p>
+</li>
+<li>
+<p>通用性——它们被用于各种各样的事情。目前，有些 Vault 可以做任何事情，从收集期权溢价到对冲杠杆期货交易，再到优化贷款收益率。（向 Yearn Finance 致敬，因为它是 Vault 领域的先驱。）</p>
+</li>
+<li>
+<p>透明性——任何人都可以随时查看持有情况和表现，这真正将它们与 TradFi 区分开来。TradFi 并没有真正等同于 Vault 的工具：它目前没有任何东西可以运行一个具有相同定制潜力和易用性的完全透明的资产管理策略。</p>
+</li>
+</ul>
+<p>由于 Celsius、3AC、FTX 等公司的崩盘，机构对将资金配置到加密货币领域变得非常谨慎。DeFi 的好处在于透明度，而 Vault 在此基础上增加了可用性和通用性。Vault 或许是在 CeFi 尘埃落定后最终将 TradFi 参与者拉入该领域的关键功能，我并不会感到惊讶，因为这可能就是 ERC-4626 标准的作用所在。</p>
+<h2 id="什么是-erc-4626">什么是 ERC-4626？</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0223/24_3iov2ig2t4.png" alt="一文浅析 DeFi 大规模采用的催化剂：ERC-4626 的未来"></p>
+<p>ERC-4626 诞生于 2021 年底的 EIP-4626，最近随着越来越多的 DeFi 开发者和用户看到它所提供的巨大优势，势头猛增。</p>
+<p>基本上，ERC-4626 采用了 Vault 创建过程并将其标准化。这对于用户体验（UX）非常重要，它会带来流动性。如果你是 OG 加密老手，你会记得以太坊上没有 ERC-20 代币标准的日子。如果没有 ERC-4626，这会使得 DeFi 几乎不可能存在，而购买/出售不同的加密货币的唯一途径会是通过中心化交易所。因此，为了有足够的流动性来运行金融系统，DeFi 需要某种标准化（资产的可替代性）。</p>
+<p><strong>ERC-4626 为 Vault 代币带来了可替代性</strong></p>
+<p>简而言之，这意味着一旦你把代币存入 Vault，你就会得到整个 Vault 策略的代币化版本——有点像 Vault策略的 LP 代币。</p>
+<p>例如，如果你将 USDC 存入 xyzVault 以赚取利息，你会收到 xyzUSDC 作为回报，这将是实时赚取利息。理想情况下，你可以在 DEX 上卖出 xyzUSDC，或将其存入另一个 Vault，赚取一些甜蜜的复利。</p>
+<p>每当你想退出交易时，你必须将 xyzUSDC 送回 xyzVault，并赎回你的原始 USDC 和赚取的利息，再减去收取的服务费。</p>
+<p><strong>ERC-4626 为 Vault 代币带来流动性</strong></p>
+<p>同样，为了拥有流动性，你首先要具有可替换性，这就是标准化如此重要的原因。</p>
+<p>目前，有非常多的 DeFi 协议在争夺相对较小的流动性池。积极的一面是我们还处于早期阶段，开放的竞争环境孕育了竞争，而竞争又孕育了创新。然而，缺点是可供争夺的少量流动性分散在一堆不可互操作的不同应用程序中。这个概念也适用于 Vault。</p>
+<p>Vault 优势是它们允许人们投资于复杂的战略，而不必自己进行所有的交易。然而，如果 Vault 不兼容 ERC-4626，那么 DeFi 就会失败，因为流动性完全被束缚了。而 ERC-4626 完美解决了这个问题。</p>
+<p>回到 xyzVault 的例子，无论你用 xyzUSDC 做什么，只要你不赎回它，你最初存入的 USDC 就会留在 xyzVault 的流动性池中。如果你随后将 xyzUSDC 存入 DEX，你也会为该 DEX 添加流动性。或者，你可以在货币市场应用程序上借出 xyzUSDC，这也有助于增加它们的流动性。</p>
+<p>现在是 alpha！让我们看一下使用 ERC-4626 标准的三个项目。</p>
+<h2 id="01-rodeo-finance"><strong>01 Rodeo Finance</strong></h2>
+<p>Rodeo 正努力成为 Arbitrum 上杠杆收益耕作的首要场所，它们正在通过利用 ERC-4626 的力量来实现这一目标。</p>
+<p>基本上，Rodeo 的 Vault 允许用户投资于不同的 LP 收益耕作策略，但他们更进一步，允许用户获得保证金贷款，这使后者可以进行更多投资，从而获得更高的收益。</p>
+<p>例如，假设你想通过向 Uniswap 提供 100 USDC/WETH 流动性来赚取收益。通常情况下，你不可能在这个策略中达到 100 的最大值。但 Rodeo 允许你以任何存款借入高达 10 倍的杠杆。当然，你使用的杠杆越多，风险就越大，但它为那些想要比“正常”LPing 获得更高 APY，并且不介意承担一些额外风险的人提供了一个不错的选择。</p>
+<p>Rodeo 有两点与众不同：首先，为了投资他们的策略，用户只需要存入 USDC。一旦用户这样做了，Rodeo 就会拿走 USDC，购买策略所需的任何 LP 代币，并为他们进行投资。这可以节省用户花费在购买代币并将其存入流动资金池的繁琐过程中的时间和金钱。相反，用户只需要一些 USDC 就可以了。</p>
+<p>其次，Rodeo 所有的 Vault 都使用 ERC-4626 标准，这意味着增加新的 Vault 非常容易。例如，由于杠杆收益耕作的风险，Rodeo 上可能会出现允许用户对冲其头寸以避免清算的 Vault。</p>
+<p>2023 年对 Rodeo 来说应该是激动人心的一年。正如你所看到的，他们在路线图中计划了大量的发布和改进。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0223/24_v1st67m4s6.png" alt="一文浅析 DeFi 大规模采用的催化剂：ERC-4626 的未来"></p>
+<h2 id="02-factordao"><strong>02 FactorDAO</strong></h2>
+<p>Factor 是一个相对较新的项目，旨在最终成为 Arbitrum 的流动性中心。当然，他们计划这样做的方式是让创建 Vault 变得更容易，它们的策略以 ERC-4626 标准为中心。</p>
+<p>Factor 有一个产品叫做创建向导，它可以作为创建各种结构化产品的一站式服务，包括收益率策略、衍生品、LP staking 等。基本上，你可以认为这是一个可以创建或投资定制的资产管理策略的场所。</p>
+<p>正如上文提到的，TradFi 没有这样的东西——任何人都可以轻松创建一个定制的资产管理策略，这是 DeFi 的主要优势。此外，借助 DeFi，你可以获得公共区块链的透明度，任何人都可以看到每个 Vault 中的所有策略、交易等。</p>
+<p>然而，我们再次看到 ERC-4626 的价值在这里发挥了作用，因为它的可组合性允许在其他策略之上建立策略。例如，你可以创建自己的基金，完全由其他 ERC-4626 代币组成，从各种不同的策略中获得收益——在 TradFi 中，这被称为“基金中的基金”。最终，这为在 Arbitrum 上构建更多创新产品和系统铺平了道路。</p>
+<p>Factor 正在 Arbitrum 生态系统中迅速增加他们的合作伙伴名单（包括 Plutus DAO、Buffer Finance 和 Camelot），他们还在 2 月 20 日公开发售其 FCTR 代币，看看它在项目和 ERC-4626 整体上吸引了多少关注，这将是非常有趣的。</p>
+<h2 id="03-fuji-finance">03 Fuji Finance</h2>
+<p>Fuji Finance 是一个跨链货币市场聚合器，目前它已经整合在 Ethereum、Polygon、Fantom、Arbitrum 和 Optimism 上。在他们即将推出的 v2 版本中，他们将 ERC-4626 提升到一个新的水平。</p>
+<p>使用 Connext 的跨链服务，Fuji 将使用 ERC-4626 标准启用跨链池。然而，Fuji 正在将其提升到一个新的水平，使用户能够在一次交易中在不同的链上借出一种资产并借入另一种资产（从这个角度来看，DeFi 中的借贷组合通常需要大约 7 笔交易）。</p>
+<p>这也进一步提高了更广泛的 DeFi 领域的效率。借助 Fuji Finance 的新产品，流动性将能够利用不同链上更高的贷款利率、更低的借款利率、farming 活动等。它还有助于跨链分散流动性，例如，如果一条较新的链与 Fuji 集成，他们可以激励 Fuji 用户在他们的链上借/贷，同时在以太坊等更成熟和流动性更强的链上借款。从本质上讲，这可能为链带来流动性。</p>
+<p>今年晚些时候，Fuji 还将扩展其能力，除了成为货币市场的聚合者外，还将成为一个策略聚合者。这就是 Vault 的标准化优势之一：借出/借入 Vault 将是与策略 Vault 相同的基础设施，它们都是 ERC-4626。这也意味着策略 Vault 可以很容易地整合 Fuji 上的借出/借入 Vault 资产，这可以用来在各种链上创建更多的资本效率策略。</p>
+<h2 id="结论">结论</h2>
+<p>到目前为止，希望你对 ERC-4626 如何在 DeFi 中创造可用性和资本效率的指数级增长有所了解。这不仅对普通用户来说是一笔巨大的交易，而且金库也可能是让更多 TradFi 实体进入该领域的关键因素，这将带来大量的流动性。TradFi 的世界没有任何东西像 Vault，具备如此干净和高效的互操作性、可定制性和透明度。本文提到的三个协议只是推动这一领域向前发展的众多项目中的一部分，从最近几个月的采用率来看，DeFi 整体上正处于一个大规模突破的边缘。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/47674/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文了解 OP 生态和未来愿景</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/47702/">
+                <span class="next-text nav-default">以太坊基金会2022年四季度捐赠55个项目一览</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#内容">内容</a></li>
+      </ul>
+    </li>
+    <li><a href="#什么是-vault">什么是 Vault？</a></li>
+    <li><a href="#什么是-erc-4626">什么是 ERC-4626？</a></li>
+    <li><a href="#01-rodeo-finance"><strong>01 Rodeo Finance</strong></a></li>
+    <li><a href="#02-factordao"><strong>02 FactorDAO</strong></a></li>
+    <li><a href="#03-fuji-finance">03 Fuji Finance</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

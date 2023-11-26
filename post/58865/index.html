@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Intent的原理、应用现状及风险应对 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将简单介绍Intent的原理、应用现状、潜在风险以及应对方法。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58865/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Intent的原理、应用现状及风险应对" />
+<meta property="og:description" content="本文将简单介绍Intent的原理、应用现状、潜在风险以及应对方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58865/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-11T00:00:00+00:00" />
+
+<meta itemprop="name" content="Intent的原理、应用现状及风险应对">
+<meta itemprop="description" content="本文将简单介绍Intent的原理、应用现状、潜在风险以及应对方法。"><meta itemprop="datePublished" content="2023-09-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4117">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Intent的原理、应用现状及风险应对"/>
+<meta name="twitter:description" content="本文将简单介绍Intent的原理、应用现状、潜在风险以及应对方法。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Intent的原理、应用现状及风险应对</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-11">
+      2023-09-11
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4117 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>近期，在以太坊社区中，关于 Intent 及其应用的讨论比较热烈。一般认为 Transaction（交易）明确指的是如何操作该行为，那 Intent（意图）是指该行为的期望结果还是其他的什么呢？针对以上疑惑，本文将简单介绍 Intent 的原理、应用现状、潜在风险以及应对方法。</p>
+<p><strong>如果说 Transaction 的指令是：</strong></p>
+<p>“先进行 A 操作然后进行 B 操作，然后向 C 付款以获得 D。”</p>
+<p><strong>那么与之对应的 Intent 就是：</strong></p>
+<p>“我有能力付款，我想要得到 D。”</p>
+<p>以 Intent 为中心的协议可以显著改善用户体验和效率。transaction 需要用户自己来明确指定每个参数，操作门槛较高。相比之下，利用 Intent，用户可以简单地表达出预想的结果，同时将最佳实现结果的任务外包给成熟的第三方。 </p>
+<p>尽管 Intent 为生态系统提供了更多可能性，但以太坊链上基于 Intent 的设计也可能对链下基础架构产生重大影响，与 MEV 相关的活动和市场控制也存在着重要联系。</p>
+<h2 id="intent的工作原理">Intent 的工作原理</h2>
+<p>当前，用户与以太坊交互的标准方法是制定和签署交易和特定格式的信息，该格式为 EVM 提供所有必要的信息以执行状态过渡。但是，创建交易可能涉及相当复杂的操作。创建交易需要有关智能合约和诸如 nonce 管理等大量细节操作，同时持有特定资产来支付 gas 费。 由于用户需要在缺乏足够信息或涉及复杂执行策略的情况下做出决策，因此这种复杂性导致用户体验不佳和效率降低。</p>
+<p>Intent 的目标就是是减轻用户的负担。Intent 通过签署一组描述性的约束条件，来允许用户将交易创建外包给第三方，但无需将完全控制权分配出去。</p>
+<p>在基于标准交易的流程中，当验证器被激励进行验证时，交易签名允许验证器准确地遵循针对特定状态的计算路径。相比之下，Intent 并不准确指定必须采取哪些计算路径，而是允许任何满足特定约束条件的操作。通过签署和共享 Intent，用户有效地授予接收者代表其选择计算路径的权限（如下图所示）。值得注意的是，单笔交易中可以包含多个 Intent，从而可以匹配重叠的 Intent，节省 gas 费和提高经济效率。此外，用户还可以更灵活地支付 gas 费，例如允许第三方来赞助 gas 或用其他 token 进行付款。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0911/9hw5syppkd7azm7" alt="Intent的原理、应用现状及风险应对"></p>
+<p>如图所示，提交交易时，用户指定确切的计算路径；提交 Intent 时，用户指定目标和一些约束条件，并且由 Matchmaking 决定要采取的计算路径。</p>
+<h2 id="intent的应用现状">Intent 的应用现状</h2>
+<p>创建 Intent 可以将与区块链交互的复杂事项外包出去，同时允许用户保持其资产和加密身份的托管权限。实际上，关于 Intent 的诸多概念与已运行了几年的系统是相对应的，例如以下场景：</p>
+<p>限制型订单：若用户收到至少 200 个 B token，则可以从用户的账户中取走 100 个 A token。</p>
+<p>Cowswap 风格的拍卖：与限制型订单相同，但依靠第三方或机制来匹配多个订单以最大程度地提高执行质量。</p>
+<p>Gas 赞助：用户可以选择以 USDC 支付交易费用，而非 ETH，账户中有 USDC 用于支付 gas 费用。</p>
+<p>委托授权：仅允许以某些预授权的方式与特定账户进行交互。仅当最终交易遵循 Intent 中指定的访问控制列表时，才能实现 Intent。</p>
+<p>合并交易处理：允许对多个 Intent 进行合并处理以提高 gas 效率。</p>
+<p>聚合器：仅使用最佳价格/收益率进行操作，通过证明执行多个场景的聚合并采取最佳路径来实现 Intent。</p>
+<p>目前，Intent 在跨链 MEV（例如 SUAVE），ERC 4337 类型的账户抽象，以及 Seaport 订单的场景中也有了新的应用。在 ERC 4337 发展的同时，其他新型应用程序（例如跨域 Intent）也正在进入探索阶段。</p>
+<p>在所有基于 Intent 的应用程序中，至少需要有一个了解 Intent 的群体，并且被激励去及时执行 Intent。至于谁来扮演这个角色，以什么方式执行以及其激励措施的问题，需要进一步探索实践，才能确定由 Intent 驱动的系统的效能、信任度以及其他影响。</p>
+<h3 id="中介与mempool">中介与 Mempool</h3>
+<p>使 Intent 进入有意愿的中介手中的最明显途径是以太坊的 Mempool。但是，当前 Mempool 设计不支持 Intent 的传播。从长远来看，考虑到 DOS 攻击的隐患，在以太坊 Mempool 中传播 Intent 获得普遍支持的可能性极低。可以说，以太坊 Mempool 的开放性和无需许可的性质对 inten 的采用形成了障碍。</p>
+<p>在没有以太坊 Mempool 的情况下，Intent 系统设计人员面临一些问题。目前面对的抉择是将 Intent 传播给许可方，还是以无需许可的方式以便任何一方都可以执行 Intent。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0911/ctjt70jj6t1uhvn" alt="Intent的原理、应用现状及风险应对"></p>
+<p>如图所示，Intent 先从用户流向许可/无需许可的公共/私密的 Intentpool，再通过 matchmaker 将其转换为交易，最终将其转换为公共 Mempool，或直接通过 MEV Boost 类型的拍卖直接展示在链上。</p>
+<h3 id="无需许可的mempool">无需许可的 Mempool</h3>
+<p>一种正在尝试的设计是一个去中心化的 API，允许在系统中各个节点通过 gossip 广播 Intent，从而为执行者提供无需许可的访问权限。</p>
+<p>例如，在0x协议中继器中，互相对限制型订单进行 gossip 广播，并在找到匹配时将其上链。在共享的 ERC 4337 Mempool 背景下，这种做法也正在被进行探索，以抗衡中心化和审查风险。但是，这种无需许可的 Intentpool 的设计也面临着以下挑战：</p>
+<p>DoS 抗性：开发者可能必须限制 Intent 的功能，以避免潜在的 DoS 攻击。</p>
+<p>传播激励措施：对于许多应用程序，执行 Intent 是一项有利可图的活动。 因此，理论上来说，操作 Intentpool 的节点有动机不去传播 Intent，以减少执行 Intent 的竞争。</p>
+<p>MEV：由于 Intent 的执行质量依赖于链下参与者的良好行为，因此在使用公共的、无需许可的 Intentpool 时面临一些困难。如果执行有利可图，那么无需许可的 Intentpool 可能会试图针对用户进行套利。这类似于目前以太坊 Mempool 中的“三明治攻击”，对于 Defi 相关的 Intent 来说这将会是一个普遍的问题。后续的改进方式可能是创建无需许可的、但进行加密处理的 Intentpool。</p>
+<h3 id="许可的mempool">许可的 Mempool</h3>
+<p>受信任的中心化 API 的抗 DOS 攻击能力更强，并且不需要传播 Intent。这种信任模型为 MEV 担忧提供了一些立足点。只要信任假设成立，执行质量可得到保证。受信任的中介也可能有与之相关的声誉，从而提供了一些激励来认真执行操作。</p>
+<p>因此，许可的 IntentPool 在短期内对基于 Intent 的应用程序开发人员具有吸引力。但是，强信任的假设天然存在缺陷，并且在一定程度上违背了最初的区块链精神。</p>
+<h3 id="混合解决方案">混合解决方案</h3>
+<p>还有一些解决方案是上述两种情况的混合。例如，有一种情况，传播过程是许可的，但执行是无需许可的，反之亦然。混合解决方案的一个常见例子是订单流拍卖。</p>
+<p>这类设计的思路是，需要交易对手的用户可能需要区分更好和更差的交易对手，以便以更有利的价格进行交易。设计流程通常包括受信任的一方，他们从用户那里获得 Intent（或交易）并代表用户促进拍卖。而参加拍卖是无需许可的。这类设计也存在缺点，在许可的 Intentpool 中，它们很可能会受到各种干扰。</p>
+<p>这种方案的底线是基于 Intent 的应用程序不仅涉及与智能合约交互的新消息格式，还需涉及以替代 mempool 的形式的传播和对手发现机制。目前最关键的就是设计出一种兼容激励同时又保持去中心化的 Intent 发现和匹配机制。</p>
+<h2 id="风险及其应对方法">风险及其应对方法</h2>
+<p>尽管 Intent 是一种令人兴奋的交易新范式，但其广泛采用也意味着更大的用户活动加速转移到替代型 Mempool 的趋势。如果管理不当，这种转变可能伤害到以太坊的去中心化以及导致受信任方权力过大，潜在的风险大致有以下几种：</p>
+<p>订单流：若 Intent 执行是许可的，但用户对其选择不慎，使之从公共 Mempool 往外迁移，可能会使以太坊区块生产变得中心化。</p>
+<p>信任：由于许多解决方案都需要对中介的信任，因此，为了确保 Intent 的执行质量，这种高准入门槛会阻碍基于 Intent 的新架构的发展，降低创新和竞争速度。</p>
+<p>透明度： 由于许多 Intent 架构都需要用户对其链资产和许可的 Mempool 交出一些控制权作为妥协，这意味着外部存在一定程度的不可渗透性，因此建立的系统存在不透明的风险，在这种情况下，用户的期望如何得到满足，以及是否存在未被发现的生态系统威胁，都是不清楚的。甚至在用户和区块链之间发展的中间件和 Mempool 的生态系统都会变得不透明。</p>
+<p>那么，如何降低上述风险呢？我们知道，以太坊 Mempool 的空间是有限的。对于某些应用，风险是由于其缺乏隐私而造成的，因此它们无法支持更广泛的消息格式。这使钱包和应用程序开发人员处于困境，因为他们必须找到某种方法使用户连接到区块链，同时避免上述风险。</p>
+<p>理想的系统应该是无需许可的，以便任何人都可以匹配和执行 Intent，且不能牺牲掉过多的执行质量。系统应该是通用的，以便部署新应用程序，而不需要再建立新的 Mempool。系统应该是透明的，以便公开报告执行 Intent 的过程，并在隐私保证允许时提供执行质量审核的数据。</p>
+<p>尽管像 FlashBots 和 Anoma 等团队正在努力致力于通过结合隐私和无需许可来满足上述通用解决方案的要求，但在近期内很难创造出如此完美的系统。因此，用户需要进行权衡，选择不同解决方案来适用于不同的应用程序。同样的，发起 Intentpool 的应用需要在无需许可的情况下寻求普遍性，而在许可的情况下谨慎选择中介。</p>
+<p>基于 Intent 的应用程序设计者需要全面考虑其应用程序的链下含义，因为它们不仅仅事关其用户群，还涉及到更广泛的社区，这就要求更广泛的社区对以太坊周围的链下生态系统保持格注意。</p>
+<h2 id="小结">小结</h2>
+<p>由于 Intent 应用的市场需求明显，许多基于 Intent 的应用程序已得到了数年时间的广泛使用。越来越多的 Intent 采用由 ERC 4337 部分驱动，可能会加速从以太坊 Mempool 转移到新的场所。Intent 的采用代表了用户从“被迫式操作”范式转变为“描述型”范式，有望大大改善用户体验和提高效率。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58863/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Huobi Ventures研报丨Web3社交赛道会是下一个牛市引擎吗？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58830/">
+                <span class="next-text nav-default">Layer2中Data Availability的核心作用</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#intent的工作原理">Intent 的工作原理</a></li>
+    <li><a href="#intent的应用现状">Intent 的应用现状</a>
+      <ul>
+        <li><a href="#中介与mempool">中介与 Mempool</a></li>
+        <li><a href="#无需许可的mempool">无需许可的 Mempool</a></li>
+        <li><a href="#许可的mempool">许可的 Mempool</a></li>
+        <li><a href="#混合解决方案">混合解决方案</a></li>
+      </ul>
+    </li>
+    <li><a href="#风险及其应对方法">风险及其应对方法</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

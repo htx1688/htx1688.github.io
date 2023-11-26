@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Paradigm：如何使用链上数据进行策略研究？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="链上数据的来源、结构以及提取和处理工具。" />
+<meta name="keywords" content="区块链" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43751/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Paradigm：如何使用链上数据进行策略研究？" />
+<meta property="og:description" content="链上数据的来源、结构以及提取和处理工具。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43751/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="Paradigm：如何使用链上数据进行策略研究？">
+<meta itemprop="description" content="链上数据的来源、结构以及提取和处理工具。"><meta itemprop="datePublished" content="2022-10-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3559">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Paradigm：如何使用链上数据进行策略研究？"/>
+<meta name="twitter:description" content="链上数据的来源、结构以及提取和处理工具。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Paradigm：如何使用链上数据进行策略研究？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-22">
+      2022-10-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3559 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《Using On-Chain Data for Policy Research: Part 1》</p>
+<p>原文作者：Brendan Malone，Paradigm</p>
+<p>原文编译：Kxp，BlockBeats</p>
+<p><strong>I. 引言</strong></p>
+<p>Crypto 政策在制定时很少会用到真实且细化的数据，原因主要有以下三点：</p>
+<p>1. 新兴技术领域的相关政策大多还停留在理论及定性分析层面，早期阶段很少会使用到数据。</p>
+<p>2. 尽管链上数据全部开放透明，但要想访问这些数据人们需要在短期内完成大量工作（即直接从区块链提取原始数据），即便对于 Crypto 原生从业者来说也是如此。</p>
+<p>3. 区块链「取证」公司和数据供应商有少量的数据产品，但它们都不具备灵活性/可定制性，也不能满足经济/金融研究人员的需求。</p>
+<p>许多现代经济学和金融学研究人员错过了将工具应用于 Crypto 数据分析的机会。从设计上讲，Crypto 可以向任何人提供细化数据，但大部分政策在制定时仍依赖于 CoinMarketCap 等外部预聚合时间序列数据源，而不是直接从数据源获取数据，这又是什么原因导致的呢？</p>
+<p><strong>正如政策制定者可以查询美国每家主要银行的资产负债表，并逐秒观察消费者存款的变化一样，他们也可以毫不费力地查看整个 Ethereum 生态系统的 Stablecoin 发行情况</strong> ，但大多数分析 Stablecoin 的政策文件却采取了一种探讨假设事件的分析方法。</p>
+<p>我将在本篇中具体阐释以下几点内容，希望可以对想要使用链上数据的政策研究人员有所帮助：</p>
+<p><strong>·</strong>  链上数据的获取方法</p>
+<p><strong>·</strong>  链上数据所采用的结构</p>
+<p><strong>·</strong>  提取和使用链上数据的几个基本工具</p>
+<p>在随后的文章中，我将探讨如何使用这里收集的数据来判断 Crypto 市场的走势。同时，我将在结尾发布可供免费使用的数据和代码。通过阐明如何在区块链中查询数据，我希望向大家展示 Crypto 的开放性可以为数据决策开辟的新方法。</p>
+<p>如果您就职于一家监管机构或研究机构，并在获取 Crypto 数据时遇到了困难，欢迎与我们取得联系分享你的想法，了解 Paradigm 可以为您提供哪些帮助。</p>
+<p><strong>II. 链上数据获取方法</strong></p>
+<p>一般来讲，数据收集工作应集中在一个区块链（Ethereum）及特定项目的子集上，这些项目主要是以美元计价、法币支持的 Stablecoin，具体包括 USDC、Tether、Binance USD、Pax Dollar 和 Gemini Dollar。该方法广泛适用于链上数据，即便你想创建一个不同的数据集。</p>
+<p>Etherscan 这类区块浏览器非常适用于查看交易快照以及收集特定智能合约的信息，但根据我的经验，它们却不太能用于生成大型数据集。在收集和处理原始数据时，你基本上有两个选择：（1）在本地运行一个完整的节点，或（2）查询已经从链上直接写入原始数据的数据库。第一种方法对于专业技能和计算资源的要求比较高，而第二种方法则只需要基本的 SQL 和 Python 技能就可以实现，所以这里我们将采用第二种方法。</p>
+<p>Dune 和谷歌云平台（GCP）的 BigQuery 有最新的链上数据，这些数据都以表格的形式存储在数据库中，研究人员可使用 SQL 命令对其进行查询。Dune 还提供免费的数据库，不过其速度较慢，而且还有些局限性，但它非常适合于 A/B 测试的数据查询，也有助于你熟悉数据库的运行模式，尤其是对于那些不善于使用 SQL 查询关联数据库的人。BigQuery 虽然更加灵活快捷，但谷歌会对计算资源收费，所以其价格也相对昂贵。我在第一次处理数据时，为了节省费用，我会先在 Dune 中测试查询语句，然后再将其输入 GCP 中运行。在大多数情况下，这种方法都能起到很好的效果（还有一点值得注意的是，Dune 的 Crypto 表格数量至少是 GCP 的 100 倍，包括一些用户生成、预先清理过的高质量 Crypto 表格。相比之下，GCP 中的数据大多是原始区块或交易。Dune 也有一些非常方便的内置数据可视化工具，值得单独购买。）</p>
+<p><strong>III. 链上数据结构</strong></p>
+<p>要回答这个问题，你首先需要搞清楚自己处理数据的目的。对于这个测试案例，我决定为主要的法定支持 Stablecoin 建立一个大型的时间序列数据集，并观察一些特定的行为: 铸币（即发行 Stablecoin），烧毁 (即停止流通 Stablecoin) 和转移。我之所以选择以这种方式进行研究，是因为政策制定者和学者目前最为关注法定支持的 Stablecoin，所以这些数据在短期内可能相当有用。</p>
+<p>以美元计价的几大 Stablecoin 都采用了 ERC-20Token 标准。顾名思义，ERC-20 是一种在 Ethereum 上使用智能合约创建 Token 的标准化方式。如果你把区块链理解为一个巨大的去中心化 Excel 表格，那么智能合约就类似于 Excel 函数。在函数中输入参数之后，它将使用其内置逻辑产生一个特定的输出结果（例如，MAX 函数就是用来输出所输入参数中的最大值）。</p>
+<p>我们可以使用智能合约的 Ethereum 地址来对它们进行定位，这些地址是区块链数据结构中的唯一标识符：</p>
+<p><strong>·</strong> USDC</p>
+<p><strong>·</strong> Tether USD</p>
+<p><strong>·</strong> Binance USD</p>
+<p><strong>·</strong> Pax Dollar</p>
+<p><strong>·</strong> Gemini Dollar</p>
+<p>与 API 类似，智能合约也是可以重复使用的程序。每次智能合约获得互动指令时，都会产生该互动的记录，并由 Ethereum 协议以日志的形式记录在区块链上，而这些日志则构成了智能合约活动的可靠信息来源。</p>
+<p>当智能合同执行一个特定函数时，例如烧毁 ERC-20 Stablecoin 以将其从流通中移除，该函数及其参数将作为交易日志记录在区块链上。</p>
+<p>在下面的交易中，USDC Stablecoin 的发行商 Circle 烧毁了价值 1056.92 美元的 USDC。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1022/11_jshn7nrise.png" alt="Paradigm：如何使用链上数据进行策略研究？"></p>
+<p>如果你切换到「日志」标签，你就可以查看交易事件日志，相应的字段为</p>
+<p><strong>·</strong>  地址：智能合约的合约地址。USDC Stablecoin 的合约地址是0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48。</p>
+<p><strong>·</strong>  名称：智能合约执行的函数，以及该函数中的参数。在这里，智能合约正在调用烧毁函数，该函数接收的参数指定了所烧毁币的发送地点（例如燃烧池，必须是 Ethereum 地址）和烧毁币的数量（其金额必须是小于 256 位的无符号整数）。</p>
+<p>Etherscan 的输出结果还会显示主题和数据字段，这些字段包含了我们在分析交易时需要解析的大部分相关信息。</p>
+<p><strong>·</strong>  Topic0 是函数签名的哈希值。从本质上讲，它会将函数及其参数经由单向算法得到一个唯一的函数哈希值。Ethereum 使用的是 Keccak-256 哈希函数，当你通过 Keccak-256 算法输入函数签名时，它总是会产生相同的哈希值，所以任何时候该哈希值出现在日志中，你都能确信是调用了同一个函数。</p>
+<p><strong>·</strong>  Topic1 是烧毁函数的一个索引参数。在这里，Topic1 是烧毁的 Token 被发往的地址。(注意：如果烧毁函数有更多的参数，这些参数将作为额外的主题出现）</p>
+<p><strong>·</strong>  这里的数据字段表示所烧毁 Token 的数量。</p>
+<p>既然我们已经了解了链上数据的基本结构，就可以开始从 Dune 和 GCP 中提取数据了。</p>
+<p><strong>IV. 提取并处理链上数据的基本工具</strong></p>
+<p>如前所述，在这个例子中，我选择从现有数据库中提取链上数据，而不是访问 Ethereum 网络上的活动节点。为了便于理解，我使用 SQL 从 GCP 提取了大量原始数据表格，然后在 Python 中使用 pandas 库对其进行清理。</p>
+<p>当我们从 GCP 提取表格时，我们将使用 BigQuery，它储存有很多 Ethereum 的数据表，如下图左边一栏所示。当你点击一个表格时，相应的数据库模式就会出现，就如下图中的 ethereum.logs 表。与此同时，其中涉及的地址、数据和主题都会记录到日志数据中去。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1022/11_wsnrmt8vlr.png" alt="Paradigm：如何使用链上数据进行策略研究？"></p>
+<p>下图中的查询语句将用于提取日志表中涉及与 USDC、Tether USD、Binance USD、Pax Dollar 或 Gemini Dollar 合约互动的所有记录。除了 ethereum.logs 中的信息外，一些额外的信息也很有用，所以我还合并了 ethereum.block 表中的数据，其中涵盖了 Gas 费等信息。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1022/11_ntyeyzac7i.png" alt="Paradigm：如何使用链上数据进行策略研究？"></p>
+<p>得到的表格可以直接由 Python 读取，并借助 pandas 数据框架细分为以下字段：</p>
+<p><strong>·</strong>  log_index</p>
+<p><strong>·</strong>  transaction_hash</p>
+<p><strong>·</strong>  transaction_index</p>
+<p><strong>·</strong>  address</p>
+<p><strong>·</strong>  data</p>
+<p><strong>·</strong>  topics</p>
+<p><strong>·</strong>  block_timestamp</p>
+<p><strong>·</strong>  block_number</p>
+<p><strong>·</strong>  block_hash</p>
+<p><strong>·</strong>  number</p>
+<p><strong>·</strong>  miner</p>
+<p><strong>·</strong>  size</p>
+<p><strong>·</strong>  gas_limit</p>
+<p><strong>·</strong>  gas_used</p>
+<p><strong>·</strong>  base_fee_per_gas</p>
+<p>这些字段中的大多数都可以直接使用，不过第三节中讨论的主题字段需要用 Python 进行一些额外的清理，以便将其分成多列。</p>
+<p><strong>V. 结语</strong></p>
+<p>这篇文章使用的是 Ethereum 的日志数据，同样的方法也可以用来访问链上的各种数据。Python 和 SQL 是大多数经济学家和政策制定者所熟悉的工具，它们可以发挥很大作用。与传统金融相比，Crypto 更具透明度。这样一来，研究人员就可以利用实时数据来阐明金融体系的运作方式，并及时控制住可能出现的风险。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43760/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Messari聘请首席运营官，未来将进行IPO</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43748/">
+                <span class="next-text nav-default">Voyager Digital敦促债权人对FTX收购资产的计划投赞成票</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

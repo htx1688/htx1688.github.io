@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          历史重演？详解以太坊2.0与硬分叉 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="以太坊主网将和以太坊信标链进行合并并完成由POW工作量证明机制迁移至POS权益证明机制的转变，但“The Merge”只是一个开始。" />
+<meta name="keywords" content="以太坊2.0" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41281/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="历史重演？详解以太坊2.0与硬分叉" />
+<meta property="og:description" content="以太坊主网将和以太坊信标链进行合并并完成由POW工作量证明机制迁移至POS权益证明机制的转变，但“The Merge”只是一个开始。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41281/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-09T00:00:00+00:00" />
+
+<meta itemprop="name" content="历史重演？详解以太坊2.0与硬分叉">
+<meta itemprop="description" content="以太坊主网将和以太坊信标链进行合并并完成由POW工作量证明机制迁移至POS权益证明机制的转变，但“The Merge”只是一个开始。"><meta itemprop="datePublished" content="2022-08-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9727">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="历史重演？详解以太坊2.0与硬分叉"/>
+<meta name="twitter:description" content="以太坊主网将和以太坊信标链进行合并并完成由POW工作量证明机制迁移至POS权益证明机制的转变，但“The Merge”只是一个开始。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">历史重演？详解以太坊2.0与硬分叉</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-09">
+      2022-08-09
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9727 字 -
+        预计阅读 20 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>“The Merge”正在到来</strong></p>
+<p>以太坊2.0的升级自Vitalik Buterin在2013年发布“下一代智能合约和去中心化应用平台”——以太坊白皮书以来就一直热议不断，在经历过数次跳票后，以太坊终于要迎来具有历史性意义的“The Merge”升级，以太坊主网将和以太坊信标链进行合并并完成由POW工作量证明机制迁移至POS权益证明机制的转变，但“The Merge”只是一个开始，以太坊还将引来“The Surge”、“The Verge”、“The Purge”和“The Splurge”等升级引入分片链并优化数据结构以及客户端成为最终版本。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_8wbuy38yal.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>“可以做发达之后处于守势的苹果，但绝对不能做固步自封的诺基亚”，共识机制的转变是以太坊在成为真正的“世界计算机” 路上必须要经历的考验，尽管升级后以太坊的未来充满了未知，但以太坊迈出了在区块链发展中历史性的一步！</strong></p>
+<p>本文章仅为个人分析，不构成任何投资意见，如出现不正确的内容欢迎各位指出。</p>
+<p><strong>目录</strong></p>
+<p><strong>一、以太坊为什么要升级？</strong></p>
+<p>（一）能源消耗问题</p>
+<p>（二）可扩展性问题</p>
+<p>（三）安全问题</p>
+<p>（四）公链竞争</p>
+<p><strong>二.以太坊2.0将会引来哪些重要升级？</strong></p>
+<p>（一）以太坊的“协调者”——信标链</p>
+<p>（二）以太坊的“数据仓库”——分片链</p>
+<p>（三）POS权益证明机制如何运行？</p>
+<p><strong>三.POS权益证明机制下的以太坊惩罚机制是什么样的？</strong></p>
+<p>（一）有哪些惩罚机制？</p>
+<p>（二）如何检测到节点作恶？</p>
+<p><strong>四.历史重演？以太坊2.0升级面临硬分叉会发生什么？</strong></p>
+<p>（一）现在的硬分叉与过去ETC分叉有什么区别？</p>
+<p>（二）以太坊2.0升级会出现多条硬分叉吗？</p>
+<p>（三）Miner是否可以拆除难度炸弹？为什么难度炸弹会使得Miner更容易产生意见上的分歧？</p>
+<ul>
+<li>
+<p>POW工作量证明机制下的以太坊正面临着能源消耗大、可扩展性低、算力越来越集中威胁网络以及高性能公链不断侵蚀市场的问题，进行扩容升级才能维持以太坊在公链中的霸主地位。</p>
+</li>
+<li>
+<p>正在与目前POW机制主链平行运行的POS机制信标链将会在“The Merge”升级后与主链合并并替代POW机制成为主链新的共识机制。</p>
+</li>
+<li>
+<p>分片技术可以将以太坊的数据放在64条分片链上进行处理，极大的提高了TPS处理速度，并且分片节点的硬件要求门槛很低，甚至可能实现在个人笔记本和手机上运行节点，使得网络节点更加去中心化。</p>
+</li>
+<li>
+<p>在POS权益证明机制下信标链将会根据币龄随机分配验证节点负责提议区块并需要通过2/3网络节点的验证投票后才可出块，在极端情况下协议将会启动紧急状态解决无法出块的情况。</p>
+</li>
+<li>
+<p>POS权益证明机制下的以太坊有两套惩罚机制：节点异常运作的惩罚（Penalties）和节点作恶要面临的削减（Slashing），削减（Slashing）惩罚更严重最高面临损失全部权益且会被驱逐出协议，而惩罚（Penalties）只是进行罚款。</p>
+</li>
+<li>
+<p>验证节点需额外运行Slasher节点才可以检测网络上的作恶行为，运行Slasher节点并没有利润可言属于利他行为，全网仅需一个诚实且正常运作的节点即可检测所有作恶行为。</p>
+</li>
+<li>
+<p>以太坊2.0升级面临的硬分叉与ETC分叉时情况不同，大量的不可复制资产如中心化稳定币等问题将会使得以太坊POW的分叉链陷入混乱，链上基础设施生态也可能会因为缺乏POW链预言机的运行而导致无法正常运作，并且中心化稳定币的发行商在分叉的未来上有决定性影响。</p>
+</li>
+<li>
+<p>以太坊POW的分叉链将不会只出现一条，难度炸弹和其他因素可能使得Miner们出现分歧导致出现多条POW分叉链，最终大部分分叉链的结局可能都会随着时间而消亡。</p>
+</li>
+</ul>
+<p><strong>一.以太坊为什么要升级？</strong></p>
+<p><strong>（一）能源消耗问题</strong></p>
+<p>POW工作量证明机制最让人诟病的就是其能耗问题，大量的算力被浪费在了竞争出块权中，这意味着随着以太坊生态的不断壮大将会有大量的电力被浪费。下图显示了以 TWh/yr 为单位的各个行业的估计年能耗（检索于 2022 年 6 月），以太坊的总能耗约为112 TWh/年已经高于Netflix每年的总能耗。POS权益证明机制下的以太坊能耗方面比POW工作量证明机制降低了99.5%，这使得以太坊更加环保的同时也更具有可持续性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_4vl01koab5.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：ethereum.org</p>
+<p><strong>（二）可扩展性问题</strong></p>
+<p>随着以太坊生态的不断完善和用户量不断增长，用户交互的需求正在不断增长，以太坊需要可以处理更多事务的能力。当前POW工作量证明机制下的以太坊TPS处理速度仅仅每秒15-17 笔交易，当以太坊交互数量暴增的时候就会出现网络堵塞导致出现“GAS战争”使得交互变得无比昂贵且确认交易极其缓慢，在“312”黑天鹅事件中MakerDAO就曾因为GAS费暴涨问题导致出现“零元购”。2017年加密猫的爆红事件导致以太坊的网络拥堵甚至GAS费达到了以太坊历史最高的平均GAS价格939.59Gwei，这是极其昂贵的，没有人愿意在如此昂贵的GAS费下进行交互。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_irhgybw839.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：etherscan</p>
+<p>截止至2022年8月4日，此时的以太坊GAS费平均价格仅18Gwei，与939.59Gwei相差52.2倍。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_savye982p9.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：etherscan</p>
+<p>POW工作量证明机制下的以太坊是不足以支撑起大量的交互请求的，这是以太坊要成长为“世界计算机”的最大阻力之一，以太坊2.0的升级可以很好的解决这个问题，在分片链开始上线后结合Layer2的Rollups技术理论上TPS的上限可以达到 10 万笔/秒，相比于POW工作量证明机制的TPS处理速度可以说是天差地别。</p>
+<p><strong>（三）安全问题</strong></p>
+<p>对于POW工作量证明机制的以太坊来说，Mining Pool的存在使得以太坊的算力呈中心化趋势且对以太坊的整体网络安全产生了威胁。POW机制下攻击成本体现在设备以及算力的堆积上，当某人或者集体掌握了51%以上的算力就可以对以太坊发动“51%攻击”且协议本身无法对这种情况起到有效抑制效果。但在以太坊合并转变POS权益证明机制后发动攻击的成本转变为了购买大量的ETH进行质押，在投入资产的同时协议还可以对发动恶意攻击的节点进行罚没资产，这种惩罚在工作量证明机制的运作下是无法实现的。</p>
+<p>以太坊升级后安全模式会发生改变，因为引入了分片链。信标链将随机分配验证者到不同的分片上——这使得验证者几乎不可能通过攻击一个特定的分片来串通，从而攻击网络。在工作量证明模式的区块链中，协议无法控制并分配Miner，所以分片在POW机制中无法获得如此高的安全性，这使得POS机制下的以太坊更具有安全性。</p>
+<p>在分片链上线后人们可以使用笔记本电脑和手机就可以运行分片链客户端，这会鼓励更多的人成为验证者，增加网络的去中心化并减少攻击面。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_6j2sb972n0.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>图片来源：ethereum.org</p>
+<p><strong>（四）公链竞争</strong></p>
+<p>公链作为区块链领域最重要的基础设施一直都是市场的焦点。以太坊作为龙头公链一直不断面临着许多号称“以太坊杀手”的新兴高性能公链的挑战，以太坊的TVL市场份额正在被不断蚕食，从2021年最高的将近97%的市场份额到目前降低到59.05%的市场份额，公链之间的竞争已经进入了白热化。POW工作量证明机制下的以太坊已经逐渐无法适应时代的需求，以太坊能做的只有进行升级扩容才能维持住以太坊在多公链时代下的霸主地位。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_uww4nipei5.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：Defillama</p>
+<p><strong>二.以太坊2.0将会引来哪些重要升级？</strong></p>
+<p><strong>（一）以太坊的“协调者”——信标链</strong></p>
+<p>信标链（Beacon Chain）是以太坊用来解决POS权益证明共识问题以及协调分片链的区块链，在2020年12月1日上线，目前正在与以太坊主链平行并独立运行着。它可以让ETH持有者质押ETH成为验证节点来替代POW Miner，同时也可以在分片链上线后与分片链进行连接并进行协调工作向分片链随机分配验证者从而构成一个可以相互协作的整体，但信标链目前无法处理账户以及智能合约。</p>
+<p>“The Merge”升级最重要的就是将信标链以及主链进行合并，合并后信标链上的验证节点将会替代所有的POW Miner负责整个以太坊的共识机制。并且主网将为POS权益证明系统带来执行智能合约的能力，向所有ETH持有人和使用者保证过渡顺利。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_ymfl0pozjm.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>（二）以太坊的“数据仓库”——分片链</strong></p>
+<p>以太坊分片链（Shard Chain）指的是创建多个新链/分片链来同时处理以太坊上的数据，从而达到减少网络拥堵、增加TPS处理速度以及降低GAS费的效果。但分片链没有处理智能合约的权利，而是成为以太坊的“数据仓库”，分片链的验证者将会由信标链来负责随机协调分配。在分片链上线后，以太坊将切割成64个分片链来同步运行，理论上配合Layer2的Rollups技术可以使得以太坊的TPS处理速度达到10万笔/秒，这极大提高了整个以太坊的吞吐量，使得以太坊可以承载更大的生态以及用户量，分片技术将会在下一次升级“The Surge”中上线。</p>
+<p>分片技术（Sharding）在理论上可以用来解决所谓的“不可能三角” 问题，即可扩展性、去中心化、安全性</p>
+<ul>
+<li>
+<p>可扩展性：分片链可以处理比单条链更多的事务，解决网络拥堵问题。</p>
+</li>
+<li>
+<p>去中心化：分片链大大降低了硬件需求的门槛，使得人人都可以通过消费级笔记本电脑甚至是手机都可以运行分片链客户端。</p>
+</li>
+<li>
+<p>安全性：信标链的随机分配机制使得攻击者无法将他们的力量聚集在一条分片链上，并且只要有一条分片出现坏块，一旦发现就会被丢弃，整条链都会避免这个坏块。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_greaesuah2.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>分片链如何与信标链连接？</strong></p>
+<p>分片链与信标链链接需要依靠交联(crosslinks)来进行实现。交联是指将一个信标区块和分片区块连接起来并可以引用。同区块下分片区块会接受来自同区块的信标区块的哈希值，该信标区块的哈希值内包含了该信标区块接受到的所有交联的哈希值，而在下一个区块中的信标区块将会接受来自上一个区块的分片区块的交联并将本区块的信标区块的哈希值发送给同区块的分片区块。某些信标区块可能会丢失分片区块的引用，但是每个分片区块必须连接到信标区块，所以错过的分片区块可以交联在下一个信标区块中。</p>
+<p>由于信标链目前只支持64个分片，所以一个信标区块最多可以容纳64个交联，如果出现一个区块中有63个分片区块没有被提议出块的话，那么下一个信标区块将会出现只有1个交联的情况，信标链就像以太坊的“颈椎”，所有的分片链都是连着这条以太坊的“颈椎”的“颈椎骨”。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_gqzsrsbrer.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>（三）POS权益证明机制如何运行？</strong></p>
+<p>POS权益证明是区块链用来实现分布式共识的一种共识机制。在POW工作量证明机制中，Miner通过算力的堆积竞争出块权。而在POS权益证明机制中，Miner通过质押的ETH数量来竞争出块权。Miner需要质押至少32个ETH成为验证节点或质押任意数量的ETH参与联合质押来参与Mining，当用户在分片上提交交易时，验证者将负责将交易添加到分片区块中，信标链通过算法伪随机选择验证者以提出新的块。</p>
+<p><strong>POS权益证明机制如何进行验证并出块？</strong></p>
+<p>要作为验证者参与，用户必须将 32 ETH 存入存款合约并运行三个独立的软件：执行客户端、共识客户端和验证者。当验证者被选中进行出块时，该区块还需三分之二的总活跃验证者进行签名确认才可出块，从而保证以太坊的安全使得该区块具有“最终性”。因为不可能存在两个区块同时获得三分之二总活跃验证者的签名，当一个验证者没有被选中出块时，它们将参与验证另一个验证者的出块提议，并确认一切都正常。</p>
+<p>关于出块时间。在工作量证明下，区块的时间由Mining难度决定，而在权益证明中，速度是固定的。权益证明以太坊的时间分为插槽（Slot）和周期（Epoch），这决定了系统中共识的节奏。即每一隔 12 秒出一个插槽，每个周期包含 32 个插槽，即每隔 6.4 分钟产生一个周期，每个插槽只能创建一个有效区块，每个插槽中随机选择一个验证者作为区块提议者，该验证器负责创建一个新分片区块并将其发送到网络上的其他节点。</p>
+<p>同样在每个插槽中，信标链会随机选择一个由至少128个验证者组成的“委员会(committees)”来对每一个分片区块进行证明，其投票用于确定所提议区块的有效性。“委员会”验证者的数量不是固定的而是随着区块的变化而改变，每个周期过后，“委员会”都由不同的、随机的参与者解散与改革，这有助于避免委员会中的不良参与者伤害到分片。“委员会”除了验证投票之外，还需要负责将自己所在的插槽中的分片区块尝试交联某个信标链上的特定的信标区块。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_31qa2i1qdf.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>通过观察信标链的区块链浏览器我们可以看到，下图详细信息显示该周期被99.8%的活跃验证者即总质押量13,177,296个ETH中的13,150,835个ETH的权益投票签名并出块，每个插槽中的分片区块都由不同的验证者出块并经过三分之二以上活跃验证者的投票签名通过出块。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_g5227kmlku.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_2sis9j03fh.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：beaconcha.in</p>
+<p><strong>POS权益证明机制如何选择验证节点出块？</strong></p>
+<p>POS权益证明机制的出块是由协议伪随机根据权益选择一个验证者来负责出块，验证者被选择出块的概率会随着质押的ETH数量以及币龄（CoinAge）的增长而增长。币龄是POS权益证明机制下的一个参数，Miner没有出块的时间越长，币龄越长且被选中出块的概率越大，但当Miner被选中出块后币龄将会归零并重新开始累积。</p>
+<p>假设质押年收益率为10%，老王质押了100个ETH成为节点进行Mining，此时老王是币龄为0，但是老王有30天没有被选择出块，此时老王的币龄为30*100=3000，那么如果此时老王被选择出块的话他的币龄会归零并根据区块奖励=币龄年利率/365 的公式获得0.82ETH=3000*10%/365。</p>
+<p>大致出块机制如下图，币龄只能增加被选中的概率，可能出现多次低币龄节点出块的可能性。但长期看质押ETH越多的节点越容易被选中，造成了越有钱越占优势的现象。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_bmrsk9fmtl.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>如果信标链一直无法出块怎么办？</strong></p>
+<p>在POS权益证明机制下的以太坊中，一个区块需要经过三分之二的验证节点投票通过才可以出块来确保区块的“最终性”，如果发生极端情况导致信标链一直无法通过三分之二的验证节点投票而使得以太坊陷入停滞该怎么办呢？</p>
+<p>当发生这种极端情况时，以太坊将会启动一种紧急状态：不活动泄漏（Inactivity leak），这种紧急状态的触发条件为信标链连续四个周期都没有通过三分之二验证节点验证投票时，就会进入不活动泄漏状态。进入这种状态后，协议将会减少未验证投票的节点权益，最终使得参与验证投票的节点的权益超过总验证节点权益的三分之二从而达到恢复信标链的正常运行。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_bw8qfw5og6.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>三.POS权益证明机制下的以太坊惩罚机制是什么样的？</strong></p>
+<p><strong>（一）有哪些惩罚机制？</strong></p>
+<p>在POW工作量证明机制中，Miner如果对区块链数据进行修改只会产生一个自己的小分叉无法被集体共识认可，最终还是得和原区块链保持同步，虽然在没有51%算力的情况下对区块链数据进行篡改并不会对区块链产生影响，但Miner并不会受到任何惩罚。但在POS权益证明机制下的以太坊中，验证节点的不当行为将会受到来自协议的惩罚，惩罚大致分为两种：惩罚和削减。</p>
+<p>惩罚和削减的区别在于，惩罚是由于验证节点一直不活动或者产生了不正确的证明而导致的处罚，但惩罚只会对验证节点的余额进行罚款并不会把该验证节点从协议中驱逐出去。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_1hwuhbyvmh.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：beaconcha.in</p>
+<p>而削减则是更为严重的一种惩罚机制，只有试图攻击以太坊网络整体稳定性的验证节点才会被进行削减处罚。在面临着最高损失高达所有权益的罚款的同时该作恶节点还会被驱逐出协议，通常被削减的情况分为：</p>
+<ul>
+<li>
+<p>作为提议者，在一个插槽中提议出两个完全冲突的区块。【如果只是简单的提议出两个相同的块则不会面临削减】</p>
+</li>
+<li>
+<p>作为验证投票者，在一个插槽中为两个完全冲突的区块都进行验证并投票，这被称为“双重投票”。【如果是对两个相同的区块进行验证投票则不会面临削减】</p>
+</li>
+<li>
+<p>作为验证投票者不按顺序进行 “环绕投票”试图反对历史。</p>
+</li>
+</ul>
+<p>如果作恶节点被进行了削减处罚，该节点将立即受到惩罚并不在进行验证，并将继续受到持续约 36 天的惩罚，并在36天后的某个周期之后才可以退出，惩罚的金额视作恶的严重程度而定，最高罚没所有权益。</p>
+<p><strong>（二）如何检测到节点作恶？</strong></p>
+<p>验证节点本身并不会检测以太坊网络上的作恶行为，而是需要在通过运行信标链节点的同时再去运行一个叫Slasher的节点才可以具备捕获在以太坊网络中可罚没的犯罪行为的能力。Slasher节点就相当于以太坊网络中的“警察”，为了检测节点作恶行为，Slasher 会记录网络上每个验证者的证明和提议历史，然后将这些历史与广播的内容交叉引用以查找作恶证据。但是运行一个Slasher节点并不一定会带来盈利，因为作恶行为并不常见且举报奖励并不高。并且运行Slasher节点需要消耗大量的磁盘空间且更加耗能，这意味着允许Slasher节点完全是一种利他行为，但是理论上整个以太坊网络只需要有一个诚实的，功能正常的Slasher节点在运作就可以发现所有的作恶行为。</p>
+<p>当允许Slasher的验证节点发现作恶行为时，该节点会把作恶证据打包进发生作恶的插槽中并对作恶节点发起削减处罚，下图例子中我们可以看到，作为验证投票者的13209节点在134045周期的4,289,592插槽为两个冲突的区块进行了验证投票，作恶证据被打包放进了下一个为4,289,593的插槽中。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_2nmgkdzqv7.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：beaconcha.in</p>
+<p>该作恶节点被70929节点举报，随后该13209节点被协议进行了削减处罚，立刻被罚款的同时，在134051周期中被驱逐出协议并且将受到连续36天的持续罚款直到142238周期才可退出取出余额。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_9f1tsy7wmw.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：beaconcha.in</p>
+<p>作为举报者的70929节点获得了约0.89ETH的举报奖励。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_sn3sbugkcw.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>四.历史重演？以太坊2.0升级面临硬分叉会发生什么？</strong></p>
+<p>关于以太坊2.0升级讨论的一个热点必定离不开以太坊POW硬分叉这个话题，那么什么是硬分叉（Hard fork）呢？</p>
+<p>硬分叉就是当区块链发生永久性分歧，在区块链系统重大更新后，没有升级的节点无法验证已经升级的节点生产的区块，这时硬分叉就会发生，将会分裂出两条条某区块之前账本完全相同的区块链。硬分叉也可以主动发起，最经典的案例就是来自于以太坊的硬分叉——以太坊经典（Ethereum Classic），硬分叉发起的原因是因为当时一个众筹了1200万枚ETH的项目The DAO被黑客攻击盗取了当时大约价值5000万美元的ETH使得以太坊收到了很大的打击。之后以太坊创始人Vitalik Buterin决定主动发起硬分叉来回滚区块链以挽回以太坊受到的损失，然后一部分人依然坚守在被盗的那条以太坊上拒绝升级，使得以太坊分裂成了以太坊经典和现在的以太坊。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_svvjq8u1il.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p><strong>（一）现在的硬分叉与过去ETC分叉有什么区别？</strong></p>
+<p>以太坊2.0升级是共识机制的彻底改变，在“The Merge“合并后POS权益证明机制将直接取代POW工作量证明机制，POW Miner们面临着需要寻找其他出路的情况。这一改变触及了所有POW Miner的利益，这导致Miner们可能会集体发动硬分叉。事实上本文在撰写期间已经有Miner团体发布声明要硬分叉出一条POW以太坊，以太坊会再次发生硬分叉基本板上钉钉了，那么这次硬分叉和以往会有什么不同呢？</p>
+<p>事实上，本次以太坊2.0升级导致的硬分叉和当年以太坊经典分叉的区别还是很大的。首先当时以太坊还处在初始阶段，并没有很丰富的生态，但经过了这么多年的发展，以太坊已经成长为了公链中的龙头，承载着最丰富的生态以及最庞大的资金体量。如果以太坊再次发生硬分叉，由于硬分叉出来的链历史账本是一样的，就会出现两份USDT、USDC以及wBTC等不可复制资产，两个以太坊上的协议比如MakerDAO、AAVE等。那么出现这种情况的时候，分叉导致多出来的中心化稳定币如USDT、USDC这种资产会因为无法兑现为法币导致最终归零，这时以太坊分叉链上的生态将变得极其混乱，如果没有好的解决方案那么该分叉链将会变得无利可图无法运作下去。</p>
+<p>以太坊创始人Vitalik Buterin在8月3日首尔举行的BUIDL Asia上发表了自己的观点：“中心化稳定币可以决定‘有争议’的硬分叉的未来”。可以看出，中心化稳定币的发行方在硬分叉中起到了决定性的作用。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_m6rszy3hd5.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>信息来源：cointelegraph.com</p>
+<p><strong>（二）以太坊2.0升级会出现多条硬分叉吗？</strong></p>
+<p>以太坊2.0升级中不会只存在一个硬分叉，可能会出现很多条POW硬分叉链，但最终这些POW硬分叉链能不能活下来还是个未知数。对于以太坊基金会以及开发人员来说，统一战线在主链——POS信标链上很容易达成共识。但对于Miner团体来说，由于去中心化导致Miner很难统一战线形成利益共同体，并且难度炸弹（Difficulty Bomb）的存在使得Miner团体更加容易产生意见上的分歧。那么什么是难度炸弹呢？</p>
+<p>难度炸弹是一个可以根据区块时间调整整条链的Mining难度值的机制，在2015年被提出并写入了以太坊代码中，目的是人为增加Mining难度使得POW Miner失去动力转而加入POS信标链从而让POW机制顺利的过渡到POS机制。当难度炸弹被激活后，Mining难度将会指数型增长，这就使得Mining的区块奖励会变得越来越低直到毫无利润可言导致所有Miner退出POW链。历史上难度炸弹曾开启过多次，但每次都被以太坊基金会以及开发人员硬分叉进行推迟了。</p>
+<p>下图中可以观察到以太坊的出块时间在难度炸弹开启后呈大幅上升趋势并在硬分叉推迟后恢复到正常时间。关于为什么难度炸弹被推迟多次的原因是以太坊2.0的升级就像在“高速上换轮胎”需要十分谨慎所以十分缓慢，以太坊基金会以及开发人员并没有做好升级的准备，所以多次推迟难度炸弹。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_9t50usuqcb.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>数据来源：bitinfocharts.com</p>
+<p>在最近一次的难度炸弹推迟EIP-5133提案中，难度炸弹被推迟到了2022年9月中旬。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_4prjqd3hw4.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>信息来源：eips.ethereum.org</p>
+<p><strong>（三）Miner是否可以拆除难度炸弹？为什么难度炸弹会使得Miner更容易产生意见上的分歧？</strong></p>
+<p>难度炸弹是可以被Miner拆除的，只要在难度炸弹发生之前硬分叉出一条新链并修改难度炸弹发生的时间即可达到拆除效果，这对于Miner团体来说可能会有一些技术上的风险以及产生额外的资源消耗。而且在难度炸弹开始前的哪个区块开始分叉？难度炸弹推迟到什么时候？这些问题上可能会让Miner们产生意见分歧无法统一战线使得出现多种不同的以太坊POW分叉链。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0809/29_oqpdb4fl2n.png" alt="历史重演？详解以太坊2.0与硬分叉"></p>
+<p>虽然以太坊可能会出现多条不同的POW硬分叉，但是最关键需要解决的问题就是链上不可复制资产以及生态问题。以太坊上核心协议的开发团队们大概率都会追随POS信标链，留在分叉链上的基础设施生态比如AAVE、MakerDAO等协议可能也会因为缺少POW链上预言机的运行变得无法正常运作，最终将会成为旧时代的产物变得毫无价值。要在POW分叉链上重建新的生态也是一件极其困难且高成本的事情，最终POW分叉链面临的结局可能都会随着时间而消亡成为人们心中的一道记忆。但一切皆有可能，以太坊硬分叉结局到底如何，让我们拭目以待！</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41254/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">金色早报 | 超过70亿美元已被用于Tornado Cash洗钱</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41275/">
+                <span class="next-text nav-default">欧易研究院：以太坊POS后 矿工们的选择</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

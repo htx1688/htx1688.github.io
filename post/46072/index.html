@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          简析Web3身份基础设施：钱包、身份证明与隐私系统 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文涵盖了去中心化身份的核心概念、互联网上身份的演变、Web3 身份基础设施栈的逐层概述以及隐私原语的相关发展情况。" />
+<meta name="keywords" content="Web 3.0" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46072/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="简析Web3身份基础设施：钱包、身份证明与隐私系统" />
+<meta property="og:description" content="本文涵盖了去中心化身份的核心概念、互联网上身份的演变、Web3 身份基础设施栈的逐层概述以及隐私原语的相关发展情况。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46072/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="简析Web3身份基础设施：钱包、身份证明与隐私系统">
+<meta itemprop="description" content="本文涵盖了去中心化身份的核心概念、互联网上身份的演变、Web3 身份基础设施栈的逐层概述以及隐私原语的相关发展情况。"><meta itemprop="datePublished" content="2023-01-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="12027">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="简析Web3身份基础设施：钱包、身份证明与隐私系统"/>
+<meta name="twitter:description" content="本文涵盖了去中心化身份的核心概念、互联网上身份的演变、Web3 身份基础设施栈的逐层概述以及隐私原语的相关发展情况。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">简析Web3身份基础设施：钱包、身份证明与隐私系统</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-01-02">
+      2023-01-02
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 12027 字 -
+        预计阅读 25 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>本文涵盖了去中心化身份的核心概念、互联网上身份的演变、Web3 身份基础设施栈的逐层概述以及隐私原语的相关发展情况。我们会在未来的文章中探讨人格证明、合规性以及应用层。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_meqngjme4h.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<blockquote>
+<p>Web3 身份基础设施——2022 年 12 月</p>
+</blockquote>
+<p>身份是由与个人、实体或物体相关数据所组成的新兴属性。在现实世界中，它是我们在脑海中根据他人声誉及自我联想形成的一种思维概念；而在数字世界中，身份由两个部分组成：</p>
+<p>· 身份标识：用于识别单一主体的一组字符或数字（如护照号码、Twitter ID、学生 ID）</p>
+<p>· 与该主体有关的数据（如旅行历史、发推量和关注量、学术成就等等）</p>
+<p>为互联网创建一个身份层往往并不简单，因为人们对它的具体含义和运作方式缺乏共识。数字身份离不开情境，我们在网络上对于不同内容的差异体验往往也是建立在各类的情境之上。今天，我们大部分的数字身份不仅支离破碎，而且受到少数人的控制，他们不想让这些身份脱离自己的情境。</p>
+<p>· 企业将客户关系视为关键资产，不愿意放弃对这些关系的控制。到目前为止，它们也还没有找到这样做的合理理由，毕竟即使是临时身份也比它们无法控制的框架要好。</p>
+<p>· 当涉及到维护与客户和供应商的线上关系时，金融这类特定行业往往有独特的需求（如合规）。</p>
+<p>· 政府有区别于其他类型组织的需求，例如，它们对驾驶执照和护照有着管理权。</p>
+<p>这种模式让管理我们身份与数据的各方之间有了不同的权力划分。它限制了我们的自主权，让我们无法选择性地披露自己的信息，并在不同的环境中转移自己的身份，自然也就很难获得线上/线下的一致体验。</p>
+<p>在 Crypto 和 Web3 兴起之前，去中心化的身份已经获得了不小的关注。其目标是让个人重新获得对其身份的自主权，而无需再依赖中心化的组织。与此同时，客户数据的滥用以及人们对大公司信任程度的减弱，也让去中心化成为了下一个互联网身份时代的核心要素。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_waqwp5hjte.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<h3 id="去中心化身份的核心概念">去中心化身份的核心概念</h3>
+<p>去中心化身份标识（DID）和证明是去中心化身份的主要组成部分。DID 会发布并存储在可验证的数据注册处（VDR），它是不受中心化管理的自主「命名空间」。除了区块链之外，去中心化的存储基础设施和 P2P 网络也可以作为 VDR。</p>
+<p>在这里，各类实体（个人、社区、组织）可以使用去中心化的公钥基础设施（PKI）来认证、证明所有权，并管理他们的 DID。与传统的网络 PKI 不同的是，它不依赖于中心化的证书机构（CA）作为其信任根（RoT）。</p>
+<p>有关身份的数据会被写成证明——它们是一个身份对另一个身份（或他们自己）所作出的「声明」。我们可以通过 PKI 实现的 Crypto 签名来完成对这些声明的验证。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_j3sqz8cbs8.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<p>去中心化身份标识有 4 个主要属性：</p>
+<p>· 去中心化：其创建不依赖于中心化机构，各实体可以依据不同的环境自主创建相应的身份标识，以实现不同身份、角色和互动情况的分离。</p>
+<p>· 永久性：一经创建就永久地归属于实体（虽然有些 DID 是为短暂的身份设计的）。</p>
+<p>· 可解析性：可以用来揭示有关该实体的额外信息。</p>
+<p>· 可验证性：由于有了 Crypto 签名和证明，实体可以证明 DID 的所有权或声明（可验证凭证），而无需依赖第三方。</p>
+<p>这些属性将 DID 与其他身份标识区分开来，如用户名（不可验证）、护照（不可去中心化）和区块链地址（持久性、可解析性有限）。</p>
+<p>万维网联盟（W3C）是一个由不同组织、工作人员和公众组成的国际社区，共同致力于开发网络标准。W3C 的DID Spec定义了 4 个主要组成部分：</p>
+<p>· 体系：前缀「did」将告诉其他系统它正在与 DID 进行交互，而不是其他类型的身份标识，如 URL、电子邮件地址或产品条形码。</p>
+<p>· DID 方法：向其他系统指定如何解释该身份标识。W3C 网站上列出了 100 多种 DID 方法，通常与它自己的 VDR 有关，并有不同的机制来创建、解析、更新和停用身份标识。</p>
+<p>· 唯一身份标识：一个特定于 DID 方法的唯一标识，例如某特定区块链上的地址。</p>
+<p>· DID 文件：上述 3 个部分可以解析为 DID 文件，其中包括实体可以自我认证的方式，有关实体的任何属性/声明，以及实体额外数据存放地点的指示符（「服务端点」）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_3nhsfi7f7t.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<blockquote>
+<p>去中心化身份标识和 DID 文件的解析</p>
+</blockquote>
+<h3 id="crypto-之作用">Crypto 之作用</h3>
+<p>虽然公钥基础设施（PKI）已经存在了很长时间，但 Crypto 通过 Token 网络的激励机制加速了它的采用。Crypto 曾经主要由注重隐私的技术专家使用，现在已经成为了参与新经济的先决条件。用户需要创建钱包来自我保管他们的资产，并与 Web3 应用程序互动。在 ICO 浪潮、DeFi 之夏、NFT 热潮和 Token 化社区的推动下，用户拥有了比以往更多的密钥。随之而来的是一个充满活力的产品和服务生态系统，大大提高了密钥管理的便捷性和安全性。可以说，Crypto 为去中心化身份基础设施及其采用提供了坚实的基础。</p>
+<p>我们可以先来探探钱包，虽然钱包主要还是扮演着资产管理的功能，但 Token 化的实现以及链上历史记录已经能让我们展示自己的兴趣（NFT 收藏）、工作（Kudos，101）和意见（治理投票）。私钥的丢失已经不仅限于金钱的损失，而已经更类似于护照或社交账号的丢失了。所以说，加密逐渐模糊了我们的个人身份与持有物品之间的界限。</p>
+<blockquote>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_4yay99lc2i.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+</blockquote>
+<p>不过，我们的链上活动与持有物只能部分反映我们的身份。区块链只是去中心化身份栈的其中一层，其他层将有助于解决一些重要的问题，比如：</p>
+<p>· 我们如何在网络和生态系统中识别和认证自己的身份？</p>
+<p>· 我们如何在保护个人隐私的同时证明一些事情（声誉、独特性、合规性）？</p>
+<p>· 我们如何授予、管理和撤销对我们数据的访问？</p>
+<p>· 我们在能够掌控自己的身份与数据的情况下与应用程序互动？</p>
+<p>这些问题的解决方案对未来的互联网影响深远。</p>
+<p>在下面几节中，我将逐层概述 Web3 的身份栈，即可验证的数据注册、去中心化存储、数据的可变性和可组合性、钱包、认证、授权和证明。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_hnp7btjsw5.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<blockquote>
+<p>去中心化身份基础设施栈</p>
+</blockquote>
+<h3 id="web3-身份栈">Web3 身份栈</h3>
+<h4 id="区块链作为可验证的数据登记处">区块链作为可验证的数据登记处</h4>
+<p>区块链的分布式特性和不可变性使其适合作为可验证的数据登记处，用于发布 DID。事实上，各种公链都有 W3C 的 DID 方法，例如：</p>
+<p>· Ethereum，其中 did:ethr: 代表 Ethereum 账户的身份</p>
+<p>· Cosmos，其中 did:cosmos: : : 代表一个 Cosmos 链间兼容的资产</p>
+<p>· Bitcoin，其中 did:btcr: 代表一个 TxRef 编码的交易 ID，参考基于 UTXO 的比特币区块链中的交易位置</p>
+<p>值得注意的是，did:pkh:</p>
+<p>是一种与账本无关的生成性 DID 方法，旨在实现区块链网络的互操作性。根据 CAIP-10 标准，</p>
+<p>是账户 ID，用于跨链的密钥对表达。</p>
+<p>Fractal 是一个身份配置和验证协议，用于需要独特和不同级别 KYC 用户的应用。在完成有效性和 KYC 检查后，Fractal DID 会被发布到相应的 Ethereum 地址上，并添加到相应的列表中。Fractal 的 DID 注册表是 Ethereum 上的一个智能合约，交易方可以根据该合约查询 Fractal DID 及其验证级别。</p>
+<p>Kilt、Dock 和 Sovrin是用于自我主权身份的特定应用区块链。在撰写本文时，它们主要被企业用来向终端用户发放身份和凭证。为了参与网络，节点需要质押本地 Token 来处理交易（如 DID/凭证的发行）、定义凭证模式，并执行撤销更新。</p>
+<h4 id="去中心化数据存储">去中心化数据存储</h4>
+<p>虽然通用区块链也可以作为资产所有权和交易历史等不可改变类用户数据的数据源（例如用于投资组合追踪器和「DeFi score」应用程序），但它们可能不适合于存储用户的大部分数据，因为编写并定期更新大量信息的成本相当高昂，并且其数据可见性还会危及个人隐私。</p>
+<p>即便如此，Arweave 这样特定于应用的区块链还是为永久存储而设计的。为了复制网络上存储的信息，Arweave 会向矿工支付区块奖励和交易费用。矿工需要提供「访问证明」（Proof-of-Access），以便增加新的区块。Arweave 将把一部分费用交给一个永久性的资助基金，将来当通胀和费用不足以支付存储成本时，该基金将把这部分钱付给矿工。</p>
+<p>Etherum 和 Arweave 都是基于区块链的数据永久储存方案。在 Ethereum 上，每个全节点必须存储整条链的数据；而在 Arweave 上，处理新区块和新交易所需的所有数据都被记入每个单独区块的状态中，新的参与者只需从其受信任的同伴那里下载当前区块即可加入网络。</p>
+<p>基于合约的持久性表明，数据不能被每个节点永久地复制和存储。相反，数据可以通过在多个节点上部署合约来实现持久性。这些节点会在一段时间内持有某项数据，并且每当他们用完后必须续约，以保持数据的持久性。</p>
+<p>IPFS 允许用户在一个点对点的网络中存储和传输可验证、有内容地址的数据。用户可以在自己的 IPFS 节点上保存他们想要的数据，使用专门的节点组或第三方的固定服务，如 Pinata、Infura 或 Web3.storage。只要有一个节点在存储数据，数据就存在于网络中，并且可以在其他节点有需求时提供给它们。IPFS 的顶层是 Crypto 经济层，如 Filecoin 和 Crust Network，旨在通过创建一个长期数据持久性的分布式市场来激励网络的数据存储。</p>
+<p>对于个人身份信息（PII），受许可的 IPFS 可以用来遵守 GDPR/CCPA 的被遗忘权，因为它允许用户删除他们存储在网络中的数据。身份钱包 Nuggets 采用了这种方法，它通过让商家和合作伙伴运行专门的节点从而进一步实现了去中心化。</p>
+<p>Sia 和 Storj 是另外两个基于合约的去中心化存储解决方案，它在整个网络的多个节点之间加密和分割单个文件。两者都使用擦除编码（只需要一个存储节点的子集来提供文件），以确保数据可以在一些节点离线时保持可用；并且都有内置的激励结构，可供人们使用原生 Token 进行存储。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_by8hwu7nnr.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<h4 id="数据突变与可组合性">数据突变与可组合性</h4>
+<p>通用区块链、Arweave 和 IPFS 都保证了数据的不变性，这对静态 NFT 艺术品和永久记录等数据来说非常重要。然而，我们今天与大多数应用程序的交互活动会不断地更新我们的数据。为可变数据设计的 Web3 协议就是为了实现这一点而创建的，它充分利用了底层的去中心化存储层。</p>
+<p>Ceramic 是一种去中心化数据突变与可组合性协议，它通过从 IPFS 或者 Arweave 这样的持久性数据存储网络获取不可变的文件，并将它们转换成动态数据结构。在 Ceramic 中，这些「数据流」类似于它自己的可变分类账。私人数据可以通过在 Ceramic 上建立索引进行链外存储，附加到通往外部私人存储的 DID 数据存储上。</p>
+<p>当用户在一个由 Ceramic 驱动的应用程序中更新他们的资料时，该协议会将这些更新验证到一个流文件中，将其转化为一个新的状态，同时保持对以前状态变化的跟踪。Ceramic 上的每一个更新都由一个可以映射到多个地址的 DID 进行验证，从而让用户可以在没有服务器的情况下更新他们的数据。</p>
+<p>目前来看，Web2 平台拥有自己的用户界面和后端，用于存储和控制用户数据。谷歌和 Facebook 利用这些数据，借助算法来差异化我们的用户体验，从而进一步收集数据。新的应用程序必须从头开始吸纳用户，不能从一开始就提供个性化的体验，因而也有着更低的市场竞争力。</p>
+<p>Web3 实现了数据的民主化，为新产品和服务提供了公平的竞争环境，并为应用程序的实验和市场竞争创造了开放的平台。在一个用户可以把数据从一个平台带到另一个平台的世界里，应用开发者不需要从头开始便可以给用户带来个性化的体验。用户可以用他们的钱包进行登录，并授权应用程序读取/写入完全由他们自己控制的「数据库」。</p>
+<p>Ceramic 上的 ComposeDB 是一个去中心化的图表数据库，应用开发者可以用 GraphQL 发现、创建、再利用可组合的数据模型。图表中的节点是账户（DID）或文件（数据流），其边界则代表了节点之间的关系。</p>
+<p>DID 代表了可以向图表中写入数据的任何实体，例如终端用户（组）、应用程序或任何认证服务。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_yqtufszccs.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<p>模型是存储有关文档数据结构、验证规则、关系和发现信息的元数据 Ceramic 流文件。开发人员可以创建、组合或混合模型，以形成可以作为其应用程序数据库的数据复合体。这将取代传统的用户表，其中包含中心化的 UID 和相关数据。应用程序可以构建在用户控制的公共数据集之上，而不用管理自己的独立表格。</p>
+<p>由于应用程序在用于特定环境时可以无需权限地对模式进行定义，策展市场也因其可以为最有用的数据模型（为社交图谱、博客文章制定模式）提供信息而变得非常重要。在以这些数据模型运行的市场当中，应用程序可以为这些模型提供反馈，从而进一步优化它们。这激励了公共数据集生成更好的分析和图表，以便产品能在此基础上完成更多的创新。</p>
+<p>Tableland 是用于可变、结构化关系数据的基础设施，其中每个表格都是作为 EVM 兼容链上的一个 NFT 被铸造的。NFT 的所有者可以为其表格设置访问控制逻辑，允许第三方在有合理写入权限的情况下对数据库上执行更新。Tableland 运行着一个链外验证者网络，用于管理表格的创建和后续的数据变化。</p>
+<p>链上和链外更新均由一个智能合约处理，该合约使用 baseURI 和 tokenURI 连接至 Tableland 网络。借助 Tableland，NFT 元数据可以经访问控制被修改、使用 SQL 进行查询、并且可以与 Tableland 上的其他图表进行组合。</p>
+<p>就像 ERC-20 和 ERC-721 这样的智能合约标准为 dapp 提供了一个创建和转移 Token 的共享语言，数据模型标准也让不同的应用程序之间实现了资料、声誉、DAO 提议和社交图谱的相互理解。由于任何人都可以向公共登记处进行提交，这些数据可以被多个应用重复使用。</p>
+<p>应用程序与数据层的分离可以让用户在不同平台之间转移自己的内容、社交图和声誉。应用程序可以在各自的环境中使用相同的数据库，这样用户就能跨平台获得一个可组合的声誉。</p>
+<h4 id="钱包">钱包</h4>
+<p>广义上讲，钱包由用于密钥管理、通信（持有者、发行者和验证者之间的数据交换）以及声明展示和验证的接口和底层基础设施组成。</p>
+<p>我们需要区分 Crypto 钱包（MetaMask、Ledger、Coinbase Wallet 等）和身份钱包：Crypto 钱包存储区块链网络特有的 Crypto 密钥，用于发送/接收 Token 和签署交易；身份钱包存储身份，并允许用户创建和提出声明，这样他们就可以跨应用/平台展示身份数据。</p>
+<p>身份钱包的例子包括 ONTO、Nuggets 和 Polygon ID Wallet。一些身份钱包，如 Fractal 将活跃度检查和 KYC 作为其上线流程的一部分，所以用户可以向有这种需求的应用程序展示他们的声明，不过这种情况在 Crypto 钱包中并不常见。身份钱包更有可能支持 W3C 所认可的 DID、可验证凭证和 DIDComm 的实现，以及除 Web3 之外的用例。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_vk4likvm0m.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<blockquote>
+<p>身份钱包的实例</p>
+</blockquote>
+<p>WalletConnect * 是一个连接钱包和 dapp 的通信协议。作为一种极简、无偏见的协议，WalletConnect 已经为数百万 Crypto 用户提供了服务，在加速自主身份基础设施的采用方面，它可能要优于 DIDComm。与 DIDComm 不同的是，DIDComm 需要服务供应商提供托管调解器基础设施，而 WalletConnect 将信息存储在中继网络的「云邮箱」中，当钱包重新上线时，该网络会将这些信息推送给钱包。</p>
+<h4 id="认证系统">认证系统</h4>
+<p>认证系统会根据一个或多个认证因素来确认用户的身份，该因素可以是用户的持有物（数字签名、身份证、安全 Token），也可以是系统已知的信息（密码、PIN、机密问题答案）或生物特征信息（指纹、声音、视网膜扫描）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_2aylvz3epf.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<blockquote>
+<p>互联网上认证的演变</p>
+</blockquote>
+<p>在去中心化的身份范式中，用户可以使用钱包来认证自己的身份。在后台，钱包会使用其存储的密钥来生成数字签名，作为持有者拥有与该账户相关私钥的「证明」。由于 Crypto 钱包可以生成签名，提供 Web3 登录的应用程序能够让用户用他们的 Metamask 或 WalletConnect 进行认证。</p>
+<p>多年来，Crypto 原住民通过「连接钱包」(Connect Wallet) 与 dapp 进行交互，他们通过这个基本操作指定自己想要使用的帐户。Dapp 不会记住任何关于已连接用户的信息，每次用户在访问站点时，dapp 都会将他们视为一张白纸。</p>
+<p>今天，用户与 dapp 有了更深层次的交互模式。去中心化的身份信息在这里变得非常有用，因为它允许应用程序访问用户的更多信息，从而提供个性化的体验，同时让个人保留对自己数据的控制权。</p>
+<p>对于更为丰富的交互场景，如加载用户偏好、配置文件或私人聊天消息，应用程序需要首先确保它们是在与帐户背后的实际密钥持有者进行对话。虽然「连接钱包」没有提供这种保证，但身份验证标准却可以做到。身份验证系统与用户建立了对话，并允许应用程序安全地读写他们的数据。</p>
+<p>Sign-In with Ethereum (SIWE) 是由 Spruce、 ENS 和 Ethereum 基金会共同制定的认证标准。SIWE 标准化了一种消息格式（类似于 jwt），从而让用户可以使用基于区块链的账户登录服务。Sign-In with X（CAIP-122）在此基础上让 SIWE 成为了 Ethereum 版本的 SIWx，并令该标准适用于不同的区块链。</p>
+<p>对于个人来说，这意味着他们可以用他们的 Web3 钱包注册或登录，而不需要创建用户名和密码，同时保证对其在线身份的自主权。应用程序可以将此作为一种针对于 Web3 原生受众的市场策略，从而满足用户的需求。</p>
+<p>从中期来看，使用加密钱包登录 dapp 和其他 Web2 平台将改善 Web3 原住民的用户体验。然而，这也让用户面临着 Web 2 中的相关性和跟踪问题。鉴于此，通过 Peer DID 或自我认证身份标识进行身份验证便可以作为一种替代方案。</p>
+<p>与上面「普通版」的 DID 不同，Peer DID 可以在 2 个或 N 个已知方之间使用。它们可以被用作每个服务或交互的唯一身份标识。该数字身份中的 Crypto 钱包地址可以与 VC 一起存储，作为每次商家或服务互动时的验证证明。</p>
+<h4 id="授权与访问控制">授权与访问控制</h4>
+<p>认证确认了用户的身份，而授权决定了一个实体能够访问哪些资源，以及他们可以如何使用这些资源。这两个过程相互独立，但在用户体验的设计流程中往往又相辅相成。在用社交账号登录（认证）到第三方服务平台后，用户可能会收到如下的授权请求：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_327urb3jfe.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<blockquote>
+<p>授权请求的实例</p>
+</blockquote>
+<p>在联合身份范式中，你可以授权第三方应用程序查看或更新存储在身份提供者（如谷歌）那里的数据，它们会负责维护你授权给这些应用程序的应用程序列表和相关权限。Web3 授权基础设施和标准有助于实现同样的目标，只是在这种情况下你享有自我主权的数据，并且可以授予每个第三方解密/阅读/更新数据的权利，而不再需要依靠中心化平台。</p>
+<p>随着 Token 化社区的兴起，Collab.Land、Guild 和 Tokenproof 等 Web 3 Token 门槛产品也相继出现。这些工具的一个主要用途是对会员专用的 Discord 频道进行访问控制，以及基于角色和声誉的精细化访问。社区可以根据 Token 持有量、链上活动或社交验证，通过编程的方式授予访问权，而不用手动分配访问权。</p>
+<p>Lit 是一个去中心化的密钥管理和访问控制协议，它使用 MPC 技术在 Lit 网络节点之间分配私钥的「权限」。公钥/私钥对由 PKP（可编程密钥对）NFT 表示，其所有者是该密钥对的唯一控制者。当任意定义的条件得到满足时，PKP 的拥有者可以触发网络的聚合机制，从而以他们的身份解密文件或签署信息。</p>
+<p>在访问控制方面，Lit 让用户可以设置链上条件，从而获取链外资源。例如，DAO 可以上传一个文件到 Arweave 或 AWS，使用 Lit 加密，并定义一组条件（如 NFT 所有权）。符合条件的钱包会签署并向协议节点广播一条消息，协议节点检查区块链以确保签署者符合条件。如果条件符合，协议会为签署者合成密钥以解密文件。该基础设施也可以用来打造 Web2 的体验，如 Shopify 折扣、设有 Token 门槛的 Zoom 会议和 Gathertown 空间、直播以及谷歌云端硬盘访问。</p>
+<p>Kepler 可以围绕用户控制的数据保险库（「Orbits」）组织数据，这些数据库代表了数据的指定主机列表，它将作为一个智能合约，持有唯一具备控制权的密钥。这些数据库可以由可信方、跨主机的共识机制、资源所有者和许可有效性来管理。任何使用 SIWE 的人都可以立即利用私人数据保险库来存储他们的偏好数据、数字证书和私人文件。由于其支持多个存储后端的「自带存储」，用户也可以进行自我托管或使用托管版本。</p>
+<p>下面的这些例子向我们展示了应用程序可以如何运用构建模块的组合：</p>
+<p>· Orbis 是一个社交类应用（「Web3 版的 Twitter/Discord」），它使用 Ceramic 进行数据存储和更新，DM 在存储之前会首先通过 Lit 进行加密</p>
+<p>· Lit 可以作为一个去中心化的加密系统，用于委托他人来解密你的 Tableland 数据</p>
+<p>· Kepler 可以将 Ceramic Documents 用作信标，以路由至私人存储区</p>
+<p>· Lit PKP 可以「拥有」应用程序的 Ceramic 流，Lit Action（IPFS 上的代码）也将有权在满足任意条件下签署和更新数据库</p>
+<p>CACAO 是一个用于表示通链对象能力（OCAP）的标准，它是使用 Sign-in-With X 来创建的。CACAO 定义了一种将 SIWx 签名操作的结果记录为基于 IPLD 的对象能力 (OCAP) 方法，不仅创建了一个身份验证的事件记录，而且还为可验证的授权创建了一个可组合且可重播的授权书。</p>
+<p>授权方法让用户可以授予应用程序以精细化、可验证的方式范围精准的查看/更新数据。并且，由于这些方法会设置一定的期限，所以人们不用在每次更新时都去进行签名，而是能够在应用程序上进行丰富的互动，并在期限结束时签署一次就可以了。</p>
+<h4 id="证明与凭证">证明与凭证</h4>
+<p>如图所示，我们到达了去中心化身份基础设施栈的顶端：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_9io48ms4rb.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<p>· 证明能够确定一项声明和签名是否有效，它们的出现是源于对已记录事件进行独立验证的需要。</p>
+<p>· 凭证是详细说明一个实体相关信息的文件，由另一个实体或他们自己书写并签署，兼具防篡改性和可加密验证性，并且可以存储在钱包里。</p>
+<p>可验证凭证（VC）是W3C可验证凭证规范所定义的可加密数字凭证的标准数据模型和表示格式：</p>
+<p>· 发行者是凭证的签发方（如大学）</p>
+<p>· 持有者拥有凭证（如学生）</p>
+<p>· 验证者负责验证凭证（如潜在雇主）</p>
+<p>· 可验证的呈现是指用户与第三方分享他们的数据，第三方可以验证该凭证确实是由发证方所签署</p>
+<p>注意：这里的发行者、持有者和验证者都是相对的概念，每个人都有自己的 DID 和各自收集的凭证。</p>
+<p>凭证是构建声誉的基础，而声誉本质上是一种社会现象，会随环境的变化而变化。实体可以借助一个或多个凭证对外展示其资质、能力或权威。这就好比任何人都可以声称自己毕业于名牌大学，但这样说并不会赢得他人的信任，只有大学颁发的证书才能证明这一点。</p>
+<p>虽然 Web3 原生的徽章和某某证明项目并不都遵守 W3C 的 VC 标准，但我们可以从上面描述的系统中找到相似之处。</p>
+<p>· 最直接的例子便是不可转让的 NFT 徽章，只有完成了一些链上活动的钱包才可以铸造它。由于所有的交易历史都在链上，所以它从一开始就具备可验证和防篡改的特性。DegenScore 通过汇总你与 DeFi 协议的互动来量化你的赌徒指数，并根据智能合约上的规则输出一个分数。你可以把它铸造成 NFT，并将其作为一个「DeFi 证书」保存在你的 Crypto 钱包中。如果有某个 Degen DAO 对该分数做出了限制，你就可以向它展示这个 NFT，相应的 Token 门槛协议会对其进行验证，成功之后你便可以加入该 DAO 了——赌徒证明（Proof of Degen）</p>
+<p>· POAP 可以证明你参加了某个活动或在现实生活中遇到了某人——出席证明/相遇证明</p>
+<p>· Otterspace 允许 DAO 决定什么是有意义的工作，并为其成员颁发 ntNFT 徽章；</p>
+<p>· Proved 要求 DAO 在使其成员为其铸造 DAO 特定的 NFT 徽章之前「签署」一项声明——贡献证明</p>
+<p>· 101 会在线上课程结束以后给通过考试的学生颁发 ntNFT——学习证明</p>
+<p>· Kleoverse 会根据 Github 数据向用户发放 Typescript、Rust 或 Solidity 能力徽章——技能证明</p>
+<p>除了上面提到的访问控制用例，Lit PKP 还可以作为 Crypto 公证人，让 Lit Actions 在签署证书之前对其进行检查。例如，某些去中心化的教育平台可以让课程创建者自己定义考试通过的标准，将这些条件部署为 Lit Action，并根据这些条件使用其 PKP 以编程方式发布 VC。</p>
+<p>这里出现了 2 个问题：这些证书数据点中哪些是有意义的？我们如何将它们汇总以获得声誉？</p>
+<p>Orange Protocol 对此提供了一个解决方案：通过模型提供者将这些数据点整合到定义明确的模式中。在 Orange 上，MP 一般是指在其系统内有声誉评估措施的平台。「数据提供者」的数据会被用于模型提供者设计的模型之中，然后 MP 会添加计算方法，将声誉标记分配给不同的实体，并将这些模型提供给其他人使用。Dapp 可以为他们的用例策划并嵌入这些声誉模型。</p>
+<p>到目前为止，Aave、Gitcoin、Snapshot、DAOHaus 等已经将他们的数据提供给 Orange。这些数据由他们和其他项目如Dework、talentDAO 和 Crypto Sapiens 建模，从而为成员提供 ntNFT。这为使用 CollabLand 和 Guild 完善 Discord 许可，以及 Snapshot 的声誉加权治理等工作创造了大量的机会。</p>
+<h4 id="隐私问题">隐私问题</h4>
+<p>我们在讨论身份基础设施时不能不考虑隐私问题和实现隐私的技术原语，因为隐私在栈的所有层面都很重要。在过去十年中，区块链的采用加速了 zk-proof 等加密原语的研发，它除了可以应用在 rollup 等扩展技术中外，还允许身份对可公开验证的信息做出有细微差别、保护隐私的声明。</p>
+<p>隐私保证有助于避免我们在使用完全透明的数据生成可信声明时所产生的负面外部性。如果没有这些保证，第三方机构就可以发起与原始交易无关的交互活动（如广告、骚扰）。利用密码学和 zk 技术，我们可以构建身份系统，其中涉及到的交互活动和数据共享可以在明确定义且与背景相关的范围内被放入「沙盒」之中。</p>
+<p>「普通」可验证凭证通常采用 JSON-JWT 或 JSON-LD 格式，每个凭证都有外部或嵌入证明（数字签名），从而使其具有防篡改和可验证的特性。</p>
+<p>Zk-proof 和新的签名方案加强了 W3C VC 的隐私保护特性，例如：</p>
+<p>· 反关联性：每当持有者分享凭证时，这个身份标识符都可以得到共享。因此，每次出示凭证时验证者都有可能串通起来，查看持有者在哪里出示他们的凭证，并将其定位到一个已识别的人身上。而有了盲签名之后，你可以每次都共享签名的唯一证明，而不共享签名本身。</p>
+<p>· 选择性披露：只分享 VC 的必要属性，而隐藏其余的属性。JSON-JWT 凭证和 JSON-LD LD-签名凭证都要求持有者与验证者分享整个凭证，不能进行「部分」分享。</p>
+<p>· 复合证明：将多个 VC 的属性合并到一个证明中，而不需要寻求发行者的帮助或生成一个新的 VC。</p>
+<p>· 判断依据：允许在证明操作中隐藏验证者提供的真实数值。例如，证明持有者的账户余额超过一定的门槛而不透露其具体数额，或者在不透露生日的情况下证明你达到了法定饮酒年龄。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0102/24_w72so6tzal.png" alt="简析Web3身份基础设施：钱包、身份证明与隐私系统"></p>
+<blockquote>
+<p>关于 ZKP 如何在凭证中保护隐私的简化图表</p>
+</blockquote>
+<p>BBS 签名方案是 MATTR 在 2020 年最初提出的一种颇具前瞻性的方法。该提案允许 BBS 签名与 VC 常用的 JSON-LD 格式一起使用。持有者可以有选择地披露原始签名凭证中的声明。该方案生成的证明是签名的零知识证明，这意味着验证者无法确定具体哪个签名被用来生成了证明，从而解决了关联性问题。</p>
+<p>Iden3 是一个 zk 原生身份协议，它提供了一个用于 zk 身份原语、身份验证和声明证明生成的可编程的 zk 框架 以及开源库。该协议使用 Baby Jubjub 椭圆曲线为每个身份生成密钥对，该椭圆曲线旨在有效地与 zk-SNARK 协同工作，后者用于以保护隐私的方式证明身份所有权和声明。PolygonID 目前正在利用这一协议来建设其身份钱包。</p>
+<p>在过去的几年时间中，应用型 zkp 吸引了 Crypto 社区的极大关注。在 Web3 中，它已经在以下这些程序中得到了应用：</p>
+<p>· 私人空投：Stealthdrop</p>
+<p>· 保护隐私但可信的证明：Sismo（所有权）、Semaphore（会员制）</p>
+<p>· 匿名通信：heyanon</p>
+<p>· 匿名投票：Melo</p>
+<h3 id="结语">结语</h3>
+<p>这项研究的几点启示：</p>
+<p>正如 Crypto 催化了 DPKI 的发展和采用，能够提供在线/IRL 访问权限的可组合声誉也将成为去中心化身份基础设施的催化剂。目前，凭证发行（某某证明）协议在不同的用例和区块链网络中依旧处于零散状态。到 2023 年，我们将看到这些 (如配置文件) 的聚合层变得成熟起来，并成为一个统一的界面。如果它可以用来解锁加密以外的其他体验，如访问事件或电子商务折扣，那么它也将会有更高的使用率。</p>
+<p>密钥管理仍然是容易出现单点故障的摩擦点。对于大多数 Crypto 原住民来说，这是一种尴尬的体验，同时也是大多数消费者完全无法触及到的事情。联合身份对 Web 1.0 范式的用户体验做出了优化，允许用户使用单点登录的方式，而无需再记住不同的用户名与密码。虽然 Web3 认证的用户体验正在改善，但目前来看它提供的用户体验仍然不及预期——不仅需要记忆助记词，而且在密钥丢失时只提供有限的追索权。随着 MPC 技术的成熟和在个人和机构中的推广，这一点也将逐步得到完善。</p>
+<p>Crypto 原生基础设施正在满足用户在 Web2 中的需求。Web3 原语开始与 Web2 应用程序和服务进行整合，为人们提供了去中心化的身份，例如 Collab.Land 与 Nuggets 的整合就让 Reddit 用户可以将他们的声誉作为 VC 来解锁访问。Auth0 认证与授权中间件整合了作为身份提供商的 SIWE，他们的 2K 企业客户现在除了 SSO 之外还可以提供钱包登录。</p>
+<p>随着数据的民主化，策展机制需要得到进一步的证实。就像索引协议 The Graph 会使用策展人和委托人的网络对最有用的子图发出信号一样（链上数据的 API），Ceramic 和 Orange 等协议上有关用户和声誉的数据模型也需要充分的时间和社区的参与才能超越 DAO 和 Crypto 原生用例而走向成熟。</p>
+<p>隐私方面也同样需要考量。项目在选择其栈时应仔细考虑公共存储或永久存储的影响。相对于保护隐私的 VC、短期和 Peer DID 以及链上/链下活动的 ZKP 组合，「纯」公共数据 ntNFTs 可能适合有限的用例（例如，一些链上活动的抽象描述），这些活动提供了选择性披露、密钥转置、反相关和撤销等功能。</p>
+<p>zkSNARK 这样的新 Crypto 工具将是下一代身份基础设施的关键构件。ZKP 目前正用于独立的用例，要想将其与应用设计模式、Crypto 原语 ZK 电路的实施、电路安全工具和开发人员工具进行融合，研发部门还需要完成不少的工作。与此同时，这也是一个需要密切关注的问题。</p>
+<p>去中心化身份是一个非常庞大的项目，单个团队很难独立完成。它的实现需要整个生态系统按照统一的标准，不断迭代原语，并相互检查设计决策的影响。</p>
+<p>本篇探讨了去中心化身份栈的基础设施部分，下一篇我将讨论配置文件、抗女巫攻击、合规性和应用层，这些都将通过本文提到的构建模块来实现。</p>
+<p>如果你正在这个领域进行建设，或者对这个话题有更多的想法，欢迎提出你的见解。</p>
+<p>原文标题：《 Towards Digital Self-Sovereignty: The Web3 Identity Stack 》</p>
+<p>原文作者：Nichanan Kesonpat，1k(x)</p>
+<p>原文编译：Kxp，BlockBeats</p>
+<p>来源：区块律动</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/46069/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">比特币本位和比特币美元本位的区别</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46078/">
+                <span class="next-text nav-default">金色晚报 | 1月2日晚间重要动态一览</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#去中心化身份的核心概念">去中心化身份的核心概念</a></li>
+        <li><a href="#crypto-之作用">Crypto 之作用</a></li>
+        <li><a href="#web3-身份栈">Web3 身份栈</a></li>
+        <li><a href="#结语">结语</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

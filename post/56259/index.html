@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          SharkTeam：Uniswap V4 Hook最佳安全实践 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="基于目前已开源的代码，来看看 V4 带来了哪些新的特性？" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56259/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="SharkTeam：Uniswap V4 Hook最佳安全实践" />
+<meta property="og:description" content="基于目前已开源的代码，来看看 V4 带来了哪些新的特性？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56259/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="SharkTeam：Uniswap V4 Hook最佳安全实践">
+<meta itemprop="description" content="基于目前已开源的代码，来看看 V4 带来了哪些新的特性？"><meta itemprop="datePublished" content="2023-08-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6260">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SharkTeam：Uniswap V4 Hook最佳安全实践"/>
+<meta name="twitter:description" content="基于目前已开源的代码，来看看 V4 带来了哪些新的特性？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">SharkTeam：Uniswap V4 Hook最佳安全实践</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-02">
+      2023-08-02
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6260 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>近期 Uniswap Lab 官宣了下一代 AMM Uniswap V4 的开发进展，并公开了白皮书和代码仓库。这次 V4 的白皮书仅仅只有 3 页，原因是 V4并没有对 AMM 的核心算法逻辑做太多修改，而是在 V3 的基础上，增加了一些新的特性，以满足更多的场景需求。SharkTeam 将基于目前已开源的代码，来看看 V4 带来了哪些新的特性，并针对V4推出的重要特性 Hook 分析最佳应用实践。</p>
+<h2 id="一v4与v3的差别">一、V4与V3的差别</h2>
+<h3 id="11-amm">1.1 AMM</h3>
+<p>在 AMM 算法层面，Uniswap V4 并没有对 V3 做修改，依然使用基于恒定乘积 x*y=k 的流动性算法。</p>
+<p>在 Uniswap V3，每一个交易对可以有 4 个池子（原本是 3 个，后来增加了一个新的 1 bp pool），分别代表 0.01% , 0.05% , 0.3% , 1% 费率的池子，这些池子对应的 tick space 也各不相同，在创建池子的时候，只能选择这 4 种中的任一个。</p>
+<p>在 Uniswap V4，每一个交易对理论上可以有任意数量的 pool，并且每一个 pool 的 fee rate 也可以是任意值，这些 pool 的 tick space 也可以是任意值。</p>
+<p>这同时也带来了一个问题：Uniswap V4 中交易对的流动性将被碎片化，因此需要一个更有效的 router/aggregator 来帮助用户找到最优的交易路径。</p>
+<h3 id="12-hooks">1.2 Hooks</h3>
+<p>Hooks 是一组由第三方或者 Uniswap 官方开发的合约，在创建 pool 的时候，pool 可以选择绑定一个 hook. 之后在交易的特定阶段，pool 都会自动调用与之绑定的 Hook 合约。Uniswap V4 一共定义了这些可以执行 hook 合约代码的阶段：</p>
+<ul>
+<li>
+<p>beforeInitialize</p>
+</li>
+<li>
+<p>afterInitialize</p>
+</li>
+<li>
+<p>beforeModifyPosition</p>
+</li>
+<li>
+<p>afterModifyPosition</p>
+</li>
+<li>
+<p>beforeSwap</p>
+</li>
+<li>
+<p>afterSwap</p>
+</li>
+<li>
+<p>beforeDonate</p>
+</li>
+<li>
+<p>afterDonate</p>
+</li>
+</ul>
+<p>分别表示在初始化 pool，添加/移除流动性，交易，捐赠等操作的前后，都可以调用 hook 合约。</p>
+<p>Hook 合约需要显式指定在上述的哪些阶段进行执行，而 pool 则需要知道对应的 Hook 在某个阶段是否需要执行，为了节省 gas，这些 flag 都没有在合约中进行存储，而是需要 Hook 使用特定的地址来标明。具体判断的代码如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_zwa0m4dklz.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_97qvutm19h.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>可以看出，Hook 地址的前 8 bit 都别用来标记在特定阶段此 Hook 是否需要执行的 flag.</p>
+<p>因此，Hook 的开发者需要在部署合约的时候，产生出满足 Pool 要求的地址，这通常需要使用 Create 2 + 计算随机 Salt 来实现。</p>
+<p>以下是白皮书中关于 Hook 执行的一个例子：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_js7ajnvlly.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>可以看到在执行 swap 的前后，pool 会先检查 pool 对应的 Hook 是否开启了相应的 flag，如果开启了，就会自动调用 Hook 合约的相应函数。</p>
+<h3 id="13-动态-fee-ratio">1.3 动态 fee ratio</h3>
+<p>除了可以在特定阶段执行代码之外，Hook 还可以决定某一个 pool 的 swap fee 费率，和 withdraw 费率。withdraw 费率指的是用户在移除流动性时需要向 Hook 支付的费率。除此之外，Hook 还可以指定在 swap fee 中抽成一部分给自己。</p>
+<p>在创建 pool 时，需要使用 fee 参数（uint 24）前 4 个 bit 来标记此 pool 是否使用动态 fee，以及是否启动 hook swap fee 和 withdraw fee：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_4tw33o2279.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>如果启动了动态 fee，那么 pool 会在每次 swap 之前，调用 Hook 合约来获取当前的 swap fee ratio. Hook 合约需要实现 getFee() 函数，返回当前的 swap fee ratio.</p>
+<p>Hooks 让 Uniswap V4 成为了一个开发者平台，给了 AMM 更多的可能性。一些可以用 Hooks 来实现的功能包括 TWAMM（时间加权自动做市商）、Limit Order（限价订单）、LP 复投等将在后续的章节中详细介绍。</p>
+<h3 id="14-singleton-合约">1.4 Singleton 合约</h3>
+<p>Uniswap V3 中每次创建新的 pool 都需要部署一个新的合约，这会消耗大量 gas，但是其实这些 pool 使用的代码是相同的，只是初始化参数不相同而已。Uniswap V4 引入了 Singleton 合约，用来管理所有的 pool，这样创建新的 pool 不再需要部署新的合约了，节省了部署合约的 gas.</p>
+<p>另外，使用 Singleton 合约的好处是，可以减少交易过程中 token 的转账，因为所有的 pool 都在同一个合约中，所以可以直接在合约内部完成跨 pool 的 swap，而在 V3 中，跨 pool 的 swap 会需要将 token 在不同 pool 中转来转去，这会增加 gas.</p>
+<p>同时，在 V4 中，所有 pool 使用同一个合约，并且合约内部的 token 记账也被简化为每种 token 按 token 来记账，而不是按 pool 来记账，这样一来如果想使用闪电贷借大量 token 也会更方便。</p>
+<h3 id="15-extload">1.5 extload</h3>
+<p>为了方便 Hook 和其他合约的 integration，V4 合约增加了 extload 函数，这样合约所有内部 states 都变成外部可读了，所有 pool 的状态将对外部完全透明。</p>
+<h3 id="16-flash-accounting">1.6 Flash Accounting</h3>
+<p>为了减少跨 pool swap 的 token 转账，V4 同时使用被称为 Flash Accounting 的方法，将 swap, add/remove liquidity/flash loan 的过程都标准化成一种类似闪电贷的过程：</p>
+<p>（1）用户获取一个 lock</p>
+<p>（2）用户进行任何操作，例如在多个 pool 中 swap，add/remove liquidity，或者通过闪电贷向 pool 借 token</p>
+<p>（3）用户所有操作所产生的 token 转账都会被记录在 lock 中</p>
+<p>（4）所有操作结束后，用户可以取走他获得的 token，同时需要支付 lock 中记录他需要支付的 token.</p>
+<p>这些过程需要发生在一个交易中。</p>
+<p>这样一来，如果一个交易中需要跨多个 pool 进行 swap，在结算时只需要两笔转账就够了。例如，在一次 ETH-&gt;USDC-BTC 这样的 swap 中，USDC 作为中间 token 完全不需要任何转账。</p>
+<h3 id="17-erc1155-mintburn">1.7 ERC 1155 mint/burn</h3>
+<p>Flash Accounting 可以减少同一笔交易中 swap 的 token 转账，通过使用 ERC 1155 token ，可以进一步减少多个交易的 token 转账。</p>
+<p>V4 允许通过 ERC 1155 mint，将属于你的 token 保存在 V4 合约中，这样你就可以在多个交易中使用这些 token，而不需要每次都将 token 转账到 V4 合约中。</p>
+<p>使用 ERC 1155 burn 可以将保存在 V4 合约中的 token 取出。</p>
+<p>ERC 1155 适合频繁 swap 或 add/remove liquidity 的用户，这些用户可以将常用的 token 直接保存在 V4 合约中，这样可以减少 token 转账的 gas 开销。</p>
+<h2 id="二hooks的最佳实践举例">二、Hooks 的最佳实践举例</h2>
+<h3 id="21-twamm时间加权自动做市商">2.1 TWAMM（时间加权自动做市商）</h3>
+<p>Alice 想在区块链上购买价值 1 亿美元的以太币。在现有的自动做市商（AMM）平台（例如 Uniswap）上执行这么大规模的订单将非常昂贵，因为这些平台可能会向 Alice 收取高昂的费用，以防止她利用内幕消息获取更好的价格。</p>
+<p>为了获得更好的价格，Alice 的最佳选择是手动将订单拆分成几个较小的子订单，并在几个小时内逐步执行它们。这样做的目的是让市场有足够的时间来意识到她没有内幕消息，从而给予她更好的价格。但是，即使她发送几个较大的子订单，每个子订单仍然会对价格产生重大影响，同时还容易受到敌对交易者的“三明治攻击”。</p>
+<p>TWAMM 通过代表 Alice 进行交易来解决这个问题。它将她的订单分解为无限多个微小的虚拟订单，以确保在时间上平滑地执行。同时，TWAMM 利用嵌入式 AMM 协议的特殊数学关系，能够在这些虚拟订单中分摊 Gas 成本。由于 TWAMM 在区块之间处理交易，因此也不容易受到“三明治攻击”。</p>
+<p>总的来说，TWAMM 为 Alice 提供了一种更高效的方式来进行大规模交易，避免了高昂的手续费和潜在的市场操纵。</p>
+<p><strong>2.1.1 原理</strong></p>
+<p>TWAMM 有一个内置的 AMM，这个 AMM 和其他的 AMM 并没有什么不同，用户可以通过这个 AMM 直接进行现货交易，也可以向其中添加流动性。但是 TWAMM 同时还有两个 TWAP order pool，分别用来执行两个方向的 TWAP order，用户提交 order 时，指定交易的 token input 数量和时长，TWAMM 会将相同交易方向的 order 放入对应的 pool 中，并按照指定的交易速度自动进行交易。当用户的 order 被完全执行后，用户就可以拿出交易得到的 token。当然，在用户的 order 在被执行完成之前，用户也可以提前取消 order 或者修改 order 需要交易的 token 数量。</p>
+<p>在以太坊中，智能合约只能由 EOA 地址主动发起交易触发执行，而不能自动执行。因此 TWAMM 需要由 EOA 账户定期发送交易来结算其 order pool 中待交易的 token，这样就需要一个 keeper 账号来执行这些交易。</p>
+<p>当然，也可以让 TWAMM 在每次有用户与其交互时，自动结算 order pool，这样就省去了 keeper 的开销，这也是 DeFi 协议处理流式数据常用的方式。</p>
+<p><strong>2.1.2 为什么说这种交易模式很难被三明治攻击？</strong></p>
+<p>这种攻击很难实施，由于一个区块内 timestamp 不会改变，攻击者必须要在一个区块的最后一个交易中，将 pool 的价格拉高，这样下一个区块中的 TWAMM 结算才会受到影响。这就要求三明治攻击发生在多个区块中，这无疑会给攻击者带来很大的风险，因为其他套利者有可能在中间介入，导致攻击者遭受损失。</p>
+<p>同时，因为套利者的存在，这样的价格操纵注定无法持久，由于 TWAP order 的特性它并不会在短时间内交易太多的 token，因此大部分情况损失也一定是有限的。</p>
+<p><strong>2.1.3 V4中的 TWAMM 工作流程</strong></p>
+<p>（1）此 Hook 维护两个 TWAP order pool，分别表示两个交易方向的 TWAP order</p>
+<p>（2）用户可以通过此 Hook 提交 TWAP order，需要指定交易的 token，数量以及时间长度</p>
+<p>（3）此 Hook 注册 beforeSwap 和 beforeModifyPosition，每次用户交易或者调整仓位时，都会触发此 Hook</p>
+<p>（4）被触发后，Hook 负责对 2 个 TWAP order pool 进行结算</p>
+<p>（5）用户也可以在任意时刻手动触发结算</p>
+<p>（6）用户可以取消或者修改 TWAP order 中的 token 数量</p>
+<p><strong>2.1.4 实例详解</strong></p>
+<p>TWAMM 注册三个阶段来进行 hooks 的逻辑调用，在 pool 初始化之前对 TWAMM 进行初始化，并在每次用户交易或者调整仓位时触发此 hook。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_lt92c7advh.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>用户可手动调用 TWAMM 中的 submitOrder 函数来提交自己需要执行的 order 到合约中。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_ls62n4dmew.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>在用户将自己需要执行的订单添加进合约后，在 pool 每次进行 swap 和 modifyPosition 操作时，都会自动进行 order 的执行。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_wults6g40a.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>每有用户调用v4的 swap 函数进行交易或 modifyPosition 函数更改仓位，都会触发 TWAMM 中的执行函数，函数中会调用内部函数_executeTWAMMOrders 继续进行此前未完成 order 的执行。</p>
+<p><strong>_executeTWAMMOrders 函数</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_lcchsm28rl.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_sh5sdjyy3f.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_zuemsdsa21.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>以上为更新订单的执行流程，在执行结束之后，会更新当前 twamm 的订单执行时间。</p>
+<h3 id="22-limit-order">2.2 Limit Order</h3>
+<p>与立即按照最后的市场价格执行的市价单不同，限价单在达到预定价格后立即执行。基于自动做市商（AMM）的 DEX 大多默认选择市价单系统。对新人来说简单易懂。市价单要么被执行，要么因参数（如最大价格影响）而失败。而在限价单中，只有当资产价格达到限价时，订单才会成交，否则订单将保持未平仓状态。</p>
+<p>例如，假设 ETH 目前在 ETH/DAI 池中的交易价格为 1 ETH = 1500 DAI。用户可以下一个止盈订单，主要内容是 &ldquo;如果 1 ETH = 2000 DAI，卖出我所有的 ETH&rdquo;。如果达到这个价格，用户的 ETH 将自动以去中心化的方式完全在链上交换为 DAI。</p>
+<p>在 Uniswap 以前的版本中，限价订单实际上是不可能的。大多数 AMM 只允许市场买入和卖出。而在V4版本中，由于 hook 的强大特性和可扩展性，让限价单在v4中存在了实现的基础。</p>
+<p><strong>2.2.1 原理</strong></p>
+<p>limit order 的设计原理相比于 twamm 来说，更加简单一些，目前实现了有关添加流动性的限价单，交易的限价单实现起来也会比较容易。</p>
+<p>由于v4中存在 tickLower 和 tickUpper，并根据池子的交易情况变化，lower 和 upper 会发生改变，用户在进行添加流动性时并不想在当前价格进行添加，这时就可以利用 limit Order hook 来执行此需求，在 hook 中设定对应的价格，在每次 swap 结束后，hook 会对当前 pool 的价格做判断，若达到了设定的价格，则将对应的流动性进行添加获取收益。</p>
+<p><strong>2.2.2 V4 中的 Limit Order 工作流程</strong></p>
+<p>1. limit 维护着多个 epoch，作为不同 lower 和交易方向的限价单。</p>
+<p>2. 用户通过这个 hook，提交自己的价格 lower 和交易方向，将限价单加入合约。</p>
+<p>3. 此 Hook 注册 afterSwap，只在每次 swap 结束后价格发生变动时触发</p>
+<p>4. 被触发后，Hook 校验当前价格区间，并从 epoch 中查验当前价格是否存在需要进行添加流动性的限价单。</p>
+<p>5. 用户可以在任何时刻提款或直接添加流动性</p>
+<p><strong>2.2.3 实例详解</strong></p>
+<p>合约注册两个阶段触发 hook，在 Pool 初始化后对 hook 初始化，并在每次兑换结束后触发 hook 逻辑。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_rfih7oq452.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_qboh5b3m8q.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>用户调用 place 函数传入想要添加流动性的数量，价格以及交易方向，hook 会先将用户想要添加的流动性加入 pool 中保存，随后为用户创建对应的限价单。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_eiy0jbmek7.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>在每次 swap 结束后都会触发此 hook，根据当前价格区间将区间价格内存在的限价单完成添加流动性的操作。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_rcp12sza6c.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_bzs23ns3h4.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>用户可在限价单完成之前调用 kill 函数取消限价单并获得此次添加流动性获得的收益。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_ep5tymfge5.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<p>用户可在想要移除流动性时调用 withdraw 函数，即可提取想要的流动性。</p>
+<p>总的来说，此 limit order hook 为用户提供了一个更便捷的途径，用户可设定自己想要添加流动性时的价格，在池子中价格区间到达该价格后，hook 自动为用户到 pool 中执行添加流动性的操作，且用户可以随时取消和提取流动性。</p>
+<p>除 TWAMM 和 Limit Order 外，基于 Hook 还可以实现 LP 复投、动态手续费变化等功能，因为篇幅原因，我们将在后续的分析中展开介绍：</p>
+<p><strong>LP复投：</strong> LP 用户可利用 hook 来进行流动性的添加，修改和移除，hook 可注册 afterSwap 和 afterModifyPosition 来进行调用。由于用户统一使用 hook 来进行流动性的添加，所以在 poolManager 中添加流动性的地址只有 hook, hook 可在每次触发时查验当前时间，每经过一定时间段后，选择提取流动性奖励并将获得的 lp 代币再次到 pool 中添加流动性，从而自动化优化用户收益。</p>
+<p><strong>动态手续费变化：</strong> hook 可注册 beforeSwap 等接口，来进行交换之前的动态手续费修改。动态手续费可以不是简单地根据时间线性变化，可以根据单笔 swap 产生的 tick 跳跃数量来量化波动率，从而动态改变手续费，实现对于 LP 无常风险的对冲。从而减少因为交易产生的无常损失对流动性提供者造成的影响。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_6fv6zola3a.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<h2 id="三hooks-安全最佳实践">三、Hooks 安全最佳实践</h2>
+<h3 id="减少require和revert的使用">减少 require 和 revert 的使用</h3>
+<p>在有关 pool 对 hooks 调用的函数逻辑中，尽量减少回退语句的使用，由于 pool 合约与 hooks 合约存在共通关系，在 hooks 中发生交易回滚后，会导致 pool 中的交易同样回退，如果在 hooks 中出现与 pool 中正常交易不相关的回退语句，可能会导致用户无法正常使用 pool 中的功能。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/18_go2z18h1ei.png" alt="SharkTeam：Uniswap V4 Hook最佳安全实践"></p>
+<h3 id="避免使用自毁函数">避免使用自毁函数</h3>
+<p>避免在 hook 中使用 selfdestruct 函数，如果 hook 中调用到了自毁函数，不仅会导致 hook 中的逻辑出现问题，并且会导致 pool 中的功能也无法正常进行，使整个 pool 池中的资产丢失并且功能无法正常进行。</p>
+<h3 id="严格进行权限控制">严格进行权限控制</h3>
+<p>严格控制 hook 合约中的权限，避免出现权限过大的角色，并对特权角色进行多签管理，防止出现单点攻击。避免存在特权角色可任意修改合约状态变量的情况，可能会出现逻辑错误导致整个交易发生回滚，影响 pool 的正常使用。验证最小权限原则，我们应当使用 openzeppelin 的 AccessControl 合约来实现控制访问更细粒度的权限，因为该实践限制每个系统组件遵循最小权限原则。</p>
+<h3 id="做好防重入限制">做好防重入限制</h3>
+<p>hooks 作为 Pool 的外部扩展代码，同样应该注意合约中可能出现的重入攻击，例如限价单中在进行原生代币转账时可能出现的重入，导致合约资产出现损失。在调用外部合约或所谓的“检查-生效-交互”模式之前检查并尝试更新所有状态。这样，即使重入，也不会产生任何影响，因为所有状态都已完成更新。.</p>
+<h3 id="合约升级控制">合约升级控制</h3>
+<p>有些开发者可能会使用代理合约以便后续对 hook 的逻辑进行变动和升级，但也因此需要注意到合约升级方面可能存在的问题。首先，hook 中即使采取代理模式，代理合约中也需要声明对应的阶段，例如 beforeSwap 等，否则 pool 无法校验到正确的返回值。其次，在调用 delegatecall 之前检查目标合约是否存在，Solidity 不会替我们执行此检查，忽略检查可能会导致意外行为和安全问题，仔细考虑变量声明的顺序，因为会出现变量打包存储同一个插槽、影响 gas 成本、内存布局、delegate 调用结果等问题。</p>
+<h3 id="about-us">About Us</h3>
+<p>SharkTeam 的愿景是全面保护Web3世界的安全。团队由来自世界各地的经验丰富的安全专业人士和高级研究人员组成，精通区块链和智能合约的底层理论，提供包括智能合约审计、链上分析、应急响应等服务。已与区块链生态系统各个领域的关键参与者,如 Polkadot、Moonbeam、polygon、OKC、Huobi Global、imToken、ChainIDE 等建立长期合作关系。</p>
+<p><a href="https://www.sharkteam.org">官网</a> | <a href="https://twitter.com/sharkteamorg">Twitter</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56229/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Sei ——重塑Web3的产品形态</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56220/">
+                <span class="next-text nav-default">SignalPlus宏观研报(20230802)：宏观数据疲软，BTC继续小幅盘整</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一v4与v3的差别">一、V4与V3的差别</a>
+      <ul>
+        <li><a href="#11-amm">1.1 AMM</a></li>
+        <li><a href="#12-hooks">1.2 Hooks</a></li>
+        <li><a href="#13-动态-fee-ratio">1.3 动态 fee ratio</a></li>
+        <li><a href="#14-singleton-合约">1.4 Singleton 合约</a></li>
+        <li><a href="#15-extload">1.5 extload</a></li>
+        <li><a href="#16-flash-accounting">1.6 Flash Accounting</a></li>
+        <li><a href="#17-erc1155-mintburn">1.7 ERC 1155 mint/burn</a></li>
+      </ul>
+    </li>
+    <li><a href="#二hooks的最佳实践举例">二、Hooks 的最佳实践举例</a>
+      <ul>
+        <li><a href="#21-twamm时间加权自动做市商">2.1 TWAMM（时间加权自动做市商）</a></li>
+        <li><a href="#22-limit-order">2.2 Limit Order</a></li>
+      </ul>
+    </li>
+    <li><a href="#三hooks-安全最佳实践">三、Hooks 安全最佳实践</a>
+      <ul>
+        <li><a href="#减少require和revert的使用">减少 require 和 revert 的使用</a></li>
+        <li><a href="#避免使用自毁函数">避免使用自毁函数</a></li>
+        <li><a href="#严格进行权限控制">严格进行权限控制</a></li>
+        <li><a href="#做好防重入限制">做好防重入限制</a></li>
+        <li><a href="#合约升级控制">合约升级控制</a></li>
+        <li><a href="#about-us">About Us</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          探究DEX设计的下一步 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="去中心化交易所是智能合约公链的一个主要用例。有人批评它们是垃圾币赌场，但它们为任一资产创建市场的无许可机制具有很大价值，无论它们带来的结果是投机还是更富成效。" />
+<meta name="keywords" content="DEX, AMM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54473/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="探究DEX设计的下一步" />
+<meta property="og:description" content="去中心化交易所是智能合约公链的一个主要用例。有人批评它们是垃圾币赌场，但它们为任一资产创建市场的无许可机制具有很大价值，无论它们带来的结果是投机还是更富成效。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54473/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="探究DEX设计的下一步">
+<meta itemprop="description" content="去中心化交易所是智能合约公链的一个主要用例。有人批评它们是垃圾币赌场，但它们为任一资产创建市场的无许可机制具有很大价值，无论它们带来的结果是投机还是更富成效。"><meta itemprop="datePublished" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6826">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="探究DEX设计的下一步"/>
+<meta name="twitter:description" content="去中心化交易所是智能合约公链的一个主要用例。有人批评它们是垃圾币赌场，但它们为任一资产创建市场的无许可机制具有很大价值，无论它们带来的结果是投机还是更富成效。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">探究DEX设计的下一步</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-06">
+      2023-07-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6826 字 -
+        预计阅读 14 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Yellow Propeller，加密KOL；翻译：金色财经xiaozou</p>
+<p><strong>本文要点：</strong></p>
+<p>·  智能合约公链非常适合交易所的运营：它们将信任商品化，使托管、费用、价格和结算对每个人来说都同等透明，并且让任何人都可以成为做市商。</p>
+<p>·  然而，去中心化交易所（DEX）的交易量仍然落后于中心化交易所（CEX），这是有充足理由的，因为：价格缺乏竞争力，执行很容易被滥用（MEV），而且作为LP的利润还不够高。</p>
+<p>·  然而，还是存在优良解决方案的，这些解决方案将让DEX更具吸引力：Oracle（预言机）定价，较慢的交易后批量结算，集中的自动化流动性，以及更低成本的L2区块空间。</p>
+<p><strong>1</strong> <strong>、前言</strong></p>
+<p>去中心化交易所是智能合约公链的一个主要用例。有人批评它们是垃圾币赌场，但它们为任一资产创建市场的无许可机制具有非常大的价值，无论它们带来的结果是投机还是更富成效的活动。</p>
+<p>如今，加密交易领域由OTC、CLOB（中央限价订单簿）、RFQ和AMM（自动做市商）构成。</p>
+<p>在对专业做市商的参与需求不足的情况下，AMM在创建交易对市场方面变得特别有用。但CLOB仍然是高需求交易对交易量的首选模式（根据Defillama的数据，DEX交易量仅占CEX的大约16%，其中大部分仍然由CEX-DEX套利驱动）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/28_1sofubtkch.png" alt="dEBMqTtakJGxYHtoU7stxufuBGC4g8k9mDz1QTqF.png" title="7060705">（DEX仍然只占加密交易量的15%左右，但其份额正在增长。来源：Coingecko 2023年第一季度行业报告。）</p>
+<p>本文，我们将明确一个好的交易所应具备的特质，了解当前DEX的不足之处，并提出一些改进优化DEX设计的方法。</p>
+<p><strong>2</strong> <strong>、好的交易所是什么样的？</strong></p>
+<p>如果我是一个交易员，一个好的交易所应该可以为我提供：</p>
+<p>·  信任：在我的交易期间及前、后的托管风险应该对我透明，并尽可能降至最低。</p>
+<p>·  最优惠的价格：我希望能够相信每次我都能在这个交易所得到最优价格，或者非常接近最优价——这样我就不需要担心其他地方的价格更好。</p>
+<p>·  公平：我不希望我的订单被滥用。并且若没有充足的理由，其他人不应该得到比我更好的价格或支付更低的费用。</p>
+<p>·  速度和可用性：花时间等待交易通过或交易所营业并不有趣。</p>
+<p>·  信息：交易所能帮助我做出明智的选择并监控我的订单。我可以看到我的交易有可能以什么价格结算，并得到很好的限价订单价格和滑点建议。我还可以看到未结算、已结算或已取消的订单情况。</p>
+<p>·  深度流动性和广泛的资产覆盖：看到很多资产对具有流动性可以给我更多的信心，我将在这个交易所获得一个好价格。</p>
+<p>流动性提供者（LP）和做市商（MM）关心的是：</p>
+<p>·  收益率：能够抵消资本风险和机会成本的利润。</p>
+<p>对MM来说，重要的是经风险调整的最佳收益率情况；其他指标只是实现这一目标的手段。高交易量、低竞争或恶性竞争、高价差、不错的返点、几乎没有有害订单流、last look最后观望机制、减速带机制、较低的托管风险——这些都有助于提高经风险调整的收益率。</p>
+<p>区块链是运营交易所非常理想的场所，已经很大程度照顾了交易员和做市商的所思所想：去中心化、开源结算机制以及开放的交易历史是信任、安全、透明和公平的坚实基础。</p>
+<p>但去中心化交易所仍然在以下方面举步维艰：</p>
+<p>·  提供可靠的好价格；</p>
+<p>·  为LP提供良好的收益率；</p>
+<p>·  防止违反公平执行承诺的MEV。</p>
+<p>在前10大DEX中，有9家是AMM。下面让我们来看看AMM，及其优缺点。</p>
+<p><strong>3</strong> <strong>、为什么</strong> <strong>AMM</strong> <strong>大行其道？</strong></p>
+<p>你常会听到这样的说法：“传统金融深谙其道，订单簿更有效，恒定函数做市商永远行不通。”</p>
+<p>那么，为什么AMM——特别是恒定函数做市商（CFMM）——在DeFi领域仍占主导地位（占据了全部DEX交易量的95%以上）？他们一定是做对了什么。</p>
+<p>以下是迄今为止AMM领先的最主要原因：</p>
+<p>·  <strong>低流动性要求：</strong> AMM（Univ2类型）始终会提供一个价格，即使流动性很小。</p>
+<p>·  <strong>被动流动性：</strong> 你的流动性是由AMM为你管理的。所以LP和任何人（不仅仅是做市商）都可以轻松赚取费用。</p>
+<p>·  <strong>简单性：</strong> 与订单簿式交易所相比，AMM对计算和存储的要求更低，因此它们消耗的gas更少。</p>
+<p>·  <strong>没有gatekeeper</strong> <strong>（看门人）：</strong> 做市商和交易所的上市费用可能高得令人望而却步，中心化交易所可以随时将代币下架。AMM让任何项目都可以轻松上市，并可提供或激励自己的流动性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/28_ml1y20v8nz.png" alt="9Zi04br1sLCONBV4xi3sPGAdfLigJrT0ITs1Czdf.png" title="7060708"></p>
+<p>（2020年底，即Uniswap推出两年后，DEX的交易量才大幅回升。来源：Dune）</p>
+<p>当首批去中心化交易所问世时，几乎没有什么流动性，做市商和交易量都很少，而且gas费很高。在这样的条件下运行CLOB是不可能的，所以AMM再适合不过了。AMM相当直接，更容易建设、模拟和审计。</p>
+<p>但是现在看起来有所不同了。订单簿交易量正在增加，专业做市商对各种资产进行报价，gas费在L2上要便宜得多，所有人都更了解CFMM（即今天的大多数AMM）的弱点。</p>
+<p>对某些市场（如长尾币）来说，AMM仍然是你最佳的选择。但它们在关键领域仍落后于中心化交易所。</p>
+<p><strong>4</strong> <strong>、</strong> <strong>AMM</strong> <strong>存在的问题</strong></p>
+<p><strong>（1</strong> <strong>）高昂的gas</strong> <strong>费</strong></p>
+<p>链上交易仍然很昂贵。AMM的池费率（0.01-0.3%）与CEX相当，但小额交易（&lt;1千美元）的gas费轻易就会让你付出1-10%，即使是在L2上！</p>
+<p><strong>（2</strong> <strong>）失效的价格</strong></p>
+<p>AMM通常不会给你最好的价格。AMM的价格只通过交易变动。因此，你需要依靠套利交易员来确保AMM价格与当前市场价格保持同步。然而，套利交易员除了持有风险之外，还受到池费率和gas费的限制。因此，流动性较低的AMM池很容易偏离其他交易所的最佳报价1-5%。</p>
+<p><strong>（3</strong> <strong>）损失与再平衡（LVR</strong> <strong>）</strong></p>
+<p><strong><img src="https://img.bibiqing.com/news/2023/0706/28_t81699t15u.png" alt="kMVcGVth3BkHBjxLCWYZ2irO0TAoTf56jHGpGKzu.png" title="7060709"></strong></p>
+<p>（在随后的几次分析中，由于有害订单流的LVR，Uniswap LP显然无盈利可言。）</p>
+<p>AMM是被动的，所以如果资产的价格是在他处决定的（例如，在币安），AMM的价格将总是落后一步。如果价格上涨（在币安上），那么AMM将以极低的价格将代币出售给套利者。如果价格下跌，AMM将以过高的价格从套利者手中购买代币。</p>
+<p>随着时间的流逝，AMM，特别是其LP，将继续亏损。是LP支付给套利者的价格让价格回到市场价。</p>
+<p>相反，在限价订单簿上活跃的做市商会试图在价格变化时立即改变他们的报价，然后以市场价格重新平衡他们的投资组合。因此叫做“loss-vs-rebalancing”（损失与再平衡）。这是被动LP以错误价格向套利者出售资产，而不是以当前市场价格重新平衡资产所遭受的损失。</p>
+<p>LVR的典型示例如下：</p>
+<p>·  <strong>LVR</strong> <strong>是永久性的：</strong> 如果价格恢复之前的水平，或LVR的损失无法恢复，这将不同于无常损失或“损失vs持有”。</p>
+<p>·  <strong>LVR</strong> <strong>随波动性的增加而增加</strong> ：价格波动越大，LP的损失就越大。</p>
+<p>·  <strong>LVR</strong> <strong>取决于价格发现场所：</strong> 重要的是你卖给套利交易者的价格比当前加权平均市场价格差多少。</p>
+<p>因为你作为LP也会从每笔交易中赚取费用，如果你的资金池在市场中有足够大的权重，这对你是有利的。只要LVR小于费用，这些交易实际上会让你盈利而不会让你亏损。在市场中权重较低的小型池将具有更高的LVR，它们将倾向于支付大池LP的收益。</p>
+<p><strong>（4</strong> <strong>）脆弱的结算（MEV</strong> <strong>）</strong></p>
+<p>交易员和LP很容易受到AMM价值提取的影响：</p>
+<p>·  交易员：搜索者可以抢先交易，对你的交易发起三明治攻击，或阻止你的交易，让你的价格更糟糕。</p>
+<p>·  被动LP：更加老练和主动的LP可以提供及时的流动性，获取你的大部分交易费用。</p>
+<p><strong>（5</strong> <strong>）流动性碎片化</strong></p>
+<p>在CFMM中，相同的代币通常与多个不同代币配对（例如，USDC-WBTC、DAI-WBTC、ETH-WBTC），甚至同一交易对有多个收费层。这使得流动性（就本情况而言为WBTC）分散在多个池中，导致LP的费用减少，交易员的流动性深度降低及价格下降。大部分流动性并非用于交易（例如，在Univ2设计中），甚至在区间订单AMM中，价格也常常偏离流动性集中之处。</p>
+<p>在中心化交易所中，通常只有一种报价资产（例如美元），做市商积极地将大部分流动性围绕在当前市场价格附近，这将导致池数量更少，订单簿深度更深，做市商的回报更好，对交易员的流动性更深及价格影响更小。</p>
+<p><strong>（6</strong> <strong>）更多问题</strong></p>
+<p>上述问题也引发了CFMM出现更多的问题：</p>
+<p>·  <strong>价格和包含的不确定性：</strong> 交易经常失败或因有意或无意的抢先交易产生滑点。</p>
+<p>·  <strong>固定价差：</strong> AMM对订单收取固定费用。这使得它们在高度波动的市场中不堪一击，在波动较小的市场中竞争力下降。</p>
+<p>·  <strong>吸引流动性比较困难：</strong> 相对亏损再平衡（LVR）和流动性碎片化使得AMM的LP盈利能力下降，吸引流动性变得更加困难。因此，协议通常需要用流动性挖矿激励来补贴LP，从而吸引足够的流动性。</p>
+<p>·  <strong>流动性碎片化：</strong> 在DEX上，一个代币通常有多个交易对，甚至同一个交易对有多个收费等级。大部分流动性并非用于交易（例如，在Univ2设计中），甚至在区间订单AMM中，价格也经常偏离流动性集中之处。这导致LP的费用减少，对交易员来说投资深度减小、价格更糟糕。</p>
+<p>但这并不意味着AMM注定要失败。区块链技术和相关研究取得了重大进展，并启用了可以解决这些问题的新构建模块。</p>
+<p><strong>5</strong> <strong>、构建更好的链上交易所模块</strong></p>
+<p>当前已经开发出了几种解决方案，也有一些相关提案，以解决不良价格、MEV、相对损失再平衡以及流动性碎片化等问题。我们来总结一下最重要的几个方案，并提出一些新的建议。</p>
+<p><strong>（1</strong> <strong>）解决昂贵的gas</strong> <strong>费问题</strong></p>
+<p>·  <strong>更低成本的区块空间</strong></p>
+<p>L2的成本要便宜一到两个数量级。因此，交易成本现已不再是瓶颈。这意味着更多的计算密集型协议的设计（如订单簿）开始成为可能。但要在小规模交易方面与CEX竞争，gas费可能需要再降一个数量级才行。</p>
+<p><strong>CoW</strong> <strong>（需求匹配）</strong></p>
+<p><strong><img src="https://img.bibiqing.com/news/2023/0706/28_do9thfrjdh.png" alt="zF3rupQJTV8UsinhWOy8uVC0SY7ca53ivRQ05T2O.png" title="7060710"></strong></p>
+<p>（三个交易员之间的CoW交易示例。每个交易员都进行自己想要的交易，相互提供流动性——不需要通过DEX或支付。）</p>
+<p>需求匹配（CoW）基本上是在同时交易互补对的交易员之间交易资产的P2P。需求匹配优化了价格，因为交易员无需支付AMM交易费用，支付的gas费也更少（只支付转账费）。然而，要让需求匹配发挥作用，你需要对当前的最佳买卖价格有良好的预测。</p>
+<p><strong>链下计算，链上验证</strong></p>
+<p>如果你将计算密集型部分放到链下，并且仅使用链进行托管、结算和验证，则可以实现更巧妙复杂的功能。例如，在链下跟踪和匹配限价订单，但在链上进行资金保管、结算交易。</p>
+<p><strong>（2</strong> <strong>）解决无效价格问题</strong></p>
+<p>·  <strong>提案邀请（RFQ</strong> <strong>）</strong></p>
+<p>通过提案邀请，你可以直接从做市商那里购买。由于做市商可以在所有交易场所（链下和其他链）进行交易，通过他们，你也可以获取这些交易场所的价格和流动性，即使你只使用一条链上。RFQ订单也更省gas费（只需转账和签名验证，不需要资金池的介入）。</p>
+<p>·  <strong>即时（JIT</strong> <strong>）流动性</strong></p>
+<p>为了弥补有害订单流的风险，做市商不会像在交易所那样进行严谨有深度的报价。实际上，一般用户会向做市商缴税，以补贴有害订单流（套利者）。</p>
+<p>然而，如果反过来，让做市商在用户提交交易后设定价格，那么做市商就可以给出更好的价格，因为他们承担的风险要更小。这给了一般用户一个更好的价格，让套利者的日子更不好过。</p>
+<p>·  <strong>更低的DEX</strong> <strong>费用</strong></p>
+<p>收费高的一个原因是为了保护LP免受LVR的影响。然而，如果DEX能够保护自己免受LVR的影响，那么它也可以设定更低的费用。通过套利，较低的费用会让一个池更接近其他池。</p>
+<p>保持价格最新并防止无利套利的一种方法就是使用Oracle定价。</p>
+<p><strong>（3</strong> <strong>）解决LVR</strong> <strong>问题</strong></p>
+<p>·  <strong>基于Oracle</strong> <strong>的定价</strong></p>
+<p>只要AMM被动地设定价格，它们就很可能容易受到信号交易员的攻击。避免这种情况的一种方法是在套利交易者进入之前主动更新AMM上的价格。</p>
+<p>Oracle需要足够快速和准确，以免留下有害的套利机会。只要从交易中收取的费用小于与市场价格的差价，那么套利就是无利可图的，也就是有害的。因此，为了避免有害订单流，Oracle价格的准确性需要高于池的交易费用的准确性。</p>
+<p>AMM甚至可以在用户签署交易<strong>之后</strong> 设定价格。这样更能防止LP提供过时报价，从而防范套利风险。</p>
+<p>·  <strong>鼓励延迟</strong></p>
+<p>如果AMM能够区分知情（可能非常无利可图）订单流和不知情（平均来说有利可图）订单流，并且只保留不知情订单流，那么许多问题将能迎刃而解。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/28_qt0ilt2oqc.png" alt="CkYFu3AbCOnlhThi9V6qaKnqkSv0SjeIoupQMLKH.png" title="7060711"></p>
+<p>（动态收费和交易延迟可以帮助AMM区分有害订单流和散户订单流）</p>
+<p>交易信号衰减得很快，所以，如果Oracle预言机出现长时间的不良延迟，那么知情交易员将更难在AMM猝不及防的情况下下手。运作机制如下：</p>
+<p>- <strong>缓慢结算成本较低：</strong> 如果你能等待5分钟来结算你的交易，那么互换交易就会很便宜（例如，0.1%的费用）。交易将以Oracle 5分钟后的价格结算。不知情的交易员不会介意这么做，因为会节省费用，等待5分钟，成本会很低。</p>
+<p>- <strong>快速结算成本高昂：</strong> 以当前的Oracle价格结算是非常昂贵的（例如0.4%）。更高的费用降低了知情交易员的信号优势大到足以使AMM无利可图的可能性。而且，依然为愿意付费的用户提供了一个快速结算的选择。</p>
+<p>延迟让DEX可以区分有害订单流和无害订单流，并相应地调整护栏（费用），或者，DEX也可以简单粗暴地完全禁止快速结算。为了有效阻止有害订单流，快速结算费必须考虑到交易对的市场波动性。</p>
+<p>·  <strong>积极的流动性管理</strong></p>
+<p>集中的流动性头寸（Uni v3）允许LP在特定的价格区间内指导他们的流动性。这使得LP或第三方有可能将流动性围绕在当前市场价格周围，并大幅提高有LP的资本效率。</p>
+<p>积极的流动性管理甚至可以保护LP免受某些LVR的影响。</p>
+<p>有了可靠的Oracle，AMM甚至可以自己围绕当前Oracle价格设定流动性，所以也就不需要积极的LP管理了。</p>
+<p>·  <strong>动态价差和波动预测</strong></p>
+<p>由于AMM的损失取决于套利者信号优势的大小，因此波动性更大的交易对更有可能出现有害订单流。在传统的订单簿中，当市场波动较大时，做市商会扩大价差。AMM也可以这样做，根据当前的市场波动动态调整费用。</p>
+<p>Uniswap v3对此已经有了一个初步版本，可以为同一个交易对提供不同的收费等级，并让LP选择适合此交易对价格波动的费用等级。</p>
+<p>做市商也会调整价差，以便根据目标库存重新平衡头寸——AMM可能会对有LP采取类似措施。</p>
+<p><strong>（4</strong> <strong>）解决脆弱结算问题</strong></p>
+<p>·  <strong>隐秘提交</strong></p>
+<p>绕开公共内存池的隐私RPC是有效保护交易不被抢跑和三明治攻击的一种方法。</p>
+<p>·  <strong>批量拍卖</strong></p>
+<p>批量拍卖是一种让价格公平的好方法：你将一段时间内的订单打包在一起，让同一交易对的交易都以相同的价格执行。这减少了你的交易被抢跑或遭受三明治攻击的可能。批量拍卖还增加了延迟，可一定程度阻止有害订单流。但与不良延迟Oracle一样，批量拍卖的可组合性较差。</p>
+<p>批量拍卖还极大地改善了互换的定价、可用流动性和路径。这在很大程度上消除了尾随交易的可能。</p>
+<p>·  <strong>动态滑点范围</strong></p>
+<p>设置滑点并不不是件容易的事。如果交易对价格波动较大，滑点过小会导致交易失败，滑点过大会让你的交易容易遭受三明治攻击。因此，为了避免失败交易，DEX通常具有较大的默认滑点范围。</p>
+<p>然而，通过波动性和深度预测，DEX用户可以做得更好，可以预测每笔交易的合适滑点。这可以帮助用户避免三明治攻击或交易失败。</p>
+<p>·  <strong>让所有LP</strong> <strong>都成为JIT</strong> <strong>（即时）LP</strong></p>
+<p>还有一种方法可以减轻JIT（即时）流动性攻击：就像上面提到的LP 的“last look”（最后观望）机制一样，如果你改变模型，在用户签署交易后确定价格，那么你就可以让每个人都即时提交报价，创造公平的竞争环境。然而，这只适用于愿意执行积极策略并能够单独响应每笔交易的LP。</p>
+<p>从结构上讲，批量拍卖也是即时的流动性交易——因为流动性和价格是在用户提交交易后发现的。</p>
+<p><strong>6</strong> <strong>、结论</strong></p>
+<p>虽然区块链是交易所的优良基础设施，但DEX尚不能处理大部分交易量。然而，交易量和做市商尚未完全迁移到链上是有充足理由的：价格缺乏竞争力，对交易员来说用户体验很糟糕，收益率太低，以及执行不够安全。幸运的是，这些问题都已经有了很好的解决方案。在这些解决方案的合力之下，有朝一日是有可能将大部分交易量带到链上的。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54489/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">速览算法稳定币Frax Finance增长的六大催化剂</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54452/">
+                <span class="next-text nav-default">投资人眼中 AI 与 Web3 结合的机遇有哪些？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          回看Tornado Cash原理：监管者的眼中钉 却是最精妙的ZK应用 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="近期Vitalik和一些学者联名发表了新论文，其中提到了Tornado Cash如何实现反xi钱方案，但文中缺乏对Tornado Cash业务逻辑与原理的细致解读，让人似懂非懂。" />
+<meta name="keywords" content="Tornado Cash" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58782/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="回看Tornado Cash原理：监管者的眼中钉 却是最精妙的ZK应用" />
+<meta property="og:description" content="近期Vitalik和一些学者联名发表了新论文，其中提到了Tornado Cash如何实现反xi钱方案，但文中缺乏对Tornado Cash业务逻辑与原理的细致解读，让人似懂非懂。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58782/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-10T00:00:00+00:00" />
+
+<meta itemprop="name" content="回看Tornado Cash原理：监管者的眼中钉 却是最精妙的ZK应用">
+<meta itemprop="description" content="近期Vitalik和一些学者联名发表了新论文，其中提到了Tornado Cash如何实现反xi钱方案，但文中缺乏对Tornado Cash业务逻辑与原理的细致解读，让人似懂非懂。"><meta itemprop="datePublished" content="2023-09-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5305">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="回看Tornado Cash原理：监管者的眼中钉 却是最精妙的ZK应用"/>
+<meta name="twitter:description" content="近期Vitalik和一些学者联名发表了新论文，其中提到了Tornado Cash如何实现反xi钱方案，但文中缺乏对Tornado Cash业务逻辑与原理的细致解读，让人似懂非懂。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">回看Tornado Cash原理：监管者的眼中钉 却是最精妙的ZK应用</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-10">
+      2023-09-10
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5305 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Faust，极客web3</p>
+<blockquote>
+<p>导语：近期Vitalik和一些学者联名发表了新论文，其中提到了Tornado Cash如何实现反xi钱方案（其实就是让取款人证明，自己的存款记录属于一个不包含黑钱的集合），<strong>但文中缺乏对Tornado Cash业务逻辑与原理的细致解读，让人似懂非懂。</strong></p>
+<p>此外值得一提的是，Tornado为代表的隐私项目才是真正用到了ZK-SNARK算法的零知识性，而大多数打着ZK旗号的Rollup，用到的只是 ZK-SNARK的简洁性。很多时候人们往往混淆了Validity Proof与ZK的区别，而Tornado恰好是理解ZK应用的极佳案例。</p>
+<p>本文作者恰好在2022年于Web3Caff Research写过一篇关于Tornado原理的文章，今日将其部分段落节选并拓展，整理成文，以便大家系统的理解Tornado Cash。</p>
+<p>原文链接：</p>
+<p><a href="https://research.web3caff.com/zh/archives/2663?ref=157">https://research.web3caff.com/zh/archives/2663?ref=157</a></p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_ntrupfsrs2.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<h3 id="龙卷风的原理">“龙卷风”的原理</h3>
+<p>Tornado Cash是利用了零知识证明的混币器协议，旧版本在2019年投入使用，新版本在2021年底启动了beta版。Tornado旧版本基本实现了去中心化，链上合约开源且无多签控制，前端代码开源且备份在了IPFS网络里。由于旧版Tornado的整体结构更简单易懂，所以本文将针对旧版本进行解读。</p>
+<p>Tornado的主要思路是：<strong>把大量的存取款行为混杂在一起，存款者在Tornado存入Token后，出示ZK Proof证明自己存过款，再用一个新地址提款，以此切断存取款地址之间的关联性。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_gnodvrspg1.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>更具体的概括，Tornado就像一个玻璃箱，混杂了很多人放进去的Coin硬币。我们能看到放Coin的是哪些人，但这些Coin高度同质化，如果有生面孔的人从玻璃箱拿走一枚Coin，我们很难知道他拿走的Coin最初是谁放进去的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_e9jb7l2j21.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>这种场景似乎屡见不鲜：当我们从Uniswap池子里SWAP几枚ETH时，根本无法知道划走的ETH是谁提供的，因为曾给Uniswap提供流动性的人太多了。但不同之处是，每次用Uniswap划走Token，我们需要用其他Token作为等价的成本，且不能把资金“私密的”转让给别人；而混币器只需要提款者出示存款凭证就行。</p>
+<p>为了让存取款动作看起来有同质性，Tornado池子的存款地址每次存入的资金、取款地址每次取出的资金都保持一致，比如<strong>某个池子的100个存款者和100名取款者，虽然公开可见，但看起来彼此没有任何联系，而且每人存入的金额、取出的金额，都是一样的。</strong> 这时就可以混淆视听，没法按照存取款金额判断关联性，进而切断资金转移痕迹，显而易见的是，这为xi钱行为提供了天然的便利。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_3ivw79c3zf.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>但有一个关键问题：取款者在提款时，怎么证明自己存过款？向混币器发起取款的地址，与所有的存款地址都不关联，那么该如何判断他的提款资格？看起来最直接的方法，是取款者直接披露自己的存款记录是哪一笔，但这就直接泄露了身份。此时零知识证明就派上了用场。</p>
+<p>提款者出具一个ZK Proof，证明自己在Tornado合约里有存款记录，且该笔存款尚未被提取，就能顺利发起取款。零知识证明本身就实现了隐私保护，外界只知道：取款人的确往资金池里存过款，但不知道他对应哪个存款者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_4nkwryoveq.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>要证明“我在Tornado资金池里存过款”可以被转化为“我的存款记录可以在Tornado合约里找到”。如果用Cn表示存款记录，问题就归纳为：</p>
+<p><strong>已知Tornado的存款记录集合为{C1，C2，…C100…}，取款者Bob证明自己曾用手上的密钥，生成了存款记录里的某个Cn，但通过ZK不泄露Cn具体是哪个。</strong></p>
+<p>这里要用到Merkle Proof的特殊性质。因为Tornado的所有存款记录，都存进了链上构造的一棵MerkleTree，作为其最底层的叶子结点，而叶子总数约为2的20次幂&gt;100万，大多数都处于空白状态（赋予了初始值）。每当有新存款行为产生时，合约就会把其对应的特征值Commitment写入一个叶子里，然后更新Merkle Tree的root。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_4zeqisubfc.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>比如，Bob的存款操作是Tornado有史以来第1万笔，那么与这笔存款有关联的一个特征值Cn会写入Merkle Tree的第1万个叶子结点，也即C10000= Cn。然后合约会自动算出新的Root，update一下。（ps：为了节约计算量，Tornado合约会缓存之前一批有变化的节点的数据，比如下图中的Fs1和Fs2、Fs0）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_jvoosr9k2s.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>而MerkleProof本身很简洁轻便，它利用了树状数据结构在检索/溯源过程中的简洁性。若想对外证明某笔交易TD存在于MerkleTree中，只要给出Root对应的MerkleProof（如下图中右边的部分），它相当简洁。如果Merkle Tree格外庞大，底层叶子有2的20次幂个，也就是包含100万笔存款记录，Merkle Proof也只需要包含21个节点的数值，非常短。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_g9jijnfrdq.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>如果要证明某笔交易H3的确包含在Merkle Tree中，设法证明用H3和Merkle Tree上其他的部分数据，可以生成Root，而生成Root所需要的那部分数据（包括Td在内）就构成了Merkle Proof。</p>
+<p>而Bob在取款时，要证明自己拥有的凭证对应着Merkle Tree上有记录的某笔存款哈希Cn。也就是说，他要证明两件事：</p>
+<p><strong>·Cn存在于链上Tornado合约里的Merkle Tree中，具体可以构造一个Merkle Proof，里面包含Cn；</strong></p>
+<p><strong>·Cn与Bob手上的存款凭证有关联。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_esfcfkn9mi.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<h3 id="tornado业务逻辑详解">Tornado业务逻辑详解</h3>
+<p>Tornado用户界面的前端代码中事先实现了很多功能，当一名存款者打开TornadoCash网页并点击存款按钮后，前端代码附带的程序会在本地生成2个随机数K和r，随后会计算出Cn=Hash(K，r)的值，再把Cn（就是下图中的commitment）传入Tornado合约，插入到后者记录的Merkle Tree里。说白了，K和r相当于私钥。它们很重要，系统会提示用户妥善保存。后面提款时仍然要用到K和r。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_zk5ihbm8qs.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>值得注意的是，以上工作皆发生于链下，也就是说：Tornado合约和外界观察者都不知晓K和r。<strong>如果K和r被泄露了，就类似于钱包私钥被盗。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_hrppywydtz.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p><strong>Tornado合约收到用户存款，并收到用户提交的Cn=Hash(K，r)后，便将Cn插入到Merkle树的最底层，作为新的叶子结点，同时会更新Root的数值。</strong> 所以，Cn和用户的存款动作是一对一关联的，外界可以知道每个Cn对应着哪个用户，知道有哪些人往混币器里存入了Token，并且知道每个存款者对应的存款记录Cn。</p>
+<p>在取款步骤中，取款者在前端网页里输入凭证/私钥（存款时生成的随机数K和r），TornadoCash前端代码中的程序会使用K和r、Cn=Hash(K，r)、Cn对应的Merkle Proof作为输入参数，生成ZK Proof，证明Cn是存在于Merkle Tree上的某笔存款记录，而K和r是对应Cn的凭证。</p>
+<p>这一步就相当于证明：我知道某笔记录于Merkle Tree上的存款记录对应的密钥。当ZK Proof被提交给Tornado合约时，上述4个参数均被隐藏，外界（包括Tornado合约）无法获知，借此保障了隐私。</p>
+<p><strong>生成ZKProof涉及的其他参数还包括：</strong> 取款时Tornado合约里Merkle Tree的根root、自定义的收款地址A、防止重放攻击的标识符nf(后面会讲)。这3个参数会公开发布到链上，外界可以获知，但不影响隐私。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_l8awe1ue4o.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>这里面有个细节，就是存款操作生成Cn时，用了2个随机数K和r来生成Cn，而不是单个随机数。这是因为单个随机数不够安全，有一定概率发生碰撞，比如，采用单随机数可能导致两个不同的存款者恰巧采用1个同样的随机数，导致生成的Cn撞车。</p>
+<p>至于上图中的A，代表接收提款的地址，由提款者自己填写。nf则是一个防止重放攻击的标识符，其数值nf=Hash（K），K就是存款生成Cn那一步用到的2个随机数之一（K和r）。这样一来，nf就与Cn关联了起来，换言之，每个Cn都有对应的nf，两者一一关联。</p>
+<p><strong>为什么要防止重放攻击呢？</strong> 由于混币器在设计上的特性，取款时不知道用户提走的币对应Merkle树的哪个叶子Cn，也就不知道提款人和哪些存款人关联，就不知道提款人到底存过几次款。提款者可以利用这一特性频繁提款，发起重放攻击，多次从混币器池里取走Token，直到把资金池抽干。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_moqprpdsht.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>在这里，nf标识符的作用类似于每个以太坊地址都有的交易计数器nonce，都是为了防止某笔交易被重放而设置。当一笔取款发生时，取款者需要提交一个nf，检查这个nf是否已被使用过（记录在案）：如果有，此次取款无效。如果没有，表示该nf尚未被使用，取款有效，对应的nf会被记录下来。下次再有人提交这个nf时，对应的取款动作直接判定为无效。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_qiehsc79kl.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p><strong>如果有人胡乱生成一个合约没记录过的nf行不行？</strong> 当然不行，因为取款者生成ZK Proof时，需要保证nf=Hash（K），而随机数K与存款记录Cn关联，也就是说，nf与某笔有记录的存款Cn关联。如果随便编造一个nf，这个nf与存款记录中的所有存款都对不上号，就不能顺利生成有效的ZK Proof，后续的工作就无法顺利完成，取款操作就不会成功。</p>
+<p>可能也有人会问：不用nf行不行？既然提款者在提款时需要提交ZK证明，证明自己和某个Cn有关联，那么每当提款动作发生时，查找对应的ZK Proof是否被提交到链上过，不就行了吗？</p>
+<p>但事实上，这样做的成本很高，因为Tornado cash合约不会永久存储过去提交的ZK Proof，因为这会严重浪费存储空间。与其比较每个新交到链上的ZKProof和既有的Proof是否一致，还不如设置个占地很小的标识符nf并将其永久存储来的更划算。</p>
+<p><strong>按照取款函数的代码示例，其需要的参数和业务逻辑如下：</strong></p>
+<p>用户提交ZKProof、nf（NullifierHash）=Hash（K），自定义一个接收提款的地址recipent，ZKProof隐藏了Cn和K、r的数值，让外界无法获取判断用户身份。recipent往往会填写一个干净的新地址，也不会泄露个人信息。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_l8sg6v3r53.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>但这里面有个小问题，就是用户在取款时，为了不可溯源，往往用新申请的地址发起取款交易，此时新地址没有ETH来支付gas费。所以取款地址发起取款时，要显式声明一个中继者relayer，由它代付gas费，之后混币器合约会直接从用户提款里扣掉一部分交给relayer，作为回报。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0910/5_lewmpi0vb6.png" alt="回看Tornado Cash原理：监管者的眼中钉，却是最精妙的ZK应用"></p>
+<p>综上所述，TornadoCash可以隐瞒取款者与存款者的关联，在用户量很大的情况下，就如同一个闹市区，犯人混进人群后警方就难以追踪。取款过程中需要用到ZK-SNARK，被隐藏起来的witness部分包含取款人关键信息，这是整个混币器最关键的一点。目前看来，Tornado可能是与ZK相关的最巧妙的应用层项目之一。</p>
+<p><strong>参考资料</strong></p>
+<p>1.https://etherscan.io/address/0xa160cdab225685da1d56aa342ad8841c3b53f291#codeTornado合约源码</p>
+<p>2.https://mirror.xyz/mazemax.eth/BTbTOrEKzGkc-XoDcFtLPfJPtQ1Mt96BZYsW83m33IUTornado.cash新旧版机制对比</p>
+<p>3.https://www.youtube.com/watch?v=Z0s4W3UBxM8AnonymousPayments</p>
+<p>4.https://medium.com/taipei-ethereum-meetup/zkp-study-group-tornado-cash-fdbb84d44b93[ZKP讀書會]TornadoCash</p>
+<p>5.https://medium.com/taipei-ethereum-meetup/tornado-cash-%E5%AF%A6%E4%BE%8B%E8%A7%A3%E6%9E%90-eb84db35de04TornadoCash實例解析</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58786/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">对话美国一线警探：执法部门是如何对抗加密“杀猪盘”的？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58771/">
+                <span class="next-text nav-default">解读CFTC的三次执法行动 对DeFi行业的影响和应对策略</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#龙卷风的原理">“龙卷风”的原理</a></li>
+        <li><a href="#tornado业务逻辑详解">Tornado业务逻辑详解</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

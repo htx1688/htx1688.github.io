@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          ​BRC-721協議解析 增強比特幣NFT集合的安全性和真實性 ordinals生態系統的標準 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="BRC-721是一個合集標準，市場可以通過這個標準準確的識別合集並显示元數據。" />
+<meta name="keywords" content="BRC 20" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50249/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="​BRC-721協議解析 增強比特幣NFT集合的安全性和真實性 ordinals生態系統的標準" />
+<meta property="og:description" content="BRC-721是一個合集標準，市場可以通過這個標準準確的識別合集並显示元數據。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50249/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="​BRC-721協議解析 增強比特幣NFT集合的安全性和真實性 ordinals生態系統的標準">
+<meta itemprop="description" content="BRC-721是一個合集標準，市場可以通過這個標準準確的識別合集並显示元數據。"><meta itemprop="datePublished" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2954">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="​BRC-721協議解析 增強比特幣NFT集合的安全性和真實性 ordinals生態系統的標準"/>
+<meta name="twitter:description" content="BRC-721是一個合集標準，市場可以通過這個標準準確的識別合集並显示元數據。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">​BRC-721協議解析 增強比特幣NFT集合的安全性和真實性 ordinals生態系統的標準</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-28">
+      2023-04-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2954 字 -
+        预计阅读 6 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：xiyu</p>
+<p>Twitter：@ohxiyu</p>
+<p><strong>一.背景</strong></p>
+<p>1.比特币ordinals缺乏将项目分组到集合中的标准化方法，因为这依赖于特定的、通常集中的服务和钱包。目前的市场情况基本上是每个交易市场、钱包都在运行自己的server，使用自己的方法中心化处理，没有统一的标准。</p>
+<p>2.这样中心化的合集标准，限制了序数生态系统的发展，并可能存在一些作恶的行为。</p>
+<p>3.BRC-721是一个合集标准，市场可以通过这个标准准确的识别合集并显示元数据。</p>
+<p><strong>二.BRC-721是什么？</strong></p>
+<p>BRC-721: Ordinals Collection Protocol 是一个用于验证比特币序数集合真实性的标准接口。为解决上述问题，该协议引入了一种去中心化和无需信任的集合创建和验证方法，类似于以太坊区块链上的 ERC-721 标准。</p>
+<p><strong>BRC-721 协议旨在通过提供一个真实性来源，简化集合创建和验证过程，无需预先付款。</strong></p>
+<p>该协议规定了集合及其项目在清单中的数据结构。清单和验证规则决定序数铭文是否属于某个集合。</p>
+<p><strong>BRC-721 协议解决的问题包括：</strong></p>
+<ol>
+<li>
+<p><strong>在其他区块链上的预付款问题</strong></p>
+</li>
+<li>
+<p><strong>缺乏元数据标准和揭示机制</strong></p>
+</li>
+<li>
+<p><strong>缺乏关于集合或其项目的共享规范</strong></p>
+</li>
+<li>
+<p><strong>需要信任集合创建者将您的铭文纳入集合</strong></p>
+</li>
+</ol>
+<p>通过这个协议，比特币nft集合的创建和验证将变得去中心化且无需信任，从而拓展ordinals生态系统的潜力。</p>
+<p><strong>三.技术规格</strong></p>
+<p><strong>1.BRC-721 协议基于三种类型的清单。</strong> <strong>每个清单都有协议和版本字段，允许第三方服务理解规范。</strong></p>
+<p> CollectionManifest（集合清单）</p>
+<p>CollectionManifest 是集合的真实来源。它存储集合参数和允许链接和验证底层集合项目的字段。</p>
+<p> InscriptionManifest（铭文清单）</p>
+<p>InscriptionManifest 是与 CollectionManifest 链接的 Ordinal 铭文。类似于 NFT 以及它与以太坊区块链合约的关系。</p>
+<p>RevealManifest（揭示清单）</p>
+<p>RevealManifest 允许将元数据链接到特定的 CollectionManifest，为 InscriptionManifests 授予属性。</p>
+<p><strong>2.每个清单及其清单内容键值都是必须符合声明的 json-schema.org Draft 4 的 JSON 字符串，以防止不一致。</strong></p>
+<p>为了验证清单，可以使用其中一个建议的验证器：https://json-schema.org/implementations.html#validators。</p>
+<p><strong>3.签名和哈希：</strong></p>
+<p>为确保清单的安全链接，该协议使用：</p>
+<ul>
+<li>
+<p>ECDSA secp256k1 对铭文内容的 SHA256 哈希进行签名和验证。</p>
+</li>
+<li>
+<p>以十六进制字符串表示的 DER 编码签名</p>
+</li>
+<li>
+<p>以十六进制字符串表示的压缩/非压缩 signerPublicKey</p>
+</li>
+</ul>
+<p>集合清单\铭文清单\揭示清单要验证 CollectionManifest，必须满足一些规则，这些规则确保了铭文铭刻的唯一性和其是否属于一个特定的集合。只有在满足所有验证规则的情况下，铭文铭刻才可以被视为集合的一部分。</p>
+<p><strong>四.API 资源</strong></p>
+<p>提供了一些api参数，可用于构建集合浏览器、画廊、稀有度工具和其他应用程序。目前，API 不提供元数据，而只提供带有指向元数据链接的 tokenURI 字段。</p>
+<p>通过这些 API 端点，开发人员可以轻松地构建与 BRC-721 协议相关的应用程序，如集合浏览器、画廊和稀有度工具等。通过调整查询参数，开发人员可以自定义请求的数据，以满足他们的应用程序需求。</p>
+<p><strong>五.BRC-721 协议应用场景</strong></p>
+<p>BRC-721 协议为比特币序数集合创建了一个标准接口。前面已经讨论了清单和验证规则，现在我们可以深入了解一下 BRC-721 协议的一些实际应用场景。</p>
+<ol>
+<li>
+<p><strong>数字艺术品收藏</strong></p>
+<p>艺术家可以使用 BRC-721 协议创建有限数量的数字艺术品集合。这可以确保艺术品的稀缺性，同时为购买者提供真实性和所有权的验证。</p>
+</li>
+<li>
+<p><strong>游戏道具和资产</strong></p>
+<p>游戏开发商可以利用 BRC-721 协议在比特币区块链上创建游戏道具和资产。这些道具可以在游戏中使用，还可以在游戏之间进行交易，为游戏生态系统提供更大的价值和互操作性。</p>
+</li>
+<li>
+<p><strong>去中心化身份验证</strong></p>
+<p>BRC-721 协议可用于创建可验证的数字身份。用户可以创建和管理自己的数字证书，如学历、技能认证等。这将减少伪造证书的风险，同时简化了证书验证过程。</p>
+</li>
+<li>
+<p><strong>票务和优惠券</strong></p>
+<p>公司和活动组织者可以使用 BRC-721 协议创建独特的门票或优惠券。这将确保门票的真实性，同时防止欺诈和伪造。</p>
+</li>
+</ol>
+<p><strong>六.缺点和局限性</strong></p>
+<p>尽管 BRC-721 协议为比特币生态系统提供了许多优势，但仍然存在一些缺点和局限性。</p>
+<p>1.首先，与以太坊相比，比特币交易速度较慢，因此创建和管理大型的序数集合<strong>可能需要更长时间。</strong> 其次，与以太坊 ERC-721 标准不同，BRC-721 协议并没有提供一个默认的元数据标准，这使得处理元数据的方式变得不同，可能会导致<strong>不同的应用程序之间的兼容性问题。</strong> 此外，由于 BRC-721 协议是相对较新的标准，<strong>目前缺乏广泛的支持和使用情况。</strong></p>
+<p>2.另外，与许多区块链应用程序一样，<strong>BRC-721 协议也需要处理许多实际问题，</strong> 例如管理用户的私钥、确保良好的用户体验和维护协议的安全性等。</p>
+<p>3.最后，BRC-721 协议的设计注重比特币生态系统中的去中心化，这可能导致一些限制，例如在集合的创建和管理方面可能需要更多的手动劳动，<strong>而不是依赖于自动化的智能合约。</strong></p>
+<p><strong>七.总结</strong></p>
+<p>ordinals基础建设的完善，标准化是必不可少的。BRC-721 协议为比特币区块链提供了一个去中心化、安全且可靠的方法来创建、验证和管理序数集合。通过 CollectionManifest、InscriptionManifest 和 RevealManifest，BRC-721 协议定义了集合和其项目的结构、内容和验证规则。这些规则确保每个铭文铭刻都是唯一的，以及它们是否属于一个特定的集合。</p>
+<p><strong>BRC-721 协议的实际应用场景包括数字艺术品收藏、游戏道具和资产、去中心化身份验证以及票务和优惠券。通过这些用例，我们可以看到 BRC-721 协议在数字资产领域的广泛应用，并且可以在比特币生态系统中实现类似于 ERC-721 对以太坊生态系统的影响。</strong></p>
+<p>通过提供 API 资源，开发人员可以轻松地构建与 BRC-721 协议相关的应用程序，如集合浏览器、画廊和稀有度工具等。通过调整查询参数，开发人员可以自定义请求的数据，以满足他们的应用程序需求。</p>
+<p><strong>总的来说，BRC-721 协议为比特币区块链提供了一个去中心化、安全且可靠的方法来创建、验证和管理序数集合。正如 ERC-721 对以太坊生态系统产生的影响，BRC-721 协议有望为比特币生态系统带来新的机遇和发展。</strong></p>
+<p>如果这篇文章对你有一些帮助，请帮我转发并关注我的推特：ohxiyu，我会持续更新。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50254/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">BRC-20代幣飆漲 除“meme”外價值在哪？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50233/">
+                <span class="next-text nav-default">CAKE周跌幅近25%，PancakeSwap代幣經濟學將「大修」？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

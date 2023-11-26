@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          以Lido为例，深入探讨LSD协议的潜在风险 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文是对 Danny Ryan 关于 LSD 协议的一些观点的回应。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/57770/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="以Lido为例，深入探讨LSD协议的潜在风险" />
+<meta property="og:description" content="本文是对 Danny Ryan 关于 LSD 协议的一些观点的回应。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/57770/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-25T00:00:00+00:00" />
+
+<meta itemprop="name" content="以Lido为例，深入探讨LSD协议的潜在风险">
+<meta itemprop="description" content="本文是对 Danny Ryan 关于 LSD 协议的一些观点的回应。"><meta itemprop="datePublished" content="2023-08-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5079">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="以Lido为例，深入探讨LSD协议的潜在风险"/>
+<meta name="twitter:description" content="本文是对 Danny Ryan 关于 LSD 协议的一些观点的回应。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">以Lido为例，深入探讨LSD协议的潜在风险</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-25">
+      2023-08-25
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5079 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题： <a href="https://hackmd.io/@sacha/on-the-risks-of-lsd">On the risks of LSD</a></p>
+<p>原文作者： sacha</p>
+<p>原文编译：倩雯， ChainCatcher</p>
+<h2 id="序言">序言</h2>
+<p>本文是对 <a href="https://twitter.com/dannyryan/status/1688644951230267392">Danny Ryan 一些观点</a>（后文会具体呈现）的回应。</p>
+<p>事实的反面是谬误，但一个深刻真理的反面很可能是另一个深刻真理。<br>
+——尼尔斯·玻尔</p>
+<p>从整体上看，我认为 Danny 的立场是伟大的。但我也认为，他的做法存在着同样重大的风险，而这些风险并没有在公众面前得到适当的讨论。</p>
+<p>我并不认为 Danny 的观点本身有错，但我确实认为其观点还有另一面没有得到足够明确的传达。这正是本文的目的所在。</p>
+<h2 id="双重治理的简介">双重治理的简介</h2>
+<p>双重治理是降低 Lido 协议治理风险的重要一步。它代表着从股东资本主义向利益相关者资本主义的转变。它还提供了一种切实可行的方式，让以太坊持有者在 Lido 协议变更中拥有话语权权。</p>
+<p>其主要目的是防止 LDO 持有者在未经协议和 stETH 持有者同意的情况下改变协议和 stETH 持有者之间的社会契约。目前， LDO 持有者对协议拥有重要的权力，可导致这一社会契约发生重大变化。这些权力包括：</p>
+<ul>
+<li>
+<p>升级以太坊流动性定标协议代码</p>
+</li>
+<li>
+<p>管理以太坊共识层预言机委员会成员名单</p>
+</li>
+<li>
+<p>以可能有害或意想不到的方式改变节点运营商之间的股权分配方式（例如，添加或删除白名单以太坊节点运营商）</p>
+</li>
+<li>
+<p>以意想不到或可能有害的方式改变治理结构（如铸造或烧毁 LDO、改变投票系统参数）</p>
+</li>
+<li>
+<p>将以太坊流动资金定投协议的总费用比例变更到约定范围之外（以及定义这些范围）。</p>
+</li>
+<li>
+<p>决定如何使用国库</p>
+</li>
+</ul>
+<p>除国库支出外，所有这些权力都会直接影响到 stETH 持有者。双重治理从根本上允许 STETH 持有者否决对 Lido 协议的任何上述修改，而不会引入新的攻击载体，也不会给 STETH 持有者带来过重的政治负担。</p>
+<h2 id="节点运营商治理">节点运营商治理</h2>
+<p>Danny 认为：</p>
+<p>“决定谁是节点运营商（ node operator ，下述简称为 NO ），背后是两个问题——谁被加入集合，谁被移出集合。从长远来看，这可以通过两种方式之一来设计，一种是通过管理（代币投票或其他类似机制），另一种是通过围绕声誉和盈利能力的自动机制。</p>
+<p>在前者即依靠治理决定 NO 的模式中，治理代币（如 LDO ）成为以太坊的主要风险。如果代币可以决定谁可以成为这个理论上的多数—— LSD 中的 NO ，那么代币持有者就可以强制进行审查、多区块 MEV 等卡特尔活动，否则 NO 就会从集合中被删除。</p>
+<p>决定 NO 的治理还有一个明显的风险，那就是监管审查和控制。如果一个 LSD 协议下的集合质押超过 50% ，这个集合质押就会获得审查区块的能力（更糟糕的是，由于能够最终确定这些区块，所以该数字会达到 2/3）。在监管审查攻击中，我们现在有了一个独特的实体——治理代币持有者，监管机构可以对其提出审查要求。根据代币的分布情况，这可能是一个比整个以太坊网络简单得多的监管目标。事实上， DAO 的代币分布一般都很糟糕，只有少数几个实体决定了大部分投票。”</p>
+<p>双重治理在很大程度上解决了上述问题。具体来说，如果 LDO 持有者试图以不公平的方式将 NO 从集合中除名，则会出现以下情况：</p>
+<ul>
+<li>
+<p>法定人数较少的 stETH 持有人（比如占总数的 5% ）可以延长治理投票时间，以便法定人数较多（比如占 15% ）的人否决这一错误决定。</p>
+</li>
+<li>
+<p>如果否决通过，所有后续的   LidoDAO 提议都会被默认否决（否决状态）——以避免给 stETH 持有者带来更多投票负担。</p>
+</li>
+<li>
+<p>重要的是，只有在 LDO 治理机构和参与的 stETH 持有者都同意解决冲突的情况下，治理机构才能恢复正常状态。</p>
+</li>
+</ul>
+<p>总之，通过赋予 stETH 持有者否决 NO 设置变更的权力， LDO 持有者就不可能单方面强制开展审查、多区块 MEV 等卡特尔活动，因为 LDO 持有者本身无法清除持异议的 NO 。</p>
+<p>关于 Danny 的第二个担忧（监管审查和控制）， st ETH 的代币分布与 LDO 的分布截然不同，而且更加多样化。因此， LDO 和 st ETH 的组合更能抵御这种审查。它确实不如 ETH 分配广泛，也没有以太坊用户分布的多样化，但这只会随着时间的推移而改善。</p>
+<h2 id="基于经济因素对-no-进行选择">基于经济因素对 NO 进行选择</h2>
+<p>Danny 认为：</p>
+<p>“基于经济和声誉选择 NO 的方案中，我们最终仍会陷入类似的卡特尔化，尽管是自动化的卡特尔化。</p>
+<p>基于盈利确定 NO 列表可能是确保 NO 对池有益的唯一无信任（非治理）方法。</p>
+<p>盈利能力的定义很成问题&hellip;&hellip;由于系统的经济活动随时间的变化很大，因此系统的设计不能只有某个绝对的指标，即必须赚取 X 的交易费用。</p>
+<p>当所有运营商都使用“诚实”的技术时，这种盈利能力比较指标就能很好地发挥作用，但如果有一定数量的不良运营商转而使用破坏性技术，如多区块 MEV 或调整区块释放时间以获取更多 MEV ，那么他们就会歪曲盈利能力目标，从而使诚实的 NO 如果不同样使用破坏性技术，最终就会被自动淘汰。</p>
+<p>这就意味着，无论采用哪种方法—— NO 治理或经济选择/剔除——这种超过共识阈值的池子都会成为卡特尔层。要么是通过治理直接形成卡特尔，要么是通过智能合约设计形成破坏性的盈利卡特尔。”</p>
+<p>这种分析感觉过于二元对立。对于 Lido （或以太坊）来说，两个极端（ LDO 治理 NO 或纯粹的算法/经济选择/剔除）都不可能，也不可取。</p>
+<p>双重治理对于最大限度地降低滥用卡特尔的风险至关重要。而且，正如 Danny 正确指出的那样，盈利能力是一个过于简单的指标，不能完全依赖于它。</p>
+<p>有许多重要因素难以在链上验证，比如地理分布或管辖权的多样性，这意味着人们可能始终需要在某个环路中发挥作用——不过，也许这最终可以简化为每年在节点运营商（新旧）之间就重新平衡股权进行投票。</p>
+<h2 id="质押-eth-治理方案">质押 ETH 治理方案</h2>
+<p>Danny 认为：</p>
+<p>“一些人认为， LSD ETH 持有者可以在其底层 LSD 协议的管理中拥有发言权，从而成为可能支持代币的不公平分配与财阀化。</p>
+<p>这里需要注意的是， ETH 持有者顾名思义并不是以太坊用户，而且从长远来看，我们预计以太坊用户的数量将远远超过 ETH 持有者（持有的 ETH 超过了促进交易所需的数量）。这是影响以太坊治理的一个关键且重要的事实—— ETH 持有者或储户不享有链上治理权。以太坊是用户选择运行的协议。</p>
+<p>从长远来看， ETH 持有者只是用户的一个子集，因此， ETH 持有者甚至只是其中的一个子集。在所有 ETH 都成为一个 LSD 下的被质押 ETH 的极端情况下，被质押 ETH 治理的投票权重或中止并不能保护以太坊平台的用户。</p>
+<p>因此，即使 LSD 协议和 LSD 持有者在微小攻击和捕获方面保持一致，用户也不会且不能够/将会做出反应。”</p>
+<p>Hasu 的回应在很大程度上解决了这些问题。 </p>
+<h2 id="治理的邪恶本质">治理的邪恶本质</h2>
+<p>Danny 认为：</p>
+<p>“即使 LSD 治理存在时间延迟，导致集合资本可以在变化发生前退出系统， LSD 协议仍会受到清水煮青蛙式治理攻击。微小、缓慢的变化不太可能导致投入资本退出系统，但系统仍会随着时间的推移而发生剧烈变化。尽管如此，任何治理机制都是如此，无论是以非正式（软性）为主，还是以正式（硬性）为主。”</p>
+<p>反过来看 Danny 的论点，由 EF 驱动的微小、缓慢的协议变化不太可能让 DAO /用户退出以太坊，但以太坊协议（和精神）仍可能随着时间的推移而发生巨大变化。</p>
+<p>特别是，它可以改变协议的方式，从而打破早期贡献者的社会契约。</p>
+<p>虽然我远不是不变性最大化主义者，但我确实相信，治理最小化作为一种哲学，它存在于软治理与硬治理的上游。</p>
+<p>硬治理的弊端已经有很多论述，而软治理也有自己的问题（更微妙，而且往往被掩盖），涉及不被承认/不负责任的权力、如何在不牺牲可信的中立性的情况下行使权力，以及如何处理权力真空（在发生死亡或悲惨事故的情况下）。这当然不是消除所有尾部风险的灵丹妙药。</p>
+<p>换句话说，在软治理下，通常存在大量不为人知的权力。不被承认的权力就是不负责任的权力。而不负责任的权力几乎不可避免地会导致在足够长的时间跨度内出现不理想的局面。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0825/aybrsctk65c3isg" alt="以Lido为例，深入探讨LSD协议的潜在风险"></p>
+<p>Gwart 曾发推表示“社会惩罚就是 Justin Drake 拿着大刀开车来到你家门口，剪断你的电脑网线，指着你说“你是个坏蛋。’”</p>
+<p>虽然这是一种幽默的表达方式，但它确实揭示了一种更深层次的潜在矛盾，即维护协议的需要与软实力在关键行为者中集中化之间的矛盾。</p>
+<p>用 Dankrad 稍微严肃的话说：“是的，我们可能会对你在质押层所做的事情有意见，这可能包括扰乱你的协议和破坏它。”</p>
+<h2 id="用户代表">用户代表</h2>
+<p>Danny 认为：</p>
+<p>“如上所述， LSD 持有者并不等同于以太坊用户。 LSD 持有者可能会接受某种以审查为前提的治理投票，但这仍然是对以太坊协议的攻击，用户和开发者将通过他们所掌握的手段——社会干预——来减轻这种攻击。”</p>
+<p>我们也可以从相反的角度来看待这个问题。</p>
+<p>几乎在所有地方，我们都可以看到，由用户引导的决策往往会在各个重要方面鼓励市场集中化。</p>
+<p>99.9% 的用户可能不太关心与他们没有直接关系的时效性审查形式，而与以太坊绑定的流动性协议的大多数贡献者可能会关心这一点。</p>
+<p>例如，大多数用户并不关心、也不应该关心以太坊节点的地理分布或司法多样性等问题，但以太坊绑定的流动性协议贡献者肯定会关心，并且可以采取切实措施，在这些方面保持以太坊的弹性。</p>
+<h2 id="资本风险与协议风险">资本风险与协议风险</h2>
+<p>Danny 认为：</p>
+<p>“上述讨论大多集中在 LSD 池（如 Lido ）对以太坊协议造成的风险上，而不是那些在池中持有资本的人所面临的风险。因此，这可能是公地悲剧——每个人理性地决定使用 LSD  协议质押，这对用户来说是个好决定，但对协议来说却是个越来越糟糕的决定。但事实上，当超过共识阈值时，以太坊协议所面临的风险和分配给 LSD 协议的资本所面临的风险是联系在一起的。</p>
+<p>卡特尔化、滥用 MEV 提取、审查制度等都是对以太坊协议的威胁，用户和开发者将采用与传统中心化攻击相同的方法来应对这些威胁——通过社会干预进行泄漏或烧毁。因此，将资本汇集到这个阶层进行卡特尔化，不仅会危及以太坊协议，还会反过来危及汇集的资本。</p>
+<p>这看似是难以认真对待或可能永远不会发生的“尾部风险”，但如果我们在加密货币领域学到了什么，那就是——如果这一风险会被利用或具有一些不太可能发生的“临界边缘情况”，那么它就会比你想象的更快被利用或崩溃。在这种开放和动态的环境中，脆性系统一次又一次地崩溃，脆弱的系统一次又一次地被利用。”</p>
+<p>用 Nikolai Mushegian 的话说，在一个开放的系统中，整个世界都可以与之互动，激励不仅仅是一种建议。它们更类似于物理定律，如重力或熵定律。只要系统中哪怕有一个部分与激励机制不兼容，它被利用也只是时间问题。任何天真的想法都无法降低这种风险。</p>
+<p>依靠承诺来阻止不良行为者，会为尾部风险敞开大门，而尾部风险可以说与 Danny 强调的风险同样严重，甚至更为严重。</p>
+<h2 id="自我限制">自我限制</h2>
+<p>Danny 认为：</p>
+<p>“以太坊协议和用户可以从 LSD 的中心化和治理攻击中恢复过来，但这并不美好。我建议 Lido 和类似的 LSD 产品为了自身利益进行自我限制，并建议资本分配者承认 LSD 协议设计固有的集合风险。由于固有的极端风险，资本分配者分配给 LSD 协议的资金不应超过以太币总质押的 25% 。人为地施加限制确实无法保证会有好结果。”</p>
+<p>事实上，人为限制流动性质押产品很可能不会带来好结果。</p>
+<p>因为承诺可以维持的时段有限。</p>
+<p>最终的结局很可能是社区无法施加影响的各方获胜：在交易所、机构（和经许可的）质押产品上进行流动质押，或采用更不可改变（和弹性更差）的协议。</p>
+<p>这些理想主义的想法出发点是好的，但却脱离了实际情况，这就像 EF 经常出现的盲点。正是这类错误，导致交易所在 Lido 计划推出之前就占据了主导地位。</p>
+<p>补充：公共产品十分有益</p>
+<p>那么， Lido 获胜的世界对以太坊公共产品的未来（尤其是 Lido DAO 在促进这一未来中的作用）意味着什么？</p>
+<p>用 Kelvin Fichter 的话说， EF 是独立的非营利机构，拥有紧闭的治理结构，无法（也不应该）成为以太坊社区公共产品的主要协调者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0825/jti83e3lwc9m0hw" alt="以Lido为例，深入探讨LSD协议的潜在风险"></p>
+<p>因此，我认为好的验证者是一个需要资金支持的公共产品， EF 不应该依靠其来提供资（部分原因是其封闭的治理结构和超强的软实力并不能很好地制定可信的中立规则），只有一个成功的流动性质押协议（&gt;50 ％的市场份额）才能在费用上有足够的回旋余地，以负担得起这样做所需的财务低效率：维持良好的验证市场、赞助昂贵的验证者、提供生态系统支持，同时从长远来看（未来 100 年）仍能获利。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/57724/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">疑似砸盘跑路？NotLarvaLabs创始人爆光PEPE幕后团队</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/57744/">
+                <span class="next-text nav-default">亿欧智库丨中国、美国、欧盟的AIGC监管态势</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#序言">序言</a></li>
+    <li><a href="#双重治理的简介">双重治理的简介</a></li>
+    <li><a href="#节点运营商治理">节点运营商治理</a></li>
+    <li><a href="#基于经济因素对-no-进行选择">基于经济因素对 NO 进行选择</a></li>
+    <li><a href="#质押-eth-治理方案">质押 ETH 治理方案</a></li>
+    <li><a href="#治理的邪恶本质">治理的邪恶本质</a></li>
+    <li><a href="#用户代表">用户代表</a></li>
+    <li><a href="#资本风险与协议风险">资本风险与协议风险</a></li>
+    <li><a href="#自我限制">自我限制</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          金色观察 | 比特币Ordinals理论手册（上） - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Ordinals Theory提出者Casey Rodarmor亲自撰写的“比特币Ordinals手册”无疑是最清晰易懂的Ordinals文献" />
+<meta name="keywords" content="Ordinals, BRC 20, Inscriptions, BRC-20" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50883/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="金色观察 | 比特币Ordinals理论手册（上）" />
+<meta property="og:description" content="Ordinals Theory提出者Casey Rodarmor亲自撰写的“比特币Ordinals手册”无疑是最清晰易懂的Ordinals文献" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50883/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-09T00:00:00+00:00" />
+
+<meta itemprop="name" content="金色观察 | 比特币Ordinals理论手册（上）">
+<meta itemprop="description" content="Ordinals Theory提出者Casey Rodarmor亲自撰写的“比特币Ordinals手册”无疑是最清晰易懂的Ordinals文献"><meta itemprop="datePublished" content="2023-05-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="10114">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="金色观察 | 比特币Ordinals理论手册（上）"/>
+<meta name="twitter:description" content="Ordinals Theory提出者Casey Rodarmor亲自撰写的“比特币Ordinals手册”无疑是最清晰易懂的Ordinals文献"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">金色观察 | 比特币Ordinals理论手册（上）</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-09">
+      2023-05-09
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 10114 字 -
+        预计阅读 21 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%AF%94%E7%89%B9%E5%B8%81/"> 比特币 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>比特币Ordinals Theory由开发人员Casey Rodarmor 2022年开发，2023年2月提交BIP后比特币ordinals生态大爆发，BRC20代币、BRC21等概念层出不穷。</p>
+<p>包括金色财经在内的各家机构和媒体也出了很多文章，但金色财经财经记者发现，Ordinals Theory提出者Casey Rodarmor亲自撰写的“比特币Ordinals手册”无疑是最清晰易懂的Ordinals文献。</p>
+<p>金色财经记者0xnaitive编译了比特币Ordinals手册，因篇幅过长，分上、下两篇刊出。本文为比特币Ordinals手册（上）。</p>
+<h2 id="引言">引言</h2>
+<p>这本手册是序数理论（ordinal theory）的指南手册。序数理论本身关注satoshis，赋予它们个体身份，并允许它们被追踪、转移并赋予意义。</p>
+<p>Satoshis，而不是比特币，是比特币网络的原生原子货币。一个比特币可以细分为 100,000,000 Satoshi，但不能再细分了。</p>
+<p>序数理论不需要比特币之外的侧链或代币，并且可以在不对比特币网络进行任何更改的情况下使用。它现在就可以用。</p>
+<p>序数理论赋予 satoshis 以钱币价值，使它们可以作为古玩被收集和交易。</p>
+<p>每个 satoshi 可以铭刻（inscribe）任意内容，创建独特的比特币原生数字工艺品（digital artifacts），可以保存在比特币钱包中并使用比特币交易进行转移。铭文（Inscriptions）与比特币本身一样持久、不可篡该、安全和去中心化。</p>
+<p>其他更不寻常的用例也是可能的：链下彩色硬币（colored-coins）、具有密钥轮换的公钥基础设施、DNS 的去中心化替代品。不过就目前而言，这样的用例是推测性的，只存在于边缘序数理论家的脑海中。</p>
+<p>有关序数理论的更多详细信息，请参阅概述部分。有关铭文的更多详细信息，请参阅铭文部分。</p>
+<p>当你准备好亲自动手时，一个好的起点是铭文，这是一种由序数理论支持的奇特digital artifact。</p>
+<h2 id="一概述">一、概述</h2>
+<p>序数是 satoshis 的编号方案，允许跟踪和传输每个 sats。这些数字称为序数（ordinal number）。Satoshis 按照它们被挖出的顺序编号，并从交易输入转移到交易输出，先进先出。编号方案和转账方案都依赖于 顺序，编号方案依赖于聪被挖出的顺序，而转账方案依赖于交易输入和输出的顺序。因此有了名称，ordinals。</p>
+<p>BIP中提供了技术细节。</p>
+<p>序数理论不需要单独的代币、另一个区块链或对比特币的任何更改。它现在就可以用。</p>
+<p>序数有几种不同的表示形式：</p>
+<ul>
+<li>
+<p>整数表示法： [2099994106992659](<a href="https://ordinals.com/sat/2099994106992659">https://ordinals.com/sat/2099994106992659</a>)序数，根据聪被挖出的顺序分配。</p>
+</li>
+<li>
+<p>十进制表示法： [3891094.16797](<a href="https://ordinals.com/sat/3891094.16797">https://ordinals.com/sat/3891094.16797</a>)第一个数字是聪被挖出的区块高度，第二个是聪在区块内的偏移量。</p>
+</li>
+<li>
+<p>度数记法： [3°111094′214″16797‴](<a href="https://ordinals.com/sat/3%C2%B0111094%E2%80%B2214%E2%80%B316797%E2%80%B4">https://ordinals.com/sat/3%C2%B0111094%E2%80%B2214%E2%80%B316797%E2%80%B4</a>)。我们稍后会讲到。</p>
+</li>
+<li>
+<p>百分位符号： [99.99971949060254%](<a href="https://ordinals.com/sat/99.99971949060254%25">https://ordinals.com/sat/99.99971949060254%25</a>)。satoshi 在比特币供应中的位置，以百分比表示。</p>
+</li>
+<li>
+<p>名称：[satoshi](<a href="https://ordinals.com/sat/satoshi">https://ordinals.com/sat/satoshi</a>)。使用从a到z的字符编码序数。</p>
+</li>
+</ul>
+<p>可以使用序数作为稳定标识符将任意资产（例如 NFT、证券代币、帐户或稳定币）附加到 satoshis。</p>
+<p>Ordinals 是一个开源项目，在GitHub上开发。该项目包括一个描述序数方案的 BIP，一个与比特币核心节点通信以跟踪所有 satoshis 位置的索引，一个允许进行序数感知交易的钱包，一个用于区块链交互式探索的区块浏览器，能铭刻satoshis的digital artifact和本手册。</p>
+<h3 id="稀有度">稀有度</h3>
+<p>人类是收藏家，既然聪可以被追踪和转移，人们自然会想要收藏。序数理论家可以自己决定哪些 sats 是罕见的和可取的，但有一些提示&hellip;&hellip;</p>
+<p>比特币有周期性的事件，有些很频繁，有些不常见，这些自然而然地成为了一个稀有度的系统。这些周期性事件是：</p>
+<ul>
+<li>
+<p>区块：从现在到时间结束，大约每 10 分钟挖出一个新区块。</p>
+</li>
+<li>
+<p>难度调整：每 2016 个区块，或大约每两周，比特币网络通过调整区块必须满足的难度目标来响应算力的变化。</p>
+</li>
+<li>
+<p>减半：每 210,000 个区块，或大约每四年，每个区块中创建的新 sats 数量就会减半。</p>
+</li>
+<li>
+<p>周期：每六次减半，就会发生一些神奇的事情：减半和难度调整同时发生。这称为conjunction，conjunction之间的时间段称为周期。conjunction大约每 24 年发生一次。第一次conjunction应该发生在 2032 年的某个时候。</p>
+</li>
+</ul>
+<p>这为我们提供了以下稀有度级别：</p>
+<ul>
+<li>
+<p>common: 不是区块第一个 sat 的任何sat</p>
+</li>
+<li>
+<p>uncommon: 每个区块的第一个sat</p>
+</li>
+<li>
+<p>rare: 每个难度调整期的第一个sat</p>
+</li>
+<li>
+<p>epic: 每个减半周期的第一个 sat</p>
+</li>
+<li>
+<p>legendary：每个周期的第一个sat</p>
+</li>
+<li>
+<p>mythic: 创世块的第一个 sat</p>
+</li>
+</ul>
+<p>这给我们带来了度数表示法，它以一种使 satoshi 的稀有性一目了然的方式明确地表示一个序数：</p>
+<p>A°B′C″D‴
+│ │ │ ╰─ Index of sat in the block
+│ │ ╰─── Index of block in difficulty adjustment period
+│ ╰───── Index of block in halving epoch
+╰─────── Cycle, numbered starting from 0</p>
+<p>序数理论家经常使用术语“小时”、“分钟”、“秒”和“第三”分别表示A、B、C和D。</p>
+<p>现在举一些例子。这个 satoshi很common：</p>
+<p>1°1′1″1‴
+│ │ │ ╰─ Not first sat in block
+│ │ ╰─── Not first block in difficutly adjustment period
+│ ╰───── Not first block in halving epoch
+╰─────── Second cycle</p>
+<p>这个 satoshi uncommon：</p>
+<p>1°1′1″0‴
+│ │ │ ╰─ First sat in block
+│ │ ╰─── Not first block in difficutly adjustment period
+│ ╰───── Not first block in halving epoch
+╰─────── Second cycle</p>
+<p>这个 satoshi rare：</p>
+<p>1°1′0″0‴
+│ │ │ ╰─ First sat in block
+│ │ ╰─── First block in difficulty adjustment period
+│ ╰───── Not the first block in halving epoch
+╰─────── Second cycle</p>
+<p>这个 satoshi epic：</p>
+<p>1°0′1″0‴
+│ │ │ ╰─ First sat in block
+│ │ ╰─── Not first block in difficulty adjustment period
+│ ╰───── First block in halving epoch
+╰─────── Second cycle</p>
+<p>这个 satoshi legendary：</p>
+<p>1°0′0″0‴
+│ │ │ ╰─ First sat in block
+│ │ ╰─── First block in difficulty adjustment period
+│ ╰───── First block in halving epoch
+╰─────── Second cycle</p>
+<p>这个 satoshi mythic：</p>
+<p>0°0′0″0‴
+│ │ │ ╰─ First sat in block
+│ │ ╰─── First block in difficulty adjustment period
+│ ╰───── First block in halving epoch
+╰─────── First cycle</p>
+<p>如果区块偏移量为零，则可以省略。这是上面uncommon的satoshi：</p>
+<p>1°1′1″
+│ │ ╰─ Not first block in difficutly adjustment period
+│ ╰─── Not first block in halving epoch
+╰───── Second cycle</p>
+<h2 id="稀有聪供应">稀有聪供应</h2>
+<p><strong>总供应量</strong></p>
+<ul>
+<li>
+<p>common：2.1千万亿</p>
+</li>
+<li>
+<p>uncommon: 6,929,999</p>
+</li>
+<li>
+<p>rare: 3437</p>
+</li>
+<li>
+<p>epic: 32</p>
+</li>
+<li>
+<p>legendary: 5</p>
+</li>
+<li>
+<p>mythic: 1</p>
+</li>
+</ul>
+<p><strong>当前供应</strong></p>
+<ul>
+<li>
+<p>common: 1.9千万亿</p>
+</li>
+<li>
+<p>uncommon: 745,855</p>
+</li>
+<li>
+<p>rare: 369</p>
+</li>
+<li>
+<p>epic: 3</p>
+</li>
+<li>
+<p>legendary: 0</p>
+</li>
+<li>
+<p>mythic: 1</p>
+</li>
+</ul>
+<p>目前，即使是不常见的 satoshis 也非常罕见。截至撰写本文时，已开采出 745,855 个不常见的 satoshis - 每 25.6 个流通比特币中就有一个。</p>
+<h3 id="名称name">名称（name）</h3>
+<p>每个 satoshi 都有一个名称，由字母A到Z组成，随着 satoshi 被开采的时间越长，名称越短。它们可以从短开始，然后变得更长，但随后所有好的、短的名字都会被困在无法使用的创世块中。</p>
+<p>例如，1905530482684727°的名字是“iaiufjszmoba”。最后被开采的聪的名字是“a”。每个 10 个或更少字符的组合都存在，或者总有一天会存在。</p>
+<h3 id="异国情调exotics">异国情调（exotics）</h3>
+<p>聪可能因其名称或稀有性以外的原因而受到重视。这可能是由于数字本身的质量，例如具有整数平方根或立方根。或者它可能是由于与历史事件有关，例如来自区块 477,120 的聪，SegWit 激活的区块，或 2099999997689999°，将被开采的最后一个聪。</p>
+<p>这种 satoshis 被称为“异国情调”。哪些 satoshis 是异国情调的，是什么让它们如此是主观的。鼓励序数理论家根据他们自己设计的标准寻找外来物。</p>
+<h3 id="铭文">铭文</h3>
+<p>Satoshis 可以铭刻任意内容，创建比特币原生的digital artifact。铭刻是通过将要铭刻的聪发送到交易中来完成的，该交易会在链上显示铭文内容。然后，此内容与那个聪有着千丝万缕的联系，将其变成一个不可篡改的digital artifact，可以被追踪、转移、储存、购买、出售、丢失和重新发现。</p>
+<h3 id="考古">考古</h3>
+<p>致力于编目和收集早期 NFT 的活跃考古学家社区如雨后春笋般涌现。这是Chainleft 对历史 NFT 的精彩总结。</p>
+<p>普遍接受的早期 NFT 截止日期是 2018 年 3 月 19 日，即第一个 ERC-721 合约SU SQUARES在以太坊上部署的日期。</p>
+<p>NFT 考古学家是否对序数感兴趣是一个悬而未决的问题！从某种意义上说，序数是在 2022 年初创建的，当时序数规范已定稿。从这个意义上说，它们不具有历史意义。</p>
+<p>但从另一种意义上说，序数实际上是由中本聪在 2009 年开采比特币创世块时创造的。从这个意义上说，序数，尤其是早期的序数，当然具有历史意义。</p>
+<p>许多序数理论家赞成后一种观点。这不仅仅是因为序数是在至少两个不同的场合独立发现的，远早于现代 NFT 时代开始之时。</p>
+<p>2012 年 8 月 21 日，Charlie Lee在 Bitocin Talk 论坛上发布了一项将权益证明添加到比特币的提案。这不是资产方案，但确实使用了序数算法，并且已实现但从未部署过。</p>
+<p>2012 年 10 月 8 日，jl2012在同一论坛上发布了一个方案，该方案使用十进制表示法并具有序数的所有重要属性。该计划进行了讨论，但从未实现。</p>
+<p>这些序数的独立发明在某种程度上表明序数是被发现的，或者是重新发现的，而不是发明的。序数是比特币数学的必然，不是源于它们的现代文档，而是源于它们古老的起源。它们是许多年前随着第一个区块的开采而启动的一系列事件的高潮。</p>
+<h2 id="二digital-artifact">二、Digital Artifact</h2>
+<p>想象一个物理人造物。比方说，一枚稀有的硬币，在维京人的宝库的黑暗中秘密保存了无数年，现在被你从地下挖了出来。它…</p>
+<p>……有主人。你。只要你妥善保管，就没有人能从你手中夺走它。</p>
+<p>…是完整的。它没有遗漏的部分。</p>
+<p>……只能由你来改变。如果你是一名商人，并且你来到了 18 世纪的中国，那么除了你之外，没有人可以在上面盖章。</p>
+<p>……只能由你处置。销售、交易或礼物是你的，你想给谁就给谁。</p>
+<p>什么是数字文物？简而言之，它们是物理人工制品的数字等价物。</p>
+<p>要使数字事物成为digital artifact，它必须像你的那枚硬币：</p>
+<ul>
+<li>
+<p>digital artifact可以有所有者。数字不是digital artifact，因为没有人可以拥有它。</p>
+</li>
+<li>
+<p>digital artifact已完成。指向 IPFS 或 Arweave 上链下内容的 NFT 是不完整的，因此不是digital artifact。</p>
+</li>
+<li>
+<p>digital artifact是无需许可的。不支付版税就不能出售的 NFT 不是未经许可的，因此不是digital artifact。</p>
+</li>
+<li>
+<p>digital artifact是不可审查的。也许你今天可以更改集中式分类账上的数据库条目，但明天可能不行，因此一个不能成为digital artifact。</p>
+</li>
+<li>
+<p>数字工件是不可变的。带有升级密钥的 NFT 不是数字神器。</p>
+</li>
+</ul>
+<p>digital artifact的定义旨在反映 NFT应该 是什么，有时是什么，以及铭文始终是什么，就其本质而言。</p>
+<h2 id="三铭文">三、铭文</h2>
+<p>铭文铭刻任意内容，创造了比特币原生的digital artifact，通常被称为 NFT。铭文不需要侧链或单独的代币。</p>
+<p>然后可以使用比特币交易转移这些铭刻的 sats，发送到比特币地址，并保存在比特币 UTXO 中。这些交易、地址和 UTXO 在所有方面都是正常的比特币交易、地址和 UTXO，除了为了发送单个 sats，交易必须根据序数理论控制输入和输出的顺序和值。</p>
+<p>铭文内容模型是网络的。铭文由内容类型（也称为MIME 类型）和内容本身（字节串）组成。这允许从 Web 服务器返回铭文内容，并用于创建使用和重新混合其他铭文内容的 HTML脚本。</p>
+<p>铭文内容完全在链上，存储在taproot script-path花费脚本中。Taproot脚本对其内容的限制很少，并且额外获得见证折扣，使得铭文内容存储相对经济。</p>
+<p>由于 taproot 脚本花费只能从现有的 taproot 输出中产生，因此使用两阶段提交/显示（commit/reveal）过程进行铭刻。首先，在提交交易中，创建一个提交到包含铭文内容的脚本的taproot输出。其次，在显示交易中，使用提交交易产生的输出，显示链上的铭文内容。</p>
+<p>铭文内容使用未执行条件中的数据推送进行序列化，称为“envelopes”。信封由OP_FALSE OP_IF … OP_ENDIF包装任意数量的数据推送组成。因为envelopes实际上是空操作，所以它们不会改变包含它们的脚本的语义，并且可以与任何其他锁定脚本结合使用。</p>
+<p>包含字符串“Hello, world!”的文本铭文的序列化如下：</p>
+<p>OP_FALSE
+OP_IF
+  OP_PUSH &ldquo;ord&rdquo;
+  OP_1
+  OP_PUSH &ldquo;text/plain;charset=utf-8&rdquo;
+  OP_0
+  OP_PUSH &ldquo;Hello, world!&rdquo;
+OP_ENDIF</p>
+<p>首先将字符串ord压入，以消除铭文与envelopes其他用途的歧义。</p>
+<p>OP_1指示下一次推送包含的内容类型，并OP_0 指示后续数据推送包含内容本身。大型铭文必须使用多次数据推送，因为 taproot 的少数限制之一是单个数据推送不得大于 520 字节。</p>
+<p>铭文内容包含在显示交易的输入中，并且铭文是在其第一个输出的第一个 sat 上进行的。然后可以使用熟悉的序数理论规则跟踪这个 sat，允许它被转移、购买、出售、丢失和恢复。si</p>
+<h2 id="四常见问题">四、常见问题</h2>
+<h3 id="什么是序数理论">什么是序数理论？</h3>
+<p>序数理论是一种协议，用于将序号分配给 satoshis（比特币的最小细分），并在交易花费时跟踪这些 satoshis。</p>
+<p>这些序列号都是很大的数字，比如这个 804766073970493。每个聪，也就是比特币的 ¹⁄₁₀₀₀₀₀₀₀₀，都有一个序号。</p>
+<h3 id="序数理论是否需要侧链单独的代币或对比特币的更改">序数理论是否需要侧链、单独的代币或对比特币的更改？</h3>
+<p>不需要！序数理论现在就能用，没有侧链，唯一需要的代币是比特币本身。</p>
+<h3 id="序数理论有什么用">序数理论有什么用？</h3>
+<p>收藏，交易和计划。序数理论将身份分配给每个 satoshis，允许它们作为古玩和钱币价值被单独跟踪和交易。</p>
+<p>序数理论还支持铭文，这是一种将任意内容附加到某个 satoshis 的协议，将它们变成比特币原生的数字工件。</p>
+<h3 id="序数理论如何运作">序数理论如何运作？</h3>
+<p>按照被开采的顺序分配给 satoshis 序数。第一个区块中的第一个聪的序号为 0，第二个聪的序号为 1，第一个区块的最后一个聪的序号为 4,999,999,999。</p>
+<p>Satoshis 存在于输出中，但交易会破坏输出并创造新的输出，因此序数理论使用一种算法来确定 satoshis 如何从交易的输入跳到输出。</p>
+<p>幸运的是，该算法非常简单。</p>
+<p>聪按照先进先出的顺序进行转账。将交易的输入视为聪列表，将输出视为slot列表，等待接收聪。要将输入聪分配给slot，请按顺序检查输入中的每个聪，并将每个聪分配给输出中的第一个可用slot。</p>
+<p>让我们想象一个具有三个输入和两个输出的交易。输入在箭头的左边，输出在右边，都标有它们的值：</p>
+<p>[2] [1] [3] → [4] [2]</p>
+<p>现在让我们用每个输入包含的 satoshis 的序号标记同一笔交易，并为每个输出slot标记问号。序数很大，所以让我们用字母来表示它们：</p>
+<p>[a b] [c] [d e f] → [? ? ? ?] [? ?]</p>
+<p>要弄清楚哪个聪到哪个输出，请按顺序检查输入聪并将每个聪分配给一个问号：</p>
+<p>[a b] [c] [d e f] → [a b c d] [e f]</p>
+<p>你可能会问费用呢？好问题！让我们想象一下同一笔交易，这次是两个聪的费用。收费交易在输入中发送的 satoshis 多于输出接收的聪，因此为了使我们的交易成为支付费用的交易，我们将删除第二个输出：</p>
+<p>[2] [1] [3] → [4]</p>
+<p>satoshis e和f现在在输出中无处可去：</p>
+<p>[a b] [c] [d e f] → [a b c d]</p>
+<p>所以他们作为费用去了挖掘这个区块的矿工那里。BIP有详细信息，但简而言之，交易支付的费用被视为 coinbase 交易的额外输入，并按照其相应交易在区块中的排序方式进行排序。该区块的 coinbase 交易可能如下所示：</p>
+<p>[SUBSIDY] [e f] → [SUBSIDY e f]</p>
+<h3 id="我在哪里可以找到细节">我在哪里可以找到细节？</h3>
+<p>BIP！</p>
+<h3 id="为什么-sat-铭文被称为digital-artifact而不是nft">为什么 sat 铭文被称为“digital artifact”而不是“NFT”？</h3>
+<p>铭文是一种 NFT，但使用“digital artifact”一词代替，因为它简单、具有启发性和熟悉性。</p>
+<p>“digital artifact”这个词具有很强的暗示性，即使对于以前从未听说过这个词的人也是如此。相比之下，NFT 是一个首字母缩略词，如果你以前没有听说过，则不会提供任何关于它含义的指示。</p>
+<p>此外，“NFT”感觉像是金融术语，“NFT”中使用的“同质化”一词和“代币”一词的含义在金融语境之外并不常见。</p>
+<h3 id="sat-铭文与其他相比如何">sat 铭文与其他&hellip;.相比如何？</h3>
+<p><strong>以太坊NFT？</strong></p>
+<p><em>铭文永远不变。</em></p>
+<p>铭文的创建者或铭文的所有者根本无法在创建铭文后对其进行修改。</p>
+<p>以太坊 NFT可以是不可篡改的，但很多不是，并且可以由 NFT 合约所有者更改或删除。</p>
+<p>为了确保特定的以太坊 NFT 是不可篡改的，必须审计合约代码，这需要详细了解 EVM 和 Solidity 语义。</p>
+<p>非技术用户很难确定给定的以太坊 NFT 是可篡改的还是不可篡改的，而以太坊 NFT 平台不会努力区分 NFT 是可篡改的还是不可篡改的，以及合约源代码是否可用和已被审计。</p>
+<p><em>铭文内容始终在链上。</em></p>
+<p>铭文无法引用链下内容。这使得铭文更持久，因为内容不会丢失，也更稀有，因为铭文创建者必须支付与内容大小成比例的费用。</p>
+<p>一些以太坊 NFT 内容在链上，但大部分内容在链下，并存储在 IPFS 或 Arweave 等平台上，或传统的完全中心化的网络服务器上。IPFS 上的内容不保证继续可用，IPFS 上存储的一些 NFT 内容已经丢失。像 Arweave 这样的平台依赖于薄弱的经济假设，并且当不再满足这些经济假设时，它们可能会发生灾难性的失败。中心化网络服务器随时可能消失。</p>
+<p>非技术用户很难确定给定以太坊 NFT 的内容存储在哪里。</p>
+<p><em>铭文要简单得多。</em></p>
+<p>以太坊 NFT 依赖于以太坊网络和虚拟机，它们非常复杂、不断变化，并且通过向后不兼容的硬分叉引入变化。</p>
+<p>另一方面，铭文依赖于相对简单和保守的比特币区块链，它通过向后兼容的软分叉引入变化。</p>
+<p><em>铭文更安全。</em></p>
+<p>铭文继承了比特币的交易模型，它允许用户在签署交易之前准确地看到交易正在转移哪些铭文。铭文可以使用部分签名的交易进行销售，这不需要允许第三方（例如交易所或市场）代表用户转移它们。</p>
+<p>相比之下，以太坊 NFT 受到终端用户安全漏洞的困扰。盲签交易、授予第三方应用程序对用户 NFT 的无限权限以及与复杂且不可预测的智能合约进行交互是司空见惯的事情。这为以太坊 NFT 用户制造了一个危险的雷区，而序数理论家根本不关心这些。</p>
+<p><em>铭文较少。</em></p>
+<p>铭文需要比特币来铸造、转移和存储。从表面上看，这似乎是一个缺点，但digital artifact存在的理由是稀缺，因此很有价值。</p>
+<p>另一方面，以太坊 NFT 可以通过单笔交易以几乎无限的数量铸造，使它们本质上不那么稀缺，因此可能不那么有价值。</p>
+<p><em>铭文不会假装支持链上版税。</em></p>
+<p>链上版税在理论上是个好主意，但在实践中并非如此。如果没有复杂和侵入性的限制，就不能在链上强制执行版税支付。以太坊 NFT 生态系统目前正在努力解决围绕版税的困惑，并且正在共同面对一个现实，即向艺术家传达的作为 NFT 优势的链上版税是不可能的，而平台则竞相降低并删除版税支持。</p>
+<p>铭文通过不做支持链上版税的虚假承诺，完全避免了这种情况，从而避免了以太坊 NFT 情况的混淆、混乱和消极。</p>
+<p><em>铭文打开新市场。</em></p>
+<p>比特币的市值和流动性都大大高于以太坊。以太坊 NFT 无法获得大部分流动性，因为出于对简单性、安全性和去中心化的担忧，许多比特币持有者不愿与以太坊生态系统互动。</p>
+<p>与以太坊 NFT 相比，此类比特币拥护者可能对铭文更感兴趣，从而解锁了新的收藏家类别。</p>
+<p><em>铭文有更丰富的数据模型。</em></p>
+<p>铭文由内容类型（也称为 MIME 类型）和内容（任意字节字符串）组成。这与网络使用的数据模型相同，允许铭文内容随网络发展，并支持网络浏览器支持的任何类型的内容，而无需更改底层协议。</p>
+<p><strong>RGB 和 Taro 资产？</strong></p>
+<p>RGB 和 Taro 都是建立在比特币之上的二层资产协议。与铭文相比，它们要复杂得多，但也更有特色。</p>
+<p>序数理论是为digital artifact而设计的，而 RGB 和 Taro 的主要用例是同质化代币，因此铭文的用户体验可能比 RGB 和 Taro NFT 的用户体验更简单、更精致.</p>
+<p>RGB 和 Taro 都在链下存储内容，这需要额外的基础设施，而且可能会丢失。相比之下，铭文内容存储在链上，不会丢失。</p>
+<p>Ordinal theory、RGB 和 Taro 都非常早，所以这是推测，但 ordinal theory 的重点可能使其在digital artifact的特征方面具有优势，包括更好的内容模型和全球唯一符号等特征。</p>
+<p><strong>Counterparty资产？</strong></p>
+<p>Counterparty 有自己的代币 XCP，它是某些功能所必需的，这使得大多数比特币持有者将其视为山寨币，而不是比特币的扩展或二层。</p>
+<p>序数理论是从头开始为digital artifact设计的，而 Counterparty 主要是为金融代币发行而设计的。</p>
+<h3 id="谁可以用铭文">谁可以用铭文…</h3>
+<p><strong>艺术家</strong></p>
+<p>*铭文在比特币上。*比特币是目前地位最高、长期生存机会最大的数字货币。如果你想保证你的艺术作品能流传到未来，没有比铭文更好的出版方式了。</p>
+<p>*更便宜的链上存储。*以每 BTC 20,000 美元和每 vbyte 1 satoshi 的最低中继费用计算，发布铭文内容的成本为每 100 万字节 50 美元。</p>
+<p>*铭文还处于早期！*铭文仍在开发中，尚未在主网上发布。这使你有机会成为早期采用者，并随着媒体的发展探索它。</p>
+<p>*铭文很简单。*铭文不需要编写或理解智能合约。</p>
+<p>*铭文解锁新的流动性。*铭文更容易获得，对比特币持有者更具吸引力，从而解锁了全新的收藏家类别。</p>
+<p>铭文是为digital artifact*设计的。*铭文是从头开始设计的，以支持 NFT，并具有更好的数据模型，以及全球唯一符号和增强来源等功能。</p>
+<p>*铭文不支持链上版税。*这是消极的，但只取决于你如何看待它。链上版税一直是创作者的福音，但也在以太坊 NFT 生态系统中造成了巨大的混乱。以太坊生态系统现在正在努力解决这个问题，并且正在进行一场逐底竞赛，以实现可选版税的未来。铭文不支持链上版税，因为它们在技术上不可行。如果你选择创建铭文，你可以通过多种方式解决此限制：保留一部分铭文以备将来销售、从未来升值中获益，或者为尊重可选版税的用户提供额外津贴。</p>
+<p><strong>收藏家</strong></p>
+<p>*铭文简洁明了，毫无意外。*它们始终是不可篡改的并且在链上，不需要特殊的尽职调查。</p>
+<p>铭文在比特币上。你可以使用你控制的比特币全节点轻松验证铭文的位置和属性。</p>
+<p><strong>比特币</strong> <strong>持有者</strong></p>
+<p>我用下面这句话“比特币网络所做的最重要的事情是让货币去中心化”开始本节。所有其他用例都是次要的，包括序数理论。序数理论的开发者理解并承认这一点，并相信序数理论至少在很小的程度上有助于比特币的主要使命。</p>
+<p>与山寨币领域的许多其他事物不同，digital artifact有其优点。当然，有大量的 NFT 是丑陋的、愚蠢的和欺诈的。然而，有许多非常有创意的东西，创造和收藏艺术从一开始就是人类故事的一部分，甚至早于贸易和金钱，这也是古老的技术。</p>
+<p>比特币为以安全、去中心化的方式创建和收集digital artifact提供了一个了不起的平台，它保护用户和艺术家的方式与它提供一个用于发送和接收价值的惊人平台的方式相同，并且原因相同。</p>
+<p>序数和铭文增加了对比特币区块空间的需求，这增加了比特币的安全预算，这对于保障比特币向依赖费用的安全模型的过渡至关重要，因为让区块奖励减半变得不再重要。</p>
+<p>铭文内容存储在链上，因此铭文使用的区块空间需求是无限的。这为所有比特币区块空间创造了最后的买家 。这将有助于支持一个强大的费用市场，从而确保比特币保持安全。</p>
+<p>铭文还反驳了比特币不能扩展或用于新用例的说法。如果你关注 DLC、Fedimint、Lightning、Taro 和 RGB 等项目，你就会知道这种说法是错误的，但铭文提供了一个易于理解的反论点，它针对一个流行且经过验证的用例——NFT，这使得它非常清晰。</p>
+<p>如果铭文如作者所希望的那样成为备受追捧的具有丰富历史的digital artifact，那么它们将成为比特币采用的强大钩子：为乐趣、丰富的艺术而来，为去中心化的数字货币而留下。</p>
+<p>铭文是区块空间需求的一个极其良性的来源。例如，比特币上的稳定币（可能会给大型稳定币发行人影响比特币发展的未来），或者 DeFi（可能通过引入比特币上的 MEV），数字艺术和收藏品，不太可能产生具有足够力量的个别实体破坏比特币。艺术是去中心化的。</p>
+<p>铭文用户和服务提供商被激励运行比特币全节点，发布和跟踪铭文，从而将他们的经济权重投入到诚实的链中。</p>
+<p>序数理论和铭文不会对比特币的同质性产生有意义的影响。比特币用户可以忽略两者而不受影响。</p>
+<p>我们希望序数理论能够加强和丰富比特币，并赋予它另一个维度的吸引力和功能，使其能够更有效地服务于其主要用例，即人类的去中心化价值存储。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50811/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">金色晨讯 | 5月9日隔夜重要动态一览</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50841/">
+                <span class="next-text nav-default">金色午报 | 5月9日午间重要动态一览</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#一概述">一、概述</a>
+      <ul>
+        <li><a href="#稀有度">稀有度</a></li>
+      </ul>
+    </li>
+    <li><a href="#稀有聪供应">稀有聪供应</a>
+      <ul>
+        <li><a href="#名称name">名称（name）</a></li>
+        <li><a href="#异国情调exotics">异国情调（exotics）</a></li>
+        <li><a href="#铭文">铭文</a></li>
+        <li><a href="#考古">考古</a></li>
+      </ul>
+    </li>
+    <li><a href="#二digital-artifact">二、Digital Artifact</a></li>
+    <li><a href="#三铭文">三、铭文</a></li>
+    <li><a href="#四常见问题">四、常见问题</a>
+      <ul>
+        <li><a href="#什么是序数理论">什么是序数理论？</a></li>
+        <li><a href="#序数理论是否需要侧链单独的代币或对比特币的更改">序数理论是否需要侧链、单独的代币或对比特币的更改？</a></li>
+        <li><a href="#序数理论有什么用">序数理论有什么用？</a></li>
+        <li><a href="#序数理论如何运作">序数理论如何运作？</a></li>
+        <li><a href="#我在哪里可以找到细节">我在哪里可以找到细节？</a></li>
+        <li><a href="#为什么-sat-铭文被称为digital-artifact而不是nft">为什么 sat 铭文被称为“digital artifact”而不是“NFT”？</a></li>
+        <li><a href="#sat-铭文与其他相比如何">sat 铭文与其他&hellip;.相比如何？</a></li>
+        <li><a href="#谁可以用铭文">谁可以用铭文…</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

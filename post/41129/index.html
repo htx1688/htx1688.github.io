@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          以太坊的可扩展性：Rollups的定位与作用 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将深入探讨Layer2 Rollup背后的数据，告诉我们为什么Rollup是短期内扩展以太坊网络的最快解决方案。" />
+<meta name="keywords" content="Layer 2, 以太坊2.0" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41129/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="以太坊的可扩展性：Rollups的定位与作用" />
+<meta property="og:description" content="本文将深入探讨Layer2 Rollup背后的数据，告诉我们为什么Rollup是短期内扩展以太坊网络的最快解决方案。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41129/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="以太坊的可扩展性：Rollups的定位与作用">
+<meta itemprop="description" content="本文将深入探讨Layer2 Rollup背后的数据，告诉我们为什么Rollup是短期内扩展以太坊网络的最快解决方案。"><meta itemprop="datePublished" content="2022-08-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3081">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="以太坊的可扩展性：Rollups的定位与作用"/>
+<meta name="twitter:description" content="本文将深入探讨Layer2 Rollup背后的数据，告诉我们为什么Rollup是短期内扩展以太坊网络的最快解决方案。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">以太坊的可扩展性：Rollups的定位与作用</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-05">
+      2022-08-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3081 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Conor Ryder,CFA</p>
+<p>本文将深入探讨Layer2 Rollup背后的数据，告诉我们为什么Rollup是短期内扩展以太坊网络的最快解决方案。<br>
+目前，以太坊性能扩展主要有两种方式：</p>
+<ol>
+<li>
+<p>提高区块链本身的交易性能。比如提升区块容量和分片，这是升级区块链最有效的方式，同时也是最复杂的，对于以太坊来说，分片和其他升级可能要再过一年或更长时间才能看到。</p>
+</li>
+<li>
+<p>迁移到Layer2。也就是将原有L1上的计算工作大部分转移到L2，减少以太坊主链的计算压力，L2 Rollup是帮助以太坊在短期内扩展的最快方式。</p>
+</li>
+</ol>
+<h2 id="区块链的发展">区块链的发展</h2>
+<p>目前，最引人注目的就是 9 月的以太坊合并（Merge），这将使以太坊区块链的能源消耗减少约 99%。然而，Merge 本身并不是帮助以太坊解决其可扩展性问题的核心因素，真正的改变要在 2023 年的分片上线才会出现。分片超出了本次深入探讨的范围，但它本质上需要将网络拆分为分片或单独的部分，以减少拥塞并提高吞吐量。与成为新金融世界计算机的雄心壮志相比，交易吞吐量是以太坊的硬伤。目前，以太坊每秒只能处理约 15 笔交易，而 Visa 为 24,000 笔。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/irhvi2k6nrc4qge" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p>只有当以太坊完成其分片路线图和其他更新时，它才能达到目标愿景的TPS 100,000 。我们可以看到，当我们考虑到有多种协议提供交易容量，并让吞吐量数量接近 Visa 的水平时，optimistic 和ZK rollups提供了可观的吞吐量提升。在没有对区块链进行广泛升级的情况下，Rollups在短期内肯定会为以太坊网络带来更多效用。</p>
+<h2 id="以太坊费用">以太坊费用</h2>
+<p>以太坊网络的交易费用目前处于 2020 年 12 月以来的最低水平。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/w1my8w2fi300u22" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p>交易费用的下降正是以太坊所需要的，但在当前的这种情况下，主要是与需求不足有关。DeFi 项目的 TVL 暴跌，NFT 处于有史以来的第一个熊市，所有这些都使区块空间需求降至低点。<br>
+然而，低费用确实让我们看到，如果费用不那么高，以太坊用户在未来可能会与协议互动。随着今年DEX交易量的逐步减少，人们认为这才描绘了这些平台的真实用户情况，然而，一个有趣的趋势是交易笔数（trade count），它显示了一个交易所的实际使用情况，交易规模（trade size）展示的是鲸鱼与零售活动。<br>
+以 Uniswap 和 Curve 为例，它们是以太坊交易量最大的两个去中心化交易所，用户是否根据较低的费用调整了自己的行为？答案是肯定的。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/4cz5s3a2bgkikra" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p>近两年来最低的交易费用使得去中心化交易所（例如上面的 Uniswap）的交易规模直线下降，而交易数量实际上却在增加。由于交易成本低，Uniswap 用户正在进行更多交易，较低的费用使普通用户更容易使用 DeFi，而这并不太适合鲸鱼，这是采用 DeFi 的细微差别。<br>
+一个面向鲸鱼的去中心化交易所是 Curve，这是一家专门从事稳定币交易的交易所。我们在那里观察到了类似的趋势，平均交易规模下降了 80% 以上，而交易数量却在增加。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/wq0j8ff74lnpymd" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p>相比之下，由于平均交易规模和交易数量都在下降，Coinbase 的交易量徘徊在年度低点附近。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/wzv3tzpdwm9vfzt" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p>在熊市中，随着公众的投资兴趣的普遍减弱，中心化交易所的交易量急剧下降。然而，DeFi 在熊市期间仍然有很多用例（看看 Curve 在 Terra 崩盘中的作用），我们可以看到链上活动的一个因素是以太坊交易费用，而不是其他的一般利益。<br>
+降低费用是以太坊社区的第一要务，以推动网络的底层采用，而最快的方法是通过Rollups。</p>
+<h2 id="rollups-现状">Rollups 现状</h2>
+<p>Rollup 有两种主要类型，Optimistic 和 ZK rollups，它们的成本节约优势显而易见,以下是各种第 2 层和以太坊之间的费用比较。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/tsr8n9ua4deysb2" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p>来源： l2fees.info</p>
+<p>Optimistic 和 ZK rollup 的主要区别在于它们对交易真实性的处理——我们如何确保被发送回以太坊网络的区块不包含虚假交易？</p>
+<h2 id="optimistic-rollup">Optimistic Rollup</h2>
+<p>Optimistic Rollup(OR) 假定交易发送回给以太坊L1的交易都是诚实有效的，因此得名 Optimistic。它通过欺诈证明来测试此假设，其中，旁观者可以声称交易是欺诈性的，这段时间通常跨越 7 天，这被广泛认为是乐观汇总的最大缺点。如果交易所需要等待 7 天的交易等待期，那么它将难以支持立即提款的功能。<br>
+最大的两个 OR 是尚未发布代币的 Arbitrum 和今年 6 月 1 日发布代币的 Optimism。投资者可以接触到其他带有代币的第 2 层协议，例如 Boba，它是另一个使用Optimistic Rollup的L2。<br>
+Dydx 是一个运行在L2的交易平台，它依赖于 zK rollups技术；IMX 是以太坊上 NFT 的L2扩展解决方案，并可用于支付平台上的交易费用。现在，市场似乎开始得出这样的结论，即Optimistic Rollup只是一个更大问题的创可贴，因为自 Optimism (OP) 代币推出以来，它的表现不仅落后于 ETH，而且落后于其他L2协议。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/g6507iihtsed47g" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p>然而，随着合并最终日期的临近，市场对整个以太坊L2更加看好，OP开始跑赢大盘。这种看涨情绪在 OP 的期货市场上也很明显，在上周资金利率呈正增长的情况下，该市场的未平仓头寸依旧大量增加。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/nar04jume9qq2z1" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<h2 id="zk-rollup">ZK Rollup</h2>
+<p>虽然Optimistic Rollup假定所有交易都是有效的，并允许旁观者提交欺诈证明，但“零知识”（zK）Rollup通过与每组交易一起提交有效性证明来自己验证每笔交易，所以，它的计算量和难度更大，这也是为什么直到最近才实现与 EVM 兼容。没有了防欺诈窗口，它在结算和取款方面就会快得多。这种近乎即时的结算对需要及时满足用户提款要求的交易所极具吸引力；这正是 dydx 已经在第 2 层采用 ZK rollup 的原因。<br>
+一直以来，开发人员都在致力于 rollups 的“圣杯”——即一个与 EVM 兼容的 ZK rollup。在过去的几周里，我们可能见证了 ZK rollup 时代的开始，Polygon、Matter Labs 和 Scroll 这三个团队都宣布了与 EVM 兼容的 ZK rollup 的突破。</p>
+<h2 id="l2和dex">L2和DEX</h2>
+<p>具体来看 Uniswap 和 Curve 对 TVL 的细分，我们可以看到它们的价值中只有一小部分位于第 L2上（Optimism 和 Arbitrum）：Uniswap 为 1.9%，Curve 为 1.8%。<br>
+Uniswap 目前有 97% 的 TVL 位于以太坊主链上，而 Curve 则有 92%。可以合理地预期，一旦 兼容 EVM的ZK Rollup推出，将会有大量交易迁移至ZK L2上，从而为更多 DEX 用户提供更便宜的费用。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/pyp5z35kv3uhr4r" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0805/p1s4oly8uvveu6t" alt="以太坊的可扩展性：Rollups的定位与作用"></p>
+<h2 id="结论">结论</h2>
+<p>L2 Rollup是以太坊短期/中期扩展策略的重要组成部分，甚至可从长期来看也是如此，因为Rollup也将位于改进后的以太坊网络之上。<br>
+如果致力于 EVM 兼容 ZK rollup 的团队能够成功推出他们的产品。他们将获得大量市场份额，可能会为去中心化交易所带来更大的流量。<br>
+再一次采访中，Vitalik Buterin曾说过：“我对 Optimism 和 Arbitrum 等团队的建议是，我认为他们应该尽快开始对自己进行 ZK 化”。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41133/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一年来NFT交易市场正在悄然演变的十五条观察和猜想</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41120/">
+                <span class="next-text nav-default">以太坊伦敦升级一周年 EIP-1559带来了哪些故事？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#区块链的发展">区块链的发展</a></li>
+    <li><a href="#以太坊费用">以太坊费用</a></li>
+    <li><a href="#rollups-现状">Rollups 现状</a></li>
+    <li><a href="#optimistic-rollup">Optimistic Rollup</a></li>
+    <li><a href="#zk-rollup">ZK Rollup</a></li>
+    <li><a href="#l2和dex">L2和DEX</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

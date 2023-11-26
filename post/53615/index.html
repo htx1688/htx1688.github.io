@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          探究ZK-Rollups在比特币扩容的三大可能性 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="比特币与ZK-rollups结合有三个主要的可能性：比特币支持图灵完备的ZK-Rollups、ZK-Rollups对比特币特定功能和场景的优化，以及比特币兼容链支持ZK-Rollups。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53615/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="探究ZK-Rollups在比特币扩容的三大可能性" />
+<meta property="og:description" content="比特币与ZK-rollups结合有三个主要的可能性：比特币支持图灵完备的ZK-Rollups、ZK-Rollups对比特币特定功能和场景的优化，以及比特币兼容链支持ZK-Rollups。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53615/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="探究ZK-Rollups在比特币扩容的三大可能性">
+<meta itemprop="description" content="比特币与ZK-rollups结合有三个主要的可能性：比特币支持图灵完备的ZK-Rollups、ZK-Rollups对比特币特定功能和场景的优化，以及比特币兼容链支持ZK-Rollups。"><meta itemprop="datePublished" content="2023-06-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3352">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="探究ZK-Rollups在比特币扩容的三大可能性"/>
+<meta name="twitter:description" content="比特币与ZK-rollups结合有三个主要的可能性：比特币支持图灵完备的ZK-Rollups、ZK-Rollups对比特币特定功能和场景的优化，以及比特币兼容链支持ZK-Rollups。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">探究ZK-Rollups在比特币扩容的三大可能性</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-22">
+      2023-06-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3352 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%AF%94%E7%89%B9%E5%B8%81/"> 比特币 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>ZK-Rollups 已成为目前以太坊上最具前景的扩容技术解决方案之一。其代表项目 zkSync 和 StarkWare 公布的融资额均已突破亿美元。随着比特币扩容逐渐成为加密行业下一个重大叙事，探究 ZK-Rollups 与比特币结合的可能性变得尤为重要。</p>
+<p>在我们开始探索之前，让我们首先对本文中 ZK-Rollups 在比特币扩容方面的技术概念进行清晰的梳理。</p>
+<p><strong>这些概念主要可以分为三个方面：</strong></p>
+<p><strong>1.存储的 ZK-Rollups 数据</strong></p>
+<p>ZK-Rollups 必须在比特币的一层上运行验证代码并存储结果数据。那些只将 ZK-Rollups 最终验证后的状态数据根（默克尔根）存储在比特币一层上的方案并不被视为真正的解决方案。</p>
+<p>例如，类似比特币扩容项目 Rollkit 的 Sovereign Rollup 解决方案，仅将状态数据存在比特币链上。然而，该方案上线后立即遭到以太坊 KOL ryanb.eth 对其实现机制的嘲讽。</p>
+<p>将状态数据存储在比特币一层上是目前 ZK-Rollups 最容易实现的方式，但这种做法缺乏真正的意义。在比特币一层上提交和存储状态数据只是一种自我证明的行为，而不能构成完整的解决方案。</p>
+<p><strong>2.图灵完备的 ZK-Rollups</strong></p>
+<p>实现 EVM 兼容的 ZK-Rollups 需要在比特币一层上支持图灵完备的智能合约，以处理各种类型的 ZK 验证。这种需要智能合约验证的 ZK-Rollups 方案是具有想象力和远大前景的技术目标，但目前的进展仍存在许多不确定性，涉及大量必要的基础研究和开发工作，仍处于探索阶段。</p>
+<p><strong>3.定制化 ZK-Rollups</strong></p>
+<p>针对某些有限、固定的场景，例如支付需求，可以开发定制化的 ZK-rollups 技术方案。这类方案的功能逻辑相对明确简单，多数情况下不需要图灵完备的智能合约支持，可以通过在比特币一层进行硬编码实现。</p>
+<p>这种特定类别的 ZK 技术有可能演变成为底层技术组件，类似于椭圆曲线加密技术成为区块链的基石。</p>
+<p>在确定 ZK-rollups 在比特币扩容的三个方面后，我们便可基于三个方面对比特币与 ZK-rollups 结合的各种可能性和潜在问题进行一个全局的探索和总结。</p>
+<p>在明确了 ZK-Rollups 在比特币扩容方面的技术概念后，我们可以基于这三个方面对比特币与 ZK-rollups 结合的各种可能性和潜在问题进行全面的探索和总结。</p>
+<h2 id="一比特币一层支持图灵完备的zk-rollups">一、比特币一层支持图灵完备的 ZK-Rollups </h2>
+<p>支持图灵完备的 ZK-Rollups 路线将意味着对比特币主网进行一次巨大的升级。在升级后，ZK-rollups 上的各种应用将能够享受比特币网络的去中心化和安全性，并在一定程度上改善比特币网络经济模型的可持续性问题。</p>
+<p>然而，这也意味着比特币一直坚持的货币和价值存储叙事将发生变化，使其更接近以太坊。同时，以比特币现金（BCH）为代表的大区块路线可能会重新崛起，因为比特币的网络去中心化性将受到削弱，核心叙事及其所基于的价值基础将受到质疑。</p>
+<p>该方向的挑战在于需要对比特币主网进行升级。这意味着需要比特币开发者、矿工群体、比特币大户以及相关市场机构的绝大多数达成一致并统一全节点的升级行动。否则，只能采用类似 LayerTwo Labs 提出的 BIP 300/301 的解决方案，即直接对比特币主网进行分叉，并期望通过分叉链的后续表现来获得比特币社区的共识以进行升级。</p>
+<h2 id="二zk-rollups对比特币特定方面的优化">二、ZK-Rollups 对比特币特定方面的优化</h2>
+<p>无论比特币是否升级支持图灵完备的 ZK-rollups，都不影响 ZK技术在比特币特定方面的技术优化。若比特币没有升级支持图灵完备的 ZK-rollups，仅仅在特定场景进行技术优化，这意味着可继续保留比特币货币和价值存储的核心叙事。</p>
+<p>例如在支付方面，ZK-rollups 可以运用数学而非经济学的方式带来比闪电网络更高的效率，但这将带来较大的计算消耗，增加节点运行的成本。当其它现有技术解决方案能取得类似的效果时，市场往往会偏向总体成本更低的技术方案。</p>
+<p>该方向可能性的挑战在于比特币是否有足够多的特定场景需要采用 ZK-rollups，并且 ZK-rollups 能否做到效率和成本的最优，否则存在项目单纯通过技术叙事进行发币炒作的嫌疑。</p>
+<p>无论比特币是否升级以支持图灵完备的 ZK-rollups，都不会影响 ZK 技术在比特币的特定方面进行技术优化。如果比特币没有升级以支持图灵完备的 ZK-rollups，仅仅在特定场景下进行技术优化，这意味着比特币可以继续保留其作为货币和价值存储的核心叙事。</p>
+<p>例如，在支付领域，ZK-rollups 可以通过数学方法而非经济学方式带来比闪电网络更高的效率，但这会增加计算成本，提高节点运行成本。当存在其他现有技术解决方案可以实现类似效果时，市场通常会更偏向总体成本较低的技术方案。</p>
+<p>这个方向的挑战在于确定比特币是否有足够多的特定场景需要采用 ZK-rollups，并且 ZK-rollups 是否能在效率和成本方面达到最优。否则，项目可能仅仅通过技术叙事进行发币炒作，这是需要警惕的。</p>
+<h2 id="三比特币兼容链支持zk-rollups">三、比特币兼容链支持 ZK-Rollups</h2>
+<p>由于支持比特币图灵完备的 ZK-Rollups 升级存在极高的推进难度，并且面临着比特币叙事崩塌的风险。另外，比特币特定 ZK-rollups 的扩容在长期运行层面存在成本问题。因此，将比特币转移到兼容链进行 ZK-Rollups 扩容的可能性非常大。</p>
+<p>目前，比特币兼容链支持 ZK-rollups 的方式主要有侧链和单向转移到新链两种方式。</p>
+<h3 id="zk-rollups侧链方式">ZK-Rollups 侧链方式</h3>
+<p>侧链方案在比特币扩容领域已经代表着一种方向，这些侧链项目普遍采用特定的跨链技术将比特币转移到支持 EVM 的链上进行扩容。通过在这些链上添加 ZK-rollups，可以实现进一步的扩容效果。</p>
+<p>目前在比特币生态扩容方向上已经存在多条侧链，例如 Stacks、RootStock 和 Liquid Network 等。因此，该方向的可能性将取决于未来竞争者是通过在已有的侧链上添加 ZK-Rollups，还是通过全新的、专注于 ZK-Rollups 的侧链来引领。</p>
+<h3 id="zk-rollups单向转移方式">ZK-Rollups 单向转移方式</h3>
+<p>单向转移比特币的扩容方案主要由项目 Hacash 提出。其基本原理是将比特币从主网单向转移到新的链上，并在该新链上支持 ZK-rollups 进行扩容。</p>
+<p>这两种比特币兼容链支持 ZK-rollups 的方式都需要有充足的激励机制来促使比特币能够转移到链上，但最大的区别在于转移后的比特币能否回到主网。因此，要使 ZK-rollups 单向转移成为更大的可能性，就必须解决 ZK-rollups 侧链方式存在的问题，并且最好还能具备一些新的优势。</p>
+<p>侧链扩容方式存在的关键问题在于如何实现比特币跨链过程的足够去中心化管理。目前来看，基于传统跨链桥的方式几乎都存在各种中心化的缺陷。而单向转移方式则通过保持比特币转移前后的私钥不变性来实现，无需引入任何形式的管理中心，因此不需要传统意义上的跨链桥。</p>
+<p>此外，还要考虑单向转移方式对比 ZK-Rollups 侧链方式所不具备的优势。以 Hacash 为例，基于 Hacash 一层的 PoW 去中心化机制和自我调节货币供应稳定体系，能够完善比特币的货币属性不足。</p>
+<h2 id="总结">总结</h2>
+<p>比特币与 ZK-rollups 结合有三个主要的可能性：比特币支持图灵完备的 ZK-Rollups、ZK-Rollups 对比特币特定功能和场景的优化，以及比特币兼容链支持 ZK-Rollups。</p>
+<p>要实现比特币支持图灵完备的 ZK-rollups，需要获得整个社区的广泛支持。然而，这可能引发比特币核心叙事危机。</p>
+<p>ZK-Rollups 对比特币特定功能和场景的优化需要根据具体情况进行评估。如果已经存在其他解决方案，就需要权衡 ZK-rollups 所带来的成本问题。</p>
+<p>比特币兼容链支持 ZK-rollups 可以通过侧链和单向转移两种方式实现。无论哪种方式，都需要有足够的激励机制来吸引比特币的参与。侧链方式需要关注现有和新兴项目之间的竞争，而单向转移方式需要解决管理中心化问题，并具备其他经济模型方面的优势才能增加其成功的可能性。</p>
+<p>以上就是对比特币与 ZK-rollups 结合的三个主要可能性进行的总结。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53591/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">三箭资本创始人推出新风投基金3AC Ventures</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/53603/">
+                <span class="next-text nav-default">一己之力带崩 AI 板块，昆仑万维大跌的背后是什么？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一比特币一层支持图灵完备的zk-rollups">一、比特币一层支持图灵完备的 ZK-Rollups </a></li>
+    <li><a href="#二zk-rollups对比特币特定方面的优化">二、ZK-Rollups 对比特币特定方面的优化</a></li>
+    <li><a href="#三比特币兼容链支持zk-rollups">三、比特币兼容链支持 ZK-Rollups</a>
+      <ul>
+        <li><a href="#zk-rollups侧链方式">ZK-Rollups 侧链方式</a></li>
+        <li><a href="#zk-rollups单向转移方式">ZK-Rollups 单向转移方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

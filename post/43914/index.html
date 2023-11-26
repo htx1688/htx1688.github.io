@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          以太坊分片设计简史：从Block到Blob - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="从 “Block” 到 “Blob”，这其中涵义深刻。" />
+<meta name="keywords" content="分片, ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43914/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="以太坊分片设计简史：从Block到Blob" />
+<meta property="og:description" content="从 “Block” 到 “Blob”，这其中涵义深刻。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43914/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-27T00:00:00+00:00" />
+
+<meta itemprop="name" content="以太坊分片设计简史：从Block到Blob">
+<meta itemprop="description" content="从 “Block” 到 “Blob”，这其中涵义深刻。"><meta itemprop="datePublished" content="2022-10-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2990">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="以太坊分片设计简史：从Block到Blob"/>
+<meta name="twitter:description" content="从 “Block” 到 “Blob”，这其中涵义深刻。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">以太坊分片设计简史：从Block到Blob</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-27">
+      2022-10-27
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2990 字 -
+        预计阅读 6 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>来源： @protolambda推文</p>
+<p>作者：Protolambda</p>
+<p><strong>从 “Block” 到 “Blob”，这其中涵义深刻。</strong></p>
+<p>带有 “crosslink” 的可执行的 “分片链” 被淘汰了：在信标链中实现 EVM；使用 “数据可用性采样” 的以 rollup 为中心的以太坊路线图，扩容以太坊基础层而无需增加应用环境的复杂性。但是，你如何在没有区块元数据的情况下调用分片内容呢？</p>
+<p>好吧，这就是 “blob” 派上用场的地方。“Blobspace” 真是一个不错的叫法！</p>
+<p>让我来分享一些以太坊分片设计的历史吧：</p>
+<p>分片 (或 “阶段 1”) 按之前的计划应该是在 “阶段 2” (即信标链执行环境) 推出。但在 “阶段 0” (信标链启动) 之前，主网 EVM 具有优先权这一情况变得清晰，而 “阶段 2” 执行层 (ewasm?) 的推出遥遥无期。</p>
+<p>“阶段 1” 的规范在信标链之前已经重写了多次：</p>
+<ul>
+<li>
+<p>更少的分片 (1024 -&gt; 64)</p>
+</li>
+<li>
+<p>借助理想的跨分片通信 (crosslinks) 实现自由骑行</p>
+</li>
+<li>
+<p>新的托管证明设计 (去掉托管部分，转而采用罕见的故意证明丢失)</p>
+</li>
+</ul>
+<p>更别说更早期的分片研究工作了，实话说，那些研究都非常抽象以及雄心勃勃：跨域消息传递、带有 ewasm 的执行环境、动态访问的无状态性、分片委员会等等都让 L1 变得更加复杂。而 L1 已经开始僵化了。</p>
+<p>但是，<strong>如果 L1 只专注于解决数据问题，那么上述提到的大多数问题都转化为 L2 的开发问题。</strong> 而采样 (sampling) 正好解决了 L1 数据问题。如果我们可以在网络层支持额外的功能&hellip;会如何呢？</p>
+<p>因此在 2020 年 10 月 14 日，开发者就 ”阶段 1 的网络连接问题(networking)“ 进行了一次电话会议。讨论下来可以得出：gossipsub 热度很高 + DHTs 似乎很慢。但在当时，这些为时还早 —— 每一个网络开发者都还在忙着为信标链的发布做准备 (12 月 1 日！)，而且由于当时的最新情况，网络层存在很明显的偏向。</p>
+<p>当时的偏向：</p>
+<ul>
+<li>
+<p>Gossipsub = 炙手可热，主网准备就绪 (除了一些 DoS 问题之外，没有多大问题了。并且这些问题也在主网启动之前发现/披露了)</p>
+</li>
+<li>
+<p>Discv5 = 不完整，需要在主网启动前从5.0 -&gt; 5.1进行实时网络迁移</p>
+</li>
+</ul>
+<p>(<a href="https://github.com/protolambda/discv5-catdog">https://github.com/protolambda/discv5-catdog</a>)</p>
+<p>但方向似乎很明确：减少 L1 复杂性，信标链已经够复杂了。只通过数据提高可扩展性，长期来看使用“数据可用性采样”方案，并拥抱 L2 扩容解决方案。因此 Vitalik 将其描述为 《以 rollup 为中心的以太坊路线图》 (中文版)。</p>
+<p>然而，当实现者忙于信标链的发布时，研究人员已经忙于发布后的工作了：Vitalik/Dankrad 当时致力于一些早期的数据可用性设计草案，试图让实现者更加容易理解这些原理。</p>
+<p>同时，我们启动了 Zinken、Toledo 和 Pyrmont 测试网 + 检查更多的启动事项 (检查漏洞等)。并且我们尝试跟上研究的进度，并开始针对网络层上的东西添加设计文档。就当时来说，关注这些问题还太早了，但 DAS (数据可用性采样) 实在太好了，没办法忽视。</p>
+<p>基于 gossipsub 的一些东西，我确实写了一些想法，把它用于 DAS。事后看来，我现在倒认为 DHTs 比 Gossipsub 更加适合 DAS，也许除了初始分配。</p>
+<p>当时我期望一些 DAS 的规范能够被实现和模拟。我想这是 “blob” 首次被提到？我们确实在 “分片数据 blob” 这样的上下文中使用过它，而且那时分片的规范中还没出现过这个词。</p>
+<p>信标链发布之后，又有了更多的时间，然后我写了一个草案，在 Vitalik 和 Dankrad 写的采样规范草案中加入了更多 typing 和网络层的内容。将 blob 命名引入分片的规范 :)</p>
+<p>2021 年一些事情发生了改变：为其设计的理想的 p2p 结构太复杂了，所以我转而尝试为它贡献工具 (go-kzg) 和参与早期的合并工作 (rayonism)。然后在夏天再次尝试加入分片的研究工作，而不是参与 Altair/London 升级的开发工作。</p>
+<p>Blob 又出现了，这次它的结构更加 PBS 化 —— 聚合了 blob-构建者和 blob-提议者的 BLS 签名。但还是太复杂了：因此，分片设计的演进方向变得主要 “以信标提议者为中心”，这样设计使得其 “仅” 成为一个网络层的问题。</p>
+<p>这在某种程度上就像是对分片的第五次设计？极简主义要舍弃掉很多东西，但结果确是美丽且强大的：更多的模块化设计、封装以及可选的复杂性。Rollup 引起了我的注意，尤其是 Optimism。</p>
+<p>2022 年底，EIP 4488 (注意不要搞混了，不是 4844！) 和 4490 出现了：人们开始变得不耐烦，calldata 的成本必须快速降低以保持竞争力！伦敦升级之后的 All Core devs 上对这些话题的讨论也变得很热烈。但在我看来这是不可持续的，因为 calldata 带有 L2 不需要的传统开销。</p>
+<p>同时，Vitalik 和 Dankrad 继续研究一些新的分片设计：更加以信标链为中心、只通过数据进行扩容、专注于采样方案。我觉得 “danksharding” 在 21 年底/22 年初真正公开出来？不是很确定第一个版本是哪个了，Dankrad 一直都在研究分片。</p>
+<p>22 年初，Vitalik 提出了两种方法，我们可以在不使用采样的情况下，向完整的 danksharding 发展：简单版本和复杂版本。虽然在我看来，这其实就是 “重 EL (执行层)” 以及 “EL 和 CL 分离，更容易和未来兼容” 之间的区别。</p>
+<p>我喜欢第二个方案，然后在 EthDenver 2022 期间，我们实现了 EIP-4844：我和 @lightclients 致力于 Geth；@asn_d6 帮助研发 KZG；@adietrichs 致力于费用市场的研究；并且都和 Vitalik/Dankrad 一起起草一份 EIP。Prysm 团队构建了首个 CL 原型。</p>
+<p>现在 4844 被命名为 &ldquo;proto-danksharding&rdquo;：实现完整分片的前提条件。但是 “blobspace” 才是真正的模因：经过许多次分片的设计迭代之后，这是比任何其他分片设计都更接近达到以太坊愿景的一个版本。</p>
+<p>对我来说，Serenity 这个阶段就是完成所有 PoS 和分片设计以及迭代更新的工作。我们已经在信标链以及类似于协议外 PBS 这些开发上获得一些进展，让我们在 PoS 方面有了一个不错的开始。我想现在是时候对分片进行首次升级了：4844！</p>
+<p>还有一些对未来 danksharding 的热点：</p>
+<ul>
+<li>
+<p>L1 数据包含延迟对 L2 的影响被高估了。</p>
+</li>
+<li>
+<p>为了获得更多数据可用性的带宽，值得权衡的设计空间。</p>
+</li>
+<li>
+<p>Gossip 和 TCP DHTs 不好，UDP DHT 类的覆盖很好：这都是关于轻节点的计数 (什么时候进行 discv5 扩展？)</p>
+</li>
+</ul>
+<p>更多 danksharding 的热点：</p>
+<ul>
+<li>
+<p>采样很大程度上依赖于良好的对等节点，希望看到更多评分优先但健壮的设计。</p>
+</li>
+<li>
+<p>宁愿选择轻量级的通信和更多的女巫，而不是缺乏 p2p 上的验证者隐私。</p>
+</li>
+<li>
+<p>ZK 可以成为未来 p2p 抗女巫的技术，但现在来说似乎还远着。</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43910/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文探讨代币经济对新兴消费者行为的塑造</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43926/">
+                <span class="next-text nav-default">元宇宙压垮Meta？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

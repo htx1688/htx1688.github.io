@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解zkSync架构及其与OP-Stack的异同之处 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="ZK-Stack（zkSync的底层代码库）和OP-Stack可能具有相似的理念。" />
+<meta name="keywords" content="zkSync, OP Stack" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55174/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解zkSync架构及其与OP-Stack的异同之处" />
+<meta property="og:description" content="ZK-Stack（zkSync的底层代码库）和OP-Stack可能具有相似的理念。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55174/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解zkSync架构及其与OP-Stack的异同之处">
+<meta itemprop="description" content="ZK-Stack（zkSync的底层代码库）和OP-Stack可能具有相似的理念。"><meta itemprop="datePublished" content="2023-07-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8628">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解zkSync架构及其与OP-Stack的异同之处"/>
+<meta name="twitter:description" content="ZK-Stack（zkSync的底层代码库）和OP-Stack可能具有相似的理念。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解zkSync架构及其与OP-Stack的异同之处</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-17">
+      2023-07-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8628 字 -
+        预计阅读 18 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：xpara，Four Pillars；翻译：金色财经xiaozou</p>
+<p><strong>要点：</strong></p>
+<p>Matterlabs是zkSync的开发公司，一直致力于开发其独特的zkEVM、创建伟大的产品。</p>
+<p>目前，zkSync Era正呈现增长之势，这一点从其令人印象深刻的衡量指标和各项目的开发部署情况就可看出。</p>
+<p>我们可以通过zkSync的三个关键层来了解zkSync架构：执行层、结算层和数据可用性层。</p>
+<p>ZK-Stack（zkSync的底层代码库）和OP-Stack可能具有相似的理念。尽管如此，从dapp开发者、核心开发者和业务运营商的角度来看，还是可以看到明显的差异。</p>
+<p><strong>1</strong> <strong>、zkSync的发展</strong> <strong>历程</strong></p>
+<p><strong>1.1 zkSync简史</strong></p>
+<p>zkSync的发展历程始于2019年的EthCC，当时还是一个小团队，致力于与zkSNARK共同开发部署Rollup。他们于2019年1月推出了proof of concept（概念证明），该证明使用zkSNARK在以太坊中运营侧链。从那时起，他们就把去中心化作为核心原则。他们专注于将所有交易数据存储在以太坊中，并研究出一个多算子模型来处理排序器去中心化模型。</p>
+<p>到2020年6月，随着zkSync v1主网的推出，该团队取得了重大进展。zkSync v1在zkSync的发展历程中可谓是一个关键里程碑，代表了其最初概念在更大范围内的实际实施。一年后，也就是2021年的6月，他们取得了进一步突破，发布了zkSync 2.0测试网，也就是Era。</p>
+<p>到2023年3月，zkSync的完整主网成功发布，标志着团队取得了重大成就。这一发展表明了平台已具有较高成熟度，并为更广泛的采用做好了准备。这是首个部署在以太坊Rollup生态系统中的主网zkEVM的发布。</p>
+<p>目前，该团队正在致力于让zkSync开源。这将支持从一个ZK-Stack中单独部署zk rollup链，使团队能够启动他们自己的定制rollup。关于这一激动人心的发展的更多细节预计将很快公布。</p>
+<p><strong>1.2</strong> <strong>融</strong> <strong>资</strong></p>
+<p>zkSync的开发团队Matterlabs已经筹集了大量资金来推进其使命的达成。通过2022年11月进行的最近一轮C轮融资，他们的总融资额达到4.58亿美元，其中包括多轮投资和专门的生态系统基金，例如包括一个单独的2亿美元的生态系统专用基金，2亿美元的C轮融资，由a16z领投的5000万美元的B轮融资，以及800万美元的A轮融资和种子轮融资。</p>
+<p>· 种子轮：在种子轮融资中，Matterlabs从PlaceholderVC、Hashed等投资方那里获得了200万美元资金。这一早期财政刺激为他们开启zkSync项目的工作提供了必要基础。</p>
+<p>· A轮：继种子轮融资之后，Matterlabs在A轮融资中又筹集了600万美元。这笔新的资金流入为推动他们的研发提供了动力，并使zkSync更接近最终目标。</p>
+<p>· B轮：Matterlabs的势头不断增长，在主要由a16z领投的B轮融资中，他们成功筹资5000万美元。</p>
+<p>· C轮：Matterlabs的C论融资额为2亿美元。</p>
+<p>· 最后，除了以上几轮投资之外，Matterlabs还成立了一个专门的2亿美元生态系统基金。该基金专门用于促进更广泛的zkSync生态系统的增长和发展。</p>
+<p>所有这些资源为Matterlabs提供了推进发展zkSync使命、加快开发步伐和促进更广泛生态系统增长所需的资金支持。总而言之，Matterlabs在重要区块链项目中拥有相当大的资金规模。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_33n388fqci.png" alt="b87IKyfCk7OmuDe4Cnn5JS89LtQ0abfs4cY5zuo9.png" title="7065603"></p>
+<p><strong>2</strong> <strong>、当前zkSync生态系统状态</strong></p>
+<p><strong>2.1总体状态</strong></p>
+<p>多年来，zkSync取得了显著的发展进步。zkSync v1，即现在的zkSync Lite，在2020年12月达到了一个发展里程碑，总锁定价值（TVL）超过了100万美元。从那之后，zkSync生态系统的TVL呈指数级增长。截至目前，zkSync的TVL已经超过6.5亿美元，使其成为以太坊生态系统中第三大L2 Rollup。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_smrobaupaj.png" alt="8KshWyrLwm0gBTqahXhjFwjNAaqjbqrqxdixcdFr.png" title="7065604"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_agz1gdetnw.png" alt="MxpS4q8Lbkif30a3Wo2Y8EgxQaPnM08xyC3PAuJo.png" title="7065605"></p>
+<p>到今年6月份，zkSync获得了一些令人印象深刻的关键指标。虽然在6月份zkSync稍微逊色于Arbitrum，但它在TPS上排名第一。它拥有最快的TVL增长率，并且在第一层上总费用支付方面处于领先地位。</p>
+<p>此外，唯一钱包的数量也在增加，这表明用户采用率在增加。与此同时，桥接到zkSync的ETH数量也在增长。</p>
+<p><strong>2.2</strong>  <strong>主要项目</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_1eotj2con8.png" alt="se5aFxpjDjeA9fVAc7BqapEaq4IBna46udjkVBQh.png" title="7065606"></p>
+<p><strong>2.2.1 Argent</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_vcoeq5hg1z.png" alt="iKPssWvuZyJLcOrTJUFrk22ruDSSe4UB8Hf8RTOC.png" title="7065607"></p>
+<p>Argent是面向基于以太坊的加密货币的非托管移动钱包，为管理数字资产提供安全友好的用户体验。</p>
+<p>Argent拥有独特的安全模式设计，即使用户的手机丢失或被盗，也能保护用户的资产。安全模式包括生物识别认证、社交恢复和链上智能合约钱包等功能。以太坊创始人V神也曾说过，Argent是一款具有多重签名安全性和社会恢复功能的钱包。</p>
+<p><strong>2.2.2 SyncSwap</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_4r28n30n9t.png" alt="HIn8WtuoltJqHf9lVoAoYF7QTS1B8CdwR5QdMnlA.png" title="7065608"></p>
+<p>SyncSwap是zkSync Era最大的DeFi协议。它是基于AMM的DEX，在AMM设计中提供了各种重要特性。它为各种代币提供了一个AMM池，重要属性如下。</p>
+<p>· Stableswap：该multi-pool允许SyncSwap聚合多个不同的池模型，每个模型都有自己的最佳场景，使交易高效。第一个落地的池模型将是Stable Pool，与通用的Classic Pool相比，Stable Pool支持高效的稳定币交易，使SyncSwap进入大规模的稳定币市场。</p>
+<p>· Smart Router：它作为一个流动性聚合平台，将不同的流动性池和各种池模型聚合在一起，毫不费力地提供最佳价格。提供多hop和路径分割。</p>
+<p>· 动态收费：SyncSwap在其DEX上引入了动态收费，允许用户根据市场情况和社区偏好定制交易费用。包括可变费用、定向费用、费用折扣和费用委托四方面。这些功能为用户提供了灵活性和适应性，以优化他们的交易策略，并与不断变化的市场和社区保持一致。</p>
+<p><strong>2.2.3 Tevaera</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_scc16qjab2.png" alt="49S6TezpHmwF5ldt1YMUtJjfocuqFQbJoMQKmjPB.png" title="7065619"></p>
+<p>Tevaera的游戏生态系统为游戏世界带来了独特的冒险和技术的融合。Teva Games提供多种类型的游戏，以自然环境为背景，由守护者角色的中心故事情节联系起来。首款多人游戏将随着Tevaera 2.0的发布首次亮相，提供令人兴奋的游戏玩法，包括加密主题的升级和多种游戏模式。</p>
+<p>由Teva Core、Teva Chain、Teva Dex和Teva Market组成的链上游戏基础设施进一步增强了生态系统。</p>
+<p>· Teva Core是一个先进的多人游戏框架。</p>
+<p>· Teva Chain是一个第三层游戏超链，促进了向全链游戏的过渡。</p>
+<p>· Teva DEX通过自动游戏dex贡献了可持续的玩转经济。</p>
+<p>· Teva Market允许铸造和交易独特的NFT角色。</p>
+<p><strong>3</strong> <strong>、zkSync架构</strong></p>
+<p>zkSync Era是一个L2协议，旨在解决以太坊的可扩展性问题，采用零知识(ZK) rollup结构。它由Matter Labs开发，是一个专注于用户需求的zk-rollup平台。该平台旨在与自定义虚拟机中的以太坊虚拟机(EVM)广泛兼容，并针对零知识证明进行了优化。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_1ayso2ij24.png" alt="z5NmH12o1DBvoJeNc3XX9Ma5HR5XMNbMPaf0AOqs.png" title="7065618"></p>
+<p>zkSync rollup的运行可以概括为以下阶段：</p>
+<p>（1）最初，由用户生成交易或优先操作。</p>
+<p>（2）随后，运营者承担起处理用户请求的责任。处理成功后，运营者创建一个rollup操作并将其包含入块。</p>
+<p>（3）在区块完成后，运营者以区块提交的形式将其提交给zkSync智能合约。值得注意的是，智能合约验证了某些rollup运行的部分逻辑。</p>
+<p>（4）最后，区块的证明被提供给zkSync智能合约，这一步就是区块验证。如果验证者合约认为验证成功，它就会将新状态验证为最终状态。这就是zkSync rollup的运行生命周期。</p>
+<p>本部分内容将深入研究zkSync是如何运行的，聚焦三个基础层：</p>
+<p>（1）执行层：执行层是指导致区块链状态变化或转换的过程。简单地说，它是接收交易并将其应用于之前状态的场所。</p>
+<p>（2）结算层：结算层使用一个证明系统确保了在执行阶段所做的更改准确地反映了系统的整体状态。</p>
+<p>（3）数据可用性层：数据可用性层是系统的记录保存部分。它是所有交易数据（输入）、系统更新（输出）和证明的存储场所。目的是为了确保在需要的时候，总是可以从头重新创建系统的当前状态。</p>
+<p><strong>3.1执行层</strong></p>
+<p><strong>3.1.1虚拟机级执行层</strong></p>
+<p>它运行在type4 zkEVM上，这意味着它需要使用高级语言（例如，Solidity、Vyper）编写的智能合约代码，然后将其编译为对zk-SNARK友好的语言。</p>
+<p>此外，zkSync Era的一个独特之处在于，它使用基于LLVM的编译器，将最终允许开发人员使用C++、Rust及其他流行语言编写智能合约。</p>
+<p>LLVM框架是一个用于构建智能合约语言工具链的编译器。它的高级中间表示(IR)允许开发人员在同时利用广泛的LLVM生态系统的同时设计、部署和改进有效的特定语言功能。</p>
+<p>在已确立的工具链中，LLVM处理LLVM IR，引入全面优化，最终将优化后的IR转给zkEVM后端代码生成器。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_n20qrqdyla.png" alt="Ify7zSoasahtVHTEqE7KunV57LWBC46OiiWlLHpk.png" title="7065616"></p>
+<p><strong>3.1.2执行层概览</strong></p>
+<p>在zkSync中，Core App（核心应用程序）在管理执行层方面发挥着关键作用。</p>
+<p>它的首要职责是跟踪L1智能合约的存款或优先操作。这种机制对于确保zkSync与以太坊网络的无缝集成至关重要，因为从以太坊网络发起的所有更改都需要被监控并反映在zkSync第2层（L2）环境中。</p>
+<p>Core App还负责管理收集传入交易的内存池(mempool)。然后，这个交易集合在队列中等待处理，在交易被确认并添加到区块之前有效地充当等待区。</p>
+<p>Core App的职责还包括从内存池中获交易，在虚拟机(VM)中执行交易，并根据需要调整状态。本质上，这个过程包括获取交易、处理交易，并在系统中反映结果。</p>
+<p>执行完交易后，Core App生成链区块。这些区块由已执行和验证的交易包组成。然后Core App将这些区块和证明提交给L1智能合约。这个过程确保了L1以太坊链的状态与L2 zkSync链保持同步。</p>
+<p>为了支持基于以太坊的应用程序间的无缝交互，它提供了一个与以太坊兼容的web3 API。这使得zkSync对于娴熟于以太坊生态系统的开发人员和用户来说更易访问且用户友好。</p>
+<p><strong>3.2结算层</strong></p>
+<p>结算层负责确保zkSync状态转换的完整性。这个验证过程是在部署在以太坊上的智能合约中完成的。在这个过程中有两个重要的合约。</p>
+<p>（1）执行者合约：该合约从验证者和zkSync中状态转换的zk证明中获取区块数据。</p>
+<p>（2）验证者合约：这是一个逻辑合约，允许系统验证执行者合约所提供的区块数据和zk证明。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_jlfostaspt.png" alt="S7CnXAGaonzhzPzGug18KehNFpL3aMYZ7h4ndzxf.png" title="7065615"></p>
+<p><strong>3.2.1执行者合约</strong></p>
+<p>proveBlocks函数在确保zkSync系统的完整性和安全性方面起着核心作用。它的主要工作职责是验证提交块的zk-SNARK证明。下面是对其运作过程的一个简单阐述：</p>
+<p>· 首先，proveBlocks确保以区块正以正确的顺序验证。它通过检查接收到的前一个块是否是区块链序列中需要验证的下一个块来做到这一点的。</p>
+<p>· 接下来，该函数开始遍历每个提交的区块。它检查这些区块的哈希值是否与区块链中特定位置的预期值相匹配。这确保了被验证的区块确实是正确的区块。</p>
+<p>· 然后，该函数开始构建proofPublicInput数组，该数组列表成为zk-SNARK证明验证过程的公共输入值。每个提交块的块号都包含在该数组中。</p>
+<p>· 然后，使用proofPublicInput数组和一些存储的参数，该函数将检查zk-SNARK证明。这就类似于解决一个谜题，所有碎片都应该完美地组合在一起。</p>
+<p>· 如果该证明被验证，该函数就会更新系统，以反映这些区块现在已经被验证。这就像在清单上的项目旁边打一个勾。</p>
+<p>· 最后，对于每个已验证的区块，该函数触发一个称为BlockVerification的特殊事件。这就像发送一个通知，告知区块号、哈希值和承诺已经被验证。</p>
+<p>简而言之，proveBlocks函数就像一个警惕的看门人，确保区块按照正确的顺序进行验证，确保zk-SNARK证明是准确的，并相应地更新系统状态。它的目标是防止无效区块被执行，确保zkSync系统的整体安全性和完整性。</p>
+<p><strong>3.2.2</strong> <strong>验证者合约</strong></p>
+<p>验证者合约就是实现上述验证逻辑的场所。它通过检查zk-SNARK证明来验证提交的数据，从而充当zkSync的守卫。验证者合约用于验证提交给zkSync的数据是否有效。</p>
+<p>验证者合约存储“验证密钥”，用于验证zk-SNARK证明。每当zkSync想要提交更新时，它都会生成一个zk-SNARK证明，并通过执行者合约提交给验证者合约。</p>
+<p>然后，验证者合约使用验证密钥来检查证明是否有效。如果有效，则无需查看实际数据就知道更新是合法的。如果无效，则将拒绝更新。</p>
+<p>通过验证这些证明，验证者合约确保只有正确有效的数据才能被接收到zkSync中。这对于安全性和防止无效状态更新来说是至关重要的。</p>
+<p><strong>3.3数据可用性层</strong></p>
+<p>系统的数据可用性层起到存档的作用，存储所有交易信息(输入)、系统变动(输出)和证明。zkSync使用智能合约接口来设置其数据可用性(DA)策略。zkSync计划为数据可用性提供多种选择，以降低成本及保护隐私。</p>
+<p><strong>3.3.1 zkPorter</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0717/27_dzhs60do6o.png" alt="wrFgH7asOYR9FuZfrF7Rf9SLMgAv11aCCJCeHfKN.png" title="7065614"></p>
+<p>zkSync推出了一个名为“zkPorter”的链下数据可用性解决方案。该工具旨在与zkSync的rollup系统集成，促进rollup和zkPorter账户之间的交互。为了确保zkPorter内的数据安全，特别启用了“guardians”（监护人）——质押zkSync代币并通过签署区块来验证数据可用性的个人。</p>
+<p>zkPorter作为内部共识协议运行，促进了大量的交易吞吐量。相比之下，zkSync 2.0中的标准ZK Rollup模式每秒能够处理大约1,000到5,000笔交易(TPS)。zkPorter则可以管理2万到10万TPS，这取决于交易的复杂程度。</p>
+<p>使用zkPorter的一个权衡考量是，用户必须信任zkSync的内部共识机制。这导致了一个不那么去中心化的rollup解决方案。用户的考量是在zkPorter（成本较低但安全性较低）或ZK-rollup模式（安全性最高）之间做出选择。</p>
+<p>此外，zkSync 2.0促进了互操作性，允许ZK-rollup和zkPorter账户之间的无缝交换。zkPorter和Starkware Volition之间的根本区别在于数据可用性的确定：在zkPorter中，这个决定是在某个账户的基础上做出的，而在Volition中，这个决定是在某账户内的各个交易的基础上做出的。</p>
+<p><strong>4</strong> <strong>、ZK-Stack和OP-Stack</strong></p>
+<p>最近，Matter Labs宣布了即将发布ZK-Stack。ZK-Stack将提供一个类似OP-Stack的软件来定制和操作rollup。</p>
+<p>OP-Stack和ZK-Stack的共同特性如下：</p>
+<p>· 免费开源：两者都是在开源许可下开发的，确保免费访问。它们鼓励开发人员在软件的基础上进行开发建设做出贡献。</p>
+<p>· 可互操作：ZK Stack的Hyperchain超链概念可以毫不费力地在一个无需信任的网络中连接，具有低延迟性和共享流动性。此外，OP-Stack还设想了一个Superchain超级链概念，以连接所有基于OP-Stack的链。</p>
+<p>· 去中心化：为了实现更加去中心化的网络和社区，OP-Stack和ZK-Stack都在近期路线图中明确提出了去中心化的计划。此举不仅增加了网络的弹性，还确保了更公平的权力和控制权的分配。</p>
+<p>尽管从理念角度来看有相似之处，但从技术和业务的角度来看存在着差异。本部分内容将深入探讨以下角度之间的区别。</p>
+<p>（1）Dapp开发者</p>
+<p>（2）核心开发者</p>
+<p>（3）业务</p>
+<p><strong>4.1</strong>  <strong>Dapp开发者角度</strong></p>
+<p><strong>4.1.1 EVM等效性</strong></p>
+<p>OP-Stack的EVM部署：OP-Stack的EVM是通过对以太坊的geth进行微小变动实现的，让系统几乎可以完全兼容EVM。另一方面，ZK-Stack在EVM操作码中合并了一些更改，还有一些操作码尚不支持。尽管进行了这些更改，但影响却很小，而且这些项目已经在现实世界中经过了严格的测试和验证。</p>
+<p>然而，由于ZK-Stack的非EVM等效性，已经出现了一些事件。一个值得注意的例子就是有921枚ETH被困在智能合约中，因为合约使用了transfer函数。这个问题已经得到有效解决。</p>
+<p><strong>4.1.2原生帐户抽象</strong></p>
+<p>与ERC-4337不同，ZK-Stack的架构包括一个原生帐户抽象(AA)功能。在像ERC-4337这样的系统中，有必要建立一个单独的UserOps内存池来允许在网络中进行帐户抽象。</p>
+<p><strong>4.1.3隐私支持</strong></p>
+<p>通过使用validum，在运营商对区块数据保密的前提下，将数据存储在其他机密数据库中可以确保隐私。该特性对企业用户尤其有利。</p>
+<p><strong>4.2核心开发者角度</strong></p>
+<p><strong>4.2.1基础设施运行：OP-Stack更直观</strong></p>
+<p>运行：zkSync和OP-Stack都通过一个Sequencer排序器来协调交易并将数据存入以太坊。然而，zkSync的运行需要一个prover证明者。此证明者应用程序处理由服务器生成的区块和相关元数据，以构建有效性零知识证明。相比之下，OP-Stack不需要单独的复杂基础设施来参与证明挑战游戏。</p>
+<p><strong>4.2.2 VM替代方案：ZK-Stack有更多的潜力提供各种选择</strong></p>
+<p>zkSync与LLVM编译器共同运行（该编译器可转换为zkEVM字节码），表明了可以使用其他语言（如C++）建立执行环境的潜力。</p>
+<p><strong>4.2.3数据可用性：ZK-Stack提供多种选择</strong></p>
+<p>OP-Stack的数据可用性层主要依赖以太坊，在以太坊中存储所有交易信息和输出状态根。这便导致操作OP-Stack链的成本很高。然而，已经有人尝试通过在Celestia DA中存储交易数据来抵消这一成本。</p>
+<p>ZK-Stack正在大力研究和开发像zkPorter这样的数据可用性解决方案的替代方案。这种方法使用户能够根据他们对更高安全性或更低成本的偏好来确定自己的数据可用性。此外，希望维护数据隐私的企业可以采用像Validium这样的解决方案，支持不被泄露的数据存储。</p>
+<p><strong>4.3业务角度：成本与收益</strong></p>
+<p>今天，启动独立的rollup已经成为一种可行的选择，特别是像ZK-Stack和OP-Stack这样的开源软件就在被公开开发和维护。此外，如Caldera和Conduit 这样的Rollup-as-a-Service (RaaS)平台大大简化了流程。</p>
+<p>抛开开发者的角度来看，现实地评估rollup运营相关的潜在成本和收益是至关重要的。然而，由于若干变量，预测这些金额可能会非常复杂。</p>
+<p>由于正在定期进行代码库的主要改进，从最近的Optimism的Bedrock升级中可以看出，与运行rollup相关的成本正在迅速降低。这种动态性使得准确预估成本和收益具有很大的挑战性。此外，由于通常是由单个实体管理全部rollup，因此与服务器和基础设施相关的具体成本并没有广为人知。最后，基础代币价格的波动（如zkSync和Optimism的ETH）增加了另一层不确定性，因为成本可能会根据市场情绪而波动。</p>
+<p>一些主要的成本和收益如下：</p>
+<p><strong>4.3.1成本</strong></p>
+<p>· L1发布成本：存储交易、状态根、证明数据的成本。通常，optimistic rollup的发布成本更高，因为它需要存储用于验证的原始交易数据。有些rollup发布状态差异，而非完整的状态数据，以避免产生进一步的成本。</p>
+<p>· L2排序器运行成本。</p>
+<p>· 证明成本：对于zk来说是证明生成和验证成本；对于欺诈证明来说就是证明挑战成本。</p>
+<p><strong>4.3.2收益</strong></p>
+<p>· L2交易费用</p>
+<p>· 可能是MEV，但为了避免中心化问题，目前已知的大多数L2排序器并不提取MEV。</p>
+<p><strong>5</strong> <strong>、结论</strong></p>
+<p>Matterlabs一直致力于zkEVM的开发，并取得了重大相关进展。尽管并不完全兼容EVM (Type4 EVM)，但利用LLVM似乎具有很大的潜力。Matterlabs的下一阶段计划是发布ZK-Stack，该代码库将使开发人员能够利用其可靠的代码库来创建自己的rollup。该工具承诺比OP-Stack具有明显的优势，特别是在隐私保护和可扩展性方面。</p>
+<p>然而，这两个项目仍处于早期阶段，还需要做大量的工作。对部署相关的成本和收益结构进行彻底的评估是至关重要的。此外，还有一个重要的挑战在于围绕这两个代码库培育开发者生态系统。详细的分析和战略规划对于确保平台及其相关技术的可持续发展至关重要。</p>
+<p>我希望两个项目都能蓬勃发展，希望开源建设和共享路线图成为web3领域的常态。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55177/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">晚间必读 | 浅谈全球稳定币监管</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55116/">
+                <span class="next-text nav-default">星球日报 |XRP三年诉讼终胜诉； Multichain团队被迫停止运营（7月17日）</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

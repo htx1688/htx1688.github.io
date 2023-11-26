@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          金色观察 | 一文解读 EigenLayer及相关术语 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="EigenLayer是以太坊的再质押集，由一组智能合约构成。" />
+<meta name="keywords" content="EigenLayer, ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49045/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="金色观察 | 一文解读 EigenLayer及相关术语" />
+<meta property="og:description" content="EigenLayer是以太坊的再质押集，由一组智能合约构成。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49045/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="金色观察 | 一文解读 EigenLayer及相关术语">
+<meta itemprop="description" content="EigenLayer是以太坊的再质押集，由一组智能合约构成。"><meta itemprop="datePublished" content="2023-03-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9041">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="金色观察 | 一文解读 EigenLayer及相关术语"/>
+<meta name="twitter:description" content="EigenLayer是以太坊的再质押集，由一组智能合约构成。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">金色观察 | 一文解读 EigenLayer及相关术语</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-29">
+      2023-03-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9041 字 -
+        预计阅读 19 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>文/0xAsharib，区块链开发人员；译/金色财经xiaozou</p>
+<p>术语解释：</p>
+<p>1、<strong>EigenLayer：是以太坊的再质押集，由一组智能合约构成。</strong> EigenLayer允许以太坊质押者通过对他们所质押的以太币（ETH）施加额外的罚没条件来验证构建在以太坊生态的新的软件模块。这提高了去中心化应用程序（DApp）的安全性，并提供了新的费用共享机会。EigenLayer层构建在以太坊区块链上，支持敏捷创新，但不会损害以太坊基础层的民主治理。</p>
+<p>2、Consensus layer Ether（ETH）（共识层Ether）：Ether（以太币）是以太坊区块链的原生加密货币。共识层负责在区块链中就网络状态达成一致共识。</p>
+<p>3、Smart contracts（智能合约）：是指将协议条款直接写入代码的自动执行合约。智能合约在以太坊区块链上运行，并自动执行合约中指定的条件。</p>
+<p>4、Slashing conditions（罚没条件）：是指如果质押者实施恶意行为或不遵守协议，通过没收他们部分质押ETH对其实施惩罚的规则。</p>
+<p>5、Cryptoeconomic security（加密经济安全）：一种使用经济激励措施和密码学来保障网络正常运行和安全性的安全模型。</p>
+<p>6、Decentralized applications（DApps）（去中心化应用程序）：是指运行在区块链（如以太坊）而非中心化服务器上的应用程序。它们通常是开源的，使用智能合约进行用户交互。</p>
+<p>7、Ethereum Virtual Machine（EVM）（太坊虚拟机）：是指以太坊智能合约的运行环境，允许开发人员在以太坊网络上创建并执行智能合约。</p>
+<p>8、Rolllups：是以太坊第二层扩展解决方案，可将多个交易捆绑到单个证明中提交到以太坊区块链。Rollups提高了吞吐量并降低了交易成本。</p>
+<p>9、Optimistic rollups：一种使用加密经济保证（欺诈证明）来验证交易的rollup，支持在以太坊网络上进行更快速、更低成本的交易。</p>
+<p>10、ZK-rollup（零知识rollup）：一种使用加密保证（简洁的有效性证明）来验证交易的rollup，为以太坊交易提供更高的隐私和可扩展性。</p>
+<p>11、Actively validated services （AVS）（主动验证服务）：是指凭借自身的去中心化验证语义进行验证的服务，例如侧链、数据可用性层、新虚拟机、keeper（守护者）网络、预言机网络、桥、阈值加密方案和可信执行环境。</p>
+<p>12、Bootstrapping problem（启动问题）：是指为新的AVS创建一个新的信任网络的挑战，这一过程可能非常困难且耗费大量资源。</p>
+<p>13、Value leakage（价值泄漏）：指费用从以太坊转移到AVS信任池，减少了以太坊的价值积累。</p>
+<p>14、Capital cost（资金成本）：是指与投资一个新系统（如AVS）相关的机会成本和价格风险。为了吸引质押者，AVS必须提供足够高的回报来弥补这一成本。</p>
+<p>15、Annual percentage return（APR）（年回报率）：是指质押者为支持像AVS这样的系统所获得的年回报率。</p>
+<p>16、Pooled security via restaking（通过再质押实现共享安全）：共享安全是指多方结合各自资源为系统提供更高的整体安全性。在EigenLayer中，以太坊验证者可以通过选择构建在EigenLayer上的新模块来再质押他们的以太币。这意味着他们将所质押的以太币也用于这些新模块的保障，从而提高了系统的整体安全性。</p>
+<p>17、Beacon chain withdrawal credentials（信标链提款凭证）：是指验证者在以太坊中提取其所持以太币所需的详细信息。验证者可以将他们的提款凭证设置为EigenLayer智能合约，允许他们在EigenLayer模块中再质押他们的ETH。</p>
+<p>18、Proof-of-custody（托管证明）：是显示验证者真正持有并维护他们所负责的数据的证明。在既有事例中，数据可用性层中的再质押者可能会受到基于托管证明的罚没条件的约束。</p>
+<p>19、Free-market governance（自由市场治理）：EigenLayer提供了一个开放的市场机制，允许验证者根据自己的风险和回报分析选择模块。验证者可以决定支持哪些模块，类似于支持早期初创公司的风险投资基金。</p>
+<p>20、Opt-in dynamics（选择动态）：是指验证者在决定选入或退出构建在EigenLayer上的特定模块时所做的选择。选择动态使验证者可以自由评估自己的风险/回报情况，并参与共享安全的增长。</p>
+<p>21、Heterogeneous resources（异构资源）：在EigenLayer环境下，异构资源指的是验证者的不同资源、性能和偏好情况。通过允许验证者选择特定模块，EigenLayer可以利用验证者之间的不同资源，从而在安全性和性能之间实现更好的权衡。</p>
+<p>22、Liquid Staking（流动性质押）：是指使用户能够将他们的以太币（ETH）存入质押池并收取流动性质押衍生代币的服务。在这里，代币代表了用户对其ETH及质押收益的所有权。流动性质押衍生品可以在DeFi生态中交易，并可在等待期后赎回其ETH标的价值。</p>
+<p>23、Superfluid Staking（超流态质押）：一种更改核心共识协议以允许质押流动性供应（LP）代币的质押方法。LP代币代表DeFi交易所（如Uniswap或Curve）总流动性的一部分。</p>
+<p>24、Yield Staking（收益质押）：指允许质押者通过保障EigenLayer上的新AVS的安全性获得额外收益的过程。收益质押可以发生在区块链的不同层：核心协议、AVS和DeFi。</p>
+<p>25、Native Restaking（本地再质押）：是指验证者通过将他们的取款凭证指向EigenLayer合约以在本地再质押他们的ETH质押的方法。相当于从L1（核心协议）到EigenLayer收益质押。</p>
+<p>26、LSD Restaking （LSD再质押）：是指验证者通过将其流动性质押衍生品（LSD）转移到EigenLayer智能合约中以再质押其LSD的方法。相当于从DeFi到EigenLayer收益质押。</p>
+<p>27、ETH LP Restaking（ETH LP再质押）：是指验证者对包含ETH的交易对的LP代币进行再质押的方法。相当于从DeFi到EigenLayer（EL）收益再质押。</p>
+<p>28、LSD LP Restaking（LSD LP再质押）：是指验证者对包含流动性质押ETH代币的LP代币交易对进行再质押的一种方法，例如Curve的stETH-ETH LP代币。相当于从L1（核心协议）到DeFi再到EigenLayer收益质押。</p>
+<p>29、Delegation in EigenLayer（EigenLayer中的委托）：该特性允许持有ETH或LSD的再质押者将其资产委托给运行EigenLayer运营节点的其他实体。运营者可以存入委托的质押，以启动新的以太坊验证者节点，将委托的质押置于罚没制约下，并从以太坊信标链和EigenLayer模块中收取费用。</p>
+<p>30、Solo Staking（独立质押）：在这种模式下，进行本地再质押的独立质押者既可以直接参与EigenLayer上的AVS，也可以将EigenLayer操作委托给另一个实体，同时继续自身的以太坊验证工作。</p>
+<p>31、Trust Model（信任模型）：EigenLayer委托模型要求再质押者信任他们所选的运营者。如果运营者不履行义务，存入的质押可能会被罚没，这将影响到委托质押的再质押者。</p>
+<p>32、Fee Model（费用模型）：EigenLayer再质押者应该考虑运营者分享给委托者的费用比例。由于会有多个运营者可供选择，在EigenLayer中会出现一个再质押者和运营者之间的自由委托市场。每个运营者都将使用以太坊上的委托合约，合约指定费用分配和相应的路由费用。</p>
+<p>33、Majority-trust security guarantees（多数信任安全保证）：安全保证依赖于一定比例的验证者会诚信作为并符合网络的最佳利益的假设。</p>
+<p>34、Withdrawal credentials（取款款凭证）：是指将验证者的以太坊PoS质押链接到EigenLayer智能合约的信息，允许通过EigenLayer提取质押的ETH。</p>
+<p>35、On-chain slashing contract（链上罚没合约）：是指AVS（特定应用验证者集）中的智能合约，它执行罚没机制，惩罚行为不当的验证者。</p>
+<p>36、Principal-agent problems（委托&ndash;代理问题）：指当可替代头寸的持有者（委托人）和运行节点的运营者（代理）之间利益不一致时出现的问题，此类问题可能导致冲突或低效。</p>
+<p>37、Token toxicity（代币毒性）：指由于网络失去效用或信任等因素导致加密货币损失价值。</p>
+<p>38、Fraud-proof（防欺诈）：是应用于区块链网络中的一种技术，用于验证状态转换或交易的正确性，从而能够检测和预防欺诈。</p>
+<p>39、Locked value（锁定价值）：AVS或智能合约中持有的加密货币的总量。</p>
+<p>40、Cryptoeconomic risk（加密经济风险）：是指由于经济激励措施和加密协议之间的相互作用，区块链网络中可能出现的财务损失或安全漏洞。</p>
+<p>41、Ossify：在AVS环境中，Ossify意指代码库和基础设施随着时间的推移经受实战考验后变得稳定可靠。</p>
+<p>42、Governance layer（治理层）：是EigenLayer协议中的一个结构，赋予以太坊和EigenLayer社区的重要成员决策能力，例如否决罚没决定的能力。</p>
+<p>43、Multisig veto committee（多签否决委员会）：一组来自以太坊和EigenLayer社区的信誉良好的个人，有权否决罚没决定、支持对EigenLayer合约的升级，并将新的AVS纳入罚没审查过程。</p>
+<p>44、Reputation-based committee（声誉委员会）：由在以太坊和EigenLayer社区中拥有良好声誉的个人组成的委员会，负责升级、罚没事件审查和AVS入驻等治理任务。</p>
+<p>45、Restakers（再质押者）：指通过EigenLayer再质押其ETH的以太坊验证者，以从AVS获取额外收益。</p>
+<p>46、Hyperscale AVS（超大规模AVS）：是指为水平扩展设计的特定应用验证者集，其中总计算工作负载分布于所有参与节点中。这种设计允许高吞吐量并减少了对中心化验证的激励。</p>
+<p>47、Horizontal scaling（scale-out）（水平扩展）：是指一种去中心化计算方法，通过添加更多节点来增加系统容量，使其能够处理更多的工作负载并提高整体性能。</p>
+<p>48、Data availability protocol（数据可用性协议）：是一种在去中心化网络中保证数据可用和可访问的协议，如区块链。在超大规模AVS环境中，数据被划分为多个部分分布于各节点中。</p>
+<p>49、Lightweight AVS（轻量级AVS）：是一种特定应用的验证者集，它执行低计算资源和最小成本的任务，允许更小型的验证者参与EigenLayer，而不会产生过多的中心化压力。</p>
+<p>50、Attesting（证明）：在区块链环境中，Attesting是见证并确认某些事件或消息的行为，例如验证区块或交易。</p>
+<p>51、Zero-knowledge proofs（零知识证明）：是一种允许一方向另一方证明他们拥有某些信息而不泄露信息自身内容的加密方法。</p>
+<p>52、Light nodes（轻节点）：是区块链节点的轻量级版本，不存储整个区块链，而是依赖其他节点来访问和验证特定的数据。Light nodes消耗的资源更少，更容易设置和维护。</p>
+<p>53、Oracle price feeds（预言机价格feeds）：是指从外部来源向区块链提供实时价格信息的数据源，通常应用于去中心化金融应用程序以获取精准的市场数据。</p>
+<p>54、Blockspace（区块空间）：是指区块链网络的单个区块中可以包含的有限数据量。在以太坊中，区块空间上限由最弱的验证者的基础设施决定，以维持去中心化特性。</p>
+<p>55、Hyperscale Data Availability Layer （Hyperscale AVS）（超大规模数据可用性层/超大规模AVS）：是指可以处理大量数据、以较低成本提供高数据可用性的数据可用性层。它使用了EigenLayer再质押和来自以太坊社区的前沿思想，如Danksharding。</p>
+<p>56、Decentralized Sequencers （Lightweight/hyperscale AVS）（去中心化排序器 / 轻量级/超大规模AVS）：这些排序器被rollup用于管理自己的矿工可提取价值（MEV）和抗审查性。去中心化排序器可以在EigenLayer上使用法定数量的ETH质押者来构建，并为多个rollup提供排序服务。</p>
+<p>57、Light-Node Bridges（Lightweight AVS）（轻节点桥/轻量级AVS）：轻节点桥是区块链之间的桥，就像NEAR和以太坊之间的Rainbow桥。它们可以构建在EigenLayer上，以减少延迟并改进链下验证。</p>
+<p>58、Fast-Mode Bridges for Rollups（Lightweight AVS）（rollup快速模式桥/轻量级AVS）：EigenLayer可以通过使用一个大型抵押池来验证处于罚没风险下的staterroot，从而为ZK rollup和optimistic rollup提供更快的验证。</p>
+<p>59、Oracle（Lightweight AVS）（预言机/轻量级AVS）：价格feeds和其他类型的数据feeds可以使用EigenLayer构建，为这些服务提供了一个选择层。</p>
+<p>60、Opt-in Event-Driven Activation（Lightweight AVS）（选入事件激活/轻量级AVS）：EigenLayer支持事件驱动型操作，如清算和抵押品转移，这在以太坊上并非原生可用的。</p>
+<p>61、Opt-In MEV Management（选入MEV管理）：在EigenLayer下，有各种可行的选择MEV管理的方法，包括提议-构建者分离、MEV平滑化和用于交易包含的阈值加密。</p>
+<p>62、Settlement Chains with Ultra-Low Latency（超低延迟结算链）：EigenLayer支持创建具有低延迟和高吞吐量的高速结算链。</p>
+<p>63、Single-Slot Finality（Lightweight AVS）（单槽最终确定性/轻量级AVS）：EigenLayer支持单槽最终确定性的可能性，其中节点证明区块的最终确定性，有可能创建了一个新的最终确定性路径。</p>
+<p>64、Staker heterogeneity（质押者异质性）：EigenLayer利用计算资源、风险偏好、奖励偏好和质押者身份的差异来创建选入验证任务，并为质押者提供独特的机会。</p>
+<p>65、Blockspace expansion（区块空间扩展）：EigenLayer允许使用来自高容量节点的多余计算资源，增加区块空间，并为去中心化应用程序（DApps）提供更大的灵活性和安全性。</p>
+<p>66、Democratic governance（民主治理）：是一个涉及大量质押者的投入和意见的决策过程。它的包容性更强，但速度更慢。</p>
+<p>67、Agility in innovation（创新敏捷性）：是指快速适应新想法、创新和变化的能力。即更快的决策和执行。</p>
+<p>68、Ethereum protocol（以太坊协议）：以太坊区块链的底层规则和流程集。</p>
+<p>69、Off-chain governance（链下治理）：是指发生在区块链之外的决策过程，通常涉及社区讨论和共识。</p>
+<p>70、Binance Smart Chain（BSC）（币安智能链）：是一个与以太坊竞争的区块链，具有更中心化的决策过程，会促进更快的创新，但民主性较低。</p>
+<p>71、Permissionless innovation（无许可创新）：是指任何人都可以创建并实施新的想法和解决方案的能力，无需中央机构的批准。</p>
+<p>72、Staging network（阶段性网络）：是指在将新想法和创新整合到主区块链之前，作为试验场的独立网络。</p>
+<p>73、Danksharding-based data availability layer（基于分片的数据可用性层）：是指在staging网络上测试的技术创新，旨在优化以太坊的设计。</p>
+<p>74、Ethereum Staker Decentralization（以太坊质押者去中心化）：是指将以太坊验证者节点分布于众多参与者中降低中心化风险的目标。</p>
+<p>75、Threshold encryption system（阈值加密系统）：是一种加密技术，通过要求多方协作解密数据进行数据保护。</p>
+<p>76、AVS（Application-specific Validation System）（特定应用验证系统）：是指为需要在区块链上进行验证的特定应用程序定制的系统。</p>
+<p>77、Quorum（法定人数）：是指区块链网络中的一组参与者，他们共同做出决策、验证交易或达成共识。</p>
+<p>78、Restaked ETH（再质押ETH）：是指再次被质押的以太坊代币，通常是为了参与特定的验证系统。</p>
+<p>79、Business models on EigenLayer（EigenLayer上的商业模式）：是指AVS在EigenLayer上生成收益或创造价值的不同方式。</p>
+<p>80、SaaS（Software as a Service）economics（软件即服务经济学）：是指用户支付订阅费来访问软件或服务的商业模式，通常托管在云中。</p>
+<p>81、Dual staking utility（双质押模型）：该模型允许参与者押注两种不同类型的代币，通过EigenLayer为AVS提供安全性。</p>
+<p>82、Death spiral（死亡螺旋）：是指代币价值迅速贬值的情况，可能导致底层协议或系统的崩溃。EigenLayer的双质押模型允许协议通过再质押ETH来对冲这种风险。</p>
+<p>83、Lightweight and hyperscale modules（轻量级和超大规模模块）：是指构建在EigenLayer上的模块，可以有不同的规模和复杂性，以满足不同需求和用例。轻量级模块需要的资源更少，而超大规模模块则可以处理大规模操作。</p>
+<p>84、Heterogeneity between stakers（质押者异质性）：是指以太坊质押者之间在可用计算资源、风险承受能力以及个人或组织身份方面的差异。EigenLayer上的模块可以利用这些差异来创建一个多样化且稳健可靠的生态。</p>
+<p>85、Agile, decentralized, and permissionless innovation（敏捷、去中心化和无许可的创新）：EigenLayer的目标是在区块链平台上促进快速、去中心化和开放的创新，支持新的想法和技术的出现，而不需要中心化的控制或许可。</p>
+<p>86、Free market for decentralized trust（去中心化信任自由市场）：EigenLayer建立了一个竞争环境，让各个模块可以从以太坊质押者那里获得信任和验证服务，支持更高效、更安全的区块链操作。</p>
+<p>87、Base layer blockchain（基础层区块链）：是基础区块链网络，为构建在其上的其他层（如以太坊）提供安全性。</p>
+<p>88、Middleware（中间件）：是指桥接应用程序和底层区块链的软件，中间件促进了通信和数据交换。</p>
+<p>89、Cost of corruption（CoC）（腐化成本）：是指攻击者在区块链系统中破坏模块或去中心化应用程序（DApp）的安全性所需的财务成本。</p>
+<p>90、Tasks（任务）：是指受EigenLayer保护的操作或活动，需要来自质押者的验证和安全服务。</p>
+<p>91、Stakers（质押者）：是指将所持有的加密货币作为抵押品以验证和保障区块链操作以换取奖励的参与者。</p>
+<p>92、Restaking（再质押）：重新分配加密货币，以保障区块链生态中的不同模块或任务。</p>
+<p>93、Validators（验证者）：是指在区块链网络中验证并确认交易或操作的参与者。</p>
+<p>94、Overcollateralization and undercollateralization（超额抵押和抵押不足）：当质押者提交的加密货币超过了确保任务安全所需的数量时，就是超额抵押，而抵押不足意味着质押者没有提交足够的加密货币。</p>
+<p>95、Quasi-concave objective（拟凹函数目标）：是一种用于优化问题的数学函数，其目标是最大化或最小化一个值，该值具有特定的数学特性，使其更容易求解。</p>
+<p>96、Linear constraints（线性约束）：是指用线性方程或不等式表示的优化问题中的限制或要求。</p>
+<p>97、Data Availability（数据可用性）：再质押可以启用超大规模的数据可用性（DA）层，该层具有较高的DA率和较低的成本。EigenLabs正在构建EigenLayer上的首个DA层，称为EigenDA。</p>
+<p>98、Decentralized Sequencers（去中心化排序器）：ETH再质押者可以形成去中心化排序器法定人数，为众多rollup服务，实现MEV管理和抗审查性。</p>
+<p>99、MEV Management（MEV管理）：在EigenLayer下有多种MEV管理方法，包括PBS、MEV平滑化和用于交易包含的阈值加密。</p>
+<p>100、Oracles（预言机）：如果预言机需要获取关于再质押ETH的多数信任，并且为选入层，那么可以通过EigenLayer来构建将价格写入以太坊的预言机。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49007/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">金色晨讯 | 3月29日隔夜重要动态一览</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49046/">
+                <span class="next-text nav-default">金色观察 | 以太坊基金会官方详解Shapella主网升级</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          DAO：设计高效率DAO的方法 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="去中心化是可以兼容高效执行的，但是效率不是免费的。它必须通过精心的组织设计才能够实现。在本文中，我们将解析这些说法及其含义。" />
+<meta name="keywords" content="DAO" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42299/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="DAO：设计高效率DAO的方法" />
+<meta property="og:description" content="去中心化是可以兼容高效执行的，但是效率不是免费的。它必须通过精心的组织设计才能够实现。在本文中，我们将解析这些说法及其含义。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42299/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="DAO：设计高效率DAO的方法">
+<meta itemprop="description" content="去中心化是可以兼容高效执行的，但是效率不是免费的。它必须通过精心的组织设计才能够实现。在本文中，我们将解析这些说法及其含义。"><meta itemprop="datePublished" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4759">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DAO：设计高效率DAO的方法"/>
+<meta name="twitter:description" content="去中心化是可以兼容高效执行的，但是效率不是免费的。它必须通过精心的组织设计才能够实现。在本文中，我们将解析这些说法及其含义。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">DAO：设计高效率DAO的方法</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-05">
+      2022-09-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4759 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：0xJustice.eth</p>
+<p>DAO的操作者们已经感受到了协调、沟通和执行失败的痛苦。这就是我们想象的未来吗？我们真的在建设新的数字领域的道路上吗？许多经验丰富的操作者甚至都会指出DAO构造本质上是低效的。</p>
+<p>去中心化是可以兼容高效执行的，但是效率不是免费的。它必须通过精心的组织设计才能够实现。在本文中，我们将解析这些说法及其含义。之后我们将回顾此类设计的可能性，并尝试将其全部应用于DAO情境中。</p>
+<h3 id="高效设计的特性"><strong>高效设计的特性</strong></h3>
+<p><strong>效率是去中心化的</strong></p>
+<p>去中心化是需要提高效率的。我们可以从多个独立的科学领域推断出这个真理。</p>
+<p>在控制论中，Conant-Ashby定理指出，每一个系统调节器都必须有一个它所调节的系统的内部模型。由此产生的一个自然结果就是黑暗原理，它指出系统中的每一个元素都必然不了解系统作为一个整体的行为。学术界对这两种观察结果的反馈是，承认自组织系统必须将控制委托给更接近控制所需信息的子系统。复杂的自适应系统需要分布式控制才能正常工作。</p>
+<p>在经济学中，Local Knowledge Problem是指理性的经济计划所需的数据分布在个体行为者之间，因此其不可避免地存在于中心化机构的认知之外。同样，如果我们试图集中控制一个自由主体的系统，我们就会陷入不可避免的“无知”之中。在这方面，效率也要求采取去中心化决策。</p>
+<p>政治哲学有辅助性原则。这一原则主张，最小的、最低的、最不集中的力量应该处理尽可能多的事务。</p>
+<p>以上所有概念传达的都是相同的信息。它们都表明，最接近问题的个人应该做出决定。这一原则是社会技术设计的一个核心公理，它认为工作系统的最终设计必须由从事工作的人完成。否则，它们就无法解释关键的系统组件，而这些组件通常是那些没有直接参与到该级别的人所看不到的。</p>
+<p>去中心化并不是做事的一种方式——它是复杂的自适应系统中唯一的方式。这是效率的边缘计算。</p>
+<p><strong>必须设计效率</strong></p>
+<p>效率是精心进行组织设计的结果。这是“组织”这一术语所暗示的，也是“公司理论”和“康威定律”的结果。前提是，个人必须组织自己、互动和产出，以生产复杂和令人满意的商品。这是很困难的，但是许多DAO期望仅通过去中心化来提高效率。生产效率不具有突发性。我们唯一免费得到的东西是熵、协调失败。</p>
+<p>由于Web3思考者经常将DAO与生物有机体进行比较，因此很容易假设最佳结构和流程将通过一种达尔文式的方式自行涌现。这种自然选择可能对生态系统有效，但对任何特定的DAO无效。金库的清空速度将比我们在组织设计的所有可能组合中的循环速度更快。</p>
+<p><strong>设计通常是组件化的（甚至是分级的!）</strong></p>
+<p>高效的设计通常是分层的、专门化的，有时甚至是分级的。DAO摧毁所有层次结构的梗可能太过强烈和吸引人，以至于不能用细微的差别来限定他们。但不可避免的现实是，伟大的设计往往是分层的。这是自然现象，而不仅仅是人类社会的产物。</p>
+<p>我们可以使用其他术语，如名称空间、范围和抽象来表达相同的概念。组织需要限定关注的范围来减少认知负荷和协调开销。这一事实并不等同于命令和控制。</p>
+<p>我之所以提到这一点，是因为如果我们从一开始就排除了这种模式，我们可能会无意中缩短我们在良好设计方面的努力。重要的是避免剥削实体。每个抽象级别都应该增加价值，而不是从系统中抽取价值。</p>
+<p>我们必须记住，网络是去中心化的；不是每一个个人或组织单位组成它。忽视这一点是一个陷阱，而且它已经导致了许多好项目的结束，这些项目从未交付，因为它们陷入了不成熟的递归去中心化工作的泥潭。</p>
+<h3 id="高效的设计灵感"><strong>高效的设计灵感</strong></h3>
+<p>这些设计属性可能会给我们一些启示，但现实世界的例子呢？海尔公司就是这样一个例子。</p>
+<p>海尔是一家市值350亿美元的家电公司，目前已拥有4000家微型企业。每个微型企业都可以自由地形成和发展，几乎不受中心化控制，并可分为以下三种功能原型之一：</p>
+<ul>
+<li>
+<p>变压器服务于现有的常青产品线。</p>
+</li>
+<li>
+<p>孵化器服务于新兴的业务线。</p>
+</li>
+<li>
+<p>节点向其他两个面向客户的业务线销售组件产品和服务，如设计、制造和人力资源。</p>
+</li>
+</ul>
+<p>这种结构共同产生了一个激励一致的、面向客户的、去中心化的平台。让我们看看这个设置的每个属性。</p>
+<p><strong>独立激励</strong></p>
+<p>在海尔，所有微型企业的成败都取决于自身的优点，他们可以自由地以自己认为合适的方式进行互动。如果执行失败，主要业务线可以选择另一个供应节点。如果业务线停止业务，其服务节点将失去一个客户。如果微型企业认为外部供应商可以更好地满足其需求，那么它可以到外部寻求服务。</p>
+<p>这与DAO有什么关系？完全依赖共享代币不足以激励一致性。我们不能排除竞争和生存本能会产生严重的负面后果。但如果没有这些激励措施，团队的预算将基于历史支出而不是预期的投资回报。</p>
+<p><strong>面向客户</strong></p>
+<p>海尔的组织单位主要围绕面向客户的服务线。每个人都直接对他们的客户负责。海尔有一个严格的政策，在客户对产品进行验证之前，不得为新业务提供资金。海尔CEO喜欢说，他们不再给员工发工资，因为他们的工资直接由客户支付。</p>
+<p>我们可以从中学到很多东西。DAO金库不是客户。DAO的最终成功标准不是分配的提案，而是与付费客户一起推出的产品数量，这些产品会带来资金流入和网络价值的增加。</p>
+<p>我们在Web3中谈论了很多民主，但最纯粹的民主形式之一是自由市场，个人用他们的资源投票。客户的“投票”应该是最终的优先级。危险的替代方案是一种圣诞老人经济学，每个人都对每个人的预算提案投赞成票，因为他们希望每个人都对自己的提案投赞成票。</p>
+<p><strong>去中心化的平台</strong></p>
+<p>海尔的功能更像是一个网络和发布平台，而不是一个单一的公司。小型的自主团队做决策，海尔专注于为这些团队的启动创造最佳条件。海尔CEO将这种结构描述为“小块，松散地连接在一起”。这一准则是DAO应该内部化的知名IT和组织设计模式。</p>
+<p>从这个角度来看，我们可以将DAO视为应用商店和经济。我们可以把它们看作是网络孵化器，而不是个体企业。这个框架对战略优先级有巨大的影响，因为它允许我们专注于识别巨大的机会和项目启动经验，而不是预定义的产品空间。</p>
+<p>一位风险投资家将海尔描述为“一个扫描战场并发现最有希望的机会的巨大搜索功能”。如果我们利用 DAO 作为启动平台，DAO 可以放大这种功能。将DAO视为新的搜索引擎。</p>
+<h3 id="将高效设计应用于-dao"><strong>将高效设计应用于 DAO</strong></h3>
+<p>这些观察结果可能很有趣，但是如何将它们实施并应用于已经运行的 DAO上呢?好消息是，这并不是DAO所特有的挑战。有一个 Team Topologies的研究机构，还有一种称为 Inverse Conway Maneuver 的技术，我们都可以申请使用。</p>
+<p>这种方法和建议建立在这样一个前提上：你的组织的产出将反映你的组织配置(康威定律)，你可以围绕期望的结果进行内部重组，以创造更大的效率。</p>
+<p>这些插图是基于我之前在《重新思考DAO贡献者漏斗》中详细阐述的工作。图的下半部分从侧面查看DAO，而上半部分从顶部查看DAO。</p>
+<p><strong>步骤1：巩固现有的价值流</strong></p>
+<p>确定DAO是如何赚钱的，然后根据这些产品团队的成功单独激励他们。我们可以通过收入分成来实现这一点。</p>
+<p><strong><img src="https://img.bibiqing.com/news/2022/0905/24_7np4iwifis.png" alt="DAO：设计高效率DAO的方法"></strong></p>
+<p>我不相信很多DAO已经回答了这个问题，但是这个答案是关键的。顾客是谁以及他们需要什么决定了其他一切。一旦你确定了价值流，就通过链上或链下协议来巩固它们。固化意味着建立一个链上收入分配或法律协议，以执行财务协议。对一些人来说，这种明确的工作流程具体化步骤可能听起来有些过分，但如果没有明确的合约，金钱会取代良好的氛围。</p>
+<p><strong>步骤2：优化贡献者体验</strong></p>
+<p>任何DAO的第二个产品都是DAO平台本身。DAO是创新引擎，其客户是贡献者。因此，我们应该将DAO平台与其支持的价值流区分开来。随着各国争夺企业注册地，DAO争夺技术贡献者和有前途的项目。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/24_440wsuchwb.png" alt="DAO：设计高效率DAO的方法"></p>
+<p>启动体验的质量如何?如何从现有的价值流中寻找新的人才?如果当前的价值流不赚钱，我们就必须为未来赚钱的价值流做好准备。</p>
+<p><strong>步骤3：引入推动者团队</strong></p>
+<p>引入推动者团队，围绕主要工作流程提供商品化服务。在最后两个步骤中，我们将平台与价值流区分开来。在这个步骤中，我们确定了规模化的机会，并通过整合的服务团队来解决这些机会。这些可能是网页设计、法律服务或社交媒体管理。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/24_cqoj8bb3nr.png" alt="DAO：设计高效率DAO的方法"></p>
+<p>这一步承认了规模经济的现实和核心竞争力的原则。这些服务团队将使团队腾出时间去做他们擅长的事情，而不会被其他问题所拖累。所有价值流都极大地受益于这些以规模高效的方式提供的商品化内部服务。一个为孵化项目制作网站或建立法律包装的推动者团队是非常有价值的。</p>
+<p><strong>步骤4：实践时间框迭代</strong></p>
+<p>最后，在多个报告、资金、交付和治理周期中操作。这些应该是每周、每两周、每月和每季度的迭代。现在不存在完美的结构，只有符合时代和环境的迭代。这一现实要求DAO不断发展和试验，所以建立快速的反馈循环和创造更多的机会来检查和适应是至关重要的。这里，我们再次以海尔的CEO为例。</p>
+<blockquote>
+<p>“. .从上到下设计一个复杂的系统是不可能的。它必须在通过想象、实验和学习的迭代过程中出现。当被问及海尔如何加速转型时，他给出了一个简单的答案：进行更多的试验，更快地复制最成功的方法，因为革命性的目标最好通过进化的方式来实现。”——张瑞敏，海尔CEO</p>
+</blockquote>
+<p>最简单的方法是采用每周演示，所有工作组展示他们的进展和遇到的问题，并在有限的预算和特定目标下实践“DAO季节”。这些事件被设定为检查和调整的时间。这些假设和实践建立在高尔定律的基础上，该定律认为，复杂的系统是建立在之前有效的简单系统之上的。</p>
+<h3 id="结论"><strong>结论</strong></h3>
+<p>DAO需要架构师，而不仅仅是操作者，需要更多的结构，而不是更少的结构。这并不是违反去中心化。几乎被普遍接受的想法是，所有复杂的工作都可以分解成小的、有报酬的任务，然后分配给大众，这只是我们迫切需要摆脱的设计反模式的一个例子。</p>
+<p>未能执行和有效交付可能对 DAO 构成更大的威胁。资源将被浪费，贡献者将失去信心。</p>
+<p>DAO对任何感觉熟悉的东西都“过敏”。这是比较幼稚的。我们不能在历史或学术真空中设计DAO的超结构。我们很幸运，有几千年的经验可以借鉴。</p>
+<p>切斯特顿篱笆的规则警告我们，在了解最初为什么建立它们之前，不要拆除它们。我们的任务是通过协调规划和激励工程来放大历史上有效的方法，最小化无效的方法。</p>
+<p>我相信我们最有希望的设计灵感来源可能来自敏捷、精益的哲学和方法。</p>
+<p>有了这些资源和新出现的DAO结构，我们可能终于有办法开启人类智慧的全新时代。我们已经真正走上了第二次复兴的道路，它可能会以一个技术奇点而告终，这个奇点不仅由人工智能主导，而且会由拥有人工智能力量的人类主导。</p>
+<p>Source：https://banklessDAO.mirror.xyz/QQA6ZhvHtDefWEAT-SXaHYPYMtHUhshtXX5dY-gv0u8</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42287/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">DAO 的脆弱性：全景解析 Lido 治理的风险和机遇</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42283/">
+                <span class="next-text nav-default">ERC-3525 通过倒计时 SFT 是什么？有什么用？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#高效设计的特性"><strong>高效设计的特性</strong></a></li>
+        <li><a href="#高效的设计灵感"><strong>高效的设计灵感</strong></a></li>
+        <li><a href="#将高效设计应用于-dao"><strong>将高效设计应用于 DAO</strong></a></li>
+        <li><a href="#结论"><strong>结论</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

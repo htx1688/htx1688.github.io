@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="上周，CertiK宣布已完成了对蚂蚁集团可信原生技术团队开发的创新开放式跨平台可信执行环境（TEE）HyperEnclave的先进形式化验证。" />
+<meta name="keywords" content="CertiK, 螞蟻區塊鏈" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56047/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证" />
+<meta property="og:description" content="上周，CertiK宣布已完成了对蚂蚁集团可信原生技术团队开发的创新开放式跨平台可信执行环境（TEE）HyperEnclave的先进形式化验证。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56047/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-31T00:00:00+00:00" />
+
+<meta itemprop="name" content="技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证">
+<meta itemprop="description" content="上周，CertiK宣布已完成了对蚂蚁集团可信原生技术团队开发的创新开放式跨平台可信执行环境（TEE）HyperEnclave的先进形式化验证。"><meta itemprop="datePublished" content="2023-07-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-31T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5291">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证"/>
+<meta name="twitter:description" content="上周，CertiK宣布已完成了对蚂蚁集团可信原生技术团队开发的创新开放式跨平台可信执行环境（TEE）HyperEnclave的先进形式化验证。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-31">
+      2023-07-31
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5291 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>上周，CertiK宣布已完成了对蚂蚁集团可信原生技术团队开发的创新开放式跨平台可信执行环境（TEE）HyperEnclave的先进形式化验证。</p>
+<p>为了实现保护Web3世界的使命，CertiK在审计过程中采用了一系列分析方法。这包括但不限于由人工审计员进行详细严谨的代码评审，通过模糊测试和静态分析发现程序错误、以及使用模型检测为标准协议提供程序正确性的数学证明。其中最强大的方法之一是使用机器验证的证明（即形式化验证）。</p>
+<p>形式化验证既包括对标准属性的自动验证，例如使用模型检测，同时也包括更为先进的验证，即为特定项目制定定制化的安全属性并对其进行证明。</p>
+<p>如下图所示，Web3应用程序依赖于其软件栈上的所有组件层次。智能合约的业务逻辑使用高级编程语言编写，编译为字节码，并由区块链节点上的字节码虚拟机进行运行。链的节点执行其特定的代码来计算诸如质押等配置，以及共识算法。此外，区块链节点运行在物理云基础设施上，其中包括操作系统、虚拟机监视器、可信执行环境等系统软件。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0731/16_36oa1zrws1.png" alt="技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证"></p>
+<p>在讨论Web3的安全性时，人们通常关注的焦点是位于其软件栈顶层的智能合约。而位于较低层级的软件组件是由多个不同的Web3应用程序共享的，因此它们经过了更多的测试，可能存在的错误较少。</p>
+<p>但与此同时，这也使得它们变得更为重要：在区块链节点代码中的一个错误可能会危及该区块链上的所有应用程序，而系统基础设施中的一个错误则可能会危及整个Web3世界。</p>
+<p>CertiK在机器验证证明方面的工作涵盖了Web3软件栈的每一层面。例如：</p>
+<ul>
+<li>
+<p>我们使用符号化模型检测自动验证ERC-20合约和其他实现标准接口的Solidity合约</p>
+</li>
+<li>
+<p>我们验证了类似UniSwap的DeFi应用程序的智能合约，形式化验证是我们对Move和Cardano合约审计的一部分，我们为一些Solidity项目验证了定制属性</p>
+</li>
+<li>
+<p>我们的DeepSEA验证编译器旨在排除编译过程中的错误</p>
+</li>
+<li>
+<p>我们形式化验证了Cosmos SDK的标准银行模块</p>
+</li>
+<li>
+<p>我们形式化验证了TON Chain的主链质押合约</p>
+</li>
+</ul>
+<p>这篇博文介绍了我们在Web3软件栈最底层的一项工作：在最近发布的一份形式化验证报告中，我们将先进形式化验证应用在了由蚂蚁集团可信原生技术团队开发的HyperEnclave可信执行环境。</p>
+<p><strong>HyperEnclave</strong>  <strong>可信执行环境</strong></p>
+<p>可信执行环境（Trusted Execution Environment，TEE）的设计目的是保护应用程序免受一种最具挑战性的攻击类型：那些甚至能够控制计算机操作系统的攻击方式。</p>
+<p>一些最著名的TEE包括英特尔的SGX、Arm TrustZone和AMD SEV。它们的工作原理是让CPU通过加密的方式证明特定的安全应用程序（enclave）已加载，并防止其他软件干扰它。</p>
+<p>TEE已经融入到数字生活的许多方面。像苹果FileVault这样的磁盘加密软件、谷歌Authenticator这样的两步验证应用程序都将密钥存储于TEE中，即使有人盗窃并拆解笔记本电脑或手机，密钥也能得到保护。</p>
+<p>同时，在Web3中，TEE也变得越来越重要。数字货币钱包也使用TEE来更安全地存储加密密钥。分布式区块链预言机可以使用TEE来增加数据的真实性可信度。有提议将TEE用于“2-of-3系统”以帮助从零知识证明的实现错误中的恢复。</p>
+<p>还有一些区块链项目，如LucidiTEE、SubstraTEE、Oasis Network和AntChain，则提议使用TEE为用户提供数据隐私保护。</p>
+<p>目前，大多数TEE都是闭源的，并且与特定的硬件供应商绑定。例如，要使用Intel SGX，应用程序必须在Intel CPU上运行，并经过Intel的批准和白名单验证。但是硬件开发本身较慢，因此TEE的功能集较小，而且安全问题的解决需要对CPU固件进行更新。相比之下，HyperEnclave大部分是使用软件实现的，利用了两个广泛可用的硬件功能。</p>
+<p>首先，计算机的可信平台模块（TPM，通常用于实现UEFI安全引导）用于验证HyperEnclave和一组特定的安全飞地（enclave）是否正在运行。其次，HyperEnclave使用CPU的虚拟化扩展来保护enclave（通常由虚拟机监视器如VMware、VirtualBox、Hyper-V、KVM等使用）。对于计算机硬件而言，HyperEnclave看起来就像任何其他的虚拟机监视器，但对于enclave来说，它提供了一个兼容SGX的API，使得针对SGX编写的应用程序可以轻松适应在HyperEnclave上运行。通过使用标准虚拟化技术，它可以轻松支持与操作系统紧密交互的高性能应用程序。</p>
+<p>HyperEnclave中最关键的部分是称为RustMonitor的监视器，用于保护enclave免受来自其它enclave和来自操作系统的危险。enclave和操作系统在虚拟化的&quot;guest&quot;模式下执行，这意味着它们每次尝试访问内存时，所访问的内存地址首先通过由RustMonitor所管理的页表进行转换。通过将enclave放置在物理内存的不同区域中，RustMonitor可以确保它们永远无法读取或覆盖其他enclave所拥有的数据。但这不能仅仅是简单的静态分离：一些内存地址必须被允许重叠，以便enclave与操作系统进行通信，并且地址映射在处理页面中断时会被更新。</p>
+<p>HyperEnclave的开发者编写了一组“页表必须遵守的不变性质”，其中定义了内存地址映射表的预期工作方式。例如，这包括诸如“如果且仅当虚拟地址位于ELRANGE中，该地址才会被映射到EPC中的物理页”等属性。详细性质请参阅形式化验证报告。任何违反了这些条件的错误都可能使整个HyperEnclave系统的安全保证无效化。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0731/16_74hm6o9oq4.png" alt="技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证"></p>
+<p>RustMonitor的设计采取了以下步骤来确保代码的可信性。首先，它保持了较小的规模——大约3000行独立于平台的代码，再加上差不多大小的x86架构特定的库代码。其次，它使用Rust语言编写——这是一种内存安全的语言，可以排除大部分的错误类别。然而，考虑到其重要性，人们仍然希望获得更高的安全性，并求助于形式化验证。</p>
+<p><strong>对HyperEnclave的RustMonitor</strong>  <strong>进行形式化验证</strong></p>
+<p>RustMonitor的页表管理代码是一个很好的验证目标，因为它既小巧、其安全性又很关键。类似于Web3智能合约的情况，对其投入精力进行形式化验证是可行的。在这个项目中，CertiK从页表必须遵守的不变性质入手，将它们从英语翻译成Coq形式化规范语言。然后，我们产生一份机器检查的证明，以证明当RustMonitor代码修改表格时，所得到的表格仍满足所有的不变性质。</p>
+<p>事实上，我们的开发工作还要更进一步，因为我们还希望确保这些不变性质的设计是正确的、而且我们对其的Coq语言翻译是正确的。为此，我们在Coq中进一步指定了客户代码所应该能观察到的信息，并利用不变性质证明不会有其它的信息流（&ldquo;不相干定理&rdquo;）。所有这些证明放在一起，共同提供了一个强有力的保证，即页表管理在设计上和实现上都是正确的。</p>
+<p>然而，证明TEE监控程序的正确性并不是一项简单的任务。像虚拟化监视器和操作系统内核这样的系统级程序大量使用低级代码，其涉及带有指针的数据结构、跳过类型抽象、以及为性能高度优化。直至今日，对此类程序的验证仍然是值得发表在顶级计算机科学期刊上的论文中的热门研究问题，对其每一行代码进行证明需要巨大的努力。</p>
+<p>例如，seL4的初始证明用了20个人年，而Komodo花费了2个人年来验证与约650行C代码对应的汇编代码。这些项目中的代码是为了简化验证而重新专门编写的，与HyperEnclave很不同——后者已经投入生产并采用了Rust的惯用写法。基于现有技术水平，对所有代码进行验证在经济上并不切实际。另一个问题是，与其他编程语言相比，Rust的验证工具链并不成熟。通过编写手工的“模型”代码而不是实际代码，可以减轻验证的负担。一个例子是Sanctum TEE，一个验证研究项目。这种方法的缺点是，代码与抽象模型之间的不匹配可能会削弱任何关于模型的安全性或正确性属性，甚至使其无效化。</p>
+<p>CertiK在解决这个问题上具备得天独厚的条件。我们的两位创始人，邵中教授和顾荣辉教授，是并发认证抽象层（CCAL）验证方法的发明者，他们用这种方法验证了世界上第一个并发认证操作系统内核CertiKOS，并验证了KVM虚拟化监视器seKVM和ARM机密计算架构。CCAL的基本思想是将程序中的所有函数划分为很多“层”，为每层编写其抽象模型，然后证明函数的实际代码实现了抽象模型，这显著降低了代码与抽象模型行为不匹配的风险。同试图将整个程序作为单个整体进行验证相比，分层方法更容易处理代码证明和并发问题。此前对seKVM和Arm CCA的工作在验证工业级系统软件项目方面受到了关注，而在这之前这类项目的规模对于形式化验证来说过于庞大。</p>
+<p>HyperEnclave形式化验证团队包括之前参与CertiKOS和seKVM验证的人员，我们试图利用这些经验在安全保证和验证的资源投入之间取得良好的平衡。为此，我们使用了一种基于CCAL规范的弹性验证方法：我们的框架支持验证函数代码是否符合模型，但我们选择仅对一部分函数进行这项验证（49个直接处理内存页表的函数）。对于其他函数，我们则假定对Rust代码的手工Coq翻译是正确的，仅证明这些Coq模型的功能正确性。这里源码中所访问数据结构的抽象程度决定了每个函数是否需要验证其代码符合模型。当HyperEnclave使用高级Rust数据结构时，我们直接将其转换到Coq，但当其使用基于字节的低级页表格式时，我们则花更多精力来证明其等效于高级功能模型（详见完整形式化验证报告）。就RustMonitor而言，这意味着我们对处理页表表示的“Memory”模块进行了代码证明，对管理enclave状态的“Enclave”模块使用了抽象模型，然后结合所有产生的模型证明了不变性定理和顶层安全定理。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0731/16_73nls3z1sa.png" alt="技术详解 | CertiK对蚂蚁集团HyperEnclave先进形式化验证"></p>
+<p>这个验证的另一个有趣的部分是如何进行代码证明。处理页表的HyperEnclave代码是低级代码，没有任何现有的验证工具能够很好地处理它。为此，我们开发了一个框架，通过转换为中间语言 MIR（Mid-level Intermediate Representation）来验证 Rust 代码，并用它来验证那些关键函数。由于MIR是一种较小的语言，我们能够为其编写精确的操作语义，并对编译器生成的 MIR 代码进行精确的验证，这使得我们的代码证明具有更坚实的基础，而不是依赖于任意的一个翻译器。</p>
+<p>总的来说，这是一项庞大的工作，涉及到大约17,300行通过了Coq证明器验证的人工证明脚本。另有几千行的形式化规范，以及大量用于所导入的MIR代码和层结构而自动生成的Coq文件。证明的主要组成部分包括不相干性证明（6600行）、代码证明（4200行）和页表操作功能证明（4400行），以及与代码证明框架相关的定理。最终，这些证明汇集成一组定理，陈述了HyperEnclave主要系统调用的数据流不相干性，亦即私密性。</p>
+<p><strong>总结</strong></p>
+<p>可信执行环境（TEE）是云计算和Web3应用程序的一项基础技术，因此构建其安全性至关重要。在这个项目中，CertiK应用了先进形式化验证技术来验证其最重要的组件，从而提供了强有力的保证，确保其代码按照预期运行，并确实符合所期望的安全属性。</p>
+<p>这项形式化验证工作只是确保隐私计算安全性的一环；它只涵盖了RustMonitor的页表管理部分，而RustMonitor又仅是整个系统中的一个组件。在未来，我们也将对其他隐私计算组件进行代码审核、测试和形式化验证。通过验证最核心的部分，我们为隐私云计算奠定了坚实的基础。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56041/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">华人珠宝艺术家陈世英确认出席“创新科技与艺术发展高峰论坛2023” （ITA2023） 共话Web3.0艺术未来</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56107/">
+                <span class="next-text nav-default">解读Polkadot 2.0：放弃插槽拍卖机制 以NFT的形式出售核时间并可进行切割和组合</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

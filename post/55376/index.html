@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文从Lybra的收益来源、实际收益、eUSD公允价值、eUSD如何向上脱锚、Lybra V2引入的新机制等5个角度入手，结合链上数据分析，解答用户对Lybra和eUSD的一些疑问。" />
+<meta name="keywords" content="Lybra Finance, curve" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55376/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性" />
+<meta property="og:description" content="本文从Lybra的收益来源、实际收益、eUSD公允价值、eUSD如何向上脱锚、Lybra V2引入的新机制等5个角度入手，结合链上数据分析，解答用户对Lybra和eUSD的一些疑问。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55376/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-20T00:00:00+00:00" />
+
+<meta itemprop="name" content="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性">
+<meta itemprop="description" content="本文从Lybra的收益来源、实际收益、eUSD公允价值、eUSD如何向上脱锚、Lybra V2引入的新机制等5个角度入手，结合链上数据分析，解答用户对Lybra和eUSD的一些疑问。"><meta itemprop="datePublished" content="2023-07-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5923">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"/>
+<meta name="twitter:description" content="本文从Lybra的收益来源、实际收益、eUSD公允价值、eUSD如何向上脱锚、Lybra V2引入的新机制等5个角度入手，结合链上数据分析，解答用户对Lybra和eUSD的一些疑问。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-20">
+      2023-07-20
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5923 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Loki，新火科技</p>
+<p>由于本文信息量很大，需要读者对Lybra的一些规定有部分储备知识，对Lybra不了解的读者可以先阅读其他地方关于Lybra的基础资料，再对本文展开深入理解。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_uvgb0adcb0.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<h3 id="一eusd收益来源有哪些">一、eUSD收益来源有哪些？</h3>
+<p><strong>eUSD的收益包括三个部分：</strong></p>
+<p><strong>（1）铸造收益（债务收益）</strong></p>
+<p><strong>（2）持有收益</strong></p>
+<p><strong>（3）挖矿收益。</strong></p>
+<p>铸造收益和挖矿收益相对比较好理解。按照官方文档信息，esLBR产出的78%被分配给eUSD贷款人，7%分配给了eUSD-USDC的Curve池，这两重收益本质上都是挖矿补贴。需要注意的是，铸造收益取决于债务量，也就是说即使铸造者将eUSD转移或者兑换成其它Token，仍可以获得铸造收益。</p>
+<p>剩下一个比较复杂一些的是持有收益，按照官网描述，<strong>eUSD是一种【持有就可以获得8.47%收益的生息稳定币】</strong> 。这种收益通过eUSD的reBase机制实现：</p>
+<ol>
+<li>
+<p>用户存入ETH或者stETH，其中stETH也会被兑换成stETH，成为生息资产。</p>
+</li>
+<li>
+<p>stETH产生利息以后，会被全部兑换成eUSD，其中的一部分（eUSD铸造量*1.5%）会被作为协议收入计提。</p>
+</li>
+<li>
+<p>剩下的eUSD通过Rebase的机制发放给所有eUSD持有人，<strong>即自动增加持有人账户内的eUSD余额。</strong></p>
+</li>
+</ol>
+<p>可以看出，<strong>用户铸造eUSD之后就丧失了stETH收入的求偿权，而是被eUSD的Rebase收入代替，同时还会被抽取一部分作为协议费用。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_uvgb0adcb0.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<p><strong>这里的一个诡计是“8.47%”使用了eUSD作为基数，</strong> 从用户计算实际收益率的角度用ETH/stETH计算才能得出实际收益。当然，<strong>我们也可以推导出实际收益的公式：</strong></p>
+<p><strong>用户实际获得的eUSD</strong>  = stETH总价值*stETH收益率 - eUSD铸造量*1.5%</p>
+<p><strong>eUSD铸造量</strong> =stETH总价值 / 全局抵押率</p>
+<p>(注：全局抵押率=stETH TVL / eUSD 总量）</p>
+<p><strong>以eUSD为基数的APY</strong> = （eUSD铸造量 * 全局抵押率 * stETH收益率-eUSD铸造量*1.5%）/ eUSD铸造量</p>
+<p>化简后可以得到：</p>
+<p><strong>APY（eUSD为基数）= 全局抵押率* stETH收益率-1.5%</strong></p>
+<p><strong>APY（stETH为基数）= （全局抵押率 * stETH收益率-1.5%）/ 全局抵押率</strong></p>
+<p>(注：全局抵押率=stETH TVL / eUSD 总量）</p>
+<p>按照当前3.77%的stETH收益率和200%左右的全局抵押率，以eUSD为基数的APY约为6.04%，以stETH为基数的APY约为3.15%。可以看出，即时按照eUSD作为基数，6.04%的收益率与项目官网显示的8.47%也有差距，即使我们考虑365天复利，也不过从6.04%提高到6.2%。当然，对于这种差异，我们还可以通过链上数据进行验证：</p>
+<p>第一种方法是通过合约历史查看，stETH收益分配通过eUSD合约中的【excess income distribution】函数发放，可以看出stETH会被兑换成eUSD，然后进行reBase和注入Lybrafund（用于质押收益分配）.</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_0q9j3odrjg.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<p>进一步分析我们可以发现，Lybra的【excess income distribution】每天定期触发一次，近5天平均产生29588美元的Rebase收益，<strong>近5天折算的平均年化APY约为6.07%，与理论推导基本一致。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_6kgnnnewz6.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<p>另一种方式选取一个链上地址进行计算，结果显示，每持有10000美元eUSD，近3天平均每天通过Rebase增加1.66 eUSD，年化APY为6.06%。</p>
+<h3 id="二挖lybra到底可以产生多少收益">二、挖Lybra到底可以产生多少收益？</h3>
+<p><strong>具体而言有两种策略：</strong></p>
+<p><strong>（1）铸造并持有</strong></p>
+<p><strong>（2）铸造并参与Curve挖矿</strong></p>
+<p>我们假想一种最简单的情况：用户存入10000美元的ETH，按照市场平均水平200%的抵押率铸造5000美元。</p>
+<p>那么它能获得的APY= eUSD铸造APY/抵押率 + eUSD持有APY /抵押率= 3.02% + 13.42%，其中3.02%是比较确定性的收益，而13.42%是以esLBR形式发放，实际到手需要很长的时间，很可能收到LBR价格波动的影响。</p>
+<p><strong>但即使是这样，Lybra挖矿也极具吸引力，</strong> 因为相比直接质押，在Lybra仅失去了1.5%/2=0.75%的收益率，但获得了13.42%的esLBR补偿，那么只要Vesting期间LBR的加权平均跌幅不超过94.5%，实际挖矿APY就不会低于单纯的Staking。当然，这些补偿最终买单人是LBR的流通市值贡献者。</p>
+<p><strong>第二种情况是在持有的基础上继续在Curve挖矿。</strong> 那么用户的10000美元本金需要分成2份，其中的6667美元存入Lybra并铸造3333美元eUSD，与剩下3333美元USDC组池。那么收益=（3.02+13.42%）*（2/3）+13.3% *（2/3）= 19.8%。可以看出，相比铸造并持有，多在Curve挖的收益率仅提高了3.38%，同时给投资组合带来了多重负面影响：</p>
+<ol>
+<li>
+<p>收益率价值稳定的部分从3.02%下降到了2.01%</p>
+</li>
+<li>
+<p>需要承担无常损失风险（且eUSD/USDC的潜在无常损失风险并不低，后面会详细阐述）</p>
+</li>
+<li>
+<p>投资组合的流动性降低</p>
+</li>
+</ol>
+<p>而关于投资组合的流动性问题，这里需要额外说明，当用户把eUSD转移至Curve以后会有一个问题，就是如果需要偿还债务，操作会更加复杂。与此同时，用户如果想提高组合的APY，<strong>除了多挖Curve以外，还有另外一个办法——降低抵押率</strong> ，如果用户愿意承担稍微大一点点的风险，就可以将抵押率从200%降低到170%，这样以来收益率将变为（3.02% + 13.42%）*200%/ 170% = 19.3%。</p>
+<p><strong>这种做法的唯一坏处是会有更高的清算风险，但并不难解决</strong> ，Lybra官网有一个CR Guadian插件的选项（由第三方提供，实际执行会收取100eUSD的单次费用），简单来说通过这个插件可以在特定情况下自动还款。依靠这个插件，可以以较低的质押比例铸造eUSD，但同时需要在钱包内留足够的eUSD，以便在必要的时候进行紧急还款。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_8r4ntbiyv7.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<p><strong>这两个策略相比起来，去Curve挖矿并不具备太强的吸引力。</strong> 从数据也可以看出，当前eUSD的铸造量已经超过1.8亿美元，但仅有1360万美元eUSD被投入Curve，不足10%，日交易量仅有84万美元，大多数挖矿者是以铸造并持有的因素参与。当然，这与LBR的产出分配密不可分，eUSD的esLBR份额也超过了Curve Pool的10倍。</p>
+<h3 id="三生息资产eusd的公允价值如何计算">三、生息资产eUSD的公允价值如何计算？</h3>
+<p>通过前面的分析，我们可以发现，<strong>eUSD成为生息资产的本质，是把stETH的生息能力转移到了eUSD上面，使其获取了6%的年化收益。</strong> 事实上我们可以把eUSD想象成一张可以随时兑换的债券，面值100美元，票面利率6%。同时，考虑到eUSD的Redeemer功能，这张债券还提供了99.5美元的刚性兑付条款，假设市场贴现率为2.7%（USDC 在AAVE的存款利率）。那么问题来了：你认为这张100美元的合理价值是多少？</p>
+<p><strong>我们想象一种最简单情况：</strong> 假如市场价格为100eUSD=100USDC：</p>
+<p>Alice将100USDC兑换成100 eUSD并持有一年</p>
+<p>一年以后Alice将106 eUSD兑换成USDC，假如1 eUSD ＞ 0.995 USDC，那么Alice可以至少获得106*0.995=105.47USDC</p>
+<p>假如1 eUSD ＜ 0.995 USDC，那么Alice不选择兑换，而是通过强赎机制兑换成价值0.995美元的stETH</p>
+<p>基于此，Alice可以获得至少5.47%的年化收益，如果按照2.7%的贴现率进行计算，这张债券的合理价值至少应该是102.7美元，即1 eUSD = 1.027USDC。</p>
+<p>当然，这考虑到交易是有磨擦的，而且贴现率2.7%并不准确，此外还要考虑各种收益率的变动、套利可持续的期限等因素，准确合理价格并不是太容易准确计量，但可以确定的是，<strong>它肯定高于100美元。</strong></p>
+<p><strong>这也是为什么我上周在推特提了一个问题：eUSD向上脱锚的概率更大，还是向下脱锚的概率更大？可能的范围有多大？就我个人的看法而言：eUSD的设计使它面临一个反常识的特性——具备天然向上脱锚的倾向。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_80ml70hvhn.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<p><strong>而就在我写完这部分内容草稿以后的几个小时后（7月16日），eUSD已经上涨至1.03USDC。当然，随着eUSD的价格上涨，套利空间会显著被缩小，eUSD的向上脱锚也不是没有限制的。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_59sh6z5g5s.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<h3 id="四eusd的向上脱锚如何发生">四、eUSD的向上脱锚如何发生？</h3>
+<p>接下来我们再从实际运行中eUSD的供需角度分析一下<strong>eUSD的脱锚为什么会必然发生：</strong></p>
+<h4 id="套利者的行为带来净买入">套利者的行为带来净买入</h4>
+<p>关于这一点上一章已经给出了详细的理论推导。而在实际中，套利者的行为包括直接使用USDC买入eUSD，赚取eUSD Rebase收益或者Curve挖矿收益。在这里我同样认为持有并赚取Rebase收益远比Curve挖矿更聪明，因为实际收益很可能连无常损失都覆盖不掉。这些套利者的行为会给eUSD带来净买入，推动eUSD的需求增长。</p>
+<h4 id="rebase机制缺陷带来净买入">Rebase机制缺陷带来净买入</h4>
+<p>在第一章中已经分析过这一问题，每天会有大约3.5万-4万美元的stETH被兑换成eUSD，而eUSD没有与stETH的流动性池，那么路由路径必然是stETH-USDC-eUSD，同样为eUSD带来净买入。</p>
+<p>事实上这是eUSD Rebase机制的内生缺陷。理论上虽然用户eUSD增加了，但增加的这部分eUSD超过了用户的实际债务，所以它们完全可以将eUSD卖出，抵消eUSD的净买入，但在现在这个阶段，这并不会发生。原因包括：1）部分用户并不熟悉Rebase机制 2）eUSD可以生息，相比USDC用户更愿意持有 3）用户短期并不希望偿还债务退出Lybra 4）操作需要手续费，需要攒够了才卖。</p>
+<h4 id="lybra的设计缺陷">Lybra的设计缺陷</h4>
+<p>首先是缺乏向上脱锚的平抑机制（v2版本正在解决这个问题），更大的问题是eUSD部署在了Curve v2池子中而非稳定币池，v2池面向的是更具波动率的资产。前面的分析中也有说过，Lybra用户参与Curve挖矿的意愿并不强，因此Curve的厚度也会相对有限。</p>
+<p>从Curve数据来看，当前池子中eUSD大约1300万美元，USDC2060万美元，大约40%：60%。换而言之，仅仅几百万美元的净买入就导致了3%的脱锚。事实上crvUSD-USDT、Frax-USDC等池子也保持着40%：60%的比例，但这些池子的价格并没有出现任何偏离。</p>
+<p>关于这一点我实在无法理解Lybra的做法，因为以上所有的因素生效都是非常缓慢的，团队有充分的时间去解决这些缺陷。但选择v2 Pool会使这件事情迅速发生。某种意义上当前的脱锚，选择Curve v2 Pool才是决定性因素。</p>
+<h3 id="五lybra-v2接下来会发生什么">五、Lybra V2：接下来会发生什么</h3>
+<p>过去的几个月里Lybra在TVL和流通量方面取得了显著的增长，但隐患同样存在，好消息是在Lybra v2中我看到了许多有意义的解决方案。：</p>
+<h4 id="eusd价格平抑机制">eUSD价格平抑机制</h4>
+<p>v2引入了一系列机制来解决eUSD的挂钩问题，包括引入稳定币池3pool代替现在的非稳定池、溢价保护机制（存在溢价的时候使用USDC作为代替奖励，减少Rebase导致的eUSD净买入），这两项措施会显著改善eUSD的正溢价问题；而dLP机制主要会在避免eUSD负溢价方面发挥作用。</p>
+<h4 id="减少泡沫">减少泡沫</h4>
+<p>主要包括：</p>
+<ul>
+<li>
+<p><strong>dLP 机制：</strong> 通过铸币挖矿需要同时持有LBR-ETH的LP，否则收益会下降，相当于强制持有LBR</p>
+</li>
+<li>
+<p><strong>归属期延长：</strong> 从30天延长至90天，提前兑现收取罚金</p>
+</li>
+<li>
+<p><strong>Boost：</strong> 锁定期影响挖矿收益率</p>
+</li>
+</ul>
+<p>这几项措施本质上是在给挖矿增加磨擦，在减少挖矿通胀泡沫抛压的同时，也有可能导致资金的流出，客观地说这些并不是多了不起的创新，也没有办法从根本上解决LBR的【矿币】特质。</p>
+<h4 id="peusd新的增长可能性">peUSD：新的增长可能性</h4>
+<p><strong>peUSD在我看来是v2版本中最重要的一个功能，因为它解决了eUSD的矛盾：eUSD作为生息资产与流通属性的矛盾。</strong></p>
+<p>v2的eUSD价格平抑机制希望将eUSD的价值限制在0.995-1.005之间，但这并不能从根本上解决eUSD的波动问题，因为任何时候以1USDC大于或者等于1eUSD的价格把USDC兑换成eUSD都是划算的，因为这种兑换相当于“剥削”了stETH的质押收益；相对应地，eUSD的持有者会有非常强的动机持有eUSD而不是将其投入流通或者交易，因为1eUSD的内在价值高于1USDC/USDT，那么就会出现一个困境：绝大多数的eUSD不会被投入流通，而是在LBR挖矿奖励系统中进行空转。</p>
+<p>而peUSD能够解决这个问题。按照v2规划，之后用户可以使用Rebase LST铸造生息资产eUSD，而使用非Rebase LST铸造0息资产peUSD，而eUSD可以1:1兑换成1peUSD，这种兑换本质上是将eUSD的流通属性和生息属性剥离，流通属性转移成为peUSD，投入交易与流通，而生息属性仍然保留在eUSD持有者身上，避免了eUSD持有者的LST收益被掠夺。（我始终愿意把1USD兑换成1eUSD，但我永远不会把0.995USDC兑换成1peUSD）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/3_dr41bforwb.png" alt="LSD稳定币龙头Lybra Finance机制详解：风险、收益与生息资产的正溢价属性"></p>
+<p>除了解决LST收益掠夺难题以外，还能创造新的增长飞轮，peUSD机制建立以后，质押品不局限于stETH，还包括所有的非Rebase LST，潜在的TVL增长和LBR治理价值也会出现；peUSD可以投入交易与流通（例如做LP对、抵押品、保证金等），带来套利和挖矿以外的真实需求，驱动非泡沫的增长。（Lybra1.5%的资金成本也低于Maker的3.49%）与此同时，eUSD也能依靠生息属性创造自己的场景，例如DAO金库、VC闲置资金管理；信托场景等。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55343/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">LayerZero宣布上线Base主网</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55410/">
+                <span class="next-text nav-default">Messari：DePIN赛道项目一览</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一eusd收益来源有哪些">一、eUSD收益来源有哪些？</a></li>
+        <li><a href="#二挖lybra到底可以产生多少收益">二、挖Lybra到底可以产生多少收益？</a></li>
+        <li><a href="#三生息资产eusd的公允价值如何计算">三、生息资产eUSD的公允价值如何计算？</a></li>
+        <li><a href="#四eusd的向上脱锚如何发生">四、eUSD的向上脱锚如何发生？</a></li>
+        <li><a href="#五lybra-v2接下来会发生什么">五、Lybra V2：接下来会发生什么</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

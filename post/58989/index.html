@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Transformer 的上下文窗口直接决定了可以提供示例的空间量，从而限制了其 ICL 能力。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58989/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符" />
+<meta property="og:description" content="Transformer 的上下文窗口直接决定了可以提供示例的空间量，从而限制了其 ICL 能力。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58989/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符">
+<meta itemprop="description" content="Transformer 的上下文窗口直接决定了可以提供示例的空间量，从而限制了其 ICL 能力。"><meta itemprop="datePublished" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4354">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"/>
+<meta name="twitter:description" content="Transformer 的上下文窗口直接决定了可以提供示例的空间量，从而限制了其 ICL 能力。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-13">
+      2023-09-13
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4354 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<blockquote>
+<p>我们知道在使用 GPT 和 LLaMA 等大型语言模型时，输入的 prompt 存在字符数限制，比如 ChatGPT 目前的输入字符限制是 4096 个字符。这会限制上下文学习和思维链等技术的发挥空间，毕竟用户只能提供有限的示例数量。近日，Nous Research、EleutherAI 和日内瓦大学的一个研究团队提出了一种扩展上下文窗口的方案 YaRN ，并在实验中取得了优于其它所有方法的效果，而且他们还发布了使用 YaRN 微调过的 LLaMA 2 7B/13B 模型，其上下文窗口为 64k 和 128k。</p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2023/0913/15_pe7frqyuds.png" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>图片来源：由<a href="https://www.wujie.ai">无界 AI</a> 生成</p>
+<p>基于 Transformer 的大型语言模型（LLM）已经展现出执行上下文学习（ICL）的强大能力，并且几乎已经成为许多自然语言处理（NLP）任务的不二选择。Transformer 的自注意力机制可让训练高度并行化，从而能以分布式的方式处理长序列。LLM 训练所用的序列的长度被称为其上下文窗口。</p>
+<p>Transformer 的上下文窗口直接决定了可以提供示例的空间量，从而限制了其 ICL 能力。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/7ve1ik6vb986rig" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>如果模型的上下文窗口有限，那么为模型提供稳健示例的空间就更少，而这些稳健示例正是执行 ICL 所用的。此外，当模型的上下文窗口特别短时，摘要等其它任务也会受到严重妨碍。</p>
+<p>就语言本身的性质来说，token 的位置对有效建模来说至关重要，而自注意力由于其并行性，并不会直接编码位置信息。Transformer 架构引入了位置编码来解决这个问题。</p>
+<p>原始的 Transformer 架构使用了一种绝对正弦位置编码，之后其被改进成了一种可学习的绝对位置编码。自那以后，相对位置编码方案又进一步提升了 Transformer 的性能。目前，最流行的相对位置编码是 T5 Relative Bias、RoPE、XPos 和 ALiBi。</p>
+<p>位置编码有一个反复出现的限制：无法泛化在训练期间看到的上下文窗口。尽管 ALiBi 等一些方法有能力做一些有限的泛化，但还没有方法能泛化用于显著长于其预训练长度的序列。</p>
+<p>已经出现了一些试图克服这些限制的研究成果。比如，有研究提出通过位置插值（PI）来稍微修改 RoPE 并在少量数据上微调来扩展上下文长度。</p>
+<p>两个月前，Nous Research 的 Bowen Peng 在 Reddit 分享了一种解决思路，即通过纳入高频损失来实现「NTK 感知型插值」。这里的 NTK 是指 Neural Tangent Kernel（神经正切核）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/naj0a4yzs4vissu" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>其声称经过 NTK 感知型扩展的 RoPE 能让 LLaMA 模型的上下文窗口大幅扩展（超过 8k），同时还无需任何微调，对困惑度造成的影响也极小。</p>
+<p>近日，他与另外三位合作者的相关论文出炉了！</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/pd80p5hkq7emul3" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<ul>
+<li>论文：https://arxiv.org/abs/2309.00071</li>
+<li>模型：https://github.com/jquesnelle/yarn</li>
+</ul>
+<p>在这篇论文中，他们对 NTK 感知型插值做出了两点改进，它们分别侧重于不同的方面：</p>
+<ul>
+<li>动态 NTK 插值法，无需微调就能用于预训练模型。</li>
+<li>部分 NTK 插值法，当使用少量更长上下文的数据微调后，模型能取得最佳表现。</li>
+</ul>
+<p>研究者表示，在这篇论文诞生前，就已经有研究者将 NTK 感知型插值和动态 NTK 插值用于一些开源模型。比如 Code Llama（使用 NTK 感知型插值）和 Qwen 7B（使用动态 NTK 插值）。</p>
+<p>在这篇论文中，基于之前有关 NTK 感知型插值、动态 NTK 插值和部分 NTK 插值的研究成果，研究者提出了 YaRN（Yet another RoPE extensioN method），一种可以高效扩展使用旋转位置嵌入（Rotary Position Embeddings / RoPE）的模型的上下文窗口的方法，可用于 LLaMA、GPT-NeoX 和 PaLM 系列模型。研究发现，只需使用原模型预训练数据规模大约 0.1% 量的代表性样本进行微调，YaRN 就能实现当前最佳的上下文窗口扩展性能。</p>
+<p><strong>方法</strong></p>
+<p>旋转位置嵌入（Rotary Position Embeddings / RoPE）最早由论文《RoFormer: Enhanced transformer with rotary position embedding》引入，也是 YaRN 的基础。</p>
+<p>简单来说，RoPE 可以写成如下形式：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/t8v6dhpdso4unid" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>对于使用固定上下文长度预训练的 LLM，如果使用位置插值（PI）来扩展上下文长度，则可以表示为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/ifpvb13roo4cbsy" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>可以看出 PI 对所有 RoPE 维度都会做同等延展。研究者发现 PI 论文中描述的理论插值界限不足以预测 RoPE 和 LLM 内部嵌入之间的复杂动态。下面将描述研究者发现并解决的 PI 的主要问题，以便读者了解 YaRN 中各种新方法的背景、起因和解决理由。</p>
+<p><strong>高频信息丢失 ——NTK 感知型插值</strong></p>
+<p>如果只从信息编码的角度看 RoPE，根据神经正切核（NTK）理论，如果输入维度较低且对应的嵌入缺乏高频分量，那么深度神经网络难以学习高频信息。</p>
+<p>为了解决在对 RoPE 嵌入插值时丢失高频信息的问题，Bowen Peng 在上述 Reddit 帖子中提出了 NTK 感知型插值。这种方法不会对 RoPE 的每个维度进行同等扩展，而是通过更少地扩展高频和更多地扩展低频来将插值压力分散到多个维度。</p>
+<p>在测试中，研究者发现在扩展未经微调的模型的上下文大小方面，这种方法优于 PI。但是，这种方法有一个重大缺点：由于它不只是一种插值方案，某些维度会被外推入一些「界外」值，因此使用 NTK 感知型插值进行微调的效果不及 PI。</p>
+<p>更进一步说，由于存在「界外」值，理论上的扩展因子就无法准确地描述真实的上下文扩展程度。在实践中，对于给定的上下文长度扩展，必须将扩展值 s 设置得比期望的扩展值高一点。</p>
+<p><strong>相对局部距离的损失 —— 部分 NTK 插值</strong></p>
+<p>对于 RoPE 嵌入，有一个有趣的观察：给定一个上下文大小 L，存在某些维度 d，其中的波长 λ 长于预训练阶段见过的最大上下文长度（λ &gt; L），这说明某些维度的嵌入可能在旋转域中的分布不均匀。</p>
+<p>PI 和 NTK 感知型插值会平等地对待所有 RoPE 隐藏维度（就好像它们对网络有同样的效果）。但研究者通过实验发现，网络会给某些维度不同于其它维度的待遇。如前所述，给定上下文长度 L，某些维度的波长 λ 大于或等于 L。由于当一个隐藏维度的波长大于或等于 L 时，所有的位置配对会编码一个特定的距离，因此研究者猜想其中的绝对位置信息得到了保留；而当波长较短时，网络仅可获得相对位置信息。</p>
+<p>当使用扩展比例 s 或基础变化值 b&rsquo; 来拉伸所有 RoPE 维度时，所有 token 都会变得与彼此更接近，因为被一个较小量旋转过的两个向量的点积会更大。这种扩展会严重损害 LLM 理解其内部嵌入之间小的局部关系的能力。研究者猜测这种压缩会导致模型对附近 token 的位置顺序感到困惑，从而损害模型的能力。</p>
+<p>为了解决这个问题，基于研究者观察到的现象，他们选择完全不对更高频率的维度进行插值。</p>
+<p>他们还提出，对于所有维度 d，r &lt; α 的维度按扩展度 s 线性插值（与 PI 一样，避免出现外推）；r &gt; β 的维度就完全不插值（总是外推）。</p>
+<p>使用这一小节描述的技术，一种名为部分 NTK 插值的方法诞生了。这种改进版方法优于之前的 PI 和 NTK 感知型插值方法，其适用于无微调和已微调模型。因为该方法避免了对旋转域分布不均匀的维度进行外推，因此就避免了之前方法的所有微调问题。</p>
+<p><strong>动态缩放 —— 动态 NTK 插值</strong></p>
+<p>当使用 RoPE 插值方法无微调地扩展上下文大小时，我们希望模型在更长的上下文大小上慢慢地劣化，而不是在扩展度 s 超过所需值时在整个上下文大小上完全劣化。</p>
+<p>在动态 NTK 方法中，扩展度 s 是动态计算的。</p>
+<p>在推理过程中，当上下文大小被超过时，就动态地更改扩展度 s，这样可让所有模型在达到训练的上下文限制 L 时缓慢地劣化而不是突然崩溃式劣化。</p>
+<p><strong>增加用于长距离的平均最小余弦相似度 ——YaRN</strong></p>
+<p>即便解决了前面描述的局部距离问题，为了避免外推，也必须在阈值 α 处插值更大的距离。直觉来看，这似乎不应该是个问题，因为全局距离无需高精度也能区分 token 位置（即网络只需大概知道 token 是在序列的开头、中间或末尾即可）。</p>
+<p>但是，研究者发现：由于平均最小距离随着 token 数量的增加而变得更近，因此它会使注意力 softmax 分布变得更尖（即减少了注意力 softmax 的平均熵）。换句话说，随着长距离衰减的影响因插值而减弱，网络会「更加关注」更多 token。这种分布的转变会导致 LLM 输出质量下降，这是与之前问题无关的另一个问题。</p>
+<p>由于当将 RoPE 嵌入插值到更长的上下文大小时，注意力 Softmax 分布中的熵会减少，因此研究者的目标是逆转这种熵减（即增加注意力 logit 的「温度」）。这可以通过在应用 softmax 之前将中间注意力矩阵乘以温度 t &gt; 1 来完成，但由于 RoPE 嵌入被编码为一个旋转矩阵，就可以简单地按常数因子 √t 来扩展 RoPE 嵌入的长度。这种「长度扩展」技巧让研究可以不必修改注意力代码，这能大幅简化与现有训练和推理流程的集成，并且时间复杂度仅有 O (1)。</p>
+<p>由于这种 RoPE 插值方案对 RoPE 维度的插值不均匀，因此很难计算相对于扩展度 s 所需的温度比例 t 的解析解。幸运的是，研究者通过实验发现：通过最小化困惑度，所有 LLaMA 模型都遵循大致相同的拟合曲线：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/sayln20dc6paqbe" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>研究者是在 LLaMA 7B、13B、33B 和 65B 上发现这个公式的。他们发现这个公式也能很好地适用于 LLaMA 2 模型（7B、13B 和 70B），差别很细微。这表明这种熵增特性很常见，可以泛化到不同的模型和训练数据。</p>
+<p>这种最终修改方案产出了 YaRN 方法。新方法在已微调和未微调场景中都胜过之前所有方法，而且完全不需要修改推理代码。只需要修改一开始用于生成 RoPE 嵌入的算法。YaRN 如此简单，使其可以在所有推理和训练库中轻松实现，包括与 Flash Attention 2 的兼容性。</p>
+<p><strong>实验</strong></p>
+<p>实验表明 YaRN 能成功扩展 LLM 的上下文窗口。此外，他们仅训练了 400 步就得到了这一结果，这差不多只有模型的原始预训练语料库的 0.1%，与之前的研究成果相比有大幅下降。这说明新方法具有很高的计算效率，没有额外的推理成本。</p>
+<p>为了评估所得到的模型，研究者计算了长文档的困惑度，并在已有基准上进行了评分，结果发现新方法胜过所有其它上下文窗口扩展方法。</p>
+<p>首先，研究者评估了上下文窗口增大时模型的性能表现。表 1 总结了实验结果。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/ijq8t1bbm2r6fhl" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>表 2 展示了在 50 个未截断的 GovReport 文档（长度至少为 16k token）上的最终困惑度。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/01hz0ftvbb6tuv5" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<p>为了测试使用上下文扩展时模型性能的劣化情况，研究者使用 Hugging Face Open LLM Leaderboard 套件评估了模型，并将其与 LLaMA 2 基准模型以及公开可用的 PI 和 NTK 感知型模型的已有分数进行了比较。表 3 总结了实验结果。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/2tens10ubuu6vbp" alt="想让大模型在prompt中学习更多示例，这种方法能让你输入更多字符"></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58993/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">香港拥抱合规 Web3，哪些业态与之“双向奔赴”？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59004/">
+                <span class="next-text nav-default">消息人士：汇丰银行正与加密托管技术公司Fireblocks合作</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

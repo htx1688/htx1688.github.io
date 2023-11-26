@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解ERC-7521草案：将用户意图添加至账户抽象钱包 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="通用用户意图开辟了一个全新的世界。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59621/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解ERC-7521草案：将用户意图添加至账户抽象钱包" />
+<meta property="og:description" content="通用用户意图开辟了一个全新的世界。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59621/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-21T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解ERC-7521草案：将用户意图添加至账户抽象钱包">
+<meta itemprop="description" content="通用用户意图开辟了一个全新的世界。"><meta itemprop="datePublished" content="2023-09-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2653">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解ERC-7521草案：将用户意图添加至账户抽象钱包"/>
+<meta name="twitter:description" content="通用用户意图开辟了一个全新的世界。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解ERC-7521草案：将用户意图添加至账户抽象钱包</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-21">
+      2023-09-21
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2653 字 -
+        预计阅读 6 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Stephen Monn</p>
+<p>原文编译：深潮 TechFlow</p>
+<p><img src="https://img.bibiqing.com/news/2023/0921/k8kaozrf4ansta0" alt="详解ERC-7521草案：将用户意图添加至账户抽象钱包"></p>
+<p>在不断发展的区块链和去中心化应用的景观中，越来越多的关注被吸引到用户定义意图而不是纯交易的概念上。这使得用户不必担心导航 DeFi 日益复杂的过程，并解锁了一系列现在才被构思的附加用例。</p>
+<p>随着个别应用已经在使用自己不同且不兼容的意图结构，创建一个可以被所有用户、应用、钱包软件、求解器、搜索器等共享和理解的通用意图标准是有意义的。</p>
+<p>为了帮助组合性和降低进入门槛，我们提出 ERC-7521 ，这是一项支持智能合约钱包通用意图的标准。</p>
+<h2 id="什么是用户意图">什么是用户意图？</h2>
+<p>由于这个领域非常新，意图的定义目前有点模糊。 从总体概念来看，这个术语通常用于指用户对期望的链上结果或最终状态的表达。 就本规范而言，意图被定义为由用户设定的一组操作和期望。 这些操作和期望可以与其他意图的操作和期望相结合，以努力满足所有参与方的共同和最大利益。</p>
+<p>使所有相关方均感满意的一系列链上操作称为解决方案。 专门的解决器（类似于 ERC-4337 中的捆绑器）将竞相找到能够为用户提供最高满意度的解决方案。 例如，这可以通过找到最佳/最有效的链上路径、利用链下流动性来源、组合不同用户的意图以利用共同需求等方式来实现，甚至包括他们自己的意图。</p>
+<h2 id="将用户意图添加到账户抽象中">将用户意图添加到账户抽象中</h2>
+<p>启用通用意图的关键是使用基于智能合约的抽象账户。与 ERC-4337 类似，意图被签名为消息，然后通过单独的交易在链上进行验证。这些签名消息然后在自己的内存池中进行传播。</p>
+<p>这个规范的目标不是在链下如何精确处理、构造或管理意图的技术细节，而是为智能合约钱包创建一个框架，以集成并自动支持由签名的意图本身定义的广泛可能性。因此，随着新的意图用例的出现，该框架还需要允许无缝且无需许可的升级和代码扩展过程。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0921/sondq90ayi7wksm" alt="详解ERC-7521草案：将用户意图添加至账户抽象钱包"></p>
+<h2 id="单一入口和无限意图标准">单一入口和无限意图标准</h2>
+<p>为了帮助促进这一无缝和允许的升级和扩展过程，ERC-4337 中的 EntryPoint 合约进行了模仿，但也被分成两个不同的部分。第一个部分称为入口点，是提交意图解决方案的主要入口点，负责验证意图签名以及运行高级意图处理逻辑。</p>
+<p>意图处理逻辑的具体内容在单独的合约中定义，称为意图标准，这由签名的意图本身指定。入口点调用这些合约来处理一个意图。正是意图标准定义了如何处理附加的意图数据和执行，以及与意图固有的拒绝服务攻击向量相关的基本链下规则，例如如何将消息传递给解决器以及针对意图固有的 DoS 攻击向量的保护机制。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0921/syn7ye63z9i6q8y" alt="详解ERC-7521草案：将用户意图添加至账户抽象钱包"></p>
+<p>这些意图标准应该自成一体地建立，独立于这个规范。我们预计随着意图格局变得更加成熟，出现优化的利基和新兴的用例，会产生具有额外功能的新意图标准。这些标准的采用和支持将由钱包开发者和意图求解器的社会共识以及最终用户的需求驱动。</p>
+<p>为了确保我们提议的 ERC 在早期阶段具有重要的功能，我们已经开发了一个基于资产的意图标准，以支持当前大多数区块链用例。我们将在公开环境中完善这个标准（以及这个 ERC），以适应生态系统的需求。</p>
+<h2 id="模糊但强大的意图结构">模糊但强大的意图结构</h2>
+<p>用户意图包含可以分解为两部分的主要数据：</p>
+<ul>
+<li>
+<p>在执行它们之前，由 Entry Point 合约用来与发送者验证消息的必要验证数据。</p>
+</li>
+<li>
+<p>由意图指定的 Intent Standard 特定的附加数据。</p>
+</li>
+</ul>
+<p>意图标准数据可以是任何内容，但总是被分解为单独的部分，称为意图段。</p>
+<p>Entry Point 合约不明确地理解数据是什么，但确实识别出了对段的划分。 Entry Point 合约调用 Intent Standard 合约一次处理一个段，并强制执行意图的段总是按指定的顺序处理。但是，Entry Point 允许在执行段之间处理其他意图。</p>
+<p>这些意图段通常由用户希望处理的操作或者检查某些条件是否得到满足组成。另外，一个 Segment 可以在处理过程中将数据传递给下一个 Segment。这些数据称为意图背景数据，在验证段间发生的更改以及避免重新计算有用数据方面非常有用。同样，充分利用这些数据由 Intent Standard 规范决定。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0921/pwlsd760kbvv6dt" alt="详解ERC-7521草案：将用户意图添加至账户抽象钱包"></p>
+<h2 id="结合意图以获得最大满意度">结合意图以获得最大满意度</h2>
+<p>在意图处理期间，意图能够对任何类型的条件提出不满意，无论是意外的低余额还是意图标准可能正在寻找的任何评估结果为假的条件。发生这种情况时，整个事务都会回滚，包括处理之前可能发生的不相关意图。</p>
+<p>只有当一组意图以让所有各方都感到满意的顺序提交和处理时，这些意图才被认为已花费，所产生的状态才被允许在链上持久化。正是这些意图组合构成了解决方案，并传递给 Entry Point 合约进行处理。</p>
+<p>然而，仅提交意图列表是不够的，因为不同意图的段可以以不同的顺序排列。因此，一个解决方案还指定了在处理期间应如何对不同意图片段进行排序（如何交错不同的意图段）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0921/2u9v0nwnrgjre6a" alt="详解ERC-7521草案：将用户意图添加至账户抽象钱包"></p>
+<p>求解过程的一部分通常包括求解器制定一个意图，以帮助满足一组其他意图，从而使它们能够在产生一些利润的同时最大限度地增加用户满意度。</p>
+<h2 id="结论增强意图驱动的区块链交互">结论：增强意图驱动的区块链交互</h2>
+<p>规范的重点是为智能合约钱包定义一个基本框架，以便它们连接并为用户解锁强大的意图表达，即使在格局继续发展的同时。将意图定义为更小的意图段的集合为用户提供了很好的体验，减少了用户需要签名的次数。意图分段和共享的背景数据也有助于在不使用大量 gas 的情况下解锁强大的功能。意图可以信任它们的所有段都将按顺序处理，而无需手动检查。</p>
+<p>通用用户意图开辟了一个全新的世界，现在才刚刚开始被开发。从简单的无 gas 代币兑换到更复杂的条件意图来自动化从冷钱包到热钱包的资金转移或通过单个签名消息进行每日币购买等过程，意图的可能性是巨大的！我们对资产基础意图标准的规范是使社区能够利用这一新框架的许多迭代中的第一个。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59646/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">详解Cosmos LSM：重新定义ATOM质押与流动性策略</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59581/">
+                <span class="next-text nav-default">详解Uniswap v4「截断式预言机」：概念、运行机制和作用</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是用户意图">什么是用户意图？</a></li>
+    <li><a href="#将用户意图添加到账户抽象中">将用户意图添加到账户抽象中</a></li>
+    <li><a href="#单一入口和无限意图标准">单一入口和无限意图标准</a></li>
+    <li><a href="#模糊但强大的意图结构">模糊但强大的意图结构</a></li>
+    <li><a href="#结合意图以获得最大满意度">结合意图以获得最大满意度</a></li>
+    <li><a href="#结论增强意图驱动的区块链交互">结论：增强意图驱动的区块链交互</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Trader Joe、Izumi、Maverick：L2头部流动性定制DEX机制分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文主要介绍在V3基础上对定价区间进行了策略优化的Dex" />
+<meta name="keywords" content="DEX, Layer 2" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/52446/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Trader Joe、Izumi、Maverick：L2头部流动性定制DEX机制分析" />
+<meta property="og:description" content="本文主要介绍在V3基础上对定价区间进行了策略优化的Dex" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/52446/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="Trader Joe、Izumi、Maverick：L2头部流动性定制DEX机制分析">
+<meta itemprop="description" content="本文主要介绍在V3基础上对定价区间进行了策略优化的Dex"><meta itemprop="datePublished" content="2023-06-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5026">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Trader Joe、Izumi、Maverick：L2头部流动性定制DEX机制分析"/>
+<meta name="twitter:description" content="本文主要介绍在V3基础上对定价区间进行了策略优化的Dex"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Trader Joe、Izumi、Maverick：L2头部流动性定制DEX机制分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-02">
+      2023-06-02
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5026 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Yilan，LD Capital </p>
+<h2 id="前言">前言</h2>
+<p>随着Uniswap V3许可证过期，许多集中流动性AMM（CLMM）的分叉项目开始兴起。“Uni v3-Fi”包括Dex（单纯的fork V3或在V3的基础上对定价区间进行定制的不同策略模型），收益增强类协议（Gammaswap），为解决V3无常损失的Option类及其他协议等，本文主要介绍在V3基础上对定价区间进行了策略优化的Dex — — Trader Joe v2、Izumi Finance和Maverick Protocol。</p>
+<h2 id="uni-v3的问题">Uni V3的问题</h2>
+<p>在Uniswap V3中，流动性是集中在特定的价格范围内的。这意味着如果资产的价格偏离了这个范围，就会出现所谓的“无常损失”（IL,Impermanent Loss）。无常损失是指相对于持有资产而言，流动性提供者在AMM中所遭受的损失。当价格偏离了流动性提供者所选择的价格范围时，无常损失可能会大幅增加，甚至超过原始资产的损失。</p>
+<p>而Uni v3的集中流动性导致的IL风险更大，这部分的解释涉及期权希腊字母概念中的gamma, Gamma是指标的价格变化相对于Delta值的变动速率。当Gamma较大时，意味着Delta对标的价格变动非常敏感，因此需要及时调整持仓以避免潜在损失，这被称为Gamma风险。在不考虑时间因素的情况下，可以说，当标的资产的波动率增大时，期权的价格也会相应增加，因为更高的波动性增加了期权实现收益的概率，因此市场对这样的期权要求更高的价格。</p>
+<p>当资产波动率大时，gamma风险也就越高，LP们承受的无常损失也就越大，因此需求的对无常损失的补偿也更多。因此 AMM 可以看成是内嵌了一个永续期权市场，而LP则暴露在gamma风险之下，承受无常损失的风险来获取交易手续费或挖矿收益。</p>
+<p>为了应对这个挑战，流动性提供者需要密切监控其提供的资产价格，并及时采取行动如撤销流动性并将资金重新分配到新的价格范围内，来减轻无常损失的影响。然而，这个过程是耗时且需要gas费用的，并且存在设置错误价格范围的风险。</p>
+<p>此外，Uniswap V3还面临其他一些问题。例如，流动性集中在特定价格范围内可能导致流动性碎片化，使得交易成本增加。此外，由于资产价格变动频繁，流动性提供者需要经常进行调整和管理，这对于大规模和频繁交易的LP来说可能是具有挑战性的。</p>
+<p>因此，虽然Uniswap V3可以提供更高的费用和年化收益率，但流动性提供者需要权衡这些潜在的挑战和风险。针对Uniswap V3存在问题的解决方案，可以分为以下几类：对无常损失的优化，对LP最佳做市方案的工具优化（也就是对不同风险偏好者提供多样性的添加流动性的选择方式工具），以及对LP NFT收益增强的策略内置优化等。</p>
+<p>本文主要分析的是对LP做市方案进行优化的三个DEX项目：Trader Joe、Izumi、Maverick。</p>
+<h2 id="trader-joe-v2">Trader Joe v2</h2>
+<p>Trader Joe V2的LB（Liquidity Book）对Uniswap V3的最大改进是引入了“Bin”的概念并使流动性分布可策略化。“Bin”是一种价格区间，作为流动性分布的单元，在Liquidity Book中，流动性被划分为离散的“Bin”单元。每个bin内的流动性遵循固定的汇率进行兑换。允许流动性提供者将资金集中在特定的价格范围内，从而避免滑点。这意味着交易在该价格范围内可以实现零滑点的执行，提高了交易的效率和成本效益。流动性分布可策略化是指LB Token的半同质化属性和垂直的流动性分布方向使得LP可以根据一定的策略来部署自己的流动性，而不仅仅是均匀分配在bin上。</p>
+<p>Trader Joe v2.1的Auto Pool于6月开始部署，The General是第一个将部署在AVAX-USDC（Avalanche）和ETH-USDC（Arbitrum）上的Auto-Pool。The General会自动重新平衡流动性位置，以最大化手续费收入；并对市场趋势和资产不平衡作出反应，使其能够适应大多数市场和环境。将来，The General也会用于其他流动性池。</p>
+<p>Auto-Pool将累积由流动性池收取的交易费用的份额。代币可以存入收益农场（将来发布）。Auto-Pool可以通过合作伙伴代币提供激励（将来发布）。每次重新平衡都会收取自动化费用，相当于年化利率4.5%。自动化费用用于支付运营成本，例如重新平衡时的gas费用。将来，自动化费用可能分发给sJOE质押者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0602/15_lr929kkwlw.png" alt="Trader Joe、Izumi、Maverick：L2头部流动性定制DEX机制分析"></p>
+<p>在不同的流动性分布的策略中进行部署，如果策略判断较为准确，也就是流动性落在选择区间的占比更多，LP获得的奖励也就更多。此外，动态swap手续费使得LP可以根据市场波动性收取不同的费用，从而更好地管理风险和收益。</p>
+<h2 id="izumi-finance">Izumi Finance</h2>
+<p>Izumi的AMM使用的是DL-AMM算法，一种新的离散集中流动性算法，具有类似于Uniswap V3的集中流动性做市商特征，但能够在任何固定价格上精确分布流动性，而不是一个价格范围。这使得iZiSwap在流动性管理方面更加可控，并且支持更多的交易方式，例如限价订单。</p>
+<p>除了Swap, Liquidbox也是Izumi Finance的核心产品之一。LiquidBox是一款基于Uniswap V3 NFT LP代币的流动性挖矿方案，通过不同的流动性激励模型来吸引流动性，让项目方能够更高效地设置交易对和流动性池，并在不同价格范围内提供不同的奖励。</p>
+<p>这些流动性奖励模型包括：</p>
+<p>1）集中流动性挖矿模型（Concentrated liquidity mining model），一般与xy=k模型相比，特定区间的资本效率高出50倍以上，而集中流动性通常会增加非稳定币对的无常损失，稳定币波动区间有限，对稳定币币对较为友好。</p>
+<p>2）单边非永久损失挖矿模型（One-sided non-impermanent loss mining model），具体操作为，当LP存入3000个USDC和3个ETH，izumi通过在Uniswap V3上（0，3）价格范围内放置3000个USDC来管理，当XYZ价格下跌用USDC形成购买订单。3个ETH被放置在izumi质押模块中以锁定流动性（质押部分不在Uniswap V3中），在ETH价格上涨时不会被动出售，从而不会对项目方造成无常损失或被动抛售压力。</p>
+<p>3）动态范围模型（Dynamic Range model），项目旨在激励流动性提供者围绕当前价格提供有效流动性。</p>
+<p>当用户将Uniswap V3 LP代币抵押到Izumi协议进行Farming时，LiquidBox会自动判断LP代币的价值范围是否在项目所有者设定的流动性激励范围内，该价值范围的设定旨在确保流动性提供者在所需的价格范围内提供流动性。</p>
+<p>这是为Uniswap v3 LP创造更多收益的策略，也类似于给项目方提供了一个帮助项目代币创建流动性的贿赂方式。同时存入LP NFT的群体基于自己对标的后市走势的判断，可以通过fixed range、dynamic range、 one sided的功能，进行流动性头寸的管理，在选择合适的情况下可以避免IL。</p>
+<h2 id="maverick-protocol">Maverick Protocol</h2>
+<p>Maverick AMM的自动流动性放置（ALP）机制与Uniswap V3类似，但是重要区别是ALP机制可以自动实现集中流动性的动态再平衡，以使得交易滑点低于非集中式AMM模型，但无常损失又低于集中式AMM模型（单面流动性机制减少无常损失的场景）。</p>
+<p>其关键机制是通过使用“Bin”来管理流动性。“Bin”是指价格的最小可用区间。在Maverick中，LP可以选择将其流动性添加到特定的bin中。LP可以选择四种不同的模式：Right模式，Left模式，Both模式和Static模式，来决定他们的流动性随价格变动的方式。</p>
+<p>当LP向bin中添加流动性时，LP必须以与bin中现有比例相同的方式添加基础资产和报价资产。LP将获得相应的LP代币，代表他们在该bin中的流动性份额。</p>
+<p>在Maverick中，当价格发生变动时，非静态（non-static）的bin可以根据价格变动向右或向左移动。当一个bin移动到与另一个相同类型的bin重叠的位置时，这两个bin会进行合并，合并后的bin将获得合并前两个bin的流动性份额。</p>
+<p>当LP想要从一个bin中移除流动性时，他们可以通过提供相应的LP代币来提取他们在该bin中的份额。如果bin是合并后的bin，LP需要进行递归计算，将他们的提取请求传递到合并链中的活跃bin，并按比例从合并bin的流动性份额中提取资产。</p>
+<h2 id="总结">总结</h2>
+<p>Trader joe v2以及v2.1做到了三个事情：1）无滑点的bin内交易。2）Liquidity Book引入了动态的swap手续费定价，费率将应用于每个bin中的swap金额，并按比例分配给该bin中的流动性提供者。这样LP可以通过手续费来对冲在高波动率市场下的无常损失。从AMM内置永续期权市场的角度来看，这样的设置也是合理的，用瞬时价格波动函数为高波动性定价，也就是类似期权市场中的期权金补偿给期权卖方（LP）。3）Auto pool自动化重新平衡流动性位置，以最大化手续费收入。后期还会引入类似Izumi Liquidbox的Farming strategy以及项目方建池激励流动性的功能。</p>
+<p>Izumi Finance做到了以下三点：1）精确的价值范围：LiquidBox允许项目所有者明确设置激励LP代币的价值范围。这意味着流动性提供者可以更加准确地了解他们所提供的流动性的价值范围，从而更好地管理风险和获得相应的奖励。2）增强的流动性管理：LiquidBox通过设置价值范围，使得流动性可以更好地集中在特定的价格上，而不仅仅是价格范围内。这种增强的流动性管理使得izumi协议更易于管理流动性，并支持更多的交易方法，如限价单。3）不同的流动性奖励模型对项目方来说是很好的流动性管理工具。</p>
+<p>Maverick通过提供不同的模式来调整流动性随价格变动的方式。当价格发生变动时，bin可以移动和合并，以保持流动性的有效性。这种机制使得LP能够更好地管理无常损失，并在价格变动中获得更好的收益。AMM 底层自动移动集中原生流动性、自定义集中流动性移动方向、LP费用自动复利以及允许项目方激励特定的价格范围这几项功能，使得 Maverick AMM为流动性提供者、DAO财库、以及项目开发团队等 DeFi 用户提供了最大化资本效率的可能以及最精准地流动性管理工具。</p>
+<p>从数据表现来看，Maverick过去一周volume为164mln, Trader Joe 为308mln, Izumi为54.16mln；TVL来看，Maverick 27.83mln，Trader Joe 140mln, Izumi 57mln。相较来看，Maverick在较低的TVL情况下，能够捕获更多的volume，资金效率非常高，而大部分的交易量由1inch路由也代表maverick的价格发现能力更强。</p>
+<p>与Uniswap V3相比，Trader Joe V2、Izumi和Maverick都是对集中流动性 (CLMM)模型的升级，并主要改进在于LP做市端。总结来看，几个协议的相同点为都引入了自定义价格区间的功能。这使得流动性提供者能够选择特定的价格范围来提供流动性。通过自定义价格区间，流动性提供者可以更精确地控制其提供的流动性，完成策略组合的建立和满足特定点位建仓需求，找到最佳的做市方案和策略。差异在于三个协议对流动性管理工具的定制程度和所在生态的发展阶段。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/52382/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SharkTeam：RWA赛道链上数据分析</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/52365/">
+                <span class="next-text nav-default">Uniswap社区未通过费用转换提案</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#uni-v3的问题">Uni V3的问题</a></li>
+    <li><a href="#trader-joe-v2">Trader Joe v2</a></li>
+    <li><a href="#izumi-finance">Izumi Finance</a></li>
+    <li><a href="#maverick-protocol">Maverick Protocol</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

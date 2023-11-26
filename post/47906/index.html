@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文探讨以太坊、Solana及Cosmos生态的MEV情况 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将强调解决 MEV 和相关激励调整挑战的各种方法，包括对权衡的比较分析。" />
+<meta name="keywords" content="ETH, SOLANA, EVM, COSMOS" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/47906/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文探讨以太坊、Solana及Cosmos生态的MEV情况" />
+<meta property="og:description" content="本文将强调解决 MEV 和相关激励调整挑战的各种方法，包括对权衡的比较分析。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/47906/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文探讨以太坊、Solana及Cosmos生态的MEV情况">
+<meta itemprop="description" content="本文将强调解决 MEV 和相关激励调整挑战的各种方法，包括对权衡的比较分析。"><meta itemprop="datePublished" content="2023-03-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3853">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文探讨以太坊、Solana及Cosmos生态的MEV情况"/>
+<meta name="twitter:description" content="本文将强调解决 MEV 和相关激励调整挑战的各种方法，包括对权衡的比较分析。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文探讨以太坊、Solana及Cosmos生态的MEV情况</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-01">
+      2023-03-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3853 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Natalie Mullins</p>
+<p>原文编译：深潮 TechFlow</p>
+<p>到目前为止，MEV 的话题几乎只集中在以太坊上。但是，本文将探讨 Solana 和 Cosmos 生态系统中的 MEV。<strong>本文将强调解决 MEV 和相关激励调整挑战的各种方法，包括对权衡的比较分析。</strong> 通过扩大范围，我们可以从正在运行的各种实践中学习，以更好地预测潜在的问题，并最终设计更好的解决方案。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_5gpbzgruyr.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<h2 id="eth">ETH</h2>
+<p>在以太坊上，金融应用的兴起成为围绕 MEV 进行更广泛研究和理解的催化剂。在 2019 年发表的具有开创性的 Flashboys 2.0 论文，不仅创造了 &ldquo;MEV &ldquo;这个短语，而且还阐明了这种现象在链上的具体表现形式。这是我们大多数人第一次接触到优先 Gas 拍卖（PGAs）或搜索器等概念。此后不久，Flashbots 成立，以解决与 MEV 相关的许多激励调整挑战。他们最初提出了三个要努力实现的核心目标：</p>
+<ul>
+<li>
+<p>照亮黑暗森林</p>
+</li>
+<li>
+<p>价值提取民主化</p>
+</li>
+<li>
+<p>分配利益</p>
+</li>
+</ul>
+<p>此后，他们的两个主要产品发布都实现了超过 90% 的网络采用，可以公平地说，这些目标也演变成指导原则，在很大程度上影响了以太坊区块空间市场的发展。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_nqngpa5l19.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_gecpbrbz0r.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<h3 id="flashbots-的核心产品">Flashbots 的核心产品</h3>
+<ul>
+<li>
+<p>Flashbots 拍卖（mev-geth + mev-relay）创建了一个私人交易池和链外密封竞价拍卖。这使得搜索者能够以捆绑的形式表达对 tx 排序的更精细的偏好，以及出价包含在块的顶部，而不会因为套利尝试失败而堵塞以太坊的公共 mempool，并使 Gas 费用严重上升。</p>
+</li>
+<li>
+<p>Flashbots Protect 是一个 RPC 端点，可以被添加到消费者钱包，如 MetaMask。这就把产品的好处扩展到了普通用户。</p>
+</li>
+<li>
+<p>MEV-Boost 的设计是为了迎接以太坊的合并（Merge），因为 MEV 预计将成为权益证明中越来越中心化的力量。它是提议者-构建者分离（PBS）的第一个实现，其目的是通过创造一个更加去中心化的、竞争性的区块建设市场，将区块 Builder 的角色与区块提议者的角色分开。</p>
+</li>
+<li>
+<p>MEV-Share（未发布）概述了一种协议的设计，该协议以私密且无需许可的方式将来自用户、钱包和/或应用程序的交易与搜索者进行匹配。以去中心化的方式对订单流进行访问和引入可编程隐私的概念，是该协议的关键长期目标。</p>
+</li>
+<li>
+<p>SUAVE（未发布）是一个即将发布的版本，旨在解决 ( 1) 独占订单流和 ( 2) 跨域 MEV 的剩余中心化权重。这个项目的细节很少，但似乎 SUAVE 将作为 EVM 生态系统的一个去中心化的内存池和排序层。它将采用加密的内存池，并向 MEV 供应链引入新的参与者：执行者——他们将竞争为用户提供最佳的执行。</p>
+</li>
+</ul>
+<h2 id="solana">Solana</h2>
+<p>和以太坊一样，Solana 的金融活动增长吸引了 MEV 活动，开始降低最终用户的体验。然而，与以太坊不同，在以太坊中，Gas 费用变得非常昂贵，Solana 的问题是由以下因素共同造成的：</p>
+<p>（1 ）极低的 Gas 费用。</p>
+<p>（2 ）缺乏费用市场。</p>
+<p>（3 ）缺乏一个次优的交易传播协议，在阻止网络垃圾邮件方面没有提供很多选择。</p>
+<p>在市场剧烈波动或流行的链上事件（如 NFT Mint）发生时，发送到网络的垃圾交易量有时非常大，以至于导致网络中断。</p>
+<p>有些人可能会想，为什么 Flashbots 产品套件不能简单地被重新用于 Solana。但重要的是，要考虑到 Solana 的架构设计与以太坊的架构设计截然不同，因此需要采用独特的方法。主要的区别例如包括 Solana 的速度（出块间隔 400 毫秒）、独特的数据传播协议、无内存池的交易转发、原生化的收费市场和并行的交易处理等。</p>
+<p>2022 年，Jito Labs 介入其中，采用特定于 Solana 生态系统的方法为其提供急需的 MEV 基础设施。 像 Flashbots 一样，他们在开始时考虑了几个关键目标：</p>
+<ul>
+<li>
+<p>最大限度地减少 MEV 的负面外部因素</p>
+</li>
+<li>
+<p>防止中心化</p>
+</li>
+<li>
+<p>分配 MEV 的奖励</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_q9vy3sle04.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<h3 id="jito-labs-的核心产品">Jito Labs 的核心产品</h3>
+<p>从那时起，Jito 一直是 Solana 上占主导地位的 MEV 解决方案提供商，并发布了许多产品，包括：</p>
+<ul>
+<li>
+<p>Jito-Solana 是第一个第三方 Solana 客户端，针对高效的 MEV 提取进行了优化。 与 mev-geth 非常相似，它支持交易集合，并能与 Jito Relayer 和 Jito Block Engine 无缝协作。</p>
+</li>
+<li>
+<p>Relayer 旨在为验证者在其 TPU（交易处理单元）和网络垃圾邮件之间提供一层保护。验证者可以运行他们自己的 Relayer 或使用由 Jito Labs 托管的版本。</p>
+</li>
+<li>
+<p>Block Engine 本质上是一个高性能的区块构建器——它对区块空间进行密封投标拍卖，并将最有利可图的交易合集转发给当前的领导者以立即执行。Block Engine 也是全球分布的，以提供低延迟的开放接入。</p>
+</li>
+</ul>
+<h3 id="搜索者工具">搜索者工具：</h3>
+<ul>
+<li>
+<p>Jito Mempool &ndash; 尽管 Solana 没有传统意义上的 mempool，但它允许搜索者订阅 &ldquo;感兴趣的账户&rdquo;，并使用捆绑从他们的交易中自动提取 MEV，从而允许更主动的搜索方法。</p>
+</li>
+<li>
+<p>ShredStream &ndash; 在 Jito-Solana 客户端上运行，它将碎片直接发送到本地连接的区块引擎，并允许搜索者访问由领导者转发的碎片，并将延迟减少数百毫秒。(碎片是一个区块（最小的单位）的碎片，在验证器产生区块时不断被发射出来。它们根据质押权重的洗牌方式被分配到网络中，因此拥有较高权重的服务器可能会更快地收到碎片，这在从事高频交易时可以带来有意义的优势）。</p>
+</li>
+<li>
+<p>MEV 支付和分配使验证人能够以空投的形式将 MEV 奖励无缝地分配给他们的质押仓位。</p>
+</li>
+</ul>
+<p>Chorus One 是所有主要加密货币生态系统中最大的节点运营商之一，最近还发布了一份白皮书，概述了 Solana-MEV 的原型。这是一种经过修改的客户端，旨在进一步以去中心化的方式进行验证器的提取，而不会给系统增加不必要的延迟。该客户端将使验证者很容易在每批用户交易后检查潜在的 MEV 机会，并插入他们自己的交易以获取价值。</p>
+<h2 id="cosmos">Cosmos</h2>
+<p>尽管可以说 Cosmos 拥有最初级的 DeFi 生态系统，但它有望成为区块空间市场设计和跨域 MEV 试验的沃土。</p>
+<p>与交易和借贷量已经达到数十亿美元的以太坊、以及低延迟金融应用程序为主的 Solana 不同，Cosmos 似乎在 MEV 方面进展缓慢。</p>
+<p>这有很多可能的原因，但最明显的解释是 Tendermint 客户端默认使用先进先出（FIFO）排序，以及缺乏金融活动。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_zi7rcnut5v.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<p>直到 2021 年底 Osmosis 的发布，甚至到 2022 年 5 月 Terra 的崩溃，人们才开始注意到并测量在 Cosmos 生态系统中捕获的有意义数量的 MEV。将这些事件与费用暴跌等熊市条件结合起来，就很容易理解为什么验证者开始考虑其他选择以试图保持盈利。</p>
+<p>因此，一些 Cosmos 原生 MEV 解决方案供应商开始进入这个领域，最著名的是 Skip Protocol 和 Mekatek。</p>
+<h3 id="mekatek-的核心产品">Mekatek 的核心产品</h3>
+<ul>
+<li>Zenith 旨在为 Cosmos 中的区块构建创建一个开放的市场。 搜索者可以提交交易包并争夺区块内的优先权，而验证者可以将区块构建外包给 Zenith 并出售他们的区块空间以获得最大利润。</li>
+</ul>
+<h3 id="skip-protocol-的核心产品">Skip Protocol 的核心产品</h3>
+<ul>
+<li>
+<p>Mev-Tendermint 是 Tendermint 的修改版，它允许验证者接受交易捆绑，并引入了密封投标拍卖，以便在区块的顶部列入（Skip 不建立整个区块，只建立顶部）。</p>
+</li>
+<li>
+<p>Skip-Select 通过允许完全可配置的、治理驱动的区块空间拍卖，将 Cosmos 的主权带到了 MEV。它使验证者可以轻松地决定如何分配 MEV 奖励、给定区块的多少百分比的构建应该外包给 Skip、是否保护区块免于抢先/三明治的影响等等。Skip-Select 还为未来通过链上治理对协议内 MEV 偏好进行投票和实施奠定了基础，这是由 Cosmos SDK 和 ABCI++（应用程序区块链接口）实现的。</p>
+</li>
+<li>
+<p>Skip Secure 与 Flashbots Protect 非常相似&ndash;私人交易 RPC，终端用户和前端可以利用其进行私人执行。</p>
+</li>
+<li>
+<p>Proto-Rev 可以说是 Skip 最激动人心的产品——一种定制模块，用于将某些 MEV 首选项纳入核心协议。Proto-rev 的第一次实施是为了帮助 Osmosis 在内部获取一些有意义的基于套利的 MEV 奖励，但该服务将在每条链的基础上提供。</p>
+</li>
+</ul>
+<p>虽然该项目公开的信息较少，但 FairBlock 正在建立基于 IBE 的解决方案（基于身份的加密），以解决 MEV 相关的挑战。该团队计划将 Cosmos Hub 的 Interchain Security 用于他们的消费者链，该链将用于管理和分发验证器解密密钥。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_njv4z5616q.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_k2uno7vz8p.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0301/6_cc6szye32h.png" alt="区块空间市场结构概述：探索以太坊、Solana及Cosmos生态的MEV情况"></p>
+<h2 id="关键点">关键点</h2>
+<ul>
+<li>
+<p>PBS 的成功——区块构建者分离（PBS）的概念已经扩散至以太坊生态之外，它的某些版本现在存在于 Cosmos 和 Solana 生态之中；</p>
+</li>
+<li>
+<p>延迟之战——由于 Solana 网络架构问题，Jito Labs 对 MEV 的提取采取了延迟敏感的方式，这为在美国或欧洲之外运行服务器或验证器的用户带来了优势；</p>
+</li>
+<li>
+<p>Enshrined Solutions——由于 Cosmos 社区对其技术栈的主权和自治水平，通常更容易将 MEV 解决方案（如 PBS）嵌入核心协议中。这有很多原因，包括尽管 Cosmos 治理通常具有挑战性，但它可以在链上进行，而且无需考虑变化将如何影响其他应用程序。而在技术方面，诸如 ABCI++ 的最新版本创新允许在基于 Cosmos 应用程序如何直接与共识层通信方面有新的可能性，如允许阈值加密等功能；</p>
+</li>
+<li>
+<p>跨域 MEV——正如 Flashbots 在 SUAVE 手册中所述，未来几年内获取跨域 MEV 的激励措施会有所增加，并可能对各类生态系统经济安全模式构成验证威胁。由于 Cosmos 为跨链而建，可能会暴露在跨域 MEV 的中心化力量之下，已经有一些大型实体在多个 Cosmos 链上运行验证器，如果不加以控制，将导致只有少数且资本极其充足的验证器控制着各种链上有意义的质押份额的世界。</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/47919/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文了解 Radiant：全链货币市场</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/47870/">
+                <span class="next-text nav-default">《数字中国规划》 明确数字赛道“新规则”</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#eth">ETH</a>
+      <ul>
+        <li><a href="#flashbots-的核心产品">Flashbots 的核心产品</a></li>
+      </ul>
+    </li>
+    <li><a href="#solana">Solana</a>
+      <ul>
+        <li><a href="#jito-labs-的核心产品">Jito Labs 的核心产品</a></li>
+        <li><a href="#搜索者工具">搜索者工具：</a></li>
+      </ul>
+    </li>
+    <li><a href="#cosmos">Cosmos</a>
+      <ul>
+        <li><a href="#mekatek-的核心产品">Mekatek 的核心产品</a></li>
+        <li><a href="#skip-protocol-的核心产品">Skip Protocol 的核心产品</a></li>
+      </ul>
+    </li>
+    <li><a href="#关键点">关键点</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

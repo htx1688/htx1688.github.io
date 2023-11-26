@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          金色观察｜万字长文详解Tornado Cash如何运作 究竟什么受制裁 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Tornado Cash是什么？它是如何运作的？以及究竟是什么受到了制裁" />
+<meta name="keywords" content="Tornado Cash" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41964/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="金色观察｜万字长文详解Tornado Cash如何运作 究竟什么受制裁" />
+<meta property="og:description" content="Tornado Cash是什么？它是如何运作的？以及究竟是什么受到了制裁" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41964/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-26T00:00:00+00:00" />
+
+<meta itemprop="name" content="金色观察｜万字长文详解Tornado Cash如何运作 究竟什么受制裁">
+<meta itemprop="description" content="Tornado Cash是什么？它是如何运作的？以及究竟是什么受到了制裁"><meta itemprop="datePublished" content="2022-08-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="13125">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="金色观察｜万字长文详解Tornado Cash如何运作 究竟什么受制裁"/>
+<meta name="twitter:description" content="Tornado Cash是什么？它是如何运作的？以及究竟是什么受到了制裁"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">金色观察｜万字长文详解Tornado Cash如何运作 究竟什么受制裁</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-26">
+      2022-08-26
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 13125 字 -
+        预计阅读 27 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>本文为加密货币研究和宣传机构CoinCenter 8月25日发表的关于Tornado Cash工作机制的文章，作者为Alex Wade，Michael Lewellen和Peter Van Valkenburgh。</p>
+<h2 id="一简介">一、简介</h2>
+<p>2022年8月，美国财政部外国资产控制办公室 (OFAC) 制裁了Tornado Cash，将45个以太坊地址添加到受制裁者的特别指定国民 ( Specially Designated Nationals，SDN) 名单中。</p>
+<p>本文档旨在帮助读者了解Tornado Cash是什么、它是如何运作的，以及究竟是什么受到了制裁。但在我们进入Tornado Cash之前，让我们回顾一下以太坊、智能合约和去中心化的一些关键概念。</p>
+<h2 id="二背景什么是以太坊其用户是谁什么是智能合约">二、背景：什么是以太坊，其用户是谁，什么是智能合约？</h2>
+<p>以太坊是一个合作运行的、全球性的、透明的数据库。通过共同努力，来自世界各地的参与者维护了以太坊地址的公共记录，其中包括用户帐户和智能合约应用程序。这些记录像现代台式计算机的用户帐户和软件一起工作，除了以太坊是：</p>
+<ul>
+<li>
+<p>合作运行：以太坊的基本运作来自其全球参与者的集体努力。没有任何一方可以改变以太坊的运作方式。</p>
+</li>
+<li>
+<p>可公开访问：世界上任何地方的任何人都可以与以太坊、其用户及其应用程序进行交互。</p>
+</li>
+<li>
+<p>透明：世界上任何地方的任何人都可以下载和查看以太坊数据库中的所有信息。</p>
+</li>
+</ul>
+<p>任何人都可以成为以太坊的用户。创建帐户很简单，不需要电话号码、电子邮件或实际地址。取而代之的是，用户安装一个名为“钱包”的应用程序，该应用程序会为该用户生成一个称为“地址”的唯一标识符和一个称为“私钥”用于身份验证的类似密码的字符串。就像一个拥有多个电子邮件地址的人一样，以太坊的用户可以根据需要创建和使用任意数量的地址。然而，与电子邮件不同的是，以太坊的用户并不是传统意义上的“客户”。他们是在开源软件上运行的全球计算系统的参与者，该软件在没有第三方监督的情况下运行。同样重要的是要注意，由同一用户控制的以太坊地址不一定彼此公开链接；它们只是属于拥有相应私钥的用户的惟一标识符。</p>
+<p>通过分享地址，用户可以从世界任何地方的任何人那里接收代币（例如像以太币这样的加密资产）。与传统的支付服务不同，在以太坊上发送和接收代币不需要中介。相反，发送者广播他们转移代币的意图，使用相应的私钥对他们的消息进行数学签名，以太坊网络用新的余额共同更新发送者和接收者地址的全局记录。在此过程中，第三方不会保管被转移的代币。</p>
+<p>除了发送和接收代币之外，用户帐户还可以与智能合约交互，智能合约是扩展以太坊功能的应用程序。当开发人员编写智能合约时，他们决定智能合约将支持哪些操作以及这些操作必须遵循哪些规则。这些规则和操作是使用广播到以太坊网络的代码编写的，就像上面描述的代币转账一样。一旦将智能合约的代码添加到以太坊的记录中，它就会收到一个唯一的地址，并且任何用户都可以与之交互以自动执行它支持的规则和操作。</p>
+<p>从本质上讲，智能合约是任何人都可以部署到以太坊的开源应用程序。就像以太坊的其他部分一样，任何人都可以在任何地方查看和使用智能合约，而无需依赖中介。</p>
+<p>人和智能合约都可以拥有以太坊地址；关键区别在于，当一个人拥有地址时，他们拥有控制发送到该地址的任何代币的私钥。该人最终将决定是否以及何时使用这些代币进行任何交易。当智能合约有地址时，写在智能合约代码中的规则和操作控制代币。它们可以是简单的规则（例如自动发回代币），或者更复杂的规则。可能存在包括人工操作和人工决策的规则（例如如果这些人为控制的地址中有5个发送签名消息表示他们同意，则将代币发回）。然而，这些规则也可能完全和永久地不受任何人的控制。在这种情况下，发送到该地址的任何令牌也是如此，直到或除非合同根据规则将它们送回给某些人。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/8_0zverfwi0k.png" alt="uU2A7LdYyiSwLkqaHio9aJLPawkP2jgPwCgJNwf3.png" title="6495729"></p>
+<p>默认情况下，智能合约是不可变的，这意味着一旦部署，任何人都无法删除或更新它们。<strong>智能合约的开发人员可以（在合约代码中）包含更新功能的能力作为支持的操作（例如，这个人工控制的地址可以在未来重写合约）</strong> 。但是，这样的操作必须在智能合约部署之前包含在智能合约的代码中（即发布到以太坊网络）。如果在部署之前不包含可更新性，任何人都无法修改智能合约。也可以通过将更新功能的权限转移到没有相应私钥的占位符（placeholder）以太坊地址来撤销更新功能的能力。这个占位符被称为“零地址”。一旦更新合约的能力被撤销，它就不能被收回，合约也不能再被改变。</p>
+<p>与传统金融不同，以太坊的记录是完全透明的：任何人都可以下载和查看其用户账户的余额和交易历史。尽管用户地址是假名的，但如果真实世界的身份与用户地址相关联，则可以追踪该用户的完整财务历史。以太坊的透明度对于可审计性很重要（例如验证记录更新是否有效）。然而，这种透明性也让用户难以保护自己的个人信息。默认情况下，今天的偶然交易记录（例如在机场支付Wi-Fi费用）直接指向早期交易记录，其中可能包括同一用户很久以前进行的任何私密、赤裸或敏感的交易。</p>
+<p>在智能合约可能支持的许多不同应用程序中，它们还可能为用户提供一种途径，以在与金融系统交互时重新获得他们期望的隐私。这种隐私的核心是<strong>使用智能合约来打破公共记录链</strong> ，否则这些记录会将你今天的交易与过去进行的每笔交易联系起来。这就是Tornado Cash。</p>
+<h2 id="三tornado-cash智能合约应用">三、Tornado Cash：智能合约应用</h2>
+<p>Tornado Cash是一个为以太坊用户提供隐私保护的开源软件项目。与许多此类项目一样，Tornado Cash不是法律实体，而是由不同贡献者群体多年来开发的几个开源软件库。这些贡献者已发布并提供Tornado Cash作为以太坊区块链上的智能合约集合作为一般用途。</p>
+<p>正如我们将解释的那样，其中一些智能合约已被OFAC制裁。然而，<strong>Tornado Cash隐私工具的核心是Tornado Cash pools</strong> ，它们只是OFAC制裁的地址的一个子集。每个Tornado Cash pool都是部署到以太坊的智能合约。与其他智能合约一样，pool合约通过特定操作扩展了以太坊的功能，以太坊的任何用户都可以根据Tornado Cash合约代码中定义的规则执行这些操作。</p>
+<p>本节将描述这些pool是如何工作的。特别是，它将描述使这些池能够自主运行的关键创新：一种被称为“零知识证明”的隐私保护数学应用。</p>
+<p>后续部分将描述OFAC制裁的具体地址以及它们的作用。最后的附录将列出所有受制裁的合约及其显著特征。</p>
+<h3 id="tornado-cash核心合约pools">Tornado Cash核心合约：Pools</h3>
+<p>Tornado Cash pools是智能合约，使用户能够在以太坊上进行私秘交易。当用户使用时，Pool将自动执行两种支持的操作之一：“存款”或“取款”。这些操作一起允许用户从一个地址存入代币，然后将同样的代币提取到另一个地址。至关重要的是，即使这些存款和取款事件公开发生在以太坊的透明分类账上，存款和取款地址之间的任何公共链接都被切断了。用户可以提取和使用他们的资金，而不必担心将他们的整个财务历史暴露给第三方。</p>
+<p>为了支持存款和取款操作，这些智能合约编码了进一步定义其功能的严格规则。这些规则自动应用于存款和取款操作，以维护所有Tornado Cash pool共享的一个非常重要的属性：用户只能提取他们最初存放的特定代币。</p>
+<p>此属性会自动针对池的所有操作强制执行，并确保Tornado Cash池完全是非托管的。也就是说，存入并随后提取代币的用户保持对其代币的完全所有权和控制权，即使它们混入过池子。用户在任何时候都不需要将其代币的控制权交给任何人。</p>
+<p><strong>Tornado Cash池的一个关键原则是用户的隐私在很大程度上来自许多其他用户同时使用该池。</strong> 如果池中只有一个用户，那么用户的存款和取款地址之间的链接是否被切断并不重要：简单的推论就会清楚地知道提取的代币来自哪里。相反，许多用户同时使用池。可以把它想象成银行的保险箱室。任何人都可以去那个房间的一个带锁的盒子里存放贵重物品，并且假设锁是好的，只有拥有钥匙的人才能取回这些贵重物品。但是，除了安全性之外，这可能会或可能不会增强隐私。如果只看到一个人进出房间，那么我们就知道那个房间里的任何贵重物品都是他们的。另一方面，如果，许多人经常进出房间，那么我们无法知道谁在哪个箱子里控制了哪些贵重物品。通过保证用户只能提取他们最初存入的代币的属性，许多用户可以同时使用这些池子，并保证没有其他人会收到他们的代币。</p>
+<p>传统上，这些保证由托管服务提供：例如银行的保险箱，或在其他加密货币服务中运行“混币服务”的一群人。像Blender.io这样的混币服务直接从他们的客户那里接受代币，聚合和混合它们，然后将资金返还给他们的客户（在这个过程中通常会收取一些费用）。在中间聚合和混合阶段，有问题的资金完全由混币服务运营商控制并被混合。在混合过程的最后阶段，用户将直接从无数其他也使用该服务的用户那里获得资金。</p>
+<p>相比之下，Tornado Cash池没有托管运营商，用户只提取他们最初存入的代币（而不是来自服务的其他用户的代币混合）。这之所以成为可能，是因为存款和取款操作的重要属性，这些操作是通过使用称为“零知识证明”的隐私保护数学分支自动执行的。” 这种零知识密码学包含在 Tornado Cash的智能合约代码中，构成了存款和取款操作的基础。</p>
+<h3 id="零知识证明">零知识证明</h3>
+<p>回顾之前的观点，以太坊是透明的：任何人都可以查看任何用户账户的交易历史和余额。同样，任何人都可以查看智能合约应用程序的交互历史、余额和代码。如果用户使用智能合约执行操作，这种交互就会成为永远记录在以太坊公共记录中的事实，任何人都可以调用和检查。那么，用户如何可以存入Tornado Cash池，然后再提取到不同的地址，而不会与任何观察以太坊公共记录的人建立明显的联系呢？</p>
+<p>答案在于零知识证明。零知识证明是一种加密方法，通过该方法，一方（“证明者”）可以向另一方（“验证者”）证明给定的陈述是真实的，而证明者无需传达该陈述之外的任何其他信息。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/8_p5dm6oa9il.png" alt="YcuqKPT1FM7C5PCelWGuykC7z4afGkWTJ2x5DuJw.png" title="6495730"></p>
+<p><strong>在Tornado Cash，“证明者”是用户从池中提取代币，而“验证者”是Tornado Cash池合约之一</strong> 。当用户使用池子智能合约撤回其代币时，用户必须提供零知识证明。池的代码自动检查输入证明，仅在证明有效时才处理提款。用户究竟要证明什么陈述以及他们如何创建证明稍微复杂一些，需要在存款过程中更详细一些。</p>
+<h3 id="池子存款流程">池子存款流程</h3>
+<p><img src="https://img.bibiqing.com/news/2022/0826/8_irrr21jqoy.png" alt="CJiywz3I7p4StWxy2aI9M4BYotTSyYvBtIajJv3v.png" title="6495731">当用户想要存入代币时，他们首先会生成一个“存款票据”（只有用户知道的一长串数字）。这是在用户自己的计算机上完成的，永远不会公开共享。接下来，用户提示Tornado Cash pool 合约处理存款。除此提示外，用户还提供其存款票据和存款代币的哈希（或编码形式）。池子智能合约自动将编码注释记录为其他用户编码注释的公共列表中的新条目。至此，充值用户已经完成了第一部分的流程，并保留了存款票据，作为稍后提取代币的收据。</p>
+<h3 id="池子取款流程">池子取款流程</h3>
+<p><img src="https://img.bibiqing.com/news/2022/0826/8_s7278nhwna.png" alt="KhHuDX4JXWCFRqzfnQ3NwsSzFeVI2iWcyNirYK7H.png" title="6495732"></p>
+<p>当用户准备提取他们的代币时，他们首先将存款票据分成两半。一侧像“秘钥”，另一侧像“锁”。之后，用户提示Tornado Cash智能合约取款。除了提示，用户还提供：</p>
+<ul>
+<li>
+<p>“锁”的哈希（或编码形式）</p>
+</li>
+<li>
+<p>使用“秘钥”和“锁”生成的零知识证明</p>
+</li>
+</ul>
+<p>池子智能合约使用这些输入来自动验证（即证明）以下内容：</p>
+<p>1、零知识证明是使用“秘钥”生成的。它对应于池子的公开编码票据列表中的现有编码票据之一（即证明被提取的代币先前是由某人存入的），和它具有完全相同的“秘钥”。</p>
+<p>2、相同的证明也对应于与证明一起提供的“锁”的编码形式（即证明提取它们的人必须是存放它们的同一个人）。</p>
+<p>3、提交的“锁”之前没有提交（即相关存款尚未被提取）。</p>
+<p>假设证明得到验证，池子智能合约会自动：</p>
+<p>1、向用户发送他们的代币。</p>
+<p>2、在其他用户的编码锁的公共列表中记录编码的“锁”，确保相同的代币不能再次被取走。</p>
+<p>至关重要的是，在执行上述操作的同时，永远不会透露以下内容：此证明对应于哪个特定的编码票据（即，在Tornado Cash的所有储户中，谁现在正在取款）。</p>
+<h3 id="tornado-cash可以删除或更新吗如果是这样由谁">Tornado Cash可以删除或更新吗？如果是这样，由谁？</h3>
+<p>如前所述，对于大多数读者来说，Tornado Cash是Tornado Cash智能合约的核心子集的代名词：Tornado Cash pools。这些合约中的绝大多数是不可变的。也就是说，它们无法被任何人更新或删除。可在附录A中找到已被制裁的、不可变的Tornado Cash pool完整列表。</p>
+<p>请注意，其中许多池曾一度扮演“运营者（operator）”角色。操作员角色最初由0xDD4c…3384担任，又名Gitcoin Grants：Tornado.cash，这是另一个受制裁的地址。该角色为其持有者提供了两个权限：</p>
+<ul>
+<li>
+<p>updateVerifier：用于更新智能合约使用的“验证者”。本质上，此权限可用于修改合约处理零知识证明的方式。</p>
+</li>
+<li>
+<p>changeOperator：用于将“运营者”权限转移到另一个地址，或通过将“运营者”权限转移到零地址来完全撤销“操作员”权限。</p>
+</li>
+</ul>
+<p>2020年5月，updateVerifier权限与changeOperator权限一起对Tornado Cash pool进行了最终更新。这将所有池子的零知识证明处理器更新为最终版本，其中包含1100多名社区参与者的贡献。此外，本次更新通过使用changeOperator将权限转移到零地址，撤销了“运营者”权限。实际上，2020年5月进行的更新巩固了社区的偏好，并确保无法进行进一步的更改。</p>
+<p>SDN列出的少数池子仍然拥有“运营者”权限。其中，两个属于非常古老、现已未使用的 Tornado Cash版本。其余的池子要么具有更新的、不可改变的版本，要么使用得很少，以至于在2020年5月的最终更新期间它们很可能被忽视了。剩下的八个池子，大部分都没用过，用过的池子在过去三年内只用过一两次。附附录C中有一份保留运营者权限的过时的Tornado Cash池子的完整清单。</p>
+<h3 id="tornado-cash辅助合约和控制">Tornado Cash辅助合约和控制</h3>
+<h4 id="治理和torn代币">治理和TORN代币</h4>
+<p>池子智能合约代表Tornado Cash应用程序的核心，该应用程序保持不变且不受任何一方的控制。然而，OFAC的制裁还包括辅助智能合约，为社区持续维护和使用Tornado Cash提供协调机制。其中一些合约今天未使用，属于旧版本的Tornado Cash。与Tornado Cash的社区维护相关的OFAC制裁的智能合约的完整列表可在附录B中找到。</p>
+<p>SDN清单包括两个至今仍在使用的主要合约：</p>
+<ul>
+<li>
+<p>Tornado Cash (Router)：最新Tornado Cash池的注册表，与当前版本的Tornado Cash 一致。用户可以选择通过路由器合约与Tornado Cash池进行交互，从而确保他们的存款和取款操作使用最新的代码进行处理。</p>
+</li>
+<li>
+<p>Tornado Cash (Relayer Registry) : 一个为Tornado Cash用户提供中继辅助提款服务的运营者注册表。用户可以选择通过中继器处理他们的提款，这可以提供额外的隐私。</p>
+</li>
+</ul>
+<p>与池子智能合约不同，Router和Relayer Registry支持一些可更新的功能。但是，更新这些合约的权限不是由人持有，而是由另一个智能合约持有。该智能合约，也称为Tornado Cash: Governance，它定义了决定如何更新Router和Relayer Registry的规则和操作。</p>
+<p>简而言之，Tornado Cash: Governance规定这些智能合约的更新是在社区的要求下处理的，社区公众投票来确定应该进行哪些更新以及何时更新。任何TORN代币的持有者都可以参与这些投票。TORN是一种建立在以太坊上的ERC20代币，社区明确使用它来对治理提案进行投票。以太坊的任何用户都可以购买TORN代币并参与此过程。</p>
+<p>请注意，虽然此过程允许更广泛的以太坊社区参与Tornado Cash的开发和维护，但此过程的任何部分都不允许更新或删除Tornado Cash池智能合约。此外，参与Tornado Cash: Governance流程是完全可选的：用户可以使用Tornado Cash池，而无需参与、监督或与Tornado Cash: Governance流程进行交互。</p>
+<p>尽管Tornado Cash: Governance和TORN代币合约是Tornado Cash软件生态系统的一部分，但两者都没有被添加到OFAC的SDN列表中。</p>
+<h4 id="relayer">Relayer</h4>
+<p>如前所述，“Relayer”是为Tornado Cash用户提供可选服务的独立运营商。</p>
+<p>默认情况下，当用户提示Tornado Cash pool合约取款时，取款账户需要已经有ETH才能支付以太坊网络来处理智能合约的操作。但是，在取款之前将以太币发送到提款账户可能会在用户的存款和提款账户之间创建一个链接。</p>
+<p>Relayer允许用户无需预先为其提款账户注资再取款，这有助于用户在取款时保持隐私。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/8_nq9wswnsca.png" alt="Ni4N9LihjJefvNnfN5W5wiPEaaVv0IXnDbD8KNbo.png" title="6495736">用户从公共Relayer Registry中选择一个Relayer，这是另一个被制裁的Tornado Cash智能合约。然后，用户使用他们的取款账户签署授权Relayer辅助提款的交易。用户将此交易发送给他们选择的Relayer，Relayer代表他们处理提款，并在此过程中赚取费用。请注意，即使他们代表用户处理提款，Relayer也永远不会保管用户的代币；智能合约确保提取的代币只发送到用户的提款账户。</p>
+<p>OFAC没有专门将任何中继地址添加到SDN列表中，但它已将包含中继者注册表的智能合约添加到列表中。</p>
+<h4 id="合规工具">合规工具</h4>
+<p>Tornado Cash旨在使以太坊的用户能够保护他们的隐私。Tornado Cash并没有暴露他们完整的财务历史，而是让用户控制他们的个人信息：共享什么以及与谁共享。然而，维护隐私和保持对个人信息的控制并不需要以不遵守法律义务为代价。</p>
+<p>为此，Tornado Cash的开发人员创建了Tornado Cash合规工具（Tornado Cash Compliance Tool）。用户向该工具提供在池子存款过程中生成的原始“存款票据”，以创建一份PDF报告，提供代币原始来源的证明。尽管Tornado Cash池合同切断了用户存款和取款地址之间的公共链接，但合规工具允许用户有选择地“撤销”这种切断，以便向第三方提供可追溯性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/8_jcve4ikfju.png" alt="HYEd7b5y1WAF5xovkuAM5TWxv26Z9crH83MfYxiO.png" title="6495737">合规工具不是智能合约。但是，与本文中描述的其他软件一样，Compliance Tool也不是 Tornado Cash开发人员提供的服务；它是一个任何人都可以使用的开源工具。</p>
+<h3 id="其他tornado-cash智能合约和地址">其他Tornado Cash智能合约和地址</h3>
+<p>最后，受制裁地址中有两个是捐赠地址。这些地址过去曾用于筹集资金，以支持为Tornado Cash提供支持的隐私软件的开发。虽然某些人或实体确实控制发送到这些地址的代币，但据我们所知，这些代币不会出于隐私目的而混合或重新路由。它们只是发件人的礼物，用于支持收件人进行的软件开发工作。OFAC批准的捐赠地址的完整列表可在附录D中找到。</p>
+<p>总的来说，虽然OFAC列出的少数合约确实保留了人为控制的元素，但它们都不是Tornado Cash隐私工具的关键，而且它们都没有控制用户代币。核心隐私工具——池子合约——不受任何个人或团体的控制；它们只是广泛分布的计算机代码，由以太坊网络根据严格且不可更改的规则执行。</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li>
+<p>Tornado Cash智能合约允许用户将他们的代币存入并随后将其提取到另一个地址。</p>
+</li>
+<li>
+<p>即使任何人都可以观察到用户存入或取出代币，但他们无法确定哪些取款对应于哪些存款。</p>
+</li>
+<li>
+<p>这些操作被定义为智能合约代码，无需任何中介或第三方即可自动执行。</p>
+</li>
+<li>
+<p>用户始终保留对其资金的控制权，并且只能提取他们最初存入的代币。</p>
+</li>
+<li>
+<p>没有人控制这些Tornado Cash智能合约的运行，也没有人有能力在未来改变它们的运行。</p>
+</li>
+<li>
+<p>一些OFAC制裁的地址保留了一定程度的人工控制。但是，这些地址不是Tornado Cash隐私操作的核心，Tornado Cash核心在不可变地址中，也无法控制任何用户代币。</p>
+</li>
+</ul>
+<h2 id="附录受制裁地址分类">附录：受制裁地址分类</h2>
+<p>附录列出了OFAC制裁的所有地址。已根据它们在Tornado Cash应用程序中提供的功能进行分类。</p>
+<p>列出的每个地址都包含以下信息：</p>
+<ul>
+<li>
+<p>名称：制裁地址的名字。请注意，这些名称并非来自Tornado Cash开发人员，它们来自第三方服务Etherscan，其网站可用于显示有关以太坊当前状态的信息。列出的名称旨在方便参考，并不一定反映社区或Tornado Cash开发人员的观点。</p>
+</li>
+<li>
+<p>描述：对每个地址所指内容的简短描述。</p>
+</li>
+</ul>
+<h3 id="a不可改变的tornado-cash池列表">A：不可改变的Tornado Cash池列表</h3>
+<p><strong>0x12D66f87A04A9E220743712cE6d9bB1B5616B8Fc</strong></p>
+<p>名称： Tornado.Cash：0.1 ETH</p>
+<p>描述：一个Tornado Cash pool，允许以0.1 ETH为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0x47CE0C6eD5B0Ce3d3A51fdb1C52DC66a7c3c2936</strong></p>
+<p>名称： Tornado.Cash：1 ETH</p>
+<p>描述：一个Tornado Cash pool，允许以1 ETH为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0x910Cbd523D972eb0a6f4cAe4618aD62622b39DbF</strong></p>
+<p>名称： Tornado.Cash：10 ETH</p>
+<p>描述：一个Tornado Cash pool，允许以 10 ETH 为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0xA160cdAB225685dA1d56aa342Ad8841c3b53f291</strong></p>
+<p>名称： Tornado. Cash：100 ETH</p>
+<p>描述：一个Tornado Cash pool，允许以100 ETH为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0xD4B88Df4D29F5CedD6857912842cff3b20C8Cfa3</strong></p>
+<p>名称： Tornado.Cash：100 DAI</p>
+<p>描述：一个Tornado Cash pool，允许以100 DAI为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0xFD8610d20aA15b7B2E3Be39B396a1bC3516c7144</strong></p>
+<p>名称： Tornado.Cash：1000 DAI</p>
+<p>描述：一个Tornado Cash pool，允许以1000 DAI为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0x07687e702b410Fa43f4cB4Af7FA097918ffD2730</strong></p>
+<p>名称： Tornado.Cash：10000 DAI 2</p>
+<p>描述：一个Tornado Cash pool，允许以10000 DAI为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0x23773E65ed146A459791799d01336DB287f25334</strong></p>
+<p>名称： Tornado.Cash：100000 DAI</p>
+<p>描述：一个Tornado Cash pool，允许以100000 DAI 为单位进行存款和取款。</p>
+<p>运营者：无（不包括功能）</p>
+<p><strong>0x22aaA7720ddd5388A3c0A3333430953C68f1849b</strong></p>
+<p>名称： Tornado.Cash：5000 cDAI</p>
+<p>描述：一个Tornado Cash pool，允许以5000 cDAI为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0xBA214C1c1928a32Bffe790263E38B4Af9bFCD659</strong></p>
+<p>名称： Tornado.Cash：50000 cDAI</p>
+<p>描述：一个Tornado Cash pool，允许以50000 cDAI为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0x03893a7c7463AE47D46bc7f091665f1893656003</strong></p>
+<p>名称： Tornado.Cash：50000 cDAI 2</p>
+<p>描述： 50000 cDAI Tornado Cash pool的更新版本，允许以50000 cDAI 为单位进行存款和取款。</p>
+<p>运营者：无（不包括功能）</p>
+<p><strong>0x2717c5e28cf931547B621a5dddb772Ab6A35B701</strong></p>
+<p>名称： Tornado.Cash：500000 cDAI 2</p>
+<p>描述：一个Tornado Cash pool，允许以500000 cDAI为单位进行存款和取款。</p>
+<p>运营者：无（不包括功能）</p>
+<p><strong>0xD21be7248e0197Ee08E0c20D4a96DEBdaC3D20Af</strong></p>
+<p>名称： Tornado.Cash：5000000 cDAI</p>
+<p>描述：一个Tornado Cash pool，允许以5000000 cDAI为单位进行存款和取款。</p>
+<p>运营者：无（不包括功能）</p>
+<p><strong>0x4736dCf1b7A3d580672CcE6E7c65cd5cc9cFBa9D</strong></p>
+<p>名称： Tornado.Cash：100 USDC</p>
+<p>描述：一个Tornado Cash pool，允许以100 USDC为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0xd96f2B1c14Db8458374d9Aca76E26c3D18364307</strong></p>
+<p>名称： Tornado.Cash：1000 USDC</p>
+<p>描述：一个Tornado Cash pool，允许以1000 USDC为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者已设置为零地址）</p>
+<p><strong>0x169AD27A470D064DEDE56a2D3ff727986b15D52B</strong></p>
+<p>名称： Tornado.Cash：100 USDT</p>
+<p>描述：一个Tornado Cash pool，允许以100USDT为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者设置为零地址）</p>
+<p><strong>0x0836222F2B2B24A3F36f98668Ed8F0B38D1a872f</strong></p>
+<p>名称： Tornado.Cash：1000 USDT</p>
+<p>描述：一个Tornado Cash pool，允许以1000 USDT为单位进行存款和取款。</p>
+<p>运营者：已撤销（运营者设置为零地址）</p>
+<p><strong>0x178169B423a011fff22B9e3F3abeA13414dDD0F1</strong></p>
+<p>名称： Tornado.Cash：0.1 WBTC</p>
+<p>描述：一个Tornado Cash pool，允许以0.1 WBTC为单位进行存款和取款。</p>
+<p>运营者：无（不包括功能）</p>
+<p><strong>0x610B717796ad172B316836AC95a2ffad065CeaB4</strong></p>
+<p>名称： Tornado.Cash：1 WBTC</p>
+<p>描述：一个Tornado Cash pool，允许以1 WBTC为单位进行存款和取款。</p>
+<p>运营者：无（不包括功能）</p>
+<p><strong>0xbB93e510BbCD0B7beb5A853875f9eC60275CF498</strong></p>
+<p>名称： Tornado.Cash：10 WBTC</p>
+<p>描述：一个Tornado Cash pool，允许以10 WBTC为单位进行存款和取款。</p>
+<p>运营者：无（不包括功能）</p>
+<h3 id="b社区治理合约清单">B：社区治理合约清单</h3>
+<p><strong>0xd90e2f925DA726b50C4Ed8D0Fb90Ad053324F31b</strong></p>
+<p>名称： Tornado.Cash：Router</p>
+<p>描述：维护Tornado Cash pool列表的合约，用户可以使用该列表将存款和取款路由到正确的 Tornado Cash pool。</p>
+<p>仍在使用：是的。</p>
+<p>治理控制：无重大控制。社区可以选择撤回发送给路由器的任何代币，因为路由器不是代币的预期接收者。</p>
+<p><strong>0x58E8dCC13BE9780fC42E8723D8EaD4CF46943dF2</strong></p>
+<p>名称： Tornado.Cash：Relayer Registry</p>
+<p>描述：本合约允许任何人注册为Tornado Cash Relayer。Relayer为用户提供可选服务，以进行无Gas提款。</p>
+<p>仍在使用：是的。</p>
+<p>治理控制：在社区投票前可更新。</p>
+<p><strong>0x527653eA119F3E6a1F5BD18fbF4714081D7B31ce</strong></p>
+<p>名称： Tornado.Cash：Trees</p>
+<p>描述：该合约包含所有Tornado Cash存款和取款事件的merkle 树。</p>
+<p>仍在使用：不，这与旧版本的Tornado Cash有关。</p>
+<p>治理控制：在社区投票前可更新。</p>
+<p><strong>0xCa0840578f57fE71599D29375e16783424023357</strong></p>
+<p>名称： Tornado.Cash：L1 Helper</p>
+<p>描述：允许用户指定存放的以太币连接到位于Gnosis Chain区块链上的Tornado Cash pool。该智能合约不是Tornado Cash应用程序的主要组成部分。</p>
+<p>仍在使用：是的。</p>
+<p>治理控制：无重大控制。社区可以选择撤回发送到该合约的代币，因为它不是预期的接收者。</p>
+<p><strong>0x722122dF12D4e14e13Ac3b6895a86e84145b6967</strong></p>
+<p>名称： Tornado.Cash：Proxy</p>
+<p>描述：Tornado.Cash：Router的旧版本。</p>
+<p>仍在使用：不，这与旧版本的Tornado Cash有关。</p>
+<p>治理控制：在2022年2月弃用本合约后没有重大控制。社区可以选择撤回发送到本合同的代币，因为它不是预期的接收者。</p>
+<p><strong>0x905b63Fff465B9fFBF41DeA908CEb12478ec7601</strong></p>
+<p>名称： Tornado.Cash：Old Proxy</p>
+<p>描述：Tornado.Cash：Router的旧版本。</p>
+<p>仍在使用：不，这与旧版本的Tornado Cash有关。</p>
+<p>治理控制：无重大控制。社区可以选择撤回发送到该合约的代币，因为它不是预期的接收者。</p>
+<h3 id="c保留运营者权限的过期合约清单">C：保留运营者权限的过期合约清单</h3>
+<p><strong>0x94A1B5CdB22c43faab4AbEb5c74999895464Ddaf</strong></p>
+<p>名称： Tornado.Cash：Mixer 1</p>
+<p>描述： Tornado Cash pool的旧版本，今天未使用。</p>
+<p>运营者： 0x8589427373D6D84E98730D7795D8f6f8731FDA16，又名Tornado Cash：Donate</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一许可是“启用”和“禁用”合约使用的许可。截至2019年10月，运营者已“禁用”该合约的使用。</p>
+<p><strong>0xb541fc07bC7619fD4062A54d96268525cBC6FfEF</strong></p>
+<p>名称： Tornado.Cash：Mixer 2</p>
+<p>描述： Tornado Cash pool的旧版本，今天未使用。</p>
+<p>运营商： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：可由运营者更新。</p>
+<p><strong>0xF60dD140cFf0706bAE9Cd734Ac3ae76AD9eBC32A</strong></p>
+<p>名称： Tornado.Cash：10000 DAI</p>
+<p>描述：旧的/未使用的Tornado Cash pool，允许以10000 DAI为单位进行存款和取款。</p>
+<p>最后使用时间： 2020年2月</p>
+<p>运营者： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<p><strong>0xb1C8094B234DcE6e03f10a5b673c1d8C69739A00</strong></p>
+<p>名称： Tornado.Cash：500000 cDAI</p>
+<p>描述：未使用的Tornado Cash pool，允许以500000 cDAI为单位进行存款和取款。</p>
+<p>最后使用：从未使用过</p>
+<p>运营者： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<p><strong>0xD691F27f38B395864Ea86CfC7253969B409c362d</strong></p>
+<p>名称： Tornado.Cash：10000 USDC</p>
+<p>描述：未使用的Tornado Cash pool，允许以10000 USDC为单位进行存款和取款。</p>
+<p>最后使用：从未使用过</p>
+<p>运营者： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<p><strong>0xaEaaC358560e11f52454D997AAFF2c5731B6f8a6</strong></p>
+<p>名称： Tornado.Cash：5000 cUSDC</p>
+<p>描述：旧的/未使用的Tornado Cash pool，允许以5000 cUSDC为单位进行存款和取款。</p>
+<p>最后使用时间： 2020年5月</p>
+<p>运营者： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<p><strong>0x1356c899D8C9467C7f71C195612F8A395aBf2f0a</strong></p>
+<p>名称： Tornado.Cash：50000 cUSDC</p>
+<p>描述：未使用的Tornado Cash pool，允许以50000 cUSDC为单位进行存款和取款。</p>
+<p>最后使用：从未使用过</p>
+<p>运营商： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<p><strong>0xA60C772958a3eD56c1F15dD055bA37AC8e523a0D</strong></p>
+<p>名称： Tornado.Cash：500000 cUSDC</p>
+<p>描述：未使用的Tornado Cash pool，允许以 500000 cUSDC为单位进行存款和取款。</p>
+<p>最后使用：从未使用过</p>
+<p>运营商： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<p><strong>0xF67721A2D8F736E75a49FdD7FAd2e31D8676542a</strong></p>
+<p>名称： Tornado.Cash：10000 USDT</p>
+<p>描述：旧的/未使用的Tornado Cash pool，允许以10000 USDT为单位进行存款和取款。</p>
+<p>最后使用时间： 2020年5月</p>
+<p>运营商： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<p><strong>0x9AD122c22B14202B4490eDAf288FDb3C7cb3ff5E</strong></p>
+<p>名称： Tornado.Cash：100000 USDT</p>
+<p>描述：未使用的Tornado Cash pool，允许以100000 USDT为单位进行存款和取款。</p>
+<p>最后使用：从未使用过</p>
+<p>运营商： 0xDD4c48C0B24039969fC16D1cdF626eaB821d3384，又名Gitcoin Grants：Tornado.cash</p>
+<p>运营者控制：</p>
+<p>任何人都不能删除此合约。</p>
+<p>授予运营者的唯一权限是更新合约使用的“验证者”的权限。本质上，运营者可能会改变该合约处理零知识证明的方式。</p>
+<h3 id="d捐赠地址列表">D：捐赠地址列表</h3>
+<p><strong>0xDD4c48C0B24039969fC16D1cdF626eaB821d3384</strong></p>
+<p>名称：Gitcoin Grants：Tornado.cash</p>
+<p>描述：用于接收来自Gitcoin众筹平台的软件开发资助的智能合约。</p>
+<p><strong>0x8589427373D6D84E98730D7795D8f6f8731FDA16</strong></p>
+<p>名称：Gitcoin Grants：Tornado.cash</p>
+<p>描述：用于接收软件开发捐款的用户地址。该地址不是智能合约。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41976/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">金色观察｜Compound III正式上线 如何搅动DeFi生态</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41947/">
+                <span class="next-text nav-default">金色早报 | 币安发布支持以太坊合并的公告</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一简介">一、简介</a></li>
+    <li><a href="#二背景什么是以太坊其用户是谁什么是智能合约">二、背景：什么是以太坊，其用户是谁，什么是智能合约？</a></li>
+    <li><a href="#三tornado-cash智能合约应用">三、Tornado Cash：智能合约应用</a>
+      <ul>
+        <li><a href="#tornado-cash核心合约pools">Tornado Cash核心合约：Pools</a></li>
+        <li><a href="#零知识证明">零知识证明</a></li>
+        <li><a href="#池子存款流程">池子存款流程</a></li>
+        <li><a href="#池子取款流程">池子取款流程</a></li>
+        <li><a href="#tornado-cash可以删除或更新吗如果是这样由谁">Tornado Cash可以删除或更新吗？如果是这样，由谁？</a></li>
+        <li><a href="#tornado-cash辅助合约和控制">Tornado Cash辅助合约和控制</a></li>
+        <li><a href="#其他tornado-cash智能合约和地址">其他Tornado Cash智能合约和地址</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#附录受制裁地址分类">附录：受制裁地址分类</a>
+      <ul>
+        <li><a href="#a不可改变的tornado-cash池列表">A：不可改变的Tornado Cash池列表</a></li>
+        <li><a href="#b社区治理合约清单">B：社区治理合约清单</a></li>
+        <li><a href="#c保留运营者权限的过期合约清单">C：保留运营者权限的过期合约清单</a></li>
+        <li><a href="#d捐赠地址列表">D：捐赠地址列表</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

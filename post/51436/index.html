@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Flashbots、MEV 和激励重构：构建去中心化金融系统的追求 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="去中心化系统中的信任扩散需要责任和警惕的扩散，特别是因为有如此多的经济激励在质押中：无论是好是坏，MEV 始终存在。" />
+<meta name="keywords" content="MEV, 去中心化" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51436/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Flashbots、MEV 和激励重构：构建去中心化金融系统的追求" />
+<meta property="og:description" content="去中心化系统中的信任扩散需要责任和警惕的扩散，特别是因为有如此多的经济激励在质押中：无论是好是坏，MEV 始终存在。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51436/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-18T00:00:00+00:00" />
+
+<meta itemprop="name" content="Flashbots、MEV 和激励重构：构建去中心化金融系统的追求">
+<meta itemprop="description" content="去中心化系统中的信任扩散需要责任和警惕的扩散，特别是因为有如此多的经济激励在质押中：无论是好是坏，MEV 始终存在。"><meta itemprop="datePublished" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6463">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flashbots、MEV 和激励重构：构建去中心化金融系统的追求"/>
+<meta name="twitter:description" content="去中心化系统中的信任扩散需要责任和警惕的扩散，特别是因为有如此多的经济激励在质押中：无论是好是坏，MEV 始终存在。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Flashbots、MEV 和激励重构：构建去中心化金融系统的追求</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-18">
+      2023-05-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6463 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>撰文：0xFishylosopher 编译：深潮 TechFlow</p>
+<p><strong>介绍</strong></p>
+<p>MEV，即最大可提取价值，是区块链设计的副产品，是一种独特的 DeFi 现象。</p>
+<p>本质上，MEV 只是一种利润最大化的行为实例，即操作区块链的验证者寻求在验证交易任务上最大化其利润。虽然有人可能会争辩说 MEV 可以通过提高资本效率而有益，但它会显著影响使用去中心化应用程序的用户体验，包括更高的 Gas 费用、滑点，以及验证者勾结和中心化等风险。</p>
+<p>在本文中，0xFishylosopher 将首先探讨 MEV 作为理论概念以及它对生态系统造成的系统性风险。紧接着，以 Flashbots 为案例研究，探讨 DeFi 社区如何试图解决 MEV 的所有这些负面外部性。</p>
+<p><strong>「Flash Boys」俱乐部</strong></p>
+<p>MEV 是区块链技术的一个特性，而不是区块链技术的 Bug。在给定的区块链网络中，验证者（或传统 PoW 模型中的矿工）决定将哪些数据放入链上。具体而言，他们可以控制哪些数据在链上的顺序。事实证明，某些交易给予了验证者巨大的利润。因此，作为理性的经济主体，验证者将以最大化交易费用的方式安排交易。</p>
+<p>这个 MEV 的概念首先由智能合约研究员 Phil Dainan 在一篇名为「Flash Boys 2.0」的重要论文中详细阐述，研究人员在其中强调存在大量的机器人和套利代理试图「预测和利用」普通用户的 DEX 交易，类似于传统金融中高频交易员积极优化交易延迟。为了了解这种现象的规模，仅在撰写本文的最近 24 小时内，通过 MEV 操作实现了 2578 ETH，约合时价 490 万美元的利润。</p>
+<p>尽管 MEV 是一个泛称，包括许多不同的套利方法和情景，但有几个关键特征支撑了 DeFi 的许多 MEV 机会。首先，许多 MEV 是通过「优先 Gas 拍卖」（PGA）的过程实现的，用户可以支付更高的交易（Gas）费用，以便让他们的交易先运行。由于许多套利机器人依赖于让他们的交易先运行以获得利润，这些机器人将参与 Gas 竞价战，不断提高价格，以便让他们的交易被验证者运行，从而导致网络拥堵严重，使普通用户无法运行他们的交易，除非他们也支付高昂的交易费用。</p>
+<p>另一方面，验证者是这种情形的主要受益者之一。事实上，权力越大，利润越大：因为验证者（至少在理论上）拥有决定运行哪些交易的权力，他们可以通过确定哪些交易给他们带来最多的现金来获得「排序优化」费用。然而，在实践中，让验证者完成整个 MEV 搜索、打包和执行流程太过繁琐。因此，大部分的「排序优化」被外包给了专门的搜索者、构建者和中继器，这些中介可以想象成是验证者的「秘书」，他们为了获得一部分利润而简化了 MEV 的过程。具体而言，搜索者将寻找 MEV 机会，构建者将这些机会捆绑成完整的「块」，中继器将这些完整的「块」发送给验证者或实际的块构建者。因此，现代 MEV 生态系统的总体情况如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/6_bhqr6p77we.png" alt="Flashbots、MEV 和激励重构：构建去中心化金融系统的追求"></p>
+<p>正如我们之前所提到的，虽然 MEV 启用的套利可以带来一些好处，包括更高的资本效率和确保价格在不同交易所之间保持一致，但对于最终用户来说，可能存在巨大的负面外部性，例如导致更高的交易费用、执行速度变慢和更高的滑点（如三明治攻击）。然而，这并不是 MEV 对区块链构成的最大风险——特别是如果验证者相互勾结，MEV 实际上可能会破坏区块链共识层的安全保障。</p>
+<p>这个安全问题源于激励调整的问题——在所有这些有利可图的 MEV 机会中，矿工可以通过优化交易费用而非坚持恒定的区块奖励津贴来赚取更多的利润。正如 Dainan 所写的那样：</p>
+<p>因此，矿工可以分叉一个高费用的块，保留一些费用来吸引其他矿工在该分叉上构建。在极端情况下，偏离协议的激励可能会导致经济理性的矿工的策略混乱，从而降低区块确认提供的安全性。</p>
+<p>这被称为「削价（undercutting）攻击」，是 MEV 可能破坏区块链基本安全保障的几种方式之一。其他已知的攻击包括「时间强盗攻击」，其中验证者不是勾结来从当前块中窃取有利可图的交易，而是通过勾结来重写过去历史中的 MEV 机会。此外，MEV 提取甚至不需要在链上进行，因为完全可以通过链下的后门交易来完成，例如大型交易者和验证者之间的交易。</p>
+<p>因此，我们可以看到，MEV 实践在区块链生态系统中面临着很大的风险。</p>
+<p><strong>Flashbots 和对抗 MEV 的战争</strong></p>
+<p>考虑到未受限制的 MEV 可能带来的潜在严重后果，已经有几个项目和团队致力于减轻这种实践的负面外部性。在这个领域中最重要的团队之一是 Flashbots，这是一个致力于重新调整 MEV 激励的项目，以一种既足够奖励验证者诚实地构建链条的行为，同时又减轻普通用户的最坏影响的方式。</p>
+<p>为此，Flashbots 试图采取三个不同的步骤：（1）揭示 MEV 的「黑暗森林」，（2）民主化 MEV 的提取，以及（3）将利益重新分配回生态系统。为了实现第一个目标，Flashbots 有一个专门的产品称为 MEV-inspect，旨在「照亮」MEV 的「黑暗森林」，以量化 MEV 造成的负面外部性并突出问题的规模。</p>
+<p>另一方面，民主化 MEV 的提取和重新分配利益的两个目标则更为复杂，包括整套产品，随着问题范围和重点的变化而逐渐发展。在某些方面，可以说 Flashbots 在过去两年的产品开发历史本身就是以太坊增长和发展的时间轴。</p>
+<p>Flashbots 发布的第一组重要产品是 MEV-Geth 客户端，或者是以太坊 Golang 的修改版本，它能够更好地通过将其路由到私有交易池来防止 MEV 操纵。在这个新客户端之上建立了一个 MEV 拍卖市场，使用「第一价格密封竞标」方法（也称为「盲竞标」），每个参与者只允许提交一个价格，而且拍卖参与者都不知道其他参与者出价的价格。通过这种设计，Flashbots 减轻了先前讨论的「价格竞标」战争。</p>
+<p>创建 MEV-Geth 和 MEV 市场的指导原则是通过一种名为「提议者 – 构建者分离」的激励重新对齐过程来分散验证者构建块本身的权力和责任。使用 MEV 拍卖的验证者不必进行复杂的 MEV 搜索和交易打包过程，而是可以简单地查看 MEV 市场，找到哪些交易将为他们提供最高的 MEV，并放置反映其实际偏好的单个出价。此外，为了防止验证者包括自己的交易并从用户交易的前置交易中获利，实际交易细节（买单、卖单、清算等）直到块构建完成后才会公开。</p>
+<p>那么，为什么验证者会使用这个算法并放弃前面提到的有利可图的 MEV 机会呢？这是因为 Flashbots 算法只需从市场中选择 MEV 交易，对于验证者来说更容易和更便宜。随着越来越多的高质量 MEV 交易通过这个市场而不是直接在链上进行，验证者通过坚持使用 Flashbots 可以获得更高的回报。结果非常令人印象深刻：在 MEV-Geth 发布后不久，超过 90% 的以太坊验证者开始使用这个方案，从而显示了激励重新对齐在解决潜在问题方面的重要性和有效性。但随着以太坊生态系统的发展，从 2022 年 9 月开始从工作量证明（PoW）模型转向权益证明（PoS）模型，这种以「提议者 – 构建者分离」为基础的概念的变化也成为必然。</p>
+<p>PoS 比 PoW 更高效的主要原因是，在 PoW 中，每个节点都必须从头开始构建和提出块，而在 PoS 中，只有少数几个验证者作为主要块提议者将数据附加到区块链上。虽然这对环境和计算效率来说很好，但由于 MEV 的有利吸引力，这可能会带来额外的中心化风险，特别是如果验证者（「提议者」）与市场卖方的关键「构建者」勾结。即使是 Flashbots 自己运行的私有交易池也可能会受到勾结的诱惑，当然，将信任放在单一实体（例如 Flashbots）身上违背了去中心化的理念。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/6_5kvsagc8ud.png" alt="Flashbots、MEV 和激励重构：构建去中心化金融系统的追求"></p>
+<p>MEV-boost 的发布使得这个 MEV 市场的「供应方」去中心化。MEV-boost 不仅包含 Flashbots 私有交易池中的交易（实质上是垄断），还允许运行此软件的任何构建者向所有参与的验证者提交交易。对于验证者来说，随着更多的构建者参与构建所有这些不同的块，这使得他们获得更多的收入，并平衡了哪些验证者可以访问哪些交易，从而建立了一个更强大和安全的生态系统。与 MEV-Geth 一样，这种新颖的设计重新对齐了多方的激励，以避免中心化风险，并取得了巨大的成功，超过 85% 的网络采用了这种设计，其中 Flashbots 只传递了 34% 的交易。</p>
+<p><strong>Flashbots SUAVE</strong></p>
+<p>这样，到目前为止，减轻所有中心化风险，使去中心化金融免受 MEV 最有害影响的任务仍未完成。通过实施提议者 – 构建者分离，Flashbots 的解决方案已经将验证者的关键权力和责任去中心化或重新定向到「构建者」，将这些「构建者」作为与选择验证者交易的构建者不同的实体引入。然而，实际上存在着重要的构建者规模经济，这反过来又会导致构建者角色的中心化风险。</p>
+<p>那么，构建者角色的规模经济是什么样子的呢？回想一下之前提到的搜索者、构建者和中继者都扮演着不同的角色，搜索者搜索 MEV 机会，然后将其发送给构建者，构建者再将完整的块发送给中继者。这意味着搜索者必须选择将结果发送给谁。为了最大化自己的回报，他们会选择最高质量的构建者，这些构建者的交易最常被验证者选择。随着越来越多的高质量交易流向顶级构建者，这就产生了一种中心化效应，顶级构建者将始终从搜索者那里获得最高质量的 MEV 交易，从而巩固了他们的地位。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/6_4u4sczokps.png" alt="Flashbots、MEV 和激励重构：构建去中心化金融系统的追求"></p>
+<p>实践证明，这种构建者中心化效应是存在的。在撰写本文的最近 24 小时内，排名前 5 位的构建者提出了约 90% 的总 MEV-Boost 块。随着这种中心化程度的增加，这些寡头可能会开始利用他们的主导地位来操纵交易，包括勾结和审查某些交易，这些都可能再次危及底层区块链的安全性。这就是 Flashbots 最新项目的动机：价值表达的单一统一拍卖，这个项目旨在将块构建过程从任何单个区块链中解散，并将其外包给一个单独的网络，从而去中心化块构建者的角色。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/6_op6ye0pgl8.png" alt="Flashbots、MEV 和激励重构：构建去中心化金融系统的追求"></p>
+<p>SUAVE 实际上是一个独立的、专用的块排序链，将负责交易内存池和构建者角色，而原生链的验证者（如以太坊）将负责提议和证明角色。正如我们所看到的，SUAVE 是「提议者 – 构建者分离」原则的自然延伸，其中我们将提议者和构建者放在两个完全独立的链上，以便它们都足够去中心化并相互分离。此外，SUAVE 的愿景是，它将作为许多不同链的通用排序层，这样无论您是以太坊、Arbitrum、Polygon 还是任何其他 EVM 链的验证者，都可以使用 SUAVE 找到最佳的 MEV 机会，不仅适用于您所在的原生链，还适用于跨链交易的跨域 MEV，这些交易仅仅通过查看该链的交易内存池是无法获取的。</p>
+<p>尽管 SUAVE 有一个宏伟的愿景，最终使所有涉及方受益，并使以太坊生态系统更加去中心化，但自 2022 年 11 月成立以来的 6 个月中，仍然存在一些关键的设计问题需要解决。例如，其中一个核心问题是是否将 SUAVE 构建为单独的 L1 链（类似于 Chainlink），或使用 Rollup 解决方案，或「借用」以太坊验证者的重新质押服务，如 Eigenlayer 。每种解决方案在实施便利性、验证者保留、安全性和灵活性方面都有其独特的权衡，我们在这里不做详细讨论。</p>
+<p>另一个核心问题是，SUAVE 是否会发布自己的代币。尽管 SUAVE 论坛目前否认它将「暂时」不会推出自己的代币，并继续使用 ETH 作为其本地链上的原生代币，但有几个疑问，即 Flashbots 是否会坚持这一点，特别是因为从长远来看，推出 SUAVE 代币似乎对 Flashbots 作为一家私人公司来说是最经济的选择。此外，可以公正地认为，Flashbots 相信它可以在熊市中筹集 10 亿美元的独角兽估值的原因是对未来会推出 SUAVE 代币的隐含承诺。</p>
+<p>那么，是什么阻止 Flashbots 宣布它正在推出 SUAVE 代币呢？事实证明，推出代币会带来几个令人头疼的设计决策。例如，这个代币是否对某些交易有用，还是仅仅是「另一个仅用于治理的代币」？如果这个代币将具有实用性，那么这种实用性会是什么样子？如何激励 Flashbots 的不同利益相关者（例如不同的链、最终用户、Flashbots 上的构建者等）使用和信任这个新代币，而不是更成熟的代币，如 ETH 甚至 L2 代币，如 ARB ？在任何情况下，都需要解决复杂的激励对齐过程，因此 Flashbots 团队完全有理由暂时避免这个问题。</p>
+<p><strong>超越 Flashbots：DeFi 未来的大局</strong></p>
+<p>虽然现在还为时过早，无法确定 SUAVE 最终会采取什么形式，以及这个全新的排序链是否能够实现其最初的目标并以真正减轻 MEV 的负面外部性的方式来调整激励，但我认为 MEV 和 Flashbots 代表了设计真正去中心化金融系统的各种权衡、问题和原则的典型形象。</p>
+<p>首先，正如之前提到的，MEV 是区块链技术的一个特征，而不是一个 Bug。这些套利机会和验证者的利润激励源于区块链的即时可访问性，并保证了 DeFi 的资本效率。MEV 的负面影响，包括网络拥堵、Gas 战争和终端用户的滑点，只是这个过程的副产品和负面外部性。</p>
+<p>根据定义，负面外部性不会影响从事负面行为的代理人。在这种情况下，对终端用户造成网络拥堵和滑点不会损害从事这种盈利行为的验证者或套利机器人。在传统经济学中，纯市场化的系统无法很好地解决所有这些外部性。传统上，政府或其他监管机构会介入，纠正市场动态，最小化负面外部性的影响（例如对烟草和酒精征税）。</p>
+<p>另一方面，DeFi 本质上是去信任的，并反对任何形式的人类政府执法。它最接近的「执法机构」是通过在代码中编码规则和法规（例如通过智能合约）来实现确定性和透明性。因此，正如 Flashbots 的故事所展示的那样，减少 MEV 这种现象的负面外部性总是依赖于一个复杂的激励重新设计和对齐的过程。毕竟，就像华尔街量化交易员一样，DeFi 套利机器人并不以高道德标准和善意著称。</p>
+<p>使用激励重新设计来减少 MEV 的负面外部性不仅仅是 Flashbots 团队的内在特征。除了 Flashbots 之外，还有许多其他团队试图重新调整激励，开发协议以减少 MEV 的影响。例如，Chainlink 的公平排序服务（FSS）利用其去中心化的预言机网络将「交易排序」过程外包给验证者，实现了类似于 SUAVE 网络所追求的目标。另一个例子是 CoW 协议（前身为 Gnosis 链）上的「需求巧合」（CoW）机制，它根据交易是否互补（例如，我想要 1500 USDC 换 1 ETH，而你想要 1 ETH 换 1500 USDC）自动将交易粘合在一起，并使用求解器算法确保每个人以最优价格交易。</p>
+<p>但是，在不信任任何单方的去中心化设置中进行激励重新设计可能是一项非常困难的任务，因为从根本上讲，您正在试图抵消规模经济。例如，在 Flashbots 的构建者中心化的情况下，已经「证明其价值」的构建者更有可能被搜索者「信任」，后者将给他们更多的高质量交易，并巩固他们作为市场领导者的地位。通过激励重新对齐来识别、解决和实施去中心化的替代方案，本质上是在玩「打地鼠」的游戏——您永远不会知道新引入的激励系统可能包含的中心化漏洞和隐藏的规模经济，所有这些只有在事后才会有意义。</p>
+<p>此外，在一个具有许多不同利益相关者和代理人的复杂系统（例如区块链）中，几乎不可能避免外部性，因为几乎肯定会有一个角落，其中一个利益相关者的行动将溢出并影响另一个利益相关者的行动。正如 Dainan 在「Flash Boys v2.0」中所展示的那样，其中许多外部性可能构成真正的威胁，破坏整个系统的稳定性。因此，任何去中心化的系统——即使是那些具有良好设计的博弈理论——都将始终具有这种内在的复杂性、微妙性和脆弱性，其中一个意外的漏洞可能会威胁其存在。</p>
+<p>与中心化系统相比，去中心化系统不包含任何明显的「单点故障」——但正是这一点使得去中心化系统有时比其中心化对手更具杀伤力。如果系统设计中存在漏洞，每个节点都有可能成为「单点故障」。</p>
+<p>最后，MEV 和 Flashbots 的故事告诉我们，维护去中心化系统的健康始终需要持续、艰巨的努力——持续参与「打地鼠」的游戏。去中心化系统中的信任扩散需要责任和警惕的扩散，特别是因为有如此多的经济激励在质押中：无论是好是坏，MEV 始终存在。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51511/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Cyber Capital 创始人：以太坊扩容不要单指望 L2</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51478/">
+                <span class="next-text nav-default">Gala Games销毁价值超6亿美元的GALA代币</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Vitalik：受信任初始化的原理是什么? - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文介绍了受信任初始化的运作原理以及其验证过程。" />
+<meta name="keywords" content="Vitalik Buterin" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40815/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Vitalik：受信任初始化的原理是什么?" />
+<meta property="og:description" content="本文介绍了受信任初始化的运作原理以及其验证过程。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40815/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="Vitalik：受信任初始化的原理是什么?">
+<meta itemprop="description" content="本文介绍了受信任初始化的运作原理以及其验证过程。"><meta itemprop="datePublished" content="2022-07-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4931">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vitalik：受信任初始化的原理是什么?"/>
+<meta name="twitter:description" content="本文介绍了受信任初始化的运作原理以及其验证过程。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Vitalik：受信任初始化的原理是什么?</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-07-29">
+      2022-07-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4931 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>来源：vitalik.ca</p>
+<p>作者：Vitalik Buterin</p>
+<p><strong>编者</strong> 注：</p>
+<p>数据可用性采样 (data availability sampling) 是 Dankshading 的关键部分，为实现这一密码协议，需要使用 KZG 仪式对数据可用性证明方案所需要的参数进行初始化。</p>
+<p>因此，KZG 受信任初始化是实现 EIP-4844 (proto-danksharding) 和完整版 Danksharding 的重要前提条件。</p>
+<p>除此之外，其他密码学协议如 ZK-SNARKs 领域也需要有受信任初始化阶段。</p>
+<p>本文介绍了受信任初始化的运作原理以及其验证过程。</p>
+<p>《分片 + 数据可用性采样》www.ethereum.cn/sharding-proposal</p>
+<p>必要的<strong>背景知识</strong> ：elliptic curves and elliptic curve pairings。</p>
+<p>另请参阅：Dankrad Feist&rsquo;s article on KZG polynomial commitments。(中文版：KZG多项式承诺)</p>
+<p>特别感谢 Justin Drake、Dankrad Feist 和 Chih Cheng Liang 的反馈和评审。</p>
+<p>许多密码协议尤其是在数据可用性采样和 ZK-SNARKs 领域都依赖于受信任初始化。受信任初始化仪式是一个用于生成一批数据的一次性流程。</p>
+<p>后续，每次运行某些密码协议时都必须使用这些数据。生成这些数据需要一些秘密信息；“<strong>信任</strong> ”来源于这样一个事实，即必须由某个人或某组人来生成这些秘密，使用秘密来生成数据，然后发布数据并销毁这些秘密。</p>
+<p>然而，一旦生成了数据并销毁了秘密，仪式创建者就不需要进一步的参与。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_9s8swv18ng.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>受信任初始化有很多类型。在主流协议中最早使用的受信任初始化的实例是 2016 年的 Zcash 启动仪式。这个仪式非常复杂，而且需要多轮的通信交互，因此只能有六名参与者。</p>
+<p>彼时彼刻，每个使用 Zcash 的人都必须相信六名参与者内至少有一名是诚实的。新式协议一般会使用 powers-of-tau 初始化技术，其遵循 1-of-N 信任模型，N 值通常为数百。</p>
+<p>也就是说，数百人一起参与生成数据，只需其中一人是诚实的并且不公开秘密就能保证最终输出的安全性。实践上，像这样的执行良好的受信任初始化通常被认为是“足够接近于去信任”的。</p>
+<p>本文将介绍 <strong>KZG</strong>  初始化如何运作及其工作原理，以及受信任初始化协议的未来。任何精通代码的人都可以随意地浏览以下代码实现：https://github.com/ethereum/research/blob/master/trusted_setup/trusted_setup.py.</p>
+<p><strong>Powers-of-tau 初始化是怎样的？</strong></p>
+<p>powers-of-tao 初始化由两系列的椭圆曲线点组成，如下所示：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_mdrpsfasr9.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lkcc2zeqv5.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>和 </p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_0k4awn6usd.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是两个椭圆曲线群的标准生成元；在 BLS12-381 中，</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lkcc2zeqv5.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>占用 48 字节（压缩形式），</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_0k4awn6usd.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>占用 96 字节。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lqaaodmr80.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>,</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lptu3vsvab.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>分别是初始化输出的</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lkcc2zeqv5.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p> ,</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_0k4awn6usd.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>生成点列的长度。一些协议要求</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lptu3vsvab.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><strong>=2</strong> ，另一些协议要求</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lqaaodmr80.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>和</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lptu3vsvab.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的值都较大，一些协议属于中间情形（例如，当前的以太坊数据可用性采样方案要求</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lqaaodmr80.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><strong>=4096</strong> 和</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lptu3vsvab.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><strong>=16</strong> ）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是用于生成点列的秘密值，使用后需要销毁。</p>
+<p>为了对多项式</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_7lwc29vvib.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>生成 KZG 承诺，我们简单选取一个线性组合</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_sqgdr1430a.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，其中</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_ls056bvn0y.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>（受信任初始化中的椭圆曲线点列）。</p>
+<p>初始化中的</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_0k4awn6usd.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>用于验证我们所承诺的多项式的值；我不会在此讨论验证流程的细节，更多的细节参见 Dankrad 的文章(<a href="https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html">https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html</a>)。</p>
+<p><strong>直观地说，受信任初始化提供了什么价值？</strong></p>
+<p>从更深层次理解这里面到底发生了什么，以及受信任初始化为何能够提供这些价值。</p>
+<p>多项式承诺使用大小为</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lpbo8l6b5z.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的对象（单个椭圆曲线点）对一段大小为</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lrk9osgs68.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的数据进行承诺。我们可以用简单的 Pedersen 承诺来做到这一点：</p>
+<p>只需将</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_srcyspj9k0.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的值设置为</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lrk9osgs68.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>个不相关的随机椭圆曲线点，然后如前所述对</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_sqgdr1430a.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>多项式进行承诺。实际上，这正是 IPA 证明所做的。(<a href="https://vitalik.ca/general/2021/11/05/halo.html">https://vitalik.ca/general/2021/11/05/halo.html</a>)</p>
+<p>然而，任何基于 IPA 的证明都需要</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_evdzslnov6.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>时间来验证，有一个不可避免的原因：使用基点</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_a1unfhfnp9.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>对多项式</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_fe4070ue0k.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>生成的承诺会对应于使用基点</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_oylosdv8ng.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的另外一个多项式。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_vj7wmhzhjm.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>在一组基点下对多项式</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_vpi2t286sl.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的一个有效承诺等效于另一组基点下对多项式</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_mizw0rq5y3.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的一个有效承诺。</p>
+<p>如果我们想对某些命题生成基于 IPA 的证明（例如，该多项式在</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_squqchrljk.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>时等于 <strong>3826</strong> ），该证明在基于第一组基点时应当验证通过，而在基于第二组基点时应当验证失败。</p>
+<p>因此，无论验证流程如何，都无法避免以某种方式考虑每一个</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_srcyspj9k0.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>值，因此不可避免地需要</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_evdzslnov6.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>时间。</p>
+<p>然而，如果有受信任初始化的话，点间存在着隐藏的数学关系。可以保证任意两个相邻点之间有着相同的因子</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>使得</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_wldzv3qo2z.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>。如果</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2z38j3cnkt.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是有效的初始化输出，“<strong>被篡改的输出</strong> ” </p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_oylosdv8ng.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是无效的。</p>
+<p>因此，我们不需要</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_1p2007hjco.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的计算量；相反，我们利用这个数学关系就可以在</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lpbo8l6b5z.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>时间下验证我们需要验证的任何东西。</p>
+<p>然而，数学关系必须保密：如果</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>已知，那么任何人都可以提出一个表示众多不同多项式的承诺：如果</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_mvs74ts137.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_fe4070ue0k.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的承诺，那么它也是</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_zpuode00zv.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>或</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_k4gvndi93s.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>或许多其他多项式的承诺。这将完全破坏所有多项式承诺应用的根基。</p>
+<p>因此，虽然在某个时间点上必须存在一些秘密值</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，让</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_srcyspj9k0.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>值之间的数学联系成为可能，从而实现高效验证，但是</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>也必须被销毁。</p>
+<p><strong>多方受信任初始化如何运作？</strong></p>
+<p>单个参与者进行初始化是很简单的：只需选择一个随机值</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，并使用</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>值生成一系列椭圆曲线点。但单个参与者的受信任初始化是不安全的：你必须信任某个特定的人！</p>
+<p>解决方案是多方受信任初始化，其中“<strong>多</strong> ”指的是很多参与者：超过 100 人是正常的，对于较小计算量的初始化方案，可能会超过 1000 人。以下是多方 powers-of-tau 初始化的工作原理。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_wo05ukv937.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>以一个已有的初始化输出为切入点（注意，你不知道</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的值，你只知道一系列的椭圆曲线点）：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_mdrpsfasr9.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>现在，选择你自己的随机秘密值 </p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_7bvf5wjpzf.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>。计算：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_l1cf4u2hvv.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>请注意，这相当于：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_nuyvme4gs6.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>也就是说，您已经创建了一个秘密值</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_79cmk2wnba.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>相对应的有效初始化输出！你永远不会把你的秘密值 </p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_7bvf5wjpzf.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>给到之前的参与者，同时之前的参与者也不会把他们的秘密值</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>给到你。</p>
+<p>只要任意一个参与者是诚实的，并且没有透露他那部分的秘密值，那么组合起来的秘密值就不会被泄露。</p>
+<p>特别地，有限域具有这样的性质：如果你知道</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2c6609o974.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>但不知道</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_7bvf5wjpzf.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，并且</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_7bvf5wjpzf.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是被安全随机地生成的，那么你对</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_79cmk2wnba.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的值一无所知！</p>
+<p><strong>验证受信任初始化</strong></p>
+<p>为了验证每个参与者确实参与了受信任初始化，每个参与者都可以提供这样一个证明，包括 (i) 他们收到的点</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2wvvg21kf4.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>和 (ii)</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_9hk5vc4b6y.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，其中 tt 是他们引入的秘密值。</p>
+<p>这一系列的证明可用于验证最后的初始化输出将所有的秘密值组合起来 (与之相反的是，最后一个参与者只是舍弃了前面的值，并输出了仅由他自己秘密值生成的初始化结果，他可以自行保留这个秘密值，从而在任何使用该初始化输出的协议中欺诈)。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_ravmp3bss8.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_nsaw7f1bgh.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是第一个参与者的秘密值，</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_0hyja9bjjf.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是第二个参与者的秘密值，以此类推。在每个步骤中的配对检查验证了每个步骤的初始化输出确实源自前一步骤初始化输出以及参与者在当前步骤中已知的新秘密值的组合。</p>
+<p>（<strong>译者</strong> 注：配对的特性</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_zslgej6hua.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>）</p>
+<p>每个参与者都应该在一些公开可验证的媒体（例如个人网站、来自其 eth 地址的交易、推特）上披露他们的证据。</p>
+<p>请注意，这个机制并不能阻止某些人声称参与了某个阶段，而实际上是另外的人（假设其他人已经透露了他们的证据），但通常会认为这不成问题：如果有人愿意就参与的情况撒谎，他们也会愿意就秘密的删除情况撒谎。只要公开声称参与的人中至少有一人是诚实的，那么初始化就是安全的。</p>
+<p>除了上述检查以外，我们还想验证初始化中的所有椭圆曲线点的幂次都是正确的（即，它们是相同秘密值的幂）。（<strong>译者</strong> 注，即椭圆曲线可以表示为序列</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_v5n4cam4yq.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>）</p>
+<p>为此，我们可以进行一系列配对校验，验证</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_oea46yaw90.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>（其中</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_5gwptw1sct.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是初始化中</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_ktuylswqmn.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的值）。</p>
+<p>这验证了每个</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_b0yis208m8.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>和</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_svuosp3vsg.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>之间的因子与</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_5gwptw1sct.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>和</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_0k4awn6usd.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>之间的因子相同。然后，我们可以在 G_{2}G2 侧执行相同的操作。（译者注，即验证</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_tkjw4rzee7.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>（其中</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_b0yis208m8.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是初始化中</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_2wvvg21kf4.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的值）</p>
+<p>然而，这需要很多次配对，成本很高。相反，我们采用随机线性组合</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_kpwc0ndiz7.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，及相同线性组合移动一位的结果：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_dk4srs7965.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>。我们使用单个配对校验来验证它们是否匹配得上：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_viucpqtir9.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>。</p>
+<p>我们甚至可以将</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_lkcc2zeqv5.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>侧和</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_0k4awn6usd.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>侧的校验过程结合在一起：除了如上所述计算</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_grigy1cw8p.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>和</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_nh8sj62cqc.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，我们还计算</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_st9ew03egc.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>（</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_4y831sbsnn.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是另一组随机系数）和</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_4c6w1ampzn.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，然后验证</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_l6p1uelg3e.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>。</p>
+<p><strong>拉格朗日形式的受信任初始化</strong></p>
+<p>在许多用例中，你不太愿意使用系数形式的多项式（例如</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_9v7eglvs7s.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，你更愿意使用点值形式的多项式（例如</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_fe4070ue0k.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>是在域</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_ghjr0srald.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>模 337 的值为</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_bgs9m8fin3.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>的多项式）。（<strong>译者</strong> 注：此处的逻辑是，n 次多项式需要 n+1 个点来进行确定，点值形式其实指的是</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_f31kl2jgat.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>,</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_f31kl2jgat.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>,如此类推）</p>
+<p>点值形式有很多优点（例如，您可以在</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_evdzslnov6.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>时间内进行多项式的乘法，某些情况下的除法运算），你甚至可以把它用在</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_evdzslnov6.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>时间内求值。特别地，数据可用性采样要求 blobs 使用点值形式进行表示。</p>
+<p>为了处理这些情况，通常可以便捷地将受信任初始化转换为点值形式。这让你能得到点值（上面的例子中为</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_bgs9m8fin3.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p>，并直接使用它们来计算承诺值。</p>
+<p>使用快速傅里叶变换（FFT）是最为便捷的手段，但是要将曲线点而非数值作为输入进行传递。我将避免在此重复对 FFT 进行详细的解释，但这里有一个实现；FFT 实际上并不难。</p>
+<p><strong>受信任初始化的未来</strong></p>
+<p>Powers-of-tau 并不是唯一的受信任初始化方案。其他一些（实际上或潜在）值得注意的受信任初始化方案包括：</p>
+<ul>
+<li>
+<p>旧版的 ZK-SNARK 协议中使用的更为复杂的初始化方案（例如，参见此处)有时仍会被使用（特别地，Groth16)，因为它验证成本会比 PLONK 更低。</p>
+</li>
+<li>
+<p>一些密码协议（例如，DARK) 依赖于隐阶群，群中元素不知道进行多少次乘法运算才能得到零元素。目前存在着完全无信任的版本（请参阅：class groups)，但目前为止，最高效的版本使用的是 RSA 群（的幂 mod ，其中，未知）。遵循 1-of-n 信任假设的受信任初始化方案是可能的，但实现起来非常复杂。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_ezsnm8gvzs.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_9wsnks7tpp.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_kgzprcs9ke.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_zmdusstmns.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+</li>
+<li>
+<p>如果/当不可区分混淆变得可行时，许多依赖于它的协议将会涉及：某人创建和发布一个混淆程序，该程序使用内部的隐藏秘密来执行某些操作。这就是受信任初始化流程：创建者需要持有秘密值来创建程序，而且之后需要把秘密值删除。</p>
+</li>
+</ul>
+<p>密码学仍然是一个快速发展的领域，受信任初始化的重要性很容易会改变。</p>
+<p>采用 IPA 和 Halo 式思想的技术方案可能会被改进到让 KZG 变得过时和不必要的程度，或者在十年后量子计算机让基于椭圆曲线的所有方案都变得不可行，届时我们将不得不使用无需受信任初始化基于哈希的协议。</p>
+<p>KZG 改良得更快，或者出现一个依赖于另一种受信任初始化的全新密码学领域都是有可能的。</p>
+<p>在一定程度上，受信任初始化是必要的，重要的是要记住，并非所有受信任初始化都水平相当。176 个参与者比 6 个更好，2000 个更佳。</p>
+<p>相比于要求运行一个复杂软件包，成本小得可以在浏览器或手机应用上进行的受信任初始化仪式（例如，ZKopru 初始化就是基于Web应用）能够吸引多得多的参与者。</p>
+<p>理想情况下，每个仪式都应当让参与者运行多个独立构建的软件实现，并且运行在不同的操作系统和环境之上，以减少共模故障的风险。</p>
+<p>参与者只需一轮交互的仪式（如powers-of-tau）远远优于多轮交互的仪式，这既是因为能够支持更多参与者，也是因为编写多个实现会更加简单。</p>
+<p>理想情况下，仪式应该是通用的（一个仪式的输出能够支持大量协议）。这些都是我们可以并应当继续钻研的事情，以保证受信任初始化尽可能的安全可靠。</p>
+<p>特别感谢 ECN 社区翻译志愿者 @doublespending 对本文的翻译贡献。</p>
+<p>点击“阅读原文”获取文章内部链接！</p>
+<p>原文链接：https://vitalik.ca/general/2022/03/14/trustedsetup.html</p>
+<p>ECN的翻译工作旨在为中国以太坊社区传递优质资讯和学习资源，文章版权归原作者所有，转载须注明原文出处以及ETH中文站。若需长期转载，请联系eth@ecn.co进行授权。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0729/4_7i0sqlk2e4.png" alt="Vitalik：受信任初始化的原理是什么?"></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40777/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">VeeFriends宣布完成5000万美元种子轮融资，a16z领投</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40790/">
+                <span class="next-text nav-default">传统游戏与链游的融合之路还有多远？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

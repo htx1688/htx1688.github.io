@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          链上游戏技术栈：如何同步游戏状态？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="全链游戏/自治世界（" />
+<meta name="keywords" content="Gamefi" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55636/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="链上游戏技术栈：如何同步游戏状态？" />
+<meta property="og:description" content="全链游戏/自治世界（" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55636/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-24T00:00:00+00:00" />
+
+<meta itemprop="name" content="链上游戏技术栈：如何同步游戏状态？">
+<meta itemprop="description" content="全链游戏/自治世界（"><meta itemprop="datePublished" content="2023-07-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8665">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="链上游戏技术栈：如何同步游戏状态？"/>
+<meta name="twitter:description" content="全链游戏/自治世界（"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">链上游戏技术栈：如何同步游戏状态？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-24">
+      2023-07-24
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8665 字 -
+        预计阅读 18 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>摘要</strong></p>
+<ul>
+<li>
+<p>全链游戏/自治世界（&ldquo;FOG/AW&rdquo;）是围绕Web 3的少数重要叙事之一。相比于只通过NFT连接到Web3的Web2.5应用不同，FOG/AW将游戏逻辑也放在了链上。它利用区块链作为游戏服务器，成为游戏状态的去中心化信任源。这带来了持久性、抗审查、可组合性等优点，但也限制了构建在其之上的游戏多样性和复杂性。</p>
+</li>
+<li>
+<p>随着游戏复杂性和可玩性要求的提高，对引擎架构提出了更多的挑战要求：比如帧数延迟、随机数、生命值恢复、连续的被动效果、计时器等等。其中时间的概念以及Ticks单位在区块链上是不一样的。Mud提供了不少思路来模拟时间流逝以及被动恢复技能。比如，当玩家在房间中移动时，交易中附带根据一些预定义的设计移动房间中的所有物品。以此感知时间和状态的变化。</p>
+</li>
+<li>
+<p>FOG/AW技术栈可被抽象为：开发者为ui/ux和游戏核心逻辑编写前端和后端代码，然后通过游戏状态的循环来同步所有的变化，最后由索引器将新的状态反映到前端的本地设备上。</p>
+</li>
+<li>
+<p>由于许多游戏类型，如RTS，需要高的tickrates，而由共识产生的区块链只能处理区块时间的变化，tickrate是这里要解决的一个大问题。Curio和Argus是这方面的领先者，他们正在摸索链的层面上增加游戏tickrate。Mud在试图最大程度实现全链上，整个应用程序状态都保存在 EVM 中。并没有为实现游戏更高tickrate上引入链下结合的方案。</p>
+</li>
+<li>
+<p>对于不同链的选择上，Dojo在引领Starknet的全链生态。根据@tarrenceva的描述，Starknet有State diffs状态差异，不同于optimistic rollups，重点放在了执行输出而不是输入。对游戏的影响主要可能在于优化成本，例如国际象棋游戏：在三分钟的游戏中，可能会发生 50 步。通过状态差异，单个证明和最终状态可以证明“输出”。而optimistic rollups需要所有中间状态的“输入”。</p>
+</li>
+</ul>
+<h1 id="定义-fogaw游戏状态是如何同步的"><strong>定义 FOG/AW：游戏状态是如何同步的</strong></h1>
+<p>我认为要判断是否是FOG，基准是游戏状态是如何同步的（source of truth）。</p>
+<p>对于Web 2.5游戏或传统的多人游戏，有一个中心化的服务器来定义当前的游戏状态，当玩家发送行动时，服务器会编译这些输入并将更新的结果返回给每个连接的玩家的设备。服务器处理所有的输入（tick），解决不一致的问题，并定期向玩家发送更新，提供游戏中所有元素的快照，每一个tick都更新游戏状态。<strong>游戏状态（&ldquo;game state or tick&rdquo;）</strong> 是游戏世界中每个对象的属性的时间快照。Tickrate 是指游戏服务器每秒钟计算并向玩家广播更新的游戏状态的次数。<strong>Tickrate</strong>  越高，游戏体验就越精确、越高保真。一般来说，实时战略或动作游戏需要高。tickrate，而卡牌游戏等回合制游戏则不需要。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0724/2_017e990fms.png" alt="链上游戏技术栈：如何同步游戏状态？"></p>
+<p><em>Source：https://www.gabrielgambetta.com/client-server-game-architecture.html</em></p>
+<p>对于完全运行在链上的游戏，区块链是游戏服务器并作为游戏状态的去中心化的信任源。在这种情况下，不仅NFTs或代币有真正的所有权，就连游戏者的ticks以及游戏逻辑也是在链上的。这就是为什么可以实现真正的所有权、持久性、抗审查性、可组合性等。理想情况下，游戏者的每个动作都应该提交给区块链，在达成共识后，游戏状态被更新并返回到本地设备。因此，自然而然地，需要较少tickrate的游戏类型更适合完全在链上进行。</p>
+<h1 id="解决游戏的延迟时间等的挑战"><strong>解决游戏的延迟、时间等的挑战</strong></h1>
+<p>随着游戏复杂性和可玩性要求的提高，对引擎架构提出了更多的挑战要求：比如帧数延迟、随机数、生命值恢复、连续的被动效果、计时器等等。</p>
+<p><strong>帧数延迟</strong> 其实在Web2世界也非常普遍，来自包括客户端渲染和用户操作上的延迟。特别是FPS这种高tickrate 游戏，一旦出现延迟，玩家体验会非常差，Web2中的其中一个解决办法是 lockstep state update，让所有玩家的同步按玩家中最高延迟的标准来同步，以此解决玩家公平性的体验。当引入区块链并需要等待交易确认后，这个延迟可能会更严重。为此，Mud也增加了游戏中常用的optimistic rendering乐观渲染这一机制，假设用户操作成功，并在服务器同意之前（或者在本例中是在事务确认之前）将其渲染在客户端中。</p>
+<p><strong>链上生成随机数</strong> 是一个经常被讨论的课题，Mud认为可以将用户行为作为随机结果的输入，在交互发生后生成。</p>
+<p><strong>时间的概念以及Ticks</strong> 单位在区块链上是不一样的。@SebastienGllmt认为在用fraud proof概念的链上（比如Op）很难使用计时器，因为一旦出错，将需要回滚，如果游戏中用到计时器，体验将很差。Mud提供了不少思路来模拟时间流逝以及被动恢复技能。比如随时间流逝增加金币，每次玩家执行需要金币的操作时，根据玩家之前的金币数量、最近一次刷新的数量和刷新率来计算玩家的金币数量。再比如，当玩家在房间中移动时，交易中附带根据一些预定义的设计移动房间中的所有物品。以此感知时间和状态的变化。</p>
+<p><strong>写脚本“作弊”也许不是问题。</strong> @BriefKandle 不认为对游戏系统的MEV算作弊，防止脚本能简单的MEV是游戏团队需要考虑的事情，Web2的游戏开发需要转变思路，好的MEV bot是游戏内的NPC。</p>
+<p>部分功能已在最近推出的一些链上游戏中实现，比如Rhascau中，他们使用了计时器和连续被动效果。基本上使用区块时间作为刻度。(在当前的 L2 中，区块时间 = tickrate）。</p>
+<h1 id="fogaw-技术栈"><strong>FOG/AW 技术栈</strong></h1>
+<p>FOG/AW引擎框架是一个开发者工具栈，可以让开发者利用区块链作为服务器和信任源构建游戏。此外，它可以解决目前的一些问题：</p>
+<ul>
+<li>
+<p>由于没有标准/现成的框架，构建链上FOG/AW的效率低下；</p>
+</li>
+<li>
+<p>缺乏模块化和代码重用性；</p>
+</li>
+<li>
+<p>缺乏可组合性。随着FOG/AW引擎的发展，链上游戏可以更加有趣和富有想象力。</p>
+</li>
+</ul>
+<p>为了便于理解，这类引擎一般简化的技术流程是：开发者为ui/ux和游戏核心逻辑编写前端和后端代码，然后通过游戏状态的循环来同步所有的变化，最后由索引器将新的状态反映到前端的本地设备上。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0724/2_lesuag71fa.png" alt="链上游戏技术栈：如何同步游戏状态？"></p>
+<p>为了使运行在区块链上的游戏也能顺畅地运行这一回路，Mud，Dojo，Curio，Argus，Paima engine及Lootchain等正在为此开发各自的技术栈。技术栈由3个关键部分组成：链、核心开发栈和游戏前端。他们都有自己的创新，在去中心化和游戏复杂性之间做出权衡。</p>
+<ul>
+<li>
+<p><strong>游戏前端</strong> ：包含传统引擎如Unity、Unreal等以及react/Threejs等语言和强大的工具提供渲染等功能，增强游戏可玩性和体验感必不可少的一环。以上项目基本都能提供相关SDK供开发者使用。</p>
+</li>
+<li>
+<p><strong>核心开发栈</strong> ：设计一套方案能让游戏逻辑运行在区块链上，并能按时同步到前端。关键组件包括合适的数据库结构（定义游戏行为和逻辑），以及游戏状态的同步和返回。</p>
+</li>
+<li>
+<p><strong>链</strong> ：大部分选择了Ethereum、Optimism和Starknet上构建。</p>
+</li>
+</ul>
+<p>下图描绘了不同的协议是如何设计各自的技术栈。以Mud V2为例来看其运作流：</p>
+<ol>
+<li>
+<p>一个开发者会在Mud调用一些Web2的前端工具来编写代码，利用这些强大的功能如渲染使得游戏更可视化看起来更好玩；</p>
+</li>
+<li>
+<p>同时，开发者会依Mud的智能合约框架（Mud World）来写游戏的人物、物品以及具体的运行逻辑等，比如当英雄A从X处移动至Y处，并发起对Y地块的讨伐，多大概率或什么情况下能成功占领该地块；</p>
+</li>
+<li>
+<p>以上的动作及游戏状态会被记录在Mud Store，它是一个链上数据库，负责全局游戏状态，是游戏状态同步的信任来源；</p>
+</li>
+<li>
+<p>当英雄A对Y进行讨伐，其实是玩家在前端本机上点击了鼠标并提交了该命令上链，该命令依据开发者的游戏设计逻辑，以及当前Store里的游戏状态，造成了一个结果，该结果被更新至新的游戏全局状态，并被同步上链；</p>
+</li>
+<li>
+<p>Mud上的游戏支持Web、Mobile等各种前端，不过可能会面临复杂的索引需求，Mode正是为此而开发的一个链下索引器。</p>
+</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0724/2_mq0pgas1vj.png" alt="链上游戏技术栈：如何同步游戏状态？"></p>
+<p>现在，让我们谈谈这些核心框架的共同和不同的设计。</p>
+<ul>
+<li>
+<p>他们中的大多数遵循Mud v1设计，并利用ECS作为游戏开发的数据结构。这是游戏逻辑的编写和呈现方式。Mud V2对其进行了改进，数据被定义在Tables和Systems，这允许其他的数据标准（不必如V1遵守ECS 数据建模标准），这给了开发者更多的选择，使其更具包容性。</p>
+</li>
+<li>
+<p>大多数都使用去中心化的数据库，因为区块链自然地是游戏状态和数据库的信任来源。Mud在试图最大程度实现全链上，整个应用程序状态都保存在 EVM 中。并没有为实现游戏更高tickrate上牺牲去中心化或者引入链下结合的方案。</p>
+</li>
+<li>
+<p>由于许多游戏类型，如FPS，需要高的tickrates，而由共识产生的区块链只能处理区块时间的变化，tickrate是这里要解决的一个大问题。Curio和Argus在自己的创新设计中，率先希望在链的层面上增加tickrates。</p>
+</li>
+<li>
+<p>对于不同链的选择上，Curio和Loot都利用Caldera构建Op stack chain，除此之外，Dojo在引领Starknet的全链生态。根据@tarrenceva的描述，Starknet有State diffs状态差异，不同于optimistic rollups，重点放在了执行输出而不是输入。对游戏的影响主要可能在于优化成本，例如国际象棋游戏：在三分钟的游戏中，可能会发生 50 步。通过状态差异，单个证明和最终状态可以证明“输出”。而optimistic rollups需要所有中间状态的“输入”。</p>
+</li>
+</ul>
+<p>目前已经有一些游戏构建在这些引擎之上，Mud和Dojo都在为此举办黑客松吸引开发者构建应用，Curio也刚在ETHCC发布魔兽争霸的minigame demo。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0724/2_vtf7pa08sv.png" alt="链上游戏技术栈：如何同步游戏状态？"></p>
+<p>很明显，FOG/AW正在成为公链争夺的关键生态，由Lattice提出的AW（自治世界）是一个很大的概念，不仅限于游戏、还包含社交、金融等众多属性。因此，构建在此之上的是一个充满想象力的虚拟世界，即Metaverse。我们可以期待一些新形态的游戏、社交、金融等融合应用。</p>
+<p><strong>Reference</strong> :</p>
+<p>1.https://mirror.xyz/matchboxdao.eth/d3lVAOa9Bi0kY-caoUT3lDC6E61mWJqtP1q6tME4xGY</p>
+<p>2.https://jumpcrypto.com/writing/defining-on-chain-gaming/</p>
+<p>3.https://www.oneqode.com/what-is-a-game-server/</p>
+<p>4.https://medium.com/@qingweilim/how-do-multiplayer-game-sync-their-state-part-2-d746fa303950</p>
+<p>5.https://latticexyz.notion.site/Building-Autonomous-Worlds-with-MUD-39d5eb5d31034589bc54a2053efb4c56</p>
+<p>6.https://twitter.com/tarrenceva/status/1660686571270705152</p>
+<p>7.https://book.dojoengine.org/framework/sozo/overview.html</p>
+<p>8. <a href="https://www.youtube.com/watch?v=A0OXif6r-Qk">https://www.youtube.com/watch?v=A0OXif6r-Qk</a></p>
+<p><em>**Part.2 投融资</em><strong>事件</strong> _** _</p>
+<p><img src="https://img.bibiqing.com/news/2023/0724/2_jbmurld8vl.png" alt="链上游戏技术栈：如何同步游戏状态？"></p>
+<p><strong>Web3 基础设施公司 RISC Zero 完成 4000 万美元融资</strong> </p>
+<p><em>* 基础设施</em></p>
+<p>旨在帮助开发者开发零证明软件的基础设施公司 RISC Zero 完成 4000 万美元 A 轮融资， Blockchain Capital 领投，参投方包括 <strong>IOSG Ventures</strong> 、Galaxy Digital、RockawayX、Maven 11、Fenbushi Capital、Delphi Digital、Algaé Ventures、IOBC、Tribute Labs 的 Zero Dao 和 Alchemy。</p>
+<p><strong>「可读」区块链浏览器 Cymbal 完成 1850 万美元融资</strong></p>
+<p><em>* 区块链技术初创公司</em></p>
+<p>总部位于加利福尼亚州门洛帕克的区块链技术初创公司 Cymbal 宣布完成 1850 万美元融资，First Round Capital、Solana Ventures、CAA Connect、Coinbase Ventures、Patron、GV、Acrew 和 UTA Ventures 等参投。Cymbal 打算利用这笔资金扩大业务并加大开发力度。</p>
+<p><strong>轻量级节点协议 Over Protocol 开发商完成 800 万美元融资</strong></p>
+<p><em>* 轻量级节点协议</em></p>
+<p>Layer 1 区块链轻量级节点协议 Over Protocol 开发商 Superblock 宣布已通过两笔融资交易完成总计 800 万美元募资，SK、Netmarble、DSC、E&amp;Investment、Schmidt、SpringCamp 和 NaverZ 参投。</p>
+<p><strong>Eyeball Games 完成 150 万美元融资，White Star Capital 领投</strong></p>
+<p><em>* 游戏</em></p>
+<p>Web3 游戏开发商 Eyeball Games 宣布完成 150 万美元 Pre-Seed 轮融资，育碧旗下数字资产基金支持的 White Star Capital 领投， Polygon Ventures、Immutable、Oular、Great South Gate Ventures 和一批天使投资人参投。</p>
+<p><strong>社交 feed 流应用 Interface 完成 140 万美元种子轮融资，Polymorphic Capital 和 Mask Network 联合领投</strong></p>
+<p><em>* 社交</em></p>
+<p>社交 feed 流应用 Interface 完成 140 万美元种子轮融资， Polymorphic Capital 和 Mask Network 联合领投， Seed Club、Caballeros Capital、Safe Ecosystem Foundation 以及包括 Blake Gao、Anton Bukov、Sergej Kunz、Arthaud Mesnard、Andrey Scherbovich 和 Will Papper 在内的天使投资人参投。</p>
+<p><strong>Cosmic Wire 完成 3000 万美元融资，Solana 基金会和 Polygon 领投</strong></p>
+<p><em>* Web3 和区块链解决方案</em></p>
+<p>Web3 和区块链解决方案 Cosmic Wire 完成 3000 万美元种子轮融资，Solana 基金会和 Polygon 领投，本轮融资将用于推动 Cosmic Wire 开发去中心化应用并扩大 Web3 生态系统。Cosmic Wire 表示其帮助用户获得数据和在线交互的控制权，继而更安全地交换信息，满足 Web3 领域不断变化的数据需求，其技术可以在金融、供应链、保险、游戏、体育、娱乐等领域应用。</p>
+<p><strong>Manta Network 开发商 p0x labs 以 5 亿美元估值完成 2500 万美元融资</strong></p>
+<p><em>* 基础设施</em></p>
+<p>Manta Network 开发商 p0x labs 以 5 亿美元估值完成 2500 万美元融资，Polychain Capital 和启明创投领投。本轮融资将用于扩展 Manta Pacific 和 Manta Atlantic 的 ZK Layer 1 区块链，以实现合规的链上隐私。</p>
+<p><strong>DeFi 抵押借贷协议 PWN 完成 200 万美元融资</strong></p>
+<p><em>* DeFi</em></p>
+<p>DeFi 抵押借贷协议 PWN 以 4200 万美元估值完成 200 万美元融资，投资方包括 Digital Finance Group、IQTEC、StarkWare、Nethermind、Safe Ecosystem Foundation、Dilectic、Next Web Capital、Patricio Worthalter、Christoph Jentzsch、Danny Ryan、Tim Beiko、Alex Van de Sande、Lefteris Karapetsas、Luis Cuende、Anthony Sassano 和 Eric Conner。</p>
+<p><strong>Hexacore 完成 350 万美元融资，Scalo Technologies 领投</strong></p>
+<p><em>* 游戏</em></p>
+<p>Web3 移动游戏开发商 Hexacore 宣布完成 350 万美元融资，迪拜科技风投 Scalo Technologies 领投，Xsolla、Estoty 和其他天使投资人参投。新资金将用于加速该公司进一步移动游戏的 Web3 功能开发，包括应用内置购买、NFT 藏品和广告激励等。</p>
+<p><strong>Futureverse 完成 5400 万美元 A 轮融资，10T Holdings 领投</strong></p>
+<p><em>* AI 元宇宙</em></p>
+<p>AI 元宇宙初创公司 Futureverse 完成 5400 万美元 A 轮融资，10T Holdings 领投，Ripple Labs 等参投。Futureverse 由 11 家不同的公司合并而成，于 2022 年底开始由八家公司合并，之后又有三家公司加入。</p>
+<p><strong>Ethena 完成600万美元融资，Dragonfly领投</strong></p>
+<p><em>* 稳定币</em></p>
+<p>去中心化稳定币项目 Ethena 完成 600 万美元融资，Dragonfly 领投，该融资还得到 Deribit、Bybit、OKX、Gemini 和 Huobi 等加密衍生品交易所的支持。该项目将发行稳定币 USDe，并通过将用户的部分抵押品转换为以太坊并质押，再通过永续合约做空相同数量的以太坊来保证稳定币抵押品价值的稳定。Ethena 希望在第三季度完成测试网阶段后，在未来几个月内全面推出其稳定币和债券资产。</p>
+<p><strong>Echooo Wallet 完成 1500 万美元融资</strong></p>
+<p><em>* 钱包</em></p>
+<p>账户抽象钱包 Echooo Wallet 以 1 亿美元估值完成 1500 万美元融资，参投方包括 Skyview Capital、A&amp;T Capital 等。Echooo Wallet 在推特上表示将于北京时间今日 22:00 启动限时免费的「AA Wallet Giveaway」活动。</p>
+<p>**</p>
+<p>_<strong>Part.3 IOSG投后项目进展</strong> _</p>
+<h2 id="heading">**</h2>
+<p><strong>MetaMask</strong>  <strong>计划年底前推出 Snaps 协议，允许任何人安全扩展 MetaMask 功能</strong></p>
+<p><em>* 钱包</em></p>
+<p>MetaMask 计划在 2023 年底之前推出 Snaps 协议。Snaps 是一个允许任何人安全扩展 MetaMask 功能的系统，允许钱包用户访问新应用并执行跨链协议交互。MetaMask 不会向 Snaps 用户收取任何费用。</p>
+<p><strong>StarkWare</strong>  <strong>推出用于开发 Starknet 合约的极速工具包 Starknet Foundry，并且即将推出 Starknet 应用链</strong></p>
+<p><em>* Layer 2</em></p>
+<p>StarkWare 联合创始人 Eli Ben-Sasson 在巴黎 EthCC（Ethereum Community Conference）大会上宣布推出开源项目 Starknet Foundry。根据 Github，Starknet Foundry 是用于开发 Starknet 合约的极速工具包，由 Software Mansion 的前 Protostar 团队设计和开发，基于本地 Cairo 测试运行器和 Blockifie 用 Rust 编写。此外Eli Ben-Sasson 还表示，Starknet 即将推出 Starknet 应用链（Appchains）。Starknet 堆栈包括 Starknet 应用链（Full Appchain as A Service）和 StarkWare 支持，Starknet Appchains 可以由使用 Starknet 堆栈的应用启动，具有可定制性、去中心化等特点。</p>
+<p><strong>Taiko</strong>  <strong>推出 Alpha-4 测试网，旨在测试初始层和基于质押的证明者经济学</strong></p>
+<p><em>* Layer 2</em></p>
+<p>基于 zkRollup 的以太坊二层网络 Taiko 宣布推出 Eldfell L3（Alpha-4 测试网）该测试网旨在测试在 Taiko 上部署 Taiko 作为 L3 初始层（Rollup 上的 Rollup），以及测试新的基于质押的证明者经济学。</p>
+<p><strong>zkSync Era</strong>  <strong>推出基于 STARK 的证明系统 Boojum</strong></p>
+<p><em>* Layer 2</em></p>
+<p>zkSync Era 发文称，正在过渡到名为 Boojum 的新的基于 STARK 的证明系统，补充了 zkSync Era 定序器。Boojum 证明者仅需要 16GB RAM，可实现未来大规模证明者去中心化。目前，影子证明已经在主网上线，该阶段为主网影子模式，尽管处于测试阶段，但已在为主网区块说生成并验证「影子证明」。Boojum 特性包括 PLONK 式算术化、FRI 承诺方案、系统「无聊」部分的效率、易于扩展、单堆栈等。Boojum 可以增强性能，也可以降低去中心化的硬件要求，更快地证明交易。</p>
+<p>**<strong>_<strong>Part.4 行业脉搏</strong> _</strong> **</p>
+<p><strong>IOSG Ventures 老友记活动巴黎站取得圆满成功</strong></p>
+<p><em>* VC</em></p>
+<p>在巴黎举办的ETHCC期间，IOSG Ventures 于7月18日成功举办了以 Generative World Architecture 为主题的活动，吸引了来自加密货币和人工智能领域的专家、爱好者、项目创始人、投资人和社区参与者。此次活动涵盖了众多令人期待的主题，包括ZKML、去中心化机器学习、生成AI技术、智能合约潜力、机器与身份、超级扩展可验证计算等等。与会者们进行了深入讨论，共同探索了加密货币和人工智能领域的非凡融合及应用。</p>
+<p>本次活动邀请了zkSync, StarkWare, Scroll, Nil Foundation, Ingonyama, Risc0, Galxe, Worldcoin, Linea, Runtime 等伙伴参与， 设置10场主题演讲和3场圆桌讨论环节，吸引了实际在线报名人数1306，累计逾1000 人员到场参与，活动收到了来自项目和社区的积极反馈。IOSG Ventures感谢所有参与者的支持，本次活动的成功离不开各位的积极参与和热情贡献。展望未来，IOSG Ventures将继续致力于推动加密货币和人工智能领域的发展，为行业创造更多令人振奋的机遇。</p>
+<p><strong>机构流动性平台 Paradigm 在 Starknet 上孵化应用链 Paradex</strong></p>
+<p><em>* DeFi</em></p>
+<p>加密货币机构流动性平台 Paradigm 在 Starknet 上孵化了一个名为「Paradex」的应用链。Paradex 是一个混合衍生品交易所，会把 Paradigm 的流动性与 DeFi 的透明度和自我托管相结合，将作为基于 Starknet 开发者堆栈的自己的链运营，并且是 StarkWare 和 Paradigm 之间持续六个月合作的结果。</p>
+<p><strong>Worldcoin 公开发布 World ID SDK</strong></p>
+<p><em>* DID</em></p>
+<p>由 OpenAI 首席执行官 Sam Altman 联合创立的以身份为中心的加密项目 Worldcoin 宣布公开发布 World ID SDK。Worldcoin 表示，「World ID SDK 使网络、移动和链上集成变得快速、简单，包括 Web 小部件（JS）、开发人员门户、开发模拟器、示例、指南等。鉴于 World ID 的无许可架构，世界各地的开发人员都可以免费与其集成。</p>
+<p><strong>第 166 次以太坊核心开发者执行会议：下一次以太坊执行层升级为 Prague，执行层为 Electra</strong></p>
+<p><em>* 以太坊</em></p>
+<p>以太坊核心开发者 Tim Beiko 表示，在第 166 次以太坊核心开发者执行会议上，开发者讨论了 Dencun 升级 devnets 的现状：devnet-7 仍在运行，工具支持方面的工作也在进行中，尤其是拥有一个包含创世以来所有 blob 的 blob 浏览器。此外，还进行了一次小规模的 Sepolia 影子分叉，发现了一些客户端错误。客户端正在转向 devnet-8 工作，其中也将包括非 4844 功能。目前，Nethermind 已实施所有内容，但仍在审查一些 EIP；Erigon 正在实施 4844，1153、5656、4788 也在实施中，SELFDESTRUCT 删除（6780）也是待办事项。Hyperledger Besu 除了 4788 与 6780 外，其余都准备就绪，EthereumJS 也已准备就绪。</p>
+<p><strong>Solana Labs 推出支持使用 Solidity 编写合约的编译器 Solang</strong></p>
+<p><em>* 基础设施</em></p>
+<p>Solana Labs 推出支持使用 Solidity 语言编写智能合约的编译器 Solang，其特点包括与以太坊 Solidity 0.8 兼容、能够调用其他 Solana 智能合约、支持 Solana SPL 代币等。</p>
+<p><strong>ConsenSys L2 网络 Linea 向整个社区开放对主网 Alpha 的访问</strong></p>
+<p><em>* Layer 2</em></p>
+<p>ConsenSys Layer2 网络 Linea 宣布向整个 Linea 社区开放对 Linea Mainnet Alpha 的访问，已使开发人员可以访问该 Rollup 和 ETH 桥 UI 以及 Infura 和 MetaMask 和 Infura 中的 RPC 端点。支持 ERC20 代币的规范代币桥将在未来几周内推出。</p>
+<p><strong>OpenSea 推出 NFT 交易功能 Deals，支持使用 WETH 交易</strong></p>
+<p><em>* NFT</em></p>
+<p>OpenSea 发推称，正式推出 Deals，用户可在 OpenSea 上交换 NFT。Deals 允许支持使用 WETH 进行 NFT 交易；由原生 NFT 协议 Seaport 提供支持，节省 Gas 费；可直接在 OpenSea 上提供、查看与接受交易。</p>
+<p><strong>OKX Web3 钱包已接入 Layer2 网络 Linea</strong></p>
+<p><em>* 钱包</em></p>
+<p>基于 OP Stack 的 Layer2 网络 Public Goods Network（PGN）已推出，拟将大部分定序器净收入用于支持以太坊生态系统及其他公共产品。目前，PGN 的部署与基础设施已准备好进行测试，跨链桥、交易视图、区块资源管理器与核心基础设施已就绪。在主网启动 6 个月后，将根据累积的影响数据评估和分配费用，可加入网络联网，合作确定定序器费用的分配方式。PGN 承诺进行至少两年的实验，允许合作伙伴在 PGN 上运行 DApp，支持公共产品资金。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55581/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">链上房地产能否革新传统交易租赁市场？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55603/">
+                <span class="next-text nav-default">梅花创投吴世春：大模型投资是张“明牌”</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading">**</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

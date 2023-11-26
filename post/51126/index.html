@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          zkVM：比zkEVM更普适的通用扩容方案 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将对比 zkEVM 和 zkVM 在技术上的差异，并介绍 RISC Zero zkVM 及其即将推出的 Bonsai 网络。" />
+<meta name="keywords" content="zkEVM, zkVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51126/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="zkVM：比zkEVM更普适的通用扩容方案" />
+<meta property="og:description" content="本文将对比 zkEVM 和 zkVM 在技术上的差异，并介绍 RISC Zero zkVM 及其即将推出的 Bonsai 网络。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51126/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="zkVM：比zkEVM更普适的通用扩容方案">
+<meta itemprop="description" content="本文将对比 zkEVM 和 zkVM 在技术上的差异，并介绍 RISC Zero zkVM 及其即将推出的 Bonsai 网络。"><meta itemprop="datePublished" content="2023-05-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2895">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="zkVM：比zkEVM更普适的通用扩容方案"/>
+<meta name="twitter:description" content="本文将对比 zkEVM 和 zkVM 在技术上的差异，并介绍 RISC Zero zkVM 及其即将推出的 Bonsai 网络。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">zkVM：比zkEVM更普适的通用扩容方案</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-12">
+      2023-05-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2895 字 -
+        预计阅读 6 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>本文将对比 zkEVM 和 zkVM 在技术上的差异，并介绍 RISC Zero zkVM 及其即将推出的 Bonsai 网络。关于 RISC Zero，它是一个通用 zkVM，RISC Zero zkVM 是一台可验证的计算机，其工作方式类似于真正的嵌入式 RISC-V 微处理器，使程序员能够像编写任何其他代码一样编写 ZK 证明。支持 Rust 和 C++ 编写 ZK 证明，并支持任何编译为 RISC-V 的语言。</p>
+<h3 id="背景">背景</h3>
+<p>随着当前智能合约的复杂性增加，dapp 越来越先进，区块空间越来越稀缺，运行链上代码的成本也在增加。换句话说，如果你的 DeFi 逻辑变得计算昂贵，或者你的链上游戏逻辑需要额外的计算能力，你应该考虑使用 zkVM 或 zkEVM，将复杂的应用逻辑移到链外。</p>
+<p>在这篇博文中，我想解释在这种情况下，一个字母所能带来的不同。我将从 EVM 的概述开始，然后是 zkEVM，再接着是 zkVM。zkEVM 允许你在链外传输 Solidity 应用程序，而 RISC Zero 的 zkVM 和即将推出的 Bonsai 网络允许你使用 Rust 编写可扩展的、与链无关的代码。</p>
+<p><strong>快速了解 EVM：</strong></p>
+<p>EVM 是 Ethereum Virtual Machine（以太坊虚拟机）的缩写，你可以把它看作是执行 Ethereum 上所有交易的软件。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0512/nr40sry42kiutw1" alt="zkVM：比zkEVM更普适的通用扩容方案"></p>
+<p>每个节点通过运行这个软件（如 geth 等实现）来参与以太坊网络。在以太坊中，交易是由代码表示的，其格式称为 EVM 字节码，代表 EVM 的指令。大体上，这些指令面向数学计算，来获取区块链信息，以及交换金钱。世界上有许多虚拟机，每一个都有自己的专长。以太坊的虚拟机很关键，因为它更适合应用于去中心化的金融（DeFi）。</p>
+<h4 id="什么是-zk为什么每个人都把它放在其他词的前面">什么是 「zk」，为什么每个人都把它放在其他词的前面？</h4>
+<p>最近最酷的趋势之一是把 「zk 」放在单词的前面，这两个字母代表零知识证明。维基百科上有很多例子（我最喜欢的是 「两个球和色盲的朋友 」问题）。如果你对它们不熟悉，我建议此时花几分钟时间读一读零知识证明的例子。</p>
+<p>长话短说，零知识证明能够实现可验证的计算。你可以把它看作是一种确保哪些计算被完成，以及计算结果是正确的方法。计算机就计算结果达成一致的一种方式是让每台机器运行相同的代码并比较结果。根据不同的计算，这对资源有限的系统来说可能很昂贵。通过使用像 RISC Zero 这样的零知识证明框架，机器可以通过检查证明的数学有效性来确保计算的正确执行，而不是重复运行相同的代码（如 EVM）。</p>
+<p>在 RISC Zero，我们把这些证明称为 「收据」（receipts），在博客的其余部分，我将使用这个术语。每张收据都包括一个加密标识符，表明进行了哪项计算，以及计算的任何公共输出的日志。虽然这可能看起来是一个简单的概念，但它意味着机器可以生成收据来「证明」计算已经完成。</p>
+<h4 id="那么当你把-zk-放在-evm-前面时会发生什么">那么，当你把 zk 放在 EVM 前面时会发生什么？</h4>
+<p>术语 zkEVM 是用来描述在 EVM 字节码引擎上运行智能合约的软件，并为特定的计算（或交易）生成收据。这个软件通常可以证明两个或多个收据是有效的，并生成另一个收据。通过使用这种机制，zkEVM 可以运行许多交易，并使用一个收据来表示它，这被称为 「Rollup」。用 Solidity 编写的项目可以使用 zkEVMs 来扩展交易，而不是在链上进行所有计算，在区块链上发布一个单一的收据来代表许多发生在链外的交易。zkEVM 有很多类型，如果你想了解它们，你可以在这篇文章中阅读更多。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0512/hhmy44dw5d8ipku" alt="zkVM：比zkEVM更普适的通用扩容方案"></p>
+<h3 id="zkvm-通过放弃-e-来解锁可验证的计算">zkVM： 通过放弃 E 来解锁可验证的计算</h3>
+<p>在 RISC Zero，<strong>我们实现了一个零知识虚拟机（zkVM），而不是一个 zkEVM。两者之间的区别在于，「VM」，即 「虚拟机」，比 EVM 更通用。</strong></p>
+<p>在 zkVM 上，你可以运行几乎所有在计算机上运行的软件，而不是任何可以在以太坊上运行的软件。这种计算机使用 RISC-V 架构，这是一套用于通用计算的指令。这意味着 RISC-V 并没有内置钱包地址或其他区块链结构的概念。该指令集主要由在内存位置之间移动数据和对数据进行数学运算的运算符组成。虽然这个指令集可能看起来过于笼统，但并不要求程序员知道如何用汇编语言编程，以便为这个 zkVM 编写程序。</p>
+<p>与 EVM 相比，这个底层的 RISC-V 模拟器允许程序员用 Rust、C/C++ 和 Go 等语言为 zkVM 编写程序（注意，我们目前支持 Rust，我们对 C/C++ 和 Go 的支持目前正在进行中）。这意味着 zkVM 的程序员可以使用别人在该语言的生态系统中开发的相关库。一个例子是，我们可以运行玩 Wordle 或 Where’s Waldo 等游戏的程序。然而，我们并不局限于简单的游戏：你可以运行许多其他编译为 RISC-V 的程序。</p>
+<h3 id="运行-risc-v-程序有什么用">运行 RISC-V 程序有什么用？</h3>
+<p>如果你想了解更多帮助你写出更好的 DeFi 应用的框架，你可能会想知道为什么我们正在研究 RISC Zero 这样一个通用的计算框架。</p>
+<p>通过允许用户使用通用语言编写程序，我们打开了在 Solidity 库之外编写代码的可能性。这意味着应用逻辑不需要局限于可以用 Solidity 表达的内容，并允许你写出与链无关的代码。像 Rust 这样的通用语言允许开发者比那些为特定目的而设计的语言更容易编写不同类型的程序。例如，你可以用 Rust 编写一个简单的算术计算器，它接受一个数学表达式作为输入，运行数学计算，并将解决方案作为输出返回。如果你增加这个计算器的复杂性，以支持常见的编程语言结构，如变量、循环和函数，你就实现了一个简单的语言解释器，将程序作为输入，运行程序，并将解决方案作为输出返回。这些程序可以被编译成 RISC-V 并在 RISC Zero 的 zkVM 上运行。有了 Rust，你可以使用现有的 crates 来为你的应用程序编程，而不是从头开始编写一切。</p>
+<p>一个这样的库是 Rust 上的 revm crate。这个 crate 是用 Rust 编写的 EVM 的一个实现。通过使用这个 crate，我们可以在 zkVM 上运行一个 EVM 字节码解释器。这意味着你可以在运行在 zkVM 上的 EVM 字节码解释器上运行 solidity 合约! 通过这样做，zkVM 会产生一个收据，代表运行智能合约的 EVM 的执行。这在 Odra 的这篇博文中已经进行了探讨，并被 zkPoEx 团队用来提高 bug 赏金。</p>
+<h3 id="如何扩展区块链">如何扩展区块链</h3>
+<p>随着当前智能合约的复杂性增加，许多人发现他们维护的链上代码只会随着他们的开发而增加成本。换句话说，如果你的 DeFi 逻辑逐渐变得计算昂贵，或者你的链上游戏逻辑需要额外的计算能力，RISC Zero 的 zkVM 和即将推出的 Bonsai 网络允许你使用通用编程语言编写可扩展的链上代码。我在这篇博文中列举了几个例子，我们正处于真正可扩展的计算网络的最开始。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51069/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">zkEVM VS zkVM：一字之差 天壤之别</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51085/">
+                <span class="next-text nav-default">阿里云争食币圈</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#zkvm-通过放弃-e-来解锁可验证的计算">zkVM： 通过放弃 E 来解锁可验证的计算</a></li>
+        <li><a href="#运行-risc-v-程序有什么用">运行 RISC-V 程序有什么用？</a></li>
+        <li><a href="#如何扩展区块链">如何扩展区块链</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

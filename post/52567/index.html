@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          以太坊账号抽象ERC4337的过审方案解读(上） - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将梳理ERC4337标准的实现机制、审计报告结论与最新行业进展。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/52567/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="以太坊账号抽象ERC4337的过审方案解读(上）" />
+<meta property="og:description" content="本文将梳理ERC4337标准的实现机制、审计报告结论与最新行业进展。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/52567/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="以太坊账号抽象ERC4337的过审方案解读(上）">
+<meta itemprop="description" content="本文将梳理ERC4337标准的实现机制、审计报告结论与最新行业进展。"><meta itemprop="datePublished" content="2023-06-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4618">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="以太坊账号抽象ERC4337的过审方案解读(上）"/>
+<meta name="twitter:description" content="本文将梳理ERC4337标准的实现机制、审计报告结论与最新行业进展。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">以太坊账号抽象ERC4337的过审方案解读(上）</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-05">
+      2023-06-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4618 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="前言">前言</h2>
+<p>在 2023.3.1 号丹佛的 WalletCon 上，官宣由以太坊基金会开发人员设计实现的ERC-4337 的核心合约已经通过了 OpenZeppelin 的审计，通过各项测试，目前审计后的合约已经顺利部署在以太坊主网以及若干测试网，后续可在各 EVM 兼容链上运作包括 Polygon、Optimism、Arbitrum、BNB Smart Chain、Avalanche 和 Gnosis Chain 等。</p>
+<p>本文将梳理 4337 标准的实现机制、审计报告结论与最新行业进展</p>
+<p><img src="https://img.bibiqing.com/news/2023/0605/10_tzakldsoos.png" alt="以太坊账号抽象ERC4337的过审方案解读(上）"></p>
+<h2 id="1账号抽象的背景">1、账号抽象的背景</h2>
+<h3 id="11为什么产权分离是账户抽象的目标">1.1、为什么产权分离是账户抽象的目标？</h3>
+<p>目前在以太坊中有两种账户，分别为外部账户（EOA）和合约账户（Contract Account）。外部账户的所有权和签名权理论上是同一个体单位持有的；简单来讲，持有私钥的人不只拥有这个账户的「所有权」，同时还有权利「签名转移所有资产」。所以当前以太坊上所有权和签名权是一体的，这样的外部账户（EOA）设计可能会衍伸出一些值得讨论的问题：</p>
+<ol>
+<li>
+<p>私钥难保护：用户失去私钥（遗失、黑客攻击、密码学上的被破解）意味着地失去所有资产。</p>
+</li>
+<li>
+<p>签名算法少：原生协议在验证交易上只能使用 ECDSA 签名和验签算法。</p>
+</li>
+<li>
+<p>签名权限高：无原生多签（多签只能通过智能合约实现协作），单签即可执行任意操作</p>
+</li>
+<li>
+<p>多币种受限：交易手续费只能通过 ETH 支付，并不支持批量交易。</p>
+</li>
+<li>
+<p>交易隐私泄露：一对一交易容易分析账户持有者的隐私信息。</p>
+</li>
+</ol>
+<p>其次单纯的合约钱包（CA）也有一定问题：</p>
+<ul>
+<li>
+<p>对合约钱包的操作必须由 EOA 发起（实质是调用合约），每笔交易将多消耗 21000 Gas。（当前以太坊交易的验证方式是固定的，只有持有了有效的 ECDSA 签名、Nonce 值和足够</p>
+<p>的账户余额，一笔交易才算有效）。</p>
+</li>
+<li>
+<p>需要 EOA 有足够的 ETH 来支付 Gas（管理两个账户），或者依靠 Relayer 支付 Gas（导致中心化）。</p>
+</li>
+</ul>
+<p>上诉的约束让普通用户很难使用以太坊：</p>
+<ul>
+<li>
+<p>首先，使用以太坊上的任何应用，用户都必须持有以太（并承担以太价格波动的风险）</p>
+</li>
+<li>
+<p>其次，用户需要处理复杂的费用逻辑，Gas price、Gas limit、事务阻塞这些概念对用户来说过于复杂。</p>
+</li>
+<li>
+<p>最后，虽然许多区块链钱包或应用试图通过产品优化提高用户体验，但它们的实际效果甚微。</p>
+</li>
+</ul>
+<p>破局之道在于实现账户抽象，<strong>将所有权（Owner）和签名权（Signer）解耦（Decoupling），从而才能逐个解决上述问题</strong></p>
+<p>拓展阅读：</p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484016&amp;idx=1&amp;sn=fb39f68929410900805506473a76d5f9&amp;chksm=e83aa5aadf4d2cbc8b0e953bb5ffd2a9b578b2c66206a465e90fa7fcba43117cf826edf8947e&amp;scene=21#wechat_redirect">以太坊账户抽象万字研报：拆解 10 个相关 EIP 提案与冲击千万级日活用户瓶颈的七年之路</a></p>
+<p>虽然也有出现若干折中方案，如多签钱包和无需 Gas 的元交易机制，接下来咱们展开探讨。</p>
+<h3 id="12eip-4337与折中方案对比">1.2、EIP-4337 与折中方案对比</h3>
+<p><strong>1.2.1、折中 1-多签合约钱包方案</strong></p>
+<p>多签钱包，即用智能合约实现多签功能的钱包合约账户。以 Safe 多签钱包（原名 Gnoiss Safe）为例，可以设定钱包的多签规则，如三人共管、两人签名可执行交易（2-of– 3 ），而 Argent 钱包的做法也类似，创新点是引入所谓的监护人（Guardian）机制，对用户更友好，用户可以设定其他 EOA 账户或邮件/手机作为监护人，监护人可以许可交易、锁定钱包、协助恢复钱包。这样的做法给用户带来了便利，但由于它的钱包软件、钱包合约及后端程序的功能很复杂，它的方案很难成为行业通行的标准做法。</p>
+<p>总之，这里很多的优点都源于合约本身的高度定制能力，同样的缺点则是依赖于 EOA 账户做管理员来驱动，<strong>这本质是签名算法的局限性。</strong></p>
+<p>相比之下对比传统多签合约钱包的方案， 4337 的优势则是可以自定义签名算法。这里的签名<strong>只需和合约中签名的算法绑定的</strong> （确保合约可以完成解签，但不限于只能基于ECDSA和secp 256 k 1 签名 ）， 而签名这件事本身可以有多种算法实现，不同算法性能和交互模式不同，而这将带来的核心变化是，如更好的将签名的功能转入手机设备端实现从而实现便携的硬件钱包。这点主要的挑战是安卓等设备开放性过高，不可能私钥存手机，需要单独的签名芯片等。<a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247483863&amp;idx=1&amp;sn=5c8c4d3b28f806b4140a59b9baa2b944&amp;chksm=e83aa60ddf4d2f1b25ebe94cdc2c99ca5704bdf1edef580a894129994fe3aac395cc2d6ec03a&amp;scene=21#wechat_redirect"></a></p>
+<p><strong>1.2.2、折中 2-元交易标准</strong></p>
+<p>这点优化折中针对的是用户执行链上行为必须依赖已有 ETH 作为手续费，采用元交易标准后</p>
+<p>用户体验上：用户虽然账户中没有 ETH（实为没有 Polygon 链的原生通证 MATIC），但可仍通过网⻚界面铸造 NFT：用户仅需签 即可，我们创建交易、为之代付燃料费、将之提交上链执行。</p>
+<p>幕后执行上：</p>
+<ol>
+<li>
+<p>用户对结构化数据进行签名，这个数据与签名是要求 NFT 合约铸造一个 NFT 给他</p>
+</li>
+<li>
+<p>数据与签名被发送给中继器（Relayer）</p>
+</li>
+<li>
+<p>链下中继器（某 EOA 账户）向链上发起交易，送到链上可信的传递者合约（Forwarder)</p>
+</li>
+<li>
+<p>而 NFT 合约是定制的，会将这样方式传递的交易中的原始发起者视为是用户，而非 msg.sender</p>
+</li>
+</ol>
+<p>因此在最终的 NFT 合约中，执行的 NFTMint 得到的对象就不是原始标准中的交易发起者了</p>
+<p>例如最近火热的 Lens 免 gas 方案，就是非常标准的元交易执行模式，已经累计有上千万笔代付交易了</p>
+<p><img src="https://img.bibiqing.com/news/2023/0605/10_smpsksg43s.png" alt="以太坊账号抽象ERC4337的过审方案解读(上）"></p>
+<p>这个方案是有效的，但有两个缺点：</p>
+<ol>
+<li>
+<p>它引入了一个我们必须信任的链下⻆色中继器（Relayer）。如果他宕机了，或者有作恶的动机（或者私钥被盗），则可能存在⻛险。</p>
+</li>
+<li>
+<p>我们最终交互的合约（即 NFT 合约）必须定制。这导致而无法与链上已经存在的、未定制的合约进行交互，这大幅减少能够适用的范围。</p>
+</li>
+</ol>
+<p>为什么用这么多篇幅来讲述合约钱包和元交易呢？因为 4337 的实现里本身几乎就能涵盖上述的优点（也是从中吸取灵感）</p>
+<p><strong>拓展阅读：</strong></p>
+<p><strong>EIP-4337 标准智能钱包实践研究报告：全景式呈现 4337 标准实例实现过程及机遇探讨</strong></p>
+<p><a href="https://research.web">https://research.web</a>3 caff.com/zh/archives/4660 </p>
+<h2 id="2为什么4337可以实现产权分离">2、为什么 4337 可以实现产权分离？</h2>
+<p>现在在去中心化的领域是不存在免费的信任，身份验证必须基于密码学证明，所以无论哪种提案都是需要管理某种意义的私钥，而要实现体验上的折中，首要打破的就是目前账户权限的过于集中，整体改造方式按针对的对象或者环节可以分成三种大方向：</p>
+<ol>
+<li>
+<p>改造链上交易类型（EIP-101、EIP-86、EIP-859、EIP-2718 ）</p>
+</li>
+<li>
+<p>改造链上主体对象（EIP-2938、EIP-3074、EIP-3607、EIP-5003 ）</p>
+</li>
+<li>
+<p>改造上链交易打包过程（EIP-4337、EIP-5189 ）</p>
+</li>
+</ol>
+<p>在下图，EIP-4337 方案纳入了最新路线图，这也宣告着以太坊最终在这两条路径中做出了决定。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0605/10_osy3lngjvf.png" alt="以太坊账号抽象ERC4337的过审方案解读(上）"></p>
+<p>EIP-4337 是迄今为止是 AA 的最佳方案。</p>
+<p>被选用的核心原因是 EIP-4337 <strong>完全避免了共识层协议更改</strong> ，使用标准中提出了新的事务对象 UserOperation，用户将此对象发送到内存池中由 bundlers 从矿工维度批量打包交付合约执行交易事务。是个任何人可以开发链上合约，任何人可以自运行捆绑器的去中心化模式。</p>
+<h3 id="214337运作原理">2.1、 4337 运作原理</h3>
+<p>后续深入理解最新进展所面临的难题和挑战还是需要先理解原理，咱们从涉及的角色，分工，对照传统交易的执行流程来梳理。</p>
+<p><strong>2.1.1、 4337 标准涉及的角色</strong></p>
+<p>ERC-4337 有五个主要组成部分： UserOperation、Bundler、EntryPoint、Wallet Contract 和 Paymaster Contract。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0605/10_g43iayjck3.png" alt="以太坊账号抽象ERC4337的过审方案解读(上）"></p>
+<ul>
+<li>
+<p>UserOperations 用户操作对象，是用于与合约账户执行交易的伪交易对象。这些是由创建者的应用程序所创建的。</p>
+</li>
+<li>
+<p>Bundlers 捆绑器，可能是某个矿工，从内存池中打包 UserOperations 并将它们发送到区块链上的 EntryPoint 合约的参与者。</p>
+</li>
+<li>
+<p>EntryPoint 入口点合约，是处理交易验证和执行逻辑的智能合约。</p>
+</li>
+<li>
+<p>Wallet Contracts 是用户最终拥有的链上身份，属于智能合约帐户。</p>
+</li>
+<li>
+<p>Paymaster Contracts 是可选的代付智能合约。</p>
+</li>
+</ul>
+<p><strong>2.1.2、 4337 交易的执行流程</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0605/10_4hok9oo7fz.png" alt="以太坊账号抽象ERC4337的过审方案解读(上）"></p>
+<p>我们来重新按完成一笔以太坊转账的流程来梳理下按照 ERC-4337 实现的交易是怎样的：</p>
+<ol>
+<li>
+<p>打开钱包：用户管理持有的私钥工具，如 Metamask，Bitkeep，Bitizen 等（此步骤不变）。</p>
+</li>
+<li>
+<p>交易签名：用私钥对新的若干字段做签名操作，称之为 UserOperation 用户操作对象（指令不变，但内容字段变化，可选用非 ECDSA 的签名算法）。</p>
+</li>
+<li>
+<p>发送交易：称之为 Bundlers 打包者或是捆绑器，本质仍是由某个负责出块的矿工操作（发送不变，发送对象改为指定矿工）。</p>
+</li>
+<li>
+<p>矿工打包：bundlers 把用户发送的操作签名解析验证后由矿工单独再签名一笔交易来包裹用户的指令，批量地将用户的操作指令转发到某个合约钱包中再由合约来验证用户的签名并执行（彻底改变）。</p>
+</li>
+<li>
+<p>由于交易是矿工签名并发送的，因此 from 是矿工，原先用户的签名和指令在则在参数之中。</p>
+</li>
+<li>
+<p>打包发送到作为路由器的智能合约中，执行验证并且进一步转发到各用户独立的合约钱包。</p>
+</li>
+<li>
+<p>入口点合约验证：EntryPoint 是处理交易验证和执行逻辑的智能合约。会反复和用户的合约账户进行交互以及验证，确保最终链上打包必然成功，否则全部交易都要回退。</p>
+</li>
+<li>
+<p>出块流程：完全不变。</p>
+</li>
+</ol>
+<h3 id="22功能举例入口点合约">2.2、功能举例：入口点合约</h3>
+<p>迁入 4337 后，对任何账户的调度都需要先经过入口点合约，他需要解决的是</p>
+<ol>
+<li>
+<p>如果用户的「钱包合约」尚未部署，则用 UO 中的 initCode 字段去部署合约（用户可自定义最终合约功能）</p>
+</li>
+<li>
+<p>循环验证组合交易中 UserOperation</p>
+</li>
+<li>
+<p>既有链下模拟验证（eth 余额，token 余额，代付）</p>
+</li>
+<li>
+<p>也在合约也提供链上验证（签名与聚合签名的有效性）</p>
+</li>
+<li>
+<p>管理质押费</p>
+</li>
+<li>
+<p>计算 gas 成本，既要用于收取用户，也需要面对失败交易补偿捆绑器</p>
+</li>
+</ol>
+<h2 id="3为什么持续要关注-erc-4337">3、为什么持续要关注 ERC-4337 ？</h2>
+<p>ERC-4337 的高开发投入以及快速的迭代进度，说明他能快速成为最终提案、并被各种应用广泛接纳、真正成为事实性行业标准，他带来的核心价值是大幅度降低普通用户使用 Web3 应用的门槛。</p>
+<p>届时，一个应用能否兼容 ERC-4337 ，则将影响自己能否利用整个以太坊生态的其他组件、以快速发展。后续的 DApp 应用，也将必然需要能兼容从账户主体已然转移向 ERC-4337 的用户们。</p>
+<p>最终验证市场的还是用户本身，实现的方案是复杂的，这也仅仅是对于应用方的复杂</p>
+<p><strong>对于用户本身而言，最终他们能够看到的是：</strong></p>
+<ol>
+<li>
+<p>更流畅的交易体验，类似购物车，即使面对 10 个市场也能够一笔交易完成打包。</p>
+</li>
+<li>
+<p>更安全的接入入口，借助 4337 的自定义签名算法能力，使用手机专属安全芯片而无需携带硬件钱包，</p>
+</li>
+<li>
+<p>更沉浸的游戏环境，借助 paymaster 的代付能力，乃至可以定义半小时内的不超过 XX 金额的交易免除签名，避免了一场游戏被场外打断。</p>
+</li>
+<li>
+<p>真正的链上主体，可以被社交恢复，可以更换私钥密码，可以做交易的风险分层分级，兼容安全与使用便捷。</p>
+</li>
+</ol>
+<p>如此种种对终端用户体验的提升，都是最终为什么要如此费力的推进 ERC-4337 的原因。</p>
+<p>上篇更多是围绕 ERC-4337 运作机制、背景进行说明。</p>
+<p>下篇详细讲述当前被审计方案的优缺与实施细节，但涉及较多以太坊底层所以阅读难度较高，投稿在Web3 Caff 平台的 research 频道（头部付费研报平台，正在进行十四君粉丝联合活动，可使用&quot;<strong>shisi</strong> &ldquo;为推荐码延长 15 天会员期）。</p>
+<p>阅读原文：https://research.web3 caff.com/zh/archives/6900 </p>
+<blockquote>
+<p><em>参考文献（强烈推荐 builder 阅读）</em></p>
+<p><em><a href="https://cointelegraph.com/news/ethereum-erc-4337-smart-accounts-launch-at-walletcon-account-abstraction-is-here">https://cointelegraph.com/news/ethereum-erc-4337-smart-accounts-launch-at-walletcon-account-abstraction-is-here</a></em></p>
+<p><em><a href="https://blog.openzeppelin.com/eip-4337-ethereum-account-abstraction-incremental-audit/#conclusions">https://blog.openzeppelin.com/eip-4337-ethereum-account-abstraction-incremental-audit/#conclusions</a></em></p>
+<p><em><a href="https://blog.openzeppelin.com/eth-foundation-account-abstraction-audit/">https://blog.openzeppelin.com/eth-foundation-account-abstraction-audit/</a></em></p>
+<p><em><a href="https://eips.ethereum.org/EIPS/eip-4337">https://eips.ethereum.org/EIPS/eip-4337</a></em> </p>
+<p><em><a href="https://hackmd.io/@erc">https://hackmd.io/@erc</a> 4337/test-suite</em></p>
+<p><em><a href="https://www.youtube.com/watch">https://www.youtube.com/watch</a>? v=eyT 6 WzJmWyc</em></p>
+<p><em><a href="https://notes.ethereum.org/@yoav/unified-erc-4337-mempool#What-does-censorship-resistance-require-of-ERC-4337">https://notes.ethereum.org/@yoav/unified-erc-4337-mempool#What-does-censorship-resistance-require-of-ERC-4337</a></em> </p>
+<p><em><a href="https://github.com/eth-infinitism/account-abstraction/issues/188">https://github.com/eth-infinitism/account-abstraction/issues/188</a></em> </p>
+<p><em><a href="https://notes.ethereum.org/@yoav/unified-erc-4337-mempool">https://notes.ethereum.org/@yoav/unified-erc-4337-mempool</a></em></p>
+<p><em><a href="https://github.com/eth-infinitism/account-abstraction/blob/develop/reports/gas-checker.txt#enroll-beta">https://github.com/eth-infinitism/account-abstraction/blob/develop/reports/gas-checker.txt#enroll-beta</a></em></p>
+</blockquote>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/52557/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一周融资速递 | 19家项目获投，已披露融资总额约为1.67亿美元（5.29-6.4）</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/52566/">
+                <span class="next-text nav-default">以太坊账户抽象研报：拆解10个相关EIP提案与冲击千万级日活用户的瓶颈问题</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#1账号抽象的背景">1、账号抽象的背景</a>
+      <ul>
+        <li><a href="#11为什么产权分离是账户抽象的目标">1.1、为什么产权分离是账户抽象的目标？</a></li>
+        <li><a href="#12eip-4337与折中方案对比">1.2、EIP-4337 与折中方案对比</a></li>
+      </ul>
+    </li>
+    <li><a href="#2为什么4337可以实现产权分离">2、为什么 4337 可以实现产权分离？</a>
+      <ul>
+        <li><a href="#214337运作原理">2.1、 4337 运作原理</a></li>
+        <li><a href="#22功能举例入口点合约">2.2、功能举例：入口点合约</a></li>
+      </ul>
+    </li>
+    <li><a href="#3为什么持续要关注-erc-4337">3、为什么持续要关注 ERC-4337 ？</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

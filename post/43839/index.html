@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          如何设计 DeFi 中的应用链？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="虽然应用程序链在DeFi和游戏等各种加密货币垂直领域浮出水面，但本文主要关注DeFi应用程序链。" />
+<meta name="keywords" content="DeFi" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43839/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="如何设计 DeFi 中的应用链？" />
+<meta property="og:description" content="虽然应用程序链在DeFi和游戏等各种加密货币垂直领域浮出水面，但本文主要关注DeFi应用程序链。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43839/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-25T00:00:00+00:00" />
+
+<meta itemprop="name" content="如何设计 DeFi 中的应用链？">
+<meta itemprop="description" content="虽然应用程序链在DeFi和游戏等各种加密货币垂直领域浮出水面，但本文主要关注DeFi应用程序链。"><meta itemprop="datePublished" content="2022-10-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6666">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何设计 DeFi 中的应用链？"/>
+<meta name="twitter:description" content="虽然应用程序链在DeFi和游戏等各种加密货币垂直领域浮出水面，但本文主要关注DeFi应用程序链。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">如何设计 DeFi 中的应用链？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-25">
+      2022-10-25
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6666 字 -
+        预计阅读 14 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Natalie Mullins</p>
+<h1 id="简介">简介</h1>
+<p>区块链的设计空间最近被打开了：我们不再只是有“单体”区块链，还有：</p>
+<ul>
+<li>
+<p>“模块化”区块链</p>
+</li>
+<li>
+<p>数据可用性和共识层</p>
+</li>
+<li>
+<p>rollups和执行环境</p>
+</li>
+<li>
+<p>特定应用链等等</p>
+</li>
+</ul>
+<p>由于有许多选择，最重要的问题不是哪种设计是最适合的去中心化平台，而是哪种设计让去中心化平台有最好的机会与中心化平台竞争？</p>
+<p>由于区块链用例不同，不可能找到一个放之四海而皆准的答案。本文将重点讨论应用链，作为应对这一挑战的最可行的、未被充分探索的方法之一。它将深入探讨应用链如何促进真正新颖的产品和功能的创造，以及探索它们所提供的主权的好处。<strong>虽然应用程序链在DeFi和游戏等各种加密货币垂直领域浮出水面，但本文主要关注DeFi应用程序链。</strong></p>
+<h1 id="应用链的优势">应用链的优势</h1>
+<p>当我们考虑上面提到的各种架构时，并不能立即看出哪些选项最能解决重要的用户体验痛点，同时也能保持足够的去中心化。每种方法都有取舍，但应用链提供了一个至关重要的独特优势——主权。</p>
+<p>从技术角度来看，主权可以被认为是垂直整合。这意味着应用程序开发人员可以控制和定制区块链堆栈的每一层，以满足其应用程序的特定需求，并以允许每一层之间最佳整合的方式进行。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/16_nk7im37lfw.png" alt="如何设计 DeFi 中的应用链？"></p>
+<p>示例：Apple 的垂直整合</p>
+<p>除了技术主权意味着减少对中间件解决方案的依赖外，它还可以免除应用程序与无关的或竞争对手的应用程序竞争区块空间，以及减少对任何其他项目的开发路线图和治理的依赖。这些好处对于那些已经达到一定规模、需要更多吞吐量、需要频繁升级和/或希望预测他们所建立的平台将如何变化和发展的项目来说，尤其具有说服力。</p>
+<p>技术主权还允许应用程序开发人员通过试验不同的共识模型、定制节点要求、状态模型和其他令人兴奋的功能来释放他们的创造力，这些将在接下来的章节中通过例子进行探讨。正如许多新的L1已经出现，专门对核心架构进行改变，他们缺乏社会共识，无法在现有的链上实现，应用链为个人应用带来了同样的优化水平。</p>
+<p>在社会方面，主权从根本上说是关于个人应用有能力将他们的价值放在首位，并对他们来说最有意义的一组权衡进行极其具体的处理。它允许社区控制自己的命运，甚至采取诸如硬分叉区块链的行动，无论是出于政治还是技术原因。大多数愿意承担构建应用链的技术壮举的项目主要是出于技术原因，但对社会主权的需求不应该被低估。现在和将来都会有一些应用选择进入这个视野，只是因为他们觉得其他生态系统没有充分地分享他们的价值观。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/16_1pjduu4ifc.png" alt="如何设计 DeFi 中的应用链？"></p>
+<p>权衡与顾虑</p>
+<p>应用链并不是所有项目的完美解决方案，最终代表了对区块链和应用应该做什么权衡的观点。许多批评者认为（1）失去同步可组合性和（2）流动性分散是应用链方法不适合DeFi的原因，然而这些担忧并不那么直接。正如通用L1上的流动性已经集中在少数流行的应用程序中一样，同样的情况也可能发生在DeFi应用链的生态系统中。与其说用户在DEX链、借贷链、perps链、流动性质押链等之间切换，不如说所有这些功能最终都被整合到几个流动性极强的DeFi应用链的核心产品中，使碎片化的问题大大减少。还值得注意的是，虽然以太坊主网仍然是DeFi的重心，但其以rollup为中心的扩展路线图对同步合成性和流动性碎片化有自己的影响。</p>
+<p>虽然应用程序链绝不是Cosmos生态系统所独有的，但许多应用程序链选择它作为他们的“家”，因为开发者工具的健壮性和异步可组合性基元，这对于像以太坊这样的生态系统还不存在。</p>
+<h1 id="用户体验痛点">用户体验痛点</h1>
+<p>说到大多数DeFi项目的用户体验现状，下面是一些痛点：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/16_i3sspsfjln.png" alt="如何设计 DeFi 中的应用链？"></p>
+<p>这份清单并不详尽，但它确实开始描绘出DeFi应用需要做好多少事情，才能真正有机会与CeFi竞争。下一节将重点介绍一些正在解决其中一些问题的DeFi应用链。</p>
+<h1 id="令人信服的功能和实验">令人信服的功能和实验</h1>
+<p>完全掌握应用链的力量的最好方法是探索今天正在建立的一些最引人注目和创新的用户体验，最值得一提的是Osmosis、Mars Protocol、Penumbra和dYdX。</p>
+<h1 id="osmosis">Osmosis</h1>
+<p>Osmosis是一个应用链DEX和Cosmos生态系统内的新兴流动性中心。Osmosis的最初灵感来自于联合创始人Sunny Aggarwal的一篇名为DAOifying Uniswap Automated Market Maker Pools的博文，其核心思想是将Cosmos的可定制性和主权带到AMMs的世界。今天，该协议允许用户创建具有独特和可改变参数的流动性池，允许实验不同种类的bonding curves，多重资产池等。实验订单簿匹配和集中流动性池的混合流动性模型也正在进行中。</p>
+<p>作为DeFi应用链世界的开拓者，Osmosis已经向市场推出了许多创新功能，包括超流速质押，它为不得不在质押收益率和DeFi收益率之间做出选择而产生的激励问题提供了一个优雅的解决方案。用户可以用含有$OSMO的任何LP份额代币作为质押，这激励了对链式安全的贡献，同时也推动了额外的价值回馈给社区。这项功能之所以能够实现，是因为Osmosis链能够识别应用级资产并在PoS共识中使用它们，而且随着更多功能和资产类型的上线，没有理由不利用它来实现其他类似的用例。</p>
+<p>当涉及到创建类似于CEX的用户体验时，Osmosis正在努力提供保证金交易和贷款作为其核心产品的一部分。该团队目前正在与Mars Protocol合作，将贷款直接整合到Osmosis交易引擎中，这将实现分阶段清算、资产交叉抵押和使用Osmosis LP代币作为保证金交易的抵押品。Osmosis作者Steview Woofwoof在今年早些时候的一篇Medium文章中简明扼要地概述了这种设计的好处：</p>
+<blockquote>
+<p>“分阶段清算确保意外波动不会立即对杠杆头寸进行灾难性的清算。高效的交叉保证金意味着，由于DEX和借贷引擎是如此紧密地结合在一起，Osmosis（不同于无状态的DEX）可以逐块追踪你所有来自不同资产和资金池的抵押品，因此它基本上可以作为一个大的抵押品池来对抗你所有的贷款和保证金头寸。</p>
+<p>在DEX中建立借贷协议的另一个好处是，它消除了对预言机的需求。事实上，Osmosis的价格反馈有可能自己被预言机化，供其他平台使用。当然，使用外部预言机进行备份或对某些类型的攻击（价格操纵、dDOS等）增加安全性可能仍然是有用的。”</p>
+</blockquote>
+<p>Osmosis也在探索几种创造性的方法来处理其DEX上的MEV，这些方法作为一个应用链，明显更容易实现，包括：</p>
+<p>阈值加密：在向区块生产者广播之前对用户交易进行加密，只有在区块被投票和最终确定之后才允许解密和执行。</p>
+<p>费用歧视：对不同种类的交易收取不同的费用（即让套利交易更昂贵）。</p>
+<p>跳过：在基本协议中建立类似Flashbots的功能（即区块内的拍卖时段）。</p>
+<p>内部化MEV：建立协议内的套利者，在每个区块的开始运行，并将收入交给$OSMO的制定者。</p>
+<h1 id="mars协议">Mars协议</h1>
+<p>Mars是Delphi实验室正在开发的一个跨链信贷协议，也是一种被称为 “合约对合约”（C2C）借贷的新型DeFi原始技术的先驱者。最初部署在Terra上，Mars团队后来退后一步，重新评估他们的产品战略，并决定今后投资于哪个生态系统。在调查了整个L1和L2的情况后，Mars团队最终选择了一个独特的Outpost &amp; Hub模式，使他们能够享受部署到现有L1的好处和应用链主权的好处。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/16_6byn7tsp5g.png" alt="如何设计 DeFi 中的应用链？"></p>
+<p>Outposts是Red Bank的实例，这是一个非托管和过度抵押的借贷协议，被部署到各种不同的链上，允许与同一L1上的其他应用进行原子同步合成。这也是C2C借贷的流动性的来源，因为授权的智能合约可以从Red Bank借贷，而不需要提交抵押品。目前的计划是在Osmosis上建立第一个Outposts。</p>
+<h1 id="mars-hub是一个应用链有两个关键功能">Mars Hub是一个应用链，有两个关键功能：</h1>
+<ol>
+<li>
+<p>管理所有outpost（包括投票决定哪些合约可以被批准用于C2C借贷）。</p>
+</li>
+<li>
+<p>从所有outpost收集收入，并将其分配给$MARS的质押者和验证人</p>
+</li>
+</ol>
+<p>到目前为止，大多数DeFi协议的跨链策略是在所有流行的L1上重新部署，或者建立一个需要桥梁来连接到其他链的应用链。这种Hub &amp; Outpost模式试图通过与现有的高流动性DeFi生态系统相结合，并简化治理和代币价值的累积，来实现两个世界的最佳效果——这两者都应该减轻一些主要方法所遭受的碎片化问题。</p>
+<p>Delphi Labs的团队非常重视为DeFi建立最好的用户体验，一旦上线，Mars将是迄今为止与中心化交易所的用户体验竞争的最雄心勃勃的尝试之一。开发路线图包括其他一些令人兴奋的新功能，如漫游者信用账户，这将使用户能够从一个账户和清算门槛中以杠杆的方式进行各种DeFi产品的交易，同时也复制了许多人在中央交易所享有的 “子账户”体验。</p>
+<h1 id="penumbra">Penumbra</h1>
+<p>Penumbra是一个跨链屏蔽资产池和应用链DEX，利用隐私来改善链上交易和做市的用户体验。该项目的愿景来自于对Zcash等隐私保护工具缺乏采用和兴趣的挫折感，以及对建立一个正是因为其隐私而更好的产品的渴望。然而，正如过去几年所显示的，事实证明，隐私是一个比许多人最初想象的要难得多的问题（尤其是在建立一个私有的DEX时）。</p>
+<p>在建立区块链上进行私有计算的方法方面，已经有许多资金充足的尝试，然而Penumbra的团队对现有的任何方法都不满意。他们反而决定提出一个更微妙但极其重要的问题。</p>
+<p>如果有用的区块链围绕着公共共享状态，我们如何才能建立一个具有有用功能的私人账本？</p>
+<p>对于Penumbra来说，公共共享状态的概念是区块链之所以有用的核心，正是因为它意味着任何想要使用区块链的人只需要与区块链本身协调，而不是与链外对手协调。正因为如此，他们认为，虽然以前设计保护隐私的L1和Rollups的尝试可能会解决隐私问题，但他们这样做的方式严重限制了用户与公共共享状态有意义的互动程度。</p>
+<p>理想情况下，私人计算会以一种保护个人隐私的方式进行，同时也允许重要的总体数据的透明度。然而，事实证明，建立一个能够管理这些权衡的系统需要一个与目前市场上任何东西都根本不同的状态模型，所以Penumbra团队一直在从头开始建立一个。此外，虽然他们目前非常有意地只关注交易和做市的用例，但该团队正在进行的研究和设计工作可能对其他情况下的隐私和可扩展性有更广泛的影响。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/16_cu7qzzmra2.png" alt="如何设计 DeFi 中的应用链？"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/16_l2qegzfmmz.png" alt="如何设计 DeFi 中的应用链？"></p>
+<p>区块链上的隐私是通过将用户数据和执行转移到链外来实现的：用对数据的加密承诺取代链上用户数据，用对状态转换正确性的零知识证明取代明文执行。这需要一个不同的状态模型。与其说是以全局的、可变的状态为中心的状态模型，有效的交易在执行过程中会发生变化，不如说是不可变的、可组合的状态片段的概念，每个交易消耗输入的状态片段并产生输出的状态片段（这在概念上与比特币的UTXO模型相似）。这使得状态片段可以被替换为对这些状态片段的承诺，而交易内容可以被替换为有效状态转换的证明。然而，这种方法的问题是，由于执行移动到链外，访问共享状态不再可能，因为拟议的状态转换的确切最终输出必须作为交易的输入。例如，在向链上提交交易之前，DEX交易将需要冻结AMM储备的确切状态和确切的输出价格。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/16_ko1lbnd4qo.png" alt="如何设计 DeFi 中的应用链？"></p>
+<h1 id="unique-state-模式">Unique State 模式</h1>
+<p>Penumbra的状态模型首先是为了促进私人与公共共享状态的互动，它通过使用一个行为者模型来实现，该模型明确地将链外计算与链上计算分开，前者是私人的，处理每个用户的状态，后者是公共的，处理共享状态。</p>
+<p>在actor模型中，用户创建一个消息（而不是一个交易），对其进行加密并将其发送给智能合约。然后，每个智能合约在每个区块中执行一次，并将该区块中发送给它的所有消息作为输入，允许交易被分批处理或使用任何其他类型的自定义应用逻辑。这也有一些很好的可扩展性优势，因为每个合约只执行一次，所以计算成本可以在区块的所有交易中摊薄。然后，验证器将在异步执行交易和产生公共输出之前解密一些关于批次总数的信息。</p>
+<p>这种异步性是通过铸造一个私有的NFT来实现的，该NFT记录了执行的中间状态并对未来的状态进行建模。一旦合约以输出消息作出回应，私人NFT就会被消耗，并被用来证明正确的未来状态被建模，此时，来自合约的消息被用来铸造执行的私人输出。这里的权衡是，执行可能发生在多个块上。</p>
+<h1 id="私人质押">私人质押</h1>
+<p>为了保护委托人的隐私和验证人的责任，Penumbra团队不得不采取一种新的方法来设计质押。与其将 “无担保”和 “有担保”视为同一质押代币的不同状态，有担保的质押被记录为委托代币。这些代币代表验证人委托池的百分比份额，就像LP代币代表流动性池的份额一样。虽然每个验证人的委托池的大小是公共链状态的一部分，但委托代币通过相互交换和驻留在多资产屏蔽池（Penumbra上的所有价值都记录在这里）而保持隐私。最后，质押奖励是通过跟踪质押代币和委托代币之间的汇率来计算的，这有很好的税收效率的好处，因为只有解押才是应税事件。</p>
+<p>最终，Penumbra所做的赌注是，隐私实际上是交易体验的组成部分，甚至更多，他们所做的定制将推动更好的执行，因为启用私人策略意味着使更多复杂和资本充足的参与者进入这个领域，这将带来更好的流动性，更好的定价和更少的滑点。我们的愿景是创造一种用户体验：提供比CeFi更多的隐私，同时具有DeFi的开放和无许可的好处。</p>
+<h1 id="dydx">dYdX</h1>
+<p>在成为以太坊L2部署的最大的应用程序后，永续交易所dYdX最近宣布他们计划将V4作为一个应用程序链来构建。在宣布之后的官方通信中，“去中心化、可扩展性和可定制性的独特组合 ”被引用为此举的主要原因，然而，值得对这些原因中的每一个进行更深入的挖掘。</p>
+<h1 id="去中心化">去中心化</h1>
+<p>面对监管的阻力，特别是在美国，许多DeFi项目被迫面对严重打击的可能性，以及他们的项目在面对这种行动时的弹性。dYdX V3目前部署在以太坊L2（StarkEx）上，虽然这里不会涉及细节，但我们已经写了很多关于围绕完全去中心化的rollups的挑战。尽管解决方案正在积极研究和开发中，但需要近期解决方案和可预测性的项目可能无法等待完全去中心化的rollups愿景实现。</p>
+<h1 id="可扩展性">可扩展性</h1>
+<p>鉴于dYdX V3目前每秒处理约10笔交易，每秒处理约1,000个订单/取消，该团队调查了整个区块链领域，以寻找一个能让他们将吞吐量提高几个数量级的链。因为他们没有找到这样的链，所以他们采用了一个更有创意的解决方案：一个去中心化的链外订单匹配网络。认识到dYdX链只需要在哪些交易已经结算上达成共识，而不是在所有的订单上达成共识，这将是在V4上实现真正卓越的可扩展性的解锁。</p>
+<p>在技术层面上，这种设计是由应用程序链允许定制节点要求的事实促成的，例如要求验证者帮助运行预言机网络或桥接基础设施等。</p>
+<h1 id="可定制性">可定制性</h1>
+<p>在接受Bankless采访时，dYdX创始人Antonio Juliano分享了他对完全垂直整合的产品和用户体验的宏伟愿景，其中不仅包括建立基本的L1，还包括建立自定义执行模块、链外订单网络、预言机网络、类似炼金术的索引器、移动应用程序和自定义钱包。Juliano本人将这一努力描述为 “非常有风险”，但他也非常明确地表示，他认为这是为dYdX产品创造最高质量用户体验的最佳选择。</p>
+<h1 id="结束语">结束语</h1>
+<p>对于上面强调的所有好处和创新实验，重要的是要承认，建立一个特定应用的区块链在技术上要比将一个应用部署为智能合约，甚至在一个专门的执行环境（rollups，子网等）中的挑战要大得多。卓越的用户体验不仅是去中心化产品击败其中心化竞争对手的方式，而且也是在一个开源、无许可的世界中建立护城河的一个组成部分。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43829/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">日榜第一的Reddit NFT是如何爆火的</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43837/">
+                <span class="next-text nav-default">三分钟读懂Solana上的DeFi/NFT收益聚合器Dappio</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

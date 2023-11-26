@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          从可验证 AI 到可组合 AI——对ZKML应用场景的反思 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文从应用视角重新部署该方案，分析其在哪些场景是刚需的，而在哪些场景需求较弱，最后延牵横向的和纵向统一的基于公链的AI生态模式。" />
+<meta name="keywords" content="人工智能, ZKML" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/60102/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="从可验证 AI 到可组合 AI——对ZKML应用场景的反思" />
+<meta property="og:description" content="本文从应用视角重新部署该方案，分析其在哪些场景是刚需的，而在哪些场景需求较弱，最后延牵横向的和纵向统一的基于公链的AI生态模式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/60102/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="从可验证 AI 到可组合 AI——对ZKML应用场景的反思">
+<meta itemprop="description" content="本文从应用视角重新部署该方案，分析其在哪些场景是刚需的，而在哪些场景需求较弱，最后延牵横向的和纵向统一的基于公链的AI生态模式。"><meta itemprop="datePublished" content="2023-09-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6086">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从可验证 AI 到可组合 AI——对ZKML应用场景的反思"/>
+<meta name="twitter:description" content="本文从应用视角重新部署该方案，分析其在哪些场景是刚需的，而在哪些场景需求较弱，最后延牵横向的和纵向统一的基于公链的AI生态模式。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">从可验证 AI 到可组合 AI——对ZKML应用场景的反思</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-28">
+      2023-09-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6086 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：郭涡轮，Mirror</p>
+<p><strong>总而言之：</strong></p>
+<p>Modulus labs通过链下执行ML计算并灵活生成zkp的方式实现了可验证AI，本文从应用视角重新部署该方案，分析其在哪些场景是刚需的，而在哪些场景需求较弱，最后延牵横向的和纵向统一的基于公链的AI生态模式，主要内容有：</p>
+<ol>
+<li>
+<p>需要是否可验证AI依据：是否修改链上数据，以及是否涉及公平和隐私</p>
+</li>
+<li>
+<p>当AI不影响链上状态时，AI可以充当建议者，人们可以通过实际效果判断AI服务质量好坏，无需对计算过程进行验证。</p>
+</li>
+<li>
+<p>当影响链上状态时，若该服务针对个人且某隐私有影响，则用户仍可以直接判断AI服务质量抽取检验计算过程。</p>
+</li>
+<li>
+<p>当AI的输出会影响多人间的公平和个人隐私时，比如用AI给社区成员评价并分配奖励，用AI优化AMM，或涉及生物数据，就会希望对AI的计算进行审查，这是可以的验证AI可能找到PMF的位置。</p>
+</li>
+<li>
+<p>纵向的AI应用生态：由于可验证AI的尾部是智能合约，可验证AI应用之间既然AI和原生dapp之间或许可以实现消耗信任地交互调用，这是潜在的可组合的AI应用生态</p>
+</li>
+<li>
+<p>横向的AI应用生态：公链系统可以为AI服务商处理服务付费、支付瓶颈协调、用户需求和服务内容的匹配等问题，让用户获得自由度更高的去中心化AI服务体验。</p>
+</li>
+</ol>
+<p><strong>1. Modulus Labs简介与应用案例</strong></p>
+<p><strong>1.1 简介与核心方案</strong></p>
+<p>Modulus Labs是一家“链上”AI公司，其认为AI可以显着提升智能合约的能力，使web3应用变得更加强大。但AI评价web3时存在一个矛盾，即AI的运行需要大量算力，而链下计算中的AI是一个黑盒子，这并不符合web3去信任、可验证的基本要求。</p>
+<p>因此，Modulus Labs 峰会 zk rollup【链下修复+链上验证】的方案，提出了可验证 AI 的架构，具体为：ML 模型在链下运行，另外在链下为 ML 的计算过程生成一个 zkp ，通过该 zkp 可以验证链下模型的架构、权限重和输入（inputs），当然这个 zkp 也可以发布到链上由智能合约进行验证。此时 AI 和链上合约就可以进行更多去信任的交互，大概实现了“链上AI”。</p>
+<p>基于可验证的 AI 思路，Modulus Labs 目前推出了三个“链上 AI”应用，同时也提出了许多可能的应用场景。</p>
+<p><strong>1.2 应用案例</strong></p>
+<ul>
+<li>
+<p>第一个推出的是Rocky bot，一个自动交易AI。Rocky由wEth/USDC交易对的历史数据训练而来。其根据历史数据判断未来weth走势，做出交易决策后会为决策过程（计算过程）生成一个 zkp ，转发 L1 发送消息触发交易。</p>
+</li>
+<li>
+<p>第二个是链上国际象棋游戏“Leela vs the World”，游戏双方是AI和人，棋局情况放在合约里。玩家通过钱包进行操作（与合约交互）。而AI读取新的棋局情况，完成判断，并为整个计算过程生成 zkp ，这两步都是在 AWS 云上，而 zkp 交由链上的合约验证，验证成功后调用棋局合约“下棋”。</p>
+</li>
+<li>
+<p>第三个是“链上”AI艺术家，并推出了NFT系列zkMon，核心在于AI生成NFT并发布至链上，同时生成一个zkp，用户通过zkp查验自己的NFT是否生成对应的AI模型。</p>
+</li>
+</ul>
+<p>此外，Modulus Labs 还提及了其他一些例子：</p>
+<ul>
+<li>
+<p>利用AI评估个人链上数据等信息，生成个人积分奖励，并发布zkp供用户验证；</p>
+</li>
+<li>
+<p>利用AI优化AMM的表现，并发布zkp供用户验证；</p>
+</li>
+<li>
+<p>利用可验证的AI帮助隐私项目应对监管压力，但同时不暴露隐私（可能是利用ML证明此交易并非洗黑钱，同时不暴露用户地址等信息）；</p>
+</li>
+<li>
+<p>AI天气预报，同时发布zkp提供所有者查验链下数据可靠性；</p>
+</li>
+<li>
+<p>AI模型比赛，比赛者提交自己的架构和权重，然后用统一的测试输入跑模型，为装甲生成zkp，最终契约会自动将奖金发放给模拟者；</p>
+</li>
+<li>
+<p>Worldcoin称在未来，或许可以让用户在本地设备下载完为虹膜生成对应代码的模型，本地运行模型并生成zkp，这样链上合约可以用zkp验证用户的虹膜代码生成自正确的模型以及合理的虹膜，同时让生物信息不离开用户自己的设备；</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0928/18_7l9wzdd47m.png" alt="f2PuWY641XRYNaz5IXOZudOPDk2itHkTYHi7MtSU.png" title="7108476"><strong>1.3 基于对可验证AI的需求讨论不同应用场景</strong></p>
+<p>1.3.1 可能需要验证AI的场景</p>
+<p>在Rocky bot的场景下，用户可能没有验证ML计算过程的需求。第一，用户并没有专业知识，根本没有能力做真正的验证。即使有验证工具，在用户看来都是【自己按了一个】按钮，界面弹窗是告诉自己这次的AI服务确实是由某个模型生成的】，无法确定真实性。第二，用户没有需求进行验证，因为用户在乎这个ai的意义是否高。当既然不高时用户就会迁移，且永远会选择效果最好的模型。总之，当用户追求的是 AI 的最终效果时，验证过程可能意义不大，因为用户只需要迁移至效果最好的模型服务即可。</p>
+<p>**一种可能的方案是：AI只作为建议者，用户自主执行交易。**当人们把自己的交易目标输入AI后，AI在链下计算并返回一个更好的交易路径/交易方向，用户选择是否进行执行。人们也不需要验证背后的模型，只需选择收益最高的产品。</p>
+<p>另一种危险但极有可能出现的情况是，人们根本不在乎自己对资产的控制权以及AI腐蚀过程，当一个自动挣钱的机器人出现时，人们甚至愿意把钱直接托管给它，正如将代币打入CEX或传统银行进行理财一般。人们并不会在乎背后的原理，只能在乎他们最后得到多少钱，甚至只能在乎项目方给其显示挣了多少钱，因为这种服务可能也能够快速获取大量用户，甚至比使用可验证AI的项目方产品迭代速度更快。</p>
+<p>退一步看，如果AI根本不参与链上状态修改，那么如果将链上数据拉下来为用户进行消耗，则也没有为计算过程生成ZKP的需求。这里将此类应用变成【数据服务】 】，下面是几个案例：</p>
+<ul>
+<li>
+<p>Mest提供的聊天框是典型的数据服务，用户可以用问答的方式了解自己的链上数据，比如询问自己在nft上花了多少钱；</p>
+</li>
+<li>
+<p>ChainGPT是一个多功能的AI助手，它可以在交易前为你解读智能合约，告诉你是否与正确的池子进行交易，或者告诉你交易是否可能被夹或抢跑。ChainGPT也准备做AI新闻推荐，输入提示自动生成图片并发布成NFT等各种服务；</p>
+</li>
+<li>
+<p>RSS3 提供了选择 AIOP ，使用户可以自己想要什么上链数据，并做一定的上链数据，从而方便地选择特定的上链数据训练 AI；</p>
+</li>
+<li>
+<p>DefiLlama 和 RSS3 也开发了 ChatGPT 插件，用户可以通过对话获取链上数据；</p>
+</li>
+</ul>
+<p>1.3.2 需要验证AI的场景</p>
+<p>本文认为涉及多个，涉及公平和隐私的场景，需要 ZKP 提供验证，在此针对 Modulus Labs 提及的几个应用进行讨论：</p>
+<ul>
+<li>
+<p>当社区基于AI生成的个人奖励发放奖励时，社区成员必然会要求对决策过程进行审查，这个决策过程就是ML的计算过程；</p>
+</li>
+<li>
+<p>AI优化AMM的涉及到多个之间的利益分配，也需要定期查验AI的计算过程；</p>
+</li>
+<li>
+<p>在平衡隐私和监管时，ZK是目前比较好的方案之一，若服务方在服务中使用ML处理隐私数据，则需要为整个计算过程生成ZKP；</p>
+</li>
+<li>
+<p>由于预测机影响范围较广，若由AI进行调节，就需要定期生成ZKP来查验AI是否正常运行；</p>
+</li>
+<li>
+<p>在比赛中，公众和其他参赛者有需求查验ML的损坏是否符合比赛规范；</p>
+</li>
+<li>
+<p>在世界币的潜在案例中，保护个人生物数据同样是一个抑制需求；</p>
+</li>
+</ul>
+<p>总体来说，当人工智能类似一个决策者时，其输出影响范围极广且涉及到多方的公平时，而人们会要求对决策过程进行审查，或者只是简单地保证人工智能的决策过程没有大的问题，而保护个人隐私就是非常直接的需求了。</p>
+<p>因此，【AI输出是否链上状态】和【修改是否需要影响公平/隐私】，是判断AI方案是否可验证的两个标准</p>
+<ul>
+<li>
+<p>当AI输出不修改链上状态时，AI服务可以充当建议者的身份，可以通过建议效果判断AI服务质量好坏，无需对计算过程进行验证；</p>
+</li>
+<li>
+<p>当AI输出修改链上状态时，若该服务仅针对个人且不对隐私有影响，则用户仍可以直接判断AI服务质量检验计算过程；</p>
+</li>
+<li>
+<p>当AI的输出会直接影响多人间的公平性，并且AI是自动修改链上数据时，社区和公众就对AI决策过程进行检验的需求；</p>
+</li>
+<li>
+<p>当ML处理的数据涉及个人隐私时，同样需要zk来保护隐私，并提出应对监管要求。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0928/18_njyks59ibq.png" alt="o4y5OwyD2QkDUXkJOghqJ8OqTFUhku2ErKu2B3bF.png" title="7108474"></p>
+<p><strong>2. 两种基于公链的AI生态模式</strong></p>
+<p>无论如何，Modulus Labs 的方案对 AI 结合加密货币并带来实际应用价值具有很大的启示意义。但公链体系不仅能够提升单个 AI 服务的能力，而且有潜力构建新的 AI 应用生态。新生态带来了引人注目的Web2的AI服务间关系，AI服务与用户的协作方式，必然是上下游各个环节的协作方式，我们可以把潜在的AI生态模式归纳为纵向模式和横向模式两种。</p>
+<p><strong>2.1 纵向模式：注意力实现AI之间的可组合性</strong></p>
+<p>“Leela vs the World”链上国际象棋这个例子有一个特殊的地方，人们可以为人类或者AI下注，结束比赛后自动分配代币。此时zkp的意义不仅仅提供用户验证AI计算的过程，而且是作为触发链上状态转换的信任。有了信任保障，AI服务之间，AI和加密货币dapp之间也可能拥有dapp级别的可组合性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0928/18_9ui1flzh4q.png" alt="KfPjcYrS9PXBLDNmms9I2h8eOP6ZYBxlfY2HACk2.png" title="7108471"></p>
+<p>可组合 AI 的基本单元是【链下 ML 模型-zkp 生成-链上验证合约-主合约】，该单元在“Leela vs the World”的框架中充实，但实际的单个 AI dapp 的架构可能和上图展示的不一样。一是国际象棋中棋局情况需要一个合约，但现实情况下AI可能不需要一个链上合约。但就可组合AI的架构来看，如果主要业务是通过合约进行记录，其他二是主合约影响不一定需要AI dapp本身的ML模型，因为某个AI dapp可能是单向影响的，ML模型处理完成后触发自身业务相关的合约即可，而该合约又会被其他dapp进行调用。</p>
+<p>延展来看，合约之间的调用是不同web3应用之间的调用，是个人身份、资产、金融服务、社交信息的调用，我们可以设想一种具体的AI应用的组合：</p>
+<ol>
+<li>
+<p>Worldcoin 使用 ML 为个人虹膜数据生成虹膜代码以及 zkp;</p>
+</li>
+<li>
+<p>AI应用先此DID是否为真人（背后有虹膜数据），根据链上信誉为用户分配NFT；</p>
+</li>
+<li>
+<p>网络服务根据用户拥有的 NFT 调整网络共享；</p>
+</li>
+<li>
+<p>&hellip;&hellip;</p>
+</li>
+</ol>
+<p>在公链框架下的AI间互动并不是一件一起讨论的事情，全链游戏领域生态贡献者Loaf曾提出，AI NPC之间可以和玩家一样交互交易，使得整个经济系统可以自我优化并自动AI Arena开发了一个AI自动对战的游戏，用户首先购买一个NFT，一个NFT代表一个战斗机器人，背后是一个AI模型。用户先自己玩游戏，然后把数据交换AI模拟学习，当用户觉得这个AI足够强的时候就可以放到竞技场中和其他AI自动对战。Modulus Labs提到的AI Arena希望把这些AI都转化为可验证的AI。这两个案例中都看到了AI间进行，并直接交互在交易时修改链上数据的可能性。</p>
+<p>但如何组合 AI 在具体实现上终止大量待讨论的问题，例如不同的 dapp 利用普遍的 zkp 或者验证合约等。不过在 zk 领域也有大量优秀项目，比如 RISC Zero 在链下进行复杂的缺血性 zkp发布至链上这方面有许多进展，或许天就可以组合出合适的方案。</p>
+<p><strong>2.2 横向模式：实现停车场去中心化的AI服务平台</strong></p>
+<p>在这方面，我们主要介绍一个叫SAKSHI的去中心化AI平台，它由来自普林斯顿、清华大学、伊利诺伊大学香槟分校、香港科技大学、Witness Chain和Eigen Layer的人员共同提出。其核心目标是让用户能够以更加去中心化的方式获得AI服务，使得整个流程更加去信任化和自动化。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0928/18_bkesldwsvr.png" alt="vfdD0GyBTNhsZlYSMUSu0dqjrdRm7if8gEm919YM.png" title="7108470"></p>
+<p>SAKSHI的架构可以分为六层：分别是服务层（Service Layer）、控制层（Control Layer）、交易层（Transation Layer）、证明层（Proof Layer）、经济层（Economic Layer）和市场层（Marketplace） ）</p>
+<p>市场是最接近用户的层次，市场上有聚合器来代表不同的AI供应商向用户提供服务，通过用户聚合器下单并和聚合器就服务质量和支付价格达成协议（协议被称为SLA） -服务级别协议）。</p>
+<p>接下来的服务层会为客户端头部提供API，然后客户端头部向聚合器发起ML推理请求，请求被传送至匹配AI服务提供方的服务器（传输请求所用的路由是控制层的一部分）。，服务层和控制层类似一个拥有多个服务器的web2的服务，但不同的服务器由不同的主体运营，单个服务器通过SLA（之前的服务协议）和聚合器进行关联。</p>
+<p>SLA以智能合约的形式部署在链上，这些合约都属于交易层（注：这里方案中部署在见证链上）。交易层会记录记账服务订单的当前状态，并用于协调用户、聚合器和服务提供方，解决支付难题。</p>
+<p>为了让交易层在处理问题时有据可依，论证层（Proof Layer）将检验服务是否符合 SLA 的约定使用模型。但 SAKSHI 并没有选择为 ML 计算过程生成 zkp ，而是用乐观论证的思路，希望建立挑战者节点网络来对服务进行检验，节点受到见证链承担。</p>
+<p>虽然 SLA 和挑战者节点网络都在 Witness Chain 上，但在 SAKSHI 的方案中，Witness Chain 并不打算用改造自己的代币励志实现独立的安全性，而是通过 Eigen Layer 来借用以太坊的安全性，因此整个经济层其实是依托于 Eigen Layer 的。</p>
+<p>可以看出，SAKSHI围绕AI服务方和用户之间，将不同的AI用去中心化的方式组织起来为用户提供服务，这形成了一个横向上的方案。SAKSHI的核心所在，它让AI服务重点更集中于管理自己的链下模型计算，通过链上协议完成用户需求和模型服务的撮合、服务的支付和服务质量的验证，并尝试自动化解决支付难题。当然，目前SAKSHI还是一个理论阶段，同样有大量执行的细节值得确定。</p>
+<p><strong>3.未来展望</strong></p>
+<p>无论是可组合AI还是去中心化AI平台，公链的AI生态模式似乎都有共通之处。比如，AI服务商均不直接和用户进行对接，其只需提供ML模型并在链下进行计算支付、难题解决、用户需求和服务之间的撮合，都可以通过去中心化的协议解决。公链作为一种去信任的基础设施，减少了服务方和用户之间的难度，此时用户也拥有更高的自主权。</p>
+<p>以公链为应用基础的优势虽然老生常谈，但也适用于AI服务。而AI应用和存粹的dapp应用不同的场所，AI应用无法将全部计算放在链上，所以用zk还是乐观证明让AI服务以更多去信任的方式接入公链系统。</p>
+<p>随着账户抽象等一系列体验优化方案的落地，用户可以感知不到助记词、链和gas等的存在，这让公链生态在体验上接近web2，而用户可以获得比web2更高的服务自由度及可组合性，这让用户产生了更大的吸引力，以公链为基础的AI应用生态值得期待。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/60119/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">背诵不等于理解，深度解析大模型背后的知识储存与提取</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/60100/">
+                <span class="next-text nav-default">分析师：SEC 今年不太可能批准比特币 ETF 申请</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          金色观察 | 实操：从硬件到软件 如何在家中运行一个以太坊节点 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="介绍在家里设置和运行以太坊节点所需的步骤" />
+<meta name="keywords" content="ETH, 以太坊2.0" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43437/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="金色观察 | 实操：从硬件到软件 如何在家中运行一个以太坊节点" />
+<meta property="og:description" content="介绍在家里设置和运行以太坊节点所需的步骤" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43437/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="金色观察 | 实操：从硬件到软件 如何在家中运行一个以太坊节点">
+<meta itemprop="description" content="介绍在家里设置和运行以太坊节点所需的步骤"><meta itemprop="datePublished" content="2022-10-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5808">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="金色观察 | 实操：从硬件到软件 如何在家中运行一个以太坊节点"/>
+<meta name="twitter:description" content="介绍在家里设置和运行以太坊节点所需的步骤"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">金色观察 | 实操：从硬件到软件 如何在家中运行一个以太坊节点</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-12">
+      2022-10-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5808 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>文/Alex R. Mead，CoinMetrics</p>
+<p>在消费级硬件上轻松设置并运行以太坊节点的能力是以太坊网络去中心化特性的一个关键卖点。但是对于一般人来说，在家里设置并运行一个节点到底有多大实用性？随着合并的完成，这个问题在加密社区中被频繁提及。在Coin Metrics，我们向来都是直接探索节点，获得一手体验。</p>
+<p>在本周“网络状态”系列文章中，我们将介绍在家里设置和运行以太坊节点所需的步骤。 我们将从基本硬件和网络需求开始，接着介绍软件下载/编译/安装，最后介绍节点操作步骤和维护。 在整个过程中，我们将提供从运行Geth/Lighthouse节点中获得的经验见解，Coin Metrics团队自2022年6月以来一直在持续运行该节点。</p>
+<p>请注意，本文不构成Coin Metrics对任何特定硬件、互联网服务提供商或以太坊客户端的背书，也不构成任何工程或财务建议。 所讨论的节点独立于Coin Metrics基础设施运行，与Coin Metrics并无关联，纯粹是出于实验和研究目的，与Coin Metrics服务没有任何交互。本文所提供的信息单纯是为了让我们讲得清楚，让你看得明白。所以，开始吧！</p>
+<h2 id="硬件和网络要求">硬件和网络要求</h2>
+<p><strong>计算机</strong></p>
+<p>要开始设置和运行你自己的以太坊节点，你需要一台计算机及互联网连接。 计算机需要满足两个一般要求，足够的RAM和足够的硬盘空间。</p>
+<p>每个节点客户端都有特定的RAM要求（见下文），但任何一台16GB RAM的现代计算机基本都够用。节点也可以运行在8GB的RAM上；然而，如果你想使用该节点做点什么，而不只是口头上说说“我要运行一个以太坊节点”而已，那么你可能会希望你有一台16GB RAM的计算机。 建议在专用的计算机上运行以太坊节点，也就是说该计算机的唯一用途就是运行以太坊节点。 没有流媒体Netflix，不编辑视频，也不处理其他前端/后端进程，只用于运行你的节点。</p>
+<p>然后，你需要确保你的计算机有足够的硬盘空间来存储当前的以太坊区块链（记住，合并后，以太坊区块链现在有两个部分：执行层和共识层信标链），而且还要有合理的空间来维持链的增长。就目前而言，一个比较好的经验就是使用2TB的固态硬盘（SSD）。固态硬盘是必不可少的，因为它支持足够快的读写行为，因此节点可以本地同步当前链，并在链持续增长时维护链。</p>
+<p>至于我们的节点，我们运行的是装有16GB RAM的Dell OptiPlex 5080和英特尔酷睿i7处理器。 这台设备是直接从戴尔的网站上购买的“现货”。此外，为了扩充内置硬盘空间，我们还使用USB-C Type 3连接器（这款USB连接器是蓝色的）连接了一个2TB的三星T7便携式固态硬盘。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1012/4_cydydyur1r.png" alt="snzRmOdlAEdElCTv6eu2P6o5nbfbsS977kw05VON.png" title="6599298"></p>
+<p>以太坊节点：Dell OptiPlex 5080，有线以太网连接，2TB固态硬盘</p>
+<p><strong>网络连接</strong></p>
+<p>要与以太坊网络同步，你需要至少每秒25MB的下载速度，这是大多数家用互联网都能满足的规格。 对于我们的节点，我们使用美国中西部可用的标准的Comcast计划，据称下载速度为250MB/秒，总数据下载上限为每月1.2TB（超出后将收取额外费用）。这个服务包，或类似的服务，通常面向位于发达经济体大都市地区的用户。</p>
+<h2 id="软件有哪些代码从哪里获得">软件：有哪些代码？从哪里获得？</h2>
+<p>合并后，所有以太坊节点必须同时运行两个软件，一个共识层节点和一个执行层节点。 Ethereum.org列出了以下执行层节点：Geth、Nethermind、Besu、Erigon和Akula。对于共识层节点，则列出了：Lighthouse、Lodestar、Nimbus、Prysm和Teku。</p>
+<p>对这些不同软件的分析本文不做赘述。不用说，我们决定分别为我们的执行层和共识层运行一直可靠的Geth和受人尊敬的Lighthouse。</p>
+<p><strong>操作系统（OS）</strong></p>
+<p>在深入研究运行以太坊协议的软件之前，先简单介绍一下操作系统的选择。我们决定运行Ubuntu 22.04 LTS，裸金属版。 裸金属意味着操作系统直接运行在处理器的硅片上。 没有虚拟机，没有Docker容器，只有计算机上的“老式”操作系统。 在裸金属上运行可对硬件资源进行最佳利用，不需要虚拟化的“开销”。Ubuntu 22.04 LTS可免费下载，之所以选择它还有部分原因是因为加密技术和Linux社区都具有独立性，其中，Ubuntu是若干“Linux风格”系统之一。</p>
+<p>要在戴尔电脑上安装Ubuntu操作系统，我们必须对运行Windows 10的现有硬盘进行开箱分区。 这个过程的详细说明可在Ubuntu的网页上找到，需要一个USB驱动器在新分区上加载新的操作系统。 安装操作系统可能很棘手，可能是非技术节点操作者要克服的第一个真正的“瓶颈”。应该注意的是，可以在Windows 10上运行相同的系统，因此这不是真正必要的步骤。 此外，互联网上有很多资源可以解决这个问题，所以我们认为，一个有动力并有良好计算机技能的用户要完成这个任务仍然是合理的。</p>
+<p><strong>执行层：Geth</strong></p>
+<p>根据clientdiversity.org的数据显示，Geth是目前使用最多的以太坊节点，约占所有以太坊客户端的80%。 虽然这对于网络来说并不理想，但这是我们的节点正在运行的客户端。 至于我们的客户端可执行程序（例如，当你启动节点时我们的操作系统实际运行的程序）——以一种真正的“不轻信，去验证”的方式——我们想要确定软件的组成。因此，我们使用Git从官方的Go Ethereum源码库下载了源代码。 在代码库完全本地化的情况下，我们使用GNU Make构建Geth客户端，还使用了来自Go Ethereum的其他几个支持软件，包括使用clef为节点创建和管理key-pair对。Go Ethereum的网页对每一步操作都有详细说明。</p>
+<p>下载源代码，并对其进行编译，再将它安装到你的设备上，这是真正的软件工程师类型的工作。 很可能，这对普通计算机用户来说是一个难以达到的提升。因此，如果从源代码编译太过困难，Geth还提供了预构建的二进制文件，你可以从他们的网页下载。 但是，请注意，虽然这些二进制文件非常值得信任，但实际上你信任的是它们的组成。使用源代码方法，可以单独分析每一行代码，因此不需要信任。</p>
+<p><strong>共识层：Lighthouse</strong></p>
+<p>本着与Geth相同的精神，对于节点，我们从官方Lighthouse库下载了Lighthouse，它是从源代码编译的。与Geth类似，如果没有软件经验，编译Lighthouse可能非常棘手。 因此，预构建的二进制文件也可用于Lighthouse。</p>
+<p><strong>运行节点</strong></p>
+<p>在实际运行节点时，请记住操作者必须在同一台机器上运行两个程序（执行客户端、共识客户端）——在我们的例子中分别是Geth和Lighthouse。 此外，每个客户端都需要向硬盘写入大量数据，这就引出了我们的第一步，为文件系统安装固态硬盘。</p>
+<p><strong>安装固态硬盘</strong></p>
+<p>与编译源代码类似，定位物理固态硬盘驱动器然后进行“安装”对普通计算机用户来说并不容易。需要使用终端程序并具有在计算机的层层文件夹结构中畅通无阻的能力。 对于我们的节点，我们选择将固态硬盘安装到主目录文件夹~/ethereum下。在这个文件夹中（请记住，它实际上位于固态硬盘上！）我们创建了另外两个文件夹，~/ethereum/execution_layer和~/Ethereum/consensus_layer。这些文件夹（或者程序员称之为目录）将保存节点所需的所有文件，包括区块链本身。</p>
+<p><strong>运行节点软件</strong></p>
+<p>有了节点运行的文件位置，我们现在可以运行节点软件了。我们首先遵循Go Ethereum网页上的步骤，包括使用clef设置一个用户帐户(（EOA &ndash; 外部拥有的帐户），然后使用几个参数启动geth，最重要的是将datadir设置为我们在固态硬盘上的~/ethereum/execution_layer文件夹（即目录）。请注意，chainid为“1”（不带引号）表示主网（即我们所知道和热爱的真正的以太坊，而不是测试网）。此外，现在geth必须连接到共识层客户端（在我们的例子中是Lighthouse），必须配置一些额外的参数，Go Ethereum在他们的网页中相应的“Connecting to Consensus Clients”（连接到共识客户端）内容中对这些参数进行了解释。</p>
+<p>该命令将启动主网区块链的同步进程，到目前为止，有超过600GB的资源（2022年10月）。当我们在2022年6月启动最初的节点同步时，这个过程用了大约5天时间。</p>
+<p>共识层客户端Lighthouse的运行方式与上述Geth相同。 同样，请确保向固态硬盘正确指定datadir，以确保有足够的硬盘空间来存储所有所需的数据。此外，Lighthouse需要与Geth进行通信，因为他们都支持合并后的以太坊。关于连接到执行引擎，Lighthouse文档提供了关于此连接过程的具体说明。 我们的节点同步信标链花费了大约两天时间。 请注意，我们首先同步了主网链（即Geth），然后启动了信标链（即Lighthouse）同步。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1012/4_iflhsha985.png" alt="d8oXTyd7P624PUiy2LJ63UUafUV1iJpVVY2qpsEm.png" title="6599299"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1012/4_945hgtvmvm.png" alt="D1hnkCUFbfs97KAEKf9EXuK4qDgzsujTIeC5xLpl.png" title="6599300"></p>
+<p>以太坊节点：左屏为Lighthouse STDOUT，右屏为Geth STDOUT。</p>
+<h2 id="使用你的节点">使用你的节点</h2>
+<p>当节点同步时，会下载大量数据。实际上是以太坊的整个区块链历史被复制到你的本地计算机上，包括信标链。这些信息完全下载结束后，你可以查询本地节点的任何信息，并且不要信任任何人来验证该以太坊系统。有了这样的设置，当涉及到以太坊网络和所有与之相关的DAapp时，你就可以真正做到“不轻信，去验证”了。</p>
+<p>连接到你的节点很简单，可以为Geth或Lighthouse节点组件使用本地托管的RPC。这些API在执行层和共识层都有很好的文档记录。对于Python用户来说，使用开源的Web3.py模块是一个很好的选择，有很多博客文章和问题论坛的回答免费提供了许多示例，比如Stack Overflow。如果你对API并不熟悉，你会经历一个学习曲线；然而，有了Python和这个生态系统可用的大量资源，有动力的用户当然也可以在网上找到资源来学习他们需要的一切知识技能。</p>
+<p><strong>节点表现</strong></p>
+<p>随着权益证明（PoS）成为共识机制，以太坊的区块时间的可预测性大为提高。出块时间高度一致，为每12秒产生一个区块（对于漏块来说则为24秒、36秒，等等），其他通信（例如，证明）在区块传播中为每6秒一次。运行一个专用节点（即，计算机只运行以太坊），这在下面显示的CPU和网络活动监视器中都非常清楚。这正是我们所期望的，而且系统的“理论”与观测到的数据相匹配总是一个令人安心的迹象。回想一下我们自己的节点，是从源代码编译的，并使用所有基本构建块进行设置。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1012/4_1feeve5vwj.png" alt="5QPTaOaYrVDMfIsy9JcZnGnoJkX1q5xxeEOOTNue.png" title="6599302">以太坊节点：标准操作的CPU负载百分比和网络数据速率。</p>
+<p>为了进一步显示正在运行的节点，我们为共识层调用一个端点来返回所有验证节点的集合（例如，/eth/v1/beacon/states/{state_id}/validators），这是在编写本文时超过400,000个验证节点的结果。该查询的运行时间为几分钟，如下所示，在请求处理期间，CPU的使用率明显增加，然后在请求得到回复后又回落到“正常”状态。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1012/4_ak9g7vyvgf.png" alt="xKkhkgT9YjnUW5On7GVFqlVLlwTcvonYeAEQEndw.png" title="6599303"></p>
+<p>以太坊节点：信标节点响应API调用，然后恢复正常的节点操作负载。</p>
+<p><strong>持续节点运行</strong></p>
+<p>与所有软件系统一样，会不断开发新的版本。对于Geth和Lighthouse来说，也是如此——而且，你必须时不时地更新节点软件。对我们来说，这包括从Github库中提取最新版本，编译新的可执行文件，并使用最新的稳定版本重新启动Geth和Lighthouse。对于我们的简单节点，我们只需重新编译并重新启动。对于面向生产的节点来说，更适合部署一个开发、分阶段和完全监控的生产环境。如果你不亲自编译，可以下载最新的预编译二进制文件，并使用它们重新启动节点。此外，操作系统也有必须下载和安装的更新。这对于避免操作系统级别的安全问题尤其重要。</p>
+<p>对于我们的节点来说，首先需要一个学习曲线来让节点连续运行。管理每个进程的RAM利用率是第一个障碍，因为在没有足够RAM的情况下，计算机会“随机”关闭。此外，最初节点使用的是WiFi，无线路由器由于数据过载而崩溃。解决了这些问题（即缓存限制和有线以太网）后，该节点已经连续运行了几个月没有停机了。</p>
+<h2 id="结论">结论</h2>
+<p>使用消费级计算机硬件和家庭互联网连接，可以运行自己的本地以太坊节点。虽然运行从源代码本地编译的客户端（共识层和执行层）对大多数用户来说可能很困难，但对于最常用的客户端来说，可以使用预编译的可执行程序。此外，安装一个固态硬盘来存储区块链并运行操作系统（OS）对大多数用户来说是一个挑战；但一个有动力、有耐心、愿意学习的用户是完全有能力做到这些的。</p>
+<p>节点操作者的下一步是决定是否成为验证者。为此，节点必须在本地运行第三个客户端（Lighthouse还附带一个验证者客户端），并且必须质押32个ETH。这比节点设置要稍微复杂一些。此外，人们应该对离线惩罚以及搞砸质押的以太币私钥可能带来的风险有所了解。因此，用户应该在运行验证者节点之前了解自己在做什么。我们还没有自己运行验证者节点，但是鉴于我们运行自己节点的复杂性，你最好至少在运行自己节点的一个月后，再决定是否运行你自己的验证者节点。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43443/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">金色Web3.0日报 | SEC正调查Yuga Labs Mango被攻击</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43441/">
+                <span class="next-text nav-default">金色观察 | 史上最强“怨种”？Mango遭遇黑客“盗”“DAO”双击</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#硬件和网络要求">硬件和网络要求</a></li>
+    <li><a href="#软件有哪些代码从哪里获得">软件：有哪些代码？从哪里获得？</a></li>
+    <li><a href="#使用你的节点">使用你的节点</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

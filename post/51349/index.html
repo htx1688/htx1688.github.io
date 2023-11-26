@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深度解析：在发送1个DAI时发生了什么 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文从通过钱包发起交易开始，解析钱包如何构建交易数据，如何设定Gas等背后到底发生了什么？" />
+<meta name="keywords" content="ETH, 錢包, Gas" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51349/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深度解析：在发送1个DAI时发生了什么" />
+<meta property="og:description" content="本文从通过钱包发起交易开始，解析钱包如何构建交易数据，如何设定Gas等背后到底发生了什么？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51349/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-16T00:00:00+00:00" />
+
+<meta itemprop="name" content="深度解析：在发送1个DAI时发生了什么">
+<meta itemprop="description" content="本文从通过钱包发起交易开始，解析钱包如何构建交易数据，如何设定Gas等背后到底发生了什么？"><meta itemprop="datePublished" content="2023-05-16T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-16T00:00:00+00:00" />
+<meta itemprop="wordCount" content="25090">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深度解析：在发送1个DAI时发生了什么"/>
+<meta name="twitter:description" content="本文从通过钱包发起交易开始，解析钱包如何构建交易数据，如何设定Gas等背后到底发生了什么？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深度解析：在发送1个DAI时发生了什么</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-16">
+      2023-05-16
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 25090 字 -
+        预计阅读 51 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：tincho 译：登链社区</p>
+<p>你有 1 个 DAI， 使用钱包（如Metamask）发送1个DAI到<code>0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</code>（就是 vitalik.eth），点击发送。</p>
+<p>一段时间后，钱包显示交易已被确认。突然，vitalik.eth 现在有了1个DAI的财富。这背后到底发生了什么？</p>
+<p>让我们回放一下。并以慢动作回放。</p>
+<p>准备好了吗？</p>
+<h2 id="构建交易">构建交易</h2>
+<p>钱包是便于向以太坊网络发送交易的软件。</p>
+<p>交易只是告诉以太坊网络，你作为一个用户，想要执行一个行动的一种方式。在此案例中，这将是向Vitalik发送1个DAI。而钱包（如Metamask）有助于以一种相对简单的方式建立这种交易。</p>
+<p>让我们先来看看钱包将建立的交易，可以被表示为一个带有字段和相应数值的对象。</p>
+<p>我们的交易开始时看起来像这样：</p>
+<p>{
+    &ldquo;to&rdquo;: &ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;,
+    // [&hellip;]}</p>
+<p>其中字段_to_说明目标地址。在此案例中，<code>0x6b175474e89094c44da98b954eedeac495271d0f</code>是DAI智能合约的地址。</p>
+<p>等等，什么？</p>
+<p>我们不是应该发送1个DAI给Vitalik吗？<code>to</code>不应该是Vitalik的地址吗？</p>
+<p>嗯，不是。要发送DAI，必须制作一个交易，执行存储在区块链（以太坊数据库的花哨名称）中的一段代码，将更新DAI的记录余额。执行这种更新的逻辑和相关存储都保存在以太坊数据库中的一个不可改变的公共计算机程序中 - DAI智能合约。</p>
+<p>因此，你想建立一个交易，告诉合约 <code>嘿，伙计，更新你的内部余额，从我的余额中取出1个DAI，并添加1个DAI到Vitalik的余额</code>。在以太坊的行话中，<code>hey buddy</code> 这句话翻译为在交易的<code>to</code>字段中设置DAI的地址。</p>
+<p>然而，&ldquo;to&rdquo; 字段是不够的。从你喜欢的钱包的用户界面中提供的信息，钱包会要求你填写其他几个字段，以建立一个格式良好的交易：</p>
+<p>{
+    &ldquo;to&rdquo;: &ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;,
+    &ldquo;amount&rdquo;: 0,
+    &ldquo;chainId&rdquo;: 31337,
+    &ldquo;nonce&rdquo;: 0,
+    // [&hellip;]}</p>
+<p>所以你给 Vitalik 发送1个DAI，你既没有使用Vitalik的地址，也没有在<code>amount</code>字段里填上<code>1</code>。这就是生活的艰难（而我们只是在热身）。<code>amount</code>字段实际上包含在交易中，表示你在交易中发送多少ETH（以太坊的原始货币）。由于你现在不想发送ETH，那么钱包会正确地将该字段设置为0。</p>
+<p>至于 &ldquo;chainId&rdquo;，它是一个指定交易执行的链的字段。对于以太坊 Mainnet，它是1。然而，由于我将在mainnet的本地Fork上运行这个实验，我将使用其链ID：31337，其他链有其他标识符。</p>
+<p>那 &ldquo;nonce&rdquo; 字段呢？那是一个数字，每次你向网络发送交易时都应该增加。它是一种防御机制，以避免重放问题。钱包通常为你设置这个数字。为了做到这一点，他们会查询网络，询问你的账户最新使用的nonce是什么，然后相应地设置当前交易的nonce。在上面的例子中，它被设置为0，尽管在现实中它将取决于你的账户所执行的交易数量。</p>
+<p>我刚才说，钱包 &ldquo;查询网络&rdquo;。我的意思是，钱包执行对以太坊节点的只读调用，而节点则回答所要求的数据。从以太坊节点读取数据有多种方式，这取决于节点的位置，以及它所暴露的API种类。</p>
+<p>让我们想象一下，钱包可以直接网络访问一个以太坊节点。更常见的是，钱包与第三方供应商(如Infura、Alchemy、QuickNode和许多其他供应商)交互。与节点交互的请求遵循一个特殊的协议来执行远程调用。这种协议被称为JSON-RPC。</p>
+<p>一个试图获取账户nonce的钱包请求将类似于这样：</p>
+<h2 id="jsonrpc20methodeth_gettransactioncountparams0x6fc27a75d76d8563840691dde7a947d7f3f179balatestid6">POST / HTTP/1.1connection: keep-alive
+Content-Type: application/json
+content-length: 124{
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,    &ldquo;method&rdquo;:&ldquo;eth_getTransactionCount&rdquo;,    &ldquo;params&rdquo;:[&ldquo;0x6fC27A75d76d8563840691DDE7a947d7f3F179ba&rdquo;,&ldquo;latest&rdquo;],    &ldquo;id&rdquo;:6}</h2>
+<p>HTTP/1.1 200 OKContent-Type: application/json
+Content-Length: 42{&ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,&ldquo;id&rdquo;:6,&ldquo;result&rdquo;:&ldquo;0x0&rdquo;}</p>
+<p>其中<code>0x6fC27A75d76d8563840691DDE7a947d7f3F179ba</code>将是发起者的账户。从响应中你可以看到，它的nonce是0。</p>
+<p>钱包使用网络请求（在此案例中，通过HTTP）来获取数据，请求节点暴露的JSON-RPC端点。上面我只包括了一个，但实际上钱包可以查询任何他们需要的数据来建立一个交易。如果在现实生活中，你注意到有更多的网络请求来查询其他东西，请不要惊讶。例如，下面是一个本地测试节点在几分钟内收到的 Metamask 流量快照：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_sfrmcu1vy5.png" alt="本地网络中Metamak流量的Wireshark快照"></p>
+<h3 id="交易的数据字段">交易的数据字段</h3>
+<p>DAI是一个智能合约。它的主要逻辑在以太坊主网的地址<code>0x6b175474e89094c44da98b954eedeac495271d0f</code>实现。</p>
+<p>更具体地说，DAI是一个符合ERC20标准的同质代币 &ndash; 一种特殊的合约类型。意思是DAI至少实现ERC20规范中详述的接口。用(有点牵强的)web2术语来说，DAI是一个运行在以太坊上的不可变的开源网络服务。鉴于它遵循ERC20规范，我们有可能提前知道(不一定要看源代码)与它交互的确切暴露的接口。</p>
+<p>简短的附带说明：不是所有的ERC20代币都是这样。实现某种接口（有利于交互和集成），单不能保证具体的行为。不过，在这个练习中，我们可以安全地假设DAI在行为上是相当标准的ERC20代币。</p>
+<p>在DAI智能合约中，有许多功能（源代码可在这里），其中许多直接来自ERC20规范。特别值得注意的是外部<code>转移</code>（external transferr） 函数。</p>
+<p>contract Dai is LibNote {
+    &hellip;    function transfer(address dst, uint wad) external returns (bool) {
+        &hellip;
+    }
+}</p>
+<p>这个函数允许任何持有DAI代币的人将其中一部分转账到另一个以太坊账户。它的签名是<code>transfer(address,uint256)</code>。其中第一个参数是接收方账户的地址，第二个参数是无符号整数，代表要转账的代币数量。</p>
+<p>现在我们不关注该函数行为的具体细节。相信我，你会了解到的，该函数将发送方的余额减去所传递的金额，然后相应地增加接收方的金额。</p>
+<p>这一点很重要，因为当建立一个交易与智能合约交互时，人们应该知道合约的哪个函数要被执行。以及要传递哪些参数。这就像在web2中，你想向一个网络API发送一个POST请求。你很可能需要在请求中指定确切的URL和它的参数。这也是一样的。我们想转移1个DAI，所以我们必须知道如何在交易中指定它应该在DAI智能合约上执行<code>转移</code>功能。</p>
+<p>幸运的是，这是非常直接和直观的。</p>
+<p>哈哈，我开玩笑。不是的。</p>
+<p>下面是你在交易中必须包含的内容，以发送1个DAI给维塔利克（记住，地址<code>0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</code>）：</p>
+<p>{
+    // [&hellip;]
+    &ldquo;data&rdquo;: &ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;}</p>
+<p>让我解释一下。</p>
+<p>为了简化集成，并有一个标准化的方式来与智能合约交互，以太坊生态系统采用（某种形式）的 &ldquo;合约ABI规范&rdquo;(ABI代表应用二进制接口)。在普通使用场景中，我强调，在普通使用场景中，为了执行智能合约功能，你必须首先按照合约ABI规范对调用进行编码。更高级的使用场景可能不遵循这个规范，但我们_肯定_不会进入这个兔子洞。我只想说，用Solidity编程的常规智能合约，如DAI，通常遵循合约ABI规范。</p>
+<p>你可以看到上面是用DAI的<code>transfer(address,uint256)</code>函数将1个DAI转移到地址<code>0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</code>的ABI编码的结果字节。</p>
+<p>现在有很多工具可以对交易进行ABI编码（如：https://chaintool.tech/calldata），而且大多数钱包都以某种方式实现ABI编码来与合约交互。为了这个例子，我们可以用一个叫做 cast 的命令行工具来验证上面的字节序列是否正确，它能够用特定的参数对调用进行ABI-编码：</p>
+<p>$ cast calldata &ldquo;transfer(address,uint256)&rdquo; 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 1000000000000000000
+0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000</p>
+<p>有什么困扰你的吗？有什么问题吗？</p>
+<p>哦，对不起，是的。那个100000000000000。说实话，我真的很想在这里为你提供一个更有力的论据。很多ERC20代币都用18位小数表示。比如说DAI。</p>
+<p>在合约里我们只能使用无符号整数。因此，1个DAI实际上被存储为1 * 10^18 - 这是100000000000000。</p>
+<p>现在我们有一个漂亮的ABI编码的字节序列，包含在交易的<code>data</code>字段中。现在看来是这样的：</p>
+<p>{
+    &ldquo;to&rdquo;: &ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;,
+    &ldquo;amount&rdquo;: 0,
+    &ldquo;chainId&rdquo;: 31337,
+    &ldquo;nonce&rdquo;: 0,
+    &ldquo;data&rdquo;: &ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;}</p>
+<p>一旦我们进入交易的实际执行阶段，我们将重新审视这个<code>data</code>字段的内容。</p>
+<h3 id="gas">Gas</h3>
+<p>下一步是决定为交易支付多少钱。因为请记住，所有交易都必须向花费时间和资源来执行和验证它们的节点网络支付费用。</p>
+<p>执行交易的费用是以ETH支付的。而ETH的最终数额将取决于你的交易消耗了多少净 Gas（也就是计算成本有多高），你愿意为每个Gas单位的花费支付多少钱，以及网络愿意接受的最低数额。</p>
+<p>从用户的角度来看，通常是，支付的越多，交易的速度就越快。因此，如果你想在下一个区块中向Vitalik支付1个DAI，你可能需要设置一个更高的费用，而不是你愿意等待几分钟（或更长的时间），直到Gas更便宜。</p>
+<p>不同的钱包可能采取不同的方法来决定支付多少Gas费。我不知道有什么单一的机制被所有人使用。确定正确费用的策略可能涉及从节点查询与Gas有关的信息（如网络接受的最低基本费用）。</p>
+<p>例如，在下面的请求中，你可以看到Metamask浏览器插件在建立交易时向本地测试节点发送请求，以获取Gas费数据：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_7y7gl93v3z.png" alt="Metamask流量查询一个节点的Gas相关数据"></p>
+<p>而简化后的请求-响应看起来像：</p>
+<p>POST / HTTP/1.1Content-Type: application/json
+Content-Length: 99{
+    &ldquo;id&rdquo;:3951089899794639,
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,
+    &ldquo;method&rdquo;:&ldquo;eth_feeHistory&rdquo;,
+    &ldquo;params&rdquo;:[&ldquo;0x1&rdquo;,&ldquo;0x1&rdquo;,[10,20,30]]}&mdash;
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 190{
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,
+    &ldquo;id&rdquo;:3951089899794639,
+    &ldquo;result&rdquo;:{
+        &ldquo;oldestBlock&rdquo;:&ldquo;0x1&rdquo;,
+        &ldquo;baseFeePerGas&rdquo;:[&ldquo;0x342770c0&rdquo;,&ldquo;0x2da4d8cd&rdquo;],
+        &ldquo;gasUsedRatio&rdquo;:[0.0007],
+        &ldquo;reward&rdquo;:[[&ldquo;0x59682f00&rdquo;,&ldquo;0x59682f00&rdquo;,&ldquo;0x59682f00&rdquo;]]
+    }}</p>
+<p><code>eth_feeHistory</code>端点被一些节点暴露出来，允许查询交易费用数据。如果你很好奇，可以阅读这里或这里玩玩它，或者看看规范这里。</p>
+<p>流行的钱包也使用更复杂的链外服务来获取Gas交易成本来估计，并向用户建议合理的价值。这里有一个例子，一个钱包请求了一个网络服务的公共端点，并收到了一堆有用的Gas相关数据：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_1rwbj4dwol.png" alt="Wireshark流量包括eth_feeHistory请求"></p>
+<p>看一下响应片段：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_0h2vs2eyzq.png" alt="Wireshark流量包括eth_feeHistory响应"></p>
+<p>很酷，对吗？</p>
+<p>无论如何，希望你能熟悉设置Gas费用价格并不简单，它是建立一个成功交易的基本步骤。即使你想做的只是发送1个DAI。这里是一个有趣的介绍性指南，可以深入挖掘其中的一些机制，在交易中设置更准确的费用。</p>
+<p>在一些初步的背景下，现在让我们回到实际的交易。有三个与Gas有关的字段需要设置：</p>
+<p>{
+    &ldquo;maxPriorityFeePerGas&rdquo;: &hellip;,
+    &ldquo;maxFeePerGas&rdquo;: &hellip;,
+    &ldquo;gasLimit&rdquo;: &hellip;,}</p>
+<p>钱包将使用一些提到的机制来为你填写前两个字段。有趣的是，每当钱包UI让你在某个版本的 &ldquo;慢速&rdquo;、&ldquo;常规 &ldquo;或 &ldquo;快速&quot;交易中进行选择时，它实际上是在试图决定什么值最适合这些确切的参数。现在你可以更好地理解上面从钱包收到的JSON格式的响应内容了。</p>
+<p>为了确定第三个字段的值，即GasLimit，有一个方便的机制，钱包可以用来在真正提交交易之前模拟交易。这使他们能够确切的估计一笔交易会消耗多少Gas，从而设定一个合理的GasLimit。</p>
+<p>为什么不直接设置一个巨大的GasLimit？当然是为了保护你的资金。智能合约可能有任意的逻辑，你是为其执行付费的人。通过在交易开始时就选择一个合理的GasLimit，你可以保护自己，避免在Gas费用中耗尽你账户的所有ETH资金的尴尬情况。</p>
+<p>可以通过节点的 &ldquo;eth_estimateGas&rdquo; 端点进行Gas估算。在发送1个DAI之前，钱包可以利用这一机制来模拟你的交易，并确定你的DAI转账的正确GasLimit。来自钱包的请求-回应可能是这样的：</p>
+<p>POST / HTTP/1.1Content-Type: application/json{
+    &ldquo;id&rdquo;:2697097754525,
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,
+    &ldquo;method&rdquo;:&ldquo;eth_estimateGas&rdquo;,
+    &ldquo;params&rdquo;:[
+        {
+            &ldquo;from&rdquo;:&ldquo;0x6fC27A75d76d8563840691DDE7a947d7f3F179ba&rdquo;,
+            &ldquo;value&rdquo;:&ldquo;0x0&rdquo;,
+            &ldquo;data&rdquo;:&ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;,
+            &ldquo;to&rdquo;:&ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;
+        }
+    ]}&mdash;
+HTTP/1.1 200 OK
+Content-Type: application/json{&ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,&ldquo;id&rdquo;:2697097754525,&ldquo;result&rdquo;:&ldquo;0x8792&rdquo;}</p>
+<p>在响应中，你可以看到，转账将需要大约 34706 个Gas单位。</p>
+<p>让我们把这些信息纳入交易的有效载荷中：</p>
+<p>{
+    &ldquo;to&rdquo;: &ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;,
+    &ldquo;amount&rdquo;: 0,
+    &ldquo;chainId&rdquo;: 31337,
+    &ldquo;nonce&rdquo;: 0,
+    &ldquo;data&rdquo;: &ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;,
+    &ldquo;maxPriorityFeePerGas&rdquo;: 2000000000,
+    &ldquo;maxFeePerGas&rdquo;: 120000000000,
+    &ldquo;gasLimit&rdquo;: 40000}</p>
+<p>记住，&ldquo;maxPriorityFeePerGas &ldquo;和 &ldquo;maxFeePerGas &ldquo;最终将取决于发送交易时的网络条件。上面我只是为了这个例子而设置了一些任意的值。至于为GasLimit设置的值，我只是把估计值增加了一点，以提交执行交易的可能性。</p>
+<h3 id="访问列表和交易类型">访问列表和交易类型</h3>
+<p>让我们简单评论一下在你的交易中设置的另外两个字段。</p>
+<p>首先，<code>accessList</code>字段。高级使用场景或边缘场景可能需要交易提前指定要访问的账户地址和合约的存储槽，从而使交易的成本降低一些。</p>
+<p>然而，提前建立这样的列表可能并不直接，目前节省的Gas可能并不那么显著。特别是对于简单的交易，如发送1个DAI。因此，我们可以直接将其设置为一个空的列表。尽管记住它确实存在有原因，而且它在未来可能变得更有意义。</p>
+<p>第二，交易类型。它在 &ldquo;type&rdquo; 字段中被指定。类型是交易内部内容的一个指标。我们的将是一个类型2的交易&ndash;因为它遵循这里指定的格式。</p>
+<p>{
+    &ldquo;to&rdquo;: &ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;,    &ldquo;amount&rdquo;: 0,    &ldquo;chainId&rdquo;: 31337,    &ldquo;nonce&rdquo;: 0,    &ldquo;data&rdquo;: &ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;,    &ldquo;maxPriorityFeePerGas&rdquo;: 2000000000,    &ldquo;maxFeePerGas&rdquo;: 120000000000,    &ldquo;gasLimit&rdquo;: 40000,    &ldquo;accessList&rdquo;: [],    &ldquo;type&rdquo;: 2}</p>
+<h3 id="签署交易">签署交易</h3>
+<p>节点如何知道是_你的_账户，而不是其他人的账户在发送交易？</p>
+<p>我们已经来到了建立有效交易的关键步骤：签名。</p>
+<p>一旦钱包收集了足够的信息来建立交易，并且你点击发送，它将对你的交易进行数字签名。如何签名？使用你的账户的私钥(你的钱包可以访问)，和一个涉及椭圆曲线的加密算法，称为ECDSA。</p>
+<p>对于好奇的人来说，实际上被签署的是交易类型和 RLP编码 内容之间的串联的<code>keccak256</code>哈希值。</p>
+<p>keccak256(0x02 || rlp([chainId, nonce, maxPriorityFeePerGas, maxFeePerGas, gasLimit, to, amount, data, accessList]))</p>
+<p>虽然你不应该有那么多的密码学知识来理解这个。简单地说，这个过程是对交易的密封。它通过在上面盖上一个只有你的私钥才能产生的聪明的印章，使其具有防篡改性。从现在开始，任何能够访问该签名交易的人（例如，以太坊节点）都可以通过密码学来验证是你的账户产生了该交易。</p>
+<p>明确一下：签名不是加密。你的交易始终是明文的。一旦它们被公开，任何人都可以从它们的内容中获得其含义。</p>
+<p>签署交易的过程中，毫不奇怪，会产生一个签名。在实践中是一堆奇怪的不可读的值，你通常会发现它们被称为<code>v</code>，<code>r</code>和<code>s</code>。如果你想更深入地了解这些实际代表的内容，以及它们对还原你的账户地址的重要性，互联网是你的朋友。</p>
+<p>你可以通过查看@ethereumjs/tx软件包来更好地了解签名实现时的样子。也可以使用ethers包中的一些实用工具。作为一个极其简化的例子，签署交易以发送1个DAI可以是这样的：</p>
+<p>const { FeeMarketEIP1559Transaction } = require(&quot;@ethereumjs/tx&rdquo;);const txData = {    to: &ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;,    amount: 0,    chainId: 31337,    nonce: 0,    data: &ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;,    maxPriorityFeePerGas: ethers.utils.parseUnits(&lsquo;2&rsquo;, &lsquo;gwei&rsquo;).toNumber(),    maxFeePerGas: ethers.utils.parseUnits(&lsquo;120&rsquo;, &lsquo;gwei&rsquo;).toNumber(),    gasLimit: 40000,    accessList: [],    type: 2,
+};const tx = FeeMarketEIP1559Transaction.fromTxData(txData);const signedTx = tx.sign(Buffer.from(process.env.PRIVATE_KEY, &lsquo;hex&rsquo;));console.log(signedTx.v.toString(&lsquo;hex&rsquo;));// 1console.log(signedTx.r.toString(&lsquo;hex&rsquo;));// 57d733933b12238a2aeb0069b67c6bc58ca8eb6827547274b3bcf4efdad620aconsole.log(signedTx.s.toString(&lsquo;hex&rsquo;));// e49937ec81db89ce70ebec5e51b839c0949234d8aad8f8b55a877bd78cc293</p>
+<p>由此产生的对象将看起来像：</p>
+<p>{
+    &ldquo;to&rdquo;: &ldquo;0x6b175474e89094c44da98b954eedeac495271d0f&rdquo;,
+    &ldquo;amount&rdquo;: 0,
+    &ldquo;chainId&rdquo;: 31337,
+    &ldquo;nonce&rdquo;: 0,
+    &ldquo;data&rdquo;: &ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;,
+    &ldquo;maxPriorityFeePerGas&rdquo;: 2000000000,
+    &ldquo;maxFeePerGas&rdquo;: 120000000000,
+    &ldquo;gasLimit&rdquo;: 40000,
+    &ldquo;accessList&rdquo;: [],
+    &ldquo;type&rdquo;: 2,
+    &ldquo;v&rdquo;: 1,
+    &ldquo;r&rdquo;: &ldquo;57d733933b12238a2aeb0069b67c6bc58ca8eb6827547274b3bcf4efdad620a&rdquo;,
+    &ldquo;s&rdquo;: &ldquo;e49937ec81db89ce70ebec5e51b839c0949234d8aad8f8b55a877bd78cc293&rdquo;,}</p>
+<h3 id="序列化">序列化</h3>
+<p>下一步是_序列化_签名的交易。这意味着将上面的漂亮对象编码成一个二进制字节序列，这样它就可以被发送到以太坊网络并被接收的节点消费。</p>
+<p>以太坊选择的编码方法被称为RLP。交易的编码方式如下：</p>
+<p>0x02 || rlp([chainId, nonce, maxPriorityFeePerGas, maxFeePerGas, gasLimit, to, value, data, accessList, v, r, s])</p>
+<p>其中初始字节是交易类型。</p>
+<p>在前面的代码片段的基础上，你可以实际看到序列化的交易这样添加：</p>
+<p>console.log(signedTx.serialize().toString(&lsquo;hex&rsquo;));// 02f8b1827a69808477359400851bf08eb000829c40946b175474e89094c44da98b954eedeac495271d0f80b844a9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000c001a0057d733933b12238a2aeb0069b67c6bc58ca8eb6827547274b3bcf4efdad620a9fe49937ec81db89ce70ebec5e51b839c0949234d8aad8f8b55a877bd78cc293</p>
+<p>这就是在我的以太坊主网上的本地 Fork 中向Vitalik发送 1 个DAI的实际有效载荷。</p>
+<h3 id="提交交易">提交交易</h3>
+<p>一旦建立、签署和序列化，该交易必须被发送到一个以太坊节点。</p>
+<p>节点会提供方便的JSON-RPC端点，节点可以在那里接收交易请求。</p>
+<p>发送交易使用<code>eth_sendRawTransaction</code>。下面是一个钱包在提交交易时使用的网络流量：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_gwnojtr4vf.png" alt="Wireshark使用eth_sendRawTransaction方法发送原始交易的流量"></p>
+<p>总结的请求-响应看起来像：</p>
+<p>POST / HTTP/1.1Content-Type: application/json
+Content-Length: 446{
+    &ldquo;id&rdquo;:4264244517200,
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,
+    &ldquo;method&rdquo;:&ldquo;eth_sendRawTransaction&rdquo;,
+    &ldquo;params&rdquo;:[&ldquo;0x02f8b1827a69808477359400851bf08eb000829c40946b175474e89094c44da98b954eedeac495271d0f80b844a9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000c001a0057d733933b12238a2aeb0069b67c6bc58ca8eb6827547274b3bcf4efdad620a9fe49937ec81db89ce70ebec5e51b839c0949234d8aad8f8b55a877bd78cc293&rdquo;]}&mdash;
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 114{
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,
+    &ldquo;id&rdquo;:4264244517200,
+    &ldquo;result&rdquo;:&ldquo;0xbf77c4a9590389b0189494aeb2b2d68dc5926a5e20430fb5bc3c610b59db3fb5&rdquo;}</p>
+<p>响应中包含的结果包含交易的哈希值：<code>bf77c4a9590389b0189494aeb2b2d68dc5926a5e20430fb5bc3c610b59db3fb5</code>.这个32字节长的十六进制字符序列是所提交交易的唯一标识符。</p>
+<h2 id="节点接收">节点接收</h2>
+<p>我们应该如何去弄清楚当以太坊节点收到序列化的签名交易时会发生什么？</p>
+<p>有些人可能会在Twitter上询问，有些人可能会阅读一些Medium文章。其他的人甚至可能会阅读文档，或者看视频</p>
+<p>只有一个地方可以找到真相：在源码。让我们用go-ethereum v1.10.18（又名Geth），一个流行的以太坊节点的实现（一旦以太坊转向Proof-of-Stake，就是 &ldquo;执行客户端&rdquo;）。从现在开始，我将包括Geth的源代码链接，以便你能跟随。</p>
+<p>在收到对其<code>eth_sendRawTransaction</code>端点的JSON-RPC调用后，该节点需要对请求正文中包含的序列化交易进行分析。所以它开始对交易进行反序列化。从现在开始，节点将能更容易地访问交易的字段。</p>
+<p>在这一点上，节点已经开始验证交易了。首先，确保交易的费用（即价格 * GasLimit）不超过节点愿意接受的最大限度（显然，默认情况下，这是一个以太币）。还有然后，确保交易是受重放保护的（按照EIP155&ndash;记得我们在交易中设置的<code>链ID</code>字段吗？），或者节点愿意接受不受保护的交易。</p>
+<p>接下来的步骤包括发送交易到交易池（又称mempool）。简单地说，这个池子代表了节点在某个特定时刻所知道的交易集合。就只有节点所知，这些还没有被纳入区块链。</p>
+<p>在_真正_将交易纳入池中之前，节点检查它是否已经知道它。而且它的ECDSA签名是有效的。否则就抛弃该交易。</p>
+<p>然后沉重的 mempool 开始。正如你可能注意到的，有很多琐碎的逻辑来确保交易池是“快乐和健康”的。</p>
+<p>这里有相当多的重要验证。例如，GasLimit 低于区块 GasLimit，或者交易的大小不超过允许的最大，或者 nonce 是预期的，或者发送方有足够的资金来支付潜在的成本（即价值 + GasLimit*价格），等等。</p>
+<p>虽然我们可以继续下去，但我们在这里不是要成为mempool专家。即使我们想这样做，我们也需要考虑，只要他们遵循网络共识规则，每个节点运营商可能采取不同的方法来管理mempool。这意味着执行特殊的验证或遵循自定义的交易优先级规则。为了只发送1个DAI，我们可以将 mempool 视为一组急切等待被拾取并被纳入区块的交易。</p>
+<p>在成功地将交易添加到池中（并做内部记录的事情），节点返回交易哈希值。这正是我们之前在JSON-RPC请求-响应中看到的返回内容?。</p>
+<h3 id="检查-mempool">检查 mempool</h3>
+<p>如果你通过 Metamask 或任何默认连接到传统节点的类似钱包发送交易，在某些时候，它将“降落”在公共节点的mempools上。你可以通过自己检查mempools来确保这一点。</p>
+<p>有一个方便的端点，一些节点暴露了出来，叫做<code>eth_newPendingTransactionFilter</code>。它也许是frontrunning（抢跑） bots 的好朋友。定期查询这个端点可以让我们在交易被纳入链中之前观察到，现在 1个 DAI 进入了本地测试节点的mempool中。</p>
+<p>在Javascript代码中，这可以通过以下方式完成：</p>
+<p>const hre = require(&ldquo;hardhat&rdquo;);
+hre.ethers.provider.on(&lsquo;pending&rsquo;, async function (tx) {    // do something with the transaction});</p>
+<p>要看到实际的<code>eth_newPendingTransactionFilter</code>调用，我们可以直接检查网络流量：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_nrsv3gr6fg.png" alt="Wireshark流量与JSON-RPC调用订阅待处理交易"></p>
+<p>从现在开始，脚本将（自动）轮询mempool中的变化。这是随后的许多周期性调用中的第一个，检查变化：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_j090a6h6ds.png" alt="Wireshark流量与JSON-RPC调用询问mempool中的变化"></p>
+<p>在收到交易后，节点最终用它的哈希值来响应：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_unjbmkq29a.png" alt="Wireshark流量与JSON-RPC调用回答检测到的交易哈希"></p>
+<p>总结的请求 - 响应看起来像：</p>
+<p>POST / HTTP/1.1Content-Type: application/json
+content-length: 74{
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,
+    &ldquo;method&rdquo;:&ldquo;eth_getFilterChanges&rdquo;,
+    &ldquo;params&rdquo;:[&ldquo;0x1&rdquo;],
+    &ldquo;id&rdquo;:58}&mdash;
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 105{
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,
+    &ldquo;id&rdquo;:58,
+    &ldquo;result&rdquo;:[&ldquo;0xbf77c4a9590389b0189494aeb2b2d68dc5926a5e20430fb5bc3c610b59db3fb5&rdquo;]}</p>
+<p>早些时候我说过 &ldquo;传统节点&rdquo;，但没有解释太多。我的意思是，有一些更专业的节点具有私人内存池的特点。它们允许用户在交易被纳入区块之前，从公众那里 &ldquo;隐藏 &ldquo;交易。</p>
+<p>不管具体情况如何，这种机制通常包括在交易发起者和区块构建者之间建立私人通道。Flashbots保护服务就是一个明显的例子。实际的结果是，即使你用上面的方法来监控mempools，你也不能通过私人通道来获取那些进入区块构建者的交易。</p>
+<p>假设发送1个DAI的交易是通过普通通道提交给网络的，没有利用这种服务。</p>
+<h2 id="传播">传播</h2>
+<p>为了使交易被包含在区块中，它需要以某种方式到达能够建立和提出交易的节点。在工作量证明以太坊中，这些节点被称为矿工。在Proof-of-Stake以太坊中，称为验证者。虽然现实往往更复杂一些。请注意，可能有一些方法可以将区块构建外包给专业服务。</p>
+<p>作为一个普通用户，你应该不需要知道这些区块生产者是谁，也不需要知道他们在哪里。相反，你可以简单地发送一个有效的交易到网络中的任何常规节点，让它包括在交易池中，并让点对点协议做他们的事情。</p>
+<p>有一些这样的p2p协议将以太坊节点相互连接。除其他事项外，它们允许频繁地交换交易。</p>
+<p>从一开始，所有节点都与他们的对等节点（默认情况下，最多50个对等节点（Peers））一起监听和广播交易。</p>
+<p>一旦一个交易到达mempool，它就会被发送给所有尚未知道该交易的连接对等节点。</p>
+<p>为了提高效率，只有一个随机的连接节点子集（平方根 ?）被发送完整交易。其余的是只发送交易哈希。如果需要的话，这些节点可以请求返回完整的交易。</p>
+<p>一个交易不能永远停留在一个节点的mempool中。如果它没有被其他原因首先被丢弃（例如，池子满了，交易价格低了，或者它被更高的nonce/价格的新交易取代）的话，它可能在一定时间后（默认为3小时）被自动删除。</p>
+<p>在mempool中被认为可以被区块构建者拾取和处理的有效交易被跟踪在一个待处理交易的列表中。这个数据结构可以被区块构建者查询，以获得被允许进入链上的可处理交易。</p>
+<h2 id="工作准备和交易纳入">工作准备和交易纳入</h2>
+<p>交易应该在浏览了mempools之后到达一个挖矿节点（至少在写这篇文章的时候）。这种类型的节点是特别重的多任务处理器。对于熟悉Golang的人来说，这意味着在挖矿相关的逻辑中，有相当多的go例程和通道。对于那些不熟悉Golang的人来说，这意味着矿工的常规操作不能像我想的那样被线性解释。</p>
+<p>本节的目标有两个方面。首先，了解我们的交易是如何以及何时被矿工从mempool中提取的。第二，找出交易的执行在哪一点上开始。</p>
+<p>当节点的挖矿组件被初始化时，至少有两件相关的事情发生。第一，它开始监听新交易到达mempool的情况。第二，一些基本的循环被触发了。</p>
+<p>在Geth的行话中，用交易建立一个区块并将其密封的行为被称为 &ldquo;提交工作（committing work）&quot;。因此，我们想了解这是在什么情况下发生的。</p>
+<p>重点是&quot;新工作&quot;loop。这是一个独立的例程，当节点收到不同类型的通知时，会触发工作提交。该触发器需要发送一个工作要求到该节点的另一个活跃监听器（运行在矿工的&quot;main&rdquo; loop中）。当收到这样的工作要求时，提交工作开始。</p>
+<p>节点开始进行一些初始准备。主要包括建立区块头。这包括寻找父区块，确保正在建立的区块的时间戳是正确的，设置区块编号，GasLimit，coinbase地址和基本费用等任务。</p>
+<p>之后，共识引擎被调用，进行区块头的&quot;共识准备&rdquo;。这计算出正确的区块难度（取决于当前的网络版本）。如果你听说过以太坊的 &ldquo;难度炸弹&rdquo;，你就知道了。</p>
+<blockquote>
+<p>译者注： TheMerge 之后已经没有难度炸弹了。</p>
+</blockquote>
+<p>接下来，区块密封上下文被创建。撇开其他动作，这包括获取最后的已知状态。这是正在建立的区块中的第一个交易将被执行的状态。这可能是我们的交易发送1个DAI。</p>
+<p>在准备好区块后，它就开始填充交易。</p>
+<p>我们达到了这里：到目前为止，我们的未决（pending）交易只是舒适地坐在节点的内存池中，与其他交易一起被拾起。</p>
+<p>默认情况下，交易在一个区块内按价格和nonce排序。对于我们的情况，交易在区块中的位置实际上是无关的。</p>
+<p>现在开始按顺序执行这些交易。一个交易被执行之后，每个交易都建立在前一个交易的结果状态之上。</p>
+<h2 id="执行">执行</h2>
+<p>一个以太坊交易可以被认为是一个状态转换。</p>
+<p>状态0：你有100个DAI，Vitalik也有100个。</p>
+<p>交易：你发送1个DAI给Vitalik。</p>
+<p>状态1：你有99个DAI，而Vitalik有101个。</p>
+<p>因此，执行交易需要_对区块链的当前状态应用_一系列的操作。产生一个新的（不同的）状态作为结果。这将被认为是新的当前状态，直到有另一个交易进来。</p>
+<p>在现实中，这更有趣（也更复杂）。让我们来看看。</p>
+<h3 id="准备工作第一部分">准备工作（第一部分）</h3>
+<p>用Geth的行话说，矿工在区块中提交交易。提交交易的行为是在一个环境中进行的。这种环境包含一个特定的状态（先不管其他的）。</p>
+<p>因此，简而言之，提交一个交易本质上是：(1)记住当前的状态，(2)通过应用交易来修改它，(3)根据交易的成功，要么接受新状态，要么回滚到原来的状态。</p>
+<p>有趣的事情发生在（2）：应用交易。</p>
+<p>首先要注意的是，交易被变成了一个 消息“Message”。如果你熟悉Solidity，在那里你通常会写诸如<code>msg.data</code>或<code>msg.sender</code>这样的东西，最后在Geth的代码中读到 <code>message</code> 就是欢迎你进入友好之地的标志。</p>
+<p>当检查消息时，会很快就会注意到它与交易的至少一个区别。一条信息有一个<code>from</code>字段!这个字段是签名者的以太坊地址，它是由交易中的公共签名衍生出来的（还记得奇怪的<code>v</code>、<code>r</code>和<code>s</code>字段吗？）。</p>
+<p>现在，执行的环境被进一步准备。首先，与区块相关的环境被创建，其中包括区块编号、时间戳、coinbase地址和区块GasLimit等内容。然后&hellip;</p>
+<p>野兽走了进来，它就是以太坊虚拟机。</p>
+<p>以太坊虚拟机（EVM），负责执行交易的基于堆栈的256位计算引擎，我们可以期待它做什么？</p>
+<p>EVM是一台机器。作为一台机器，它有一套可以执行的指令（又称操作码）。该指令集多年来一直在变化。因此，一定会有段代码告诉EVM今天应该使用哪些操作码。当EVM实例化解释器时，它选择正确的操作代码集，取决于正在使用的版本。</p>
+<p>最后，在真正的执行之前有两个最后步骤。EVM的交易上下文被创建（在你的Solidity智能合约中使用过<code>tx.origin</code>或<code>tx.gasPrice</code>吗？），EVM被赋予访问当前状态的权限。</p>
+<h3 id="准备工作第二部分">准备工作(第二部分)</h3>
+<p>现在轮到EVM执行状态转换了。给定一个信息、一个环境和原始状态，它将使用一组有限的指令来转移到一个新的状态。其中，维塔利克有1个额外的DAI?。</p>
+<p>在应用状态转换之前，EVM必须确保它遵守特定的共识规则。让我们看看这一点是如何做到的。</p>
+<p>验证开始于Geth所说的&quot;预检查&rdquo;，它包括：</p>
+<ol>
+<li>
+<p>验证信息的nonce。它必须与信息的 &ldquo;from&quot;地址的nonce匹配。此外，它必须不是可能的最大nonce（通过检查nonce +1是否会导致溢出）。</p>
+</li>
+<li>
+<p>确保与信息的<code>from</code>地址相对应的账户没有代码。也就是说，交易起源是一个外部拥有的账户（EOA）。从而遵守EIP 3607规范。</p>
+</li>
+<li>
+<p>验证交易中设置的 <code>maxFeePerGas</code>（Geth中的 <code>gasFeeCap</code>）和 <code>maxPriorityFeePerGas</code>（Geth中的 <code>gasTipCap</code>）字段是在预期范围内。此外，优先权费用不大于最大费用。并且<code>maxFeePerGas</code>大于当前区块的基本费用。</p>
+</li>
+<li>
+<p>购买Gas，检查账户是否能够支付它打算消费的所有Gas。而且该区块中还有足够的Gas来处理这笔交易。最后让账户提前支付Gas费用（别担心，以后还有退款机制）。</p>
+</li>
+</ol>
+<p>接下来，EVM核算交易消耗的 &ldquo;内在 (intrinsic) Gas&rdquo;。在计算内在Gas时，有几个因素需要考虑。首先，交易是否是合约创建。我们这里不是，所以Gas 初始为21000 个单位](<a href="https://github.com/ethereum/go-ethereum/blob/v1.10.18/params/protocol">https://github.com/ethereum/go-ethereum/blob/v1.10.18/params/protocol</a>_params.go#L32)。之后，信息的 &ldquo;数据 &ldquo;字段中的非零字节的数量也被考虑在内。每个非零字节收取16个单位（遵循本规范）。每个零字节只收取4个单位的费用。最后，如果我们提供访问列表，一些更多的Gas将被提前计算。</p>
+<p>我们将交易的<code>value</code>字段设置为零。如果我们指定一个正值，现在将是EVM检查发送方账户是否真的有足够的余额以执行ETH转账的时刻。此外，如果我们设置了访问列表，现在它们将被初始化为状态。</p>
+<p>正在执行的交易并不是在创建一个合约。EVM知道它因为<code>to</code>字段不是零。因此，它将起者的账户nonce增加1，并执行一个调用。</p>
+<p>调用将从<code>from</code>到<code>to</code>信息的地址，传递<code>data</code>，没有value，以及消耗内在Gas后剩下的任何Gas。</p>
+<h3 id="调用">调用</h3>
+<p>DAI智能合约存储在地址<code>0x6b175474e89094c44da98b954eedeac495271d0f</code>。这就是我们在交易的<code>to</code>字段中设置的地址。这个初始调用是为了让EVM执行存储在它那里的任何代码，逐个操作码执行。</p>
+<p>操作码是EVM的指令，用十六进制数字表示，范围从00到FF。尽管它们通常用它们的名字来指代。例如，<code>00</code>是<code>STOP</code>，<code>FF</code>是<code>SELFDESTRUCT</code>。一个方便的操作码列表可以在evm.codes上找到。</p>
+<p>那么DAI的操作码到底是什么？很高兴你这么问：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0516/5_63ksiofi0w.png" alt="DAI智能合约的EVM操作码"></p>
+<p>不要惊慌。现在要想弄清这一切还为时尚早。</p>
+<p>让我们慢慢开始，把初始调用分解。它的简要文档提供了一个很好的总结：</p>
+<p>// Call executes the contract associated with the addr with the given input as// parameters. It also handles any necessary value transfer required and takes// the necessary steps to create accounts and reverses the state in case of an// execution error or failed value transfer.func (evm *EVM) Call(caller ContractRef, addr common.Address, input []byte, gas uint64, value *big.Int) (ret []byte, leftOverGas uint64, err error) {
+    &hellip;
+}</p>
+<p>首先，逻辑检查是否已经触及调用深度限制。这个限制是设置为1024，这意味着在一个交易中最多只能有1024个嵌套调用。这里是一篇有趣的文章，可以阅读关于EVM这种行为背后的一些推理和微妙之处。稍后我们将探讨如何增加/减少调用深度。</p>
+<p>相关的附带说明：调用深度限制 <em>并不是</em> EVM的堆栈大小限制 &ndash; 堆栈大小（巧合？）也是1024个元素。</p>
+<p>下一步是确保，如果在调用中指定了一个正的 value ，那么发送方有足够的余额来执行转移（执行几步之后）。我们可以忽略这一点，因为我们调用的value是零。此外，一个当前状态的快照被拍摄下来。这允许在失败时轻松恢复任何状态变化。</p>
+<p>我们知道DAI的地址指的是一个有代码的账户。因此，它必须已经存在于以太坊的状态空间里。</p>
+<p>然而，让我们暂时想象一下，这不是一个发送1个DAI的交易。假设它是一个没有价值的垃圾交易，目标是一个新的地址。相应的账户将需要被添加到状态。然而，如果该账户缺只是空的呢？除了浪费节点的磁盘空间之外，似乎没有理由对它进行跟踪。EIP 158对以太坊协议进行了一些修改，以帮助避免这种情况的发生。这就是为什么你在调用任何账户时看到这个<code>if</code>条件。</p>
+<p>我们知道的另一件事是，DAI不是预编译合约。什么是预编译合约？下面是以太坊黄皮书提供的内容：</p>
+<blockquote>
+<p>[&hellip;&hellip;]初步的架构预备代码片段，以后可能成为原生扩展。地址1到9的合约分别执行椭圆曲线公钥恢复函数、SHA2 256位Hash方案、RIPEMD 160位Hash方案、身份函数、任意精度的模块化指数、椭圆曲线加法、椭圆曲线标量乘法、椭圆曲线配对检查以及BLAKE2压缩函数F。</p>
+</blockquote>
+<p>简而言之，在以太坊的状态下，（到目前为止）有9个不同的特殊合约。这些账户（范围从0x0000000000000000000000000001到0x0000000000000000000009）开箱即包含执行黄皮书中提到的操作的必要代码。当然，你可以在Geth的代码中自己检查其实现。</p>
+<p>为了给预编译合约的故事增添一些色彩，请注意，在以太坊主网中，所有这些账户的余额至少有 <em>1wei</em>。这是故意的（至少在用户开始错误地发送以太币之前）。看，这里有一个近5年的交易向<code>0x0000000000000000000000000000000009</code>预编译的账户发送了1wei。</p>
+<p>不管怎样。在意识到调用的目标地址并不对应于预编译的合约后，节点从状态中读取账户的代码。然后确保它是不空的。最后，命令EVM使用它的解释器，用给定的输入（交易的<code>data</code>字段的内容）来运行该代码。</p>
+<h3 id="解释器第一部分">解释器(第一部分)</h3>
+<p>现在是EVM实际执行DAI代码的时候了。为了完成这个任务，EVM手头有几个元素。它有一个堆栈，可以容纳多达1024个元素(尽管只有前16个元素可以通过可用的操作码直接访问)；它有一个易失性的读/写内存空间；它有一个程序计数器；它有一个特殊的只读内存空间，叫做calldata保存调用的输入数据。还有一写其他东西。</p>
+<p>像往常一样，在进入多汁的东西之前有一些必要的设置和验证。首先，调用深度递增1。其次，如果有必要，只读模式被设置。我们的调用不是只读的（见这里传递的<code>false</code>参数）。否则一些EVM操作将不被允许。这包括改变状态的EVM指令<code>SSTORE</code>, <code>CREATE</code>, <code>CREATE2</code>, <code>SELFDESTRUCT</code>, <code>CALL</code> 有正值，和<code>LOG</code> 。</p>
+<p>解释器现在进入了执行循环。它包括按顺序执行DAI代码中由程序计数器和当前EVM指令集所指示的操作码。目前我们使用的是伦敦指令集&ndash;这是在解释器第一次实例化时在跳转表中配置的。</p>
+<p>循环还负责保持一个健康的堆栈（避免上下溢出）。并花费每个操作的固定Gas成本，以及适当时的动态Gas成本。这些动态成本包括，例如，EVM内存的扩展（阅读更多关于内存扩展成本的计算这里）。请注意，Gas是在执行操作码之前（&ndash;而不是之后）消耗的。</p>
+<p>每个可能指令的实际行为可以在这个Geth文件中找到实现。只要略微浏览一下，就可以开始看到这些指令是如何与堆栈、内存、Calldata和状态一起工作的。</p>
+<p>在这一点上，我们需要直接跳到DAI的操作码中，并为我们的交易跟踪它们的执行。然而，我不认为这是处理这个问题的最好方法。我宁愿先从EVM和Geth中走出来，然后进入Solidity 领地。这应该给我们一个更有价值的关于ERC20转移操作的高级行为的概述。</p>
+<h3 id="solidity-执行">Solidity 执行</h3>
+<p>DAI智能合约是用Solidity编码的。它是一种面向对象的高级语言，当被编译时，输出EVM字节码，能够在EVM兼容的链上部署智能合约(在我们的例子中是以太坊)。</p>
+<p>DAI的源代码可以找到在区块浏览器中验证，或在GitHub。为了便于参考，我将会指向第一个。</p>
+<p>在我们开始之前，让我们始终牢记，EVM 对 Solidity 一无所知。它对其变量、函数、合约的布局、ABI编码等一无所知。以太坊区块链存储的是普通的EVM 字节码，而不是花哨的Solidity代码。</p>
+<p>你可能会问，为什么当你去任何区块浏览器时，他们会在以太坊地址上向你显示Solidity代码。嗯，这只是一个幌子。在大多数区块浏览器中，人们可以上传Solidity 源代码，而浏览器则负责用特定的编译器设置来编译该源代码。如果编译器产生的输出与区块链上的指定地址存储的内容相匹配，那么合约的源代码就被称为 &ldquo;验证&rdquo;。从那时起，任何导航到该地址的人都会看到该地址的Solidity代码，而不是只看到存储在该地址的EVM字节码。</p>
+<p>上述情况的一个非微不足道的后果是，在某种程度上，我们相信区块浏览器会向我们展示合法的代码（这不一定是真的，即使是意外）。不过这可能有替代方案&ndash;除非每次你想读一个合约时，都要对照自己的节点来验证源代码。</p>
+<p>无论如何，现在回到DAI的Solidity代码。</p>
+<p>在DAI的智能合约上（用Solidity v0.5.12编译），让我们专注于函数的执行：<code>transfer</code>。</p>
+<p>function transfer(address dst, uint wad) external returns (bool) {    return transferFrom(msg.sender, dst, wad);
+}</p>
+<p>当<code>transfer</code>运行时，它将调用另一个名为<code>transferFrom</code>的函数，然后返回后者返回的任何布尔标志。<code>transfer</code>的第一个和第二个参数（这里称为<code>dst</code>和<code>wad</code>）被直接传递给<code>transferFrom</code>。这个函数另外读取发起者的地址（在<code>msg.sender</code>中作为一个Solidity全局变量）。</p>
+<p>对于我们的例子，这些将是传递给<code>transferFrom</code>的值：</p>
+<p>return transferFrom(    msg.sender, // 0x6fC27A75d76d8563840691DDE7a947d7f3F179ba (my address on the local testing node)
+    dst,        // 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 (Vitalik&rsquo;s address)
+    wad         // 1000000000000000000 (1 DAI in wei units));</p>
+<p>让我们看看<code>transferFrom</code>函数，然后：</p>
+<p>function transferFrom(address src, address dst, uint wad) public returns (bool) {
+   &hellip;
+}</p>
+<p>首先，发起者的余额被检查与被转移的金额相对照。</p>
+<p>require(balanceOf[src] &gt;= wad, &ldquo;Dai/insufficient-balance&rdquo;);</p>
+<p>这很简单：你转移的DAI不能多于你的余额。如果我没有1个DAI，执行将在这一点上停止，返回一个错误信息。请注意，每个地址的余额都在智能合约的存储中被跟踪。在一个名为<code>balanceOf</code>的 Map 的数据结构中。如果你至少有1个DAI，我可以向你保证你的账户地址在那里的某个地方有记录。</p>
+<p>第二，代币allowances 被验证。</p>
+<p>// don&rsquo;t bother too much about this :)if (src != msg.sender &amp;&amp; allowance[src][msg.sender] != uint(-1)) {    require(allowance[src][msg.sender] &gt;= wad, &ldquo;Dai/insufficient-allowance&rdquo;);
+    allowance[src][msg.sender] = sub(allowance[src][msg.sender], wad);
+}</p>
+<p>这与我们现在没有关系。因为我们没有代表另一个账户执行转账。虽然要注意到这是所有ERC20代币应该实现的机制&ndash;DAI不是例外。实质上，你可以授权其他账户从你的账户转账DAI代币。</p>
+<p>第三，实际进行余额互换。</p>
+<p>balanceOf[src] = sub(balanceOf[src], wad);
+balanceOf[dst] = add(balanceOf[dst], wad);</p>
+<p>当发送1个DAI时，发送方的余额减少了100000000000000，接收方的余额增加了100000000000000。这些操作是在<code>balanceOf</code>数据结构上进行读写的。值得注意的是使用了两个特殊的函数<code>add</code>和<code>sub</code>来进行计算。</p>
+<p>为什么不简单地使用<code>+</code>和<code>-</code>运算符？</p>
+<p>记住：这个合约是用Solidity 0.5.12编译的。在那个时候，编译器并没有像今天这样包括上/下溢检查。因此，开发者必须记住（或被提醒?），在适当的地方自己实现它们。因此在DAI合约中使用了<code>add</code>和<code>sub</code>。它们只是自定义的内部函数，用于执行加法和减法，并带有约束检查以避免算术问题。</p>
+<p>function add(uint x, uint y) internal pure returns (uint z) {    require((z = x + y) &gt;= x);
+}function sub(uint x, uint y) internal pure returns (uint z) {    require((z = x - y) &lt;= x);
+}</p>
+<p><code>add</code>函数将<code>x</code>和<code>y</code>相加，如果运算结果小于<code>x</code>，则停止执行（从而防止整数溢出）。</p>
+<p><code>sub</code>函数从<code>x</code>中减去<code>y</code>，如果操作的结果大于<code>x</code>，则停止执行（从而防止整数下溢）。</p>
+<p>第四，触发一个<code>转移</code>事件（正如ERC20规范所建议的）。</p>
+<p>emit Transfer(src, dst, wad);</p>
+<p>一个事件是一个记录操作。在事件中发出的数据后可以从读取区块链的链外服务中获取，但绝不会被其他合约获取。</p>
+<p>在我们的转账操作中，发出的事件似乎记录了三个元素。发起者的地址（<code>0x6fC27A75d76d8563840691DDE7a947d7f3F179ba</code>），接收者的地址（<code>0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</code>），和发送金额（<code>100000000000000</code>）。</p>
+<p>前两个对应于事件声明中标记为 “indexed” 的参数。索引参数有利于数据的检索，允许过滤任何相应的记录值。除非事件被标记为 &ldquo;匿名&rdquo;，否则事件的标识符也会作为一个主题被包含。</p>
+<p>因此，更具体地说，我们正在处理的<code>Transfer</code>事件实际上记录了3个主题（事件的标识符、发起者的地址和接受者的地址）和1个值（转移的DAI数量）。一旦我们涉及到低级别的EVM的东西，我们将涵盖关于这个事件的更多细节。</p>
+<p>在函数的最后，布尔值 &ldquo;true &ldquo;被返回（正如ERC20规范所建议的）。</p>
+<p>return true;</p>
+<p>这是一种信号，表明转移被成功执行。这个布尔标志被传递给启动调用的<code>transfer</code>函数（它也简单地返回它）。</p>
+<p>这就是了!如果你曾经发送过DAI，这就是你所执行的逻辑。这就是你花钱让一个全球去中心化的节点网络为你做的工作。</p>
+<p>等一下。我可能偏得有点远了。因为正如我之前告诉你的，EVM对Solidity一无所知。节点不执行Solidity。它们执行的是EVM的字节码。</p>
+<p>是时候进行真正的交易了。</p>
+<h3 id="evm执行">EVM执行</h3>
+<p>在这一节中，将变得相当技术化。我假设你对EVM的字节码比较熟悉。如果你不熟悉，我强烈建议你阅读这个专栏或这个系列。在那里，你会发现本节中的很多概念都有单独和更深入的解释。</p>
+<p>DAI的原始字节码是很难阅读的 &ndash; 我们已经在上一节见证了它。研究它的一个更漂亮的方法是使用反汇编的版本。你可以在这里找到Dai的反汇编字节码(为了便于参考，我已经把它提取到这个gist中)。</p>
+<h4 id="空闲内存指针和调用的值">空闲内存指针和调用的值</h4>
+<p>如果你已经熟悉 Solidity 编译器，前三条指令不应该感到惊讶。它只是在初始化空闲内存指针。</p>
+<p>0x0: PUSH1     0x800x2: PUSH1     0x400x4: MSTORE</p>
+<p>Solidity 编译器为内部的东西保留了从<code>0x00</code>到<code>0x80</code>的内存插槽。所以 <code>空闲内存指针</code> 是一个指向EVM内存中第一个可以自由使用的插槽的指针。它存储在<code>0x40</code>，初始化时指向<code>0x80</code>。</p>
+<p>请记住，所有EVM操作码在Geth中都有对应的实现。例如，你可以真正看到<code>MSTORE</code>的实现是如何弹出两个堆栈元素并向EVM内存写入一个32字节的字：</p>
+<p>func opMstore(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {    // pop value of the stack
+    mStart, val := scope.Stack.pop(), scope.Stack.pop()
+    scope.Memory.Set32(mStart.Uint64(), &amp;val)    return nil, nil
+}</p>
+<p>在DAI的字节码中，接下来的EVM指令确保调用不持有任何价值。如果它有，执行将在<code>REVERT</code>指令处停止。注意使用<code>CALLVALUE</code>指令（在此实现来读取当前调用的Value。</p>
+<p>0x5: CALLVALUE 0x6: DUP1      0x7: ISZERO    0x8: PUSH2     0x100xb: JUMPI     0xc: PUSH1     0x00xe: DUP1      0xf: REVERT</p>
+<p>我们的调用没有持有任何值（交易的<code>value</code>字段被设置为零）&ndash;所以我们可以继续。</p>
+<h4 id="验证calldata第一部分">验证calldata（第一部分）</h4>
+<p>接下来：由编译器引入的另一个检查。这一次，它要弄清楚calldata的大小（通过<code>CALLDATASIZE</code>指令获得&ndash;在这里实现是否低于4字节（见下面的<code>0x4</code>和<code>LT</code>指令）。在此案例中，它将跳到<code>0x142</code>位置。在<code>0x146</code>位置的<code>REVERT</code>指令上停止执行。</p>
+<p>0x10: JUMPDEST0x11: POP       0x12: PUSH1     0x40x14: CALLDATASIZE0x15: LT        0x16: PUSH2     0x1420x19: JUMPI&hellip;0x142: JUMPDEST  0x143: PUSH1     0x00x145: DUP1      0x146: REVERT</p>
+<p>这意味着在DAI智能合约中，calldata的大小被强制要求为_至少_4字节。这是因为Solidity使用的ABI编码机制用其签名的keccak256哈希值的前四个字节来识别函数(通常称为 &ldquo;函数选择器&rdquo; - 见规范 - Solidity 文档)。</p>
+<p>如果calldata没有至少4个字节，就不可能识别出该函数。所以编译器引入了必要的EVM指令，以在此案例中提前失败。这就是你在上面目睹的情况。</p>
+<p>为了调用<code>transfer(address,uint256)</code>函数，calldata的前四个字节必须与函数的选择器匹配。这四个字节是：</p>
+<p>$ cast sig &ldquo;transfer(address,uint256)&ldquo;0xa9059cbb</p>
+<p>与我们之前建立的交易的<code>data</code>字段的前4个字节完全相同：</p>
+<p>0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000</p>
+<p>现在calldata的长度已经得到验证，是时候使用它了。请看下面如何将前4个字节的calldata放在堆栈的顶部（这里需要注意的主要EVM指令是<code>CALLDATALOAD</code>，这里实现）。</p>
+<p>0x1a: PUSH1     0x00x1c: CALLDATALOAD0x1d: PUSH1     0xe00x1f: SHR</p>
+<p>实际上<code>CALLDATALOAD</code>将32字节的calldata推到堆栈中。它需要用<code>SHR</code>指令来截断，以保留前四个字节。</p>
+<h4 id="函数调度器">函数调度器</h4>
+<p>不要试图逐行理解下面的内容。相反，注意突出的高级模式就好。我会添加一些分界线，使之更加清晰：</p>
+<p>0x20: DUP10x21: PUSH4     0x7ecebe000x26: GT        0x27: PUSH2     0xb80x2a: JUMPI0x2b: DUP1      0x2c: PUSH4     0xa9059cbb0x31: GT        0x32: PUSH2     0x7c0x35: JUMPI0x36: DUP1      0x37: PUSH4     0xa9059cbb0x3c: EQ        0x3d: PUSH2     0x6b40x40: JUMPI0x41: DUP1      0x42: PUSH4     0xb753a98c0x47: EQ        0x48: PUSH2     0x71a0x4b: JUMPI</p>
+<p>一些被推送到堆栈的十六进制值有4个字节长，这并不是巧合。这些确实是函数选择器。</p>
+<p>上面这组指令是Solidity编译器产生的字节码的一个常见结构。它通常被称为 &ldquo;函数调度器&rdquo;。它类似于一个if-else或switch流程。它只是试图将calldata的前四个字节与合约的函数的已知选择器集合相匹配。一旦它找到一个匹配项，执行将跳到字节码的另一个部分。在那里，该特定函数的指令被放置在这个部分。</p>
+<p>按照上述逻辑，EVM 将 calldata 的前四个字节与 ERC20 <code>transfer</code>函数的选择器相匹配：<code>0xa9059cbb</code>。并跳转到字节码位置<code>0x6b4</code>。这就是告诉 EVM 开始执行DAI的转移。</p>
+<h4 id="验证calldata第二部分">验证calldata(第二部分)</h4>
+<p>在匹配了选择器和跳转后，现在EVM要开始运行与函数有关的具体代码了。但在跳转到其细节之前，它需要以某种方式记住位置，一旦所有与功能相关的逻辑被执行，在哪里继续执行。</p>
+<p>做到这一点的方法是简单地保持堆栈中适当的字节码位置。请看下面正在推送的<code>0x700</code>值。它将在堆栈中徘徊，直到在某个时间点（稍后）被检索到，并被用来跳回以结束执行。</p>
+<p>0x6b4: JUMPDEST  0x6b5: PUSH2     0x700</p>
+<p>现在让我们更具体地了解一下<code>transfer</code>函数。</p>
+<p>编译器嵌入了一些逻辑，以确保calldata的大小对一个有两个<code>address</code>和<code>uint256</code>类型的参数的函数是正确的。对于<code>transfer</code>函数，至少是68字节（4字节用于选择器+64字节用于两个ABI编码的参数）。</p>
+<p>0x6b8: PUSH1     0x40x6ba: DUP1      0x6bb: CALLDATASIZE0x6bc: SUB       0x6bd: PUSH1     0x400x6bf: DUP2      0x6c0: LT        0x6c1: ISZERO    0x6c2: PUSH2     0x6ca0x6c5: JUMPI     0x6c6: PUSH1     0x00x6c8: DUP1      0x6c9: REVERT</p>
+<p>如果calldata的大小更小，执行将在位置<code>0x6c9</code>的<code>REVERT</code>处停止。由于我们的交易的calldata已经被正确的ABI编码，因此有适当的长度，执行会跳到位置<code>0x6ca</code>。</p>
+<h4 id="读取参数">读取参数</h4>
+<p>下一步是让EVM读取calldata中提供的两个参数。这些是20字节长的地址<code>0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</code>和数字<code>100000000000000</code>（十六进制的<code>0x0de0b6b3a7640000</code>）。两者都是以32个字节为一组的ABI编码。因此，需要进行一些基本的操作来读取正确的数值，并把它们放在堆栈的顶部。</p>
+<p>0x6ca: JUMPDEST  0x6cb: DUP2      0x6cc: ADD       0x6cd: SWAP1     0x6ce: DUP1      0x6cf: DUP1      0x6d0: CALLDATALOAD0x6d1: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0x6e6: AND       0x6e7: SWAP1     0x6e8: PUSH1     0x200x6ea: ADD       0x6eb: SWAP1     0x6ec: SWAP3     0x6ed: SWAP2     0x6ee: SWAP1     0x6ef: DUP1      0x6f0: CALLDATALOAD0x6f1: SWAP1     0x6f2: PUSH1     0x200x6f4: ADD       0x6f5: SWAP1     0x6f6: SWAP3     0x6f7: SWAP2     0x6f8: SWAP1     0x6f9: POP       0x6fa: POP       0x6fb: POP       0x6fc: PUSH2     0x1df40x6ff: JUMP</p>
+<p>为了更加直观，在依次应用上述指令集后（直到<code>0x6fb</code>），堆栈顶部看起来像这样：</p>
+<p>0x0000000000000000000000000000000000000000000000000de0b6b3a7640000
+0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045</p>
+<p>这就是EVM如何迅速地从calldata中提取两个参数，将它们放在堆栈中供将来使用。</p>
+<p>上面的最后两条指令（字节码位置<code>0x6fc</code>和<code>0x6ff</code>）只是让执行跳到位置<code>0x1df4</code>。让我们在那里继续。</p>
+<h4 id="transfer函数"><code>transfer</code>函数</h4>
+<p>在简单的Solidity分析中，我们看到<code>transfer(address,uint256)</code>函数是一个包装器，调用更复杂的<code>transferFrom(address,address,uint256)</code>函数。编译器将这种内部调用翻译成这些EVM指令：</p>
+<p>0x1df4: JUMPDEST  0x1df5: PUSH1     0x00x1df7: PUSH2     0x1e010x1dfa: CALLER    0x1dfb: DUP5      0x1dfc: DUP5      0x1dfd: PUSH2     0xa250x1e00: JUMP</p>
+<p>首先注意推送值<code>0x1e01</code>的指令。这就是指示EVM <code>记住</code> 它应该跳回的确切位置，以便在即将到来的内部调用后继续执行。</p>
+<p>然后，注意<code>CALLER</code>的使用（因为在Solidity中，内部调用使用<code>msg.sender</code>）。以及两个<code>DUP5</code>指令。这些都是把<code>transferFrom</code>的三个必要参数放在堆栈的顶部：调用者的地址，接收者的地址，以及要转移的金额。后两个参数已经在堆栈的某处，因此使用了 <code>DUP5</code>。现在堆栈的顶部有所有必要的参数：</p>
+<p>0x0000000000000000000000000000000000000000000000000de0b6b3a7640000
+0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045
+0x0000000000000000000000006fc27a75d76d8563840691dde7a947d7f3f179ba</p>
+<p>最后，在指令<code>0x1dfd</code>和<code>0x1e00</code>之后，执行跳转到位置<code>0xa25</code>。在那里EVM将开始执行与 <code>transferFrom</code> 函数对应的指令。</p>
+<h4 id="transferfrom函数"><code>transferFrom</code> 函数</h4>
+<p>首先需要检查的是发送方是否有足够的DAI余额&ndash;否则将被回退。发送方的余额被保存在合约存储器中。然后需要的基本EVM指令是<code>SLOAD</code>。然而，<code>SLOAD</code>需要知道什么存储槽需要被读取。对于映射（在DAI智能合约中保存账户余额的Solidity数据结构的类型），这不是那么直接的告诉。</p>
+<p>我不会在这里深入研究合约存储中Solidity状态变量的内部布局。你可以阅读它这里是v0.5.15。我只想说，给定映射<code>balanceOf</code>的键地址<code>k</code>，它相应的<code>uint256</code>值将被保存在存储槽<code>keccak256(k . p)</code>，其中<code>p</code>是映射本身的槽位置，<code>.</code>是连接。你可以自己做数学题。</p>
+<blockquote>
+<p>参考状态变量的存储空间 。</p>
+</blockquote>
+<p>为了简单起见，我们只强调几个需要发生的操作。EVM必须 i) 计算映射的存储槽，ii)读取数值，iii)将其与要转账的数量（已经在堆栈中的数值）进行比较。因此，我们应该看到像 &ldquo;SHA3 &ldquo;这样的指令用于散列，&ldquo;SLOAD&rdquo; 用于读取存储，&ldquo;LT &ldquo;用于比较。</p>
+<p>0xa25: JUMPDEST  0xa26: PUSH1     0x00xa28: DUP2      0xa29: PUSH1     0x20xa2b: PUSH1     0x00xa2d: DUP7      0xa2e: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xa43: AND       0xa44: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xa59: AND       0xa5a: DUP2      0xa5b: MSTORE    0xa5c: PUSH1     0x200xa5e: ADD       0xa5f: SWAP1     0xa60: DUP2      0xa61: MSTORE    0xa62: PUSH1     0x200xa64: ADD       0xa65: PUSH1     0x00xa67: SHA3      &ndash;&gt; calculating storage slot0xa68: SLOAD     &ndash;&gt; reading storage0xa69: LT        &ndash;&gt; comparing balance against amount0xa6a: ISZERO    0xa6b: PUSH2     0xadc0xa6e: JUMPI</p>
+<p>如果发送方没有足够的DAI，执行将在<code>0xa6f</code>处继续，最后在<code>0xadb</code>处碰到<code>REVERT</code>。由于我没有忘记在我的发送方账户余额中装入1个DAI，那么让我们继续到<code>0xadc</code>位置。</p>
+<p>下面一组指令对应于EVM验证调用者是否与发起者的地址相符（记得合约中的<code>if (src != msg.sender ...) { ...}</code>合约中的代码段）。</p>
+<p>0xadc: JUMPDEST  0xadd: CALLER    0xade: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xaf3: AND       0xaf4: DUP5      0xaf5: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xb0a: AND       0xb0b: EQ        0xb0c: ISZERO    0xb0d: DUP1      0xb0e: ISZERO    0xb0f: PUSH2     0xbb40xb12: JUMPI&hellip;0xbb4: JUMPDEST  0xbb5: ISZERO    0xbb6: PUSH2     0xdb20xbb9: JUMPI</p>
+<p>既然不匹配，就在<code>0xdb2</code>位置继续执行。</p>
+<p>下面这段代码没有让你想起什么吗？检查一下正在使用的指令。同样，不要单独一行行理解。用你的直觉来发现高级模式和最相关的指令。</p>
+<p>0xdb2: JUMPDEST  0xdb3: PUSH2     0xdfb0xdb6: PUSH1     0x20xdb8: PUSH1     0x00xdba: DUP7      0xdbb: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xdd0: AND       0xdd1: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xde6: AND       0xde7: DUP2      0xde8: MSTORE    0xde9: PUSH1     0x200xdeb: ADD       0xdec: SWAP1     0xded: DUP2      0xdee: MSTORE    0xdef: PUSH1     0x200xdf1: ADD       0xdf2: PUSH1     0x00xdf4: SHA3      0xdf5: SLOAD     0xdf6: DUP4      0xdf7: PUSH2     0x1e770xdfa: JUMP</p>
+<p>感觉它类似于从存储器中读取映射，那是因为它就是这样! 上面是EVM从<code>balanceOf</code>映射中读取发送方的余额。</p>
+<p>然后执行跳转到<code>0x1e77</code>的位置，这里是<code>sub</code>函数的主体。</p>
+<p><code>sub</code>函数将两个数字相减，在整数下溢时恢复到原状。我这里没有写字节码，尽管你可以在这里 找到他。算术运算的结果被保存在堆栈中。</p>
+<p>回到对应于<code>transferFrom</code>函数主体的指令，现在减法的结果将被写入存储空间-更新<code>balanceOf</code>映射。试着注意下面的计算，以获得映射项的适当存储槽，这通过<code>SSTORE</code>指令的执行。这条指令是有效地将数据写入状态的指令&ndash;也就是更新合约的存储。</p>
+<p>0xdfb: JUMPDEST  0xdfc: PUSH1     0x20xdfe: PUSH1     0x00xe00: DUP7      0xe01: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xe16: AND       0xe17: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xe2c: AND       0xe2d: DUP2      0xe2e: MSTORE    0xe2f: PUSH1     0x200xe31: ADD       0xe32: SWAP1     0xe33: DUP2      0xe34: MSTORE    0xe35: PUSH1     0x200xe37: ADD       0xe38: PUSH1     0x00xe3a: SHA3      0xe3b: DUP2      0xe3c: SWAP1     0xe3d: SSTORE</p>
+<p>一组相当类似的操作码被运行以更新接收者的账户余额。首先是从存储中的<code>balanceOf</code>映射中读取。然后使用<code>add</code>函数将余额加到正在转移的金额上。最后，结果被写到适当的存储槽。</p>
+<h4 id="事件记录log">事件记录（Log）</h4>
+<p>在合约的代码中，<code>Transfer</code>事件是在更新余额之后发出的。因此，在分析的字节码中必须有一组指令来处理这种带有适当数据的事件。</p>
+<p>然而，事件是另一个属于Solidity的幻想世界的东西。在EVM世界中，事件对应于记录操作。</p>
+<p>记录是通过可用的<code>LOG</code>指令集进行的。有几个变体，取决于有多少个主题要被记录。在DAI的案例中，我们已经注意到，发出的<code>Transfer</code>事件有3个主题。</p>
+<p>那么找到一组运行<code>LOG3</code>指令的指令就不奇怪了。</p>
+<p>0xeca: POP       0xecb: DUP3      0xecc: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xee1: AND 0xee2: DUP50xee3: PUSH20    0xffffffffffffffffffffffffffffffffffffffff0xef8: AND       0xef9: PUSH32    0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef0xf1a: DUP5      0xf1b: PUSH1     0x400xf1d: MLOAD     0xf1e: DUP1      0xf1f: DUP3      0xf20: DUP2      0xf21: MSTORE    0xf22: PUSH1     0x200xf24: ADD       0xf25: SWAP2     0xf26: POP       0xf27: POP       0xf28: PUSH1     0x400xf2a: MLOAD     0xf2b: DUP1      0xf2c: SWAP2     0xf2d: SUB       0xf2e: SWAP1     0xf2f: LOG3</p>
+<p>在这些指令中，至少有一个值是突出的：<code>0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef</code>.这是该事件的主要标识符。也叫主题0。它是编译器在编译时计算的一个静态值（嵌入在合约的运行时字节码中）。如前所述，事件签名的哈希值：</p>
+<p>$ cast keccak &ldquo;Transfer(address,address,uint256)&ldquo;0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef</p>
+<p>就在到达<code>LOG3</code>指令之前，堆栈看起来像这样：</p>
+<p>0x00000000000000000000000000000000000000000000000000000000000000800x00000000000000000000000000000000000000000000000000000000000000200xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef &ndash; topic 0 (event identifier)0x0000000000000000000000006fc27a75d76d8563840691dde7a947d7f3F179ba &ndash; topic 1 (sender&rsquo;s address)
+0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045 &ndash; topic 2 (receiver&rsquo;s address)</p>
+<p>那么转移的金额在哪里？在内存中! 在到达 <code>LOG3</code> 之前，EVM 首先被指示将金额存储在内存中。这样它就可以在以后被记录指令消耗掉。如果你看一下<code>0xf21</code>位置，你会看到<code>MSTORE</code>指令负责这样做。</p>
+<p>所以一旦到达<code>LOG3</code>，EVM 就可以安全的从内存中抓取实际记录的数值，从偏移量<code>0x80</code>开始，读取<code>0x20</code>字节（上面的前两个堆栈元素）。</p>
+<p>另一种理解日志的方法是看它的在Geth中的实现。在那里你会发现一个负责处理所有日志指令的单一函数。你可以看到 i) 一个空的主题数组被初始化，ii) 内存偏移量和数据大小从堆栈中读取，iii) 主题从堆栈中读取并插入数组中，iv) 值从内存中读取，v) 包含它被发出的地址、主题和值的日志被附加。</p>
+<p>这些日志后来是如何还原的，我们很快就会发现。</p>
+<h4 id="返回值">返回值</h4>
+<p><code>transferFrom</code>函数的最后一件事是返回布尔值<code>true</code>。这就是为什么在<code>LOG3</code>之后的第一条指令只是将<code>0x1</code>的值推到堆栈中。</p>
+<p>0xf30: PUSH1    0x1</p>
+<p>接下来的指令准备让堆栈退出<code>transferFrom</code>函数，回到它的包装<code>transfer</code>函数。请记住，这个下一步跳转的位置已经存储在堆栈中了&ndash;这就是为什么你在下面的操作码中没有看到它。</p>
+<p>0xf32: SWAP1     0xf33: POP       0xf34: SWAP4     0xf35: SWAP3     0xf36: POP       0xf37: POP       0xf38: POP       0xf39: JUMP</p>
+<p>回到<code>transfer</code>函数中，要做的就是为最后的跳转准备堆栈。到一个执行将被结束的位置。这个即将跳转的位置之前也已经存储在堆栈中了（还记得被推送的<code>0x700</code>值吗？）</p>
+<p>0x1e01: JUMPDEST  0x1e02: SWAP1     0x1e03: POP       0x1e04: SWAP3     0x1e05: SWAP2     0x1e06: POP       0x1e07: POP       0x1e08: JUMP</p>
+<p>剩下的就是为最后一条指令准备堆栈：<code>RETURN</code>。这条指令负责从内存中读取一些数据，并将其传回给原始调用者。</p>
+<p>对于DAI转账，返回的数据将简单地包括由<code>transfer</code>函数返回的<code>true</code>布尔标志。记住，这个值已经放在堆栈里了。</p>
+<p>EVM开始抓取第一个可用的空闲内存位置。这是通过读取空闲内存的指针来完成的：</p>
+<p>0x700: JUMPDEST  0x701: PUSH1     0x400x703: MLOAD</p>
+<p>接下来，必须用<code>MSTORE</code>将该值存储在内存中。虽然不是那么直接地告诉你，下面的指令只是编译器认为最适合为<code>MSTORE</code>操作准备堆栈的指令。</p>
+<p>0x704: DUP1      0x705: DUP3      0x706: ISZERO    0x707: ISZERO    0x708: ISZERO    0x709: ISZERO    0x70a: DUP2      0x70b: MSTORE</p>
+<p><code>RETURN</code> 指令从内存中复制返回的数据。所以它需要被告知要读取多少内存，以及从哪里开始。下面的指令简单的告诉EVM从内存中读取并返回<code>0x20</code>字节，从空闲内存指针开始。</p>
+<p>0x70c: PUSH1     0x200x70e: ADD       0x70f: SWAP2     0x710: POP       0x711: POP       0x712: PUSH1     0x400x714: MLOAD     0x715: DUP1      0x716: SWAP2     0x717: SUB       0x718: SWAP1     0x719: RETURN</p>
+<p>返回值 &ldquo;0x0000000000000000000000000000000000000000000000000001&rdquo;（对应于布尔值 &ldquo;true&rdquo;）。</p>
+<p>执行停止。</p>
+<h3 id="解释器-第二部分">解释器 (第二部分)</h3>
+<p>字节码的执行已经结束。解释器必须停止迭代。在Geth中，它是这样做的：</p>
+<p>// interpreter&rsquo;s execution loopfor { 
+    &hellip;    // execute the operation
+    res, err = operation.execute(&amp;pc, in, callContext)    if err != nil {        break
+    }
+    &hellip;
+}</p>
+<p>这意味着 <code>RETURN</code> 操作码的执行应该以某种方式返回一个错误。即使是像我们这样成功的执行。事实上，它确实。尽管它作为一个标志&ndash;当它与成功执行<code>RETURN</code>操作码所返回的标志相匹配时，错误实际上被删除。</p>
+<h3 id="gas-退款和付款">Gas 退款和付款</h3>
+<p>随着解释器运行的结束，我们回到了最初触发它的调用中。该运行被成功完成。因此，返回的数据和任何剩余的Gas被简单地返回。</p>
+<p>调用也完成了。执行是在包裹状态转换之后进行的。</p>
+<p>首先提供Gas退款。它被添加到交易中任何剩余的Gas中。退款金额的上限是所使用Gas的1/5（由于EIP 3529）。所有现在可用的Gas（剩余的加上退还的）被以ETH形式支付到发起者的账户，按照发起者在交易中最初设定的费用价格。所有剩余的Gas被重新添加到区块中的可用Gas中，以便后续交易可以消耗这些Gas。</p>
+<p>然后向coinbase地址（PoW中的矿工地址，PoS中的验证者地址）支付最初承诺小费。有趣的是，对执行过程中使用的所有Gas 都进行支付。即使其中一些后来被退还了。此外，请注意这里*有效的小费是如何计算的。不仅注意到它被 &ldquo;maxPriorityFeePerGas&rdquo; 交易字段所限制。但更重要的是，意识到它不包括基本费用（base-fee）!这没有错 &ndash; 以太坊喜欢看着ETH燃烧。</p>
+<p>最后执行结果被包裹在一个更漂亮的结构中。包括使用的Gas，任何可能中止执行的EVM错误（在我们的例子中没有），以及从EVM返回的数据。</p>
+<h3 id="建立交易收据">建立交易收据</h3>
+<p>代表执行结果的结构现在被传递 向上 返回 。在这一点上，Geth 对执行状态做了一些内部清理。一旦完成，它就会累积交易中使用的Gas（包括退款）。</p>
+<p>最重要的是，现在是创建交易收据的时候了。收据是一个总结与交易执行有关的数据的对象。它包括的信息有：执行状态（成功/失败），交易的哈希值，使用的Gas 单位，创建合约的地址（在我们的例子中没有），发出的日志，交易的bloom 过滤器，和其他。</p>
+<p>我们很快就会检索到我们交易的收据的全部内容。</p>
+<p>如果你想深入了解交易的日志和bloom filter的作用，请查看noxx的文章。</p>
+<h2 id="挖掘区块">挖掘区块</h2>
+<p>后续交易的执行继续发生，直到区块的空间耗尽。</p>
+<p>这时节点会调用共识引擎来最终完成该区块。在PoW中，这需要积累挖矿奖励（向coinbase地址发放ETH的全额奖励，以及其他区块的部分奖励）并相应地更新区块的最终状态根。</p>
+<p>接下来，实际的区块被组装，将所有数据放在正确的位置。包括头的交易哈希或收据哈希等信息。</p>
+<p>现在为真正的PoW挖矿做好了所有准备。一个新的 &ldquo;任务&quot;被创建并推送给正确的监听者。委托给共识引擎的挖掘任务开始。</p>
+<p>我不会详细解释PoW的实际开采是如何进行的。互联网上已经有很多关于它的内容。只需注意，在Geth中，这涉及一个多线程的尝试和错误过程，以找到一个数字，满足一个必要条件。不用说，一旦以太坊切换到权益证明，挖掘过程的处理方式将有很大不同。</p>
+<p>挖出的区块被推送到适当的channel和在结果循环中接收。其中收据和日志会相应地更新，并在其被有效挖出后提供最新的区块数据。</p>
+<p>区块最后被写入链中，置于链的顶端。</p>
+<h2 id="广播区块">广播区块</h2>
+<p>下一步是向整个网络宣布，一个新的区块已经被开采出来。同时，该区块在内部存储到待定区块集合。耐心地等待其他节点的确认。</p>
+<p>公告已经完成发布一个特定的事件，被挖掘的广播循环(loop)接收。在那里，该区块被完全传播到一个子网的对等节点，并以较轻的方式提供给其他人。</p>
+<p>更具体地说，广播需要向连接的对等节点的平方根发送块数据。在内部实现是将数据推送到块通道（ channel） 队列，直到其通过p2p层发送。p2p消息被识别为<code>NewBlockMsg</code>。其余节点的收到一个包括区块哈希的轻量级通告。</p>
+<p>请注意，这只对PoW有效。在权益证明中，区块传播将发生在共识引擎上。</p>
+<h2 id="验证区块">验证区块</h2>
+<p>对等节点不断监听消息。每种类型的可能的消息都有一个相关的处理程序，一旦收到相应的消息，就立即调用。</p>
+<p>因此，在得到带有区块数据的 &ldquo;NewBlockMsg &ldquo;消息时，其相应的处理程序被执行。处理程序对消息进行解码并对传播的块运行一些早期验证。这些验证包括对报头数据的初步理智检查，主要是确保它们被填充和约束。以及对区块的uncle和交易哈希值进行验证。</p>
+<p>然后发送消息的对等节点被标记为拥有该区块。从而避免了以后将区块传播回给它。</p>
+<p>最后，数据包被向下传递到第二个处理程序，在那里区块将被入队导入到链的本地副本。入队是通过向相应的通道（channel）直接发送导入请求完成的。当请求被拾取时，它就会触发实际的入队操作。最后推送区块数据到队列中。</p>
+<p>该区块现在在本地队列中，准备被处理。这个队列在节点的区块提取器主循环中被定期读取。当区块到达前面时，节点将拾取它并尝试导入。</p>
+<p>在实际插入候选块之前，至少有两个值得强调的验证。</p>
+<p>首先，本地链必须已经包括被传播块的父节点。</p>
+<p>第二，区块的头必须是有效的。这些验证是真正的验证。意思是说，那些对共识真正重要的，并且在以太坊的黄皮书中被指定。因此，它们是由共识引擎处理。</p>
+<p>举例来说，引擎会检查区块的工作证明是否有效，或者区块的时间戳是否不在过去或不在未来太远，或者区块高度是否已经正确增加，等等。</p>
+<p>在验证了它符合共识规则之后，整个区块被进一步传播到一个对等节点的子集。然后才是实际的导入运行。</p>
+<p>在导入过程中会有很多事情发生。所以我将直接切入正题。</p>
+<p>在几个额外的验证之后，父区块状态被检索。这是新区块的第一个交易将被执行的状态。以它为参考点，整个区块被处理。如果你曾经听说过所有以太坊节点都要执行和验证每一笔交易，现在你可以确定了。之后，完成后状态被验证（见如何这里）。最后，该区块被写入到本地链。</p>
+<p>成功导入继续发布该区块到其他节点的对等物上（不是完全广播）。</p>
+<p>整个验证过程被复制到所有收到区块的节点。很大一部分会接受它进入他们的本地链，以后会有更多的区块到达，插入到它的上面。</p>
+<h2 id="检索交易">检索交易</h2>
+<p>在包含交易的区块上挖出几个区块后，就可以开始安全地假设交易确实已经被确认。</p>
+<p>从链上找回交易是非常简单的。我们所需要的是它的哈希值。方便的是，在我们第一次提交交易的时候就已经获得了它。</p>
+<p>交易本身的数据，加上区块的哈希值和编号，总是可以在节点的<code>eth_getTransactionByHash</code>端点上检索到。不出所料，它现在返回：</p>
+<p>{
+    &ldquo;hash&rdquo;: &ldquo;0xbf77c4a9590389b0189494aeb2b2d68dc5926a5e20430fb5bc3c610b59db3fb5&rdquo;,
+    &ldquo;type&rdquo;: 2,
+    &ldquo;accessList&rdquo;: [],
+    &ldquo;blockHash&rdquo;: &ldquo;0xe880ba015faa9aeead0c41e26c6a62ba4363822ddebde6dd77a759a753ad2db2&rdquo;,
+    &ldquo;blockNumber&rdquo;: 15166167,
+    &ldquo;transactionIndex&rdquo;: 0,
+    &ldquo;confirmations&rdquo;: 6,
+    &ldquo;from&rdquo;: &ldquo;0x6fC27A75d76d8563840691DDE7a947d7f3F179ba&rdquo;,
+    &ldquo;maxPriorityFeePerGas&rdquo;: 2000000000,
+    &ldquo;maxFeePerGas&rdquo;: 120000000000,
+    &ldquo;gasLimit&rdquo;: 40000,
+    &ldquo;to&rdquo;: &ldquo;0x6B175474E89094C44Da98b954EedeAC495271d0F&rdquo;,
+    &ldquo;value&rdquo;: 0,
+    &ldquo;nonce&rdquo;: 0,
+    &ldquo;data&rdquo;: &ldquo;0xa9059cbb000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa960450000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;,
+    &ldquo;r&rdquo;: &ldquo;0x057d733933b12238a2aeb0069b67c6bc58ca8eb6827547274b3bcf4efdad620a&rdquo;,
+    &ldquo;s&rdquo;: &ldquo;0x00e49937ec81db89ce70ebec5e51b839c0949234d8aad8f8b55a877bd78cc293&rdquo;,
+    &ldquo;v&rdquo;: 1,
+    &ldquo;creates&rdquo;: null,
+    &ldquo;chainId&rdquo;: 31337}</p>
+<p>交易的收据可以在<code>eth_getTransactionReceipt</code>端点请求。根据你运行这个查询的节点，你可能还会得到预期交易收据数据之外的额外信息。这是我从mainnet的本地分叉中得到的交易收据：</p>
+<p>{
+    &ldquo;to&rdquo;: &ldquo;0x6B175474E89094C44Da98b954EedeAC495271d0F&rdquo;,
+    &ldquo;from&rdquo;: &ldquo;0x6fC27A75d76d8563840691DDE7a947d7f3F179ba&rdquo;,
+    &ldquo;contractAddress&rdquo;: null,
+    &ldquo;transactionIndex&rdquo;: 0,
+    &ldquo;gasUsed&rdquo;: 34706,
+    &ldquo;logsBloom&rdquo;: &ldquo;0x00000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000008000000000000000000000000000000000000000011000000000000000000000000000000000000000000000000000010000000000000004000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000002000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000&rdquo;,
+    &ldquo;blockHash&rdquo;: &ldquo;0x8b6d44d6cf39d01181b90677f8a77a2605d6e70c40d649eda659499063a19c77&rdquo;,
+    &ldquo;transactionHash&rdquo;: &ldquo;0xbf77c4a9590389b0189494aeb2b2d68dc5926a5e20430fb5bc3c610b59db3fb5&rdquo;,
+    &ldquo;logs&rdquo;: [
+        {
+            &ldquo;transactionIndex&rdquo;: 0,
+            &ldquo;blockNumber&rdquo;: 15166167,
+            &ldquo;transactionHash&rdquo;: &ldquo;0xbf77c4a9590389b0189494aeb2b2d68dc5926a5e20430fb5bc3c610b59db3fb5&rdquo;,
+            &ldquo;address&rdquo;: &ldquo;0x6B175474E89094C44Da98b954EedeAC495271d0F&rdquo;,
+            &ldquo;topics&rdquo;: [
+                &ldquo;0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef&rdquo;,
+                &ldquo;0x0000000000000000000000006fc27a75d76d8563840691dde7a947d7f3f179ba&rdquo;,
+                &ldquo;0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045&rdquo;
+            ],
+            &ldquo;data&rdquo;: &ldquo;0x0000000000000000000000000000000000000000000000000de0b6b3a7640000&rdquo;,
+            &ldquo;logIndex&rdquo;: 0,
+            &ldquo;blockHash&rdquo;: &ldquo;0x8b6d44d6cf39d01181b90677f8a77a2605d6e70c40d649eda659499063a19c77&rdquo;
+        }
+    ],
+    &ldquo;blockNumber&rdquo;: 15166167,
+    &ldquo;confirmations&rdquo;: 6, // number of blocks I waited before fetching the receipt
+    &ldquo;cumulativeGasUsed&rdquo;: 34706,
+    &ldquo;effectiveGasPrice&rdquo;: 9661560402,
+    &ldquo;type&rdquo;: 2,
+    &ldquo;byzantium&rdquo;: true,
+    &ldquo;status&rdquo;: 1}</p>
+<p>你看到了吗？它说<code>&quot;status&quot;：1</code>.</p>
+<p>这只能说明一件事：成功</p>
+<h2 id="后记">后记</h2>
+<p>这个故事绝对可以有更多的内容。</p>
+<p>从某种意义上说，它是永无止境的。总会有一个更多的注意事项。还有一个附带说明。一个替代的执行路径。另一个节点的实现。另一个我可能已经跳过的EVM指令。另一个以不同方式处理事情的钱包。所有的事情都会使我们更接近于找到当你发送1个DAI时发生的 &ldquo;真正真相&rdquo;。</p>
+<p>幸运的是，这不是我打算做的事。我希望最后的+1万字没有让你这么想?。请允许我在这里阐明一些情况。</p>
+<p>事后看来，这篇文章是混合了好奇心和挫折感的副产品。</p>
+<p>好奇是因为我做以太坊智能合约安全已经超过4年了，但我还没有像我希望的那样花更多的时间来手动深入探索基础层的复杂性。我真的想获得第一手的经验，看看以太坊本身的实际实现。但智能合约总是被挡在中间。现在我终于找到了更多的和平时光，这似乎是回归本源并开始这次冒险的正确时机。</p>
+<p>但是好奇心是不够的。我需要一个借口。一个触发点。我知道我所想的会很艰难。所以我需要一个足够强大的理由，不仅是为了开始工作。而且，更重要的是，每当我觉得自己厌倦了试图从以太坊的代码中找出意义时，就会重新开始。</p>
+<p>我在我没有注意的地方找到了它。我在挫折中发现了它。</p>
+<p>沮丧的是，我们在汇款时已经习惯了绝对令人震惊的缺乏透明度的情况。如果你曾经需要在一个资本管制日益严格的发展中国家进行汇款，毫无疑问，你会感受到我的心情。所以我想提醒自己，我们可以做得更好。我决定用文字来表达我的挫折感。</p>
+<p>这篇文章也给我提了个醒。如果你能避开那些模糊的东西、价格、JPEG中的猴子、Ponzis、Rugpulls和盗窃，这里仍然有价值。这不是 &ldquo;神奇 &ldquo;的互联网货币。这里有真正的数学、密码学和计算机科学。作为开放源码，你可以看到每一块的移动。你几乎可以触摸到它们。不管是哪一天，也不管是什么时候。无论你是谁。无论你来自哪里。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51298/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">强化风险研判精准惩治违法犯罪</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51302/">
+                <span class="next-text nav-default">时光机器之旅：寻找BRC-20的前生</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#构建交易">构建交易</a></li>
+    <li><a href="#jsonrpc20methodeth_gettransactioncountparams0x6fc27a75d76d8563840691dde7a947d7f3f179balatestid6">POST / HTTP/1.1connection: keep-alive
+Content-Type: application/json
+content-length: 124{
+    &ldquo;jsonrpc&rdquo;:&ldquo;2.0&rdquo;,    &ldquo;method&rdquo;:&ldquo;eth_getTransactionCount&rdquo;,    &ldquo;params&rdquo;:[&ldquo;0x6fC27A75d76d8563840691DDE7a947d7f3F179ba&rdquo;,&ldquo;latest&rdquo;],    &ldquo;id&rdquo;:6}</a>
+      <ul>
+        <li><a href="#交易的数据字段">交易的数据字段</a></li>
+        <li><a href="#gas">Gas</a></li>
+        <li><a href="#访问列表和交易类型">访问列表和交易类型</a></li>
+        <li><a href="#签署交易">签署交易</a></li>
+        <li><a href="#序列化">序列化</a></li>
+        <li><a href="#提交交易">提交交易</a></li>
+      </ul>
+    </li>
+    <li><a href="#节点接收">节点接收</a>
+      <ul>
+        <li><a href="#检查-mempool">检查 mempool</a></li>
+      </ul>
+    </li>
+    <li><a href="#传播">传播</a></li>
+    <li><a href="#工作准备和交易纳入">工作准备和交易纳入</a></li>
+    <li><a href="#执行">执行</a>
+      <ul>
+        <li><a href="#准备工作第一部分">准备工作（第一部分）</a></li>
+        <li><a href="#准备工作第二部分">准备工作(第二部分)</a></li>
+        <li><a href="#调用">调用</a></li>
+        <li><a href="#解释器第一部分">解释器(第一部分)</a></li>
+        <li><a href="#solidity-执行">Solidity 执行</a></li>
+        <li><a href="#evm执行">EVM执行</a></li>
+        <li><a href="#解释器-第二部分">解释器 (第二部分)</a></li>
+        <li><a href="#gas-退款和付款">Gas 退款和付款</a></li>
+        <li><a href="#建立交易收据">建立交易收据</a></li>
+      </ul>
+    </li>
+    <li><a href="#挖掘区块">挖掘区块</a></li>
+    <li><a href="#广播区块">广播区块</a></li>
+    <li><a href="#验证区块">验证区块</a></li>
+    <li><a href="#检索交易">检索交易</a></li>
+    <li><a href="#后记">后记</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

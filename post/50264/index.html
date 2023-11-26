@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          a16z：關於數據可用性抽樣和 danksharding 的概述及改進建議 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在這篇文章中，我們將研究 Danksharding 中的數據可用性是如何工作的，並對底層技術提出一些修改建議。" />
+<meta name="keywords" content="Danksharding, 以太坊2.0" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50264/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="a16z：關於數據可用性抽樣和 danksharding 的概述及改進建議" />
+<meta property="og:description" content="在這篇文章中，我們將研究 Danksharding 中的數據可用性是如何工作的，並對底層技術提出一些修改建議。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50264/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="a16z：關於數據可用性抽樣和 danksharding 的概述及改進建議">
+<meta itemprop="description" content="在這篇文章中，我們將研究 Danksharding 中的數據可用性是如何工作的，並對底層技術提出一些修改建議。"><meta itemprop="datePublished" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9713">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="a16z：關於數據可用性抽樣和 danksharding 的概述及改進建議"/>
+<meta name="twitter:description" content="在這篇文章中，我們將研究 Danksharding 中的數據可用性是如何工作的，並對底層技術提出一些修改建議。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">a16z：關於數據可用性抽樣和 danksharding 的概述及改進建議</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-28">
+      2023-04-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9713 字 -
+        预计阅读 20 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文：A16z</p>
+<p>编译：GWEI Research</p>
+<p>Danksharding 是一种用于扩展未来版本以太坊链上数据量的方法。这次升级的目标是确保链上的数据在首次发布时就能被归档方访问。它通过一种叫做数据可用性采样（简称 DAS）的技术来实现这一目标。</p>
+<p>在这篇文章中，我们将研究 Danksharding 中的数据可用性是如何工作的，并对底层技术提出一些修改建议。特别地，我们探讨了一种可能改进数据恢复的小改动：当前的方案需要 75% 的份额来恢复一个区块，而这项修改可能将此界限降低到 25%。</p>
+<h2 id="protodanksharding">Protodanksharding</h2>
+<p>Danksharding 计划在 Protodanksharding（EIP-4844）之后推出。Protodanksharding 将通过引入一种名为“携带数据块交易”的新交易类型，使客户端能够将更多数据写入区块链。最初，这种新交易类型将携带多达四个数据块，每个数据块最大为 128 KB（每个 32 字节的 4096 个字段元素），每个区块可添加多达 512 KB 的额外数据（平均目标为 256 KB），而目前以太坊的区块大小平均为 100 KB。</p>
+<p>这些数据块将被处理得不同：</p>
+<p>（一）它们只会被存储一段有限的时间，比如 30-60 天；</p>
+<p>（二）尽管这些数据是交易数据的一部分，但智能合约无法直接访问这些数据。相反，智能合约只能访问到数据块数据的一个简短承诺，称为 DATAHASH。验证者承担的额外负担似乎是可以接受的：验证者目前存储不到 100 GB 的数据以维护区块链的状态。在 protodanksharding 之后，他们将不得不额外存储 50-100 GB 的数据。</p>
+<p>紧接着将推出 Danksharding。它将通过增加每个区块的数据块数量上限，将客户端可用的数据提高 60 倍。区块将从每个区块 0.5 MB 增长到 30 MB。但是，因为验证者不能被迫存储 60 倍的数据，数据将在它们之间分散，使得每个验证者只存储一小部分数据。然而，他们可以通过数据可用性采样（DAS）协议就他们是否共同存储所有数据达成共识。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/5_5al86my5e4.png" alt="a16z：关于数据可用性抽样和 danksharding 的概述及改进建议"></p>
+<p>这些数据块的定价将通过类似于 EIP-1559 的机制进行，并且将以每字节约 1 个数据-gas 为目标。当前最便宜的替代品 Calldata 的价格为每字节 16 gas。但由于有两个不同的费用市场，这些费用无法直接比较。Roll-up 客户端将从这些升级中受益，因为目前超过 90% 的客户端费用用于支付以太坊数据费。</p>
+<p>其他项目，如 Celestia 和 EigenLayer，也采用 DAS 技术来增加可用的数据空间。这些设计比完全分片的以太坊网络要简单得多。</p>
+<h2 id="数据可用性采样的目标">数据可用性采样的目标</h2>
+<p>我们描述这个方案，假设采用了提议者-构建者分离（PBS）设计：</p>
+<ul>
+<li>
+<p>客户端将其携带数据块的交易提交给区块构建者。</p>
+</li>
+<li>
+<p>区块构建者通过选择 N 个客户端数据块来形成一个区块 B。数据块编号为 i，附带一个由发送它的客户端签名的简短承诺 Ci。让 C =（C1，&hellip;，CN）是区块 B 中所有 N 个签名承诺的列表。</p>
+</li>
+<li>
+<p>区块构建者将他们提议的区块提交给当前的区块提议者（验证者之一）。区块提议者选择其中一个区块并将其原样发布到网络上。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0428/5_3l7sermo35.png" alt="a16z：关于数据可用性抽样和 danksharding 的概述及改进建议"></p>
+<p>挑战在于确保稍后可以重建区块B。为此，构建者将区块在 V 个验证者的大型网络中进行复制。可以要求每个验证者都存储整个区块，但这被认为太昂贵。相反，区块构建者：</p>
+<ol>
+<li>
+<p>使用纠删码将区块B编码成更大的区块E；</p>
+</li>
+<li>
+<p>将区块E分成V个重叠的片段P1，&hellip;，PV；</p>
+</li>
+<li>
+<p>将一对（Pi，C）发送给编号为i的验证者。</p>
+</li>
+</ol>
+<p>每个验证者检查它接收到的片段Pi是否与签名承诺列表C一致。区块构建者为验证者提供证明以方便这些检查。</p>
+<p>有了这个设置，数据可用性采样方案有两个协议：</p>
+<ol>
+<li>
+<p>采样协议在采样验证者和验证者集之间运行。采样验证者将列表C作为输入，并从验证者集合中随机请求区块E的元素。如果采样验证者收到了所有请求的元素，并且都与C一致，它将输出成功。</p>
+</li>
+<li>
+<p>重构协议在重构代理和验证者集之间运行。重构代理将C作为输入，从验证者集请求区块E的元素。一旦收集到超过75%的元素，且所有元素都有效，重构代理计算并输出区块B。 （我们在下面讨论了一种可能减少重建所需元素数量的方法。）</p>
+</li>
+</ol>
+<p>要求是，如果采样验证者输出成功，那么只要输入超过四分之三的元素，重构代理将输出区块B。只要提供足够的元素，即使提供的元素是对抗性选择的，重构也应该成功。</p>
+<p>总之，以下各方参与到Danksharding中：</p>
+<ul>
+<li>
+<p>客户端：将数据块（可以是交易或捆绑包）发送给构建者。</p>
+</li>
+<li>
+<p>构建者：创建区块并将此区块的片段发送给验证者。</p>
+</li>
+<li>
+<p>区块提议者（验证者之一）：将区块发布到网络。</p>
+</li>
+<li>
+<p>采样验证者（任何一个验证者）：运行采样协议，如果协议输出成功，则对区块头进行签名。</p>
+</li>
+<li>
+<p>重构代理：在需要时与整个验证者集合进行交互以重构先前发布的区块。如果验证者回应超过四分之三的有效元素，重构将成功。</p>
+</li>
+</ul>
+<h2 id="纠删编码和多项式承诺">纠删编码和多项式承诺</h2>
+<p>接下来我们解释该方案的两个构建模块：纠删编码和多项式承诺。</p>
+<h3 id="构建模块1纠删编码">构建模块#1：纠删编码</h3>
+<p>纠删编码可以追溯到20世纪60年代，它的产生是为了满足在损耗信道上传输信息的需求。在danksharding中，它被用来防止验证者丢失数据片段。该技术将数据从N个元素扩展到M个元素（M &gt; N），以便可以从扩展数据的任何完整的N个元素中重建原始数据。想象一下，将N个元素（原始数据）编码成M = 2N个元素，并将一个编码元素分给2N个验证者。如果大多数验证者都是诚实的，他们就可以共同重建原始数据。这种技术可以防止任何一半验证者的崩溃故障。通过在下一节中讨论的多项式承诺，可以扩展以防止一半验证者的拜占庭行为。</p>
+<p>以下是扩展的详细过程。要将数据从N个字段元素d1、d2、&hellip;、dN ∈ ?p扩展到M个编码元素e1、e2、&hellip;、eM ∈ ?p，我们对满足p(i) = di（对于i = 1、&hellip;、N）的唯一N - 1次多项式p(x)进行插值。然后在M个点上评估多项式：ei = (i,p(i))，对于i = 1，&hellip;，M。使用拉格朗日插值从M个编码元素中的任何N个元素重建原始多项式p(x)。这种扩展方法称为Reed-Solomon编码或低次多项式扩展。</p>
+<h3 id="构建模块2多项式承诺">构建模块#2：多项式承诺</h3>
+<p>多项式承诺是DAS方案的一个构建模块。它允许方案做两件事：</p>
+<ol>
+<li>
+<p>使用短承诺字符串C，承诺一个?p[X]中的有界度D的单变量多项式p。</p>
+</li>
+<li>
+<p>在给定点x ∈ ?p处打开已承诺的多项式。</p>
+</li>
+</ol>
+<p>更准确地说，给定x,y ∈ ?p，承诺者可以创建一个简短的证明π，证明已承诺的多项式p满足p(x) = y，且其次数最多为D。证明π针对承诺字符串C和值x、y进行验证。这个π被称为评估证明。</p>
+<p>安全性保证承诺与多项式绑定，且敌手不能创建虚假证明。</p>
+<p>这里可以使用一些实用的多项式承诺方案。Danksharding使用KZG承诺方案，该方案需要一个可信设置仪式来生成公共参数（称为SRS），但具有常数大小的承诺和常数大小的评估证明。KZG承诺具有以下几个特点，使其特别适合danksharding：</p>
+<ol>
+<li>
+<p>承诺是同态的：如果C1是对p1的承诺，C2是对p2的承诺，那么C1 + C2是对p1 + p2的承诺；</p>
+</li>
+<li>
+<p>承诺是唯一的：如果两个人独立计算对多项式p的承诺，他们会得到相同的承诺；</p>
+</li>
+<li>
+<p>评估证明是同态的：对于给定的x，如果π1是一个证明，证明p1(x) = y1，π2是一个证明，证明p2(x) = y2，那么π1 + π2就是一个证明，证明（p1 + p2)(x) = y1 + y2。</p>
+</li>
+</ol>
+<p>现在我们可以解释客户端如何承诺其数据块。首先，客户端将数据块解释为m个字段元素d1，&hellip;，dm ∈ ?p的向量，其中m ≤ 4096。接下来，它插入一个单变量多项式p ∈ ?p[X]，其次数最多为m - 1，满足p(i) = di，对于i = 1，&hellip;，m。（技术上说，danksharding使用1、ω、ω2，&hellip;、ωm-1 ∈ ?p作为评估点，其中ω ∈ ?p是m次单位根，以及一个反向位排序；这是出于效率考虑，但为了简单起见，我们在这里不考虑。）最后，客户端构建多项式p的KZG多项式承诺。它对承诺进行签名，并将承诺-签名对发送给构建者。这个过程需要公共参数（SRS），包含4096个群元素。</p>
+<h2 id="数据分散">数据分散</h2>
+<p>接下来，我们解释区块构建者如何编码一个区块并将其分成片段发送给验证者。取某个256位素数p。区块构建者执行以下操作：</p>
+<p>输入：一个danksharding区块B可以包含多达256个数据块（比protodanksharding多64倍），每个数据块是一个?p中的4096个元素的向量。因此，我们可以将一个区块表示为一个256 × 4096的?p元素矩阵。这个矩阵的每一行对应一个客户端的数据块。请注意，每个客户端都向构建者发送一个B的行以及该行的已签名KZG多项式承诺。构建者收集256个已签名的多项式承诺C0，&hellip;，C255，每行一个承诺。</p>
+<p>步骤1：构建者插入一个双变量多项式d(X,Y)，使得d(i,j) = B[i,j]，对于i = 0，&hellip;，255和j = 0，&hellip;，4095。这个双变量多项式在X方向上的次数最多为255，在Y方向上的次数最多为4095。</p>
+<p>步骤2：构建者使用上述纠删编码方法将块在每个方向上扩展两倍。也就是说，它通过设置E[i,j] ← d(i,j)为i = 0，&hellip;，511和j = 0，&hellip;，8191，形成一个512 × 8192的字段元素矩阵E。下图说明了这一点。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/5_9ehm6btfkp.png" alt="a16z：关于数据可用性抽样和 danksharding 的概述及改进建议"></p>
+<p>步骤3：构建者验证每个已签名的Ci是否是对一元多项式di(Y) := d(i,Y)的KZG承诺，对于所有i=0，&hellip;，255。注意多项式di(Y)是B的第i行的插值，因此必须与客户端i提交的多项式相同。构建者拒绝所有Ci格式不正确的数据块。</p>
+<p>现在，构建者使用C = (C0, . . . , C255)作为对区块B的承诺，或更确切地说，是对双变量多项式d(X,Y)的承诺。</p>
+<p>让我们证明C = (C0, . . . , C255)确实是对多项式d(X,Y)的多项式承诺。对于给定的x,y,z ∈ ?p，让我们构造一个评估证明，使验证者确信d(x,y) = z相对于承诺C。由于d(X,Y)中X的次数最多为255，因此只依赖于x的常数λ0，&hellip;，λ255 ∈ ?p满足</p>
+<p>d(x,Y) = λ0 · d(0,Y) + . . . + λ255 · d(255,Y)。</p>
+<p>然后，根据KZG承诺的同态性质可得</p>
+<p>Cx := λ0 · C0 + . . . + λ255 · C255</p>
+<p>是对一元多项式dx(Y) := d(x,Y)的KZG承诺。因此，验证者可以从C中自行构建Cx。让π成为多项式dx(Y)的KZG评估证明，使验证者确信在承诺Cx下，dx(y) = z。这个π是在点(x,y)处对d(X,Y)的所需评估证明。</p>
+<p>这个论证表明C是对d(X,Y)的多项式承诺。值得注意的是，虽然每个客户端独立于其他客户端签名B的一行，但所有客户端签名的集合充当了对d(X,Y)多项式承诺的签名。</p>
+<p>步骤4：在这个DAS方案中，通信的最小单位是一个样本，它是一个16元素的行向量。将512 × 8192元素的矩阵E视为512 × 512样本的方阵。设V为验证者的数量。然后，区块构建者将矩阵E分解为V个重叠片段P1，&hellip;，PV，其中Pi包含E中恰好两行两列的样本，这些样本是从512行和512列的样本中随机选择的。因此，Pi包含2 × 512 × 16 + 2 × 8192 = 9216个?p中的字段元素。这比完整的区块B小得多，B大约有一百万个字段元素。以太坊的验证者数量最少为128（目前约为500,000），因此存在足够的验证者确保整个区块得到充分覆盖。</p>
+<p>步骤5：区块构建者将三元组(Pi, C, πi)发送给验证者i，其中πi是Pi中所有元素的评估证明列表：Pi中两行和两列样本中每个单元格d(x,y)的一个证明。πi中的证明使验证者能够验证Pi中的每个字段元素与承诺C一致。</p>
+<p>在danksharding中，验证者的数量可以大大超过区块中的列或行的数量。因此，某些列和行可能由多个验证者存储。因此，danksharding使用复制和Reed-Solomon纠删编码确保数据可以重构。</p>
+<h3 id="完整区块的重构">完整区块的重构</h3>
+<p>当重构代理需要重构整个区块时，它拥有C，并要求验证者集合将其片段发送给它。作为回应，诚实的验证者i发送(Pi, πi)。重构代理检查πi中的开放证明，如果有效，它接受Pi中的值。因此，拜占庭式验证者无法发送虚假数据。然而，拜占庭式验证者可能拒绝发送他们的数据，不回应重构代理。</p>
+<p>当某些数据丢失时，danksharding需要至少75%的矩阵E来重构区块。由于验证者仅存储完整的行和列，最坏的情况是以下情况，即75% - ε的区块元素已存在，但无法重构缺失的元素。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/5_s9fl1oq1l9.png" alt="a16z：关于数据可用性抽样和 danksharding 的概述及改进建议"></p>
+<p>要理解为什么在这种情况下数据无法重构，请注意存在一个非零的双变量多项式δ(X,Y)，它在整个“存在”的区域上的取值为零，并且在X和Y上具有所需的度限制。因此，在重构过程中，无法判断缺失的白色区域是来自正确的多项式d(X,Y)还是多项式d(X,Y) + δ(X,Y)；两个多项式在现有数据上一致。因此，当缺失的数据遵循这种模式（最多到行和列的排列）时，无法重构缺失的数据。请注意，如果验证者删除了部分数据，从而成为“拜占庭式”，它会删除所有数据，包括两行和两列。</p>
+<p>所以，在最坏的情况下，不到75%的区块是不够的。然而，当75%或更多的区块存在时，通过简单的贪婪算法保证重构成功。</p>
+<p>重构算法：重构通过迭代地找到一个具有至少50%可用元素的不完整行（或列），并使用单变量插值来重构行（或列）的缺失元素。要了解为什么这个过程最终会重构整个区块，让我们假设区块仍然缺少一些元素，但我们找不到可以重构的行或列。这意味着每行和每列要么具有&lt;50%的可用元素，要么已满（具有100%的可用元素）。让我们选择任何不完整的行；它具有&gt;50%的不可用元素，通过这些元素的列也必须具有&gt;50%的不可用元素，这立即意味着区块&gt;25%的不可用，这与原始假设相矛盾。</p>
+<p>为了使一个区块无法重构，对手需要攻击至少15/16的验证者集。在这种情况下，攻击者会选择要擦除的象限，并攻击那些在该象限中至少有一个行或一个列的验证者。</p>
+<h3 id="验证者数据的本地重构">验证者数据的本地重构</h3>
+<p>假设一个诚实的验证者i崩溃并丢失了其数据。当它重新上线时，它希望重构其两行和两列Pi以及开放证明πi。Danksharding允许验证者在不重构整个区块的情况下执行此操作。验证者可以从存储相同确切点集的另一个验证者那里下载其数据，或者从其他验证者那里获取其行（或列）的50%元素，并通过单变量插值重构剩余的行。这个过程不需要进行完整的重构。</p>
+<p>例如，假设一个验证者存储了至少50%的第42列，但不到100%，它需要重构缺失的元素。也就是说，验证者持有对(i,42) ∈ (?, ?)的所有i ∈ S的配对(E(i,42), πi)，其中S是一个集合，满足256 ≤ |S| &lt; 512。为了重构缺失的配对，验证者执行以下操作：</p>
+<ol>
+<li>
+<p>在?域上使用拉格朗日插值构造一个多项式p(x)，其次数为255，使得对于所有i ∈ S，p(i) = E(i,42)。</p>
+</li>
+<li>
+<p>评估多项式以获得缺失的元素：对于所有i ∈ {0..511}\S，E(i,42) := p(i)。请注意，这些点保证位于一个255度的多项式上，因为验证者已经根据承诺C检查过它们。</p>
+</li>
+<li>
+<p>通过在指数上进行多项式插值，用多重取幂获得缺失的证明：对于{0..511}\S中的所有i，计算πi := ∑j∈S πj · Λj,S(i)，其中Λj,S(i)是拉格朗日系数Λj,S(i) := ∏k∈S,k≠j(i – k)/(j – k)。</p>
+</li>
+</ol>
+<p>步骤3利用了KZG多项式承诺具有同态证明的事实。据我们所知，KZG是唯一具有此属性的多项式承诺方案。</p>
+<h2 id="在danksharding中进行数据可用性抽样">在danksharding中进行数据可用性抽样</h2>
+<p>为了确定扩展区块E中是否有足够的数据可用于重构原始区块B，抽样客户端查询E的随机样本。对于每个查询，它得到一个样本（16个元素的行向量）和一个评估证明，以根据承诺C检查样本。如果所有查询都成功回答，客户端将接受数据作为可用。如果客户端总共进行了Q次查询，那么它错误地接受不可用的数据的概率为(3/4)^Q，随着查询次数Q的增加，这个概率呈指数级下降。比率3/4对应于上一节中的75%重构阈值。</p>
+<p>在以太坊网络中，将由三种类型的参与者进行抽样：(i) 无法承担全部存储blob数据的完整节点，(ii) 轻客户端，以及 (iii) 验证者本身。验证者在投票确认区块及其前驱之前，必须证明数据是可用的。每个时代都有固定的验证者集，它们被随机地分成32个委员会。每个委员会被分配到一个时代的12秒时段（每个时代有32个时段）。预计每个时段会确认一个区块。每个验证者都会收到每个区块的片段（2行和2列的样本），即使在验证者不是证明委员会成员的区块上也是如此。此外，每个验证者都会对当前区块和所有之前的区块进行抽样，以确保所有区块在选择一个区块进行依据分叉选择规则的证明之前都是有效的且可用的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/5_ktu6fgst52.png" alt="a16z：关于数据可用性抽样和 danksharding 的概述及改进建议"></p>
+<p>协议保证数据在一个32个时段的时代内，即6分钟内可用。其他方法，如可检索性证明或激励机制，可以帮助确保数据在更长的时间内可用，例如，在blob数据过期之前应该保持可用的30-60天内。</p>
+<p>一个25%重建的提案 在本节中，我们解释如何在只有25%的数据可用的情况下实现重建（与上文中解释的当前danksharding的75%相比）。</p>
+<p>当可用点的分数低于75%时，贪婪的按列和按行的一元插值可能会失败。相反，我们建议通过双变量多项式插值直接进行重建。在这种情况下，即使E的点只有25%可用，也可以实现完全重建。然而，这需要对验证器分配片段的方式进行一些修改。我们建议让每个验证器分配存储：</p>
+<p>一个完整的行（512个样本），一个完整的列（512个样本），以及 一个随机（或伪随机）分布在矩阵E周围的1024个样本的集合。 每个验证器的总存储需求保持不变，但现在即使少于75%的样本可用，也可以进行重建。此外，多个验证器存储相同的点集，因此，如果任何验证器需要重建其片段，它可以向存储完全相同片段的任何其他验证器请求。如果没有这样的验证器可用，它可以进行局部或完全重建以获取其片段。</p>
+<p>这种混合方案在比辛特验证器数量较少的情况下允许便宜的重建，使得E的样本超过75%可用。在不愉快的情况下，当拜占庭验证器的数量变得过高时，由于样本在矩阵E中的随机分散，可以从只有25%的样本中使用完全双变量插值进行数据重建。</p>
+<p>双变量插值可以简单地通过求解多项式系数上的线性方程组来实现。这种简单方法需要构建一个220 × 220场元素的插值矩阵（32TB）。这相当大，但并非不可行。然而，还有更好的方法可以使用。（例如，参见P.J.Olver-2016的调查报告。）虽然双变量插值的成本不菲，但它只在恢复点的分数低于75%时需要，可以作为一种安全措施。为了启用此安全措施，danksharding需要稍微修改以按照上述方式将片段分配给验证器。</p>
+<h2 id="带有ipa承诺的danksharding">带有IPA承诺的Danksharding</h2>
+<p>前述构造的主要缺点是KZG多项式承诺方案需要可信设置。否则，该方案非常快速。然而，可信设置通常需要大量的工作和协调（我们关于链上KZG设置的工作可以帮助简化未来项目的仪式）。一些其他多项式承诺方案不需要可信设置（例如Bulletproofs），尽管它们没有用于验证器在重建其需要存储的数据时的效率所需的同态证明（正如Vitalik所指出的）。</p>
+<p>然而，可以修改构造，以避免同态证明的需求并仍然具有轻量级验证器。高层次的思路是让区块构建者计算区块矩阵E的列的承诺。通过这种方法，验证器不需要重建列证明；他们只需自己完全重建列，然后根据列承诺从头开始重新计算证明。通过共识，验证器将确保他们在相同的列承诺集上达成一致。</p>
+<p>具体而言，步骤1-4与上文中解释的danksharding相同。然而，步骤5是不同的。</p>
+<p>步骤5：区块构建者计算B的列的多项式承诺：将它们表示为T =（T0，T1，&hellip;，T4095），每个Tj都是对d（X，j）的承诺（具体来说，它可以是Pedersen向量承诺，针对d（X，j）的系数向量）。接下来，它创建一个证明，证明C和T承诺了相同的矩阵，方法如下。区块构建者选择一个（伪）随机点（x̂，ŷ），使用承诺的同构性来插值计算列承诺Tŷ，得到一元多项式d（X，ŷ）以及行承诺Cx̂，得到一元多项式d（x̂，Y），并创建两个证明：πx̂ - 针对Cx̂的d（x̂，ŷ）的多项式求值证明，以及πŷ - 针对Tŷ的d（x̂，ŷ）的多项式求值证明。点（x̂，ŷ）对所有验证器是通用的，可以从随机信标输出中获得，或者用Fiat-Shamir变换生成伪随机。然后，区块构建者向验证器i发送（Pi，C，T，πx̂，πŷ，d（x̂，ŷ）），其中Pi是E的两行和两列。在此构造中，构建者不计算任何证明。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/5_9no0ser4w0.png" alt="a16z：关于数据可用性抽样和 danksharding 的概述及改进建议"></p>
+<p>验证器验证证明πx̂，πŷ，以捕获恶意区块构建者生成错误的列承诺T。然后，验证器重新提交Pi中的两行和两列，并验证它们是否与C和T中的相应元素匹配。如果Pi中的行（表示为x）位于原始矩阵B的范围内：x ∈ {0..255}，验证器只需验证承诺是否与C中的相应元素Cx匹配；但是，如果行位于扩展部分：x ∈ 256..511，验证器首先通过C中的承诺插值以获得Cx：</p>
+<p>Cx := λ0 · C0 + . . . + λ255 · C255</p>
+<p>请注意，插值是可能的，因为IPA承诺（尽管它们的证明不是）是同态的。验证器以类似的方式针对T验证Pi的列，并在需要时进行插值。</p>
+<p>在此构造中，区块构建者无需为验证器计算证明。验证器可以自己计算所有证明。然而，找出一种高效算法一次计算大量证明（类似于KZG的方式，或使用Vitalik的IPA思想）是一个有趣的研究问题。</p>
+<p>正如我们所看到的，这种方法的主要瓶颈是对采样客户端的效率损失，因为基于IPA方案的证明大小是对数的（与KZG的常数大小相反）。此外，采样客户端可能需要下载列承诺，除了行承诺之外，导致通信开销。然而，我们认为这是一个值得进一步探索的有前景的方向。</p>
+<p>使用Merkle承诺的Danksharding Vitalik最近探讨的另一种可行方法是使用Merkle承诺而不是多项式承诺来避免可信设置。Merkle承诺不是多项式承诺方案，因此与擦除编码一起使用更具挑战性。区块构建者将擦除编码数据，并通过Merkle树根对扩展数据进行承诺。主要挑战是在不下载全部数据的情况下检测错误扩展的数据。欺诈证明可用于解决这个问题，但这依赖于一个客户端能下载全部数据，检查它是否正确擦除编码并正确承诺，并在发现问题时通过提供欺诈证明发出警报。</p>
+<p>或者，可以使用FRI证明来检查Merkle树的叶子是否接近Reed-Solomon码字（即检查Merkle承诺基础数据是否正确擦除编码）。采样客户端将检查FRI证明，并通过请求它们的Merk尔证明来对足够比例的叶子进行采样，以确保数据可用且可以重建。</p>
+<p>数据可用性采样及其具体实例danksharding将降低数据存储成本，从而实现更具可扩展性和更便宜的区块链。DAS的编码方面是一个潜在的研究丰富领域，有许多可能的探索方向。我们提出了一种可能的途径：改进重建协议以使用较少的样本（25％而不是75％）。另一个令人兴奋的方向是探索不需要可信设置的替代承诺方案。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50260/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">3分鐘一個大片！視頻版Midjourney上線iPhone，網友實測太絢了</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50266/">
+                <span class="next-text nav-default">a16z：巨額計算成本壓力下，不同企業該如何選擇 AI 基礎設施？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#protodanksharding">Protodanksharding</a></li>
+    <li><a href="#数据可用性采样的目标">数据可用性采样的目标</a></li>
+    <li><a href="#纠删编码和多项式承诺">纠删编码和多项式承诺</a>
+      <ul>
+        <li><a href="#构建模块1纠删编码">构建模块#1：纠删编码</a></li>
+        <li><a href="#构建模块2多项式承诺">构建模块#2：多项式承诺</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据分散">数据分散</a>
+      <ul>
+        <li><a href="#完整区块的重构">完整区块的重构</a></li>
+        <li><a href="#验证者数据的本地重构">验证者数据的本地重构</a></li>
+      </ul>
+    </li>
+    <li><a href="#在danksharding中进行数据可用性抽样">在danksharding中进行数据可用性抽样</a></li>
+    <li><a href="#带有ipa承诺的danksharding">带有IPA承诺的Danksharding</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

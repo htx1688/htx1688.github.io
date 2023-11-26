@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文作者以知名ZKRollup项目Aztec为例，以近期Aztec Labs提出的名为B52、Fernet的2个提案为切入点，为广大读者解析ZKR如何实现定序器节点的去中心化。" />
+<meta name="keywords" content="AZTEC, Rollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55922/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？" />
+<meta property="og:description" content="本文作者以知名ZKRollup项目Aztec为例，以近期Aztec Labs提出的名为B52、Fernet的2个提案为切入点，为广大读者解析ZKR如何实现定序器节点的去中心化。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55922/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？">
+<meta itemprop="description" content="本文作者以知名ZKRollup项目Aztec为例，以近期Aztec Labs提出的名为B52、Fernet的2个提案为切入点，为广大读者解析ZKR如何实现定序器节点的去中心化。"><meta itemprop="datePublished" content="2023-07-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6356">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"/>
+<meta name="twitter:description" content="本文作者以知名ZKRollup项目Aztec为例，以近期Aztec Labs提出的名为B52、Fernet的2个提案为切入点，为广大读者解析ZKR如何实现定序器节点的去中心化。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-28">
+      2023-07-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6356 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：0xhhh，EthStorage；编译：Faust，《极客web3》</p>
+<p>导语：自Rollup成为显学以来，定序器Sequencer去中心化始终是以太坊/Celestia社区的关注焦点，同时也是Layer2研发工作中难以逾越的大山。对此，不同的Rollup方案均提出过关于节点去中心化的设想，为这一话题提供了无比广阔的想象空间。</p>
+<p>本文作者以知名ZKRollup项目Aztec为例，以近期Aztec Labs提出的名为B52、Fernet的2个提案为切入点，为广大读者解析ZKR如何实现定序器节点的去中心化。</p>
+<h3 id="提案b52permissionless的定序器方案">提案B52：Permissionless的定序器方案</h3>
+<p><strong>提案B52打算实现以下目标（理想情况下）：</strong></p>
+<p>1. 去中心化的sequencer网络，由L2节点自己选举每一轮的proposer</p>
+<p>2. 去中心化的prover网络，prover节点硬件要求低</p>
+<p>3. Rollup整体具备很好的抗审查性.</p>
+<p>4.L2产生的MEV价值由L2节点获取</p>
+<p>5. L2区块被提交到DA层时，可以获得比较有效的最终性Finality，不可逆转的finality则要等ValidityProof（有效性证明）提交完毕</p>
+<p>6. L2 Token可以拥有不错的经济模型</p>
+<p>7. L2区块和交易数据都在L2的p2p网络中传播</p>
+<p>8. L2继承L1的安全性</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_d7dz7jbmdt.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p><strong>该方案将整个L2出块流程划分成三个时间阶段：</strong></p>
+<ol>
+<li>
+<p>Block Proposal Window(BPW)</p>
+</li>
+<li>
+<p>BlockAcceptance Window(BAW)</p>
+</li>
+<li>
+<p>State advances</p>
+</li>
+</ol>
+<p>其中，BPW（区块提议）阶段是多个定序器Seuqnecer提出不同的区块并竞争、Prover选择某个备选区块给出投票的过程。</p>
+<p>BAW（区块采纳）是Prover给区块构造有效性证明Validity Proof，并将其提交的过程。</p>
+<p>Block Proposal Window（区块提议阶段）：</p>
+<p>BPW可以再细分为<strong>Block Proposal, Block Voting, Aggregation</strong> 三个阶段。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_ks0ueuhhcu.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_lryn63fbrb.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p>Block Proposal(BP)阶段中任何人都可以收集交易，并广播自己的BP内容。BP内容会包含三个部分: txs order hash, prover reward percentage, burn token amount</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_3wfsv27mt5.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p><strong>txs order hash:</strong>  Proposer 从L2的交易池(mempool) 中选择最有价值的一批交易并排序，然后将这批交易的哈希值放进自己构建的区块中。</p>
+<p><strong>prover reward percentage:</strong>  Sequencer分享给Prover的区块奖励百分比</p>
+<p><strong>burn token amount:</strong>  Proposer提议销毁的L2 Native Token数量，接着它将自己提出的BP发送到L2 p2p网络中</p>
+<p><strong>Block Voting 投票阶段：</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_rkus2epdqo.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p>Prover 在p2p网络中接收到不同Proposer提出的BP后，会投票给能让自己获得最多reward的BP。不过投票的组成很特殊：</p>
+<p><strong>Vote={BlockHash, Index of Proof Tree}</strong></p>
+<p>BlockHash是Prover要投票的Proposal的哈希，而Index of Proof Tree则是Prover要参与构建的Proof Tree的叶子索引值（后面会解释）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_u71cs2jvfk.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p><strong>Aggregation聚合:</strong> Proposer在L2 p2p网络中收集Prover们针对BP的投票，将其聚合并放进BP中，提交到L1上（每个BP一般只包含与自己有关的投票记录）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_k0jo0azhkq.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p><strong>在此，需要强调BP被选中并纳入Rollp账本的先决条件:</strong></p>
+<p><strong>拥有最高的分数:</strong></p>
+<p>SCORE(y) = NUM_PROVERS (x)^3 * BURN_BID(z)^2`</p>
+<p>NUM_PROVERS (x)是该BP获得的Prover投票数量，BURN_BID是该BP所提议销毁的L2 Token数量。由于BURN_BID越高，BP提议者最后获得的奖励越少，所以这个数值要设置得当。</p>
+<p>同时，该BP需要在Block Proposal Window结束前被提交到L1上，对应的有效性证明Proof要在Block Acceptance Window结束前被上传到L1。</p>
+<p>需要注意:BP的分数计算中，投票数量占的比重最大，其次才是burn token的数量。同时，B52方案允许多个proposer(其实就是sequencer)针对一个有效的BP名额展开竞争</p>
+<p>B52方案仅需要Proposer（sequencer）在自己的BP中指定burn token的数量（类似于EIP1559的方式）而无需事先stake token，这可以让网络更加permissionless（无准入许可），同时也有利于L2的原生Token产生通缩。</p>
+<p>此外，BP中不包含完整的交易数据，只包含交易序列的哈希，道理类似于以太坊PBS方案，旨在避免MEV被其他Proposer窥探并抢跑。</p>
+<p><strong>Block Acceptance Window（区块采纳阶段）详解：</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_d7dz7jbmdt.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_kk9dsaly9i.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p>在Block Proposal Window结束后，Prover需要reveal揭示他们的BP对应的完整交易数据。Prover投票的BP如果被选中的话(分数最高，可通过L1合约查询)，它们就需要构造投票时给出的Index of Proof Tree所对应的Sub Proof Tree。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_u71cs2jvfk.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p>假设Aztec的区块包含2^13=16384的交易数量，并且有2048个prover，那么每个prover构造2^3=8笔交易组成的sub proof tree.然后prover把自己构造的sub proof tree广播到L2 p2p网络中。proposer接收之后，会把所有的sub proof tree聚合成一个block proof。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_wkyji7yvkp.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p>接着Propsoer将聚合的proof提交到L1的Rollup合约，合约会验证这个proof以及对应状态转换结果的正确性。这里要注意，Prover如果故意不提交proof的话，不仅无法获得Proposer许诺的区块奖励分红，还会被slash，因为要成为Prover是需要提前质押Token的。因此，与Proposer（Sequencer）不同，Prover并不是Permissionless的。</p>
+<p><strong>State Advances（状态推进阶段）详解：</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_s04lm734cb.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p>在 Block Acceptance Window结束之后，Rollup合约会选择一个分数最高的区块纳入Rollup账本，并且把区块奖励Reward按照Proposer（Sequencer）事先声明的比例，分别发送给Proposer和Prover。</p>
+<p><strong>以上便是Aztec的B52方案。但本文作者认为，B52提案存在一些潜在问题：</strong></p>
+<p>问题一: <strong>假如一个分数最高的区块的validity proof是不完整的</strong> 。提案中给出的解决方法是，假如Proposer只提供了50%的proof，那么他也只能获得50%的区块奖励，从而确保Proposer没有动力故意不提交完整的proof。同时Prover自己也可以直接向合约直接提交proof。</p>
+<p>按照提案的叙述，是可以接受一个区块没有完整交易的validity proof。这点其实是不合理的：因为:zkrollup都是在给出validity proof的同时，才声明这个区块对应的新状态有效。</p>
+<p>如果proposer最后提交到L1的聚合proof缺失了某个交易的proof，很显然在这笔交易之后发生的所有交易的状态转换证明都是不成立的(因为交易是顺序执行并且有状态依赖的)，我们也就无法确认这个区块对应的新状态是有效的。</p>
+<p>因此这个时候，合理的方式应该是进入无限等待的Block Acceptance Window，直到所有交易的proof都提交完成。</p>
+<p>问题二:<strong>假如得分最高的区块是非法区块(B52方案里也没有解释这点)。</strong> BP仅仅包含交易序列的哈希，所以恶意的proposer实际上可以故意构造有问题的交易,比如双花交易。那么这个时候，实际上需要在L1合约增加一个任何人都可以提交illeagal proof的函数, 这个illeagal proof用于证明得分最高的BP是一个非法区块。</p>
+<p>并且这种举报应该是有奖励的，我们可以把proposer 发送到合约中的burn token都奖励给提交illegal proof的举报者节点。</p>
+<p><strong>有趣的思考：</strong> 关于叔块和多余的Prover Work: B52方案实际上会在每轮分数最高且有效的BP出现后，把这一轮出现的其他BP（已经提交完整proof）作为叔块，分配一定的叔块奖励。</p>
+<p>这实际上沿用了ETH POW共识机制的做法，为了避免算力过度集中，需要分配一部分出块奖励给未被采纳的区块提出者（矿工），以保障小矿池/个体矿工的利益，避免算力被大矿池垄断。因此采用以太坊表现不错的叔块机制也是一个很聪明的选择。</p>
+<p>B52提案在Rollup去中心化方面的意义：<strong>Proposer是去中心化且不需要质押的，准入门槛低</strong> ；但是因为需要自己Build最有价值的区块，以及需要收集其他Prover的投票，并聚合所有Proof，实际上Proposer的硬件门槛没有提案中叙述的那么低（比如带宽可能不会很低）。</p>
+<p>所以，最终还是会成为一个比较中心化的网络，类似Mev-Boost Builder，因为最终能出块的proposer往往也是最擅长捕捉MEV的Block Builder。</p>
+<p>同时，B52方案里的Prover需要质押资产，但因为仅仅需要生成sub tree proof，相比于那些需要完整生成整个block proof的方案来说，<strong>Prover的去中心化程度会更好（硬件要求可以放低了）。</strong></p>
+<p><strong>活性Liveness：</strong> 总体的网络Liveness是不错的，因为L2有自己的p2p网络来广播交易和投票/BP，并且Sequencer和Prover都比较去中心化。但是需要解决我们上面提到的两个问题，一个是得分最高的区块一定是合法的区块，第二个是需要等待完整的block proof提交到L1才能进入一个新状态。所以需要一个更有效的激励机制，避免整个Rollup网络由于缺失某一部分tx proof而无法正常工作（停机）。</p>
+<p><strong>抗审查性Censorship Resistance：</strong> 如果我们能保证任何人都能发布区块提议BP，并且保证不只是Proposer可以提交block proof,那么网络会有很好的抗审查性 。</p>
+<p><strong>最终性Finality：</strong> L2的finality 跟网络的liveness息息相关，因为最终的verified finality 还是需要等待Block Proof的提交，但实际上你也可以相信一个得分最高的BP对应的区块内容(只要它里面不包含恶意交易)。</p>
+<p>这个区块会在Block Acceptance Window 开始时被揭示reveal，意味着作为用户，仅仅需要等待一个Block Proposal Window的时间，你提交的交易所在的区块就可以被采纳。</p>
+<p><strong>继承L1安全性：</strong> 作为一个通过提交validity proof来更新状态的L2，是可以继承L1的安全性。</p>
+<h3 id="提案fernet引入vdf选拔合法proposer">提案Fernet：引入VDF选拔合法Proposer</h3>
+<p><strong>Fernet 方案简介:</strong> 通过VDF在每轮出块周期内，为Committee（就是Sequencer节点集合）中不同的节点设定一个预估的分数，最终分数最高的Sequencer提议的区块会成为有效块。</p>
+<p><strong>首先，如何加入Committee？实际上需要在L1质押16个ETH，</strong> 并且在质押操作完成后等待4个L1区块后，加入Sequencer Committee。至于退出Sequencer Committee，则需要调用L1合约里的Unstake函数，之后再过3天才能拿回自己质押的剩余金额。</p>
+<p>然后，什么是VDF？Verifiable Delay Function就是可验证延迟函数，该数学函数满足严格的串行执行特性，它会执行一些计算步骤，并至少会消耗一段可预估的时间。我们把VDF算出来的数值记作Score，它满足均匀正态分布，因此<strong>当Sequencer算出VDF Score后，就可以判断自己被选中为合法Proposer的概率有多大。</strong></p>
+<p>Sequencer的VDF计算如下:</p>
+<p>Score = VDF( privatekey , public inputs )</p>
+<p>public inputs = { current block number , randao }</p>
+<p>randao是一个随机数，用来防止Sequencer提前计算未来所有区块高度下自己的VDF Score</p>
+<p><strong>Fernet整个流程主要分为3个阶段:</strong></p>
+<p>1. Proposal Phase 2. Proving Phase 3. Finalization</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_cfgbsti2iu.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p><strong>Proposal Phase:</strong> PROPOSAL_PHASE_L1_BLOCKS = 2 Ethereum blocks （该阶段会维持2个L1 block的时间）</p>
+<p>这个阶段开始，每个Sequencer都会用VDF算出自己在当前出块高度下对应的VDF Score。<strong>如果Sequencer认为自己的VDF Score很有可能赢得这次区块的出块权(假设Score满足正态分布)</strong> ，那么他会提交一个Proposal到L1的Rollup合约。Proposal包含：交易序列的哈希、指向哪个之前的L2区块。</p>
+<p>unproven block:只提交了Proposal到Rollup合约的区块block contents。接着，<strong>Sequencer需要把unproven block对应的 block contents 以及proof of VDF 一起发送到L2的p2p网络中。</strong></p>
+<p>ProvingPhase:PROVING_PHASE_L1_BLOCKS= 50 L1 blocks(该阶段会维持50个L1区块，大概10 min)</p>
+<p>Prover从L2的p2p网络中接收所有Block Contents中对应的交易，并会为VDF Score更高的区块构建Proof。Proof的构建也是采取多个Prover并行协作的方式(类似B52方案) 。</p>
+<p>因此需要Sequencer在最后将多个不同的交易对应的Proof聚合成一个Block Proof(包含VDF Proof)，提交到L1的Rollup合约。任何人都可以将已经提交Block Proof的Block Contents提交到Rollup合约上。</p>
+<p><strong>Finalization:</strong> 需要提交一笔L1的交易来Finalize区块，一个最终可以被Finalize的区块需要满足:提交了Block Contents和Block Proof，指向的前一个区块必须是Finalize的。在满足以上条件的基础上，还要拥有最高的Score。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0728/19_pi0qt0k96b.png" alt="解析Aztec Labs的B52提案：ZK-Rollup如何实现定序器节点的去中心化？"></p>
+<p>流水线出块机制:需要注意的是，Fernet采用的是流水线出块机制.当第N块的Proposal阶段结束时，第N+1个块的Proposal就开始了（Aptos等公链也有类似的做法）。但对于第N+1个块来说，它需要等待第N个块Finalize后，它才能提交L1的Final Block交易，并且验证通过成为Final Block 。</p>
+<p><strong>潜在的攻击维度:</strong> 假如VDF Score最高的Sequencer故意不在L2 p2p中广播Block Contents, 那么有可能导致区块重组reorg。</p>
+<p>reorg的L2区块数量计算:1+PROVING_PHASE_L1_BLOCKS / PROPOSAL_PHASE_L1_BLOCKS =1+50/2=26块</p>
+<p>解决方式:增加叔块机制，避免每个L2slot（出块时隙）只有一个完整的候选区块。</p>
+<p>Fernet在去中心化上的意义：Sequencer通过质押16个ETH加入Sequencer Committee，准入门槛并不高（但也不低）。Prover不需要任何质押，但假如Prover不生成Proof也没有惩罚。这与B52方案基本是相反的。</p>
+<p><strong>活性Liveness：</strong> 整体网络的 Liveness 是可以保证的，因为VDF+叔块机制可以保证每一轮不止有一个出块者。</p>
+<p><strong>MEV：</strong> MEV的考量是最特殊的，该方案计划引进PBS，这样作为Sequencer计算出一个高分的VDF Score后，就可以直接找Block Builder构造一个更有价值的区块。</p>
+<p><strong>抗审查性Censorship Resistance：</strong> Fernet 也将采用跟以太坊一致的PBS机制，因此本质上 Fernet 抗审查的问题等价于以太坊 PBS 的抗审查问题。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55902/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">解析 Vertex 协议：填补 DEX 与 CEX 之间的业务空白</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55907/">
+                <span class="next-text nav-default">借给别人比特币虚拟货币 可以起诉吗？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#提案b52permissionless的定序器方案">提案B52：Permissionless的定序器方案</a></li>
+        <li><a href="#提案fernet引入vdf选拔合法proposer">提案Fernet：引入VDF选拔合法Proposer</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

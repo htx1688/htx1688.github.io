@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          三分钟了解NostrSwap：Nostr生态首个Dex实现BRC-20零Gas 交易 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="以兼顾去中心化和高性能的 Dex 为起点，以 NRC-20 为核心， NostrSwap 所描绘高效、便捷、互通且低门槛金融生态画卷正徐徐展开。" />
+<meta name="keywords" content="項目, NostrSwap, Nostr" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/52329/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="三分钟了解NostrSwap：Nostr生态首个Dex实现BRC-20零Gas 交易" />
+<meta property="og:description" content="以兼顾去中心化和高性能的 Dex 为起点，以 NRC-20 为核心， NostrSwap 所描绘高效、便捷、互通且低门槛金融生态画卷正徐徐展开。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/52329/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="三分钟了解NostrSwap：Nostr生态首个Dex实现BRC-20零Gas 交易">
+<meta itemprop="description" content="以兼顾去中心化和高性能的 Dex 为起点，以 NRC-20 为核心， NostrSwap 所描绘高效、便捷、互通且低门槛金融生态画卷正徐徐展开。"><meta itemprop="datePublished" content="2023-06-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3774">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="三分钟了解NostrSwap：Nostr生态首个Dex实现BRC-20零Gas 交易"/>
+<meta name="twitter:description" content="以兼顾去中心化和高性能的 Dex 为起点，以 NRC-20 为核心， NostrSwap 所描绘高效、便捷、互通且低门槛金融生态画卷正徐徐展开。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">三分钟了解NostrSwap：Nostr生态首个Dex实现BRC-20零Gas 交易</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-01">
+      2023-06-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3774 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>市场的本质在于交易。回溯市场发展演变就像是在看一本「人类如何实现更高效交易」的编年史。区块链最出圈应用场景 DeFi 的几次迭代也围绕着「更高效交易」展开。</p>
+<p>然而，随着 BRC-20 热度的飙升，我们惊喜于市场新叙事涌现的同时，激增的交易量造成的拥 堵网络和高昂费用，也再次撕开区块链遮羞布：在去中心化的前提诉求下，我们如何实现所渴求的「更高效交易」？</p>
+<p>当问题出现，行业总不乏一些勇于探索创新的先锋，基于 Nostr 协议构建的生态首个 Dex NostrSwap 便是其中之一。在洞察市场诉求实现 BRC-20 零 Gas 交易之后，NostrSwap对于交易的尝试并未止步，以兼顾去中心化和高性能的 Dex 为起点，以 NRC-20 为核心， NostrSwap 所描绘高效、便捷、互通且低门槛金融生态画卷正徐徐展开。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0601/6_jkmq8sq9l6.png" alt="VD71BLyqEVSyJO1NyMZ5x6Z1w0yKmRbrvYNiZoRL.png" title="7045334"></p>
+<p><strong>NostrSwap：一个兼顾去中心化与高性能的 Dex</strong>  </p>
+<p>作为基于 Nostr 协议构建的生态首个 Dex，NostrSwap 汲取了 Nostr 协议灵活可拓展的强大 优势，创新性推出了一个完全去中心化的链下 P2P 市场，为全球加密社区用户带来高效、丝 滑、低成本的交易体验。 </p>
+<p>交易所堪称市场基石，但经历过 FTX 的大厦崩塌，后续影响发酵至今，加密社区对于交易所 的感情愈发复杂： </p>
+<p>中心化交易所（Cex）拥有媲美 Web2 的流畅体验，且高效的流动性带来了足够的交易深度，但 用户并不完全掌握自己的资产，信任黑箱下，我们对于资金安全、利益交换、信息泄露的担忧 从未停止；去中心化交易所（Dex）虽然拥有匿名性、安全性、交易透明等优势，但去中心化引 起的交易速度慢、深度不足、成本高等问题，依旧将大多数追求体验的用户拒之门外。</p>
+<p>这似乎是个「鱼与熊掌无法兼得」的悖论，但凭借 5 年 DeFi / CeFi / 交易所丰富运营经验， NostrSwap 却通过机敏的市场判断，推演出两全其美的解决方案：链下交易，链上结算。</p>
+<p>当交易发生时，用户的原始代币将在链上的 NostrSwap 智能合约中锁定，并桥接到链下的 Nostr 协议；NostrSwap 使用 Nostr 协议作为链下通信层传输指令消息，基于 Nostr 协议铸造 代币并将代币分发到用户相应的 NostrSwap 上的账户地址中。当用户想要退出时， NostrSwap 销毁用户在 Nostr 协议中的代币并解锁用户的链上代币。</p>
+<p>在去中心化方面：NostrSwap 所进行的每一笔交易都由节点执行，并由审计员审计，且所有交 易细节都存储在 Nostr 协议的中继端。此外，NostrSwap 通过 IPFS 协议实现数据的存储和快 速高效检索，以进一步实现去中心化和公开透明，保护用户隐私及资金安全。 </p>
+<p>在性能方面：由于 Nostr 协议是一种链下去中心化协议，其 5,000 + TPS 的优异性能不仅使得 基于 Nostr 协议的交易能够高效执行，且除了充值和提现功能外，所有交易都无需 Gas。以 BRC-20 为例，NostrSwap 交易产生的最低费用为 0.1%，远低于其他解决方案数十倍。 </p>
+<p>值得一提的是，在保证去中心化与性能的基础之上，NostrSwap 的高度可拓展性还进一步消 除了摩擦，实现了前所未有的多链聚合：不管是 BTC、ETH、Layer2 还是其他区块链，用户都 能够轻松的桥接到 NostrSwap，聚合多链资产，释放长尾活力，提高资金流动，实现更高效的撮合。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0601/6_vg6hdfg643.png" alt="N1N9dCG0Li7tOZasEpgr5uEjg4hCfPBM22pog8lC.png" title="7045331"></p>
+<p><strong>Nostr 协议与 NostrSwap 之间的互相成就</strong>  </p>
+<p>提起 Nostr 协议，很多人会先入为主的想到社交，但社交只是其应用场景之一，在更广泛的应 用场景 Nostr 协议拥有更广阔的想象空间，NostrSwap 敏锐的捕捉到了这一点。 </p>
+<p>Nostr 协议由两部分组成：客户端 Client 和中继端 Relay。客户端用于签名、验证信息，由用户 运行。中继端可以抓取、存储任何与它链接的客户端的信息，并且转发给其他客户端，但中继 端之间互不通信。相比较于其他协议，Nostr 优势在于：</p>
+<p>● 简单易注册：任何用户都可以创建一对公私钥，降低用户进入门槛； </p>
+<p>● 去中心化： 客户端发布信息可选择存储至多个中继端，不依赖于任何单一中继端，且中继端只负责存储、传输，用户也无需信任中继端； </p>
+<p>● 高度重视隐私和安全：所有数据都经过加密并存储在去中心化服务器，且只有用户可 以控制他们的数据； </p>
+<p>● 极强的可拓展性：虽然 Nostr 不使用区块链，但理论上它可以支持任何区块链； </p>
+<p>● 高效：相比较现存区块链解决方案，Nostr 协议能够实现更高效的数据传输。 对于想要为用户提供安全、高效、低成本交易体验的 NostrSwap 而言，拥有轻量级、抗审查 且具有高度互操作性优势的 Nostr 协议是 NostrSwap 实现自身发展愿景的不二之选。</p>
+<p>另一方面，目前的 Nostr 生态金融基础设施仍有待完善，而缺少 Token 和交易的产品支持使 得生态激励这一重要板块缺失，而 NostrSwap 弥补了这方面的空白。 </p>
+<p>虽然 Nostr 协议整合了比特币闪电网络，但由于比特币受众及功能限制，以及打赏这一形式的 局限性，所以闪电网络并不认为是理想的生态支持。NostrSwap 通过 NRC-20 协议帮助解决 这一困境。 通过 NRC-20，来自BTC、ETH、Layer2等其他链的资产能够以规范的方式流通进入Nostr生 态，并通过NostrSwap 交易平台进行更好的交互。</p>
+<p>NostrSwap与Nostr 协议的结合，形成了产品与协议之间相辅相成的典范：NostrSwap 为 Nostr 生态繁荣带来更多可能性；而因为有了 Nostr 协议，NostrSwap 的理想照进现实，让更 多加密社区享受到高效、便捷、互通且低门槛交易体验。</p>
+<p><strong>从 NRC-20 开始：感受 NostrSwap 卓越交易体验</strong>  </p>
+<p>我们知道，在社区还在困顿于比特币网络的拥堵和高成本时，NostrSwap 已经实现 BRC-20 零 Gas 交易。对于 BRC-20 玩家而言，这是效率、成本与交易体验的双重飞跃。 </p>
+<p>首先，Nostr 协议性能高于比特币数百倍，NostrSwap 实现了「更高效交易」；其次，链下交易， 链上结算的方式也让交易费用从 1.6% 降低至 0.1%；最令人惊喜的是，NostrSwap 还可以轻 松地将 ERC-20 代币兑换为 BRC-20 代币，且用户可以通过 Nostr 协议前端（包括 Damus.io、 Amethyst、Snort.social 和 Iris.to 等热门应用）的「聊天交易」功能，以聊天的方式轻松交易，这 大大降低了交易操作门槛，实现了更无缝直观的交易体验。</p>
+<p><strong>谈及这一系列质的飞跃，NRC-20 功不可没。</strong>  </p>
+<p>简单来说，NRC-20 代币是使用 Nostr 协议创建的可替代代币技术标准，由 NostrSwap 支持的 NRC20Dao 发布。就像 ERC-20 的出现引发了以太坊生态的大爆发一样，NRC-20 同样对于 Nostr 生态有着不可忽视的作用。</p>
+<p> NRC-20 相当于 Nostr 生态资金入口，它兼容 ERC-20 和 BRC-20，大量 Token 可以通过 NRC-20 标准进入 Nostr 生态；同时它打通资产交互各个环节的桥梁，用户可以将手上来源于 以太坊上的 USDT 转为 NRC-20 代币并进行 BRC-20 交易；更有很多体验过 NRC-20 「聊天 交易」功能的用户称其为加密资产交易的首选，因为它不仅使用简单，性能卓越，而且零交易 门槛，轻松打破人们对于去中心化交易的所有偏见。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0601/6_jk40lg3m1v.png" alt="bzI8jGX7NeqV2R8rgyUikC8XQAObQWTfpKBfHdOm.png" title="7045332"></p>
+<p>作为 NRC-20 的发起者，未来 NostrSwap 团队将继续以技术、资助等方式支持 NRC-20 的维 护与开发，并将继续秉承「开源Dao」的方式继续运行，致力于推动其完全开源和社区化。</p>
+<p>当然，以 NRC-20 为核心，NostrSwap 一系列开发工作也在紧锣密鼓的进行中：</p>
+<p>2023 年下半年，NostrSwap 将致力于构建基于 NRC-20 的 TestNet 节点，以进一步测试、优 化功能点。此外，NostrSwap 还将建立基于 NRC-20 的点对点 MarketPlace，利用中央限价订 单簿 (CLOB) 模式，允许用户绕过中间方并以低成本、高效率的方式直接交互，以进一步整合 各个区块链之间的流动性。不久的将来，NostrSwap 还将加速构建基于 NRC-20 的 AMM Swap 协议等模块，为用户带来卓越体验。 </p>
+<p>在功能模块逐渐完善之后，在低门槛、低成本、高效率、强交互的基础上，NostrSwap 还将规 划构建 Nostr 生态首个完全去中心化永续合约交易所，发挥可拓展性优势，整合多链资源，释 放长尾资产活力。 </p>
+<p><strong>结语</strong></p>
+<p>如何打破去中心化、性能、安全这一区块链不可能三角，社区历经多轮迭代，Nostr 协议崭露头角。</p>
+<p>毋庸置疑的是，作为一个让 Elon Musk 感到害怕的去中心化协议，凭借轻量级、可拓展、抗审 查和高度去中心化等优势，Nostr 协议不仅斩获了 1800 万用户，更让我们对其生态的未来充满期待。</p>
+<p>更毋庸置疑的是，作为 Nostr 生态首个 Dex，一方面 NostrSwap 能够获得的生态反哺不容小觑；另一方面，其创新的链下 P2P 市场模式不仅实现了去中心化与高性能的完美兼顾，提出的 NRC-20 更激活了生态活力，我们同样期待这样一个抓住痛点、解决痛点的新兴项目的未来表现。</p>
+<p>在实现全球加密社区用户所渴求的高效、丝滑、低成本的交易体验方面，一切才刚刚开始，未来敬请期待。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/52305/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">认为投资者“人傻钱多”？推特网红Ben“欺诈事件”全过程剖析</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/52335/">
+                <span class="next-text nav-default">市场低迷，乱象丛生，近期的meme有多离谱？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

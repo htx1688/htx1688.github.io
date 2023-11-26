@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="全新的系统也带来了前所未有的风险，MEV 就是它的副产品。" />
+<meta name="keywords" content="MEV" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42169/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？" />
+<meta property="og:description" content="全新的系统也带来了前所未有的风险，MEV 就是它的副产品。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42169/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？">
+<meta itemprop="description" content="全新的系统也带来了前所未有的风险，MEV 就是它的副产品。"><meta itemprop="datePublished" content="2022-09-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3737">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"/>
+<meta name="twitter:description" content="全新的系统也带来了前所未有的风险，MEV 就是它的副产品。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-01">
+      2022-09-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3737 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<blockquote>
+<p>全新的系统也带来了前所未有的风险，MEV 就是它的副产品。</p>
+</blockquote>
+<p>原文标题：《TheTie：详解合并后 MEV 的民主化未来》（MEV: An Intro to Value Extraction）</p>
+<p>撰文：Vaish Puri</p>
+<p>编译：西早先生</p>
+<p>以太坊越来越复杂，这是它的本质，也是它的诅咒，因为以太坊的核心是——智能合约。这种全新、激进的工具使开发者能够大胆地进入去中心化金融领域，该领域充满了爆炸性的增长和波动。然而，全新的系统也带来了前所未有的风险。<strong>最大 / 矿工可提取价值（MEV），就是它的副产品。</strong></p>
+<h2 id="主要内容概览">主要内容概览</h2>
+<ol>
+<li>
+<p>MEV 是矿工可以从操控交易中提取的 ETH 总额。这种操控分为几种形式，但大多数是重排交易顺序和 frontrun（抢先交易）。</p>
+</li>
+<li>
+<p>MEV 的三个最常见的例子是：DEX（去中心化交易所）套利，清算，和三明治交易。</p>
+</li>
+<li>
+<p>MEV-Geth 是一个无许可的 MEV 提取概念证明，由 Flashbots 设计和执行，目的是缓解由 frontrun 和 backrun 机器人造成的网络拥堵。</p>
+</li>
+<li>
+<p>MEV-Boost 分离了 PoS 验证者的角色：区块建设和区块提议。Searcher（独立的网络参与者，他们在区块链上寻找 MEV 机会而得名）向区块建设者发送捆绑交易，有时他们自己也是区块建设者。</p>
+</li>
+<li>
+<p>OpenMEV 是一个促进区块生产者和验证者聚集与沟通的平台，目标是让用户分到 MEV 的一杯羹。</p>
+</li>
+</ol>
+<h2 id="什么是-mev">什么是 MEV？</h2>
+<p>MEV 的核心是，矿工从操控交易中提取的 ETH 总额。这种操控有几种形式，但大多数是重排交易顺序和 frontrun。这是由矿工对交易顺序的控制决定的。MEV 有两个基本来源：</p>
+<ol>
+<li>
+<p><strong>DEX 套利而产生的纯收入机会</strong></p>
+</li>
+<li>
+<p><strong>最优 gas 费竞拍机制（PGA）</strong></p>
+</li>
+</ol>
+<p>MEV 这个词可能会产生误导，因为很多人认为提取的价值属于矿工。实际上，大部分 MEV 流向了套利交易员。MEV 的流行基于一个事实，即无论市场环境如何变幻，价值都会越积越大。</p>
+<p><img src="https://hx24-prod.marstelegram.com/image/news/2022/09/01/1661989131727201.png" alt="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"></p>
+<p>举个例子，来看看纯收入套利机会和 PGA 如何实现 MEV。假设 DEX 上有一单大交易，那就有了套利的机会。然后，套利机器人提交一笔交易，捕捉价格差异，支付 Xgwei 的 gas 费。接下来，矿工复制和审查套利机器人的交易，为自己获利。或者其他套利机器人出更高的 gas 费，然后出现 PGA。最终支付的 gas 费和 MEV 的差额就是套利机器人的利润。这只是获得 MEV 的一个例子，稍后我们会介绍其他 MEV 策略。</p>
+<h2 id="mev-供应链">MEV 供应链</h2>
+<p>为了更好地理解 MEV 的工作原理，我们拆解一下它的供应链。自 2017 年 MEV 诞生以来，一直有两个主要参与者：矿工和 MEV Searcher。</p>
+<p><img src="https://hx24-prod.marstelegram.com/image/news/2022/09/01/1661989094692502.png" alt="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"></p>
+<p>可以把 MEV searcher 理解为「区块链管道工」。他们用不同的方法，寻找链上所有可提取的价值。searcher 与矿工合作，也愿意支付高额的 gas 费，因为他们希望自己的交易也能成交。在某些情况下，searcher 向矿工支付的 gas 费，占其 MEV 总收入的 90%，有时甚至更高。</p>
+<p>现在，我们在供应链的视角下，<strong>重新审视 MEV searcher 和矿工。</strong></p>
+<p><img src="https://hx24-prod.marstelegram.com/image/news/2022/09/01/1661989178786531.png" alt="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"></p>
+<p>下文提到的「用户」，指的是任何想参与区块链的人。用户访问钱包 UI，这一行为将用户的意愿编码成交易，供区块链理解。这就是应用层，该层将一切行为汇集在一起，表达用户的意图。开发者代表用户做出处理 MEV 的决定。例如，开发者可以将交易发送到公共交易池，searcher 在上面挑选交易，或者发送到像 Flashbots Protect RPC 这样的私密路径系统，该系统对 searcher 有所限制。</p>
+<p>然后，searcher 把所有的用户交易集中到一起，并转换为名为捆绑（bundle）的交易类型，然后提取所有可能的 MEV。捆绑是一个或多个交易，分组后按照顺序执行。除了 searcher 的交易外，捆绑还可以涵盖其他用户在 mempool 中的挂起交易，而且捆绑也可以针对特定区块进行打包。</p>
+<p>这一点很重要，因为 searcher 的流动性、套利和清算是维持市场运行的关键，但 searcher 也有可能提取过高的价值，高于他们提供的服务。然后，建设者将捆绑汇集，构建区块。</p>
+<p>最后，验证者发挥共识作用，对区块进行验证。以前，验证者和建设者被认为是同一批人，以太坊合并后就不是了，因为合并会分割区块提议者和建设者。下文会有更多关于这方面的内容。</p>
+<h2 id="mev-策略">MEV 策略</h2>
+<p>MEV 的三个最常见的例子是：</p>
+<ol>
+<li>
+<p><strong>DEX 套利</strong>  </p>
+</li>
+<li>
+<p><strong>清算</strong></p>
+</li>
+<li>
+<p><strong>三明治交易</strong></p>
+</li>
+</ol>
+<p>DEX 套利在前面的例子中已经介绍过了，所以我们来聊聊清算和三明治交易。</p>
+<p>清算是主要的 MEV 机会。借款人被清算时，通常会有大量的清算费用。这就是 MEV 的机会所在。searcher 确定被清算的借款人后，争取第一个提交清算交易，收取清算费。</p>
+<p>三明治交易是另一种常见的 MEV 提取形式，也被认为是最邪恶的。这种策略有点像传统金融中的高频交易。三明治的核心是利用 mempool，扫描大型 DEX 交易。三明治攻击的两个主要构成是：</p>
+<ol>
+<li>
+<p><strong>AMM（自动做市商）</strong></p>
+</li>
+<li>
+<p><strong>滑点</strong></p>
+</li>
+</ol>
+<p>例如，如果 MEV 提取人看到 Uniswap 上价值 100,000 USDC 的 ETH 交易被挂起，那么结论就很清楚了，ETH 的价格在交易执行后会上升。合理的做法是在交易执行前立即购买 ETH，并在交易执行后立即卖出。</p>
+<p>人们可以通过这种方式计算出任何特定交易的近似价格效应，这比传统金融中的抢先交易更有优势。DEX 上的每笔交易都有特定的性质，人们可以计算优化的交易规模，抢先购买。</p>
+<p><img src="https://hx24-prod.marstelegram.com/image/news/2022/09/01/1661989217069218.png" alt="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"></p>
+<p><img src="https://hx24-prod.marstelegram.com/image/news/2022/09/01/1661989235166411.png" alt="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"></p>
+<h2 id="后合并时代">后合并时代</h2>
+<p>2021 年，MEV 的开采出现了爆炸性增长，gas 费在几个月内高得离谱。名为 Flashbots 的利他主义组织出现后，人们开始讨论为 MEV 提取创造一个无许可、透明和公平的生态系统。因此，一般的 frontrun 交易不再有效，且 PGA 是链下完成的，gas 费更低。</p>
+<p>MEV-Geth 是一个无许可 MEV 提取的概念证明，由 Flashbots 设计和执行，目的是缓解由 frontrun 和 backrun 机器人造成的网络拥堵。</p>
+<p>我们的想法是，采用一个中立的、公开的、开源的基础架构进行无许可的 MEV 提取，可以消除 MEV 内幕交易的风险。同时，MEV-Geth 还尝试为 MEV 提取创造一个生态系统，保留以太坊的属性。事实上，以太坊的 &ldquo;searcher &ldquo;和 &ldquo;捆绑 &ldquo;概念就是 MEV-Geth 引入的。</p>
+<p>请注意，MEV-Geth 是概念证明，虽然它与常规的以太坊客户端兼容，但仍然是一个还在优化的项目。</p>
+<h2 id="未来">未来</h2>
+<p>MEV 不限于以太坊，但以太坊上的 MEV 是最大的。因此，讨论合并后的 MEV 很有必要。</p>
+<p>我们聊过区块提议者 - 建设者分离（PBS）的话题，但为什么 PBS 对 MEV 和以太坊来说十分重要呢？MEV 为共识网络的去中心化带来了风险，在遇到规模经济的时候也会出现问题。比如说，一个 10 倍大的交易池里，提取 MEV 的机会也有 10 倍。此外，MEV 使去中心化交易池变得复杂，因为还是只有一个实体，负责建设区块和提出提案。于是他们能轻松和谨慎地提取 MEV，无需与交易池分享收入。</p>
+<p>PBS 将提议者和建设者分割，解决了这个问题。区块提议者不是自己产出收入最高的区块，而是与第三方市场合作，也就是区块建设者。区块建设者生产捆绑交易，里面包含区块内容，并向提议者收取费用。提议者选择费用最高的捆绑交易。</p>
+<p><img src="https://hx24-prod.marstelegram.com/image/news/2022/09/01/1661989300084269.png" alt="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"></p>
+<p>合并后，出块时间将被固定为 12 秒，而不是目前的泊松分布（Poisson distribution）。此外，区块提议者会提前收到通知。固定的出块时间和提前收到通知的区块提议者，使得 searcher 在区块被提议之前提交捆绑交易。searcher 会集中在大型验证者和最优区块建设者的旁边。事实上，一些区块建设者会向 searcher 提供主机托管服务（如 AWS 数据中心）。</p>
+<p>目前，Flashbots 正在为合并后的以太坊验证者开发名为 MEV-Boost 的 PBS 工具。运行 MEV-Boost 的验证者可以向公开市场出售区块空间，放大他们的质押回报（高达 60%！），同时保留以太坊的去中心化。</p>
+<p>那么，它是如何工作的呢？PoS 节点运营商必须运行三个软件：验证客户端、共识客户端和执行客户端。MEV-boost 可以算是共识客户端的「摩托车挎斗」，把区块建设外包出去给其他网络建设者。区块建设者准备完整的区块，优化 MEV 的提取和奖励的公平分配。然后他们将区块提交给中继服务器。中继服务器汇总多个建设者的区块，选择费用最高的区块。最后，MEV-boost 中利润最高的区块，由验证者的共识层提议至以太坊网络，进行认证和打包。</p>
+<p><img src="https://hx24-prod.marstelegram.com/image/news/2022/09/01/1661989323613950.png" alt="详解 MEV 原理及策略：以太坊合并后的 MEV 民主化如何？"></p>
+<h2 id="民主化-mev">民主化 MEV</h2>
+<p>除了 Flashbots 之外，Manifold Finance 推出了 OpenMEV，它是促进区块生产者和验证者聚集与直接沟通的平台。协议可以利用 MEV 发挥其优势。例如，用户可以提出想要的区块交易顺序。OpenMEV 的核心优势是它可靠的中立性。也就是有一个机制或规则，规范链外行为和活动。</p>
+<p>OpenMEV 的目标是，使协议在价值获取和分配上更高效，因为目前成为 MEV 提取者的门槛有点高。有了 OpenMEV，任何人都可以通过 SushiSwap 赢得 OpenMEV 的「奖励」。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42186/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">晚间必读 | 一文读懂去中心化身份</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42194/">
+                <span class="next-text nav-default">一文读懂可验证随机函数 VRF</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#主要内容概览">主要内容概览</a></li>
+    <li><a href="#什么是-mev">什么是 MEV？</a></li>
+    <li><a href="#mev-供应链">MEV 供应链</a></li>
+    <li><a href="#mev-策略">MEV 策略</a></li>
+    <li><a href="#后合并时代">后合并时代</a></li>
+    <li><a href="#未来">未来</a></li>
+    <li><a href="#民主化-mev">民主化 MEV</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

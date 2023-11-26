@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="阿尔法家族新成员AlphaDev近来引发不少关注与讨论。一位曾在谷歌工作的研究人员对这项最新研究进行了详解。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53471/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI" />
+<meta property="og:description" content="阿尔法家族新成员AlphaDev近来引发不少关注与讨论。一位曾在谷歌工作的研究人员对这项最新研究进行了详解。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53471/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-20T00:00:00+00:00" />
+
+<meta itemprop="name" content="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI">
+<meta itemprop="description" content="阿尔法家族新成员AlphaDev近来引发不少关注与讨论。一位曾在谷歌工作的研究人员对这项最新研究进行了详解。"><meta itemprop="datePublished" content="2023-06-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4147">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"/>
+<meta name="twitter:description" content="阿尔法家族新成员AlphaDev近来引发不少关注与讨论。一位曾在谷歌工作的研究人员对这项最新研究进行了详解。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-20">
+      2023-06-20
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4147 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文：<a href="https://mp.weixin.qq.com/s/e8380BBElYUqmn6mNa4maw">新智元</a></p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/24_ai1tuw5rro.jpg" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>图片来源：由<a href="https://www.wujieai.com/ai">无界 AI</a>‌ 生成</p>
+<p>几天前，DeepMind推出了AlphaDev，直接把排序算法提速70%。</p>
+<p>这一全新AI系统，便是基于下棋高手AlphaGo打造。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/cga6umoj32abrql" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>而这项研究恰恰激起了前谷歌研究人员Justine Tunney的兴趣。</p>
+<p>她表示，作为一名C语言库的作者，我一直在寻找机会来策划最好的东西。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/ab9ie17d58imgy9" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>一起看看Justine如何详解DeepMind排序算法。</p>
+<h2 id="deepmind排序算法"><strong>DeepMind排序算法</strong></h2>
+<p>DeepMind的这一发现赢得了当之无愧的关注，但不幸的是，他们本可以更好地解释AlphaDev。</p>
+<p>接下来，从DeepMind发布的汇编代码开始，该代码将一个有三个项目的数组进行排序，从伪汇编翻译成汇编：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/20ymk4ct7qw51ks" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>我将这个函数命名为 move37() ，是因为DeepMind的博客文章，将其与AlphaGo下的令人震惊的「第37步」进行了比较。</p>
+<p>在2016那场人机大战中，AlphaGo下了一颗违反人类直觉的棋，一个简单的肩冲，击败了传奇围棋选手李世石。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/edd037kpqps51ry" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>所以如果运行DeepMind代码：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/ga86zigbjsn5h7q" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>但是，在我看来这是一个错误。</p>
+<p>我们给它的数组是{3,1,2}，但 move37() 将其排序为{2,1,3}。</p>
+<p>DeepMind一定在欺骗我们，因为我不相信2在1之前。再来看看他们对LLVM libcxx所做的开源贡献，这有望澄清一些事情：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/7p51wu1tz7kh46p" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>所以 move37() 实际上不是一个排序函数，而是一个排序内核，旨在用作 sort3() 函数的构建块。</p>
+<p>如果论文和博客文章能提到这一点就好了，因为它让我在最短的时间内感到非常困惑。下面是更好的代码版本，其中包括缺失的交换（swap）操作。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/ztwdkubk3lnafkd" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>为了解释为什么他们的代码很重要，让我们考虑一下这个算法在高层次上是如何工作的。当我第一次尝试自己解决 sort3() 问题时，我想到了这个：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/sb8p1r0zcv96leb" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>然后我查看了libcxx，发现它们也在做同样的事情。上述代码的问题是，编译器并不善于优化它。</p>
+<p>如果你尝试编译上面的代码，就会注意到你的编译器插入了大量的分支指令。这就是DeepMind试图通过LLVM贡献来改进的地方。</p>
+<p>然而，这些技术往往不太容易理解。</p>
+<p>我实际上喜欢天真无邪的代码，因为如果我们眯起眼睛，可以看到一种模式，与DeepMind最先进的汇编代码有相同的基本想法。</p>
+<p>这个想法是这个问题本质上归结为3个比较和交换操作：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/83awanniazr7s4b" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>上面的代码是之前排序网络的最先进技术。现在，这就是DeepMind的新发现发挥作用的地方。他们发现有时上面的 mov 指令是不必要的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/hs16qvi02uci9dc" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>如果你试着运行上面的代码，你会发现不管有没有被删除的行，它都是100%正确的。</p>
+<p>这行代码看起来像是在做什么，但实际上什么也没做。所以我并不惊讶这样的事情会被计算机科学忽视几十年。</p>
+<p>现在也应该更清楚AlphaDev是如何工作的。</p>
+<p>DeepMind基本上构建了一个人工智能，它可以摆弄汇编代码，随机删除一些东西，看看它是否损坏。</p>
+<p>我这么说并不是要否定AlphaDev的智能，因为如果我说我没有做同样的事情，那就是在撒谎。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/8wepsyehwza1z45" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>上面的代码中还有两个 mov 指令，我们有可能将其删除。通过使用ARM64指令集来做到这一点，它可以为类似的问题提供更小的代码。</p>
+<p>在这里，我们不需要任何指令来创建临时变量：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/dsvktkm2e9878az" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>Arm公司最近风头正劲，我想上面的例子可以作为他们赢得名声的证据。</p>
+<p>Arm也是目前开源领域最好的公司之一。比如，他们的MbedTLS库是我迄今为止见过的最被低估的瑰宝之一。</p>
+<p>当我开始使用它时，我原本有这样的计划，即修改Arm的代码，使之在x86硬件上更好地工作。</p>
+<p>我编写了所有这些精心设计的汇编优化，使其与x86上的OpenSSL达到相同的性能。</p>
+<p>MbedTLS是简单、可移植、可破解的C代码，因此对于任何想要一个不是Perl生成的汇编的加密库的人来说，是个好消息。</p>
+<p>我告诉了Arm公司的人我在做什么，他们并没有觉得这是颠覆性的。</p>
+<p>我希望有一天能找到时间做DeepMind做的事情，并在上游进行修改。Arm公司的优化程序库也是多产的，它在质量上与双转换无懈可击。</p>
+<p>它对C库对此特别感兴趣，因为几十年来，开源社区一直依靠Sun Microsystems在90年代初编写的数学函数来维持生计。</p>
+<p>Arm找到了一种改进其中几个函数的方法，例如 pow(x,y) 。考虑到这是数学中最基本的运算之一，这是一件非常有影响力的事情。</p>
+<p>比如，如果你在纯软件中使用Arm的解决方案在x86机器上实现 pow(x,y) ，那么它将比英特尔的原生x87指令快5倍。</p>
+<p>很幸运，DeepMind也加入了这个游戏，所以我冒昧地把他们的libcxx diff翻译成可读的C代码。</p>
+<p>这是我希望在论文和博客文章中看到的另一件事，因为在这段代码中，你会发现专家们用来让编译器生成无分支 MOVcc 指令的规范技巧。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/7wp5zk4d0gsusi5" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>当我看到 Sort5() 函数，我觉得自己对DeepMind研究的动机有了更好的理解。</p>
+<p>如果你在ARM64上编译 Sort5() 函数，那么编译器将产生一个处理11个寄存器的函数。如果你在推理一个数学方程，那么你能一次在你的工作记忆中保存11个变量吗？</p>
+<p>可能不会。这就是为什么有一个像 PartialSort3 这样优秀的内核函数如此有用的原因。</p>
+<p>值得一提的是， Sort3() 和 Sort5() 本身就是内核，因为它们旨在成为传统排序功能的构建块。</p>
+<p>博客文章涵盖了这个主题，但我认为分享一些实际上可移植和可执行的东西会很有用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/hp2cp24fss1z241" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>The above algorithm shows what the new and improved libcxx is doing. It&rsquo;s basically quicksort except it switches to the sorting kernels and insertion sort when recursing into smaller slices. With libcxx I think they even took the added step of schlepping in heapsort, which is kind of slow, but prevents adversaries from smashing your stack. 上面的算法显示了新的和改进的libcxx正在做什么。它基本上是快速排序，除了在递归到更小的切片时切换到排序内核和插入排序。对于libcxx，我认为他们甚至采取了在堆排序中移动的额外步骤，这有点慢，但可以防止对手破坏您的堆栈。</p>
+<p>The main thing you may be wondering at this point is, can I use this? Do these sorting network kernels actually make sorting go faster? I would say yes and no. When all you want is to sort ascending longs, the code above will go 2x faster than the standard qsort() function provided by your C library. Except you don&rsquo;t need the kernels to do that. What I&rsquo;ve determined so far is that, on my personal computer (which has an Intel Core i9-12900KS) the above function sorts longs at 255 megabytes per second. However if I comment out the sorting kernels: 在这一点上，你可能想知道的主要事情是，我可以使用这个吗？这些排序网络内核真的能让排序变得更快吗？我会说是和不是。当你只想对升序长进行排序时，上面的代码将比你的C库提供的标准 qsort() 函数快2倍。只是你不需要内核来做到这一点。到目前为止，我已经确定，在我的个人电脑上（它有一个英特尔酷睿i9-12900KS），上面的函数以每秒255兆字节的速度排序。但是如果我注释掉排序内核：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0620/c1iss7v1bjfffaz" alt="AlphaDev将排序算法提速70%！C语言库作者一文详解DeepMind最新AI"></p>
+<p>然后我的 longsort() 函数以每秒275兆字节的速度运行，通过简化算法实现了7%的性能提升。</p>
+<p>long 的好处是它足够长，可以存储 int 键值对，能够快速对地图条目进行排序是一个有用的技巧。</p>
+<p>上面的函数编译后只有181字节的x86-64机器代码。</p>
+<p>由于DeepMind的 sort3() 只有42字节，我希望可以交换一些大小以获得性能优势。</p>
+<p>因为到目前为止，我发现的下一个最佳算法是改用基数排序，速度为400 MB/s，但除了依赖于 malloc() 之外，还需要高达763字节的二进制占用空间。因此，如果能看到这些内核做得更好就好了。</p>
+<p>这并不是说DeepMind的想法没有价值。</p>
+<p>我认为值得注意的是，DeepMind非常慷慨，去年给了我们他们的矢量化快速排序库（当时他们被称为Google Brain），并通过这样做实现了永远无法挑战的排序优势。</p>
+<p>Vqsor在我的电脑上以1155 MB/s的速度对长时间进行排序。</p>
+<p>它甚至略微优于djbsor，后者是开源社区中最受欢迎的库之一，尽管它从未推广到比 int 更多的数据类型。</p>
+<p>这两种实现实现的方式都是通过矢量化排序网络。我认为这就是排序网络技术真正闪耀的地方。</p>
+<p>我想，如果就智能实体而言，AlphaDev不是一个蹒跚学步的孩子，它就会这样做。</p>
+<p>当你从基本原则开始时，仅基线指令集就非常难以支持。如果我们等待，那么我认为我们可以期待在未来看到AlphaDev的伟大成就，因为它正在努力应对更强大的挑战。</p>
+<p>我也很喜欢DeepMind让算法变得更小的事实，因为这是我不常看到的。</p>
+<p>大小编码是我最喜欢的爱好之一。在这个博客上，我发布了一个383字节的lambda演算虚拟机和一个436字节的带有垃圾回收机制的lisp机。</p>
+<p>我还在博客上介绍了我在cosmpolitan c库中使用的大小优化技巧。</p>
+<p>我也喜欢DeepMind的母公司，因为几周前Google给我颁发了开源同行奖金，很高兴看到他们分享我使软件变小的热情。</p>
+<p>很高兴看到他们用它来改进矢量化快速排序。</p>
+<p>最后，我喜欢人工智能公司用机器语言编写代码的机器的想法。他们为什么不呢？机器的本质就是机器。</p>
+<p>作为一个建设者，我发现这比OpenAI正在创造的未来要少得多。</p>
+<p>他们已经建立了一个巨大的家长式机器，在零和经济中与地球上的每个建设者竞争，然后诱使世界上的寻租者通过政府监管来控制这台机器。</p>
+<p>我不认为OpenAI承诺将所有我最喜欢做的任务（如编码）自动化是一种进步。我想要的是能够控制一台机器，这台机器能够完成我自己无法完成的事情，比如发现排序内核。这才是真正的进步。</p>
+<p>我认为，我们能够砍掉的每一条装配线都是朝着这个梦想的积极方向迈出的一步。</p>
+<p>参考资料：</p>
+<p><a href="https://justine.lol/sorting/">https://justine.lol/sorting/</a>‌</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53486/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">AI应用迎强心剂！41个深度合成服务算法获网信办备案 又一轮TMT繁荣有望复现？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/53450/">
+                <span class="next-text nav-default">Binance Research：当流动性质押遇到DeFi</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#deepmind排序算法"><strong>DeepMind排序算法</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

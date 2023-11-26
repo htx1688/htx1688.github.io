@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Pantera 合伙人解读 MEV 常见攻击方法和解决方案 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="MEV 是指矿工或验证者从区块链中提取的超出了正常交易费用的价值。" />
+<meta name="keywords" content="MEV" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49818/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Pantera 合伙人解读 MEV 常见攻击方法和解决方案" />
+<meta property="og:description" content="MEV 是指矿工或验证者从区块链中提取的超出了正常交易费用的价值。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49818/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="Pantera 合伙人解读 MEV 常见攻击方法和解决方案">
+<meta itemprop="description" content="MEV 是指矿工或验证者从区块链中提取的超出了正常交易费用的价值。"><meta itemprop="datePublished" content="2023-04-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3075">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pantera 合伙人解读 MEV 常见攻击方法和解决方案"/>
+<meta name="twitter:description" content="MEV 是指矿工或验证者从区块链中提取的超出了正常交易费用的价值。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Pantera 合伙人解读 MEV 常见攻击方法和解决方案</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-17">
+      2023-04-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3075 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>在所有协议中，Uniswap V2 提取的 MEV 最多，约占总量的 62%。</p>
+<p><strong>撰文：Paul Veradittakit，Pantera Capital 合伙人</strong></p>
+<p><strong>编译：Leah，Foresight News</strong></p>
+<p>**<strong>MEV 简介</strong> **</p>
+<p>MEV（最大可提取价值）是一个近期在加密货币领域受到广泛关注的概念。随着区块链技术的发展，交易排序的重要性日益凸显，但排序可以被操纵，有心之人可以从交易系统中提取价值。</p>
+<p>MEV 是指矿工或验证者从区块链中提取的超出了正常交易费用的价值。矿工在打包交易的时候可以做到将某些交易进行排序干预等，通过这些操作，矿工可能获取除了交易费用和区块奖励之外的额外利润，这些多出来的价值就被称为 MEV。为了缓解 MEV 的负面影响，出现了像 Flashbots 这样的公司，Flashbots 是 Pantera 的投资组合公司。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0417/15_b0s906vm6l.png" alt="image.png" title="1681734949398498.png"></p>
+<p>**<strong>示例</strong> **</p>
+<p>让我们通过一个假设的情景来分析 MEV 在加密货币领域的应用。</p>
+<p>假设你是一个去中心化交易所的交易员，想要在特定的价格点购买某种代币，你下单完成后等待区块链网络执行。但你可能并没有意识到，你想执行的交易在同一时间已经被纳入了更复杂交易网络。</p>
+<p>与此同时，交易网络中的某名矿工可以访问所有未确定交易，并有可能为了自己的利益操纵交易。例如，为了获取利益，矿工可能选择优先处理某些交易，其中也包括他们自己的交易。这就是所谓的 MEV。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0417/15_cfebbjrvsd.png" alt="image.png" title="1681734962364196.png"></p>
+<p>在执行你的那笔交易时，如果你的订单排在另一个附有更高手续费的交易之后，矿工可能会选择优先执行那笔手续费更高的交易，导致你的订单未能以你期望的价格成交。结果就是作为交易员的你遭受了损失，而矿工获得了更多利润。</p>
+<p>总的来说，虽然 MEV 是加密领域的一个问题，但各方正在协力找寻解决方案，以期减轻 MEV 的负面影响，并为交易员和用户提供一个更公平、安全的环境。</p>
+<p>**<strong>最常见的 MEV 攻击</strong> **</p>
+<p>下面我将介绍几种最常见 MEV 攻击及其攻击原理。</p>
+<p>**<strong>抢先交易（Front-Running）</strong> **</p>
+<p>简单来说，抢先交易指恶意行为者在执行队列中将自己的交易放在已知待处理交易之前。恶意行为者通常利用抢先交易机器人完成抢单行为，这些机器人会扫描去中心化交易所上的大额订单，发现大额订单后，机器人会以更高的 gas 费抢先完成攻击交易，以此攫取利益。</p>
+<p>**<strong><img src="https://img.bibiqing.com/news/2023/0417/15_iemzgg2388.png" alt="image.png" title="1681734976343631.png"></strong> **</p>
+<p>**<strong>三明治攻击（Sandwich Attacks）</strong> **</p>
+<p>三明治攻击是抢先交易的一种，攻击者在受害者待处理的交易前后各放置一个交易。在去中心化交易所上，三明治攻击通常被用于从毫无戒心的交易者身上提取 MEV。攻击者通过识别受害者即将购买的代币，开展抢先交易以推高价格，然后在受害者的购买命令价格已经大大提高时，卖掉先前购买的代币，从而操纵资产价格。</p>
+<p>**<strong>后置交易（Back-Running）</strong> **</p>
+<p>后置交易是指恶意行为者在已知待处理目标交易之后立即放置他们的交易。搜索者使用后置交易机器人监控内存池中新的代币配对列表或去中心化交易所上创建的流动性池。当发现新的代币配对时，机器人在初始流动性之后立即提交交易，尽可能多地购买代币，使其他交易者随后购买的代币数量变少。然后机器人等待价格上涨，其他交易者购买代币后以更高的价格出售以获利。</p>
+<p>**<strong>清算（Liquidations）</strong> **</p>
+<p>清算是一种通过清算去中心化链上协议的超额抵押贷款来提取 MEV 的攻击类型。清算者使用专门的机器人监控网络寻找清算机会，并在交易中选择预先执行或后置执行以清算贷款。他们通过在借款人还款之前清算其贷款，并出售其抵押品来从不知情的借款人身上提取 MEV。</p>
+<p>**<strong>时间强盗攻击（Time-Bandit Attacks）</strong> **</p>
+<p>时间强盗攻击是一种仅矿工可以执行的攻击。这些攻击通过重组区块来从先前挖掘的区块中提取 MEV 机会。当 MEV 与区块奖励相比足够高时，矿工可能会破坏共识以从旧区块中提取 MEV。具有足够能力的矿工可能决定重新生成旧区块以捕获套利机会，从而拥有比最初生成该区块的矿工更长的链。</p>
+<p>**<strong>解决方案：Flashbots</strong> **</p>
+<p>Flashbots 是一家专注于减少 MEV 负面影响的公司，通过允许矿工在交易上链之前私密且安全地汇集交易来实现这一目标。这降低了矿工通过重新排序交易来提取 MEV 的激励。相反，他们可以简单地按照提交的顺序处理交易，将 MEV 分配给用户。</p>
+<p>Flashbots 开发了许多机制来实现这一目标。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0417/15_amq28ojcdg.png" alt="image.png" title="1681735003363199.png"></p>
+<p>Flashbots Relay 是最重要的机制之一，它是一个连接矿工和交易发送者的点对点网络。Relay 允许矿工直接从用户接收交易包，而无需依赖内存池。这使得用户能够更好地保护隐私和安全，并减少了 MEV 提取的激励。</p>
+<p>Flashbots 开发的另一个关键机制是 MEV-Geth 客户端。此客户端使矿工能够访问可包含在区块中的所有交易，而不仅仅是那些在内存池中的交易。这使矿工能够在不重新排序交易的情况下更有效地捕获 MEV。</p>
+<p>除了这些机制之外，Flashbots 还开发了许多其他工具和技术来解决 MEV 提取问题。其中包括一个交易模拟工具，该工具允许用户估算其交易的潜在 MEV，以及一个交易池管理系统，该系统使矿工能够管理他们收到的交易。</p>
+<p>**<strong>MEV 统计与相关数据</strong> **</p>
+<ul>
+<li>
+<p>总提取的 MEV（即成功的 MEV 交易 + 成功 MEV 交易的 gas 费 + 失败 MEV 交易的 gas 费）超过 6.9 亿美元。</p>
+</li>
+<li>
+<p>仅在过去的 30 天里，就有超过 500 万美元的 MEV 被提取。</p>
+</li>
+<li>
+<p>在所有提取的 MEV 中，36.4% 是 MEV 矿工收入，而 63.6% 是 MEV 搜索者收入。</p>
+</li>
+<li>
+<p>绝大多数 MEV 是通过套利完成的；通过清算完成的不到百分之一。</p>
+</li>
+<li>
+<p>按协议分类的 MEV 提取量中，Uniswap V2 提取量最大，占总量的约 62%。Uniswap V3 和 Balancer 也各自拥有不菲的提取量。</p>
+</li>
+<li>
+<p>ETH/WETH 是用于 MEV 利润获取的主要代币（占总量的 95%）。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0417/15_o0rouss7fm.png" alt="image.png" title="1681735012344370.png"></p>
+<p>累积提取的 MEV – 毛利润。来源：FlashBots</p>
+<p>**<strong>结论</strong> **</p>
+<p>总之，MEV 是一个在加密货币行业中出现的术语，描述了矿工通过操纵交易以谋求利益所能赚取的利润。虽然 MEV 并不是一个新概念，但由于去中心化金融（DeFi）的兴起、矿工之间为获取更高的费用而展开的激烈的竞争，它在近年来变得越来越普遍。</p>
+<p>MEV 对加密货币行业有积极和消极的影响。一方面，MEV 可以激励矿工通过优先处理更重要的交易和区块来为网络的安全做出贡献。另一方面，它也可能导致市场操纵，催生不公平的行为，损害网络的完整性。</p>
+<p>尽管存在这些挑战，但像 Flashbots 这样的公司正在研究创新的解决方案，以减轻 MEV 的负面影响，创造一个更公平和透明的加密货币生态系统。随着 MEV 继续成为行业讨论和争论的话题，各方利益相关者需要共同努力，寻找有效的解决方案，平衡所有参与者的利益。通过持续的创新和合作，可以充分发挥区块链和加密货币的潜力，创造一个更加包容和去中心化的金融未来。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49775/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">ITM Trading首席市场分析师警告CBDC危险</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49806/">
+                <span class="next-text nav-default">V神高度重视的这个以太坊重要升级 或将开启Web3大爆发时代</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

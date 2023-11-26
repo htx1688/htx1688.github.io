@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          SharkTeam：Rugpull工厂黑色产业链分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="近期发生了多起 Rug Pull 事件，SharkTeam 安全研究团队对这些事件进行了详细分析。在分析过程中，我们发现 BNB Chain 上的 Rugpull 工厂合约在过去一个月内已经发起了 70 多次 Rugpull。接下来，我们将从资金溯源、欺诈行为模式等方面进行分析。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58637/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="SharkTeam：Rugpull工厂黑色产业链分析" />
+<meta property="og:description" content="近期发生了多起 Rug Pull 事件，SharkTeam 安全研究团队对这些事件进行了详细分析。在分析过程中，我们发现 BNB Chain 上的 Rugpull 工厂合约在过去一个月内已经发起了 70 多次 Rugpull。接下来，我们将从资金溯源、欺诈行为模式等方面进行分析。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58637/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-07T00:00:00+00:00" />
+
+<meta itemprop="name" content="SharkTeam：Rugpull工厂黑色产业链分析">
+<meta itemprop="description" content="近期发生了多起 Rug Pull 事件，SharkTeam 安全研究团队对这些事件进行了详细分析。在分析过程中，我们发现 BNB Chain 上的 Rugpull 工厂合约在过去一个月内已经发起了 70 多次 Rugpull。接下来，我们将从资金溯源、欺诈行为模式等方面进行分析。"><meta itemprop="datePublished" content="2023-09-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2778">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SharkTeam：Rugpull工厂黑色产业链分析"/>
+<meta name="twitter:description" content="近期发生了多起 Rug Pull 事件，SharkTeam 安全研究团队对这些事件进行了详细分析。在分析过程中，我们发现 BNB Chain 上的 Rugpull 工厂合约在过去一个月内已经发起了 70 多次 Rugpull。接下来，我们将从资金溯源、欺诈行为模式等方面进行分析。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">SharkTeam：Rugpull工厂黑色产业链分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-07">
+      2023-09-07
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2778 字 -
+        预计阅读 6 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>近期发生了多起 Rug Pull 事件，SharkTeam 安全研究团队对这些事件进行了详细分析。在分析过程中，我们发现 BNB Chain 上的 Rugpull 工厂合约在过去一个月内已经发起了 70 多次 Rugpull。接下来，我们将从资金溯源、欺诈行为模式等方面进行分析。</p>
+<p>鉴于篇幅所限，我们将主要分析 SEI、X、TIP 和 Blue 几个代币事件。这些代币都是由代币工厂合约0xDC4397ffb9F2C9119ED9c32E42E3588bbD377696进行 createToken 操作创建的。</p>
+<p>在 createToken 函数中，创建代币时需要传入以下参数：代币名称、代币符号、精度、供应量、代币所有者地址、创建代币对的工厂合约地址以及 BUSD-T 稳定币地址。其中，创建代币对的工厂合约使用了 PancakeSwap 的工厂合约，并且每个代币都有不同的所有者地址。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/ds5s8rm3ri5dlha" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<h2 id="一资金溯源">一、资金溯源</h2>
+<p>SEI、X、TIP 和 Blue 代币的所有者地址、符号和合约地址如下图所示。其中，X、TIP 和 Blue 的所有者地址为：</p>
+<p>0x44A028Dae3680697795A8d50960c8C155cBc0D74。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_tsksj871is.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>0x 44 A 028 Da 的资金来自0x072e9A13791f3a45fc6eB6AD38e6ea258C080cc3，地址0x 0 a 8310 ec 资金来自多个 EOA 账户，并且有一个共同地址</p>
+<p>0x072e9A13791f3a45fc6eB6AD38e6ea258C080cc3。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_4lmtqdg28s.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>以下是代币工厂合约 0x DC 4397 ffb 9 F 2C 9119 ED 9 c 32 E 42 E 3588 bbD 377696 的相关信息。该工厂合约由地址0x 1 dE 949 eac 4 b 5 fc 1 B 814 E 733 C D5 6 AE 65 DfF 1 bcEEF 创建。地址 0x1dE949ea 的资金来自多个账户，其中共有一个资金来源地址为0x 072 e 9 A 13791 f 3 a 45 fc 6 eB 6 AD 38 e 6 ea 258 C 080 cc 3 。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/wngp47wdz4olm0c" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>地址0x 072 e 9 A 13 的资金来源如下：地址0x 1 dE 949 ea 存在部分资金交互。其他地址也创建了工厂代币合约，并且是一些代币的 Rug Puller。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_odt8prg9b1.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>例如，0x 04067 B 4 fcC 9 f 3d 99 aC 5211 cfE 8 d 3 e 8687 B 0401 d 3 的资金来自于 0x 6 ae 8 F 98830894518 c 939 B 0 D 0 A 5 EF 11 c 671 e 9 DFCa。而 0x6ae8F988 创建了工厂合约 0x e 83 EbBb 4 acc 3d 8 B 237923 Ee 33 3D 04 B 887 ca 1 a 008 。该工厂合约也进行了相同的代币创建行为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_uqnjfgsddy.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>我们选择其中一个代币进行分析，发现该代币存在 Rug Pull 行为。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_j92lurk558.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>0x6ae8F988 的资金部分来自于 0xa6764FBbbFD89AEeBac25FCbB69d3E9438395e57，该地址的资金又是来自于0xE5A5c50980176Cc32573c993D0b99a843D77BC6E。地址 0xE5A5c509 的资金是由 Tornado Cash 地址提供，资金为 10 BNB。除了 Tornado 提供的资金外，还有一部分通过钓鱼和代币 Rug Pull 获得的利润。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_tlrf50cpt3.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>此外，上述地址在接下来的 Rugpull 工厂欺诈行为模式中起着重要作用。</p>
+<h2 id="二rugpull工厂欺诈行为模式">二、Rugpull 工厂欺诈行为模式</h2>
+<p>让我们一起看看 SEI、X、TIP 和 Blue 几个代币的 Rugpull 工厂欺诈行为模式。</p>
+<p>（1）SEI</p>
+<p>首先，SEI 代币所有者 0x 0 a 8310 eca 430 beb 13 a 8 d 1 b 42 a 03 b 3521326 e 4 a 58 以 1u 的价格兑换了 249 枚 SEI。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_3s4h3knhm5.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>然后， 0x6f9963448071b88FB23Fd9971d24A87e5244451A进行了批量买入和卖出操作。在买入和卖出操作下，代币的流动性明显增加，价格也发生了上涨。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_dv22bq5jpj.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>通过钓鱼等方式宣传，诱惑大量用户购买，随着流动性增加，代币价格翻倍。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_yizfcmg5qr.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>代币的价格达到一定的数值时，代币所有者进场 sell 操作进行 Rugpull。可以从下图看出，进场收割时间段和价格都不同。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/yvy02r84m8fojge" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>（2）X、TIP、Blue</p>
+<p>首先 X、TIP 和 Blue 代币所有者 0x44A028Dae3680697795A8d50960c8C155cBc0D74 用 1u 兑换了相应的代币。然后，和 Sei 代币一样。0x 6 f 9963448071 b 88 FB 23 Fd 9971 d 24 A 87 e 5244451 A 批量的买入和卖出操作。在买入和卖出操作下，流动性明显增加，价格上涨。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_2slgpzdc6t.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>然后通过钓鱼等一些途径宣传，诱惑大量的用户进行购买，随着流动性增加，代币价格也翻倍。</p>
+<p>和 SEI 一样，代币的价格达到一定的数值时，代币所有者进场 sell 操作进行 Rugpull。可以从下图看出，进场收割时间段和价格都不同。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_cviniac71u.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>SEI、X、TIP 和 Blue 几个代币的波动图如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0907/6_kbvm58muue.png" alt="SharkTeam：Rugpull工厂黑色产业链分析"></p>
+<p>我们从资金溯源、行为模式中可以得知：</p>
+<p>在资金溯源内容中，代币工厂的创建者和代币创建者的资金来自多个 EOA 账户。不同账户之间也有资金往来，其中一些通过钓鱼地址转移，一些通过之前进行代币 Rugpull 行为获取，还有一些通过 tornado cash 等混币平台获得。采用多种方式进行资金转移旨在构建复杂错综的资金网络。不同地址还创建了多个代币工厂合约，并大量生产代币。。</p>
+<p>在分析代币 Rugpull 行为时，我们发现地址 0x6f9963448071b88FB23Fd9971d24A87e5244451A 是其中一个资金来源。操作代币价格时，也采用了批量方式。地址 0x072e9A13791f3a45fc6eB6AD38e6ea258C080cc3 也充当了资金提供者的角色，向多个代币持有者提供相应的资金。。</p>
+<p>总而言之，这一系列行为背后有一个分工明确的Web3诈骗团伙，构成了一个黑色产业链，主要涉及热点搜集、自动发币、自动交易、虚假宣传、钓鱼攻击、Rugpull 收割等环节，多发生于 BNBChain。所发的 Rugpull 虚假代币都与行业热点事件紧密相关，具有较强的迷惑性和鼓动性。用户需时刻提高警惕，保持理性，避免不必要的损失。</p>
+<h3 id="about-us">About Us</h3>
+<p>SharkTeam 的愿景是保护Web3世界的安全。团队由来自世界各地的经验丰富的安全专业人士和高级研究人员组成，精通区块链和智能合约底层理论。提供包括链上大数据分析、链上风险预警、智能合约审计、加密资产追讨等服务，并打造了链上大数据分析和风险预警平台 ChainAegis，平台支持无限层级的深度图分析，能有效对抗Web3世界的高级持续性盗窃(Advanced Persistent Theft，APT)风险。已与Web3生态各领域的关键参与者,如 Polkadot、Moonbeam、polygon、OKX、Huobi Global、imToken、ChainIDE 等建立长期合作关系。</p>
+<p>官网：<a href="https://www.sharkteam.org/">https://www.sharkteam.org</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58633/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Reflexer基金会从Paradigm回购15万枚FLX，约208万美元</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58647/">
+                <span class="next-text nav-default">SignalPlus波动率专栏(20230907)：行情摇摆不定，看跌价差策略成为市场焦点</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一资金溯源">一、资金溯源</a></li>
+    <li><a href="#二rugpull工厂欺诈行为模式">二、Rugpull 工厂欺诈行为模式</a>
+      <ul>
+        <li><a href="#about-us">About Us</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

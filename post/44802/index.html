@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="这篇文章将讨论将 CEX 向免信任更近一步的尝试过程、这些技术的局限性，以及一些依靠 ZK-SNARK 等先进技术的方案和更强大的想法。" />
+<meta name="keywords" content="CEX" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/44802/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？" />
+<meta property="og:description" content="这篇文章将讨论将 CEX 向免信任更近一步的尝试过程、这些技术的局限性，以及一些依靠 ZK-SNARK 等先进技术的方案和更强大的想法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/44802/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-21T00:00:00+00:00" />
+
+<meta itemprop="name" content="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？">
+<meta itemprop="description" content="这篇文章将讨论将 CEX 向免信任更近一步的尝试过程、这些技术的局限性，以及一些依靠 ZK-SNARK 等先进技术的方案和更强大的想法。"><meta itemprop="datePublished" content="2022-11-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-11-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5409">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？"/>
+<meta name="twitter:description" content="这篇文章将讨论将 CEX 向免信任更近一步的尝试过程、这些技术的局限性，以及一些依靠 ZK-SNARK 等先进技术的方案和更强大的想法。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-11-21">
+      2022-11-21
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5409 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Vitalik Buterin</p>
+<p>原文链接：https://hackmd.io/@vbuterin/proof_of_solvency</p>
+<p>每当一个大型中心化交易所崩溃时，<strong>一个常见的问题就是我们是否可以使用加密技术来解决</strong> 。交易所可以利用密码学证明它们在链上持有的资金足以支付它们对用户的债务，而不是仅仅依赖政府许可、审查公司审计和运营交易所的个人背调等法律途径。</p>
+<p>而且交易所可以建立一个系统，在该系统中，未经储户同意，交易所不能提取储户的资金。我们可以探索「主动不做坏事」且有野心的 CEX 和「没有能力做坏事」的 CEX 之间的界限，但目前往往人们只是看向效率低下且隐私泄露的链上 DEX。</p>
+<p>这篇文章将讨论将 CEX 向免信任更近一步的尝试过程、这些技术的局限性，以及一些依靠 ZK-SNARK 等先进技术的方案和更强大的想法。</p>
+<p><strong>【余额表和默克尔树：传统的偿付能力证明】</strong></p>
+<p>交易所试图用密码学的方式证明自己没有欺骗用户的最早尝试要追溯到很久以前。</p>
+<ul>
+<li>
+<p>2011 年，当时最大的比特币交易所 MtGox 通过发送一笔交易，将 424242 个比特币转移到预先公布的地址，证明他们有资金。</p>
+</li>
+<li>
+<p>2013 年，人们开始讨论如何解决问题的另一面：证明客户存款的总规模。如果你证明客户的存款等于 X（负债证明），并证明拥有 X 个代币的私钥（资产证明），那么你就有了偿付能力证明——你证明了交易所有资金偿还所有储户。</p>
+</li>
+</ul>
+<p>证明存款的最简单方法是简单地发布一个（用户名、余额）对列表。每个用户都可以检查他们的余额是否包含在列表中，任何人都可以检查完整的列表，查看：</p>
+<ul>
+<li>
+<p>每个余额都是非负的；</p>
+</li>
+<li>
+<p>总额为索赔金额。</p>
+</li>
+</ul>
+<p>当然，这破坏了隐私，所以我们可以稍微改变一下方案：</p>
+<ul>
+<li>发布一个（哈希「用户名、salt」，余额）对的列表，并私下向每个用户发送他们的 salt 值。但即使这样也会泄露余额和余额变化的模式。</li>
+</ul>
+<p><strong>为了保护隐私，我们想到了下一个发明：默克尔树技术。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/1121/9_cttut6y00p.png" alt="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？"></p>
+<p>绿色：代表 Charlie 的节点。</p>
+<p>蓝色：代表 Charlie 将收到作为证明的一部分代节点。</p>
+<p>黄色：代表根节点，向所有人公开显示。</p>
+<p><strong>默克尔树技术包括将客户余额表放入默克尔总和树中。</strong> 在默克尔总和树中，每个节点都是一个（余额，哈希）对。底层叶节点表示各个客户的余额和 salt 的用户名哈希。</p>
+<p>在每个较高层节点中，余额是下面两个余额的和，而哈希是下面两个节点的哈希。默克尔总和证明与默克尔证明一样，是树的一个「分支」，由从叶到根的路径上的姐妹节点组成。</p>
+<p>该交易所将向每位用户发送一份默克尔存款证明。然后，用户将得到一个保证，他们的余额是正确包括在总额的一部分。可以在这里找到一个简单的示例代码实现。</p>
+<p>这种设计中泄露的隐私比完全公开的列表要低得多，而且可以通过在每次发布「根」时移动分支来进一步减少，但仍然存在一些隐私泄露：Charlie 了解到有人的余额为 164 ETH ，有两个用户的余额加起来达到 70 ETH 等等。控制多个帐户的攻击者仍有可能了解交易所用户的大量信息。</p>
+<p>该方案的一个重要的微妙之处是负余额的可能性：如果一个交易所有 1390 ETH 的客户余额，但只有 890 ETH 的储备，试图通过在树的某个位置的假账户下添加 -500 ETH 余额来弥补差额，该怎么办？</p>
+<p>事实证明，这种可能性并没有破坏该方案，这就是我们特别需要默克尔总和树而不是常规默克尔树的原因。假设 Henry 是交易所控制的假账户，交易所在那里放了 -500 ETH：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1121/9_dmvtft810w.png" alt="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？"></p>
+<p>Greta 的证明验证将会失败：交易所将不得不给她 Henry 的 -500 ETH 节点，她会以无效为由拒绝它。Eve 和 Fred 的证明验证也会失败，因为 Henry上面的中间节点有 -230 的 ETH，所以也是无效的。为了避免被怀疑盗用，交易所必须希望树的右半部分没有人检查他们的余额证明。</p>
+<p>如果交易所能够识别出价值 500 ETH 的用户，他们相信这些用户要么不会费心检查证据，要么在他们抱怨他们从未收到过证明时不信任他们，他们就可以不被怀疑盗用。但是，交易所也可以将这些用户从树中排除并产生相同的效果。</p>
+<p>因此，如果仅以实现负债证明为目标，默克尔树技术基本上与责任证明方案一样好。但它的隐私属性仍然不理想。你可以用更聪明的方式使用默克尔树，比如把每个 satoshi 或 wei 做成一个单独的叶，但最终通过更现代的技术，还有更好的方法来做到这一点。</p>
+<p><strong>【使用 ZK-SNARK 改进隐私性和稳健性】</strong></p>
+<p>ZK-SNARK 是一项强大的技术。ZK-SNARK 之于密码学，可能就像变压器之于人工智能。我们可以使用 ZK-SNARK 极大地简化和改善责任证明协议中的隐私。</p>
+<p>我们可以做的最简单的事情是将所有用户的存款放入默克尔树（或者，更简单的，KZG 承诺），并使用 ZK-SNARK 来证明树中的所有余额都是非负的，并且加起来是某个声称的值。如果我们为隐私添加一层哈希，那么给每个用户的默克尔分支（或 KZG 证明）将不会透露任何其他用户的余额。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1121/9_odahes1qia.png" alt="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？"></p>
+<p>使用 KZG 承诺是避免隐私泄露的一种方法，因为不需要提供「姐妹节点」作为证明，并且可以使用一个简单的 ZK-SNARK 来证明余额的总和，并且每个余额都是非负的。</p>
+<p>我们可以用一个专用的 ZK-SNARK 证明上述 KZG 中余额的总和以及非负性。这里有一个简单的例子。</p>
+<blockquote>
+<p>我们引入一个辅助多项式 I(x)，它组成每个余额的比一部分（我们假设余额低于 215），每 16 个位置跟踪一个带有偏移量的总和，只有当实际的总和与声明的总和相匹配时，它的总和才为零。如果 z 是单位的 -128 阶根，我们可以证明以下等式：</p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2022/1121/9_ztq0tei3e5.png" alt="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？"></p>
+<p>可在这里找到关于 ZK-SNARK 的进一步解释。只需要几个额外的方程，这样的约束系统就可以适应更复杂的环境。例如，在杠杆交易系统中，个人用户的余额为负是可以接受的，但前提是他们有足够的其他资产，以一定的担保保证金覆盖资金。SNARK 可以用来证明这一更复杂的约束，让用户放心，交易所不会通过秘密豁免其他用户遵守规则来冒资金风险。</p>
+<p>在较长期的未来，这种 ZK 债务证明或许不仅可以用于客户在交易所的存款，还可以用于更广泛的贷款。任何人借出一笔贷款都会将记录放入一个多项式或包含该贷款的树中，该结构的根会在链上发布。这将使任何寻求贷款的人向贷款机构证明，他们还没有获得过多的其他贷款。</p>
+<p>最终，法律创新甚至可能使以这种方式承诺的贷款比没有这样承诺的贷款具有更高的优先级。这与我们在《去中心化社会：寻找 Web3 的灵魂》文章中讨论的一个想法的方向完全相同——通过某种形式的「灵魂绑定代币」，在链上产生负面声誉的概念。</p>
+<p><strong>【资产证明】</strong></p>
+<p>资产证明的最简单版本是我们上面看到的协议：要证明你持有 X 个代币，你只需在事先约定的时间移动 X 个代币，或者在数据字段包含「这些资金属于币安」字样的交易中移动 X 个代币。为了避免支付交易费用，你可以签署一个链下消息。比特币和以太坊都有链外签名消息的标准。</p>
+<p>这种简单的资产证明技术存在两个实际问题：</p>
+<ul>
+<li>
+<p>冷钱包处理；</p>
+</li>
+<li>
+<p>抵押品两用。</p>
+</li>
+</ul>
+<p>出于安全考虑，大多数交易所将绝大多数客户资金保存在冷钱包中。在离线计算机上，交易需要手动签名并转移到互联网上。我过去用来存放个人资金的冷钱包设置需要一台永久离线的电脑生成一个包含签名交易的二维码，然后我用手机扫描。</p>
+<p>现在的交易所协议更加疯狂，经常涉及多个设备之间的多方计算。在这种设置下，制造一个额外的消息来证明对地址的控制是一个昂贵的操作。</p>
+<p>交易所可以采用以下几种方式：</p>
+<ul>
+<li>
+<p>保留一些公共长期使用地址。交易所将生成一些地址，发布一次每个地址的证明以证明所有权，然后重复使用这些地址。这是迄今为止最简单的选择，不过它确实在如何保护安全和隐私方面增加了一些限制。</p>
+</li>
+<li>
+<p>有很多地址，随便证明几个。交易所将有许多地址，甚至可能每个地址只使用一次，并在单笔交易后退出。在这种情况下，交易所可能有一个协议，其中不时随机选择一些地址，必须“打开”以证明所有权。一些交易所已经通过审计师进行了类似的操作，但原则上，这种技术可以转化为完全自动化的程序。</p>
+</li>
+<li>
+<p>更复杂的 ZKP 选项。例如，一个交易所可以将它的所有地址设置为 1/2 多签，其中每个地址的私钥都是不同的，另一个是某个“重要”紧急备份密钥的盲版，以某种复杂但安全的方式存储，例如 12/16 多签。为了保护隐私并避免泄露其全部地址，交易所甚至可以在区块链上运行零知识证明，证明链上所有具有这种格式的地址的总余额。</p>
+</li>
+<li>
+<p>另一个主要问题是防止抵押品两用。在彼此之间来回转移抵押品以证明储备，这对交易所而言很容易做到，这将使它们能够在实际上没有偿付能力的时候假装自己有偿付能力。理想情况下，偿付能力的证明应该是实时完成的，每个区块之后都有一个更新的证明。如果这是不切实际的，那么下一个最好的办法就是在不同交易所之间按照固定的时间表进行协调，例如在 UTC 时间每周二下午 2 点时证明储量。</p>
+</li>
+</ul>
+<p>最后一个问题是：你能以法定方式进行资产证明吗？交易所不仅持有加密货币，它们还在银行系统内持有法定货币。在这方面，答案是肯定的，但这样的程序将不可避免地依赖于「法定」信托模型——银行本身可以证明余额，审计师可以证明资产负债表等等。考虑到法币无法通过密码学验证，这是在该框架内所能做到的最好的方法，但仍然值得一做。</p>
+<p>另一种方法是将一个运营交易所处理资产支持稳定币的实体（如 USDC ）和另一个处理在加密货币和传统银行系统之间移动的现金进出过程的实体（USDC 本身）完全分离开来。因为 USDC 的“负债”只是链上的 ERC20 代币，负债证明是「免费的」，只需要资产证明。</p>
+<p><strong>【Plasma 和 validiums 扩容解决方案：我们能实现非托管 CEX 吗？】</strong></p>
+<blockquote>
+<p>假设我们想更进一步：我们不想仅仅证明交易所有资金偿还用户。相反，我们希望阻止完全交易所盗用用户的资金。</p>
+</blockquote>
+<p>第一个主要尝试是 Plasma，这是一种 2017 年和 2018 年在以太坊研究圈流行的扩容解决方案。Plasma 的工作原理是将余额拆分为一组独立的「代币」，其中每个代币都被分配一个索引，并位于 Plasma 区块的默克尔树的特定位置。要进行有效的代币转移，需要将一笔交易放到根被发布到链上的树的正确位置。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1121/9_qessg6f0kg.png" alt="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？"></p>
+<p>Plasma 的一个版本的过度简化图。代币保存在智能合约中，该合约在取款时强制执行 Plasma 协议的规则。</p>
+<p>自 2018 年 Plasma 讨论的热潮以来，ZK-SNARK 已经变得更加适用于与扩展相关的用例，正如我们上面所说的，ZK-SNARK 改变了一切。</p>
+<p>更现代的 Plasma 想法是 Starkware 所称的 validium：基本上与 ZK-rollup 相同，只是数据是链外保存的。这种结构可以用在很多用例中，可以想象任何中心化服务器需要运行一些代码并证明它正在正确执行代码的情况。在有效期限内，操作人员没有办法窃取资金，尽管根据实现的细节，如果操作人员消失，一些数量的用户资金可能会被卡住。</p>
+<p>CEX 和 DEX 并不是二进制的，事实证明，它们有一系列的选择，包括各种形式的混合中心化，在那里你可以获得一些优势，比如效率，但仍然有很多加密屏障，防止中心化运营商的滥用。</p>
+<p>处理用户错误也是一个大问题。到目前为止，最重要的错误类型是——如果用户忘记了密码，丢失了设备，被黑客攻击，或者无法访问自己的帐户，该怎么办？</p>
+<p>交易所可以解决这个问题。首先是电子邮件恢复，如果连这都失败了，再通过 KYC 进行更复杂的恢复。但为了能够解决这些问题，交易所需要真正控制这些代币。为了有能力以正当的理由收回用户账户的资金，交易所需要有能力以不正当的理由窃取用户账户的资金。这是一个不可避免的权衡。</p>
+<p>理想的长期解决方案是依靠自我托管，并借助诸如多签和社会恢复钱包等技术来帮助用户处理紧急情况。但在短期内，有两种明显的替代方案，它们的成本和收益明显不同：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1121/9_5jsswumzn3.png" alt="V神文章：如何使用 ZK-SNARKs 改善中心化交易所的安全性？"></p>
+<p><strong>【总结：展望未来更先进的交易所】</strong></p>
+<p>短期内，有两种明确的交易所类别：托管交易所和非托管交易所。如今，后一类只是像 Uniswap  这样的 DEX，在未来我们可能还会看到加密技术受限的 CEX，用户资金以类似 validium 智能合约的形式持有。我们也可能会看到半托管交易所，我们信任他们使用法定货币，而不是加密货币。</p>
+<p>这两种类型的交易所将继续存在，而提高托管交易所安全性的最简单的向后兼容方法是增加储备证明。这包括资产证明和负债证明的结合。为两者都制定好的协议存在技术上的挑战，但我们可以也应该尽可能在这两个方面取得进展，并尽可能地开源软件和流程，以便所有的交易所都能受益。</p>
+<p>从长远来看，我希望我们越来越接近所有非托管交易所，至少在加密货币方面是这样。钱包恢复将会存在，而且可能需要为处理小额金额的新用户提供高度集中的恢复选项，以及由于法律原因需要这种安排的机构，但这可以在钱包层而不是在交易所内部完成。</p>
+<p>magic.link 与 Polymarket 等平台的交互就是这种方法的一个例子。在法币方面，传统银行系统和加密货币生态系统之间的流动可以通过 USDC 等资产支持稳定币原生的现金进出过程完成。然而，我们要完全实现还需要一段时间。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/44810/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">V3 版本将至 老牌 DeFi Synthetix 能否迎来「第二春」？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/44781/">
+                <span class="next-text nav-default">ZachXBT：FTX黑客与FTX团队和巴哈马官方均无关</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

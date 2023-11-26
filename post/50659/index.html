@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深度：一文探索共享排序器网络属性 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="开箱即用的 rollups 可以实现高水平的审查阻力、易于部署、互操作性、快速终结、活跃性和 MEV 民主化。随着共享排序器的出现，这样的世界可能触手可及。" />
+<meta name="keywords" content="Rollup, 區塊鏈" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50659/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深度：一文探索共享排序器网络属性" />
+<meta property="og:description" content="开箱即用的 rollups 可以实现高水平的审查阻力、易于部署、互操作性、快速终结、活跃性和 MEV 民主化。随着共享排序器的出现，这样的世界可能触手可及。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50659/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="深度：一文探索共享排序器网络属性">
+<meta itemprop="description" content="开箱即用的 rollups 可以实现高水平的审查阻力、易于部署、互操作性、快速终结、活跃性和 MEV 民主化。随着共享排序器的出现，这样的世界可能触手可及。"><meta itemprop="datePublished" content="2023-05-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="17303">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深度：一文探索共享排序器网络属性"/>
+<meta name="twitter:description" content="开箱即用的 rollups 可以实现高水平的审查阻力、易于部署、互操作性、快速终结、活跃性和 MEV 民主化。随着共享排序器的出现，这样的世界可能触手可及。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深度：一文探索共享排序器网络属性</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-06">
+      2023-05-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 17303 字 -
+        预计阅读 35 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文：MAVEN11</p>
+<p>编译：GWEI Research</p>
+<p>试想这样一个世界：<strong>开箱即用的 rollups 可以实现高水平的审查阻力、易于部署、互操作性、快速终结、活跃性和 MEV 民主化。</strong> 这似乎是一个遥不可及的目标，但随着共享排序器的出现，这样的世界可能触手可及。然而，并非所有rollup都是平等的，这导致我们产生了关于共享排序器网络上奖励和MEV应如何分配的问题。在本文中，我们将探讨实现共享排序器网络的属性以及可以实现的属性。</p>
+<p>共享排序器网络主要由Alex Beckett介绍，后来由Celestia的Evan Forbes和Espresso Systems团队（以及Radius）进行了更深入的研究，以及Jon Charbonneau的新作品。Josh、Jordan及其Astria团队正在构建第一个生产中的共享排序器网络。Astria的共享排序器网络是一个模块化区块链，为rollup聚合和排序交易，而无需执行这些交易。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_erzea0if95.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>在Astria设置中，排序器将有序区块发送到DA层，同时发送给rollup节点。Rollup从排序器获得软确定性保证，并从DA层获得硬确定性保证（在区块确定后），然后执行对它们有效的交易。</p>
+<p>共享排序器网络本质上是一个不依赖于特定rollup的排序器集合，顾名思义，它可以为不同的rollup群集提供服务。这具有各种权衡和属性，稍后我们将讨论。首先，我们必须描述对于排序器（或排序器集合）最重要的属性。在rollup中，排序器或排序器集合的主要要求是抗审查性或活跃性（部分来自基础层的安全性）。这意味着提交给排序器的有效交易必须在有限的时间内（超时参数）包含在链中。共享排序器集合只需要确保交易包含在区块中（即crLists）。</p>
+<p>实现抗审查和活跃性非常困难，正如我们在Modular MEV part 2中所描述的。在诸如Tendermint的共识算法中，您可以在攻击后进行恢复。然而，在攻击发生时，您会失去活跃性。从本质上讲，要求所有其他排序器签署一个区块，而不是选择一个定制的领导者，可能不是最好的选择。尽管这增加了抗审查性，但以“中心化”和MEV提取到单一领导者为代价。另一个可能使用的排序机制可能类似于Duality的Multiplicity。</p>
+<p>这是它们为非领导节点（或排序器）将附加交易包含在区块中的设备。总的来说，在大多数共识协议中实现攻击后的抗审查性和活跃性是很困难的。</p>
+<p>另一种可能使用的共识算法是类似于HotStuff 2的算法，它在攻击期间确保活跃性。</p>
+<p>它的作用是避免在选择新的领导者之前等待最大网络延迟（超时），以防审查或不签名。这可能是一个有趣的共识算法，因为它在不增加额外阶段的情况下解决了共识中的活跃性问题。如果一个领导者知道最高锁定（同意特定输出的最大数量的参与者）并能说服诚实的参与者，问题就解决了。如果不是，诚实的领导者在特定点之后可以有目的地推动进展，帮助下一个领导者。例如，Hotstuff节点在通知新领导者之前不需要确认切换消息，而是可以直接切换到新视图并通知新领导者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_71ad6bo4w3.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>它与Tendermint的区别在于，尽管两者都是两阶段（Hotstuff I有三个阶段，II有两个阶段），但Tendermint具有线性通信，而不是响应式的，而Hotshot2是响应式的。如果存在一系列诚实的领导者，协议是乐观响应的，因为所有步骤（除了第一个领导者的提案）都依赖于从前一步获得大多数消息。在共享排序器设置中，这使得协议在不需要依赖底层层次的情况下实现更好的活跃性，同时不排除这样做的可能性。</p>
+<h2 id="共享排序器集合的构建模块">共享排序器集合的构建模块</h2>
+<p>一组排序器可以向settlement层提交交易（rollup所在的层）。只要满足某些要求，且所需提议者的数量没有达到，就可以加入这个集合。这可能是为了优化延迟、吞吐量等（例如，Tendermint保持相对较低）。这些要求类似于如何成为某个区块链上的验证者。例如，必须满足某些硬件要求，以及一个起始押金或债券 - 如果你想提供经济软最终性，这尤其重要。</p>
+<p>共享排序器集合（或任何去中心化排序器集合）由几个组件组成，这些组件共同确保交易得到处理。这些组件包括：</p>
+<p>1.每个rollup的JSON-RPC，用于将交易提交（对于非完整节点运行者）到充当内存池的节点，然后进行构建和排序。在内存池中，需要有某种机制来决定队列的顺序，以及事务选择过程，以确保有效地构建区块。</p>
+<p>2.一个区块/批处理构建算法，它处理队列中的交易，并将它们转换成一个区块或批处理。这个步骤还可以包括可选的压缩，以减小生成的区块的大小（calldata压缩）。如前所述，这应该与提议者分开 - 本质上是PBS。数据压缩可以采用多种方式，例如：</p>
+<p>a.不使用RLP编码 - 然而，对于去中心化排序器集合来说，这可能是必要的，以帮助在节点之间以空间有效的格式传输数据。</p>
+<p>b.省略nonce（验证特定区块中数据的唯一数字） - 可以在执行时通过查看链的先前状态来重新计算。</p>
+<p>c.简化Gas价格 - 根据固定价格范围设定Gas。</p>
+<p>d.Gas简化 - 除了Gas价格之外，还有Gas编号系统。</p>
+<p>e.用索引替换地址 - 而不是存储完整的地址，rollup可以存储一个索引，用于在其他地方存储的地址映射。</p>
+<p>f.科学计数法中的值 - 以太坊交易中的值字段以wei定价，使其成为一个大数字。你不能省略值字段或将其减少到一组固定值。然而，您可以用科学计数法表示而不是wei来节省数据。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_ueer8ojseq.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p><strong>1.</strong> a.省略数据字段 - 对于简单的转账来说是不需要的，但是在更复杂的交易中则是必需的。</p>
+<p>b.用BLS聚合签名替换单个签名 - 签名是以太坊交易中最大的组成部分。你可以为一定数量的交易存储一个BLS聚合签名，而不是存储每个签名。可以针对整个消息和发送者集合检查BLS聚合签名以确保有效性。</p>
+<p>c.发送方字段作为索引 - 与接收方字段一样，你可以将发送方字段添加为映射的索引。</p>
+<p>d.一个有趣的“模块化”设计概念是，你还可以在这方面进行调整，并在你认为合适的地方进行权衡，以使其适应你特定的rollup场景。</p>
+<p>一个点对点（p2p）层，允许排序器从其他排序器接收交易并在构建后传播区块。这个步骤对于确保共享排序器在多个rollup之间有效地工作至关重要。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_6lnl9jfi94.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>共享排序器集的领导者轮换算法（在单个领导者选举的情况下，它们不需要达成共识）。你可以选择只实施一个领导者轮换算法。另一种方法是走多个并发区块生产者之路，正如Duality所提议的。</p>
+<p>一个共识算法，例如前面讨论过的Tendermint或Hotstuff2，以确保rollup节点与账本的拟定顺序达成一致。</p>
+<p>一个用于将区块/批次提交到底层DA+共识层的RPC客户端，确保区块/批次安全地添加到DA层，确保“最终”确定性，并确保链上有所有交易数据可用。</p>
+<p>将构建者和提议者角色分开以确保公平性和一致性，并避免MEV窃取。除了将执行从排序中移除之外，优化效率、降低PGA和提高CR也非常重要。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_ynopezsnhb.png" alt="Rollup 节点从排序器接收有序块以进行软提交，并接收有序 DA 层块以进行硬提交"></p>
+<p>Rollup 节点从排序器接收有序块以进行软提交，并接收有序 DA 层块以进行硬提交</p>
+<p>交易数据（调用数据）首先发布到基础网络，其中执行共识以保证用户和rollup的交易。然后，rollup节点执行交易（并承诺将状态转换函数添加到规范的rollup链中）。共享排序器网络为rollup提供生命力和抗审查能力。Rollup保持其主权，因为所有交易数据都存储在基础层，允许它们随时从共享排序器分叉。从rollup侧的状态转换函数（STF）计算出的状态根是由共享排序器发送到DA层的交易根（输入）计算出的。在Celestia上，这是在数据被添加到链上并达成共识时生成的。因为您已经有了tx根（和所有可用数据），Celestia可以为轻量级客户端（在Celestia上运行的rollup节点）提供一个小型包含证明。</p>
+<p>为了给用户提供他们期望的用户体验，rollup节点接收已排序的区块（也发送给DA层）。这可以为rollup提供一个软最终确定性保证——承诺该区块最终将按原样排序到DA层，这时rollup节点执行交易并提供一个新的状态根。</p>
+<h2 id="区块创建和时隙">区块创建和时隙</h2>
+<p>为了确定区块创建的时机，排序器需要建立时隙的概念。排序器应该以规律的间隔提交批次，通常每X秒提交一次，其中X是时隙时间。这样可以确保交易及时高效地处理，否则特定间隙的领导者将超时，并失去签名奖励（和执行奖励）。例如，Celestia的区块时间（根据GitHub规格）可能会在15秒左右。因为这是已知的，我们可以假设有多少“时隙/区块”可以从共享排序集合到DA层和rollup节点的已确认区块中填充。考虑优化过的Tendermint，或者类似Hotstuff2的东西。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_it1kzk2kpg.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>在一个时隙中可以提交多个批次，假设设计允许rollup完整节点在时隙的时间和超时参数内高效地将它们处理成一个单一的区块。这有助于进一步优化区块创建并确保交易快速处理。此外，时隙还可以用来促进排序器领导者选举。例如，你可以根据权益比例从权益池中随机选择一个时隙领导者。以保密的方式进行这样的操作最有意义，并且可能更倾向于使用类似于秘密领导者选举的技术，以减少审查。或者甚至是分布式验证器技术（DVT）类型的设置（如Obol/SSV-esque解决方案）。延迟和时隙时间对区块提交和构建如何影响协议具有很大影响。因此，研究如何影响系统是有意义的。Bloxroute尤其在其以太坊中继器的性能方面有很好的研究和数据点。在MEV-Boost中，参与的提议者（验证者，或在rollup案例中，排序器）从中继器请求GetHeader。这为他们提供了区块出价，即特定区块的价值。这可能是每次收到的最高价值区块。对于每个时隙，验证者通常在时隙时间开始后约400毫秒请求GetHeader - 由于显然有很多验证者 - 中继器通常必须处理无数请求。对于大型共享排序器集合，情况也是如此。这意味着您需要适当的基础设施来支持这一点。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_0dondu1wts.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>中继器还有助于促进构建者和提议者的分离，同时还努力验证构建者构建的区块是否正确。他们还检查费用是否正确支付，并充当DoS保护。此外，它们本质上充当区块的托管人，并处理验证者注册。在无限排序器的世界中，这尤其重要，因为您需要正确核算谁在参与，谁没有参与（例如之前讨论的同步层）。</p>
+<p>就区块何时准备好（即由构建者提交）而言，通常在时隙开始前后约200ms左右呈现。然而，就像GetHeader一样，存在相当大的差异，但主要是在时隙时间开始前后约200ms提供。在构建者向多个中继器发送的情况下，实际上有相当多的延迟。Bloxroute还研究了区块发送到多个中继器时会发生什么。正如您可能预料的那样，区块传播到的中继器越多，延迟越大。平均而言，第二个中继器需要99ms才能使区块可用，第三个中继器需要122ms，第四个中继器需要342ms。来源：https://bloxroutelabs.medium.com/mastering-defi-trading-block-building-and-mev-f662650736c0</p>
+<p>在过去几个月里可能已经很清楚，RPC对于区块链非常重要。没有适当的基础设施是一个巨大的负担，拥有合适的RPC选择也至关重要。因此，对于将交易发送到RPC（和公共内存池）的零售用户来说，RPC包含至关重要。Bloxroute对20笔交易进行了一个小测试，这些交易被发送到不同的RPC，然后测量每笔交易被包含在一个区块中所需的时间。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_qw25pz1pgs.png" alt="来源: Bloxroute Labs "></p>
+<p>来源: Bloxroute Labs</p>
+<p>有趣的是，一些 RPC 需要几个区块来包含交易，因为它取决于哪个构建者赢得了相应的下一个区块。交易从 RPC 发送到的构建器越多，快速包含的可能性就越高。尽管交易发起者有可能利用其独特定位的订单流来针对特定的构建者甚至构建自己的区块。</p>
+<p>在关于以太坊中继性能的统计数据方面，看看它们的表现也很有趣。这有助于我们更深入地了解 PBS 如何在多验证器/构建器/中继世界中工作，这有望成为我们总体上关于汇总的方向。 Metrika 在这方面有一些很好的统计数据，这些数据点都归功于他们。</p>
+<p>这里需要注意的是，失标是指接力者应该接力，但没有接力。出价预期来自注册到任何给定插槽的特定中继的验证器。对于中继而言，这本身并不是故障，并且在协议级别上也不会这样处理。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_98j6d3ns8n.png" alt="来源: app.metrika.co "></p>
+<p>来源: app.metrika.co</p>
+<p>如果发生投标错误（例如中继提供无效块），并且它有责任，那么它将被视为投标错误。这些通常不那么频繁，并且大部分是注册偏好错误（即 gas 限制或费用不符合特定验证者的注册偏好）。更罕见的是共识层错误，即出价与以太坊的共识层规则不一致，例如时间戳错误或父哈希与先前区块不一致等。</p>
+<p>在延迟方面（例如，验证者接收到对构建者构建的区块头的响应所花费的时间），数据非常一致。尽管存在一些异常值，例如，如果被请求的中继位于与所选验证器不同的地理位置。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_2tsrdo35qw.png" alt="来源: app.metrika.co"></p>
+<p>来源: app.metrika.co</p>
+<p>在建造者方面，随着时间的推移，MEV-boost 上的建造者总数约为 84 人，其中前 3 名建造者约占建造区块的 65%~。这有点误导，因为这些也是运行时间最长的构建器。尽管它确实展示了某种程度上集中的构建者角色，但就好像你降低了时间尺度一样，我们得到了类似的结果。就实际活跃的建设者而言，数字要低得多，过去 30 天有 35 个，过去一周有 24 个。竞争很激烈，最大和最差的通常会获胜。独家订单流可能而且已经只会增加的东西。我们希望建造者的分布在一定程度上围绕几方保持集中（因为这是一个拥有最佳订单流和硬件优化的游戏），除非我们对设置进行重大更改。虽然这不是一个基本问题，但这仍然是堆栈中的一个集中力量，我们渴望了解挑战这里现有事态的想法。如果您有兴趣深入研究这个（严重的）主题，我们强烈建议您阅读 Quintus 的关于订单流、拍卖和集中化的文章。</p>
+<p>就我们期望看到构建器角色在模块化堆栈中向前发展的位置而言，我们非常确定（至少在 Cosmos SDK 设置中）将通过构建器模块看到 Skip/Mekatek 类型设置。另一种解决方案是 SUAVE 类型设置——例如一个特定的全球构建链，为任意数量的链提供区块构建和出价偏好服务，以确保 PBS。稍后我们将更深入地介绍此解决方案，并针对围绕此的一些未解决的问题提供一些答案。</p>
+<p>关于中继，我们强烈推荐 Frontier Research 的 Ankit Chiplunkar 和以太坊基金会的 Mike Neuder 的一篇文章。其名称为 Optimistic 继电器以及在哪里可以找到它们。其中详细介绍了 MEV-boost 中的继电器如何运行、它们当前的权衡和运行成本以及可以进行的可能更改以提高效率。一个有趣的注意事项是，根据 Flashbot 的估计，目前在 MEV-Boost 中运行中继的成本约为每年 10 万美元。</p>
+<h2 id="finality--最终性"><strong>Finality</strong>  最终性</h2>
+<p>作为我们如何看待模块化区块链最终确定性的先驱（就像他们现在看起来的那样），这里是我们之前的模块化 MEV 文章的回顾。请注意，这不是“官方”的，也不是对最终结果的全面看法；然而，我们认为它在一个易于理解的心智模型中最准确地代表了 rollup finality 的细微差别。</p>
+<p>Pending_On_L2：由rollup的排序器提供的软性承诺，表示用户的交易最终将在其获取安全性的底层层中提交并最终确定。<br>
+Finality_On_L2：排序器已承诺执行rollup的状态转换功能，且区块已添加到rollup的权威链中。<br>
+Pending_On_L1：交易输入或输出/状态转换函数已发布到L1，但尚未发布有效性证明，或者争议期尚未结束 - 这还需要两个连续的以太坊时代。这是大多数Optimistic rollup声称达到最终确定性的时刻，然而根据权威桥的说法，在这个时刻，仍然存在一个任意的7天挑战期。<br>
+Finality_On_L1：Optimistic rollup的争议期已结束，或者已发布并验证有效性证明，以及在两个连续的时代中以绝大多数票通过确认。</p>
+<p>现在在主权共享排序rollups 上，这看起来略有不同，让我们尝试用图表来解释它：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_04enugra24.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>在这种情况下，理论上我们在 L2 之前获得 L1 的最终确定性，等等？是的，在这种情况下，L2 毕竟是主权的。这是假设没有欺诈证明和质疑期，或者您使用的是有效性证明。</p>
+<p>那么，我们如何真正实现这些最终级别？当一个块被添加到规范链并且不能被还原时，块最终性就实现了。然而，这里有一些细微差别，具体取决于完整节点或轻节点的视图。在有序块的情况下，一旦它被包含在 DA 层块中，它就是最终的。已执行的块（带有状态根）由汇总的完整节点/验证器执行，这为它们提供了从基础层上的有序块派生的有效状态根的保证。全节点之外的终结性（例如对于轻客户端或桥接）必须确信所述状态根的有效性。在这里，您可以使用下述方法之一。此外，另一种方法还让验证者通过保证金和随后的欺诈证明对状态根的正确证明负责（乐观路线）。您还可以提供有效性 (ZK) 证明。</p>
+<p>有不同的方法来实现块最终性：</p>
+<p>概率上，通过工作量证明 (PoW)、LMD+Ghost、Goldfish、Ouroboros (PoS) 等。</p>
+<p>可证明的是，当该区块被足够多的委员会成员签署时。 （例如 Tendermint 2/3rds、Hotshot2 或其他 PBFT 类型）</p>
+<p>取决于 DA 层上交易/区块的排序，以便它规定什么是规范链，以及分叉选择规则（例如Based‌）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_v8z3dlp27y.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>可以通过不同的机制实现不同类型的最终性。</p>
+<p>一种最终确定性是“软最终确定性”（例如，待决），如果实施单个领导者选举就可以实现。在这种情况下，每个槽将只有一个或零个块（提交或不提交），并且同步层可以安全地假定这些块中事务的顺序。</p>
+<p>另一种类型的最终性是“可证明的最终性”，它提供比软最终性更强的保证（本质上是最终的）。为了实现可证明的最终性，大多数排序者必须在一个块上签名，从而同意该块是规范的。虽然这种方法很不错，但如果已经实施了单领导选举，则可能没有必要，因为它基本上保证了块排序。显然，这取决于有效的特定领导人选举算法。例如。它是 51% 的实现，66% 还是单个领导者（最好是随机的（VRF）和秘密的）。如果你想进一步阅读以太坊的最终性，我们强烈推荐这篇文章‌，以及我们稍后将推荐的无界集。</p>
+<h2 id="许可的半许可的或无许可的"><strong>许可的、半许可的或无许可的</strong></h2>
+<p>为了防止潜在的 DoS 攻击，必须在加入定序器集和向定序器层提交交易时设置经济壁垒。在有界（有限数量的定序器）和无界（无限）集合中，必须存在将批次提交到 DA 层的经济障碍，以防止同步层（在定序器之间传播块）被减慢或 DDoSed。然而，DA 层本身提供了一些保护，因为向它提交数据会产生成本 (da_fee)。加入无界集所需的保证金应涵盖防止同步层被垃圾邮件所必需的任何额外费用。另一方面，加入有界集合所需的债券将取决于需求（从成本/收入的角度来看均衡）。</p>
+<p>对于无限的排序器集，排序器层上的可证明最终性是不可能的（因为我们永远不知道有多少活跃的投票者/签名者）。另一方面，使用有界定序器集，可以通过（超）多数定序器在块上签名来实现可证明的最终性。这确实需要同步层了解排序器层以及在任何给定时间哪些排序器处于活动状态，这是一些额外的开销。在有界定序器集合中（例如最多 100 个），您还可以针对“性能”优化定序器的数量，尽管以去中心化和抗审查为代价。有界集和经济债券的重要性在于能够提供“快速”可证明的最终性，这也是确定性的。</p>
+<p>无界和有界排序器类型都是我们在遗留区块链中也看到的东西，例如以太坊中的 PoS (Casper+LMD-GHOST)，它是无界的；基于 Cosmos SDK/Tendermint 的链中的 PoS 使用有界集。一个有趣的想法是，我们是否期望像我们在权益证明中看到的那样，围绕共享测序仪从社区中获得类似的经济学和选择？在这里，我们看到了对许多实体的中心化（因此，如果你有一些大型质押提供者/池，那么无界并不重要）。虽然，他们确实“掩盖”了中心化，毕竟，如果你愿意，你仍然可以持有股份。从意识形态的角度来看，选择几乎总是不受限制的——但请记住，无论如何，经济学使它们非常相似。无论参与者是谁，你所支付的经济效益应该是平等的，例如DA 成本和硬件成本（尽管这可能会因分配给您的股份数量和经验以及已经有效运行的基础设施而降低）。即使在有界的 PoS 世界中，我们也看到一群基础设施提供商基本上成为几乎所有链中最大和最常见的验证者。大多数 Cosmos 链上的验证者之间已经存在巨大的相关性，这肯定也会对所述链的去中心化和审查抵抗构成威胁。不过，有一点完全不同，那就是任何零售用户都可以向他们选择的任何验证者质押任何金额。可悲的是，这通常被分配到列表的顶部，生活还在继续。再一次，我们问；我们期望类似的经济学会出现在模块化这个词中吗？ 人们可能希望不会，但随着我们的专业化，您通常需要最适合这项工作的人——这通常是专业知识的提供者。稍后我们还将在单独的部分中介绍这些经济学。</p>
+<p>然而，在所有这一切中要记住的一件重要事情是，归根结底，最重要的是最终用户验证——对于轻客户端和 DAS，任何人、任何地方（甚至在吉萨金字塔）都可以使用);</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_7dv993npp4.png" alt="来源： @JosephALChami"></p>
+<p>来源： @JosephALChami</p>
+<p>在排序器方面，无界和有界的权衡和积极因素可以总结为：</p>
+<h3 id="无界-排序器集"><strong>无界</strong> 排序器<strong>集：</strong></h3>
+<ul>
+<li>
+<p>任何拥有足够保证金/股权的人都可以成为排序者 = 高度去中心化</p>
+</li>
+<li>
+<p>不可能进行单一的领导人选举，因为集合可能是无限的。</p>
+</li>
+<li>
+<p>通过 VRF 进行非单一领导者选举是可能的，但是在不知道会有多少定序器的情况下很难确定 VRF 参数。如果可能的话，这也应该是一个秘密的领导人选举实施，以避免 DoS 攻击。</p>
+</li>
+<li>
+<p>如果没有领导人选举 = 资源浪费问题：区块构建本质上是一场混战，谁提交第一个有效区块/批次谁就获胜，而其他人都输了。</p>
+</li>
+<li>
+<p>sequencer 层没有可证明的最终性，只有概率——例如LMD Ghost+Casper</p>
+</li>
+<li>
+<p>只有在批次写入 DA 层后才能达到最终确定性（仅限于底层块时间，在 Celestia 的情况下为 15 秒）。<br>
+比有界集“更好”的审查阻力。</p>
+</li>
+</ul>
+<h3 id="有界排序器集">有界排序器集：</h3>
+<p>例如，这是以太坊中单槽最终确定性的解决方案之一，同时拥有超级“多数”委员会。看到这个。</p>
+<ul>
+<li>
+<p>允许的定序器的数量在任何特定时间都是有限的。</p>
+</li>
+<li>
+<p>有界集的实现可能比无界集更复杂。</p>
+</li>
+<li>
+<p>可以实现单一领导者选举，在 sequencer 层提供强大的最终性保证。</p>
+</li>
+<li>
+<p>同步层需要知道定序器集以了解哪些块是有效的。</p>
+</li>
+<li>
+<p>将排序器集（或集更改）写入结算层块（例如分叉选择规则），写入 DA 层，可以让同步层独立确定定序器集。例如，这就是 Sovereign Labs 的 rollups 功能，将集合更改写入发布到 DA 层的有效性证明中。</p>
+</li>
+<li>
+<p>如果 DA 层的速度足够，则可能不需要对排序器层的强最终性保证（但是，大多数未优化结算层的当前设置至少有 10 秒以上的出块时间）。</p>
+</li>
+</ul>
+<p>关于如何监控这些排序器集，以及如何添加或删除新进入者，对于如何实现这方面仍有相当大的设计空间。例如。这是否会通过代币持有者治理来实现（然后你如何解释使用该集合的许多不同代币和汇总？）。这意味着它很可能通过发出链上变化信号的链下社会共识来完成（例如以太坊方式）。但是，请记住，对于违反共识规则的罚没，实际的链上共识显然已经到位。</p>
+<h2 id="共享排序器的经济学">共享排序器的经济学</h2>
+<p>共享排序器网络的经济性允许一些有趣的选择。正如我们之前所讨论的，共享排序器网络中的验证器与典型的 L1 验证器并没有太大区别。它参与的网络只是针对执行一项任务、接收意图（pre-PBS）以及随后提出和订购交易进行了更优化。与“常规”验证器一样，有收入和成本组成部分。在等式的两边，验证者参与的网络具有很大的灵活性，类似于常规的 L1。</p>
+<p>收入来自用户，或者他们最终打算与之交互的汇总，他们为使用共享排序器支付一定的费用。该费用可以是提取的 MEV 的百分比（尽管此处输入数字可能很难近似）、跨链价值转移、类似构造的气体或每次交互的固定费用。最优雅的收入解决方案可能是这样一种设置，其中支付给共享排序器的价值小于通过在汇总之间共享排序器并获得共享安全性和流动性的好处而获得的额外价值。缺点是堆栈的另一部分去中心化的好处很难量化。然而，随着共享排序器网络成长为自己的生态系统，其提取费用的能力可能会增加。这在很大程度上是由于它们固有的易于聚集的能力，并且在某种程度上具有规模经济效应。随着越来越多的汇总以及随之而来的应用程序加入网络；可提取的跨域 MEV 越多。</p>
+<p>在成本方面，共享排序器网络也有竞争的可选性。他们可以通过预付发布到 DA 层的成本，甚至与汇总本身上的应用程序交互来轻松补贴网络的使用。这类似于 web2.0 公司使用的策略，而您在用户（或汇总）获取上承担初始损失，希望他们的长期收入会超过支出。另一种更新颖或加密原生的方法是允许汇总以其原生代币支付 DA 费用。在这里，共享排序器层承担了在 DA 层上发布数据所需的代币与汇总的本机代币之间的定价风险。本质上，它仍然是一个共享的排序器。但是，它通过获取“供应商”（汇总）的令牌来创建生态系统一致性。这有点类似于我们在应用链论文中提出的仓储结构。其他可以降低成本的部分是通过使用不同形式的 DA。不同的 DA 层将根据利用率提供不同的定价，用户能够通过轻客户端轻松验证或直接做出不同的块大小选择。最后，共享排序器还可以在发布到 DA 层之前对事务进行批处理。在 ZKR 的情况下，由于交易的某种平衡，这可以降低 tx 成本，在 ORU 方面，您可以进行我们目前在各种汇总上看到的各种批处理气体优化。这将减少需要在 DA 层上发布的数据量，从而降低共享排序器网络的成本，提高整个网络的盈利能力。 它确实以限制互操作性和改变最终确定时间为代价（如前所述，在 L1 上的最终确定意义上）。</p>
+<p>总体而言，共享排序器网络的经济性允许进行一些有趣的实验和引导策略。我们估计关键的区别将是生态系统的规模，因此是跨域 MEV 的数量，而不是事物的成本方面。我们还强烈建议查看 Espresso 团队关于共享排序的非常深入的博客文章，它们还涵盖了这些类型网络的一些经济权衡（和积极因素）。为了展示为什么 rollup 被激励使用共享排序（超出其经济性）的另一种方式，研究聚合是有意义的。</p>
+<h2 id="聚合理论与共享排序器">聚合理论与共享排序器</h2>
+<p>另一种描述共享排序器的特性的方法是通过聚合理论的视角。聚合理论 (AT) 是关于平台或聚合器如何通过集成其他平台及其用户的系统方式获得显着用户吸引力的概念。您基本上将游戏从分配稀缺资源（例如块空间）更改为控制对丰富资源的需求（同样，本例中的块空间是有意义的）。 AT 本质上是将供应商和产品（即汇总和区块空间）聚合到聚合用户群的单一卓越用户体验中。随着这些聚合器网络效应的增长，这种关系变得越来越排外——没有理由离开。当这种情况发生时，用户体验就成为类似设置之间的重要区别因素。如果存在对新用户的激励（例如良好的用户体验和简单的互操作性），那么将 rollup 转移到他们自己的网络或不同集合的可能性就不太可能了——因为网络效应会驱动新供应商和新用户。这会产生飞轮效应，无论是从供应商和用户的角度来看，还是从聚合审查抵制的角度来看。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_4ashs1hel9.png" alt="来源: Aggregation Theory 2015, Ben Thompson"></p>
+<p>来源: Aggregation Theory 2015, Ben Thompson</p>
+<p>在共享排序器的脉络中，可以通过汇总的几乎“组合”和联盟看到 AT，它们都利用堆栈的类似垂直部分——加强自己和他人，同时使用户能够在任何地方拥有相同的体验。</p>
+<p>供应商（例如 rollups）在理论上并不是共享排序器集中的排他性，但实际上；共享的排序器集，它是汇总，用户受益于网络效应的循环，导致所述汇总的使用增加。这些好处使汇总和用户更容易与共享堆栈集成，因为他们会因不参与而损失更多。当您只有两个 rollup 共享一个 sequencer 集时，这些好处可能很难看到，但随着您将越来越多的 rollup 和用户添加到等式中，它会变得更加清晰。共享排序器集与用户有直接关系，因为他们对交易进行排序，即使用户自己不知道他们甚至在与他们交互——因为从他们的角度来看，他们只是在使用他们有理由使用的汇总交互（意味着排序/排序器变得排他）。与这些排序器相关的唯一成本基本上是它们运行的硬件成本，只要保护它的区块空间和令牌对最终用户有价值。交易费用是数字化的，从用户的钱包中支付，也许在未来，甚至可以通过帐户抽象中的 paymasters 等预付款抽象出来（但是，有人将不得不承担 DA、排序和执行的成本）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_ssib3z2ekb.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>当你考虑到来自 Astria 的 Josh 和 Jordan 以前工作的地方——谷歌时，这就更有意义了。谷歌产品从一开始就深受 AT 思想的启发，这在谷歌搜索中尤为普遍，它是通过模块化单个页面和文章创建的，使它们可以通过全局搜索窗口直接访问。</p>
+<p>在这种情况下，共享排序器集的客户（rollups 的用户）的获取成本越来越低，因为随着供应商（rollups）数量的增加，他们很可能会被吸引到该集。这确实意味着，在大多数情况下，聚合器（或多聚合器）具有可能的赢家通吃效应，因为这种聚合器的价值随着供应商的崛起而增加（当然，只要用户体验良好） ).相比之下，在单一测序网络上，客户获取仅限于单一网络及其应用程序。如果用户想要使用位于不同汇总上的汇总应用程序，他们将（在当前限制内）必须完全脱离网络。这意味着用户和价值的粘性不是很高，也意味着在任何时候，如果不同的 rollup 生态系统受到高度重视（或具有更多激励），资本可能会外逃。</p>
+<h2 id="属性和权衡的总结">属性和权衡的总结</h2>
+<h3 id="属性">属性</h3>
+<p>Shared Sequencer 集是一个汇总网络，它聚合和排序多个汇总的交易。这些汇总都共享相同的排序器。这种资源汇集意味着 rollup 获得更强的经济安全和审查阻力，从而允许快速的软最终保证和有条件的交叉 rollup 交易。</p>
+<p>现在，Twitter 上有很多关于共享相同排序器集的汇总之间的原子性的噪音。这主要是围绕它在默认情况下是否是原子的这一事实而设定的——它不是。然而，如果有问题的汇总已经实现了彼此的状态转换函数（STF）作为它们之间关于条件交易的依赖——它们之间确实可以具有原子性——只要它们的槽/块时间对齐（它们应该与共享序列集）。在这种情况下，为了获得原子互操作性，您基本上只需在链 B 上运行链 A 的轻节点，反之亦然（类似于 IBC 的工作方式）。为了在安全措施方面进一步实现这种互操作性（除了信任单个完整节点作为轻节点），您可以实施 ZKP（本质上是状态证明）来解决确保状态确实正确的“预言机问题”。如果有条件的交易或类似交易已经触及它们之间的规范桥梁，这将使周围更加清晰。欺诈证明也是一种可能性，但显然会给我们留下一个挑战期（这意味着第三方会突然出现并收取费用来承担该风险）。此外，在轻客户端（而不是彼此的情况下的完整节点）中，由于等待签名的标头 + 欺诈证明窗口（如果有），它至少会落后一个块。</p>
+<p>我们相信“桥接”最有可能与轻客户端和 ZK 一起解决。在这种情况下使用轻客户端（而不是智能合约）的挑战在于，汇总节点端的硬分叉（升级等）需要相互结合才能保持其桥接运行（这正是 IBC 需要启用相同状态模块）。如果你想阅读更多关于这个特定主题（以及如何解决它）的信息——我们强烈推荐这个PPT‌。</p>
+<p>共享排序器之所以具有令人难以置信的可扩展性，是因为它们不执行和存储任何状态（就像集中式排序器现在所做的那样）。汇总节点本身也是如此（它们不必扩展到 100 个节点，除非它们想要它们之间的原子性——例如轻客户端/状态证明）。这些节点只执行对它们的汇总有效的交易，以及对它们也有效的任何有条件的跨域交易。如果汇总节点必须为许多汇总执行和存储状态，这将阻碍可扩展性和降低去中心化（反过来降低审查阻力）。它还强化了 Proposer-Builder-Seperation (PBS) 的概念。虽然我们还是需要把builder和proposer完全分开。在当前设置中，定序器本质上是构建器和提议器（尽管它们不执行交易）。理想的设置可能是排序器只是盲目地签署来自高度优化的构建器设置的构建块，并确保块被正确实施（同时提供高度的经济最终性和对该证明的审查阻力）。通过这种方式，他们可以提供高度的安全性和承诺，以保证汇总节点的软最终性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/9_qpnjswonss.png" alt="深度：一文探索共享排序器网络属性"></p>
+<p>对于交叉汇总条件事务，它们也存在以帮助使汇总节点（执行程序）能够提供中间状态根，从而允许汇总之间的原子性。如果您想深入了解它的外观，那么这个简短的演示非常适合您。</p>
+<h3 id="权衡">权衡</h3>
+<p>前面提到的超时参数对 MEV 和事务包含有一些有趣的影响，这取决于排序器集的排序和领导者/共识机制。例如如果超时参数，如我们的特定应用链论文中所述，是相对较短的，那么去中心化排序器级别的提议者尽可能快地发布数据是关键。在这样的世界中，您可能会遇到分散排序器集的“验证者”的竞争，它们竞争充当领导者并在 DA 层上为区块空间竞相出价，直到在经济上不再需要这样做。</p>
+<p>正如 Evan 在 Celestia 论坛上的原始懒惰排序器帖子‌中所提到的，等待交易执行直到它们被发布到基础层（在这种情况下是 Celestia）是非常浪费的。由于您现在受限于基础层的阻塞时间——从用户体验的角度来看，这是等待最终确定的很长时间。为了获得更好的用户体验，共享排序器为汇总提供了软最终承诺（如前所述），这为我们提供了用户在现有中心化汇总中习惯的用户体验（同时保持去中心化和高审查阻力）。软性承诺本质上只是对最终交易顺序的承诺，但一旦发布，就会得到沉重的经济纽带和来自 baselayer 的快速最终确定性的支持。这也包含在欺诈证明中（如介绍中所述）。当所有 tx 数据都已发布到 baselayer 时（意味着 L1 实际上达到更快的最终性），就会出现真正的硬最终性。这取决于汇总是否使用欺诈证明或零知识证明来进行主权证明验证——这发生在汇总方面。想要这种分离的原因是为了从定序器中消除状态转换的繁重计算（这是一个巨大的瓶颈）。相反，rollup 节点只处理对它们有效的节点（这意味着我们必须添加条件交易、状态证明或轻节点验证以实现适当的互操作性）。硬最终性仍然依赖于基础层（但是对于 Celestia 来说这可能是 15 秒左右，并且对于 Tendermint 也是确定性的）——这确实为我们在汇总方面提供了高度相对快速的硬性最终性保证。</p>
+<p>也可以在网络中使用 ZK 证明来优化验证、交易大小（例如，仅发布状态差异——但这确实会增加更高的信任度，直到发布 ZKP）。如前所述，这些状态证明可用于允许连接的链/汇总具有更容易和更快的互操作性（不必等待挑战窗口）。</p>
+<p>前面提到的这些条件交易的一个缺点是它们的验证和发布可能要贵得多（例如，Tendermint 区块头验证成本高昂，并且在 Cosmos 链上得到补贴）——同时也会增加一些延迟系统（但仍然比孤立的汇总快得多）。由于垂直共享集成而可实现的原子性确实弥补了很多这一点。</p>
+<p>在新rollup的引导阶段，使用共享的排序器集很有意义——作为供应商，您获得的积极影响可能会超过您可能“被迫”做出的一些权衡在护城河级别。然而，对于具有大量交易和经济活动的已经成熟的汇总，放弃部分护城河可能意义不大。</p>
+<p>这带来了一个问题，即我们是否需要对提取的 MEV 进行经济/交易（每个 rollup）加权重新分配，以吸引已经成熟的 rollups 加入共享集——或者甚至保持非常成熟的 rollups 并避免让它们分拆出自己的网络。这一切都非常理论化，但围绕 MEV 在具有不同活动程度的许多汇总之间的共享垂直世界中的外观，这无疑是一个有趣的思考过程。例如，如果通过排序器集驱动大部分价值的单个汇总正在与其他人分享这些利润的一部分（这可能不会带来那么多的“价值”），那么他们肯定有更多理由转向自己的孤立的系统。 EigenLayr 的 Sreeram 在这里也有一些想法‌，我们也推荐阅读。</p>
+<p>当您考虑到搜索者在新链上工作需要相当大的技术成本这一事实时，这也变得越来越重要，因此对其进行标准化并向链提供关于“他们的”MEV 的一些主权可能是一个很好的起点。从本质上讲，在 MEV 中，占主导地位的界面（或软件）很可能会胜出——然而，除非您运行基础设施的关键部分（导致集中化），否则实际上要通过该软件获利非常困难。在市场层面上，共享排序器提供的本质上是许多供应商的公共内存池，集中拍卖可能会带来更健康的竞争。</p>
+<p>这里的一个担心是，在两个rollup 的情况下，它们都在共享集中运行一个排序器。可以选择运行排序器的具有“较低经济”价值的汇总（A）来提议来自汇总（B）的具有大量 MEV + 费用的块。从 rollup B 的角度来看，他们基本上会错过一些价值，而这些价值是他们以孤立的方式保留给自己的。</p>
+<h2 id="解决互操作性权衡问题">解决互操作性权衡问题</h2>
+<p>关于互操作性的建议权衡的另一条说明是解决其中一些问题的另一种方法，总结如下：</p>
+<p>共享排序器网络的要点在于它为多条链提供了规范性保证，这在这种情况下无疑是一个很大的优势。这可以与一种机制相结合，以保证汇总之间的有效状态转换。这可能是基于委员会的方法（例如 PoS）、保税证明（乐观方法）或我们更喜欢的方法——由委员会签署支持的 ZKP。因为共享排序器是“惰性的”，它们只创建大型块来为多个汇总排序交易，并且所述交易的执行留给特定汇总。状态证明（即 Lagrange、Axiom 或 Herodotus 等）都是可能的解决方案，也有可能获得主权汇总的最终性证明。您甚至可以通过质押池、EigenLayr 等添加经济债券的最终证明。这个想法是，共享排序器为排序的规范性提供了经济保证，并且从该排序生成有效性证明本身就是确定性的。基本思想是 rollups 可以在彼此之间同步执行事务。例如，两个汇总节点网络可以有条件地知道两个汇总历史通过 ZKP 有效并且可用（数据发布到高效的 DA 层）。然后，rollup 节点可以通过在链上发布从网络 A 和 B 接收到的单个 rollup 块前缀来同时结算两个 rollup。确实需要说明的一件事，我们之前略微讨论过 - 交叉 - rollup 原子（或同步）事务可能比单个 intra rollup 事务更昂贵。 这是因为有条件的交叉汇总事务正在通过共享执行消耗来自两个独立系统的资源。</p>
+<p>Succinct 还有一篇关于 Optimism 超级链生态系统中带有共享排序器（和共享欺诈证明者）的汇总之间的跨链“原子”交易的文章，可以在此处‌查看。另外，正如 Polymer 的 Bo Du‌ 所说； “跨链原子 txs 就像为写入获取跨数据库分片的锁”。</p>
+<h2 id="垂直的未来"><strong>垂直的未来</strong></h2>
+<p>Jon Charbonneau 和其他人已经相当深入地研究了 SUAVE 类链条可能看起来的内部工作原理，因此我们不会详细介绍。如果你想要更详细的描述，你可以查看他的作品。虽然，我们确实认为垂直整合确实值得它发挥自己的作用，既要强调我们真正可以实现多么令人难以置信的模块化（以及为什么），又要强调围绕垂直整合的一些悬而未决的问题和担忧。</p>
+<p>虽然目前来自 Astria、Espresso 和 Radius 的共享排序提案是令人难以置信的模块化，但排序者仍然充当构建者和提议者（尽管在 Astria 案例中，他们不执行交易）。 Astria 从一开始就积极地将 PBS 构建到他们的架构中。</p>
+<p>如果 PBS 尚未内置到协议中（尽管去中心化程度不同），则有多种方法可以实现 PBS。像 SUAVE 这样的东西，使用 MEV-Boost 等链下模型，或实施构建器模块（例如由 Mekatek 和 Skip 构建的 Cosmos SDK）。</p>
+<p>需要注意的重要一点是，这些都不是排他性的。你可以灵活运用几种不同的方法，让任何人表达他们的喜好。这样你就可以让执行者竞争来填补这些空缺。添加更多的可选性总是好的（并且坚持我们对模块化的信念）。虽然，不同的实现会有不同的权衡。使用 SUAVE 之类的东西，您确实可以将隐私（使用 SGX 或密码学）与加密经济安全性一起添加到事实中，而不是依赖于完全信任的集中式 PBS 构建器。 （感谢 Jon Charbonneau 在这里提供反馈）。</p>
+<p>垂直集成到构建器链中需要在确保公平的情况下完成，并且不会偷工减料并增加延迟和降低性能。因此，构建链需要进行难以置信的优化，并且可能需要昂贵且高性能的硬件（导致中心化）。这意味着为了获得最终用户验证，我们可能需要一些轻节点的实现（尽管它们必须信任完整节点），或者利用状态证明类型设置来确保链和用户有出价偏好被填充的证明，并且该块已正确构建。</p>
+<p>像这样的链很可能是令人难以置信的状态重（我们希望避免）。尽管这些状态繁重的交易将通过智能合约进行优先投标。在偏好出价的情况下，它要么被填满要么不（在短时间内），因为出价通常只在短时间内有效，具体取决于偏好。这意味着我们很可能能够为出价实施非常有效（和早期）的状态到期——这将使我们能够修剪数据并保持链条“干净”。这个到期日需要足够长以仍然允许出价偏好被填充，尽管将它降低太多本质上使得不可能在遥远的未来实施区块空间期货。不太可能需要恢复和检索过期的投标合同，因为它们不需要无限存在（与应用程序不同）——这可以通过在投标完成时提供状态/存储证明来变得更加“安全”和无信任，或通过 DAS 存储解决方案——例如 Joachim Neu 提出的解决方案。</p>
+<p>正如我们前面提到的，验证 SUAVE 的“真实性”的需要可能仅限于平台的“鲨鱼”（高级用户），因为 SUAVE 实施的大多数用户和客户都有可观的经济收益从利用它。这可能会诱使我们让人们运行一个完整的节点，如果他们想要验证——尽管这排除了绝大多数人（你可以争辩说他们不需要验证）。这（在我们看来）与加密是对立的，我们更希望看到 SUAVE 的验证通过状态证明或通过轻客户端友好实现“无需信任地”发生。</p>
+<p>需要这个的原因是你想要验证你的出价偏好是否正确填写，并且块在支付时填充了正确的信息（以避免奇怪的重新捆绑和其他漏洞利用）。这本质上是一个预言机问题——确实可以通过状态证明解决链上状态（所有 SUAVE 都是）。使这些状态证明跨链带来了另一个问题，我们如何以一种方式跨链中继这些信息，使其不会被篡改或保留？这可能是通过强大的经济最终证明（例如 Lagrange 提出的证明，其中您可以使用 EigenLayr 的重新质押验证器来证明具有非常强大的经济债券的链的最终性和真实性）。这就提出了一个不同的问题（例如，投标合同指定“预言机”——在这种情况下是重新抵押者）指定了一个被抵押并提供经济债券的代币——但我们如何在共识之外削减它？虽然您可以在削减标准中编写代码，但这并未达成共识，这意味着将通过智能合约使用社会削减（这几乎从不“公平”，并且可能导致问题）。这是目前在 EigenLayr 中削减的更大问题之一。</p>
+<p>那么，这会给我们留下什么？可能在这种情况下，直到我们在共识之外进行链上“无信任”削减，像 SUAVE 这样的链可能需要自己的共识算法和加密经济安全性来证明出价偏好和构建块的最终性——然而，这意味着添加更多的加密经济攻击向量，特别是如果它的汇总构建块比它自己的加密经济安全更有价值。</p>
+<p>除此之外，SUAVE 型链和跨域 MEV 的总体外观还有超大的设计空间。以下是一些可能的研究途径：</p>
+<p>Intent Matching and Intent-Based Systems 意图匹配和基于意图的系统<br>
+Convex optimizations in multi asset trades 多资产交易中的凸优化<br>
+DSLs<br>
+MEV redistribution MEV重新分配<br>
+Latency wars<br>
+Scaling issues of having a single set of actors needing to build for the state machines of multiple rollups. 需要为多个汇总的状态机构建一组参与者的扩展问题。<br>
+Preference expression  偏好表达</p>
+<p>在偏好表达上，为了与 EVM 中的智能合约交互，合约调用（消息）被发送到地址上的特定函数，部署的代码包含执行指令。当用户提供输入时，由于潜在的状态性，他们可能无法控制输出。</p>
+<p>相比之下，偏好表达设计系统（例如 SUAVE 和 Anoma）只需要用户用债券签署偏好，如果满足搜索者的偏好，该债券将支付给构建者和提议者。不同语言和虚拟机的实现可能因复杂的组合逻辑而异，例如 MEV 搜索器和构建器的事务排序。这是一个新的设计空间，最近受到了很多关注——尤其是在 Anoma 结构周围。我们建议在此处查看 Anoma 架构。并且强烈推荐这本简短的读物，作为 Haun Breck 的开胃菜。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50688/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">浅析元宇宙对商业银行的影响</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50656/">
+                <span class="next-text nav-default">深度解读NFT MEV：NFT交易中的新机遇</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#共享排序器集合的构建模块">共享排序器集合的构建模块</a></li>
+    <li><a href="#区块创建和时隙">区块创建和时隙</a></li>
+    <li><a href="#finality--最终性"><strong>Finality</strong>  最终性</a></li>
+    <li><a href="#许可的半许可的或无许可的"><strong>许可的、半许可的或无许可的</strong></a>
+      <ul>
+        <li><a href="#无界-排序器集"><strong>无界</strong> 排序器<strong>集：</strong></a></li>
+        <li><a href="#有界排序器集">有界排序器集：</a></li>
+      </ul>
+    </li>
+    <li><a href="#共享排序器的经济学">共享排序器的经济学</a></li>
+    <li><a href="#聚合理论与共享排序器">聚合理论与共享排序器</a></li>
+    <li><a href="#属性和权衡的总结">属性和权衡的总结</a>
+      <ul>
+        <li><a href="#属性">属性</a></li>
+        <li><a href="#权衡">权衡</a></li>
+      </ul>
+    </li>
+    <li><a href="#解决互操作性权衡问题">解决互操作性权衡问题</a></li>
+    <li><a href="#垂直的未来"><strong>垂直的未来</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

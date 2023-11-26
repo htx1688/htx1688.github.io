@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Fuel：模块化执行案例（第 1 部分） - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="区块链空间正越来越多地转向模块化架构，以实现真正的可扩展性。即使是像以太坊这样以前完全单片的链，也正在转向模块化设计，以克服单片区块链设计带来的挑战。" />
+<meta name="keywords" content="技术" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/44223/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Fuel：模块化执行案例（第 1 部分）" />
+<meta property="og:description" content="区块链空间正越来越多地转向模块化架构，以实现真正的可扩展性。即使是像以太坊这样以前完全单片的链，也正在转向模块化设计，以克服单片区块链设计带来的挑战。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/44223/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="Fuel：模块化执行案例（第 1 部分）">
+<meta itemprop="description" content="区块链空间正越来越多地转向模块化架构，以实现真正的可扩展性。即使是像以太坊这样以前完全单片的链，也正在转向模块化设计，以克服单片区块链设计带来的挑战。"><meta itemprop="datePublished" content="2022-11-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-11-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6059">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Fuel：模块化执行案例（第 1 部分）"/>
+<meta name="twitter:description" content="区块链空间正越来越多地转向模块化架构，以实现真正的可扩展性。即使是像以太坊这样以前完全单片的链，也正在转向模块化设计，以克服单片区块链设计带来的挑战。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Fuel：模块化执行案例（第 1 部分）</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-11-05">
+      2022-11-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6059 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>模块化执行案例</p>
+<hr>
+<p>区块链空间正越来越多地转向模块化架构，以实现真正的可扩展性。即使是像以太坊这样以前完全单片的链，也正在转向模块化设计，以克服单片区块链设计带来的挑战。</p>
+<p>模块化区块链堆栈的核心组件之一是执行层，Fuel正在为模块化区块链堆栈构建最快的执行层。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_hcmsfsswtr.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<h2 id="什么是模块化执行层他们将如何实现更具可扩展性的区块链系统">什么是模块化执行层？他们将如何实现更具可扩展性的区块链系统？</h2>
+<p>与单片执行层相比，模块化执行层具有两个核心优势：</p>
+<p>1，单片链将计算和验证耦合在同一层，导致安全性低于标准和有限的可扩展性。模块化执行层通过解耦计算和验证来避免这种情况，从而大规模提供更强大的安全保证。</p>
+<p>2，单片链在可以支持的速度和计算种类方面被锁定在低效的技术中。另一方面，可以专门设计模块化执行层，以优化高效计算。</p>
+<p>这篇文章会详细阐述了第一个核心好处，第二个好处将在第2部分中探讨，链接：</p>
+<h2 id="单片区块链基础计算与验证">单片区块链基础：计算与验证</h2>
+<p>要了解模块化执行层（MEL）带来的创新，首先我们需要了解单体区块链如何处理计算和验证。</p>
+<p>区块链依赖于执行交易并将它们捆绑成一个区块的实体网络 - 这些被称为区块生产者。如果没有制衡，恶意区块生产者可能会在区块中包含无效交易（例如，将代币铸造到他们自己的地址）。为了防止这种情况，区块链依靠其他节点的网络来确定区块的有效性，然后再将其添加到其链版本中。</p>
+<p>这导致了区块链运行所需的两个核心功能：</p>
+<p>区块生产（即计算） - 执行交易并应用单个状态转换来构建区块。</p>
+<p>块验证（即验证） - 确认状态转换有效。</p>
+<h2 id="单片链的计算与验证">单片链的计算与验证</h2>
+<p>注意：为了便于理解，本文提供了关于区块生产和验证如何在单片区块链上工作的简化说明。实际上，该过程更为复杂，并且可能因特定链的设计而异。但是，许多相同的核心原则适用。</p>
+<p>在大多数单体区块链设计中，计算和验证由相同的实体执行 - 验证者（即全节点）。当用户发送交易时，验证器将执行交易，然后将相应的状态转换包含在块中。</p>
+<p>一旦一个区块被创建和传播，其他完整节点就会下载该区块并重新执行该区块中的交易，以确认其有效。如果区块是有效的，假设它们是诚实的，则全节点将该区块附加到他们的链版本上，从而证明其有效性。</p>
+<p>有时，应用程序或用户需要访问区块链的状态，但不希望产生运行完整节点和独立验证所有交易的高资源需求。为此，它们可以运行轻量级客户端，这些客户端假定全节点提供的区块仅包含有效交易。</p>
+<p>他们不会下载完整的区块链，也不会验证所有以前的交易是否有效。相反，他们必须相信大多数完整节点是诚实的（即只在他们的链副本中包含有效的区块）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_9orstetejk.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>这被称为诚实多数假设，也是大多数单体区块链容易受到51%攻击的原因。在单片模型下，由于需要诚实的大多数完整节点来验证区块链是否有效，因此轻客户端被迫信任大多数。</p>
+<p>如果超过一半的完整节点是不诚实的，轻客户端无法知道这一点，因此他们最终将遵循无效链。</p>
+<h2 id="诚实多数假设---可扩展性的限制">诚实多数假设 - 可扩展性的限制</h2>
+<p>单片链的可扩展性受到它们对这种诚实多数假设的依赖的严重限制。这是因为，为了增加交易吞吐量，必须增加区块大小和/或频率，以便在相同的时间内处理更多的交易。这增加了全节点的资源需求（和相关成本）;更大/更快的块=更多的计算=更高的成本。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_yf7hn84n0v.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>随着运行全节点的成本增加，更多的实体将选择运行轻客户端，依靠越来越小的全节点网络来验证链的有效性。区块验证的日益集中化是对单体链安全的主要威胁，因为更集中的验证者池更容易受到攻击，也更容易串通。</p>
+<h2 id="模块化执行解耦计算和验证">模块化执行：解耦计算和验证</h2>
+<p>好消息是，区块链系统可以摆脱依赖于诚实多数假设的设计。为了避免这种单片设计的陷阱，模块化区块链堆栈将计算与验证分离。通过将执行（即计算）移出基础链（通常称为“父链”），可以在不影响去中心化的情况下实现更大的规模。</p>
+<h2 id="什么是模块化执行层">什么是模块化执行层？</h2>
+<p>在模块化区块链堆栈中，执行层负责计算 - 换句话说，处理交易和应用单个状态转换。</p>
+<p>Fuel将模块化执行层定义为：为模块化区块链堆栈设计的可验证计算系统。更具体地说，一种欺诈或有效性可证明的区块链（或其他计算系统），它利用模块化区块链来实现数据可用性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_37izutzids.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>为了进一步澄清，如果计算系统：1）不能证明欺诈或有效性，或者2）不将数据可用性卸载到另一层，则计算系统不是模块化执行层。</p>
+<p>与单体区块链一样，模块化执行层采用专用区块生产者网络。这些实体处理执行交易和生成区块的资源密集型过程。然而，与单片系统不同，验证不是在执行层处理的，而是在模块化区块链堆栈的较低级别处理的。</p>
+<h2 id="验证---保持区块生产者的诚实">验证 - 保持区块生产者的诚实</h2>
+<p>模块化执行的天才之处在于，只要验证（即区块验证）是去中心化的，计算（即区块生产）就不需要去中心化。区块大小可以增加，导致产生区块的节点中心化 - 但只要验证解耦，无效区块就不会添加到链中。</p>
+<p>但这是如何工作的呢？如果我们允许区块生产保持中心化，我们如何确保安全性得到保护？这就是模块化发挥作用的地方。</p>
+<p>模块化执行层将执行的资源密集型功能抽象为强大的区块生产者，这些生产者捆绑并执行批量交易，并定期将这些交易作为区块发布到父链（结算/共识/数据可用性层）。为了保持这些区块生产者的诚实，还有其他非区块生产的完整节点（通常称为“验证者”或“证明者”），它们下载并重新执行发布到父链的区块，以确保它们只包含有效的交易。</p>
+<p>这些全节点如何传达交易的有效性或无效性的细节取决于模块化执行层是采用乐观模型还是零知识模型。在乐观 MEL 的情况下，全节点仅在检测到无效交易时才采取行动（通过欺诈证明）。相反，在零知识MEL的情况下，全节点主动证明交易的有效性（通过有效性证明）。在任何一种情况下，区块生产者提供的所有交易的有效性或无效性都在父链上得到证明，而不是在模块化执行层上。</p>
+<h2 id="示例optimistic模块化执行层上的欺诈证明">示例：Optimistic模块化执行层上的欺诈证明</h2>
+<p>为了提供更深入的说明，让我们探讨Optimistic MEL 的情况（假设所有交易都是有效的，除非另有证明）。如果即使是模块化执行层上的单个完整节点在父链上发布的区块中检测到无效交易，它们也可以生成欺诈证明（在预定义的“争议解决窗口内”），以加密方式证明交易无效。</p>
+<p>根据特定模块化堆栈的结构，可以通过多种方式处理，例如：</p>
+<p>1，在具有沉降层的模块化堆栈中：</p>
+<p>全节点将欺诈证明提交给结算层上的专用争议解决合约，该合约直接重新执行交易（请注意，这要求MEL交易的结构使其能够以确定性的方式在结算层的虚拟机上证明欺诈 - 例如，FuelVM被设计为在EVM中可证明欺诈，以便在以太坊上进行结算）。</p>
+<p>如果交易无效，违规的区块生产者将受到砍杀的惩罚（即他们损失资金），“举报人”将获得这些资金的一部分奖励，并且链的状态将恢复到无效交易之前的状态。由于无法保证无效事务之后的任何事务都对应于有效状态，因此这些后续事务将重新执行。</p>
+<p>2，在没有沉降层的模块化堆栈中：</p>
+<p>全节点通过点对点网络八卦欺诈证明，以警告轻客户端该区块包含无效交易。使用欺诈证明作为区块生产者不诚实行为的证据，全节点可以在父链上提出惩罚交易，从而削减区块生产者的资金。</p>
+<p>由于没有结算层来决定链的“规范”版本，恶意全节点理论上可以选择不拒绝该区块;但是，欺诈证明已经传达给轻客户端，因此他们知道不要遵循恶意全节点的链版本。因此，社会共识保证了无效区块将被拒绝。</p>
+<p>在任何一种情况下，由于验证过程被载入在父链而不是执行层上，因此安全性被外包给父链，这意味着执行层本身可以在较低的安全保证下运行。即使执行层上99%的全节点是不诚实的，也只需要一个诚实的全节点来确保执行层只包含有效的交易。</p>
+<p>这意味着模块化执行层（和 MEL 轻客户端）可以基于单个诚实的少数假设运行，而不是依赖于诚实的多数全节点。</p>
+<p><img src="https://img.jinse.cn/6646439_watermarknone.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>在模块化执行层上，轻客户端只需要依靠一个诚实的全节点来保证链的有效性。</p>
+<p>无效区块只能由单片系统中的大多数完整节点还原，而模块化系统中的单个完整节点可以使用欺诈/有效性证明强制还原无效交易。</p>
+<h2 id="这如何实现可扩展性">这如何实现可扩展性</h2>
+<p>允许计算在父链下进行，可以大幅增加交易吞吐量。区块大小可以显着增加，而不必担心区块生产的集中化，因为单独的区块验证过程使区块生产者保持诚实。</p>
+<p>虽然较大的区块确实给执行验证的完整节点带来了更高的负担，但诚实的少数假设意味着该领域的中心化威胁较小，因为依赖于不诚实多数的基于中心化的漏洞变得不可能。</p>
+<p>轻客户端还可以在模块化架构下以更高的安全保证运行，因为欺诈证明使他们能够根据来自单个诚实完整节点的证明来识别无效交易（与单片系统相反，单片系统要求轻客户端相信至少有一半的完整节点是诚实的）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_lrys36fivz.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>模块化执行层上的轻型客户端比单片客户端具有更高的安全保证</p>
+<p>此外，区块生产者知道任何恶意活动都会被检测到并导致砍伐，因此他们甚至不太可能试图做出不诚实的行为。因此，执行层可以进行计算优化（即处理大量事务），同时依赖于模块化堆栈的安全优化的较低级别。</p>
+<h2 id="模块化执行潜在挑战">模块化执行：潜在挑战</h2>
+<p>这种模块化架构确实带来了一些额外的技术和博弈论挑战。</p>
+<h2 id="数据可用性">数据可用性</h2>
+<p>虽然欺诈/有效性证明使诚实的完整节点能够证明欺诈，但还有一个问题：数据可用性。为了生成证明，全节点依赖于区块可用性，因为它们需要下载并重新执行区块中的所有交易以确定其有效性并生成证明。</p>
+<p>理论上，恶意区块生产者可以只将区块头发布到父链，可能会扣留部分或全部相应数据。这可以防止全节点生成欺诈/有效性证明来提醒轻客户端注意该问题。</p>
+<p>在尝试验证块时，全节点很容易识别数据何时被恶意块生产者扣留。在这种情况下，他们可以简单地假设链是无效的，并从中分叉。但是，轻客户端如何在不下载整个区块的情况下确定数据是否被区块生产者扣留？</p>
+<p>一种称为数据可用性抽样 （DAS） 的新技术使轻客户端能够概率地确定整个块是否已发布。简而言之，轻客户端从全节点请求块的一小部分随机小部分（或“样本”）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_p8n6yvf78k.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>如果所有请求的样本都可用，则假设有足够的轻客户端执行数据可用性采样，这很可能证明整个块都可用。如果块的任何部分不可用，轻客户端知道数据已被保留，因此可以从该版本的链中分叉。</p>
+<p>这项技术的完整解释超出了本文的范围，但您可以在此处阅读有关它的更多信息。最终，重要的一点是，DAS 使轻客户端能够识别无效块，即使恶意块生产者隐瞒数据也是如此。</p>
+<h2 id="验证者的困境">验证者的困境</h2>
+<p>另一个潜在的问题是被称为“验证者困境”的现象。简化版本如下：</p>
+<p>如果区块生产者知道全节点会识别不诚实的活动，他们将诚实行事以避免被砍伐。</p>
+<p>随着时间的推移，如果全节点假设区块生产者将继续诚实行事，他们就没有动力继续验证区块，因为他们永远不会因识别无效交易而获得奖励。</p>
+<p>如果全节点没有经济激励继续验证区块，他们可能会停止这样做。在这一点上，区块生产者不诚实的行为变得可行。即使仍然有非零数量的全节点，区块生产者贿赂剩余的全节点以忽略足够有价值的无效交易在财务上也可能变得可行。</p>
+<p>这以一个循环难题告终，即模块化执行层变得越安全（即区块生产者不诚实行为的动机越小），它就越倾向于降低安全性（即全节点不再被激励来验证区块）。另一方面，它的安全性越低，安全性就越高。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_a7qowse1zv.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>这种困境可以通过多种途径来缓解（有关这些因素的博弈论分析，请参阅这篇广泛的文章）：</p>
+<p>利他主义 - 因为 MEL 只需要一个诚实的验证者，只要至少有一个利他主义的完整节点在运行，系统就会保持安全。然而，虽然这在实践中可能足够安全，但对于控制大量资产的系统来说，这并不能提供足够的保证。</p>
+<p>经济利益 - 有许多实体有经济激励来运行超出潜在举报人奖励的完整节点。例如，区块浏览器、流动性提供商或 dapp 等产品和服务需要访问 MEL 的完整状态才能有效地运行其业务。然而，这些实体（理论上）容易受到恶意区块生产者的贿赂。</p>
+<p>鲸鱼 - 在MEL上拥有大量资产的实体可以选择运行一个完整的节点，以确保他们的利益得到保护并且链是安全的。</p>
+<p>快速提款 - 由于乐观的 MEL 在保证模块化堆栈的较低层的最终性之前依赖于争议解决窗口，因此在此窗口过后，从 MEL 到和解层的提款不会最终确定。因此，第三方服务有一个市场，这些服务提供快速提款，接受MEL上的代币，并立即将相同的代币（减去费用）发送给结算层的用户。为了确保在结算层发送资金后不会恢复MEL状态，服务提供商被激励在进行此类交易之前验证链的有效性。</p>
+<p>区块生产者 - 可以对提交基于先前无效区块构建的区块的区块生产者进行处罚。有了这样的机制，区块生产者将被激励在提交区块之前验证链的有效性。</p>
+<p>虽然上述缓解策略本身可能并不完全有效，但当结合起来时，有明显的动机让许多不同的各方继续在 MEL 上运行完整节点并验证链的状态。</p>
+<h2 id="新的设计空间超越-evm">新的设计空间：超越 EVM</h2>
+<p>通过采用在单一诚实的少数假设下实现高安全性的设计，模块化区块链堆栈能够开发比以前在单片设计下可能实现的更高吞吐量的区块链。</p>
+<p>然而，除了将计算与验证分离所带来的可扩展性优势外，通过专门关注堆栈顶部的设计：模块化执行层，可以在可扩展性方面取得进一步进展。使这一层的计算更具可扩展性和效率是构建更好的区块链的下一步。</p>
+<p>目前正在开发的大多数模块化执行层都使用以太坊作为其父链，因此默认使用 EVM 作为执行环境。这相当于提高内燃机能源效率的设计：对已经过时技术的渐进式改进。</p>
+<p>实际上，模块化堆栈开辟了更广阔的设计空间，消除了模块化执行层依赖低效 EVM 的需要。Fuel正在利用这个新扩展的设计空间来构建一个超越EVM的模块化执行层，优化高效和可扩展的计算，卓越的开发人员体验和最大的安全性。</p>
+<p>在第 2 部分中，我们将探讨模块化执行层如何超越上一代区块链设计的技术限制，以实现真正的可扩展性。（第2部分链接：）</p>
+<p><img src="https://img.bibiqing.com/news/2022/1105/6_78bd8m0ois.png" alt="Fuel：模块化执行案例（第 1 部分）"></p>
+<p>fuel官网：https://www.fuel.network/</p>
+<p>推特：https://twitter.com/fuellabs_</p>
+<p>Discord社区：https://discord.com/invite/fuelnetwork</p>
+<p>油管视频：https://www.youtube.com/channel/UCam2Sj3SvFSAIfDbP-4jWZQ</p>
+<p>来源：bress</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/44238/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">DAO 犯罪是组织「背锅」还是成员「替罪」</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/44233/">
+                <span class="next-text nav-default">Fuel：模块化执行案例（第 2 部分）</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是模块化执行层他们将如何实现更具可扩展性的区块链系统">什么是模块化执行层？他们将如何实现更具可扩展性的区块链系统？</a></li>
+    <li><a href="#单片区块链基础计算与验证">单片区块链基础：计算与验证</a></li>
+    <li><a href="#单片链的计算与验证">单片链的计算与验证</a></li>
+    <li><a href="#诚实多数假设---可扩展性的限制">诚实多数假设 - 可扩展性的限制</a></li>
+    <li><a href="#模块化执行解耦计算和验证">模块化执行：解耦计算和验证</a></li>
+    <li><a href="#什么是模块化执行层">什么是模块化执行层？</a></li>
+    <li><a href="#验证---保持区块生产者的诚实">验证 - 保持区块生产者的诚实</a></li>
+    <li><a href="#示例optimistic模块化执行层上的欺诈证明">示例：Optimistic模块化执行层上的欺诈证明</a></li>
+    <li><a href="#这如何实现可扩展性">这如何实现可扩展性</a></li>
+    <li><a href="#模块化执行潜在挑战">模块化执行：潜在挑战</a></li>
+    <li><a href="#数据可用性">数据可用性</a></li>
+    <li><a href="#验证者的困境">验证者的困境</a></li>
+    <li><a href="#新的设计空间超越-evm">新的设计空间：超越 EVM</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

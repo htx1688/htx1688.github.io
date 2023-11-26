@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="这篇博文的目的是解释数据可用性采样（DAS）的基础、它所依赖的模型，以及在实践中实施该技术时所面临的挑战与未解决的问题。" />
+<meta name="keywords" content="公链" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42026/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向" />
+<meta property="og:description" content="这篇博文的目的是解释数据可用性采样（DAS）的基础、它所依赖的模型，以及在实践中实施该技术时所面临的挑战与未解决的问题。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42026/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向">
+<meta itemprop="description" content="这篇博文的目的是解释数据可用性采样（DAS）的基础、它所依赖的模型，以及在实践中实施该技术时所面临的挑战与未解决的问题。"><meta itemprop="datePublished" content="2022-08-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7603">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"/>
+<meta name="twitter:description" content="这篇博文的目的是解释数据可用性采样（DAS）的基础、它所依赖的模型，以及在实践中实施该技术时所面临的挑战与未解决的问题。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-29">
+      2022-08-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7603 字 -
+        预计阅读 16 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>注：原文作者 Joachim NeuJoachim-Neu 是 Paradigm 的研究实习生，他也是斯坦福大学的区块链科学博士生，目前他的研究重点是可证明共识安全。</p>
+<h2 id="简介">简介</h2>
+<p>任何 L1 区块链的核心职责是保证数据可用性。这种保证对于客户端能够解释 L1 区块链本身至关重要，并且它也是更高层应用（例如 rollup）的基础。为此，一种经常被讨论的技术会用于数据可用性验证的随机抽样，正如 Mustafa Al-Bassam、Alberto Sonnino 以及 Vitalik Buterin 在 2018 年发表的一篇论文中所推广的那样。该技术是 Celestia 区块链的核心，并被提出通过“Danksharding”包含在权益证明（PoS）以太坊中。</p>
+<p><strong>这篇博文的目的是解释数据可用性采样（DAS）的基础、它所依赖的模型，以及在实践中实施该技术时所面临的挑战与未解决的问题。</strong> 我们希望这篇文章能够吸引研究人员关注这个问题，并激发解决一些突出挑战的新想法（参见以太坊基金会最近的提案 Request‌）。</p>
+<h2 id="问题">问题</h2>
+<p>有人（例如 L1 区块提议者或 L2 定序器）生成了一个数据区块。他们声称已经向“公众”提供了数据。你的目标是检查可用性声明，即，如果需要，你是否真的能够获得数据？</p>
+<p>数据的可用性至关重要，基于欺诈证明的乐观（Optimistic）系统，例如 Optimism，需要数据可用性进行验证，甚至基于有效性证明的系统，例如 StarkNet 或 Aztec，它们也需要数据可用性以确保活跃性（例如，证明资产所有权以用于 rollup 的逃生舱口或强制交易包含机制）。</p>
+<p>对于迄今为止的问题表述，有一个简单的“幼稚”测试过程，这也是比特币等早期系统隐式采用的：只需下载整个数据块。如果你成功了，你就知道它是可用的，而如果你没有成功，你就会认为它不可用。然而，现在我们希望测试数据的可用性，而不需要自己下载太多的数据，比如因为数据量超出了我们的处理能力，或者因为在我们实际上不感兴趣的数据上花费大量带宽来验证其可用性似乎很浪费。在这一点上，我们需要一个模型来阐明仅下载或保留“部分数据”的“含义”。</p>
+<h2 id="模型">模型</h2>
+<p>计算机科学中的一种常见方法是首先在具有相当丰富设施的模型中描述一项新技术，并随后解释如何实现该模型。我们对 DAS 采用了类似的方法，但正如我们将看到的，当我们尝试实例化模型时会弹出有趣的开放式研发问题。</p>
+<p>在我们的模型中，在一个黑暗的房间里有一个公告板（见下面的漫画）。首先，区块生产者进入房间，并有机会在公告板上写一些信息。当区块生产者退出时，他可以给你（验证者）一小段信息（大小与原始数据不成线性比例）。你带着一个手电筒进入房间，手电筒的光束很窄，电池电量很低，所以你只能在公告板的几个不同位置阅读文字。你的目标是让自己相信区块生产者确实在公告板上留下了足够的信息，这样如果你打开灯并阅读完整的公告板，你就可以恢复文件。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_3ybf9gmlss.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>起初，这个问题似乎很棘手：我们可以要求区块生产者在公告板上写下完整的文件。现在考虑两种可能性：要么区块生产者诚实地写下整个文件，要么区块生产者行为不当，其漏掉了一小部分信息，使得整个文件不可用。通过仅在几个位置检查公告板，你无法可靠地区分出这两种情况，因此，你无法准确地检查数据可用性。我们需要一种新的方法！</p>
+<h2 id="理论解决方案">（理论）解决方案</h2>
+<p>这就是里德 - 所罗门（Reed-Solomon）纠删码发挥作用的地方。让我们简单回顾一下，简单来说，纠删码的工作方式如下：k 个信息块组成的向量被编码成一个（更长的！）n 个编码块的向量。编码的比率 R = k/n 衡量了编码引入的冗余。随后，从编码块的某些子集中，我们可以解码原始信息块。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_0uh0b9i4vy.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>如果编码是最大距离可分（MDS）的，那么原始信息块可以从编码块大小的任何子集中恢复，这是一个有用的效率和鲁棒性保证。里德 - 所罗门（Reed-Solomon）码是一种流行的 MDS 编码家族，其工作原理如下。记住，在学校里，你可能知道两点唯一地决定一条线：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_pw5inf5stn.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>这是因为一条线可以描述为具有两个系数的 1 次多项式：<em>y = a1x+a0</em>（我们现在假设这些点具有不同的 x 坐标）。事实上，这一观点可以推广：任何次数的多项式 t-1，它对应于描述多项式</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_1ssjg42jqj.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>的一组系数</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_s8rnothhvy.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>，由多项式通过的任何 t 个点唯一确定（具有不同的 x 坐标）。换句话说：一旦知道多项式在不同位置的求值，就可以在任何其他位置获得其求值（首先恢复多项式，然后求值）。</p>
+<p>里德 - 所罗门（Reed-Solomon）码就是基于这种洞察力构建的。对于编码，我们从 k 个信息块</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_nyrvmns5uy.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>开始，构造相关的多项式</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_jez4je9ler.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>，并在不同的 x 坐标上对其进行求值以获得编码块。现在，由于上述见解，这些编码块中的任何 k 个都允许我们唯一地恢复 k-1 次多项式，并读取系数以获得原始信息块。瞧！</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_s32nc6rsd0.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>回到我们的数据可用性问题：我们不再要求区块生产者在公告板上写下原始文件，而是要求他将文件分成 k 个块，使用 Reed-Solomon 码对它们进行编码，例如，速率 R=1/2，并将 n = 2k 编码块写入公告板。现在让我们假设区块生产者至少诚实地遵循编码（我们稍后将看到如何解除这个假设）。再次考虑两种情况：生产者行为诚实并写下所有块，或者生产者行为不端并希望保持文件不可用。回想一下，我们可以从 n = 2k 个编码块中的任何 k 个恢复原始文件。所以为了保持文件不可用，区块生产者最多可以写入 k-1 个块。换句话说，现在至少有 k+1，超过 n=2k 个编码块的一半将丢失！</p>
+<p>但是现在这两种情况，一个写满的公告板和一个半空的公告板，很容易区分：你在少数 r 个随机抽样的位置检查公告板，如果每个采样位置都有其各自的块，则认为该文件可用，如果任何采样位置为空，则该文件不可用。请注意，如果文件不可用，因此（超过）一半的公告板是空的，你错误地认为文件可用的概率小于</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_rgrvvdnmaw.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>，即在 r 中呈指数级小。</p>
+<h2 id="实际存在的挑战">（实际）存在的挑战</h2>
+<p>给定的“暗室公告板”模型是非常简单的。现在让我们考虑一下模型：组件代表什么？我们可以在真实的计算机系统中实现它们吗？如何实现？</p>
+<p>事实上，为了帮助发现理论与实践之间的差距，我们已经使用“奇怪的”“暗室中的公告板”模型解释了问题和解决方案，其中的隐喻与真实的计算系统几乎没有相似之处。这是为了鼓励你思考现实世界和模型世界的各个方面是如何对应的，以及它们是如何（无法）实现的。如果你的模型中有一些部分无法转化为计算机/网络/协议等价物，那么你知道还有一些事情要做，可能是你的理解还有问题，也可能是开放的研究问题！；）</p>
+<p>这是一个非详尽的挑战集合，对于其中一些挑战，社区多年来已经找到了合理的答案，而另一些仍然是开放的研究问题。</p>
+<p><strong>挑战 A：如何确保公告板上的块实际上是由提议者写的？</strong> 考虑采样块在网络上以任何形式传输到采样节点时的变化。这是一小段信息的来源，当生产者离开并且采样节点进入暗室时，区块生产者可以将其传递给采样节点。在实践中，这被实现为对写入公告板的原始内容的绑定向量承诺（想想 Merkle 树），并作为区块头的一部分进行共享。给出承诺后，区块生产者可以在公告板上留下每个编码块的证明，以表明该块确实是由区块生产者编写的。第三方无法在传输过程中更改块，因为承诺方案不允许为修改的块伪造有效证明。请注意，这本身并不排除区块生产者在公告板上写入无效/不一致的块，我们接下来将讨论这一点。</p>
+<p><strong>挑战 B：确保区块生成者纠删码正确</strong> 。在上述方案中，我们假设区块生产者正确地编码信息块，因此纠删码的保证成立，也就是说，从足够的编码块中，实际上可以恢复信息块。换句话说，区块生产者所能做的就是保留块，但不能将我们与无效块混淆。在实践中，有三种常见的排除无效编码的方法：</p>
+<p><strong>欺诈证明</strong> 。这种方法依赖于这样一个事实，即一些采样节点足够强大，可以对如此多的块进行采样，以至于它们可以发现块编码中的不一致，并发布无效的编码欺诈证明，以将所讨论的文件标记为不可用。这方面的工作旨在最小化节点必须检查的块数量（并作为欺诈证明的一部分转发）以检测欺诈（参见原始的 Al-Bassam/Sonnino/Buterin 论文为此使用了 2 D 里德 - 所罗门码‌）。</p>
+<p><strong>多项式承诺</strong> 。该方法使用 KZG 多项式承诺‌作为包含在区块头中的绑定向量承诺来解决挑战 A。多项式承诺允许根据对未编码信息块的承诺直接验证 Reed-Solomon 编码块，因此没有无效编码的空间。可以这样想：向量承诺和 Reed-Solomon 编码在多项式承诺中是不可分割的。</p>
+<p><strong>有效性证明</strong> 。可以使用密码学证明系统来证明向量承诺提交的编码块的正确纠删码。这种方法是一种很好的教学“心理模型”，并且对于所使用的纠删码来说是通用的，但在相当长的一段时间内可能效率不高。</p>
+<p><strong>挑战 C：公告板是“什么”以及“在哪里”？提议者如何“写”到上面？</strong> 在我们讨论公告板“是什么”和“在哪里”、提议者如何“写入”它以及验证者如何从中“读取”/“采样”之前，让我们回顾一下两种基本 P2P 网络原语的众所周知的缺点：</p>
+<p>1、基于低量级泛洪的发布 - 订阅 gossip 网络，例如 GossipSub‌，其中通信被组织成不同的“广播组”（“主题”），参与者可以加入（“订阅”）并向其发送消息（“发布”）：</p>
+<ul>
+<li>
+<p>在任意（“拜占庭式”）对抗行为（例如，eclipse 攻击、Sybil 攻击、对等发现攻击）下不安全；</p>
+</li>
+<li>
+<p>常见的变体甚至不提供 Sybil 抵抗机制</p>
+</li>
+<li>
+<p>通常无法保证参与者的组成员身份与其他参与者的隐私（事实上，组成员身份通常与对等方通信，以避免他们转发不需要的主题网络流量）</p>
+</li>
+<li>
+<p>如果有大量主题且每个主题的订阅者很少，则通信往往变得不可靠（因为订阅特定主题的节点的子图可能不再连接，因此泛洪可能会失败）</p>
+</li>
+</ul>
+<p>2、分布式哈希表 (DHT)，例如 Kademlia‌，其中每个参与者存储哈希表中存储的全部数据的一部分，参与者可以快速确定到存储特定信息的对等体的短路径：</p>
+<ul>
+<li>
+<p>也不是拜占庭容错（例如，诚实参与者请求的不适当路由，对网络形成/维护的攻击）</p>
+</li>
+<li>
+<p>事实上，DHT 在对抗行为的恢复能力方面比 gossip 协议差得多：gossip 协议“仅”要求由诚实节点（以及诚实节点之间的边）形成的子图是连接的，这样信息可以从任何诚实节点到达所有诚实节点。而在 DHT 中，信息是专门沿着路径路由的，当查询到达其路径上的对手节点时，查询可能会失败。</p>
+</li>
+<li>
+<p>也不提供 Sybil 抵抗机制</p>
+</li>
+<li>
+<p>哪些参与者存储或请求哪些信息（来自其他参与者好奇的眼睛）的隐私不受保障</p>
+</li>
+</ul>
+<p>考虑到这一点，我们可以回到关于如何实现公告板及其读/写操作的中心问题。编码块存储在哪里？它们如何到达那里？社区正在考虑的三种主要方法是：</p>
+<ol>
+<li>
+<p><strong>GOSSIP</strong> ：使用一个 gossip 网络分散编码块。例如，每个编码块可能有一个主题，负责存储某个块的节点可以订阅相应的主题。</p>
+</li>
+<li>
+<p><strong>DHT</strong> ：将编码块上传到 DHT 中。然后，DHT 将“自动”为每个参与者分配他们应该存储的块。</p>
+</li>
+<li>
+<p><strong>REPLICATE</strong> : 来自附近副本的样本。一些节点存储数据的完整（或部分）副本，并将块请求提供给采样节点。</p>
+</li>
+</ol>
+<p>这些方法的挑战是：</p>
+<ol>
+<li>
+<p>如何确保“公告板上有足够的空间”开始（即，有足够的参与者订阅了 GOSSIP 中的每个主题，或者每个节点可以存储它需要存储在 DHT 下的所有块），以及公告板的所有部分随着时间的推移而保持在线？（理想情况下，为了确保可伸缩性，我们甚至希望高效地使用存储，即诚实节点存储的内容之间不应存在太多冗余。）在一个真正无许可的系统中，这将特别棘手（在该系统中，节点来来去去，并且可能没有 Sybil 抵抗机制），因此大部分节点可能是对抗性的并且可能在瞬间消失。幸运的是，在区块链环境中，通常存在一些 Sybil 抵抗机制（如 PoS），并可用于建立声誉，甚至进行攻击，但关于如何利用 Sybil 抵抗机制来保护对等网络层，还有很多细节有待确定。</p>
+</li>
+<li>
+<p>在前一点上进行扩展，因为网络是共识的基础，因此是所谓拜占庭容错（BFT）系统的基础，网络层本身最好是 BFT——但如前所述，流行的 gossip 或 DHT 协议（如 GossipSub 或 Kademlia）并非如此。（即使是 REPLICATE 也可能面临这一挑战，因为 DHT 仍可能用于网络堆栈的其他部分，例如用于对等节点发现；但此时，但在这一点上，DHT 的挑战成为普遍的网络层问题，而不是特定于数据可用性采样。）</p>
+</li>
+<li>
+<p>最后，一些人认为，从长远来看，节点应该存储或转发不超过一个区块的一小部分，否则可扩展性和支持相对“弱”参与者（参见去中心化）的可能性是有限的。这与 REPLICATE 是对立的。对于 GOSSIP，这需要大量的广播组（“主题”），每个广播组都有少量订阅者，在这种情况下，gossip 协议往往变得不那么可靠。在任何情况下，上述方法都会带来开销，例如，代表其他节点转发数据块的带宽不得超过单个节点的预算。</p>
+</li>
+</ol>
+<p><strong>挑战 D：我们“如何”实施随机抽样？</strong> 这个问题有两个方面：期望的块如何在网络中定位和传输（即如何从公告板上“读取”），以及如何确保采样相对于对手“保持随机”，即，对抗性区块生产者没有（太多）机会根据谁查询哪些块来自适应地改变其策略。</p>
+<ul>
+<li>
+<p>当然，直接从区块生成者那里进行采样不是一个可行的选择，因为这需要来自区块生产者的高带宽，并且如果每个人都知道区块生产者的网络地址，则会产生相关的拒绝服务向量。（可以通过 DHT 和 REPLICATE 的镜头查看一些涉及从区块生产者拉取的混合结构）</p>
+</li>
+<li>
+<p>另一种方法是在使用上述方法之一（GOSSIP 或 DHT）分散块后从 swarm“群”中采样。具体来说：</p>
+</li>
+</ul>
+<p>（1）在使用 GOSSIP 或 DHT 分散块之后，DHT 可能会方便地路由采样请求和随机采样块，但这会带来上面讨论的挑战，最明显的是缺乏 BFT 和隐私。</p>
+<p>（2）或者，在 GOSSIP 下，每个节点都可以订阅与其想要采样的块相对应的主题——但存在上述挑战：除了缺乏 BFT 和隐私之外，拥有大量主题而每个订阅者都很少会导致不可靠的通信。</p>
+<ul>
+<li>REPLICATE 可以在“来自区块生产者的样本”和“来自群体的样本”之间进行折衷，其中从数据的完整副本中抽取块，并在网络对等方之间识别副本。</li>
+</ul>
+<p>请注意，上面只解决了采样（现在从公告板“阅读”），而不是将来任何时候从公告板“阅读”。具体来说，GOSSIP 本质上实现了一个临时公告板（只能在其内容被写入/分散时读取/采样），而 DHT 实现了一个永久公告板（也可以在很长时间之后读取/采样）。通常，我们需要的是一个永久性公告板（根据具体设计，永久性要求从“天”到“永远”不等），为此，GOSSIP 必须辅以 DHT 来路由块，这会带来上述挑战。而 REPLICATE 会立即实现永久公告板。</p>
+<p>下表说明了不同 P2P 协议来实现模型的不同情况。具体地说，面向 gossip 的方法有两种变体，一种使用 gossip 对块进行采样，另一种使用 DHT 对块进行采样。相比之下，面向 DHT 的方法完全依赖于 DHT 进行所有相关操作。在面向 replication 的方法中，每个节点使用请求/响应协议从附近的完整副本中读取/采样块。它有效地使用 gossip 进行块的初始传播，尽管两个对等方之间的 gossipping 在技术上可以通过请求/响应协议来实现。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0829/12_zs9ro38k96.png" alt="Paradigm：公链数据可用性采样（DAS）技术的挑战与未来研发方向"></p>
+<p>此外，在上述所有技术中，“谁采样了什么”被（至少部分）泄露给了攻击者，因此攻击者可以通过自己的行为自适应地削弱/促进某些节点采样的块传播，从而欺骗某些节点相信该块是（不）可用的。虽然早期的工作表明只有少数节点可以被欺骗，但这是不可取的。或者，早期的工作假设匿名网络通信，这在实践中至少会带来相当大的性能损失，如果不是完全不切实际的话。</p>
+<p><strong>挑战 E：如何“修复”公告板的内容？</strong> 也就是说，如果编码块丢失（例如，因为存储该块的节点已经离线；这是如何检测到的？），它是如何恢复的？简单的修复涉及解码和重新编码，因此会带来相当大的通信和计算负担，特别是对于常见的 Reed-Solomon 纠删码。谁来承担这个负担？他们如何得到补偿？如何避免恶意区块生产者通过保留一些编码块，并迫使节点花费资源进行昂贵的修复来伤害采样节点？分布式维修方案呢？修复所需的块是如何检索到的，这回到了上一点关于将来从公告板上“读取”的问题。</p>
+<p><strong>挑战 F：激励</strong> 。如果采样是免费的，如何防止拒绝服务向量？如果抽样需要付费（如何实施？），如何同时做到完全匿名？那些在对等网络中存储（部分）公告板、路由信息或执行诸如块修复之类的维护任务的人如何获得补偿？</p>
+<h2 id="另一种模型">另一种模型</h2>
+<p>为了完整起见，我们简要提及一个稍微不同的模型，DAS 实现了稍微不同的保证。即使没有匿名和可靠的网络，攻击者也最多可欺骗一定数量的诚实节点，使其相信不可用的文件可用。否则，它将不得不释放如此多的块，以便从诚实节点获得的所有块的联合中恢复文件。该模型的优点是，网络所需的属性更容易实现（特别是当对等网络被对手破坏时）。缺点是对单个用户没有具体的保证（你可能就是少数被骗的人！），并且目前还不清楚如何收集诚实节点获得的所有样本并恢复文件（特别是当 P2P 网络已被对手破坏时）。</p>
+<h2 id="未来的研究与发展方向">未来的研究与发展方向</h2>
+<p>根据这篇博文中提出的观察和论点，我们认为以下将是未来关于数据可用性研究和开发的一些有趣方向：</p>
+<ul>
+<li>
+<p>显然，为了保护网络层，一些 Sybil 抵抗机制是必要的（目前，可以说，网络协议通常隐含地依赖于 IP 地址的稀缺性，例如，参见 GossipSub v1.1 的对等评分）。方便的是，共识层正好提供了这一点，例如，以权益证明（PoS）的形式。因此，在网络层上重用共识层的 Sybil 抵抗机制似乎是很自然的，例如从验证器集中在 gossip 协议中采样一个节点（从而“继承”共识的诚实多数假设力量）。虽然这可能不会立即保护非积极共识参与者的节点的网络，但它可以帮助在共识节点之间建立安全的“主干”（从而加强共识安全），并随后可能成为为每个人提供更好安全的垫脚石。这条道路上合乎逻辑的下一步，将是仔细分析共识和网络与这种共享的 Sybil 抵抗机制的相互作用（这是最近朝着这一方向迈出的第一步）。</p>
+</li>
+<li>
+<p>改进的 gossip 和 DHT 协议：（参见本调查‌）</p>
+</li>
+</ul>
+<p><strong>（1）拜占庭容错 (BFT)，特别是使用共识层常见的 Sybil 抵抗机制</strong></p>
+<p><strong>（2）效率（特别是对于 BFT 变体，迄今为止，它们具有相当大的开销和/或较低的抵抗能力）</strong></p>
+<p><strong>（3）隐私保证（改进的保证，更好的效率/更低的开销）</strong></p>
+<ul>
+<li>修复机制：</li>
+</ul>
+<p><strong>（1）以分布式方式实施修复（具有局部性的纠删码？）</strong></p>
+<p><strong>（2）研究和设计相关的激励措施</strong></p>
+<p>致谢：特别感谢 Mustafa Al-Bassam、Danny Ryan、Dankrad Feist、Sreeram Kannan、Srivatsan Sridhar、Lei Yang、Dan Robinson、Georgios Konstantopoulos 以及 Dan Lee 对本文早期草稿提供的富有成果的讨论和反馈，并感谢 Achal Srinivasan 提供了漂亮的插图。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42057/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Limit Break已完成两轮共计2亿美元融资，Paradigm等领投</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42060/">
+                <span class="next-text nav-default">SBF：并不打算收购Huobi</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#问题">问题</a></li>
+    <li><a href="#模型">模型</a></li>
+    <li><a href="#理论解决方案">（理论）解决方案</a></li>
+    <li><a href="#实际存在的挑战">（实际）存在的挑战</a></li>
+    <li><a href="#另一种模型">另一种模型</a></li>
+    <li><a href="#未来的研究与发展方向">未来的研究与发展方向</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

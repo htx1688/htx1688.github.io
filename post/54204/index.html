@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          基础设施如何通过账户抽象为数十亿用户提供支持 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="​在本文中，BlockPI团队将深入探讨他们对AA的理解，并从基础设施服务提供商的角度分享思考。" />
+<meta name="keywords" content="賬戶抽象" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54204/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="基础设施如何通过账户抽象为数十亿用户提供支持" />
+<meta property="og:description" content="​在本文中，BlockPI团队将深入探讨他们对AA的理解，并从基础设施服务提供商的角度分享思考。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54204/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-03T00:00:00+00:00" />
+
+<meta itemprop="name" content="基础设施如何通过账户抽象为数十亿用户提供支持">
+<meta itemprop="description" content="​在本文中，BlockPI团队将深入探讨他们对AA的理解，并从基础设施服务提供商的角度分享思考。"><meta itemprop="datePublished" content="2023-07-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7245">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基础设施如何通过账户抽象为数十亿用户提供支持"/>
+<meta name="twitter:description" content="​在本文中，BlockPI团队将深入探讨他们对AA的理解，并从基础设施服务提供商的角度分享思考。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">基础设施如何通过账户抽象为数十亿用户提供支持</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-03">
+      2023-07-03
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7245 字 -
+        预计阅读 15 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>无论是牛市还是熊市，以太坊生态系统一直在不断地建设和自我优化。其中，账户抽象（Account Abstraction，AA）近年来取得了重要的进展，并已渗透到以太坊生态系统的各个部分，包括应用、基础设施、用户和开发者。我们可以预见，AA的大规模采用将从整体上降低区块链使用的门槛，并将web2的用户体验引入web3行业。</p>
+<p>在本文中，BlockPI团队将深入探讨他们对AA的理解，并从基础设施服务提供商的角度分享思考。</p>
+<h3 id="eoa和合约钱包">EOA和合约钱包</h3>
+<p>AA的概念源于EOA账户的局限性。EOA账户（external owned account）是以太坊中的用户账户，由公钥（区块链地址）表示，通过私钥访问。它是以太坊生态系统的主要组成部分，允许用户在区块链上转账或与智能合约交互。然而，对很多人来说，使用EOA本身就是一项充满挑战的任务。况且，现在的EOA账户依旧存在一些使用上不便之处，影响用户体验。</p>
+<p>首先就是Gas费问题。每笔交易都会花费用户相当多的ETH作为Gas费（以25 Gwei的Gas price 为例，简单的ETH转账的Gas费约为0.5美元，进行合约交互或当Gas price更高时则会更贵）。这使得小额交易的手续费显得非常昂贵，尤其是在网络拥堵严重的时期。此外，只能使用ETH支付Gas，这意味着用户必须在钱包中持有ETH，对很多用户而言，这构成了一个较高的进入门槛。</p>
+<p>其次，对于用户想要实现的某些复杂操作，EOA必须借助于其他的智能合约。例如，如果用户想要设置定时周期性转账，则用户需要将ETH转到具有此功能的某个智能合约中来实现该操作。</p>
+<p>EOA的第三个问题是固定的签名加密算法。以太坊网络使用一种名为secp256k1的数字签名算法，来确保交易的真实性和安全性。该算法被硬编码到系统中，用户无法选择使用其他加密算法。</p>
+<p>除了上述的三个问题之外，EOA的公钥和私钥之间的绑定关系也是一个问题。私钥是用户访问EOA的唯一途径，如果私钥丢失，将无法找回。这同时意味着与之关联的EOA内的所有资产将无法找回。</p>
+<p>同时， 在执行某些线性任务时，EOA也存在限制。例如，如果用户希望在一个操作中批准（approve）、交换（swap）和取消批准代币（unapprove token），需要执行三个单独的交易，既低效又耗时。</p>
+<p>好消息是，合约钱包可以解决上述的所有问题。合约钱包本质上是一种实施了AA的特定类型的智能合约账户，它可以在以太坊上作为用户的钱包使用。并且可以给用户提供更灵活也更个性化的方式来管理资金。只要是以太坊智能合约能够实现的逻辑，合约钱包就可以实现并提供对应的功能。</p>
+<p>具体地说，多个合约钱包操作可以被打包到一笔链上交易中，这些操作则可以分摊这一笔交易的Gas成本。如果第三方愿意支付Gas费用，则对于使用合约钱包的用户来说不需要支付Gas。合约钱包也可以一次性完成多个线性任务。除此之外，合约钱包还支持自定义签名的加密算法，并设置钱包恢复的功能等等。</p>
+<p>随着对合约钱包优势的讨论持续进行，以太坊社区实际上早已对合约钱包进行了长期研究。尽管许多EIP已经探讨了账户抽象相关问题，但截至2021年，仍未建立统一标准。以下是几个具有代表性的EIP。</p>
+<h4 id="eip-86">EIP-86</h4>
+<p>最初由Vitalik Buterin于2017年提出。该方案实现了一系列变更，其共同目的是“抽象化”签名验证和nonce检查，从而使用户能够创建能执行任意签名/nonce检查的“账户合约”。</p>
+<h4 id="eip-2938">EIP-2938</h4>
+<p>于2020年提出。这个EIP的标题是账户抽象（Account Abstraction）。AA的概念在这个EIP中有很好的描述。它引入了一种新的交易，即AA 交易。交易由入口点地址（ EntryPoint  address）发起，并调用AA合约钱包。 EIP-2938提供了一个统一的规范并正式将AA账户抽象引入以太坊共识。具体来说，它在以太坊共识中引入了两个新的操作码、三个全局变量和一个不同的有效载荷结构。</p>
+<h4 id="eip-3074">EIP-3074</h4>
+<p>于2020年提出。这个EIP引入了两个EVM指令， AUTH 和 AUTHCALL 。 AUTH 根据ECDSA签名授权设置环境变量。 AUTHCALL 作为授权账户发送调用。这允许智能合约代表EOA发送交易。但这对AA来说仍然不是一个完美的解决方案。在授权交易过程中，EIP-3074在原生价值传输方面存在一定的限制。并且如果用户丢失了对EOA的访问权限，仍将无法找回他的资产。如果遭遇私钥泄露，用户则需要将所有资产转移到新账户中。</p>
+<p>由于需要在共识层进行更改或方案不够全面，上述提案均未被正式纳入以太坊协议中。因此，以太坊社区继续探索如何在不改变共识的前提下，将AA引入以太坊协议，并最终提出了EIP4337。</p>
+<h3 id="erc---4337">ERC - 4337</h3>
+<p>EIP-4337最初于2021年9月提出，并于2023年3月获得授权成为ERC-4337。其作者包括Vitalik Buterin、Yoav Weiss、Kristof Gazso、Namra Patel、Dror Tirosh、Shahaf Nacson和Tjaden Hess。</p>
+<p>EIP-4337是一项具有颠覆性的提议，能够在不改变以太坊核心协议的情况下引入AA。EIP-4337最终成为了ERC-4337标准，构建者可利用该标准实现自己的智能合约钱包。同时该标准还引入了一些额外的基础设施包括“Bundlers”和“ UserOperation  mempool”。如此一来，它实际上在区块链系统上层复制了一个有相似功能的以太坊mempool。用户提交的不再是单笔交易，而是 UserOperation 。多笔 UserOperations  可以打包成一个单笔交易并发送到以太坊上。</p>
+<p>以下是以太坊[官方文档](<a href="https://eips.ethereum.org/EIPS/eip-4337">https://eips.ethereum.org/EIPS/eip-4337</a>)中ERC-4337的详细技术解释，以及一些有助于理解的评论。</p>
+<h3 id="erc-4337的关键角色和其定义">ERC-4337的关键角色和其定义</h3>
+<p>- <strong>UserOperation</strong>  — 描述代表用户发送的交易的结构。为避免混淆，它没有被命名为“transaction”它会被发送给Bundler，与其他 UserOperations 一起打包为一个Bundle。接着将Bundle作为一笔单独的交易发送到链上。</p>
+<p>- <strong>Sender</strong>  — 发送 UserOperation 的合约账户。该钱包合约必须遵循ERC-4337标准配置 IAccount 接口.</p>
+<p>- <strong>EntryPoint</strong>  — 执行 UserOperations 捆绑包的全局单例合约。Bundlers/Clients将支持的 EntryPoint 列入白名单。该合约由Infinitism 团队审计并且核准部署，负责处理所有 UserOperations ，并连接其他角色的合约，包括Wallet Factory、Aggregator、  Paymaster 。该合约在EVM兼容链上都是相同的地址。</p>
+<p>- <strong>Bundler</strong>  — 从mempool打包多个 UserOperations 并创建 EntryPoint.handleOps() 交易的节点（当前出块节点）。Bundler服务可以独立于区块链节点运行，并通过RPC来发送打包好的 UserOperations 。</p>
+<p>- <strong>Aggregator</strong>  — 由账户信任的辅助合约，用于验证聚合签名。Bundlers/Clients将支持的签名聚合器列入白名单。 Aggregator 必须遵循ERC-4337标准配置 IAggregator 接口。</p>
+<p>-  <strong>Paymaster</strong>   — 一个可以代付Gas的智能合约。如果它在 EntryPoint 合约中存入了足够的ETH，则可以为发送方支付 UserOperation 的Gas费, 从而有效地实现Gas抽象。 Paymaster 必须遵循ERC-4337标准配置 Paymaster 接口。 Paymaster 可以与  Sender  达成协议。例如，  Sender  向 Paymaster 支付USDC， Paymaster 用ETH来支付其发送的 UserOperations 的Gas。事实上， Paymaster 可以选择支持任何代币，包括ERC-20代币甚至其他链上的代币。</p>
+<p>- <strong>Wallet Factory</strong>  — 可以为ERC-4337用户创建合约钱包的智能合约。部署Wallet Factory是无需许可的。作为链上智能合约，其代码向公众开放，任何人都可以对其进行审查。一个广泛使用的Wallet Factory应当经过专业人士的全面审计。</p>
+<p>下图解释了 EntryPoint 合约如何与其他角色交互。</p>
+<p>- Bundlers调用 EntryPoint 合约的 handleOps 函数，该函数接受 UserOperation 作为输入。</p>
+<p>-  handleOps 会在链上验证 UserOperation ，检查是否由指定的智能合约钱包地址签名，并确认钱包是否有足够的Gas来补偿Bundler。</p>
+<p>- 如果验证通过， handleOps 将根据 UserOperation 的calldata中定义的函数和输入参数执行智能合约钱包函数。</p>
+<p>另一方面，当Bundler使用EOA触发 handleOps 函数时，会产生Gas费用。智能合约钱包可以从自己的账户余额中向Bundlers支付Gas费用，或者请求 Paymaster 合约代付。 UserOperations 在没有足够Gas的情况下无法通过链下的验证步骤，即在链上执行交易前失败。即便具备足够的Gas， UserOperations 在执行过程中仍可能因运行时错误等原因失败。对于一笔 UserOperation ，无论执行合约成功与否， EntryPoint 合约都会向触发 handleOps 函数的Bundler支付Gas费用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0703/49cg9i136938ye9" alt="基础设施如何通过账户抽象为数十亿用户提供支持"></p>
+<p>(摘自官方文档: <a href="https://eips.ethereum.org/EIPS/eip-4337">https://eips.ethereum.org/EIPS/eip-4337</a>)</p>
+<p>在ERC-4337生效后，用户现在可以通过两种方式发起区块链交易。一种是传统方式，即由EOA直接发起交易。另一种是使用ERC-4337标准，通过Bundler发起 UserOperation ，随后Bundler会将其与其他 UserOperations 打包并发往链上。以下流程图阐述了普通EOA发送交易与ERC-4337合约钱包发送 UserOperation 之间的差异。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0703/elwkte9safs9oy8" alt="基础设施如何通过账户抽象为数十亿用户提供支持"></p>
+<h3 id="道路已经铺好但尚无众多行人">道路已经铺好，但尚无众多行人</h3>
+<p>ERC-4337提供了一个强大的框架，让用户和开发者可以在以太坊使用和构建AA。尽管该框架是一个重要的进步，但仍存在一些挑战和不确定性需要应对和解决。</p>
+<p>AA的采用还处于初级阶段。根据Dune ERC-4337分析面板（*[ERC-4337 Account Abstraction](<a href="https://dune.com/niftytable/account-abstraction">https://dune.com/niftytable/account-abstraction</a>)* from @niftytable），链上仅执行了65k+  UserOperations ，其中90%来自Polygon。因此，目前执行的 UserOperation 数量仍然非常少，其中大部分是开发者的测试，而只有很小一部分来自于真实用户。我们注意到，已经整合了AA的产品仍处于初期阶段。 目前，我们可以观察到，Bundlers整体仍旧处于亏损状态， 目前亏损约为700多个MATIC。这主要是因为一些Polygon上的Bundler错误预估需要的Gas引起的，导致 EntryPoint 返回的的Gas少于提交的Bundle消耗的gas。这个问题需要在Bundler客户端层面解决。</p>
+<p>除此之外，还有一些问题需要解决。其中一个问题是Bundlers如何处理交易失败。  </p>
+<p>在将多个 UserOperations 打包在一起后，Bundlers首先会模拟交易，检测是否会出现合约执行失败，并计算  Sender  或 Paymaster 返回的Gas费用是否大于支付的Gas费。  </p>
+<p>如果有利可图，Bundler将这批 UserOperations 作为一个交易提交给出块节点。然而，交易仍然可能失败，导致Bundler支付Gas费用，但没有收到 EntryPoint 返还Gas的情况。例如，用户可能向不同的Bundlers发送操作。如果存在盈利空间并且模拟成功，Bundlers会将其提交到链上。在这种情况下，如果一个 UserOperation 同时被不同的Bundlers提交到出块节点，只有一笔交易会成功，这意味着只有一个Bundler会收到 EntryPoint 返回的Gas费，其他所有Bundler都会因为上链失败而损失Gas。尽管有人可能认为这种行为应被视为恶意攻击，并主张Bundler可以禁掉该  Sender  地址，拒绝来自该地址的任何未来请求，但这并非一个合理的解决方案，因为用户可能无意中采取这种行为。这个问题需要在代码中妥善解决，也许可以通过正在开发中的公共mempool来实现。此外，即使交易已成功提交且模拟结果显示存在获利空间，Bundlers也可能因为突然的Gas波动遭受损失。</p>
+<p>另一个问题是从AA中可以获取的最大可提取价值（MEV）。在以太坊的背景下，MEV通常指的是矿工或其他交易处理者通过操纵区块中交易的顺序或在区块中插入他们自己的交易来提取的价值。有人可能会注意到，MEV的逻辑也可以适用于AA。这是因为在AA中，Bundlers可以对UserOps进行自由排序，这为它们提供了获取MEV的可能性。然而，Bundler是否能提取MEV取决于是否有足够多的 UserOperations 可以打包在一起。现在整个AA市场仍处于初级阶段，因此Bundler MEV也可以被认为是初级阶段。可以遇见到的是，AA的MEV可能朝两个方向发展：一是类似于以太坊主网，有像Flashbots、Ultra Sound和BloXroute这样的参与者参与；另一个方向是形成Bundler共识来实施公平排序。而后者将完全消除AA中提取MEV的可能性。</p>
+<h3 id="未来发展">未来发展</h3>
+<h4 id="公共mempool">公共mempool</h4>
+<p>虽然AA生态系统已经投入运行，但仍有许多开发工作尚待完成。从整个AA生态系统来看，目前最大的缺失部分是公共mempool。Etherspot团队，Skandha Bundler客户端的开发者，目前正在开发公共mempool的p2p网络。预计公共mempool的p2p网络将在今年8月份推出。</p>
+<h4 id="bundle算法">Bundle算法</h4>
+<p>在此过程中，以太坊基金会资助了几个优秀的AA开发团队。到目前为止，已经开发了多个目前已经可以使用的Bundler客户端。其中，有一些已经非常成熟了。分别是Candide（用Python编写的Voltaire Bundler）、Pimlico（用Typescript编写的Alto Bundler）、Etherspot（用Typescript编写的Skandha Bundler）、Stackup（用Go编写的Stackup-Bundler）等。</p>
+<p>这里就涉及到了打包策略的问题。目前，由于 UserOperations 的数量较少，Bundlers可以采用简单的打包逻辑，例如固定的时间间隔或每个Bundle中一定数量的 UserOperations 。然而，随着 UserOperations 数量的增加，特别是在公共mempool引入之后，选择和打包 UserOperations 的策略变得更加复杂。原因很简单：在AA生态中，缺乏类似区块链共识协议的机制，Bundler群体成为了一个黑暗森林，每个Bundler根据自己的利益优先处理任务，并互相竞争。与公共mempool相对的，私有mempool有可能会较早出现。因为当从公共mempool打包 UserOperations 无法盈利时，打包私有mempool中的 UserOperations 依旧存在盈利的可能。在这种情况下，该Bundler在打包时相较其他Bundler更有竞争力。</p>
+<p>此外，随着公共mempool的逐步普及，其中的 UserOperations 有各种特性，例如不同的Gas盈利预期和链上执行复杂性。Bundlers将进行链下模拟，评估各种 UserOperations 组合的盈利能力，从而建立各自的打包策略。打包更多的 UserOperations 有可能产生更高的利润，但同时也增加了验证失败的风险。即使验证通过，链上执行失败的风险仍然存在。相对的，打包较少的 UserOperations 则相反。Bundlers需要设置自己的交易Gas参数，这将影响出块节点执行这笔交易的优先级。在不同的预估Gas price和Gas波动率条件下，Bundlers可能有不同的打包策略。同时还要考虑这些验证和策略计算需要消耗本地硬件计算资源和区块链节点资源的成本。此外，Bundlers还需要努力为用户提供良好的用户体验，确保用户在提交 UserOperation 后不会面临过长的延迟。</p>
+<p>尽管这些挑战的解决方案仍然不明朗，但我们可以有信心地说，AA行业的发展和开发者的共同努力将最终解决这些问题。作为基础设施建设者，BlockPI希望在AA行业的发展中充当问题解决者的角色，无论是作为开发者还是为其他开发者提供AA友好的基础设施。</p>
+<h3 id="基础设施必须要适应aa">基础设施必须要适应AA</h3>
+<p>AA将链上交易行为中涉及的各种角色抽象出来，包括  Sender  、Bundlers、Gas payers、合约钱包、Signers，从而使用户在使用区块链时具有更高的自由度。同时，基础设施供应商可以根据自己对市场的判断，独立部署这些服务。</p>
+<p>为了适应AA的大规模采用，基础设施提供商首先需要提供至少两个基本服务：Bundler服务和 Paymaster 服务。</p>
+<p>在Bundler服务中，基础设施提供商可能需要与Bundlers一起开发私有mempool，以提供良好的用户体验。具体来说，基础设施提供商需要集成多种Bundler客户端，以确保Bundler服务的稳定。这些Bundler客户端目前向用户提供几种标准的JSON RPC方法，这些方法是ERC-4337 核心开发组提供的。可以预见以后会有更多的RPC方法可供用户使用。基础设施服务商需要在这个过程中及时更新对这些方法的支持。</p>
+<p>此外，在Bundler API和原始节点客户端RPC之间进行优化也非常重要。目前的节点客户端没有针对AA进行过优化。一些Bundler API方法需要节点提供针对AA的数据索引。例如，现在的客户端在通过哈希查找 UserOperation 时，需要扫描所有区块中的 EntryPoint 合约日志。若缺乏数据索引，这个单一请求的硬件资源消耗将会相当巨大，同时请求的返回时间也将变得很长。</p>
+<p>除此之外，为了给用户提供免Gas的用户体验以及多样化的服务，基础设施提供商需要与不同的 Paymaster 服务提供商达成合作，从而集成不同的 Paymaster 服务。同时根据市场需求，基础设施提供商还可以基于现有 Paymaster 服务设计更方便的集成解决方案。其他服务，如聚合签名、钱包工厂等，也是基础设施未来发展和集成的潜在方向。</p>
+<p>总之，为了适应AA的大规模应用，基础设施提供商需要不断完善和扩展其服务。这包括优化Bundler服务，与不同的 Paymaster 服务提供商合作，集成各种API接口，以及开发其他潜在的服务。随着AA行业的不断发展，这些努力将有助于提供更高效、安全和便捷的区块链使用体验。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54215/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">击败ChatGPT？OpenChat霸榜斯坦福AlpacaEval开源榜首，性能高达105.7%</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54257/">
+                <span class="next-text nav-default">季度加密货币交易量创2021年以来新低，仅高于2020年第四季度</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#eoa和合约钱包">EOA和合约钱包</a></li>
+        <li><a href="#erc---4337">ERC - 4337</a></li>
+        <li><a href="#erc-4337的关键角色和其定义">ERC-4337的关键角色和其定义</a></li>
+        <li><a href="#道路已经铺好但尚无众多行人">道路已经铺好，但尚无众多行人</a></li>
+        <li><a href="#未来发展">未来发展</a></li>
+        <li><a href="#基础设施必须要适应aa">基础设施必须要适应AA</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          数据模拟 合并后太坊节点们的收益有怎样的变化？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在这篇文章中，我们尝试使用过去的数据来模拟合并后执行层费用对验证者回报的影响。" />
+<meta name="keywords" content="EVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/45003/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="数据模拟 合并后太坊节点们的收益有怎样的变化？" />
+<meta property="og:description" content="在这篇文章中，我们尝试使用过去的数据来模拟合并后执行层费用对验证者回报的影响。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/45003/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="数据模拟 合并后太坊节点们的收益有怎样的变化？">
+<meta itemprop="description" content="在这篇文章中，我们尝试使用过去的数据来模拟合并后执行层费用对验证者回报的影响。"><meta itemprop="datePublished" content="2022-11-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-11-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7242">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据模拟 合并后太坊节点们的收益有怎样的变化？"/>
+<meta name="twitter:description" content="在这篇文章中，我们尝试使用过去的数据来模拟合并后执行层费用对验证者回报的影响。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">数据模拟 合并后太坊节点们的收益有怎样的变化？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-11-28">
+      2022-11-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7242 字 -
+        预计阅读 15 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《Post-Merge MEV: Modelling Validator Returns》</p>
+<p>原文作者：pintail</p>
+<p>尝试使用过去的数据来模拟合并后执行层费用对验证者回报的影响。</p>
+<h3 id="概要">概要</h3>
+<p>工作证明挖矿时代结束后，执行层交易费用将支付给权益证明验证者。由于 EIP-1559 费用的燃烧，实际支付给验证者的剩余费用中绝大部分是「最大可提取价值」（MEV）。</p>
+<p>合并后，Ethereum 将有固定的 12 秒区块间隔，而不再是平均为 13.5 秒的可变区块间隔。然而，该变化可能不会对 MEV 的不稳定性造成太大影响。</p>
+<p><strong>自 2022 年 3 月至 2022 年 8 月，到达矿工手中的 MEV 水平虽然较低，不过却一直相对稳定。</strong></p>
+<p>基于合并后向验证者支付相同水平 MEV 的模型表明，验证者的中位回报率为 6.1% APR（包括 MEV 和共识层奖励），下四分位数为 5.3%，上四分位数为 7.3%。这是基于过去 6 个月的数据（2022 年 3 月至 2022 年 8 月）。</p>
+<p>运行多个验证者或与其他验证者共享收益的用户（例如通过流动质押供应商），其收益的不稳定性水平会更低。</p>
+<h3 id="引言">引言</h3>
+<p>随着 Ethereum 不断过渡到权益证明（PoS）信标链，并将其作为主网的共识引擎，许多媒体开始集中报道工作证明挖矿时代的结束，以及随之而来的能源使用问题和以太币发行量的减少（PoS 更安全且更能抵抗中心化）。然而，信标链接管交易收录和排序职责的另一个后果是，目前支付给矿工的交易收录费用将转而支付给出块者。也就是说，任何随机选取的验证者将每 12 秒发布一个区块。</p>
+<p>挑选验证者进而出块的方式与现有的程序没有发生改变，正如我在关于验证者收益的第一篇文章中所提到的那样，即使验证者完全参与，这一过程也会在收入方面产生一些随机性的变化。因此，<strong>对于本文来说，问题在于，验证者收益将在多大程度上受到它们将交易纳入 Ethereum 执行层而收到的费用的影响。</strong></p>
+<h3 id="mev-的具体含义">MEV 的具体含义</h3>
+<p>在标题中，我把这些执行层的费用称为「MEV」，但这可能会造成一些混淆，<strong>因为 MEV 一词既可以表示「矿工可提取的价值」，也可以表示「最大可提取的价值」</strong> ——这两个词似乎都不能精准描述验证者在合并后的 Ethereum 区块中收录或排序交易而得到的收益。为了减少歧义，Flashbots 团队引入了「已实现的可提取价值」一词，用以描述实际获得的价值，而不是理论上的最大值。不过，这种命名方式也会造成一些误解，我们仍不能明确该价值是由搜索者「实现」的价值，还是实际支付给矿工/验证者的金额。因此，为了简单起见，<strong>由于人们已经广泛使用「MEV」这一术语，我在这里用它代指矿工/验证者获得的收入。</strong></p>
+<p>那么，如果我们本就可以使用交易费用这样直接的词语，为什么还要选择一个花哨的术语——MEV 呢？原因主要有以下几点：自从 Flashbots 引入了 Ethereum 主流执行客户端 geth 的分叉后，交易收录与排序的收入就发生了巨大的变化。截至 2022 年 8 月，大约 74% 的 Ethereum 哈希率都在运行 mev-geth，这样矿工可以收到更多高时效性的交易捆绑包来获取收入，并得到直接支付的奖励（先前这些钱都在 Gas 费竞拍的过程中消耗掉了）。</p>
+<p>此外，Flashbots、Ethereum 基金会和客户团队合作开发的 mev-boost 可以让为验证者从合并后相同的收入流中获利。事实上，无论验证者是否选择运行 mev-boost，他们收到的出块费用在广义上仍然属于 MEV。更重要的是，自从伦敦硬分叉引入 EIP-1559 后，交易费中的拥堵费不再支付给矿工，而是都被烧掉了。这说明，现在构成矿工收入的绝大部分是那些因其捕获价值而向其支付特殊溢价的交易，即 MEV，因为那些低时效性的交易只会向矿工支付一笔象征性的费用。</p>
+<h3 id="早期模型">早期模型</h3>
+<p>在我之前关于验证者奖励的文章中，我只关注了验证者参与信标链（即共识层）而获得的收益。在此基础上，2021 年 7 月，Flashbots 的 Alex Obadia 和 Taarush Vemulapalli 介绍了他们对验证者奖励引入 MEV 的影响的早期成果。为此，他们专门从大约 10 万个区块的样本中获取了 Flashbots 交易捆绑包数据。首先，他们对各区块进行了平均化处理，并为每个区块应用了固定数值的 MEV。然后，他们查看了该数据集中的第 1 和第 99 位百分位数，以确定验证者的收入范围（结果表明其差异非常显著）。</p>
+<p>在这篇文章中，我将通过以下方式进一步改进这种方法：</p>
+<p><strong>1. 观察费用收入的整体情况（而不仅仅是 Flashbots 捆绑包），因为来自执行层的所有矿工费用收入都可以被认定为某种 MEV</strong></p>
+<p><strong>2. 采用更大规模的数据集，并考虑 MEV 水平随时间的变化情况</strong></p>
+<p><strong>3. 对整个结果的分布进行建模</strong></p>
+<p><strong>4. 计算运行多验证者用户的结果分布变化情况</strong></p>
+<p>在上述文章中观察到的一点是，我们很难推断 EIP-1559 对支付给矿工的费用产生了怎样的影响（在文章撰写时，引入 EIP-1559 的伦敦硬分叉还没有上线）。不过，我们现在已经有了大量这方面的数据。在下图中我们可以看到，原先支付给矿工的那部分费用在伦敦硬分叉后反而从以太币供应中抹去了。显然，伦敦硬分叉之前和之后的数据不具有可比性。出于这个原因，在这篇文章中，我们将只处理伦敦硬分叉之后的数据。</p>
+<p>imports / definitions / db connection</p>
+<p>get block summary data from db as pandas dataframe</p>
+<p>plot daily fees/coinbase transfers</p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_meh16m2z9h.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<h3 id="选择数据集">选择数据集</h3>
+<p><strong>在本篇文章中，我们将利用历史数据对未来做出预测（该方法在金融事件中并不可靠）。</strong> 正如我在上一篇文章中解释的那样，由于伦敦硬分叉中 EIP-1559 的实施，交易费市场在 2021 年 8 月发生了重大变化，该硬分叉在区块高度达到 12,965,000 时上线，因此在这之前的数据与最近的数据没有可比性。这之后的硬分叉是 Gray Glacier，它在区块高度 15,050,000 时上线，并推回了 Ethereum 的难度炸弹（difficulty bomb）。但在这之前，平均区块间隔已经开始发生变化。之后区块间隔还会出现变化，不过似乎对可用的 MEV 影响有限，所以我们不用担心 Gray Glacier 之前平均区块间隔略有增加的问题。</p>
+<p>因此，自伦敦硬分叉以来，我们得到了一年多的可用数据。事实上，我们不妨采用正好一年的数据，从而为费用市场结算留出时间。我们将关注区块 13,136,427（2021 年 9 月 1 日开采的第一个区块）到区块 15,449,617（2022 年 8 月 31 日开采的最后一个区块）这一范围内的区块。这些区块中包含了一整年的数据，总计大约 230 万个区块。</p>
+<p>选择了这个区块范围后，我们需要确定每个区块的矿工有多少收入。为此，我们将使用 Flashbots 的 mev-inspect-py 工具，该工具用于刮取区块的「Coinbase 转帐」交易，并汇总费用。这是因为，目前支付矿工的方式主要有两种，其中包括 Flashbots 捆绑包带有 MEV 的交易——要么设置一个足够高的交易费用，要么作为交易的一部分直接支付给矿工。由于 Gas 费效率更高，搜索者一直倾向于使用 Gas 费用而非 Coinbase 转账来支付矿工。尽管如此，我们还是希望将这两者都包括在我们的数据集中，以获得更全面的信息。</p>
+<p>为了确定每个区块的 MEV 数额，我们必须做更多的工作。首先，我们必须排除矿工支付给自己的交易，因为这些交易不存在经济意义。因此，我们需要识别由一个矿池控制的多个地址（这涉及到在 Etherscan 上的一些手动侦查），然后根据每笔交易的发送者地址是否在一个矿池组中进行标注，并根据产生该交易的矿池来标注每个区块。做完这些之后，我们就有机会生成一个每个区块的 MEV 摘要，其中减去了 EIP-1559 烧掉的以太币以及池内转账，结果保存为 Postgres 数据库中由 mev-inspect-py 填充的额外表格。</p>
+<p>最后，结果显示，其中有一笔交易的交易费比其他任何交易都高得多（7676 ETH）。事实上，这笔交易费本身就价值约 2300 万美元，在这一时期提取的所有 MEV 中占了很大比例。在这种情况下，高额费用便是一个出错的结果，而且绝大部分的费用都已经被矿工退回了。考虑到这一点，我选择将这笔交易从数据集中删除。</p>
+<h3 id="区块间隔">区块间隔</h3>
+<p>在我们开始更详细地研究矿工收入在区块间的分布之前，我们应该先暂停思考一下合并后的另一个变化，即区块间隔从随机（区块间平均约 13.5 秒）变为固定的 12 秒区块间隔。直觉上来说，我们可能认为较长的区块间隔会让矿工有更多的机会从传入的交易中收获 MEV，从而更多的区块利润。我们可能也会认为区块间隔的变化会大大影响矿工的收入。</p>
+<p>这些问题要想调查清楚光靠链上数据的话肯定是行不通的，不过我也在附录中对这一问题进行了说明。现在，我只想说，从表面上看，可变区块间隔似乎对矿工收入的影响非常小。在下文当中，我将通过将所有矿工的收入按这一比率进行反比例计算，以说明区块的平均频率略有增加，从平均间隔 13.5 秒到 12 秒。不过，我不会采用建模的方式来说明从可变间隔到固定间隔期间所发生的变化。</p>
+<h3 id="历史-mev-水平">历史 MEV 水平</h3>
+<p>让我们来通过下面两张图来看看一个矿工在一个典型的区块中可望获得多少 MEV。从直方图我们可以看出，每个区块的矿工收入往往非常低。第二张图可能稍微不那么直观，但实际上却提供了更多的信息。我们可以看到，矿工收入的中位数是 0.07 ETH。图中还标出了其他几个点，价值最低的 1% 的区块根本没有向矿工支付任何费用，而价值最高的那 1% 的区块则向矿工支付了超过 1.8 ETH 的费用。如下表所示（但不在图表上，因为这会使轴线过于扭曲），价值最高的 0.1% 的区块向矿工支付了 12.5 ETH 或更多的费用。</p>
+<p>plot block revenue histogram and empirical cumulative density function (ecdf)</p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_pcbul9hjw7.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_kw8am5j18c.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p>MEV 变化趋势</p>
+<p>上面的直方图和 ECDF 是基于我们整个一年的数据，并将其视为静态分布来进行绘制的。然而，我们也许会认为，矿工收入水平会随着时间的推移而变化，矿工收入的分布将取决于各种因素，如链上活动水平、支付给矿工的可用 MEV 比例的变化趋势，或与 L2 区块链相比，基础链上的可用 MEV 数值。</p>
+<p>为了清楚这一点，下图显示了数据集中每一周的区块奖励中位数，我们之前看到的总体中位数由红色虚线表示。以周为单位的原因在于，我们发现链上活动每周会出现一定的周期变化，比如周末的活动就相对较少。因此，通过对这些数据进行分组并提取中位数，我们消除了周期性的干扰。很明显，在这个图表中矿工收入的每周中位数水平整体呈下降趋势，且波动逐渐缓和。如果我们把该图标用橙色虚线一分为二，那么我们就可以把这两半看作是独立的两个部分，代表了在不同的网络/市场条件下支付给矿工的 MEV 水平。然而，我们需要从中看到的是，我们不能对基于历史数据做出的有关未来收入的任何估计报以很大的信心（请记住这一点，因为这正是我在本文后半部分要讲述的内容）。</p>
+<p>Look at variation across the dataset</p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_i1os93nhgo.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p>由于我们长达一年的数据集中的矿工收入水平并不稳定，我们可以用更为详尽的方式来比较数据集的前后两个部分。下图展示的是数据集两个部分的 ECDF，其中蓝线表示的是数据集的前半部分，橙线表示的是后半部分，而蓝线则明显低于橙线。X 轴上显示的是收入数据，而在每个四分位数，矿工收入水平在数据集的前半部分都会更高。前面图表中显示的整个数据集的 ECDF 将落在这两条线之间。如下表所示，每个区块在后六个月的中位数 MEV 都大致等于前六个月的一半。</p>
+<p>Generate ECDFs for the first half of the dataset versus the second</p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_vhyyegwqak.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_owgs0qdswo.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<h3 id="模拟合并后-mev-的回报率">模拟合并后 MEV 的回报率</h3>
+<p>因此，结合我们对矿工历史区块收入的了解，让我们来模拟一下验证者在一年中 MEV 的收入情况。由于我们现在考虑的主体是验证者而不是矿工，我将用 32 个 ETH 的百分比回报来表示结果。我们还没有得出每个区块收入分布的具体分析表达式（我很难借助帕累托分布提出一个合理的表达式）。这使建模工作略显复杂，所以在这种情况下我们将使用蒙特卡洛模拟法。</p>
+<p>这种方法的原理很简单：生成一个均匀分布在 0 和 1 之间的随机数，并使用这个数字从我们之前计算的 ECDF 中进行查找（ECDF 按比例计算，以考虑到平均区块间隔从 13.5 秒到 12 秒的变化）；然后，将该区块的收入分配给一个随机选择的验证者；最后，重复这个过程，直到我们得到一年的模拟区块（总共 2,629,746 个区块）。我们将进行三次这样的计算，分别使用全年数据集得出的 ECDF，以及将数据集拆分成两个部分后分别得出的 ECDF。</p>
+<p>我们将假设验证者的表现良好（没有遗漏的出块提案）。我们还将使用一个大小为 420,000 的验证器集，该数值接近于 2022 年 8 月验证者集的规模。这个验证者的数量也正好可以分为 32 个组，这在我们以后研究验证者组别时将非常有用。</p>
+<p>simulate a year&rsquo;s worth of block proposals</p>
+<p>plot ECDF and histogram for single validator return</p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_akptc1k5dq.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_ssto1k358w.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p>因此，以中位数为基准，当基于「高 MEV」期间 (即 2021 年 9 月至 2022 年 2 月) 的数据时，MEV 似乎为验证者的 APR 增加了约 3 个百分点，而当我们使用「低 MEV」期间 (2022 年 3 月至 2022 年 8 月) 的数据时则增加了约 1.5 个百分点。然而，一些验证者在一年的时间里几乎没有从 MEV 中获得任何回报，而少数幸运的人却可以获得超过 100% 的收益。</p>
+<h3 id="建立完整的验证器回报模型">建立完整的验证器回报模型</h3>
+<p>现在我们可以看到近似的验证者 MEV 收益，接下来让我们通过引入证明和同步委员会的奖励来完成模拟。由于 beaconcha.in 经常显示信标链上的参与率超过 99%，我们这里为了简化可以默认全部参与。在实践中，如果我们今天在主网上看到的情况在合并后仍然存在，那么验证者收益发生变化的主要原因将是随机分配的出块者职责、同步委员会和 MEV，而不是由于验证者的表现。</p>
+<p>因此，在下面的模拟中，所有验证者都会因其优越的的认证表现而获得相同的奖励，但每 256 个 epoch 会随机选择一个由 512 个验证者组成的委员会，然后该委员会因其在随后 256 个 epoch 的全部参与而获得完整的同步委员会奖励。每个区块的 MEV 选择方式与之前相同，但现在验证者可以获得信标链出块奖励，以及执行层交易费用（MEV）。</p>
+<p>model full validator returns using previously calculated MEV ECDFs</p>
+<p>plot simulated full validator returns</p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_09whcutt7e.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_lls49h6hge.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p>所以，根据我们全年的历史 MEV 数据集，并考虑到平均区间的减少，我们得出「中间 50%」的验证者的模拟回报率大约在 5.7% 和 8.5% 之间。同时，「最幸运的 1%」验证者的年回报率将高达 30%，而「最不幸运的 1%」却只有 4.2%。整套系统中最不赚钱的验证者仍然取得了 3.8% 的回报，而最赚钱的验证者在这一年中的回报率超过 4500%（即 45 倍）。不过，这个模型中的回报率并不包含复利。在实际情况中，赚取如此大回报的运营商可能会选择建立新的验证者，并因此赚取更多收益。</p>
+<h3 id="运行多个验证者">运行多个验证者</h3>
+<p>我们要考虑的最后一个问题是，运行多个验证者的质押者有着怎样的收益分布情况。在下面的图表中，我们模拟集中的验证者（基于整年的区块收入数据）被分为 2、4、8、16 和 32 个验证者的组别，用于比较不同组别大小的 ECDF 年回报率。图中的红色虚线表示的是整个验证者集的平均回报率（即如果所有 MEV 和信标链奖励得到平均分享，每个验证器将获得的回报）。我们预计，平均回报率是大规模验证者组别（如 Lido，或非常大的机构质押者）在扣除任何费用之前的收入。</p>
+<p>calculate ECDFs for 1, 2, 4, 8, 16, 32 validators</p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_0vkkkfossf.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1128/19_3edytpc4cu.png" alt="数据模拟，合并后太坊节点们的收益有怎样的变化？"></p>
+<p>从表中我们可以看到，验证者规模越大，ECDF 线也会变得越来越陡峭。这相当于直方图的峰值变窄，说明随着验证者规模增大，收益波动率也会不断减少。不仅如此，我们还能观察到，虽然运行单一验证者的四分位数范围（即第 25 和第 75 百分位数之间的 APR 百分比差异）约为 2.8 个百分点，但对于 32 个验证者的小组来说，四分位数范围只有 1.2 个百分点。</p>
+<p>这就是我们所期望看到的结果——通过运行多个验证者，我们可以平滑来自共识层和执行层的奖励波动。让我没想到的是，由 32 个验证者组成的群组的收益波动率（以四分位数范围衡量）只比单个验证器的收益波动率低 2.3 倍左右。这对于一部分来说是相当不错的结果，因为他们希望自己的回报率能更为稳定且更好预测，而这也将会让数据分布更为集中（在这种情况下，如果收益水平呈现正态分布的话，那么质押增加 32 倍将会让收益波动率减少 325.8 倍）。对此，Barnab Monnot（Ethereum 基金会的稳健激励小组组长）已经做了一些初步的工作。他发现财富集中化的趋势可能是奖励分配不均的结果，不过这仍然是一个有待研究的问题。</p>
+<h3 id="结论">结论</h3>
+<p>在这篇文章中，我们尝试使用过去的数据来模拟合并后执行层费用对验证者回报的影响。<strong>我们发现，当我们使用来自 MEV 充足时期（2021 年 9 月至 2022 年 2 月）的数据时，MEV 为验证人的回报增加了约 3 个百分点，但当使用来自 MEV 较少时期（2022 年 3 月至 2022 年 8 月）的数据时，这一数字下降到 1.5 个百分点。</strong> 在两种情况中，收益水平都相当不稳定，有些验证者在一年中几乎没有收到 MEV，而有些验证者的年回报率则远远超过 100%。当我们加入共识层奖励时，我们发现表现良好的验证者将获得至少 3.8% 的年利率，中位数年回报率大致在 6.1%（基于低 MEV 数据集）到 7.6%（基于高 MEV 数据集）。我们发现，<strong>验证者群体会比单个验证者获得更平稳的回报，尽管（至少对我来说）这种效果没有预期的那么明显，32 个验证者组成的群体的收益波动率比单个验证者的波动率低约 2.3 倍。</strong></p>
+<p>然而，过去的表现并不能保证未来的回报。我们尚不清楚 MEV 未来能在多大程度上为验证者所用，而其他参与者（应用、用户、 L2 序列器、构建者、中继器&hellip;&hellip;）最终又能获得多少比例。因此，本文的建模结果并不是对未来的预测，只是提出了几种可能发生的情况。</p>
+<p>文章最后，我还没有谈及这样一个问题：在合并之后，我们可以事先知道某一个 slot 的出块者的身份。目前来看，权益证明区块链上的这一变化为原子式跨链交易以及多区块 MEV 提供了新的可能性（因为拥有相当比例质押的验证者可能会在多个区块链上部署同步的区块提案）。不过，这些功能将会如何实现仍然是一个很大的未知数。尽管如此，我希望这篇文章可以为验证者提供一些思路，让他们了解自己在 Ethereum 走向合并后的发展方向以及应如何考虑自身收益，也许这也将帮助权益证明在未来几周、几个月和几年的时间里建立起自己的生态。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45002/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">数据：Tether已封禁807个地址，总计超4.35亿枚USDT</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/45034/">
+                <span class="next-text nav-default">晚间必读 | Polygon：把世界带到以太坊</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概要">概要</a></li>
+        <li><a href="#引言">引言</a></li>
+        <li><a href="#mev-的具体含义">MEV 的具体含义</a></li>
+        <li><a href="#早期模型">早期模型</a></li>
+        <li><a href="#选择数据集">选择数据集</a></li>
+        <li><a href="#区块间隔">区块间隔</a></li>
+        <li><a href="#历史-mev-水平">历史 MEV 水平</a></li>
+        <li><a href="#模拟合并后-mev-的回报率">模拟合并后 MEV 的回报率</a></li>
+        <li><a href="#建立完整的验证器回报模型">建立完整的验证器回报模型</a></li>
+        <li><a href="#运行多个验证者">运行多个验证者</a></li>
+        <li><a href="#结论">结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

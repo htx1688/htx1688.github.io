@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          对话Jolestar：Merkle Tree的方案真的能证明CEX的清白？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="一起聊聊默克尔树以及这次事件所带来的一些独家延展性思考。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59285/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="对话Jolestar：Merkle Tree的方案真的能证明CEX的清白？" />
+<meta property="og:description" content="一起聊聊默克尔树以及这次事件所带来的一些独家延展性思考。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59285/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="对话Jolestar：Merkle Tree的方案真的能证明CEX的清白？">
+<meta itemprop="description" content="一起聊聊默克尔树以及这次事件所带来的一些独家延展性思考。"><meta itemprop="datePublished" content="2023-09-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8880">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="对话Jolestar：Merkle Tree的方案真的能证明CEX的清白？"/>
+<meta name="twitter:description" content="一起聊聊默克尔树以及这次事件所带来的一些独家延展性思考。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">对话Jolestar：Merkle Tree的方案真的能证明CEX的清白？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-17">
+      2023-09-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8880 字 -
+        预计阅读 18 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Hahaho@DAOrayaki.org</p>
+<p>播客地址：https://www.ximalaya.com/sound/ 589658039 </p>
+<p>这两天关于FTX跟币安的话题在圈内持续发酵，最新的进展是，虽然FTX已经宣告破产保护，但其交易所在持续的受到黑客攻击，目前围绕着整个事件的内外部情况，可以用一片混乱，一波未平一波又起来形容。我个人的思考，从这次还在发酵的事件中显现出了很多问题，例如市场监管方向的问题，涉及垄断法的问题，中心化与去中心化问题，交易所的流动性及兑付问题等等，无论哪一块，对行业的未来发展都有着十分深远的影响。</p>
+<h2 id="shaun">Shaun</h2>
+<p>Hello，大家好，欢迎来到本期的YakiTalki，我是主持人Shaun。这两天关于FTX跟币安的话题在圈内持续发酵，最新的进展是，虽然FTX已经宣告破产保护，但其交易所在持续的受到黑客攻击，目前围绕着整个事件的内外部情况，可以用一片混乱，一波未平一波又起来形容。我个人的思考，从这次还在发酵的事件中显现出了很多问题，例如市场监管方向的问题，涉及垄断法的问题，中心化与去中心化问题，交易所的流动性及兑付问题等等，无论哪一块，对行业的未来发展都有着十分深远的影响。DAOrayaki做为行业BUIDler一员，则更关注对于BUIDL圈有影响的问题事件，这就是今天我们要谈的Merkle Tree（默克尔树）。这次的交易所大战后，各个交易所都开始“你争我抢”的官宣一个叫默克尔树的技术，力图通过此种方式，证明自己交易所的资产储备透明性及交易透明性。默克尔树到底是什么，被用来解决什么样的问题，对行业又有着什么的影响，带着这些思考，我们今天特别独家邀请了Starcoin的核心开发者，同时也是MoveFuns DAO的发起人Jolestar老师，一起聊聊默克尔树以及这次事件所带来的一些独家延展性思考。</p>
+<p>欢迎社区的老朋友，Jolestar老师。</p>
+<h2 id="jolestar">Jolestar</h2>
+<p>Hi，各位伙伴大家好。</p>
+<h2 id="shaun-1">Shaun</h2>
+<p>在正式开聊今天的话题之前，我很好奇您对这一次的“神仙打架”事件有怎样的解读？</p>
+<h2 id="jolestar-1">Jolestar</h2>
+<p>肯定是出乎大多数人的意料，关注的时候没想到“打架”会是这样的走向，也有人觉得老大跟老二打架，老三遭殃等等。确实没想到事情进展会如此快，FTX几乎毫无反抗之力。此外根据我的观察，事件最开始的时候大家谈及提币，受到过LUNA事件影响的用户，这次事件会更加警觉，积极提币。有的人在事件酝酿之初呈观望态度，最终放在FTX的资产收到了损失。</p>
+<p>所以大家也得到了一个结论，一旦有风吹草动，不管真假，先把币提出来。但这种行为模式会对中心化交易所产生很大影响，从博弈上来说，这是一种多次博弈，大家都会形成经验，每次都会这样选择，并且反应的会越来越迅速。</p>
+<p>从负面来看，无论是对市场价格亦或是整个行业，大家都会容易产生悲观，恐慌的情绪；但正面来看，大家很早就意识到中心化交易所是一个非常大的单点风险，去中心化就是要消除这种单点风险，在DeFi之前很多人的资产都存在交易所，链上资产很少，DeFi促使用户将资产从交易所迁移到链上，这次事件也让更多人意识到要以自己保管资产的方式为主。</p>
+<p>这对行业长远来看上是好事，大家会更关注去中心化这件事本身。之前为了早期快速发展，可能会牺牲去中心化，寻求先把整体市场做起来，吸引用户。但经过这次事件大家逐渐意识到，如果要更平稳的前进，还是要回归到去中心化路线。</p>
+<h2 id="shaun-2">Shaun</h2>
+<p>我今天打开Twitter，发现两个特别显著的特征，一是有人认为，从今往后不管市场信息是真是假，只要信息出来，第一件事情先动，切记不要三思后行，我认为这还是有借鉴意义的，大家现在对于整个市场好像属于一个特别恐慌，特别小心谨慎的状态。</p>
+<p>二是KOL开始广泛提出把代币存在冷钱包，有些冷钱包开始在Twitter上更积极的推广，我觉得这可能也是大家想把去中心化这件事做到更从个人，更从自己出发的特征。</p>
+<h2 id="jolestar-2">Jolestar</h2>
+<p>实际上关于资产到底如何管理，网上一直有很多争论。有人认为普通用户的资产管理能力可能不够，自行保存可能会面临黑客攻击，非官方虚假App，私钥助记词丢失等等问题导致资产损失，这种情况也是确实存在的。</p>
+<p>但从长远来看，中心化交易所的整体破产或损失，与个人用户的损失相比，对行业的影响更大。个人用户的损失是零散分散的，不是集中式的，有人会觉得交易所的管理手段与技术更安全，但因为它是单点，风险集中，一旦爆发，对行业的影响远比陆续出现事故的影响大。并且从市场的角度来看，个人用户的风险损失对整体市场的波动影响也会更小，所以还是建议大家去自己管理资产。</p>
+<h2 id="shaun-3">Shaun</h2>
+<p>今天看到有一个人讲他自己如何管理数字资产，他说会把自己的数字资产分两为部分， 50 %放在冷钱包， 50 %放在头部交易所，哪怕面临黑客攻击或是交易所倒闭，仍然还留有一半的资产。</p>
+<p>这次事件逼着大家想各种解法，于是很多中心化交易所开始谈一项技术，即默克尔树，它们想通过默克尔树证明自身资产储备情况是透明的，交易是透明的。所以今天邀请Jolestar老师，我们来聊一聊到底什么是默克尔树，是否可以用相对简明的方式阐述这种技术？</p>
+<h2 id="jolestar-3">Jolestar</h2>
+<p>Merkle Tree其实是非常基础的技术，它想解决的问题是，假如有两个数据集，想比较两个数据集内的数据是否一致，如果逐个比较成本会很高。所以我们可以将数据做成树结构，找到两个节点，计算出节点数据的哈希值（哈希值可以理解为数据指纹），将得到的两个哈希值结合起来再生成一个哈希值，一层一层搭起一棵树。</p>
+<p>搭起树后就有个根（Root），如果能保证叶子节点的顺序，通过对比两个数据集的根节点，就能知道整个数据是否一致。这种技术在很多场景都会被使用，在区块链内会被用来做状态树，我把它理解成一种状态证明或数据证明。</p>
+<p>它还有一个特性是，可以证明某一个数据与根的关系，证明根下是否包含了某一个数据，这也是交易所用这种数据结构去表达证明的方式，每个人都可以查询自己在结构树里的余额，拿到一个证明。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0917/15_3507enybe8.jpg" alt="对话Jolestar：Merkle Tree的方案真的能证明CEX的清白？"></p>
+<p>Merkle Tree图示</p>
+<h2 id="shaun-4">Shaun</h2>
+<p>所以默克尔树这种方式，能够让交易所跟用户之间的信息保持一个更透明的状态，可以这么理解吗？</p>
+<h2 id="jolestar-4">Jolestar</h2>
+<p>它比完全黑盒的状态更透明一些。但要想默克尔树有效，需要依赖几个条件：</p>
+<p>一是交易所将数据的根公布，每个用户检查核对根上的余额与账号上看的余额是否匹配，如果发现不匹配，用户会对外公布，在社交媒体进行宣传声讨，这本质上是一种基于社会共识的约束力，但不是强约束力。</p>
+<p>二是默克尔树的叶子节点不会全部公开，需要依赖第三方审计机构将所有节点进行总值校验，确认总值与所有个体用户的值的合是否一致，否则个人节点值随意生成，甚至是负的，总值也可以匹配。所以要由审计机构对每个节点进行确认，才能保证值是可信的。</p>
+<p>此外，默克尔树的数据具有时效性，它依赖于人工审计，但人工审计不可能实时审计，也不能频繁审计，甚至做不到每天审计。所以只能阶段性审计，而这又有可能导致审计时数据是对的，不审计时将钱挪用，等再审计的时候挪回，这种事情是没法避免的。</p>
+<h2 id="shaun-5">Shaun</h2>
+<p>也就是说，这件事涉及的不单是技术本身的问题，默克尔树是单从技术层面公示，但还需要行业者的自查自律，以及第三方监管机构的协查。如果有一方或两方相对作恶的话，技术本身还是挺难满足透明化要求的。</p>
+<p>所以在这件事情出来以后，各大交易所陆续公布了默克尔树，有些也开始发快照，采取一些行动，您觉得这些行为在多大程度上是有效的？</p>
+<p>我理解它其实对行业有一定的促进，但其实并不是那么有用？</p>
+<h2 id="jolestar-5">Jolestar</h2>
+<p>没有那么理想，但还是起到了一定作用。区块链目前有很多的中心化交易所，如果它真意图跑路，用户基本也是没办法的。它之所以没跑路是因为遵循商户与用户，或人与人的一定程度“契约精神”的约束。</p>
+<p>约束来自于对违背承诺的惩罚，在对方违背承诺后我可以选择不再继续和你交易，这是最直接的惩罚，如果交易所希求于一个更长期的博弈关系，这种最直接的惩罚会产生很大影响。所以交易所会倾向于继续长期的与你交易下去，因为未来有更大的蛋糕，如果未来能赚到更多的钱，交易所没理由跑路。如果行业持续的向上发展，大家对未来的期望也高，用户的退出威慑就是有效的。</p>
+<p>同时，虽然中心化交易所不透明，但在区块链之上的交易是透明的，资金进出是透明的。这对交易所是一个非常明确的约束力，交易所钱包能不能正常顺利提币，流入转出记录都是公开的。我认为这也是区块链的交易所这么多年来，还处于正反馈循环的成长过程的原因。这不像传统金融机构，比如P 2 P热潮，你会发现整个行业几乎没有一个正向成长的过程，因为从募集到使用转移资金，都是完全不透明的。</p>
+<p>所以交易所虽然中心化，但还有透明的构成部分，而默克尔树可以让它更透明。此外，虽然前面提到几个缺点，但要跟审计机构合谋是有成本的，临时拆借资金填补窟窿也有成本，并且很容易被人发现。最近不是也有新闻说有些交易所在拆借资金。</p>
+<h2 id="shaun-6">Shaun</h2>
+<p>对，最新的消息应该是三个小时以前，Twitter流传某交易所挪用资金拍快照，如果大家感兴趣可以在Twitter上跟进一下，这些信息更新的还是蛮快的。</p>
+<p>就像前面提到的，现在这种方式的作恶成本会更高，那您怎么看交易所公布默克尔树这件事，其实是好的，但是效率有限？</p>
+<h2 id="jolestar-6">Jolestar</h2>
+<p>是的，所以我认为聊胜于无，有比没有强。虽然它不解决根本问题，也不是终极方案，但从现阶段来看，这引发了大家的关注。像之前就有交易所公布过默克尔树，假如一个百分百保证金的交易所诚心的想自证清白，但用户却不关心，这也会让交易所很苦恼，因为用户不关注，相对于其它交易所就没有竞争优势。</p>
+<p>所以这次的广泛关注，也算是倒逼交易所自律，诚实的交易所如果有竞争优势，大家就会更诚实。如果不能自认清白，就是一个劣币趋势良币的一个过程。</p>
+<h2 id="shaun-7">Shaun</h2>
+<p>您也谈到默克尔树不是终极解法，我相信整个行业还是在一个持续探索和发展的阶段，那从您的角度来讲，除了默克尔树，目前有没有其它解法值得探索？</p>
+<h2 id="jolestar-7">Jolestar</h2>
+<p>交易所的系统流程可以理解为，基于用户的请求，用程序处理用户的资金与数据，产生最终结果。简化下来就是，我基于参数执行计算，运行程序并得出结果，我将结果告知你。但你如何判断我的结果是真实的，没有欺骗你？最简单的方式就是你也通过程序执行一遍计算，如果有第三方想校验结果的真实，仍需要自己再执行一遍计算。</p>
+<p>如果有一部分用户基于硬件等原因，无法运行程序校验，想让它们相信数值的真实性，就需要各运行节点商量出统一规则，如何判断结果是正确的，这就是区块链的共识，这样的运行模式也就是链的机制。</p>
+<p>如果是不仅基于参数算数据，而是每次计算结束后还会留一个状态，将其累积，以便下次计算时重读。这就牵扯到一个问题，该怎么保证每个节点上，最终基于计算的状态是一致的。这也是默克尔树的用法，区块里的哈希值组成状态树，区块链基于某个Root（状态树的根）执行程序，得到结果，将结果广播给其它节点，大家验证，通过共识机制决策出一个所有人认可的结果。</p>
+<p>每次交易都会导致状态树的根变化，而审计又是阶段性审计，那如何保证过程中每一步是可信的？同时用户如果想教验结果必须亲自执行计算，也意味着交易所的程序，数据必须公开，但实际上交易所的交易数据很难直接证明某项交易是由用户发起，假如出现BUG，程序以某用户的身份发了笔交易，用户的余额变化，用户进行申诉，但交易记录上确实存有这条记录。如果把信息对外公布，外人很难判断这个行为是用户发出，还是交易所替用户发出。</p>
+<p>这时就需要区块链签名机制，也就是必须有一个用户知道，交易所不知道的私钥。交易的时候用户由签名，发出交易，这时交易所其实就变成了链，在用区块链的模式运行，用户必须用私钥发起交易，所有交易与程序必须公开，第三方也可以校验交易所的数据真实性。这时它更像一个私有链，但是数据公开的私有链，因为没有其它节点做共识，也没有约束，即便交易所算错数据，用户证明后发现错误，用发推文声讨的社会共识约束交易所并不会起到很好的效果。</p>
+<p>如果想用程序约束，交易所就需要抵押一部分资金到链上，如果用户发现执行错误，用户去链上提交仲裁，扣下交易所抵押的资金。如果交易所有决心这样做，用户就可以相信。</p>
+<p>同时这也是现阶段Layer 2 的目标，但其中的难题是，交易所交易的链上仲裁环节如何证明。如果交易所运行的撮合程序计算错误，该怎么让链识别撮合错误呢？假如交易所可以将程序重复在链上执行，就可以进行惩罚，但这个方案仍然不可行，因为大多数链下程序的复杂度大于链上，链上无法支撑起这么复杂的重复计算。</p>
+<p>其它办法还有ZK（零知识证明），即把链下的计算结果生成一个证明，在链上只是校验，不需要重新执行。但要做成通用交易所的撮合程序，还是需要一定的复杂度。</p>
+<p>还有一种方案，就是Layer 2 的交互式证明，它跟重复证明的机制类似。用户运行交易所的程序发现计算错误，但这条交易不能在链上重复执行，所以要在链下通过交汇的方式找到是哪一条长指令发生了差异，把指令及其涉及的内存状态，生成状态树提交链上，由链上重新执行指令，判断对错。通过这种思路，任意复杂的链下的程序都可以在链上做仲裁。</p>
+<p>所以长远来看，中心化交易所要么自身演化成去中心交易所，要么等待被其它去中心交易所超越。这时中心化交易所的应用场景就只剩下OTC，也就是法币出入金通道与转换途径。</p>
+<h2 id="shaun-8">Shaun</h2>
+<p>也就是说从您的角度来看，如果行业是正向发展的话，未来交易所的模式都应该去中心化。币安属于纯中心化交易所吗，该怎么去定义它？</p>
+<h2 id="jolestar-8">Jolestar</h2>
+<p>是的。这里面其实还有很多问题，比如交易所是不能直接将用户交易数据公开的，因为它掌握了大量用户的隐私信息。我认为现在中心化交易所很难演进成去中心化交易所，因为目前我没发现有任何一家大企业的成功先例，能在内部搞一个新趋势，自己革自己的命。所以肯定是新的去中心化交易所模型，逐渐的将用户从中心化交易所吸引过去，逐渐替代。</p>
+<h2 id="shaun-9">Shaun</h2>
+<p>未来的发展有没有可能是，中心化的交易所加上强监管？</p>
+<h2 id="jolestar-9">Jolestar</h2>
+<p>不可能，即使现有传统金融的所谓强监管的程度，也不是我们追求的，还是会有一定程度的“延迟”。一般情况下，监管机构要拿到记录与账本才可以审计。现在所说的Layer 2 ，要保证数据可用性，即保证任何人都拿到并审计，而在传统情况下，交易记录不可能谁都拿的到，只有审计机构能拿到，它的数据可用性被限制在一个范围内，且不是实时的，毕竟也出现过审计机构本身出现丑闻的新闻。所以我们认为如果有技术性解决手段，就不要用人治手段。</p>
+<p>此外，区块链领域的资产类型演进非常快，而传统监管体系演进了非常长的时间才出现。比如银行的监管体系演进了上百年才出现比较完善的监管体系，股票交易所也类似，即资产从发行到流通的整个环节，都在可控范围内。而Crypto领域只是在一端进行强监管，比如现在Coinbase的模式，资产的流通并不在内部，而是在外部，这会带来一定程度的挑战。</p>
+<h2 id="shaun-10">Shaun</h2>
+<p>我看到有社区小伙伴在评论区说，最好做一条只有币对交易的公链。实际上刚才我们谈到的解法，基本上都是基于Layer 2 （二层）？</p>
+<h2 id="jolestar-10">Jolestar</h2>
+<p>这个里面牵扯几个问题，用公链做交易所本身是不划算的，公链本身解决了一个问题就是仲裁者问题，大家是基于节点的共识规则运行。就不必返回中心化交易所的仲裁者模式运行，也不必再造一条链，用其它机制解决这个问题。此外公链的节点数量越多，成本越高，TPS也会受影响。</p>
+<p>用Layer 2 解决是一个更靠谱的方案，中心化交易所的优势Layer 2 都可以满足。但Layer 2 现阶段有一些困难，就是现阶段大多数Layer 2 属于单链，而中心化交易所支持的链足够多，做一些复杂交换时明显是中心化交易所更快捷。</p>
+<p>所以行业内最近也在思考新的方案，就是Layer 2 能否可以连接多链，将拓展连接到多链上作为结算层，最终达到的去中心化交易所的体验，资产支持类型上完全可以跟中心化交易所媲美，并且安全性更高。</p>
+<h2 id="shaun-11">Shaun</h2>
+<p>聊到这，话题也快接近尾声了，鉴于这个事件还在持续发酵，您觉得会对整个行业的未来产生哪些实质性的影响？</p>
+<h2 id="jolestar-11">Jolestar</h2>
+<p>在以前的时候，去中心化跟中心化之间有着一层模糊地带，“我”自己虽然是中心化，但“我”在去中心化的世界里，没有什么能管得了“我”。但现在在加速这一状态，也就是要么真正的去中心化，要么回到监管框架下，把中间模糊的地带去掉。</p>
+<p>我最近写过的一篇有关Web 3 的长推里有提到，Web 3 要解决的，是Web 2 应用面临的被监管机构撕裂的问题，而中心化交易所会直接面临这个问题。如果回归监管框架，那只能在一个国家经营，这就拒绝了其它国家的用户；或是在不同的国家，拆成不同的交易所，遵守不同国家的监管规则，把用户分隔开。这些方案短期来说，单个国家的交易量或许能支撑起一个交易所，但长远看不是未来的趋势。</p>
+<p>如果不想被监管机构撕裂，只能走去中心化路线，而目前的方案在我看来只有Layer 2 一条。当然或许有一条沿径路线，比如将几个交易所打造成联盟链，互相跑对方的节点，把账号打通，互相监督。但我觉得目前来看，它们不会达成这种共识。</p>
+<h2 id="shaun-12">Shaun</h2>
+<p>对的，目前还处于一个相杀不相爱的阶段哈哈哈。</p>
+<p>感谢Jolestar老师，我们预留几分钟，有没有小伙伴有相关问题想提问？</p>
+<h2 id="sophiefu">Sophie.Fu</h2>
+<p>你好，首先非常感谢两位老师的分享，我想问一个比较小白的问题，就是现在市面上的交易所，是不是还没有纯粹的去中心化的交易所？像币安或是这次事件涉及的交易所，它们其实还算一个相对中心化的交易所，可以这么理解吗？</p>
+<h2 id="jolestar-12">Jolestar</h2>
+<p>现在所有链上的Swap都可以理解成去中心化交易所的一种，只是交易模型之间会有不同。中心化交易所里一般说挂单，Swap是直接兑换的AMM（自动做市商）方式，它跟挂单撮合不一样，但本质上功能是一样的，就是用一种Token交换另一种Token。</p>
+<p>对于是否是去中心化的判断，如果说不懂技术，有几个最简单的判断标准。首先程序是用钱包还是账号登陆，虽然现在也有去中心化钱包做到不用私钥登陆，但你能感受到资产是在谁的控制之下，这点上能区分出。</p>
+<p>第二个是，交易是不是能直接关停，这涉及到前面遗漏的一点，就是所谓单方面提款能力的问题。现在所有Layer 2 的方案里，最复杂的一个设计就是允许用户单方面从链上提款，也就是如果应用宕机，用户能不能通过某种链上的方式把钱照常提走，这是中心化与去中心化的关键差异。因为中心化交易所即便通过默克尔树证明资产健康，如果它把网站或应用关闭，不搭理用户，用户也没办法，资产也无法提取。</p>
+<p>还有就是看团队，即便是老板跑了或消失了，但应用还会继续运行，没有人能停掉，这是真正的去中心化的。</p>
+<h2 id="shaun-13">Shaun</h2>
+<p>看来大家以后要注意是用钱包登录，还是用交易所账号密码登录，这是一个很好的区分点。</p>
+<h2 id="jolestar-13">Jolestar</h2>
+<p>有关这件事对未来的影响，我再补充几句。如果中心化交易所进一步在自证清白的路线上“卷”，其实是会推动整体Layer 2 技术的演进，区块链的状态证明与计算证明等等技术证明的路线，会受到更多的关注，Layer 2 技术未来会变成显学，大家会真正的关注怎么去证明。</p>
+<h2 id="shaun-14">Shaun</h2>
+<p>正如您所说，以前的交易所好像没有那么紧张，而目前的趋势是大家都忙着自证清白。但现在的解法更多的还是依托“老调重弹”的默克尔树，它能解决一定程度的问题，但可能只解决了不到 1 / 3 的问题，因为这其中还包括行业者的自律，以及第三方审计的监管。</p>
+<p>就像您在分享中提到的，在未来，可能整个Layer 2 会有更多新的技术上的赋能，以及更广泛的应用场景。</p>
+<p>我觉得这次“神仙打架”没有赢家，我在交易所方面用的不多，但我觉得原先的FTX在流动性，体验各方面都很优秀。但就像开篇提到的，FTX在短短两三天之内倒塌，这跟行业整体的恐慌程度，用户的挤兑有关，但速度超乎人们的意料。</p>
+<p>SBF自己也谈到他犯的错误，应对流动性挤兑的不足，CZ也认为这件事其实对谁都不好。您也谈到交易所想拿到未来全球化的牌照，几乎是难上加难，只能逐个地域逐个国家去应对政策。</p>
+<p>最重要的是资本市场，这次事件之后大家会变得更加谨慎，这不一定是好事情。像红杉，软银这些大资本也损失了不少，但没有办法。行业真正的建设者们，仍然需要资金去支持，我觉得这或许没那么乐观。</p>
+<p>我个人觉得这次事件对于整个圈子未来的发展，影响是深远的。从好的方面的来讲，事件倒逼行业，尤其是中心化的交易所去做更多去中心化的改进是好的现象，它可以让很多此刻应景的老技术重出江湖，例如默克尔树，也可以倒逼开发者们加快探索相关新技术的可能。但从不好的方面来讲，加速来临的，可能更严苛的行业监管，一家独大的中心化交易所现状，雷曼效应所引发的资本市场恐慌潮，可能会让整个行业未来的发展之路变得更加艰难及不确定。</p>
+<p>但无论资本行业如何血雨腥风，真正的BUIDLer们，一直在路上。</p>
+<p>再次感谢Jolestar老师的倾情分享，欢迎时常来坐坐，也感谢DAOrayaki社区的小伙伴。</p>
+<p>今天相关讨论的音频晚些时候会上传在 DAOrayaki 官网，DAOrayaki.org 的专属播客频道里。我们也会同时发布在国内的小宇宙播客平台，喜马拉雅FM，全球各大流媒体平台，例如苹果播客、谷歌播客、YouTube 以及 Spotify 上，欢迎大家收听及订阅。我们下期不见不散。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59290/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">大模型竟塞进自动驾驶，AI 会解说自己怎么开车了！</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59288/">
+                <span class="next-text nav-default">金色早报 | 中国全国元宇宙行业产教融合共同体正式成立</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#shaun">Shaun</a></li>
+    <li><a href="#jolestar">Jolestar</a></li>
+    <li><a href="#shaun-1">Shaun</a></li>
+    <li><a href="#jolestar-1">Jolestar</a></li>
+    <li><a href="#shaun-2">Shaun</a></li>
+    <li><a href="#jolestar-2">Jolestar</a></li>
+    <li><a href="#shaun-3">Shaun</a></li>
+    <li><a href="#jolestar-3">Jolestar</a></li>
+    <li><a href="#shaun-4">Shaun</a></li>
+    <li><a href="#jolestar-4">Jolestar</a></li>
+    <li><a href="#shaun-5">Shaun</a></li>
+    <li><a href="#jolestar-5">Jolestar</a></li>
+    <li><a href="#shaun-6">Shaun</a></li>
+    <li><a href="#jolestar-6">Jolestar</a></li>
+    <li><a href="#shaun-7">Shaun</a></li>
+    <li><a href="#jolestar-7">Jolestar</a></li>
+    <li><a href="#shaun-8">Shaun</a></li>
+    <li><a href="#jolestar-8">Jolestar</a></li>
+    <li><a href="#shaun-9">Shaun</a></li>
+    <li><a href="#jolestar-9">Jolestar</a></li>
+    <li><a href="#shaun-10">Shaun</a></li>
+    <li><a href="#jolestar-10">Jolestar</a></li>
+    <li><a href="#shaun-11">Shaun</a></li>
+    <li><a href="#jolestar-11">Jolestar</a></li>
+    <li><a href="#shaun-12">Shaun</a></li>
+    <li><a href="#sophiefu">Sophie.Fu</a></li>
+    <li><a href="#jolestar-12">Jolestar</a></li>
+    <li><a href="#shaun-13">Shaun</a></li>
+    <li><a href="#jolestar-13">Jolestar</a></li>
+    <li><a href="#shaun-14">Shaun</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

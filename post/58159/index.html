@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          速览Restaking领头羊：EigenLayer的业务逻辑和估值推演 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将对 EigenLayer 的业务逻辑进行梳理，并对 EigenLayer 的项目估值进行试算。" />
+<meta name="keywords" content="EigenLayer" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58159/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="速览Restaking领头羊：EigenLayer的业务逻辑和估值推演" />
+<meta property="og:description" content="本文将对 EigenLayer 的业务逻辑进行梳理，并对 EigenLayer 的项目估值进行试算。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58159/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-31T00:00:00+00:00" />
+
+<meta itemprop="name" content="速览Restaking领头羊：EigenLayer的业务逻辑和估值推演">
+<meta itemprop="description" content="本文将对 EigenLayer 的业务逻辑进行梳理，并对 EigenLayer 的项目估值进行试算。"><meta itemprop="datePublished" content="2023-08-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-31T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5274">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="速览Restaking领头羊：EigenLayer的业务逻辑和估值推演"/>
+<meta name="twitter:description" content="本文将对 EigenLayer 的业务逻辑进行梳理，并对 EigenLayer 的项目估值进行试算。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">速览Restaking领头羊：EigenLayer的业务逻辑和估值推演</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-31">
+      2023-08-31
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5274 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="引言">引言</h2>
+<p>随着以太坊上海升级的完成，不少 LSD 项目的业务都迎来了快速增长，LSD 资产的用户人数和净值也大幅上升。另一方面随着年底坎昆升级的临近以及 OP stack 的开放，今天也是 Rollup 大年，而围绕 Rollup 模块的各类服务，如 DA 层、共享排序器、RaaS 服务等也方兴未艾。而基于 LSD 资产提出 Restaking 概念，旨在为众多 Rollup 和中间件（Middleware）们提供服务的 EigenLayer，在今年的关注度也持续攀升，不但在 3 月以 5 亿美金的估值完成 5000 万美金的大额融资，其代币的 OTC 价格近期据传更是达到了惊人的 20 亿美金，媲美公链级项目的估值水平。</p>
+<p>笔者在本文将对 EigenLayer 的业务逻辑进行梳理，并对 EigenLayer 的项目估值进行试算，尝试回答以下几个问题：</p>
+<ul>
+<li>
+<p>Restaking 服务是什么，客户群是谁，尝试解决什么问题？</p>
+</li>
+<li>
+<p>Restaking 模式推广的阻碍是什么？</p>
+</li>
+<li>
+<p>EigenLayer 的 5 亿、甚至 20 亿美金估值贵不贵？</p>
+</li>
+</ul>
+<p><em>以下文章内容为笔者截至发表时的阶段性看法，更多从商业角度进行评估阐释，对项目的技术细节着墨较少。本文可能存在事实、观点的错误和偏见，仅作为讨论之用，也期待来自其他投研同业的指正。</em></p>
+<h2 id="eigenlayer-的业务逻辑">EigenLayer 的业务逻辑</h2>
+<p>在正式开始梳理 EigenLayer 的业务之前，先介绍下文将出现的几个高频词汇：</p>
+<p>中间件：Middleware，指的是区块链底层服务和 Dapp 之间的服务，在Web3领域里，典型的中间件有预言机、跨链桥、索引器、DID、DA 层等</p>
+<p>LSD：即流动性质押衍生品（Liquid Staking Derivatives），比如 Lido 的 stETH</p>
+<p>AVS：主动验证节点服务（Actively Validated Services），即为项目提供安全和去中心化保障的分布式节点系统，最典型的就是公链的 PoS 系统</p>
+<p>DA：Data availability 的缩写，数据可用性主要指其他项目（比如 Rollup 们）可以把自己的交易数据备份在 DA 层之上，保证后续有需要时，可以从 DA 层访问和复原所有历史交易记录</p>
+<h3 id="业务范围">业务范围</h3>
+<p>EigenLayer 提供了一个代币经济安全（cryptoeconomic security）的租借市场。</p>
+<p>所谓代币经济安全（cryptoeconomic security），指的是各类Web3项目为了保证项目在平稳运行的同时，具备无许可、去中心化的属性，需要网络的主要服务者（验证人）以代币质押的方式参与项目，验证人如果未能履约，其质押的代币将被罚没。</p>
+<p>EigenLayer 作为平台方，一方面向 LSD 资产的持有人募集资产，另一方面，以募集到的 LSD 资产作为抵押品，向有 AVS 需求的中间件或侧链、Rollup 们提供便捷、低成本的 AVS 服务，其自身在 LSD 提供者和 AVS 需求方中间提供需求匹配服务，并由专门的质押服务商负责具体的质押的安全保障服务。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_409ggplpw1.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>除此之外，EigenLayer 背后的母公司还做了一个 DA 层，为那些需要 DA 层服务的 Rollup 或应用链提供数据可用性服务，该产品名为“EigenDA”，EigenDA 将与 EigenLayer 产生业务协同。</p>
+<p>EigenLayer 希望解决的痛点在于：</p>
+<p>1.对各类项目方：降低独立构建自己的信任网络的高成本，直接付费购买 EigenLayer 平台上的质押资产+节点运营商，无需自建。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_jwqbymppmu.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>来源：EigenLayer 白皮书</p>
+<p>2.对以太坊：拓展以太坊 LSD 的使用场景，让 ETH 成为更多项目的网络安全抵押品，增加对 ETH 的需求。</p>
+<p>3.对 LSD 用户：进一步提升 LSD 资产的资本效率和收益。</p>
+<h3 id="业务用户">业务用户</h3>
+<p>EigenLayer 服务的用户涉及三方，对应的需求分别是：</p>
+<p>1.LSD 资产提供者：这类用户的主要需求是获得以太坊 LSD 资产在基础 PoS 奖励之外的收益，同时愿意承担将自己的 LSD 资产作为质押资产提供给节点运营者，面临的可能的罚没风险。</p>
+<p>2.节点运营商：通过 EigenLayer 获得 LSD 资产，为需要 AVS 服务的项目方提供节点服务，从项目方提供的节点奖励和手续费中抽取收益。</p>
+<p>3.AVS 需求方：指的是那些需要 AVS 为自己提供安全，但是又希望降低成本的项目方（比如以 LSD 资产作为节点运营方质押物的某条 Rollup 或跨链桥），他们可以通过 EigenLayer 购买这类服务，无需自建 AVS。</p>
+<p>EigenDA 的需求方主要是各类 Rollup 或应用链。</p>
+<h3 id="eigenlayer-业务细节">EigenLayer 业务细节</h3>
+<p>用户可以将质押在以太坊网络的代币包括 stETH、rETH、cbETH 代币二次质押到 EigenLayer 市场，质押服务提供商负责将用户的代币与相应的安全网络需求方匹配，为这些项目方提供 AVS 服务，而 AVS 的底层资产就是用户质押在 EigenLayer 的代币，项目方需要向用户分发一定的“安全费”。</p>
+<h3 id="产品进度">产品进度</h3>
+<p>目前 EigenLayer 仅上线了 LSD 的 restake 功能，尚未开发基于 LSD 资产的节点运营质押和 AVS 服务。在共开放过两次的 LSD 资产的存入活动中，存款均很快就达到限额（存款人主要是为了谋求 EigenLayer 潜在的空投奖励）。用户也可以直接存入 32 个整数单位的 ETH 参与 Restake。在限制存入的情况下，目前 EigenLayer 已经累计了 15 万左右的 staking ETH。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_c907d5cmv0.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>图片来源：https://app.eigenlayer.xyz/</p>
+<p>而根据 EigenLayer 官方公布的路线图，目前Q3季度的主要任务是 Operator 测试网（节点运营方测试网）的开发， 4 季度正式开始 AVS 服务测试网的开发。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_s22sl3pwje.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p><a href="https://docs.EigenLayer.xyz/overview/readme/protocol-features/roadmap">https://docs.EigenLayer.xyz/overview/readme/protocol-features/roadmap</a></p>
+<p>而 EigenDA 的首个明确用户是基于 OP 虚拟机 fork 的 rollup 项目 Mantle，目前 Mantle 已经在使用测试版的 EigenDA 做它的 DA。</p>
+<h3 id="代币经济模型">代币经济模型</h3>
+<p>EigenLayer 是有代币的项目，但是尚未确定和披露其代币信息和代币模型。</p>
+<h2 id="eigenlayer-的团队和融资背景">EigenLayer 的团队和融资背景</h2>
+<h3 id="核心团队">核心团队</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_yt0yf9it4f.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>Founder&amp;CEO：Sreeram Kannan</p>
+<p>华盛顿大学计算机工程系副教授，同时也是 EigenLayer 背后的母公司 Layr Labs 的创始人和实控人。发表区块链相关论文 20 余篇。在印度科学研究所完成电信本科学业，在伊利诺伊香槟分校获得数学硕士和信息论与无线通信博士，后在加州大学伯克利分校作为博士后研究员，目前在华盛顿大学任教，担任华盛顿大学区块链实验室(UW-Blockchain-Lab)负责人。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_qwujoynylu.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>Founder&amp;首席战略官：Calvin Liu</p>
+<p>美国康奈尔大学哲学与经济学专业，毕业后多年从事数据分析、企业咨询和战略工作，在 Compound 身为战略负责人工作近 4 年， 2022 年加入 EigenLayer。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_9qot0sw2ys.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>COO：Chris Dury</p>
+<p>纽约大学斯特恩商学院工商管理硕士。拥有丰富的云服务产品项目管理经验。加入 EigenLayer 之前，担任 Domino Data Lab （机器学习平台）的产品高级副总裁，曾在亚马逊 AWS 担任总经理和总监，领导了多项面向游戏开发者的云服务项目。2022 年初加入了 EigenLayer。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_1i3kifqt29.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>数据来源：https://www.linkedin.com/company/eigenl/</p>
+<p>EigenLayer的团队正在迅速增长中，目前员工人数 30+，大部分员工在美国西雅图。</p>
+<p>Layr Labs 是 EigenLayer 背后的母公司，也由 Sreeram Kannan 创立（创立时间为 2021 年），旗下除了 EigenLayer 之外，还有 EigenDA 和 Babylon（同样是提供加密经济安全服务的项目，不过主要服务于 Cosmos 生态）两个项目。</p>
+<h3 id="融资情况">融资情况</h3>
+<p>EigenLayer 目前进行过两笔公开融资，分别是 22 年种子轮的 1450 万美金（估值不明）和 23 年 3 月完成的 A 轮的 5000 万（估值 5 亿）美金。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_f6ctllibsi.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>其中比较知名投资机构如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_bakguqv8us.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>数据来源：rootdata.com</p>
+<p>23 年同期，其母公司 Layr Labs 也完成了将近 6448 万美金的股权融资，详见其给 SEC 的报备资料。</p>
+<h2 id="restaking-业务的市场规模推动叙事和挑战">Restaking 业务的市场规模、推动叙事和挑战</h2>
+<h3 id="市场规模预测">市场规模预测</h3>
+<p>EigenLayer 提出了 restaking 这个新颖的概念，提供了“cryptoeconomic security as a Service”的服务，其客户群体包括中间件（预言机、桥、Da 层）以及侧链\应用链\Rollup 们，希望解决的痛点是降低这些项目的去中心化网络安全成本（相比它们自建信任网络而言）。</p>
+<p>理论上来说，凡是需要代币质押作为准入，以博弈机制维护网络共识、保持去中心化的项目，都是它的潜在用户。这个市场目前的具体规模不好准确估测，乐观来说可能是一个 3 年内会到达百亿美金级别的市场。</p>
+<p>因为以太坊的 ETH 质押金额目前为 420 亿美金，项目总市值 2000 亿左右（以上均为 2023.8.30 日数据），以太坊链上资金总规模在 3000-4000 亿美金。考虑到 EigenLayer 未来的主要客户还是一些比较小和新的项目，相较于处于绝对龙头地位的以太坊的 400 亿美金左右 PoS 质押规模，EigenLayer 服务项目的质押业务规模在短期内应该在 10-100 亿美金区间。</p>
+<h3 id="推动项目业务和预期增长的叙事">推动项目业务和预期增长的叙事</h3>
+<p><strong>需求端：</strong></p>
+<ul>
+<li>
+<p>坎昆升级的到来和 OP Stack 的开放，让中小型 Rollup、应用链快速发展，增加了对低成本 AVS 的总需求</p>
+</li>
+<li>
+<p>公链\Rollup\应用链模块化趋势的发展增加对以太坊之外更便宜的 DA 层的需求，而 EigenDA 的拓展，增加对 EigenLayer 的需求，业务之间具有协同性</p>
+</li>
+</ul>
+<p><strong>供给端：</strong></p>
+<p>以太坊质押率的提高、质押用户数量的上升，提供了充沛的 LSD 资产和持有人规模，他们有很强的意愿提高 LSD 资产的资金效率和收益。后续 EigenLayer 也有希望引入 ETH 之外的 LSD 资本。</p>
+<h3 id="问题和挑战">问题和挑战</h3>
+<ul>
+<li>
+<p>对于 AVS 的需求方来说，在 EigenLayer 平台采购抵押资产+专业验证节点的组合服务，到底能降低多少成本？这个很难说，用以太坊的 LSD 资产作为抵押物，并不意味着这就直接继承了以太坊百亿级别的安全性，实际上项目方的经济安全性，是由租借来的以太坊 LSD 资产总规模+验证节点的运营质量决定的，这或许比自己从头搭建 AVS 更快速和简便，但是节省的成本比率或许并不会太多。</p>
+</li>
+<li>
+<p>项目方用其他资产作为 AVS 的抵押物，会削弱自身代币的场景。虽然 EigenLayer 支持项目方自身代币+EigenLayer 混合质押模式，但是仍然会在服务的采用上造成不小的阻碍。</p>
+</li>
+<li>
+<p>项目方采用 EigenLayer 构建 AVS，会担心由于对 EigenLayer 的依赖性，在长期发展中陷入被动，未来可能会被“卡脖子”。待项目成熟后，项目方可能会转为使用自身的代币作为网络安全的质押资产。</p>
+</li>
+<li>
+<p>项目方以 LSD 抵押物作为安全质押品，需要考虑 LSD 平台本身的信用和安全风险，叠加了一层风险。</p>
+</li>
+</ul>
+<h3 id="竞争对手">竞争对手</h3>
+<p>restaking 是一个较新的概念，由 EigenLayer 首创，该模式目前的跟进者较少。但对于 EigenLayer 来说，其潜在客户们的比较的方案主要是自建安全网络，还是外包安全网络给 EigenLayer。目前来看，EigenLayer 还需要更多的客户实例来证明其方案的优越性和便利性。</p>
+<h2 id="估值推演">估值推演</h2>
+<p>作为一个新型的商业项目，EigenLayer 缺少明确的对标项目和对标市值。所以我们通过预测项目的年化协议收入和 PS，对项目的估值进行推算。</p>
+<p>在进行正式的估算之前，我们仍然需要假设几个前提：</p>
+<ol>
+<li>
+<p>EigenLayer 的商业模式主要为从 AVS 服务使用者那里收取安全服务费的提成，服务费 90% 给 LSD 的存款人， 5% 给节点运营方，EigenLayer 提成比率为 5% （这个标准与 Lido 一致）。</p>
+</li>
+<li>
+<p>AVS 服务使用方，每年为自己租赁的 LSD 资本支付平均为 10% 的安全服务费。</p>
+</li>
+</ol>
+<p>之所以取 10% ，是目前主流的 POS 类项目，为 PoS 质押者提供的年化奖励基本在 3-8% 区间，考虑到会使用 EigenLayer 的多为较新的项目，初期激励比率会更高，因此笔者选取 10% 作为平均的安全服务费比率。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_3237bihezv.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>各大L1的 PoS 奖励比率，数据来源：https://www.stakingrewards.com/</p>
+<p>基于以上假设，笔者根据 EigenLayer 出借的 LSD 资产量，以及对应的 PS，得出以下项目估值区间，其中估值的彩色部分区域是笔者认为概率较高的估值范围，颜色越绿代表预测越乐观。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/18_819wov70tw.png" alt="详解「再质押」领头羊EigenLayer：业务逻辑和估值推演"></p>
+<p>而笔者之所以将“LSD 资产年出借量 20-50 亿”和“PS 在 20-40 倍”的区域判断为估值概率较高的区间，是因为：</p>
+<ul>
+<li>
+<p>如今仅前十大公链的 PoS 质押代币市值为 730 亿美金左右，如果把 Aptos 和 Sui 算上有近 820 亿，但这两个项目的质押大多来自未释放的团队和机构代币，审慎期间我剔除了这两个异常值。笔者假设 EigenLayer 的 LSD 份额能占到总 PoS 质押市场的 2.5% -6.5% 左右（注意，拍脑袋的），对应 20-50 亿的市场金额。至于 2.5% -6.5% 的份额是否合理？读者们见仁见智。</p>
+</li>
+<li>
+<p>PS 取值 20-40 倍，则是以 Lido 当前的 25 倍 PS（23.8.30 日数据，以全流通市值为市值基数）为锚点，而较新的叙事初登场时可能会享受更高的溢价。</p>
+</li>
+</ul>
+<p>根据以上推算， 2-10 亿美金或许是 EigenLayer 的合理估值区间，以 5 亿估值参投项目的一级投资者们，考虑还有代币解锁的种种限制，或许没有给自己留出太多的安全边际。如果真有如传言所说的，存在想要以 20 亿美估值 OTC 买入 EigenLayer 代币的投资者，则更要审慎为好。</p>
+<p>当然需要说明的是，以上估值是对 EigenLayer 整个项目的估值推演，具体的代币市值应该是多少，需要视其代币具体在业务中的捕获能力决定，比如：</p>
+<ol>
+<li>
+<p>协议的收入会有多少比率归属于代币持有人？</p>
+</li>
+<li>
+<p>除了回购\分红，代币在业务中是否有比较刚性的应用场景，增加对它的需求？</p>
+</li>
+<li>
+<p>EigenDA 是否会跟 EigenLayer 共享同一种代币，给代币提供更多的场景和需求？</p>
+</li>
+</ol>
+<p>其中 1、 2 两点的赋能如果不足，会进一步削弱 EigenLayer 代币的内在价值，如果 3 有意外惊喜，则会给代币增加价值。</p>
+<p>此外，EigenLayer 登场时的市值，亦取决于届时的市场牛熊环境。</p>
+<p>让我们静待市场的答案。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58121/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">首批8个大模型将正式上线！ 百度、字节、商汤、中科院旗下紫东太初等在列</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58176/">
+                <span class="next-text nav-default">晚间必读 | 灰度胜诉业内人士怎么看？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#eigenlayer-的业务逻辑">EigenLayer 的业务逻辑</a>
+      <ul>
+        <li><a href="#业务范围">业务范围</a></li>
+        <li><a href="#业务用户">业务用户</a></li>
+        <li><a href="#eigenlayer-业务细节">EigenLayer 业务细节</a></li>
+        <li><a href="#产品进度">产品进度</a></li>
+        <li><a href="#代币经济模型">代币经济模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#eigenlayer-的团队和融资背景">EigenLayer 的团队和融资背景</a>
+      <ul>
+        <li><a href="#核心团队">核心团队</a></li>
+        <li><a href="#融资情况">融资情况</a></li>
+      </ul>
+    </li>
+    <li><a href="#restaking-业务的市场规模推动叙事和挑战">Restaking 业务的市场规模、推动叙事和挑战</a>
+      <ul>
+        <li><a href="#市场规模预测">市场规模预测</a></li>
+        <li><a href="#推动项目业务和预期增长的叙事">推动项目业务和预期增长的叙事</a></li>
+        <li><a href="#问题和挑战">问题和挑战</a></li>
+        <li><a href="#竞争对手">竞争对手</a></li>
+      </ul>
+    </li>
+    <li><a href="#估值推演">估值推演</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

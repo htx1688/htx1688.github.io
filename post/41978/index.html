@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          EVM 深入探讨 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在智能合约世界中，“以太坊虚拟机（EVM）”及其算法和数据结构是首要原则。" />
+<meta name="keywords" content="EVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41978/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="EVM 深入探讨" />
+<meta property="og:description" content="在智能合约世界中，“以太坊虚拟机（EVM）”及其算法和数据结构是首要原则。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41978/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-26T00:00:00+00:00" />
+
+<meta itemprop="name" content="EVM 深入探讨">
+<meta itemprop="description" content="在智能合约世界中，“以太坊虚拟机（EVM）”及其算法和数据结构是首要原则。"><meta itemprop="datePublished" content="2022-08-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3585">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="EVM 深入探讨"/>
+<meta name="twitter:description" content="在智能合约世界中，“以太坊虚拟机（EVM）”及其算法和数据结构是首要原则。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">EVM 深入探讨</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-26">
+      2022-08-26
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3585 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>导语</strong></p>
+<p><strong>在智能合约世界中，“以太坊虚拟机（EVM）”及其算法和数据结构是首要原则。</strong> 我们创建的智能合约就是建立在这个基础之上的。不管是想要成为一名出色的 Solidity 智能合约开发人员还是安全人员都必须对 EVM 有深入的了解。</p>
+<p>此系列我们将引介翻译 noxx 的文章（https://noxx.substack.com/），深入探讨 EVM 的基础知识。</p>
+<p>基础知识：Solidity → 字节码 → 操作码</p>
+<p>在阅读本篇文章之前，你需要了解一些智能合约相关基础知识以及如何将智能合约代码部署到以太坊链上。正如我们所知，智能合约在部署到以太坊网络之前需要先将 Solidity 代码编译成字节码，EVM 会根据编译后的字节码执行相应的操作。本篇重点介绍编译后的字节码以及其如何被 EVM 执行的。</p>
+<p>智能合约被部署后编译生成的字节码代表了整个合约的内容，其中存在多个可调用的函数。那么 EVM 是如何知道不同函数所对应的字节码是哪个呢？下面我们将通过一个 Solidity 智能合约及其字节码和操作码来向大家演示 EVM 在执行代码时是如何在字节码中选择对应的函数的。</p>
+<p>1_Storage.sol Breakdown</p>
+<p>我们使用在线 Solidity IDE 工具 Remix 来编译 Storage 合约。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_7yct1r3k5e.png" alt="oi07I2BPI7kdLwwjFNMpX2Wtbb3ArAqXXIDwQ5W7.png" title="6496241"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_lgyzd86bq1.png" alt="Xjr9BsBROk9BT2DLd5CoHsbSgPzBLj3ixvOqKTnp.png" title="6496242"></p>
+<p>此合约中存在两个函数 store() 和 retrieve()，在进行函数调用时 EVM 需要判断我们调用的是哪个函数。我们可以通过 remix 看到整个合约编译后的字节码。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_svqs9gw03j.png" alt="EVM 深入探讨"></p>
+<p>下面这段字节码是我们需要重点关注的，这段就是 EVM 判断被调用函数的选择器。与其对应的是 EVM 操作码及输入值。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_qy2wgsg7s2.png" alt="EVM 深入探讨"></p>
+<p>我们可以通过 Ethervm.io 来查看 EVM 操作码列表。一个操作码长度为 1 个字节（byte），这使得它可以存在 256 种不同的操作码。但 EVM 仅使用其中的 140 个操作码。</p>
+<p>下面是我们将上述字节码解析成与其对应的操作码。这些操作码会由 EVM 在调用栈上按顺序执行。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_m6giqhvwzs.png" alt="EVM 深入探讨"></p>
+<p>智能合约函数调用</p>
+<p>在深入研究操作码之前，我们需要快速了解如何调用合约中的函数。调用智能合约中的函数有以下方式：</p>
+<p>abi.encode(&hellip;) returns (bytes)：计算参数的 ABI 编码。</p>
+<p>abi.encodePacked(&hellip;) returns (bytes)：计算参数的紧密打包编码。</p>
+<p>abi. encodeWithSelector(bytes4 selector, &hellip;) returns (bytes)：计算函数选择器和参数的 ABI 编码。</p>
+<p>abi.encodeWithSignature(string signature, &hellip;) returns (bytes)：等价于 abi.encodeWithSelector(bytes4(keccak256(signature), &hellip;)。</p>
+<p>abi.encodeCall(function functionPointer, (&hellip;)) returns (bytes memory)：使用 tuple 类型参数 ABI 编码调用 functionPointer()。执行完整的类型检查，确保类型匹配函数签名。结果和 abi.encodeWithSelector(functionPointer.selector, (&hellip;)) 一致。</p>
+<p>这里我们以第四种为例，调用 store() 并传入参数 10：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_00szo56bd8.png" alt="EVM 深入探讨"></p>
+<p>下面是通过 abi.encodeWithSignature (&quot; store (uint256)&quot;，10) 编码后的内容：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_b0y5so05qs.png" alt="EVM 深入探讨"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_srfsf816ho.png" alt="EVM 深入探讨"></p>
+<p>这段数据就是编码后的函数签名。</p>
+<p>我们可以使用在线工具（“https://emn178.github.io/online-tools/keccak_256.html”）来查看 store(uint256) 和 retrieve() 哈希后的结果。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_ztbtmcw7s9.png" alt="EVM 深入探讨"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_bawkag16nv.png" alt="EVM 深入探讨"></p>
+<p>也可以通过以太坊函数签名数据库（https://www.4byte.directory/signatures/）进行反查。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_uw6eu108hk.png" alt="EVM 深入探讨"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_w09srowitd.png" alt="EVM 深入探讨"></p>
+<p>再回到上面的那组函数签名数据，其中前 4 个字节对应的是 store(uint256)。而剩余的 32 个字节则对应的是一个十六进制的值 “a”，也就是我们调用函数时传入的 uint256 类型的 10。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_0jkaos313h.png" alt="EVM 深入探讨"></p>
+<p>这里我们可以得到一个结论，通过 abi.encodeWithSignature() 编码后得到的数据，共 36 个字节。这 36 个字节的数据就是函数签名，其中前 4 个字节为函数选择器，它将指引 EVM 去选择我们调用的目标函数，后 32 个字节的数据则是我们调用函数时传入的参数。</p>
+<p>操作码和调用栈</p>
+<p>这里相信大家已经大致了解了智能合约中函数调用的原理了，下面我们将通过解读每个操作码的作用及其对栈调用的影响。如果你不熟悉栈数据结构的工作原理，可以观看此视频来快速入门：https://www.youtube.com/watch?v=FNZ5o9S9prU</p>
+<p>我们将得到的字节码分解成相对应的操作码后依次开始分析。</p>
+<p> PUSH1 操作，将一个 1 字节的值压入栈，它会告诉 EVM 将下一个数据字节 0x00（也是十进制的 0） 压入栈中。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_s56j0w6w90.png" alt="EVM 深入探讨"></p>
+<p>接下来是 CALLDATALOAD，其作用是从消息数据中读取 32 个字节的值，其中使用 “输入” 值作为偏移量将 calldata 加载到栈中。栈项大小为 32 字节，但是当前我们的 calldata 有 36 个字节。推送的值是 msg.data[i:i+32] 其中 “i” 就是这个输入值。此操作确保只有 32 个字节被推送到栈，同时也能保证我们能够访问 calldata 中的任何部分。</p>
+<p>当前输入值为 0 也就是没有偏移量（从栈中弹出的值是前一个 PUSH1 的值 0），因此 calldata 的前 32 个字节会被推送到调用栈。</p>
+<p>还记得之前所获取到的函数签名吗？如果要传入这 36 个字节，这就意味着后面的 4 个字节“0000000a”将会丢失。如果想访问这个 uint256 类型的参数，需要设置 4 的偏移量来省略函数签名，这样就可以保证参数的完整性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_i1hr6ds19g.png" alt="EVM 深入探讨"></p>
+<p>第二次进行 PUSH1 的操作将传入十六进制的数据 0xe0，也就是十进制的 224。我们上面提到过，函数签名是 4 个字节也就是 32 位。我们加载的 calldata 是 32 个字节也就是 256 位，而 256 - 32 =224 正好满足。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_pptowf7frv.png" alt="EVM 深入探讨"></p>
+<p>SHR，是向右移位指令。它从栈中获取第一项 224 表示要位移的位数，从栈中获取第二项 （0x6057361d0…00） 表示需要移位的内容。在这个操作之后调用栈上有了 4 个字节的函数选择器。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_wioh4cyuq9.png" alt="EVM 深入探讨"></p>
+<p>如果对于位移的工作原理不熟悉的小伙伴，可以查看这个视频了解：https://www.youtube.com/watch?v=fDKUq38H2jk&amp;t=176s</p>
+<p>接下来的操作码， DUP1，它用来获取并复制栈顶部的值。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_w60sissqu1.png" alt="EVM 深入探讨"></p>
+<p>PUSH4 将 retrieve() (0x2e64cec1) 的 4 个字节函数签名推入调用栈。</p>
+<p>如果你好奇是这个值是如何获得的，那是因为 solidity 代码被编译成字节码中。编译器可以从字节码中获取所有函数名称和参数类型的信息。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_2teg8s10ug.png" alt="EVM 深入探讨"></p>
+<p>EQ 用于判断从栈中弹出的 2 个值，在当前事例中为 0x2e64cec1 和 0x6057361d 并检查它们是否相等。如果相等，则将 1 推回栈，如果不相等则为 0。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_8oibkdhnho.png" alt="EVM 深入探讨"></p>
+<p>PUSH2 将 2 字节的十六进制数据 0x003b，十进制值为 59，推送到调用栈中。</p>
+<p>调用栈中有一个叫做程序计数器的东西，它会指定下一个执行命令在字节码中的位置。这里的 59，是通过 retrieve() 字节码的开始位置所得到的。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_ul23wbddlt.png" alt="EVM 深入探讨"></p>
+<p>JUMPI 代表“如果条件为真，则跳转”，它从栈中弹出 2 个值作为输入，第一个 59 表示的是跳转位置，第二个 0 是是否应该执行此跳转条件的布尔值。其中 1 为真，0 为假。</p>
+<p>如果条件为真，程序计数器将被更新，执行将跳转到该位置。但我们的例子中条件为假的，程序计数器没有改变并且继续执行。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_jm13n0y3es.png" alt="EVM 深入探讨"></p>
+<p>再次进行DUP1。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_w60sissqu1.png" alt="EVM 深入探讨"></p>
+<p>PUSH4 将 store(uint256) (0x6057361d) 的 4 字节函数签名推送到调用栈上。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_dijig91h93.png" alt="EVM 深入探讨"></p>
+<p>再次进行 EQ，但这次结果为真，因为函数签名相同。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_psb0fb110f.png" alt="EVM 深入探讨"></p>
+<p>PUSH2 推送 2 个字节的十六进制数据 0x0059 也就是十进制的 89， 到 store(uint256) 字节码的程序计数器位置。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_2choc19bs1.png" alt="EVM 深入探讨"></p>
+<p>执行 JUMPI，此次 bool 值为真，执行跳转。因此会将程序计数器更新为 89，这会将执行移动到字节码的不同部分。在这个位置，会有一个 JUMPDEST 操作码，如果没有这个操作码在这里的话，JUMPI 操作就会失败。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_jm13n0y3es.png" alt="EVM 深入探讨"></p>
+<p>有了它，在执行此操作码后，将被带到 store(uint256) 对应的字节码的位置，并且函数的执行将继续。虽然这个合约只有 2 个函数，但基础原理都是相同的。</p>
+<p>通过上面的例子我们知道了 EVM 是如何根据合约函数调用来确定它需要执行的函数字节码的位置。简单来说就是由合约中每个函数及其跳转位置所组成的一组简单的“if 语句”。</p>
+<p>EVM Playground</p>
+<p>这是一个 EVM Playground（https://www.evm.codes/playground）测试平台，在平台上我们可以设置刚刚运行的字节码。就能够通过交互方式来查看栈的变化，并且传入 JUMPDEST（注：可能跳转的目标元数据），可以看到 JUMPI 之后会发生什么。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0826/19_86wgwu13d6.png" alt="EVM 深入探讨"></p>
+<p>EVM Playgrpund 还能有助于我们理解程序计数器的运行，每条命令旁都能看到相对应的注释以及偏移量所代表的程序计数器的位置，同时在左边框内还能看到 calldata 的输入。当点击运行指令，可以通过右上角的箭头单步调试每个操作码例如更改为 retrieve() 调用数据 0x2e64cec1 来查看执行的变化。</p>
+<p>敬请期待《EVM 深入探讨-Part 2》，让我们共同探索合约内存是什么以及它在 EVM 下的工作方式。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41973/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">DID 如何重构 Web3 社交模式？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41959/">
+                <span class="next-text nav-default">Fei Protocol的大败局：含金汤匙出生到因合并走向落幕</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

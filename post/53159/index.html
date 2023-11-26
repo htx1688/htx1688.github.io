@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文读懂ERC-4626：DeFi代币化保险库的新标准 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="ERC-4626 是一种标准，它改进了收益型保险库的技术参数，为代表单个底层 ERC-20 代币份额的收益保险库提供标准 API。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53159/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文读懂ERC-4626：DeFi代币化保险库的新标准" />
+<meta property="og:description" content="ERC-4626 是一种标准，它改进了收益型保险库的技术参数，为代表单个底层 ERC-20 代币份额的收益保险库提供标准 API。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53159/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-14T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文读懂ERC-4626：DeFi代币化保险库的新标准">
+<meta itemprop="description" content="ERC-4626 是一种标准，它改进了收益型保险库的技术参数，为代表单个底层 ERC-20 代币份额的收益保险库提供标准 API。"><meta itemprop="datePublished" content="2023-06-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3594">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文读懂ERC-4626：DeFi代币化保险库的新标准"/>
+<meta name="twitter:description" content="ERC-4626 是一种标准，它改进了收益型保险库的技术参数，为代表单个底层 ERC-20 代币份额的收益保险库提供标准 API。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文读懂ERC-4626：DeFi代币化保险库的新标准</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-14">
+      2023-06-14
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3594 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Sina Pilehchiha</p>
+<p>原文编译：深潮 TechFlow</p>
+<p>TLDR： ERC-4626 是用于代币化保险库 (Vault) 的标准。</p>
+<p>在引入 ERC-4626 之前，每个保险库都有其各自的规范和实现细节。这使得集成变得困难、容易出错且浪费资源。</p>
+<p>ERC-4626 试图通过标准规范来解决这个问题，以降低集成工作量，并创建更一致和强大的实现模式，就像 ERC-20 一样。</p>
+<h2 id="什么是-erc-4626">什么是 ERC-4626 ？</h2>
+<p>ERC-4626 是一种标准，它改进了收益型保险库的技术参数。它为代表单个底层 ERC-20 代币份额的收益保险库提供标准 API。</p>
+<p>代币化保险库已经成为 DeFi 中极为常见的模式。收益聚合器、借贷市场、质押衍生品等许多 dApp 都利用和依赖于代币化保险库。代币化保险库的示例包括 Yearn 和 Balancer。作为一个收益聚合器，Yearn 保险库使用户可以存入数字资产并获得收益。Balancer 是一个自动化的组合管理器和流动性提供商，其业务逻辑的核心依赖保险库。这些保险库管理各种池中的代币。同时，它们将代币管理与池子本身的逻辑分离开来。</p>
+<p>协议通过代币化其保险库来增强流动性和灵活性。代币化保险库可以轻松进行交易，并在 DeFi 平台上使用资产。此外，它们还能够创建多样化、相互连接的金融产品。该行业一直倡导这种范式，通常称为“货币乐高”。</p>
+<p>然而，没有适当的适应性或标准化的可组合性会带来挑战。它不仅使开发人员难以遵守 ERC-20 等行业标准，而且还会使新开发人员感到困惑。如果没有适当的适应性或标准化，就很难审查新的变化并验证集成的实施细节。</p>
+<p>于是 ERC-4626 被提出来解决这个问题，并简化集成，同时允许 DeFi 参与者最终采用更安全和强大的统一保险库规范。这反过来也将减少协议可能遭受的攻击面，同时在多个协议之间集成代币。</p>
+<h2 id="erc-4626-可以预防哪些安全问题">ERC-4626 可以预防哪些安全问题？</h2>
+<p>通过提供统一的标准，ERC-4626 加速了跨协议集成的构建速度。熟悉的、统一的标准也更容易让开发人员理解，从而减少编码错误的可能性。这有助于防止可组合性问题。标准化还可以防止工作重复，因为社区只需要设计一次保险库，而不是为每个协议单独设计。由于这种设计工作通常容易出错，它有助于避免重复已经建立但普遍存在的设计缺陷。</p>
+<p>我们将在这里介绍两个案例研究，以展示 ERC-4626 可以预防哪些问题。</p>
+<h3 id="rari-capital-事件">Rari Capital 事件</h3>
+<p>Rari Capital 被盗取了价值约 1100 万美元的代币，这相当于 Rari Capital Ethereum 池中所有用户资金的 60 ％。</p>
+<p>总的来说，Rari Capital 被黑客攻击是由于不安全的跨协议实现。其 Ethereum 池通过将 ETH 存入 Alpha Finance 的 ibETH 代币合约作为产出策略。这种特定策略通过某些合约及公式（具体如 ibETH.totalETH / ibETH.totalSupply 函数）跟踪其 ibETH/ETH 汇率的价值，在此攻击场景中可能会有错误的输出，例如在调用 ibETH.work（）函数时，债务价值可能会被人为地膨胀。</p>
+<p>攻击者只需重复调用 RariFundManager 合约中的 deposit 和 withdraw 函数，就可以耗尽 Rari Fund Manager。deposit 和 withdraw 函数需要获取池子的余额以计算要发行给调用者的 REPT 代币数量，或要发放给调用者的 ETH 金额，这个操作会分别调用 Alpha 池的 getBalance 函数，调用 ibETH 合约及其 totalETH 函数。Rari 不知道操纵此函数的可能性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0614/lag3lit3l7fp3nd" alt="一文读懂ERC-4626：DeFi代币化保险库的新标准"></p>
+<p>ibETH 合约中还有另一个函数：ibETH.work 。该函数可以调用用户指定的任何合约。这使得 Rari 的 deposit 和 withdraw 函数可以变得可重入并被多次调用。</p>
+<p>work 函数是一个可支付的函数，意味着用户可以通过 work 函数控制 ibETH 合约中的 ETH 数量，从而改变 totalETH 函数返回的值。更糟糕的是，work 函数还支持调用任何其他合约，例如 RariFundManager。</p>
+<p>通过这个函数，攻击者可以再次发送 ETH 并增加 ibETH 合约中的 totalETH 金额，同时调用 RariFundManager 合约中的 withdraw 来赎回更多资产。</p>
+<p>这次事件突显了 DeFi 合约中集成不足和不兼容的设计所带来的重大风险。它强调了像 ERC-4626 这样的标准通过增加关键的安全和可预测性层可以防止这样的攻击，并促进统一行为和相互理解。</p>
+<h3 id="cream-finance-事件">Cream Finance 事件</h3>
+<p>Cream Finance 遭受了一场复杂的攻击，利用了平台中两个基本弱点：可操纵的混合预言机和没有上限的代币供应。攻击的关键部分是对混合预言机的操纵，这影响了 yUSD 代币的感知价值。当攻击者向 yUSD 保险库发送大量 Yearn 4-Curve 代币时，他改变了保险库报告的汇率，因此还影响到了预言机对 yUSD 代币的感知价值。</p>
+<p>这里的关键教训是一个强大且无法操纵的价格预言机对于 DeFi 协议的稳定性至关重要。按时间加权平均价格（TWAP）预言机可以帮助防止此类黑客攻击，因为他们对突然的价格操纵更具有韧性。</p>
+<p>这些问题，以及其他脆弱的设计模式，可以通过谨慎采用和实施 ERC-4626 来加以缓解。</p>
+<h2 id="erc-4626-中的潜在安全风险">ERC-4626 中的潜在安全风险</h2>
+<p>使用新的协议总有一些取舍。对于代币化的保险库，将其集成到智能合约中可能存在潜在问题，需要特别注意。</p>
+<h3 id="管理-feeontransfer-代币">管理 feeOnTransfer 代币</h3>
+<p>如果保险库旨在支持 feeOnTransfer 代币，请在转移资产时检查保险库中的金额和份额是否处于预期范围内。</p>
+<h3 id="适当使用-decimals变量">适当使用 decimals 变量</h3>
+<p>尽管 convertTo 函数应该无需使用 EIP-4626 保管库的 decimals 变量，但仍强烈建议在可行的情况下镜像底层 Token 的 decimals 。这种做法有助于消除潜在的混淆来源，并简化各种前端和链下用户的集成。</p>
+<h3 id="四舍五入">四舍五入</h3>
+<p>根据规范，保险库实现者应意识到在不同的可变和视图方法中需要特定且相反的舍入方向，因为在计算过程中更安全的做法是优先考虑保险库本身而不是其用户：</p>
+<ul>
+<li>
+<p>如果它正在计算要发行给用户的股票数量，以获得他们提供的某些基础代币的金额，或者它正在操作将特定份额的基础代币转移给用户，则应向下舍入。</p>
+</li>
+<li>
+<p>如果它正在计算用户必须提供多少份额才能获得一定数量的基础代币，或者正在计算用户必须提供多少基础代币才能获得一定数量的份额，则应向上舍入。</p>
+</li>
+</ul>
+<p>其中首选舍入方向将是模棱两可的是 convertTo 函数。为确保在所有 EIP-4626 保险库实现中保持一致性，指定这些功能必须始终向下舍入。集成者可以自己模仿舍入方向向上的版本，例如通过添加一个 Wei 到结果来实现。</p>
+<p>一个用户通过赎回他们在保险库中的股份（previewRedeem）来获得基础资产的数量，可能会与发行相同数量的股份（previewMint）时需要付出的数量有很大差异。这些差异可能很小（例如由于舍入误差），也可能很大（例如保险库实现了提款或存款费用）。因此，集成者应该注意使用最适合他们用例的预览函数，并且永远不要假设它们是可互换的。</p>
+<h3 id="覆盖核心功能">覆盖核心功能</h3>
+<p>为了实现或扩展预期的功能，建议使用现有的挂钩而不是更改核心功能。这种做法可确保更易于管理的跟踪，以进行有效的代码测试和审核。</p>
+<h3 id="零份额">零份额</h3>
+<p>ERC-4626 的原始规范没有概述如何处理保险库中没有份额的极端情况，以及保险库是否应该像正常情况一样工作或者回滚。这可能会成为混淆和错误的潜在来源。</p>
+<h3 id="保险库作为价格预言机">保险库作为价格预言机</h3>
+<p>关于预言机价格操纵攻击的风险，这些 preview 方法返回的值尽可能接近准确。因此，它们可以通过更改链上条件进行操作，并且不总是安全用作价格预言机。 ERC-4626 规范包括允许不精确的 convert 方法和 totalAssets 方法，因此可以实现为强大的价格预言机。例如，在资产和股份之间转换时，使用时间加权平均价格来实现 convert 方法是正确的。</p>
+<h3 id="具体实施问题">具体实施问题</h3>
+<p>在进一步集成之前，集成者必须审查任何代币化保险库的实现，因为可能存在恶意实现，看起来符合接口规范，但其核心函数由完全不同的设计规范组成。</p>
+<h3 id="eoa-直接访问">EOA 直接访问</h3>
+<p>如果要直接访问一个保险库，则其实现需要具备可用于容纳滑点损失或意外存款/提款限制的功能。与智能合约不同，EOA 没有交易回滚的故障保护机制，如果在调用核心函数时没有实现精确输出，则无法回退。</p>
+<h3 id="扩展保险库">扩展保险库</h3>
+<p>随着越来越多的参与者开始采用 ERC-4626 标准，我们将看到为该标准实施的更多扩展。例如，Superform 开发了一个试验性的 Multi 保险库扩展，支持在一个保险库合约内使用不同的计算。自然而然，实现越偏离原始标准，引入新漏洞的可能性就越高。开发人员和审计人员可以根据用例找到自己的最佳选择，以确定实际风险值。</p>
+<p>需要注意的是，导致灾难性事件的不是每个协议的最小添加，而是它们集成在一起时的总和。</p>
+<p>上面提到的潜在攻击向量是围绕 ERC-4626 标准讨论较多的一些问题。随着采用率的增加，我们肯定将探索更多实现用例，以及更多与 ERC-4626 保险库集成的合适场景。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53138/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">羊毛党聚集的zkSync 或不负众望成为以太坊Layer2新龙头？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/53166/">
+                <span class="next-text nav-default">一文读懂即将在Coinlist公售的价值捕获链Archway</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是-erc-4626">什么是 ERC-4626 ？</a></li>
+    <li><a href="#erc-4626-可以预防哪些安全问题">ERC-4626 可以预防哪些安全问题？</a>
+      <ul>
+        <li><a href="#rari-capital-事件">Rari Capital 事件</a></li>
+        <li><a href="#cream-finance-事件">Cream Finance 事件</a></li>
+      </ul>
+    </li>
+    <li><a href="#erc-4626-中的潜在安全风险">ERC-4626 中的潜在安全风险</a>
+      <ul>
+        <li><a href="#管理-feeontransfer-代币">管理 feeOnTransfer 代币</a></li>
+        <li><a href="#适当使用-decimals变量">适当使用 decimals 变量</a></li>
+        <li><a href="#四舍五入">四舍五入</a></li>
+        <li><a href="#覆盖核心功能">覆盖核心功能</a></li>
+        <li><a href="#零份额">零份额</a></li>
+        <li><a href="#保险库作为价格预言机">保险库作为价格预言机</a></li>
+        <li><a href="#具体实施问题">具体实施问题</a></li>
+        <li><a href="#eoa-直接访问">EOA 直接访问</a></li>
+        <li><a href="#扩展保险库">扩展保险库</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

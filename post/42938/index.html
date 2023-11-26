@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          数据分析：Uniswap3的TVL计算竟然都是错的？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="TVL如此重要，但我竟然发现最大的DeFi协议Uniswap V3 TVL的数据存在一些错误。" />
+<meta name="keywords" content="Uniswap" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42938/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="数据分析：Uniswap3的TVL计算竟然都是错的？" />
+<meta property="og:description" content="TVL如此重要，但我竟然发现最大的DeFi协议Uniswap V3 TVL的数据存在一些错误。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42938/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="数据分析：Uniswap3的TVL计算竟然都是错的？">
+<meta itemprop="description" content="TVL如此重要，但我竟然发现最大的DeFi协议Uniswap V3 TVL的数据存在一些错误。"><meta itemprop="datePublished" content="2022-09-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5115">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据分析：Uniswap3的TVL计算竟然都是错的？"/>
+<meta name="twitter:description" content="TVL如此重要，但我竟然发现最大的DeFi协议Uniswap V3 TVL的数据存在一些错误。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">数据分析：Uniswap3的TVL计算竟然都是错的？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-23">
+      2022-09-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5115 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>摘要：<strong>TVL如此重要，但我竟然发现最大的DeFi协议Uniswap V3 TVL的数据存在一些错误。</strong> 官方的Uniswap 图表也存在一些问题。</p>
+<p>原文作者：Ivan Vakhmyanin</p>
+<p>编译：PANews</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_nj16p58nct.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>2 x 2 = 5</p>
+<p>很明显，这是错误的数学题。当我看到Uniswap V3 用户界面上显示的流动性和 TVL（锁定总价值）的数据完全错误时，我的感受和看到2 x 2 = 5的感受是一样的。</p>
+<p>Uniswap是以太坊和整个区块链行业最大的去中心化金融（DeFi）项目。因为成千上万的流动性提供者每天都在使用Uniswap的数字来建立他们的投资策略，这些数字怎么可能不准确呢？</p>
+<p>我试着找出我计算过程中的错误，但数小时都无成果，且实际情况比TVL不准确还更糟糕。</p>
+<h3 id="发现问题"><strong>发现问题</strong></h3>
+<p>首先，了解什么是TVL以及如何使用TVL？</p>
+<p>TVL是委托给区块链或协议的所有加密货币资产的总价值，通常以美元计价。这些资产可能是去中心化交易所、跨连桥、借贷协议的总流动性，或者PoS的总质押资产。</p>
+<p>TVL被加密投资者广泛应用，主要应用于以下场景：</p>
+<p>1、判断协议，热门的协议一般都会展示它们的TVL，因为更大的TVL意味着更大的用户信任、更低的风险以及更稳定的利润。</p>
+<p>2、筛选协议，加密交易者一般会选择更高的TVL的DeFi工具，如去中心化交易所或跨链桥。</p>
+<p>3、监控协议，TVL数据能快速增长的协议，是发展越来越好的信号。</p>
+<p>TVL如此重要，但我竟然发现最大的DeFi协议Uniswap v3 TVL的数据存在一些错误。不过对于我来说，最大的发现是官方的Uniswap 图表也存在一些问题，以下是我发现这个问题的全程：</p>
+<p>以一个流动性分析项目为例，首先将 Uniswap v3 的官方数据与我使用原始区块链数据的计算进行比较。此步骤对于数据质量标准至关重要，为了提高验证的准确性，我选择了一个热门的流动性池 USDC-WETH（0.3% 的费用水平）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_j3tauokp84.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>Uniswap v3 上第三个池子的 TVL 高达 3.33 亿美元（基于撰写本文时的 Uniswap 官方图表），每日交易量为 6100 万美元。</p>
+<p>但我计算出来的是1.76 亿美元，和Uniswap v3 的官方数据并不一致，于是我决定到ETH的区块浏览器上进一步验证。理论上，每个 Uniswap v3 池子都是一个智能合约。因此，区块链浏览器可以显示池中拥有的代币余额，也就是这个池子的 TVL。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_8so0m5ywq9.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>我预计区块浏览器池子中的代币余额会比Uniswap的官方数据大一点，因为池子还包含流动性及还未领取的费用。但这个余额几乎是Uniswap官方数据的一半，最让人惊讶的是，这和我的计算结果相同！</p>
+<p>我再逐个检验其他资产的流动性，也出现类似的情况。这个时候，我意识到这个问题和应该不是我计算的问题。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_acbylwuzqq.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>为什么会发生这个情况？经过研究，我发现 Uniswap 依赖于去中心化的区块链索引服务The Graph。使用此服务，任何开发人员都可以为特定的区块链数据用例添加个人分析代码（称为子图），并通过 API 提供分析。所以Uniswap Labs 为 Uniswap 协议分析创建了自己的子图，并通过The Graph提供给服务来组建相关数据。比较好的一面是The Graph的代码是公开的，不好的一面是它的 TVL计算错误。</p>
+<p>我对其中的代码进行了简要的分析，发现它考虑了所有兑换和流动性事件，但没有考虑费用。Uniswap 矿池对每次交换收取 0.01% 到 1% 的费用。该费用从交易资产中扣除，并计入流动性提供者。反过来，流动性提供者可以随时收取应计费用。但是，当前的 Uniswap v3 子图显示的数字好像从未累积和收取任何费用。因此，Uniswap v3 TVL 数据在每次交换时都偏离了现实。</p>
+<p>我第一反应是向The Graph提交工单进行反馈。但我在Github上发现，这个问题在2021年11月已经被核心开发人员提出了。我不知道The Graph为什么一直没有解决这个问题，但随着时间的累积，TVL将会和实际数据相差越来越大。如现在的USDC-ETH这样的大池子，目前的TVL已经和真实的数据相差几乎一半了。</p>
+<h3 id="验证问题"><strong>验证问题</strong></h3>
+<p>不真实的TVL会如何影响我们的投资决策呢？在开始之前，我们来看看这些偏差如何影响 Uniswap v3 的总TVL。在撰写本文时，Uniswap v3官方显示是120亿美元。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_0s394edfsu.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>从上图官方报道的数据可以看到，TVL在2022年3月6日从5亿美元稳步增长到45亿美元。但发生了一些疯狂的事情，在2022年3月7日，TVL被报道为2540亿美元。这比整个以太坊网络有史以来最高的TVL还要多2.5倍，且在一天之内发生这样的变化。显然，这个数据的错误的。在接下来的几周，官方报道TVL为100-200亿美元。</p>
+<p>此时，我对Uniswap的分析数据失去了所有的信任，但怎么才能知道真实的TVL呢？</p>
+<p>有以下两个选择：</p>
+<blockquote>
+<p>选项 1 — 分叉并修复 Uniswap v3 子图。这个选项的不好的地方是子图重新索引需要几天时间，而且我不喜欢 The Graph 使用的 GraphQL 语言。</p>
+<p>选项 2 —— 使用Datamint的高性能分析数据库，它适用于所有 Uniswap v3 和以太坊数据，可随时用于复杂的在线查询。</p>
+</blockquote>
+<p>经过一些实验，我创建了以下算法来进行准确的 TVL 计算，下面是分步过程。</p>
+<p>1.首先按照以下两个步骤来计算所有现有的Uniswap v3 的TVL。</p>
+<p>2.将所有 ERC-20 代币转账添加到矿池合约（包括所有无人认领的费用）并匹配Etherscan的代币余额。</p>
+<p>3.添加所有流动性事件，传入和导出，然后添加所有兑换交易以计算费用。</p>
+<p>4.比较两种方法并确保不存在无法解释的差异。</p>
+<p>5.兑换少于 50 次或 0.00000000000001 代币数量的废弃池和空池（检测到 7,863 个池，包括 2,083 对稳定池，我的算法删除了 112 个空池和废弃池）。</p>
+<p>6. 为每个代币找到稳定币的路径，将池中的 TVL 转换为美元。</p>
+<p>7. 移除美元价值受损的低流动性资金池，因为某些资金池在完全移除流动性后可能显示价值不足（请查看下图作为示例）。</p>
+<p>8. 将所有剩余货币对的 TVL 转换为美元并添加。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_f4yej3i752.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>计算过程很快，我喝咖啡的过程中就完成了，下面是最终的计算结果。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_63pyziimq5.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>从上图的计算结果可以看出，这几乎比报告TVL的118亿美元少了近4倍。</p>
+<p>免责声明：我的计算可能存在错误，在面向企业客户时我们使用自动测试等其他工具来实现数据的高质量。但对于个人项目，这些工具并不适用。另外，这个研究主要是表现出现存数据的问题，但并非是最终数据。</p>
+<h3 id="修复问题">修复问题</h3>
+<p>错误的数据会导致投资者做出一些错误的决策，我们认为实际上修复Uniswap 的TVL并不难。Uniswap Labs可选择在子图代码中修复，或计算器开发人员开始使用其他数据源。但我们对计算器的预测数据的准确性保持怀疑，我做了一些简短的计算来验证我的观点，结果和我的猜测一样，发现没有接近的数据。</p>
+<p>这是一个非常大胆的猜测，我知道很多流动性提供者都是依靠现有的计算器来做出数万美元的投资决策。但为了便于您进一步做出自己的判断，我们复原了以下的计算过程：</p>
+<p><strong>首先，让我们回顾一下 Uniswap v3 协议的一些核心概念。</strong></p>
+<p>它的主要创新之一是集中流动性。本质上，使用 Uniswap v3，您可以选择您希望资金用作流动性提供者的价格范围。这是一个了不起的概念，可以为协议用户带来巨大的价值。流动性提供者限制了他们对无常损失的范围，交易者可以在波动性较低时享受较小的价格滑点。但所有这些潜在的好处都是有代价的，那就是复杂性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_7hpyv0ybaq.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>在 Uniswap v3 中，流动性提供者选择提供流动性的价格范围。一旦价格在此范围内，他将获得兑换费用的分成。流动性提供者希望其流动性头寸的价格范围尽可能宽。但是，流动性在此范围内按比例分配。因此，范围越广，每笔交易的兑换费用就越低。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_v7c8knofhs.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>在此示例中，选项 A 显示流动性提供者选择了较宽的价格范围，而选项 B 显示了相同金额的较窄价格范围。假设在这两种情况下，价格都在所选价格范围内，流动性提供者在选项 B 中获得 3 倍以上的费用。但是，如果价格波动更大，流动性提供者最终可能在选项 A 中获得更高的利润。</p>
+<p>因此，实际上，选择正确的价格范围应在错过价格的风险和每笔交易获得较低回报之间找到最佳平衡。</p>
+<p>此外，还有一个被经常忽视的参数也会影响流动性提供者的利润。那就是LP利润计算器，这个参数可以改变一切。如果你想知道LP的具体计算逻辑，可以参考以下示例：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_8coich4vc3.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>在此示例中，两个流动性提供者（LP1 和 LP2）拥有头寸。LP1 的头寸窄幅为 3 美元。LP2 拥有 5 美元的宽头寸。在这种情况下，如果价格没有超出 LP1 的持仓范围，他将获得比 LP2 多 3 倍的费用。因为 LP2 在这个范围内只有 1 美元，而这 1 美元正在与 LP1 的 3 美元竞争。</p>
+<p>如果您查看任何 Uniswap v3 池子的流动性分布，你会发现它并不统一。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_bno711d3sq.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>门槛越高，竞争越高，流动性提供者需要在选择有竞争力的范围和价格下跌概率较低的范围之间找到平衡。这就是为什么这种分布在 LP 利润预测和战略制定中发挥重要作用的原因，但我并不确定这个分布是否计算正确。</p>
+<h3 id="流动性资金"><strong>流动性资金</strong></h3>
+<p>流动性提供者就是猜测价格、竞争状态和交易量，如果 LP 有一个愿望，那就是事先了解交易的未来以调整流动性头寸，这是可以实现的。</p>
+<p>在研究过程中，一些不寻常的流动性提供者引起了我的注意。他们每天多次添加和删除大量流动性头寸（超过 1000 万美元）。更令人惊讶的是，他们总是在同一个区块中添加和移除流动性。</p>
+<p>我们可以看下面这个例子：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_22ws0w7l0i.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>我们有三笔交易，都在区块15413416，位置 3-5，以自下而上的顺序执行。第一个使用 Execute 方法的交易是一个名为“MEV Bot”的合约，为 USDC-WETH 池增加了 2200 万美元的流动性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_dvg1cvzf0z.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>MEV Bot 增加流动性</p>
+<p>第二笔交易是通过 WETH 从 USDC 到 DogeChain 的交换，这是一笔价值约 16,500 美元的普通兑换交易。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_1841okzpec.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>标准兑换交易</p>
+<p>第三笔交易又是“MEV Bot”，从 USDC-WETH 池中移除了 2200 万美元的流动性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_ed8vjntw63.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>MEV Bot 消除流动性</p>
+<p>示例中发生的事情称为“流动性狙击”，让我解释一下这是如何工作的：</p>
+<p>1.有人发送了一笔交易，将 USDC 交换到 DogeChain；</p>
+<p>2.MEV Bot 在内存池中检测到此交易，并使用 Flashbots 技术或类似技术激活了与矿池的私有链接；</p>
+<p>3.MEV Bot 向矿工支付了一笔兑换交易和两笔按特定顺序进行的交易，以允许提取价值；</p>
+<p>4.MEV Bot 在一个非常窄的价格范围内增加了如此多的流动性（2200 万美元），因此有效地，从特定的 USDC-DogeChain 交易中获得的所有费用利润都累计到他的身上；</p>
+<p>5.MEV Bot 移除流动性并赚取费用（约 35 美元）。</p>
+<p>因此，他扣除GAS费后的毛利润约为 30 美元。也许这个费用不是很多，但他每分钟多次执行此策略，所有这些都加起来，就是不小的数量了。你也可以通过区块浏览器，自己检查这个过程。</p>
+<p>作为流动性提供者，这对你意味着什么呢？这意味着流动性狙击手可能会大幅削减你的费用利润。</p>
+<h3 id="结论"><strong>结论</strong></h3>
+<p>我相信 Uniswap 是一个具有巨大潜力的伟大项目，我也尊重 Uniswap v3 核心集中流动性的想法。然而，我发现 Uniswap 生态系统的分析部分还远未成熟，我相信这个情况很快就会改变！最后，总结一下我的研究结果：</p>
+<blockquote>
+<p>1.Uniswap v3 图表中的 TVL 数据非常不准确，所有依赖官方 Uniswap v3 子图的分析工具都存在相同的错误。</p>
+<p>2.Uniswap v3 TVL 总额为31.4b亿美元，而官方网站报告的为 118亿美元（数据截止至撰写本文）。</p>
+<p>3.Uniswap v3 流动性提供者的计算器对现实生活中的策略几乎没有价值，因为它们没有考虑竞争和流动性狙击手。</p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2022/0923/14_n1r976az6q.png" alt="数据分析：Uniswap3的TVL计算竟然都是错的？"></p>
+<p>著名的呆伯特系列，经修改后以反应流动性提供者的现实情况</p>
+<p>幸运的是，您现在可以更好地了解 Uniswap v3 流动性池在现实生活中的运作方式，并可以相应地调整您的研究。</p>
+<p>虽然我无法提供投资建议，但我认为只有 2 个选项可以建立一个突出流动性的策略：</p>
+<ul>
+<li>
+<p>简易版，使用历史性能数据。尝试一些小额流动性头寸，看看哪些选项更有效，但这只有在市场稳定的假设下才有效。</p>
+</li>
+<li>
+<p>进阶版，进行研究并相应地优化 LP 策略。如上所述，这需要深入了解 Uniswap v3 协议、数学和博弈以及实时处理大量数据的强大数据分析工具。</p>
+</li>
+</ul>
+<p>这两种选择有一个共同点，那就是你的决定是基于数据的而不是直觉或随机工具，有时处理数据很困难，但它有回报。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42918/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">是炒作概念还是真的未来？169个APP自称为元宇宙社交</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42910/">
+                <span class="next-text nav-default">速览 101 个 Y Combinator 孵化的 Crypto 项目</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#发现问题"><strong>发现问题</strong></a></li>
+        <li><a href="#验证问题"><strong>验证问题</strong></a></li>
+        <li><a href="#修复问题">修复问题</a></li>
+        <li><a href="#流动性资金"><strong>流动性资金</strong></a></li>
+        <li><a href="#结论"><strong>结论</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

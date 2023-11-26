@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          通过链上数据发现NFT系列的隐藏持仓与操盘行为 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="NFT 一直是web3中备受瞩目的赛道，但其发展中一直存在很多令人诟病的问题，其中之一就是市场操纵。本文以一个真实项目为例，介绍了一个从链上数据发现NFT市场操纵的方法。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54079/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="通过链上数据发现NFT系列的隐藏持仓与操盘行为" />
+<meta property="og:description" content="NFT 一直是web3中备受瞩目的赛道，但其发展中一直存在很多令人诟病的问题，其中之一就是市场操纵。本文以一个真实项目为例，介绍了一个从链上数据发现NFT市场操纵的方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54079/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-30T00:00:00+00:00" />
+
+<meta itemprop="name" content="通过链上数据发现NFT系列的隐藏持仓与操盘行为">
+<meta itemprop="description" content="NFT 一直是web3中备受瞩目的赛道，但其发展中一直存在很多令人诟病的问题，其中之一就是市场操纵。本文以一个真实项目为例，介绍了一个从链上数据发现NFT市场操纵的方法。"><meta itemprop="datePublished" content="2023-06-30T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-30T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3484">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="通过链上数据发现NFT系列的隐藏持仓与操盘行为"/>
+<meta name="twitter:description" content="NFT 一直是web3中备受瞩目的赛道，但其发展中一直存在很多令人诟病的问题，其中之一就是市场操纵。本文以一个真实项目为例，介绍了一个从链上数据发现NFT市场操纵的方法。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">通过链上数据发现NFT系列的隐藏持仓与操盘行为</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-30">
+      2023-06-30
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3484 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="简介">简介</h2>
+<p>NFT 一直是 web 3 中备受瞩目的赛道，但其发展中一直存在很多令人诟病的问题，其中之一就是市场操纵。市场操纵是指利用不正当的手段或信息，影响市场价格或交易量，从而获得不正当的利益的行为。在 NFT 交易中，市场操纵主要表现为以下两种形式：</p>
+<ul>
+<li>
+<p><strong>持仓操纵</strong> ：持仓指项目方（包括公开持仓和隐藏持仓，其中被用于市场操纵的是隐藏持仓）或做市商通过大量持有某种 NFT，造成其稀缺性和价值感，从而吸引更多的买家进入市场，推高其价格，然后在高位出售，获得巨额利润。这种行为会导致 NFT 价格泡沫的形成和破灭，损害其他投资者的利益。</p>
+</li>
+<li>
+<p><strong>交易量或价格操纵</strong> ：指某些个人或组织通过操纵大批地址频繁地在不同的账户之间交易 NFT，制造出虚假的交易量或借此拉升价格，从而误导其他投资者的判断，诱使他们跟风买卖，从而获得不正当的利润。这种行为会破坏 NFT 市场的真实性和公平性，降低其信任度和吸引力。</p>
+</li>
+</ul>
+<p>典型的 NFT 市场操控行为主要包括三个阶段：</p>
+<ul>
+<li>
+<p><strong>第一阶段，吸筹</strong> ：主要操作是低价持续吸收筹码。</p>
+</li>
+<li>
+<p><strong>第二阶段，刷量或拉盘</strong> 。这个阶段主要指标是交易量，通过操控多个地址进行虚假交易提高交易量，并拉升价格。</p>
+</li>
+<li>
+<p><strong>第三阶段，出货阶段</strong> 。进一步拉高价格，同时出货回收资金。</p>
+</li>
+</ul>
+<h2 id="方法论">方法论</h2>
+<p>为了找出 NFT 项目背后持仓或操盘的痕迹，我们采用了链上数据分析的方法，利用区块链技术提供的可追溯、不可篡改、公开透明的特性，对 NFT 市场中的各种交易数据进行收集、清洗、处理和挖掘。我们主要关注以下两个方面的数据：</p>
+<ul>
+<li>
+<p><strong>资金关系：</strong> 我们通过追踪 NFT 交易中涉及的地址之间的转账记录，构建资金流向图，分析资金来源和去向，识别出可能存在操控意图的地址或地址组。</p>
+</li>
+<li>
+<p><strong>相似行为信息：</strong> 我们通过 NFT 交易中涉及的地址的行为信息构建特征，使用聚类算法寻找相似度高的地址簇，分析他们是否存在市场操控的行为。</p>
+</li>
+</ul>
+<p>通过以上两个方面的数据分析，我们可以初步筛选出一些可疑的地址或地址簇，并进一步对他们的交易行为进行深入分析，揭示他们操控市场的手段、动机和效果。</p>
+<h2 id="具体案例以akcb为例">具体案例（以 AKCB 为例）</h2>
+<p>AKCB (A KID CALLED BEAST) 是一个以太坊上的 NFT 项目，它由一万个独一无二的 3 D 和 AR 准备好的数字野兽组成。每个野兽都属于 20 个野兽部落中的一个，每个部落都有 500 个成员，代表了不同的性格和价值观。拥有 AKCB 的用户可以进入相应的部落社区，与其他拥有相同野兽部落的用户互动和合作。AKCB 于 2023 年 1 月 15 日开始 mint，最初的 mint 价格为 0.0777 ETH，截止至 2023 年 6 月 20 日地板价在 0.4 ETH 附近。AKCB 在上线后上受到了不少关注和追捧，但我们也发现其中存在一些可疑的行为，比如拉盘、制造稀缺感等。我们将通过持仓和价格操控两个部分来展示。</p>
+<h3 id="一-持仓">一. 持仓 </h3>
+<p><strong>1.公开持仓</strong></p>
+<p>项目方通过合约地址0x263f8b4a146E85d8fd2BB42bE7fac5aaB0Ba3b7F Mint 了 1000 个 token（约 10% ）。项目方普遍会自留一些 token，用于未来社区发展，或用作市值管理。这部分公开持仓一般不属于恶意操纵行为。</p>
+<p><strong>2. 隐藏持仓</strong></p>
+<p>由于每个用户只能 mint 一个 token，因此存在大批由同一实体控制的地址去 mint，通过检测所有 minter 之间的同一地址入金、资金归集、资金转账行为找到了几批这样的地址。</p>
+<p><em>地址簇 1:</em></p>
+<p>共 70 个地址，这些分别通过 Disperse.app 由两个 transaction 入金，具有完全相似的行为信息，完成交易后有共同的资金归集地址，mint 后部分地址集中在 1 月 27、 2 月 8 卖出。入金 tx_hash：</p>
+<p>0x0d673d7b25115bfef7eef59496f902b08b84a9b123951b01ed4107e9a4d1831f、</p>
+<p>0x713c9bcd9f0c28c7d2fe5a833953d24b01e4d3d8472fd9832c1b602f73eb0f99</p>
+<p>总共 mint 了 70 个 tokens，其中 43 个已经出货，目前仍分散持有 27 个。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_mthwhjrn4i.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 1 ：这些地址均通过 Disperse.app 在两笔交易中的一笔中入金</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_rq43hlj7d8.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 2 ：这些地址均通过 Disperse.app 在两笔交易中的一笔中入金</p>
+<p><em>地址簇 2 ：</em></p>
+<ul>
+<li>
+<p>0x302fa7adfdd959aedfd29f00b9b5489d7072cd13</p>
+</li>
+<li>
+<p>0x37e725fe7eb92cc865d87b671d52ab962c9337f4</p>
+</li>
+</ul>
+<ol>
+<li>
+<p>0x3c4ea03a66ac5a896a7d3076e3519234248f5983</p>
+</li>
+<li>
+<p>0x62198ce64f6938d4b8f38fde5dcc77eb884b69da</p>
+</li>
+<li>
+<p>0x952d1a292a16f3a87cc941b0d94c178dee7c5820</p>
+</li>
+<li>
+<p>0xe49083eedb16f5752a90d264315ef8a1041eac86</p>
+</li>
+<li>
+<p>0xf8939f0b7d6fdc63d9d7139e7bf7240fae8e3529</p>
+</li>
+<li>
+<p>0xf35073b570c57c9e4c09eb373d8b7a1b2e96dae6</p>
+</li>
+<li>
+<p>0x04f340231b82e1e7115087e81aaa04cb57606220</p>
+</li>
+<li>
+<p>0x30348990bc891f5fc7d52b9c2a91907ff4a00416.</p>
+</li>
+<li>
+<p>0x0127ead2363227136cfee02ee860faae0f695e30</p>
+</li>
+</ol>
+<p>关系：地址 1-9 通过 CoinTool: MultiSender 在同一个 transaction 中入金，入金 tx_hash：</p>
+<p>0x0086718d1b4242060b3ab5c7c4716bd26c75a4ded0cb8341d5ba801d7e2ec87a，</p>
+<p>地址 9、 10 是地址 11 的入金地址，此外，这批地址没有任何历史交易，行为完全相似。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_gscl50tvjv.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 3 ：地址都是通过 CoinTool：MultiSender 在同一笔交易中入金</p>
+<p>这批地址共 mint 了 11 个 tokens，后分别将 tokens 归集到地址 2、地址 11 ，并在 2 月中旬以及 3 月 10 日全部出货（价格都在 1.2 ETH 以上）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_lguosfuu71.jpg" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p><em>图 4: 代币被转移到地址 2 或地址 11</em> </p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_r6irjh5tc1.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 5:簇 2 中地址之间的资金相关性</p>
+<p><em>地址簇 3 ：</em></p>
+<ol>
+<li>
+<p>0x8cA45E505d10764AcD1A918146cfd0A0FF68E0C8</p>
+</li>
+<li>
+<p>0x5a42a4e689b727354ef9933e610f4fbe0f599e8d</p>
+</li>
+<li>
+<p>0x8bae46274a92d5d5852C476d2c4A80968018Bab4</p>
+</li>
+<li>
+<p>0x2eeEc62CE45367a47d77B81851aebC756B107567</p>
+</li>
+<li>
+<p>0x685225594fb2499eae3598ee698441d4da9a2be7</p>
+</li>
+<li>
+<p>0x71a3ae50fcbc3d89d1a6910478c70e9e67ee1552</p>
+</li>
+<li>
+<p>0x77b8726b0b062ab5c9596eafbee441ab2181390e</p>
+</li>
+<li>
+<p>0x6cC330603cDfa702a8D10E25931263DbA9a35458</p>
+</li>
+<li>
+<p>0x4ee5d01a5c96be6743718fc237a7a81960615fe9</p>
+</li>
+<li>
+<p>0xdcbe09d16e3c83acda5b1718b1b2c1cb4b6794cf</p>
+</li>
+<li>
+<p>0xB4f6C471fb6682d178fC485E2751B58477BAe584</p>
+</li>
+</ol>
+<p>共 11 个地址，这批地址入金地址相同，最终资金归集地址相同，没有历史交易，行为相似，具体资金来源为：</p>
+<ul>
+<li>
+<p>地址 1-5 资金来源：0xFccf1C6A8C6978d76dF001699E02A2Ee88B8DEdA;</p>
+</li>
+<li>
+<p>地址 6-7 资金来源：0x82B38c1636E98f0F7010cB00fcE9a24b649878Ab;</p>
+</li>
+<li>
+<p>地址 8-11 资金：地址 1 直接或间接打入</p>
+</li>
+</ul>
+<p>以上地址最终资金都归集到同一个 Bybit 存款钱包：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_fogym9usmh.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 6:这些地址最终都将资金发送到相同的 Bybit 存款地址</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_32ryzt1v2k.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 7:簇 3 中地址之间的资金相关性</p>
+<p>这批地址在 1 月 26 日开放第二次 mint 后共 mint 了 11 个 tokens 随后立即抛售，价格在 0.5 ETH 附近。</p>
+<p><strong>结论</strong></p>
+<p>我们通过算法发现的每个地址簇背后肯定是由同一实体操纵，这些地址的共同特征是：</p>
+<ul>
+<li>
+<p>都是没有历史交易的新地址</p>
+</li>
+<li>
+<p>由同一实体大规模操纵</p>
+</li>
+<li>
+<p>mint 后在高位价格出货</p>
+</li>
+</ul>
+<p>这种行为很可能是项目方或做市商通过这种方式来增加热度并且回收资金。</p>
+<h3 id="二-价格操纵">二. 价格操纵</h3>
+<p>在我们对 AKCB 的交易数据进行分析的过程中，我们发现该系列的交易量以及地板价变化存在以下可疑现象，认为项目方或做市商可能在 2 月 6 日到 2 月 15 日之间进行拉盘：</p>
+<p><strong>疑点 1 ： 2 月 6 日起 buyers 数量、sellers 数量、交易量、地板价急剧上升（对比同期其他蓝筹 NFT 没有类似上升趋势）</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_uzk08m5oc9.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 8: 2 月 6 日起，买家和卖家数量急剧增加</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_dgcetpylz2.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 9: 2 月 6 日起交易量和地板价大幅上升</p>
+<p>在这之后，该系列的交易量和地板价都一直维持在一个相对低的水平。</p>
+<p><strong>疑点 2 ： 2 月 6 日起交易价格分布呈现均匀上升趋势&amp;当日交易价格集中分布在次日地板价之下</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_c0j61ezgjg.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 10:交易价格分布呈均匀上升趋势</p>
+<p>由于拉升地板价最简单方式就是将该目标地板价之下的 tokens 全部扫掉，因此必然会使得交易价格分布呈现均匀上升的趋势，并且当日交易价格集中分布在次日的地板价之下。在交易量骤增的 2 月 7 日、 2 月 8 日，大部分交易的价格低于次日地板价，这与其他时间段的情况截然不同，这样的差异表明了有系统地操纵地板价的可能性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_m96qjveb7p.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 11: 2 月 7 日和 2 月 8 日，大多数交易的价格低于第二天的地板价</p>
+<p><strong>疑点 3 ：做市商地址大量扫货</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0630/4_b9znel45ih.png" alt="通过链上数据发现NFT系列的隐藏持仓与操盘行为"></p>
+<p>图 12 NSwap 扫了大量的 AKCB</p>
+<p>NSwap 大量购买后地板价大幅上涨，除了 NSwap 进场让社区对 AKCB 信心上升之外，从数据上来看我们认为后续的价格上涨也有人为操盘因素。</p>
+<p><strong>结论</strong></p>
+<p>通过这些异常的交易数据，我们认为 AKCB 在 2 月中旬的地板价大幅提升（最高达到 1.92 ETH）背后可能存在做市商刷量拉盘的行为。</p>
+<h2 id="总结">总结</h2>
+<p>NFT 市场是一个充满创新和活力的领域，但也存在着一些不规范和不公平的现象，比如操控市场价格、刷交易量、洗钱等。这些行为不仅损害了 NFT 市场的健康发展，也影响了普通用户和投资者的利益。因此，从数据的角度去分析这些操控行为，可以让玩家对于系列的盘面有更深刻的了解，在投资时能作出有数据支撑的决定。另一方面，通过揭露这些市场操纵行为，我们可以提高 NFT 市场的透明度和公信力。</p>
+<h2 id="关于作者">关于作者</h2>
+<p>此分析研究报告由 <a href="https://www.eocene.io/?ref=odaily">Eocene Research</a> 的 Helena L. 和 Lin S. 共同撰写。在  <a href="https://twitter.com/EoceneNI">Twitter</a>  上关注我们，随时了解更多我们的 NFT 分析和研究。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54130/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">什么是加密货币中的流动性质押？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54088/">
+                <span class="next-text nav-default">万事达卡全面进军Crypto：即将推出“多通证网络”产品</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#方法论">方法论</a></li>
+    <li><a href="#具体案例以akcb为例">具体案例（以 AKCB 为例）</a>
+      <ul>
+        <li><a href="#一-持仓">一. 持仓 </a></li>
+        <li><a href="#二-价格操纵">二. 价格操纵</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#关于作者">关于作者</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

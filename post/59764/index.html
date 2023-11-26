@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文读懂以“意图”为中心只看重结果的Intent-centric架构 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Intent-Centric是一种围绕用户需求将意图视为核心的设计理念。这种架构形式极大简化了用户的体验门槛，让每一位用户只需表达自己的意图，把中间过程移交给各类其他协议，等待最终结果即可。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59764/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文读懂以“意图”为中心只看重结果的Intent-centric架构" />
+<meta property="og:description" content="Intent-Centric是一种围绕用户需求将意图视为核心的设计理念。这种架构形式极大简化了用户的体验门槛，让每一位用户只需表达自己的意图，把中间过程移交给各类其他协议，等待最终结果即可。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59764/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文读懂以“意图”为中心只看重结果的Intent-centric架构">
+<meta itemprop="description" content="Intent-Centric是一种围绕用户需求将意图视为核心的设计理念。这种架构形式极大简化了用户的体验门槛，让每一位用户只需表达自己的意图，把中间过程移交给各类其他协议，等待最终结果即可。"><meta itemprop="datePublished" content="2023-09-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="11830">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文读懂以“意图”为中心只看重结果的Intent-centric架构"/>
+<meta name="twitter:description" content="Intent-Centric是一种围绕用户需求将意图视为核心的设计理念。这种架构形式极大简化了用户的体验门槛，让每一位用户只需表达自己的意图，把中间过程移交给各类其他协议，等待最终结果即可。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文读懂以“意图”为中心只看重结果的Intent-centric架构</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-23">
+      2023-09-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 11830 字 -
+        预计阅读 24 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：@YBBCapital  Researcher @Ac_Core_</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_dfk0jkprvt.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<h2 id="前言">前言 </h2>
+<p>Web3繁琐的用户体验成为了阻碍区块链被大规模采用的原因之一，随着近期Web3知名风投 Paradigm 对外介绍该机构在加密领域重点关注的 10 个潜在趋势时，将“以意图为中心（Intent-Centric）协议及基础设施” 位居榜首后，这一概念瞬间引发了业内的重点关注。这是一种围绕用户需求将意图视为核心的设计理念。举例说明，“我要点一份 30 元汉堡外卖”就是一个“意图”，为完成这个意图用户需在外卖平台输入姓名、电话、配送地址后下单支付，过程不必在意所支付的 30 元中商家获取的利润及平台分配给骑手的利润，我只需在家等待汉堡送达即可。这种架构形式极大简化了用户的体验门槛，让每一位用户只需表达自己的意图，把中间过程移交给各类其他协议，等待最终结果即可。注意：本文不为项目宣发，适合大众读者阅读，内容仅做分析参考。</p>
+<h2 id="intent-centric设计原理">Intent-Centric 设计原理</h2>
+<h3 id="产生背景">产生背景：</h3>
+<p>在Web3世界里，交易是最核心的功能，无论 DeFi、GameFi、NFT 甚至任何一个赛道都离不开基础交易。但现实是，区块链的去中心化属性决定了不同链之间都是一座独立的孤岛，我们需要在不同岛之间找到链接它们的桥梁才能完成资产兑换。虽然中心化交易提供了便捷的用户资产交易体验，但用户仍需逐一授权钱包才能逐一畅游无数的 Dapp 应用，为降低去中心化应用程序的体验门槛，Intent-Centric 概念应运而生。</p>
+<p>虽然“意图”的雏形不是在近期诞生的，但这场概念风波由 Paradigm 引发，所以我们借用他们的定义来做参考：“意图是一套经过签名的声明性约束，它允许用户将交易创建给第三方外包，但不放弃对交易方的完全控制”。在实际中签名是受到用户自发性的意图主导，但为降低用户使用门槛而把资产移交给第三方外包处理真能实现嘛？下文将展开讨论——为实现 Intent-Centric 的愿景需涉及什么内容。</p>
+<h3 id="什么是意图">什么是意图：</h3>
+<p>Intent-Centric 可理解为“以意图为中心”  ，Paradigm 在 23 年 6 月 1 日发布的《 Intent-Based Architectures and Their Risks 》一文中表述了对意图概念的解释。在用户常规交易流程中，交易签名允许验证者按某个特定计算路径进行验证执行，其过程中的 Gas 费则用来激励验证者去完成计算。但意图并不明确特指某个计算路径，无论任何路径在满足特定约束条件下完成最终结果即可。实际操作中通过签署和分享意图，用户实际上是允许接受者代表自己选择出交易执行路径（如下图），为了与交易区分我们把意图定义为信息签名，它允许从给定的起始状态进行状态转换，以检索多路径达到最终状态结果【 1 】。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_klopkvrsgm.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：Intent-Based Architectures and Their Risks – Paradgim</p>
+<p>如上图所示，在提交交易时需指定明确的执行路径，比如在 Uniswap 进行 Token 兑换，但在提交意图时执行路径则是由匹配结果来确定。对用户而言只需提出自己的意图，其他由 Intent-Centric 的相关协议/应用来完成，即匹配执行路径，简述执行操作为 Solver（求解器）负责匹配符合意图的执行路径，最后等待最终的执行并获得结果即可。</p>
+<p>简而言之：交易 = 我指定执行方式这样做；意图 = 我只要这样的结果但不关注实现的过程。</p>
+<p>不同偏好的意图可以通过复杂的方式进行匹配，而实现这一过程需要“发现交易对手”和“求解器的求解”。</p>
+<h3 id="bobthe-intent-solver">Bob，the Intent Solver </h3>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_l2s3dgk8pk.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：ETH Global</p>
+<p>Bob the Solver（音译：鲍勃求解器，下文统称求解器但不特指 Bob Solver）是一个基于意图的交易基础设施，其主要目的在于简化操作流程，降低用户的参与门槛，集成式的参与到钱包和去中心化应用程序当中，本质是将用户的外包交易进行创建和执行，其实现主要由两部分关联组成：</p>
+<p>创建交易的求解器: 组成包括 AI 聊天机器人+意图分类+交易优化，它负责实现用户意图的最优执行路径并发送至 AA 钱包，且求解器配备了机器学习（ML）模型，用于对用户意图分类；</p>
+<p>执行交易的“抽象账户钱包” : 采用 EIP-4337 标准的 AA 钱包系统，由捆绑器（Bundler）和代付合约(Paymaster)组成，与求解器进行融合达到简化交易流程的目的。 </p>
+<h3 id="意图层与求解器">意图层与求解器</h3>
+<p>是否可以单独构建出一个意图层并让求解器竞争求解？虽在理论上是可实现的，但现实是实现非常困难。谈到这里需重点提及 Anoma、SUAVE（详情见下文内容）以此解决最核心的 MEV 问题。为实现 Intent-Centric 的愿景目标，将交易打包给第三方来处理完成，需具备什么特性才能安全完成资产转移？</p>
+<p><strong>1.可信赖</strong></p>
+<p>为实现可信赖和去中心化的区块链特征，假设只存在一个简单“意图网络”或许还远远不够，这样无法兑现用户和求解器对意图的保证。因为用户在表明意图后会被 Sovler 计算出各项执行路径所需的具体费用，同时 Sovler 也会被用户设定的调节所约束，用户需要知道各项执行路径是可信赖的；</p>
+<p><strong>2.隐私</strong></p>
+<p>求解器为用户提供一个最佳执行路径，所存在的复杂性质难免会遭受到黑客的入侵从而盗取资产或获得用户信息，同时多数情况下用户的链上活动信息都会暴露给观察者，为保证用户信息的安全需至少对部分重要信息进行加密或隐藏，但在区块链上实现可计算信息的私有化是非常困难的；</p>
+<p><strong>3.意图的表达</strong></p>
+<p>意图是个抽象的概念，用户对区块链表达意图的方式和用户对 AI 提出问题的方式似乎存在着相似的问题，我该对它怎样说明它才能理解我想表达的意思？如一些表述出一些含蓄不清的意图，求解器在选择执行路径时是否会产生更多的 Gas 费用，高效且准确的解析器才是实现意图的关键所在；</p>
+<p><strong>4.保持意图与 MEV 的一致性</strong></p>
+<p>这里以 SUAVE 解决 EVM 现实问题的独立区块链为例，当它处理以太坊意图时需进行跨链结算，好比曾推出的 MEV-Geth 和 MEV-Boost 等 MEV 去中心化解决方案取得的巨大成功，以更加公平透明的交易处理机制满足跨链 MEV 的需求；</p>
+<p><strong>5.抗审查</strong></p>
+<p>根据 Paradigm 的解释我们不难发现存在一个核心问题，具有 AI 功能的解析器不应该只单一存在，如单一的解析器遭受攻击或停用则会导致整个系统宕机的恶劣情况，以及解析器是否存在拒执行，错误执行等问题，这些问题下文中的 Anoma 可能可以解决；</p>
+<p><strong>6.求解器的竞争性</strong></p>
+<p>不同的用户会有不同的意图，求解器内也会包含多个交易类别，比如兑换、跨链、质押等，单一的求解器之间不会产生竞争，因为只有在链上结算时，求解器才能收取费用。是否可以让负责不同交易类别的求解器进行合理的再分配或优化解析器算法以此保持求解器间的竞争性，让每个有效的地址都有资格成为求解器来成功参与到内存池（Mempool），从而提升交易执行质量；</p>
+<p><strong>7.意图内存池</strong></p>
+<p>Paradigm 提出了三种新的内存池（Mempool）解决方案：</p>
+<p>a.无许可内存池（Permissionless Intentpools）：采用开放式设计允许任何人将意图提交至内存池，并为执行者提供无须许可的访问权限；</p>
+<p>b.许可意图池子（Permissioned Intentpools）：需权限才能提交和执行用户意图，让用户将意图传递给值得信任的第三方来代表用户执行；</p>
+<p>c.混合方案（Hybrid Solutions）：将以上两种内存池特点进行结合，旨在到达开放度和可控度之间的平衡。</p>
+<h2 id="实现意图所需的元素">实现意图所需的元素</h2>
+<h3 id="账户抽象aa">账户抽象（AA）</h3>
+<p>简单回顾：以太坊有两种账户类型：EOA 外部拥有账户和 CA 合约账户，区别在于前者可以发起交易，后者不能发起交易但可托管 Solidity 代码，我们现在使用的大多数都是 EOA 账户。除此之外还有 Gonsis Safe 这样的多签智能合约账户（SCW），刚提到的合约账户不能发起交易所以需用到 EOA 来启动 SCW，这样 EOA 可以只负责签署交易，而智能合约可执行任意逻辑，在增强资产安全的同时开发出无数的新应用场景。</p>
+<p>意图层的实现需要账户抽象（原因见下文 SUAVE 部分解释），EIP-4337 由用户操作（UserOperation）、捆绑器（Bundler）、入口合约（EntryPoint）、合约工厂（Wallet Factory）、代付合约(Paymaster)、签名聚合器（Signature Aggregator） 六部分组成。简要操作流程如下：</p>
+<ul>
+<li>
+<p>发起用户操作即执行交易内容；</p>
+</li>
+<li>
+<p>将操作发送到P2P “用户操作内存池（UserOperation Mempool）” 并由捆绑器对执行的签名，Gas 费用等用户操作交易内容进行“捆绑打包”提交上链（实际包含多种情况这里不做展开）；</p>
+</li>
+<li>
+<p>捆绑器将内容“打包”发送给入口合约处理，也可选择性使用签名聚合器以此检测是否合法；</p>
+</li>
+<li>
+<p>入口合约将交易预发送至钱包合约或代付合约；</p>
+</li>
+<li>
+<p>代付合约根据项目方的业务逻辑可以展开多种类型，为简述这里不做展开【 2 】。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_swcz4pqu6k.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：ReadON Investment Research Group</p>
+<p>智能合约钱包无疑是账户抽象最大的参与者，目前主要竞争势力有多签钱包 Gnosis Safe 和专注构建完全兼容 EIP-4337 的 Candide 智能合约钱包。通过上图分析不难发现，账户抽象是利用捆绑器+代付合约完成了“适合开发者的狭义”意图，而 Paradigm 则是利用 Solver+AI 完成了“适合大众用户的广义”意图。将“抽象”和“意图”这两个概念放在同一个赛道理解范围内再合适不过了，都有种杂乱中带着一丝有序的魔幻概念。</p>
+<h3 id="意图的可编程性">意图的可编程性</h3>
+<p>根据 Researcher@tme l0 211 的观点，意图的可编程性可总结为：若意图不可编程，则程序不可执行，自动化就不可能，智能就无从谈起。如何理解，意图是人为的思绪表达它本身具有包含情绪因素的抽象性，而接受它的是一串串冰冷的代码和算法，好比我的意图是赚钱，代码和算法如何帮我找到该意图的执行路径？Intent-Centric 并不是一个全新的概念，而是建立在目前已有简洁化 intent 设计之上，为此整理出已有的 Intent-Centric 项目和概念。</p>
+<p><strong>已知代表性的项目：</strong></p>
+<p><strong>UniswapX ：</strong> off-Chain 延伸方案 intent</p>
+<p><strong>CowSwap ：</strong> off-Chain 延伸方案 intent</p>
+<p><strong>1inch :</strong>  Fusion 订单撮合 off-Chain + 多 DEXAggregator</p>
+<p><strong>Solv Protocol ：</strong> 全新 ERC 3525 标准实现复杂金融 intent</p>
+<p><strong>Unibot ：</strong> 中心化服务器后台预置参数，规则等自动化 intent</p>
+<p><strong>Opensea ：</strong> 链下签名+链上合约组合完成</p>
+<p><strong>已知代表性的概念：</strong></p>
+<p>ERC 3525 标准 : 由 Solv Protcocol 提出，旨在提供一种半质化资产标准，可以更加结构化地描述数字资产，满足各种应用场景需求；</p>
+<p>Abstract Account 账户抽象：提供了一整套标准化的账户管理接口，用于抽象不同类型账户的底层实现复杂度，免 Gas、社交恢复等；</p>
+<p>MPC Wallet：用私钥分片技术，将私钥分成多份，分别存储在多个独立节点上。在进行交易等操作时，这些节点通过安全的多方计算协议，共同计算生成签名，而无需重新构成完整私钥。</p>
+<p>综上无论是代表性的项目或概念都是通过一系列更复杂化的指令来让用户做到更简化的体验，<strong>如果将以上内容划分，可分为四类：</strong></p>
+<p><strong>中心化 intent :</strong>  </p>
+<p>基于中心化的资源撮合匹配平台，比如 Unibot 等机器人交易 CEX 交易、Friend.tech 等；</p>
+<p><strong>结构化 intent :</strong></p>
+<p>基于智能合约或代理合约组合，链上+链下预处理组合，全新 ERC 标准等预置参数适配 EVM 虚拟机执行；</p>
+<p><strong>分布式 intent ：</strong></p>
+<p>基于无需可分布式的 Solver+Executor 等全新区块链架构，构建的全新可执行用户复杂意图市场；</p>
+<p><strong>智能化 intent ：</strong></p>
+<p>基于 AIGC 为 input+outcome 的承载体，由通过 DeFi 全域 training 的 AI 来编程化用户的复杂意图并且执行输出。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_l5tno1y7ny.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：Researcher@tmel0211</p>
+<h3 id="mev">MEV</h3>
+<p>最大可提取价值 (Maximal Extractable Value, MEV) 是指矿工通过添加、删除、重排交易以此获得额外的收益奖励，可完成 DEX 套利、抢跑交易（Fornt - Running）、尾随交易（Back - Running）、清算（Liquidation）、狙击机器人（Snipping bots）、时间强盗攻击（Time-bandit attack）、三明治攻击（Sandwich）等行为，这损害了正常使用 DeFi 的用户的权益。展开来讲，以太坊上的交易是根据 Gas 来让矿工进行排序交易的，高 Gas 优先打包处理，低 Gas 慢处理，交易首先会被提交到 Mempool 内存池【 3 】，等待被包含进区块中，验证者从内存池中提取交易，并在构建时将它们添加到下一个区块中，由于内存池公开，搜索者有机会向验证者支付费用以特定方式订购交易，通过排序从用户手中提取价值，于是便有了 MEV 矿工价值。 实现用户的意图需将交易移交给第三方外包处理，所以 Intent-Centric 架构中交易产生的 MEV 也是需要重点关注的问题之一。</p>
+<p>MEV 带来的最直观影响：伤害整个网络的同时竞争也让市场更加有效。</p>
+<p>资本的分配不均（大户拥有更多的 ETH 筹码）可能会导致验证者的中心化（更大的质押池获取更高的 MEV 收益）降低整体网络的安全性，即使当下已出现产生了一定效果的缓解手段，但区块构建权利带来的中心化风险当前仍无法完全消除；</p>
+<p>为增加交易被打包的可能性，MEV 相互竞争的检索者们通过竞拍 Gas 获得优先权，这会让公共内存池因搜寻者的高 Gas 费交易而变得网络拥堵，但同时 DEX 套利和借贷清算也可帮助 DeFi 市场更快地达到均衡，以维持市场稳定。</p>
+<p>MEV 是这个行业探索多年无法绕开且重要的话题，如何缓解 MEV 带来的不利因素也在不断探索当中，本文将在下一个章节“实现意图的通用解决方案”中展开说明。根据 EigenPhi 截止 23 年 9 月 15 日数据，链上 MEV 的获利水平仍存在较大的收益空间， 以太坊合并后仅使用 Flashbots 的出块节点获利已超 20 万枚 ETH，所以这是一块非常巨大的利益分配蛋糕。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_k0hy2461qk.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：EigenPhi ｜ MEV Data</p>
+<h3 id="跨链排序器与预言机">跨链，排序器与预言机</h3>
+<p>Intent-Centric 是一个庞大的系统架构，按照 Paradigm 的解释来看，Intent-Centric 的内容会涉及到整个区块链领域，各类 Layer 1 与不同的 Layer 2 之间的庞大资产转移都要传递给意图来便捷化处理。现如今行业的发展已将我们带到了一个多链的时代，每条链之间都是一座孤岛，但孤岛之间又会存在着不同的桥梁，所以跨链与排序器也是满足意图所必备的桥接。</p>
+<p>基于当下以太坊 Layer 2 生态的繁荣，目前主流公认的四大天王：Arbitrum、Optimism、zkSync、Starkware 各展拳脚讲述自己的 Layer 3 ，OPstack 和 ZKstack 对应叙事。当下 Layer 2 面临的共同问题是中心化排序器问题，虽目前也在积极寻找可行解决方案但现实是这里暗藏着一个巨大的蛋糕，以 OPstack 为例我们可将它的盈利模式简单当做“出租商铺”来理解，Layer 2 的盈利=Layer 2 的 Gas 收入+MEV 收入-Layer 1 的 Gas 支出。如果要实现意图的目的，Layer 2 与 Layer 1 的过路费是必不可少的。</p>
+<p>话题来到跨链桥，当前 Layer 2 的繁荣让我们早期认识到了排序器的可观利润，但跨链的利润也不容小视，跨链是打通不同链孤岛之间必不可少的桥梁，作为基础设施之一当下熊市环境除了满足正常交易用户的跨链需求之外，撸毛党对于空投的预期而产生的跨链需求仍是实际存在的市场需求。不断繁荣的 Dapps 应用也将逐步从便捷的中心化交易所里蚕食到利润。但值得注意的问题是跨链桥的安全性，据 hacked.slowmist 官方数据，在从 21 年 6 月 29 日启至 23 年 9 月 16 日的这两年时间内，跨链桥生态共发生公开安全事件 38 起，累计损伤金融高达 20 亿美元。综上，实现意图涉及到的 Gas 费用不可避免，但本文暂不对排序器和跨链的安全性展开讨论，虽然这是值得我们重点关注的问题。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_qimwbm7n18.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：hacked.slowmist </p>
+<p>话题来到预言机（Oracle），以宏观视角来讲区块链的强金融属性导致它是一个追求确定性的系统环境，即使 RWA 的叙事谈及多年，但现实是区块链无法获得链外真实世界数据只能获取链内数据，因为虚拟机（VM）不能让智能合约有网络调用（ Network Call），所以智能合约的运行都必须是一致的结果，所以对外界而言区块链的数据也是封闭的。</p>
+<p>我们放大镜头来到微观视角，预言机是 DeFi 世界中的一个重要因素，虽然不同协议的安全性通常是由底层智能合约网络来继承，但它的正常运行还是需要依赖预言机，如果一个协议的预言机遭受到攻击或破坏，那么整个协议就会被操控。如今的 DeFi 更希望将自身定义为“源码（ Primitives ）”，并希望有更多的团队在它们的基础之上构建产品或组合协议，但在这迭代过程中衍生的新 DeFi 合约为承载更庞大的生态体系会去升级自身的运行逻辑，这也带来了一些外部依赖并产生无法预估的相关风险。</p>
+<p>经过几年时间的发展，DeFi 领域也累计遭到了数十亿美元的盗窃，比如今年 3 月， Euler Finance 借贷协议遭受黑客攻击，其损失金额高达 2 亿美元。它可以让用户发布抵押品并借款，它的问题发生在一个特定函数中且没有对它进行安全检查，使用户能破坏借贷市场的基本不变式（如 UniSwap 中的基本不变式：tokenBalanceX * tokenBalanceY == k）。同样依赖于预言机进行定价的衍生品协议如缺乏内部价格发现机制，则容易受到价格滞后无更新影响，从而严重限制它们的规模和用户体验，这也正好解释了为什么交易员 Avraham Eisenberg 能够成功攻击  Mango Markets 并从该加密货币交易平台抽走 1.16 亿美元。</p>
+<p>综上所述，区块链森林黑暗法则一般处处充满着未知的风险，为实现 Intent-Centric 架构的愿景还有很长一段路需走。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_gvntg6m1yd.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：Chainalysis</p>
+<h3 id="聚合器与gas">聚合器与 Gas</h3>
+<p>聚合器出现的直接目的是为用户省去寻找最佳交易路径和收益策略的麻烦，其中包括众多聚合器类型，例如：交易聚合器、信息聚合器、收益聚合器、流动性聚合器、资产管理聚合器。Intent-Centric 架构是需要一定程度的中心化色彩的，各类集合器或许可以便捷解析器在寻找意图过程中的执行路径，给到一定程度上的“参考答案”。</p>
+<p>Gas 是执行各类交易必不或缺的过路费用，如何优化 Gas 费也是行业老生常谈的话题之一，目前总体来说都是围绕以产品端、账户抽象钱包、DeFi 协议来做优化，未来是否能将聚合器、账户抽象、DeFi 协议三者结合从一个全新的产品端角度来做到优化 Gas 的效果，让我们拭目以待。</p>
+<h3 id="钱包授权">钱包授权</h3>
+<p>Dapps 交互的第一步：钱包授权，让我们将视角再次回到交易本身。Intent-Centric 架构目的是做到交易简化降低用户使用门槛，但每个意图中的交易都会涉及到无数授权签名，如何安全便捷的解决授权问题也是需要考虑的问题，或许账户抽象和下文中的 dappOS V2是套不错的解决方案。</p>
+<h2 id="实现意图的通用解决方案">实现意图的通用解决方案</h2>
+<h3 id="anoma">Anoma</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_j6ovi7lssy.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：Anoma 官方</p>
+<p><strong>简介：</strong></p>
+<p>据 23 年 5 月 31 日 Coindesk 报道，Anoma Foundation 目前已顺利完成了由 CMCC Global、Electric Capital 等 14 家资本累计 2500 万美元的投资。该项目于 22 年 8 月公布的白皮书中就已提出了意图的架构：Intent  Gossip Layer 意图传播层（ Gossip 这里暂译为传播，部分翻译解释为八卦）用于传播意图、发现交易对手和匹配执行路径。它的设计为默认的验证路径，其所有的传播（Gossip）信息均由发出者节点签名，从而形成一个可追溯到发起者的签名链，这一功能在抗审查和 Dos 攻击（拒绝服务攻击，是一种用于破坏合法用户访问目标网络或网站资源的方法）显的尤为重要，所以谈及 Intent-Centric 的实现，Anoma 是必不或缺的。</p>
+<p>Anoma 起初基于 Tendermint 开发并使用拜占庭容错(BFT）的共识机制，随后转向 Heliax 开发出的另一种 PoS 权益证明共识机制“ Typhon ” ，以允许在独立链之间进行共识划分。该项目团队先后开发了 Taiga（集成到意图传播层 “Intent  Gossip Layer” 和匹配层的私有状态转换框架）、Typhon（跨链原子交易共识机制）、MASP（多资产屏蔽池）、Vamp-IR（算术电路语言）、Juvix（智能合约编程语言）等多方技术推动密码学和分布式系统的试验。</p>
+<p>接上文 “意图的可编程性” 段落内容，要实现 Intent-Centric 的架构愿景，可编程算法结构和发现交易对手是必不可缺的功能，它需建立在多交互式和多应用程序的基础之上，所以这里引出全栈式去中心化应用程序的统一架构 Anoma，以共同构建去中心化应用程序的范例。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_3f4leaarhp.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：Anoma</p>
+<p><strong>设计架构及其创新点：</strong>  </p>
+<p>1.隐私支付</p>
+<p>为了保护用户隐私并防止他人追溯收集数据，发送方、接收方、金额和资产面额都经过加密，通过零知识证明 zk-SNARKs 来保证资金的转移，它的独到之处是允许所有资产共享同一个屏蔽池（MASP）来提供可组合的资产保护增加用户匿名集，而不是每个资产单独屏蔽。参与者越多资产越多转移就更加频繁，这大幅增加了资产转移数据的隐匿程度； </p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_6iasozt2iw.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：Delphi Digital - Delphi Creative</p>
+<p>2.易货交易</p>
+<p>在这个项目中一再强调“易货”交换计划，其核心思想来源于古老的物物交换。简单来说就是以物易物，无需交换媒介，不涉及现金收付，所处其中的参与者至少要有双重巧合才能交易成功，一是双方恰好有对方想要的物品，二是双方转让交易便利。以此帮助用户传到意图传播层的节点操作者和运行检查这些意图是否兼容的匹配节点操作者，以便创建和配相关交易，并发送相应的执行交易账本。Anoma 实施了一种数字易货计划，可以促进商品、服务或数字表示价值的交易；</p>
+<p>3.意图匹配系统</p>
+<p>在以太坊 EVM 中，交易并不强制要求未来状态而是授权具体执行路径，而 Anoma 包含一个匹配系统，允许用户使用 Gossip 广播交易意图。简单来讲 Anoma 由两个主要部分组成：分布式账本和意图匹配系统，它们相互补充也可以单独运行，通过使用 Intent Gossip 运行节点、Token 交换求解器和请求新意图的 RPC 服务器，并将交易从匹配的意图提交到分布式账本中，从而帮助用户自动发现交易对手；</p>
+<p>4.多链支持</p>
+<p>Anoma 使用 Cosmos 生态系统的跨链通信 IBC 协议进行区块链间通信，IBC 利用中继器在不同区块链之间实现数据传输，旨在成为多链隐私层。目前虽中继器通常由节点运营商运行，但任何有能力的人都可以运行，并在此过程中赚取费用；</p>
+<p>5.分形缩放扩容方案</p>
+<p>Anoma 使用分形解决方案来解决区块链的可扩展性问题，允许用户创建本地实例以满足其他交易需求。分形指的是将 Anoma 分成不同的应用链，以处理不同的任务，让每个 Anoma 应用链都可以高度定制化从而实现规模化并应对用户增长（与支持 IBC 协议到达扩展目的类似），未来其安全性将由ⅣInterchain Security、ⅣMesh Security、ⅣInterchain Alliance 项目作为提升。</p>
+<h3 id="suave">SUAVE</h3>
+<p><strong>简介：</strong></p>
+<p>据 23 年 7 月 25 日消息，以太坊基础设施服务 Flashbots 以 10 亿美元估值完成 6000 万美元 B 轮融资用于开发 SUAVE 平台。SUAVE（Single Unified Auction for Value Expression）将内存池和区块生成从现有区块链分离从而形成一层独立区块链网络（排序层），并提供高度专业化的即插即用替代方案【 4 】，旨在解决 MEV 相关挑战的基础设施。</p>
+<p>虽然 SUAVE 是一个新的区块链，但它并不是一个可以与以太坊或任何其他参与链竞争的通用智能合约平台。如果将 Anoma 比作构建以意图为中心的区块链，那么 SUAVE 即构建以意图为中心的基础设施 。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_v4y2quzk3s.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：SUAVE in the blockchain stack</p>
+<p><strong>SUAVE 的三个目标：</strong></p>
+<p>照亮黑暗森林：向每一位用户揭露当下不透明 MEV 生态系统中的不公平事件，量化其影响并打破参与者之间的信息壁垒；</p>
+<p>民主式开采：用开放的方式实现矿工与检索者之间的整合，以最大限制的方式促进各方之间的竞争并免费向所有矿工开放，以防止 MEV 集成和中心化；</p>
+<p>利益分配：将 MEV 交给创造它的人—— 以太坊用户。</p>
+<p>按照 SUAVE 的意图解决方案，在处理来自外部（以太坊为例）交易时需进行跨链结算，可用它来尝试解决 EVM 中的各类风险，好比曾推出的 MEV-Geth 和 MEV-Boost 等 MEV 去中心化解决方案取得的巨大成功。但需要说明的是用户在实现意图过程中会向 SUAVE 存入资金，并在需求得到解决解锁资金的过程中，SUAVE 上的智能合约需为资产验证而会涉及到预言机，所以一定程度来讲 SUAVE 也会面临如今跨链桥的所有风险。</p>
+<p>从 SCW 与 AA 到 SUAVE 与 Intent-centric：</p>
+<p>回顾上文“账户抽象 AA”部分，再思考账户抽象所带来的主要功能：私钥找回、无 Gas 支付、多签授权、一笔交易多个转账、费率限制等，总的来说账户抽象是将常规账户(EOA)和智能合约账户(CA)的优势功能完美结合起来。</p>
+<p>SUAVE 的愿景是成为各类不同链之间的共同排序层（包括跨链交易和 MEV），所以用户意图如果涉及到跨链资产转移时，账户抽象（AA）与 Gonsis Safe 这样的多签智能合约账户（SCW）集结双方优势，再结合 SUAVE 的 EVM 解决方案或许是目前理论上一套较优的解决方案。</p>
+<h3 id="cowswap">CoWSwap</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_0r153q1o7k.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：CoW Protocol</p>
+<p><strong>简介：</strong></p>
+<p>如果要选出最接近 Intent-Centric 架构的项目，CoWSwap 一定可以位居榜单。其协议与其他协议不同的是，用户交易只需发送出一个签名订单，将交易的执行委托给解决者网络，并在该网络中完成交易（无需指定执行路径），同时链下签名订单会由于求解器匹配后执行（与上文中的 Bob Solver 类似但不同），因求解器的 “批量捆绑” 权所以过程中的 Gas 费用将由求解器承担交易失败无需支付。</p>
+<p><strong>CoWSwap Hooks：</strong></p>
+<p>谈及 Hooks 是否会让我们联想到 Uniswap V4？但两者的实际使用功能截然不同，CoW Hooks 是将交易、桥接、质押、存款等串联在一起，可在订单执行前/后执行并以单一交易的形式执行交易排序。</p>
+<p><strong>主要功能：</strong></p>
+<p>预挂钩（Pre-hooks）可用于为订单 &ldquo;设置 &ldquo;条件。例如，执行验证链上签名所需的代码，或通过 EIP-2612 许可设置所需的批准；</p>
+<p>后挂钩（Post-hooks ）在交换发生且接收地址收到资金后执行。后挂钩提供了立即使用资金的机会，包括通过抵押、提供流动性、将代币桥接到 L2 等。</p>
+<p><strong>CoW Hooks 的 DeFi 示例 ：</strong></p>
+<p>偿还债务和质押：将挂钩前操作设置为偿还债务和平仓，然后使用 CoW Swap 交换资产，最后使用挂钩后操作将新资产存入定注金库；</p>
+<p>创建 LP 仓位：可只使用预挂钩交易或只使用后挂钩交易；</p>
+<p>JIT（即时）智能订单：通过可组合 CoW 框架（ERC-1271）来编程 Safe 智能合约钱包，执行自定义的智能合约审批和交换；</p>
+<p>NFT：可以在 CoW Hooks 功能中出售或购买 NFT；</p>
+<p>跨链：可以将资产通过 Cow Hooks 发送到桥接合约以此完成跨链交易；</p>
+<p>空投：可使用 CoW Hooks 在无需使用 ETH 做为 Gas 的情况下出售空投；</p>
+<p>解锁和重新质押：如果是质押了 32 枚以太坊的验证者，可解除绑定以领取奖励，也可通过 CoW Hooks 在其他链重新质押资产；</p>
+<p>自动增加 LP 仓位：假设在 Gnosis 链成为 EUR - USDC 池的流动性提供者以获得 GNO Token 奖励。可使用 CoW Hooks 通过 CoW Swap 以 50/50 的比例自动将您的 GNO 转换为 EUR - USDC 使资产自动增加 LP 仓位。</p>
+<h3 id="dappos-v2">dappOS V2</h3>
+<p>讨论完意图层和相关基础设施层，我们来探讨一下被誉为 “意图层新浪潮”的 dappOS V2协议。23 年 7 月 21 日，估值高达 5000 万美元的 dappOS V2完成了由 IDG 资本和红杉资本（中国）共同领投的种子轮融资，与此同时也受到其他大 VC 机构和币安的关注 。</p>
+<p>dappOS V2是一种意图协议，引用 dappOS 账户和 dappOS 网络旨在简化用户与 dApp 交互达到 CeFi 级别的用户体验。同时通过 “链抽象（Chain Abstraction）”技术消除了多链带来的碎片化障碍（链抽象与账后抽象相似）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0923/9_pizlr0raku.png" alt="一文读懂以“意图”为中心只看重结果的Intent-centric架构"></p>
+<p>图源：Intent-Centric A Narrative worth keeping an eye</p>
+<p>无论是以意图为目的还是以交易为目的，用户的关注点始终是资金账户的总金额，而不是不同链之间单个资产余额。按照 dappOS V2的理解此处应当存在一个统一的账户钱包以达到 “一个签名完成一切” 的意图愿景而引入了一键式多 “TXN (交易记录-Transaction)” 的设计概念，以此为用户在完成 TXN 前扫除障碍，达到用户以意图为导向的交易目的。</p>
+<p>比如借用它来实现在 Arbitrum 和 Avalanch 不同链之间以在没有资产的情况下实现与 GMX 的交互，以此达到未来 DeFi 将以意图为中心的基础交易法则。所以实现以意图为中心的概念需要涉及到链抽象，账户抽象以及更多的 “协议抽象” 。不过说到这里需要考虑一个问题：假设在各类抽象都得以实现的情况下撸毛用户的交互法则和各类项目的空投规则是否会随之改变？</p>
+<h2 id="小结">小结：</h2>
+<p>Intent 在其执行过程中仍充满了风险和挑战，它需依赖于中介或特定的执行者，因此会存在权利集中和被垄断风险，从而影响至整个中间件的信任问题。其次将交易移交给第三方执行所带来的安全与隐私的相关风险也值得考虑，Intent 应用开发者们能否在安全，隐私，便捷三方面做到平衡也是非常值得期待的。</p>
+<p>意图的概念在Web2领域已有较为成熟的应用，比如打车软件、售票软件、地图导航，但这些应用成功的基础是建立在Web2基础设施健全的基础之上的，如需在Web3领域出现成熟的应用场景还需等待行业的不断成熟。Intent-Centric 是一个宏大的概念，会涉及到区块链的方方面面，同时也是区块链结合 AI 的最好路径之一，但它能否落地发展并枝繁叶茂仍需我们持续关注。</p>
+<h2 id="解释文献及参考文章">解释文献及参考文章</h2>
+<p>【 1 】<a href="https://www.paradigm.xyz/2023/06/intents">https://www.paradigm.xyz/2023/06/intents</a></p>
+<p>【2】<a href="https://mirror.xyz/0x7333aB7AE068Ef92fb77A2bcab32FA273c45185c/ozUKb4RdhqB4ya49uw_OfMHILiZpDBV99eosD9gfumU">https://mirror.xyz/0x7333aB7AE068Ef92fb77A2bcab32FA273c45185c/ozUKb4RdhqB4ya49uw_OfMHILiZpDBV99eosD9gfumU</a></p>
+<p>【 3 】<a href="https://www.alchemy.com/overviews/what-is-a-mempool">https://www.alchemy.com/overviews/what-is-a-mempool</a></p>
+<p>【4】<a href="https://writings.flashbots.net/the-future-of-mev-is-suave/#iv-suave-in-the-blockchain-stack">https://writings.flashbots.net/the-future-of-mev-is-suave/#iv-suave-in-the-blockchain-stack</a></p>
+<p>【5】<a href="https://medium.com/metaweb-vc/account-abstraction-and-suave-how-far-are-we-from-an-intent-centric-ethereum-907e30804880">https://medium.com/metaweb-vc/account-abstraction-and-suave-how-far-are-we-from-an-intent-centric-ethereum-907e30804880</a></p>
+<p>【6】<a href="https://news.marsbit.co/20230818082351362551.html">https://news.marsbit.co/ 20230818082351362551 .html</a></p>
+<p>【7】<a href="https://ring-echidna-74e.notion.site/2023-09-14-Intent-centric-_Haotian-CryptoInsight-26795d3ac3b8493293b18f354fe898c2">https://ring-echidna-74e.notion.site/2023-09-14-Intent-centric-_Haotian-CryptoInsight-26795d3ac3b8493293b18f354fe898c2</a></p>
+<p>【 8 】<a href="https://research.web3caff.com/zh/archives/11091?login=successref=416">https://research.web3 caff.com/zh/archives/11091? login=successref= 416</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59763/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文读懂Gear Protocol和 Vara Network</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59757/">
+                <span class="next-text nav-default">以太坊验证者激增 Dencun 新提案 EIP-7514 要解决什么问题？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言 </a></li>
+    <li><a href="#intent-centric设计原理">Intent-Centric 设计原理</a>
+      <ul>
+        <li><a href="#产生背景">产生背景：</a></li>
+        <li><a href="#什么是意图">什么是意图：</a></li>
+        <li><a href="#bobthe-intent-solver">Bob，the Intent Solver </a></li>
+        <li><a href="#意图层与求解器">意图层与求解器</a></li>
+      </ul>
+    </li>
+    <li><a href="#实现意图所需的元素">实现意图所需的元素</a>
+      <ul>
+        <li><a href="#账户抽象aa">账户抽象（AA）</a></li>
+        <li><a href="#意图的可编程性">意图的可编程性</a></li>
+        <li><a href="#mev">MEV</a></li>
+        <li><a href="#跨链排序器与预言机">跨链，排序器与预言机</a></li>
+        <li><a href="#聚合器与gas">聚合器与 Gas</a></li>
+        <li><a href="#钱包授权">钱包授权</a></li>
+      </ul>
+    </li>
+    <li><a href="#实现意图的通用解决方案">实现意图的通用解决方案</a>
+      <ul>
+        <li><a href="#anoma">Anoma</a></li>
+        <li><a href="#suave">SUAVE</a></li>
+        <li><a href="#cowswap">CoWSwap</a></li>
+        <li><a href="#dappos-v2">dappOS V2</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结：</a></li>
+    <li><a href="#解释文献及参考文章">解释文献及参考文章</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

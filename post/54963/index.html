@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Starknet 0.12.0正式部署主网：实现量子跃迁 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Starknet 0.12.0已于7.12日正式部署在主网上，实现更大的吞吐量和更低的延迟。" />
+<meta name="keywords" content="StarkNet" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54963/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Starknet 0.12.0正式部署主网：实现量子跃迁" />
+<meta property="og:description" content="Starknet 0.12.0已于7.12日正式部署在主网上，实现更大的吞吐量和更低的延迟。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54963/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="Starknet 0.12.0正式部署主网：实现量子跃迁">
+<meta itemprop="description" content="Starknet 0.12.0已于7.12日正式部署在主网上，实现更大的吞吐量和更低的延迟。"><meta itemprop="datePublished" content="2023-07-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4795">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Starknet 0.12.0正式部署主网：实现量子跃迁"/>
+<meta name="twitter:description" content="Starknet 0.12.0已于7.12日正式部署在主网上，实现更大的吞吐量和更低的延迟。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Starknet 0.12.0正式部署主网：实现量子跃迁</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-13">
+      2023-07-13
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4795 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>前言</strong></p>
+<p>据悉，Starknet 0.12.0已于7.12日正式部署在主网上，实现更大的吞吐量和更低的延迟。在通读本篇文章之前，你需要对零知识证明的概念有一个初步的认知：</p>
+<p>零知识证明属于密码学概念，是一种交互式的证明。让我们先举一个经典的例子：A是红绿色盲，B有两个台球，一个是红色，一个是绿色。在A的眼中，这两个球的颜色完全一样，B需要向A证明这两个台球一个是红色，一个是绿色。此时，A将台球放在背后，他可以将两个球互换位置或者不换，而B需要判断A是否将两个球互换位置，重复多次，若每次B猜的结果都是正确的，则A认为两个台球一个是红色，一个是绿色是真实情况。这个就是经典的零知识证明的例子，在零知识证明里，我们只需要“证明者”以及“验证者”两个身份。</p>
+<h2 id="1starknet简介"><strong>1. Starknet 简介</strong></h2>
+<p>StarkNet是一个无需许可的去中心化Validity-Rollup（也被称为“ZK-Rollup”）。它作为Ethereum上的Layer2能够使任何Dapp在计算方面实现无限的扩展并且无需牺牲Ethereum的可组合性和安全性。</p>
+<p>StarekNet的母公司StarkWare成立于2018年，总部位于以色列，旗下所研发的主要产品有Starknet以及StarkEx。其公司估值已经达到80亿美金。截至目前为止，StarkNet已经经历五轮融资，共融资2.73亿美金。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0713/6_hlzsjt3u4p.png" alt="Starknet 0.12.0正式部署主网：实现量子跃迁"></p>
+<p>值得一提的是，以太坊基金会特别公开支持利用starks的starkware，他们向starkware提供了1200万美元的资助。而这也是行业普遍看好StarkNet今后发展及其正统性的原因之一。</p>
+<p><strong>代币经济模型</strong></p>
+<p>StarkNet已于2022年11月16日宣布在以太坊主网上部署其原生代币$STRK，用作投票、质押和支付费用等。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0713/6_1hnwtr3py4.png" alt="Starknet 0.12.0正式部署主网：实现量子跃迁"></p>
+<p>图1-1 $STARK 代币经济模型</p>
+<p>代币经济模型中除投资者以及核心贡献者的49.9%代币之外，其余50.1%的代币全部归StarkNet基金会所有。在这其中，仍然有8.1%的代币未被分配。这部分将由社区决定相应的用途，因此这部分代币普遍被推测为潜在的空投额度。而Starknet基金会目前也已经任命Facebook前高管Diego Oliva为其第一任首席执行官。Oliva此前也曾表示，他将专注于Starknet去中心化社区的治理，着重强调开发者以及用户的权益。</p>
+<p><strong>路线图</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0713/6_e1co0oreas.png" alt="Starknet 0.12.0正式部署主网：实现量子跃迁"></p>
+<p><strong>V 0.12.0 吞吐量和延迟</strong></p>
+<p>在官方近期公布了2023整体的路线图，0.12.0版本已于本周三，也就是7.12日正式部署在主网上。Starknet的最新版本0.12.0引入了显著的性能改进，包括吞吐量和延迟方面的提升。通过采用基于Rust的Sequencer和Rust-Cairo VM，StarkNet的性能将得到显著提升，并且OKEX交易所已开始支持ETH starknet主网的充值。</p>
+<p><strong>V 0.13.0交易成本</strong></p>
+<p>在V 0.13.0版本中，Starknet 的交易成本将大幅降低。这是通过volition降低交易成本的主要组成部分来实现。L1( 以太坊 ) 数据成本占今天交易成本的95% ，而Volition 将允许开发人员使用混合数据可用性 (DA) 模式构建 Starknet 应用程序。此外，以太坊的 EIP-4844（分片 Blob 交易）预计将于2023年第四季度发布。由于以太坊的 EIP-4844 和 Starknet 的 Volition(链下数据可用性)，Starknet的数据成本将大幅降低。</p>
+<p><strong>V 0.14.0费用市场</strong></p>
+<p>网络拥塞是每个开发人员以及用户所头痛的事情。为了解决这个问题，Starknet 将在V 0.14.0 引入费用市场，以便根据用户为交易支付gas的多少来有效地分配 Starknet有限资源。</p>
+<p><strong>V 0.15.0更短的固定块间隔</strong></p>
+<p>在V0.15.0版本中，一些改进计划旨在提升Starknet的性能和用户体验，通过解耦块和证明之间的关系，减少块间隔并改善网络的吞吐量。这将使Starknet成为一个更强大和高效的区块链平台。</p>
+<p><strong>2. 技术分析</strong></p>
+<h2 id="zk-rollupvsop-rollup"><strong>ZK-Rollup VS OP-Rollup</strong></h2>
+<p>目前市场上使用最广泛的Layer2——Arbitrium的底层技术是OP- Rollup，（Optimistic Rollup）。它是通过欺诈证明（Fraud proofs）实现扩容。在Op-Rollup中，交易数据被系统乐观地相信是正确的，而不进行实时验证，直接进入一个等待期。在等待期内，如果有节点提出异议并提供了证据证明存在恶意交易，那么该交易将被取消；如果没有异议，等待期结束后，交易将自动完成并在主链上验证交易。</p>
+<p>而Starknet则是基于ZK-Rollup技术的Layer2。ZK-Rollup主要依赖于零知识证明技术，通过将计算和验证过程分离，将合约执行的验证放在链下完成，然后将验证结果提交到以太坊主网上。计算过程在链下进行，而验证结果仅作为一个证明提交到以太坊，因此，这种方法提供了最高级别的安全性和用户隐私保护。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0713/6_qbqmyvtuid.png" alt="Starknet 0.12.0正式部署主网：实现量子跃迁"></p>
+<p>OP-rollup和ZK-rollup相比，ZK-rollup则是一种比OP-rollup更加安全的替代方案，而OP-rollup则是具有EVM兼容性的DeFi项目的更好选择。由此可见，具备EVM兼容性的ZK-rollup以其天然的安全性的优势将会是Layer2的未来的叙事发展方向。安全性的实现这一优势要归功于StarkNet对最安全、最可扩展的密码学证明系统——STARK的依赖。</p>
+<p><strong>Zk-STARKs VS Zk-SNARKs</strong></p>
+<p>STARK（Zero-Knowledge Scalable Transparent Arguments of Knowledge）和Zk-SNARK（Zero-Knowledge Succinct Non-Interactive Argument of Knowledge）都属于零知识证明的技术，用于创建可以验证但不泄露全部信息的证明。但它们在实现方式和特性上存在一些关键的区别。</p>
+<p>选择使用SNARKs还是STARKs取决于具体的应用场景和需求。SNARKs在证明大小和验证速度上有优势，但需要信任设置。而STARKs不需要信任设置，对量子计算机攻击有抵抗力，但证明较大，验证速度较慢。</p>
+<p>这里引入了一个概念——信任设置（Trusted Setup），他是一种在某些类型的零知识证明系统（如zk-SNARKs）中使用的过程，它在系统开始运行之前创建了一些初始参数。这些参数在证明的生成和验证过程中都会被使用。</p>
+<p>信任设置的关键是确保生成者在创建初始参数后彻底销毁他们所使用的秘密信息。如果生成者保留了这些秘密信息，他们就有能力创建看似有效的虚假证明，这将危及系统的安全性。因此，信任设置过程需要接受严格的审查和监控，以确保所有生成者都按规定销毁了秘密信息。这就是为什么称其为“信任设置”，因为用户必须相信这个过程是公正的，生成者没有作弊行为。</p>
+<p>而zk-STARKs却是一种不需要信任设置的零知识证明系统。这意味着，与需要信任设置的系统（如zk-SNARKs）不同，zk-STARKs的证明生成和验证过程不依赖于任何秘密信息。这提供了更高的透明性和安全性，因为系统的安全性不依赖于任何特定个体或组织的行为。zk-STARKs是通过使用一种被称为“FRI”（Fast Reed-Solomon Interactive Oracle Proofs）的技术实现的。</p>
+<p><strong>FRI协议</strong></p>
+<p>FRI协议的基本思想是通过一系列的抽样和插值步骤，逐步降低多项式的度。在每一步，证明者都会提供一个新的多项式，并声称它是原始多项式的一个压缩版本。验证者可以通过检查这些多项式在随机点上的值，来验证这个声称是否正确。</p>
+<p>这个过程会一直持续到多项式的度足够低，以至于验证者可以直接检查它的所有系数。由于在每一步中多项式的度都会减半，所以这个过程可以在对数时间内完成，这使得FRI协议非常高效。</p>
+<p>FRI协议的一个关键特性是，它只依赖于公开的、预先定义的参数，而不需要任何秘密信息。这使得它可以用于构建不需要信任设置的零知识证明系统，如zk-STARKs。然而，FRI（Fast Reed-Solomon Interactive Oracle Proofs）协议并不相当于信任设置。相反，FRI协议是一种用于生成和验证zk-STARKs证明的技术。它允许证明者向验证者证明一个多项式的系数是低度的，而不需要透露多项式的具体内容。FRI协议的关键特性是，它只依赖于公开的、预先定义的参数，而不需要任何秘密信息。这使得它可以用于构建不需要信任设置的零知识证明系统，如zk-STARKs。FRI协议是zk-STARKs的一个关键组成部分，它使得zk-STARKs能够在不需要信任设置的情况下工作。但FRI协议本身并不是一个信任设置过程，因为它不涉及生成或销毁任何秘密信息。</p>
+<p><strong>Starknet工作原理</strong></p>
+<p>StarkWare公司旗下的产品有专门为项目方定制的ZKR企业服务的StarkEx以及更加通用的StarkNet。StarkNet由五个部分组成，分别是：Starknet上的prover（证明者），Sequencer（排序器）和Full node（全节点）；以及部署在以太坊上的verifier（验证者）和Starknet core（核心状态合约）。</p>
+<p>其工作原理是在StarkNet上发起一个交易，由链下服务器排序器进行接受，排序，验证，并打包到区块，执行交易，然后状态转发给starknet core状态合约。随即，证明者将交易生成证明，并发送给以太坊的验证者验证。验证者将验证结果发送到以太坊的starknet core核心状态合约，并从Starknet core合约触发一组新的以太坊交易，以更新链上的全局状态以进行记录保存。而全节点（Full node）则发挥了储存功能，包括状态改变、元数据、证明以及记录在Starknet中被执行的所有事务，并跟踪系统的当前全局状态。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0713/6_lhh86k5o2p.png" alt="Starknet 0.12.0正式部署主网：实现量子跃迁"></p>
+<p>图2-1 Starknet工作原理示意图</p>
+<p><strong>3. StarkNet生态</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0713/6_m9wt8may85.png" alt="Starknet 0.12.0正式部署主网：实现量子跃迁"></p>
+<p>图3-1 Starknet生态图（来自推特@odin_free）</p>
+<p>Starknet生态项目繁多，目前包含100多种dapps和服务。其中钱包类别有Braavos以及Argent两类钱包，但是这两者之间的助记词不互通。Defi类协议现已部署了60多个，包括10kswap，Jediswap，Myswap等DEX以及Zklend等借贷协议；截至目前位置，由Defilama数据显示，StarkNet总TVL仅有$17.36M, 虽然整体TVL呈现上升状态，但对比同类型的zkSync Era的$189.21M，仍存在近十倍的差距，由此可见，StarkNet生态仍处于早期。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0713/6_3ai1u5ahct.png" alt="Starknet 0.12.0正式部署主网：实现量子跃迁"></p>
+<p>图3-2 StarkNet TVL 来自defilama</p>
+<p>跨链桥则有官方跨链桥stargate、以及Orbiter，Layerswap等；Did有StarknetID以及任务平台StarQuest。目前，Starknet各类协议的NFT奥德赛活动正在如火如荼地进行中，StarkNet未来生态将会持续繁荣还是昙花一现，我们只有拭目以待…</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54921/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SignalPlus宏观研报(20230713)：等待“熊市”投降</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54902/">
+                <span class="next-text nav-default">Web3行业续命指南：5种简单到不可思议的防猝死与抗抑郁的方法</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1starknet简介"><strong>1. Starknet 简介</strong></a></li>
+    <li><a href="#zk-rollupvsop-rollup"><strong>ZK-Rollup VS OP-Rollup</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

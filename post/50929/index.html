@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          去中心化的Prover如何实现？Opside 创新性提出 ZKP的两步提交算法 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Opside提出的ZKP两步提交算法，在实现了prover去中心化的同时，能很好地规避针对prover的抢跑攻击，并鼓励更多的矿工提供稳定、持续的ZKP算力。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50929/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="去中心化的Prover如何实现？Opside 创新性提出 ZKP的两步提交算法" />
+<meta property="og:description" content="Opside提出的ZKP两步提交算法，在实现了prover去中心化的同时，能很好地规避针对prover的抢跑攻击，并鼓励更多的矿工提供稳定、持续的ZKP算力。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50929/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-10T00:00:00+00:00" />
+
+<meta itemprop="name" content="去中心化的Prover如何实现？Opside 创新性提出 ZKP的两步提交算法">
+<meta itemprop="description" content="Opside提出的ZKP两步提交算法，在实现了prover去中心化的同时，能很好地规避针对prover的抢跑攻击，并鼓励更多的矿工提供稳定、持续的ZKP算力。"><meta itemprop="datePublished" content="2023-05-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2622">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="去中心化的Prover如何实现？Opside 创新性提出 ZKP的两步提交算法"/>
+<meta name="twitter:description" content="Opside提出的ZKP两步提交算法，在实现了prover去中心化的同时，能很好地规避针对prover的抢跑攻击，并鼓励更多的矿工提供稳定、持续的ZKP算力。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">去中心化的Prover如何实现？Opside 创新性提出 ZKP的两步提交算法</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-10">
+      2023-05-10
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2622 字 -
+        预计阅读 6 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文来源：Opside Team</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/11_tkncs151s3.png" alt="去中心化的Prover如何实现？Opside 创新性提出 ZKP的两步提交算法"></p>
+<h3 id="为什么我们需要去中心化的prover">为什么我们需要去中心化的 prover</h3>
+<p>当前，以太坊主网上已经有多个 ZK-Rollups 在运行了。然而 ZK-Rollup 的去中心化设计仍然处于早期阶段。我们目前都聚焦在 Sequencer 的去中心化问题上，大部分人都忽略了，实际上目前绝大部分的 ZK-Rollup 项目都没有实现去中心化的 prover。</p>
+<p>对于 ZK-Rollup 来说，中心化的 prover 仍然是安全的，并且也不像中心化的 sequencer 那样会带来审查的问题。但是中心化的 prover 也会引发很多问题。首先，如果只有一个 prover，那么单节点宕机就会造成整个 ZK-Rollup 的有效性证明无法提交，从而给交易的最终确定性造成影响。其次，中心化的 prover 成本高昂，无法承担未来海量的 ZK-Rollup 的算力需求。最后，从经济的角度来说，中心化的 prover 独享了一部分收益，这在代币经济学上来说，实际上是不公平的。</p>
+<h3 id="去中心化prover的挑战">去中心化 prover 的挑战</h3>
+<p>去中心化 prover 能很好地解决以上的问题，但是也带来一些挑战，这也是为什么最近上线的几个 zkEVM 方案采用了中心化 prover 方案的原因之一。例如 Polygon zkEVM 的 beta mainnet 中依靠 trusted aggregator 来提交 ZKP，zkSync era 也是类似。</p>
+<p>从技术细节上来讲，ZK-Rollup 的智能合约验证 ZKP 的时候，需要原始的 proof 数据，这就可能引发各种不同的链上攻击行为。例如，某一个 prover 提交计算出来的 ZKP 到链上合约时，需要发一笔L1的交易。当这个 prover 发出的交易广播到交易池中，攻击者就可以看到原始 proof 数据，攻击者可以设置一个更高的 gas 费来发交易，从而优先打包到区块中，来获取 PoW 奖励。</p>
+<p>此外，由于 prover 之间是依靠算力来竞争，没有一个可信的身份识别机制，也很难建立一个通信机制。不同的矿工有可能做重复的工作，从而造成算力的浪费。</p>
+<h3 id="zkp的两步提交">ZKP 的两步提交</h3>
+<p><a href="https://opsi.de/">Opside</a> 提出了一个 ZKP 两步提交算法，来实现了 prover 的去中心化。这种算法既能够防止 ZKP 抢跑攻击，又可以让更多的矿工获得奖励，从而鼓励更多的矿工在线，并提供稳定、持续的 ZKP 算力。</p>
+<p>第 1 步：提交 hash</p>
+<ul>
+<li>
+<p>对于某个 sequence，prover 计算出 ZKP 之后，首先计算（proof / address）的 hash，并向链上智能合约提交 hash 和 address。其中，proof 是某一个 sequence 的零知识证明，address 是该 prover 的地址</p>
+</li>
+<li>
+<p>假设在第 1 个 prover 在第 T 个区块提交了 hash，则在第 T+ 10 区块以内，还可以接受其他 prover 提交 hash，没有数量限制。第 T+ 11 区块及之后，不再接受新的 prover 提交 hash</p>
+</li>
+</ul>
+<p>第 2 步：提交 ZKP</p>
+<ul>
+<li>
+<p>第 T+ 11 区块及之后，允许任何 prover 提交 ZKP。只要有一个 ZKP 通过验证，那么就可以根据该 ZKP 对所有提交过的 hash 进行校验。校验通过的 prover 都可以得到 PoW 奖励，奖励金额按照矿工质押量的比例来分配。</p>
+</li>
+<li>
+<p>如果在第 T+ 20 区块之前，都没有 ZKP 通过验证，则所有提交过 hash 的 prover 都将被 slash。此时该 sequence 重新开放，允许提交新的 hash，回到第 1 步</p>
+</li>
+</ul>
+<p>举一个例子，假设 Opside 中每个L2区块的 PoW 奖励是 128 IDE，当前总共有 64 个 Rollup slots，那么每一个 Rollup sequence 分配到的 PoW 奖励是 2 IDE。如果先后有 A, B, C 3 个矿工为一个 sequence 提交了正确的 ZKP，且 A, B, C 3 个矿工的矿工质押量（IDE）分别为 200 K， 500 K， 300 K。那么，A, B, C 可以获得的 PoW 奖励分别为 0.4 IDE， 1 IDE， 0.6 IDE。</p>
+<p>Prover 的质押与惩罚</p>
+<p>为了避免针对 prover 的恶意行为，prover 需要在一个特殊的系统合约中注册，并质押一定数量的 token。如果当前质押数量小于阈值，则不允许提交 hash 和 ZKP。prover 提交 ZKP 获得的奖励也将依据质押量比例来分配，从而避免 prover 多次提交 ZKP 的恶意行为。</p>
+<p>当 prover 出现以下行为，会进行不同程度的惩罚</p>
+<ul>
+<li>
+<p>prover 提交了错误的 hash</p>
+</li>
+<li>
+<p>对于某个 sequence，如果没有对应的 ZKP 通过验证，则所有提交过 hash 的 prover 都将被惩罚</p>
+</li>
+</ul>
+<p>罚没的 token 将被烧毁。</p>
+<p>关于 ZKP 的两步提交机制更多的细节与考量，请读者参阅官方文档。prover 质押以及惩罚的具体数字在未来可能会改动。</p>
+<p>几个考量*   为什么允许多个 prover 提交 hash？如果第一个 hash 的提交者才能获得奖励，那么第一个 prover 提交了 hash 之后，其他 prover 就没有动力提交 proof。如果一个恶意攻击者提交 hash 之后迟迟不提交 proof，那么会阻碍整个 sequence 被验证的速度。因此应当允许多个 prover 独立且并行地提交 hash，以避免 ZKP 的验证被单个攻击者垄断。</p>
+<ul>
+<li>
+<p>为什么需要设置一个时间窗口？假设任何人在提交了 hash 之后可以立即提交 proof，那么该 proof 仍然有可能被抢跑。因为攻击者会立即提交一个与自己地址关联的 hash，随后提交 proof，从而获取奖励。设置时间窗口之后，提交过 hash 的 prover 就没有动力在此时间窗口内提交 proof，从而避免了 proof 被攻击者利用的可能。</p>
+</li>
+<li>
+<p>为什么要按照质押量来分配 PoW 奖励？在一个时间窗口内，允许多个 prover 为同一个 sequence 提交 hash。实际上，矿工可以利用自己生成的 proof 提交多个 hash（只需要多个地址即可），从而占有大部分甚至所有 PoW 奖励。为了避免这种攻击行为，一个 sequence 的 PoW 奖励将按照矿工质押量的比例来分配。</p>
+</li>
+</ul>
+<h3 id="总结与规划">总结与规划</h3>
+<p>本文提出的 ZKP 两步提交算法，在实现了 prover 去中心化的同时，能很好地规避针对 prover 的抢跑攻击，并鼓励更多的矿工提供稳定、持续的 ZKP 算力。最初的版本将在 Opside 的 Pre-alpha testnet 上线。在未来，Opside 也将在更多 ZKP 的挖矿领域进行更多创新。例如：</p>
+<ul>
+<li>
+<p>根据整个网络的 ZKP 算力供需关系，动态调整 PoS 与 PoW 的奖励分配比例</p>
+</li>
+<li>
+<p>根据 ZK-Rollup 类型、Rollup 交易数量、gas 使用量等进行工作量预估，建立 Rollup batch 的个性化定价机制</p>
+</li>
+<li>
+<p>应用开发者对所属 Rollup 的 ZKP 生成进行补贴，以激励矿工提供算力</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50919/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">起底 RWA：链上国债生态项目的发展</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50932/">
+                <span class="next-text nav-default">去中心化的Prover如何实现？Opside创新性提出ZKP的两步提交算法</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#为什么我们需要去中心化的prover">为什么我们需要去中心化的 prover</a></li>
+        <li><a href="#去中心化prover的挑战">去中心化 prover 的挑战</a></li>
+        <li><a href="#zkp的两步提交">ZKP 的两步提交</a></li>
+        <li><a href="#总结与规划">总结与规划</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          全链游戏内核剖析：MUD引擎与World Engine - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="以更远大的视角看，随着基建设施的提升，不仅仅是游戏而是各种复杂想法的构建与实现都会通过MUD进行，并在更复杂的Rollup方案上融合交互，区块链的新范式也许会从全链游戏开始。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56789/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="全链游戏内核剖析：MUD引擎与World Engine" />
+<meta property="og:description" content="以更远大的视角看，随着基建设施的提升，不仅仅是游戏而是各种复杂想法的构建与实现都会通过MUD进行，并在更复杂的Rollup方案上融合交互，区块链的新范式也许会从全链游戏开始。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56789/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-10T00:00:00+00:00" />
+
+<meta itemprop="name" content="全链游戏内核剖析：MUD引擎与World Engine">
+<meta itemprop="description" content="以更远大的视角看，随着基建设施的提升，不仅仅是游戏而是各种复杂想法的构建与实现都会通过MUD进行，并在更复杂的Rollup方案上融合交互，区块链的新范式也许会从全链游戏开始。"><meta itemprop="datePublished" content="2023-08-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7917">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="全链游戏内核剖析：MUD引擎与World Engine"/>
+<meta name="twitter:description" content="以更远大的视角看，随着基建设施的提升，不仅仅是游戏而是各种复杂想法的构建与实现都会通过MUD进行，并在更复杂的Rollup方案上融合交互，区块链的新范式也许会从全链游戏开始。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">全链游戏内核剖析：MUD引擎与World Engine</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-10">
+      2023-08-10
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7917 字 -
+        预计阅读 16 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者: Solaire, YBB Capital</p>
+<p><img src="https://img.bibiqing.com/news/2023/0810/16_zogqk6zygt.jpg" alt="全链游戏内核剖析：MUD引擎与World Engine"></p>
+<p>过去由于区块链链表结构的限制，在链上构建一个实用的 DApp 一直不是件简单的事情。但即便受此限制，探索者们也从未停下过前进的步伐，随着”x * y = k”这段著名的恒定乘积池公式诞生于世，短短数百行代码的 Uniswap 引领 DeFi 彻底改变了 Crypto 的叙事。简单的 DApp 在开发者的巧思下尚能达到如此高度，那么复杂的 DApp 应用呢？比如把游戏或者社交平台完全搭建在链上？这在过去可能是一个疯狂的想法，但在 Rollups 打开可扩展性的今天，这种可能性开始变得微妙。</p>
+<p>DeFi 曾给 Crypto 带来了数千亿美元的 TVL，复杂性倍增的 DApp 如何实现？会引领 Crypto 再次走上一个新的高度吗？或许处在发展初期的全链游戏能给我们答案。本文的内容将从全链游戏的历史、全链游戏目前的定义、全链游戏创造与运行的实现方式以及全链游戏对 Crypto 未来的意义，这四个部分对全链游戏进行一次剖析。</p>
+<h2 id="全链游戏的起源与发展">全链游戏的起源与发展</h2>
+<p>全链游戏的历史可以追溯到 10 年之前，Mikhail Sindeyev 分叉 Namecoin 并构建了世界上第一个区块链游戏《Huntercoin》。《Huntercoin》于 2013 年作为一个实验原型开始，并迅速发展了一批在线狂热追随者，得到了许多著名的 bitcointalk.org 成员的支持。凭借科技爱好者对视频游戏的热爱，最受欢迎的 Huntercoin 帖子获得了超过 380, 000 次的浏览。然而遗憾的是 Mikhail Sindeyev 在 2014 年 2 月中风去世了，《Huntercoin》的开发也陷入困境，代币 HUC 在 2015 年几乎归零，虽然全链游戏的第一次尝试并没有成功，但庆幸的是全链游戏的故事仍在继续。</p>
+<p>2020 年 Gubsheep（Brian Gu）、Alan Luo、SCOTT SUNARTO ，受到小说《三体：黑暗森林》的启发，开发了一款同名 MMORTS 太空征服游戏《Dark Forest》。游戏建立在以太坊之上，并将所有规则、逻辑写入到智能合约，即每一步动作都是一笔链上交易的全链游戏。游戏内容的核心部分则利用了 ZK-Snarks（零知识证明）技术去制作战争迷雾以复现三体小说中黑暗森林法则的定义（一旦某个宇宙文明被发现，就必然遭到其他宇宙文明的打击）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0810/16_326wc12ssp.png" alt="全链游戏内核剖析：MUD引擎与World Engine"></p>
+<p>比如当玩家想要采取行动时，受到黑暗森林的法则影响，玩家不能暴露自己的坐标，却要从 A 星球移动到 B 星球，他们需要提交 A 跟 B 的坐标以证明这是有效的，但以太坊的区块信息是完全透明的，《Dark Forest》则通过以下方式去实现信息隐藏。玩家选择要离开的星球和目的地星球，这两个星球的位置是玩家的私有信息。计算要离开的星球和目的地星球的位置的哈希值，然后将这两个哈希值提交到区块链。在这个阶段，玩家会提交一个承诺（Commit 阶段），由于哈希函数的单向性，这些提交的哈希值不能用来确定玩家的实际行星位置。而下一个阶段是验证（Reveal 阶段），在此阶段，玩家生成并提交一个零知识证明，证明他们的行动是有效的。这个证明可以被任何人验证，但不会透露任何关于玩家星球位置的信息。</p>
+<p>如此，第一个在信息透明的以太坊上做到隐藏信息的全链游戏就诞生了，这个疯狂又极富想法的实验，很快在整个 Crypto 圈子里引起了轰动，Vtalik（以太坊创始人）甚至在 Twitter 直接转发并称赞了这个游戏。</p>
+<p>但《Dark Forest》首发后随着超过 10000 名玩家的涌入，困境也开始显现，以太坊的性能不足以支撑这种复杂应用的运行。游戏上线当天直接堵爆了整个区块链，数万亿的 Gas 被花费。并且由于游戏是基于 DeFi 应用的库和架构设计的，后期再进行优化也只是减缓痛苦并不解决问题。</p>
+<p>受到这场实验对 ZK-Snarks 前景的启发以及对全链游戏困境的思考，游戏创始人 Brian Gu 创建了 0 x PARC 作为 ZK-Snarks 的研究院，以推动零知识证明的发展，而 0 x PARC 的另外一个分支 Lattice 则负责设计维护全链游戏引擎 MUD。另一位创始人 SCOTT SUNARTO 则开始研发全链游戏运行专用的分片 Rollup 框架——World Engine。</p>
+<p>零知识证明在今天已经开始了广泛运用，并被各位所熟知，我们接下来讨论的主要是后两者，MUD 引擎与 World Engine，即创造与运行。但在此之前我们需要了解驱动者（0 x PARC）对全链游戏的定义与新的认知方式。</p>
+<h2 id="autonomous-worlds">Autonomous Worlds</h2>
+<p><strong>基于 0 x PARC 加密游戏论文合集《Autonomous Worlds》中的观点，全链游戏至少需要遵循五个标准：</strong></p>
+<p><strong>l 数据来源于区块链：</strong> 区块链不仅仅是数据的辅助存储，也不仅仅是存储在专有服务器中数据的 &ldquo;镜像&rdquo;。所有有意义的数据都可以在区块链上访问，而不仅仅是资产所有权等数据。这样，游戏就能充分利用可编程区块链的优势——透明的数据存储，可无权限互操作；</p>
+<p><strong>l 逻辑和规则通过智能合约实现：</strong> 例如，游戏中的战斗，而不仅仅是所有权，都是在链上进行的；</p>
+<p><strong>l 游戏的开发遵循开放生态原则：</strong> 游戏合约和可访问的游戏客户端都是开源的。第三方开发者可以通过插件、第三方客户端、互操作智能合约，实现完全重新部署，定制甚至分叉自己的游戏体验。这反过来又使游戏开发者能够利用整个(激励一致)社区的创造性产出；</p>
+<p><strong>l 游戏永久存于链上：</strong> 这一点与上述三点密切相关，因为检验一款游戏是否是加密原生游戏的试金石是:如果明天核心开发者提供的客户端消失了，游戏还能玩吗?答案往往是肯定的，如果(也只有当)游戏数据存储是无权限的，如果游戏逻辑可以无权限执行，如果社区可以与核心智能合约交互而不依赖于核心团队提供的接口；</p>
+<p><strong>l 游戏可与我们认为有价值的事物互通：</strong> 区块链为价值概念本身提供了一个本地应用程序接口，数字资产默认情况下可与我们关心的其他资产互操作。这既反映了游戏的深度和意义，也有助于提升游戏的深度和意义，并将游戏世界与&quot;真实&quot;世界联系起来。</p>
+<p>基于这个标准下构建的全链游戏也可将其看为基于区块链为低层的世界，或者说 Autonomous Worlds（自主世界）。</p>
+<p>那么何谓世界？世界并非只能指代现实世界，世界的载体可以是小说、电影、游戏、诗歌甚至法律体系。但在这些世界里都是由中心（作者、开发者或者群体）制定框架与规则再传达给我们。这些世界里自主性的程度也是不一样的，比如开放世界游戏里非常知名的《Minecraft》（《我的世界》），玩家拥有极高的自主性，通过对不同方块的搭建，以及规则修改，玩家可以创造只属于他们的世界。而自主性较低的世界可能是小说世界，比如《Harry·Potter》，我们看到的这个魔法世界都是基于 JK 罗琳所创造的规则和框架。</p>
+<p>如果把区块链作为世界的基底，区块链毫不含糊地保存了其状态下所有节点实体的集合。此外，它们还用计算机代码正式定义了引入规则。拥有区块链底层的世界可以让其居民参与共识。它们运行一个计算机网络，在每次引入新的实体时达成一致。</p>
+<p><strong>从世界的角度来看，有两个区块链概念需要定义：</strong></p>
+<p><strong>l 区块链状态根:状态根是对世界中所有实体的压缩。</strong></p>
+<p>有了状态根，人们就可以确定任何实体是否是虚拟的，相信一个世界的状态根就等于相信世界本身。0x411842e02a67ab1ab6d3722949263f06bca-20c62e03a99812bcd15dce6daf26e 是 2022 年 7 月 21 日 07: 30: 10 PM UTC 时的以太坊——一个拥有区块链底层的世界的状态根。在计算这个状态根时，以太坊世界的所有实体都被考虑在内。它代表了该世界在该特定时间内的全部内容；</p>
+<p><strong>l 区块链状态转换函数:每个区块链都定义了一个状态转换函数。</strong></p>
+<p>它可以被视为一个明确的引入规则。它定义了&quot;世界&quot;的前一个状态——虚拟实体的集合——如何通过人和机器的输入引入新的虚拟实体。就比特币而言，状态转换函数定义了余额如何在地址之间消费和转移。</p>
+<p>所以把全链游戏看作以区块链为底层的世界，则这个去中心化世界拥有无限大的自主性，也可以称之为自主世界。</p>
+<h2 id="创造的困境">创造的困境</h2>
+<p>在早期探索全链游戏的新设计过程中，开发者多次受到传统 DApp 架构和用于构建 DeFi 应用的库的局限性的影响。《Dark Forest》和其他早期的全链游戏构建在当时不得不遵循用于构建 DeFi 应用的架构和库，这些架构成为了当时构建全链游戏的默认选择。</p>
+<p><strong>早期在创造全链游戏方面的模式可总结为四点：</strong></p>
+<p><strong>l 当不同合约触及相同状态：</strong> 多个智能合约可能会修改同一个数据或状态，这可能会导致数据不一致或其他问题。有时使用 Diamond Pattern 去解决（钻石模式是一种解决 Solidity 智能合约中多重继承问题的方法）；</p>
+<p><strong>l 编写多种数据结构：</strong> 每种实体（如游戏中的士兵、行星等）都有其自己的数据结构和类型；</p>
+<p><strong>l 编写 Getters 函数：</strong> 此为数据结构返回批量元素的函数，用于从链上获取初始状态或数据。例如，getPlanets()函数可能会返回所有行星的列表；</p>
+<p><strong>l 事件：</strong> 每个数据结构都包含一个事件，这是智能合约中的特定功能，允许应用在新块被添加到链上时同步或更新其状态。例如，当一个新的行星被创建时，可能会触发一个事件，应用会监听这个事件并更新其显示的行星列表。</p>
+<p>通过这种模式构建全链游戏非常痛苦，虽然可以不断进行优化以减缓痛苦，但我们都明白这种构建方式还是与使用真正的通用引擎构建相差甚远。</p>
+<h3 id="世界的创造者mud引擎">世界的创造者——MUD 引擎</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0810/16_k912h23anm.png" alt="全链游戏内核剖析：MUD引擎与World Engine"></p>
+<p>MUD 引擎的诞生来自于开放者们对过去以及现有问题的思考，MUD 是一个构建复杂应用的以太坊应用程序的框架。MUD 提供了一些组织数据和逻辑的约定，并抽象了低级复杂性，使开发者可以专注于应用程序的功能。它标准化了链上数据的存储方式。有了这种标准数据模型，MUD 可以提供所有网络代码来同步合约和客户端状态。</p>
+<p><strong>MUD 最新版本目前配备了五个组件：</strong></p>
+<p>l Store：一个链上数据库；</p>
+<p>l World：一个入口点框架，带来标准化的访问控制、升级和模块；</p>
+<p>l tools：基于 Foundry 的超快速开发工具；</p>
+<p>l 客户端数据存储：可以神奇地反映链上状态；</p>
+<p>l MODE：可以使用 SQL 查询的 Postgres 数据库。</p>
+<h3 id="evm完全兼容性极高的自由度">EVM 完全兼容性，极高的自由度</h3>
+<p>MUD 的通用性并不止于以太坊主网，只要语言支持，MUD 可以无缝地运作在任何 EVM 兼容的链上，无论是 Polygon、Arbitrum、Optimism 还是 Gnosis Chain。</p>
+<p>此外，尽管 MUD 在 Autonomous Worlds（自主世界）和链上游戏社区中是首选框架，但它的应用远不止于此。与此同时，MUD 提供了极大的自由度，不强迫开发者受限于特定的数据模型。简而言之，任何可以通过 Solidity 映射和数组实现的功能，都可以轻松地在 MUD 中完成。而在数据可用性上，无论是在主网还是 Rollups 上部署的 MUD 应用，它们都可以与 ENS 和 Uniswap 等传统以太坊应用程序相媲美。</p>
+<h3 id="核心思想">核心思想</h3>
+<p>MUD 作为一套为链上复杂应用设计的高度协同的库和工具，其核心思想围绕三点：</p>
+<p>l 所有链上状态均保存在 MUD 链上数据库 Store 中：Store 是一个嵌入式 EVM 数据库，类似于 SQLite 数据库，它具有表、列和行的概念。使用 Store 可以更加结构化地管理数据，并且不需要依赖 Solidity 编译器提供的存储方法。并且，它支持在运行时创建表，并允许注册挂钩以自动创建索引视图，从而带来更多灵活性；</p>
+<p>l 逻辑是无状态的，并且通过自定义权限跨不同合约进行分区：&ldquo;World&rdquo; 充当一个入口点，协调不同的智能合约对 &ldquo;Store&rdquo; 的访问。当一个“World”被部署时，它会随即创建一个“Store”，每个在“Store”中的表都是在一个特定的命名空间下被注册的。当功能（比如地址之间转账的逻辑）被添加到“World”时也在命名空间下注册，并被称为“系统”。这些“系统”实际上是智能合约，但与传统的智能合约不同的是，它们是无状态的，不直接持有数据。而是利用“World Store”进行数据的读取和写入。由于这种设计，只要部署在同一条链上，这些“系统”可以在不同的“World”之间重复使用；</p>
+<p>l 不需要索引器或子图，前端也可保持同步：当使用 Store（以及扩展的 World）时，链上数据自动内省（Introspection，自我检查），任何改变都通过标准事件进行广播。通过 &ldquo;MODE&rdquo; 节点，实时地将链上状态转换为 SQL 数据库，从而保持最新状态（毫秒级延迟）。此外，MUD 提供了一系列查询工具，如 MUD QDSL 和 GraphQL，使得前端同步变得更加简化。对于 React 开发者，MUD 还提供了专门的 Hooks，允许自动绑定和更新组件状态。</p>
+<h3 id="突破枷锁">突破枷锁</h3>
+<p>通过三点核心思想我们再以过去的困境为例，看看 MUD 是如何打破复杂应用的枷锁的。</p>
+<p>l 当不同合约触及相同状态：通过使用 &ldquo;World&rdquo; 和 &ldquo;Store&rdquo; 结构来集中管理链上状态。所有的智能合约（在 MUD 中称为“系统”）都通过 &ldquo;World&rdquo; 来访问和修改 &ldquo;Store&rdquo; 中的数据。这确保了所有的状态修改都经过一个集中的入口点，从而减少了数据不一致或冲突的风险。通过命名空间和路径，MUD 提供了对数据的细粒度访问控制。不同的“系统”可以有不同的权限，从而确保只有授权的“系统”可以修改特定的数据或状态；</p>
+<p>l 数据结构：与传统的 Solidity 存储方法不同，MUD 的 &ldquo;Store&rdquo; 提供了类似于 SQLite 的表、列和行的概念，从而可以更加结构化地存储和管理数据。每种实体（如游戏中的士兵、行星等）都可以有其自己的表，每个表可以有多个列来存储该实体的不同属性；</p>
+<p>l Getters 函数：由于 MUD 的 &ldquo;Store&rdquo; 提供了结构化的数据存储，获取数据变得更加简单和直观。开发者可以使用 SQL-like 的查询语言来获取数据，而不需要编写专门的 getters 函数。例如，要获取所有的行星，开发者可以简单地查询行星表，而不需要编写一个 getPlanets() 函数；</p>
+<p>l 事件：MUD 提供了自动内省功能，这意味着任何数据更改都会自动被系统识别并触发相应的事件。应用可以监听这些事件来同步或更新其状态，而不需要为每种数据结构手动定义事件。</p>
+<p>以上是对 MUD 基本构建块，组件的部分使用方式说明，MUD 还可以构建更复杂的场景与应用。</p>
+<h2 id="运行世界world-engine">运行世界，World Engine</h2>
+<p>全链游戏的运行对于以太坊来说一直是个巨大的挑战，随着 Rollups 的快速发展，以及坎昆升级的临近，成本大幅下降，速度大幅提高的将来。全链游戏已经蓄势待发，但目前的主流 Rollups 基本是为交易设计的，并没有真正为全链游戏所量身打造的 Rollup。</p>
+<p>而 Argus 旗下的核心产品 World Engine 则是真正为了全链游戏所打造的分片架构 Rollup，由于目前还没有公开测试，我们将从项目的博客与演讲中分析 World Engine。</p>
+<h3 id="全链游戏需要怎样的rollup">全链游戏需要怎样的 Rollup</h3>
+<p>l 高吞吐量与高 TPS：更快的交易处理，更低的延迟，更好的可扩展性；</p>
+<p>l 扩展读写：大多数 Layer 2 为了高并发处理，都设计成进行大量写入，但游戏需要读取以获得玩家位置，所以读与写同样重要；</p>
+<p>l 水平可扩展的链：水平可扩展性是指通过添加更多的节点和资源来增加系统的处理能力，以适应不断增长的需求。这样可以避免 Noisy Neighbor 问题（一个应用或实体的活动可能对其他应用或实体产生负面影响，导致资源争用和性能问题）；</p>
+<p>l 灵活与定制：灵活性与可定制性，方便修改状态机，使其为游戏设计。这包括有一个游戏循环，使其自我执行等等；</p>
+<p>l Tick rate：Ticks 是游戏时间中的原子单位，游戏想要足够低的延迟需要更高的 Tick rate 或者每秒更多的区块以降低延迟。</p>
+<h3 id="分片架构">分片架构</h3>
+<p>为了实现上述目标，团队回顾了 21 世纪初和 20 世纪 90 年代末并受到启发，像 MMOs 这样的在线游戏刚刚兴起的情况。早期的在线游戏在服务器和网络技术相对有限的情况下，需要找到一种方式来支持大量玩家的互动。&ldquo;分片&quot;就是其中一种解决方案，它的核心思想是将玩家分布到不同的服务器或“分片”上，每个分片可以独立地托管一部分玩家、游戏地图和数据。</p>
+<p>例如，Ultima Online 是一个早期的 MMORPG，它在服务器上实现了分片概念。游戏中的不同分片代表了不同的虚拟世界，每个分片可以容纳一定数量的玩家。这样做的好处包括：</p>
+<p>l 扩展性：通过将玩家分布到不同的分片，游戏可以更轻松地扩展以适应更多玩家的加入；</p>
+<p>l 减少负载：分片可以减少单个服务器上的玩家数量和数据量，从而降低服务器的负载，提高性能；</p>
+<p>l 避免拥堵：分片可以减少玩家在同一区域的拥堵情况，提供更流畅的游戏体验；</p>
+<p>l 地理位置优化：通过将玩家分配到就近的分片，可以减少网络延迟，提高游戏响应速度。</p>
+<p>那么如何把这个概念带入 World Engine？与过去的许多分片排序器不同，&ldquo;World Engine&rdquo; 的设计更适合特定的需求。它的优化方向包括吞吐量和运行时间。为了确保高效的 &ldquo;Tick rate&rdquo;（即每秒更新频率）和区块时间，它默认是同步的。设计的目标是确保交易被迅速处理，以保持高效的游戏体验或系统性能。在排序方式上采用的是部分排序的方式，而不是强制要求对所有交易进行总排序。这意味着并不要求每个交易都必须在所有其他交易之后发生。这可以减少排序的负担，从而更好地满足高吞吐量和快速区块时间的需求。</p>
+<p>这里有两个关键组成部分，EVM Base Shard（EVM 分片）与一个 Game Shard（游戏分片），EVM 分片就是存粹的 EVM 链。而真正的秘密武器是游戏分片，它本质上是一个设计成高性能游戏服务器的迷你区块链。World Engine 具有一个 bring-your-own-implementation 接口，这样我们可以根据我们的喜好定制这个分片。构建的分片，注入到基础分片中。只需要实现一套标准的接口，就像我们熟悉的 Cosmos，Cosmos 有一个 IBC 接口。我们基本上可以将这个整合成一个类似的规范，将自己的分片带到 World Engine 堆栈中。</p>
+<p>Cardinal 是 World Engine 的第一个游戏分片实现。它使用 Entity-Component-System (ECS)游戏架构，一个具有面向数据的架构。这允许并行化游戏，并提高游戏计算的吞吐量。它有一个可配置的”Tick rate“，最高可达每秒 20 次 Tick。对于这里的区块链来说，那就是每秒 20 个区块。另外它还是自我索引的，无需外部索引器。</p>
+<p>并且分片还可以通过地理定位，以减少延迟。比如，游戏可能有在美国的排序器，然后亚洲玩家必须等待 300 毫秒的延迟，才能让 transaction 到达排序器。这在游戏中是一个巨大的问题，因为 300 毫秒是很长的时间。如果试图玩一个有 200 毫秒延迟的 FPS 游戏，那基本上就是，在玩 PPT 了。</p>
+<h2 id="结语对全链游戏的思考">结语：对全链游戏的思考</h2>
+<p>全链游戏一直是亚洲加密圈内较为冷门的方向，但随着 Starknet 的游戏引擎 Dojo 的推出，以及基于 OP Stack 概念验证型滴答链的开发演示，关于全链游戏的讨论逐渐开始火热。而本文讨论的范围是《Dark Forest》所衍生出的生态，也是目前全链游戏最强大的生态。</p>
+<p>通过对其历史和技术上的探究，我们可以发现 Rollup 以及 DApp 还具备极高的上限，以更远大的视角看，随着基建设施的提升，不仅仅是游戏而是各种复杂想法的构建与实现都会通过 MUD 进行，并在更复杂的 Rollup 方案上融合交互，区块链的新范式也许会从全链游戏开始。</p>
+<p>关于全链游戏还有许多可扩展的内容，比如从 Loot 衍生出的全链游戏生态推动了 Starknet 发展，又或者是状态同步的实现，ESC 架构的运用。我已将相关阅读链接放在下表，感兴趣的朋友可以阅读了解。</p>
+<p>参考文献</p>
+<p>1. 原文：<a href="https://youtu.be/lHyQKCVQTPo">Modular Summit Day 1 (Galois Stage)</a> 译文：<a href="https://captainz.xlog.app/World-Engine-zhuan-wei-quan-lian-you-xi-she-ji-de-fen-pian-Rollup-kuang-jia">World Engine：专为全链游戏设计的分片 Rollup 框架</a></p>
+<p>2.<a href="https://lattice.xyz/history">Lattice History</a></p>
+<p>3.<a href="https://mud.dev/">MUD 开发文档</a></p>
+<p>4.<a href="https://docs.google.com/document/d/1TL1m56K1EVdwr7ZBxmEKeUdOGsRTVew_8KFuNHe-cPA/edit">AUTONOMOUS WORLDS</a></p>
+<p>相关阅读</p>
+<p>1.<a href="https://captainz.xlog.app/wei--shu-zi-shen-ming--ji-shi">为“数字神明”记时</a></p>
+<p>2.<a href="https://mirror.xyz/0x949B1fE8B1860E51fa550131EB0F21729cA68A1A/3iN8GC9dr1UOdJuB2741eA84XAvIUrcS4t52KOryFZM">一文回顾全链游戏发展史</a></p>
+<p>3.<a href="https://captainz.xlog.app/ru-he-shi-yong-OPStack-gou-jian-quan-lian-you-xi-de-shi-zhong-zhou-qi">如何使用 OPStack 构建全链游戏的时钟周期</a></p>
+<p>4.<a href="https://mirror.xyz/matchboxdao.eth/d3lVAOa9Bi0kY-caoUT3lDC6E61mWJqtP1q6tME4xGY">The future of on-chain gaming: &lsquo;The promise of MUD ECS engine&rsquo;</a></p>
+<p>5.<a href="https://ethereumnavi.com/en/2023/03/22/lattice-mud-en/">Overview of MUD, which support the construction of autonomous worlds, and major game projects using MUD, such as OP Craft and Sky Strife</a></p>
+<p>6.<a href="https://medium.com/@350306878/mask%E5%A4%A9%E7%84%B6-%E5%85%A8%E9%93%BE%E6%B8%B8%E6%88%8F%E4%B8%BA%E4%BD%95%E5%B4%9B%E8%B5%B7-%E5%AE%83%E7%9A%84%E9%AD%85%E5%8A%9B%E5%9C%A8%E5%93%AA-%E4%B8%87%E7%89%A9%E5%88%9B%E9%80%A0%E8%90%A5-c0945eaf73fd">全链游戏为何崛起，它的魅力在哪？</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56820/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">苹果“大杀四方”，爱奇艺业务停摆，XR冰火两重天</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56781/">
+                <span class="next-text nav-default">权威外媒聚焦知名机构研报：波场及USDD二季度在动荡环境中逆势发展</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#全链游戏的起源与发展">全链游戏的起源与发展</a></li>
+    <li><a href="#autonomous-worlds">Autonomous Worlds</a></li>
+    <li><a href="#创造的困境">创造的困境</a>
+      <ul>
+        <li><a href="#世界的创造者mud引擎">世界的创造者——MUD 引擎</a></li>
+        <li><a href="#evm完全兼容性极高的自由度">EVM 完全兼容性，极高的自由度</a></li>
+        <li><a href="#核心思想">核心思想</a></li>
+        <li><a href="#突破枷锁">突破枷锁</a></li>
+      </ul>
+    </li>
+    <li><a href="#运行世界world-engine">运行世界，World Engine</a>
+      <ul>
+        <li><a href="#全链游戏需要怎样的rollup">全链游戏需要怎样的 Rollup</a></li>
+        <li><a href="#分片架构">分片架构</a></li>
+      </ul>
+    </li>
+    <li><a href="#结语对全链游戏的思考">结语：对全链游戏的思考</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

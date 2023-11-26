@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Vitalik：不同类型的 ZK-EVM - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="这篇文章将描述不同 EVM 等效“类型”的分类学，以及每种类型的优势和开销。" />
+<meta name="keywords" content="zkEVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/44368/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Vitalik：不同类型的 ZK-EVM" />
+<meta property="og:description" content="这篇文章将描述不同 EVM 等效“类型”的分类学，以及每种类型的优势和开销。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/44368/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-09T00:00:00+00:00" />
+
+<meta itemprop="name" content="Vitalik：不同类型的 ZK-EVM">
+<meta itemprop="description" content="这篇文章将描述不同 EVM 等效“类型”的分类学，以及每种类型的优势和开销。"><meta itemprop="datePublished" content="2022-11-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-11-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5110">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vitalik：不同类型的 ZK-EVM"/>
+<meta name="twitter:description" content="这篇文章将描述不同 EVM 等效“类型”的分类学，以及每种类型的优势和开销。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Vitalik：不同类型的 ZK-EVM</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-11-09">
+      2022-11-09
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5110 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>特别感谢 PSE、Polygon Hermez、Zksync、Scroll、Matter Labs 和 Starkware 团队的探讨与校对。</p>
+<p>最近，很多“ZK-EVM”项目很快相继发出公告。Polygon 开源了他们的 ZK-EVM 的项目，ZKSync 发布了 ZKSync 2.0 的计划，而 Scroll 作为相对的新秀，最近也宣布了他们的 ZK-EVM 项目。还有 Privacy and Scaling Explorations（隐私和扩容探索）团队、Nicolas Liochon et al 的团队，以及 Nethermind 团队致力于将 EVM 的 Solidity 语言转译为 StarkWare 的 ZK 友好语言 Cairo 的一个 Alpha 编译器，这些团队都在为此不断努力，当然，还有一些项目我没有例举出来。</p>
+<p>这些项目的核心目标是一致的：<strong>利用 ZK-SNARK 技术对以太坊类交易的执行生成加密证明，不是让证明更易于验证以太坊链本身，就是构建（接近）相当于以太坊所提供的一些功能，但比它更具有可扩展性的 ZK-rollups。</strong> 但这些项目之间也有些细微区别，并且他们在实用性和速度之间所做的权衡也有差异。这篇文章将描述不同 EVM 等效“类型”的分类学，以及每种类型的优势和开销。</p>
+<p>概览（图表形式）</p>
+<p><img src="https://img.bibiqing.com/news/2022/1109/7_8nyns8dkpo.png" alt="Vitalik：不同类型的 ZK-EVM"></p>
+<p><strong>类型 1：完全以太坊等效的 ZK-EVM</strong></p>
+<p>第一类 ZK-EVM 力图成为完全不妥协的以太坊等效 ZK-EVM 。他们不会更改以太坊系统的任何部分来让它更容易生成证明：不会替换哈希、状态树、交易树、预编译或是共识中的其他逻辑，不管这些部分多么次要。</p>
+<p><strong>优势：完美的兼容性</strong></p>
+<p>ZK-EVM 的目标在于，能够像目前以太坊验证区块那样 —— 或者至少，验证执行层上面的区块（因此，虽然信标链的共识逻辑没有囊括进来，但是所有执行的交易、智能合约和账户逻辑都包含在内）。</p>
+<p>第一类的 ZK-EVM 正是我们最终所需要的，能让以太坊 L1 本身更具有可扩展性。长期来看，在第二类和第三类的 ZK-EVM 中试验得出的对以太坊的修改，可能会被合理引入至以太坊上，但是这种重新架构本身具有复杂性。</p>
+<p>第一类 ZK-EVM 对 Rollup 来说也是理想的，因为它们让 Rollup 可以重复利用基础设施。比如，以太坊执行层客户端可以像原来那样生成和处理 Rollup 的区块（至少，一旦实现提款功能，它们可以重新使用该功能来支持 ETH 存入 Rollup），所以区块浏览器、区块生成等工具可以轻松重新使用。</p>
+<p><strong>劣势：证明生成时间慢</strong></p>
+<p>以太坊原本的设计并不是 ZK 友好的，因此，以太坊协议中的许多部分都需要花费大量的计算来生成 ZK 证明。第一类 ZK-EVM 旨在完全复制以太坊的环境，因此，它无法缓解这些计算低效性问题。目前，以太坊区块证明需要花费多个小时才能生成。这可以通过巧妙的工程（如大规模并行生成证明），或从长远来看，通过 ZK-SNARK ASIC 来缓解低效性问题。</p>
+<p><strong>谁在构建第一类 ZK-EVM？</strong></p>
+<p>Privacy and Scaling Explorations 团队正在努力构建第一类 ZK-EVM。</p>
+<p><strong>类型 2：完全 EVM 等效的 ZK-EVM</strong></p>
+<p>第二类 ZK-EVM 力争成为完全 EVM 等效但也不那么以太坊等效的 ZK-EVM。也就是说，“从内部来看”，他们完全就像以太坊一样，但是在外部与以太坊有一些区别，尤其是区块结构和状态树等数据结构。</p>
+<p>它的目标在于，与现有的应用完全兼容，但它会对以太坊做一些较小的修改，让开发更容易，也让证明生成得更快。</p>
+<p><strong>优势：在虚拟机层面完全等效</strong></p>
+<p>第二类 ZK-EVM 会改变存储着如以太坊状态的数据结构。幸运的是，因为 EVM 本身就不能直接访问这些数据结构，所以对原本在以太坊上运行的应用程序没什么影响，它们仍能在第二类的 ZK-EVM rollup 上运行。你可能无法像原来那样使用以太坊执行层客户端，但你可以通过一些修改来使用客户端，并且依旧能使用 EVM 调试工具和大部分其他开发者基础设施。</p>
+<p>还存在少数例外情况。当验证以太坊历史区块的默克尔树证明来验证历史交易、收据或状态的声明（比如，桥接有时候也会这么做）时，应用程序出现了不兼容。如果 ZK-EVM 用不同的哈希函数来替换 Keccak，那就会损坏这些证明。而且，我经常建议不要这样构建应用程序，因为未来的以太坊更新（如 Verkle tree）甚至会影响以太坊上的应用。更好的选择是以太坊自己添加不会过时的 (future-proof) 历史访问预编译。</p>
+<p><strong>劣势：已经改进过了但还是证明时间太慢</strong></p>
+<p>第二类 ZK-EVM 能比第一类提供更快的证明生成时间，它主要通过移除部分以太坊堆栈，这部分堆栈依赖于具有不必要复杂性和 ZK 不友好的加密学。特别是，这些堆栈可能会更改以太坊的 Keccak 和基于 RPL 的 Merkle patricia tree，也许还会更改区块和收据结构。第二类 ZK-EVM 则是会使用不同的哈希函数，如 Poseidon。自然而然地，它会修改状态树以储存哈希码和 Keccak，不需要验证哈希以处理 EXTCODEHASH 和 EXTCODECOPY 操作码。</p>
+<p>这些修改极大地改善了证明生成的时间，但它们没有解决所有问题。这类 ZK-EVM 继承了 EVM 本身带来的低效性和 ZK 不友好问题，所以像原本那样基于 EVM 生成证明的低效情况依然存在。内存就是最简单的例子：因为  MLOAD 可以读取任何 32 字节，包括“无序的”代码段（其开头和结尾都不是 32 的倍数）， MLOAD 也不能单纯理解为对一段代码的读取；确切地说，它可能需要读取两个连续的代码段和执行位操作来结合运行结果。</p>
+<p><strong>谁在构建第二类 ZK-EVM？</strong></p>
+<p>Scroll 的 ZK-EVM 项目正在构建第二类 ZK-EVM，Polygon Hermez 也是。即使如此，还没有项目真的成为第二类 ZK-EVM；尤其是很多更加复杂的预编译还没实现。所以，目前来说，这两个项目应该说属于第三类 ZK-EVM。</p>
+<p><strong>类型 2.5：EVM 等效，除了 gas 开销</strong></p>
+<p>在最糟糕的情况下，有一种能够极大地改善证明生成时间慢的方式是，大大提高那些难以在 EVM 中生成 ZK 证明的执行所花的 gas 开销。这些执行可能涉及预编译、KECCAK 操作码，还可能涉及调用合约的特定模式、访问内存/存储或是回滚。</p>
+<p>更改 gas 开销可能会降低开发者工具的兼容性，损坏一些应用，但总体上，它的风险比“更深入地”变更 EVM 来说更少。开发者需要注意，不要消耗超出一个区块所容纳的 gas 上限，也永远都不要用硬编码 gas 数来进行调用（这已经是长期以来对开发者的标准建议了）。</p>
+<p>另一种管理资源限制的方式是，只要对每个操作能被调用的次数设定硬限制就好了。这在电路中的实现很简单，但是对 EVM 的安全假设就不太好了。我更愿意将这种方法称作第三类 ZK-EVM，而不是类型 2.5。</p>
+<p><strong>类型 3：几乎是 EVM 等效的</strong></p>
+<p>第三类 ZK-EVM 几乎是 EVM 等效的，但需要对完全等效性做一些牺牲，以进一步改善证明生成时间，并促进 EVM 更易于开发。</p>
+<p><strong>优势：易于构建，证明生成时间更快</strong></p>
+<p>第三类 ZK-EVM 也许会取消一些格外难以在 ZK-EVM 实现中实现的功能。预编译通常会是这类功能中最难实现的；此外，这类 ZK-EVM 有时也在处理合约代码、内存和堆栈方面有些许不同。</p>
+<p><strong>劣势：兼容性更差</strong></p>
+<p>第三类 ZK-EVM 的目标是与大部分应用程序兼容，它只需要对剩下的应用进行极少的改写。即使是这样，也需要对一些应用进行改写，因为这些应用会使用第三类 ZK-EVM 已经取消的预编译，或是因为它们对边缘情况有着微妙依赖性，而 VM 会以不同的方式处理。</p>
+<p><strong>谁来构建第三类 ZK-EVM？</strong></p>
+<p>Scroll 和 Polygon 现在的形式都属于第三类 ZK-EVM，尽管他们预计会随着时间改善兼容性。Polygon 的设计很独特，他们用着自己的内部语言 zkASM 验证 ZK，并且他们会使用 zkASM 的实现来转译 ZK-EVM 代码。虽然其实现细节是这样的，但我还是愿意把它称为真正的第三类 ZK-EVM。它依旧能够验证 EVM 代码，只是用着一些不同的内部逻辑罢了。</p>
+<p>现在，还没有 ZK-EVM 团队想要成为第三类 ZK-EVM；该类型仅仅是完成预编译添加这一复杂工作和项目能够转为类型 2.5 之前的过渡阶段。然而，通过添加新的 ZK-SNARK 友好的预编译，为开发者提供证明生成时间短、gas 开销低的功能，第一类和第二类 ZK-EVM 在未来可能会自发成为第三类 ZK-EVM。</p>
+<p><strong>类型 4：高级语言（high-level-language）等效</strong></p>
+<p>第四类 ZK-EVM 系统的工作原理是，采用高级语言编写智能合约源码（如 Solidity、Vyper，或一些由两者编译而成的中间语言（intermediate）），并将这些源码编译为一些明确设计成 ZK-SNARK 友好的其他语言。</p>
+<p><strong>优势：极快的证明生成时间</strong></p>
+<p>不将 EVM 的每个执行步骤的所有环节生成 ZK 证明，而是直接开始证明高级语言编写的代码，这样你可以避免掉很多开销。</p>
+<p>在本文，虽然我只用了一句话来描述这种优势（对比以下兼容性相关的劣势要点列表来说），但这句话不应该被解读为价值判断！从高级语言直接编译真的可以极大地减少开销，并通过让证明过程变得容易而推动去中心化。</p>
+<p><strong>劣势：兼容性更差</strong></p>
+<p>一个用 Vyper 或 Solidity 编写的“正常”应用程序能够被编译出来，并且它“可以运行”，但在很多重要情况下，很多应用会变得不“正常”：</p>
+<ul>
+<li>
+<p>第四类 ZK-EVM 的系统中的合约地址与 EVM 中的可能不一样，因为 CREATE2 合约地址取决于具体的字节码。这破坏了依赖于尚未部署的“反事实合约”的应用、ERC-4337 钱包、EIP-2470 单例和许多其他应用程序。</p>
+</li>
+<li>
+<p>手动编写的 EVM 字节码更难投入使用。很多应用程序为了效率，会使用手动编写部分 EVM 字节码。尽管有很多种方式可以实现对这类有限制的 EVM 字节码的支持，可以在无需完全成为第三类 ZK-EVM 的情况下将这些用例应用起来，但第四类 ZK-EVM 的系统可能不会支持这种手动编写的字节码。</p>
+</li>
+<li>
+<p>很多调试基础设施无法继续生存，因为这种基础设施都基于 EVM 字节码运行。尽管如此，但我们可以通过“传统”高级语言或中间语言更轻松地访问调试基础设施，以减轻这种劣势（比如 LLVM）。</p>
+</li>
+</ul>
+<p>开发者应该留心这些问题。</p>
+<p><strong>谁在构建第四类 ZK-EVM？</strong></p>
+<p>ZKSync 系统就是第四类 ZK-EVM，虽然它可能会随着时间提高 EVM 字节码的兼容性。Nethermind 的 Warp 项目正在构建从 Solidity 语言转译为 StarkWare Cairo 语言的编译器，这个编译器将会把 StarkNet 变成真正的第四类 ZK-EVM 系统。</p>
+<p><strong>各个 ZK-EVM 类型的未来</strong></p>
+<p>并不是说这些类型比其它类型“更好”或“更差”。相反，相较之下他们各有不同：从类型 1 至类型 4，编号较低的 ZK-EVM 类型和现有的基础设施更加兼容，但运行得更慢；而编号较高的 ZK-EVM 类型则和现有的基础设施不那么兼容，但运行得更快。总之，对所有 ZK-EVM 类型的探索有益于该领域的健康发展。</p>
+<p>另外，ZK-EVM 项目可以随着时间的推移，轻松地从编号高的 ZK-EVM 开始，然后转为编号低的类型（反之亦然）。例如：</p>
+<ul>
+<li>
+<p>ZK-EVM 可以在一开始作为第三类 ZK-EVM 投入使用，不去加入一些特别难以生成 ZK 证明的功能。之后，他们可以随着时间的推移而加入那些功能，继而转变为第二类。</p>
+</li>
+<li>
+<p>一开始作为<strong>第二类别的 ZK-EVM</strong> ，通过在完全兼容以太坊的模式下运行，或使用在修改后能更快生成证明的状态树，这类 ZK-EVM 可以在之后变成第二类和第一类 ZK-EVM 的混合类型。Scroll 就正在考虑向这个方向发展。</p>
+</li>
+<li>
+<p>一些一开始属于<strong>第四类系统的 ZK-EVM 项目</strong> ，可以通过之后添加 EVM 代码处理的功能，继而随着时间变成第三类 ZK-EVM（尽管开发者还是会被鼓励直接从高级语言编译，以此减少费用和证明生成的时间）。</p>
+</li>
+<li>
+<p>如果以太坊自身为了变得更加 ZK 友好而采用一些修改，那么第二类和第三类可以成为第一类 ZK-EVM。</p>
+</li>
+<li>
+<p><strong>第一类或第二类 ZK-EVM 可以通过增加验证 ZK-SNARK 友好语言代码的预编译，变成第三类 ZK-EVM。</strong> 这为开发者在以太坊兼容性和运行速度之间提供了一个选择。这可以算是第三类 ZK-EVM，因为它会破坏完美的 EVM 等效，但出于实际意图和目的，它可能还会具有很多第一类和第二类 ZK-EVM 的优势。它不好的地方可能是，一些开发者工具无法理解 ZK-EVM 的自编译，虽然这点也可以修复：开发者工具可以通过支持包括 EVM 代码等效的预编译实现在内的配置格式，以此增加通用的预编译支持。</p>
+</li>
+</ul>
+<p>就个人而言，通过结合 ZK-EVM 中的改进与让以太坊变得更加 ZK-SNARK 友好的改进，我希望这些项目全部慢慢变成第一类 ZK-EVM。在这样的未来里，我们也会有多种 ZK-EVM 实现，可以用于 ZK rollup，也能用来验证以太坊链本身。理论上，以太坊没有必要标准化单个 ZK-EVM 的实现来供 L1 使用；不同客户端可以使用不同的证明，我们才能继续从代码冗余中获益。</p>
+<p>不论如何，我们还需要一些时间来迎接这种未来。同时，我们也会在扩容以太坊和开发基于以太坊 ZK rollup 的不同赛道上看到大量创新。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/44341/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SBF致股东信：将尽其所能保护客户资产和股东投资</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/44337/">
+                <span class="next-text nav-default">Web3迪士尼 Yuga labs的核心投资逻辑浅析</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

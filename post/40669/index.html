@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          探究对以太坊TPS造成影响的五个方面 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="尽管分片方式并未确定，但可以肯定的是分片将极大的提高 TPS。" />
+<meta name="keywords" content="TPS" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40669/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="探究对以太坊TPS造成影响的五个方面" />
+<meta property="og:description" content="尽管分片方式并未确定，但可以肯定的是分片将极大的提高 TPS。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40669/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-26T00:00:00+00:00" />
+
+<meta itemprop="name" content="探究对以太坊TPS造成影响的五个方面">
+<meta itemprop="description" content="尽管分片方式并未确定，但可以肯定的是分片将极大的提高 TPS。"><meta itemprop="datePublished" content="2022-07-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="10958">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="探究对以太坊TPS造成影响的五个方面"/>
+<meta name="twitter:description" content="尽管分片方式并未确定，但可以肯定的是分片将极大的提高 TPS。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">探究对以太坊TPS造成影响的五个方面</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-07-26">
+      2022-07-26
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 10958 字 -
+        预计阅读 22 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《ETH 交易成本组成》</p>
+<p>原文作者：Xiang，W3.Hitchhiker；修订：Evelyn，W3.Hitchhiker</p>
+<p>众所周知，以太坊有自己的虚拟机。</p>
+<p>什么意思呢？</p>
+<p>就是比特币中的交易长这样：</p>
+<p>「如果小明的签名验证通过，小明转 10 元钱给小红的地址。」</p>
+<p>而以太坊中的交易可能长这样：</p>
+<p>「当小明的签名验证通过并且满足 blablablabla 条件时，将小明账户中的 10 元钱转到小红的账户上。」</p>
+<p>这其中的 blablablabla 条件，实际上可以是任何逻辑或者任何程序，其中可以有条件判断，可以有循环，这些以太坊都支持。但问题就来了——要是有个不善良的矿工打包了个死循环放在区块里，岂不是能让所有的以太坊节点都死机？</p>
+<p>为了防止这种事情发生，<strong>以太坊中设置了每个区块的 Gas 上限以及每个计算步骤所需要消耗的 Gas 量。</strong></p>
+<p>我们可以简单粗暴地把 Gas 理解成汽油。比如，一个条件判断需要 10 gas，一个签名验证需要 100 gas，一个状态读写需要 10 gas 等等……然后，每笔交易都需要注明这笔交易需要使用的 Gas（当然，还需要付钱）。比如说，在某笔交易之后，你注明「跑 1000 个 gas 的」，于是，以太坊的节点会执行这笔交易，但是当计算需要消耗的 gas 超过 1000 了，不管交易的步骤执行没执行完都会停下来。</p>
+<p>于是，死循环不会出现，比如你写了个死循环，但是每次循环会烧 10 gas，而区块的 gas 上限是 10000，你于是最多给这个程序买 10000 的 gas，那么所有节点会执行 1000 次循环，直到把你给的 gas 烧完就停下来，而不会无限循环下去。</p>
+<p>而这个时候就引出了另一个以太坊和比特币不同的区别：</p>
+<p><strong>在比特币中，链上最宝贵的资源是空间——因为一个区块大小是 1 M，而平均 10 分钟才能出一个区块。</strong></p>
+<p><strong>而在以太坊中，链上最宝贵的资源是 gas，因为每个区块的 gas 是有上限的，而平均出块时间也是固定的，每单位时间能够做的计算步骤其实也是有限的，所以 ETH 的 TPS 也是有限的。</strong></p>
+<p>于是，当大量的人需要做交易，尤其是很多操作复杂的交易的时候，以太坊就会拥堵。</p>
+<h3 id="eth-的-tps">ETH 的 TPS</h3>
+<p>对 ETH 的 TPS 造成影响的问题大概分以下几个方面：</p>
+<ul>
+<li>
+<p>ETH 的 gas 机制</p>
+</li>
+<li>
+<p>ETH 的交易成本</p>
+</li>
+<li>
+<p>ETH 的网络</p>
+</li>
+<li>
+<p>合并进程</p>
+</li>
+<li>
+<p>分片链</p>
+</li>
+</ul>
+<h3 id="1eth-的-gas-机制">1、ETH 的 gas 机制</h3>
+<p>我们知道比特币区块链中消耗的矿工费用是 BTC，为了激励以太坊网络中的计算，于是在以太坊中产生了 gas 的概念，在以太坊区块链上执行写入操作都需要支付 gas 费用，以太坊定义了货币是 1 ETH，且 1 ETH = 1e18 Wei。Wei 是其中的最小额，在整个工作中，发送Token、调用合约都要支付 gas，且以 Wei 作为单位来计算。</p>
+<h4 id="wei-的由来"><strong>Wei 的由来</strong></h4>
+<p>戴维（Wei Dai）是一位华裔计算机工程师，对密码学和加密货币的贡献而闻名，他开发了 Crypto++ 密码库，创建了 B-Money 加密货币系统，并共同提出了 VMAC 消息认证码算法。2013 年，Vitalik Buterin 的以太坊（Ethereum）最小单位 Wei，便以他的名字命名。比特币白皮书的排名第一的参考资源也是戴维的 B-money，中本聪在建立比特币初期也多次想与戴维联系。</p>
+<p>目前 ETH 消耗 gas 的单位是 Gwei，对应 1 Gwei=1e9 Wei</p>
+<p>简单说，gas price 就是汽油单价，gas limit 相当于发动一次汽车需要的最大汽油量。</p>
+<p>再具体点的表达是：</p>
+<p>Gas Price 是以太坊内计算消耗 1 个 gas 对应多少 Gwei 的标准量，单位是 Gwei。</p>
+<p>Gas Limit 是消耗 gas 的上限单位。在完成每笔交易中最多使用多少个 gas（交易的 gas limit）。</p>
+<p>区块的 Gas Limit 是能够将一定量的交易「装在」该区块中的交易平台用总 Gas 数的上限。当节点在选择要打包的交易时，节点必须确保加入这笔交易后，区块里的交易平台用总 Gas 数不会超过区块 Gas 上限。对于要被打包的交易来说，其 Gas Limit 加上其他交易的 Gas Limit 总和，必须小于等于区块 Gas Limit。当然，如果有一笔交易不能被打包进入当前区块，它还是有机会被后面的区块打包的。区块的 Gas Limit 大小是动态调整的，伦敦升级为以太坊引入了可变大小的区块 Gas limit。每个区块的目标大小为 1500 0000 gas，但区块大小会根据网络需求增加或减少，直至区块限制为 3000 0000 个 gas（目标区块大小的 2 倍）。</p>
+<h4 id="区块-gas-limit-为什么要改变"><strong>区块 gas limit 为什么要改变</strong></h4>
+<p>让区块大小可以根据网络交易多寡，自由调整区块大小。在网络交易量大时，可自动实现扩容。</p>
+<p>防止恶意用户的恶意 for 循环攻击使网络瘫痪。</p>
+<p>因恶意用户不断的转移额度非常小的帐目，使得整个网络瘫痪，当交易的费用非常低时，可以忽略不计，因此以太坊引入了 gas 的概念，任何转账以及智能合约的执行，都要消耗一定的费用即 gas，如果 gas 消耗完毕，则代码不再继续执行，这样防止恶意代码的 for 循环不停的执行，以至于整个网络无法继续向下一个状态迁移。因此我们知道，任何计算、存储都是需要付出成本的，这样才能杜绝恶意攻击代码。</p>
+<h4 id="交易成本对-tps-的影响"><strong>交易成本对 TPS 的影响</strong></h4>
+<p>当交易大时，区块 gasl imit 将实现自动扩容，提高以太坊本身的 tps，区块的 gas limit 最高为 30,000,000（节点默认配置）。</p>
+<h3 id="2eth-的交易成本">2、ETH 的交易成本</h3>
+<p>以太坊的底层技术与 gas 的设计都是由 Gavin Wood 完成的，具体可参考 Gavin Wood 写的黄皮书。</p>
+<p>以下是 ETH 黄皮书设计的 gas 成本。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0726/26_9i7byeim1g.png" alt="探究对以太坊TPS造成影响的五个方面"></p>
+<p>截图来自：https://ethereum.github.io/yellowpaper/paper.pdf</p>
+<p>使用 ETH 需要付费，以及 gas 的概念。总的来说，每一笔交易都有与之关联的 gas——发送一笔交易的成本包含两部分：固有成本 和 执行成本。</p>
+<p>执行成本根据该交易需要使用多少 ETH 虚拟机（EVM）的资源来运算而定，执行一笔交易平台需的操作越多，则它的执行成本就越高。</p>
+<p>固有成本由交易的负载（payload）决定，交易负载分为以下三种负载：</p>
+<p>如果该交易是为了创建智能合约，则负载就是创建智能合约的 EVM 代码</p>
+<p>如果该交易是为了调用智能合约的函数，则负载就是执行消息的输入数据</p>
+<p>如果该交易只是单纯在两个账户间转账，则负载为空</p>
+<h4 id="固有成本-gas">固有成本 gas</h4>
+<p><img src="https://img.bibiqing.com/news/2022/0726/26_cd597wak54.png" alt="探究对以太坊TPS造成影响的五个方面"></p>
+<p>假设 Nzeros 代表交易负载中，字节为 0 的字节总数；Nnonzeros 代表交易负载中，字节不为 0 的字节总数。可以通过下列公式计算出该交易的固有成本，参考黄皮书 6.2 章节：</p>
+<p>固有成本 = Gtxdatazero Nzeros + Gtxdatanonzero Nnonzeros + Gtxcreate + Gtransaction + Gasscesslist 成本</p>
+<p>在黄皮书的附录 G 中，可以看到一份创建和执行交易的相关成本的费用表。其中与固有成本相关的内容如下：</p>
+<p>Gtransaction = 21,000 Wei</p>
+<p>Gtxcreate = 32,000 Wei</p>
+<p>Gtxdatazero = 4 Wei</p>
+<p>Gtxdatanonzero = 16 Wei (在伊斯坦布尔升级前为 68 wei）</p>
+<p>Gasscesslistaddress = 2400 Wei</p>
+<p>Gasscessliststorage = 1900 Wei</p>
+<p>因为 ETH 是原生的 Token ，没有智能合约，不需要与合约交互，所以 ETH 的转账是最便宜的，只需要 21000 gasl imit 的配置。当 ETH 转账需要附加一些数据时，就可以参考上述公式。</p>
+<p>如下图，操作了 tp 钱包，在转账时加入了两个 0 字节，两个非 0 字节。按上述公式计算：</p>
+<p>固有成本 = 21000 + 4 2 + 16 2 = 21040，也就是对应上方的 gas limit。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0726/26_9ytyf4s0rc.png" alt="探究对以太坊TPS造成影响的五个方面"></p>
+<p>交易的固有成本必须小于该交易设置的 gas 上限</p>
+<p>我们知道了固有成本后，就能理解为什么一旦交易的固有成本高于 Gas 限制，则该交易就会被视为非法。Gas Limit 规定了一笔交易在执行时，能够消耗掉的 Gas 上限；如果在还没开始执行该交易前，我们就知道它的固有成本是高于 Gas 上限的，那我们就没有理由执行这笔交易。（这是因为在交易之前就会报错）</p>
+<p>而其他 Token 的转账就会比 ETH 的 21000 gas limit 高很多，这是因为其他 Token 是通过智能合约执行交易，比普通的转账需要更复杂的计算和写入。</p>
+<p>Gas Limit 范围虽然可以调整，但是如果填写太少，可能会导致交易失败，就好比油价很高，但是你拿一个可乐瓶来做油箱，并且要跑 100 公里的路，但事实是还没有上高速车就没有油了，所以 gas limit 不够矿工消耗的话会就会导致代码执行中断。尽管如此，矿工还是会把劳务费 gas 收走的。</p>
+<p>那 ETH 目前的 tps 大约在什么范围？</p>
+<p>2022 年 2 月 28 日下午的区块 gas limit 为 30,000,000 左右，以太坊的出块时间在 13 秒左右，交易的最低成本为 21000，对应 ETH 的 tps 上限为 110 左右，由于还存在大量不是普通转账的交易，而是与合约交互的交易，所以实际 ETH 的 tps 只有 10 多笔。</p>
+<h4 id="执行成本-gas">执行成本 gas</h4>
+<p>在以太坊中，执行交易会改变状态——好几笔交易被打包进一个区块，每个区块就相当一个交易列表；当交易被按照顺序执行后，会输出新的合法状态。</p>
+<p>交易按照以下步骤执行：</p>
+<p>1、将发送者账户 nonce 值加 1</p>
+<p>每当发送一笔交易，发送者账户 nonce 就会增加。这个操作在交易执行之初就会完成，如果交易执行失败，则账户 nonce 值回滚。</p>
+<p>2、从发送者账户扣除交易预付额（gas limit gas price）</p>
+<p>我们会从发送者账户余额里扣除交易预付额，这个机制很简单——由发送者为自愿付出的执行交易成本（gasLimit gasPrice）付费。</p>
+<p>3、确定该交易能够用于执行的 gas 值（gas limit - intrinsic cost）</p>
+<p>交易的 gas 总额（gas limit）扣掉固有成本后，剩下的就是可用于执行交易的 gas。</p>
+<p>4、执行该交易包含的操作（转账、调用或创建智能合约）</p>
+<p>执行交易还涉及 EVM 的操作列表，其中唯一完全不需要 EVM 操作的交易——就是普通转账。</p>
+<p>每一项 EVM 操作都有对应的 gas 成本；在交易执行过程中，每做了一项 EVM 操作，就会从可用 gas 中扣掉对应的 gas 成本。直到下列两种情况中的一种出现才停止：</p>
+<p>可用 gas 被耗尽，执行失败</p>
+<p>执行结束后可用 gas 还有剩，或是刚好为零</p>
+<p>5、通过 SELFDESTRUCT 和 SSTORE 函数对发送者退款</p>
+<p>在以太坊中，SELFDESTRUCT 操作码用于销毁不再需要的智能合约。每销毁一个合约，执行者能够收取 24,000 Wei。</p>
+<p>同样的，当使用 SSTORE 操作码写入 0（有效删除值）的时候，操作者每写入一个 0，就能收取 1500 Wei。</p>
+<p>关于退款，有件有趣的事情是，退款也有上限。该上限确保矿工可以算出执行交易平台需的计算时间的上界。（更多关于 gas 费用和退款的详细说明，可以在以太坊的设计合理性一文中找到）。</p>
+<p>还有一个重点是，必须在交易平台包含的操作都执行结束后，才会进行退款。因此任何应该返还的 gas 都不会被交易执行过程所消耗，从而避免了可能出现的_永远不会耗尽 gas 的交易_。</p>
+<p>6、退还交易发送者任何未使用的 gas</p>
+<p>如果用于交易的预付款超过交易平台使用的 gas，则发送方有权在执行交易后收回剩余的 gas。</p>
+<p>7、向受益人账户（通常属于挖出包含该交易的区块的矿工）转入挖矿收益</p>
+<p>执行交易平台使用的所有 Gas 被视为交易手续费，由矿工获得。这种机制激励矿工持续出块，并在网络安全层面永续合作。</p>
+<p>执行交易包含的操作成本参考下图黄皮书的对应内容，例如 MUL、DIV、ADD、SUB 等等。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0726/26_4jjhogiqce.png" alt="探究对以太坊TPS造成影响的五个方面"></p>
+<h4 id="与-gastps-相关的-eip-方案">与 gas、tps 相关的 EIP 方案：</h4>
+<p>EIP-5: 调整 RETURN 和 CALL 的 Gas 用量</p>
+<p>EIP-150：大量 IO 操作的 Gas 成本变化</p>
+<p>EIP-158：状态清除</p>
+<p>EIP-1108：降低 alt_bn128 预编译 Gas 成本</p>
+<p>EIP-1283：SSTORE 操作码的 Gas 调整</p>
+<p>EIP-2028：减少交易数据使用成本</p>
+<p>EIP-2200：净 Gas 计量的结构化定义</p>
+<p>EIP-2565：指定 ModExpGas 成本</p>
+<p>EIP-1559：ETH 1.0 链的收费市场变化</p>
+<p>EIP-2929：状态访问操作码的 Gas 成本增加</p>
+<p>EIP-1077: 合约调用的 Gas 中继</p>
+<p>EIP-1087：用于 SSTORE 操作的 Gas 计量</p>
+<p>EIP-1285：在 CALL 操作码中增加 GcallstipendGas</p>
+<p>EIP-1380：降低了内部调用的 Gas 成本</p>
+<p>EIP-1613: Gas 站网络</p>
+<p>EIP-1930：具有严格 Gas 语义的 CALL</p>
+<p>EIP-2045：EVM 操作码的颗粒 Gas 成本</p>
+<p>EIP-2046：降低了对预编译进行静态调用的 Gas 成本</p>
+<p>EIP-2542：新的操作码 TXGASLIMIT 和 CALLGASLIMIT</p>
+<p>EIP-3322：帐户 Gas 存储操作码</p>
+<p>EIP-2780：减少内部交易 Gas</p>
+<p>EIP-4488：减少交易 calldata gas 与总 calldata 限制</p>
+<p>EIP-4844：分片 Blob 交易</p>
+<p>EIP-1559</p>
+<p>2019 年由 v 神提出，2021 年 8 月 5 日上线。</p>
+<p>一种交易定价机制，包括固定的每个区块的交易费用，该费用将被销毁并动态扩展/收缩区块大小以应对瞬时的堵塞。</p>
+<p>交易发送者通过提供两个值来指定其费用：</p>
+<p>「gas premium」（天然气溢价）加到「base fee」（基本费）中，以计算 gas price。「gas premium」可以设置为较低的值（例如 1 gwei）以补偿矿工的叔叔率风险，也可以设置为较高的值以在突如其来的高交易量中竞争。「gas premium」将给予矿工。</p>
+<p>「fee cap」表示交易发送者愿意支付的最高总额（base fee + gas premium）。</p>
+<p><strong>动机</strong></p>
+<p>「当前以太坊的「最高价拍卖」费用模式效率低下，对用户来说成本高昂。此 EIP-1559 提出了一个取代这种机制的方法，即根据网络需求来对一个基本网络费用进行调整，从而创建更好的费用价格效率，并降低用于避免支付不必要的高额费用所需的客户端软件的复杂性。」</p>
+<p>在当前的以太坊系统中，新提交的交易必须等待被某个矿工打包进入下一个区块，但这些交易可以通过增加 Gas Price 参数使其高于网络平均水平，以此来激励矿工打包自己的交易。矿工是总是会希望将那些包含最大交易费的交易打包进入新区块中，因此预计被打包进入下一个区块中的交易总是那些有着最高 Gas 价格的交易。</p>
+<p>这种最高价拍卖模式的问题在于，在交易需求旺盛的时期，情况可能会很快失控。当区块接近达到满块时，使交易被打包进入下个区块的成本 (交易费) 可能会急剧上升，因为用户会试图以比其他人更高的价格来让自己的交易被打包。</p>
+<p>尽管当前矿工们有一定的能力 (备注：比如增加区块 gas 上限) 来增加在单个区块中打包的交易笔数，但这一上限无法很快得到改变，且实际上矿工们更乐于使用较小的满块，而不是将区块 gas 上限越推越高 (对于矿工来说，由于存在叔块率，更大的区块带来更高的风险)。尤其是如果你的钱包使用了 gas 定价算法，从而使你的交易在一个特定的时间框架内被打包，那么你可能最终会支付一笔相当高昂的交易费来让你的交易被打包进入下一个 (几乎) 满了的区块。</p>
+<p>EIP-1559 引入了 gas 费用的「base fee」(基本费) 概念，这笔费用被设定为会动态地调整，当网络超出目标每区块 gas 使用量时，「base fee」会略有增加，而当数量低于目标时，「base fee」用会略有下降。这笔「base fee」不会流向矿工的口袋，而是会被销毁。</p>
+<p>为了激励矿工打包交易，用户还将设定一个「Tip」(小费) 参数，并设定一个他们为了让自己的交易被打包进入区块而愿意支付的最大金额，矿工将获得这笔「Tip」(小费)。</p>
+<p>由于「基本费」不会根据网络需求的瞬息变化而剧烈波动，因此用户在一定程度上远离了「最高价拍卖」模式带来的低效率问题 (「Tip」费用仍然是最高价模式 )，因为「基本费」会被销毁，而不是给矿工，这样矿工就不会有动机去尝试操控交易费了。重要的是，此机制也试图解决钱包开发者在自动预估网络交易费方面遇到的一个重大问题，使交易费预估变得更加可预测。</p>
+<h4 id="简单总结">简单总结</h4>
+<p>提高用户体验，避免 gas 费用增长过快，更好的预估市场，利于 L2 的运行成本的评估，缩减了矿工的利润，销毁更多 ETH，利好 ETH 与 layer2，但对 tps 影响不大。</p>
+<p><strong>EIP-4488</strong></p>
+<p>2021 年 11 月份由 v 神提出，目前还处于草案阶段（待讨论确定）</p>
+<p>降低交易调用 calldata gas 成本，并增加一个区块中调用 calldata(Gtxdatazero) 的总交易的限制。</p>
+<p><strong>动机</strong></p>
+<p>Rollups 在短期和中期，也可能是长期的，以太坊唯一的去信任扩展解决方案。长时间来，L1 的交易费用一直非常高，并且迫切需要采取任何必要的措施来帮助促进整个生态系统向 rollup 的迁移。Rollups 显着降低了许多以太坊用户的费用：Optimism 和 Arbitrum 经常提供比以太坊 L1 层本身低约 3-8 倍的费用，而具有更好的数据压缩并且可以避免包含签名的 ZK rollups 的费用约低 40-100 倍的费用。</p>
+<p>然而，即使是这样，费用对许多用户来说也太贵了。对 rollups 本身长期不足的长期解决方案一直是数据分片，这将为链中的 rollups 添加约 1-2 MB/秒的专用数据空间。然而，数据分片仍然需要相当长的时间来完成实施和部署。因此，需要一种短期解决方案来进一步降低 rollup 成本，并激励整个生态系统向以 rollup 为中心的以太坊过渡。</p>
+<p>该 EIP 提供了一种快速实施的短期解决方案，同时也降低了安全风险。</p>
+<p>当前区块的 gas limit 为 30000000 左右，那区块最大块大小为 30000000 / 16 = 1875000 字节。如果只是简单把 calldata 从 16 减少至 3，会将区块最大大小增加到 10000000 字节，这会让以太坊的 P2P 网络面临前所未有的压力，所以该项提案限制了 calldata 总量的大小。公式如下：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0726/26_h5chy22ocw.png" alt="探究对以太坊TPS造成影响的五个方面"></p>
+<h4 id="简单总结-1">简单总结</h4>
+<p>短期的解决方案，也可能是长期的，利好 layer2 的 rollup，可以大大降低 rollup 的交易成本，非 0 字节的数据可以降低为当前的 1/5 的成本不到，0 字节的也可以微微降低（ab，op，zk 等预计都可以下降至目前 1/4-1/5 的手续费），但对 ETH L1 tps 影响不大, 甚至会降低，区块大小会增加，所以该提议与 EIP-4444 可能同期执行。</p>
+<h4 id="交易成本对-tps-的影响-1">交易成本对 TPS 的影响</h4>
+<p>ETH 的 gas 的相关处于草案阶段的 EIP 主要为 EIP-4488，对 TPS 的影响较大，利好 layer2 的 rollup，可以大大降低 rollup 的交易成本，非 0 字节的数据可以降低为当前成本的 1/5 不到，0 字节的也可以微微降低（ab，op，zk 等预计都可以下降至目前 1/4 - 1/5 的手续费），但对 ETH L1 tps 影响不大，可能微降。</p>
+<h3 id="3eth-的网络">3、ETH 的网络</h3>
+<p>ETH 节点之间的数据都是通过 P2P 网络进行传输，ETH 的 P2P 网络会影响节点间的区块数据的同步速度，因此也会限制 TPS 的增长。</p>
+<p>Devp2p 是一组形成以太坊 P2P 网络的网络协议。服务于与以太坊相关的任何网络应用程序的需求。</p>
+<p>该系统提供对整个 Internet 中其他节点的发现以及与这些节点间的安全通信。</p>
+<p>IPFS 的 libp2p 项目，旨在成为一个模块集合，用于从模块化组件组装 P2P 网络。</p>
+<p>很难比较这两个项目，因为它们的范围不同，并且在设计时考虑了不同的目标。devp2p 是一个集成系统定义，它希望能够很好地满足以太坊的需求（尽管它也可能非常适合其他应用程序），而 libp2p 是一组编程库组件的集合，不专门为单个应用程序服务。</p>
+<p>也就是说，这两个项目在精神上非常相似，并且随着 libp2p 的成熟，devp2p 正在采用部分 libp2p。</p>
+<h4 id="与-eth-网络相关的-eip">与 ETH 网络相关的 EIP：</h4>
+<p>EIP-8: devp2p 前向兼容性要求</p>
+<p>EIP-627：Whisper 规范</p>
+<p>EIP-706：DEVp2p 快速压缩</p>
+<p>EIP-778：以太坊节点记录 (ENR)</p>
+<p>EIP-868：v4 ENR 扩展</p>
+<p>EIP-2124：减少交易数据使用成本</p>
+<p>EIP-2364：ETH/64：forkid 扩展协议握手</p>
+<p>EIP-2464：ETH/65：交易公告和检索</p>
+<p>EIP-2481：ETH/66：请求标识符</p>
+<p>EIP-2976：基于 Gossip 的类型化交易</p>
+<p>EIP-4444：对执行层客户端的历史数据设限</p>
+<p>EIP-4444</p>
+<p>2021 年 11 月份由提出 George Kadianakis、lightclient、Alex Stokes目前还处于草案阶段</p>
+<h4 id="动机"><strong>动机</strong></h4>
+<p>客户端停止在 p2p 层上提供超过一年的历史收据。客户可以在本地修剪这些历史数据。</p>
+<p>历史块和收据目前占用超过 400GB 的磁盘空间（并且还在增长！）。因此，要验证链，用户通常必须拥有 1TB 的磁盘。</p>
+<p>验证新块不需要历史数据，因此一旦客户端同步了链的末端，只有在通过 JSON-RPC 明确请求或对等方尝试同步链时才会检索历史数据。通过修剪历史，该提议减少了节点的硬盘需求。修剪历史数据还允许客户端删除处理历史块的代码。这意味着执行客户端不需要维护处理每次升级的复合更改的代码路径。</p>
+<p>最后，随着客户端基于 PoS 采用更轻量级的同步策略，这种变化将导致网络上的带宽使用减少。</p>
+<h4 id="简单总结-2">简单总结</h4>
+<p>裁剪一年前的历史数据，减少网络带宽的使用。</p>
+<h4 id="eth-网络对-tps-的影响">ETH 网络对 TPS 的影响</h4>
+<p>与 ETH 的网络相关的、处于草案阶段的 EIP，对 TPS 的影响不大。</p>
+<h3 id="4合并进程">4、合并进程</h3>
+<p>合并是指以太坊的信标链作为共识层，与当前大多 ETH 用户使用的主网 POW 链作为执行层，进行合并，合并后执行层就会放弃现有的 POW 共识机制。</p>
+<h4 id="信标链">信标链</h4>
+<p>信标链将管理或协调扩展的分片和质押网络。但它不会像今天的以太坊主网。不能处理账户或智能合约。</p>
+<p>信标链的角色会随着时间而改变，但它是正在努力实现的安全的、可持续和可扩展的以太坊的基础组成部分。</p>
+<p>信标链将向以太坊引入 POS。这是一种帮助您确保以太坊安全的新方法。把它想象成一种公共物品，它将使以太坊更健康，并在此过程中为你赚取更多的 ETH。</p>
+<p>质押和成为验证者比挖矿（网络当前的方式）更容易。从长远来看，这将有助于使以太坊更加安全。参与网络的人越多，它就会变得越去中心化和安全。</p>
+<p>最初，信标链将与我们今天使用的以太坊主网分开存在。但最终，它们将被连接起来。该计划是将主网「合并」到由信标链来控制和协调的 POS 系统中。</p>
+<p>信标链启动时间 2020 年 12 月份。</p>
+<p><strong>弃用 ETH2</strong></p>
+<p>以太坊协议正发生重大变化。客户端团队正在升级协议，对以太坊进行扩容，以满足全球用户的需求，同时提升以太坊安全性与去中心化程度。除了协议开发，以太坊的一个极为重要的转变在于弃用术语「Eth1」与「Eth2」。2021 年年底起，核心开发者就停止使用「Eth1」与「Eth2」了，分别以「执行层」与「共识层」取而代之。今天，正如我们在 Q1 路线图中强调那般， ethereum.org 也对此做出同样的改变。</p>
+<p>Eth1 执行层</p>
+<p>Eth2 共识层</p>
+<p>执行层 + 共识层 = 以太坊</p>
+<p>让我们一起来探究原因吧！</p>
+<p><strong>概览</strong></p>
+<p>术语 Eth1 与 Eth2 ( 以太坊 2.0 ) 逐步停止使用</p>
+<p>执行层 ( Eth1 ) 与共识层 ( Eth2 ) 作为新术语</p>
+<p>以去中心化的方式来扩展以太坊的路线图保持不变</p>
+<p>用户不需要有任何操作</p>
+<p><strong>以太坊 2.0 从何而来？</strong></p>
+<p>作为路线图的一部分，以太坊一直计划以去中心化的方式来扩展网络，并过渡到 PoS  ( 权益证明 )。早些时候，研究者们分别对这些计划进行研究，但在 2018 年左右，上述都被纳入进「以太坊 2.0」路线图中。</p>
+<p>作为路线图的一部分，现有的 PoW 链 ( Eth1 ) 最终会通过难度炸弹被弃用。用户与应用将被迁移到新的以太坊 PoS 链 (即 Eth2 ) 上。</p>
+<p>2019 年初 ConsenSys 发表的《Serenity 路线图》解释了具体情况。</p>
+<p><strong>发生了什么改变？</strong></p>
+<p>随着信标链的工作开始，很明显，分阶段进行的以太坊 2.0 将要花费数年时间才能完全交付。这导致对 PoW 链的研究计划又重新活跃起来，例如 Stateless Ethereum ( 无状态以太坊 )，这是一个通过删除网络里不再被访问的状态来限制状态膨胀率的范式。</p>
+<p>对于 PoW 链长期可持续发展的日益关注，加上我们也意识到信标链将比以太坊 2.0 路线图的其他部分更早准备好，「早期合并」(「Early Merge」) 提案由此产生。 在这个提案里，现有的 EVM 链将作为以太坊 2.0 的「分片 0」。这不仅能加快向 PoS 的转变，还能令应用的过渡更为顺畅，因为不需要应用终端发生任何迁移就能过渡到 PoS。</p>
+<p>这个提案发布不久后，Danny Ryan 在他的文章《Eth1+Eth2 客户端的关系》中探讨了我们怎样通过利用现有的 Eth1 客户端来完成这一点。这将能大大减少交付一个合并后系统的开发工作，且充分利用已经在主网身经百战的客户端。大约在同一时间，把 rollups 作为一种可行且安全的方式来为以太坊扩容的研究证明是有前景的。与其花上几年等待一个复杂、不确定的扩容方案，我们还不如将注意力放到基于 rollups 的扩容方案，而不是分片执行。</p>
+<p>还想阅读更多资料？点击查看 Danny Ryan 在 ETHGlobal 的演讲《Eth1 + Eth2 = Ethereum》</p>
+<p><strong>为什么我们不能用 Eth2？</strong></p>
+<p><strong>思维模式</strong></p>
+<p>Eth2 这个品牌名的主要问题之一是 Eth2 会对新以太坊用户创造一个不完整的心智模型。他们会直觉地认为：Eth1 在前，Eth2 在后；或者 Eth2 一旦创世了，Eth1 就不复存在了。这两种观念都是错误的。通过不再试用 Eth2 这个术语，未来用户就不会再形成这种容易错误理解的思维模式了。</p>
+<p><strong>包容性</strong></p>
+<p>随着以太坊路线图的升级，以太坊 2.0 已经变得不能准确表达以太坊路线图的意思了。严谨且准确的词汇选择，可以让大众更好理解以太坊的内容。</p>
+<p><strong>防止诈骗</strong></p>
+<p>不幸的是，一些恶意行为者试图利用 Eth2 这一误称来骗用户用 ETH 来兑换 Token 「ETH2」，或者要在 Eth2 升级前，必须以某种方式迁移他们的 ETH。</p>
+<p>我们希望这次更新的术语能够清楚地消灭这种诈骗元素，让生态变得更安全。</p>
+<p><strong>对质押的澄清</strong></p>
+<p>有些质押运营商还把他们在信标链上的 ETH 打上「ETH2」的标签。这可能会带来误解，因为这些服务的用户并不会实际收到」ETH2」 Token 。从来就没有所谓的「ETH2」 Token ；那仅代表用户在特定运营商的押金中的份额。</p>
+<h4 id="合并">合并</h4>
+<p>最初，信标链与主网分开运行。以太坊主网继续通过 POW 得到保护，即使信标链使用 POS 共识并行运行。合并是这两个系统最终融合在一起的时候。</p>
+<p>想象一下以太坊主网是一台载满游客并高速运行的火车，信标链也同样如此，他们在高速运行的同时，还需要相互对接，合并成一台全新性能更强的火车，并且过程中游客是无感知的，可想而之难度是非常大的。</p>
+<p>合并后标志着以太坊工作量证明的结束，并开启一个更可持续、更环保的以太坊时代。此时，以太坊将更接近实现其以太坊愿景中概述的全面、安全和可持续性，并且用户全程将会是无感知的。</p>
+<p>一旦发生合并，将分配质押者来验证以太坊主网。将不再需要 POW 模式采矿，因此矿工可能会将他们的收入投入到新的股权证明系统中。</p>
+<p>合并预计时间：ETH 官网提供的合并时间在 2022 年的第三季度。</p>
+<h4 id="合并对-tps-的影响">合并对 TPS 的影响</h4>
+<p>合并后主网作为执行层继续运行，当前 POW 的出块平均时间为 13 秒左右，转 POS 后，大约为 12 秒一个区块，出块时间会稳定许多，传统 POW 矿商可能也转为 POS 挖矿，将提高 ETH 的需求，利好 ETH，但转 POS 后，以太链的 TPS 只会有微涨幅，不会有大的变化。</p>
+<h3 id="5分片">5、分片</h3>
+<p>分片是水平拆分数据库以分散负载的过程，这是计算机科学中的一个常见概念。在以太坊环境中，分片将通过创建称为「分片」的新链来减少网络拥塞并增加每秒交易量。</p>
+<p>以太坊的分片过程会是一个多阶段升级的过程，最终分片链将网络负载分散到 64 个新链上。</p>
+<p>将保持较低的硬件要求来规范本地运行节点。分片将为以太坊提供更多存储和访问数据的能力，目前认为不会影响执行代码。</p>
+<h4 id="分片的特点">分片的特点</h4>
+<p>保持去中心化，分片是一种很好的扩展方式，使用分片链，验证者只需为他们正在验证的分片存储/运行数据，而不是为整个网络存储/运行数据。这加快了速度并大大降低了硬件要求。</p>
+<p>分片最终会实现在个人笔记本电脑或手机上运行以太坊。会有更多的人能够在分片的以太坊中参与或运行客户端。这将提高安全性，网络越分散，攻击范围就越小。</p>
+<p>由于硬件要求较低，分片将使您更轻松地自行运行客户端，而完全不依赖任何中介服务。</p>
+<h4 id="分片链的细节讨论">分片链的细节讨论</h4>
+<p><strong>分片链版本 1：数据可用性</strong></p>
+<p>当第一个分片链运行时，它们只会向网络提供额外的数据。他们不会处理交易或智能合约。但是当与 rollup 相结合时，它们会处理大量事务。</p>
+<p>Rollup 是当今存在的「layer2」技术。它们允许 dapp 将交易捆绑或「rollup」到链外的单个交易中，生成加密证明，然后将其提交给链。这减少了事务所需的数据。汇总与分片提供的所有额外数据可用性相结合，每秒可以获得 100000 个事务。</p>
+<p><strong>分片链版本 2：代码执行</strong></p>
+<p>考虑到版本 1 分片提供的处理能力，是否还需要将分片应用到处理执行过程。在社区中存在争论。Vitalik Buterin 提出了 3 个值得讨论的潜在选项。</p>
+<p>（1）不需要状态执行</p>
+<p>这意味着我们不会让分片能够处理智能合约只将它们作为数据仓库。</p>
+<p>（2）有一部分执行分片</p>
+<p>也许有一个妥协，我们不需要所有的分片（现在计划 64 个）变得更聪明。我们可以只将这个功能添加到少数几个，而剩下的不添加。这可以加快交付速度。</p>
+<p>（3）等待（ZK）snarks</p>
+<p>当 ZK snarks 技术成熟稳固后重新审视这个问题。可能 ZK snarks 技术需要更多分片。</p>
+<h4 id="分片预计时间">分片预计时间</h4>
+<p>ETH 官网提供的分片时间在 2023 年某个时间，取决于合并后工作进展的速度。</p>
+<h4 id="分片对-tps-的影响">分片对 TPS 的影响</h4>
+<p>尽管分片方式并未确定，但可以肯定的是分片将极大的提高 TPS。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40668/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">谁推高了7月的ENS域名注册量？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40649/">
+                <span class="next-text nav-default">投资DAO的风险投资历程和未来</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#eth-的-tps">ETH 的 TPS</a></li>
+        <li><a href="#1eth-的-gas-机制">1、ETH 的 gas 机制</a></li>
+        <li><a href="#2eth-的交易成本">2、ETH 的交易成本</a></li>
+        <li><a href="#3eth-的网络">3、ETH 的网络</a></li>
+        <li><a href="#4合并进程">4、合并进程</a></li>
+        <li><a href="#5分片">5、分片</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

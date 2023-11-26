@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          扩容新思路？一文读懂模块化公链Celestia - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="可扩展性一直是区块链技术被广泛采用的最大障碍之一，尽管已经有不少Ｌ1扩展解决方案，但大多数都专注于共识层而不是数据可用性。" />
+<meta name="keywords" content="Celestia" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40870/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="扩容新思路？一文读懂模块化公链Celestia" />
+<meta property="og:description" content="可扩展性一直是区块链技术被广泛采用的最大障碍之一，尽管已经有不少Ｌ1扩展解决方案，但大多数都专注于共识层而不是数据可用性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40870/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="扩容新思路？一文读懂模块化公链Celestia">
+<meta itemprop="description" content="可扩展性一直是区块链技术被广泛采用的最大障碍之一，尽管已经有不少Ｌ1扩展解决方案，但大多数都专注于共识层而不是数据可用性。"><meta itemprop="datePublished" content="2022-08-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3262">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="扩容新思路？一文读懂模块化公链Celestia"/>
+<meta name="twitter:description" content="可扩展性一直是区块链技术被广泛采用的最大障碍之一，尽管已经有不少Ｌ1扩展解决方案，但大多数都专注于共识层而不是数据可用性。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">扩容新思路？一文读懂模块化公链Celestia</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-01">
+      2022-08-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3262 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Chole</p>
+<p>可扩展性一直是区块链技术被广泛采用的最大障碍之一，尽管已经有不少Ｌ1扩展解决方案，但大多数都专注于共识层而不是数据可用性。</p>
+<p>一直以来，区块链都是执行状态机复制的分布式网络，分成了数据、共识、执行这三层。这也是基于互联网创建货币的关键点，也就是引入一种外部无法干预的共识系统，而最初中本聪所提出的解决方案则是引入“中本聪共识”让全世界的人都可以维护和运转比特币。</p>
+<p>在这些单体区块链中，数据、共识、执行这三层工作全都会由一个网络来完成，从数据的验证到交易的执行都得透过节点执行。</p>
+<p>且由于区块链是全局复制的分布式状态机，因此若复杂度越高、系统保持同步性的成本和复杂度也就越高。Roll-up 则将执行层分离出去，处理复杂交易，解决了一部分问题。例如 Arbitrum 在 L1 嵌入了特定的操作码，让节点刻意绕过 EVM 调用数据，只会存储验证这些交易，而不会执行它。</p>
+<p>不过 Roll-up 就必须监控 L1 并且执行调用交易以便计算，再以不同方式将返回 L1。这些交易实际上必须通过 ETH 网络进行路由，才能在 Roll-up 上执行。</p>
+<p>目前 ETH 已经有 Optimism、ZKsync 和 Starknet 等基于 Roll-up 的扩展解决方案以及基于执行层的桥梁，例如，Connext、Composable、Axelar等。然而，这些扩展解决方案的数据可用性还是依赖于以太坊的共识层与执行层，且目前以太坊执行层使用成本仍然很高，开发者可部署的范围还是很有限。</p>
+<p>而第一个模块化区块链网络 Celestia 即将在今年上线，并支持 Roll-up 成为其数据可用层。</p>
+<h3 id="1项目概述">1. 项目概述</h3>
+<p>先前取名为 LazyLedger 的 Celestia 可以说是第一个模块化区块链网络，也就是可插拔的共识和数据可用性层，让任何人都可以快速部署去中心化的区块链，而无需额外的共识层的成本。也就是说，Celestia 是一个存储交易记录并且提供数据可用性的公链。</p>
+<p>Celestia 采用模块化架构，将区块链解构为数据、共识、执行。目前大部分的区块链仍然会将共识和执行功能捆绑在一层，在该层上构建智能合约。而用户被绑定在这个执行环境中，就会大大限制了针对特定用例进行优化和专业化的潜力。</p>
+<p>Celestia 模块化架构则将执行层存在于自身的区块链上，允许针对特定用例进行优化和专业化。任何构建基于此架构的去中心化应用程序的开发人员都将在原区块链执行层基础上享有更完整地安全性和可扩展性。且在 Celestia 模块化区块链中，数据可用性采样是可以实现的，这让节点能够用很小的样本验证一个区块，同时可以使用硬件配置较低的的设备充当节点，如家用电脑与手机等。</p>
+<p>开发人员可以直接选择要使用的执行环境在  Celestia 上构建 dApp，并可以并行运行任意数量的执行环境，而在单体环境中，共识紧密地绑定了执行规则，导致用户只能选择主链支持的执行环境。Celestia 已经与Tendermint和 Cosmos zones合作作为数据可用性层。这些公链将通过利用欺诈证明使信任最小化，从而为 Cosmos 生态系统提供统一的安全级别。</p>
+<h3 id="2应用场景">2. 应用场景</h3>
+<p><img src="https://img.bibiqing.com/news/2022/0801/24_t0pvps0sgf.png" alt="扩容新思路？一文读懂模块化公链Celestia "></p>
+<p>Celestia 为中心的组合方式：</p>
+<p>将主权 Roll-up 直接建立在 Celestia 上，使用Celestia共识将 DA 单独当成一个模块，完全基于Celestia建立链。而结算 Rollup会发生在Cevmos上，Cevmos是Cosmos SDK中最好的内嵌EVM的SDK，是一个专门针对Roll-up结算的项目。Cevmos 上的汇总会将他们的数据发布到 Cevmos 上，然后再发布到 Celestia。</p>
+<p>而 Cevmos 的目标是允许以太坊Roll-up在 Celestia 上本地启动，而无需更改代码库。Roll-up不再是运行在以太坊上的合约，拓展性则会更强。</p>
+<p>Celestium 则通过量子引力桥，Celestia 将作为以太坊的DA链下解决方案，为以太坊提供数据可用性，这是安全低成本的以太坊Validium设计。</p>
+<p>自主权优势：</p>
+<p>Celestia 网络本身只负责验证数据完整性，不涉及一个完整的共识机制，因此，Celestia 之上的 rollup 基本上是自我主权的区块链，节点可以自由地分叉他们的软件。</p>
+<p>过去在 L1 中，分叉就等于执行层和共识层的分叉，如果以太坊上的 Roll-up 有漏洞或者被攻击，就需要重新部署或整个网络分叉才能完成状态更新。但 Celestia 的技术迭代却允许链分叉而不用失去安全性，因为分叉之后使用的 DA 层是相同的且更新变得更加容易，执行层可以专注于优化执行的环境和速率。</p>
+<p>简易部署链之技术：</p>
+<p>过去部署一条链对于资源、成本要求很高，需要建立共识、激励节点加入网络。而随着 PoS 的发展，Cosmos SDK 等工具让创建新区块链变得更加容易，但是依然需要开发人员寻找验证节点的加入。</p>
+<p>因此，Celestia 引入的 Optimint 则会更高效的帮助开发人员部署链，因为 Celestia 提供完整的共识和安全性。且多链采用的是同一 DA 层，实现了同一区块链间桥接的最小化信任。提高了多个区块链可以相互通信的安全性。最后 Celestia 也结合了 Cosmos 开放的生态和以太坊共享安全性，提供了多链开放且共享安全的可能。</p>
+<h3 id="3团队介绍">3. 团队介绍</h3>
+<p>执行长 Mustafa Al-Bassam 毕业于伦敦大学学院博士学位，之前与他人共同创办智能合约平台 Chainspace，接着被 Facebook 收购。Mustafa 先前也撰写了几篇关于分片区块链系统安全性的开创性论文。</p>
+<p>CRO 则是 John Adler ，他之前在 ConsenSys 工作是 L2 可扩展性研究人员，从事以太坊 2.0 的第二阶段工作。而 Adler 则从 Mustafa 身上找到数据可用性的新应用，为Optimistic Rollup方案创建了第一个先驱。</p>
+<p>首席技术官 Ismail Khoffi 在业界是非常知名的研究工程师， Khoffi 除了构建学术研究模型之外，还为 Google UK 和 Tendermint 等各种非区块链、区块链项目都大量投入贡献。</p>
+<p>首席运营官  Nick White 毕业于斯坦福大学硕士。在加入 Celestia 之前，White 与他人共同创立了可扩展区块链基础设施的区块链协议 Harmony，为去中心化革命提供新动能。White 还是亚洲人工智能初创公司的加速器项目 Zeroth.ai 的高级人工智能专家。</p>
+<h3 id="4投资机构">4. 投资机构</h3>
+<p>Celestia 已启动其 “Mamaki” 测试网，支持用户操作节点、接收测试网代币、验证者委托以及在钱包之间发送交易。该项目预计主网将在 2023 年初上线。</p>
+<p>目前已经先于测试网上线了开发者网，开发者网包括三个主要组成部分：Optimint, Celestia-app和Celestia-nodes。Celestia-nodes 的任务是为这个区块链达成共识和建立网络，决定了轻节点和完整节点如何创建新区块、从区块中采样数据，以及同步新区块的多面向技術。而在Optimint中，Cosmos Zones都将直接部署在Celestia上。</p>
+<h3 id="5社群情况">5. 社群情况</h3>
+<p>Twitter：</p>
+<p><a href="https://twitter.com/CelestiaOrg">https://twitter.com/CelestiaOrg</a></p>
+<p>5.9 k 位追随者</p>
+<p>Discord：</p>
+<p><a href="https://discord.com/invite/YsnTPcSfWQ">https://discord.com/invite/YsnTPcSfWQ</a></p>
+<p>35491 位追随者</p>
+<p>Telegram：</p>
+<p><a href="https://t.me/CelestiaCommunity">https://t.me/CelestiaCommunity</a></p>
+<p>9580 位追随者</p>
+<h3 id="6-链茶点评">6. 链茶点评</h3>
+<p>可扩展性一直是区块链技术被广泛采用的最大障碍之一。尽管已经有不少Ｌ1扩展解决方案，但大多数都专注于共识层而不是数据可用性。</p>
+<p>模块化区块链 Celestia 构建了一个将数据层单独独立出来的公链，且还允许开发人员关注数据层之上的设计，而不需要花心力注意底层数据记录，许多人相信未来这种模块化设计的数据可用层不仅可以为扩容提供更快的实现方案，更会极大的降低开发者进入 web3 的难度。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40888/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">开源与 Web3：公共物品如何与权益绑定？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40886/">
+                <span class="next-text nav-default">摩根士丹利策略师：经济衰退风险抑制美股上涨空间</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1项目概述">1. 项目概述</a></li>
+        <li><a href="#2应用场景">2. 应用场景</a></li>
+        <li><a href="#3团队介绍">3. 团队介绍</a></li>
+        <li><a href="#4投资机构">4. 投资机构</a></li>
+        <li><a href="#5社群情况">5. 社群情况</a></li>
+        <li><a href="#6-链茶点评">6. 链茶点评</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

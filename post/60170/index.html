@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文速览Friend.tech设计机制及潜在风险 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Friend.tech的火热会持续多久？其Key的定价模型是怎样的？产品存在哪些潜在风险？今天我们就为大家梳理一下。" />
+<meta name="keywords" content="friend.tech" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/60170/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文速览Friend.tech设计机制及潜在风险" />
+<meta property="og:description" content="Friend.tech的火热会持续多久？其Key的定价模型是怎样的？产品存在哪些潜在风险？今天我们就为大家梳理一下。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/60170/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文速览Friend.tech设计机制及潜在风险">
+<meta itemprop="description" content="Friend.tech的火热会持续多久？其Key的定价模型是怎样的？产品存在哪些潜在风险？今天我们就为大家梳理一下。"><meta itemprop="datePublished" content="2023-09-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3920">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文速览Friend.tech设计机制及潜在风险"/>
+<meta name="twitter:description" content="Friend.tech的火热会持续多久？其Key的定价模型是怎样的？产品存在哪些潜在风险？今天我们就为大家梳理一下。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文速览Friend.tech设计机制及潜在风险</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-29">
+      2023-09-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3920 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_8m6wnwleei.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p>此前，Beosin曾发表过《Friend.tech暴露10万+地址的关联信息，社交类Dapp隐私该如何保障？》文章，我们谈到从Friend.tech开启邀请制 Beta 测试以来，这款去中心化社交应用迅速吸引了大量用户，甚至吸引了大牌加密货币影响者的关注。同时文章也谈到Friend.tech暴露10万+地址的关联信息对用户的影响。</p>
+<p>目前，Friend.tech热度愈演愈烈，社交媒体平台上得到了广泛传播和分享。对于任何一个火热的项目，我们在参与前都需要关注其潜在的风险，这样才能保障资金安全。Friend.tech的火热会持续多久？其Key的定价模型是怎样的？产品存在哪些潜在风险？今天我们就为大家梳理一下。</p>
+<p><strong>Friend.tech介绍</strong></p>
+<p>Friend.tech 是构建在Base区块链上的去中心化社交应用，用户需要通过绑定推特和钱包来使用 Friend.tech 并以此获利。Friend.tech 的定位是将用户的影响力代币化，用户可以购买其他用户的“Key”（原名为Share）以获得和其他用户直接交流的权限。</p>
+<p>仅仅在推出的第一周，Friend.tech上的交易量就超过了7,000 ETH，显示出其强大的市场吸引力。至9月27日，已有超过27万名用户在平台上完成了792.7万笔交易。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_s1usddlk2a.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p>Source: https://dune.com/21co/friendtech-analysis</p>
+<h3 id="key-定价模型"><strong>Key 定价模型</strong></h3>
+<p>Key 的定价没有采用传统的订单簿或者去中心化交易所常用的 AMM 恒定乘积模型来定价，而采取了基于当前Key在平台上的总持有量的固定价格模型，即Key的价格只与持有者数量有关。<strong>下文用S表示当前持有量</strong> 。</p>
+<p>每一个 Key 被购买时，Key价格为（S^2 / 16000）ETH。当用户注册完成Friend.tech 的账户后，用户就持有自己的Key了。此时持有量S为1，随后购买该用户第二份 Key 的价格为1^2/16000 ETH，即<strong>0.0000625 ETH</strong> 。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_qstsnv35oa.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p>当用户出售 Key 时，售价为(S − 1)^2 / 16000。每增加1份持有量，Key的涨幅为(2S+1)/S^2。值得注意的是，初期Key的涨幅非常大，如果出现第2份Key的购买者，那么Key的价格将上涨300%；但随着持有量增加，涨幅会越来越小，第11份Key的购买者对于价格的影响约为19%，<strong>不足以涵盖买卖的手续费 (在实际交易中，用户在购买或售出 Key 时都需额外支付 10% 手续费)，需要有更多的购买者进来才能获利</strong> 。</p>
+<p>因此，实际交易中，购买的份数越靠后，回本所需的持有量越多。当 Key 持有量达到50时，持有量需要比购入时增加约10%才能让用户回本；在回本前，增量用户需要付出的总费用将成指数上升。若用户购入某 Key 的第 100 个份额，将需要等待后续用户购买11个Keys（后续总花费约为8 ETH），才能卖出回本；而如果是第200份Key，则需要后续购买者花费约68 ETH才能回本。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_0moqmpygsk.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p>Friend.tech固定价格模型的<strong>优势</strong> 在于：</p>
+<p>（1）早期Key价格上升迅速，易制造财富效应和FOMO情绪。第1份Key与第10份Key的价格相差100倍，早期玩家以极小的投入可以获得高倍数以及不错的回报。</p>
+<p>（2）价格上涨需要新用户的进入，变相锁仓留住用户。由此激励影响力大的KOL进驻Friend.tech，用户也会选择持有影响力大的KOL的Key以期望获利。</p>
+<p>其<strong>劣势</strong> 在于：</p>
+<p>（1）Key的持有量有上限。上文已分析Key后面的份数价格昂贵且回本难度大，这对于新用户的加入是非常高的壁垒。目前Friend.tech上Key持有量最大为343，价格为7.353 ETH。而目前Key的总数为190836，约千分之一的Key持有量超过100。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_is2dq5dqjw.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p>Data Source: https://dune.com/queries/2969074/4920998</p>
+<p>（2）Key创建者的收入，Key的价格与Key创建者在Friend.tech产生的内容几乎无关，这对于一款定位为社交赛道的应用来说缺乏可持续性。</p>
+<p>（3）<strong>机器人泛滥，无有效反女巫措施</strong> 。因为Base网络的排序器 (Sequencer) 是由Coinbase掌控，其他用户无法主动掌握区块的交易排序，因此Friend.tech的狙击机器人很可能是用以下策略进行狙击的：</p>
+<p>首先，机器人会监控Base的L2CrossDomainMessenger合约地址，检查与该合约交互的地址是否为Base上的新账户。</p>
+<p>其次，检测到新账户后，马上开始调用Friend.tech Shares合约 (0xcf205808ed36593aa40a44f10c7f7c2f67d4a4d4)，在buyShares()函数中传入新账户地址和份数，尝试购买该账户最新的Key。</p>
+<p>通过每秒提交多笔gas不同但内容相同的交易，尽可能在新账户创建Key后第一时间买入。排序器会根据gas和接收时间对交易进行打包上链。这种滥发交易和抢跑行为大大降低了用户体验，损害了真实用户的利益。</p>
+<h3 id="friendtech爆火原因"><strong>Friend.tech爆火原因</strong></h3>
+<p>1.  推特博主引入流量</p>
+<p>作为一款社交产品，Friend.tech 通过将影响力代币化为KOL提供了可观的收益。由于Keys的定价模型，用户每次购买Shares，对应的KOL都将获得5%的交易费用。因此，Friend.tech 对于影响力大的KOL是非常有吸引力的，KOL可以通过 Friend.tech 获得粉丝经济的收益，而KOL的进驻又为 Friend.tech 带来了用户数和知名度的提升。而在TOKEN2049期间，由于传播效应与聚集效应，不少加密人士尝试使用 Friend.tech。</p>
+<p>2.  渐进式网络应用程序（PWA）</p>
+<p>Friend.tech采用PWA，让其网页应用程序可以在多种设备上运行。对于项目方来说，PWA比起原生应用难度更低，开发周期更短。对于用户来说，只需要有浏览器即可使用Friend.tech，可以做到即开即用。</p>
+<p>3.  推出积分系统与空投</p>
+<p>8月19日，Friend.tech 在推特上宣布Paradigm将参与其种子轮融资，并且会与Paradigm合作构建新的社交工具。同时 Friend.tech 宣布这些积分在为期6个月的测试阶段结束后会有特殊用途（即空投）。有Blur的空投效益在前，目前Friend.tech吸引了一大批空投猎人，为 Friend.tech 贡献数据量。</p>
+<h3 id="friendtech衍生工具"><strong>Friend.tech衍生工具</strong></h3>
+<p>1.  FriendSniper</p>
+<p>一款电报机器人，提供Friend.tech新增用户提醒，Key狙击买入，跟单交易和限价止盈止损的服务。FriendSniper的狙击功能目前处于测试阶段，且代码未开源，用户使用时需注意风险。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_gry6tljneh.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p><a href="https://www.friendsniper.io/">https://www.friendsniper.io/</a></p>
+<p>2.  FrenTrade</p>
+<p>FrenTrade是一个Friend.tech的信息聚合平台。用户可以在该平台上查看目前流行交易的Key，新上线的Key和最新发生交易的Key等信息。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_vmez990i4c.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p><a href="https://fren.trade/">https://fren.trade/</a></p>
+<p>3.  FriendMEX</p>
+<p>FriendMEX提供购买Key，查看Key价格走势，显示实时交易等服务，是由前Paradigm的研究员 Anish Agnihotri 专门为交易Key开发的项目。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_3y16446qz8.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p><a href="https://friendmex.com/">https://friendmex.com/</a></p>
+<p>4.  Hyperliquid</p>
+<p>Hyperliquid推出了针对Friend.tech的指数永续合约FRIEND-USD，该指数通过多重标准选出20个账户的Key，跟踪它们每份买入价的中位数。该指数每周周三会更新指数中各Key的比例因子。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_isz33st4cn.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p><a href="https://app.hyperliquid.xyz/trade/FRIEND">https://app.hyperliquid.xyz/trade/FRIEND</a></p>
+<h3 id="friendtech潜在风险"><strong>Friend.tech潜在风险</strong></h3>
+<p>通过Beosin VaaS工具扫描Friend.tech业务合约，结合Beosin安全审计专家的分析，我们发现Friend.tech有以下风险：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0929/8_q63shomv4s.png" alt="一文速览Friend.tech设计机制及潜在风险"></p>
+<p>1.  <strong>中心化风险</strong> ，owner可以无限制的调整手续费率，从而收取高昂的手续费，甚至可以设置100%的手续费让用户收不到卖出的钱，也可以设置超过100%的手续费率来停用买入卖出功能。</p>
+<p>2.  <strong>业务逻辑风险</strong> ，sharesSubject地址即股权发行人最初可以免费获得1股，并且不能售卖最后的1股。假设用户买入1股后，若发行人卖出，则用户将无法卖出，遭受损失。</p>
+<p>3.  由于股权总量越大买价和卖价都越高，可能存在早期大户购入大量股权的情况，随着总量的增加可抛售获利，后期的用户购买的股权则可能产生亏损，<strong>参与投资需注意资金风险</strong> 。</p>
+<p>4.  用户注册Friend.tech后是由Friend.tech生成一个新的钱包。Friend.tech表示新生成的钱包为MPC钱包，私钥只有用户能完整访问。但Friend.tech并未经过任何代码审计，<strong>其私钥生成和保管流程依然是黑盒</strong> 。</p>
+<h3 id="总结"><strong>总结</strong></h3>
+<p>Friend.tech目前仍处于非常早期的阶段，重金融交易属性，社交功能相对非常简单，采用积分空投的方式来实现用户留存，用户需留意相关风险。Key定价模型适合早期启动，但上限明显，后续Friend.tech如何持续获得新用户是一个难题。对于关注Key交易的用户来说，围绕Friend.tech构建的交易工具和项目陆续上线，此类用户可以使用衍生工具非常方便地进行Key相关的交易。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/60165/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一览 DeFi 格局：顶级协议及其独特功能指南</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/60152/">
+                <span class="next-text nav-default">以太坊开发者：Holesky测试网已启动</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#key-定价模型"><strong>Key 定价模型</strong></a></li>
+        <li><a href="#friendtech爆火原因"><strong>Friend.tech爆火原因</strong></a></li>
+        <li><a href="#friendtech衍生工具"><strong>Friend.tech衍生工具</strong></a></li>
+        <li><a href="#friendtech潜在风险"><strong>Friend.tech潜在风险</strong></a></li>
+        <li><a href="#总结"><strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

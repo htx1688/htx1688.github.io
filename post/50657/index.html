@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深度解析全链游戏引擎MUD - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="游戏引擎在游戏开发中发挥着至关重要的作用。" />
+<meta name="keywords" content="Gamefi" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50657/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深度解析全链游戏引擎MUD" />
+<meta property="og:description" content="游戏引擎在游戏开发中发挥着至关重要的作用。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50657/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="深度解析全链游戏引擎MUD">
+<meta itemprop="description" content="游戏引擎在游戏开发中发挥着至关重要的作用。"><meta itemprop="datePublished" content="2023-05-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4015">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深度解析全链游戏引擎MUD"/>
+<meta name="twitter:description" content="游戏引擎在游戏开发中发挥着至关重要的作用。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深度解析全链游戏引擎MUD</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-06">
+      2023-05-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4015 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>游戏引擎在游戏开发中发挥着至关重要的作用。<strong>对于全链上游戏来说，同样需要一个能够帮助开发者快速部署游戏逻辑的工具。这不仅能够缩短开发周期，还为后续的迭代开发和开放生态中的互操作提供了统一的数据标准。</strong></p>
+<h3 id="传统游戏引擎"><strong>传统游戏引擎</strong></h3>
+<p>游戏引擎是一种用于开发和创建电子游戏的软件框架。它包括了游戏开发所需的许多核心功能，对于传统的Web2游戏来说，一般包含如渲染引擎、音频处理、物理模拟和动画系统等。通过使用游戏引擎，开发者能够专注于游戏设计和创意，而无需从头开始构建整个技术基础设施。游戏引擎为游戏开发者提供了一个快速有效的工具，以降低开发成本和时间。</p>
+<p>有许多知名的Web2游戏引擎，如Unity、Unreal Engine和Godot等。这些引擎不仅适用于专业开发者，也适用于独立开发者和初学者。游戏引擎具有高度可定制性，可以根据项目需求进行调整。它们通常支持跨平台开发，允许开发者为多种设备（如个人计算机、游戏机和移动设备等）创建游戏。此外，许多引擎还提供了对虚拟现实（VR）和增强现实（AR）的支持，以满足不断发展的技术需求。游戏引擎还包含了一套丰富的工具集，可以帮助开发者轻松地创建游戏世界、角色和物品。这些工具有助于实现高效的游戏开发流程，例如可视化的场景编辑器、脚本编辑器以及动画和特效工具等。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/14_uyseys35fp.png" alt="深度解析全链游戏引擎MUD"></p>
+<h3 id="全链游戏引擎">全链游戏引擎</h3>
+<p>游戏引擎在游戏开发中发挥着至关重要的作用。对于全链上游戏来说，同样需要一个能够帮助开发者快速部署游戏逻辑的工具。这不仅能够缩短开发周期，还为后续的迭代开发和开放生态中的互操作提供了统一的数据标准。</p>
+<p>在这个领域中，较为成熟的项目是由Lattice工作室开发的基于Solidity的全链游戏引擎MUD。它使开发者能够迅速将游戏逻辑部署到智能合约中，并实现合约与客户端状态的同步等功能，从而显著提高开发效率。</p>
+<p>值得注意的是，目前全链上游戏除了采用Solidity编写外，StarkNet的Cairo也是一种常用的语言。然而，MUD并不能很好地兼容Cairo。因此，StarkNet生态中的两个活跃项目Realms和Briq的创始人共同开发了基于Cairo的全链上引擎Dojo。由于Dojo的核心理念与MUD相似，引发了MUD创始人Ludens的不满。但在一番争议之后，Ludens最终表示愿意协助将MUD部署到StarkNet上。</p>
+<h3 id="ecs架构">ECS架构</h3>
+<p>开发游戏引擎时遇到的最大问题是如何表示游戏对象，游戏对象可以从没有控制或交互的简单2D图像到具有控制、声音、动画和AI的异常复杂3D对象。在概念上，很容易将游戏对象理解为表示游戏中具有多个功能的实体。最开始使用面向对象变成OOP的架构，现在更为流行的是ECS架构（Entity Component System）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/14_cbrq8vug4o.png" alt="深度解析全链游戏引擎MUD"></p>
+<p>ECS通过将逻辑、数据和实体分离，提高了游戏开发的灵活性和可维护性。这种架构模式有助于降低代码复杂度，减少耦合，从而提升性能和开发效率。ECS由以下三个主要部分组成：</p>
+<ol>
+<li>
+<p>实体（Entity）：实体是游戏世界中的基本对象，如角色、道具或场景物体等。实体本身并不包含任何数据或逻辑，而只是一个唯一标识符，用于关联组件和系统。</p>
+</li>
+<li>
+<p>组件（Component）：组件用于存储实体的属性和数据。每个组件负责表示一个特定的特征或功能，例如位置、速度或生命值等。组件只包含数据，不包含任何逻辑。通过将不同的组件组合在一起，可以轻松地创建具有各种功能和特性的实体。</p>
+</li>
+<li>
+<p>系统（System）：系统负责处理游戏逻辑和行为。系统根据实体所拥有的组件来执行相应的操作。例如，一个处理移动的系统会查找具有位置和速度组件的实体，并根据其速度更新位置。系统独立于实体和组件，使得游戏逻辑更加模块化和可复用。</p>
+</li>
+</ol>
+<p>ECS模式有助于解决传统面向对象编程（OOP）在游戏开发中的一些问题，如继承层次过深和代码重用困难等。ECS使得游戏对象的构建更加灵活，可以通过组合不同的组件轻松创建出复杂的行为。此外，ECS还有助于优化性能，特别是在处理大量游戏对象时。许多现代游戏引擎，如Unity和Godot，已经采用了ECS作为其核心架构。</p>
+<p>全链游戏和Web2游戏甚至常见的GameFi游戏（游戏资产上链但游戏本身不上链）有很大不同，比如，编程语言多采用Solidity，游戏对象的属性状态储存在智能合约中，这就导致面向对象编程完全无法使用，只能采用ECS架构。</p>
+<p>我们来看Solidity，其实已经在不知不觉中使用过这种模式的变体。以ERC-20合约为例：ERC-20合约将每个地址的代币余额存储在一个映射中（从address到uint256余额）。我们可以将每个ERC-20合约视为一个具有两列的表：&ldquo;地址&quot;和&quot;余额&rdquo;。这对应于具有单个模式值（&ldquo;余额&rdquo;）的组件。表中的每行都将一个实体（&ldquo;地址&rdquo;）与一个组件值（&ldquo;余额&rdquo;）关联起来。一个地址可以在许多独立的ERC-20合约中持有余额，这对应于一个实体与许多独立的组件值关联。在当前的ERC-20参考实现中，状态和逻辑是耦合在同一个合约中的。在ECS中，我们将有一个通用的&quot;转账系统&quot;来处理从一个地址向另一个地址转账代币的逻辑，通过修改代币组件中存储的状态。</p>
+<p>另一个例子是一个简单的视频游戏，可用的组件有&quot;位置&quot;和&quot;生命值&quot;。具有位置的实体在位置组件中有一个条目，具有生命值的实体在生命值组件中有一个条目。&ldquo;移动系统&quot;可以实现将实体从一个位置移动到另一个位置的规则。&ldquo;战斗系统&quot;可以根据涉及实体位置的规则实现战斗逻辑，并修改实体的生命值。</p>
+<h3 id="mud游戏引擎">MUD游戏引擎</h3>
+<p>MUD是一个以太坊应用程序框架。其核心是一组合约接口和使用它们的约定。这些核心接口和库使得一系列周边工具、集成和库能够更加顺畅地进行，从而使链上应用程序的开发变得更加简洁。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/14_z0kd57yiza.png" alt="深度解析全链游戏引擎MUD"></p>
+<p>MUD 可以实现如下功能</p>
+<p>目前</p>
+<ul>
+<li>
+<p>在合约和客户端之间进行状态同步，无需定制网络代码</p>
+</li>
+<li>
+<p>通用索引器（无需定制索引代码）</p>
+</li>
+<li>
+<p>无缝合约升级（+ 开发过程中的自动合约升级）</p>
+</li>
+<li>
+<p>合约共享状态</p>
+</li>
+<li>
+<p>Optimistic 更新</p>
+</li>
+<li>
+<p>合约和系统的自动生成类型</p>
+</li>
+<li>
+<p>与合约状态进行交互的查询语言</p>
+</li>
+<li>
+<p>用于检查和修改合约和本地状态的数据浏览器</p>
+</li>
+<li>
+<p>位打包实用工具</p>
+</li>
+</ul>
+<p>未来</p>
+<ul>
+<li>
+<p>本地模拟事务（包括Optimistic状态）</p>
+</li>
+<li>
+<p>内置支持账户抽象化</p>
+</li>
+<li>
+<p>合约包管理器</p>
+</li>
+</ul>
+<p>MUD的框架包含8个库文件。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/14_7zl2upiajg.png" alt="深度解析全链游戏引擎MUD"></p>
+<ul>
+<li>
+<p>SOLECS是MUD的核心Solidity库，包含了链上组件、系统等的接口和参考实现。由于所有状态都存储在组件中，并且所有状态更新都在中心World合约中注册，MUD可以提供开箱即用的网络逻辑，以实现合约和客户端状态的同步。</p>
+</li>
+<li>
+<p>RECS是用TypeScript实现的一种响应式ECS库。它可以独立于任何链上组件使用，但也可以与SOLECS共同使用，以便在客户端上以相同格式镜像链上状态。</p>
+</li>
+<li>
+<p>Services包含了使用上述方法同步链上状态的通用索引器。</p>
+</li>
+<li>
+<p>Network是智能合约和节点做状态同步的库。</p>
+</li>
+</ul>
+<p>基于StarkNet的Dojo在功能上和MUD非常类似，甚至可以认为是用Cairo语言把MUD重新写了一遍，所以不再具体讲解。在MUD的开发者文档中给出了一个具体的例子来教会大家如何在一天时间就能开发出一个全链游戏：Emojimon（表情怪兽）。感兴趣的朋友可以参考这篇官方教程：<a href="https://mud.dev/tutorials/emojimon/">https://mud.dev/tutorials/emojimon/</a></p>
+<h3 id="基于mud开发的游戏">基于MUD开发的游戏</h3>
+<h4 id="sky-strife">Sky Strife</h4>
+<p>Sky Strife是一个基于MUD构建的链上游戏。游戏以快节奏的实时战略（RTS）战斗为特点，展开一场争夺谁能带着“Ember Crown”逃离战场的激战。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/14_b5avzp5o59.png" alt="深度解析全链游戏引擎MUD"></p>
+<h4 id="kamigotchi">Kamigotchi</h4>
+<p>Kamigotchi 是一款具有PvP机制的多人在线角色扮演闲置游戏。您可以使用您的Kamigotchi（简称“Kami”）从世界各地散布的节点中收获$KAMI。$KAMI可用于升级您的Kami并购买食物。然而，收获会消耗您的Kami的生命值，当生命值较低时，其他玩家可以使用他们的Kami猎杀您的Kami。您需要保持您的Kami充饥并仔细观察它们以获得最大产出。死亡并不是永久的，核心NFT不受影响，但这会让您付出代价——被杀死的Kami在游戏中无法再次使用，除非使用商店中的某些消耗品复活，当然这需要$KAMI。此外，您的Kami会因为这次经历而心情受挫。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/14_8sb4em9ezd.png" alt="深度解析全链游戏引擎MUD"></p>
+<h4 id="muddy-forest">Muddy Forest</h4>
+<p>Muddy Forest是一款完全基于链上的大型多人在线实时战略太空征服游戏，游戏中的每个动作，从运输、发送资源到占领星球等，都发生在区块链上。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/14_7tttrv1578.png" alt="深度解析全链游戏引擎MUD"></p>
+<p>文：JustinZhao</p>
+<p>原标题：深度解析全链游戏引擎MUD</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50656/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">深度解读NFT MEV：NFT交易中的新机遇</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50678/">
+                <span class="next-text nav-default">梳理ARK Invest的Crypto持仓变化情况，木头姐看涨有多坚定？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#传统游戏引擎"><strong>传统游戏引擎</strong></a></li>
+        <li><a href="#全链游戏引擎">全链游戏引擎</a></li>
+        <li><a href="#ecs架构">ECS架构</a></li>
+        <li><a href="#mud游戏引擎">MUD游戏引擎</a></li>
+        <li><a href="#基于mud开发的游戏">基于MUD开发的游戏</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          打破区块链的不可篡改性：代理模式如何实现智能合约升级？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将为大家概述代理合约的类型、相关的安全事件和建议，以及使用代理合约的最佳实践。" />
+<meta name="keywords" content="合約, 智能合約" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53198/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="打破区块链的不可篡改性：代理模式如何实现智能合约升级？" />
+<meta property="og:description" content="本文将为大家概述代理合约的类型、相关的安全事件和建议，以及使用代理合约的最佳实践。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53198/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-15T00:00:00+00:00" />
+
+<meta itemprop="name" content="打破区块链的不可篡改性：代理模式如何实现智能合约升级？">
+<meta itemprop="description" content="本文将为大家概述代理合约的类型、相关的安全事件和建议，以及使用代理合约的最佳实践。"><meta itemprop="datePublished" content="2023-06-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5290">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"/>
+<meta name="twitter:description" content="本文将为大家概述代理合约的类型、相关的安全事件和建议，以及使用代理合约的最佳实践。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">打破区块链的不可篡改性：代理模式如何实现智能合约升级？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-15">
+      2023-06-15
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5290 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>代理模式使智能合约能够升级其逻辑，同时维持其链上地址和状态值。对代理合约的调用会通过delegateCall的方式执行来自逻辑合约的代码，以修改代理合约的状态。</p>
+<p>本文将为大家概述代理合约的类型、相关的安全事件和建议，以及使用代理合约的最佳实践。</p>
+<p><strong>可升级的合约和代理模式简介</strong></p>
+<p>我们都知道区块链的「不可篡改」特质，智能合约代码在部署于区块链上后就无法被修改。</p>
+<p>因此当开发者想为逻辑升级、修复错误或因安全更新试图更新合约代码时，他们必须部署一个新的合约，并会生成一个新的合约地址。</p>
+<p>想要解决这个问题，就可以用代理模式。</p>
+<p>代理模式实现了合约的可升级性，并且不会改变合约的部署地址，这也是目前最普遍的合约升级模式。</p>
+<p>代理模式是一个<strong>可升级的合约系统</strong> ，包括代理合约和逻辑实现合约。</p>
+<p>代理合约处理用户交互和数据及合约状态存储。用户对代理合约的调用会通过delegatecall()执行来自逻辑合约的代码，从而改变代理合约的状态。升级则是通过更新在代理合约预定存储槽里记录的逻辑合约地址来实现。</p>
+<p>较为常规的三种代理模式分别是透明代理、UUPS代理和Beacon代理。</p>
+<p><strong>透明代理</strong></p>
+<p>在透明代理模式中，升级功能是在代理合约中实现的。代理合约的管理员角色被赋予了操作代理合约的直接权限，以更新代理对应的逻辑实现地址。没有管理员权限的调用者则会把他们的调用委托给实现合约。</p>
+<p>注意：代理合约管理员不能是逻辑实现合约的关键角色，甚至也不能是普通用户，因为代理管理员无法与实现合约进行交互。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0615/18_nswn6c40e4.png" alt="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"></p>
+<p><strong>UUPS代理</strong></p>
+<p>在UUPS(Universal Upgradeable Proxy Standard)模式中，合约升级功能是在逻辑合约中实现的。由于升级机制存储在逻辑合约中，升级过后的版本可以删除升级相关的逻辑，以禁止未来的升级。在这种模式下，所有对代理合约的调用都会被转发给逻辑实现合约。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0615/18_lb8sn8946p.png" alt="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"></p>
+<p><strong>Beacon代理</strong></p>
+<p>Beacon代理模式允许多个代理合约通过引用Beacon合约来共享同一个逻辑实现。Beacon合约为调用的代理合约提供逻辑实现合约的地址，当升级到一个新的逻辑实现地址时，只需要更新Beacon合约里记录的地址即可。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0615/18_y4jctfjhfw.png" alt="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"></p>
+<p><strong>代理误用和安全事件</strong></p>
+<p>开发人员可以利用代理模式合约来实现可升级的合约系统。然而，代理模式也有一定的操作门槛，如果使用不当，可能会给项目带来堪称毁灭性的安全问题。以下部分展示了与代理误用相关的事件，以及代理带来的中心化风险。</p>
+<p><strong>代理管理的密钥泄露</strong></p>
+<p>代理管理员控制着透明代理模式的升级机制，如果管理员的私钥被泄露，攻击者可以升级逻辑合约并在代理状态上执行他们自己的恶意逻辑。</p>
+<p>2021年3月5日，PAID Network遭受了由于私钥管理不善而引起的“铸币”攻击。PAID Network被攻击者利用，攻击者窃取了代理管理员的私钥并触发了升级机制以更改逻辑合约。</p>
+<p>升级后，攻击者可以销毁用户的PAID，并为自己铸造了一批PAID，随后再将其出售。代码本身并不存在安全漏洞，而是攻击者从管理员那里获取了升级合约的私钥。</p>
+<p><strong>未初始化的UUPS代理实现</strong></p>
+<p>对于UUPS代理模式，在代理合约的初始化过程中，初始参数由调用者传给代理合约，再由代理合约调用逻辑合约里的initialize()函数实现初始化。</p>
+<p>initialize()函数通常被“initializer”修饰符保护，以限制该函数只能被调用一次。在调用initialize()函数后，从代理合约的角度看，逻辑合约被初始化了。</p>
+<p>然而，从逻辑合约的角度来看，逻辑合约并没有被初始化，因为initialize()并没有在逻辑合约中被直接调用。鉴于逻辑合约本身未被初始化，任何人都可以调用initialize()函数来初始化它，将状态变量设置为一个恶意的值，并有可能接管逻辑合约。</p>
+<p>逻辑合约被接管的影响取决于系统中的合约代码。在最坏的情况下，攻击者可以将UUPS代理模式中的逻辑合约升级为恶意合约，并执行“自毁”函数调用，这可能导致整个代理合约变得毫无用处，合约中的资产将永久丢失。</p>
+<p><strong>案例</strong></p>
+<p>① Parity Multisig Freeze：未初始化逻辑合约。攻击者触发了许多钱包的初始化，并通过调用 selfdestruct() 将以太币锁定在合约中。</p>
+<p>② Harvest Finance、Teller、KeeperDAO和Rivermen都使用了未初始化的逻辑合约，这将允许攻击者任意设置合约的初始化参数，并在delegatecall() 期间执行selfdestruct()将代理合约销毁。</p>
+<p><strong>存储冲突</strong></p>
+<p>在一个可升级的合约系统中，代理合约不会声明状态变量，而是使用伪随机存储槽来存储重要数据。</p>
+<p>代理合约将逻辑合约状态变量的值保存在它们被声明的相对位置。如果代理合约声明了它自己的状态变量，这时代理和逻辑合约都试图使用同一个存储槽，就会发生存储冲突。</p>
+<p>OpenZeppelin库提供的代理合约不会在合约中声明状态变量，而是基于EIP 1967标准，将需要存储的数值（如管理地址）保存到特定的存储槽中，以防止冲突。</p>
+<p><strong>案例</strong></p>
+<p>北京时间2022年7月23日，去中心化音乐平台Audius遭到黑客攻击，该事件是由于在代理合约中引入新的逻辑，从而产生存储冲突所导致的。</p>
+<p>代理合约声明了一个proxyAdmin地址状态变量，在执行逻辑合约代码时，其值会被错误地读取。</p>
+<p>项目方私自定义的proxyAdmin的值被错误的当成了initialized和initializing的值，使得initializer修饰符返回了错误的结果，进而允许攻击者再次调用initialize()函数并将管理合约的权限授予自己。攻击者随后更改了投票参数并通过了他们的恶意提案，以窃取Audius资产。</p>
+<p><strong>在逻辑合约里调用delegatecall()或不信任的合约</strong></p>
+<p>假设delegatecall()存在于一个逻辑合约中，而合约没有正确验证调用目标。在这种情况下，攻击者可以利用该函数来执行对其控制的恶意合约的调用，以破坏逻辑实现或执行自定义逻辑。</p>
+<p>同样地，逻辑合约中若有一个不受限制的address.call()函数，一旦攻击者恶意提供地址和数据字段，就可以利用其充当代理合约。</p>
+<p><strong>案例</strong></p>
+<p>Pickle Finance、Furucombo以及dYdX攻击事件。</p>
+<p>在这几起事件中，存在漏洞的合约获得了用户token的批准，并且合约内存在一个由用户提供调用合约地址和数据的call()/delegatecall()，攻击者将能够调用具有transferFrom()功能的合约，以提取用户余额。在dYdX事件中，dYdX执行了他们自己的白帽攻击以保护资金。</p>
+<p><strong>最佳实践</strong></p>
+<p><strong>一般情况</strong></p>
+<p>（1）仅在必要的时候才使用代理模式</p>
+<p>不是每个合约都需要升级。如上文所示，使用代理模式涉及很多风险。“可升级”的属性也会引起信任问题，因为代理管理员可以在没有得到社区同意的情况下升级合约。我们建议仅在必要时才将代理模式整合到项目中。</p>
+<p>（2）不要修改代理库</p>
+<p>代理合约库很复杂，尤其是处理存储管理和升级机制的部分。修改中的任何错误都会影响代理和逻辑合约的工作。我们在审计过程中发现的大量与代理有关的高严重性bug都是由不正确的代理库修改造成的。Audius事件就是一个典型的例子，展示了代理合约修改不当所带来的后果。</p>
+<p><strong>代理合约操作管理要点</strong></p>
+<p>（1）初始化逻辑合约</p>
+<p>攻击者可以接管一个未初始化的逻辑合约，并有可能借此破坏代理合约系统。因此请在部署后初始化逻辑合约，或者在逻辑合约的构造函数中使用_disableInitializers()来自动禁用初始化。</p>
+<p>（2）确保代理管理账户的安全</p>
+<p>一个可升级的合约系统通常需要一个“代理管理员”的特权角色来管理合约的升级。如果管理密钥泄露，攻击者可以自由地将合约升级为恶意合约，就可以窃取用户的资产。我们建议谨慎管理代理管理账户的私钥，以避免任何被黑客攻击的潜在风险。可以使用多签名钱包来防止单点的密钥管理失败。</p>
+<p>（3）为透明代理管理使用单独的账户</p>
+<p>代理管理和逻辑治理应该是独立的地址，以防止丢失与逻辑实现的交互。如果代理管理和逻辑治理引用同一个地址，就不会转发任何调用来执行特权功能，从而禁止治理功能的更改。</p>
+<p><strong>代理合约存储相关</strong></p>
+<p>（1）在代理合约中声明状态变量时要小心谨慎</p>
+<p>正如Audius黑客事件中所解释的那样，代理合约在声明自己的状态变量时必须谨慎。在代理合约中以正常方式声明的状态变量会在读写数据时造成数据冲突。如果代理合约需要一个状态变量，请将该值保存在一个类似EIP1967的存储槽中，以防止在执行逻辑合约代码时发生冲突。</p>
+<p>（2）维护逻辑合约的变量声明顺序和类型</p>
+<p>每个版本的逻辑合约都必须保持状态变量相同的顺序和类型，并且需要在现有变量的末尾添加新的状态变量。否则，委托调用会导致代理合约读取或覆盖不正确的存储值，而且旧的数据可能与新声明的变量相关联，这会给应用程序带来严重的问题。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0615/18_1zt59lsbng.png" alt="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"></p>
+<p>（3）在基础合约中包含存储间隙</p>
+<p>逻辑合约需要在合约代码中包含存储间隙，以便在部署新的逻辑实现时预测到新的状态变量。在添加新的状态变量后，需要适当地更新间隙的大小。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0615/18_804bi4db5e.png" alt="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"></p>
+<p>（4）不在构造函数或声明过程中设置状态变量的值</p>
+<p>在声明期间或构造函数中分配状态变量只会影响逻辑合约中的值，不会影响代理合约。非不可变的参数应该使用initialize()函数来分配。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0615/18_mmbf076qsq.png" alt="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"></p>
+<p><strong>合约继承</strong></p>
+<p>（1）可升级合约只能继承自其他可升级合约</p>
+<p>与不可升级的合约相比，可升级的合约具有不同的结构。例如，构造函数与改变代理状态不兼容，它使用initialize()函数来设置状态变量。</p>
+<p>任何继承另一个合约的合约都需要使用其继承合约的initialize()函数来分配各自的变量。当使用OpenZeppelin库或编写自己的代码时，确保可升级的合约只能继承其他的可升级合约。</p>
+<p>（2）不要在逻辑合约中实例化新合约</p>
+<p>通过Solidity创建实例化的合约将不可升级。合约应单独部署，并将其地址作为参数传递给可升级的逻辑合约，以实现可升级状态。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0615/18_dy3gzda9iz.png" alt="打破区块链的不可篡改性：代理模式如何实现智能合约升级？"></p>
+<p>（3）Parent合约初始化风险</p>
+<p>当初始化Parent合约时，__{ContractName}_init函数将初始化其Parent合约。调用多个 __{ContractName}_init可能导致Parent合约的第二次初始化。注意__{ContractName}_init_unchained()将只初始化{ContractName}的参数，而不会调用其Parent合约的初始化器。</p>
+<p>然而，这并不是一个值得推荐的做法，因为所有的Parent合约都需要被初始化，不初始化所需的合约会导致以后的执行问题。</p>
+<p><strong>逻辑合约的实现</strong></p>
+<p><strong>避免使用selfdestruct()或对不信任的合约执行selegatecall()/call()</strong></p>
+<p>如果合约中存在selfdestruct()或delegatecall()，攻击者就有可能利用这些函数来破坏逻辑实现或执行自定义逻辑。开发者应验证用户的输入，不允许合约执行对不信任合约的delegatecall/calls。此外，不建议在逻辑合约中使用delegatecall()，因为在多个合约的代理链中管理存储布局会很麻烦。</p>
+<p><strong>写在最后</strong></p>
+<p>代理合约通过使协议在部署后能够更新其代码逻辑，来绕过区块链的不可篡改特质。然而，开发代理合约仍然需要十分谨慎，不正确的实现可能会导致项目安全与逻辑问题。</p>
+<p>总的来说，最佳实践是使用权威提供的且经过广泛测试的解决方案，因为透明、UUPS和Beacon代理模式每个都有针对各自用例的经过验证的升级机制。除此之外，升级代理的特权角色也应该被安全地管理，以防止攻击者改变代理逻辑。</p>
+<p>逻辑实现合约也应注意不要使用delegatecall()，这样可以防止攻击者执行某些恶意代码，如selfdestruct()。</p>
+<p>虽然遵循最佳实践可以确保代理合约部署的稳定，同时保持可升级的灵活性，但所有代码都容易出现可能危及项目的新安全或逻辑问题。因此所有的代码最好由具备审计和保护代理合约协议经验的安全专家团队进行审计。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53210/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">从加密“拉拉队长”到加密“灭绝师太”，美 SEC 主席是如何陷入监管尴尬的？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/53195/">
+                <span class="next-text nav-default">大厦将倾？韩国又一加密公司暂停提款</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

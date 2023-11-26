@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Vitalik：我使用以太坊的一些用户体验及经验教训 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="ETH支付、确认延迟、社交恢复、隐私等" />
+<meta name="keywords" content="ETH, Vitalik Buterin" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/47863/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Vitalik：我使用以太坊的一些用户体验及经验教训" />
+<meta property="og:description" content="ETH支付、确认延迟、社交恢复、隐私等" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/47863/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="Vitalik：我使用以太坊的一些用户体验及经验教训">
+<meta itemprop="description" content="ETH支付、确认延迟、社交恢复、隐私等"><meta itemprop="datePublished" content="2023-02-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4075">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vitalik：我使用以太坊的一些用户体验及经验教训"/>
+<meta name="twitter:description" content="ETH支付、确认延迟、社交恢复、隐私等"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Vitalik：我使用以太坊的一些用户体验及经验教训</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-28">
+      2023-02-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4075 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>文/Vitalik，以太坊创始人；译/金色财经0xnaitive</p>
+<h2 id="eth支付">ETH支付</h2>
+<p><strong>2013年</strong> ，我去了旧金山互联网档案馆旁边的一家寿司店，因为我听说它接受比特币支付，我想试试。到了付账的时候，我要求用BTC支付。我扫描了二维码，然后点击了 &ldquo;发送&rdquo;。令我惊讶的是，交易没有通过；它似乎已经发送，但餐厅没有收到它。我又试了一次，还是没有成功。我很快就发现，问题出在我的移动互联网当时工作不顺。我不得不向附近的互联网档案馆走了50多米，接入了它的WIFI，这才使我终于可以发送交易。</p>
+<p><strong>经验教训：</strong> 互联网不是100%可靠的，消费者互联网比商家互联网更不可靠。我们需要现场支付系统具备一些功能（NFC，顾客出示二维码，等等），让顾客直接将交易数据传输给商家，如果这是最好的广播方式。</p>
+<p><strong>2021年</strong> ，我试图在阿根廷的一家咖啡店为自己和朋友的茶水付费。在他们的说法中，他们没有特意接受加密货币：老板只是认出了我，并向我展示了他在加密货币交易所的账户，所以我建议用ETH支付（使用加密货币交易所账户作为钱包是在拉丁美洲进行当面支付的标准方式）。不幸的是，我的第一笔0.003 ETH的交易没有被接受，可能是因为它低于交易所0.01 ETH的最低存款额。我又发了一笔0.007ETH。很快，两笔交易都得到了确认。(我并不介意多付3倍的钱，把它当作小费）。</p>
+<p><strong>2022年</strong> ，我试图在不同的地方支付茶水费。第一笔交易失败了，因为我的手机钱包的默认交易只发送了21000 Gas，而接收账户是一个合约，需要额外的Gas来处理转账。试图发送第二笔交易失败，因为我手机钱包的用户界面出现故障，无法向下滚动并编辑包含Gas限额的字段。</p>
+<p><strong>经验教训：</strong> 简单而坚固的用户界面比花哨而华丽的用户界面更好。但是，大多数用户甚至不知道什么是Gas限制，所以我们真的需要有更好的默认值。</p>
+<h2 id="确认延迟">确认延迟</h2>
+<p><strong>很多时候</strong> ，在我的交易被链上接受和服务确认交易之间有一个令人惊讶的长时间延迟，即使是作为 &ldquo;未确认&rdquo;。其中有些时候，我肯定会担心他们的支付系统出现了一些故障。</p>
+<p><strong>很多时候</strong> ，在发送交易和该交易被接受的区块之间有一个令人惊讶的、不可预知的时间延迟。有时，一笔交易会在几秒钟内被接受，但其他时候，需要几分钟甚至几小时。最近，EIP-1559大大改善了这一点，确保大多数交易被接受到下一个区块中，甚至最近的合并通过稳定区块时间进一步改善了情况。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0228/6_m0s3sq2er2.png" alt="y8udz4bf8M5zrztdpRX9olRJ55f7yrfiwkOsC8h2.png" title="6858396"></p>
+<p>图表来自Yinhong (William) Zhao和Kartik Nayak的报告。</p>
+<p>然而，异常仍然存在。如果你在其他许多人发送交易的时候同时发送交易，而基本费用正在飙升，你就会面临基本费用过高和你的交易不被接受的风险。更糟糕的是，钱包的用户界面在显示这些方面很糟糕。没有大的红色闪烁警报，也很少清楚地表明你应该做什么来解决这个问题。即使对一个专家来说，他知道在这种情况下，你应该通过发布一个数据相同但最大基本费用较高的新交易来 &ldquo;加速 &ldquo;交易，但往往不清楚这样做的按钮在哪里。</p>
+<p><strong>经验教训：</strong> 关于交易的用户体验需要改进，尽管有相当简单的修复方法。归功于Brave钱包团队认真对待我在这个问题上的建议，首先将最大基本费用的容忍度从12.5%提高到33%，最近又在探索如何使卡住的交易在用户界面上更加明显。</p>
+<h2 id="社交恢复">社交恢复</h2>
+<p><strong>2019年</strong> ，我正在测试最早的钱包之一，试图提供社交恢复。与我喜欢的基于智能合约的方法不同，他们的方法是使用Shamir的秘钥共享，将账户的私钥分成五块，以这样的方式，其中任何三块都可以用来恢复私钥。用户要选择五个朋友（用现代术语说是 &ldquo;监护人&rdquo;），说服他们下载一个单独的移动应用程序，并提供一个确认码，用来通过Firebase创建一个从用户钱包到朋友应用程序的加密连接，并将他们的秘钥份额发送给他们。</p>
+<p><strong>这种方法对我来说很快就遇到了问题。</strong> 几个月后，我的钱包出事了，我需要实际使用恢复程序来恢复它。我让我的朋友通过他们的应用程序和我一起执行恢复程序&ndash;但事情并没有按计划进行。其中两个人失去了他们的秘钥碎片，因为他们换了手机，忘记把恢复程序移过来。对第三个人来说，Firebase的连接机制在很长一段时间内都没有工作。最后，我们想出了如何解决这个问题，并恢复了秘钥。然而，在那之后的几个月，钱包又坏了。这一次，一个常规的软件更新不知怎么就意外地重置了应用程序的存储，并删除了其秘钥。但我没有添加足够的恢复伙伴，因为Firebase的连接机制太破，没有让我成功做到这一点。我最终损失了少量的BTC和ETH。</p>
+<p><strong>经验教训：</strong> 基于秘钥分享的链下社交恢复实在是太脆弱了，除非没有其他选择，否则是个坏主意。你的恢复监护人不应该下载一个单独的应用程序，因为如果你有一个应用程序只用于恢复这样的特殊情况，那就太容易忘记它并失去它。此外，要求单独的中心化通信渠道也会带来各种问题。相反，添加监护人的方式应该是提供他们的ETH地址，而恢复应该由智能合约完成，使用ERC-4337账户抽象钱包。这样一来，监护人只需要不丢失他们的以太坊钱包就可以了，而这是他们因为其他原因已经更在乎不会丢失的东西。</p>
+<h2 id="隐私问题">隐私问题</h2>
+<p><strong>在2021年</strong> ，我试图在使用Tornado Cash时，通过使用 &ldquo;自我中继 &ldquo;选项来节省费用。Tornado Cash使用 &ldquo;中继 &ldquo;机制，由第三方在链上推送交易，因为当你取款时，你的取款地址中一般还没有代币，你不想用你的存款地址支付交易，因为这在两个地址之间建立了公共联系，这正是Tornado Cash试图防止的整个问题。问题是，中继机制往往很昂贵，中继机构收取的百分比费用可能远远超过交易的实际Gas费用。</p>
+<p>为了节省成本，有一次我使用中继机制进行第一笔小额提款，这样收费较低，然后使用Tornado Cash的 &ldquo;自我中继 &ldquo;功能，自己发送第二笔较大的提款，而不使用中继机制。问题是，我搞砸了，在登录我的存款地址时不小心这么做了，所以存款地址支付了费用而不是提款地址。哎呀，我在两者之间建立了一个公共链接。</p>
+<p><strong>经验教训：</strong> 钱包开发者应该开始更明确地考虑隐私问题。另外，我们需要更好的账户抽象形式，以消除对中心化或甚至联合式中继的需求，并使中继角色商品化。</p>
+<h2 id="其他的东西">其他的东西</h2>
+<ul>
+<li>
+<p><strong>许多应用程序仍然不能与Brave钱包或Status浏览器一起使用</strong> ；这可能是因为他们没有正确地做功课，而是依赖于Metamask特定的API。甚至Gnosis Safe也有很长一段时间不能与这些钱包一起使用，导致我不得不自己编写迷你Javascript dapp来进行确认。幸运的是，最新的UI已经修复了这个问题。</p>
+</li>
+<li>
+<p><strong>在Etherscan上的ERC20转账页面非常容易被伪造的东西所欺骗。</strong></p>
+<p>（例如：https://etherscan.io/address/0xd8da6bf26964af9d7eed9e03e53415d37aa96045#tokentxns）。任何人都可以创建一个新的ERC20代币，其逻辑可以发出一个日志，声称我或任何其他特定的人向其他人发送了代币。这有时被用来欺骗人们，让他们以为我支持一些骗人的代币，而实际上我甚至从未听说过它。</p>
+</li>
+<li>
+<p><strong>Uniswap曾经提供非常方便的功能，能够交换代币，并将输出发送到不同的地址。</strong> 当我必须用USDC支付给某人，但我身上没有任何美元时，这真的很方便。现在，接口不提供这个功能，所以我不得不swap，然后在一个单独的交易中发送，这不那么方便，而且浪费更多的Gas。我后来了解到Cowswap和Paraswap提供了这个功能，不过Paraswap&hellip;&hellip;目前似乎不能与Brave钱包一起使用。</p>
+</li>
+<li>
+<p><strong>Ethereum登录</strong> 很好，但如果你想在多个设备上登录，而你的Ethereum钱包只在一个设备上可用的话，还是很难使用。</p>
+</li>
+</ul>
+<h2 id="结论">结论</h2>
+<p>良好的用户体验不是指平均情况，而是指最坏的情况。一个干净整洁的用户界面，但在0.723%的情况下会做一些奇怪的、无法解释的事情，从而导致大问题，这比一个向用户暴露更多细节的用户界面更糟糕，但至少可以让用户更容易理解发生了什么，并解决任何出现的问题。</p>
+<p>除了尚未完全解决扩容导致的高额交易费用这一重要问题外，用户体验也是许多以太坊用户，尤其是发展中国家用户，经常选择中心化解决方案，而不是将权力掌握在用户及其亲友或当地社区手中的链上去中心化替代方案的一个关键原因。多年来，用户体验已经取得了长足的进步&ndash;特别是，从EIP-1559之前的平均交易需要几分钟才能被包含，到EIP-1559和合并之后的平均交易需要几秒钟才能被包含，这对使用以太坊的愉快程度是一个巨大的改变。但仍需做更多工作。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/47861/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Vitalik：关于 Crypto 用户体验的 5 个经验教训</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/47871/">
+                <span class="next-text nav-default">Web3数据云服务商Oort的边缘节点网络已覆盖15个国家和地区</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#eth支付">ETH支付</a></li>
+    <li><a href="#确认延迟">确认延迟</a></li>
+    <li><a href="#社交恢复">社交恢复</a></li>
+    <li><a href="#隐私问题">隐私问题</a></li>
+    <li><a href="#其他的东西">其他的东西</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

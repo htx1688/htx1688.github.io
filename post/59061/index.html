@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          专访MetaMask：Snaps功能开发的背后故事 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="MetaMask 正在成为加密行业的谷歌？" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59061/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="专访MetaMask：Snaps功能开发的背后故事" />
+<meta property="og:description" content="MetaMask 正在成为加密行业的谷歌？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59061/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="专访MetaMask：Snaps功能开发的背后故事">
+<meta itemprop="description" content="MetaMask 正在成为加密行业的谷歌？"><meta itemprop="datePublished" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6296">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="专访MetaMask：Snaps功能开发的背后故事"/>
+<meta name="twitter:description" content="MetaMask 正在成为加密行业的谷歌？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">专访MetaMask：Snaps功能开发的背后故事</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-13">
+      2023-09-13
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6296 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>采访：Jack，BlockBeats</p>
+<p>整理：Sharon、Luccy、kaori，BlockBeats</p>
+<p>编辑：Jaleel，BlockBeats</p>
+<p>昨夜，Consensys 宣布向公众推出 MetaMask Snaps 的首个版本。据官网说明，MetaMask Snaps 是由第三方开发人员创建的功能，MetaMask 用户可以将其直接安装到他们的钱包中。</p>
+<p>发布初期，MetaMask Snaps 将提供 34 个 Snaps 功能，包括可识别潜在安全隐患的交易洞察、与比特币等非 EVM 区块链的互操作以及 Web3 通知等实用功能。这 34 个 Snaps 功能已经过安全审核，并由 MetaMask 团队手动添加到白名单中。</p>
+<p>早在今年 7 月，MetaMask 就计划要在 2023 年底之前推出 Snaps 协议，允许任何人安全扩展 MetaMask 功能的系统，钱包用户可访问新应用并执行跨链协议交互。MetaMask 此前将 Snaps 描述为「一个开源系统，允许任何人安全地扩展 MetaMask 的功能」，以创建新的 Web3 体验。这意味着开发人员可以使用 Snaps 在 MetaMask 之上构建专门的功能。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/9_k5pv12ym7u.png" alt="专访MetaMask：Snaps功能开发的背后故事"></p>
+<p>Francesco Andreoli（左一）于 Token 2049 会场</p>
+<p>今日，在新加坡 Token 2049 与会期间，BlockBeats 对 MetaMask 开发者关系维护者 Francesco Andreoli 进行了专访，探讨了 MetaMask 最新发布的 Snaps 功能如何促进不同生态系统间无需许可的创新和互操作性等话题。</p>
+<h2 id="metamask-snaps继续秉承无准入的精神">MetaMask Snaps：继续秉承无准入的精神</h2>
+<p>Francesco Andreoli 是一名 ETH 工程师和数字企业家，他拥有苏黎世联邦理工学院的机械工程硕士和学士学位，以及霍特商学院的国际商务硕士学位。他精通 6 种不同的语言，喜欢在新兴市场工作，对风险投资和数据驱动的扩展策略充满热情。他主要活跃于瑞士、瑞典、巴西、南非、尼日利亚和美国。他曾担任 TechStars、Angelhack、The Hult 奖以及全球其他几个创业加速器和孵化计划的导师。</p>
+<p>一开始，Francesco Andreoli 是巴西 IBM 的工程师，随后共同创立了 washmypants.com 和 Myinsurance，后者是一家提供移动优先小额保险解决方案的瑞士初创公司。此外，他还是瑞士基于可再生能源的 DLT 采矿设施的联合创始人（2018 年被 Petawatt 集团收购）。自 2019 年以来，他与 Oui capital 一起，积极投资活跃在撒哈拉以南非洲国家的种子创业公司。</p>
+<p>如今，Francesco Andreoli 是 ConsenSys、MetaMask 的开发者关系维护者（DelRel），同时也是 Oui Capital 的创始合伙人、Digital Asset 的前开发人员营销主管、Daml 的创建者，全球最大的黑客马拉松生态系统 Angelhack 前开发者社区建设者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/9_3ym025y24o.png" alt="专访MetaMask：Snaps功能开发的背后故事"></p>
+<p><strong>BlockBeats：</strong> 请简要介绍一下 MetaMask Snaps。</p>
+<p><strong>Francesco Andreoli：</strong> 我们昨天推出了 MetaMask Snaps 的第一个迭代，这是基于 MetaMask 现有功能的扩展。第一版的 Snaps 中有不同的功能，包括交易洞察、互操作性和通知。关于 Snaps 最令人兴奋的事情是，这些是开发者和第三方社区拥有的，这意味着它们并非来自共识团队。而正是这样无需许可的创新生态系统，才能让我们能进一步扩展 MetaMask 今天的功能。</p>
+<p><strong>BlockBeats：</strong> MetaMask Snaps 目前主要的功能类别是什么？</p>
+<p><strong>Francesco Andreoli：</strong> 如你所知，我们昨天向公众发布了我们的 MetaMask Snaps 第一代，并推出了 34 个 Snaps。目前我们有三个类别，第一个是交易洞察，用户可以获得更清晰的交易洞察，这使他们能够了解到潜在的安全风险，或者是否在与恶意合约交互；第二个类别是 Solar Bound 互操作性。它是关于更广泛的 Web 3 多链愿景，让那些与 EVM 不兼容的 Snaps 添加到扩展中，以便用户可以与其他链进行特定交易；第三类别是通知，对于许多特定用例，用户需要特定的信息，可以直接在 MetaMask 钱包中通过 web3 通知随时了解情况。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/fklpqzs6603amo9" alt="专访MetaMask：Snaps功能开发的背后故事"></p>
+<p><strong>BlockBeats：</strong> MetaMask 也在推动诸如「Sell」之类的功能。Snaps 将在 MetaMask 的「功能生态系统」中扮演什么角色？</p>
+<p><strong>Francesco Andreoli：</strong> Metamask 的愿景是创造一个更加开放的生态系统，以鼓励创新。这些年来，我们从社区收到了很多反馈，我们采取了一种非常不同的激活方式。我们希望建立一个积极的社区，鼓励成员参与创新。如果有成员发现了特定的用例，他们可以扩展程序当前的功能。我认为这不仅是 MetaMask 自身，更是共识的最有力声明，我们希望在我们的生态系统中有更多包容性的创新。</p>
+<h2 id="metamask-正在成为加密行业的谷歌">MetaMask 正在成为加密行业的谷歌？</h2>
+<p>目前，MetaMask 已经开放了测试版，与最终版本不同的是，开放测试版将托管各种允许列表的 Snap，这些快照已经过第三方和小狐狸钱包团队的审核。MetaMask Snaps 开放测试版是构建这个无许可系统的第一步。最终，MetaMask 对小狐狸钱包快照的愿景是完全无需许可，没有任何看门人。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/9_aafltt4cj4.png" alt="专访MetaMask：Snaps功能开发的背后故事"></p>
+<p>在<a href="https://metamask.io/news/latest/snaps-in-metamask-stable-and-where-we-go-from-here/">一篇博客</a>中，MetaMask 联合创始人 Dan Finlay 也讲述了一些开发 Snaps 功能背后的故事。</p>
+<p>Snaps 的开发之旅带 MetaMask 团队经历了计算史上一些令人兴奋的角落，并结交了一些很棒的朋友。在这项工作中，MetaMask 与 Agoric 合作产生的价值毫不夸张，他设计了一个 JavaScript 限制 API，向 JS 标准委员会 TC-39 提出了它，实现了该 API 的工作填充程序，今天已经可以使用，并与我们合作完善了这个系统、LavaMoat 和我们的安全计算方法。</p>
+<p>MetaMask 也在 Snaps 的开发过程中也经历了一个对 WebExtension 来说特别具有挑战性的时期：谷歌自己提出了一个关于像 MetaMask 这样的扩展如何工作的大修，并且有一段时间它笼罩着整个项目，这可能是一个致命的打击，或者至少是一个迫使 MetaMask 团队离开扩展平台的改变。幸运的是，在很大程度上要感谢 Consensys 和 Google 非常聪明和体贴的开发人员，MetaMask 团队能够在扩展平台的变化方式上提出妥协，允许 MetaMask 的雄心勃勃的目标，而不会影响任何一家公司的安全理想。</p>
+<p><strong>BlockBeats：</strong> 很多人喜欢将 Snaps 的功能比做谷歌，从而使 MetaMask 变得像谷歌一样。您如何看待这一点？</p>
+<p><strong>Francesco Andreoli：</strong> 我可以告诉你一些关于扩展方面的信息。在过去的几年里，Snaps 面向开发者的环境存在了 18 个月。我们意识到，作为生态系统中的构建者，我们还需要考虑未来的需求，比如我们收到了很多关于新功能的问题，我们认为我们需要更多地支持构建者和社区，来帮助实现这种无需许可的创新。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/9_64rif4wsc1.png" alt="专访MetaMask：Snaps功能开发的背后故事"></p>
+<p>这就是 Snaps 背后的全部故事，我们希望通过进一步扩展 MetaMask 目前的功能，实现生态系统中无需许可的创新。我认为这个愿景也是在不断发展的，现在大家都知道，MetaMask 既有移动端的应用，也有浏览器的扩展，但我们还试图在基础设施的更低层次上实现更多的目标，让生态系统周围的社区构建者构建他们认为社区应该需要的功能，以满足所有最终用户的需求。</p>
+<p>这就是为什么我们开始发布第一批 34 个 Snaps 的新功能。我们非常兴奋，因为这是一系列案例的组合。例如，对于不兼容 EVM 的 Snaps，在 Snaps 发布之前，你无法进行比特币交易；再比如，你可以获取通知，甚至查询你的交易历史。我建议每个用户都尝试一下，因为这非常简单。基本上，你只需在当前的 MetaMask 账户中安装 Snaps，然后自动启用并激活这些功能即可。</p>
+<h2 id="为什么选择兼容非-evm">为什么选择兼容非 EVM？</h2>
+<p><strong>BlockBeats：</strong> 在 ordinals 之后，BTC 生态系统似乎恢复了活力，这就是 MetaMASK 选择切入这一领域的原因吗？除了已经存在的钱包产品之外，MetaMask 还能提供什么价值？</p>
+<p><strong>Francesco Andreoli：</strong> 基本上，Snaps 主要是为了促进不同生态系统之间的无需许可的创新和互操作性。而且我认为用户的主要需求不仅仅是在不同生态系统之间搭建桥梁，还需要在不同生态系统之间提供更多的透明度。最终，终端用户在与底层基础设施层进行交互时，更关心的是安全环境以及能否与不同的生态系统进行互动。这就是 Snaps 的作用所在。</p>
+<p>我们有非 EVM 兼容的 Snaps，这是 Snaps 那 34 个已经发布的其中一个重要功能。通过这些 Snaps 的功能，你作为终端用户可以拓展您的 Web3 使用范围，而不仅仅局限于以太坊生态系统，还可以与其他生态系统进行互动，比如 Filecoin、StarkNet、BTC 等。我认为这将更有助于终端用户，因为如今正在建立的各种孤岛之间缺乏透明度，而这正是终端用户在无缝穿梭于这些孤岛之间所需要的。</p>
+<p><strong>BlockBeats：</strong> 目前有许多关于 zkBridge 或 LayerZero 作为多链未来解决方案的讨论。我想知道所有这些跨链都可以用 MetaMask 作为解决方案吗？</p>
+<p><strong>Francesco Andreoli：</strong> 像 ConsenSys 这样的大公司是我们的支持者，我们有 MetaMask，有 Infura，有 Linea，这是我们在 ETHCC 期间推出的主网上的 zk-EVM。当谈到多链未来时，我们还会谈论像 Linea 这样的事物，让构建者更容易地在 zk-EVM 层上部署。与此同时，我们还通过 StarkNet Snaps 之类的工具来启用 Layer 2 ，所以这是一个混合体。</p>
+<p>我认为 Metamask 中的桥接功能可以聚合不同的桥接，所以才能为最终用户提供多种解决方案，但我们确实认为，Snaps 可以在不同层次上实现更多的可用性，使这种多链未来策略保持一致。</p>
+<p><strong>BlockBeats：</strong> Snaps 在未来的发展路线图是什么样的？</p>
+<p><strong>Francesco Andreoli：</strong> 但我认为还可以考虑游戏和应用程序，这些都是主要的用例。在公共 Snaps 发布期间，我们推出了这三个主要类别和 34 个 Snaps 的主要功能。我认为未来的发展路线图主要围绕着 Snap 家族中出现更多类型的 Snaps 来发展。我们正在与不同的第三方开发商和社区合作，以围绕 Snaps 实现更多的用例。</p>
+<p>在未来，将有更多 Snap 陆续通过审核。Consensys 将收集用户对 MetaMask Snaps 的使用意见，并继续开发以实现 MetaMask Snaps 的最终愿景。MetaMask Snaps 旨在彻底改变用户与 MetaMask 的交互方式，为用户提供更强的操作和自定义功能。</p>
+<h2 id="占据钱包半壁江山的-metamask-如何看待行业竞争">占据钱包半壁江山的 Metamask 如何看待行业竞争</h2>
+<p>在全部钱包应用中，MetaMask 是同赛道中的绝对龙头。全行业流量最大的 DEX，几乎无人不知的 Uniswap，当时官方统计了从 Uniswap 创立后，一共有 25 万地址使用过 Uniswap。而 MetaMask，据 ConsenSys 宣布，在那时已是 3000 万月活，在四个月中，该数据增长了 42% 。</p>
+<p>要知道，Ethereum 全网活跃地址在历史巅峰在 900 万上下，如果按照每个用户只有一个地址计算，MetaMask 市场占有率就超过了 50% ，而每个用户并不只有一个地址。可以说，MetaMask 独占加密钱包的半壁江山。毫无疑问的是，MetaMask 已成为 Web3 经济的关键参与者。</p>
+<p>去年 10 月 MetaMask 的总收入已经高达 3.2 亿美元。而坐拥 MetaMask 的 ConsenSys 也早以 70 亿美元估值完成 4.5 亿美元 D 轮融资，创下 crypto 行业融资金额最大的单笔融资。截至今年 8 月 9 日，据 The Block 援引 CoinGecko 数据报道，MetaMask 迄今为止应用程序下载量已超过 2266 万次，成为当前最受欢迎的加密热钱包。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/9_njhhsob6tt.png" alt="专访MetaMask：Snaps功能开发的背后故事"></p>
+<p><strong>BlockBeats：</strong> 毫无疑问，在突飞猛进之后，MetaMASK 将比其他公司更具竞争力。MetaMASK 如何看待它与其他钱包的竞争？这就是为什么团队决定建立 Snap，以获得更多的市场优势吗？</p>
+<p><strong>Francesco Andreoli：</strong> 推出 Snaps 使得整个社区可以完全无需许可地扩展现有扩展程序的功能，而我相信我们的生态系统周围会有不同的标准。未来 Snaps 与其他基础设施层的兼容是非常重要的。但这些都是第三方 Snaps，而不是由我们的团队内部开发的。而现在我们真的向所有社区开放了构建这些扩展的机会。在这种状态下，其他生态系统的人们将建立不同的 Snaps，我们已经在其他生态系统中看到了这一点。</p>
+<p>比如，今天你不仅可以做非 DBN 兼容的 Snaps，如比特币 Snaps，还可以安装你的 Cosmos Snaps、Filecoin Snaps。在第二层你也可以有你的 Startnet Snaps。因此，实际上 Snaps 非常强大，因为今天我们的生态系统或者一般不同的生态系统都在为那些用户构建非常特定的工具，而我认为我们需要更多的互操作性和无需许可的创新，这是我们唯一可以扩展的方式，我们可以提供更多的工具来吸引十亿用户。</p>
+<p><strong>BlockBeats：</strong> 对于专注于钱包空间的建筑商来说，除了生态系统赠款之外，他们今后还将获得何种好处？</p>
+<p><strong>Francesco Andreoli：</strong> 从构建者的角度来看，这是一个非常有趣的问题。在过去的 18 个月里，Snaps 基本上可以在 Metamask 或 Flask 的开发者版本上使用，因为有很多资源，我们也从未想过能够看到这么多不同的用例和功能。并且对于大部分人来说，他们不仅仅是 Snaps 的开发者，他们实际上更像是第三方公司、合作伙伴和单独开发者在构建这些功能。</p>
+<p>我们总是能看到为他们提供的不同资源和支持。例如，在黑客马拉松或会议等现实生活中的活动，您会看到这些开发者正在构建这些 Snap，我们鼓励他们提交他们的 Snap，向 Metamask Grants DAO 提交提案。我们还邀请他们在这个构建者共识社区平台上展示他们的 Snap，就像与那些构建者对话一样。我们还鼓励他们围绕我们的共识博客创建特定的开发者内容，所以设置了不同的曝光机制。Metamask Grants DAO 是其中的重要组成部分，因为很多时候，当你想要让你的产品或 Snap 更上一层楼时，你会希望能够继续扩展其功能。</p>
+<p><strong>BlockBeats：</strong> 谈到 Grants DAO，我也想了解它们的决策过程，谁在投票和决定向哪些项目发放资助、以及谁在做出这些决策和执行这些操作。</p>
+<p><strong>Francesco Andreoli：</strong> 是的，我想介绍一下 Mitterman 的 Grants DAO。首先，比如黑客马拉松之后的项目，它们在获得风险投资之前要么需要一个桥梁，要么需要更多的支持。我们希望提供更多积极的支持，所以我们建立了这个 Metamask Grants DAO，这是一个每季度 260 万美元的 DAO。非常有趣的一点是，这是一个员工领导的 DAO。这意味着所有在 DAO 中做出的决策以及尽职调查，都是通过员工来完成的。</p>
+<p>因此，我们建立了一个内部系统，使我们能够投票并将提案推向下一轮。这就是 MetaMask Grants DAO 的运作方式。我们也在很多方面提供帮助，如设置提案和提供不同的模板。此外，我们目前正在推出一个名为 Fellowship 的全面加速器计划，它可以将产品提升到新的高度。我们还有不同的创业套餐，你也可以申请，我们还有还有不同的倡议。</p>
+<p>我也鼓励所有希望建立 Snaps 的独立开发人员，关注我们最近推出的大使计划，在这里我们为你提供了一个平台，你可以在这里构建并扩大你所有出色的 Snaps 的影响力。</p>
+<p><strong>BlockBeats：</strong> EIP-4337 和账户抽象会显著改变 MetaMASK 的功能吗？</p>
+<p><strong>Francesco Andreoli：</strong> 是的，我们非常看好账户抽象这个主题。我们认为这是一个很好的方式来吸引更多的用户。目前，我们希望通过使 Snaps 开发者能够构建账户销毁用例来实现这一目标。在过去的 18 个月里，我们看到了不同的有趣用例，例如账户恢复、NPC、赞助交易等，看到这些用例被激活非常有趣。我们相信通过专注于账户销毁 Snaps，未来会有更多友好的功能来吸引更多的终端用户。</p>
+<p><strong>BlockBeats：</strong> 最后，您有什么想对中国开发者说的吗？</p>
+<p><strong>Francesco Andreoli：</strong> 归根结底，我们希望强化终端用户在 Web 3.0 入门过程中的专注、个性化体验，我认为这也是愿景中一个非常重要的部分，那就是我们看到不同用户的不同需求，DeFi 重度用户、NFT 重度用户、关心隐私相关交易的用户等。所以我认为定制化旅程将是一个非常重要的挑战，而且我相信 Snaps 绝对有能力赢得这个挑战。此外，我还相信 Snaps 可以由第三方开发者构建，这意味着真正实现了我们所谈论的无需许可的创新。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59039/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">英伟达越做越大，让AI芯片初创公司难以融资？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59019/">
+                <span class="next-text nav-default">专访返景星达CEO李强：AR行业爆发拐点将至</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#metamask-snaps继续秉承无准入的精神">MetaMask Snaps：继续秉承无准入的精神</a></li>
+    <li><a href="#metamask-正在成为加密行业的谷歌">MetaMask 正在成为加密行业的谷歌？</a></li>
+    <li><a href="#为什么选择兼容非-evm">为什么选择兼容非 EVM？</a></li>
+    <li><a href="#占据钱包半壁江山的-metamask-如何看待行业竞争">占据钱包半壁江山的 Metamask 如何看待行业竞争</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

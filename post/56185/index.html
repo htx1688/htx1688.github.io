@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          超越治理代币 探讨Rollup的货币化设计 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="​Rollup 是众多基础设施中一个好的投资类别吗？" />
+<meta name="keywords" content="Rollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56185/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="超越治理代币 探讨Rollup的货币化设计" />
+<meta property="og:description" content="​Rollup 是众多基础设施中一个好的投资类别吗？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56185/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="超越治理代币 探讨Rollup的货币化设计">
+<meta itemprop="description" content="​Rollup 是众多基础设施中一个好的投资类别吗？"><meta itemprop="datePublished" content="2023-08-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6726">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="超越治理代币 探讨Rollup的货币化设计"/>
+<meta name="twitter:description" content="​Rollup 是众多基础设施中一个好的投资类别吗？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">超越治理代币 探讨Rollup的货币化设计</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-01">
+      2023-08-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6726 字 -
+        预计阅读 14 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>Rollup 是众多基础设施中一个好的投资类别吗？</p>
+<p>Rollup 的投资逻辑从早期的 ZK/OP 叙事之争，到后来实践中的 TPS 和用户体验比拼，再到围绕 OP Stack 等衍生工具构建的护城河——对于这个问题，处在行业发展的不同阶段或许有不同的回答。</p>
+<p>但归根结底我们需要回答的是，Rollup 是赚钱的生意吗？Rollup 的经济学是怎么一回事？本文试图学习探讨 Rollup 的商业模式及其 Monetization 的设计空间。</p>
+<p>Barry Whitehat 最早在 Ethereum Research 论坛提出了 Rollup 的概念。当 Rollup 的概念处在雏形阶段时，我们把运作 Rollup 的角色统一称为 Relayer 或 Operator。随着基础设施发展的精细化，这一角色被分解为多个实体：Sequencer 负责排序交易，并写入 DA，Challenger 负责提出挑战，Prover 负责生成证明。在我们讨论 Rollup 经济时，基本上可以从这几个实体出发进行梳理。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_a70incp3ey.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: IOSG</p>
+<p>本文主要讨论 Rollup Monetization 的几个方面：</p>
+<ul>
+<li>
+<p>交易费用（Transaction Fee）的缘由、构成和 Rollup 的盈亏情况；</p>
+</li>
+<li>
+<p>MEV 在 Decentralized Sequencer 语境下的形式和 Monetization；</p>
+</li>
+<li>
+<p>基于 Fault Proof 和 Validity Proof 进行 Monetization 的可能性。</p>
+</li>
+</ul>
+<h3 id="交易费用-transaction-fee">交易费用 (Transaction Fee)</h3>
+<p>与在其他链上类似，用户在 Rollup 发送交易需要支付交易费用。</p>
+<p>从 Sequencer 的角度看，这个交易成本主要涵盖两部分支出：执行开销和安全开销。</p>
+<h4 id="执行开销execution-cost">执行开销（Execution Cost）</h4>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_hmqwis5zg2.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: John Adler</p>
+<p>Rollup 的执行开销继承自以太坊的模型。抽象来看，每个以太坊节点运行着一个复制状态机。如上图所示，节点下载并存储交易数据、执行计算、读写内存和存储，这些操作对应物理性的资源花销和消耗。Gas 作为统一的资源定价单位，被用于对这些操作背后隐含的资源进行度量。</p>
+<p>那么延伸到 Rollup 中也是如此， 运营 Rollup 节点将产生一定的执行开销，这是 Rollup 用户支付的交易费用的由来。由于 EVM 等效性的细微差异和 Rollup 设计的不同，不同 Rollup 对执行开销的定价也有些许分别（例如，zkSync Era 提供了原生的账户抽象，一些操作对比 EOA 可能需要支付更多的 Gas），但总体上沿用以太坊的 Gas 模型。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_cdbjvh9ims.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: Dune Analytics @springzhang</p>
+<p>除了上述的执行开销之外，还应考虑拥堵费用和最低交易费用。</p>
+<p>拥堵费用。反映在 Gas 价格与网络流量的动态平衡上。例如在 Arbitrum Odyssey 期间，网络流量的激增导致了 Gas 价格的大幅上涨。</p>
+<p>最低交易费用。在网络费用极低的区块链上，为了避免 Spam 和 DoS 攻击，有必要设置一个交易费用的下限。目前 Arbitrum One 上为 0.1 gwei，Arbitrum Nova 上为 0.01 gwei。最低交易费用的数值取决于该网络的设计（在 Optimism 上是 0.001 gwei）。</p>
+<h4 id="安全开销security-cost">安全开销（Security Cost）</h4>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_ez6b07svdi.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: Celestia Forum @adeets_22</p>
+<p>安全开销即为我们讨论的数据可用性（DA）成本，DA 是 Rollup 等效于以太坊安全性的保证，确保所有人能够根据发布在以太坊 L1 上的数据重建 Rollup 的状态（这里讨论的是以太坊 L1 的情况，当然还有其他 DA 方案）。贡献给以太坊 L1 的 DA 成本占据 Rollup 总成本的绝大多数。今年 5 月，Arbitrum 向以太坊提交了大约 3,927 MB 的数据，并为此支付 4,856 枚 ETH，DA 成本约 1.24 ETH/MB。（按 S3 Standard 每 GB $ 0.023 和 ETH 价格 $1800 计算，以太坊的 DA 存储成本大概是 AWS 的 一亿倍）。</p>
+<p>由于链上 DA 非常昂贵，各个 Rollup 都采用了数据压缩方法。Arbitrum 和 Optimism Bedrock 分别使用开源数据压缩库 Broti 和 zlib 对发布到以太坊 L1 的数据进行压缩。StarkNet 和 zkSync Era 通过发布 State Diff（即先前状态与新状态之差）而非全部数据，对数据进行压缩。（P.S：Optimism Bedrock 升级还采取了多种方法对交易成本进行压缩，在这里我们可以看到更多数据指标）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_t87n8uretw.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: IOSG</p>
+<p>值得期待的是，以太坊 L1 高昂的 DA 成本将在 Decun Upgrade 引入 EIP-4844 后得到大幅缓解。另外，此处讨论的「安全开销」实际隐含了不同的安全级别。除以太坊 L1 保证的 DA 之外，DAC 和 Celestia、EigenDA 等解决方案提供了多样的「安全 - 成本」权衡，为 DA 需求端提供了多种选择。一些低频、高价值的 DeFi 应用更需要安全保证，一些高频、相对低价值的应用（例如游戏），则可以更多考虑成本；各取所需。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_zszc448ms1.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: Dune Analytics @optimismfnd</p>
+<p>综上所述，简单地从 Sequencer 的角度看：Sequencer 从用户侧收取交易费用，向以太坊支付 DA 费用。那么 Sequencer 的利润可以按上述方式计算。目前多数 Sequencer 由 Rollup 团队运营，如果忽略代币发行的收入和通胀等一系列细节，Rollup 的收入也可以粗略地用这个方式进行衡量。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_cbq6q34udt.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: Token Terminal</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_9quh1h3f71.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: IOSG</p>
+<p>以 Optimism 为例，在过去 30 天，Optimism 每天的盈利大约是 20k 美金。根据 Token Terminal 的数据，Optimism 上线至今的盈利大约是 10.9 M 美金。</p>
+<h3 id="mev">MEV</h3>
+<p>MEV 是 Rollup 建立商业模式的重要方式。在中心化的单个 Sequencer 语境下谈论 MEV 没有太多意义，所以我们先从去中心化 Sequencer 开始，随后将探索 Rollup 的 MEV 经济。</p>
+<h4 id="decentralized-sequencer-ds">Decentralized Sequencer (DS)</h4>
+<p>截至目前 Arbitrum ($5.87b)、Optimism ($2.14B) 和 zkSync Era ($649M) 依赖于中心化的 Sequencer/Operator 进行交易排序、提交批次等操作。</p>
+<p>去中心化是一项繁杂的事项，引入多方参与者的过程需要仔细打磨，一步到位没有必要。从安全性、竞争形势和开发者资源的角度思考，在项目早期采用中心化的 Sequencer 讲得通。然而，中心化的 Sequencer 至少有两个明显的缺陷（这同样也是大多数中心化手段的缺陷）。</p>
+<ul>
+<li>
+<p><strong>交易审查：</strong> 即对特定用户的交易进行审查，包括勒索攻击等等。为了解决这个问题，Arbitrum 和 Optimism 提供了用户交易强制包含的选项，例如 Arbitrum 的所有用户都可以调用 forceInclusion 方法来强制包含交易；StarkEx 实施了逃生舱（Escape Hatch）机制，实现了部分抗审查。</p>
+</li>
+<li>
+<p><strong>活跃保证：</strong> Sequencer 是否能够持续保持在线？如果中心化的服务产生单点故障（例如硬件故障或软件配置错误），整个网络将会停机。这种可能性虽小，但一旦发生会产生广泛的负面影响。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_sfkrizasca.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: Taiko</p>
+<p>当前， Sequencer 实际上同时扮演了以太坊 L1 上 Builder 和 Proposer 的角色：既负责交易排序，又负责提交 Batches —— 实现 DS 的过程有点像在重走以太坊 PBS 的老路。</p>
+<p>要实现DS，Rollup 通常有几种选项。</p>
+<ul>
+<li>
+<p>领导者选举/轮换（Leader Election/Rotation）机制，加上本地区块构建，即以太坊 L1 上非 PBS 的情况。Vitalik 在他的 An Incomplete Guide to Rollups 提出了几种选举/轮换的方法：Sequencer 拍卖、基于 PoS 的随机选取、DPoS 投票等。根据以太坊的实践，很显然 PBS 会是更优解。</p>
+</li>
+<li>
+<p>领导者选举/轮换机制，加上开放的区块构建市场 ，即以太坊 L1 上 Enshrined PBS 或者 Proposer 采用 MEV-Boost的情况。</p>
+</li>
+<li>
+<p>一些特定机制，例如 FCFS (First Come First Serve)。FCFS 最终会导致延迟竞赛，类似于传统高频交易中的 Colocation。Arbitrum 当前采用 FCFS，并在研究 Time-Boost 等变体。Time-Boost 在 FCFS 的基础上引入了优先费用，可以支付费用让交易加快最多 0.5 秒。这是一种延迟与费用之间的二维权衡。</p>
+</li>
+</ul>
+<p>Rollup 团队可以采用以上选项内部构建 DS，也可以考虑外包 Sequencing：</p>
+<ul>
+<li>
+<p>Espresso/Astria 等项目提出了它们的 DS/SS 服务；</p>
+</li>
+<li>
+<p>Flashbots 正在构建 SUAVE，一个域间通用的加密内存池；</p>
+</li>
+<li>
+<p>Justin Drake 提出的 Based Rollup，直接借助 L1 共识，由以太坊 L1 的 Proposer 把 Rollup 区块包含到 L1 区块中，继承 L1 等同级别的去中心化和活跃保证。</p>
+</li>
+</ul>
+<p>选择内部构建或外包有一些利弊权衡，本文将在稍后进一步讨论。</p>
+<h4 id="ds-语境下的-rollup-mev">DS 语境下的 Rollup MEV</h4>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_n3tzeypf1z.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: odos.xyz/arbitrage</p>
+<p>如果我们有了一个开放区块构建的 DS 市场，那么现在以太坊上的 MEV 供应链就会在 Rollup 上复现。其中，域内 MEV （Intradomain MEV） 指发生在 Rollup 内部的 MEV，这与以太坊 L1 的 MEV 并没有太多差异。例如 DEX 中的三明治攻击、跨 DEX 套利等等。因为目前 Rollup 还没有实现 DS ，上图以以太坊 L1 上的跨 DEX 套利作为举例。</p>
+<p>更有趣的可能是跨域 MEV （Cross-domain MEV）。我们把跨域 MEV 分为普通跨域 MEV 和 Shared Sequencer （SS）下的跨域 MEV。</p>
+<ul>
+<li><strong>普通领域 MEV</strong></li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_7vvkveow0j.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: odos.xyz/arbitrage</p>
+<p>普通跨域 MEV 在以太坊 L1 和 Rollup、Rollup 和 Rollup 之间发生。在 DS 的语境下，各个域之间都有各自的 MEV 管道，涵盖不同角色。上图是跨域套利的一个示例。</p>
+<p>在 Searcher 端，跨域 MEV 涉及到复杂的执行风险，因为不同域有不同的确认时间和最终性，无法确定交易是否会被如愿包含。为此，Primev 正在构建一个通讯网络，Searcher 可以向多个域的多个 Builder 提交出价，为其 Bundle 获取预先确认（Pre-confirmation）保证。这样一来Searcher 可以量化并管控它们的执行风险。</p>
+<p>跨域 MEV 存在中心化的趋势。如 Flashbots 所指出，同时在多条链上进行区块构建的 Builder 与仅在一条链进行区块构建的 Builder 相比，在跨域 MEV 方面具有更大的优势，因此容易导致中心化。在 Rollup-centric Roadmap 之下，这是未来几年需要面对的话题。</p>
+<ul>
+<li><strong>SS 下的 MEV</strong></li>
+</ul>
+<p>如果多个 Rollup 使用同一个 SS，情况有所不同。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_e2hd0g3lj7.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: IOSG</p>
+<p>SS 的特性之一是它可以实现跨 Rollup 原子套利。原先 Searcher 在分别提交交易 1 和交易 2 的时候，不确定这两笔交易是否会按它的期望被包含（例如刚好在下一个区块被包含）。有了 SS 之后，Searcher 可以提交类似上图的Bundle，当交易 1 和交易 2 能够同时满足时才进行执行，否则两笔交易都不执行（当然，需要满足交易不是无效交易）。这种实施减少了 Searcher 的执行风险。</p>
+<p>理想情况下，SS 将会实现「整体大于部分之和」。例如，一笔交易涵盖的信息在单个 Rollup 上可能没有价值，但在多 Rollup 共享排序的情况下可以与其他 Rollup 上的交易进行排列组合，从而充分利用一些「无效信息」并实现正和游戏。</p>
+<p>尽管有众多好处，但 Sequencing 涉及到复杂的商业问题，故笔者认为 SS 短期内不会得到头部 Rollup 采用，而可能在长尾的 App-specific Rollup 中率先实施和验证，或者作为 Rollup-as-a-Service 项目的可选项提供给开发者使用。</p>
+<ul>
+<li><strong>围绕 MEV 的 Rollup 经济</strong></li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_5basdi8uu4.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: IOSG</p>
+<p>在 DS 得到实施之后，问题回归到如何围绕 MEV构建经济模型和价值捕获机制。</p>
+<p>在上文我们讨论了 Rollup 的开销。这种开销的源头是 DA 资源和运营 Rollup 本身的物理资源。这些有限资源构成了区块空间的稀缺性。MEV 反映了对区块空间稀缺性的支配权。Rollup 可以对该支配权进行定价。</p>
+<p>Fuel Network 认为一个优化的代币模型应该合理地对区块空间的价值进行捕获。用户使用 Rollup 代币支付交易费用，是价值捕获的其中一种方式（即赋予了代币 Utility）。但这也引入了额外的用户侧摩擦。Fuel 的想法也是对区块空间的稀缺性进行代币化，但代币化的是「收取区块空间内费用的权利」。这是从区块生产者和 MEV 的角度而言的，并不影响终端用户。</p>
+<p>对应上述 DS 的选项，笔者认为可能有以下设计空间：</p>
+<ul>
+<li>
+<p>MEV Auction (MEVA)。Sequencer 参与拍卖来确定特定区块、或特定时间内的区块的交易排序权。拍卖的出价作为 Rollup 的收入。</p>
+</li>
+<li>
+<p>PoS。质押 Rollup 代币，随机选择 Sequencer；质押越多，成为 Sequencer 的概率越大。注意 Rollup 仍由 Validity/Fault Proof 和以太坊保证安全，并不需要依赖于 PoS 提供的经济安全。PoS 仅作为选择领导者的方式。质押代币为 Rollup 提供了价值捕获，这种锁仓本质上也是对区块空间稀缺性的反映。</p>
+</li>
+<li>
+<p>SS。相较上述两点而言，SS 是一个有趣的新话题，目前还没有定论。假设 Rollup 选择外包 Sequencing 给 SS，同时意味着出让了自己捕获域内 MEV 的权利 —— 尽管这样做的好处是多个域间会产生网络效应，从而形成正和。但从另一个角度来说， Rollup 完全可以选择把自己的 MEV 留在自己的生态内部，由自己捕获或是对域内 MEV进行代币化。</p>
+</li>
+</ul>
+<p>因此，笔者认为 SS 应该以某种方式对其各个域间捕获的 MEV 进行再分配。在多个 SS 争夺他们的 Rollup 客户的情况下，这种再分配的激励显得尤为重要。在这种情况下，再分配的 MEV 可以作为 Rollup 的收入。</p>
+<h3 id="欺诈证明-fault-proof">“欺诈”证明 (Fault Proof)</h3>
+<p>欺诈证明的普遍设计是在挑战期内，人们（称为挑战者）可以对状态转换提出质疑；一旦该质疑被验证为正确，作恶者会被罚没，挑战者获得部分罚没的资金作为奖励。其余被罚没的资金可能会被销毁，如果被罚没的资金是 Rollup 的代币，这被视为对于所有代币持有者的一种补偿（而非对于攻击的受害者）。Arbitrum 和 Optimism Cannon 目前都采用交互式欺诈证明。</p>
+<p>在 Arbitrum 上观察状态转换和提出挑战的一方称为验证者（Validator），观察状态转换的一方称为观测者（Watchtower Validators） 。两者的主要区别在于前者可以提出挑战，后者可以以任意方式提出警告（例如通过社区或社交媒体）。成为验证者需要白名单的权限。观测者则无需许可。</p>
+<p>Arbitrum 可能在未来去中心化验证者（也即挑战者）这一角色。但实际上挑战者只需要 1 of N 的信任假设，一个诚实的挑战者对于网络来说是足够的。因此，笔者认为去中心化挑战者只是满足去中心化的要求，除了上述提到的挑战者获得部分罚没的资金之外，在经济学上没有太多的设计空间，更多可能是出于设计冗余的考虑。</p>
+<h3 id="证明者网络市场-prover-networkmarket">证明者网络/市场 (Prover Network/Market)</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_tl73kzq0iq.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source: Figment Capital</p>
+<p>Figment Capital 在其文章中对 Prover Network 和 Prover Market 进行了概念区分：Prover Network 是仅为单个应用（例如 Scroll）提供服务的 Prover 集合。Prover Market 是开放的市场，多个应用（例如 Scroll、Succinct）可以向该市场提交证明请求。这篇文章已经概括了 Decentralized Prover 的方方面面，因此本文不会重复增添过多笔墨。</p>
+<h4 id="证明网络prover-network">证明网络（Prover Network）</h4>
+<p>Scroll 在两年前提出了去中心化 Prover 的想法。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_8vjfy3me70.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source:Scroll</p>
+<p>Prover （Scroll 称为 Roller）需要质押代币以获得初始的声誉，该声誉与质押的代币成正比例。在网络需要生成证明的时候，由 Sequencer 按声誉随机选择多个 Prover，要求他们在时间 T 内生成证明 —— 如果证明无效将被罚款；如果证明有效但晚于时间 T，将降低其声誉；如果证明有效且在时间 T 内，有机会获得奖励。</p>
+<p>引入限定时间 T 的设计，而非简单地采用「最快」来进行衡量，是为了避免最快的 Prover 赢家通吃的局面，因为只要能够在时间 T 内完成，最快的 Prover 和稍慢的 Prover 获得奖励的概率是相同的。这种机制鼓励最快的 Prover 并行生成其他区块的证明，以最大化利润。</p>
+<h4 id="证明市场prover-market">证明市场（Prover Market）</h4>
+<p><img src="https://img.bibiqing.com/news/2023/0801/29_w4neqnsoa7.png" alt="超越治理代币，探讨Rollup的货币化设计"></p>
+<p>Source:=nil;</p>
+<p>=nil; 提供了构建电路和证明市场的通用化服务。构建电路的开发者和生成证明的 Prover 各自获得一部分收入。</p>
+<p>作为一个开放市场，=nil; 与现货市场类似，有两方角色：证明请求者和证明生产者。前者可以发布买单，后者可以发布卖单。挂单的参数包含 Statement （如 Mina 或 Solana 的状态证明电路）、成本、订单超时时限和证明生成时间。</p>
+<p>=nil; 也采用了类似的声誉系统，没有按时生成证明和生成错误证明的 Prover 会被降低评级甚至罚没。</p>
+<p>Scroll 和 =nil; 都采用了 Staking-slashing 和声誉系统的设计，区别在于面向的需求端群体不同。前者服务于 ZKRollup 本身，后者服务于多个 ZK 应用。这两个实例分别对应内部构建 Prover 和外包 Prover 的两种形式。</p>
+<h3 id="closing-thoughts">Closing Thoughts</h3>
+<p>综合以上讨论，笔者提出几个观点：</p>
+<ul>
+<li>
+<p>交易费用是简单有效的商业模式，而 Rollup 对以太坊进行扩容的主要卖点之一就是低费用，因此它们在交易费用上面并不会做太多文章。随着 EIP-4844 的采用和各类 DA 方案的成熟（Celestia、EigenDA 等），Rollup 交易费用将进一步得到降低。这对用户而言是好事情。</p>
+</li>
+<li>
+<p>在 Rollup 方面，笔者认为，主流 Rollup 在两到三年内会逐渐走向 DS，一些长尾 Rollup 可能更快一步。MEV 作为较隐晦的商业模式，会成为 Rollup 收入的主要增长点。其中，如果内部构建 DS，则关系到代币经济学设计；如果选用 DS &amp; SS ，如何对其中的 MEV 进行合理分配是 Rollup 和 DS &amp; SS 项目都需要考虑的点。Rollup 上的 MEV 重要性目前被严重低估。</p>
+</li>
+<li>
+<p>去中心化往往是渐进式的过程，去中心化也有不同的程度。无论去中心化 Sequencer 或是 Prover，主要有两种选项：由团队进行内部构建或外包。前者的设计空间较为广阔，主要建立在 Staking-slashing 的加密经济原语之上，已经有一些成熟的机制设计可供参考。笔者猜测后者可能依赖于类似 DA 的付费模型。</p>
+</li>
+</ul>
+<p>DS 在机制设计上可能是更复杂的，而 Prover 相对直观。因为我们很难说 Sequencer 返回的交易序列是正确或错误的，而数学证明是确定性的东西，可以定量地被衡量，例如时间、成本等参数。DS 更多是从 MEV 经济的角度出发去考虑。</p>
+<p>Rollup 如何选择上述两种方式，根据项目所处阶段不同有所差异，至少需要考虑资本效率、开发者资源等因素。对于早期的 Rollup，包括一些 App-specific Rollup，外包这项去中心化的工作，快速进行 Bootstrap 可能是最优解（通过 DS &amp; SS 或 EigenLayer）。而相对成熟的 Rollup 一方面有更加充足的开发者资源和资金，另一方面会更多地考虑代币价值捕获和资源连接，并借此构建护城河和飞轮效应。</p>
+<p><strong>Reference</strong></p>
+<p>1.https://joncharbonneau.substack.com/p/rollups-arent-real</p>
+<p>2.https://mirror.xyz/0x59567ea31347ba1430939E8a8aC58fDa014aBed9/I12E6Jf9X6HE_DuegZG4gmy8j-4RGAX4AdMZ71MnANY</p>
+<p>3.https://figmentcapital.medium.com/decentralized-proving-proof-markets-and-zk-infrastructure-f4cce2c58596</p>
+<p>4.https://dba.mirror.xyz/LYUb_Y2huJhNUw_z8ltqui2d6KY8Fc3t_cnSE9rDL_o</p>
+<p>5.https://hackmd.io/@EspressoSystems/EspressoSequencer</p>
+<p>6.https://mirror.xyz/electriccap.eth/SD0wT7qSSfis9gLT_Ki1gY6_oTYEqgwcGE0hDw7kMDY</p>
+<p>7.https://hackmd.io/@yezhang/SkmyXzWMY</p>
+<p>8.https://nil.foundation/</p>
+<p>9.https://fuel-labs.ghost.io/token-model-layer-2-block-production/</p>
+<p>10.https://offchain.medium.com/time-boost-a-new-transaction-ordering-policy-for-arbitrum-5b3066382d62</p>
+<p>11.https://docs.google.com/presentation/d/1KCcJv5m8NlbSMv4UiWSaRkKOBfiiHeaOBe444vVL_fQ/edit#slide=id.g22387294055_1_237</p>
+<p>12.https://forum.celestia.org/t/ethereum-rollup-call-data-pricing-analysis/141</p>
+<p>13.https://ethresear.ch/t/mev-auction-auctioning-transaction-ordering-rights-as-a-solution-to-miner-extractable-value/6788?ref=alex-beckett</p>
+<p>14.https://vitalik.ca/general/2021/01/05/rollup.html</p>
+<p>15.https://twitter.com/sreeramkannan/thread/1637496244317880321</p>
+<p>16.https://twitter.com/jon_charb/thread/1637488620729774080</p>
+<p>17.https://barnabe.substack.com/p/understanding-rollup-economics-from</p>
+<p>18.https://developer.arbitrum.io/intro/</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56130/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">操作教程：手把手教你如何从Base链取回ETH</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56132/">
+                <span class="next-text nav-default">都在说跑路项目BALD与SBF有关？都有哪些证据</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#交易费用-transaction-fee">交易费用 (Transaction Fee)</a></li>
+        <li><a href="#mev">MEV</a></li>
+        <li><a href="#欺诈证明-fault-proof">“欺诈”证明 (Fault Proof)</a></li>
+        <li><a href="#证明者网络市场-prover-networkmarket">证明者网络/市场 (Prover Network/Market)</a></li>
+        <li><a href="#closing-thoughts">Closing Thoughts</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

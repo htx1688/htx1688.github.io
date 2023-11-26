@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          官方指南：波卡的账户生成与操作方法 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本期介绍利用Polkadot-JS以及其他工具如何创建波卡账户、如何备份账户、如何恢复账户等一系列操作。" />
+<meta name="keywords" content="Polkadot, 波卡, 賬戶" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56546/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="官方指南：波卡的账户生成与操作方法" />
+<meta property="og:description" content="本期介绍利用Polkadot-JS以及其他工具如何创建波卡账户、如何备份账户、如何恢复账户等一系列操作。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56546/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-07T00:00:00+00:00" />
+
+<meta itemprop="name" content="官方指南：波卡的账户生成与操作方法">
+<meta itemprop="description" content="本期介绍利用Polkadot-JS以及其他工具如何创建波卡账户、如何备份账户、如何恢复账户等一系列操作。"><meta itemprop="datePublished" content="2023-08-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6766">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="官方指南：波卡的账户生成与操作方法"/>
+<meta name="twitter:description" content="本期介绍利用Polkadot-JS以及其他工具如何创建波卡账户、如何备份账户、如何恢复账户等一系列操作。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">官方指南：波卡的账户生成与操作方法</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-07">
+      2023-08-07
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6766 字 -
+        预计阅读 14 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h1 id="免责声明密钥安全">免责声明：密钥安全</h1>
+<p>访问账户的唯一方式是通过你的密钥种子或账户的JSON文件与密码相结合。请将它们离线保存在安全和私密的位置。如果你与任何人共享这些信息，他们就可以访问你的账户，包括你的资金。这些信息总是黑客和恶意行为者的目标。请查看维基文档以了解如何识别骗局，详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-scams">https://wiki.polkadot.network/docs/learn-scams</a></p>
+<p>请查阅此帮助文章以获取有关密钥安全的更多信息。详情请参见：</p>
+<p><a href="https://support.polkadot.network/support/solutions/articles/65000181874-how-to-store-your-mnemonic-phrase-and-backup-file-safely">https://support.polkadot.network/support/solutions/articles/65000181874-how-to-store-your-mnemonic-phrase-and-backup-file-safely</a></p>
+<h1 id="生成账户的方式">生成账户的方式</h1>
+<p>由国库出资的钱包和浏览器插件：如果你是一般用户，建议你使用由国库或Grant计划的钱包和插件来生成账户。详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/wallets-and-extensions">https://wiki.polkadot.network/docs/wallets-and-extensions</a></p>
+<p>如果你是高级用户或开发人员，可以使用Polkadot-JS插件。详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/polkadotjs#polkadot-js-extension">https://wiki.polkadot.network/docs/polkadotjs#polkadot-js-extension</a></p>
+<p>当你使用Polkadot-JS插件（详情请参见：<a href="https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-browser-extension">https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-browser-extension</a>）等浏览器插件生成账户时，它会将你的账户存储在私密保险库中，并允许你无需担心清除浏览器缓存。请记得备份你的密钥种子短语——当你无法访问此计算机或插件崩溃无法修复时，这将会派上用场。</p>
+<p>或者，你也可以使用Polkadot-JS UI（详情请参见：<a href="https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-ui">https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-ui</a>）生成账户，尽管此选项默认已禁用。有关Polkadot-JS UI的更多信息，请参阅专门的页面（详情请参见：<a href="https://wiki.polkadot.network/docs/polkadotjs-ui">https://wiki.polkadot.network/docs/polkadotjs-ui</a>）。</p>
+<p>请注意，所有连接到互联网的钱包都被视为“热钱包”，容易受到各种攻击，因此建议在处理较大金额时使用冷钱包。</p>
+<p>Polkadot生态系统中目前流行的冷钱包解决方案包括Ledger（详情请参见：<a href="https://wiki.polkadot.network/docs/ledger">https://wiki.polkadot.network/docs/ledger</a>）和Polkadot Vault（详情请参见：<a href="https://wiki.polkadot.network/docs/polkadot-vault">https://wiki.polkadot.network/docs/polkadot-vault</a>）。后者将你的密钥存储在断网隔离的移动电话上。但是，这需要获得一部专门用于Polkadot Vault的Android或兼容iOS的手机，并且你只能将其用于Polkadot Vault。</p>
+<p>除了Polkadot-JS浏览器插件和Polkadot-JS UI之外，还可以使用Subkey工具生成Polkadot地址。详情请参见：</p>
+<p><a href="https://github.com/paritytech/substrate/tree/master/bin/utils/subkey">https://github.com/paritytech/substrate/tree/master/bin/utils/subkey</a></p>
+<p>Subkey适用于习惯使用命令行的用户，可能看起来令人畏惧，但它确实很容易上手。请按照Subkey文档中的说明操作。详情请参见：</p>
+<p><a href="https://docs.substrate.io/reference/command-line-tools/subkey/">https://docs.substrate.io/reference/command-line-tools/subkey/</a></p>
+<p><strong>账户生成指南</strong></p>
+<p>如何使用以下工具生成账户的详细信息，请参阅我们的帮助文章。Ledger 硬件钱包详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-generation#ledger-hardware-wallet">https://wiki.polkadot.network/docs/learn-account-generation#ledger-hardware-wallet</a></p>
+<p>Polkadot Vault详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-generation#polkadot-vault">https://wiki.polkadot.network/docs/learn-account-generation#polkadot-vault</a></p>
+<p>Polkadot-JS 浏览器插件详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-browser-extension">https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-browser-extension</a></p>
+<p>Polkadot-JS UI详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-ui">https://wiki.polkadot.network/docs/learn-account-generation#polkadot-js-ui</a></p>
+<p>Subkey详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-generation#subkey">https://wiki.polkadot.network/docs/learn-account-generation#subkey</a></p>
+<p>Vanity Generator详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-generation#vanity-generator">https://wiki.polkadot.network/docs/learn-account-generation#vanity-generator</a></p>
+<h1 id="备份账户">备份账户</h1>
+<p>根据你使用的访问账户的软件不同，有多种方法可以备份和恢复账户。备份信息并确保其安全尤为重要。一般来说，只要你知道如何生成账户并且有存储安全的种子短语（助记词）（详情请参见：<a href="https://wiki.polkadot.network/docs/learn-accounts#portability">https://wiki.polkadot.network/docs/learn-accounts#portability</a>）或JSON文件（以及密码），就可以恢复你的账户。</p>
+<h1 id="ledger硬件钱包">Ledger硬件钱包</h1>
+<p>如果你想使用Ledger硬件钱包生成你的地址并将通证保存在冷钱包中，请按照Ledger硬件钱包指南页面上的说明进行操作。详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/ledger">https://wiki.polkadot.network/docs/ledger</a></p>
+<h1 id="polkadot-vault">Polkadot Vault</h1>
+<p>Parity Signer是一种在断网隔离设备上存储DOT的安全方法。强烈建议你在安装后关闭Wi-Fi、移动网络、蓝牙、NFC和其他任何通讯方式。</p>
+<p>有关如何使用Parity Signer生成账户，请参阅此视频教程（详情请参见：<a href="https://www.youtube.com/watch?t=120&amp;v=hgv1R9mPEXw&amp;feature=youtu.be">https://www.youtube.com/watch?t=120&amp;v=hgv1R9mPEXw&amp;feature=youtu.be</a>）并访问帮助文章（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000180512-how-to-create-an-account-in-parity-signer">https://support.polkadot.network/support/solutions/articles/65000180512-how-to-create-an-account-in-parity-signer</a>）。</p>
+<p><strong>恢复Polkadot Vault上的账户</strong></p>
+<p>请参阅此视频教程（详情请参见：<a href="https://www.youtube.com/watch?v=hgv1R9mPEXw&amp;t=407s&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=hgv1R9mPEXw&amp;t=407s&amp;ab_channel=Polkadot</a>）和此帮助页面（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000167901-how-to-restore-an-account-in-parity-signer">https://support.polkadot.network/support/solutions/articles/65000167901-how-to-restore-an-account-in-parity-signer</a>），了解如何在Polkadot-JS UI上恢复你的账户。</p>
+<h1 id="polkadot-js浏览器插件">Polkadot-JS浏览器插件</h1>
+<p>有关如何使用Polkadot插件生成账户的指南，请参阅此视频教程（详情请参见：<a href="https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot</a>）并访问此帮助文章（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000098878-how-to-create-a-dot-account">https://support.polkadot.network/support/solutions/articles/65000098878-how-to-create-a-dot-account</a>）。</p>
+<p>Polkadot-JS浏览器插件（Polkadot插件）在安全性和可用性之间提供了一个合理的平衡。它提供了一个单独的本地机制，用于生成你的地址并与Polkadot进行交互。</p>
+<p>这种方法涉及安装Polkadot插件，并将其用作一个“虚拟保险库（virtual vault）”，与你的浏览器分开，用于存储私钥。它还允许签署交易和其他类似功能。</p>
+<p>它仍然在你用于连接互联网的同一台计算机上运行，因此相较于使用Parity Signer或其他断网隔离设备来说，安全性较低。</p>
+<p><strong>使用Polkadot-JS浏览器插件备份账户</strong></p>
+<p>请查看此视频教程（详情请参见：<a href="https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;feature=youtu.be&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;feature=youtu.be&amp;ab_channel=Polkadot</a>）并访问此帮助页面（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000177677-how-to-export-your-json-backup-file">https://support.polkadot.network/support/solutions/articles/65000177677-how-to-export-your-json-backup-file</a>），了解如何备份你的账户。</p>
+<p><strong>使用Polkadot-JS浏览器插件重置密码</strong></p>
+<p>请查阅此视频教程了解如何更改在Polkadot-JS浏览器插件上生成的账户（即注入账户）的密码。详情请参见：</p>
+<p><a href="https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;t=280s&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;t=280s&amp;ab_channel=Polkadot</a></p>
+<p>警告：在按照下面的说明操作之前，请确保你已将你的助记词存储在一个可以安全访问的位置。</p>
+<p>假设你生成了一个由密码PSW 1保护的账号ACCOUNT 1。要使用浏览器插件重置账号ACCOUNT 1的密码，你需要按照以下步骤进行操作：</p>
+<p>1.打开浏览器插件并进入账号ACCOUNT 1，然后点击 &ldquo;忘记账户（Forget account）&quot;。这个操作将删除你对账户的访问权限。请注意，你的通证仍然保存在 Polkadot 区块链网络上的账户中。</p>
+<p>2.在浏览器插件中，点击右上角的 &ldquo;+&rdquo; 按钮，并选择 &ldquo;从现有助记词导入账户（Import account from pre-existing seed）&ldquo;选项。在输入助记词之后，你可以选择一个新密码PSW 2。</p>
+<p>JSON 文件不允许更改账户密码，如果你使用 &ldquo;从备份的JSON文件恢复账户&quot;选项将账户添加到插件中，这将允许你使用由密码PSW 1保护的JSON文件恢复对账户的访问权限，但不会让你设置一个新密码。因此，默认情况下，PSW 1 将成为账户的密码。</p>
+<p>冷钱包上的账户不需要密码，对于像Ledger （详情请参见：<a href="https://www.ledger.com/">https://www.ledger.com/</a>）这样的硬件钱包，你可能要设置访问设备上的账户的PIN码，但你不需要为每个单独的账户设置密码。当你需要使用账户进行交易时，你需要使用Ledger设备进行签名。此外，Ledger钱包允许你为多个区块链网络生成多个账户，而无需为访问这些账户设置不同的密码。</p>
+<p><strong>在Polkadot-JS浏览器插件上恢复账户</strong></p>
+<p>请参阅此视频教程（详情请参见：<a href="https://www.youtube.com/watch?v=9ohp8k4Hz8c&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=9ohp8k4Hz8c&amp;ab_channel=Polkadot</a>）和帮助页面（详情请参见：<a href="https://www.youtube.com/watch?v=9ohp8k4Hz8c&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=9ohp8k4Hz8c&amp;ab_channel=Polkadot</a>），了解如何在Polkadot-JS UI上恢复你的账户。</p>
+<h1 id="polkadot-js-ui">Polkadot-JS UI</h1>
+<p>关于如何使用Polkadot-JS UI生成账户的指南，请参阅此视频教程（详情请参见：<a href="https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot</a>）并访问此帮助文章（详情请参见：<a href="https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot</a>）。</p>
+<p>注意：如果你使用此方法生成账户并清除浏览器中的 cookies，如果你没有备份，你的账户将永久丢失。请确保将助记词存储在一个安全的地方，或者如果使用 Polkadot{.js} 浏览器插件，则可以下载账户的 JSON 文件。请参阅此处了解更多关于账户备份和恢复的信息。详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-generation#restore-account-on-the-polkadot-js-ui">https://wiki.polkadot.network/docs/learn-account-generation#restore-account-on-the-polkadot-js-ui</a></p>
+<p>默认情况下，Polkadot-JS UI 禁用了本地浏览器中的账户存储。要使用Polkadot-JS UI生成账户，请导航到设置（settings）&gt; 账户（account）选项，并在下拉菜单中点击允许本地浏览器账户存储。不推荐在没有浏览器插件的情况下使用Polkadot-JS用户界面，这是最不安全的生成账户方式，只有在其他所有方法都不可行的情况下才可使用。</p>
+<p><strong>使用Polkadot-JS UI进行账户备份</strong></p>
+<p>请参阅阅视频教程（详情请参见：<a href="https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;ab_channel=Polkadot</a>）和访问帮助页面（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000177677-how-to-export-your-json-backup-file">https://support.polkadot.network/support/solutions/articles/65000177677-how-to-export-your-json-backup-file</a>），了解如何备份你的账户。</p>
+<p><strong>使用Polkadot-JS UI重置密码</strong></p>
+<p>要重置在Polkadot-JS Apps UI生成的账户密码，你需要进入“账户（Accounts）&ldquo;选项卡，点击你的账户上的三个垂直点图标，然后选择&quot;更改此账户的密码（Change this account&rsquo;s password）”。</p>
+<p>请参阅此视频教程，了解如何更改在Polkadot-JS UI上生成的账户（非注入账户）密码。详情请参见：</p>
+<p><a href="https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;t=261s&amp;ab_channel=Polkadot">https://www.youtube.com/watch?v=DNU0p5G0Gqc&amp;t=261s&amp;ab_channel=Polkadot</a></p>
+<p>注意：如果你首先在Polkadot-JS Apps UI上生成账户，然后将其添加到浏览器插件中，你需要按照浏览器插件指南来更改此类账户的密码。</p>
+<p><strong>在Polkadot-JS UI上恢复账户</strong></p>
+<p>请参阅此视频教程（详情请参见：<a href="https://youtu.be/cBsZqFpBANY">https://youtu.be/cBsZqFpBANY</a>）和帮助页面（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000180110-how-to-restore-your-account-in-polkadot-js-ui">https://support.polkadot.network/support/solutions/articles/65000180110-how-to-restore-your-account-in-polkadot-js-ui</a>），了解如何在Polkadot-JS UI上恢复你的账户。</p>
+<h1 id="subkey">Subkey</h1>
+<p>Subkey是面向高级技术用户的工具，适用于熟悉命令行和编译Rust代码的用户。Subkey可以在任何能够编译该代码的设备上生成密钥。Subkey还可用于使用断网隔离设备进行自动化账户生成的用户。但并不建议一般用户使用。</p>
+<p>有关如何使用Subkey生成账户的指南，请参阅此视频教程（详情请参见：<a href="https://youtu.be/SWfE_EwxgIU">https://youtu.be/SWfE_EwxgIU</a>）并访问此帮助文章（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000180519-how-to-create-an-account-in-subkey">https://support.polkadot.network/support/solutions/articles/65000180519-how-to-create-an-account-in-subkey</a>）。</p>
+<h1 id="vanity-generator">Vanity Generator</h1>
+<p>Vanity Generator是Polkadot-JS UI上的一个工具，可以生成包含特定子字符串的地址。有关如何使用Vanity Generator生成账户的教程，请参阅此帮助文章，详情请参见：</p>
+<p><a href="https://support.polkadot.network/support/solutions/articles/65000171416">https://support.polkadot.network/support/solutions/articles/65000171416</a></p>
+<p>编者注：</p>
+<p>Vanity Generator生成的地址是一种自定义的区块链地址，它可以包含用户想要的一些字符，比如自己的名字、品牌、口号等。这样的地址可以让用户更容易记住和识别，也可以展示自己的个性和风格。</p>
+<h1 id="账户地址格式">账户地址格式</h1>
+<p>为Polkadot生成的账户也可以在Polkadot生态系统的多个链上使用。更具体地说，使用 *25519账户地址格式（最新列表可以在ss58注册库存储库上找到）的链的账户与使用类似格式的所有链兼容。要在不同链上切换账户，你可以按照此帮助文章（详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000103707-can-i-use-the-same-account-on-polkadot-kusama-and-parachains-">https://support.polkadot.network/support/solutions/articles/65000103707-can-i-use-the-same-account-on-polkadot-kusama-and-parachains-</a>）的指南操作。Subscan提供了一个工具（详情请参见：<a href="https://polkadot.subscan.io/tools/format_transform">https://polkadot.subscan.io/tools/format_transform</a>），可以用于在不同链之间转换你的地址。</p>
+<p><strong>在多个链上使用同一账户 - 利与弊</strong></p>
+<p>不同链的地址格式有所不同，但这种差异只是视觉上的。同一私钥可以用于代表相应账户在多个链上签署交易。在多个链上使用单个账户很方便，因为你不必处理多个助记词或私钥。但是，如果你在一条链上的账户被入侵，攻击者可以完全访问所有其他链上的账户。这对账户持有人的隐私也有影响，因为知道一个链上的账户的身份会暴露账户持有人在所有链上的身份。在Polkadot-JS UI的“账户（）”标签中，对于你在多个链上使用的每个账户，会显示一条警告信息，并建议在不同的链上使用不同的账户（见下文）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/h82ltf4cqfiv3u2" alt="官方指南：波卡的账户生成与操作方法"></p>
+<p>在Polkadot-JS 插件中，你可以在所需的链格式处于活动状态时点击账户图标，复制你的地址。例如，选择“Substrate”作为格式将改变你的地址，点击账户的彩色图标将以该格式复制地址。在Polkadot模式下，将复制该地址格式，依此类推。</p>
+<h1 id="加密增强">加密增强</h1>
+<p>一些新生成的JSON账户文件无法导入（恢复）到较旧的钱包软件中。这是由于加密方法的改进，在加密/解密钱包时会略有延迟。如果无法加载JSON文件，请使用最新版本的钱包软件。如果仍无法加载，请确保钱包软件使用最新版本的Polkadot API，详情请参见：</p>
+<p><a href="https://polkadot.js.org/docs/api/">https://polkadot.js.org/docs/api/</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56536/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">多维度盘点Paradigm十大关注领域相关项目</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56538/">
+                <span class="next-text nav-default">加密叙事与产品构建 孰轻孰重？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

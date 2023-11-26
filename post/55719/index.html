@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          UniswapX 协议白皮书 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="UniswapX 协议是为以太坊虚拟机实现的基于荷兰拍卖的非托管交易协议。" />
+<meta name="keywords" content="UniswapX" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55719/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="UniswapX 协议白皮书" />
+<meta property="og:description" content="UniswapX 协议是为以太坊虚拟机实现的基于荷兰拍卖的非托管交易协议。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55719/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-25T00:00:00+00:00" />
+
+<meta itemprop="name" content="UniswapX 协议白皮书">
+<meta itemprop="description" content="UniswapX 协议是为以太坊虚拟机实现的基于荷兰拍卖的非托管交易协议。"><meta itemprop="datePublished" content="2023-07-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4560">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="UniswapX 协议白皮书"/>
+<meta name="twitter:description" content="UniswapX 协议是为以太坊虚拟机实现的基于荷兰拍卖的非托管交易协议。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">UniswapX 协议白皮书</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-25">
+      2023-07-25
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4560 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="摘要">摘要</h2>
+<p>UniswapX 协议是为以太坊虚拟机实现的基于荷兰拍卖的非托管交易协议。</p>
+<p>UniswapX 聚合了链上和链下流动性，以不断优化价格的形式将 MEV 内化到协议中，为用户提供无需 Gas 兑换，并可扩展以支持跨链交易。</p>
+<h2 id="1-简介">1 简介</h2>
+<p>我们介绍了一种基于荷兰式拍卖的去中心化交易协议的设计，该协议使用链下签名订单在链上执行和结算。</p>
+<p>UniswapX 协议有几个优点：</p>
+<ul>
+<li></li>
+</ul>
+<pre><code>UniswapX 将路由和批处理外包给一组无许可的填单者（Fillers）。这些填单者可以将订单路由到链上和链下流动性的组合，确保兑换者的订单始终获得最佳执行。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>UniswapX 交易使用 Permit2 可执行的链外代币，允许兑换者隐式把交易费用作为兑换的一部分，省去了要持有链上原生代币的余额的要求。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>与 Uniswap 协议上的兑换相比，兑换者不用为失败的交易支付费用，并且批量结算和/或直接从填单者库存中填充的兑换更省钱。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>与 AMM 不同的是，UniswapX 将 MEV 内化了 \[9\]，通过将订单产生的任何盈余以提高价格的形式返还给兑换者来减少价值损失。此外，UniswapX 的订单更不容易受到抢跑的影响。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>UniswapX 可以扩展到支持跨链交易，使兑换者可以无缝地交易 源链上的资产以换取目标链上所需的资产。
+</code></pre>
+<p>以下各节将深入解释这些变化以及帮助实现这些变化的架构。</p>
+<h2 id="2-签名订单">2 签名订单</h2>
+<p>当兑换者通过 Uniswap 协议（v1、v2、v3 和 v4 [[3-6]）进行交易时，他们会创建交易并签名。这些交易指定一个输入Token、一个输出 Token、一个特定的执行路径和一个最低输出量。然后，兑换者将交易提交到内存池（无论是公共的还是私有的），然后由区块构建者接收并包含在区块中。</p>
+<p>UniswapX 利用了 Permit2 [19]，这是一种代币授权合约，为任何 ERC20 代币引入了基于签名的授权和转让。此外，UniswapX 还使用 Reactor  合约进行链上结算，Reactor 合约负责检查交易的执行是否符合用户期望的参数，并撤销不符合参数的交易。兑换者必须首先授权 Permit2 合约。然后，通过 UniswapX 协议进行交易的兑换者不需要自己创建和提交交易，而是对交易订单前面，订单指定：</p>
+<p>(1) 输入代币（即支付代币）</p>
+<p>(2) 一个输出代币（即获取代币）</p>
+<p>(3) 输入（输出）量</p>
+<p>(4) 一个起始输出（输入）金额</p>
+<p>(5) 最低输出（输入）量</p>
+<p>(6) 一个衰减函数</p>
+<p>(7) 兑换期限</p>
+<p>(8) 授权 UniswapX reactor 合约代其使用代币</p>
+<p>这些订单由 MEV 搜索者、做市商和/或其他链上代理（统称为填单者 filler）共同接收，并将其发送给 Reactor 合约。通过在链上提交兑换者的订单，填单者代表他们支付 Gas 费用。这些费用通过会反映到执行的价格中，以便收回 Gas 成本。</p>
+<p>Reactor 合约会调用填单者的 Executor 合约（执行者）， 指定填单逻辑， 一旦资产来源确定，Executor 合约就会将资产发送给兑换者，Executor 合约就会从兑换者的地址提取资金。最后，Reactor 会检查订单条件是否满足。</p>
+<p>UniswapX 并未规定填单者如何填充兑换者的订单：流动性可来自 Uniswap 或其他 DEX 等链上流动性池、链下流动性或其他 UniswapX 订单。多个订单可以捆绑到同一笔交易中，也可以在链上原子执行其他操作。</p>
+<h2 id="3-荷兰式订单">3 荷兰式订单</h2>
+<p>为了向兑换者提供最佳执行价格，UniswapX 使用了一种我们称之为荷兰式订单的订单类型，它与荷兰式拍卖非常相似。荷兰式订单的衰减特性在填单者之间创造了一个竞争市场，以尽快为兑换者找到最佳价格，同时为自己保留一些微薄的利润空间。</p>
+<p>普通限价订单总是以其限价执行，而荷兰式订单则不同，它的执行价格取决于它被纳入区块的时间。订单的起始价格是对兑换者来说比当前估计市场价格更有利的价格&ndash;例如，如果当前市场价格是1 ETH =  1000 USDC，卖出ETH订单的起始价格可能是1 ETH = 1050 USDC。该订单的价格会随着时间推移逐渐下降，直到达到兑换者愿意接受的最差价格（例如1 ETH = 995 USDC）。</p>
+<p>一旦有利可图，填单者就有动力尽快填单。如果等待时间过长，他们就有可能将订单拱手让给其他愿意接受较低利润的填单者。</p>
+<h2 id="4-跨链订单">4 跨链订单</h2>
+<p>UniswapX 协议可扩展至支持跨链交易，即兑换者用其在源链上持有的资产换取目标链上所需的资产。</p>
+<p>跨链 UniswapX 有以下几个优势：</p>
+<ul>
+<li></li>
+</ul>
+<pre><code>只要两个链之间有信息传递桥梁，UniswapX 就能在任何两个链之间提供快速兑换。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>兑换和桥接合并为单个操作，兑换者无需直接与桥对接，无需在任一链上维护Gas代币，也无需等待结算延迟。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>UniswapX 可以提供从 L2 到其父 L1 的近乎即时的退出。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>兑换者可以指定在目标链上接收原生资产或标准资产，而不是桥接资产。例如，主网上的 ETH 可以直接兑换为 Avalanche 上的 AVAX。
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>被动桥接风险降至最低。兑换者在兑换原生资产时不会承担任何桥接风险，而填单者只有在通过桥接在链之间重新平衡资产时才会承担桥接风险。
+</code></pre>
+<h3 id="41-简化的跨链订单">4.1 简化的跨链订单</h3>
+<p>首先，我们将解释 UniswapX 协议跨链的简化版本，然后再将其扩展到更高效的乐观版本。</p>
+<p>为了启动跨链订单，兑换者需要签署一份链外订单，其中包括与单链订单相同的参数，以及以下附加参数：</p>
+<p>(1) 一个结算预言机 - 一个单向预言机，可以证明某个目标链上发生的事件。这可以是 Rollup 与其父链之间的官方桥、轻客户端桥或第三方桥</p>
+<p>(2) 填单截止时间 - 订单必须在目标链上成交的时间</p>
+<p>(3) 填单者保证金金额和填单者保证金资产 - 填单者必须在源链上存入的保证金</p>
+<p>(4) 证明截止时间 - 填单者必须在这个时间之前，在源链上证明其完成了订单</p>
+<p>填单者保证金金额、填单截止时间和证明截止时间的参数不在本文讨论范围之内。</p>
+<p>与 UniswapX 协议的单链实现一样，兑换者的订单会传播到填单者网络，填单者向源链的 reactor 合约提交订单、兑换者的资金 和 填单者保证金以此来竞争执行订单。</p>
+<p>填单者通过在目标链上转移兑换者所需的资产来执行订单。他们首先将资产发送到 reactor 合约，然后由 reactor 合约将资产转发到兑换者的地址。目标链上的reactor合 约会记录订单已在指定截止时间前完成，并通过结算预言机将消息传递回源链上的 reactor 合约，确认兑换者的订单已完成。</p>
+<p>然后，兑换者的资产连同保证金被释放给源链上的填单者。如果填单者没有在证明截止时间前执行订单，兑换者将从源链上的 reactor 合约处收到其支付的资产和填单者的保证金。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0725/27_vimpavipw2.png" alt="UniswapX 协议白皮书"></p>
+<p>单链兑换</p>
+<p><img src="https://img.bibiqing.com/news/2023/0725/27_r4cnkhgggf.png" alt="UniswapX 协议白皮书"></p>
+<p>UniswapX 简化的跨链兑换</p>
+<h3 id="42-乐观的跨链订单">4.2 乐观的跨链订单</h3>
+<p>某些结算预言机的使用可能会过于缓慢或昂贵。例如，对填单者而言，执行从一个 Rollup 链到另一个 Rollup 链的兑换可能过于昂贵，需要超过七天的时间，并且在允许他们保管兑换者的输入代币及其初始保证金之前，至少需要在 L1 上进行一次交易。</p>
+<p>乐观的跨链协议可以缓解这些结算延迟问题，有效地在任何缓慢的桥梁之上构建一个快速而廉价的桥梁。</p>
+<p>乐观协议包括与简化协议相同的参数，以及以下附加参数：</p>
+<p>(1) 挑战保证金金额和挑战保证金资产&ndash;挑战者必须在源链上支付的保证金金额。</p>
+<p>(2) 挑战截止时间 - 质疑者可以对填单提出质疑的截止时间。该期限必须在证明截止时间之前。</p>
+<p>在协议简化版中，填单者执行订单的方式是：向兑换者索要订单，并向源链 Reactor 合约提交填单者保证金，然后通过目标链上的 reactor合约将资产转移到兑换者在目标链上的地址。reactor 合约会记录该订单已在截止时间前成交。</p>
+<p>在最乐观的情况下，填单者在填单截止时间前完成在目标链上兑换者的订单，在质疑期结束前无人对订单交易提出质疑，填单者在源链上收到兑换者的资金及其填单保证金。</p>
+<p>为了让填单者保持诚实，任何人都可以在填单截止时间之后、挑战截止时间之前，使用源链上的Reactor合约挑战填单者。如果填单者受到质疑，填单者必须在证明截止时间前使用结算预言机提供证明。如果填单者能证明他们在证明截止时间前完成订单，那么他们就会收到挑战者的保证金。如果填单者未能提供有效证明，则填单者的保证金将由挑战者和兑换者平分，兑换者的资金将在源链上返还给他们。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0725/27_9wfo2adtch.png" alt="UniswapX 协议白皮书"></p>
+<p>UniswapX 乐观跨链兑换，无挑战</p>
+<p><img src="https://img.bibiqing.com/news/2023/0725/27_ekmahk7avb.png" alt="UniswapX 协议白皮书"></p>
+<p>UniswapX 乐观跨链不成功挑战</p>
+<h2 id="5-订单参数化方案">5 订单参数化方案</h2>
+<p>UniswapX 协议不强制执行特定的衰减函数。同样，该协议也没有规定设置初始荷兰式订单价格的方法，但它包含一些可选功能，以启用不同的机制。</p>
+<p>荷兰式订单起始价格参数化方案的一种方法是，通过链外询价系统（RFQ： Request For Quote）投票选择填单者。为了激励这个填单者网络提供尽可能好的价格，UniswapX 允许订单指定一个填单者，该填单者在短暂的时间内享有填单的独家权利，之后荷兰式拍卖开始，任何填单者都可以执行订单。</p>
+<p>RFQ 系统可能会受益于配套的补偿或惩罚制度，以限制滥用这种专有权为填单者提供的自由选择，并确保兑换者的用户体验不受损害。与订单参数化设计一样，任何此类系统都超出了核心协议和本文的范围【2】。</p>
+<h2 id="6-费用">6 费用</h2>
+<p>Uniswap 治理可以对每个 UniswapX 兑换收取最高 0.05% 的费用，与 Uniswap v2 的最高费用相同。治理必须以每交易对为单位指定费用，费用必须是以基础点为单位的整数值。治理还必须按链激活费用。</p>
+<p>接口和钱包可以选择对通过其平台提交的互换收取额外的无上限费用。</p>
+<h2 id="7-先期工作">7 先期工作</h2>
+<p>UniswapX 协议从过去和现在的许多协议中汲取灵感。这并不是一份详尽的清单。</p>
+<h3 id="71-签名订单">7.1 签名订单</h3>
+<p>许多协议已经认识到让兑换者签署订单而使用实际交易，包括 0x [20] 和 Wyvern [21] 。包括 CoW Swap [8] 和 dYdX [13] 在内的一些协议都支持批量签署链外订单。Seaport [17] 特别支持带有衰减函数的链外签名订单。</p>
+<h3 id="72-荷兰式拍卖">7.2 荷兰式拍卖</h3>
+<p>荷兰式拍卖在 DeFi 中有大量应用，包括 Seaport 中的 NFT 销售、MakerDAO [14] 和 Euler Protocol [11] 中的清算，以及 DutchX [15] 等协议中的交易。Stephane Gosselin 还曾在 EIP 2593 中提议使用荷兰式拍卖作为确定交易费用的方法[10]。</p>
+<p>最近，1inch 在其 Fusion 协议[1]中探索了签名订单与荷兰式拍卖的结合。</p>
+<h3 id="73-聚合器">7.3 聚合器</h3>
+<p>包括 1inch、0x API 和 Paraswap 在内的项目[18]为兑换者提供了跨各种链上流动池的智能订单路由功能。其中一些项目还允许链外做市商通过 RFQ 系统提供订单改进。</p>
+<h3 id="74-跨链荷兰式拍卖">7.4 跨链荷兰式拍卖</h3>
+<p>Summa [12]率先提出了通过单向消息传递预言机进行基于荷兰式拍卖的跨链交易的想法。</p>
+<h3 id="75-乐观桥">7.5 乐观桥</h3>
+<p>Optics [7] 、Nomad [16] 和 Across [2] 都采用了防欺诈结算设计，提供无信任和快速的代币桥。</p>
+<h2 id="8-结论">8 结论</h2>
+<p>UniswapX 是一种无托管和无许可的交易协议，它使用荷兰式拍卖在填单者之间创建一个有竞争力的路由市场，并利用链上和链下流动性的组合。通过将订单结构化为 Permit2 可执行的链外签名，该协议为兑换者提供了无Gas交易体验。UniswapX 还可以扩展到支持跨链兑换，使兑换者可以近乎即时地将资产从 L2 桥接到其父链 L1。</p>
+<h3 id="参考资料">参考资料</h3>
+<p>[1]</p>
+<p>登链翻译计划: <em><a href="https://github.com/lbc-team/Pioneer">https://github.com/lbc-team/Pioneer</a></em></p>
+<p>[2]</p>
+<p>Tiny 熊: <em><a href="https://learnblockchain.cn/people/15">https://learnblockchain.cn/people/15</a></em></p>
+<p>[3]</p>
+<p>learnblockchain.cn/article…: <em><a href="https://learnblockchain.cn/article/6200">https://learnblockchain.cn/article/6200</a></em></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55706/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Unibot数据解读：静态数据具备吸引力，但主要收入来自$UNIBOT交易税</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55692/">
+                <span class="next-text nav-default">UniswapX：开启Uniswap V4 DeFi实验基地的门扉</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#1-简介">1 简介</a></li>
+    <li><a href="#2-签名订单">2 签名订单</a></li>
+    <li><a href="#3-荷兰式订单">3 荷兰式订单</a></li>
+    <li><a href="#4-跨链订单">4 跨链订单</a>
+      <ul>
+        <li><a href="#41-简化的跨链订单">4.1 简化的跨链订单</a></li>
+        <li><a href="#42-乐观的跨链订单">4.2 乐观的跨链订单</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-订单参数化方案">5 订单参数化方案</a></li>
+    <li><a href="#6-费用">6 费用</a></li>
+    <li><a href="#7-先期工作">7 先期工作</a>
+      <ul>
+        <li><a href="#71-签名订单">7.1 签名订单</a></li>
+        <li><a href="#72-荷兰式拍卖">7.2 荷兰式拍卖</a></li>
+        <li><a href="#73-聚合器">7.3 聚合器</a></li>
+        <li><a href="#74-跨链荷兰式拍卖">7.4 跨链荷兰式拍卖</a></li>
+        <li><a href="#75-乐观桥">7.5 乐观桥</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-结论">8 结论</a>
+      <ul>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深度解读 Flashbots 投资逻辑、技术框架、市场规模和主要风险 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="长期来看，MEV赛道有广阔的前景。目前虽然处于起步阶段，但Flashbots为MEV的快速增长构建了基础，并为未来提供了许多机会。" />
+<meta name="keywords" content="MEV, Flashbots" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58667/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深度解读 Flashbots 投资逻辑、技术框架、市场规模和主要风险" />
+<meta property="og:description" content="长期来看，MEV赛道有广阔的前景。目前虽然处于起步阶段，但Flashbots为MEV的快速增长构建了基础，并为未来提供了许多机会。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58667/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-08T00:00:00+00:00" />
+
+<meta itemprop="name" content="深度解读 Flashbots 投资逻辑、技术框架、市场规模和主要风险">
+<meta itemprop="description" content="长期来看，MEV赛道有广阔的前景。目前虽然处于起步阶段，但Flashbots为MEV的快速增长构建了基础，并为未来提供了许多机会。"><meta itemprop="datePublished" content="2023-09-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="18945">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深度解读 Flashbots 投资逻辑、技术框架、市场规模和主要风险"/>
+<meta name="twitter:description" content="长期来看，MEV赛道有广阔的前景。目前虽然处于起步阶段，但Flashbots为MEV的快速增长构建了基础，并为未来提供了许多机会。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深度解读 Flashbots 投资逻辑、技术框架、市场规模和主要风险</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-08">
+      2023-09-08
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 18945 字 -
+        预计阅读 38 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Elma Ruan；来源：WJ3B Web3</p>
+<p><strong>项目简介</strong></p>
+<p>Flashbots是一个研究和开发组织，旨在减轻Maximal Extractable Value（MEV）对区块链的负面影响，特别是以太坊。他们的主要目标是通过MEV-Boost等产品为MEV打造一个无需许可、透明和可持续的生态系统。未来的 MEV 发展应专注于跨链 MEV 捕获、最小化价值流失、最小化对协议真实用户的潜在负面影响，并确保参与者公平分配等方向</p>
+<p><strong>作者</strong></p>
+<p>Elma Ruan，WJB资深投研员，拥有常春藤盟校市场/金融双硕士学位，5年WEB3经验,擅长DeFi, NFT等多个赛道，进入加密行业前，曾就职某大型证券公司任职投资经理。</p>
+<h1 id="1-研究要点">1. 研究要点</h1>
+<h2 id="11-核心投资逻辑">1.1 核心投资逻辑</h2>
+<p>MEV（矿工可提取价值）是底层基础设施的一小部分，与区块内的交易密切相关。它具有高收入效应，收入增加与交易场景的复杂性成正比，并且相对风险较低。解决 MEV 问题是以太坊发展路线图的重要组成部分，旨在确保可靠、公平和可信任的中立交易，并解决 MEV 问题。未来的 MEV 发展专注于跨链 MEV 捕获、最小化价值流失、最小化对协议真实用户的潜在负面影响，并确保参与者公平分配等方向。</p>
+<p>当提到MEV时，常常会被想到与之相关的各种策略，例如抢先交易、夹子攻击、跟踪交易等等。这些策略可能给区块链生态系统中某些参与者带来不公正的结果，损害普通用户的利益。Flashbots的创始人们认为MEV问题也是以太坊生态系统中的一个重要问题，它可能导致不公平的交易和造成市场扭曲。因此创始人创建了Flashbots项目，旨在为以太坊生态系统提供一个可信、中立的通信渠道，以便矿工和其他参与者之间进行私人通信，从而解决MEV问题。Flashbots的核心基础设施是中继器（relay），其作用是收集来自不同参与者网络的交易包，并将它们转发给矿工。中继器可以验证交易的有效性，防止恶意交易的出现。同时，中继器还能帮助矿工更好地利用MEV，从而提高他们的收益。</p>
+<p>用户和Searchers（搜索者）之间的配对是通过Flashbots服务实现的。用户可以选择性地将他们的交易信息暴露给Flashbots, Searchers根据这些交易信息的集合捆绑打包，并将其提交给Block Builders来构建整个区块, 这样有助于Searchers更有效地进行套利操作。如果用户愿意，套利者可以与用户分享一部分MEV利润，从而实现双赢的局面。这种机制还可以为其他套利者提供一个良性竞拍过程，他们可以通过出更高的价格来获得利润，避免了交易失败和避免承担过多的Gas费用。此外，通过过滤掉失败的交易，减少了链上空间的占用，从而在一定程度上缓解了拥堵问题，实现了多赢的局面。</p>
+<p>总体来说，对各方都是有好处的：</p>
+<p>Proposers（提案人）：通过与Searchers私下合作，Proposers可以排到前面并获得更多的利益。</p>
+<p>Searchers：使用Flashbots，他们可以避免资源浪费，节省成本，并获取更多交易信息。</p>
+<p>交易用户：在发起交易时可以避免恶意行为的干扰，并减少因为错误操作而产生的损失。</p>
+<p>Flashbots: 获得用户和Searchers提供的独家交易信息，从而获得更多的获利空间，让其变得更强。</p>
+<p>然而，Flashbots也存在一些劣势。首先，Flashbots的中继需要大量的计算资源和带宽，这可能会导致一些性能问题。其次，Flashbots需要得到足够的参与者支持，否则它可能无法发挥作用，这需要Flashbots与以太坊生态系统中的其他参与者建立合作关系，以确保Flashbots能够得到广泛的应用和支持。最后，尽管Flashbots目前是一个非盈利组织，但仍然需要将交易提交到中心化的Flashbots服务器，这可能存在一些中心化风险。</p>
+<p>在行业大背景下，Flashbots的出现是一个积极的信号。随着加密货币市场的不断发展，MEV问题已经成为一个越来越严重的问题。Flashbots的解决方案为以太坊生态系统提供了一个可行的解决方案，可以帮助减轻MEV问题带来的负面影响。MEV的公平化和市场化为LSD协议和以太坊质押者提供了可预测的收益，促进了以太坊质押的增长和LSD协议对MEV解决方案的采用。同时，MEV的公平化和市场化也促进了链上活跃度的增长，提升了链上用户体验，推动了MEV产品的采用和对以太坊质押的需求，形成了一个良性循环。此外，市场化的MEV协议还能更好地分配利益，推动整体以太坊生态的增长。</p>
+<p>长期来看，MEV赛道有广阔的前景。目前虽然处于起步阶段，但已经开始出现头部效应。Flashbots为MEV的快速增长构建了基础，并为未来提供了许多机会。</p>
+<h2 id="12估值">1.2 估值</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_646gnie8is.jpg" alt="Flashbots"></p>
+<p>Flashbots项目估值已达10亿美元，根据The Block的报道，该以太坊基础设施服务提供商在23年7月完成了6000万美元的B轮融资。</p>
+<h1 id="2项目基本情况">2. 项目基本情况</h1>
+<h2 id="21项目业务范围">2.1 项目业务范围</h2>
+<p>Flashbots的业务范围主要包括Flashbots Auction、Flashbots Protect、Flashbots Data、MEV-Boost和MEV-Share。Flashbots Auction是一个无需许可、透明且公平的生态系统，旨在高效提取最大利益并保护交易先知行为。Flashbots保护提供安全、用户友好的交易方式，防止恶意交易并允许用户分享MEV。Flashbots Data提供用于分析以太坊MEV的工具，存储在Postgres数据库中。MEV-Boost可以提高验证人效益，促进以太坊竞争和去中心化。MEV-Share是一种开源协议，旨在让用户、钱包和应用程序能够内部化他们交易所创造的最大利益损失（MEV）。</p>
+<h2 id="22-过往发展情况和路线图">2.2 过往发展情况和路线图</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_9lhncypirb.jpg" alt="Flashbots"></p>
+<p>未来路线图：</p>
+<p>SUAVE是一个名为“Single Unified Auction for Value Expression”的项目，旨在通过构建一个去中心化的交易序列化层来解决MEV（矿工可提取价值）的问题。SUAVE由三个主要组件组成：通用偏好环境、最佳执行市场和去中心化的区块构建网络。SUAVE旨在赋予用户更多的权力，并最大程度地去中心化公共区块链。它是一个独立的网络，可以作为任何区块链的即插即用内存池和去中心化的区块构建器。Flashbots是SUAVE的创建者之一，在SUAVE的白皮书中，Flashbots明确表示，他们将继续完善SUAVE，把SUAVE列入了未来重要的规划中。</p>
+<p>- 2021年Q2：发布SUAVE的第一个版本，支持以太坊和BSC等主流公链。</p>
+<p>- 2021年Q3：支持更多的公链，包括Polygon、Solana等。</p>
+<p>- 2021年Q4：支持跨链MEV解决方案，以及更多的MEV捕获策略。</p>
+<p>- 2022年：推出SUAVE的第二个版本，支持更多的MEV捕获策略和更高的吞吐量。</p>
+<p>-2023 年：计划发布 SUAVE 测试网链来开始测试其新功能</p>
+<p>- 未来：进一步提高SUAVE的安全性和去中心化程度，支持更多的公链和跨链解决方案。</p>
+<p>此外，SUAVE的未来计划还包括与其他MEV相关的项目和组织合作，以推动MEV的发展和去中心化。SUAVE还计划通过社区治理来实现去中心化，以确保其长期的可持续性和发展。</p>
+<h2 id="23-团队情况">2.3 团队情况</h2>
+<h3 id="231整体情况">2.3.1 整体情况</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_howj2sp825.jpg" alt="Flashbots"></p>
+<p>根据领英官网显示，Flashbots目前拥有28位员工，其中大部分集中在计算机科学、数学、心理学和经济学等专业领域。这些员工具有广泛的专业背景，擅长于各种技术与领域，包括但不限于Python、区块链、机器学习和C语言等。他们的专业知识和技能使得他们能够在以太坊生态系统中应对复杂的技术挑战，并为Flashbots项目的研究和发展做出积极贡献。</p>
+<h3 id="232创始人">2.3.2 创始人</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_137kf0815i.jpg" alt="Flashbots"></p>
+<p>Philip Daian 联合创始人</p>
+<p>另外, Stephane Gosselin，Flashbots的联合创始人，于2022年10月因与团队在审查制度方面存在分歧而辞去了公司职务。</p>
+<p>Alex Obadia是Flashbots的前联合创始成员和顶级策略研究员，于2023年6月20日出于个人考虑离开了Flashbots。</p>
+<h3 id="233核心成员">2.3.3 核心成员</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_e1cv3bkqtj.jpg" alt="Flashbots"></p>
+<p>Andrew Miller  可信执行环境和SUAVE 的研究主管</p>
+<p>Miller以其破解英特尔SGX代码的研究而广为人知，他一直担任加密货币和合约计划（IC3）的副主任，Miller计划将从伊利诺伊大学担任助理教授职位中暂时休假，目前他在该校专注于电气和计算机工程</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_nffvtayzfu.jpg" alt="Flashbots"></p>
+<p>Hasu Flashbots 战略主管  </p>
+<p>Hasu担任领先流动质押协议Lido的战略顾问，以及保护用户免受MEV影响的Flashbots研发团队战略主管。目前，他表示大约 90% 的时间在 Flashbots 上，10% 的时间在 Lido 上。他还在Paradigm投资公司担任研究合作者，是Deribit Insights联合创始人，曾代表MakerDAO。他通过写作、社交媒体和播客进行教育和推动行业发展。</p>
+<h2 id="24融资情况">2.4 融资情况</h2>
+<p>这家公司成立于2020年，经历了两轮融资。在成立之初，公司获得了Paradigm的种子轮投资，投资金额未公开披露。而在2023年，公司进行了B轮融资，融资金额为6000万美金, Paradigm是B轮融资的重要投资方。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_spw4jc3scr.jpg" alt="Flashbots"></p>
+<h2 id="3业务分析">3. 业务分析</h2>
+<h2 id="31-服务对象">3.1 服务对象</h2>
+<p>Flashbots 的主要服务对象包括以下人群：</p>
+<p>1） 套利和清算机器人、DeFi交易员：通过在以太坊链上寻找可提取的价值来获取利润，并将这些交易捆绑在一起提供给Flashbots的Builders。</p>
+<p>2） 具有复杂使用功能的以太坊Dapps：这些Dapps利用Flashbots提供的功能来优化其交易的执行，提高效率和收益。</p>
+<p>3） 专业的Builder机构：这些机构通过从Searchers发送的交易捆绑中挑选最有利可图的交易，并将它们打包成完整的区块，最终通过Relay发送给Validators。目前市场上活跃的Builders数量较少，而前几家机构垄断了市场份额。</p>
+<p>4）矿工： ETH2.0的验证者，负责向网络提议区块并将其添加到链中。</p>
+<p>5）普通的以太坊用户: 他们可以直接与Flashbots交互，通过Flashbots提供的工具和接口来执行他们的交易。</p>
+<h2 id="32业务分类">3.2 业务分类</h2>
+<p>Flashbots的业务范围主要包括以下几个方面：</p>
+<p>1）Flashbots拍卖（Flashbots Auction）：提供了一个无需许可、透明和公平的生态系统，用于高效地提取MEV（矿工可提取价值）并保护交易防止先知行为，同时保持以太坊的理念。Flashbots 拍卖在以太坊用户和验证者之间提供了一个私有通道，以便在区块内有效地传达交易首选顺序。</p>
+<p>2）Flashbots保护（Flashbots Protect）：为以太坊用户提供了一个用户友好、安全和功能强大的交易环境。它具有可配置性，可以选择发送给哪些构建者并根据自身需求自定义MEV分享的设置。同时还提供了防止交易先知行为的保护机制，使交易不会被公共Mempool中的恶意交易捕捉，并且如果交易创建了MEV，用户可以通过MEV-Share机制获得回报。</p>
+<p>3）Flashbots数据（Flashbots Data）：提供了一种用于以太坊的MEV检查的工具，可以对区块进行分析，包括验证人的支付、代币转账和利润、兑换和套利等数据，并将所有数据存储在Postgres数据库中，以进行查询和分析。</p>
+<p>4）MEV-Boost：主要目的是为了提升以太坊验证者的效益，通过访问竞争性的区块构建市场。MEV-Boost机制将提案者和区块构建者的角色分开，从而促进了以太坊网络的去中心化和抗审查能力。</p>
+<p>5）MEV-Share：是一个开源的协议，用于让用户、钱包和应用程序内部化他们交易所创造的MEV。它具有中立性，意味着任何搜寻者都可以参与其中，而不受限于特定的区块构建者。</p>
+<p>综上所述，Flashbots主要涉及Flashbots拍卖、Flashbots保护、Flashbots数据、MEV-Boost和MEV-Share等业务范围，旨在提高MEV的效益、保护交易安全、提供竞争性的区块构建。</p>
+<h2 id="33业务详述">3.3 业务详述</h2>
+<p>Flashbots的业务主要涉及到四个部分：Searchers搜索者、Relays中继器、Builders构建者和Proposers提案者。这些角色在单个出块的流程中扮演不同的角色和承担不同的责任。</p>
+<p>以下是这些角色在单个出块流程中的流程和责任：</p>
+<p>Builders构建者：Builders通过收集来自用户、搜索者或其他订单流的交易来创建区块。他们的目标是以最大化自身和提案者的MEV为目标，构建出具有最大可执行价值的区块。</p>
+<p>Relays中继器：Relays是受信任的第三方，作为双向通信渠道将提案者与构建者联系起来。他们扮演验证者的角色，验证区块的有效性，并计算向提案者支付的金额。</p>
+<p>Proposers提案者：Proposers是以太坊权益证明验证者（Validators）。他们在收到Relays提交的区块头和支付值后，评估所有收到的出价，选择与最高支付相关联的区块头进行签署。</p>
+<p>Searchers搜索者：Searchers监听公共交易池和Flashbots私有交易池，寻找利益最大化的交易顺序，并将其打包提供给Builders。</p>
+<p>操作流程如下：Builders创建区块并提交给Relays中继者。Relays验证区块有效性，计算支付给提案者的金额，并发送区块头和支付值给当前提案者。提案者评估收到的出价，选择与最高支付相关的区块头签署，并发送给Relays。Relays使用信标节点发布区块，并将其返回给提案者。最后，奖励以区块内的交易和区块奖励形式分配给Builders和提案者。</p>
+<p>1. Flashbots Auction</p>
+<p>Flashbots Auction是一个开放、透明、公平的生态拍卖机制,旨在高效获取MEV和防止抢先交易,符合以太坊的理念。它通过一个私有通信渠道,使以太坊用户和验证者可以高效沟通区块内交易的优先顺序。</p>
+<p>Flashbots Auction最初基于mev-geth和mev-relay。在PoS以太坊中,它建立在Mev-Boost之上,该程序实现了以太坊的“提案者-构建者分离”。</p>
+<p>但也暴露出MEV带来的一系列负面效应:</p>
+<p>1）PGA机器人操作者和POW矿工之间低效的交易顺序沟通,导致网络和链路拥堵。</p>
+<p>普通用户承担高Gas费和区块空间稀缺的损失。</p>
+<p>2）MEV激励机制对以太坊共识的安全性构成一定威胁。它鼓励链上历史重组，以获取过去的MEV，并同时推动交易路由的中心化，以获得更好的隐私保护、延迟控制和交易顺序控制。</p>
+<p>3）有相关方正在开发许可和排他的交易路由基础设施, 这有损以太坊的中立性、透明度、去中心化和公平性。Flashbots Auction作为一个开放的民主化选择,旨在降低上述负面效应和安全威胁。</p>
+<p>工作原理</p>
+<p>Flashbots Auction是一个提供私有交易池和密封式区块空间拍卖机制的系统。该系统允许区块生成者在不信任的环境下，委托他人来寻找最优的区块构造方式。</p>
+<p>在常规的以太坊交易池中,用户会把交易广播到公共P2P网络,并指定Gas价格,表示他们愿意为以太网上的计算支付的费用。区块生成者收到交易后,根据Gas价格排序,然后使用贪婪计算法（在计算机科学中,贪婪计算法是一种选取局部最优解的算法,希望通过局部最优选择达到全局最优。这里指区块生成者使用贪婪计算法产生收费最高的区块）产生一个区块,以通过交易费用最大化收入。这种机制混合了英式拍卖和全支付拍卖的特点,在公开环境中竞价区块空间,最高出价者获胜,所有参与者都承担成本。</p>
+<p>这种机制存在以下问题:</p>
+<ol>
+<li>
+<p>公开的交易池导致区块空间竞价战,增加网络负载和Gas价格波动,不利于没有先知竞价策略的参与者。</p>
+</li>
+<li>
+<p>全支付拍卖导致未中标的交易在区块链上失败，从而浪费了宝贵的区块空间。此外，出价方由于执行风险而低估了他们的出价，最终导致人为的区块空间稀缺并使验证者的收入下降。</p>
+</li>
+</ol>
+<p>3）仅仅依靠Gas价格的机制导致出价参与方无法表达对交易顺序的偏好，因为他们只能竞价争夺区块的顶部位置。这迫使参与方采取其他无效的策略来增加自己的交易入块机会，比如发送大量无用交易来占用区块空间。这种情况导致公共资源的浪费和效率损失。</p>
+<p>相反, Flashbots拍卖使用首价密封投标拍卖(FPSBA)机制, 参与方可以通过私下渠道沟通具体的出价和交易顺序偏好,而无需支付未中标的成本。这种机制最大限度地提高了验证者的收益,因为每笔交易都有对应的出价,验证者可以选择收益最高的交易组合。同时,不同参与方需要根据MEV机会的预期收益确定出价,这相当于是一个价格发现过程,可以推导出MEV机会的市场价值。最关键的是,FPSBA机制杜绝了公开竞价导致的抢先交易问题。</p>
+<p>Flashbots Auction路线图</p>
+<p>Flashbots团队采用了一种逐步推进的方式来实现Flashbots拍卖架构的去中心化。在这个过程中，他们将分阶段地引入新的技术和改进，以逐步完善整个架构。</p>
+<p>l  交易前隐私：交易只在被打包进区块后公开, 排除中间方如中继器和构块者。</p>
+<p>l  失败交易隐私：未中标交易不会进入区块,不会公开。</p>
+<p>l  效率：意味着MEV的获取不会造成不必要的网络或链路拥堵。</p>
+<p>l  捆绑合并：以无冲突的方式合并多个传入的捆绑包。</p>
+<p>l  不可逆保护：一旦包含Flashbots捆绑的区块传播, 就难以通过链重组进行修改,可防止时序攻击。</p>
+<p>l  完全隐私：中继器和验证节点等中间方无法在上链前看到交易内容。</p>
+<p>l  允许开放：没有审查交易的可信中间方。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_pjg1waugb5.jpg" alt="Flashbots"></p>
+<p>技术架构</p>
+<p>Flashbots拍卖架构提出了一个网络, 包含三个不同的参与方,各自专门执行维持这种通信渠道所需的部分工作。区块构建者负责构建完整的区块,由验证者进行提议。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_sou4imyh5u.jpg" alt="Flashbots"></p>
+<p>对搜索者（Searchers）来说，Searchers指的是出于各种目的,优先使用Flashbots私有交易池而非常规P2P交易池的以太坊用户。这些用户负责监控链上状态,并向中继器发送交易捆绑包。</p>
+<p>主要可分为以下三类:</p>
+<p>以太坊交易机器人操作者 ：他们需要快速、无风险进入区块空间,例如套利和清算机器人。</p>
+<p>寻求交易抢跑保护的以太坊用户 ：例如Uniswap交易员。</p>
+<p>具有复杂使用功能的以太坊Dapp ： 如实现账户抽象或零Gas交易。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_i8csacftyo.jpg" alt="Flashbots"></p>
+<p>（Searchers从各种渠道获取信息,并根据这些信息创建捆绑包发送给区块构建者）</p>
+<p>通过直接将捆绑包提交给区块构建器，而不是通过点对点网络，Searchers能够获得&quot;交易前隐私&quot;，这意味着他们的交易不会被网络中的其他人看到。Searchers可以通过两种方式表达他们愿意支付以确保交易被打包的费用：设置以太坊交易的Gas价格或直接向Coinbase地址转账。与设置Gas价格不同，直接支付的方式可以避免不必要的失败出价费用，并在交易成功时才需要支付费用。采用这种方式既确保了交易的隐私，又提高了经济效益。</p>
+<p>对区块构建者（Block Builders）来说，Block Builders是一类专业人员，他们接受用户和搜索者的交易，并努力从这些交易中构建出最具盈利潜力的区块。构建出的区块会通过MEV增强中继器发送给验证者。搜索者会向一个或多个区块构建者发送捆绑包。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_zz4zyn0lf3.jpg" alt="Flashbots"></p>
+<p>(区块构建者使用来自搜索者的捆绑包和来自交易池的交易来创建区块）</p>
+<p>中继器（Relays）</p>
+<p>中继器是PBS（Periscope Block Scope）的一个组件，负责将来自构建者的区块进行托管，以供验证者使用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_k2t7lioydu.jpg" alt="Flashbots"></p>
+<p>(中继器从其构建者中选择最具盈利性的区块，并对其进行托管，以供验证者使用）</p>
+<p>通过MEV-Boost技术，验证者可以从多个中继器中选择最有盈利潜力的区块。每个中继器会在验证者决定将其提议给网络之前，将区块的内容保密。</p>
+<p>具体而言，中继器执行以下步骤：</p>
+<p>接收来自区块构建者的新区块。</p>
+<p>当验证者要求时，将最盈利的区块发送给验证者。</p>
+<p>验证者通过对该区块头进行签名，确立自己将提议完整区块的承诺。</p>
+<p>在收到验证者签名的区块头后，中继器将完整区块发送给验证者。</p>
+<p>快速而可靠地执行所有操作，以确保验证者不会错过提议截止时间。</p>
+<p>验证者（Validators/Proposers）</p>
+<p>在PoS以太坊中，验证者负责向网络提议区块，并将区块追加到区块链上。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_mis0jujswj.jpg" alt="Flashbots"></p>
+<p>（验证节点利用MEV增益，在多个中继器中选择最有利可图的区块来进行提案）</p>
+<p>当区块构建者在生成区块时，如果他们包含能够产生最大化收益的MEV交易，那么生成的区块往往更具利润性。验证节点可以通过选择这些具有最高利润的区块来获得更高的利润。这个过程被称为Mev-Boost，它可以提升验证节点的收益。</p>
+<p>Bundles（交易包）</p>
+<p>Searchers使用Flashbots将交易包提交给区块构建者，以便将其包含在区块中。交易包是将一个或多个交易组合在一起，并按照提供的顺序进行执行。除了Searchers的交易之外，交易包还可以潜在地包含来自内存池中其他用户的待处理交易，并且交易包还可以定向地选择特定的区块来进行包含。</p>
+<p>Bundle Pricing（交易包价格）</p>
+<p>Flashbots的block Builders从高层次来看，旨在在所构建的区块中包含可能获利最大的交易。在以太坊的PoW机制中，Flashbots的块构建器通过将搜索者的捆绑包插入块的顶部，并删除块尾部的交易来达到搜索者的最大获利目标。根据Gas Price计量，区块尾部的交易对于矿工来说是最不赚钱的但要挖掘的交易。因此，对于一个Flashbots捆绑包来说，要被认为是赚钱的，它必须具有比它所替代的区块尾部交易更高的Gas Price。</p>
+<p>在PoS以太坊中，Flashbots上的捆绑包定价的经验法则基本相同；更赚钱的交易通常会受到块构建算法的青睐。捆绑包/交易的盈利能力是由每个使用的Gas Price、优先费用和直接验证者支付价格来确定的。</p>
+<p>在PoS机制中，捆绑包不会将交易放置在捆绑包交易之间，而是可以在块中的任何位置放置。这意味着除了将交易捆绑成一个包之外，还可以将来自内存池的其他交易添加到区块链中。然而，捆绑包中的交易不会被直接添加进区块链。</p>
+<p>捆绑包排序公式</p>
+<p>Flashbots block Builders使用了一种新的算法，旨在产生最赚钱的块。这种设计对于搜索者来说有一些重要的变化需要注意：</p>
+<p>不再根据有效Gas Price进行排序和包含捆绑包，算法优化整体块的利润。</p>
+<p>不再保证在块的顶部执行。</p>
+<p>其他交易（例如来自内存池的交易）可能会在两个不同捆绑包之间实现，而不是在捆绑包内的交易之间。</p>
+<p>RPC终端点</p>
+<p>高级用户可以与relay.flashbots.net上的RPC终端点或以下其中一个测试网址进行交互。</p>
+<p>捆绑包中继器URL如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_8kg50qwsrn.jpg" alt="Flashbots"></p>
+<p>Searchers Reputation 搜索者声誉</p>
+<p>在高负载期间，Flashbots为具有良好绩效记录的搜索者提供对Flashbots区块构建器的一致访问。为了应对复杂的应用层攻击，即第7层攻击，正在探索多种解决方案之一，即通过引入搜索者声誉机制，以增强Flashbots基础设施。</p>
+<p>EIP-1559 Support</p>
+<p>自从mev-geth v1.10.5-mev-0.3.0版本起，Flashbots开始支持EIP-1559交易。对于希望继续使用传统交易方式的搜索者，不需要进行任何配置更改。然而，EIP-1559对于区块的基本费用带来了重大改变，这意味着那些曾经使用0 Gas价格进行交易的搜索者需要对其事务进行一些级别的调整。尽管如此，搜索者仍然有机会优先支付费用，他们可以直接向Coinbase转账或者支付高于EIP-1559基本费用的Gas价格。但无论如何，用户的交易必须至少包含等于基本费用的以太坊Gas Price。</p>
+<p>2. Flashbots Protect</p>
+<p>概述</p>
+<p>Flashbots Protect RPC 不会追踪用户的任何信息（例如IP地址、位置等），也不会存储或记录用户信息。Flashbots Protect 是一种用户友好、安全而强大的以太坊交易方式，既适合新手，也适合有经验的用户。</p>
+<p>它拥有以下主要优点：</p>
+<p>1）可配置性：用户可以选择将交易发送给不同的构建者，并设置 MEV份额。</p>
+<p>2）防止抢先交易：用户的交易不会被公共内存池中的夹子机器人发现。</p>
+<p>3）获得 MEV 回报：如果用户的交易产生了 MEV，用户可以通过 MEV-Share 获得最高90%的回报。</p>
+<p>4）无失败交易：只有在用户的交易操作没有被撤销或回滚时，才会将其纳入交易中，因此用户无需支付失败交易的费用。</p>
+<p>MEV-Share（后文有更详细的介绍）</p>
+<p>通过 MEV-Share，用户有机会获得他们通过交易所进行交易时所创造的最大为 90% 的 MEV 收益。默认情况下，Protect 用户将连接到可持续调优的 Stable 配置，该配置由 Flashbots 不断优化以实现更好的执行效果，同时保护用户免受有害的 MEV。</p>
+<p>Flashbots MEV-Share 节点维护着一个稳定配置，不断进行优化，旨在为用户提供更好的执行效果，同时保护用户免受有害的 MEV。用户只需要将交易发送到 Flashbots Protect 以获得收益。高级用户可以通过高级面板或手动设置其 Protect RPC 请求来对交易和首选项进行更精确的控制。</p>
+<p>有三种使用Flashbots Protect的方式：</p>
+<ol>
+<li>
+<p>将Flashbots Protect RPC（https://rpc.Flashbots.net）添加到用户的钱包中，适用于大多数用户。</p>
+</li>
+<li>
+<p>使用eth_sendRawTransaction将交易发送至https://rpc.Flashbots.net。</p>
+</li>
+<li>
+<p>使用eth_sendPrivateTransaction将交易发送至Flashbots。</p>
+</li>
+</ol>
+<p>最简单的使用方式是将Flashbots Protect RPC添加到用户钱包中，并可以配置发送给哪些构建者以及自定义MEV-Share设置。</p>
+<p>提升交易的纳入速度</p>
+<p>通过Flashbots Protect发送的交易默认仅与Flashbots共享，Flashbots仅构建以太坊的一部分区块。如果用户希望增加交易被纳入的机会，可以选择与更多构建者共享用户的交易。只需在“连接钱包到Protect”按钮的选项中选择其他构建者即可。</p>
+<p>取消交易</p>
+<p>提交至Flashbots Protect的交易会发送到Flashbots MEV-Share节点，并在那里挂起最多6分钟。</p>
+<p>Flashbots Protect允许用户通过向Flashbots Protect提交取消交易来取消待处理交易。取消交易时，用户需要发送一笔新交易，该交易需满足以下条件：</p>
+<p>要取消一笔交易，可以通过使用相同的地址进行提交，包括相同的nonce、发送者和接收者地址，并且数据字段为空。这样取消交易是免费的，它主要用于验证控制原始交易账户的操作权限。由于取消交易不会被允许进入区块链，因此不会产生任何费用。</p>
+<p>修复卡住的交易</p>
+<p>如果用户的交易处于“待处理”状态或nonce非常高，用户需要在MetaMask中清除活动和nonce数据。这将导致MetaMask从网络更新nonce和交易历史记录。在此过程中，用户的资金和密钥是安全的。</p>
+<p>3. Flashbots Data</p>
+<p>MEV-Inspect</p>
+<p>mev-inspect-py是一个用于以太坊的MEV检测工具。它能够分析区块中的各种信息，包括验证者支付、代币转移和利润、交易和套利等等。所有这些数据都会被存储在Postgres数据库中，方便进行查询和分析。</p>
+<p>执行区块的检测按照以下步骤进行：</p>
+<p>从RPC端点获取区块的跟踪信息、收据和区块数据。</p>
+<p>使用已知的ABI（应用二进制接口）对跟踪信息进行解码(指使用特定智能合约的ABI规范来解析区块链上的交易或事件跟踪数据），以便能够理解其含义。</p>
+<p>从解码后的跟踪信息中提取出结构化的对象，例如转移和交换操作。</p>
+<p>将这些结构化对象保存到数据库中，以便日后进行查询和分析。</p>
+<p>4. MEV-Boost</p>
+<p>MEV-Boost是一个开源的中间件软件，由验证者使用，用于访问一个竞争激烈的区块构建市场。它是Flashbots开发的，旨在实现基于权益证明（PoS）以太坊中的提案者-构建者分离（PBS）。通过MEV-Boost，验证者可以从构建者市场中获得区块。构建者会生成包含交易顺序和提案者费用的区块，并向验证者提供。通过将提案者和构建者的角色分离，MEV-Boost鼓励更多的去中心化和抗审查性在以太坊网络中。</p>
+<p>意义</p>
+<p>在以太坊上，MEV具有集中化的影响力。如果没有进行干预，围绕MEV机会的竞争可能导致共识机制的不稳定，同时也可能需要建立许可通信基础设施，以确保搜索者、区块生产者和验证者之间的平衡。对于PoS以太坊来说，获得MEV的机会变得更为重要，因为计划中减少的区块奖励将使MEV成为验证者总收入的较大部分。运行MEV-Boost的验证者通过将自己的区块空间出售给开放市场来最大化其权益奖励。据估计，使用MEV-Boost的验证者可以将其权益奖励提高超过60%。</p>
+<p>工作原理</p>
+<p>PoS节点运营者需要运行三个软件组件：验证者客户端、共识客户端和执行客户端。MEV-Boost作为共识客户端的一个附加组件，是一个独立的开源软件，负责查询和外包区块构建给一组构建者网络。</p>
+<p>区块构建者准备完整的区块，优化MEV提取并公平分配奖励，并将区块发送给中继器。一个MEV-Boost实例可以配置为连接多个中继器。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_dq9dnestd3.jpg" alt="Flashbots"></p>
+<p>中继器将来自多个构建者的区块进行汇总，并确定最有利可图的区块提交给提案者。然后，提案验证者的共识客户端通过MEV-Boost接收到的最有利可图的区块将其传播到以太坊网络，以进行证明和区块包含。</p>
+<p>5. MEV-Share</p>
+<p>MEV-Share是一个开源协议，旨在让用户、钱包和应用程序内部交易所产生的最大可执行值。通过&quot;orderflow auction&quot;的方式，它允许用户选择与愿意将其交易打包的搜索者共享交易数据。用户可以自由选择如何重新分配搜索者的报价，可以选择自己、验证者或其他参与方。MEV-Share具备中立性，对搜索者开放，不偏袒任何一个特定的区块构建者。其目标是减少独占订单流对以太坊的集中化影响，并使钱包和其他订单流来源能够参与到MEV供应链中。</p>
+<p>使用MEV-Share的方式很简单，用户只需将交易发送到Flashbots Protect，利用该服务Flashbots MEV-Share节点。通过MEV-Share，MEV被返还给其最初的创建者：用户。该协议具备可扩展性和去中心化的设计，使得搜索者可以无需许可就进行集成，并且不会偏袒任何一个特定的区块构建者。</p>
+<p>用户将其交易发送给特定的MEV-Share节点，该节点根据用户的隐私偏好选择性地与搜索者共享交易信息。基于这些信息，搜索者提交部分捆绑给MEV-Share节点，试图在不查看交易完整数据的情况下从用户的交易中提取MEV。MEV-Share节点会模拟搜索者提交的交易捆绑的一部分。然后，它会将成功的捆绑和一个条件发送给区块构建者。换句话说，MEV-Share节点会帮助搜索者共享他们成功的交易捆绑信息, 这意味着用户将从自己的交易中获得90%的MEV回报。这一机制确保了用户在该过程中获得公平的回报。</p>
+<p>目前，MEV-Share节点仅接受回溯操作。</p>
+<p>6.REV</p>
+<p>自2022年9月15号合并之后，项目方将MEV更改为REV（Realized Extractable Value）。</p>
+<p>可以将REV拆分为以下2个部分：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_oek6icvpvo.jpg" alt="Flashbots"></p>
+<p>其中，REVS是传递给搜索者的价值，REVM是传递给矿工的价值。需要注意的是，如下面所述，REV已经包括了机会的开采成本（即机会的实际REV取决于开采时的网络gas价格）。</p>
+<p>搜索者的REV由以下部分组成：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_ci327yfiy5.jpg" alt="Flashbots"></p>
+<p>在执行提取操作的交易中，Vout表示从搜索者流向区块链的价值（不包括Gas费）；Vin表示从区块链流向搜索者的价值；MEVg表示交易的Gas价格；MEVs表示交易的大小，即它们消耗的总Gas量。Vout、Vin和MEVg以基本网络货币（ETH）计价，而MEVs以Gas单位计算。将Gas费用从Vout中分离出来有助于量化提取成本，也是实际计算REV的方法。</p>
+<p>在这里, “区块链”一词，指的是与提取交易的EOA或由搜索者控制的智能合约不相关的任何其他地址（对应于智能合约或EOA）。识别这些地址是一种基于已知搜索者模式的启发式指导过程，可能有疏漏。此外，与MEV提取相关的任何辅助交易（如三明治攻击中的“肉”）都不是上述变量的组成部分。转向矿工方面有：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_mswsameg7y.jpg" alt="Flashbots"></p>
+<p>其中，geff表示在未利用机会的情况下，本应被包含在块中的交易的有效Gas价格。因此，REV包括了矿工通过包含MEV提取交易所承担的机会成本。</p>
+<p>由于交易池中的交易是短暂的，无法仅通过区块链数据和日志后测量geff。因为Flashbots采用一种近似方法，该方法同时也作为矿工所实现价值的下界：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_u06ys5nr4z.jpg" alt="Flashbots"></p>
+<p>其中，gtail是区块中最后一笔交易的Gas价格。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_stscawu5ut.jpg" alt="Flashbots"></p>
+<p>因此，即使挖矿者和搜索者的角色有些模糊，但可以清楚地确定机会的提取成本，即减数部分的MEV.gtail。</p>
+<p>最后，在这个阶段，搜索者和挖矿者之间的价值分配完全取决于MEV的选择，而MEV的选择又受到其他试图利用这个机会的搜索者的影响。</p>
+<h2 id="34行业空间及潜力">3.4 行业空间及潜力</h2>
+<h3 id="341背景">3.4.1 背景</h3>
+<p>MEV可以根据其分类方式进行如下划分：</p>
+<p>1）交易执行类：</p>
+<p>Pre-transaction MEV：在交易执行之前进行的操作，主要通过竞拍公共交易池或交易重新定向等方式获取价值。</p>
+<p>Mid-transaction MEV：在交易执行过程中产生的价值，包括操纵交易排队顺序、交易重新排序等操作。</p>
+<p>Post-transaction MEV：在交易执行完成后进行的操作，通常与区块链上的智能合约交互相关，包括挖矿奖励、闪电贷等。</p>
+<p>2）市场操纵类：</p>
+<p>市场前期（Pre-market）MEV：通过在交易所之外操作市场以获取利益，例如信息操纵、协作操纵等。</p>
+<p>市场交易中（In-market）MEV：通过交易所内部的操作和交易活动来获取利益，包括市价操纵、停损激活等。</p>
+<p>市场后期（Post-market）MEV：通过交易完成后的操作来获取利益，例如交易回报和市场调整。</p>
+<p>3）区块链协议类：</p>
+<p>合约交易（Contract transactions）MEV：利用智能合约执行的交易，通过操作合约逻辑获取价值。</p>
+<p>区块挖矿（Block mining）MEV：挖矿过程中操纵区块顺序以获取价值。</p>
+<p>解决MEV（矿工可提取价值）问题是以太坊发展路线图的重要组成部分。在2020年11月5日，以太坊联合创始人Vitalik Buterin发布了更新版的以太坊发展路线图，其中引入了一个全新阶段——&ldquo;The Scourge&rdquo;，旨在确保可靠、公平和可信的中立交易，并解决MEV问题。这意味着对解决MEV中心化问题的协议将获得更多关注，而这个赛道的重要性也将逐渐提升。</p>
+<p>过去几年中，MEV的发展经历了不同的阶段。早期阶段（2010-2017年）是MEV的萌芽期，主要集中在比特币网络上，如Fee Sniping和双花攻击。正式诞生阶段（2018-2019年）是以太坊上MEV的显著增长期，包括以太坊上的去中心化交易所、算法稳定币和自动做市机制等的出现，为MEV的机会提供了更多。</p>
+<p>目前，MEV市场上出现了多种解决方案，其中Flashbots是最突出的一个组织。Flashbots通过机器人加密来实现MEV的提取，其MEV拍卖平台的推出受到了广泛关注，并获得了可观的MEV收入。MEV赛道的市场潜力巨大。根据Flashbots提供的数据，在以太坊合并之前，已经实现了超过206,450ETH的MEV收益，但这仅仅是区块提议者接受的收益，搜索者的收益尚未计算在内。按照目前的市场发展情况看，MEV的市场规模可能是无限的。而且，当前的实际MEV收益只是潜力的一部分。</p>
+<p>总体而言，MEV赛道的发展前景广阔，随着技术和协议的不断创新，解决MEV问题的关注度将进一步提升，为用户和参与者带来更多机会和利益。</p>
+<h3 id="342市场规模">3.4.2 市场规模</h3>
+<p>这个领域的收入规模与加密市场的交易量几乎同步发展。MEV的规模受两个主要因素影响：套利频率与价格波动之间存在正相关关系，套利量与总交易量之间也存在正相关关系。</p>
+<p>以Flashbots为例，其总毛提取利润为713.95M，被视为良性的MEV, 对市场价值的确定、DeFi核心功能的完成以及DEX交易量都起到积极影响。而三明治攻击收入为1206.11M，被视为不利的MEV，大多数MEV保护型DEX希望能够控制并保住这部分利润。</p>
+<p>使用Uniswap、Pancakeswap和Sushi作为锚点进行累计费用收入排名，这三个DEX的累计费用为5.21 billion，通过Flashbots获取的MEV收入约占了其中的37%。除了主要的DEX，以太坊上的其他DApp、第二层解决方案以及替代层也会产生可观的MEV收益。要计算这些费用在整个价值链上的传导并形成各个细分领域的规模，需要分析MEV利润在不同参与者之间的分配情况。</p>
+<p>根据Eigenphi的数据，在2023年1月和2月，MEV搜索者通过钱包和RPC从所有用户的交易中获得了4830万美元，其中3470万美元流向了构建者, 构建者将3030万美元传送给了验证者。利润分配如下：搜索者获得730万美元（17.4%），构建者获得440万美元（10.5%），验证者获得3030万美元（72.1%）。从中可以看出，大部分利润（72%）仍由下游的验证者获得。</p>
+<p>在4830万美元中，有630万美元用于EIP 1559的销毁。普通交易通过钱包和RPC传输到构建者再传输到验证者的优先手续费为3255.4万美元。而钱包和RPC的普通交易为EIP 1559销毁了2.272亿美元。</p>
+<p>在2021年的牛市中，整体收入上限达到了4.76亿美元。根据较低的, 10倍价格收入倍数计算，整个领域的规模接近50亿美元。而每个细分领域的规模可根据占比粗略估算，搜索者超过10亿美元，验证者超过35亿美元。</p>
+<p>然而，参与链上交易并从中获利的机器人可能仍需承担许多失败交易成本以及其他链下对冲成本的影响，这些成本并未计入计算。此外，这只是直接参与者所获得的收入来计算，未考虑到间接参与者的市场。实际上，整个领域的规模远远超过上述数字。</p>
+<h2 id="35业务数据">3.5 业务数据</h2>
+<p>l  运营数据</p>
+<p>备注：自2022年9月15号合并之后，项目方将MEV更改为REV（Realized Extractable Value），相较于理论上的最大金额, 这样更准确地表示了实际实现和提取的金额。简单来说，REV是指矿工在区块链网络中赚取的收入，而MEV是更具体的概念，它涉及矿工从订购交易和操纵某些链上活动的能力中获取的潜在价值。</p>
+<p>REV:</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_pfuzm591nt.jpg" alt="Flashbots"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_wedkkmjav3.jpg" alt="Flashbots"></p>
+<p>截至2023年8月31日，自合并以来总提取金额为288,829个ETH，过去30天提取金额为18,860个以太坊（Searchers的收益尚未计算在内）。自2022年10月起，支付给Proposers的以太坊总量在持续攀升，从2022年10月的1.6K个/周上涨至2023年8月的287.1K/周，涨幅超过179倍。</p>
+<p>REV详细分析（以下数据集包含了合并后由mev-inspect-py捕获的两种类型的REV攻击套利和清算的统计）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_apqn47ugpm.jpg" alt="Flashbots"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_77c0zkc6m1.jpg" alt="Flashbots"></p>
+<p>根据数据显示，通过MEV套利所占比例最大的协议是Uniswap V2，占比为64.11%。其次是Uniswap V3、Curve和Balancer V1。在套利交易中，占比最高的币种是WETH，占比达到91.58%。其次是USDC、USDT及其他币种。在清算方面，Aave协议占比为68.8%，Compound V2占比31.2%。总的清算获利价值大约为122万美元左右。在币种方面，WETH占比最高，约为25.09%，其次是USDC，占比为24.07%。</p>
+<p>需要注意的是，由于以美元计价的所有代币价格没有完整覆盖，因此项目方只能检测到约85%左右的套利总量（以美元计价）。</p>
+<p>Flashbots 中继器指标</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_o025ufwadh.jpg" alt="Flashbots"></p>
+<p>根据数据集包括Flashbots中继在以太坊主网上运行的MEV-Boost情况来看，可以观察到Flashbots MEV-Boost中继区块支付给验证者的以太币（ETH）总额不断增长。在2022年11月，区块奖励达到了高峰值13K ETH/周，而总体上，每周支付给验证者的ETH平均在2-4K之间。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_e9rywssuk9.jpg" alt="Flashbots"></p>
+<p>在整个时间段内，MEV-Boost Relay提交的区块总数大约为250万个。其中，Flashbots占据40.1%的比例，而其他占比则为59.9%。</p>
+<p>Flashbots 中继验证器注册数据：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_93hcnpubym.jpg" alt="Flashbots"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_i8wqbsc7ny.jpg" alt="Flashbots"></p>
+<p>根据数据显示，已注册Flashbots的中继器验证者占当前验证者总数的81%。目前，总验证者数量约为81万人。总体而言，验证者的注册数量持续增加。在2022年9月到11月期间，验证者的增长速度较快，周注册数达到了高峰。然而，从2022年11月开始到2023年9月期间，验证者的注册数量呈明显下降趋势。特别是在2022年12月到2023年4月期间，验证者的注册数量处于低谷。目前，验证者的注册量维持在一个相对中等的水平。</p>
+<p>l  社媒数据</p>
+<p>Twitter: 该项目目前尚未设立官方账号。</p>
+<p>Discord: 目前在 Discord 上有26870名关注者，其中3996人在线。</p>
+<p>Discord社区中的讨论非常活跃，涉及了很多技术方面的话题。</p>
+<h2 id="36项目竞争格局">3.6 项目竞争格局</h2>
+<h3 id="361项目介绍">3.6.1 项目介绍</h3>
+<p>Manifold Finance</p>
+<p>Manifold Finance（FOLD）是一个MEV中继器基础设施项目，旨在改善DeFi、 DApps和协议之间的连接，并提供解决方案。Manifold Finance于2020年由Sam Bacha创立，充当以太坊用户和验证者之间的中间人。</p>
+<p>他们的主要关注点之一是保护用户免受MEV攻击的影响，例如夹子攻击，这些攻击可以利用交易并操纵价格。通过他们的第一个产品YCabal，Manifold Finance重新定义了交易过程，防止了链上的恶意套利攻击，并降低Gas费用。</p>
+<p>Skip Protocol</p>
+<p>Skip Protocol在Cosmos上开发了一套生态系统适配的MEV产品。这些产品的目标是帮助区块链实现长期的财务可持续性，并利用MEV来实现这一目标。通过提供专门的MEV基础设施，Skip Protocol让区块链社区能够自主控制MEV收入的获取和分配方式。他们的产品可以帮助质押者、验证者和协议从MEV中获取利润，同时改善链上用户体验。此外，这些产品还能让交易者执行更复杂和更有利可图的交易策略。</p>
+<h3 id="362对比分析">3.6.2 对比分析</h3>
+<p>Manifold Finance、Skip Protocol和Flashbots都是旨在减轻MEV负面影响的组织或协议。其中，Manifold Finance和Flashbots都是技术基础设施，而Skip Protocol是一个去中心化的协议。</p>
+<p>Manifold Finance通过SecureRPC系统和OpenMEV SDK来减少MEV的负面影响，而Flashbots则通过一系列的产品来研究民主化和重新分配MEV收入，并为生态系统带来更多透明度。</p>
+<p>Skip Protocol则专注于解决MEV搜索者和验证者整合的问题，通过创建一个密封投标、封闭式拍卖的系统，允许交易者向验证者提交小费交易，验证者根据区块的情况在区块中优先处理，从而获得更多奖励。</p>
+<p>Flashbots是一个研发组织，旨在减轻MEV负面影响。Flashbots拍卖跳过了传统的公开竞价拍卖，允许用户私下交流他们的出价和交易订单偏好，同时最大化验证者的奖励并防止抢跑交易，私人交易池与密封投标的结合确保了以太坊网络的公平和最佳区块的构建。</p>
+<p>因此，这三个组织或协议的不同之处在于它们的产品、技术基础设施和解决问题的重点。</p>
+<h2 id="37通证模型分析">3.7 通证模型分析</h2>
+<h3 id="代币总量和分配情况">代币总量和分配情况</h3>
+<p>该项目目前还没有发行代币。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0908/8_wyw441cn0g.jpg" alt="Flashbots"></p>
+<h1 id="4初步价值评估">4. 初步价值评估</h1>
+<h2 id="41核心问题">4.1 核心问题</h2>
+<p>项目是否具备牢靠的竞争优势？这种竞争优势来自哪里？</p>
+<p>1）前沿技术和独特的市场定位：Flashbots的目标是解决以太坊中的封锁竞争和交易前运行（MEV）问题，前沿技术和独特的市场定位使得Flashbots在以太坊生态系统中具备了竞争优势。</p>
+<p>2）市场需求和行业合作伙伴：Flashbots还与多个以太坊生态系统中的项目和交易所合作，共同推进技术和市场的发展，这为Flashbots项目提供了更大的竞争优势。</p>
+<p>3）强大的团队实力：Flashbots项目由来自以太坊开发者社区的顶级工程师和研究人员组成。他们具备深厚的区块链技术背景和丰富的经验，能够应对市场挑战并推动项目的发展。强大的团队实力是Flashbots项目建立竞争优势的重要因素之一。</p>
+<p>项目在运营上的主要变量因素是什么？这种因素是否容易量化和衡量？</p>
+<p>1） 交易流量：这是衡量Flashbots项目活跃度和用户参与度的一个重要指标。更高的交易流量意味着更多的用户在使用Flashbots的服务。这可以通过统计交易的数量、价值和频率来进行量化和衡量。</p>
+<p>2）合作伙伴和社区参与度：Flashbots项目需要与以太坊矿工、研究者和开发者等不同利益相关者进行密切合作，共同推动以太坊的发展。合作伙伴的数量和质量，以及社区的活跃度和参与度，可以成为衡量项目合作与社区建设的重要指标。</p>
+<p>3）技术创新和研究成果：Flashbots项目的目标之一是推动以太坊中的新技术的创新。衡量项目在技术创新和研究成果方面的影响力和质量可能相对更具主观性，但可以通过评估项目参与的技术规范、工具和软件的质量和影响力来进行衡量。</p>
+<p>这些变量因素在一定程度上可以量化和衡量，特别是交易流量方面。合作伙伴和社区参与度可以通过关注社交媒体活动、合作项目数量和质量以及活动参与人数进行初步衡量。技术创新和研究成果可能需要更深入的评估和评估，需要考虑到质量、可行性和影响力等方面的因素。</p>
+<h2 id="42主要风险">4.2 主要风险</h2>
+<p>1. 中心化问题：Flashbots是一个旨在最大化以太坊利益的组织，但这有时可能与以太坊社区的期望产生一定的冲突。例如，Flashbots宣布将对被美国财政部外国资产控制办公室列入黑名单的交易进行审查，这一决定引起了公众的广泛关注和反对。这些问题可能对Flashbots在以太坊社区中的声誉和用户的信任产生影响。</p>
+<p>2. 流动性不足：Flashbots拍卖的流动性不足可能会导致其无法发挥作用，从而影响其商业模式的可行性。此外，Flashbots拍卖的流动性问题可能会导致其无法吸引足够的用户和验证者参与，从而影响其长期发展。</p>
+<p>3. 性能问题：Flashbots的中继器的运作需要大量的计算资源和带宽，这可能会导致一些性能问题。此外，Flashbots的性能问题可能会影响其在以太坊网络中的稳定性和可靠性，从而影响其商业模式的可行性。</p>
+<p>4. 交易订购市场的问题：Flashbots拍卖的交易订购市场可能会导致一些交易被优先处理，这可能会引起公众的不满和质疑。</p>
+<p>5. 法律和监管问题：Flashbots拍卖的运营可能会受到法律和监管的限制和约束，这可能会影响其商业模式的可行性和长期发展。</p>
+<p>6. 机制风险：许可和排他的交易路由基础设施的发展可能对以太坊的中立性、透明度、去中心化和公平性产生负面影响。Flashbots Auction作为一种开放和民主的选择，需要在未来的发展中找到解决方案，以避免这种影响。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58714/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">赛智时代：AI大模型重点行业应用研究</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58675/">
+                <span class="next-text nav-default">使用AI服务惹上版权官司怎么办？微软：帮忙打官司，赔偿金全包</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-核心投资逻辑">1.1 核心投资逻辑</a></li>
+    <li><a href="#12估值">1.2 估值</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21项目业务范围">2.1 项目业务范围</a></li>
+    <li><a href="#22-过往发展情况和路线图">2.2 过往发展情况和路线图</a></li>
+    <li><a href="#23-团队情况">2.3 团队情况</a>
+      <ul>
+        <li><a href="#231整体情况">2.3.1 整体情况</a></li>
+        <li><a href="#232创始人">2.3.2 创始人</a></li>
+        <li><a href="#233核心成员">2.3.3 核心成员</a></li>
+      </ul>
+    </li>
+    <li><a href="#24融资情况">2.4 融资情况</a></li>
+    <li><a href="#3业务分析">3. 业务分析</a></li>
+    <li><a href="#31-服务对象">3.1 服务对象</a></li>
+    <li><a href="#32业务分类">3.2 业务分类</a></li>
+    <li><a href="#33业务详述">3.3 业务详述</a></li>
+    <li><a href="#34行业空间及潜力">3.4 行业空间及潜力</a>
+      <ul>
+        <li><a href="#341背景">3.4.1 背景</a></li>
+        <li><a href="#342市场规模">3.4.2 市场规模</a></li>
+      </ul>
+    </li>
+    <li><a href="#35业务数据">3.5 业务数据</a></li>
+    <li><a href="#36项目竞争格局">3.6 项目竞争格局</a>
+      <ul>
+        <li><a href="#361项目介绍">3.6.1 项目介绍</a></li>
+        <li><a href="#362对比分析">3.6.2 对比分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#37通证模型分析">3.7 通证模型分析</a>
+      <ul>
+        <li><a href="#代币总量和分配情况">代币总量和分配情况</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#41核心问题">4.1 核心问题</a></li>
+    <li><a href="#42主要风险">4.2 主要风险</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

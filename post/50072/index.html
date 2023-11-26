@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          发现最安全钱包ZenGo问题 防御特权用户攻击细节分析（独家） - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="CertiK 对ZenGo的安全设计和实施进行了全面评估。" />
+<meta name="keywords" content="钱包, 安全漏洞" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50072/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="发现最安全钱包ZenGo问题 防御特权用户攻击细节分析（独家）" />
+<meta property="og:description" content="CertiK 对ZenGo的安全设计和实施进行了全面评估。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50072/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="发现最安全钱包ZenGo问题 防御特权用户攻击细节分析（独家）">
+<meta itemprop="description" content="CertiK 对ZenGo的安全设计和实施进行了全面评估。"><meta itemprop="datePublished" content="2023-04-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5594">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="发现最安全钱包ZenGo问题 防御特权用户攻击细节分析（独家）"/>
+<meta name="twitter:description" content="CertiK 对ZenGo的安全设计和实施进行了全面评估。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">发现最安全钱包ZenGo问题 防御特权用户攻击细节分析（独家）</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-23">
+      2023-04-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5594 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_ky2or9474p.png" alt="Qar7IOQPfayPxlTsPCV5nXIbYXqfOHJjwmNoB37B.png"></p>
+<p>ZenGo是一个使用多方计算（MPC）技术的安全Web 3钱包。</p>
+<p>最近，CertiK的SkyFall团队对众多移动钱包进行了彻底的审计和研究，发现ZenGo的MPC解决方案提供了比普通移动钱包更强大的安全防御措施——ZenGo的钱包用户，尤其是那些高价值的钱包用户可以防御来自高级攻击者的直接攻击：例如利用零日漏洞或高级恶意软件在用户设备上获得root权限。</p>
+<p>该威胁是<strong>最新出现</strong> 且<strong>仅被CertiK团队发现</strong> ，因此MPC钱包开发者请务必注意攻击细节！</p>
+<p>防御特权攻击者是具有挑战性的。我们在报告结果中提出了一个新的攻击方式，与针对ZenGo中的MPC方法攻击向量。于是我们立即向ZenGo报告了这个安全问题，同时ZenGo也迅速做出了回应并修复了该问题。</p>
+<p>本文我们将深入探讨该发现的技术细节，并分享我们是如何与ZenGo合作以提高MPC钱包的整体安全性的。 </p>
+<p>基于我们对ZenGo安全设计的彻底审查和他们对问题的专业回应，CertiK认为ZenGo可以被称为目前市场上安全度较高的钱包解决方案。</p>
+<h1 id="什么是mpc"><strong>什么是MPC？</strong></h1>
+<p>多方计算（MPC），有时也被称为安全多方计算（SMPC），是密码学的一个领域。它允许多方联合签署交易，同时确保每一方的密钥不被泄露。</p>
+<p>因为MPC技术可以在多方之间分配密钥从而消除任何单点故障，因此可以让用户更好地保护Web 3私钥，这种方法也通常被称为 &ldquo;阈值签名&rdquo;，目前已被许多Web 3托管人和钱包开发者采用以保护Web 3资产。其中，ZenGo是最广为人知且使用率最高的MPC钱包开发商之一。 </p>
+<p>如下图所示，该钱包并不是由一个传统的私钥来控制签署交易，而是由多个私钥分片参与交易签署过程，并产生一个最终签名从而进行验证。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_6st94evzh6.png" alt="KzjRWhtEfGaN6yQm8j342XdTSDPZFJ4LO4W8DeGq.png"></p>
+<p>产生签名的普通MPC设计</p>
+<p>通过本次研究，我们已认识到与MPC方法相关的挑战和潜在的安全风险对于Web 3资产保护的重要性。于是我们想要通过探索和解决这些挑战来更好地保护Web3用户。</p>
+<p> 因此我们可以想一下这个问题：与传统的加密钱包相比，为什么MPC钱包可以提供更高的安全性？它又是如何做到的？</p>
+<h1 id="zengo-mpc设计和安全保证"><strong>ZenGo MPC设计和安全保证</strong></h1>
+<p>通过本次研究，我们已认识到与MPC方法相关的挑战和潜在的安全风险对于Web 3资产保护的重要性。于是我们想要通过探索和解决这些挑战来更好地保护Web3用户。</p>
+<p> 因此我们可以想一下这个问题：与传统的加密钱包相比，为什么MPC钱包可以提供更高的安全性？它又是如何做到的？</p>
+<p>在评估了不同Web 3钱包的设计后，我们研究了MPC的Web 3钱包——我们评估了市场上最受推崇的MPC钱包之一，同时也是头部的自我托管MPC钱包——ZenGo。</p>
+<p>本次评估我们采用了与之前研究概述中相同的威胁模型：“如果你的设备被植入了恶意软件，那么该钱包还能保护你的资产吗？”</p>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_5elbpijdo5.png" alt="1682220414573851.jpg"></p>
+<p>ZenGo安全架构概述</p>
+<p>如上图所示，ZenGo钱包具备独特的安全设计，安全架构和恢复过程比传统的钱包更富有层次。ZenGo提供的安全功能包括但不限于：</p>
+<p>双方签名方案：ZenGo的MPC设计实现了双方签名方案。每个用户在生成交易签名时都涉及两个密钥分片：一个存储在ZenGo的服务器上（主密钥①），另一个存储在用户的设备上（主密钥②）。ZenGo和用户均不知道对方持有的密钥是什么。</p>
+<p>基于TEE的保护：此外，为了防止 &ldquo;中间人 &ldquo;和 “APP劫持&quot;的攻击，ZenGo应用程序使用了TEE（可信执行环境）解决方案，并用TEE专用密钥签署HTTPS的通信内容来请求相关API。这个基于TEE的设备密钥是在用户设置设备时在TEE内产生的，即使是操作系统本身也无法提取。</p>
+<p>有了这些安全功能，攻击者就不能再从内存或存储文件中窃取用户的私钥并控制ZenGo用户的资产。ZenGo还利用TEE来保护服务器和客户端之间的互动不能够被篡改。这也意味着“中间人”和 &ldquo;APP劫持&quot;攻击被有效阻止和防御了。</p>
+<p>我们的审计证实，ZenGo确实有一个安全的设计和实现可以抵御这些攻击，并且这已是我们所接触过的被审计钱包中具备最高安全水准的设计。</p>
+<p>ZenGo的安全设计和实现成功地防御了包括来自特权的攻击及上述攻击。然而处理所有类型的特权攻击也并不是易事，特别是考虑到攻击者可以读取（以及在某些情况下写入）任意内存。</p>
+<p>通过审计整个钱包，我们能够发现ZenGo中的一个实现问题那就是：该钱包允许我们作为特权攻击者从而绕过某些保护。</p>
+<p>不过在讨论细节之前，让我们先回顾一下ZenGo钱包的安全机制。</p>
+<h1 id="zengo钱包的安全做法"><strong>ZenGo钱包的安全做法</strong></h1>
+<p>通过本次研究，我们已认识到与MPC方法相关的挑战和潜在的安全风险对于Web 3资产保护的重要性。于是我们想要通过探索和解决这些挑战来更好地保护Web3用户。</p>
+<p>因此我们可以想一下这个问题：与传统的加密钱包相比，为什么MPC钱包可以提供更高的安全性？它又是如何做到的？</p>
+<p>一个经典的Web 3钱包只需要一个私钥。然而用户总是有一定可能会透露私钥或助记词的。因此他们可能会丢失私钥，然后眼睁睁看着攻击者占有资产。</p>
+<p>MPC钱包的工作方式则不同。该钱包没有单一的私钥，用户现在只持有一份私钥分片，对其余的私钥分片一无所知。从这个角度看，攻击者即使获得了用户那一份的个人密钥，也不能直接转移资金。而为了进一步保护用户，ZenGo使用了多种手段来加强他们的安全设计：不仅仅是上述的双方签名方案和基于TEE的设备保护，还有基于面部扫描的生物识别认证及额外密钥加密等。</p>
+<h1 id="用户注册和用户账号恢复过程中的保护措施"><strong>用户注册和用户账号恢复过程中的保护措施</strong></h1>
+<p>在用户注册和账号恢复过程中，ZenGo采用了以下保护措施来保护用户资产。 </p>
+<p><strong>用户识别保护：</strong>  双方签名方案要求只有当用户与另一方（ZenGo的设定为服务器方）交互，才能动用他们的资金。为了能够识别用户和存储在服务器上的相关密钥份额，ZenGo需要用户的电子邮件以便注册账户。</p>
+<p>为了避免电子邮件被黑，ZenGo使用了面部扫描技术（FaceTec的Zoom），将生物识别信息与用户账户绑定。在注册与电子邮件验证后的账号恢复过程中，用户需要“刷脸”来进行认证。</p>
+<p><strong>应用程序-服务器通信保护：</strong>  为了确保ZenGo服务器与合法用户的设备进行互动，ZenGo在注册和账号恢复过程中在TEE环境中生成并注册了一个非对称密钥。ZenGo应用程序和服务器之间的所有交互都需要由这个特定的密钥签署。因为它受到硬件支持的安全解决方案的保护，因此攻击者不能直接读取这个密钥，而该密钥也很难被滥用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_zae03h458n.png" alt="ikwP1K8EX2yc9dTKGuWbRGuGVFbG8bARg2djAOvH.png"></p>
+<p>ZenGo用户注册和账号恢复过程</p>
+<p><strong>用户密钥共享保护：</strong>  让用户存储和备份其密钥分片是有风险的，因为这或将危及到ZenGo提供的所有安全措施。而为了解决这个安全问题，ZenGo在注册过程中生成了一个加密密钥。加密密钥对用户的密钥共享进行加密，并将密码文本存储在其服务器上。</p>
+<p>但是，加密密钥不与ZenGo共享，而是强制与用户的Google Drive或iCloud进行同步。只有在用户通过电子邮件验证和基于服务器的生物识别认证后，才能将加密的密钥共享并进一步解密。其中基于服务器的生物识别认证（FaceTec人脸识别）几乎不可能被常规的2D/3D人脸重建“蒙骗”。</p>
+<h1 id="交易签名的生成"><strong>交易签名的生成</strong></h1>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_zb94r8r9r9.png" alt="NRksr5dp4SB9QJhN9OxLvuLHzqTBmtW8RcqAcEv1.png"></p>
+<p>ZenGo的交易过程</p>
+<p>为了签署一项交易，ZenGo应用程序与ZenGo服务器进行了一系列的交互。在交互过程中，ZenGo使用其开源的双方签名解决方案和用户密钥分片来生成双方签名。然后，ZenGo服务器再进一步完成签名并广播交易。这个过程中的所有请求都有时间戳和TEE中的签名以保持信息的完整性和不可重放性。</p>
+<h1 id="zengo-mpc设计中的问题发现"><strong>ZenGo MPC设计中的问题发现</strong></h1>
+<p>正如我们之前所讨论的，ZenGo的安全设计中涉及许多加密密钥，每一个密钥都有不同的职责。在下面的表格中，我们显示了ZenGo使用了哪些密钥以及它们是如何被保护的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_00tjpmzcgl.png" alt="MjRMXOXumZMlE4a4uX8yuA7JDU0R0sCccu7Yn6XV.png"></p>
+<p>通过这个表格，我们可以看到，在客户端有三个密钥被使用：主密钥②，设备密钥和加密密钥。攻击者需要同时获得主密钥②和设备密钥，以便与ZenGo服务器互动，窃取用户资金。</p>
+<p>正如前面交易细节部分所介绍的，主密钥②在内存中作为文本参与双方签名的生成，它允许攻击者读取进程内存并提取主密钥②。而作为一种一定程度上的解决方案，所有对ZenGo服务器的交易请求都需要由设备密钥签署，而设备密钥是不能被读取或提取的。这个过程是在TEE中完成的，攻击者无法控制。</p>
+<p>然而，尽管ZenGo的安全设计考虑到了许多方面，CertiK的SkyFall团队仍然在其中发现了一个漏洞。在对ZenGo应用程序中所有API进行细节审计后，我们注意到某些API允许攻击者欺骗ZenGo服务器，并轻松生成一个新的设备密钥，以便在其他设备上使用。</p>
+<p>这种由设备密钥注册的API缺乏必要的安全保护措施：攻击者可以在其他设备上生成一个新的NIST P-256椭圆曲线密钥，然后攻击者可以利用设备密钥注册API，并注册新生成的密钥对，假装新的用户设备并请求交易。</p>
+<p>我们将这种攻击命名为设备分叉攻击。</p>
+<h1 id="对zengo钱包的设备分叉攻击"><strong>对ZenGo钱包的设备分叉攻击</strong></h1>
+<p>如上文所述，攻击者需要拥有ZenGo用户的主密钥②和有效的设备密钥来窃取其资产。</p>
+<p>主密钥②：主密钥②是一个固定的密钥，在内存中作为明文使用，以便参与双方的签名过程。由于双方签名算法的复杂性和独特性，这个过程不能在TEE中完成。因此，一个有特权权限的攻击者可以简单地转储进程内存或劫持某些系统API来提取主密钥②。下方截图显示了我们在iOS平台上能够提取到的主密钥②。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_iwohlepprn.png" alt="LBBUMdtPuN0JFOt99DDRNk1l434irP1w6RxZ3yWl.png"></p>
+<p>设备密钥：在注册或账号恢复过程中，TEE中的用户设备上会生成一个有效的设备密钥作为对前述明文提取威胁的解决方案。设备密钥并不能被有特权权限的攻击者读取，然而，攻击者可以使用相同的设备密钥注册API，从而来注册另一对密钥并使用它。</p>
+<p>设备密钥注册API只有一个非常基础的认证机制：攻击者可以使用一个普通的明文本地存储的JWT 令牌和提取到的主密钥②进行API身份认证。根据设计，该API涉及到的服务器代码也应该经过Face tec生物识别认证。然而在实践中，由于逻辑缺陷，代码未能执行此环节。 </p>
+<p>在我们的模拟攻击中，我们模拟了一个具备特权权限的攻击者，并持续监控受害者的设备。一旦ZenGo应用程序被启动，我们便立即从内存中提取主密钥②，并从本地数据库中读取API令牌。而这些信息足以让攻击者盗取用户的全部资金！</p>
+<p>一旦有了API令牌，我们就会生成一个新的设备密钥，并调用设备密钥注册API从而在ZenGo服务器上注册设备密钥。随后，我们构建了所有的API请求，与ZenGo服务器交互来发起交易。对于MPC钱包来说，生成双方签名是一个非常独特并且复杂的过程。不过好在ZenGo的开发过程始终秉承着开源精神，我们才能够编译官方ZenGo应用程序中使用的双方签名库并在本地运行。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_zz3b36smjw.png" alt="meeV0nGQI2eUw6VNkbhVsnZOpbf1bNJ5a0kDZgOi.png"></p>
+<p>上图中展示了我们是如何提取主密钥②并代表受害者注册一个新的设备密钥的。随后我们利用这两个密钥向“攻击者的账户”发送了0.00222 ETH。这整个过程只用了几秒钟，并且受害者也会完全意识不到。</p>
+<p>为了解决这个问题，ZenGo在服务器端为设备注册实施了FaceTec生物识别认证。服务器API级别的解决措施消除了这种攻击的可能性，且不需要更新客户端代码。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0423/2_54l00msesg.png" alt="ya7wPy5GoOWz8Am6F1oNlOy4mLASK8hq6R8pnWGI.png"></p>
+<h1 id="总结"><strong>总结</strong></h1>
+<p>在CertiK对ZenGo的评估中，我们彻底检查并审计了其为保护用户资产所采取的所有安全措施。这些措施包括双方签名方案、基于TEE的设备保护以及用来注册和恢复账号的生物识别。 </p>
+<p>尽管ZenGo有着较高的安全意识，并采取了诸多措施用来提高自己的安全性，CertiK还是在ZenGo的实施中发现了一个关键的可被利用的API访问认证风险。该漏洞可以让持有特权的攻击者绕过现有的安全措施，并在用户的设备被破坏时窃取用户的资金。</p>
+<p>ZenGo及时解决了该问题并部署了一个补丁，CeritK随后也进行了彻底的进一步审计并确定该补丁已修复报告中提到的风险。</p>
+<p>随着补丁的部署，我们相信ZenGo在日后可以有效地预防特权用户非法访问用户资金。防御特权攻击者是一项艰巨的任务，而ZenGo的安全实践向我们展示了全面保护用户的安全方法。该钱包的做法超过了目前市场上绝大多数常规钱包。 </p>
+<p>我们很荣幸能够与ZenGo合作，并很荣幸能够与ZenGo在保护Web 3用户安全方面做出共同努力并解决安全挑战。同时也感谢ZenGo对我们发现漏洞的及时回应与高效的漏洞补丁出台行动。</p>
+<p>作为安全行业的从业者，我们很高兴看到一个顶级Web 3钱包公司如此重视安全，对用户和用户的资金具备如此高的责任心。希望在未来的安全道路中，我们可为更多项目提升安全性，为其用户赋予“安心”。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50073/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">俄央行正开发数字卢布与其他CBDC之间的互动模式</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50047/">
+                <span class="next-text nav-default">后 ChatGPT 时代 问自己 25 个问题</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

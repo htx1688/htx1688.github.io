@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文了解 Lido V2：支持取消质押 ETH 引入新模块化架构设计 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="2 月 7 日，Lido 正式发布了 Lido V2 提案，将允许质押者从 Lido 中取消质押他们的ETH，同时质押路由器带来的新模块化架构设计还将实现 Lido 验证者生态的进一步去中心化。" />
+<meta name="keywords" content="Lido" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/47104/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文了解 Lido V2：支持取消质押 ETH 引入新模块化架构设计" />
+<meta property="og:description" content="2 月 7 日，Lido 正式发布了 Lido V2 提案，将允许质押者从 Lido 中取消质押他们的ETH，同时质押路由器带来的新模块化架构设计还将实现 Lido 验证者生态的进一步去中心化。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/47104/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-08T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文了解 Lido V2：支持取消质押 ETH 引入新模块化架构设计">
+<meta itemprop="description" content="2 月 7 日，Lido 正式发布了 Lido V2 提案，将允许质押者从 Lido 中取消质押他们的ETH，同时质押路由器带来的新模块化架构设计还将实现 Lido 验证者生态的进一步去中心化。"><meta itemprop="datePublished" content="2023-02-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4652">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文了解 Lido V2：支持取消质押 ETH 引入新模块化架构设计"/>
+<meta name="twitter:description" content="2 月 7 日，Lido 正式发布了 Lido V2 提案，将允许质押者从 Lido 中取消质押他们的ETH，同时质押路由器带来的新模块化架构设计还将实现 Lido 验证者生态的进一步去中心化。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文了解 Lido V2：支持取消质押 ETH 引入新模块化架构设计</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-08">
+      2023-02-08
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4652 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Lido，由 DeFi 之道编译。</p>
+<blockquote>
+<p>2 月 7 日，Lido 正式发布了 Lido V2 提案，这是该协议迄今为止最大规模升级，将允许质押者从 Lido 中取消质押他们的ETH，同时质押路由器（Staking Router）带来的新模块化架构设计还将实现 Lido 验证者生态的进一步去中心化。</p>
+</blockquote>
+<p>Lido 协议的技术贡献者提出了 Lido V2 的提案——这是 Lido 协议迄今为止最大的升级以及在进一步去中心化道路上的一步改变。</p>
+<p>本次升级的两大重点是：</p>
+<ul>
+<li>
+<p>Staking Router：得益于新的模块化架构设计，任何人都可以为新的节点运营商开发入口，从独立的质押者到 DAO 和分布式验证者技术 (DVT) 集群。他们将共同创建一个更加多样化的验证者生态系统。</p>
+</li>
+<li>
+<p>提款：这次全面的以太坊 Lido 协议升级将允许 stETH 持有者以 1:1 的比例从 Lido 提取 ETH，实现真正进出以太坊质押生态系统的关键里程碑。</p>
+</li>
+</ul>
+<p>Lido 的目的是为用户提供一种中心化质押平台（例如交易所）的替代方案，同时消除运行单独节点的技术和财务挑战。自始至终，Lido 协议一直坚持为其用户提供最高标准的安全性和可用性。</p>
+<p>该提案旨在推动一个更具包容性、开放性和透明性的平台，同时以我们的核心使命为基础，使质押变得简单、尽可能安全，并保持以太坊去中心化和抗审查。</p>
+<h2 id="下一次重大升级">下一次重大升级</h2>
+<p>在接下来的几个月里，以太坊将完成上海/Cappella 硬分叉升级。此次升级使自信标链启动以来的所有以太坊质押者相关者能够进行提款。</p>
+<p>提款的实施实现了 Lido 的核心目标，允许用户自由地进行质押和解除质押。鉴于这种自由，这个市场将在 DeFi 生态系统中提供最佳体验、安全记录和更广泛可组合性的平台上大放异彩。</p>
+<p>Staking Router 和基于模块的验证者集基础设施的出现将促进以太坊上整个 Lido 以及外部第三方贡献者的发展。</p>
+<p>Lido 协议是流动质押的早期采用者，最初仅使用基于 BLS 的 0 x00 取款凭证（WC）。基于智能合约的 WC 可用后，Lido 协议立即切换到更安全的 0 x01 WC。目前，一小部分验证者（约 12%）仍在使用由 6-of-11 阈值方案管理的 0 x00 WC。</p>
+<p>为了减轻与分布式托管人相关的风险，可以通过一个仪式将这些凭证轮换给基于智能合约的凭证。在这个仪式上，参与者将签署一个轮换消息，该消息将被广播到共识层网络。</p>
+<p>提款的实施加上 Staking Router 提案将有助于增加网络的去中心化程度，同时促成一个更健康的 Lido 协议，并实现期待已久的随意抵押和取消抵押（提款）的能力，加强 stETH 作为以太坊上最可组合和最有用的资产。</p>
+<h2 id="staking-router-是什么">Staking Router 是什么？</h2>
+<p>Staking Router 是一项重大的协议升级，可将运营商注册中心移至模块化且可组合性更强的架构。</p>
+<p>Staking Router 将作为 Lido 愿景的核心：作为一个平台，让质押者、开发人员和节点运营商可以无摩擦地协作，共同推动去中心化以太坊的未来。</p>
+<p>以太坊应该成为应用程序及其用户的可靠中立之家。以太坊 Lido 的使命是提供一个安全且可访问的质押平台，并为以太坊的整体去中心化做出贡献。</p>
+<p>Lido 坚定地致力于进一步多样化其运营商和验证者集，这在保持网络性能和中立性的同时降低了停机或审查的风险。</p>
+<h3 id="概述">概述</h3>
+<p>Staking Router 是一个控制器合约，它允许 Lido 通过模块化基础设施演变成一个可扩展的协议。这将通过本质上将各种模块视为可以充当协议潜在供应的验证者池集来工作。每个模块将负责管理内部运营商注册表、存储验证者密钥，以及在参与该模块的运营商之间分配股权和奖励。</p>
+<p>每个模块都可以包括各种类型的节点运营商，从社区利益相关者到专业或新兴的抵押组织，再到 DAO，他们可以独立或通过 DVT 等基础设施协同运行验证者。此外，节点运营商将能够通过多个模块参与。除了产品功能外，它还可以允许将密钥存储在 L2 或链下，从而降低协议成本并增加节点运营商的潜在数量。</p>
+<p>模块化架构将有助于更快地对各种节点操作员配置进行实验。这将减少一些技术障碍，同时加快扩展节点运营商集合的迭代过程。</p>
+<p>Staking Router 准备让使用 Lido 的各种利益相关者受益，包括：</p>
+<ul>
+<li>
+<p><strong>质押者</strong> ：他们受益于更加多样化和安全的节点运营商集，因为他们的存款将分布在更多的独立实体上，从而降低网络停机风险并提高以太坊的弹性。</p>
+</li>
+<li>
+<p><strong>节点运营商</strong> ：通过新模块，其他类型的节点运营商，如独立抵押者、小团体、DAO 和专业节点运营商，将能够增加他们参与 Lido 协议的途径。</p>
+</li>
+<li>
+<p><strong>开发人员</strong> ：用户将能够使用不同的节点运营商组合和具有各种竞争特征（例如覆盖选项和费用结构）来提议和实施模块，并申请加入 Staking Router 的模块集。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0208/7_79zgv6idru.png" alt="一文了解 Lido V2：支持取消质押 ETH 引入新模块化架构设计"></p>
+<p>Staking Router 在架构上将 Lido 协议转向聚合器策略，包含更多样化的验证者集，并为不同的方法、技术和整个协议中更大的整体灵活性提供了可能性。</p>
+<p>此外，Staking Router 将允许单个模块（及其各自验证器的相应子集）使用自定义参数进行操作，例如费用或抵押品要求，从而在验证者集之间增加更多的弹性。</p>
+<h3 id="质押模块未来方向">质押模块未来方向</h3>
+<p>目前，Lido 使用单一的 NodeOperatorsRegistry 合约，这是一个由 DAO 控制的精选节点运营商注册表。</p>
+<p>Staking Router 提案将允许引入额外的模块，通过利用 DVT、绑定和声誉评分等机制来支持更多样化的运营商基础，以便将无许可进入节点运营商集。</p>
+<ul>
+<li>社区模块：绑定的无许可节点运营商具有可选机制，可根据声誉（例如，基于成功的表现）有效降低保证金要求。</li>
+</ul>
+<p>展望未来，其中一些模块可能包括：</p>
+<ul>
+<li>
+<p>DVT 模块：支持 DVT 的验证器（带有可选的绑定），例如 Obol 的分布式验证者集或 SSV 节点。</p>
+</li>
+<li>
+<p>链下或 L2 模块：通过将验证者密钥的存储推送到链下或 L2 解决方案来降低 gas 成本。</p>
+</li>
+</ul>
+<p>为了扩展这一点，可以有许多相同类型的模块（或具有重叠类型的模块，例如 DVT + Community）在同一个质押集中运行。每个模块将能够通过它们用来生成验证者以添加到池中的运算符类型来表达特定目的或主题。</p>
+<p>最后，Staking Router 协调存款和取款以满足 DAO 所需的权益分配，并允许 DAO 设置的财政部质押奖励和权益分配算法来控制验证者分配。</p>
+<h3 id="提款">提款</h3>
+<p>提款将使用户能够取消质押他们的 stETH，以 1:1 的比例获得质押的 ETH。</p>
+<p>由于提款是流动质押（liquid staking）的基本特征，我们努力做出最佳设计，平衡用户体验和操作速度与协议的安全性。</p>
+<p>由于以太坊网络设计的固有复杂性，其中共识层和执行层的功能有些分离，提议添加到 Lido 协议设计中的提款机制将有两种模式：<strong>涡轮（Turbo）模式</strong> 和<strong>地堡（Bunker）模式</strong> 。</p>
+<p>有关 Lido 提款的更详细解释，包括深入了解 Turbo 和 Bunker 模式，请参阅此处由 Lido 协议工程贡献者准备的技术分析。</p>
+<h3 id="turbo-模式">Turbo 模式</h3>
+<p>这是默认使用的模式，除非发生灾难性事件或不可预见的情况影响以太坊网络。在 Turbo 模式下，使用用户存款和奖励中的所有可用 ETH，可以快速满足提款请求。退出网络的时间长短是不确定的；然而，在最好的情况下，提款请求可以在数小时内处理，而无需验证者退出。</p>
+<p>为了使过程尽可能顺利，贡献者为协议和节点操作员提出了自动化工具。该工具将用于帮助围绕验证者退出的流程自动化，从而最大限度地减少可能的延迟。</p>
+<h3 id="bunker-模式">Bunker 模式</h3>
+<p>为了在灾难性场景下有序处理提现，Bunker 模式被提出。其目的是通过延迟整个协议中的提款和社会化负面影响来防止老练的参与者获得对其他质押者的不公平优势。</p>
+<h3 id="领取人claimant概述">领取人（Claimant）概述</h3>
+<p>由于以太坊提款的异步性质，提款建议通过请求（Request）/领取（Claim）流程进行。</p>
+<ul>
+<li>
+<p><strong>请求（Request）</strong> ：用户锁定 stETH 作为提现请求。</p>
+</li>
+<li>
+<p><strong>执行</strong> ：协议获取 ETH 来完成提款请求，锁定这些 ETH，销毁锁定的 stETH，并将取款请求标记为可领取。</p>
+</li>
+<li>
+<p><strong>领取（Claim）</strong> ：用户可以随时领取他们的 ETH。</p>
+</li>
+</ul>
+<p>执行时间也不确定。在最好的情况下预计几个小时，大多数情况下大多数请求应该在一周以下。但是，在最坏的情况下，它可能会长得多。</p>
+<p>还应该注意的是，当用户排队等待提款（并退出质押网络）时，他们将不会获得质押奖励。</p>
+<h3 id="协议升级安全的方法">协议升级安全的方法</h3>
+<p>这个升级到 Lido V2 的提案的代码经历了迄今为止最严格的审查，共进行了七次不同的独立审计。</p>
+<p>安全是最重要的，需要花费无数时间进行内部和外部测试。</p>
+<p>根据最近出台的审计政策‌，我们已经与多家审计服务提供商合作，以对所有与升级相关的代码库进行多样化和彻底的安全评估。他们中的一些是长期合作伙伴，而另一些将首次为 Lido 安全做出贡献。</p>
+<p>在下面找到已确认审计服务提供商的完整列表：</p>
+<ol>
+<li>
+<p>Sigma Prime 将审核为 0 x00-&gt;0 x01 提款凭证轮换仪式设计的更新的 dc4 bc 版本。</p>
+</li>
+<li>
+<p>ChainSecurity 将在 1 月份成为第一批仔细检查 Staking Router 代码的审计方。ChainSecurity 的工作将用于在将新的关键协议部分合并到最终协议升级代码之前找出其潜在的弱点。</p>
+</li>
+<li>
+<p>Oxorio 将在 2 月至 3 月对启用以太坊提款代码库的协议进行审计。</p>
+</li>
+<li>
+<p>Statemind 将在 2 月至 3 月对启用以太坊提款代码库的协议进行审计。</p>
+</li>
+<li>
+<p>HEXENS 将在 2 月至 3 月对启用以太坊提款代码库的协议进行审计。</p>
+</li>
+<li>
+<p>协议智能合约的 MixBytes () Camp 安全审计竞赛计划于 2 月至 3 月举行。</p>
+</li>
+<li>
+<p>Certora 将成为协议升级安全的最终贡献者，在 2 月至 3 月提供完整的协议审计和形式验证。</p>
+</li>
+</ol>
+<p>可以在专用的公共 GitHub 存储库‌中查找对 Lido 代码库执行的完整审计列表以及详细报告。</p>
+<h3 id="发布详情">发布详情</h3>
+<p>以下是一个粗略的时间表，而不是最终的，并且可能会发生变化。</p>
+<p><strong>2 月初：</strong></p>
+<ul>
+<li>代码冻结和安全审计开始。</li>
+</ul>
+<p><strong>2 月底：</strong></p>
+<ul>
+<li>对升级进行信号快照投票，以预先承诺“升级参数”和 DAO 的整体设计支持。</li>
+</ul>
+<p><strong>3 月初：</strong></p>
+<ul>
+<li>
+<p>上线 Goerli 测试网。</p>
+</li>
+<li>
+<p>完成对所有代码（链上和链下）、Oracle &amp; NO 自动化的测试。</p>
+</li>
+</ul>
+<p><strong>3/4 月：</strong></p>
+<ul>
+<li>
+<p>提款凭证轮换仪式（0 x00 -&gt; 0 x01）。</p>
+</li>
+<li>
+<p>硬分叉前的协议升级。</p>
+</li>
+<li>
+<p>主网合约部署。</p>
+</li>
+<li>
+<p>关于协议升级的 Aragon。</p>
+</li>
+<li>
+<p>计划中的上海/Capella 硬分叉。</p>
+</li>
+</ul>
+<p>Lido V2 向来自以太坊生态系统各个角落的外部贡献者开放开发生态系统。</p>
+<p>Staking Router 的模块化功能的推出将随着时间的推移而到来，最初优先考虑社区和基于 DVT 的模块。</p>
+<p>很快，社区开发人员、项目团队和研究人员将能够通过提议将由 DAO 审查的 Staking Router 模块直接为 Lido 做出贡献。</p>
+<p>升级后，Lido DAO 邀请您加入我们的研究论坛，该论坛将发布进一步的更新以供协作提案。Lido 协议旨在尽可能培养和支持外部贡献者。</p>
+<h2 id="结论">结论</h2>
+<p>如此处所述，Lido 协议的使命是使质押变得简单和安全，同时保持以太坊的去中心化和抗审查性。</p>
+<p>在这种情况下，Staking Router 是实现为以太坊培养最佳验证者集的目标的一个关键里程碑——它不会在质量、安全性或去中心化方面做出妥协。</p>
+<p>在过去两年中，Lido 协议的地位不断提高，成为以太坊生态系统和整个 DeFi 领域不可或缺的组成部分。迄今为止，已有超过 10 万个唯一的质押者地址已将超过 4,815,040 枚 ETH 存入 Lido 协议，这突显了实现质押访问民主化目标的巨大成功。</p>
+<p>Lido 协议对去信任化质押、网络民主化和增强以太坊协议弹性的承诺一如既往地坚定。随着 Lido V2 的推出，Lido 协议期待与我们不断壮大的用户、节点运营商和 LDO 持有者社区分享更多信息。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/47115/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一览 Cosmos 生态链 Canto 新手指南</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/47114/">
+                <span class="next-text nav-default">以太坊合并后流通量首次减少超1万枚</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#下一次重大升级">下一次重大升级</a></li>
+    <li><a href="#staking-router-是什么">Staking Router 是什么？</a>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#质押模块未来方向">质押模块未来方向</a></li>
+        <li><a href="#提款">提款</a></li>
+        <li><a href="#turbo-模式">Turbo 模式</a></li>
+        <li><a href="#bunker-模式">Bunker 模式</a></li>
+        <li><a href="#领取人claimant概述">领取人（Claimant）概述</a></li>
+        <li><a href="#协议升级安全的方法">协议升级安全的方法</a></li>
+        <li><a href="#发布详情">发布详情</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

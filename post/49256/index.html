@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Vitalik：以太坊多客户端将如何与ZK-EVM交互？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="一种未被充分讨论但非常重要的以太坊维护其安全性和去中心化的方式是其多客户端理念。" />
+<meta name="keywords" content="Vitalik Buterin" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49256/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Vitalik：以太坊多客户端将如何与ZK-EVM交互？" />
+<meta property="og:description" content="一种未被充分讨论但非常重要的以太坊维护其安全性和去中心化的方式是其多客户端理念。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49256/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-03T00:00:00+00:00" />
+
+<meta itemprop="name" content="Vitalik：以太坊多客户端将如何与ZK-EVM交互？">
+<meta itemprop="description" content="一种未被充分讨论但非常重要的以太坊维护其安全性和去中心化的方式是其多客户端理念。"><meta itemprop="datePublished" content="2023-04-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5983">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vitalik：以太坊多客户端将如何与ZK-EVM交互？"/>
+<meta name="twitter:description" content="一种未被充分讨论但非常重要的以太坊维护其安全性和去中心化的方式是其多客户端理念。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Vitalik：以太坊多客户端将如何与ZK-EVM交互？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-03">
+      2023-04-03
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5983 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Vitalik；翻译：金色财经0x25</p>
+<p>一种未被充分讨论但非常重要的以太坊维护其安全性和去中心化的方式是其多客户端理念。以太坊有意没有默认每个人都运行“参考客户端”：相反，有一个协作管理的规范（是用非常易读但非常慢的Python编写的）并且有多个团队实现规范（也称为“客户端”），这些客户端客户端由用户实际运行。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0403/1_qz1194snck.png" alt="Vitalik：以太坊多客户端将如何与ZK-EVM交互？"></p>
+<p>每个以太坊节点运行一个共识客户端和一个执行客户端。截至今天，没有共识或执行客户端占网络的2/3 以上。如果在其类别中份额低于 1/3 的客户端出现错误，则网络将照常运行。如果在其类别中占有 1/3 到 2/3 份额的客户端（例如 Prysm、Lighthouse 或 Geth）出现错误，链将继续添加区块，但它会停止最终确定区块，从而为开发人员提供时间进行干预。</p>
+<p>以太坊验证方式的一个未被充分讨论但非常重要的即将到来的重大转变是ZK-EVM的兴起。证明 EVM 执行的 SNARK已经开发多年，该技术正被称为ZK rollups的2 层协议积极使用。其中一些 ZK Rollups已经在主网激活，很快就会有更多。但从长远来看，ZK-EVM 不仅仅用于Rollup；我们也想使用它们来验证1 层的执行情况。</p>
+<p>一旦发生这种情况，ZK-EVM 实际上成为第三种类型的以太坊客户端，对网络安全的重要性与当今的执行客户端和共识客户端一样重要。这自然会提出一个问题：ZK-EVM 将如何与多客户端交互？困难的部分之一已经完成：我们已经有多个正在积极开发的 ZK-EVM 实现。但其他困难的部分仍然存在：我们如何真正为 ZK 证明以太坊区块的正确性创建一个“多客户端”生态系统？这个问题提出了一些有趣的技术挑战——当然还有权衡是否值得的迫在眉睫的问题。</p>
+<h2 id="以太坊多客户端理念的最初动机是什么">以太坊多客户端理念的最初动机是什么？</h2>
+<p>以太坊的多客户端哲学是一种去中心化，就像一般的去中心化一样，人们可以关注架构去中心化的技术收益或政治去中心化的社会收益。最终，多客户理念受到双方的推动并为双方服务。</p>
+<h3 id="技术去中心化">技术去中心化</h3>
+<p>技术去中心化的主要好处很简单：它降低了一个软件中的一个错误导致整个网络灾难性崩溃的风险。例证这种风险的历史情况是2010 年的比特币溢出漏洞。当时，比特币客户端代码没有检查交易输出的总和是否溢出（通过总和超过最大整数回绕到零)，所以有人做了一笔交易，给了自己数十亿枚比特币。该漏洞在数小时内被发现，并迅速修复并在整个网络中快速部署，但如果当时有一个成熟的生态系统，这些代币就会被交易所、桥和其他构造所接受，攻击者可能已经带走了很多钱。如果有五个不同的比特币客户，他们不太可能都有相同的错误，因此会立即出现分叉，而分叉中有错误的一方可能会输掉。</p>
+<p>使用多客户端方法来最小化灾难性错误的风险需要权衡：相反，你会遇到共识失败错误。也就是说，如果你有两个客户端，则存在客户端对某些协议规则有细微不同解释的风险，虽然两种解释都是合理的并且不允许偷钱，但分歧会导致链分叉成两个。这种类型的严重分叉在以太坊的历史上发生过一次（还有其他更小的分叉，其中运行旧版本代码的网络的很小一部分被分叉了）。单一客户端方法的捍卫者将共识失败作为不具有多个实现的原因：如果只有一个客户端，则该客户端不会不同意自己。他们关于客户数量如何转化为风险的模型可能如下所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0403/1_h4y35seuj8.png" alt="Vitalik：以太坊多客户端将如何与ZK-EVM交互？"></p>
+<p>我当然不同意这种分析。我不同意的地方在于 (i) 2010 年风格的灾难性错误也很重要，并且 (ii)你实际上永远不会只有一个客户端。后一点在2013 年的比特币分叉中表现得最为明显：由于两个不同版本的比特币客户端之间存在分歧而发生了链分叉，其中一个版本意外地限制了可以使用的对象数量，但未记录在案。在单个区块中进行修改。因此，理论上一个客户端在实践中通常是两个客户端，理论上五个客户端在实践中可能是六个或七个客户端。所以我们应该面对冒险并走在风险曲线的右侧，并且至少有几个不同的客户端。</p>
+<h3 id="政治去中心化">政治去中心化</h3>
+<p>垄断的客户端的开发人员处于拥有大量政治权力的位置。如果客户端开发人员提出更改，而用户不同意，理论上他们可以拒绝下载更新版本，或者在没有它的情况下创建一个分叉，但实际上用户通常很难做到这一点。如果不愉快的协议更改与必要的安全更新捆绑在一起怎么办？如果主要团队威胁说如果他们不按他们的方式行事就退出怎么办？或者，更温和地说，如果垄断的客户端团队最终成为唯一拥有最强大协议专业知识的群体，而使生态系统的其他部分处于不利地位，无法判断客户端团队提出的技术论点，从而使客户端团队面临有很大的空间来推动他们自己的特定目标和价值观，这可能与更广泛的社区不匹配？</p>
+<p>对协议政治的担忧，特别是在2013-14 比特币 OP_RETURN 战争的背景下，一些参与者公开支持分叉链的特定用途，是以太坊早期采用多客户端哲学的重要促成因素，这旨在让一小部分人更难做出此类决定。以太坊生态系统特有的担忧——即避免权力集中在以太坊基金会内部——为这一方向提供了进一步的支持。2018 年，基金会决定有意不实施以太坊 PoS 协议（即现在所谓的“共识客户端”），将该任务完全留给外部团队。</p>
+<h2 id="未来zk-evm将如何进入1层">未来ZK-EVM将如何进入1层？</h2>
+<p>如今，ZK-EVM 用于Rollup。这通过允许仅在链下发生几次昂贵的 EVM 执行来增加扩展性，而其他人只需验证链上发布的SNARKs即可证明 EVM 执行计算是否正确。它还允许一些数据（特别是签名）不包含在链上，从而节省 gas 成本。这给了我们很多可扩展性的好处，可扩展计算与 ZK-EVM 和可扩展数据与数据可用性采样的结合可以让我们扩展得更远。</p>
+<p>然而，今天的以太坊网络也有一个不同的问题，一个再多的 layer 2 扩容也无法自行解决的问题：layer 1 难以验证，以至于没有多少用户运行自己的节点。相反，大多数用户只是信任第三方提供商。Helios和Succinct等轻客户端正在采取措施解决该问题，但轻客户端远非完全验证节点：轻客户端仅验证称为同步委员会的随机验证者子集的签名，而不会验证该链实际上遵循协议规则。为了让我们进入一个用户可以实际验证链是否遵守规则的世界，我们必须做一些不同的事情。</p>
+<h3 id="选项-1限制1层强制几乎所有活动移动到2层">选项 1：限制1层，强制几乎所有活动移动到2层</h3>
+<p>随着时间的推移，我们可以将1层每个区块的 gas 目标从 1500 万减少到 100 万，足以让一个区块包含一个 SNARK 和一些存款和取款操作，但其他的不多，从而强制几乎所有用户活动移动到2层协议。这样的设计仍然可以支持在每个区块中提交许多Rollup：我们可以使用由定制构建者运行的链下聚合协议来从多个2层协议收集SNARK，并将它们组合成一个SNARK。在这样的世界中，1层的唯一功能是成为2层协议的交换所，验证它们的证据并偶尔促进它们之间的大额资金转移。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0403/1_hq8cyrp3ea.png" alt="Vitalik：以太坊多客户端将如何与ZK-EVM交互？"></p>
+<p>这种方法可能有效，但它有几个重要的弱点：</p>
+<p><strong>它实际上是向后不兼容的，因为许多现有的基于 L1 的应用程序在经济上变得不可行。</strong> 高达数百或数千美元的用户资金可能会陷入困境，因为费用变得如此之高，以至于超过了清空这些账户的成本。这可以通过让用户签署消息以选择协议内大规模迁移到他们选择的 L2 来解决（参见此处的一些早期实施想法），但这增加了过渡的复杂性，这需要1层的某种SNARK真正足够便宜。当涉及到SELFDESTRUCT 操作码之类的东西时，我通常喜欢打破向后兼容性，但在这种情况下，权衡似乎不太有利。</p>
+<p><strong>它可能仍然无法使验证变得足够便宜。理想情况下，以太坊协议应该不仅在笔记本电脑上而且在手机、浏览器扩展程序甚至其他链中都应该易于验证。</strong> 第一次同步链的时候，或者长时间离线后，应该也很容易。笔记本电脑节点可以在大约 20 毫秒内验证 100 万gas，但即使这样也意味着在离线一天后需要 54 秒进行同步（假设单slot最终确定性将slot时间增加到 32 秒），而对于手机或浏览器扩展，则需要每个区块几百毫秒，并且可能仍然是不可忽略的电池消耗。这些数字是可控的，但并不理想。</p>
+<p><strong>即使在 L2 优先的生态系统中，L1 至少在某种程度上可以负担得起也是有好处的。</strong> 如果用户在注意到新的状态数据不再可用时可以提取资金，Validiums可以从更强大的安全模型中受益。如果经济上可行的跨 L2 直接转移的最小规模较小，套利将变得更加有效，尤其是对于较小的代币。</p>
+<p>因此，尝试找到一种使用 ZK-SNARKs 来验证1层本身的方法似乎更合理。</p>
+<h3 id="选项-2snark验证第-1-层">选项 2：SNARK验证第 1 层</h3>
+<p>类型1（完全等效于以太坊）ZK-EVM可用于验证（1 层）以太坊区块的 EVM 执行。我们可以编写更多的 SNARK 代码来验证区块的共识方面。这将是一个具有挑战性的工程问题：今天，ZK-EVM 需要几分钟到几小时来验证以太坊区块，并且实时生成证明需要一个或多个（i）改进以太坊本身以删除对 SNARK 不友好的组件，（ii） ) 要么通过专门的硬件获得巨大的效率提升，要么 (iii) 通过更多的并行化改进架构。然而，没有根本的技术原因不能做到这一点——所以我希望，即使需要很多年，它也会完成。</p>
+<p>这是我们看到与多客户端范式交集的地方：如果我们使用 ZK-EVM 来验证 1 层，我们使用哪个 ZK-EVM？</p>
+<p>我看到三个选项：</p>
+<p>1、单一 ZK-EVM：放弃多客户端范式，并选择我们用来验证区块的单一ZK-EVM。</p>
+<p>2、Closed multi ZK-EVM：就一组特定的多个 ZK-EVM 达成一致并达成共识，并有一个共识层协议规则，即一个区块需要来自该集合中超过一半的 ZK-EVM 的证明才能被认为是有效的.</p>
+<p>3、Open multi ZK-EVM：不同的客户端有不同的 ZK-EVM 实现，每个客户端在接受一个区块为有效之前等待与自己的实现兼容的证明。</p>
+<p>对我来说，（3）似乎是理想的，至少直到并且除非我们的技术改进到我们可以正式证明所有 ZK-EVM 实现彼此等效的程度，此时我们可以选择最重要的一个高效的。(1) 会牺牲多客户端范式的好处，并且 (2) 会关闭开发新客户端的可能性并导致更加中心化的生态系统。(3) 有挑战，但这些挑战似乎比其他两个选项的挑战要小，至少目前是这样。</p>
+<p>实施 (3) 不会太难：每个类型的证明可能都有一个 p2p 子网络，使用一种类型证明的客户端将监听相应的子网络并等待直到他们收到证明他们的证明验证者认为有效。</p>
+<p>(3) 的两个主要挑战可能如下：</p>
+<p>延迟挑战：恶意攻击者可能会延迟发布一个区块，以及对一个客户端有效的证明。生成对其他客户有效的证明实际上需要很长时间（即使例如 15 秒）。这段时间足够长，可能会创建一个临时分叉并中断几个插槽的链。</p>
+<p>数据效率低下：ZK-SNARKs 的一个好处是可以从区块中删除仅与验证相关的数据（有时称为“见证数据”）。例如，一旦你验证了一个签名，你就不需要将签名保存在一个区块中，你可以只存储一个表示签名有效的bit，以及区块中确认所有签名有效的单个证明。但是，如果我们希望能够为一个区块生成多种类型的证明，则需要实际发布原始签名。</p>
+<p>在设计单slot最终确定性协议时要小心，可以解决延迟挑战。单slot最终确定性协议可能需要每个slot超过两轮的共识，因此可能需要第一轮包含区块，并且只需要节点在第三轮（或最后一轮）签署之前验证证明。这确保了在发布区块的截止日期和预计证明可用的时间之间始终有一个重要的时间窗口可用。</p>
+<p>数据效率问题必须通过单独的协议来聚合与验证相关的数据来解决。对于签名，我们可以使用ERC-4337 已经支持的BLS聚合。另一大类与验证相关的数据是用于隐私的ZK-SNARKs 。幸运的是，这些往往有自己的聚合协议。</p>
+<p>还值得一提的是，SNARK 验证 1 层有一个重要的好处：链上 EVM 执行不再需要由每个节点验证这一事实使得可以大大增加发生的 EVM 执行量。这可以通过大幅增加1 层gas限制或引入enshrined rollups或两者兼而有之。</p>
+<h2 id="结论">结论</h2>
+<p>使一个开放的多客户端 ZK-EVM 生态系统运行良好需要大量的工作。但真正的好消息是，这项工作的大部分正在发生或无论如何都会发生：</p>
+<p>我们已经有多个强大的ZK-EVM实现。这些实现还不是类型 1（完全等同于以太坊），但其中许多正在积极朝着这个方向发展。</p>
+<p>在Helios和Succinct等轻客户端上的工作最终可能会变成对以太坊链的 PoS 共识端进行更全面的 SNARK 验证。</p>
+<p>客户端可能会开始尝试使用 ZK-EVM 来证明自己的以太坊区块执行，特别是当我们有无状态客户端并且没有技术需要直接重新执行每个区块来维护状态时。我们可能会从客户端通过重新执行它们来验证以太坊区块，过渡到大多数客户端通过检查 SNARK 证明来验证以太坊区块。</p>
+<p>● ERC-4337 和 PBS 生态系统可能会很快开始使用 BLS 和证明聚合等聚合技术，以节省 gas 成本。在 BLS 聚合上，工作已经开始。</p>
+<p>有了这些技术，未来看起来非常美好。以太坊区块会比今天更小，任何人都可以在他们的笔记本电脑甚至他们的手机或浏览器扩展程序中运行一个完全验证的节点，这一切都会发生，同时保留以太坊多客户端理念的好处。</p>
+<p>从长远来看，当然任何事情都有可能发生。也许 AI 会加强形式验证，使其可以轻松证明 ZK-EVM 实现等效并识别导致它们之间差异的所有错误。这样的项目甚至可能是现在就开始着手的实用项目。如果这种基于形式验证的方法取得成功，则需要建立不同的机制以确保该议的政治去中心化持续进行；也许到那时，协议将被视为“完整的”，不变性规范将更加强大。但即使这是更长远的未来，开放的多客户端 ZK-EVM 世界似乎也是天然的下一步，无论如何都有可能发生。</p>
+<p>从短期来看，这仍然是一段漫长的旅程。ZK-EVM就在这里，但 ZK-EVM 在1 层真正可行将需要它们成为类型 1，并使证明足够快以使其可以实时发生。有了足够的并行化，这是可行的，但要实现这一点仍然需要做很多工作。共识变化，如提高 KECCAK、SHA256 和其他哈希函数预编译的 gas 成本，也将是未来图像的重要组成部分。也就是说，过渡的第一步可能比我们预期的要早：一旦我们切换到Verkle树和无状态客户端，客户端就可以开始逐渐使用ZK-EVM，并且到“开放的多ZK-EVM”世界的过渡可以自行发生。</p>
+<p>特别感谢 Justin Drake 的反馈和审阅</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49243/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Sui主网即将上线 如何获取Token？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49259/">
+                <span class="next-text nav-default">比特币接下去怎么走？看看6个技术分析师的观点</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#以太坊多客户端理念的最初动机是什么">以太坊多客户端理念的最初动机是什么？</a>
+      <ul>
+        <li><a href="#技术去中心化">技术去中心化</a></li>
+        <li><a href="#政治去中心化">政治去中心化</a></li>
+      </ul>
+    </li>
+    <li><a href="#未来zk-evm将如何进入1层">未来ZK-EVM将如何进入1层？</a>
+      <ul>
+        <li><a href="#选项-1限制1层强制几乎所有活动移动到2层">选项 1：限制1层，强制几乎所有活动移动到2层</a></li>
+        <li><a href="#选项-2snark验证第-1-层">选项 2：SNARK验证第 1 层</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

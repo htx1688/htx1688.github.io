@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          报告解读之 Ronin Network 安全事件及反洗钱分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本篇主要集中解读 Ronin Network 安全事件反洗钱分析及工具方法介绍。" />
+<meta name="keywords" content="其他" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41668/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="报告解读之 Ronin Network 安全事件及反洗钱分析" />
+<meta property="og:description" content="本篇主要集中解读 Ronin Network 安全事件反洗钱分析及工具方法介绍。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41668/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-18T00:00:00+00:00" />
+
+<meta itemprop="name" content="报告解读之 Ronin Network 安全事件及反洗钱分析">
+<meta itemprop="description" content="本篇主要集中解读 Ronin Network 安全事件反洗钱分析及工具方法介绍。"><meta itemprop="datePublished" content="2022-08-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3315">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="报告解读之 Ronin Network 安全事件及反洗钱分析"/>
+<meta name="twitter:description" content="本篇主要集中解读 Ronin Network 安全事件反洗钱分析及工具方法介绍。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">报告解读之 Ronin Network 安全事件及反洗钱分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-18">
+      2022-08-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3315 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%A5%E5%91%8A/"> 报告 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>本篇主要集中解读 Ronin Network 安全事件反洗钱分析及工具方法介绍。</strong></p>
+<p><strong>事件背景</strong></p>
+<p>3 月 29 日，Axie Infinity 侧链 Ronin Network 发布社区预警 ，Ronin Network 出现安全漏洞，共 17.36 万枚 ETH 和 2550 万枚 USDC 被盗，损失超 6.1 亿美元。据官方发布的信息，攻击者使用被黑的私钥来伪造提款，仅通过两次交易就从 Ronin bridge 中抽走了资金。值得注意的是，黑客事件早在 3 月 23 日就发生了，但官方据称是在用户报告无法从 bridge 中提取 5k ETH 后才发现这次攻击。本次事件的损失甚至高于去年的 PolyNetwork 被黑事件，后者也窃取了超过 6 亿美元。</p>
+<p>事情背景可追溯到去年 11 月，当时 Sky Mavis 请求 Axie DAO 帮助分发免费交易，由于用户负载巨大，Axie DAO 将 Sky Mavis 列入白名单，允许 Sky Mavis 代表其签署各种交易，该过程于 12 月停止。但是，对白名单的访问权限并未被撤销，这就导致一旦攻击者获得了 Sky Mavis 系统的访问权限，就能够通过 gas-free RPC 从 Axie DAO 验证器进行签名。Sky Mavis 的 Ronin 链由九个验证节点组成，其中至少需要五个签名来识别存款或提款事件。攻击者通过 gas-free RPC 节点发现了一个后门，最终攻击者设法控制了五个私钥，其中包括 Sky Mavis 的四个 Ronin 验证器和一个由 Axie DAO 运行的第三方验证器。美国调查机构认为朝鲜黑客组织 LAZARUS GROUP 是此事件的幕后黑手。</p>
+<p><strong>工具及方法</strong></p>
+<p>在正式开始反洗钱分析之前，先介绍一个高效的工具和一套有效应对复杂洗钱情况的分析方法。</p>
+<h3 id="基础工具---misttrack"><strong>基础工具 - MistTrack</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_h1kpdtsf3d.png" alt="报告解读之 Ronin Network 安全事件及反洗钱分析"></p>
+<p>（MistTrack 反洗钱追踪系统示例图）</p>
+<p>MistTrack 反洗钱追踪系统是一套由慢雾科技创建的专注于打击加密货币洗钱活动的 SaaS 系统，具有资金风险评分模块、交易行为分析模块、资金溯源追踪模块、资金监控模块等核心功能。</p>
+<ul>
+<li>AML Risk Score</li>
+</ul>
+<p>MistTrack 反洗钱追踪系统主要从地址所属实体、地址历史交易活动、慢雾恶意钱包地址库三方面为其计算 AML 风险评分。当地址所属实体为高风险主体（如混币平台）或地址与已知的风险主体存在资金来往时，系统会将该地址标记为风险地址。同时，结合慢雾恶意钱包地址库中的恶意地址数据集，对已核实的勒索、盗币、钓鱼欺诈等非法行为的涉案地址进行风险标记。</p>
+<ul>
+<li>Address Labels</li>
+</ul>
+<p>MistTrack 反洗钱追踪系统积累了超 2 亿个钱包地址标签，地址标签主要包含 3 个分类：</p>
+<p>（1）它归属于什么实体，如 Coinbase、Binance</p>
+<p>（2）它的链上行为特征，如 DeFi 鲸鱼、MEV Bot 以及 ENS</p>
+<p>（3）一些链下情报数据，如曾使用过 imToken/MetaMask 钱包</p>
+<ul>
+<li>Investigations</li>
+</ul>
+<p>追踪和识别钱包地址上的加密资产流向，实时监控资金转移，将链上和链下信息整合到一个面板中，为司法取证提供强有力的技术支持。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_gz9rvjhui1.png" alt="报告解读之 Ronin Network 安全事件及反洗钱分析"></p>
+<p>（MistTrack 追踪分析示例图）</p>
+<p>通过标记 1 千多个地址实体、2 亿多个地址标签，10 万多个威胁情报地址，以及超过 9000 万个与恶意活动相关的地址，MistTrack 为反洗钱分析和研究提供了全面的情报数据帮助。通过对任意钱包地址进行交易特征分析、行为画像以及追踪调查，MistTrack 在反洗钱分析评估工作中起到至关重要的作用。</p>
+<h3 id="拓展方法---数据分析"><strong>拓展方法 - 数据分析</strong></h3>
+<p>MistTrack 可以满足常见的反洗钱分析场景，而遇到复杂特殊的情况就需要其他的方法辅助分析。从区块链反洗钱资金态势中我们可以看到很多被黑事件发生后，在 ETH/BSC 链上的资金都不约而同地流向了一片灰暗之地——Tornado.Cash，Tornado.Cash 已成为 ETH/BSC 链上反洗钱的主战场。</p>
+<p>新的洗钱手法需要新的分析方法，对 Tornado.Cash 转出分析的需求变得越来越普遍，此处我们将提出一个针对 Tornado.Cash 资金转出的分析方法：</p>
+<ul>
+<li>
+<p>记录目前已知的信息，已知信息包括转入 Tornado.Cash 总数，第一笔 Tornado.Cash 存款时间，第一笔 Tornado.Cash 存款的区块高度。</p>
+</li>
+<li>
+<p>将参数填入我们准备的分析面板（https://dune.com/awesome/Tornado-withdraw-analysis）。</p>
+</li>
+<li>
+<p>得到初步的 Tornado.Cash 提款数据结果，再使用特征分类的方式对数据结果做进一步筛选。</p>
+</li>
+<li>
+<p>筛选后的结果是一批疑似黑客转出的结果集，取概率最高的结果集并对它进行验证。</p>
+</li>
+<li>
+<p>Tornado.Cash 转出分析结论。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_8b5d2vvop4.png" alt="报告解读之 Ronin Network 安全事件及反洗钱分析"></p>
+<p>（Dune Dashboard - Tornado.Cash 转出分析）</p>
+<p>通过这个 Tornado.Cash 资金转出的分析方法，我们已成功分析出 Ronin Network 等多个安全事件从 Tornado.Cash 转出后的资金详情。</p>
+<p>显而易见，这个 Tornado.Cash 资金转出的分析方法同样存在局限性：</p>
+<p>转入 Tornado.Cash 的数量分类也是一个匿名集，资金量越大相应的匿名集数量越少，资金量越小则相反。所以对于资金量小的分析难度更大。</p>
+<p>而在 BTC 链上，通过区块链反洗钱资金态势我们可以看到 ChipMixer 和 Blender 是黑客的常用洗钱平台。Blender 目前已被美国财政部制裁，站点已不可用，这里不再做进一步的探讨。</p>
+<p>ChipMixer 流入洗钱资金量巨大，我们同样需要提出一个针对 ChipMixer 资金转出的分析方法。</p>
+<ul>
+<li>识别 ChipMixer 的提款特征。</li>
+</ul>
+<p>输入地址类型</p>
+<p>输出地址类型</p>
+<p>输入数额特征</p>
+<p>版本</p>
+<p>锁定时间</p>
+<p>bech32(bc1q&hellip;)</p>
+<p>bech32(bc1q&hellip;)</p>
+<p>所有的输入数额都满足 Chips(即 0.001  * 2 的 n 次方，n &lt; 14)的要求</p>
+<p>2</p>
+<p>区块高度 - 1/区块高度 - 2/区块高度 -  3</p>
+<ul>
+<li>
+<p>根据上述提款特征对相应时间段的结构化区块数据进行扫描和筛选，得到这个时间段内 ChipMixer 的提款记录。</p>
+</li>
+<li>
+<p>对提款记录数据归类结果集，取概率最高的结果集并对它进行验证。</p>
+</li>
+<li>
+<p>ChipMixer 转出分析结论。</p>
+</li>
+</ul>
+<p><strong>反洗钱分析详述</strong></p>
+<p>根据上述方法，针对 Ronin Network 安全事件做出以下分析：</p>
+<p>黑客地址：0x098B716B8Aaf21512996dC57EB0615e2383E2f96（ETH 链）</p>
+<p>被盗时间：3 月 23 日</p>
+<p>损失统计：173,600 ETH、25,500,000 USDC</p>
+<p>攻击手续费来源：SimpleSwap</p>
+<p>资金转移：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_usop3pgste.png" alt="报告解读之 Ronin Network 安全事件及反洗钱分析"></p>
+<p>（Ronin Bridge Exploiter 资金转移时间线）</p>
+<p><strong>ETH 资金转移：</strong></p>
+<p>黑客将攻击获利的 25,500,000 USDC 兑换为了 8,562.6801 ETH，所以黑客需要洗币的总额为 182,163.737 ETH（Binance 提款 1.0569 ETH + 攻击所得 173,600 ETH + 攻击兑换 USDC 所得 8,562.6801 ETH ）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_szk1ob7dsw.png" alt="报告解读之 Ronin Network 安全事件及反洗钱分析"></p>
+<p>（Ronin Bridge Exploiter 资金转移图）</p>
+<p>黑客获利资金流向主体详情如下表：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_54s0cbrual.png" alt="d4mJ30khWa7X7px0F2KnjClauOEBHEw9SUBc4AY6.png" title="6477342"></p>
+<p>注：其他未做统计的流向资金为洗币过程损失。</p>
+<p><strong>Tornado.Cash 资金转移：</strong></p>
+<p>黑客总计转入 Tornado.Cash 175,100 ETH，经过分析，我们得出 Ronin 黑客从 Tornado.Cash 提款符合下列特征：从 Tornado.Cash 转出后直接或转移一层后使用 1inch 或 Uniswap 兑换为 renBTC，通过 renBTC 跨链到 BTC 链。</p>
+<p>通过 Dune Analytics，我们将符合上述特征的 Tornado.Cash 提款和跨链到 BTC 链的数据筛选出来，并进行有效的可视化展示（https://dune.com/awesome/ronin-hacker-analysis），如下图：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_ybioaejg04.png" alt="报告解读之 Ronin Network 安全事件及反洗钱分析"></p>
+<p>（Ronin 黑客从 Tornado.Cash 转出后通过 renBTC 跨链数据）</p>
+<p>根据上面的分析图，得到 Tornado.Cash 转出资金情况如下表：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_tgfnj8cbrk.png" alt="grcPFpKzkYfYea4oo3HqnXKf9NHWyNJ61UhYmfzm.png" title="6477341"></p>
+<p>注：数据有效时间截止于 7 月 20 日。</p>
+<p><strong>BTC 资金转移：</strong></p>
+<p>根据对 Tornado.Cash 资金转移的分析，我们得到符合特征的共计 8,075.9329 BTC 的资金跨链到 BTC 链。其中的 6,191.2542 BTC 经过分析确认与 Ronin 黑客相关，再加上从 Huobi 和 FTX 提款的 439.7818 BTC，确认共计 6,631.036 BTC 为 Ronin 黑客所属资金。此部分资金的进一步转移情况如下表：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_w2m02hbpef.png" alt="bf1JYVWssjgS3WflnghXgQkb6RNu1LJoPeVRnUsQ.png" title="6477340"></p>
+<p>注：0.1 BTC 以下转移额不做统计。</p>
+<p><strong>ChipMixer 资金转移：</strong></p>
+<p>根据 BTC 资金转移可以看到 3460.6845 BTC 转移到了 ChipMixer，通过对 BTC 链上数据监控以及对 ChipMixer 的提款数据进行分析，识别出 Ronin 黑客从 ChipMixer 共计提款 2,871.03 BTC。此部分资金的进一步转移情况如下表：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/8_pppdsaelwi.png" alt="Vy5XtHvExpBd1sVfwa8YDIUrk6kHbLzVlup6urSV.png" title="6477338"></p>
+<p>注：0.1 BTC 以下转移额不做统计。</p>
+<p><strong>总结</strong></p>
+<p>以上便是关于 Ronin Network 安全事件反洗钱分析以及工具方法介绍的全部内容，至此，关于 2022 上半年区块链安全及反洗钱分析报告的四篇完整解读已全部完成，可以直接点击顶部专题合集**#区块链安全与反洗钱报告** 浏览查看。</p>
+<p>完整报告下载：</p>
+<p><a href="https://www.slowmist.com/report/first-half-of-the-2022-report.pdf">https://www.slowmist.com/report/first-half-of-the-2022-report.pdf</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41676/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Zee Prime Capital：详解 Web3 社交及其实现方式</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41686/">
+                <span class="next-text nav-default">古典音乐NFT平台KOLO.Market的探索与实践</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#基础工具---misttrack"><strong>基础工具 - MistTrack</strong></a></li>
+        <li><a href="#拓展方法---数据分析"><strong>拓展方法 - 数据分析</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

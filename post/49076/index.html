@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文是Polygon zkEVM系列文章的第一篇，简要阐述了Polygon zkEVM的整体架构和交易执行流程，并且分析了Polygon zkEVM是如何实现计算扩容并同时继承以太坊的安全性的。" />
+<meta name="keywords" content="Polygon" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49076/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程" />
+<meta property="og:description" content="本文是Polygon zkEVM系列文章的第一篇，简要阐述了Polygon zkEVM的整体架构和交易执行流程，并且分析了Polygon zkEVM是如何实现计算扩容并同时继承以太坊的安全性的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49076/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-30T00:00:00+00:00" />
+
+<meta itemprop="name" content="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程">
+<meta itemprop="description" content="本文是Polygon zkEVM系列文章的第一篇，简要阐述了Polygon zkEVM的整体架构和交易执行流程，并且分析了Polygon zkEVM是如何实现计算扩容并同时继承以太坊的安全性的。"><meta itemprop="datePublished" content="2023-03-30T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-30T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5280">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"/>
+<meta name="twitter:description" content="本文是Polygon zkEVM系列文章的第一篇，简要阐述了Polygon zkEVM的整体架构和交易执行流程，并且分析了Polygon zkEVM是如何实现计算扩容并同时继承以太坊的安全性的。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-30">
+      2023-03-30
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5280 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>来源：Binary DAO</p>
+<p>Author: 0xhhh（Twitter:@hhh69251498 ）</p>
+<p>Editor:Red One</p>
+<p>本文是Polygon zkEVM系列文章的第一篇，简要阐述了Polygon zkEVM的整体架构和交易执行流程，并且分析了Polygon zkEVM是如何实现计算扩容并同时继承以太坊的安全性的。</p>
+<p>3月27日，Polygon zkEVM主网测试版本正式上线，Vitalik 在上面完成了第一笔交易。</p>
+<p>本文是Polygon zkEVM系列文章的第一篇，简要阐述了Polygon zkEVM的整体架构和交易执行流程，并且分析了Polygon zkEVM是如何实现计算扩容并同时继承以太坊的安全性的。</p>
+<p>同时还会在接下来两篇文章里详细介绍Polygon zkEVM的zkEVM Bridge和zkEVM的设计细节，以及Polygon zkEVM接下来的去中心化Sequencer的路线图。</p>
+<h3 id="一rollup为了给以太坊实现计算扩容">一、Rollup为了给以太坊实现计算扩容</h3>
+<p>首先，我们需要明确Rollup的大概工作原理。Rollup的出现是为了给Ethereum实现计算扩容，具体的实现方法是将交易的执行外包给Rollup，然后将交易和交易执行后的状态(State)存储在 Ethereum 的合约内，由于技术路线的不同演变出了两种类型的 Rollup：</p>
+<p><strong>Optimistic Rollup</strong></p>
+<p>乐观的认为发送到 Ethereum 的 Rollup 交易(Rollup Transaction)和对应的 Rollup 状态(Rollup State )都是正确的，任何人都可以通过提供欺诈证明(Fraud Proof)对还处于挑战期的Rollup State进行挑战(Challenge)。</p>
+<p><strong>Zero-knowledge Rollup</strong></p>
+<p>ZK会为发送到 Ethereum 的 Rollup交易和对应的 Rollup 状态提供一个有效性证明(由以太坊上的合约验证，来证明 Rollup 的执行对应交易后的状态是正确的)。</p>
+<p><strong>参考以太坊官方定义：</strong></p>
+<p><a href="https://ethereum.org/en/developers/docs/scaling/#rollups">https://ethereum.org/en/developers/docs/scaling/#rollups</a></p>
+<p>Zero-knowledge Rollup 和 Optimistic Rollup 最大的区别就是由于验证状态有效性的不同方式导致达成 Finality 的时间不同；</p>
+<p>Optimistic Rollup 乐观的认为提交到 Ethereum 上的交易和状态都是正确的，所以存在7天的挑战期（达成Finality的时间是7天），期间任何人发现在 Ethereum 上的交易对应状态不正确都可以通过提交正确的状态进行挑战。</p>
+<p>Zero-knowledge Rollup( zk-Rollup ) 达成 Finality 的时间，则取决于：交易对应的有效性证明( Validity Proof )提交到以太坊并且验证通过所花费的时间。目前可能在1个小时左右的Finality居多(因为需要考虑到Gas成本问题)。</p>
+<h3 id="二polygon-zkevm-执行流程">二、Polygon zkEVM 执行流程</h3>
+<p>接下来我们以一个简单的交易被确认流程来看看 Polygon zkEVM是怎么工作的，从而对整体协议有一个具体的理解，它的整个过程可以主要分为三个步骤:</p>
+<p>1. Sequencer 将多个用户交易打包成 Batch 提交到L1的合约上；</p>
+<p>2. Prover 为每笔交易生成有效性证明(Validity Proof)，并将多个交易的有效性证明聚合成一个有效性证明；</p>
+<p>3. Aggregator 提交聚合了多个交易的有效性证明(Validity Proof) 到 L1 的合约中。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_f4ynwek846.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p><strong>1 Sequencer 将用户交易打包成 Batch 提交到 L1 合约上.</strong></p>
+<ol>
+<li>
+<p>用户将交易发送给Sequencer，Sequencer会在本地按照收到交易的快慢顺序进行处理(FRFS)，当Sequencer在本地将交易执行成功后，如果用户相信Sequencer是诚实的，那么他可以认为这个时候的交易已经达成了Finality。这里需要注意，目前大多数Sequencer内部的Mempool(交易池)都是私有的，所以暂时可以获取的MEV是比较少的。</p>
+</li>
+<li>
+<p>Sequencer 会将多笔交易打包进一个Batch里(目前是一个Batch里只包含一个交易) 然后在收集到多个Batches之后, 通过L1上的 PolygonZKEvm.sol的SequenceBatch()函数将多个Batches一起送到L1的交易Calldata上。</p>
+</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_rkw2srk26v.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p>(需要注意这里一次性提交多个Batches是为了尽可能减少L1的Gas消耗)</p>
+<ol start="3">
+<li>当PolygonZkEvm.sol 收到 Sequencer 提供的 Batches 后，它会依次在合约内计算每个Batch的哈希，然后在后一个Batch里记录前一个Batch的哈希，于是我们就得到了下图的Batch结构。</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_qdfbjslv05.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<ol start="4">
+<li>每个Batch里的交易顺序也是确定的，所以当Batch的顺序确定之后，我们认为所有被包含在Batch提交到L1的 Polygon zkEVM合约的交易的顺序都被确定了。</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_664q1yrwr9.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p>以上实际过程也是L1充当Rollup DA层需要完成的工作(这个时候并没有完成任何状态检验或推进的工作)。</p>
+<p><strong>2. Aggregator 为多个Batch的交易生成 Validity Proof</strong></p>
+<ol>
+<li>
+<p>当Aggregator监听到L1的 PolyonZKEVM.sol 合约中已经有新的 Batch 被成功的提交之后，它会把这些 Batch 同步到自己的节点里，然后给 zkProver 发送这些交易。</p>
+</li>
+<li>
+<p>zkProver 接收到这些交易之后会并行为每笔交易生成 Validity Proof，再将多个Batch包含的交易的 Validity Proof再聚合成一个有效性证明(Validity Proof)。</p>
+</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_fs96ao6zyn.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<ol start="3">
+<li>zkProver 将聚合多个交易的Validity Proof发送给 Aggregator。</li>
+</ol>
+<p><strong>3. Aggregator 提交聚合证明到 L1 的合约</strong></p>
+<p>Aggregator 会将这个有效性证明(Validity Proof)以及对应的这些 Batch 执行后的状态一起提交到 L1 的Polygon zkEvm.sol 合约内，通过调用以下方法：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_1ukme73kji.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p>合约内接下来会执行以下操作来验证状态转换是否正确。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_3h88ry6yzv.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_h2sf2j3qkk.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p>当这一步在L1合约内执行成功时，这部分batch包含的所有交易也就真正达成了Finality（对应OP的7天挑战期结束）。</p>
+<h3 id="三ethereum-在-polygon-zkevm-中充当的角色">三、Ethereum 在 Polygon-zkEVM 中充当的角色</h3>
+<p>上文我们已经了解了Polygon zkEVM的整体流程, 可以回顾下Ethereum 为 Rollup 做了哪些工作:</p>
+<p>第一步，Sequencer 将 Rollup 的交易收集起来打包成 Batch 之后，提交到L1的合约中。L1不仅仅提供了DA层的功能，实际上还完成了一部分交易排序的功能；当你把交易提交到Sequencer时，交易是没有真正被定序的，因为Sequencer有权力可以随便改变交易的顺序，但是当交易被包含在Batch里提交到L1合约上之后，任何人都没有权利再修改其中的交易顺序。</p>
+<p>第二步，Aggregator 将Validity Proof 提到L1合约上来达成新的状态,Aggregator则是类似Proposer的角色，合约则类似Validator的角色；Aggregator 提供了一个Validity Proof来证明一个新的状态是正确的，并告诉Validator我提供的Validity Proof涉及哪些交易Batch，他们都存在了L1的哪个位置。</p>
+<p>接着Validator从合约中提取对应的Batch，与Validity Proof结合在一起就可以验证状态转换的合法性了，如果验证成功实际上合约内也会更新到对应Validity Proof的新状态。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_5zuhn971y7.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<h3 id="四从模块化的角度结构-smart-contract-rollup">四、从模块化的角度结构 Smart Contract Rollup</h3>
+<p>如果从模块化的角度来看，Polygon zkEVM 属于Smart Contract Rollup 类型，我们可以尝试解构下它的各个模块，从 Delphi 给的图中， 我们也可以看出实际上 Polygon ZkEVM 作为 Smart Contrat Rollup的Consensus Layer，DA Layer 和 Settlement Layer其实都是耦合在PolygonZkEVM.sol合约中，并不能很好的区分。但是我们尝试着去解构各个模块:</p>
+<p>数据可用层(Data Availability Layer): Rollup交易存放的地方，对于Polygon-zkEVM来说，当Sequencer调用SequenceBatch()方法的时候，实际上就包含了往DA层提交交易数据。</p>
+<p>结算层(Settlement Layer): 具体指的是Rollup和L1之间的资金流动机制，具体指的是Polygon-zkEVM的官方桥(在下一篇文章会有详细介绍)。</p>
+<p>共识层(Consensus Layer): 包含交易排序和如何确定下一个合法状态(分叉选择)，Sequencer 调用L1合约中的SequenceBatch()的时候完成了交易排序的工作，当Aggregator调用L1合约中的TustedVerifyBatches()的时候完成了确认下一个合法状态的工作。</p>
+<p>执行层(Execution Layer): 执行交易并且得到新的世界状态，当用户向Sequencer提交交易，并且Sequencer执行完之后得到新状态的过程(所以我们往往说Rollup是计算扩容，因为L1把执行交易得出新状态的这个过程外包给了Rollup，同时Sequencer会通过Aggregator委托zkProver帮忙生成Validity Proof。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_7clzvps857.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<h3 id="五为什么说-polygon-zkevm-继承了l1的安全性">五、为什么说 Polygon-zkEVM 继承了L1的安全性</h3>
+<p>从上面介绍的整体流程上看，实际上Sequencer做了类似以太坊 Proposer的工作，提议了一批交易是有效交易，并且给出了这批交易执行后的新状态；而L1合约的验证逻辑，相当于所有L1的Validator都会在自己的以太坊客户端里执行一遍，实际上是所有的以太坊验证者充当了Rollup的验证者，因此我们认为 Polygon zkEVM 继承了以太坊的安全性。</p>
+<p>从另外一个角度上看，因为Rollup的所有交易以及状态都存储在以太坊上，所以即便Polygon zkEVM 这个团队跑路了，任何人都还是有能力依托以太坊上存储的数据，恢复整个Rollup网络。</p>
+<h3 id="六polygon-zkevm-激励机制">六、Polygon zkEVM 激励机制</h3>
+<p>Rollup激励机制主要指的是如何让Sequencer和Aggregator有利可图，从而保持持续性的工作的？</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_snrvhivyd4.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p>首先用户需要支付自己在Rollup上的交易手续费，这部分的手续费是采用ETH计价的，用Bridged ETH支付。</p>
+<p>Sequencer 则需要支付这些包含Rollup交易的Batch上传到L1交易的Calldata上的成本(调用SequenceBatch(batches()的成本)，同时需要在上传Batch的同时支付一定的Matic到L1合约中，用于之后支付Aggregator为这些Batches提供Validity Proof的成本。</p>
+<p>Aggregator 在调用trusted VerifyBatches 为L1合约内还没有被Finality的Batches提供Validity Proof的同时，也可以取出Sequencer提前支付在合约内的MATIC代币，作为提供Validity Proof的报酬。</p>
+<p>Sequencer的收入 = Rollup所有交易的Gas费用 - 将Batches上传到L1花费的L1网络Gas费用 - 支付给Aggregator的证明费用(MATIC计价)。</p>
+<p>Aggregator的收入 = Sequencer支付的MATIC报酬 - 提交到Validity Proof到 L1的Gas费用 - Validity Proof生成花费的硬件费用。</p>
+<p>调整支付给Aggregator的证明费用，同时为了避免Sequencer因为无利可图罢工，提供了以下的机制来调整Sequencer支付给Aggregator 的证明费用。</p>
+<p>合约中存在这样一个方法用来调整为Batch提供证明的费用:</p>
+<p>function _updateBatchFee(uint64 newLastVerifiedBatch) internal</p>
+<p>它会更改合约中一个名为BatchFee的变量，而这个变量决定了Sequencer为每个Batch支付的MATIC代币数量。</p>
+<p>更改机制如下:</p>
+<p>合约中维护了这样一个变量VeryBatchTimeTarget ，代表每个Batch被Sequencer提交到L1之后期望在这个时间内被验证状态。</p>
+<p>合约内会记录所有超过了VeryBatchTimeTarget之后还没有被验证状态的Batches, 并且将这些Batches的总数量记为DiffBatches。</p>
+<p>于是当有Batches迟到的时候，会用以下公式来调整BatchFee:</p>
+<p>MultiplierBatchFee 是一个被限制在1000~1024范围的数，可以通过函数setMultiplierBatchFee() 由合约管理员更改：</p>
+<p>FunctionsetMultiplier BatchFee(uint16newMultiplierBatchFee) public onlyAdmin</p>
+<p>需要注意这里的 采用MultiplierBatchFee 和10^3是为了实现3个小数点后的调整精度。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_2b03lgnz36.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_f403u07yab.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p>同理假如Batches提前了也会触发相应的batchFee调整机制:DiffBatches 表示提前验证状态的Batches的数量。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_zii6hurjos.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0330/18_jogwbssy4k.png" alt="zkEVM系列第一篇：Polygon zkEVM的整体架构和交易执行流程"></p>
+<h3 id="总结">总结</h3>
+<p>在这篇文章里我们梳理了Polygon zkEVM的核心机制，并分析了它实现以太坊计算扩容的可行性。有了一个整体的大纲后，在接下来的文章里我们会深入到协议内部，依次解析zkEVM Bridge的设计细节以及Sequencer的去中心化路线，zkProver的实现以及zkEVM的设计原理。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49086/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Web3数据云Oort重磅推出革命性去中心化存储服务Oort DSS</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49070/">
+                <span class="next-text nav-default">当前以太坊Gas费飙升至53GWei</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一rollup为了给以太坊实现计算扩容">一、Rollup为了给以太坊实现计算扩容</a></li>
+        <li><a href="#二polygon-zkevm-执行流程">二、Polygon zkEVM 执行流程</a></li>
+        <li><a href="#三ethereum-在-polygon-zkevm-中充当的角色">三、Ethereum 在 Polygon-zkEVM 中充当的角色</a></li>
+        <li><a href="#四从模块化的角度结构-smart-contract-rollup">四、从模块化的角度结构 Smart Contract Rollup</a></li>
+        <li><a href="#五为什么说-polygon-zkevm-继承了l1的安全性">五、为什么说 Polygon-zkEVM 继承了L1的安全性</a></li>
+        <li><a href="#六polygon-zkevm-激励机制">六、Polygon zkEVM 激励机制</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

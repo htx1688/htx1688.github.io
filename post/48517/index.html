@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          读懂加密内存池：解决 MEV 和审查问题的全新设计空间 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="加密内存池是解决 MEV 和审查问题的强大工具，目前已有多种可以单独使用的相关方案，它们之间也可以组合使用。" />
+<meta name="keywords" content="MEV" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/48517/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="读懂加密内存池：解决 MEV 和审查问题的全新设计空间" />
+<meta property="og:description" content="加密内存池是解决 MEV 和审查问题的强大工具，目前已有多种可以单独使用的相关方案，它们之间也可以组合使用。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/48517/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-16T00:00:00+00:00" />
+
+<meta itemprop="name" content="读懂加密内存池：解决 MEV 和审查问题的全新设计空间">
+<meta itemprop="description" content="加密内存池是解决 MEV 和审查问题的强大工具，目前已有多种可以单独使用的相关方案，它们之间也可以组合使用。"><meta itemprop="datePublished" content="2023-03-16T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-16T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7066">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"/>
+<meta name="twitter:description" content="加密内存池是解决 MEV 和审查问题的强大工具，目前已有多种可以单独使用的相关方案，它们之间也可以组合使用。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">读懂加密内存池：解决 MEV 和审查问题的全新设计空间</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-16">
+      2023-03-16
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7066 字 -
+        预计阅读 15 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>撰文：Jon Charbonneau</p>
+<p>编译：0x11，Foresight News</p>
+<p><strong>加密内存池是解决 MEV 和审查问题的强大工具，目前已有多种可以单独使用的相关方案，它们之间也可以组合使用。</strong></p>
+<p>这篇文章概述了 Justin Drake 围绕该主题的演讲（Columbia、Amsterdam 和 Flashbots Roast）所构建的设计空间。你们中的大多数人可能在第一次观看时感到难以理解，所以我试着简单地进行分解和扩展。</p>
+<p>基本思想：允许用户提交加密交易，区块生产者提交这些交易才能解密：</p>
+<ul>
+<li>
+<p>用户加密并广播交易</p>
+</li>
+<li>
+<p>加密交易提交</p>
+</li>
+<li>
+<p>交易被解密</p>
+</li>
+<li>
+<p>事务执行（注意：提交、解密和执行可能在单个 slot）</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_n80bzf8j6z.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>两个问题似乎可以迎刃而解：</p>
+<ul>
+<li>
+<p>MEV：如果我看不到它，我无法抢先交易</p>
+</li>
+<li>
+<p>审查：除非排除所有加密交易，否则我无法审查交易（如果许多交易是加密的，成本可能会非常昂贵）</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_g6dwwfwwl7.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>这里需要确保的一个关键点是保证解密不依赖于用户。有几种方法可以实现这一点：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_yk5c2hfff8.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_3p4970cjgo.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<h2 id="1in-flight">1.In-flight</h2>
+<p>相信某个第三方，私下向他发送数据，他可以解密和查看数据，但承诺在数据提交到链上之前不会公开披露。这就是 Flashbots Protect 等产品的工作方式。</p>
+<h2 id="2-可信硬件">2. 可信硬件</h2>
+<p>你可以利用受信任的硬件。明文可以在受信任的硬件中运行，但在提交交易之前不会公开解密。最著名的例子是 Flashbots SUAVE 的 SGX。</p>
+<h2 id="3-门限加密--解密ted">3. 门限加密 / 解密（TED）</h2>
+<p>一个委员会可以联合起来强制解密密文，但是需要签名者达到一个门槛才能做到这一点。例如，你的「阈值」可能是需要 2/3 的验证者同意解密。TED 已经在几个不同的领域进行了研究，包括：</p>
+<ul>
+<li>
+<p>以太坊 L1——Shutterized Beacon Chain</p>
+</li>
+<li>
+<p>Shutter Network —— 以太坊 L2s</p>
+</li>
+<li>
+<p>Arbitrum —— Chainlink 的 FSS</p>
+</li>
+<li>
+<p>Osmosis &amp; Anoma —— Ferveo</p>
+</li>
+</ul>
+<h3 id="shutterized-beacon-chain">Shutterized Beacon Chain</h3>
+<p>仔细查看 Shutterized Beacon Chain 提案，验证器的一个子集（「keypers」）使用分布式密钥生成器（DKG）生成公钥 / 私钥对。每个人都可以看到公钥，但私钥在委员会中被分成多份保管。重建私钥和解密需要密钥份额达到一定阈值（例如，2/3）。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_5p0a1jb4fl.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_nwleqrsmd3.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>用户可以有选择地加密交易，这些交易在其内容被解密和执行之前被包含在链上。区块生产者使用明文交易（立即执行）和加密交易（计划在未来的区块高度）创建区块。 </p>
+<p>在生成并证明区块 n -1 之后，keypers 应该生成并发布区块 n 的解密密钥。该密钥可以解密区块 n 内的交易。区块 n 必须包含解密密钥才能被视为有效。区块的后状态是这样计算的：即在执行区块中的明文交易之前执行区块中的加密交易（按照它们的设置顺序）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_ol4agyoc8y.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<h3 id="缺点">缺点</h3>
+<p>TED 有几个缺点：</p>
+<p><strong>缺乏问责机制</strong> ：与传统的安全假设不同，这里的恶意行为不可归因或不可报告。Keypers 可以立即解密，你无法对其进行归因。即使你假设验证者的行为与激励相容，验证者集之外的三字母机构（译者注：三字母机构是 CIA、FBI 等机构的总称，它们保卫美国，但通常行事神秘）也可能会对他们施加影响。 </p>
+<p><strong>诚实多数假设</strong> ：不诚实的委员会可能会产生问题，例如选择从不解密某些消息，或秘密解密他们不应该解密的消息（例如，在政府机构的要求下，或自私地进行 MEV 提取）。在大多数情况下，区块链实际上依赖于经济上理性的多数（即，罚没的惩罚通常超过恶意双花等行为的经济激励）。通过阈值加密，这个假设被转移到真正诚实和无私的多数。</p>
+<p><strong>破坏协议的稳定性</strong> ：本质上是上面两点的结合，TED 增加了验证者作恶的动机，并且不容易受到惩罚。</p>
+<p><strong>活跃度减弱</strong> ：更高的解密阈值增强了协议安全性）。然而，这直接削弱了活跃度。例如，大规模的网络中断会导致一半的验证者中断，现在可能造成协议停止。特别是对于非常强调「第三次世界大战」活跃度的以太坊来说，这是一个不可接受的权衡。 </p>
+<p><strong>糟糕的用户体验</strong> ：TED 可能会根据实施细节增加不同程度的延迟和成本。</p>
+<p><strong>次优价值分配</strong> ：让我们看一个简单的抢跑（frontrunning）示例：</p>
+<ul>
+<li>
+<p>1 ETH 价格为 1000 美元 </p>
+</li>
+<li>
+<p>如果我将交易发送到 vanilla 内存池 ——我得到 990 美元（搜索者 frontruns 和 backruns，净赚 10 美元）</p>
+</li>
+<li>
+<p>如果我将交易发送到 TED 内存池——我得到 995 美元（搜索者无法抢跑，但我推动了本地现货价格，为搜索者创造了 5 美元的套利机会）</p>
+</li>
+<li>
+<p>我将交易发送到最佳订单流拍卖——我得到了 1000 美元（我没有得到 frontruns 或 backruns。或者类似地，我确实获得 frontruns 和 / 或 backruns，但搜索者必须在竞争性拍卖中出价 10 美元获得这样做的权利，最终结果是相同的。）</p>
+</li>
+</ul>
+<p>在这种情况下，你会将钱留在桌面上让其他人拿走。一个经济上理性的用户应该公开足够的订单信息，这样他们就可以得到接近订单全部价值的补偿。他们不应该天真地对他们的交易进行阈值加密，隐藏它提供的价值（允许其他人捕获它）。 </p>
+<p>这是一个超理想化的例子，但你明白了，掩盖问题并不总能解决问题。TED 可以是一个有用的工具，但它不是 MEV 的灵丹妙药。在某些情况下， CR 来说可以说更好。 </p>
+<p>此外，以太坊带来了额外的复杂性。例如，它缺乏即时终结性（尽管这可能有一天会随着单时隙终结性而改变）引入了围绕重组的问题。我相信至少在以太坊的 L1 中，这里的权衡利大于弊。增加以太坊的信任假设，增加共谋的动机（不被发现），以及降低其活跃度所带来的伤害可能比好处更多。 </p>
+<p>然而，与以太坊 L1 相比，这些权衡中的一些对于 L2 或其他 L1 可能更容易接受。 </p>
+<h2 id="4延迟加密--解密ded">4.延迟加密 / 解密（DED）</h2>
+<p>使用延迟加密，你可以将加密信息设置为在一定时间后自动解密，这是与 VDF 相关的顺序计算。</p>
+<p>要实际实施 DED，你需要 VDF ASIC。幸运的是，以太坊基金会和协议实验室一直致力于构建它们，最近获得了 GlobalFoundries 构建的芯片的第一批测试样本。这些 VDF 评估器应该能够进行极快的顺序计算。这些 VDF ASIC 也适用于时间锁定谜题和 DED。 </p>
+<p>VDF 还需要生成 SNARKs。这可以使用 GPU 来完成，但理想情况下，以太坊基金会也希望为 SNARK 生产相关的 ASIC。 </p>
+<p>总的来说，你不再信任某个委员会，因此通常首选安全假设。但是，需要专门的硬件并不那么理想，所需的延迟还可能会增加系统的延迟。有趣的是，你可以结合使用 TED + DED 的优势……</p>
+<h2 id="5见证加密--解密wed">5.见证加密 / 解密（WED）</h2>
+<p>WED 很强大，但别高兴太早，它不会很快到来。这是非常奇特的东西，还需要很多年来实现。但它很酷并且有助于理解，所以我将简要介绍一下。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_lz2iiw1na7.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>WED 允许任意见证人强制解密密文。例如，你的规则可以是「只有在以太坊完成包含加密有效负载的区块后才能解密」，并且只有在证明这一点的情况下才会解密。你可以想象基本上任何你想要实现的复杂语句都需要 SNARK。</p>
+<p>WED 实际上是 TED 或 DED 的概括。你甚至可以构建两者的混合体。例如，指定证人可以证明：</p>
+<ul>
+<li>
+<p>快乐的结果：门槛委员会已经签署了解密，或者 </p>
+</li>
+<li>
+<p>预备方案：所需时间已过，返回以延迟解密</p>
+</li>
+</ul>
+<p>这提供了一个预备，以防阈值委员会没有响应。这也允许你在参数化 m/n 阈值假设时更加保守（即，你可以要求每个委员会成员或几乎所有成员都签字）。</p>
+<ul>
+<li>
+<p>快乐的结果：最佳用户体验，整个委员会即时确认 </p>
+</li>
+<li>
+<p>预备方案：延迟和 UX 暂时受到影响，但活性得以保留</p>
+</li>
+</ul>
+<p>实际上，WED 可能会针对你想要的任何声明验证 SNARK。例如： </p>
+<ul>
+<li>
+<p>TED ：你可以有一个 SNARK 来证明「我有 n 个签名中的 m 个签名」来强制解密。</p>
+</li>
+<li>
+<p>DED ：你可以使用 VDF 并进行顺序计算（这非常昂贵）。然后在你的计算结束时，你有一个简短的证明。然后你拿那个简短的证明并将它包装在一个 SNARK 中（让它更短），然后输入它来强制解密。</p>
+</li>
+</ul>
+<h2 id="同态性">同态性</h2>
+<p>这里的每个加密方案（阈值、延迟和见证），你都可以具有同态性。也就是说，可以创建阈值 FHE 、延迟 FHE 和见证 FHE 方案，以实现对密文的任意操作。</p>
+<p>in-flight 和可信硬件（例如，SGX）解决方案也可以模拟相同的功能——对私有数据进行操作。这是因为在这两种情况下，受信任的第三方或硬件都可以访问明文本身进行操作。不过，在理想情况下，我们希望移除这些信任假设，仅依赖强化密码学。</p>
+<p>我们可以想象一个例子：</p>
+<ul>
+<li>
+<p>m1 = 事务 1</p>
+</li>
+<li>
+<p>m2 = 事务 2</p>
+</li>
+<li>
+<p>f(x) = 构建一个区块 </p>
+</li>
+</ul>
+<p>然后所有五个解决方案都可以复制以下功能： </p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_3ui9n5v0h4.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>当我们考虑如何隐藏交易元数据和使用加密输入构建最佳区块时，请记住这种能力。理论上，这里的五个选项中的每一个都可以用于下面需要「同态」的解决方案。 </p>
+<h2 id="元数据">元数据</h2>
+<p>元数据是提供有关其他数据的信息的数据，但不提供该数据的内容（例如消息的文本或图像本身）。出于我们的目的，交易元数据可以包括发送方的 IP 地址、随机数、Gas 支付等。</p>
+<p>理想情况下，我们希望隐藏尽可能多的元数据。否则，它可能会泄露信息，让外人可以推断你的交易（可能会为他们提供足够的信息以试图抢跑或审查等）。但是，我们需要元数据来验证交易是否有效、是否支付了必要的费用、是否是垃圾邮件等。</p>
+<p>让我们来看看屏蔽各种元数据的一些解决方案。</p>
+<h3 id="1-ip-地址---tor">1. IP 地址 - Tor</h3>
+<p>非常简单——人们可以使用像 Tor 这样的服务来私下广播并屏蔽他们的 IP 地址。</p>
+<h3 id="2签名--snark">2.签名 -SNARK</h3>
+<p>你需要在 p2p 级别知道加密交易是有效的，特别是它具有有效签名。我们可以使用 SNARK 来证明签名有效，这将伴随每笔加密交易。SNARK 包含三个重要部分：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_kf2s7f0iji.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>用户想证明自己的交易密文是有效的，它对应交易明文，它的签名是有效的。要证明任何签名有效，你需要与帐户关联的公钥来验证它。</p>
+<ul>
+<li>
+<p>查找以太坊状态根（公共）。</p>
+</li>
+<li>
+<p>提供与此状态根相对应的发送者公钥 Merkle 证明（私有）</p>
+</li>
+<li>
+<p>验证签名，你需要根据状态根验证发件人公钥 Merkle 证明。用 SNARK 证明你的发送者公钥 Merkle 证明是有效的并且你的签名是有效的。</p>
+</li>
+</ul>
+<h3 id="3-gas-支付snark">3. Gas 支付——SNARK</h3>
+<p>你需要证明加密交易的发送方有足够的 ETH 来支付这笔费用。我们可以再次使用 SNARK。 </p>
+<p>这是一个类似的过程，但现在你提供了一个 Merkle 路径到状态根，它证明了发送者的余额（而不是发送者的公钥）。你验证 Merkle 路径并验证余额是否足以支付所需的 Gas。</p>
+<p>仅执行反序列化交易、检查其余额和检查签名等基本操作所需的最低 Gas。你可以规定发件人始终必须支付此最低金额。 </p>
+<p>但是在执行时间上，你还需要有实际交易本身的 Gas limit，这个 Gas limit 也可以加密。所以当你去实际执行交易本身时，你会检查发送者是否有足够的余额来支付当时交易的全部 Gas：</p>
+<ul>
+<li>
+<p>如果是：运行交易并在最后发出退款</p>
+</li>
+<li>
+<p>如果否：中止交易，发送方只需支付 21000 Gas</p>
+</li>
+</ul>
+<h3 id="4-发送者和随机数---snark">4. 发送者和随机数 - SNARK</h3>
+<p>随机数是一个值，等于从一个地址发送的交易数量（或一个账户创建的合约数量）。用户的随机数从他们的地址开始交易时每次交易都会增加 1。 </p>
+<p>我们今天拥有随机数的一个原因是，用户无法通过大量交易向 mempool（DoS 攻击）发送垃圾信息，以增加他们交易被执行的可能性。节点将只查看具有该随机数的一笔交易并丢弃其他交易。 </p>
+<p>对于加密交易，你将通过 SNARK 证明其随机数是之前的随机数 + 1。然而，如果节点将不再能够分辨出许多加密交易具有相同的随机数，那么上述的 DoS 攻击可能会带来不利影响。</p>
+<p>为了保留这种反 DoS 属性，我们想添加一个「重播标签」。它对交易进行了独特标记，因此你不能再为一个地址发送大量交易垃圾。要创建此标签，你可以简单地散列（随机数，私钥）。因为随机数和私钥都是固定的，如果用户尝试使用相同的随机数和私钥发送两者，不同的交易将具有相同的重播标签。</p>
+<p>最后，你可能希望保留一定程度的灵活性。假设 Gas 价格已经变动，你有理由希望以更高的价格重新广播交易。为了缓解这种情况，你可以散列（随机数、私钥、slot）。现在，你可以在每个 slot 调整一次你的交易，每个 slot 每个地址只能发送一笔交易。  </p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_io1ktqdvyv.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<h3 id="5数据大小---同态">5.数据大小 - 同态</h3>
+<p>加密数据大小为 n 的明文将创建大小为 n 的密文。即使是这个大小也足以从概率上计算出某些交易。我们可以通过「填充」来缓解这个问题——在加密之前向明文添加 0，将位数扩展为 2 的下一次幂（例如，向 5 位的密文添加三个 0）。 </p>
+<p>在以下示例中：</p>
+<ul>
+<li>
+<p>白色 = 填充的 0</p>
+</li>
+<li>
+<p>其他颜色=实际交易数据</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_g6dozs9oe1.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>当你构建区块时，你可以连接这些密文，但这有两个问题：</p>
+<ul>
+<li>
+<p>不完美的打包——额外的 0 意味着你必须为额外的数据可用性付费</p>
+</li>
+<li>
+<p>不完美的隐私 - 也许 2 的幂就提供了足够信息。交易规模分布不明确，因此某些规模仍可能从概率上揭示足够的信息。</p>
+</li>
+</ul>
+<p>一个更好的解决方案涉及「剪掉」填充： </p>
+<ul>
+<li>
+<p>将每笔交易填充到最大大小（此处为 16）并同态加密</p>
+</li>
+<li>
+<p>在密文上应用一个函数以有效地打包明文，删除不必要的填充</p>
+</li>
+</ul>
+<p>现在你得到了最佳打包。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_l8zu9zqc3s.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>通过填充到「最大」尺寸，这实际上可以将最大值设置为实际区块大小限制转换为的值（即，如果 30mm Gas 转换为大约 x kB）。这意味着将每个事务填充到 x kB 的大小。或者，如果说 99.9% 的交易通常在 y kB 范围内， 你可以设置更小更实用的 y kB 大小。</p>
+<p>同样，可以使用可信硬件而不是前面讨论的 FHE 来模拟这种「剪辑」。例如，你可以运行 SGX 并将加密交易接收到你的可信飞地。在飞地中，可以对数据进行明文操作，以剪掉不必要的填充以密集打包区块。然后数据被加密并运回，随后是一种强制解密方法（阈值、延迟、见证）。 </p>
+<p>请注意，在任何一种情况下，输出都应该是某个固定大小，因此你可能会留下少量填充。 </p>
+<p><strong>交易包选择：同态和不相交的状态访问列表</strong></p>
+<p>假设我们解决了上面的所有问题，区块生产者能够根据大小将所有内容最佳地打包到一个块中。但我们还有另一个问题——区块生产者能否在经济方面最优地打包所有东西？我们希望在不丢弃价值的情况下去中心化构建区块。否则，它无法与中心化实体竞争。</p>
+<p><strong>解决方案 1 - FHE EVM</strong></p>
+<p>直接的答案：完全在 FHE 中运行 EVM。这将允许去中心化构建最佳区块，为区块生产者获取最大价值。他们选择并排序使价值最大化的交易。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_36hubeuonu.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>不幸的是，这并不是件简单的事。FHE 电路最大的成本是它的「深度」（即最长路径中的门数）。特别是，它的乘法深度非常重要。例如，前面描述的删除填充的事务「裁剪」是一个相当「浅」的电路（即，它非常简单）。通过硬件加速，此类用例可能在 2-3 年内在计算上可行。 </p>
+<p>但是，使用 FHE 运行整个 EVM 需要非常深且复杂的电路。我们终于开始在 zkEVM 电路方面取得一些有意义的进展（这比运行标准 EVM 的计算密集度高几个数量级），但 FHE EVM 甚至更遥远。 </p>
+<p>再次注意，使用可信硬件模拟此功能也是可行的（例如，SUAVE 中的 SGX 这样做）。</p>
+<p><strong>解决方案 2 - 状态访问列表</strong></p>
+<p>或者，我们可以更有限地使用 FHE 和访问列表。这比运行完整的 FHE EVM 更容易实现——它是一个更浅的电路。在这个设置中，交易包可以包括一个加密的状态访问列表及其出价。这确切地指定了他们的包将访问状态的哪一部分。 </p>
+<p>现在，区块生产者的同态电路只需为具有不相交状态访问列表的交易包挑选最高出价。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_c8f7tfcid6.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>请注意，这并不是严格意义上的最优。例如，一个区块中的第二高出价 (T 2 ) 可能达到与最高出价 (T 1 ) 完全相同的状态。在这个访问列表范例中，区块生产者会丢弃第二笔交易。但是，有可能 T 1 和 T 2 都有效。在这种情况下，FHE EVM（或今天的中心化区块生产）将获得更多价值。 </p>
+<p>它并不完美，但从我们今天的情况来看，这条捷径应该足够接近最优了。绝大多数 MEV 仍然会使用不相交的访问列表，因为像上面这样的冲突示例非常罕见。 </p>
+<h3 id="6-时间戳---同态">6. 时间戳 - 同态</h3>
+<p>你甚至可以通过允许验证者进行「虚拟」交易来试图隐藏交易存在的泄漏，因此内存池总是被填满。验证者还需要一个 SNARK 来证明他们是被允许创建这些虚拟交易的验证者。当「真实」交易出现峰值时，验证者将广播较少的虚拟交易。当真实交易下降时，验证器将发出更多虚拟交易。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_7obeew7472.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<p>假设一切都使用 FHE 加密，你将能够检测到添加到相应交易的「虚拟标志」。你可以在打包实际区块时忽略这些交易。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0316/1_nbtzwnmb6b.png" alt="读懂加密内存池：解决 MEV 和审查问题的全新设计空间"></p>
+<h2 id="状态差异---fhe-evm">状态差异 - FHE EVM</h2>
+<p>背景速览：ZK Rollup 的一个优势是他们不需要在链上发布完整的交易数据。他们发布状态更新之间的「状态差异」就足够了。相反，Optimistic Rollups 必须在链上发布完整数据，以防对欺诈证明进行仲裁。这种较低的数据要求为 ZK Rollup 节省了成本，因为它们在数据可用性层消耗的资源较少。 </p>
+<p>将这一点带入我们的对话中——理想情况下，你不希望在加密内存池的情况下失去这种好处。你想要获得加密的内存池，并且仍然保留 ZK Rollup 仅发布状态差异的能力。答案在这里——FHE zkEVM。听起来很酷，但你可能又要等待良久。</p>
+<p>一个缺点是单独发布状态差异可能会降低 Rollup 完整节点的响应速度。例如，在纯分叉选择规则 Rollup 中，完整节点可以在数据可用性层完成并确保有效性时立即完成他们对 Rollup 的视图。如果你只发布状态差异（而不是完整的交易数据），即使是完整的节点也需要提交 ZK 证明才能确认他们对 Rollup 的视图。就目前的情况而言——这些证明需要一段时间才能生成，但可扩展的数据可用性层有望很快变得非常便宜。</p>
+<h2 id="结论">结论</h2>
+<p>加密内存池是一个迷人且有前途的设计空间，但仍然存在一些实际挑战。例如，你可能只是将某些问题转移到堆栈的其他地方。钱包可以在源头上审查你以防止交易加密 / 路由，他们可以提交有效负载以在你的交易前 / 后运行（或出售权利）等。一个可能的答案是用户在本地创建交易而不依赖于服务提供商。 </p>
+<p>关键是这里没有灵丹妙药，但如果设计得当，它们可能是解决方案的重要组成部分，可以通过不同的功能和信任假设来改善当前情况。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/48518/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">从指数角度分析 哪些代币可能被批准香港散户购买</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/48532/">
+                <span class="next-text nav-default">对话Signature Bank董事会成员、前美国众议员Barney Frank</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1in-flight">1.In-flight</a></li>
+    <li><a href="#2-可信硬件">2. 可信硬件</a></li>
+    <li><a href="#3-门限加密--解密ted">3. 门限加密 / 解密（TED）</a>
+      <ul>
+        <li><a href="#shutterized-beacon-chain">Shutterized Beacon Chain</a></li>
+        <li><a href="#缺点">缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#4延迟加密--解密ded">4.延迟加密 / 解密（DED）</a></li>
+    <li><a href="#5见证加密--解密wed">5.见证加密 / 解密（WED）</a></li>
+    <li><a href="#同态性">同态性</a></li>
+    <li><a href="#元数据">元数据</a>
+      <ul>
+        <li><a href="#1-ip-地址---tor">1. IP 地址 - Tor</a></li>
+        <li><a href="#2签名--snark">2.签名 -SNARK</a></li>
+        <li><a href="#3-gas-支付snark">3. Gas 支付——SNARK</a></li>
+        <li><a href="#4-发送者和随机数---snark">4. 发送者和随机数 - SNARK</a></li>
+        <li><a href="#5数据大小---同态">5.数据大小 - 同态</a></li>
+        <li><a href="#6-时间戳---同态">6. 时间戳 - 同态</a></li>
+      </ul>
+    </li>
+    <li><a href="#状态差异---fhe-evm">状态差异 - FHE EVM</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

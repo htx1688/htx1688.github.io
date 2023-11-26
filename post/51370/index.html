@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          波卡平行链插槽拍卖机制详解 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文介绍波卡平行链插槽拍卖的机制，以便能够更清晰地理解其中的过程。" />
+<meta name="keywords" content="Polkadot, 波卡, 生態" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51370/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="波卡平行链插槽拍卖机制详解" />
+<meta property="og:description" content="本文介绍波卡平行链插槽拍卖的机制，以便能够更清晰地理解其中的过程。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51370/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="波卡平行链插槽拍卖机制详解">
+<meta itemprop="description" content="本文介绍波卡平行链插槽拍卖的机制，以便能够更清晰地理解其中的过程。"><meta itemprop="datePublished" content="2023-05-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4721">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="波卡平行链插槽拍卖机制详解"/>
+<meta name="twitter:description" content="本文介绍波卡平行链插槽拍卖的机制，以便能够更清晰地理解其中的过程。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">波卡平行链插槽拍卖机制详解</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-17">
+      2023-05-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4721 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3 id="概述"><strong>概述</strong></h3>
+<p>对于要添加到波卡的平行链，它必须位于可用的平行链插槽之一。平行链插槽的数量在波卡上不是无限的，因为只有有限的数量可用。通过链上治理，每隔几个月就会解锁有限数量的插槽。如果一条平行链想要在每个中继链区块中保证区块包含，它必须获得一个平行链插槽。按需平行链（以前称为平行线程）的开发正在进行中。</p>
+<p>平行链插槽将根据未经许可的蜡烛拍卖进行租赁，并进行一些与提高区块链操作安全性相关的更改。</p>
+<h3 id="拍卖时间表"><strong>拍卖时间表</strong></h3>
+<p>拍卖时间表和正在进行的行动的详细信息可在平行链信息网站上找到。</p>
+<p>平行链信息网站，详情请参见：<a href="https://parachains.info/auctions/polkadot">https://parachains.info/auctions/polkadot</a></p>
+<h3 id="蜡烛拍卖机制"><strong>蜡烛拍卖机制</strong></h3>
+<p>蜡烛拍卖是公开拍卖的一种变体，竞标者提交的出价越来越高。拍卖结束时出价最高的人被视为获胜者。</p>
+<p>蜡烛拍卖最初用于16世纪的船舶销售。该名称源自确定拍卖长度的系统。“一寸蜡烛”是指蜡烛燃烧一寸所需要的时间。当蜡烛的火焰熄灭时，拍卖结束，此时的最高出价者成为赢家。</p>
+<p>当在线使用蜡烛拍卖时，它们需要一个随机数来决定终止时间。平行链插槽拍卖与普通蜡烛拍卖略有不同，因为它们不会随机终止拍卖。相反，它们会运行整个固定的持续时间，并且会追溯随机选择获胜者。</p>
+<p>波卡上的蜡烛拍卖分为两部分：</p>
+<p>开盘期在拍卖开始后立即生效。这段时间持续1天18小时，作为平行链候选人的缓冲时间来设置他们的初始出价，并可能开始执行他们关于如何赢得插槽拍卖的策略。在开盘阶段，将继续接受出价，但不会对拍卖结果产生任何影响。</p>
+<p>结束期在开放期之后再延长五天，拍卖将根据蜡烛拍卖机制结束。</p>
+<p>拍卖的结束时间可以在结束期间内的任何时间发生。这个时间是由可验证随机函数（VRF）自动随机选择的。赢得拍卖的概率等于包含中标的区块数除以结束期间的区块总数。随机结束是通过在整个结束期间传播来管理的，其中在结束期间内的每个区块拍摄快照以捕获该给定区块的获胜者。在此期间结束时，将随机选择其中一张快照来确定拍卖的获胜者。</p>
+<p>波卡上的平行链拍卖从开始持续整整一周：开始期1天18小时， 结束期（蜡烛拍卖阶段）5天，确定拍卖获胜者6小时。</p>
+<h3 id="随机性"><strong>随机性</strong></h3>
+<p>以下示例将展示Kusama第九次拍卖的蜡烛拍卖的随机性机制。请记住，蜡烛阶段具有统一的终止配置文件，并且在任何给定区块结束的概率相同，并且无法在拍卖之前或拍卖期间预测终止区块。</p>
+<p>第九次拍卖开始于block 9362014。</p>
+<p>拍卖的完整持续时间等于block 9362014+72000</p>
+<p>这里，block 72000是“结束期”，分为20个区块的3600个样本（sample）。形象地说，蜡烛被点燃，蜡烛阶段持续72,000个区块。</p>
+<p>结束期间的获胜样本具有index 1078.</p>
+<p>1078号样本（sample）获胜：</p>
+<p>1078号样本（sample）指的是区块为block 9362014 + 21560的赢家，等于block 9383574。</p>
+<p>父块是Logs 中的新BABE会话，它更新了用于选择样本索引的随机性。 因此，本次拍卖的获胜者并不是整个拍卖期间的最高出价。</p>
+<h3 id="理论基础"><strong>理论基础</strong></h3>
+<p>区块链系统的公开和透明特性打开了传统拍卖格式中不存在的攻击途径。当通过互联网或区块链实施时，普通的公开拍卖尤其容易受到拍卖狙击。</p>
+<p>拍卖狙击发生在拍卖结束时，竞标者犹豫是否提前出价，希望支付的价格低于他们对物品的实际价值。</p>
+<p>例如，Alice可能在拍卖会上将一件物品估价为30美元。她提交了10美元的初始出价，希望以更低的价格购买这些物品。爱丽丝的策略是逐渐提高出价，直到超过她的真实价值30美元。另一位投标人Eve对同一物品的估价为11美元。Eve的策略是观看拍卖并在最后一秒提交11美元的出价。</p>
+<p>在拍卖结束前，Alice将没有时间响应此出价，因此将失去该物品。拍卖机制是次优的，因为它还没有发现物品的真实价格，而且物品还没有到达最看重它的参与者手中。</p>
+<p>在区块链上，这个问题可能更糟，因为它可能让区块的生产者有机会在最后一个结束区块中通过自己添加拍卖而忽略其他出价来狙击任何拍卖。也有可能是恶意竞标者或区块生产者试图通过狙击拍卖来伤害诚实的竞标者。</p>
+<p>出于这个原因，维克瑞拍卖（Vickrey auctions）是一种密封出价拍卖，其中出价是隐藏的，只有在后期阶段才会显示，它已经成为一种备受推崇的机制。</p>
+<p>例如，该机制用于在ENS上拍卖人类可读的名称。蜡烛拍卖是另一种不需要两步提交和显示方案（维克瑞拍卖的主要组成部分）的解决方案，它允许智能合约参与。</p>
+<p>蜡烛拍卖让每个人都知道出价的状态，但他们不会透露拍卖何时正式结束。这有助于确保投标人愿意尽早进行真正的投标。否则，他们可能会发现自己处于这样一种情况，即在有机会出价之前就确定拍卖已经结束。</p>
+<p>维克瑞拍卖，详情请参见：</p>
+<p><a href="https://en.wikipedia.org/wiki/Vickrey_auction">https://en.wikipedia.org/wiki/Vickrey_auction</a></p>
+<h3 id="网络实施"><strong>网络实施</strong></h3>
+<p>波卡将使用基于可验证随机函数（VRF）的随机信标。VRF将提供随机性的基础，这将追溯确定拍卖的结束时间。</p>
+<p>插槽持续时间上限为2年，分为3个月的周期。平行链可以在插槽持续时间的任意组合内租用一个插槽。随着时间的推移，平行链可能会租用多个插槽，这意味着它们可以通过租用一个连续的插槽来延长对网络的租约，超过最长期限。</p>
+<h3 id="出价"><strong>出价</strong></h3>
+<p>平行链或平行链团队通过指定他们想要租赁的插槽范围和他们愿意保留的通证数量在拍卖中出价。投标人可以是普通账户，也可以使用众贷功能从社区获取通证。</p>
+<p>想要更深入地比较这两种获得平行链插槽的方法，请查看Crowdloan Campaigns vs Parachain Auctions，详情请参见：<a href="https://wiki.polkadot.network/docs/learn-crowdloans#crowdloan-campaigns-vs-parachain-auctions">https://wiki.polkadot.network/docs/learn-crowdloans#crowdloan-campaigns-vs-parachain-auctions</a></p>
+<p>Parachain slots at genesis​</p>
+<p>--3 months&ndash; v vSlot A | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |&hellip;Slot B | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |&hellip;Slot C |__________| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |&hellip;Slot D |__________| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |&hellip;Slot E |__________|___________| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |&hellip; ^ ^ &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;max lease&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;​</p>
+<p>范围1 - 4的每个期间代表3个月的持续时间，共计2年。</p>
+<p>投标人将提交一份投标配置，指定他们愿意抵押的通证数量和期限。槽位范围可以是周期1 - n中的任何一个，其中n是一个槽位可用的周期数。（波卡的n= 8）</p>
+<p>如果你将通证与平行链插槽绑定，你就不能用这些通证Staking。这样，你通过放弃获得Staking奖励的机会来支付平行链插槽。</p>
+<p>单个投标人的投标人配置可能类似于以下伪代码示例：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0517/uivhsp4vzdkou3s" alt="波卡平行链插槽拍卖机制详解"></p>
+<p>从这个例子中要理解的重要概念是，竞标者可以在不同的价格（bond_amount）下提交不同的配置。然而，只有其中一个出价才有资格排除其他出价而获胜。</p>
+<p>获胜者选择算法将选择可能不重叠的出价，以最大化在整个平行链插槽租赁期间持有的通证数量。这意味着对于任何给定的插槽租赁期，最高出价者并不总是能赢（参见下面的例子）。</p>
+<p>每个区块都会根据波卡使用的VRF产生一个随机数。此外，每个拍卖都会有一个从0开始逐渐增加到1的阈值。VRF产生的随机数会与阈值进行比较，以确定该区块是否是所谓结束期内拍卖的结束。此外，VRF还会从最后一个Epoch中选择一个区块来访问出价的状态，这有助于缓解来自恶意验证者的某些类型的攻击。</p>
+<h3 id="案例"><strong>案例</strong></h3>
+<p>（假如）有一个平行链插槽可用。</p>
+<p>Charlie出价75范围为1-8。</p>
+<p>Dave的出价100范围是5-8。</p>
+<p>Emily出价40范围为1-4。</p>
+<p>让我们根据算法计算每个竞标者的估值。我们通过将绑定的金额乘以出价指定范围内的期数来实现这一点。</p>
+<p>Charlie - 75 * 8 = 600 对于范围1-8</p>
+<p>Dave - 100 * 4 = 400 对于范围5-8</p>
+<p>Emily - 40 * 4 = 160 对于范围1-4</p>
+<p>尽管Dave根据每个时期的代币数量出价最高，但当我们进行计算时，我们看到由于他只出价4个范围，因此他需要与出价低得多的Emily分享位置。Dave和Emily的出价加在一起仅等于560。Charlie对整个范围的估值是600。因此，Charlie获得了完整的平行链槽。</p>
+<h3 id="平行链租赁延期"><strong>平行链租赁延期</strong></h3>
+<p>在插槽租约到期之前，平行链必须竞标并赢得另一场拍卖以确保租约的连续性。为了避免任何连接中断并最大限度地降低失去后续拍卖的风险，平行链团队需要提前计划在当前租期结束之前竞标租约延期。在上一节中进行了解释，每次拍卖让您竞标8个LP（租赁期），这为平行链的租赁延期提供了两种方案。</p>
+<p><strong>具有重叠槽位的租期扩展</strong></p>
+<p>获取一个插槽，其中第一个租用期在当前插槽的最后一个租用期之前。</p>
+<p>注册一个新的paraId</p>
+<p>用新的paraId赢得一个插槽拍卖</p>
+<p>平行链团队可以访问两个插槽：</p>
+<p>即将结束租期的一个</p>
+<p>刚刚开始租期的一个</p>
+<p>两个插槽至少有一个LP（租赁期）是共同的。当旧插槽过渡到它们的最后一个LP（租赁期）时，平行链可以交换插槽。这可以通过链上治理来完成。该交换的调用（swap call）在registrar pallet中可用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0517/nq1fuywwimc6pt6" alt="波卡平行链插槽拍卖机制详解"></p>
+<p>通过XCM进行插槽交换需要两个活跃的平行链向中继链发送一个XCM消息来批准交换。一个拥有两个重叠插槽的平行链团队可以在新的插槽上启动一个空壳平行链，并将其与旧的插槽上的实际平行链进行交换，从而确保租赁的连续性。</p>
+<p><strong>非重叠插槽的租期延长</strong></p>
+<p>获取一个插槽，其中第一个LP（租赁期）的开始时间紧接着当前插槽的最后一个LP（租赁期）的结束时间。在这种情况下，平行链可以直接用它们当前的paraId进行竞标，它将自动延长，无需进行交换。</p>
+<p>这种方法的优点是不会有多余的LP（租赁期）分布在同一个团队拥有的不同插槽上，但它的缺点是失去了在何时赢得一个新插槽的灵活性：如果团队没有赢得准确的插槽，那么它将遭受一些停机时间，直到它赢得一个新插槽。</p>
+<h3 id="相关资源"><strong>相关资源</strong></h3>
+<p>平行链插槽拍卖如何运作。详情请参见：<a href="https://support.polkadot.network/support/solutions/articles/65000182287-how-does-a-parachain-slots-auction-work-">https://support.polkadot.network/support/solutions/articles/65000182287-how-does-a-parachain-slots-auction-work-</a></p>
+<p>平行链分配-关于平行链分配的 W3F 研究页面，该页面更深入地研究了该机制，详情请参见：</p>
+<p><a href="https://research.web3.foundation/en/latest/polkadot/overview/3-parachain-allocation.html">https://research.web3.foundation/en/latest/polkadot/overview/3-parachain-allocation.html</a></p>
+<p>研究更新：蜡烛拍卖案例- W3F 关于蜡烛拍卖的细分和研究更新，详情请参见：</p>
+<p><a href="https://polkadot.network/blog/research-update-the-case-for-candle-auctions">https://polkadot.network/blog/research-update-the-case-for-candle-auctions</a></p>
+<p>抢先交易、智能合约和蜡烛拍卖 W3F 研究团队讨论如何通过蜡烛拍卖来弥补当前区块链拍卖的不足，详情请参见：</p>
+<p><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3846363">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3846363</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51371/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">比特币面临「剧变」：Ordinals是天使还是魔鬼</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51408/">
+                <span class="next-text nav-default">错过BRC-20？手把手教你如何埋伏LTC-20</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述"><strong>概述</strong></a></li>
+        <li><a href="#拍卖时间表"><strong>拍卖时间表</strong></a></li>
+        <li><a href="#蜡烛拍卖机制"><strong>蜡烛拍卖机制</strong></a></li>
+        <li><a href="#随机性"><strong>随机性</strong></a></li>
+        <li><a href="#理论基础"><strong>理论基础</strong></a></li>
+        <li><a href="#网络实施"><strong>网络实施</strong></a></li>
+        <li><a href="#出价"><strong>出价</strong></a></li>
+        <li><a href="#案例"><strong>案例</strong></a></li>
+        <li><a href="#平行链租赁延期"><strong>平行链租赁延期</strong></a></li>
+        <li><a href="#相关资源"><strong>相关资源</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

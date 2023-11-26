@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Glassnode：加密市场流动性枯竭现状解析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在本期文章里，我们将进一步探讨流动性枯竭的问题，以及如何使用链上数据来更好地描述这种市场结构。" />
+<meta name="keywords" content="流動性, 加密市場" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58921/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Glassnode：加密市场流动性枯竭现状解析" />
+<meta property="og:description" content="在本期文章里，我们将进一步探讨流动性枯竭的问题，以及如何使用链上数据来更好地描述这种市场结构。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58921/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="Glassnode：加密市场流动性枯竭现状解析">
+<meta itemprop="description" content="在本期文章里，我们将进一步探讨流动性枯竭的问题，以及如何使用链上数据来更好地描述这种市场结构。"><meta itemprop="datePublished" content="2023-09-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3809">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Glassnode：加密市场流动性枯竭现状解析"/>
+<meta name="twitter:description" content="在本期文章里，我们将进一步探讨流动性枯竭的问题，以及如何使用链上数据来更好地描述这种市场结构。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Glassnode：加密市场流动性枯竭现状解析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-12">
+      2023-09-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3809 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：UkuriaOC，Glassnode分析师；翻译：金色财经xiaozou</p>
+<p>本文要点：</p>
+<ul>
+<li>
+<p>整个数字资产市场的流动性、波动性和交易量持续压缩，许多指标回落到2020年牛市之前的水平。</p>
+</li>
+<li>
+<p>除Tether（USDT）外，所有主要稳定币资产都在回撤，稳定币供应正经历持续下降。</p>
+</li>
+<li>
+<p>长期持有者群体坚定持仓，几乎无资产外流。</p>
+</li>
+<li>
+<p>而短期持有者正徘徊在盈利边缘，他们持有的大部分数字资产都是在高于当前价格区间水平之上购入的。</p>
+</li>
+</ul>
+<p>数字资产市场经历了波动性压缩和异常低的交易量，现已回落到极其狭窄的交易区间。总而言之，极端冷漠和无聊可能是最能描述当前市场情绪的词语。最近几周，我们探讨了衍生品市场和链上数据是如何体现这一点的。在上周的视频报告中，我们详细介绍了一些驱动因素，主要与净资本外流有关。</p>
+<p>在本期文章里，我们将进一步探讨流动性枯竭的问题，以及如何使用链上数据来更好地描述这种市场结构。</p>
+<p><strong>1、稳定币供应下降</strong></p>
+<p>我们将从资本流入的宏观视角开始我们的研究。在这里，我们考虑三种主要资产（BTC、ETH和稳定币）所持有的总投资资本。</p>
+<ul>
+<li>
+<p>自2022年4月以来，随着LUNA-UST崩溃后的大量赎回，稳定币供应持续下降。</p>
+</li>
+<li>
+<p>自今年年初以来，BTC和ETH都经历了资本净流入，已实现市值（Realized Cap）分别攀升至68亿美元/月（BTC）和48亿美元/月（ETH）。</p>
+</li>
+<li>
+<p>然而，自8月下旬以来，这三种资产几无流入或流入呈负值，表明了一定程度的停滞，以及不确定性占据了主导地位。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_pslsljkn9i.png" alt="KkFBbXkklfQ7SOHKeWAhvxB4ZcVIIaLeLTxCtbVo.png" title="7098784"></p>
+<p>如果我们不看稳定币，我们可以看到总共有430亿美元的资本被赎回，自2022年3月的高点以来，共下降了26%。这可以被视为是熊市条件下资本离开的结果，但也反映了更高利率的机会成本，而这些成本并没有转嫁到无收益的稳定币上。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_0l0tokutv2.png" alt="EsDd3wId0hKm3yLyrvl7Mtdzy4huo8txY9zJ0n9q.png" title="7098785"></p>
+<p>具体来看三个最大的稳定币，我们能够发现这些动态并不是均匀分布的：</p>
+<ul>
+<li>
+<p>自2022年11月当前周期的低点以来，USDT供应实际上已经增加了133亿美元。</p>
+</li>
+<li>
+<p>而USDC的供应量则减少了167亿美元，这或许可以在一定程度上反映出美国机构将资本转移到了利率更高的市场。</p>
+</li>
+<li>
+<p>BUSD供应量大幅下跌，减少了204亿美元（-89%），主要原因是发行方Paxos在SEC的强制措施后进入了只可赎回模式。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_49eciigssj.png" alt="qeEe7PbXHy3DUqTtHD3qTKWEo6893YhJHCVXMOYo.png" title="7098786"></p>
+<p>如果我们通过具有相对主导地位的贷款来看的话，我们可以看到Tether市场份额的扩张是多么重要。USDT现在占稳定币市场的69%，与2022年6月44%的低点形成鲜明对比。</p>
+<p>BUSD的稳定币市场份额已降至2.1%，USDC降至21.7%，与一年前达到的38%的峰值相比是一个大幅下降。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_6cmce5a4ta.png" alt="uwa6ununisllYARfF2FSuTM4S1S4OyzxNphMVQIX.png" title="7098787"></p>
+<p>从短期来看，我们可以看看流入交易所的这三种主要资产买卖双方的情况。这里我们做了一些简单的假设：</p>
+<ul>
+<li>
+<p>我们假设流入交易所的BTC+ETH的美元价值代表“卖方”压力。</p>
+</li>
+<li>
+<p>我们假设流入交易所的稳定币的美元价值代表“买方”压力。</p>
+</li>
+</ul>
+<p>下图计算了稳定币流入(+ve)和BTC 以及ETH流入之间的净美元差异。我们要看的不是绝对值（因为围绕这些假设会出现误差），而是任何重大的整体变化。</p>
+<ul>
+<li>
+<p>正值表明净买方格局，即稳定币的买方超过了BTC+ETH卖方。</p>
+</li>
+<li>
+<p>负值表明净卖方格局，即稳定币的买方低于BTC+ETH卖方。</p>
+</li>
+</ul>
+<p>2021年的牛市周期显然是由净卖方压力主导的，投资者在上行狂热中获利。2022年年中LUNA-UST和3AC的崩溃标志着向净积累的转变，那时，投资者努力确立市场底部。</p>
+<p>然而，自今年4月以来，市场已经回归到相对中性的水平，与BTC和ETH资本流入放缓一致，市场变得越来越冷漠和不确定。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_0ljjiyoy67.png" alt="7AotPlkGU4NMuMpKxhHdJ4LH0Q644pZDevq5pNgD.png" title="7098788"></p>
+<p><strong>2、链上很平静</strong></p>
+<p>尽管在最近的抛售中波动峰值飙升至2.6万美元，然后在Grayscale法庭上成功挑战SEC之后再次出现波动，但已实现波动率仍然非常低。市场仍处于历史低位波动环境，这通常是未来波动性加剧的前兆。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_qrtwfeqllf.png" alt="bdBZCXwff6cVnNvZY2YnSAPNojHSzf9HeBKfZFoC.png" title="7098789"></p>
+<p>这种低流动性和低波动性环境也反映在比特币网络结算量上。代币交易的总美元交易量正在24.4亿美元/天的周期低点附近徘徊，并已回到2020年10月的水平。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_a4nc9272wt.png" alt="LLUK62dcmV0vGvXfG2AXDHRknk7IEsadc4Vexd2P.png" title="7098790"></p>
+<p>如果我们看一下链上的已实现价值（即代币买入和卖出价格之间的增量），我们会发现这部分也非常安静。总体而言，市场锁定的利润或损失很小，这表明大多数正在交易的代币都非常接近其原始购买价格。</p>
+<p>已实现利润和亏损同样相当于2020年市场的水平，这告诉我们2021年牛市的繁荣可能已经彻底消失。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_uc9n82s2ms.png" alt="s5DvbLtMzARh4Y2syf9zf0jUvE85pfHADdHloNGQ.png" title="7098791"></p>
+<p>我们还可以通过观察市场中最活跃、流动性最强的部分——“热供应”群体（过去一周内交易的代币）所持有的财富比例，来追踪这种链上的非流动性和冷漠情绪。</p>
+<p>这个“热供应”群体持有的已实现价值处于历史低点，这表明目前在交易的代币中很少有超过一周的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_utpiornmfq.png" alt="Zax23CtVhi0TFGcZMgI2IYHOPB0Cb9vQfNWWk08N.png" title="7098792"></p>
+<p><strong>3、链下也很安静……</strong></p>
+<p>转到链下衍生品市场，我们可以看到期货交易量也遭遇了类似的命运，达到了120亿美元/天的历史低点。交易量较少的时期是2022年底的平静期，比特币在557美元的价格范围内交易了超两周之久（WoC 2）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_7emfd1ii0w.png" alt="c1ZzJtuA6rHTEU6OIhk4DxlOv06eIcqsOFypC9nn.png" title="7098793"></p>
+<p>然而，我们注意到期权市场出现了一个有趣的不同，期权市场的交易量在2023年大幅增加，目前为4.37亿美元/天。这可能反映出，在整体流动性状况紧缩时期，市场更倾向于利用期权的杠杆和资本效率来表达自己的观点。</p>
+<p>值得注意的是，虽然期权市场目前的未平仓合约与期货市场相当，但期权交易量仍然比期货市场小一个数量级。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_nag43epmgm.png" alt="1cz3IwuZttxjbjjHTdyEHX5pdKGD21rxOMJGvjJq.png" title="7098794"></p>
+<p>尽管过去的一个月里有几天波动剧烈，但期权市场继续反映了相对较低的隐含波动率。波动率溢价最初的上升是短暂的，1个月隐含波动率再次回到33.9%的历史低点。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_n9zme0rh6e.png" alt="seqsUEuW1PR4sZQKfaRhkD1Y1mO3YIPuGe3Yrzcr.png" title="7098796"></p>
+<p><strong>4、市场继续持仓</strong></p>
+<p>由于链上和链下都异常平静，长期持有者持有的供应量达到1474万枚BTC的历史新高也就不足为奇了。相反，代表市场更活跃部分的短期群体的供应量已降至2011年以来的最低水平。</p>
+<p>当然，持仓仍是主要的市场动态，这既表明现有投资者有坚定的信念，这些投资者也可能是唯一留下来的投资者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_5do4ytrt6w.png" alt="8Pbrsu4gXxEVROKt9nHqFRciYJhXVprO0rCFGA9n.png" title="7098798"></p>
+<p>我们可以在活跃度指标中找到融合点，活跃度指标将所有时期的Coinday Destruction和Coinday Creation的平衡进行了比较。换句话说，活跃度代表了整个市场“投资者持有时间”的相对平衡。</p>
+<p>与我们上面提到的净卖方格局一致，2021年的活跃度大幅上升，旧币被交易获利。随着2022年熊市在2021年5月至12月之间到来，强劲的下行趋势已经形成。这标志着一个拐点，从交易员市场向持仓者市场的转变。</p>
+<p>现在，活跃度已恢复到2020年底的水平，并呈现出越来越陡峭的下行趋势。这表明总的“投资者持有时间”正在增加，投资者越来越不愿意消费和放弃他们所持有的代币。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_lm8icg8au6.png" alt="mC4kUfTLHZBbxygorXvQQB0oRE0ai36592NRYdo7.png" title="7098799"></p>
+<p>这项工作的一个关键见解是真实市场平均价格的走势，我们认为这是活跃的比特币投资者最准确的“成本基础”模型。该模型目前位于29.6万美元点位，自今年4月以来已经形成了心理阻力。传统的已实现价格为20.3万美元，这两种模型都是近几年价格走势的主要模型。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_yt2jqu7jk6.png" alt="CyEe9EB3islM4yCgeKVITUWlc6JaLbg2zGWb0K25.png" title="7098800"></p>
+<p><strong>5、市场敏感度</strong></p>
+<p>如果我们将这两种定价模型作为URPD图的心理边界，我们可以更好地描述这两种模型之间获得的供应。目前，超过481万枚比特币的成本基础在20.3万美元到29.6万美元之间。</p>
+<p>我们还可以看到，在撰写本文时，交易价格仅低于26k美元，短期持有者的头寸几乎完全处于水下（underwater）。可以说，这让对价格更敏感的群体不免有些紧张。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_fyay1cgzcz.png" alt="vBh37clMePzPGrsYwlxSlLljhBoiBMN0FURZl2T8.png" title="7098801"></p>
+<p>下图表显示了短期持有者供应利润的百分比。我们可以看到，他们的绝大多数供应已经陷入了未实现亏损，只有16.3%的供应仍然保持“盈利”。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_scj6v5k8uy.png" alt="IJtfIt9vX976izBlhacsR6UUFmMtAnQYhCs3La73.png" title="7098802"></p>
+<p>对于长期持有者群体来说，他们的盈利能力正在逐渐提高，尽管仍处于历史低位。虽然这是一个积极趋势，但超过26.7%的LTH供应低于其收购价格，远低于历史平均水平。</p>
+<p>虽然2023年比特币和数字资产的复苏合情合理，但这些发现表明，仍有几个心理成本基础障碍必须要克服。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0912/17_vldtw15olv.png" alt="YEQVnTdNdXU24rXYTXfgZSp1wgpVtPfGewf0sZTB.png" title="7098803"><strong>6、结论</strong></p>
+<p>波动性、流动性、交易量和链上结算量都处于历史低点。这些都表明，市场很可能已经进入了一个极度冷漠的疲倦期，甚至可以说是极度无聊的时期。</p>
+<p>长期持有者群体仍然坚定不移，几乎不会放弃他们的持仓。另一方面，短期持有者群体徘徊在盈利边缘，许多代币的成本基础高于目前的2.6万美元的交易区间。这表明，这一群体对价格越来越敏感，许多心理价格障碍尚未被克服。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58904/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">FTX在巴哈马拥有38处房产，账面价值达2.22亿美元</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58928/">
+                <span class="next-text nav-default">LD Capital：Coinbase——探析投资逻辑与增长潜力</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

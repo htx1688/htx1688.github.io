@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Layer2的激勵機制：Fiat-Shamir heuristic在FOX的妙用 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Layer1作為一種分佈式系統，為了達成共識需要高昂的通訊代價，並且大量的計算也會消耗昂貴的gas。所以，作為Layer1的擴展，Layer2的設計可以有效地提升Layer1的效率。但是從這個角度來說，Layer2的設計仍然面臨着和Layer1一樣的一大難題，就是如何平衡去中心化程度和高效性。" />
+<meta name="keywords" content="Folder, Layer2, 節點" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50262/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Layer2的激勵機制：Fiat-Shamir heuristic在FOX的妙用" />
+<meta property="og:description" content="Layer1作為一種分佈式系統，為了達成共識需要高昂的通訊代價，並且大量的計算也會消耗昂貴的gas。所以，作為Layer1的擴展，Layer2的設計可以有效地提升Layer1的效率。但是從這個角度來說，Layer2的設計仍然面臨着和Layer1一樣的一大難題，就是如何平衡去中心化程度和高效性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50262/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="Layer2的激勵機制：Fiat-Shamir heuristic在FOX的妙用">
+<meta itemprop="description" content="Layer1作為一種分佈式系統，為了達成共識需要高昂的通訊代價，並且大量的計算也會消耗昂貴的gas。所以，作為Layer1的擴展，Layer2的設計可以有效地提升Layer1的效率。但是從這個角度來說，Layer2的設計仍然面臨着和Layer1一樣的一大難題，就是如何平衡去中心化程度和高效性。"><meta itemprop="datePublished" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3387">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Layer2的激勵機制：Fiat-Shamir heuristic在FOX的妙用"/>
+<meta name="twitter:description" content="Layer1作為一種分佈式系統，為了達成共識需要高昂的通訊代價，並且大量的計算也會消耗昂貴的gas。所以，作為Layer1的擴展，Layer2的設計可以有效地提升Layer1的效率。但是從這個角度來說，Layer2的設計仍然面臨着和Layer1一樣的一大難題，就是如何平衡去中心化程度和高效性。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Layer2的激勵機制：Fiat-Shamir heuristic在FOX的妙用</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-28">
+      2023-04-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3387 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>撰文：孟铉济，Fox Tech 首席科学家；康水跃，Fox Tech CEO</p>
+<h1 id="前言">前言</h1>
+<p>Layer1作为一种分布式系统，为了达成共识需要高昂的通讯代价，并且大量的计算也会消耗昂贵的gas。所以，作为Layer1的扩展，Layer2的设计可以有效地提升Layer1的效率。但是从这个角度来说，Layer2的设计仍然面临着和Layer1一样的一大难题，就是如何平衡去中心化程度和高效性。</p>
+<p>zkRollup是非常有前景的Layer2扩容方案，通过将计算搬到链下并向Layer1链上提供零知识证明的方式来实现。在实现zkRollup的方案当中，FOX系统采用了当下主流结构，主要有两种节点，分别是Sequencer和Folder。简单来说，Sequencer负责对用户提交的交易进行排序打包，并且更新Layer2链上状态，Folder负责对Sequencer打包的交易生成证明并提交到Layer1。</p>
+<p>一个有意义的问题是，Layer2的节点是否应该是去中心化的，如果是，如何设计激励机制来保证这一点。因为可以想象，Layer1效率低的本质就是，为了实现去中心化每个节点都需要进行大量的计算和通讯。而使用了Layer2系统，将计算过程解耦，如果在这部分依然用完全等效于Layer1的去中心化模式，则又会因为同样的原因造成Layer2的拥堵，所以这里需要做权衡。</p>
+<p>激励机制的设计就是通过调整Layer2节点获得激励手续费的方式以及平衡支付给Layer2节点的费用，来鼓励节点参与Layer2系统维护。本质上，Layer2节点收到的激励费用来源与以太坊一样，来自于提交交易的用户付出的Gas费。本文会探讨在FOX的系统当中，FOX的节点如何参与系统收取手续费，以及这样做的原因。</p>
+<h1 id="gas的作用">Gas的作用</h1>
+<p>首先我们来回顾Gas费在以太坊系统当中的作用。Layer1的计算资源是有限的，用户提交交易时候会指定交易Gas费，Gas费基本同交易的执行操作复杂度相关，而在此基础上愿意支付更高昂的Gas费的用户可以获得更优先的交易执行。矿工的激励就来源于打包的区块的Gas费总和。此外，Gas费机制还可以有效防止恶意合约（例如无限循环），限制区块容量大小，这样在一定程度上保障了安全性。</p>
+<p>所以可以看出，对Gas费的合理利用，本质上是对链上计算资源的合理调度和分配，同时也是项目方、矿工和用户的多方博弈。好的激励机制的设计以及手续费的使用和分配对于系统运行至关重要。</p>
+<h1 id="交易上链流程">交易上链流程</h1>
+<p>用户提交交易给FOX系统当中的交易池同时要附加一笔用来激励FOX节点的手续费，然后系统中的Sequencer节点将从交易池中抓取交易进行打包排序，这里每次打包的交易就构成Layer2的区块，同时Sequencer需要执行交易计算，并将计算结果传到Layer1的FOX合约当中，并且，Sequencer还需要将交易数据存到ZK-Ringer当中来保障数据可用性。之后，Sequencer的排序结果以及计算结果会传给Folder节点，Folder正确计算证明（包括证明聚合部分）并传到Layer1的合约当中。在这个过程中，Sequencer对于交易的执行结果会在执行结束之后直接更新到Layer2当中，而交易真正被Layer1共识的时间节点可以认为是Folder的证明被验证之后。</p>
+<p>可以看到，在这个流程当中，用户最初附上的手续费要涵盖几个用途：</p>
+<ul>
+<li>
+<p>支付给Sequencer的手续费</p>
+</li>
+<li>
+<p>支付给Folder的手续费</p>
+</li>
+<li>
+<p>Sequencer将交易结果提交到Layer1的Gas费</p>
+</li>
+<li>
+<p>Sequencer将信息存储到ZK-Ringer的手续费</p>
+</li>
+<li>
+<p>Folder调用合约的Gas费</p>
+</li>
+</ul>
+<p>为此，我们需要梳理具体的机制来激励各方参与。</p>
+<h1 id="fox的激励机制">FOX的激励机制</h1>
+<p>FOX的激励模式比较新颖。首先，为了平衡去中心化和效率的问题，我们将节点的角色分为负责排序以及执行交易的Sequencer节点，以及负责对交易执行正确性生成证明并聚合的Folder节点。FOX的Folder节点采用了去中心化的模式，也就是说任何FOX矿工都可以接入网络担任证明生成者，为了鼓励更多节点的参与，成功提交正确证明到Layer1合约的Folder可以获得代币奖励。与此同时，为了避免算力浪费，我们指出，并不是只有第一个证明提交者可以获得奖励，在第一个证明提交者成功提交之后的一个时间窗口和数量窗口内（这里具体参数会随系统状况进行调整），所有正确的证明者都可以获得奖励。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/25_jmstmzusht.jpg" alt="Layer2的激励机制：Fiat-Shamir heuristic在FOX的妙用"></p>
+<p>图1：原始版本的激励模式</p>
+<p>然而在这种机制下，恶意的Folder会有一种很狡猾的攻击。</p>
+<p>当某一个恶意的Folder，记作Adv，在完成了证明生成之后，一方面将证明提交到Layer1中的Verifier合约进行验证，另一方面它串通一些节点（或者就是该Folder控制的节点），将计算好的证明透露给这些节点，然后它们就可以不经过自己计算而直接将Adv计算好的证明提交，也可以领取到一部分奖励，而这个过程之中他们没有付出任何算力，从另一个角度来说，Adv通过较少的算力获得了多份的收益，并且造成其它节点即便生成了正确的证明也难以争抢过Adv。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/25_lduakeklvi.jpg" alt="Layer2的激励机制：Fiat-Shamir heuristic在FOX的妙用"></p>
+<p>图2：恶意Folder的攻击方式</p>
+<p>在这个攻击当中，产生问题的原因是Verifier无法区分每一份证明是否由该Folder独立生成，因为证明值都是相同的。为了规避这个问题，我们需要将Folder的独特的地址信息加入到Folder提交的证明当中，从而使得每一个Folder提交的证明都只能是自己独立生成的而不能是其它节点提交的。</p>
+<p>而融入这种信息的方法很巧妙，使用Fiat-Shamir heuristic（读者可以参考FOX之前的文章《如何将交互式证明改造为非交互式？Fiat-Shamir Heuristic！》来了解技术细节）。按照生成证明的过程计算，其中一步，证明者，也就是Folder需要通过哈希函数来生成一个随机挑战值，只需要要求在这个哈希的输入当中加入Folder的地址，就可以保证挑战值与Folder的地址相对应，且仍然是一个Folder无法预测和控制的随机数。</p>
+<p>严格说明这种方法的安全性需要用到比较深入的密码学中理论安全的随机函数的概念以及不可区分性等等，我们不在这里详细讨论。简单来说，可以认为，由于哈希函数本身的安全性以及Fiat-Shamir heuristic结构的安全性，添加一个固定的值作为哈希的原像并不会破坏输出的不可预测性，所以原来zkp算法的安全性仍然可以保证。</p>
+<p>这样一来，每个Folder就必须独立进行证明生成而不能直接利用其它节点结果，从而实现了我们的目标。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0428/25_6pefdf2hep.jpg" alt="Layer2的激励机制：Fiat-Shamir heuristic在FOX的妙用"></p>
+<p>图3：修改后的激励模式</p>
+<h1 id="结语">结语</h1>
+<p>本文从节点手续费的重要作用角度出发，介绍了手续费与如何激励节点参与系统维护之间的联系，同时指出，好的激励机制可以有效地维护系统安全性。在此基础之上，我们详细讨论了FOX当中采用的对于Layer2的Folder的激励机制，并且解释了这种做法的合理性，以及技术上如何巧妙地运用Fiat-Shamir heuristic来实现这一点。</p>
+<h1 id="参考文献">参考文献</h1>
+<p>《深度｜迭代与竞争——以太坊的 Layer2 扩容之路》国盛区块链研究院 <a href="https://www.theblockbeats.info/news/24443">https://www.theblockbeats.info/news/24443</a></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50216/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">GMX公開Arbitrum空投代幣接收地址，所有ARB都將存入金庫</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50238/">
+                <span class="next-text nav-default">Lido社區關於批准授權成立金庫管委會的提案已獲投票通過</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

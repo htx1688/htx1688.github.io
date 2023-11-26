@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Sei如何使用订单簿引擎抵制MEV？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="什么是原生订单匹配引擎？为何这个特性能将MEV保护提升至全新水平？" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53002/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Sei如何使用订单簿引擎抵制MEV？" />
+<meta property="og:description" content="什么是原生订单匹配引擎？为何这个特性能将MEV保护提升至全新水平？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53002/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="Sei如何使用订单簿引擎抵制MEV？">
+<meta itemprop="description" content="什么是原生订单匹配引擎？为何这个特性能将MEV保护提升至全新水平？"><meta itemprop="datePublished" content="2023-06-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4274">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sei如何使用订单簿引擎抵制MEV？"/>
+<meta name="twitter:description" content="什么是原生订单匹配引擎？为何这个特性能将MEV保护提升至全新水平？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Sei如何使用订单簿引擎抵制MEV？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-12">
+      2023-06-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4274 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>Sei 是首个专为交易类应用量身定制的特定订单簿的 L1 区块链，其主要特性之一就是内置的订单匹配模块。</p>
+<p>文章来源：<a href="https://mirror.xyz/0x545eF29F027D9413883274d0fdF82c1d6a19bB76/NqNhcS38WVbruwjzgzpQJMBOT2wrXqi8b9S20ZPV_eM">3 V Labs</a>，作者：<a href="https://twitter.com/Macr0Mark">@Macr 0 Mark</a></p>
+<p>Sei 网络旨在处理大规模的机构级订单流，它采用了三项主要的技术创新：</p>
+<ul>
+<li>
+<p>原生订单匹配</p>
+</li>
+<li>
+<p>双涡轮共识</p>
+</li>
+<li>
+<p>市场化的并行链</p>
+</li>
+</ul>
+<p>什么是原生订单匹配引擎？为何这个特性能将 MEV 保护提升至全新水平？</p>
+<h2 id="mev-是什么它为何成为威胁所有-layer-1-的最大问题"><strong>MEV 是什么，它为何成为威胁所有 Layer 1 的最大问题？</strong>  </h2>
+<p>在 Sei 团队的视线中，存在两种类型的 MEV，一种是前置交易的机器人/验证人，一种是清算/套利者。前者会带来负面后果，而后者对于一个强大的交易经济模型来说则是可以接受的。</p>
+<p>Sei 试图通过频繁的批量拍卖（FBA）最小化不良 MEV，同时通过链下闪电机器人式拍卖最大化良性 MEV。</p>
+<p>从气费中获取代币价值对于像 Sei 这样的高吞吐量链来说收益不足。因此，Sei 计划通过分配由良性 MEV 机器人生成的拍卖利润给验证人和股权人，来获取价值增值。Sei 的拍卖将是私人的且在链下进行，类似于闪电机器人模型（一种基于 <a href="https://boost.flashbots.net/">MEV-boost</a> 的实施方案，允许以太坊进行前置运行保护）。这个系统是私人的，意味着它是一个盲拍（也被称为第一价格封闭标书拍卖），在这里投标者可以提交精确的交易订单偏好，而无需揭示其出价，也无需为失败的标书付费。</p>
+<p>这次拍卖将允许机器人竞争典型的 MEV 交易，比如清算和套利。而不是拥塞 P2P 网络并提高气价。机器人将为交易的经济价值进行投标，中标的出价将接近交易的实际价值。在足够多的市场参与者的情况下，中标价可能会略低于交易价值，一部分给予赢家，其余的则进行分配。</p>
+<p><strong>例如，在一次价值 100 美元的清算中，机器人会竞争并加价，以便参与清算交易，但是它们不会对 Sei 链造成垃圾信息，而是在链下进行，超越了气费。在一个高效的市场中，获胜的出价可能值大约 99 美元，其中 1 美元将被授予机器人，剩下的 99 美元将被分配给验证者和委托人。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0612/18_3vr66p2azb.png" alt="Sei如何使用订单簿引擎抵制MEV？"></p>
+<p>让我们后退一步，看看什么是 MEV。</p>
+<p>&ldquo;最大可提取价值，是通过在区块中包含、排除和改变交易顺序，从区块生产中最大化经济价值的过程&rdquo;。</p>
+<p>在 MEV 下，验证人通过“搜索者”或套利机器人支付的增加的气费获得利益，这些机器人必须以最高的气费提交套利交易。套利机器人运行算法以检测有利可图的 MEV 机会，并执行无知的零售交易者发布的订单，就在他们能以公平价格完成订单的几秒钟（甚至几毫秒）之前，因此先发制人。</p>
+<p>关于 MEV 的更深入研究，请查看这个<a href="https://blog.pantherprotocol.io/miner-extractable-value-the-good-the-bad-the-ugly/#generalized-front-running-what-is-front-running-and-why-it%E2%80%99s-so-common">指南</a>。</p>
+<p>迈克尔·刘易斯在他的书《闪电男孩》中，调查了原始的华尔街“先发制人者”，其中高频交易（HFT）和不道德的套利实践，导致了一个被操纵的市场的形成。</p>
+<p><strong>持续的信息不对称（前置运行）和深度流动性的缺乏，正在阻止下一代 DEXs 推翻他们的中心化对手和市场制造商以数十亿美元的规模实现链上的资本效率。</strong></p>
+<p>当选择在哪里安置他们的流动性时，做市商（MM）重视速度、最终性和延迟。为了提供市场深度，MM 每个区块都跟踪并更新他们的双边价格，因此，亚秒级的区块时间意味着更小的差价，因此被高频交易者利用的风险更小，他们在外部价格更新和 MM 反应之间的时间范围内获利。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0612/18_kf34izbcgl.png" alt="Sei如何使用订单簿引擎抵制MEV？"></p>
+<p>一群 MM 正在选择真正的交易链</p>
+<h2 id="sei-的原生-homie-如何实现前置交易保护"><strong>Sei 的原生 hOMiE 如何实现前置交易保护？</strong></h2>
+<p>订单匹配引擎（OME）是在包括加密市场在内的所有种类的交易市场上，匹配买卖订单。</p>
+<p>就像你的汽车引擎，OME 负责速度（TPS 和最终性）和扭矩（吞吐量）。</p>
+<p>让我们详细拆解一下为什么 Sei 拥有一台“法拉利”引擎。</p>
+<ul>
+<li>
+<p>Sei 的 OME 是原生的，这意味着任何在 Sei 基础设施之上建立的交易类应用都可以使用订单下达和匹配（“即插即用”），它不是需要被分叉的智能合约。</p>
+</li>
+<li>
+<p>Sei 的 OME 使用<strong>频繁批量拍卖</strong> 和单区块订单执行相结合</p>
+</li>
+<li>
+<p>FBA 可以在区块结束时聚合每一笔市场订单，然后以同样的统一清算价格执行所有订单。</p>
+</li>
+<li>
+<p>Sei 还将下订单和执行合并到一个区块中，以创造更快的交易体验。无论你的交易顺序如何，你仍然会和那个区块时间（约 450 毫秒）内发布交易的所有人得到同样的价格。</p>
+</li>
+</ul>
+<p>假设在订单簿上有两个订单，一个是以 10 美元的价格卖出 $Sei，另一个是以 11 美元的价格卖出 $Sei，然后有两个买家进来。通常情况下，第一个买家以 10 美元的价格成交，第二个买家以 11 美元的价格成交，但是使用频繁批量拍卖，两个订单都以 10.50 美元的价格成交，这是统一的清算价格，由两个价格的总和除以二得到，(P 1+P 2)/2 。</p>
+<p><strong><em>频繁批量拍卖</em></strong> <em>：这个模型是作为解决连续双重拍卖模型（CDA）的巨大套利机会而创建的方案。CEX 通常使用 CDA，订单一旦到达订单簿（或被其他出价或要价填满）就被处理，这在高波动性时需要高吞吐量。对于 DEX，这通常会因为网络拥塞导致严重的延迟。</em></p>
+<h2 id="sei-的引擎真的独一无二吗与-injectivedydx-和-serum-进行比较"><strong>Sei 的引擎真的独一无二吗？与 Injective、dYdX 和 Serum 进行比较</strong></h2>
+<p>以太坊上的 Uniswap 或者 Solana 上的 Serum 这样的 DEX，是一个接一个地执行每一个订单，这导致了更慢的性能和更高的与 MEV 相关的成本。</p>
+<p>新的 AMM 模型有“可能”的无限流动性的好处，但它们限制用户只能接受价格。而中心订单簿交易所（CLOB）的用户可以吃单或挂单。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0612/18_ubj8rsk4z6.jpg" alt="Sei如何使用订单簿引擎抵制MEV？"></p>
+<p>OME 比较 @ 3 vLabs</p>
+<h3 id="injective"><strong>Injective</strong></h3>
+<p>Injective 的总锁仓量超过 920 万美元，市值达 2.93 亿美元（截至 2023 年 2 月 22 日），基于 Cosmos SDK，以流动性最强的做市商、去中心化交易所和交易员为目标群体。</p>
+<p>为了减少前置交易，Injective 也采用了频繁批量拍卖（FBA）模型，并引入了三个主要特性。</p>
+<ul>
+<li>
+<p>离散时间特性：规定交叉订单在一个离散的时间周期内以“先进先出”的优先级填充；</p>
+</li>
+<li>
+<p>统一清算价格；</p>
+</li>
+<li>
+<p>密封出价：订单在拍卖间隔结束和批次执行前不会在订单簿中公开。</p>
+</li>
+</ul>
+<h3 id="serum"><strong>Serum</strong></h3>
+<p>对于 Serum 而言，其总锁仓量为 56.6 万美元，市值为 1.24 亿美元（截至 2023 年 2 月 22 日），其订单匹配引擎相当简单。该模型将最高的出价和最低的接单价格聚合，设置当前市场价格，交易员可以立即执行订单，从而收紧买卖价差。</p>
+<p>这种模型在高流动性订单簿和 Solana 的快速交易速度下可以很有效，但仍然不是最优的。</p>
+<p>在 Sei 中，所有的中心化订单簿交易都在一个区块的范围内原子性地执行，而不像 Serum，需要两个独立的交易来处理订单的放置和执行。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0612/18_8316ui7qtm.png" alt="Sei如何使用订单簿引擎抵制MEV？"></p>
+<p>交易的生命周期 <a href="https://github.com/sei-protocol/sei-chain/blob/master/whitepaper/Sei_Whitepaper.pdf">https://github.com/sei-protocol/sei-chain/blob/master/whitepaper/Sei_Whitepaper.pdf</a></p>
+<h3 id="dydx"><strong>DYDX</strong></h3>
+<p>说到 dYdX，当前版本存在两个问题：Ethereum 和 StarkEX 应用程序的性能都不足以满足 dYdX 的需求，此外，v3 是通过中心化序列器操作的，它有权限审查交易。</p>
+<p>用 dYdX 团队的话来说：</p>
+<p>“我们可以开发的每一个 L1 或 L2 的根本问题在于，没有一个可以处理接近于运行一流订单簿和匹配引擎所需的吞吐量。”</p>
+<p>在性能方面，当前的版本 3 每秒处理 10 笔交易，每秒处理约 1, 000 个订单的挂单/取消。</p>
+<p>dYdX 团队正在以 Cosmos 应用链为基础重建，包括一个完全去中心化的、链下的，订单簿和匹配引擎。dYdX v 4 计划在 2023 年下半年（9 月底）发布，公开测试网将在 7 月底推出。</p>
+<p>听起来熟悉吗？</p>
+<h2 id="sei-的竞争优势"><strong>Sei 的竞争优势</strong></h2>
+<p>Sei 的优化设置将进一步提升这些订单匹配引擎的性能，具体方法包括：</p>
+<h3 id="区块并行处理"><strong>区块并行处理</strong></h3>
+<p>Sei 并不是顺序处理交易，而是并行处理交易。多个与不同市场相关的交易可以同时进行处理，从而提升性能。从最近的负载测试中，我们可以看到与顺序处理相比，区块时间减少了 75-90% ，而对于并行处理，延迟时间为 40-120 ms，与顺序处理的 200-1370 ms 的延迟时间相比，有显著改善。</p>
+<p>基于市场的并行处理：默认情况下，Sei 将所有触及不同市场的订单簿交易视为独立的（如果它们在同一区块中不影响同一市场）。</p>
+<h3 id="原生价格预言机"><strong>原生价格预言机</strong></h3>
+<p>Sei 的价格预言机负责将链下价格数据引入区块链，它们被内建在链中。这意味着所有的验证者在提交一个区块时都需要提出他们的价格（汇率）。只有当所有验证者对一个共同价格达成一致时，区块才会被创建。如果验证者错过了一些投票窗口或者提供的价格过于偏离中位数，他们将会被削减（惩罚）。</p>
+<h3 id="交易订单打包"><strong>交易订单打包</strong></h3>
+<p>做市商可以在一笔交易中取消和创建在多个市场的订单（即，所有对某一特定市场的 BTC 永续合约的订单将会被合并到一次智能合约调用中）。</p>
+<h2 id="深入研究订单匹配优先级"><strong>深入研究订单匹配优先级</strong></h2>
+<p>Sei 的订单匹配引擎（OME）将优先处理所有订单取消，移除与之相关的订单簿中的限价单。然后，所有的限价单将被添加到订单簿中。这确保了订单能够在最大流动性中完成。然后，匹配引擎将处理市场订单。</p>
+<p>Injective 协议运行在先进先出（FIFO）原则上，市场订单首先被执行，然后是未填充的限价单，最后是最新的限价单。</p>
+<p>Serum Dex 也采用与“价格-时间-优先权”匹配的 FIFO 策略，订单根据其价格进行排名，同一价格的订单则根据它们在订单簿中发布的时间进行排名。</p>
+<p>总结来说，Sei 是为交易类应用定制构建的 L1 区块链，具有包括原生订单匹配、双涡轮共识和基于市场的并行化在内的多项创新技术。其原生订单匹配引擎（OME）旨在通过使用频繁批量拍卖（FBA）和单区块订单执行来实现防止前置交易。这允许更快的交易执行，并消除了由高频交易者进行市场操纵和剥削的风险。</p>
+<p>总体而言，Sei 旨在为交易类应用的机构订单流和市场做市商提供一个安全和高效的平台。</p>
+<h2 id="参考资料"><strong>参考资料</strong></h2>
+<ul>
+<li>
+<p>_“最大可提取价值（MEV）”，<a href="https://ethereum.org/en/">Ethereum.org</a> 开发者文档<br>
+_</p>
+</li>
+<li>
+<p><em>白皮书 “Sei：专为交易定制的 Layer 1 ，为交易所提供独特优势”，Sei Labs</em></p>
+</li>
+<li>
+<p><em>“延迟和吞吐量”，来自 Sei Co-founder <a href="https://twitter.com/jayendra_jog/status/1560305088362528768">@jayendra_jog 的 Tweet</a></em></p>
+</li>
+<li>
+<p><em>“为什么 dYdX 要离开以太坊和 StarkWare，选择在 Cosmos 上构建本地链”，Cryptoslate，Liam Wright</em></p>
+</li>
+<li>
+<p><em>“Serum - 中心限价订单簿 vs 自动市场做市商”，DoDao. io</em></p>
+<p>了解更多 Sei 相关信息：</p>
+</li>
+<li>
+<p>Sei 官网：<a href="https://www.sei.io/">https://www.sei.io/</a></p>
+</li>
+<li>
+<p>Sei 官方推特：<a href="https://twitter.com/SeiNetwork">https://twitter.com/SeiNetwork</a></p>
+<p>Sei 官方中文推特：<a href="https://twitter.com/Ship_DAO">https://twitter.com/Ship_DAO</a></p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53015/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SEC与Coinbase的对决 将如何影响每个加密投资者</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/52993/">
+                <span class="next-text nav-default">SignalPlus宏观研报20230612：TradFi资产毫无波澜，加密货币市场动荡不安</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mev-是什么它为何成为威胁所有-layer-1-的最大问题"><strong>MEV 是什么，它为何成为威胁所有 Layer 1 的最大问题？</strong>  </a></li>
+    <li><a href="#sei-的原生-homie-如何实现前置交易保护"><strong>Sei 的原生 hOMiE 如何实现前置交易保护？</strong></a></li>
+    <li><a href="#sei-的引擎真的独一无二吗与-injectivedydx-和-serum-进行比较"><strong>Sei 的引擎真的独一无二吗？与 Injective、dYdX 和 Serum 进行比较</strong></a>
+      <ul>
+        <li><a href="#injective"><strong>Injective</strong></a></li>
+        <li><a href="#serum"><strong>Serum</strong></a></li>
+        <li><a href="#dydx"><strong>DYDX</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#sei-的竞争优势"><strong>Sei 的竞争优势</strong></a>
+      <ul>
+        <li><a href="#区块并行处理"><strong>区块并行处理</strong></a></li>
+        <li><a href="#原生价格预言机"><strong>原生价格预言机</strong></a></li>
+        <li><a href="#交易订单打包"><strong>交易订单打包</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#深入研究订单匹配优先级"><strong>深入研究订单匹配优先级</strong></a></li>
+    <li><a href="#参考资料"><strong>参考资料</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

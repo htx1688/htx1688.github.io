@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          剖析六种 EVM 语言：优秀的语言要如何设计 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="EVM DSL 设计任重而道远。每种语言都有自己独特的设计决策，我期待看到它们在未来如何发展。" />
+<meta name="keywords" content="EVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/48624/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="剖析六种 EVM 语言：优秀的语言要如何设计" />
+<meta property="og:description" content="EVM DSL 设计任重而道远。每种语言都有自己独特的设计决策，我期待看到它们在未来如何发展。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/48624/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="剖析六种 EVM 语言：优秀的语言要如何设计">
+<meta itemprop="description" content="EVM DSL 设计任重而道远。每种语言都有自己独特的设计决策，我期待看到它们在未来如何发展。"><meta itemprop="datePublished" content="2023-03-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8867">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="剖析六种 EVM 语言：优秀的语言要如何设计"/>
+<meta name="twitter:description" content="EVM DSL 设计任重而道远。每种语言都有自己独特的设计决策，我期待看到它们在未来如何发展。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">剖析六种 EVM 语言：优秀的语言要如何设计</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-19">
+      2023-03-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8867 字 -
+        预计阅读 18 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>以太坊虚拟机 (EVM) 是一个 256 位、基于堆栈、全球可访问的图灵机。由于架构与其他虚拟机和物理机的明显不同，EVM 需要领域特定语言 DSL（注：领域特定语言指的是专注于某个应用程序领域的计算机语言）。</p>
+<p>在本文中，我们将研究 EVM DSL 设计的最新技术，介绍六种语言 Solidity、Vyper、Fe、Huff、Yul 和 ETK。</p>
+<h2 id="语言版本">语言版本</h2>
+<ul>
+<li>
+<p>Solidity: 0.8.19 </p>
+</li>
+<li>
+<p>Vyper: 0.3.7</p>
+</li>
+<li>
+<p>Fe: 0.21.0</p>
+</li>
+<li>
+<p>Huff: 0.3.1</p>
+</li>
+<li>
+<p>ETK: 0.2.1</p>
+</li>
+<li>
+<p>Yul: 0.8.19</p>
+</li>
+</ul>
+<p>阅读本文，需要你对 EVM、堆栈和编程有基本的了解。</p>
+<h2 id="以太坊虚拟机概述">以太坊虚拟机概述</h2>
+<p>EVM 是一个基于 256 位堆栈的图灵机。然而，在深入研究它的编译器之前，应该介绍一些功能特性。</p>
+<p>由于 EVM 是「图灵完备」的，它会受到「停机问题」的困扰。简而言之，在程序执行之前，没有办法确定它未来是否会终止。EVM 解决这个问题的方法是通过「Gas」计量计算单位，一般来说，这与执行指令所需的物理资源成比例。每个交易的 Gas 量是有限制的，交易的发起者必须支付与交易消耗的 Gas 成比例的 ETH。这个策略的影响之一是，如果有两个功能上相同的智能合约，消耗更少 Gas 的合约将被更多采用。这导致协议竞争极端的 Gas 效率，工程师努力最小化特定任务的 Gas 消耗。</p>
+<p>此外，当调用一个合约时，它会创建一个执行上下文。在这个上下文中，合约有一个堆栈用于操作和处理，一个线性内存实例用于读写，一个本地持久性存储用于合约读写，并且附加到调用的数据「calldata」可以被读取但不能被写入。</p>
+<p>关于内存的一个重要说明是，虽然它的大小没有确定的「上限」，但仍然是有限的。扩展内存的 Gas 成本是动态：一旦达到阈值，扩展内存的成本将呈二次方增长，也就是说 Gas 成本与额外内存分配的平方成正比。</p>
+<p>合约也可以使用一些不同的指令来调用其他合约。 「call」指令将数据和可选的 ETH 发送到目标合约，然后创建自己的执行上下文，直到目标合约的执行停止。 「staticcall」指令与 「call」相同，但增加了一个检查，即在静态调用完成之前，断言全局状态的任何部分都未被更新。最后， 「delegatecall」指令的行为类似于 「call」，只是它会保留先前上下文的一些环境信息。这通常用于外部库和代理合约。</p>
+<h2 id="为什么语言设计很重要">为什么语言设计很重要</h2>
+<p>在与非典型架构交互时，特定领域语言（DSL）是必要的。虽然存在诸如 LLVM 之类的编译器工具链，但是依赖它们来处理智能合约，在程序正确性和计算效率至关重要的情况下，不太理想。</p>
+<p>程序正确性非常重要，因为智能合约默认是不可变的，并且鉴于区块链虚拟机（VM）的属性，智能合约是金融应用程序的热门选择。虽然存在针对 EVM 的升级性解决方案，但它充其量只是一个补丁，最坏的情况是任意代码执行漏洞。</p>
+<p>计算效率也非常关键，因为最小化计算具有经济优势，但不能以安全为代价。</p>
+<p>简而言之，EVM DSL 必须平衡程序正确性和 Gas 效率，在不牺牲太多灵活性的情况下通过做出不同的取舍来实现其中之一。</p>
+<h2 id="语言概览">语言概览</h2>
+<p>对于每种语言，我们将描述它们的显着特性和设计选择，并包括一个简单的计数功能智能合约。言语流行度是根据 Defi Llama 上的总锁定价值 (TVL) 数据确定的。</p>
+<h3 id="solidity">Solidity</h3>
+<p>Solidity 是一种高级语言，其语法类似于 C、Java 和 Javascript。它是按 TVL 计算最受欢迎的语言，其 TVL 是第二名的十倍。为了代码重用，它使用面向对象模式，智能合约被视为类对象，利用了多重继承。编译器采用 C++ 编写，计划在将来迁移到 Rust。</p>
+<p>可变的合约字段存储在持久性存储中，除非它们的值在编译时（常量）或部署时（不可变）已知。合约内声明的方法可以声明为 pure、view、payable，或默认情况下是 non-payable 但状态可修改。pure 方法不会从执行环境中读取数据，也不能读取或写入持久性存储；也就是说，给定相同的输入，pure 方法将始终返回相同的输出，它们不会产生副作用。view 方法可以从持久性存储或执行环境中读取数据，但它们不能写入持久性存储，也不能创建副作用，例如附加事务日志。payable 方法可以读写持久性存储，从执行环境中读取数据，产生副作用，并且可以接收附加在调用中的 ETH。non-payable 方法与 payable 方法相同，但具有运行时检查，以断言当前执行上下文中没有附加 ETH。</p>
+<blockquote>
+<p>注意：将 ETH 附加到交易中与支付 Gas 费用是分开的，附加的 ETH 由合约接收，可以通过恢复上下文选择接受或拒绝它。</p>
+</blockquote>
+<p>在合约的范围内声明时，方法可以指定以下四种可见性修饰符：private、internal、public 或 external。private 方法可以通过当前合约内的「jump」指令在内部访问。任何继承的合约都不能直接访问 private 方法。internal 方法也可以通过「jump」指令在内部访问，但继承的合约可以直接使用内部方法。public 方法可以通过「call」指令由外部合约访问，创建一个新的执行上下文，并在直接调用方法时通过跳转进行内部访问。public 方法也可以通过在方法调用前加上「this.」来在新的执行上下文中从同一合约中访问。external 方法只能通过「call」指令访问，无论是来自不同的合约还是在同一合约内，都需要在方法调用前加上「this.」。</p>
+<blockquote>
+<p>注意：「jump」指令操作程序计数器，「call」指令为目标合约的执行期间创建一个新的执行上下文。在可能的情况下，使用「jump」而不是「call」更加节约 Gas。</p>
+</blockquote>
+<p>Solidity 还提供了三种定义库的方式。第一种是外部库，它是一个无状态的合约，单独部署到链上，在调用合约时动态链接，并通过「delegatecall」指令访问。这是最不常见的方法，因为外部库的工具支持不足，「delegatecall」很昂贵，它必须从持久存储中加载额外的代码，并且需要多个事务进行部署。内部库的定义方式与外部库相同，只是每个方法必须定义为内部方法。在编译时，内部库被嵌入到最终合约中，并且在死代码分析阶段，库中未使用的方法将被删除。第三种方式与内部库类似，但不是在库内定义数据结构和功能，而是在文件级别定义，并且可以直接导入和在最终合约中使用。第三种方法提供了更好的人机交互性，可以使用自定义数据结构，将函数应用于全局作用域中，并一定限程度上将别名运算符应用于某些函数。</p>
+<p>编译器提供两个优化通道。第一个是指令级优化器，对最终的字节码执行优化操作。第二个是近期增加使用 Yul 语言（稍后详细介绍）作为编译过程中的中间表示（IR），然后对生成的 Yul 代码进行优化操作。</p>
+<p>为了与合约中的公共和外部方法交互，Solidity 规定了一种应用程序二进制接口（ABI）标准来与其合约交互。目前，Solidity ABI 被视为 EVM DSL 的事实标准。指定外部接口的以太坊 ERC 标准都按照 Solidity 的 ABI 规范和风格指南来执行。其他语言也遵循 Solidity 的 ABI 规范，很少出现偏差。</p>
+<p>Solidity 还提供了内联 Yul 块，允许对 EVM 指令集进行低级别访问。Yul 块包含 Yul 功能的子集，详细信息请参见 Yul 部分。这通常用于进行 Gas 优化，利用高级语法不支持的功能，并自定义存储、内存和 calldata。</p>
+<p>由于 Solidity 的流行，开发人员工具非常成熟且设计精良，Foundry 是在这方面突出的代表。</p>
+<p>以下是用 Solidity 编写的一个简单合约：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/5_h16zakap52.png" alt="剖析六种 EVM 语言：优秀的语言要如何设计"></p>
+<h3 id="vyper">Vyper</h3>
+<p>Vyper 是一种语法类似于 Python 的高级语言。它几乎是 Python 的一个子集，只有一些小的不同。它是第二受欢迎的 EVM DSL。Vyper 针对安全性、可读性、审计能力和 Gas 效率进行了优化。它不采用面向对象模式、内联汇编，并且不支持代码重用。它的编译器是用 Python 编写的。</p>
+<p>存储在持久性存储器中的变量是在文件级别声明的。如果它们的值在编译时已知，可以将它们声明为「constant（常量）」；如果它们的值在部署时已知，则可以将它们声明为「immutable（不变量）」；如果它们被标记为 public，则最终合约将为该变量公开一个只读函数。常量和不变量的值通过它们的名称在内部访问，但是持久性存储器中的可变量可以通过在名称前面添加「self.」来访问。这对于防止存储变量、函数参数和局部变量之间的命名空间冲突非常有用。</p>
+<p>和 Solidity 类似，Vyper 也使用函数属性来表示函数的可见性和可变性。被标记为「@external」的函数可以通过「call」指令从外部合约访问。被标记为「@internal」的函数只能在同一合约中访问，并且必须以「self.」为前缀。被标记为「@pure」的函数不能从执行环境或持久存储中读取数据，也不能写入持久存储或创建任何副作用。被标记为「@view」的函数可以从执行环境或持久存储中读取数据，但不能写入持久存储或创建副作用。被标记为「@payable」的函数可以读取或写入持久存储，创建副作用，接受收 ETH。没有声明这个可变性属性的函数默认为 non-payable，也就是说，它们和 payable 函数一样，但不能接收 ETH。</p>
+<p>Vyper 编译器还选择将局部变量存储在内存中而不是堆栈上。这使得合约更加简单和高效，并解决了其他高级语言中常见的「堆栈过深」的问题。但是，这也带来了一些折衷。</p>
+<p>另外，由于内存布局必须在编译时知道，因此动态类型的最大容量也必须在编译时知道，这是一个限制。此外，分配大量内存会导致非线性的 Gas 消耗，正如 EVM 概述部分中提到的。但是，对于许多用例来说，这个 Gas 成本可以忽略不计。</p>
+<p>虽然 Vyper 不支持内联汇编，但它提供了更多内置函数，以确保几乎每个 Solidity 和 Yul 中的功能在 Vyper 中也可以实现。通过内置函数可以访问低级位运算、外部调用和代理合约操作，通过编译时提供覆盖文件可以实现自定义存储布局。</p>
+<p>Vyper 没有丰富的的开发工具套件，但它有更紧密集成的工具，并且也可以插入到 Solidity 开发工具中。值得关注的 Vyper 工具包括 Titanaboa 解释器，它具有许多与 EVM 和 Vyper 相关的内置工具，可用于实验和开发，以及 Dasy，一种基于 Vyper 的 Lisp，具有编译时代码执行功能。</p>
+<p>下面是用 Vyper 编写的一个简单合约：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/5_gfgd2zjgid.png" alt="剖析六种 EVM 语言：优秀的语言要如何设计"></p>
+<h3 id="fe">Fe</h3>
+<p>Fe 是一种类似 Rust 的高级语言，目前正在积极开发中，大部分功能尚未推出。它的编译器主要用 Rust 编写，但使用 Yul 作为其中间表示形式（IR），依赖于用 C++ 编写的 Yul 优化器。随着 Rust 原生后端 Sonatina 的加入，这一点有望改变。Fe 使用模块进行代码共享，因此不使用面向对象的模式，而是通过基于模块的系统重用代码，在模块内声明变量、类型和函数，可以以类似于 Rust 的方式进行导入。</p>
+<p>持久存储变量在合约级别声明，如果没有手动定义的 getter 函数则不可公开访问。常量可以在文件或模块级别声明，并且可以在合约内部访问。当前不支持不可变的部署时变量。</p>
+<p>方法可以在模块级别或合约内声明，默认是 pure 和 private。要使合约方法公开，必须在定义前加上「pub」关键字，这使得它可以在外部访问。要从持久化存储变量中读取，方法的第一个参数必须是「self」，在变量名前加上「self.」，使该方法具有只读访问本地存储变量的权限。要读取和写入持久化存储，第一个参数必须是「mut self」。「mut」关键字表示合约的存储在方法执行期间是可变的。访问环境变量是通过将「Context」参数传递给方法来完成的，通常命名为「ctx」。</p>
+<p>函数和自定义类型可以在模块级别声明。默认情况下，模块项都是私有的，除非加上「pub」关键字才能访问。但是，不要和合约级别的「pub」关键字混淆。模块的公共成员只能在最终合约或其他模块内部访问。</p>
+<p>Fe 暂时不支持内联汇编，相反，指令由编译器内部函数或在编译时解析为指令的特殊函数包装。</p>
+<p>Fe 遵循 Rust 的语法和类型系统，支持类型别名、带有子类型的枚举、特征和泛型。目前这方面的支持还有限，但正在进行中。特征可以针对不同类型进行定义和实现，但不支持泛型，也不支持特征约束。枚举支持子类型，并可以在其上实现方法，但不能在外部函数中对其进行编码。尽管 Fe 的类型系统仍在发展中，但它在为开发人员编写更安全、编译时检查的代码方面显示出了很大的潜力。</p>
+<p>下面是用 Fe 编写的一个简单的合约：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/5_o6kqv7s06t.png" alt="剖析六种 EVM 语言：优秀的语言要如何设计"></p>
+<h3 id="huff">Huff</h3>
+<p>Huff 是一种汇编语言，具有手动堆栈控制和对 EVM 指令集的最小化抽象。通过「#include」指令，编译时可以解析任何包含的 Huff 文件，从而实现代码重用。最初由 Aztec 团队编写用于极度优化的椭圆曲线算法，编译器后来被用 TypeScript 重写，然后又被用 Rust 重写。</p>
+<p>常量必须在编译时定义，目前不支持不可变量，并且语言中没有显式定义持久性存储变量。由于命名存储变量是高级抽象，因此在 Huff 中写入持久性存储是通过操作码 「sstore」 写入和 「sload」读取。自定义存储布局可以由用户定义，也可以按照惯例从零开始并且每个变量递增使用编译器内在的「FREE_STORAGE_POINTER」。使存储变量外部可访问需要手动定义一个可以读取并返回变量给调用者的代码路径。</p>
+<p>外部函数也是高级语言引入的抽象，因此在 Huff 中没有外部函数的概念。但是，大多数项目在不同程度上遵循其他高级语言的 ABI 规范，最常见的是 Solidity。一个常见的模式是定义一个「调度程序」，加载原始调用数据并使用它来检查是否匹配函数选择器。如果匹配，则执行其后续代码。由于调度程序是用户定义的，因此它们可能遵循不同的调度模式。Solidity 按名称字母顺序对其调度程序中的选择器进行排序，Vyper 按数字顺序排序并在运行时执行二进制搜索，大多数 Huff 调度程序按预期的函数使用频率排序，很少使用跳转表。目前，跳转表在 EVM 中不被原生支持，因此需要使用类似「codecopy」的内省指令才能实现。</p>
+<p>内部函数使用「#define fn」指令定义，可以接受模板参数以提高灵活性，并指定函数开始和结束时的预期堆栈深度。由于这些函数是内部的，因此无法从外部访问，在内部访问需要使用「jump」指令。</p>
+<p>其他控制流程，例如条件语句和循环语句可以使用跳转目标定义。跳转目标是由标识符后跟冒号定义的。可以通过将标识符压入堆栈并执行跳转指令来跳转到这些目标。这在编译时解析为字节码偏移量。</p>
+<p>宏由「#define macro」定义，其他方面与内部函数相同。关键区别在于宏不会在编译时生成「jump」指令，而是将宏的主体直接复制到文件中的每个调用中。</p>
+<p>这种设计权衡了减少任意跳转与运行时 Gas 成本之间的关系，代价是调用多次时代码的大小增加。「MAIN」 宏被视为合约的入口，并且其主体中的第一条指令将成为运行时字节码中的第一条指令。</p>
+<p>编译器内置的其他特性还包括为日志记录生成事件哈希、为调度生成函数选择器、为错误处理生成错误选择器以及内部函数和宏的代码大小检查器等。</p>
+<blockquote>
+<p>注意：「// [count]」之类的堆栈注释不是必需的，它们只是用于指示该行执行结束时的堆栈状态。</p>
+</blockquote>
+<p>下面是用 Huff 编写的一个简单合约：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/5_9l17kjd48w.png" alt="剖析六种 EVM 语言：优秀的语言要如何设计"></p>
+<h3 id="etk">ETK</h3>
+<p>EVM 工具包（ETK）是一种具有手动堆栈管理和最小化抽象的汇编语言。代码可以通过「%include」和「%import」指令进行重用，编译器是用 Rust 编写的。</p>
+<p>Huff 和 ETK 之间的一个显着区别是，Huff 为 initcode 添加了轻微的抽象，也称为构造函数代码，这些代码可以通过定义特殊的「CONSTRUCTOR」宏来覆盖。在 ETK 中，这些不会被抽象化，initcode 和运行时代码必须一起定义。</p>
+<p>与 Huff 类似，ETK 通过「sload」和「sstore」指令读写持久性存储。然而，没有常量或不可变关键字，但是可以使用 ETK 中的两种宏之一来模拟常量，即表达式宏。表达式宏不会解析为指令，而是生成可用于其他指令中的数字值。例如，它可能不会完全生成「push」指令，但可能会生成一个数字以包含在「push」指令中。</p>
+<p>如前所述，外部函数是高级语言概念，因此在外部公开代码路径需要创建函数选择器调度程序。</p>
+<p>内部函数不像其他语言那样可以显式定义，而是可以为跳转目标指定用户定义的别名，并通过其名称跳转到它们。这也允许其他控制流，例如循环和条件语句。</p>
+<p>ETK 支持两种宏。第一种是表达式宏，可以接受任意数量的参数并返回可用于其他指令的数字值。表达式宏不生成指令，而是生成立即值或常量。然而，指令宏接受任意数量的参数，并在编译时生成任意数量的指令。ETK 中的指令宏类似于 Huff 宏。</p>
+<p>下面是 ETK 用编写的一个简单合约：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/5_ncf1ov6eoy.png" alt="剖析六种 EVM 语言：优秀的语言要如何设计"></p>
+<h3 id="yul">Yul</h3>
+<p>Yul 是一种具有高级控制流和大量抽象的汇编语言。它是 Solidity 工具链的一部分，并可以选择在 Solidity 编译通道中使用。 Yul 不支持代码重用，因为它旨在成为编译目标而不是独立语言。它的编译器是用 C++ 编写的，计划将其与 Solidity 通道的其余部分一起迁移到 Rust。</p>
+<p>在 Yul 中，代码被分成对象，这些对象可以包含代码、数据和嵌套对象。因此，Yul 中没有常量或外部函数。需要定义函数选择器调度程序才能将代码路径公开到外部。</p>
+<p>除了堆栈和控制流指令外，大多数指令在 Yul 中都作为函数公开。指令可以嵌套以缩短代码长度，也可以分配给临时变量，然后传递给其他指令使用。条件分支可以使用「if」块，如果值为非零，则执行该块，但没有「else」块，因此处理多个代码路径需要使用「switch」处理任意数量的情况和「default」后备选项。循环可以使用「for」循环执行；虽然其语法与其他高级语言不同，但提供了相同的基本功能。可以使用「function」关键字定义内部函数，并且与高级语言的函数定义类似。</p>
+<p>Yul 中的大多数功能在 Solidity 中使用内联汇编块公开。这允许开发人员打破抽象，编写自定义功能或在高级语法中不可用的功能中使用 Yul。但是，使用此功能需要深入了解 Solidity 在 calldata、memory 和 storage 方面的行为。</p>
+<p>还有一些独特的函数。 「datasize」，「dataoffset」和「datacopy」函数通过其字符串别名操作 Yul 对象。 「setimmutable」和「loadimmutable」函数允许在构造函数中设置和加载不可变参数，尽管它们的使用受到限制。 「memoryguard」函数表示只分配给定的内存范围，从而使编译器可以使用超出保护范围的内存进行附加优化。最后，「verbatim」允许使用 Yul 编译器不知道的指令。</p>
+<p>下面是用 Yul 编写的一个简单合约：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0319/5_se59uht0tu.png" alt="剖析六种 EVM 语言：优秀的语言要如何设计"></p>
+<h2 id="优秀-evm-dsl-的特性">优秀 EVM DSL 的特性</h2>
+<p>一个优秀的 EVM DSL 应该从这里列出的每种语言的优缺点中学习，还应该包括几乎所有现代语言中的基础，如条件语句、模式匹配、循环、函数等等。代码应该是明确的，为了代码美观或可读性而添加最少的隐式抽象。在高风险、正确性至关重要的环境中，每行代码都应该是明确可解释的。此外，一个定义良好的模块系统应该是任何伟大语言的核心。它应该清楚地说明哪些项定义在哪个作用域中，以及哪些可以访问。默认情况下，模块中的每个项都应该是私有的，只有显式公共项才能在外部公开访问。</p>
+<p>在 EVM 这样的资源受限环境中，效率很重要。效率通常通过提供低成本的抽象来实现，如通过宏进行编译时代码执行，丰富的类型系统来创建设计良好的可重用库以及常见的链上交互包装器。宏在编译时生成代码，这对于减少常见操作的样板代码非常有用，在像 Huff 这样的情况下，它可用于在代码大小与运行时效率之间进行权衡。丰富的类型系统允许更具表现力的代码、更多的编译时检查以在运行时之前捕获错误，并且当与类型检查的编译器内部函数结合使用时，可能会消除大部分内联汇编的需求。泛型还允许可空值（例如外部代码）被包装在「选项」类型中，或者易出错的操作（例如外部调用）被包装在「结果」类型中。这两种类型是库编写者如何通过定义代码路径或恢复失败结果的事务来强制开发人员处理每个结果的示例。然而，请记住，这些是编译时抽象，会在运行时解析为简单的条件跳转。强制开发人员在编译时处理每个结果会增加初始开发时间，但好处是运行时的意外情况要少得多。</p>
+<p>灵活性对于开发人员也很重要，因此，虽然复杂操作的默认情况应该是安全且可能不那么高效的路线，但有时需要使用更高效的代码路径或不支持的功能。为此，应该向开发人员开放内联汇编，而且没有护栏。Solidity 的内联汇编为了简单和更好的优化器传递设置了一些护栏，但是当开发人员需要完全控制执行环境时，他们应该被授予这些权利。</p>
+<p>一些可能有用的功能包括可以在编译时操作函数和其他项的属性。例如，「inline」属性可以将简单函数的主体复制到每个调用中，而不是为了效率创建更多的跳转。而「abi」属性可以允许手动覆盖给定外部函数生成的 ABI，以适应不同代码风格的语言。此外，还可以定义一个可选的函数调度器，允许在高级语言内进行定制，以便对预期更常用的代码路径进行额外的优化。例如，在执行「name」之前检查选择器是否为「transfer」或「transferFrom」。</p>
+<h2 id="结论">结论</h2>
+<p>EVM DSL 设计任重而道远。每种语言都有自己独特的设计决策，我期待看到它们在未来如何发展。作为开发人员，学习尽可能多的语言符合我们的最大利益。首先，学习多种语言并了解它们的不同之处和相似之处将加深我们对编程和底层机器体系结构的理解。其次，语言具有深远的网络效应和强大的保留特性。毫无疑问，大型参与者都在构建自己的编程语言，从 C#、Swift 和 Kotlin 到 Solidity、Sway 和 Cairo。学习在这些语言之间无缝切换为软件工程职业提供了无与伦比的灵活性。最后，重要的是要了解每一种语言背后都需要付出大量的工作。没有人是完美的，但无数有才华的人付出了大量努力，为像我们这样的开发者创造安全愉快的体验。</p>
+<p>来源：DeFi之道</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/48614/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">盘点Web3基础设施服务商</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/48616/">
+                <span class="next-text nav-default">区块链上的DID：去中心化标识如何掌管线上身份的未来</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#语言版本">语言版本</a></li>
+    <li><a href="#以太坊虚拟机概述">以太坊虚拟机概述</a></li>
+    <li><a href="#为什么语言设计很重要">为什么语言设计很重要</a></li>
+    <li><a href="#语言概览">语言概览</a>
+      <ul>
+        <li><a href="#solidity">Solidity</a></li>
+        <li><a href="#vyper">Vyper</a></li>
+        <li><a href="#fe">Fe</a></li>
+        <li><a href="#huff">Huff</a></li>
+        <li><a href="#etk">ETK</a></li>
+        <li><a href="#yul">Yul</a></li>
+      </ul>
+    </li>
+    <li><a href="#优秀-evm-dsl-的特性">优秀 EVM DSL 的特性</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

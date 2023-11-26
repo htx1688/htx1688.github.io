@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文读懂去中心化 Rollups - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="中心化Rollups最终将面临垄断定价和MEV的问题。" />
+<meta name="keywords" content="Rollup, 擴容" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51459/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文读懂去中心化 Rollups" />
+<meta property="og:description" content="中心化Rollups最终将面临垄断定价和MEV的问题。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51459/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-18T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文读懂去中心化 Rollups">
+<meta itemprop="description" content="中心化Rollups最终将面临垄断定价和MEV的问题。"><meta itemprop="datePublished" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8111">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文读懂去中心化 Rollups"/>
+<meta name="twitter:description" content="中心化Rollups最终将面临垄断定价和MEV的问题。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文读懂去中心化 Rollups</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-18">
+      2023-05-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8111 字 -
+        预计阅读 17 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原标题：《去中心化 Rollups》</p>
+<p>随着 Rollups 使用的增加并托管生态的应用程序，用户的迁移成本将增加，中心化的排序器将获得对定价的垄断性影响力。中心化排序器的控制者有理由从用户中直接（例如通过费用）和间接（例如通过抢跑交易、三明治攻击等）最大程度地提取价值（MEV）。— Espresso</p>
+<p>正如Espresso团队所提到的，<strong>中心化Rollups最终将面临垄断定价和MEV的问题。此外，中心化Rollups本质上会破坏可组合性，导致割裂的Rollups。</strong></p>
+<p>然而，目前几乎所有的Rollups都仍然是中心化的，因为建立一个去中心化、无需许可且可扩展的Rollup是极具挑战性的。另一个原因是，先推出中心化的Rollups可以帮助孵化生态系统并抢占市场份额。</p>
+<p>而当我们讨论去中心化的Rollups时，特别是zkRollups时，有两个层面的去中心化。第一个是证明者的去中心化，第二个是排序器的去中心化。实现完全的去中心化，还需要解决排序器和证明者之间的协调问题。</p>
+<p>在模块化趋势下，去中心化Rollup目前主要有三类参与者。第一类旨在实现完全去中心化的Rollups，并提出了完整的解决方案。第二类是旨在解决证明者网络的协议。最后有多种解决方案正在实现排序器的去中心化。</p>
+<h2 id="rollups-去中心化"><strong>Rollups 去中心化</strong> </h2>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_vss8tr5f6i.png" alt="一文读懂去中心化 Rollups"></p>
+<p>在zkRollups中，Polygon和Starknet已经提出了解决方案来实现他们Rollups的去中心化。</p>
+<h3 id="polygon"><strong>Polygon</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_m4ol2bjnq6.png" alt="一文读懂去中心化 Rollups"></p>
+<p>在引入POE（Proof of Efficiency）之前，Polygon zkEVM采用了POD（Proof of Donation），使得排序器可以竞标创建下一个交易批次的机会。但是，这会带来一个问题，即单个恶意方可以通过出价最高来控制整个网络。</p>
+<p>采用POE后，排序器和证明者将在自身硬件条件下，最高效地参与到无需许可的网络中。任何人都可以加入Polygon zkEVM，只要这是有经济效益的。</p>
+<p>在Polygon zkEVM中，排序器需要16GB的RAM和4个核心的CPU，而证明者需要1TB的RAM和128个核心的CPU。此外，还有一个称为聚合器的角色，负责收集L1数据，将其发送到证明者，接收证明并将其提交到L1。我们可以将聚合器和证明者视为同一个主体，因为聚合器和证明者之间的关系是非常简单的，聚合器支付证明者生产证明的成本。</p>
+<p>这种架构非常简单：任何排序器都可以无需许可地在L1上基于前一个状态打包交易，并更新相应地状态。同时，任何聚合器都可以提交证明以验证更新后的状态。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_u7kkhs3m69.png" alt="一文读懂去中心化 Rollups"></p>
+<p>在POE中，效率不仅指参与者在相互竞争时的网络效率，也指排序器和证明者自身的经济效率。在L2中，排序器和证明者分享交易费用，排序器支付 batchFee 给聚合器来生成证明。这确保了参与者在经济上有动力为网络效率做出贡献，从而带来更加健壮和可持续的生态系统。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_ry8nivvss1.png" alt="一文读懂去中心化 Rollups"></p>
+<p><strong>排序器</strong></p>
+<ul>
+<li>
+<p>收入：L2交易费用</p>
+</li>
+<li>
+<p>成本： batchFee （以$MATIC计算）+ L1 交易费用（调用  sequenceBatches  方法）</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_kro5s33f3r.png" alt="一文读懂去中心化 Rollups"></p>
+<p><strong>聚合器（证明者）</strong></p>
+<ul>
+<li>
+<p>收入： batchFee （以$MATIC计算）</p>
+</li>
+<li>
+<p>成本：证明成本 + L1 交易费用（调用  verifyBatchesTrustedAggregator 方法）</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_ofrzp6oecd.png" alt="一文读懂去中心化 Rollups"></p>
+<p><strong>协调器: batchFee</strong></p>
+<ul>
+<li>
+<p>初始参数</p>
+</li>
+<li>
+<p> batchFee = 1 $MATIC</p>
+</li>
+<li>
+<p> veryBatchTimeTarget  = 30分钟。这是验证批次的目标时间。协议将更新`batchFee`变量来达到该目标时间。</p>
+</li>
+<li>
+<p> multiplierBatchFee  = 1002。这是批次费用乘数，范围从1000到1024，保留3位小数。</p>
+</li>
+<li>
+<p>调节器</p>
+</li>
+<li>
+<p> diffBatches : 被聚合的批次中&gt; 30分钟的数量减去&lt;=30分钟的批次数量。最大值为12。</p>
+</li>
+<li>
+<p>协调过程</p>
+</li>
+<li>
+<p>当  diffBatches  &gt; 0时，增加聚合奖励以激励聚合器。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_erhvtr4ac5.png" alt="一文读懂去中心化 Rollups"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_bdhgrmmteh.png" alt="一文读懂去中心化 Rollups"></p>
+<ul>
+<li>当  diffBatches  &lt; 0时，减少聚合奖励来抑制聚合器，减缓聚合进程。</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_dreh4tspzq.png" alt="一文读懂去中心化 Rollups"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_q36sneyal2.png" alt="一文读懂去中心化 Rollups"></p>
+<h3 id="starknet"><strong>Starknet</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_cat60gd55q.png" alt="一文读懂去中心化 Rollups"></p>
+<p>Starknet也旨在构建一个快速确认的无许可且可扩展的Rollup。虽然尚未达成去中心化解决方案的最终规范，但他们几个月前在论坛上发布了一些草案。</p>
+<p>与Polygon zkEVM的简单机制相比，Starknet的方案更为复杂，因为它包括L2共识和证明网络中的链式协议证明（chained proof-of-a-protocol）。</p>
+<p><strong>排序器</strong></p>
+<p>Starknet 提出了一个双账本共识协议，而不是简单地在排序器层中添加一个共识层。在该协议中，L2 作为live protocol 提供快速响应，而 L1 checkpoints 则作为safe protocol提供最终确认性。</p>
+<p>对于 L2 的live protocol，可以采用各种共识机制，例如抗女巫的 PoS 系统，如 Tendermint 或 DAGs。另一方面，L1 的safe protocol涉及多个合约，分别处理Stake管理、证明验证和状态更新。</p>
+<p>该双账本共识协议的典型工作流程如下：</p>
+<p>1. 首先，将 L2 live ledger的输出作为 L1 safe ledger的输入，生成一个检查后的live ledger。</p>
+<p>2. 然后，将检查后的live ledger作为输入，再次输入到 L2 的纯共识协议中，确保检查后的live ledger始终是live  ledger的前缀。</p>
+<p>3. 重复上述过程。</p>
+<p>在构建双账本共识协议时，存在成本和延迟之间的权衡。理想的解决方案旨在同时实现低成本和快速的最终确认。</p>
+<p>为了在 L2 上降低 gas 成本，Starknet 将checkpoints分为“分钟级”和“小时级”。对于“分钟级”checkpoints，只有状态本身被提交到链上，而其余数据（有效性证明、数据可用性等）则通过 StarkNet L2 网络发送。这些数据由 StarkNet 全节点存储和验证。另一方面，“小时级” checkpoints 在 L1 上进行公开验证。两种类型的检查点提供相同的最终确认。对于“分钟级”checkpoints，有效性证明由 StarkNet 全节点验证，并可以由任何一个节点在 L1 上发布，以向“分钟级”checkpoints赋予 L1 的最终确认性。因此，证明者需要生成小证明，以便在 L2 网络中广泛传播。</p>
+<p>为了进一步降低延迟，Starknet 提出了一种领导者选举协议，以提前确定领导者。其基本逻辑如下：当前时期 i 的领导者是基于 L1 质押数量和一些随机性预先确定的。具体来说，在时期 i-2中， leader_election  方法根据时期 i-3 中的质押数量将排序器按词典顺序平铺展开。然后，发送一笔交易来更新随机数并随机选择一个点。该点落在位置所对应的排序器将成为时期 i 的领导者。</p>
+<p><strong>证明者</strong></p>
+<p>在POE模块下，参与者之间进行公开竞争，这可能导致赢家通吃的情况。Starknet试图实现一种无中心化风险的竞争机制。以下是几种可选方案：</p>
+<ul>
+<li>
+<p>轮流制：这可以部分解决中心化问题，但可能无法通过激励机制找到证明工作的最佳人选。</p>
+</li>
+<li>
+<p>基于质押：排序器根据其所质押的数量决定了当选证明者的概率。</p>
+</li>
+<li>
+<p>Commit-Reveal 方案：首个提交者需要抵押代币来获得短暂的垄断机会，然后在该时间窗口内生成证明。为了避免DDoS攻击，如果前者无法及时生成证明，后者所需的抵押代币将呈指数级增长。虽然在该机制下，网络可能会失去最佳性能的机器，但可以培养更多的证明者。</p>
+</li>
+</ul>
+<p>除了证明者之间的竞争，还应该降低进入门槛，以便更多的证明者可以参与到网络中来。Starknet提出了一种利用递归证明的复杂协议，称为链式协议证明。</p>
+<p>在链式协议证明中，区块链本身被划分为几个不同的分支。这样证明不仅可以是递归的，而且证明生成也可以是并发的。例如，在3个分支的设定中，12个黑色的区块被分为3行，每行代表一个分支。我们可以把每个分支看作一个子链，子链中的每个块都应证明前一个块。从整条链的角度看，插槽 n 需要证明插槽 n-3 。3个区块的间隔为排序器预留了足够的时间来提前计算和购买证明。这有点类似于分片技术，其中攻击者只需要控制一个分支就能控制整个证明者网络。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_p321fv5vvv.png" alt="一文读懂去中心化 Rollups"></p>
+<p>为了将这些分支编织在一起，Starknet提出了一种编织技术，可以将多个节点合并在一起，共同验证交易的合法性，确保交易记录的一致性和可靠性。</p>
+<p>其中一种方案是要求每个插槽需要同时与几个分支进行合并。另一种方案是将每个分支交替尝试和其余分支合并，从而减少证明工作量。当然这也是一个开放性问题，可能未来有更好的解决方案。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_ry6rb1e53u.png" alt="一文读懂去中心化 Rollups"></p>
+<p><strong>协调</strong></p>
+<p>为了积极确保证明者能够有足够的盈利空间，Starknet 提出了参考 EIP1559 方案的做法：将基础费用设定为证明者资源价格的下限，积极地进行价格发现，并且排序器可以使用小费来激励证明者。这样，证明者将始终得到超额支付，只有极端情况才会影响证明过程。否则，如果证明者获得的报酬接近市场价格，那么轻微的波动就可能引发证明者停摆。</p>
+<p><strong>证明者去中心化</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_rkh7srvdss.png" alt="一文读懂去中心化 Rollups"></p>
+<p>从 Rollups的角度来说，证明者比排序器去中心化更容易实现。而且，当前证明者是性能瓶颈，需要跟上排序器批处理的速度。在排序器去中心化尚未解决时，去中心化的证明者也可以为中心化的排序器提供服务。</p>
+<p>事实上，不仅是 Rollups，zkBridge 和 zkOracle 也需要一个证明者网络。他们都需要一个强大的分布式证明者网络。</p>
+<p>从长远来看，能够容纳不同计算能力的证明者网络更具可持续性，否则性能最好的机器将垄断市场。</p>
+<p><strong>证明市场</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_uk88bltjok.png" alt="一文读懂去中心化 Rollups"></p>
+<p>有些协议不是协调排序器和证明者之间的关系，而是直接将协调抽象成了证明市场。在该市场中，证明是商品，证明者是证明的生产者，而协议则是证明的消费者。在“看不见的手”的作用下，市场均衡是最高效的。</p>
+<h3 id="mina"><strong>Mina</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_zfnc5jaqqk.png" alt="一文读懂去中心化 Rollups"></p>
+<p>Mina已经建立了一个名为Snarketplace的证明市场，在其中交易Snark证明。这里的最小单位是单个交易的Snark证明。Mina采用了一种名为Scan State的状态树的递归证明。</p>
+<p>Scan State是一个二叉树的森林，其中每个交易是一个节点。在树的顶部生成一个单个证明，可以证明树中的所有交易。证明者有两个任务：首先是生成证明，第二是合并证明。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_4r0h2vi6vq.png" alt="一文读懂去中心化 Rollups"></p>
+<p>在证明者完成工作并提交出价后，Mina协议的区块生产者将选择最低价格的出价者。这也是均衡价格，因为出价者会提交高于证明成本的出价，而区块生产者将不会购买不划算的证明。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_srskop98jb.png" alt="一文读懂去中心化 Rollups"></p>
+<p><strong>=Nil; Foundation</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_ytgo26s5tg.png" alt="一文读懂去中心化 Rollups"></p>
+<p>Mina的证明市场是专为自己的协议设计的，而=nil; Foundation则提出了一个通用的证明市场，以服务整个市场。</p>
+<p>该市场的服务由三个组成部分构成：`DROP DATABASE、zkLLVM和Proof Market。</p>
+<ul>
+<li>
+<p>`DROP DATABASE：是一个数据库管理系统协议，可以看作是一个DA层。</p>
+</li>
+<li>
+<p>Proof Market：是一个在DROP DATABASE上运行的应用程序，类似于一些人所说的zk证明的“去中心化交易所”。</p>
+</li>
+<li>
+<p>zkLLVM：是一个编译器，将高级编程语言转换为可证明计算协议的输入。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_8gpehowslc.png" alt="一文读懂去中心化 Rollups"></p>
+<p>每个证明由其不同的输入和电路组成，因此每个证明都是唯一的。电路定义了证明的类型，类似于金融术语中定义“交易对”的方式。此外，不同的证明系统引入了更多的电路。</p>
+<p>工作流程如下：证明的需求方可以用高级编程语言编写代码，然后通过工具链将其喂给 =nil; zkLLVM，生成一个单独的电路，它将成为市场中的一个独特的交易对。</p>
+<p>对于证明需求方，他们可以在成本和时间之间做取舍。证明者也将考量自己的计算能力和收入。因此在市场上，将会有不同的计算能力，高算力将更快地生成证明，但成本更高，而低算力生成证明更慢，但更便宜。</p>
+<p><strong>两步提交</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_rl113wyg1f.png" alt="一文读懂去中心化 Rollups"></p>
+<p>最近，Opside 提出了一种两步提交方案来去中心化证明者网络。该方案将证明提交分成两个阶段，来避免最快的证明者总是胜出的情况。</p>
+<ul>
+<li>
+<p>步骤1：提交第T个区块的零知识证明的哈希</p>
+</li>
+<li>
+<p>从第T+11个区块开始，不再允许新的证明者提交哈希。</p>
+</li>
+<li>
+<p>步骤2：提交零知识证明</p>
+</li>
+<li>
+<p>在第T+11个区块之后，任何证明者都可以提交零知识证明。如果至少有一个零知识证明通过验证，它将用于验证所有提交的哈希，经过验证的证明者将根据抵押金额的比例获得相应的PoW奖励。</p>
+</li>
+<li>
+<p>如果在第T+20个区块之前没有零知识证明通过验证，则所有提交哈希的证明者都会受到惩罚。然后重新开放排序器，可以提交新的哈希，回到步骤1。</p>
+</li>
+</ul>
+<p>这种方法可以包容不同的算力。然而，所需的抵押仍然引入了一定程度的中心化。</p>
+<p><strong>排序器去中心化</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_cqrn34a6m1.png" alt="一文读懂去中心化 Rollups"></p>
+<p>排序器的去中心化比验证者更为复杂。这是因为排序器具有打包排列交易的权力，诸如MEV和收入分配等问题都需要考量。</p>
+<p>考虑到以太坊将对活性的优先级高于响应性，L2 解决方案应该通过优先考虑响应性而不是活性来与这样的取舍互补。但是，与中心化排序器相比，去中心化排序器在响应性方面本身就有所牺牲。因此，需要实现各种优化来解决这个困境。</p>
+<p>目前，有三种不同的去中心化排序器方案。第一种方案是通过优化共识机制实现。第二种方案涉及共享排序器网络。第三种方案基于L1的验证者。</p>
+<p><strong>共识</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_c49uvcqoc5.png" alt="一文读懂去中心化 Rollups"></p>
+<p>共识协议主要负责对交易进行排序和确保其可用性，而不是执行交易。但是，正如前面提到的直接添加另一个共识层，并不是一个简单的解决方案。</p>
+<p>为了提高响应性，一种常见的方法是依靠较小的验证器集合。例如，Algorand和Polkadot使用随机抽样的较小委员会来批量处理交易。所有节点使用随机信标和可验证随机函数（VRF），在给定时期内被包含在委员会中的概率与其质押数量成比例。</p>
+<p>为了减少网络流量，可以使用更小的数据可用性（DA）委员会。或者采用 VID（Verifiable Information Dispersal）。VID将数据的纠删码分发给参与共识的所有节点，使得任何持有足够高质押比例的节点子集都可以协作恢复数据。这种方法的取舍在于减少广播复杂性，但增加了数据恢复的复杂性。</p>
+<p>Arbitrum 则选择了有声誉的实体组成验证者集，如ConsenSys、Ethereum Foundation、L2BEAT、Mycelium、Offchain Labs、P2P、Quicknode、IFF的分布式账本研究中心（DLRC）和Unit 410加入排序器委员会。这种方法的取舍在于通过提高去中心化的质量来弥补数量上的不足。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_a37t1uents.png" alt="一文读懂去中心化 Rollups"></p>
+<h2 id="共享排序器网络"><strong>共享排序器网络</strong></h2>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_w3wiouc90q.png" alt="一文读懂去中心化 Rollups"></p>
+<p>排序器在模块化区块链中（特别是在 Rollup 中）发挥着至关重要的作用。每个 Rollup 通常都会构建自己的排序器网络。然而，这种方法不仅造成了冗余问题，而且还阻碍了可组合性。为解决这个问题，一些协议提出了构建一个共享的 Rollup 排序器网络。这种方法降低了实现原子性、可组合性和互操作性的复杂度，这些特性在开放无需许可的区块链中，是用户和开发者迫切需要的。此外，它还不再需要单独的排序器网络的轻客户端。</p>
+<h3 id="astria"><strong>Astria</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_wuru21scpi.png" alt="一文读懂去中心化 Rollups"></p>
+<p>Astria正在为Celestia的Rollup生态系统开发一种中间件区块链，其中包括自己的分布式排序器集合。这个排序器集负责接受来自多个Rollup的交易并将其写入基础层，而不执行它们。</p>
+<p>Astria的作用主要聚焦于交易排序，与基础层和Rollup独立运作。交易数据存储在基础层上（例如Celestia），而Rollup全节点维护状态并执行操作。这确保了Astria 与Rollup解耦。</p>
+<p>对于最终确认性，Astria提供两个级别的Commitment：</p>
+<ul>
+<li>
+<p>“Soft commitment”：使得Rollup能够为其最终用户提供快速的区块确认。</p>
+</li>
+<li>
+<p>“Firm commitment”：速度与基础层相同，确保更高的安全性和最终确认性。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_vaea1bqpwi.png" alt="一文读懂去中心化 Rollups"></p>
+<h3 id="espresso"><strong>Espresso</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_nfdn00tsyn.png" alt="一文读懂去中心化 Rollups"></p>
+<p>Espresso在零知识技术领域做出了重大贡献。他们最新在开发一种去中心化排序器的综合解决方案，可应用于 Optimistic Rollups和zkRollups。</p>
+<p>去中心化排序器网络由以下组成：</p>
+<ul>
+<li>
+<p>HotShot 共识：优先考虑高吞吐量和快速最终确认性，而不是动态可用性。</p>
+</li>
+<li>
+<p>Espresso DA：结合基于委员会的 DA 解决方案和 VID，其中高带宽节点将数据提供给所有其他节点。每个单独区块的可用性也由小型随机选举的委员会支持。VID 提供可靠但较慢的备份，只要所有节点的足够高比例的质押权重没有受到威胁，就可以保证可用性。</p>
+</li>
+<li>
+<p>Rollup REST API：以太坊兼容 JSON-RPC。</p>
+</li>
+<li>
+<p>排序器合约：验证 HotShot 共识（即作为轻客户端）并记录 checkpoints（即对交易进行密码学承诺），管理 HotShot 的质押表。</p>
+</li>
+<li>
+<p>P2P 网络：Gossip 协议。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_6bpam9cu2s.png" alt="一文读懂去中心化 Rollups"></p>
+<p>与 Astria 相比，Espresso 提供 DA。因此，工作流程将略有不同，如下所述：</p>
+<p>1. 用户创建并提交交易到 Rollup。</p>
+<p>2. 交易通过排序器网络传播并保留在内存池中。</p>
+<p>3. 通过 HotShot 质押机制指定领导者，提出区块，并将其传播回 Rollup 的执行者和证明者。</p>
+<p>4. 领导者将交易发送到数据可用性委员会，并收到 DA 证书作为反馈。</p>
+<p>5. 领导者还向 Layer 1 排序器合约发送对区块的承诺，以及合约用于验证区块的证书。</p>
+<p>Espresso 引入了用于证明的 Gossip 协议，提供更灵活的用户体验。它提供三种交易最终确认性的选项：</p>
+<ul>
+<li>
+<p>快速：用户可以信任已执行交易并生成证明的 Rollup 服务器，或者他们可以利用 HotShot 的低延迟执行交易。</p>
+</li>
+<li>
+<p>适度：用户可以稍等一段时间以生成证明，然后检查该证明。</p>
+</li>
+<li>
+<p>慢速：用户可以等待 L1 验证状态更新来获取更新后的状态，无需任何信任假设或计算。</p>
+</li>
+</ul>
+<p>除了上述优化之外，Espresso 还计划使整个以太坊验证者集本身参与运行 Espresso 排序器协议。使用相同的验证者集合将提供类似的安全性，并且与 L1 验证者分享价值将更加安全。此外，Espresso 还可以利用 EigenLayer 提供的 ETH 再质押解决方案。</p>
+<h3 id="radius"><strong>Radius</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_ecis4o3cgd.png" alt="一文读懂去中心化 Rollups"></p>
+<p>Radius正在构建一个基于零知识证明的无信任共享排序层，专注于解决L2中的MEV问题，因为L2的收入主要来自区块空间。所需要考虑的权衡是MEV和L2收入之间的平衡。Radius的目标是消除对用户有害的MEV，并提出了一个两层服务。</p>
+<p>顶层针对常规用户交易，并通过使用时间锁谜题提供密码学保护，以防止有害的MEV。具体而言，它采用了实用可验证延迟加密（PVDE）技术，该技术将在5秒内为基于RSA的时间锁谜题生成零知识证明。该方法提供了一种实用的解决方案，以保护用户免受有害的MEV。简而言之，在排序器确定交易顺序之后，才可以知晓交易内容。</p>
+<p>底层是为区块构建者设计的，并允许他们参与产生收入的活动，同时减轻MEV的负面影响。</p>
+<h3 id="based-rollups"><strong>Based Rollups</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_o69ipyfdtd.png" alt="一文读懂去中心化 Rollups"></p>
+<p>Based Rollup 是最近由Justin Drake提出的一个概念，其中L1区块提议者与L1的搜索者和构建者合作，在无需许可的情况下将rollup区块包含在下一个L1区块中。它可以被视为L1上的共享排序器网络。Based Rollup的优缺点很明显。</p>
+<p>从积极的一面来看，Based Rollup 利用了L1所提供的活性和去中心化性，并且它的实现简单且高效。Based Rollup也与L1保持经济上的一致性。然而，这并不意味着Based Rollup损害了其主权。虽然将MEV交给了L1，Based Rollup仍然可以拥有治理代币并收取基础费用。根据假设，Based Rollup 可以利用这些优势，实现主导地位，并最终最大化收益。</p>
+<h2 id="结论"><strong>结论</strong></h2>
+<p><img src="https://img.bibiqing.com/news/2023/0518/20_simaqi4tg0.png" alt="一文读懂去中心化 Rollups"></p>
+<p>观察所提出的这些方案，可以看出Rollup的去中心化仍有很长的路要走。其中一些提案仍处于草案阶段，需要进一步讨论，而其他一些则仅完成了初步规格说明。所有这些方案都需要实现并接受严格的测试。</p>
+<p>虽然有些Rollup可能没有明确提出相应的去中心化解决方案，但它们通常包括应急逃离机制来解决由于中心化排序器引起的单点故障。例如，zkSync提供了`FullExit`方法，允许用户直接从 L1 提取其资金。在系统进入 exodus mode ，无法处理新区块时，用户可以启动提款操作。</p>
+<p>为了实现抗审查，这些Rollup通常还允许用户直接在L1上提交交易。例如，zkSync采用优先级队列来处理在L1上发送的这类交易。类似地，Polygon zkEVM在L1合约中包含了一个  force batch  方法。当一周内未发生聚合时，用户可以在L1上调用此方法，并提供交易的字节数组和  bathFee 给证明者。</p>
+<p>可以肯定的是，在可预见的未来，Rollup的去中心化将会是一个组合型的解决方案，可能包括上述这些重要的方案或者其他一些创新性的变体。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51435/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">星球日报 | Tether将定期分配15%已实现净利润购买BTC；国际证监会组织将发布加密资产国际规则（5月18日）</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51506/">
+                <span class="next-text nav-default">一文了解Web3.0数据泄露事件分类及保护措施</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rollups-去中心化"><strong>Rollups 去中心化</strong> </a>
+      <ul>
+        <li><a href="#polygon"><strong>Polygon</strong></a></li>
+        <li><a href="#starknet"><strong>Starknet</strong></a></li>
+        <li><a href="#mina"><strong>Mina</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#共享排序器网络"><strong>共享排序器网络</strong></a>
+      <ul>
+        <li><a href="#astria"><strong>Astria</strong></a></li>
+        <li><a href="#espresso"><strong>Espresso</strong></a></li>
+        <li><a href="#radius"><strong>Radius</strong></a></li>
+        <li><a href="#based-rollups"><strong>Based Rollups</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#结论"><strong>结论</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

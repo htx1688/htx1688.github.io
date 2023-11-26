@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          什么是并行执行 以 Aptos、Sui、Linera 和 Fuel 为例给你讲透 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文旨在通过 Aptos、Sui、Linera 和 Fuel 来阐明并行执行技术的原理，以及这些项目之间的异同和面临的挑战。" />
+<meta name="keywords" content="技术" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42544/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="什么是并行执行 以 Aptos、Sui、Linera 和 Fuel 为例给你讲透" />
+<meta property="og:description" content="本文旨在通过 Aptos、Sui、Linera 和 Fuel 来阐明并行执行技术的原理，以及这些项目之间的异同和面临的挑战。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42544/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="什么是并行执行 以 Aptos、Sui、Linera 和 Fuel 为例给你讲透">
+<meta itemprop="description" content="本文旨在通过 Aptos、Sui、Linera 和 Fuel 来阐明并行执行技术的原理，以及这些项目之间的异同和面临的挑战。"><meta itemprop="datePublished" content="2022-09-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5686">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="什么是并行执行 以 Aptos、Sui、Linera 和 Fuel 为例给你讲透"/>
+<meta name="twitter:description" content="本文旨在通过 Aptos、Sui、Linera 和 Fuel 来阐明并行执行技术的原理，以及这些项目之间的异同和面临的挑战。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">什么是并行执行 以 Aptos、Sui、Linera 和 Fuel 为例给你讲透</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-12">
+      2022-09-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5686 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>来源：老雅痞</p>
+<p>本文旨在通过 Aptos、Sui、Linera 和 Fuel 来阐明并行执行技术的原理，以及这些项目之间的异同和面临的挑战。</p>
+<p>当观察区块链技术的发展时，我们可以看到一个强大的趋势，即新的 L1 侧重于并行执行。这一想法并不新鲜，比如目前在 Solana 的 Sealevel 执行环境中就使用了并行执行。然而，上一轮牛市中，DeFi 和 NFT 令人印象深刻的表现表明了对改进的迫切需求。目前采用并行执行理念的一些知名项目有 Aptos、Sui、Linera 和 Fuel。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0912/20_3batz3dqcw.png" alt="什么是并行执行  以 Aptos、Sui、Linera 和 Fuel 为例给你讲透"></p>
+<p>本文讨论了这些项目之间的异同，以及它们面临的挑战。</p>
+<h2 id="问题所在">问题所在</h2>
+<p>智能合约平台能够创建广泛的去中心化应用。为了执行这些应用，需要一个共享的计算引擎。网络中的每个节点都会运行这个计算引擎，并执行应用程序以及用户与应用程序的交互。当节点从执行中得到相同的结果时，他们就会达成共识，并推动链的发展。</p>
+<p>以太坊虚拟机是最主要的智能合约 (SC) 执行引擎，有大约 20 种不同的实现方式。自从 EVM 发明以来，它已经被开发人员广泛采用。除了以太坊和以太坊的 L2 外，Polygon、BNB Smart Chain 和 Avalanche c Chain 等其他几个链都采用了 EVM 作为执行引擎，并致力于改变共识机制以提高网络吞吐量。</p>
+<p>EVM 的一个主要限制特性是顺序的顺序执行。EVM 本质上每次执行一个交易都会将所有其他交易置于暂停状态，直到交易执行完成，区块链状态被更新。即使两个交易是独立的，例如，从 Alice 到 Bob 的付款和从 Carol 到 Dave 的另一个付款，EVM 也不能并行执行这些交易。虽然该执行模式允许使用闪电贷等有趣的用例，但它既不高效，也不可扩展。</p>
+<p>交易的这种顺序执行是网络吞吐量的主要瓶颈之一。首先，它导致区块中的交易执行时间变长，从而限制了区块时间。此外，它还限制了可以添加到区块中的交易数量。以太坊的平均吞吐量约为 17 tx/ 秒。这种低吞吐量意味着在高活动时期，网络矿工 / 验证者不能处理所有的交易，并会引发确保交易优先执行而推高交易费用的费用竞标战。以太坊的平均费用在某些点超过 0.2 ETH( 约 800 美元 )，让许多用户望而却步。顺序执行的第二个问题是网络节点的低效。顺序指令的执行不能从多核处理器中受益，这会导致硬件利用率低，效率低下。这阻碍了可扩展性，并导致了不必要的能源消耗。</p>
+<h2 id="并行执行可以解决这个问题">并行执行可以解决这个问题？</h2>
+<p>EVM 结构的基本限制为专注于并行执行 (PE) 的 L1 新领域奠定了基础。并行允许在多个处理器核心之间划分交易处理，提高了硬件利用率，从而实现了更好的可扩展性。在高吞吐量链中，硬件资源的增加与可执行的交易数量直接相关。在高频活动期间，验证者节点可以委托更多的核心来处理额外的交易负载。计算资源的动态扩展允许网络在高需求时期实现更高的吞吐量，从而显著改善用户体验。</p>
+<p>这种方法的另一个优点是改善了交易确认延迟。节点资源的动态扩展使低延迟确认交易成为可能。交易不需要等待数十或数百个区块，也不需要支付过多的费用来确定优先级。确认时间的改进提高了交易的最终确定性，为低延迟区块链打开了大门。保证执行交易的低延迟可以实现以前不可能实现的几个用例。</p>
+<p>改变链的执行模式，以允许 PE 并不是一个新想法，已经有一些项目已经对此进行了探索。一种方法是将 EVM 使用的会计模型从帐户模型替换为未支出交易输出 (UTXO) 模型。比特币就使用了 UTXO 执行模型，它允许并行处理交易，这使其成为了支付的理想选择。由于 UXTOs 的功能有限，因此需要扩展来实现智能合约所需的复杂交互。作为示例，Cardano 为此使用了一个扩展的 UTXO 模型，Findora 使用了一个实现了两种会计模型，并允许用户在其间进行更改资产类型的混合 UTXO 模型。</p>
+<p>PE 的另一种方法并不改变账户模型，而是专注于改进链状态的架构。这种方法的一个例子是 Solana 的 Sealevel‌框架，本文主要讨论后一种方法。</p>
+<h2 id="并行执行是如何运作的">并行执行是如何运作的</h2>
+<p>并行执行的工作原理是识别独立的交易并同时执行它们。如果一个交易的执行会影响另一个交易的执行，那么两个交易是相互依赖的。例如，同一个池中的 AMM 交易是相互依赖的，必须按顺序执行。</p>
+<p>虽然并行处理的概念很简单，但问题在于细节。其主要的挑战是有效地识别“独立”的交易。分类独立交易需要理解每个交易如何更改区块链内存或链状态。与同一个智能合约交互的交易可以同时改变合约状态，因此不能同时执行。在目前应用程序之间的可组合程度下，识别依赖关系是一项具有挑战性的任务。</p>
+<h2 id="识别独立交易">识别独立交易</h2>
+<p>本节中将比较不同的并行执行引擎所使用的方法。讨论的重点是控制状态 ( 内存 ) 访问的方法。区块链状态可以被看作是 RAM 存储器。每个链上账户或智能合约都拥有一系列可修改的存储位置。相互依赖的交易是那些试图改变同一区块中相同内存位置的交易。不同的链使用不同的内存架构和不同的机制来识别依赖交易。</p>
+<p>这个类别中的几条链都建立在 Facebook 已经砍掉的区块链项目 Diem 所开发的技术之上。Diem 团队创建了智能合约语言 Move，以专门改善 SC 的执行。Aptos、Sui 和 Linera 是属于这一类别的三个备受瞩目的项目。除了它们之外，Fuel 是另一个专注于 PE 的知名项目，它使用自己的 SC 语言。</p>
+<h2 id="aptos">Aptos</h2>
+<p>Aptos 构建在 Diem 的 Move 语言和 MoveVM 之上，创建了实现并行执行的高吞吐量链。Aptos 的方法是检测依赖关系，同时对用户 / 开发者透明，也就是说不要求交易明确声明它们使用的是哪一部分状态 ( 内存位置 )。Aptos 使用了软件交易内存 (STM) 的一种称为 Block-STM 的修改。在 Block-STM 中，交易在区块中被预先排序，并在执行期间在处理器线程之间进行划分，以便 optimistic execution。在执行中，交易的执行被假定没有依赖关系。被交易修改的内存位置会被记录下来。执行之后将验证所有交易结果。在验证期间，如果发现一个交易访问了被前一个交易修改过的内存位置，该交易就会被宣布无效。交易结果将被刷新，然后重新执行交易。这个过程重复进行，直到区块中的所有交易都被执行。当使用多个处理器核心时，Block-STM 可以提高执行速度。该速度取决于交易之间的相互依赖程度。Aptos 团队的结果显示，使用 32 个核心可以将速度在高度相互依赖的情况下提高 8 倍，在低相互依赖的情况下提高 16 倍。如果一个区块中的所有交易都是相互依赖的，那么与顺序执行相比，Block-STM 的性能损失会更小。Aptos 公司声称，这种方法可以实现 160，000 TPS 的吞吐量。</p>
+<h2 id="sui">Sui</h2>
+<p>另一种 PE 方法是要求交易明确声明他们修改了链状态的哪些部分。目前 Solana 和 Sui 使用了这种方法。Solana 将内存单元称为账户，而交易必须说明它修改了哪些账户。Sui 也使用了类似的方法。</p>
+<p>Sui 还利用 MoveVM 构建在了 Diem 的技术之上。然而，Sui 使用了不同版本的 Move 语言。Sui Move 的实现改变了 Diem 的核心存储模型和资产权限。这代表了它与使用核心 Diem Move 的 Aptos 的主要区别。（此前我们分析过 Sui 和 Aptos 的区别，感兴趣的朋友请前往 Allrecord 重构查看）Sui Move 定义了一个状态存储模型，使识别独立交易更加容易。在 Sui 中，状态存储被定义为对象。对象通常代表资产，并且可以被共享，这意味着多个用户都可以修改一个对象。每个对象在 Sui 执行环境中都有一个惟一的 ID，并具有指向所有者地址的内部指针。通过使用这些概念，很容易通过检查交易是否使用相同的对象来识别依赖关系。</p>
+<p>通过将声明依赖关系的工作转移给开发者，执行引擎的实施变得更加容易，这意味着理论上它可以拥有更好的性能和可扩展性。然而，这样做的代价是开发人员体验不够理想。</p>
+<p>Sui 还没有上线，该项目最近刚刚上线了他们的测试网。Sui 的创始人声称，并行执行的实现以及 Narwhal &amp; Tusk 共识机制的使用可以让吞吐量超过 10 万 tx/ 秒。如果这是真的，比起 Solana 目前约 2400 tx/ 秒的吞吐量，Sui 将有一个巨大的提升，并将超过 Visa 和万事达的吞吐量。</p>
+<h2 id="linera">Linera</h2>
+<p>Linera 是并行处理领域的最新成员，他们最近宣布了由 a16z 领投的第一轮融资。关于项目实施的细节并不多。然而，根据他们的融资公告，我们知道它基于同样在 Facebook 开发的 FastPay 协议。Fastpay 基于一种叫做 Byzantine Consistent Broadcast 的技术。这项技术专注于加速独立支付，比如发生在销售点网络中的支付。它允许一组验证者确保支付的完整性，只要其中三分之二以上是诚实的。Fastpay 是银行和金融机构网络中使用的实时总结算 (RTGS) 系统的变体。</p>
+<p>Linera 计划在 FastPay 的基础上建立一个区块链，通过并行执行支付交易，专注于快速结算和低延迟。值得注意的是，Sui 也使用了 Byzantine Consistent Broadcast 方式进行简单支付。对于其他交易，Sui 使用自己的共识机制 Narwhal 和 Tusk 来高效地处理 DeFi 交易等更复杂和具依赖性的交易。</p>
+<h2 id="fuel">Fuel</h2>
+<p>Fuel 致力于成为模块化区块链堆栈中的执行层。这意味着 Fuel 不实施共识，也不将区块链的数据存储在 Fuel 链上。对于一个功能性的区块链，Fuel 与其他链 ( 如以太坊或 Celestia) 进行交互，以获得共识和数据可用性。</p>
+<p>Fuel 使用 UTXO 创建严格的访问列表，用一个列表来控制对同一片状态的访问。该模型建立在经典交易排序的概念之上。在这个方案中，区块中的交易排序大大简化了交易之间依赖关系的检测。为了实现这个架构，Fuel 构建了一个名为 FuelVM 的新虚拟机和一种名为 Sway 的新语言。FuelVM 是 EVM 的兼容和简化的实现方式，它可以有效地引导开发人员进入 Fuel 生态系统。此外，由于 Fuel 专注于模块化区块链堆栈，Fuel SC 的执行可以在以太坊主网上进行。这种方法与以太坊在合并后作为一个以 rollup 为中心的结算和数据可用层的愿景一致。</p>
+<p>作为一种概念验证，Fuel 团队创建了一个名为 SwaySwap 的 Uniswap 风格的 AMM，目前它正在测试网上运行，以证明与 EVM 相比，FuelVM 的性能有所提高。</p>
+<h2 id="并行执行方法的挑战">并行执行方法的挑战</h2>
+<p>并行执行方法看起来合乎逻辑且简单明了。然而，还有一些挑战需要讨论。首先是要估计可以使用这种并行执行加速的交易的实际比例。第二个挑战是网络的去中心化，也就是说，如果验证者可以轻易扩展计算能力以提高吞吐量，那么经常使用商品硬件的完整节点如何跟上以确保链的正确性？</p>
+<h2 id="可并行交易的百分比">可并行交易的百分比</h2>
+<p>准确估计可并行执行的链上交易的百分比是一个挑战。此外，根据网络活动的类型，这个百分比在不同区块之间可能会有很大的变化。例如，一个 NFT 铸币活动可能会导致依赖交易剧增。也就是说，我们可以使用一些假设来获得可并行交易平均百分比的粗略估计。例如，我们可以假设大多数 ETH 和 ERC20 传输是独立的。因此，我们可以假设约 25% 的简单 ETH 和 ERC20 转账是相互依赖的。另一方面，同一个池中的所有 AMM 交易都是相互依赖的。考虑到大多数 AMM 通常由少数池主导，而且 AMM 交易具有高度的可组合性，并与多个池交互，我们可以安全地假设至少 50% 的 AMM 交易是相互依赖的。</p>
+<p>通过对以太坊的交易类别进行一些分析，我们可以发现在以太坊约 120 万笔的日常交易中，有 20-30% 是 ETH 转账，10-20% 是稳定币转账，10-15% 是 DEX 转账，4-6% 是 NFT 交易，8-10% 是 ERC20 审批，12-15% 是其他 ERC20 转账。通过使用这些数字和假设，我们可以估计 PE 可以加速 SC 平台上大约 70-80% 的交易。这意味着依赖交易的顺序执行可能占所有交易的 20-30%。换句话说，如果使用相同的 gas 限制，PE 吞吐量可能会提高 3 - 5 倍。关于构建并行执行 EVM 的一些实验也显示了类似的估计。在实践中，高吞吐量链将通过使用更高的每区块 gas 限制和更短的区块时间来以实现至少比以太坊提高 100 倍的吞吐量。增加的吞吐量需要强大的验证者节点来处理这些区块。这一需求导致了网络集中化的问题。</p>
+<h2 id="网络集中化">网络集中化</h2>
+<p>对并行处理的另一个常见批评是，它极大地推动了网络的集中化。在高吞吐量网络中，网络每秒可以处理数以万计的交易。验证者节点受到费用和网络奖励的激励来处理这些交易，并投资于专用服务器或可扩展的云架构来处理这些交易。而对于使用该链并需要运行完整节点与链交互的公司或个人来说，情况就不一样了。这些实体无法负担复杂的服务器来处理如此庞大的交易负载。这将推动链上用户依赖于 Infura 等专门的 RPC 节点供应商，从而导致更多的集中化。</p>
+<p>如果不选择使用消费级硬件来运行整个节点，高吞吐量链可能会变成一个封闭的系统，其中一小群实体对网络拥有绝对的权力。在这种情况下，这些实体可以协调审查交易、实体甚至应用程序，从而将这些链转变为与 Web 2 没有区别的许可系统。</p>
+<p>目前，在 Sui 测试网上运行全节点的要求低于 Aptos 测试网节点。然而，我们预计当主网启动、应用程序开始出现在链上时，这些需求将发生重大变化。去中心化的倡导者一直在提出解决这些预期问题的方案。其中解决方案包括使用轻型节点，通过 zk 有效性证明或欺诈证明来验证区块的正确性。Fuel 团队在这方面非常积极，并在去中心化的重要性上与以太坊社区的理念达成了一致。Aptos 和 Sui 团队还未清晰表明执行这些方法的优先次序或其他促进去中心化的方法。Linera 团队在他们的介绍文章中简要地讨论了这些问题，但协议的实施尚未证实这一承诺。</p>
+<h2 id="结论">结论</h2>
+<p>并行执行引擎有望改善智能合约平台的吞吐量。通过结合共识机制的创新，交易的并行执行可以使链的吞吐量接近或超过 100k TPS。这样的性能可以与 Visa 和 Mastercard 相媲美，从而可以实现完全的链上游戏和去中心化小额支付等目前具有挑战性的几个用例。这些令人印象深刻的改进面临着如何确保去中心化的挑战。我们期待着致力于解决这些问题的创始人。</p>
+<p>信息来源自 Alliance DAO，略有修改</p>
+<p>作者：Mohamed Fouda</p>
+<p>编译：RR</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42535/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">金色早报 | Dogechain已停机8小时 远超官方维护时间</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42543/">
+                <span class="next-text nav-default">数据：近85%的执行层客户端已为以太坊合并做好准备</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题所在">问题所在</a></li>
+    <li><a href="#并行执行可以解决这个问题">并行执行可以解决这个问题？</a></li>
+    <li><a href="#并行执行是如何运作的">并行执行是如何运作的</a></li>
+    <li><a href="#识别独立交易">识别独立交易</a></li>
+    <li><a href="#aptos">Aptos</a></li>
+    <li><a href="#sui">Sui</a></li>
+    <li><a href="#linera">Linera</a></li>
+    <li><a href="#fuel">Fuel</a></li>
+    <li><a href="#并行执行方法的挑战">并行执行方法的挑战</a></li>
+    <li><a href="#可并行交易的百分比">可并行交易的百分比</a></li>
+    <li><a href="#网络集中化">网络集中化</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

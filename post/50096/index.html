@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          全面解读DeFi借贷：组成、公式、用例 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="，讨论 DeFi 借贷协议的工作原理——它们的关键组成部分、公式和用例。" />
+<meta name="keywords" content="DeFi" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50096/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="全面解读DeFi借贷：组成、公式、用例" />
+<meta property="og:description" content="，讨论 DeFi 借贷协议的工作原理——它们的关键组成部分、公式和用例。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50096/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-24T00:00:00+00:00" />
+
+<meta itemprop="name" content="全面解读DeFi借贷：组成、公式、用例">
+<meta itemprop="description" content="，讨论 DeFi 借贷协议的工作原理——它们的关键组成部分、公式和用例。"><meta itemprop="datePublished" content="2023-04-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4795">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="全面解读DeFi借贷：组成、公式、用例"/>
+<meta name="twitter:description" content="，讨论 DeFi 借贷协议的工作原理——它们的关键组成部分、公式和用例。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">全面解读DeFi借贷：组成、公式、用例</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-24">
+      2023-04-24
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4795 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《DeFi Lending Concepts Part 1: Lending and Borrowing》</p>
+<p>原文作者：Tal</p>
+<p>原文编译：Kxp，Blockbeats</p>
+<p>这篇文章是三篇系列文章的第一篇**，讨论 DeFi 借贷协议的工作原理——它们的关键组成部分、公式和用例。** 在这一过程中，我们将强调，尽管协议使用不同和创意的命名方式，但它们倾向于重复、迭代和分享核心概念。其中一篇本博客文章中详细介绍如何使用 ERC 20  Token 来代表用户在借贷池中的份额。我们将从分析这些协议的独特元素开始，并提供技术概念来区分它们的工作方式。</p>
+<h2 id="借贷池">借贷池</h2>
+<p>在传统金融（或 TradFi）中，借贷由第三方金融机构进行调整。这些金融机构被委托执行两项关键任务：强制借方向贷方支付利息，并评估并防止被认为是不可信的当事方参与这些活动。</p>
+<p>相比之下，在去中心化金融（或 DeFi）中，第三方借款人和贷款人是不值得信任的。这种信任的缺失激发了一个创新的设计，用于在链上促进借贷过程。</p>
+<p>借贷池是一个智能合约。DeFi 协议用户可以存入资产（通常是 ERC 20 Token），目的是使用该合约来借出他们存入的资产。其他用户可以与借贷池进行交互，享受即时贷款，即抵押在池中的资产进行借款。</p>
+<p>与传统金融方法相比，借贷池在借贷方面具有一些重大的优点，例如：</p>
+<p>· 在 DeFi 中，贷款不受贷款资金与借款金额 1: 1 可用性的限制。相反，来自协议所有用户的资金都被存入池中，从而创建了足够大的 Token 库存，以立即满足贷款需求。</p>
+<p>· DeFi 不需要还款计划。贷款是根据以前存入的抵押品执行的，用户可以随时选择还款。</p>
+<p>此时，你可能会想，「如果我不得不提供同等价值（甚至高估）的资产作为抵押品，为什么要在借贷协议上借入资产？难道我不应该出售抵押品并购买所借资产吗？」</p>
+<p>实际上，这种 DeFi 借贷协议似乎只允许完全抵押（或超额抵押）的贷款，为一个有趣的「交易」方法打开了大门：杠杆。</p>
+<p>假设你对 WBTC 非常看好，非常确定它的价值会飙升！你可以在你最喜欢的借贷协议上存入一些 WBTC（价值 1000 美元），然后使用它来借入一些稳定币（例如 USDC），然后用这些稳定币在某个交易所上购买更多的 WBTC（对于我们的场景，假设你的初始存款的一半，即 500 美元）。在这种情况下，你暴露于 WBTC 的价值为 1500 美元，而你的初始存款只有 1000 美元。</p>
+<p>但是，如果你把你的 500 美元的 WBTC 抵押品存入协议来借入更多的 USDC 呢？这个过程被称为超额杠杆，你可以一直这样做，直到你超出了你的借款能力，而协议的政策会阻止你这样做。</p>
+<p>在类似的情况下，假设你对 WBTC 持悲观态度（毕竟现在是 Crypto 冬天）。你可以采取我们之前场景的相反操作，将 USDC 作为抵押品存入协议来借入 WBTC，然后立即以更多的稳定币换掉它。如果你的预测成为现实，WBTC 的价格下降了，你可以在交易所上以更便宜的价格购买相同数量的 WBTC，偿还贷款并获得多余的 USDC，从而打开（并关闭）WBTC 的空头头寸。</p>
+<h2 id="份额token">份额 Token</h2>
+<p>与传统金融一样，将资产存入借贷池的用户会受到长期保留资金的激励，并获得存款利息。利息随时间累计，按用户在协议中的存款的百分比计算，并由其相应的存款用户声明。用户在借贷池中保留资产的时间越长，他们获得的利息就越多。</p>
+<p>协议如何记录每个用户在池中的份额？当一个用户向池中存入资产时，他们的「份额」会稀释所有用户的份额，协议会相应地反映这一点。然而，协议不会直接跟踪和更新每个用户的池份额，而是仅处理存款人份额的变化，而无需每次提取或存入时主动更新其他用户的份额。</p>
+<p>你可能会认为这个协议让你既能拥有蛋糕，又能吃掉蛋糕。但实际上不是这样的：</p>
+<p>协议通过铸造和销毁 ERC 20 Token 来处理利息发放，我们称之为「份额 Token」，它代表了贷款池中一个贷方的份额（或存款资产的比例）。这种「份额 Token」设计自动调整其他「股东」的股份稀释，以反映「份额」的铸造和销毁，与他们的基础资产的存款或提取成比例。</p>
+<p>下面，我们将提供不同协议如何使用「份额 Token」的实际示例，并讨论它们的相似之处。</p>
+<h2 id="atokenaave-的份额token">aToken：AAVE 的「份额 Token」</h2>
+<p>aToken 是 AAVE 的收益生成 Token，由贷款池在存入和提取资产时铸造和销毁。</p>
+<p>aToken 是集成到 AAVE 协议中的类似于 ERC 20 的 Token，因此用户可以进入的每个不同市场（存入抵押品）都有一个对应的 aToken。</p>
+<p>如果我们查看 AAVE 借贷池合约，我们可以看到当用户向池中存入资产时发生的基本操作：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_zu7dkmicsg.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>我们可以看到与用户存入的市场相对应的 aToken 将被称为「铸造」函数。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_mkghs518ot.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>我们可以看到，实际要铸造的数量是：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_t1i5lsrorf.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>如上图所示，在这个例子中，用户加入了一个已经在之前的存款中赚取了一些利息的市场。上面的方程式帮助我们理解这一点，因为它显示了如何使用全局指数来考虑所有用户的利息累计，这个指数会在各种操作（存款、提款等）时更新。</p>
+<p>当用户提取他们的基础资产时，liquidityIndex 将用作乘数来计算交易中所欠的 Token 数量。</p>
+<p>以下是来自借贷池合约的相关代码片段：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_kjvty8vk2s.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>在这里，aToken 合约的 balanceOf 函数有点奇怪。毕竟，我们刚刚确定铸造的 aToken 数量与存入的基础资产数量不同。调用 IAToken(aToken).balanceOf(address(user)) 如何产生用户即将提取的基础资产数量（如在函数底部所示）？原因如下：</p>
+<p>· 当用户提取他们的资产时，他们的 aToken 将被销毁。这些已销毁的 aToken 保持其他用户所拥有的 aToken 的总量与他们的份额成比例，这些份额是在用户资产提取之后的。</p>
+<p>· 用户提取资金的市场利率会随着每次提取而更新。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_bodlzmv0km.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>正如我们先前所述，aToken 是类似于 ERC 20 的 Token。我们强调它们是「类似」ERC 20 Token，因为它们的 balanceOf 函数具有独特的属性。在常规的 ERC 20 Token 中，balanceOf 函数返回一个地址拥有的 Token 数量。</p>
+<p>由于 aToken 代表池的份额，而不是直接的价值，因此 aToken 的 balanceOf 函数返回协议欠用户的基础 Token 的数量，以对其存款进行补偿。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_c7fruqfhfq.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>在此，该 balanceOf 函数覆盖了继承的 aToken 合约中的 balanceOf 函数。结果，该示例逻辑中的 balanceOf 逻辑被执行，而不是用户 Token 数量的常规（继承）映射查找。</p>
+<p>上述提到的 Token 数量然后乘以 getReserveNormalizedIncome 的结果，该函数执行以下逻辑：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_sjpl4iu63i.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>我们可以识别此处的分支：</p>
+<p>· 如果在该块中已经更新了保留数据：返回该市场的 liquidityIndex 值，因为它已经更新。</p>
+<p>· 否则：我们需要看看 calculateLinearInterest 中发生了什么才能找出下一个流程。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_nkswuqn1hv.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>当前市场的 ReserveData 对象中的 currentLiquidityRate 和 lastUpdateTimestamp 被传递到此函数中，函数的结果为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_bgv9v98ssv.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>让我们分解此方程式的组件，以更好地理解 linearInterest 值的要点： </p>
+<p>· currentLiquidityRate：可以将其视为我们所在市场的年利率（APY）</p>
+<p>· block_{timestamp} - lastUpdatedTimestamp：自上次更新以来经过的时间</p>
+<p>注意：由于我们在 getNormalizedIncome 中选择了第二个分支，因此在此时保证该值为正值。</p>
+<p>因此，我们可以将此利息应计机制视为一个简单的利息复合机制，它在每个区块中进行复合。现在，我们已经确定了要为用户累计的利息金额，我们只需要将该值乘以流动性指数，然后在 balanceOf 函数中进行用户的规范化收入乘法：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_uh2qmoimbe.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>现在我们了解了 aToken 背后的逻辑，但我们仍然需要解决 liquidityIndex 的工作原理之谜。</p>
+<p>在下面的示例中，liquidityIndex 可以定义为一定时间内储备积累的利息：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_v9vibgzhtd.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>回顾之前提到的 liquidityRate 变量 - 现在我们将讨论它在计算 liquidityIndex 中的使用。只有当 liquidityRate 大于 0 时，才会积累利息 - 换句话说，只有该市场中有任何 APY 时才会积累利息。这是有意义的。</p>
+<p>让我们快速回顾一下 calculateLinearInterest 的实际操作：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_boot1ebm23.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>上述逻辑可以转化为以下方程式：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_f2m4vj4hza.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>正如我们可以在 DefaultReserveInterestRateStrategy.sol 合约中看到的那样，liquidityRate 是通过以下方式定义的：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_wqfvmuvhta.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>因此，可以写为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_hq7owqk4or.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>整体借款利率（overallBorrowRate）在此定义为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_1l5qhltaej.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>我们可以将其写成：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_805d8hmhwj.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_osr62udpvo.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>利用率（utilizationRate）可以定义为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_h8cubfrfys.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>在定义利用率时，我们更容易考虑储备中流动性（当前借出的流动性）与市场中总流动性之间的比率，这可以简化为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_syr75hqntn.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>现在我们可以使用这两个定义来编写流动性指数的方程式：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_jfzegnaona.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>由于 totalBorrows 在分子和分母中都存在，因此我们可以写成：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_c4bin34lua.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>关于流动性指数的方程式，现在已经说得够多了，我们以后会再来讨论这个定义。</p>
+<h2 id="ctokencompound-的份额token">cToken：Compound 的「份额 Token」</h2>
+<p>让我们继续我们下一个借贷协议示例，Compound。</p>
+<p>Compound 使用称为 cToken 的「份额 Token」来处理借款和放贷。这个 Token 为 Compound 协议中所有可用于用户借贷的资产进行记账。</p>
+<p>与我们在 AAVE V2 中讨论的类似，Compound 的「份额 Token」被铸造并用于赎回基础资产。</p>
+<p>Compound 使用的汇率类似于 AAVE V2 的流动性指数，以确定应铸造多少 cToken。这个汇率是一个这样的函数：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_ot6knqbruv.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>让我来解释这里的关键术语：</p>
+<p>·totalCash：cToken 账户拥有的 ERC 20 基础 Token 的数量。 </p>
+<p>· totalBorrows：借款者借出市场上的 ERC 20 基础 Token 的数量。 </p>
+<p>· totalReserves：保留的一定数量的 ERC 20 基础 Token，可通过治理方式进行提取或转移。 </p>
+<p>· totalSupply：返回 cToken 的总供应量的 ERC 20 函数。</p>
+<p>有了这个背景，我们可以写出 Compound 的汇率方程式：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_1e0pc46322.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>当用户存入 ERC 20 Token 时，汇率决定了将铸造多少 cToken 作为回报：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_2qifqtgj21.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>要铸造的 cToken 数量由以下方程式定义：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_2ggbq8sdtu.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<h2 id="etokeneuler-的份额token">eToken：Euler 的「份额 Token」</h2>
+<p>为了进一步巩固这些协议之间的相似性，让我们再分析另一个借贷协议 Euler，看看它如何处理借贷。</p>
+<p>在下面的示例中，deposit 函数允许用户存入 ERC 20 Token 以换取 eToken。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_yf9mqjsf0y.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>正如我们所见，internalAmount 是为此转移铸造的 eToken 数量。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_3rl32wz745.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>与 Compound 的名字和函数 exchangeRate 又一次直接重叠。</p>
+<p>让我来解释一下用于计算汇率的关键参数：</p>
+<p>· poolSize：使用基础资产的 ERC 20 合约中，以池合约地址调用 balanceOf（address）函数的结果。</p>
+<p>· totalBorrows：借出的 ERC 20 基础 Token 的总量，目前不在池中。</p>
+<p>· totalBalances：所有 eToken 持有者的总余额。</p>
+<p>因此，方程式将是：</p>
+<h3 id="总结">总结</h3>
+<p>我们已经涵盖了 3 个借贷协议： </p>
+<p>· AAVE V2 </p>
+<p>· Compound </p>
+<p>· Euler</p>
+<p>我们已经检查了「份额 Token」的铸造方式，以及它们如何通过借贷池交换存款资产。</p>
+<p>我们提出的三个方程式可以归纳为一个简单的方程式：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_5zgmccr1wo.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>请记住，汇率可以按照协议定义的任何方式进行定义。这些任意的汇率可以增加铸造的 Token 数量（如果小于 1 ），如果大于 1 则会减少数量。</p>
+<p>在 AAVE V2 和 Compound 中，我们已经看到了 someRate 变量的一些相似之处。在 Compound 中，someRate 是：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_6j3ra4qlbi.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>而对于 AAVE V2，someRate 的定义如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_410olh2nwp.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>流动性指数的定义为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0424/8_ls5qjll7bc.png" alt="全面解读DeFi借贷：组成、公式、用例"></p>
+<p>虽然我们不能将每个协议的汇率归纳为一个式子，但对于 AAVE 2 和 Compound，我们知道汇率是市场中总流动性的函数。回到我们的方程式，给定 totalLiquidity 是市场中 ERC 20 基础 Token 的总量，那么在 exchangeRate 表达式的分子中和 liquidityRate 的分母中的分子是功能上相同的。</p>
+<p>简而言之：这些协议在本质上是相似的。虽然它们有时可能使用不同的术语，但当将它们分解为方程式时，每个组件在实现中都具有类似的目的。我们邀请读者随机选择一个借贷协议，并检查我们在此处讨论的归纳是否也适用于该协议。如果适用的话，请随时告诉我们。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50109/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">区块链金融司法治理的困境及其化解：以稳定币相关司法文书为视角</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50094/">
+                <span class="next-text nav-default">社区都在骂 Sui 那到底买不买？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#借贷池">借贷池</a></li>
+    <li><a href="#份额token">份额 Token</a></li>
+    <li><a href="#atokenaave-的份额token">aToken：AAVE 的「份额 Token」</a></li>
+    <li><a href="#ctokencompound-的份额token">cToken：Compound 的「份额 Token」</a></li>
+    <li><a href="#etokeneuler-的份额token">eToken：Euler 的「份额 Token」</a>
+      <ul>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

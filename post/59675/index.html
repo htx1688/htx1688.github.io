@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          大模型清流Cohere是如何被打造出来的？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Cohere近期获得了2.7亿美元的C轮融资，累计融资额超过4.3亿美元。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59675/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="大模型清流Cohere是如何被打造出来的？" />
+<meta property="og:description" content="Cohere近期获得了2.7亿美元的C轮融资，累计融资额超过4.3亿美元。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59675/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="大模型清流Cohere是如何被打造出来的？">
+<meta itemprop="description" content="Cohere近期获得了2.7亿美元的C轮融资，累计融资额超过4.3亿美元。"><meta itemprop="datePublished" content="2023-09-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6419">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="大模型清流Cohere是如何被打造出来的？"/>
+<meta name="twitter:description" content="Cohere近期获得了2.7亿美元的C轮融资，累计融资额超过4.3亿美元。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">大模型清流Cohere是如何被打造出来的？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-22">
+      2023-09-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6419 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>来源：<a href="https://www.tmtpost.com/6716611.html">适道</a></p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/3_rj48eezme0.png" alt="大模型清流Cohere是如何被打造出来的？"></p>
+<p>图片来源：由<a href="https://www.wujieai.com/ai">无界 AI</a>生成</p>
+<p><strong>本期内容摘要：</strong></p>
+<blockquote>
+<p>1. 20岁的少年参与了开创生成式AI时代的重要论文<br>
+2. 喜欢玩技术的华人创业者与天才少年联合创立Cohere<br>
+3. AI会带来哪些风险，它未来最大的机会是什么？</p>
+</blockquote>
+<p>基础大模型领域的全球竞争仍在进行，融资百亿美元的OpenAI毫无疑问是领跑者之一，它的杀手级应用ChatGPT拥有数亿活跃用户，想要与它正面竞争无疑是困难的。</p>
+<p>而一家估值20亿美元的AI独角兽在基础大模型的竞争中找到了一条差异化的路线，成为大模型创业混战中的一股清流。</p>
+<p>这家独角兽就是Cohere，它由《Attention is All You Need》这篇开创性论文最年轻的作者Aidan Gomez与他的两位多伦多大学校友Ivan Zhang和Nick Frosst联合创立。</p>
+<p>Cohere近期获得了2.7亿美元的C轮融资，累计融资额超过4.3亿美元，估值超过21亿美元。它的投资者名单中包括Salesforce、NVIDIA、Oracle这样的企业巨头，Tiger Global和Index Ventures等顶级投资机构，以及Geoffrey Hinton（深度学习三巨头，图灵奖获得者）、李飞飞等知名AI大牛。它的合作者还包括Amazon、麦肯锡等。</p>
+<p>为何说Cohere是大模型创业混战中的一股清流？</p>
+<p>在产品上，它专注于服务企业级客户，以强大的大模型Command为基础，提供企业级别的文字处理，知识问答等功能，并且模型可微调、可定制。此外，它还推出了企业级的知识助手Coral。</p>
+<p>在安全性上，为了打消企业客户的疑虑，它的产品可以多云和本地部署，并且拥有高度的数据隐私性。</p>
+<p>在融资策略上，它更倾向于拿与自己产业链相关的大企业的钱，借助巨头的力量发展自己，但是却不与巨头绑定（参考OpenAI与微软的关系）。</p>
+<p>作为知名AI独角兽，Cohere的产品和企业竞争优势已经被研究透彻，我们尝试从创业者角度切入，以Cohere的两位创始人Aidan Gomez与Ivan Zhang的多个访谈为材料，整理出Cohere从0到1的发展历程，以及Aidan与Ivan两位创业者对企业与AI的诸多真知灼见。</p>
+<p><em>注：本文材料来源于Cohere的投资人、Madrona合伙人Jon Turow，Weights&amp;Bias的创始人Lukas Biewald，知名媒体人Steven Marsh与Cohere的两位联合创始人Aidan Gomez及Ivan Zhang的对谈。</em></p>
+<h2 id="20岁的少年参与了开创生成式ai时代的重要论文">20岁的少年参与了开创生成式AI时代的重要论文</h2>
+<p>Aidan Gomez是大语言模型领域开创性论文《Attention is All You Need》最年轻的作者。当时他从多伦多大学去Google Brain实习，还是大约19或20岁的本科生，这是他在美国科技界的第一次经历。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/afmwhly45ntadhw" alt="大模型清流Cohere是如何被打造出来的？"></p>
+<p>Aidan Gomez在多伦多大学</p>
+<p>他在谷歌的实习导师是Lukasz Kaiser，也是《Attention is All You Need》的主要作者之一。当时他们一起打造了一个训练大型神经网络的软件平台Tensor，同时他们也在训练一个AI模型。他们的想法是，训练一个能从数据集中学会做许多事情的巨大AI模型，训练它要用到多种模态的数据集，包括图片、文本、甚至视频。</p>
+<p>当时Aidan和Noam Shazeer（也是Transformer的论文作者）是“同桌”，Noam也在研究大语言模型，只是他研究的算法是RNN（循环神经网络）。Noam的目标是找到一种比RNN更简单、更精炼、更具可扩展性的新架构。</p>
+<p>于是Lukasz、Aidan与Noam一拍即合，打算一起做这项研究，这时他们又发现Google Brain的translate组的Niki Parmar, Jakob Uszkoreit, Ashish Vaswani与自己有相近的想法，两个小组合并后，大家齐心协力地研究，最后那篇《Attention is All You Need》就诞生了。</p>
+<p>论文的投稿是在一个凌晨，当时办公室只有Aidan和Ashish两个人。稿子投出去后，他们就沉浸在了兴奋中。Ashish已经预见到这篇论文可能产生巨大的影响，而年轻的Aidan还是第一次投稿重要论文，还不知道这篇论文的重要性。就像他接受纽约客专栏作家Steven Marsh访谈时说的那样：“我不认为任何人预见到了它在未来会变成什么样。 ”</p>
+<p>而他真正对Transformer模型的实际影响感到震撼，是在实习结束回到多伦多大学以后。</p>
+<p>“当时，我在多伦多大学进行夏季研究，然后收到了Lukasz的邮件，主题是《看看这个》。邮件内容是一个关于日本朋克摇滚乐队的故事，故事记载了他们怎么组队，怎么发专辑，然后又遗憾解散的过程。在邮件的最后，Lukasz写道：‘我输入的唯一的词是transformer，模型自动生成了故事。’</p>
+<p>看了这篇机器生成的文本，我觉得这会掀起一场产品革命。因为这是第一次，一个非人类的系统以一种像我们人类一样引人入胜的方式使用语言。” Aidan对Steven Marsh说。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/wc6n75ghtdw6yuv" alt="大模型清流Cohere是如何被打造出来的？"></p>
+<p>大模型的进化树</p>
+<p>当《Attention is All You Need》和Transformer诞生之后，这个创新的模型迅速被AI社区采纳，成为了新的技术标准。它在AI研究者中间掀起了热潮，不断有基于Transformer的强大模型出现，例如BERT，例如GPT。而在2022年底，ChatGPT正式打开了生成式AI的热潮。</p>
+<h2 id="喜欢玩技术的华人创业者与天才少年联合创立cohere">喜欢玩技术的华人创业者与天才少年联合创立Cohere</h2>
+<p>Cohere的联合创始人Ivan Zhang是一个非典型AI研究者，但却是一个典型的创业者。他与Aidan是多伦多大学的校友，后来辍学与Aidan一起创业。“我是一个创造者，我不太喜欢坐在教室里单纯地吸收大量信息，我需要亲自动手，边‘玩技术’边学习，这是我最好的学习方式。” 他这么向Cohere的投资人Jon Turow介绍自己。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/67gaiev0b6c3gzw" alt="大模型清流Cohere是如何被打造出来的？"></p>
+<p>Cohere的联合创始人Ivan Zhang</p>
+<h3 id="从研究者到创业者从toc转型tob"><strong>从研究者到创业者，从ToC转型ToB</strong></h3>
+<p>2017年，从多伦多大学辍学后，Ivan在一家创业公司做后端工程师，他正是在这时认识了Aidan Gomez。当时Aidan想做一个独立的AI研究小组，进行兴趣主导的AI研究，验证自己的创新想法，于是他们一起做了FOR.ai 。现在这个组织仍在运行，叫做Cohere For AI，由多位AI领域的研究科学家组成，主要做AI的基础研究。</p>
+<p>2019年，Ivan向Aidan提议：“我们为什么不一起做一些新东西？”，于是他们从FOR.ai独立出来，开始进行更正式的创业。在这个阶段，他们已经有了创业经验，懂得一个组织正确的运行方式，也认识了不少AI领域的创始人。</p>
+<p>在Cohere的创业初期，他们的第一个想法是打造一个AI基础平台，让开发者上传AI模型，然后平台会压缩模型的尺寸，使模型更高效。但是在那个时间点，生成式AI的热潮并没有到来，这个市场还太小。</p>
+<p>作为论文作者的Aidan观察到Transformer模型在AI社区内的蓬勃发展，看到它解决了各种各样和文本处理相关的问题，看到了开发者们对这个架构的改进。正好那时OpenAI的GPT-2发布，Transformer模型的参数突破10亿，这也让Aidan进一步意识到了模型规模的重要性，以及这个模型架构真正的潜力。</p>
+<p>于是，几位创始人将Cohere的方向从一个模型压缩平台，往基础大模型及服务转型。</p>
+<p>“当体验了GPT-2后，我们发现它很酷，但是我们还不确定可以用GPT这类的AI基础模型搭建什么服务。我们先尝试做了Cohere的第一个项目，它是一个文本自动完成工具，形式是Chrome浏览器的扩展。用户只要在文本框中输入一段文字，它可以自动续写完成。我们最初打算利用广告来赚钱。（注：这是一个ToC的商业模式）。但是我们显然低估了打造消费者产品的难度，这个产品的体验并不好，也没有获得很多用户，我们明白自己在这个方向没有竞争优势。</p>
+<p>于是我们决定拆除前端的界面，只提供后端的模型的能力，从ToC转向ToB，做企业级的API服务。当时，99%的NLP用例需要单词嵌入，也需要对模型进行微调，所以我们在几个月内，打造了一个带有AI生成能力，并可以对模型进行嵌入和微调的API平台。” Ivan向Jon Turow分享Cohere转型背后的思考。</p>
+<p>对于Cohere为什么转向ToB，以及公司使命的内核，Aidan Gomez进行了清晰的表述：“我们就是想让AI大模型被更多人使用。当时，开发者和企业想要利用AI大模型的能力，无论是技术还是算力上都面临很多阻碍。我们存在的意义就是消除人们使用AI大模型的障碍，让不熟悉AI的开发者，以及普通的企业，都能方便地使用AI的能力。</p>
+<p>因为生成式AI特有的对话式互动对于终端用户来说是最好的体验。以我自己为例，当我想开一个银行账户时，如果一家银行能有一个24小时与我对话互动、并且高效解决问题的移动App，那会对我吸引力大增。</p>
+<p>Cohere就是要做到这一点，帮助所有类型的企业和组织用上生成式AI的力量，增强他们的竞争优势。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/cy3ls3lys7ybw9g" alt="大模型清流Cohere是如何被打造出来的？"></p>
+<p>Cohere允许企业客户用自己的数据微调模型</p>
+<p>企业在采用AI能力时，还会对两个问题产生疑问，就是模型的托管和数据的隐私。我们是支持多云托管的，企业可以选择适合自己的云服务，也可以在本地的服务器中部署。我们也十分重视数据隐私，当企业用自己的数据进行模型微调时，无论是部署在云中，还是部署在本地服务器，我们都不会看到他们的数据，这是我们的一个核心特性。”</p>
+<h3 id="不拘一格的人才策略塑造了cohere的高创造力"><strong>不拘一格的人才策略，塑造了Cohere的高创造力</strong></h3>
+<p>Cohere能够在早期迅速转向，找到自己正确的位置，离不开Ivan和Aidan从FOR.ai 开始积累的人才观和创业哲学。Ivan在与Jon Turow对谈时分享了他们的人才招聘哲学和创业文化：“我们的招聘方式与众不同。在FOR.ai创业的时候，我们就确立了一个原则：我们寻找的是来自不同背景，但是对AI非常感兴趣并希望产生巨大影响的人。</p>
+<p>你不需要具有在Meta AI，DeepMind或Google工作过的完美背景，但是一定要对自己专注的领域有非常高的兴趣和热情。而且你不光会写论文，还要有实际动手的能力。我们把这种招聘方式带到了Cohere，构建了非常强大的早期团队。</p>
+<p>在公司文化上，我们喜欢在技术方面进行很多探索，‘玩技术’，然后获得突破。虽然我们都会写论文，但不是‘书呆子’，我们对自己应该要做什么非常清楚，而且会花很多的时间在工程实践而不仅是算法探索上，这让我们打造的产品能够真正为人们带来价值。”</p>
+<p>现在OpenAI占据了生成式AI的C位，那么已经拥有数亿活跃用户的ChatGPT，会不会帮助OpenAI进行垄断，其他的公司是否还有机会？Aidan Gomez有自己的看法：“我绝不认为大模型领域会形成垄断。我认为每个公司都有自己的风格、方向和自己的优势，在市场上都会找到自己的位置。消费者和企业客户会选择他们认为最好的伙伴，最值得信任的公司，以及最能帮他们成功的平台。</p>
+<p>对于Cohere这样的基础模型公司，我们面对的最终状态，很可能不是赢家通吃，而是一个多元化的市场格局。我们会有凭借自己的优势去赢得自己比赛的胜利。我们会用各种方法帮助客户，让他们用上最好的AI能力。我们的焦点是让AI模型通过提示，微调在内的各种方法，帮助特定客户，获得最大的价值。”</p>
+<h2 id="ai会带来哪些风险它未来最大的机会是什么">AI会带来哪些风险，它未来最大的机会是什么？</h2>
+<p>生成式AI的爆发，在受到欢迎的同时，也引发了不少担忧。在公众层面，人们担忧AI是否会发展太快，能力太强，从而“抢夺”人类的工作机会；在现实的使用层面，则有不少人担忧AI模型的安全性和可控性。</p>
+<p>对此话题，Aidan Gomez和Ivan Zhang也发表了自己的看法。</p>
+<h3 id="ai可能污染社交媒体"><strong>AI可能“污染”社交媒体</strong></h3>
+<p>Aidan Gomez的观点更偏向社会性，他表示，AI生成的内容对社交媒体的“污染”值得担忧：“与其担忧非人类智慧代替人类这类可能还有很多年才会发生的事，我们更应该关注当前的现实风险。</p>
+<p>例如，非常有可能有AI生成数百万个机器人，无缝地进入我们的社交媒体和公共对话，然后推动某一个观点（无论这个观点是有益的，还是有害的）。这可能会在一些能对社会产生重大影响的公共议题上产生无法预料的影响。</p>
+<p>所以我们必须权衡这个事情的风险，最好有具体的政策来减轻这种风险。例如，人们有权知道，我们正在阅读的媒体内容或者营销内容，到底是人类创作的还是机器合成的。”</p>
+<p>而Ivan Zhang的观点则相对现实，他认为AI面临两大挑战：“对于AI面临的挑战，我们从客户中获取的信息首先是怎么评估生成式AI模型的能力。要准确地比较两个AI模型的能力并不容易，而且在文本生成方面，这种比较很可能是主观的。这对生成式AI在商业方面的采用会产生一定的阻碍。</p>
+<p>另一个挑战就是数据隐私问题，在使用开源或闭源的大模型进行商用时，你有时候会使用一些敏感的数据，这又会产生合规的问题。比如用AI辅助你写作一封敏感的电子邮件时，你是不是会担心自己输进模型的敏感数据被滥用？当然，这种担心成为了我们的机会，我们正在与Oracle合作解决这个问题。”</p>
+<h3 id="具身智能未来是ai的大机会"><strong>具身智能未来是AI的大机会</strong></h3>
+<p>Aidan Gomez和Ivan Zhang既是AI专家，也是企业家，对于AI在未来有哪些新的方向和机会，他们的观点也值得关注。</p>
+<p>首先，他们在不同的场合都提到了同一个技术，那就是具身智能，也就是将生成式AI的能力注入到有形的机器中。</p>
+<p>Aidan这么对Lukas Biewald表述：“我认为将生成式AI用到机器人技术和实体化方面真的太酷了，而且这个方向有非常强烈的需求。我们都想象过机器人具有高智能和灵活的身体会怎么样——它一定会产生巨大的变革。但是这个方向确实还有很长的路要走，我也希望自己在这个方向产生影响，并试着去做一些相关的事情。”</p>
+<p>Ivan也认为具身智能绝对是AI下一阶段的大机会：“我认为最大的机会是能影响实体的‘行动模型’，将AI与工程及实体的产品结合起来，将会非常令人兴奋，也一定会有不少企业对它们感兴趣。但是，这项技术要走向实体化，模型的准确性还需要进一步的提高。”</p>
+<p>此外，Aidan也对AI的智能发展和未来应用做了更长远的想象：“现在AI模型的构建依赖于人类，为了让AI更加智能，我们会用人类的各种高阶知识来训练它。打个比方，就像让一个非常聪明的人，去教一个还不那么聪明的AI。那么未来如果AI模型变得非常聪明，人类的知识已经被他全部学会了，就会面临一个临界点——人类已经没什么能教给AI了。</p>
+<p>我最感兴趣的是，如果AI突破了这个临界点，会发生什么？如果一群已经学完了人类已有知识的AI在一起交谈、探索、学习，会不会产生新的知识？</p>
+<p>也许当这个时候来临，我们人类会向AI学习新知识，AI会带着人类一起在新的知识海洋里遨游。”</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59724/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">大模型不是手机厂商的杀手锏</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59741/">
+                <span class="next-text nav-default">当AI学会了闻味儿，人类就可以少工作70年</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#20岁的少年参与了开创生成式ai时代的重要论文">20岁的少年参与了开创生成式AI时代的重要论文</a></li>
+    <li><a href="#喜欢玩技术的华人创业者与天才少年联合创立cohere">喜欢玩技术的华人创业者与天才少年联合创立Cohere</a>
+      <ul>
+        <li><a href="#从研究者到创业者从toc转型tob"><strong>从研究者到创业者，从ToC转型ToB</strong></a></li>
+        <li><a href="#不拘一格的人才策略塑造了cohere的高创造力"><strong>不拘一格的人才策略，塑造了Cohere的高创造力</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#ai会带来哪些风险它未来最大的机会是什么">AI会带来哪些风险，它未来最大的机会是什么？</a>
+      <ul>
+        <li><a href="#ai可能污染社交媒体"><strong>AI可能“污染”社交媒体</strong></a></li>
+        <li><a href="#具身智能未来是ai的大机会"><strong>具身智能未来是AI的大机会</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

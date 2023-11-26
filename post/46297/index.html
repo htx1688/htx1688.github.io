@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深入了解Tether的内部情况：加密货币中牢不可破的“纽带” - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在加密货币的生存危机中，其最大的流动性供应商Tether 经受住了多次数十亿美元的赎回。" />
+<meta name="keywords" content="USDT, 加密市场" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46297/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深入了解Tether的内部情况：加密货币中牢不可破的“纽带”" />
+<meta property="og:description" content="在加密货币的生存危机中，其最大的流动性供应商Tether 经受住了多次数十亿美元的赎回。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46297/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-09T00:00:00+00:00" />
+
+<meta itemprop="name" content="深入了解Tether的内部情况：加密货币中牢不可破的“纽带”">
+<meta itemprop="description" content="在加密货币的生存危机中，其最大的流动性供应商Tether 经受住了多次数十亿美元的赎回。"><meta itemprop="datePublished" content="2023-01-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5510">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入了解Tether的内部情况：加密货币中牢不可破的“纽带”"/>
+<meta name="twitter:description" content="在加密货币的生存危机中，其最大的流动性供应商Tether 经受住了多次数十亿美元的赎回。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深入了解Tether的内部情况：加密货币中牢不可破的“纽带”</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-01-09">
+      2023-01-09
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5510 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文来源：Forbes</p>
+<p><strong>在加密货币的生存危机中，其最大的流动性供应商Tether 经受住了多次数十亿美元的赎回。</strong> 来自 USDC 等对手稳定币的竞争和监管压力会迫使 Tether 完全坦诚吗？</p>
+<p>2022 年 11 月 7 日星期一，Tether 的高管们接到了一个不同寻常的电话，电话来自一位长期的商业伙伴，FTX 首席执行官 Sam Bankman Fried。</p>
+<p>Bankman Fried，这位年轻的、蓬头垢面的加密货币高管，乘着加密货币的风口获得了 265 亿美元的个人财富，电话里听起来很绝望。五天前行业媒体的一则新闻显示，支撑他的交易公司 Alameda Research， 其高杠杆资产负债表的是价值约 50 亿美元的 Bankman Fried 发行的一种名为 FTT 的代币。而 FTX 和 Alameda 是 Tether 的大客户。迄今为止，Bankman Fried 已经发行了价值高达 360 亿美元的基于美元的稳定币 USDT，几乎占到了总发行量的一半。</p>
+<p>&ldquo;他联系了我们，要求提供经济帮助，&ldquo;Terther 的 CTO Paolo Ardoino 说。&ldquo;他没有透露细节或具体需要多少，但我们断然拒绝。&rdquo;</p>
+<p>Paolo Ardoino 说，这个请求有些古怪，于是很快就決定拒绝。&ldquo;他突然要求一些他以前从未要求过的东西，他说话的方式表明，他面临了一个大问题。而且他说的不是 1000 万美元，他的要求是几十亿。&rdquo;</p>
+<p>在那个绝望的电话之后的几周内，FTT 从 26 美元跌到了不到 2 美元，蒸发了约 30 亿美元的市值。FTX 和 Alameda 很快就会申请破产保护， 12 月 12 日，Bankman Fried 被逮捕，并因涉及 8 项罪名包括洗钱罪和欺诈罪被起诉。</p>
+<p>对于Tether 来说，Bankman Fried 的消亡是苦乐参半的，Tether 是一家有争议的公司，其背后是价值 660 亿美元的稳定币 USDT，用于全球超过 50% 的比特币交易。</p>
+<p>FTX 是 Tether 最大的客户，但与培植媒体并与政客交往的 Bankman Fried 不同，Tether 抵制监管审查，这一直是媒体蔑视的来源。</p>
+<p>但在加密货币动荡的2022 年，Tether 一直坚持不懈。5 月，当加密货币当时的第三大稳定币 TerraUSD 及其姐妹代币 LUNA（市值 450 亿美元）突然崩溃时，Tether 面临着恐慌的加密货币投资者的 160 亿美元赎回。虽然 USDT 在恐慌性抛售期间跌至 95 美分，但它满足了市場的赎回要求，并在一周内反弹至全额价值。在 FTX 的崩溃期间，几天内涌入了约 30 亿美元的赎回，但 Tether 几乎没有错过任何一笔，所有的赎回都是以美元 1: 1 进行的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0109/3_81qyys4dkz.png" alt="深入了解Tether的内部情况：加密货币中牢不可破的“纽带”"></p>
+<p>在最近的比特币牛市中，USDT 市值激增</p>
+<p>Tether 的首席技术官 Paolo Ardoino 认为，&ldquo;每个人都把 Tether 看成是没有能力做事的乌合之众，&ldquo;他是 Tether 的首席技术官，也是唯一愿意对媒体发言的 C-suite 成员。</p>
+<p>虽然Tether 迄今为止已经证明了它在市场上的持久力，但这个稳定币供应商还没有在加密货币之外获得足够的信任。多年来，它被指控操纵市场，将客户资金放在其高管的个人账户上，以及支撑比特币的价格。2021 年，CFTC 和纽约总检察长迫使 Tether 分别支付 4100 万美元和 1850 万美元的罚款，因为它误导客戶 USDT 是由美元一比一支持的。</p>
+<p>该公司从未出示过审计报告，并拒绝披露其抵押品的确切组合，其中包括加密代币、贷款和其他非流动性投资。相比之下，其最接近的竞争对手USD Coin，由总部位于波士顿的 Circle Financial 运营，公布了支持其 450 亿美元数字美元的具体国库券、CUSIPs 和到期日。</p>
+<p>但是，如果加密货币在当前的残酷冬天中幸存下来，其主导的流动性供应商Tether 必须成长起来。这就是为什么 Tether 最近一直在开展清理其形象的活动。长期以来，它被指称用有问题的商业票据填充其资产负债表， 2022 年 6 月，它承诺从其储备中消除价值 300 亿美元的商业票据资产，并将其中大部分替换成美国国库券和其他现金等价物。然后在 8 月，它聘请了五大会计师事务所 BDO，目的是进行全面审计。上周二，该公司宣布它将在 2023 年底前停止出借 USDT&ndash;其贷款占其资产的 9% 。</p>
+<p>这是否足以让那些在FTX 倒闭后对这个诡异的稳定币供应商更加胆怯的反对者闭嘴？</p>
+<p>&ldquo;通常稳定和总是稳定之间是有区别的，&ldquo;代理货币监理长 Michael Hsu 说。&ldquo;总是稳定的是美联储的钱和中央银行的钱。而如果你属于永远稳定的类别，你就不必公开为自己辩护。&rdquo;</p>
+<p>事实上，像 Tether 这样的稳定币需要在所有方面都存在，这表明比特币和其他加密货币存在明显的弱点。 十多年后，最初的加密货币仍然非常不稳定。 仅在过去 18 个月里，比特币的价格就两次逼近 70, 000 美元，然后回落超过 65% 至最近的 17, 000 美元。 每天价格波动 5% 或更多并非闻所未闻。</p>
+<p>稳定币的发明是为了解决这个问题，而加密货币投资者长期以来一直面临着另一个问题：大多数加密货币交易所，尤其是那些位于海外的加密货币交易所，都被银行拒之门外，因此以美元和其他法定货币开展业务，即使并非不可能，也是困难的。 稳定币在各种区块链之上生存和转移，就像比特币一样，避免了中央银行的控制。 就仅以数字形式存在的 USDT 而言，它与美元挂钩。</p>
+<p>如果存在于全球银行业之外的稳定币让您感到不安，请考虑一下世界主要的稳定币提供商 Tether，它是由一群不甚敞亮的人物经营的。</p>
+<p>其首席技术官 Paolo Ardoino 是 Tether 的代言人。 所有关于 Tether 的媒体信息都经过他。 据熟悉其财务状况的消息人士透露，Tether 的首席财务官 Giancarlo Devasini 是该公司的控股股东，估计拥有 Tether 母公司  40% 的股份，而 DigFinex 还拥有加密货币交易所 Bitfinex。</p>
+<p>根据 Bitfinex 网站上的官方简历，出生于意大利都灵的 Devasini 现年 58 岁，是半导体市场的成功先驱，在他于 2008 年金融危机前不久将其出售之前，其业务年收入增长至 1.13 亿欧元。 但《金融时报》 2021 年 7 月的一项调查发现，Devasini 的商业帝国在 2007 年的销售额仅为 1200 万欧元，并于次年 6 月进入清算阶段。 此外，Devasini 的一家名为 Acme 的公司被东芝公司就 DVD 格式规范提起的专利侵权诉讼。 （Tether 表示，这起诉讼毫无根据，也没有得出不利的结论。）</p>
+<p>众多消息来源称，曾经学习成为一名医生的Devasini 是 Tether 的策划者，并在为大客户（如 Alameda ）发行 Tether 代币方面发挥了直接作用。的 Devasini 的确切位置尚不清楚，各种消息来源称他在非洲岛国圣多美和普林西比、巴哈马、意大利和法国里维埃拉等地。</p>
+<p>Tether 的首席执行官是一位名叫 Jan Ludovicus van der Velde 的荷兰人。据熟悉 Tether 财务状况的消息人士透露，他拥有合并后实体的 20% 股份，并居住在香港。他也回避采访，并留在后台。</p>
+<p>如果说Devasini 是在幕后管理 Tether 和 Bitfinex（在维尔京群岛注册成立），那么 Jan Ludovicus van der Velde 则更像是一个人物，负责维护与银行和监管机构的高层战略关系。根据 Paolo Ardoino 的说法，自新冠疫情以来，Jan Ludovicus van der Velde 多次前往欧洲警察局，解释 Tether 的运作方式。Jan Ludovicus van der Velde 还帮助该公司在哈萨克斯坦获得了数字证券发行许可证，并正在领导在欧洲和土耳其获得新的银行关系。</p>
+<p>除了共同的所有权，Tether 和 Bitfinex 都有相同的 CEO、CFO、CTO 和总顾问。Bitfinex 和 Tether 的首席运营官实际上是 Paolo Ardoino 的妻子，尽管她在福布斯看到的文件中没有被列为股东。Tether 总共有大约 50 名员工，而交易所 Bitfinex 有 200 名。</p>
+<p>有两种方法可以获得Tether 代币，在加密货币术语中被称为 USDT。它可以在全球数百家列出数字资产的加密货币交易所中的任何一家购买，也可以使用 Tether 自己控制的、在几个不同区块链上运行的智能合约，直接从 Tether 那里获得。后一种方法是为高利贷者保留的，每笔交易额必须超过 10 万美元的 USDT。据说 Devasini 参与了这些大额交易，例如 Sam Bankman Fried 就曾亲自打电话为 Alameda 发行大量 USDT。有时发行量可高达 5 亿美元。</p>
+<p>这样的业务可以说是非常有利可图的。在收入方面，USDT 的发行和赎回是该公司的一个重要利润来源。它对每笔交易收取 0.1% 的费用。《福布斯》估计，自 2014 年成立以来，Tether 已经获得了不少于 1.09 亿美元的手续费收入，其中大部分是在过去两年里，这期间其市值从 500 万美元飙升至 2022 年 5 月的 840 多亿美元。</p>
+<p>但真正的财富来自于Tether 如何投资其收到的数十亿美元来发行 USDT。理论上，Tether 应该只是把客户的资金存放在现金和国债中，履行其储备金与美元 1: 1 支持的承诺。然而，福布斯发现，Tether 早在 2015 年就开始创建储备资产的多样化模型。</p>
+<p>为什么Tether 需要投资于美国国债和货币市场基金之外的风险资产？Paolo Ardoino 说，Tether 有义务赚取利润，以便获得某些商业许可。&ldquo;对我们公司来说，最重要的事情之一，也是说到我们和 Circle（USDC 发行商）之间的区别，就是确保商业模式保持盈利，&ldquo;Ardoino 说，他预计这家稳定币公司今年的收入将超过 6 亿美元。在 2022 年第三季度，以 &ldquo;透明和稳定 &ldquo;为口号的 Circle 公司报告了 4300 万美元的利润，收入为 2.74 亿美元——这是自 2018 年成立以来的第一次盈利。</p>
+<p>与其他稳定币一样，Tether 储备的最大部分一直都是 &ldquo;现金和现金等价物以及其他短期存款和商业票据&rdquo;。根据其目前的储备分类，其资产的 82.45% 是现金和现金等价物，其中， 70% 是国债。剩下的 17.5% 投资于各种风险较高的资产，包括担保贷款，而 Tether 长期以来一直不愿披露这方面的细节。</p>
+<p>Tether 从未对其 660 亿美元的储备进行过明确的审计，其网站只列出了所谓的证明，这些证明只是快照，没有会计师事务所实际跟踪资金流动或做任何认真的尽职调查。</p>
+<p>据熟悉Tether 业务的公司称，其部分交易方包括加密货币交易公司 Jump Crypto 和 Cumberland/DRW。此外，该公司在 2021 年向现已破产的加密货币贷款人 Celsius 提供了一笔 8.41 亿美元的贷款，以比特币为抵押。Paolo Ardoino 说，Celsius 的贷款已经全部偿还了。该公司没有说其他交易方是否是关联公司。</p>
+<p>在《华尔街日报》最近的一篇文章中，该公司发言人表示，该公司自己持有所有未偿还贷款的抵押品。</p>
+<p>Tether 的其他部分资产（约 4% ）投资于私人加密货币公司的代币和股权，包括 Blockstream、Dusk Network 和 Renrenbit。它还投资于 ShapeShift、OWNR Wallet 和 STOKR、LN Wallets 和 Exordium Limited。鉴于加密货币的总市值在今年已经下降了 63% ，这些资产很可能受到了巨大的冲击。</p>
+<p>虽然Tether 正在采取措施变得更加透明，但 Paolo Ardoino 认为，无论该公司做什么，它都无法满足批评者的要求。</p>
+<p>“Genesis 最近停止了提款。 Voyager 是一家上市公司，你也知道， Celsius 和 BlockFi，这是一个被各方称赞的庞然大物。 Three Arrows，被视为完美的交易员，” Paolo Ardoino 说。 “每个人总是比 Tether 更好。”</p>
+<p>令人惊讶的是，Paolo Ardoino 指出，Tether 在 2019 年与纽约总检察长办公室达成了 1850 万美元的和解，证明他的公司具有持久的力量。在该案中，Tether 秘密使用其客户的抵押品给姐妹公司 Bitifinex 提供了 8.5 亿美元的紧急贷款，因为该加密交易所在巴拿马的银行 Crypto Capital 被政府监管机构没收了自己的资金。对此，Tether 当时表示：&ldquo;这笔贷款是为了确保 Bitfinex 客户的连续性。此后，它已被提前全额偿还，包括利息。在任何时候，这笔贷款都没有影响 Tether 处理赎回的能力。&rdquo;</p>
+<p>“人们提出问题很好，”Ardoino 说，“但是我们不断自证清白而对方又顾左右而言他，这对我来说意味着别有用心。”</p>
+<p>同时，Paolo Ardoino 并没有因为担心如何满足其他人对 Tether 应该如何运作或进行披露的期望而寝食难安。Tether 没有计划成为一家上市公司，并且其管理结构估计也不会有任何变化。</p>
+<p>对于Ardoino、Devasini 和 van der Velde 来说，更严重的问题是整个加密货币市场的状况，而 Tether 是其中一个关键的流动性提供者。稳定币对于活跃的交易者来说至关重要，但在加密货币的寒冬，Tether 的市值已经下降了 25% 以上。由于利率大幅提高，现在为交易者停放闲置的现金储备提供了加密货币和 DeFi 之外的众多选择，这使得情况更加恶化。在主要的加密货币交易所，USDT 的收益率目前平均为 2% 。</p>
+<p>如果加密货币复苏，Tether 可能会看到其他竞争对手争夺其位置。包括 USDC，它已经拥有 29.8% 的市场份额，并被 BlackRock 和 BNY Mellon 银行等华尔街公司所青睐，除此之外大型交易所 Binance 本身已经创建了自己的稳定币 BUSD。然后还有一个可能，就是在某个时候，由 FDIC 担保的大银行或中央银行提供数字美元。</p>
+<p>&ldquo;我们并不打算永远成为市场上最大的稳定币。如果明天摩根大通决定创建他们的 JPUSD 或其他什么，他们将在两秒钟内超过我们，&ldquo;Ardoino 说。&ldquo;我们希望土耳其人、委内瑞拉人和阿根廷人都能使用 Tether。对我们来说，唯一重要的事情是我们的产品被新兴市场和发展中国家的人们使用。他们才是真正迫切需要近用美元的人。&rdquo;</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/46280/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">日本的NFT市场：廉价MINT和HOLD文化圈的吸引力</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46300/">
+                <span class="next-text nav-default">外媒：Huobi Korea将切断与Huobi Global的联系</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

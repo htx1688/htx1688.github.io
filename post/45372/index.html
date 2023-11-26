@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文以 ENS 为例从整体架构到合约细节，深度剖析 web3 域名系统的设计。" />
+<meta name="keywords" content="域名" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/45372/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计" />
+<meta property="og:description" content="本文以 ENS 为例从整体架构到合约细节，深度剖析 web3 域名系统的设计。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/45372/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-08T00:00:00+00:00" />
+
+<meta itemprop="name" content="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计">
+<meta itemprop="description" content="本文以 ENS 为例从整体架构到合约细节，深度剖析 web3 域名系统的设计。"><meta itemprop="datePublished" content="2022-12-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7506">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"/>
+<meta name="twitter:description" content="本文以 ENS 为例从整体架构到合约细节，深度剖析 web3 域名系统的设计。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-12-08">
+      2022-12-08
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7506 字 -
+        预计阅读 15 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《Buidler DAO：以 ENS 为例深度分析 Web3 域名系统的技术设计》</p>
+<p>原文作者：@axtrur，Buidler DAO 研究员</p>
+<p>Web3 域名系统，简而言之就是基于区块链的分布式、去中心化的命名系统，与 DNS（互联网名称服务）类似，将地址（钱包地址或智能合约地址）解析成可读性的名称，本文以 ENS 为例从整体架构到合约细节，深度剖析 web3 域名系统的设计。</p>
+<h3 id="ens-前置概念">ENS 前置概念</h3>
+<h4 id="域名层级">域名层级</h4>
+<p>类似 DNS，ENS 域名层级同样分为</p>
+<p>根域名，即&quot;&ldquo;域名</p>
+<p>一级域名，类似.com,.cn，在 ens 中有.eth 和.reverse( 用来记录反向解析，后面会提到 ) </p>
+<p>二级域名，即用户注册的域名，比如 axtrur.eth </p>
+<p>三级域名，用户注册了二级域名之后，可以创建或修改该二级域名下的三级域名，比如 app.axtrur.eth</p>
+<h4 id="namehash-算法">NameHash 算法</h4>
+<p>由于智能合约直接与可读的域名进行交互效率低，因此 ENS 采用固定长度的 256 位加密哈希作为域名记录。namehash 是一个递归算法，可从任意域名的 NameHash 值推导出任意子域名的值，而无需知道原域名的真实文本字符串，同时符合域名的多层级特性。</p>
+<p>Namehash(&rdquo;&quot;) = &ldquo;0x0000000000000000000000000000000000000000000000000000000000000000&rdquo; Namehash(&ldquo;eth&rdquo;) = keccak256(Namehash(&quot;&quot;), keccak256(&ldquo;eth&rdquo;)) Namehash(&ldquo;axtrur.eth&rdquo;) = keccak256(Namehash(&ldquo;eth&rdquo;), keccak256(&ldquo;axtrur&rdquo;)) Namehash(&ldquo;app.axtrur.eth&rdquo;) = keccak256(Namehash(&ldquo;axtrur.eth&rdquo;), keccak256(&ldquo;app&rdquo;))</p>
+<h4 id="node">node</h4>
+<p>在 ens 中，用户注册的域名比如 axtrur.eth，会采用 namehash 算法生成的哈希 node 去记录链上数据，后文中我们将提到的 node 理解为一个域名名称比如 axtrur 即可，关于 ENS 名称的处理请参考 <a href="https://ensuser.com/docs/contract-api-reference/name-processing.html">https://ensuser.com/docs/contract-api-reference/name-processing.html</a></p>
+<h3 id="ens-模块概念">ENS 模块概念</h3>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_u94srezt57.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>注册器合约（绿色部分）：负责分配名称的合约，有正向注册器，反向注册器，DNS 注册器。</p>
+<p>解析器合约（蓝色部分）：负责记录域名映射关系的合约，分正向、反向解析器，其中正向解析器合约也可自定义实现：</p>
+<p>正向解析（主网上有默认的公共解析器合约）：负责记录域名所绑定的内容，即域名的 nameNode（比如 axtrur.eth，app.axtrur.eth）到（包括不限于 name, addr, txt, contenthash 等内容）的解析，可设置各类币种的钱包地址，还可以设置 IPFS 的内容哈希，甚至记录邮箱等第三方账号作为文本记录。</p>
+<p>反向解析（主网上有默认的反向解析器合约）：负责记录钱包地址所绑定的域名，即反向域名的 nameNode（比如 {{钱包地址}}.addr.reverse) 到 域名名称的解析</p>
+<p>根合约：是根域名的 owner，拥有一级域名的管理权限</p>
+<p>控制器合约：官网的注册入口合约（如果需要实现不同的玩法合约，则统一归为控制器合约模块，需要将对应注册器合约地址设置给注册器，才有权限操作注册器进行域名 NFT 注册与记录反向解析）</p>
+<p>价格预言机：ENS 定价采用的是 U 本位（usdt），所以需要 USDT 预言机来计算某一时刻的注册费的 eth 换算值，ENS 主网上的注册费为：</p>
+<p>长度为 5+ 个字符的域名：每年支付 5 美元</p>
+<p>长度为 4 个字符的域名：每年支付 160 美元</p>
+<p>长度为 3 个字符的域名：每年支付 640 美元</p>
+<p>DNSSEC 预言机：DNS 安全扩展预言机合约，负责校验证明 web3 域名的所有权和有效性</p>
+<h3 id="ens-模块解析">ENS 模块解析</h3>
+<h4 id="注册表合约-ensregistrysol">注册表合约 (EnsRegistry.sol)</h4>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_9ejn4tgv2w.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>注册表是 ENS 最核心的合约，上图为注册表合约内部的 records 结构，维护着域名层级 node 对应的 owner、解析器、ttl 信息注册表是 ENS 最核心的合约，上图为注册表合约内部的 records 结构，维护着域名层级 node 对应的 owner、解析器、ttl 信息。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_swipbf9vb4.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>除了注册表信息 records 维护，合约还维护 owner 的委托管理者信息 operators，owner 可以通过添加设置委托管理者地址（可以是用户地址，也可以是合约地址）来共同管理域名信息 合约中相关管理设置接口（比如设置解析器，ttl，以及创建和修改子域名），都会通过修饰器`authorised(node)`来限制调用权限；该修饰器将判断该接口的交易请求者是否为当前域名的 owner，或者委托管理者地址，保证了仅有域名的 owner 或委托者才有创建下一级子域名的权限。同时这里部署初始化的时候将`」」`根域名的 node 的 owner 设置为部署者，只有这样，部署者才能将根域名的 owner 设置给 Root 合约根合约。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_1tvbnmjit2.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>（Root.sol）根合约是根域名的 owner，同时根合约作为根域名的 owner，有权限调用注册表合约的 setSubnodeOwner 接口，将域名.eth 的 owner 指向基础注册器合约。</p>
+<h4 id="基础注册器合约baseregistrarimplementationsol">基础注册器合约（BaseRegistrarImplementation.sol）</h4>
+<p>由于 Root 合约将域名.eth 的 owner 指向基础注册器合约（又称正向注册器合约），从而基础注册器拥有.eth 底下的二级域名的设置权限，使得用户可以通过基础注册器合约进行域名注册；同时该注册器合约继承了 ERC721 协议标准，这也就是为什么 ENS 域名可以作为 NFT 在交易市场比如 opensea 上买卖的原因。除此之外，基础注册器合约还维护着每个域名的过期时间 expiries，注册器为每个域名设置了 90 天的保护期，当域名过期后且在保护期内，域名拥有者可以通过调用续期 renew 接口进行续期，如果超过了保护期，则需要重新注册（这里重新注册会先销毁 NFT 在重新 mint）。同时在 ENS 设计中，注册器合约（不管是正向注册器还是反向注册器）基本上都有 controllers 结构，维护着可信的 controller 注册器合约，只有可信合约才可进行调用。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_gim1h2ww2r.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<h4 id="控制器合约ethregsitercontrollersol">控制器合约（ETHRegsiterController.sol）</h4>
+<p>用户在官网中，将要注册的域名等注册信息传给控制器合约，控制器合约通过预言机计算该域名的价格，同时将域名通过 namehash 转成 node 后传给基础注册器进行域名 NFT 的注册，同时将域名相关注册表信息写入注册表合约完成注册，同时域名的 owner 可以在官网通过注册表合约进行管理操作，官网中的注册页面如下：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_ohtumy4oui.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>核心注册流程：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_puvvd9afdu.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>ENS 注册采用「请求 - 提交」两阶段注册模式 ENS 注册采用「请求 - 提交」两阶段注册模式，为什么需要两阶段提交？我们知道以太坊节点从交易池 pool 中捞取交易是会按照交易给的 gas 费进行优先级排序；在注册者携带待注册域名构造的交易提交上链前，在整个网络是公开透明的，恶意的攻击者可以监听并解析此类待上链交易，并构造相同域名的注册交易，通过提高 gas 费的方式抢先上链注册控制器合约注册。</p>
+<p>为了防止此类域名抢注问题，ENS 采用了先请求，后提交的注册模式。在第一阶段并不直接提交域名，而是先调用</p>
+<p>makeCommitment 接口根据待申请域名 name、待申请地址 owner、随机值 secret 进行哈希后生成一条特殊的 commitment 后，通过 commit 提交上链。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_rit3z36o44.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>提交阶段的 commitment 记录着当前时间戳，同时 ENS 设置 commitment 的有效期为 60s 到 86400s 之间；第二阶段注册的时候合约会重新计算 commitment，判断是否与第一阶段提交的一致，同时检查 Commitment 的有效期，保证跟第一阶段的链上处理时间间隔 1 分钟以上，保证记录了第一阶段交易的区块经过了至少 5 个后续区块的确认。（此时攻击者虽然可以获取域名值，但由于只有第一阶段的 owner 需要根第二阶段的 owner 一致才能生成一致的 commitment，从而避免了被抢注的风险）</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_zpu3hs681h.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>用户在官网的第二阶段注册流程实际上是代码中的 resolver != address(0) 逻辑分支，因为 ENS 默认会将注册的 resolver 解析器设置为默认的公共正向解析器（publicResolver 后面会提到），这里为什么需要将域名注册给合约本身然后在转移给用户呢？因为上文中我们提到注册表合约中只有 owner 或者委托管理者才有权限设置解析器或更新 owner，所以为了帮用户设置好解析器，需要通过基础注册器注册（register）给合约自身，再通过注册表合约设置解析器（setResolver），然后声明所有权（reclaim），最后才转移给注册者（transferFrom）。</p>
+<h4 id="解析器resolver">解析器（Resolver)</h4>
+<p>ENS 中的解析器合约分为正向解析和反向解析，解析记录是 ENS 比较重要的内容，只有定义好规范，生态才能方便的即成 ENS 这类 web3 域名系统。</p>
+<p>正向解析（ENS 默认的正向解析器合约 PublicResolver.sol 或者自定义解析器合约。）</p>
+<p>负责将域名映射为对应用户设置的内容（包括币种地址，ipfs 内容 hash，通用 text 记录等等。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_ongjbfdjiv.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>首先 metamask 会通过注册表合约获取域名 node 设置的解析器地址（默认的公共解析器，也可以是用户自定义的解析器合约地址），然后与该解析器地址交互，获取用户设置的 eth 的币种地址（官网注册默认会设置成注册者，注册者后续可自由更改）进行转账操作。</p>
+<p>反向解析（ENS 默认反向解析器合约 DefaultReverseResolver.sol）</p>
+<p>负责将用户钱包地址映射为对应的域名。</p>
+<p>反向解析实际上是对用户不透明的，用户也无法像正向解析器合约那样可以自定义。用户也可以通过反向注册器（ReverseRegistrar.sol）的 setName 方法设置当前钱包地址要绑定的域名，反向记录同样在 ENS 注册表合约维护，用户注册的反向记录在三级域名记录中，格式为：具体用户地址.addr.reverse</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_q95m5n9sk9.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>设置反向解析之后，opensea 用户界面会将用户钱包地址展示为可读的 ENS 域名，则是反向解析的过程解析器结构以及 node 对应的注册表信息。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_451t9d92ff.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>根域名的 owner 是根域名：</p>
+<p>.eth 一级域名的 owner 是正向注册器也就是（BaseRegistrarImplement.sol）</p>
+<p>用户注册的二级、三级域名的 owner 是用户本身，同时可以自由设置解析器合约地址</p>
+<p>.reserve 一级域名 owner 是 ENS 的多签钱包地址</p>
+<p>.addr.reserve 二级域名 owner 是反向注册器，ens 当前主网版本控制器合约注册的时候默认通过反向注册器（ReverseRegistrar.sol）设置反向解析记录（比如具体用户地址.addr.reverse 指向 axtrur.eth），用户无需提供 gas 之外的反向注册费。</p>
+<p>用户注册域名的反向三级域名的 owner 都默认指向反向注册器合约，同时 resolver 默认指向反向解析器合约</p>
+<p>上面我们已经把 ENS 域名合约设计以及主要的模块梳理完了，ENS 在设计上比如模块拆分，权限拆分方面都是值得我们借鉴的，但是目前主网上的 ENS 也存在一些问题。</p>
+<h3 id="ens-存在问题与解决">ENS 存在问题与解决</h3>
+<p>1、零宽问题：这是 ENS 目前比较麻烦的问题，因为合约设计之初并没有限制零宽字符（关于零宽问题解释  <a href="https://mirror.xyz/0xc952fE149b640097054CFa53cAf7aC2bfd0162C5/RW6psQ2mnxyzmQx08PUXgLXOZc0kjvfXm8RGRVu8s0Y">https://mirror.xyz/0xc952fE149b640097054CFa53cAf7aC2bfd0162C5/RW6psQ2mnxyzmQx08PUXgLXOZc0kjvfXm8RGRVu8s0Y</a>），比如可以官网注册某个域名的时候，如果该域名已被注册，此时用 <a href="https://unicode-table.com/en/200B/">https://unicode-table.com/en/200B/</a> 拷贝对应某种零宽字符串插入到要注册的域名中间某个位置，则可以注册对应的域名了。</p>
+<p>2、特殊字符：ENS 合约并没有限制.，emoji 表情等特殊字符过滤，以致于目前交易市场存在太多冗杂非规范的域名。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_bc87s3p5cz.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>目前 ENS 官网已经对特殊字符进行过滤，并给予必要的警告提示（但是合约本身并没有限制，所以科学家一样可以通过合约进行注册）</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_zovpebjz7l.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>3、transfer 问题：ENS 目前有个比较麻烦的问题就是域名 NFT 在转移的时候，owner 没有同步转移，所以当你在交易市场买了一个 ENS 域名 NFT 的时候，你需要通过基础注册器合约的 reclaim 接口，消耗一定的 gas 费声明 NFT 所有权后，才能到 ens 官网上看到自己拥有的域。</p>
+<p>4、tokenURI 问题：ENS 的基础注册器合约并没有即成 ERC721 标准的 tokenURI，可能是设计之初没有考虑好，所以目前我们在交易市场比如 opensea 上的 ENS 的 NFT 的 metadata，是交易市场特殊对 ENS 即成了 ENS 中心化的 metaservice 的 API（比如：https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/92165218023603606815515740961699344403389102980529428548045197994533319339809）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_a1sfslh9ne.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>5、保留字：这是我觉得.bit 这方面做得比较好的方面，.bit 官方会把 web2 世界中的机构或公司名称保留下来，便于后续 web2 与 web3 之间的连接（https://github.com/dotbitHQ/Documents/blob/main/Reserved_DAS/Reserved_DAS_List.md）这对于 web3 域名生态发展是有意义。</p>
+<p>6、基础合约可升级，ENS 目前对于基础模块并没有采用代理模式支持合约可升级，这样当未来需要对基础模块升级的时候是比较麻烦的，一种是 fallback 一种是迁移数据，但这都只能解决部分问题，这个方面 ENS 是有改善空间的。</p>
+<p>我们可以怎么解决上面那些问题呢？</p>
+<p>1、字符问题，我们可以在控制器合约的 valid 函数修改逻辑，一种实现方式是限制零宽等特殊字符比如 spaceid（https://github.com/Space-ID/SpaceIDContract-Audit/blob/main/contracts/bnbregistrar/BNBRegistrarControllerV9.sol#L88），另一种就是只允许符合规范的字符。</p>
+<p>2、transfer 问题：我们可以在基础注册器里复写 transferFrom 和 saveTransferFrom 函数，在转移 nft 的同时调用 setSubnodeOwner 转移 owner。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_66qemoa7r5.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>3、tokenURI 问题：这个比较简单我们只要继承 ECR721 的 tokenURI 标准呢就可以了，那怎么实现在图片中动态的域名的展示呢？我们可以采用 svg 上链（可以看文章后面改造后的合约代码的 TokenURIBuilder.sol）。</p>
+<p>4、保留字问题：可以将保留字以及对应要保留的钱包地址上链，先保留给合约本身，后面可以通过 apply 接口申请给某个特定地址。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_7kdwteuqes.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<p>5、基础合约可升级：我们可以采用代理模式 (eip-1967) 对基础模块合约进行改造，感兴趣可以参考 lens-protocol 的合约设计（https://github.com/lens-protocol/core/tree/main/contracts）。</p>
+<h3 id="dns-模块">DNS 模块</h3>
+<p>ENS 的 DNS 能力并不是我们说的 web2 域名系统比如.com 可以实现在浏览器里访问域名来访问你的 ens 域名，ENS 的 dns 注册实际上只是基于 DNS 安全扩展，通过相关的证明，校验算法证明你对于该 web2 的域名的所有权，然后在链上做一个（web2 域名到钱包地址）的记录，使得我们可以用 web2 域名进行链上转账。详见（https://ensuser.com/docs/dns-registrar-guide.html）</p>
+<p>但是本文为什么我们没有详细讲 ENS 的 DNS 模块呢？是因为 ENS 虽然花了大部分精力在实现 DNS，但是这个功能放在 ENS 比较鸡肋，用的人很少。其实这实际上是一个 did 聚合的范畴，类似的能力个人觉得更适合放到聚合 DID 中去实现，比如像 mask network 的 nextid，cloak network 的 zkid。可以把 proof 做好，向即成 twitter 等 web2 的 handler 一样，去集成 web2 域名。</p>
+<h3 id="部署自己的-web3-域名">部署自己的 web3 域名</h3>
+<p>本文最后给大家提供一个改造后的 ENS 域名合约版本 ( <a href="https://github.com/axtrur/xens-contracts">https://github.com/axtrur/xens-contracts</a> 改造内容以及部署方式详见 readme)，方便大家自行部署自己的 web3 域名，深入理解 web3 域名系统的设计原理 部署 goerli 测试网命令</p>
+<p>OWNER_KEY={{account private key}} INFURA_ID=c03713652e3c4ef6a3c09ea7dbf58711 npx hardhat deploy &ndash;network goerli (INFURA_ID 可以替换成自己的 infuraid，执行前删除 deployment/goerli 文件夹以及 deployment/goerli_result.json)</p>
+<p>部署测试网 goerli 后，执行注册脚本 ens.js 注册域名</p>
+<p>OWNKEY={{account private key}} INFURA=https://goerli.infura.io/v3/c03713652e3c4ef6a3c09ea7dbf58711 node ens.js</p>
+<p>就可以到 opensea 测试网查看已经部署的 nft 了，比如我部署的.buidlerdao 后缀的域名就可以到 opensea 测试网查看已经部署的 nft 了，比如我部署的.buidlerdao 后缀的域名</p>
+<p><a href="https://testnets.opensea.io/collection/buildlerdao-name-service">https://testnets.opensea.io/collection/buildlerdao-name-service</a></p>
+<p><img src="https://img.bibiqing.com/news/2022/1208/29_qbms1n4t9v.png" alt="Buidler DAO：以ENS为例深度分析Web3域名系统的技术设计"></p>
+<h3 id="总结">总结</h3>
+<p>ENS 域名作为 web3 域名的先行者，在设计上有很多值得借鉴的地方，我们看到的.bnb，.nft 也都是基于 ens 合约基础上搭建的。希望通过本文大家对 ENS 的设计从整体到细节有个深入的深入，web3 域名不仅仅是一个 NFT，他有着更深远的意义。同时 web 域名只是一个很小的开始，相信随之普及、生态集成以及大家对 did 的探索，原生链上的可读的 web3 域名将会被聚合起来，使得每个用户在加密世界里都有个统一的名片描述，更好地去连接多链生态，连接用户。</p>
+<p><strong>ENS 域名系统相关 EIP 标准</strong></p>
+<p>EIP 137 - 注册表 <a href="https://eips.ethereum.org/EIPS/eip-137">https://eips.ethereum.org/EIPS/eip-137</a></p>
+<p>EIP 181 - 反向注册器 <a href="https://eips.ethereum.org/EIPS/eip-181">https://eips.ethereum.org/EIPS/eip-181</a></p>
+<p>EIP 205 - ABI 解析 (ABI()).</p>
+<p>EIP 619 - SECP256k1 公钥解析 (pubkey()).</p>
+<p>EIP 634 - 文本记录解析 (text()).</p>
+<p>EIP 1577 - 内容 hash 解析 (contenthash()).</p>
+<p>EIP 2304 - 多Token地址解析 (addr()). 新的记录类型可以随时通过 EIP 标准化程序进行定义</p>
+<p><strong>主网部署的 ENS 合约</strong></p>
+<p>注册表合约：0x00000000000c2e074ec69a0dfb2997ba6c7d2e1e</p>
+<p>根合约：0xab528d626ec275e3fad363ff1393a41f581c5897</p>
+<p>基础正向注册器合约：0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85</p>
+<p>反向注册器合约：0x084b1c3c81545d370f3634392de611caabff8148</p>
+<p>默认正向解析器合约：0x4976fb03c32e5b8cfe2b6ccb31c09ba78ebaba41</p>
+<p>默认反向解析器合约：0xa2c122be93b0074270ebee7f6b7292c7deb45047</p>
+<p>控制器合约：0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5</p>
+<p><strong>ENS 域名资料</strong></p>
+<p>官网: <a href="https://app.ens.domains/">https://app.ens.domains/</a></p>
+<p>github: <a href="https://github.com/ensdomains">https://github.com/ensdomains</a></p>
+<p>合约代码：https://github.com/ensdomains/ens-contracts/tree/master/contracts</p>
+<p>线网部署版本：https://etherscan.io/accounts/label/ens</p>
+<p>文档：https://ensuser.com/docs/contract-api-reference/ens-contracts-overview.html</p>
+<p>交易市场：https://opensea.io/collection/ens</p>
+<p><strong>其他 web3 域名系统资料</strong></p>
+<p>.bnb</p>
+<p>官网： <a href="https://space.id/">https://space.id/</a></p>
+<p>github： <a href="https://github.com/Space-ID">https://github.com/Space-ID</a></p>
+<p>交易市场：https://www.element.market/collections/space-id-bnb</p>
+<p>.bit</p>
+<p>官网：https://www.did.id/</p>
+<p>github：https://github.com/dotbitHQ</p>
+<p>交易市场：https://opensea.io/collection/dotbit</p>
+<p>.nft</p>
+<p>官网：https://nft.space/</p>
+<p>交易市场：https://www.element.market/collections/nft-name-service</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45353/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Bitcoin.com通过VERSE代币预售完成5000万美元融资，并推出Verse发展基金</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/45326/">
+                <span class="next-text nav-default">FTX聘请了法庭团队来帮助追查丢失的加密资产</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ens-前置概念">ENS 前置概念</a></li>
+        <li><a href="#ens-模块概念">ENS 模块概念</a></li>
+        <li><a href="#ens-模块解析">ENS 模块解析</a></li>
+        <li><a href="#ens-存在问题与解决">ENS 存在问题与解决</a></li>
+        <li><a href="#dns-模块">DNS 模块</a></li>
+        <li><a href="#部署自己的-web3-域名">部署自己的 web3 域名</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

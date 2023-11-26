@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          V神：深入了解钱包和其他用例的跨 L2 读取 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="这篇文章将更直接地关注一个特定子问题的技术方面：如何更容易地从L2读取L1，从L1读取L2，或者从另一个L2读取L2。" />
+<meta name="keywords" content="Layer 2, 技術" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53639/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="V神：深入了解钱包和其他用例的跨 L2 读取" />
+<meta property="og:description" content="这篇文章将更直接地关注一个特定子问题的技术方面：如何更容易地从L2读取L1，从L1读取L2，或者从另一个L2读取L2。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53639/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="V神：深入了解钱包和其他用例的跨 L2 读取">
+<meta itemprop="description" content="这篇文章将更直接地关注一个特定子问题的技术方面：如何更容易地从L2读取L1，从L1读取L2，或者从另一个L2读取L2。"><meta itemprop="datePublished" content="2023-06-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9660">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="V神：深入了解钱包和其他用例的跨 L2 读取"/>
+<meta name="twitter:description" content="这篇文章将更直接地关注一个特定子问题的技术方面：如何更容易地从L2读取L1，从L1读取L2，或者从另一个L2读取L2。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">V神：深入了解钱包和其他用例的跨 L2 读取</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-23">
+      2023-06-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9660 字 -
+        预计阅读 20 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Vitalik Buterin  编译：白话区块链</p>
+<p>在之前那篇关于三个转变的文章中，我概述了一些关键原因，为什么开始明确考虑 L1 + 跨 L2 支持、钱包安全和隐私作为生态系统堆栈的必要基本功能是有价值的，而不是将这些东西构建为可以由单个钱包单独设计的插件。</p>
+<p>这篇文章将更直接地关注一个特定子问题的技术方面，比如：如何更容易地从L2读取L1，从L1读取L2，或者从另一个L2读取L2。解决这个问题对于实现资产/密钥库分离架构至关重要，但它在其他领域也有有价值的用例，最显著的是优化可靠的跨 L2 调用链，包括在 L1 和 L2 之间移动资产等用例。<br>
+<strong>本文目录</strong><br>
+目标是什么？<br>
+跨链证明是什么样的？<br>
+我们可以使用什么样的证明方案？<br>
+Merkle证明<br>
+ZK SNARKs<br>
+专用KZG证明<br>
+Verkle树证明<br>
+聚合<br>
+直接状态读取<br>
+L2如何学习最近的以太坊状态根？<br>
+非L2s链上的钱包<br>
+保护隐私<br>
+总结<br>
+ </p>
+<h2 id="1目标是什么">1.目标是什么？</h2>
+<p>一旦 L2 成为主流，用户将拥有跨多个 L2 的资产，可能还有 L1。一旦智能合约钱包（多重签名，社交恢复或其他）成为主流，访问某些帐户所需的密钥将随着时间的推移而改变，旧密钥将不再需要有效。一旦这两件事都发生，用户将需要一种方法来更改有权访问位于许多不同地方的许多帐户的密钥，而无需进行极大量的交易。<br>
+特别是，我们需要一种方法来处理反事实地址：尚未以任何方式在链上“注册”的地址，但仍需要接收并安全地持有资金。我们都依赖于反事实地址：当您第一次使用以太坊时，您可以生成一个ETH地址，有人可以使用该地址向您付款，而无需在链上“注册”该地址（这需要支付txfee，因此已经持有一些ETH）。<br>
+对于EOA，所有地址都以反事实地址开头。使用智能合约钱包，反事实地址仍然是可能的，这在很大程度上要归功于 CREATE2，它允许您拥有一个只能由具有与特定哈希匹配的代码的智能合约填充的 ETH 地址。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_8zslq7gnhf.png" alt="Aprx6619C0RKWypR8IvDnS15p0E7CekwuSR506Fu.png" title="7054363"></p>
+<p>EIP-1014 （CREATE2） 地址计算算法</p>
+<p>然而，智能合约钱包带来了新的挑战：访问密钥更改的可能性。该地址是 initcode 的哈希值，只能包含钱包的初始验证密钥。当前的验证密钥将存储在钱包的存储中，但该存储记录不会神奇地传播到其他L2。<br>
+如果用户在许多 L2 上有许多地址，包括他们所在的 L2 不知道的地址（因为它们是反事实的），那么似乎只有一种方法允许用户更改他们的密钥：资产/密钥库分离架构。每个用户都有（i）一个“密钥库合约”（在L1或一个特定的L2上），它存储所有钱包的验证密钥以及更改密钥的规则，以及（ii）L1和许多L2上的“钱包合约”，它们读取跨链以获取验证密钥。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_wfgeouanei.png" alt="lW50aExDpfi7AxsZTmeUXmvctJqoQOEall2aRroH.png" title="7054365"></p>
+<p>有两种方法可以实现这一点：</p>
+<p>轻量版（只检查更新密钥）：每个钱包在本地存储验证密钥，并包含一个函数，可以调用该函数来检查密钥库当前状态的跨链证明，并更新其本地存储的验证密钥以匹配。当钱包首次在特定 L2 上使用时，必须调用该函数以从密钥库获取当前验证密钥。<br>
+-优点：谨慎使用跨链证明，所以如果跨链证明很昂贵也没关系。所有资金只能使用当前密钥使用，因此它仍然是安全的。<br>
+-缺点：要更改验证密钥，您必须在密钥库和每个已初始化的钱包中（尽管不是反事实的钱包）中进行链上密钥更改。这可能会花费很多汽油。<br>
+重量版（检查每个tx）：每笔交易都需要一个跨链证明，显示密钥库中当前密钥。<br>
+-优点：系统复杂性较低，密钥库更新价格便宜。<br>
+-缺点：单个 tx 价格昂贵，因此需要更多的工程才能使跨链证明便宜得多。也不容易与ERC-4337兼容，ERC-4337目前不支持在验证期间跨合约读取可变对象。 </p>
+<h2 id="2跨链证明是什么样的">2.跨链证明是什么样的？</h2>
+<p>为了展示全部复杂性，我们将探讨最困难的情况：密钥库在一个L2上，钱包在不同的L2上。如果钱包上的密钥库位于L1上，则只需要此设计的一半。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_f9ujdick3s.png" alt="mFcDC57SfmM6ukDMLPTiulzhHoj3ovGykyS3erqq.png" title="7054368"></p>
+<p>假设密钥库在 Linea 上，钱包在 Kakarot 上。钱包密钥的完整证明包括：<br>
+-证明当前 Linea 状态根的证明，给定 Kakarot 知道的当前以太坊状态根<br>
+-证明密钥库中当前密钥的证明，给定当前 Linea 状态根<br>
+这里有两个主要的棘手的实现问题：<br>
+-我们使用什么样的证据？（是默克尔证明吗？别的什么？<br>
+-L2首先如何学习最近的L1（以太坊）状态根（或者，正如我们将看到的，可能是完整的L1状态）？或者，L1如何学习L2状态根？<br>
+在这两种情况下，一侧发生的事情与另一侧可证明的事情之间的延迟有多长？</p>
+<h2 id="3我们可以使用哪些类型的证明方案">3.我们可以使用哪些类型的证明方案？</h2>
+<p>有五个主要选项：<br>
+-Merkle 证明<br>
+-通用 ZK-SNARKs<br>
+-专用证明（例如使用 KZG）<br>
+-Verkle 证明，它们在基础设施工作负载和成本上介于 KZG 和 ZK-SNARKs 之间。<br>
+-无需证明，依赖直接状态读取<br>
+就所需的基础设施工作和用户成本而言，我将它们大致排名如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_jmsysu16yh.png" alt="QChCpk7vF9XJVLBnjaWrgsQj2V5F2W13XHrB1t3C.png" title="7054369"></p>
+<p>“聚合”是指将用户在每个区块内提供的所有证明聚合到一个大的元证明中，该元证明将所有证明组合在一起。这对于 SNARK 和 KZG 是可能的，但对于 Merkle 分支则不然（你可以稍微组合一下 Merkle 分支，但它只节省你的 log（每个块的 txs）/log（密钥库的总数），在实践中可能是 15-30%，所以它可能不值得付出代价）。<br>
+只有当方案拥有大量用户时，聚合才变得值得，因此实际上，版本 1 实现可以省略聚合，并在版本 2 中实现聚合。 </p>
+<h2 id="4默克尔证明将如何工作">4.默克尔证明将如何工作？</h2>
+<p>这个很简单：直接按照上一节中的图表进行操作。更准确地说，每个“证明”（假设证明一个L2到另一个L2的最大难度情况）将包含：<br>
+一个Merkle分支，证明持有密钥库的L2的状态根，给定L2知道的以太坊的最新状态根。密钥库持有 L2 的状态根存储在已知地址的已知存储槽（L1 上的协定代表 L2）中，因此可以通过树的路径进行硬编码。<br>
+一个 Merkle 分支，用于证明当前验证密钥，给定持有密钥库的 L2 的状态根。在这里，验证密钥再次存储在已知地址的已知存储插槽中，因此可以对路径进行硬编码。<br>
+不幸的是，以太坊状态证明很复杂，但存在用于验证它们的库，如果您使用这些库，这种机制实现起来并不太复杂。<br>
+<strong>更大的问题是成本。</strong> Merkle 证明很长，不幸的是，Patricia 树比必要的长 ~3.9 倍（确切地说：持有 N 个对象的树的理想 Merkle 证明是 32 * log2（N） 字节长，并且因为以太坊的 Patricia 树每个孩子有 16 片叶子，这些树的证明是 32 * 15 * log16（N） ~= 125 * log2（N） 字节长）。在一个拥有大约 2.5 亿 （~2²⁸） 帐户的州，这使得每个证明 125 * 28 = 3500 字节，或大约 56，000 gas，加上解码和验证哈希的额外成本。<br>
+两个证明加在一起最终将花费大约 10万 到 15万 gas（如果每笔交易使用，则不包括签名验证）——远远高于目前每笔交易 2.1万个 gas 的基本价格。但是，如果在L2上验证证明，则差异会变得更糟。L2 内部的计算很便宜，因为计算是在链下完成的，并且在节点比 L1 少得多的生态系统中完成。另一方面，数据必须发布到 L1。因此，比较不是 2.1 万气体与 1.5 万气体;它是 2.1 万 L2 gas与 10 万 L1 gas。<br>
+我们可以通过查看 L1 gas 成本和 L2 gas 成本之间的比较来计算这意味着什么：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_h8fim958ss.png" alt="Byb1nBD9GFmqUZfya6w68RN3uqYxZ5oP1pdQqapA.png" title="7054370"></p>
+<p>目前，对于简单发送，L1 比 L2 贵 15-25 倍，对于代币交换来说，L1 贵 20-50 倍。简单发送相对数据量大，但交换的计算量要大得多。因此，掉期是L1计算与L2计算近似成本的更好基准。考虑到所有这些因素，如果我们假设 L1 计算成本和 L2 计算成本之间存在 30 倍的成本比率，这似乎意味着在 L2 上放置默克尔证明的成本可能相当于 50 个常规事务。<br>
+当然，使用二元Merkle树可以将成本降低~4倍，但即便如此，在大多数情况下，成本还是太高了 - 如果我们愿意牺牲不再与以太坊当前的六边形状态树兼容，我们不妨寻求更好的选择。</p>
+<h2 id="5zk-snark证明将如何工作">5.ZK-SNARK证明将如何工作？</h2>
+<p>从概念上讲，ZK-SNARKs 的使用也很容易理解：您只需将上图中的 Merkle 证明替换为证明这些 Merkle 证明存在的 ZK-SNARK。一个 ZK-SNARK 需要 ~400，000 个 GAS 的计算，大约需要 400 个字节（相比之下：一个基本事务需要 2.1 万个 gas 和 100 个字节，将来压缩后可减少到 ~25 个字节）。因此，从计算的角度来看，ZK-SNARK的成本是今天基本交易成本的19倍，从数据的角度来看，ZK-SNARK的成本是今天基本交易的4倍，是未来基本交易成本的16倍。<br>
+这些数字比默克尔证明有了很大的改进，但它们仍然相当昂贵。有两种方法可以改进这一点： （i）特殊用途的KZG证明，或（ii）聚合，类似于ERC-4337聚合，但使用更花哨的数学。我们可以同时研究两者。</p>
+<h2 id="6特殊用途的kzg证明将如何工作">6.特殊用途的KZG证明将如何工作？</h2>
+<p>警告，此部分比其他部分更具数学性。这是因为我们正在超越通用工具，并构建一些更便宜的特殊用途，因此我们必须更多地“在引擎盖下”。如果您不喜欢深奥的数学，请直接跳到下一部分。<br>
+首先，回顾一下KZG承诺是如何运作的：<br>
+我们可以表示一组数据 [D_1 &hellip;D_n] 使用从数据导出的多项式的 KZG 证明：具体来说，多项式 P，其中 P（w） = D_1，P（w²） = D_2 &hellip;P（wⁿ） = D_n. w 这里是“统一根”，对于某些评估域大小 N，wN = 1 的值（这一切都是在有限域中完成的）。<br>
+为了“提交”到 P，我们创建一个椭圆曲线点 com（P） = P₀ * G + P₁ * S₁ + &hellip; + Pk * Sk。这里：<br>
+-G 是曲线的生成器点<br>
+-Pi 是多项式 P 的第 i 次系数<br>
+-Si 是可信设置中的第 i 个点<br>
+为了证明 P（z） = a，我们创建一个商多项式 Q = （P - a） / （X - z），并创建一个承诺 com（Q）。只有当 P（z） 实际上等于 a 时，才有可能创建这样的多项式。<br>
+为了验证证明，我们通过对证明 com（Q） 和多项式承诺 com（P） 进行椭圆曲线检查来检查方程 Q * （X - z） = P - a：我们检查 e（com（Q）， com（X - z）） ？= e（com（P） - com（a）， com（1））<br>
+需要了解的一些关键属性包括：<br>
+-证明只是 com（Q） 值，即 48 个字节<br>
+-com（P₁） + com（P₂） = com（P₁ + P₂）<br>
+这也意味着您可以将值“编辑”为现有合约。假设我们知道D_i当前是 a，我们希望将其设置为 b，并且对 D 的现有承诺是 com（P）。承诺“P，但 P（wⁱ） = b，并且没有其他评估更改”，然后我们设置 com（new_P） = com（P） + （b-a） * com（Li），其中 Li 是“拉格朗日多项式”，在 wⁱ 处等于 1，在其他 wj 点处等于 0。<br>
+为了有效地执行这些更新，每个客户端都可以预先计算和存储对拉格朗日多项式 （com（Li）） 的所有 N 个承诺。在链上合约中，存储所有 N 个承诺可能太多了，所以你可以对 com（L_i）（或哈希（com（L_i））值集做出 KZG 承诺，所以每当有人需要更新链上的树时，他们可以简单地向适当的 com（L_i） 提供其正确性的证明。<br>
+因此，我们有一个结构，我们可以继续将值添加到不断增长的列表的末尾，尽管有一定的大小限制（实际上，数亿可能是可行的）。然后，我们使用它作为我们的数据结构来管理（i）对每个L2上的密钥列表的承诺，存储在该L2上并镜像到L1，以及（ii）对L2密钥承诺列表的承诺，存储在以太坊L1上并镜像到每个L2。<br>
+保持承诺更新可以成为核心L2逻辑的一部分，也可以通过存款和撤回桥接实现，而无需更改L2核心协议。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_9e4nwns8ef.png" alt="2In3vl05wne1uejML5EFsLGZefUPFuio7vwqEyHJ.png" title="7054371"></p>
+<p>因此，完整的证明需要：<br>
+-密钥库持有L2（48字节）上的最新com（key list）<br>
+-KZG证明com（key list）是com（mirror_list中的值），对所有键列表提交列表的承诺（48字节）<br>
+-KZG证明您的key在com（key list）（48字节，加上索引的4个字节）<br>
+实际上可以将两个 KZG 证明合并为一个，因此我们得到的总大小只有 100 字节。<br>
+注意一个微妙之处：因为键列表是一个列表，而不是像状态那样的键/值映射，所以键列表必须按顺序分配位置。密钥承诺合约将包含其自己的内部注册表，将每个密钥库映射到一个 ID，并且对于每个密钥，它将存储哈希（密钥库的地址）而不仅仅是密钥，以便明确地与其他 L2 通信特定条目正在谈论的密钥库。<br>
+这种技术的优点是它在 L2 上表现非常好。数据是 100 字节，比 ZK-SNARK 短 ~4 倍，比默克尔证明短。计算成本主要是一号2配对检查，或约11.9 万个gas。在L1上，数据不如计算重要，因此不幸的是KZG比Merkle证明贵一些。</p>
+<h2 id="7verkle树将如何工作">7.Verkle树将如何工作？</h2>
+<p>Verkle 树本质上涉及将 KZG 承诺（或 IPA 承诺，可以更高效且使用更简单的加密）堆叠在一起：要存储 2⁴⁸ 值，您可以对 2²⁴ 值列表做出 KZG 承诺，每个值本身都是 KZG 对 2²⁴ 值的承诺。Verkle树被强烈考虑用于以太坊状态树，因为Verkle树可以用来保存键值映射，而不仅仅是列表（基本上，你可以创建一个大小为2²⁵⁶的树，但开始为空，只有在你实际需要填充它们时才填充树的特定部分）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_c10gz0fg5n.png" alt="mRvhYA6NB4YbDQSuqD8YBm8I6mvsm1fdJ8wJ9OP3.png" title="7054372"></p>
+<p>维克尔树是什么样子的。实际上，对于基于 IPA 的树，您可以为每个节点指定 256 == 2⁸ 的宽度，对于基于 KZG 的树，您可以为每个节点指定 2²⁴ 的宽度。<br>
+Verkle树中的证明比KZG长一些;它们可能有几百个字节长。它们也很难验证，特别是如果您尝试将许多证明聚合为一个。<br>
+实际上，Verkle树应该被认为是像Merkle树，但如果没有SNARKing更可行（因为数据成本较低），而SNARKing更便宜（因为较低的证明成本）。<br>
+Verkle 树的最大优点是可以协调数据结构：Verkle 证明可以直接用于 L1 或 L2 状态，没有叠加结构，并且对 L1 和 L2 使用完全相同的机制。一旦量子计算机成为一个问题，或者一旦证明Merkle分支变得足够高效，Verkle树就可以就地替换为具有合适的SNARK友好哈希函数的二元哈希树。</p>
+<h2 id="8集合体">8.集合体</h2>
+<p>如果 N 个用户进行 N 笔交易（或者更现实地说，N 个 ERC-4337 UserOperations）需要证明 N 个跨链声明，我们可以通过聚合这些证明来节省大量资金：将这些交易组合成一个区块或进入区块的捆绑包的构建者可以创建一个证明，同时证明所有这些主张。<br>
+这可能意味着：<br>
+-N Merkle 分支的 ZK-SNARK 证明<br>
+-一个 KZG 多重证明<br>
+-一个 Verkle 多重证明（或多证明的 ZK-SNARK）<br>
+在所有三种情况下，每个证明只需要几十万汽油。构建器需要在每个 L2 上为该 L2 中的用户制作其中一个;因此，为了便于构建，整个方案需要有足够的使用率，以至于在多个主要 L2 的同一区块中通常至少有几笔交易。<br>
+如果使用ZK-SNARKs，主要的边际成本只是在合同之间传递数字的“业务逻辑”，因此每个用户可能需要几千个L2气体。如果使用 KZG 多重证明，则证明者需要为该块内使用的每个密钥库持有 L2 添加 48 个 gas，因此每个用户的方案边际成本将为每个 L2（而不是每个用户）再增加 ~800 个 L1 gas。但这些成本远低于不聚合的成本，不聚合的成本不可避免地涉及每个用户超过10，000个L1气体和数十万个L2气体。对于 Verkle 树，您可以直接使用 Verkle 多重证明，为每个用户添加大约 100-200 字节，或者您可以制作 Verkle 多重证明的 ZK-SNARK，其成本与 Merkle 分支的 ZK-SNARKs 相似，但证明成本要低得多。<br>
+从实现的角度来看，最好让捆绑者通过ERC-4337账户抽象标准聚合跨链证明。ERC-4337已经有一种机制，供构建器以自定义方式聚合用户操作的各个部分。甚至还有用于 BLS 签名聚合的实现，它可以将 L2 上的 gas 成本降低 1.5 到 3 倍，具体取决于包含的其他压缩形式。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_zy7b51zac9.png" alt="oxeYy0EtfGLg1F2UMJ3TgOJhNwBa3VbcyNHTzD1z.png" title="7054373"></p>
+<p>来自 BLS 钱包实现帖子的图表，显示了早期版本的 ERC-4337 中 BLS 聚合签名的工作流程。聚合跨链证明的工作流程可能看起来非常相似。</p>
+<h2 id="9直接状态读取">9.直接状态读取</h2>
+<p>最后一种可能性，也只可用于 L2 读取 L1（而不是 L1 读取 L2），是修改 L2，让它们直接对 L1 上的合约进行静态调用。<br>
+这可以通过操作码或预编译来完成，它允许调用 L1，在那里你提供目标地址、gas 和 calldata，它返回输出，但由于这些调用是静态调用，它们实际上无法更改任何 L1 状态。L2 必须知道 L1 已经处理存款，因此没有什么根本可以阻止这样的事情的实施;这主要是一个技术实现挑战（参见：这个来自乐观的RFP，以支持对L1的静态调用）。<br>
+请注意，如果密钥库位于 L1 上，并且 L2 集成了 L1 静态调用功能，则根本不需要证明！但是，如果 L2 没有集成 L1 静态调用，或者密钥库位于 L2 上（一旦 L1 变得太贵以至于用户无法使用哪怕一点点，最终可能必须如此），那么将需要证明。</p>
+<h2 id="10l2-如何学习最近的以太坊状态根">10.L2 如何学习最近的以太坊状态根？</h2>
+<p>上述所有方案都要求 L2 访问最近的 L1 状态根或整个最近的 L1 状态。幸运的是，所有 L2 都已经具有访问最新 L1 状态的一些功能。这是因为他们需要这样的功能来处理从 L1 到 L2 的消息，尤其是存款。<br>
+事实上，如果 L2 具有存款功能，那么您可以按原样使用该 L2 将 L1 状态根移动到 L2 上的合约中：只需让 L1 上的合约调用 BLOCKHASH 操作码，并将其作为存款消息传递给 L2。可以在 L2 端接收完整的块标头，并提取其状态根。但是，每个 L2 最好都有明确的方式来直接访问完整的最新 L1 状态或最近的 L1 状态根。<br>
+优化 L2 接收最新 L1 状态根的方式的主要挑战是同时实现安全性和低延迟：<br>
+-如果 L2 以懒惰的方式实现“直接读取 L1”功能，只读取最终的 L1 状态根，那么延迟通常为 15 分钟，但在不活动泄漏的极端情况下（您必须容忍），延迟可能是几周。<br>
+-L2 绝对可以设计为读取更新的 L1 状态根，但由于 L1 可以恢复（即使具有单插槽终结性，在非活动泄漏期间也会发生恢复），L2 也需要能够恢复。从软件工程的角度来看，这在技术上具有挑战性，但至少乐观已经具备了这种能力。<br>
+-如果您使用存款桥将 L1 状态根引入 L2，那么简单的经济可行性可能需要在存款更新之间花费很长时间：如果存款的全部成本为 10 万 gas，我们假设 ETH 为 1800 美元，费用为 200 gwei，并且 L1 根每天进入 L2 一次， 这将花费每天每个L236美元，或每年每个L2维护系统的成本为13148美元。延迟一小时，每年每个L2的费用高达315569美元。在最好的情况下，不断有不耐烦的富裕用户支付更新费用，并使系统为其他人保持最新状态。在最坏的情况下，一些利他主义的演员将不得不自己为此付出代价。<br>
+-“预言机”（至少是一些 DeFi 人称之为“预言机”的技术）在这里不是一个可接受的解决方案：钱包密钥管理是一个非常安全的关键低级功能，因此它最多应该依赖于几个非常简单的、无需加密信任的低级基础设施。<br>
+此外，在相反的方向上（L1s 读数为 L2）：<br>
+-在乐观汇总中，由于欺诈证明延迟，州根需要一周才能达到 L1。在ZK汇总中，由于验证时间和经济限制的结合，现在需要几个小时，尽管未来的技术将减少这种情况。<br>
+-预确认（来自测序仪、证明者等）不是 L1 读数 L2 的可接受解决方案。钱包管理是一个非常安全关键的低级功能，因此L2 - L1通信的安全级别必须是绝对的：甚至不可能通过接管L2验证器集来推送错误的L1状态根。L1 应信任的唯一状态根是已被 L2 在 L1 上的状态根持有合约接受为最终状态根。<br>
+对于许多 DeFi 用例来说，其中一些用于无信任跨链操作的速度慢得令人无法接受;对于这些情况，您确实需要具有更不完善的安全模型的更快网桥。然而，对于更新钱包密钥的用例，更长的延迟更容易接受：您不会延迟数小时交易，而是延迟密钥更改。您只需要将旧密钥保留更长时间即可。如果您因为密钥被盗而更改密钥，那么您确实有很长一段时间的漏洞，但可以缓解，例如。通过具有冻结功能的钱包。<br>
+最终，最好的延迟最小化解决方案是让 L2 以最佳方式实现对 L1 状态根的直接读取，其中每个 L2 块（或状态根计算日志）包含一个指向最新 L1 块的指针，因此如果 L1 恢复，L2 也可以恢复。密钥库合约应放置在主网上或 ZK 汇总的 L2 上，以便可以快速提交到 L1。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_8m6svsunez.png" alt="GbGQTaEGhOoBoi5Tpp6I1A4Rx8PSFhPGoT1R87ZC.png" title="7054374"></p>
+<p>L2 链的块不仅可以依赖于以前的 L2 块，还可以依赖于 L1 块。如果 L1 通过此类链路恢复，则 L2 也会恢复。值得注意的是，这也是早期（Dank之前）版本的分片被设想的工作方式;有关代码，请参见此处。</p>
+<h2 id="11另一条链需要多少与以太坊的连接才能持有密钥库植根于以太坊或-l2-的钱包">11.另一条链需要多少与以太坊的连接才能持有密钥库植根于以太坊或 L2 的钱包？</h2>
+<p>令人惊讶的是，没有那么多。它实际上甚至不需要是汇总：如果它是 L3 或验证，那么在那里保存钱包是可以的，只要您在 L1 或 ZK 汇总上持有密钥库。你确实需要的是链可以直接访问以太坊状态根，以及一个技术和社会承诺，如果以太坊重组，愿意重组，如果以太坊硬分叉，则硬分叉。<br>
+一个有趣的研究问题是确定一条链在多大程度上可以与多个其他链建立这种形式的连接（例如。以太坊和Zcash）。天真地这样做是可能的：如果以太坊或 Zcash 重组，你的链可以同意重组（如果以太坊或 Zcash 硬分叉，则硬分叉），但你的节点运营商和你的社区通常有两倍的技术和政治依赖性。因此，这种技术可用于连接到其他一些链，但成本增加。基于 ZK 桥的方案具有吸引人的技术特性，但它们的关键弱点是它们对 51% 攻击或硬分叉不具有鲁棒性。可能还有更聪明的解决方案。</p>
+<h2 id="12隐私保护">12.隐私保护</h2>
+<p>理想情况下，我们也希望保护隐私。如果您有许多钱包由同一密钥库管理，那么我们希望确保：<br>
+-目前尚不清楚这些钱包都是相互连接的。<br>
+-社交康复监护人不知道他们正在保护的地址是什么。<br>
+这会产生一些问题：<br>
+-我们不能直接使用默克尔证明，因为它们不保护隐私。<br>
+-如果我们使用 KZG 或 SNARK，那么证明需要提供验证密钥的盲版本，而不透露验证密钥的位置。<br>
+-如果我们使用聚合，那么聚合器不应该学习明文中的位置;相反，聚合器应该接收盲证明，并有办法聚合这些证明。<br>
+-我们不能使用“轻量级版本”（仅使用跨链证明来更新密钥），因为它会造成隐私泄漏：如果许多钱包由于更新过程而同时更新，则时间会泄漏这些钱包可能相关的信息。<br>
+因此，我们必须使用“重型版本”（每笔交易的跨链证明）。<br>
+使用 SNARK，解决方案在概念上很简单：默认情况下，证明是信息隐藏的，聚合器需要生成递归 SNARK 来证明 SNARK。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0623/28_9cb5rtzb0m.png" alt="yrW7UPhndSkx5MiegIH0LVCvfbWhbBRPlfOxuDdy.png" title="7054375"></p>
+<p>目前这种方法的主要挑战是聚合需要聚合器创建一个递归SNARK，这目前非常慢。<br>
+有了KZG，我们可以在非索引揭示KZG证明上使用这项工作（另见：Caulk论文中这项工作的更正式版本）作为起点。然而，盲证明的聚合是一个需要更多关注的开放问题。<br>
+不幸的是，从 L2 内部直接读取 L1 并不能保护隐私，尽管实现直接读取功能仍然非常有用，既可以最大限度地减少延迟，又因为它对其他应用程序的实用性。</p>
+<h2 id="13总结">13.总结</h2>
+<p>要拥有跨链社交恢复钱包，最现实的工作流程是在一个位置维护密钥库的钱包，以及在许多位置维护钱包的钱包，其中钱包读取密钥库（i）更新其验证密钥的本地视图，或（ii）在验证每笔交易的过程中。<br>
+使之成为可能的一个关键因素是跨链证明。我们需要努力优化这些证明。等待Verkle证明的ZK-SNARKs或定制的KZG解决方案似乎是最佳选择。<br>
+从长远来看，聚合协议（其中捆绑器生成聚合证明，作为创建用户提交的所有用户操作的捆绑包的一部分）对于最小化成本是必要的。这可能应该集成到ERC-4337生态系统中，尽管可能需要对ERC-4337进行更改。<br>
+应优化 L2，以最大程度地减少从 L2 内部读取 L1 状态（或至少是状态根）的延迟。L2s直接读取L1状态是理想的，可以节省证明空间。<br>
+钱包不仅可以在 L2 上;您还可以将钱包放在与以太坊连接级别较低的系统上（L3，甚至是仅在以太坊重组或硬分叉时同意包含以太坊状态根和重组或硬分叉的独立链）。<br>
+但是，密钥库应位于 L1 或高安全性 ZK 汇总 L2 上。使用 L1 可以节省很多复杂性，但从长远来看，即使这样也可能太昂贵，因此需要在 L2 上使用密钥库。<br>
+保护隐私将需要额外的工作，并使某些选择更加困难。但是，无论如何，我们可能应该转向隐私保护解决方案，至少确保我们提出的任何内容都与保护隐私兼容。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53651/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Vitalik Buterin人物志：既乃孤岛 又为信号塔</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/53643/">
+                <span class="next-text nav-default">贝莱德的比特币ETF：加密行业的“救心丸” or ”抢食者“？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1目标是什么">1.目标是什么？</a></li>
+    <li><a href="#2跨链证明是什么样的">2.跨链证明是什么样的？</a></li>
+    <li><a href="#3我们可以使用哪些类型的证明方案">3.我们可以使用哪些类型的证明方案？</a></li>
+    <li><a href="#4默克尔证明将如何工作">4.默克尔证明将如何工作？</a></li>
+    <li><a href="#5zk-snark证明将如何工作">5.ZK-SNARK证明将如何工作？</a></li>
+    <li><a href="#6特殊用途的kzg证明将如何工作">6.特殊用途的KZG证明将如何工作？</a></li>
+    <li><a href="#7verkle树将如何工作">7.Verkle树将如何工作？</a></li>
+    <li><a href="#8集合体">8.集合体</a></li>
+    <li><a href="#9直接状态读取">9.直接状态读取</a></li>
+    <li><a href="#10l2-如何学习最近的以太坊状态根">10.L2 如何学习最近的以太坊状态根？</a></li>
+    <li><a href="#11另一条链需要多少与以太坊的连接才能持有密钥库植根于以太坊或-l2-的钱包">11.另一条链需要多少与以太坊的连接才能持有密钥库植根于以太坊或 L2 的钱包？</a></li>
+    <li><a href="#12隐私保护">12.隐私保护</a></li>
+    <li><a href="#13总结">13.总结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

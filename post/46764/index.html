@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Sui开发者必看：如何构建Capy原型？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Sui Capys是Mysten实验室的新原型，作为开发者预览，展示了Sui生态系统的关键能力。" />
+<meta name="keywords" content="Sui" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46764/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Sui开发者必看：如何构建Capy原型？" />
+<meta property="og:description" content="Sui Capys是Mysten实验室的新原型，作为开发者预览，展示了Sui生态系统的关键能力。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46764/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="Sui开发者必看：如何构建Capy原型？">
+<meta itemprop="description" content="Sui Capys是Mysten实验室的新原型，作为开发者预览，展示了Sui生态系统的关键能力。"><meta itemprop="datePublished" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3895">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sui开发者必看：如何构建Capy原型？"/>
+<meta name="twitter:description" content="Sui Capys是Mysten实验室的新原型，作为开发者预览，展示了Sui生态系统的关键能力。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Sui开发者必看：如何构建Capy原型？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-01-29">
+      2023-01-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3895 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文：《在Sui上构建Capy原型》</p>
+<p>作者：Alan</p>
+<p>在这个去中心化的游戏中，玩家购买、交易、繁殖和装饰可爱的南美半水生啮齿动物Capybaras。<strong>Sui开发者可以将这里概述的许多原则和代码实例用于他们自己的项目。</strong></p>
+<p>作为Sui区块链上的可编程对象，Capys展示了资产所有权、可转让性和动态对象领域等原则。它们与配件一起出现在玩家的钱包里，包括帽子、自行车和围巾。现在要预览Capys，请到Capy.art。使用Sui Move开发Sui Capys需要定义基本模块，创建类型，最重要的是，建立一个注册表来记录和验证Capys。该原型的一个独特的功能是能够繁殖两个现有Capys，根据繁殖对的特征生成一个全新的Capys。要重申的是，这是一个开发者预览，以展示Sui的独特方面，供开发者在建立自己的项目时参考。Capys是不售卖的。</p>
+<p>免责声明</p>
+<ul>
+<li>
+<p>这个DApp目前被认为是早期的Alpha，所以它的样式边缘可能有点粗糙。</p>
+</li>
+<li>
+<p>该dApp运行在Sui的开发网，没有主网的成熟度和稳定性。</p>
+</li>
+<li>
+<p>在使用Capys时，有一个已知的Sui钱包交易历史的错误，我们将在下周发送一个钱包修复程序来解决这个问题。</p>
+</li>
+<li>
+<p>我们正计划在不久的将来将Capy.art更新为钱包适配器标准。</p>
+</li>
+<li>
+<p>Sui Capys是一个专门用来激励我们开发者社区的演示。这不是一个空投。请负责任地使用水龙头，不要向我们的Devnet龙头发送垃圾邮件。</p>
+</li>
+</ul>
+<h3 id="capy架构">Capy架构</h3>
+<p>Capy应用程序（Github）由三个模块组成：capy、capy_items和capy_market。这些模块定义了Capys、配件和交易机制。在开发过程中，我们首先定义了一些具体的原则，以使原型变得令人愉快和有性能。</p>
+<p>以下原则有助于确定架构和实现：</p>
+<ul>
+<li>
+<p>Capys应该可以自由转移，并且可以在任何链上应用中使用。</p>
+</li>
+<li>
+<p>类型应该包含最小的数据量以保持性能。</p>
+</li>
+<li>
+<p>事件可以用来发射静态数据，由索引器来获取。</p>
+</li>
+<li>
+<p>原型应该是可扩展的，所以以后可以添加新的属性。</p>
+</li>
+</ul>
+<p>希望在Sui上构建游戏和应用程序的开发者应该从定义诸如这些核心概念开始，这将指导开发过程。</p>
+<h3 id="capy-core">Capy Core</h3>
+<p>Capy模块定义了Sui Capys的核心功能：它定义了一个Capy类型，以及授予发布者一个CapyManagerCap，为承载者开放管理功能。它定义了CapyRegistry，集中的原型状态，以及它的演变方式。</p>
+<h3 id="type-capy">Type: Capy</h3>
+<p>Capy是应用程序的主要类型，是一个具有定义的属性集的自有对象。32个基因和原型特征所需的额外实用信息。Capy有两种能力，key和store。前者使其成为可拥有的资产，后者允许自由转移和包装。</p>
+<ul>
+<li>
+<p>gen属性标志着Capy的世代。第一代Capy的基因为gen 0；较新的品种有其父母的基因加1为 gen1，所以有了gen1、gen2等等。</p>
+</li>
+<li>
+<p>src属性使资源管理器能够显示图像。Capys本身并不存储它们的完整图像，因为它是动态的，在添加新项目时可以改变。</p>
+</li>
+<li>
+<p>genes属性存储了基因序列，这是一个32字节的向量，用于计算属性和在育种期间为新生儿选择基因。</p>
+</li>
+<li>
+<p>item_count是一个实用的属性，跟踪附着在每个Capy上的对象的数量。</p>
+</li>
+<li>
+<p>attributes属性存储了育种期间产生的人类可读的属性。例如，{ “name&quot;: &ldquo;pattern&rdquo;, &ldquo;value&rdquo;: &ldquo;panda&rdquo; }。</p>
+</li>
+</ul>
+<p>这组字段是Sui Capys功能的最低要求，包括育种或添加/删除 Items。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_nkpdvylife.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<h3 id="type-capy-registry">Type: Capy Registry</h3>
+<p>CapyRegistry 是育种所需的共享对象，它存储了曾经出生的Capys的总数，并包含一个伪随机种子，在下面的基因科学部分进行描述，用于育种期间的基因选择。它包含了在育种阶段分配给新生儿的所有属性定义。</p>
+<p>新的属性可以被添加到原型中，如下文管理功能部分所述：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_8g7uwv0swr.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<h3 id="type-capymanagercap">Type: CapyManagerCap</h3>
+<p>CapyManagerCap是模块发布时发送给模块发布者（发布事务的发送者）的一种功能。它授权所有模块的管理行为，包括capy_items和capy_market。</p>
+<h3 id="initializer">Initializer</h3>
+<p>Capys是一个独立的（非通用）应用程序，因此其主要逻辑可以在模块初始化中启动。init函数做如下两件事：</p>
+<ul>
+<li>
+<p>创建一个CapyManagerCap并将其发送给模块发布者。</p>
+</li>
+<li>
+<p>创建并共享一个CapyRegistry。</p>
+</li>
+</ul>
+<h3 id="admin-functions">Admin Functions</h3>
+<p>为了使应用程序变得可玩并具有一定的意义，管理员必须执行一系列的动作：</p>
+<ul>
+<li>
+<p>add_gene函数在CapyRegistry中注册了一个新的GeneDefinition。在育种过程中，注册表中的所有现有属性都被分配给新的Capy。如果一个新的GeneDefinition（Attribute）被添加到原型中，在这次添加之前出生的Capy不会得到它，但他们的孩子会。每个基因定义都有一个名称和一组选择器，用来选择每个属性的值。</p>
+</li>
+<li>
+<p>batch function允许批量创建带有预定义基因的Capys。它用于初始化，并在后期阶段为新用户填充更多的Capys市场交易。</p>
+</li>
+</ul>
+<h3 id="breeding">Breeding</h3>
+<p>创造不可预测性和帮助原型进化的主要逻辑是capy::breed函数。任何拥有两只卡比的玩家都可以执行这个功能。这个函数的逻辑如下：</p>
+<ul>
+<li>
+<p>根据CapyRegistry.capy_hash为新的Capy选择父基因。</p>
+</li>
+<li>
+<p>从CapyRegistry中获取当前GeneDefinitions的列表并设置属性。</p>
+</li>
+<li>
+<p>发出一个带有新Capy数据的事件。</p>
+</li>
+<li>
+<p>返回一个新的Capy（使用breed_and_keep发送至发送者）。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_afdyyo3r8c.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<h3 id="gene-science">Gene Science</h3>
+<p>在我们进入应用中最有趣的部分之前，我们必须注意，这个解决方案并不能提供绝对的不可预测性，因此不应该用于高风险的应用。但它确实通过将用户输入变成一个伪随机修改器来创造某种程度的随机性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_o3jng39jih.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<p>这个原型的一个真正有趣和独特的功能是能够繁殖两个现有的卡比来产生第三个。新的Capy会继承其父母的特征。繁殖功能需要两个亲代Capys，并计算新生儿的基因。为了使这个动作公平和随机，我们需要有一个选择算法和一个种子。CapyRegistry提供了种子（存储为capy_hash），并在每次繁殖后更新。该算法如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_edskgho2ec.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<ol>
+<li>
+<p>使用散列函数（sha3_256）三次加盐生成三个32字节的向量（标记为A、B和C），这些向量来自capy_hash。</p>
+</li>
+<li>
+<p>使用第一个向量（A）进行亲本基因选择。如果第N个字节的值超过126，则选择第一个父母的基因。否则，选择第二个亲本的基因。如上图所示，第一个基因将是P2，第二个P1，第三个P2，第四个P1再次出现（直到N=32）。</p>
+</li>
+<li>
+<p>第二个向量（B）定义了一个突变的机会。如果位置N的值超过250，使用第三个向量（C）中的相同位置来选择突变的值。在这个例子中，第三个基因将发生突变，其值将是42。</p>
+</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_nqdq5qfyf6.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<h3 id="capy-items">Capy Items</h3>
+<p>这个非常简单的模块定义了可以添加到每个Capy的可穿戴物品，以及我们如何实现前端显示。项目只能由Capy管理员添加，因为它需要有CapyManagerCap的授权。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_s6vnad3c2t.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_z9f1pwp61s.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<h3 id="managing-items">Managing Items</h3>
+<p>在Capys中添加和删除附件时，使用了动态对象字段，这是一种更有效、更方便的替代Sui中父子对象的方法。动态字段允许任意的名称，并且可以即时添加和删除。下面的代码将一个项目添加到一个Capy中。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_ic3ulfbtnv.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<h3 id="capy-market">Capy Market</h3>
+<p>为了收购和出售Capys和CapyItems，我们创建了Capy市场。这个模块利用了动态对象字段，并锁定了支付价格后可以获得的物品。在这个市场架构中，每一个项目类型存在一个市场对象，(CapyMarket sells Capys while a different object, CapyMarket, sells Capy accessories)），列表作为动态对象字段附加到市场，而列出的对象附加到列表。</p>
+<p>+&ndash;&gt; Listing &ndash;&gt; TCapyMarket +&ndash;&gt; Listing &ndash;&gt; T +&ndash;&gt; Listing &ndash;&gt; T</p>
+<p>Marketplace and the List Function</p>
+<p>每个Marketplace实例只为一种类型服务。在这个应用中，一个Marketplace实例为Capy类型存在，另一个为CapyItem类型存在。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_imzsi1w0ss.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<p>List函数使用了动态字段。它使列出的项目成为清单的一个字段，然后使Listing成为CapyMarket的一个Listing字段。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/14_983y6610ae.png" alt="Sui开发者必看：如何构建Capy原型？"></p>
+<h3 id="capy-inspiration">Capy Inspiration</h3>
+<p>创建Capy原型，以展示Sui的一些关键功能，并在他们自己的项目中激励开发者。Capy利用Sui的面向对象的特性，允许玩家可以交易和购买的便携式配件，并根据父母的属性生成新的Capy。我们设计的原型是可以无限扩展的，因此它将使用户和开发者都感到高兴。</p>
+<p>我们希望这里的例子和代码能对Sui的开发者有所帮助。几个突出的实现包括Capy市场、附件和育种。Capy市场可以作为任何交易或存储机制的模型。配件展示了对动态字段的良好使用。育种提供了一种独特的手段，可以自动生成具有无限应用的新对象</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/46758/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">NFT归零也可以14天无理由退款？保时捷带了个好头</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46748/">
+                <span class="next-text nav-default">Vitalik：以RAI系统为例 探讨预言机共同质押的可能性</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#capy架构">Capy架构</a></li>
+        <li><a href="#capy-core">Capy Core</a></li>
+        <li><a href="#type-capy">Type: Capy</a></li>
+        <li><a href="#type-capy-registry">Type: Capy Registry</a></li>
+        <li><a href="#type-capymanagercap">Type: CapyManagerCap</a></li>
+        <li><a href="#initializer">Initializer</a></li>
+        <li><a href="#admin-functions">Admin Functions</a></li>
+        <li><a href="#breeding">Breeding</a></li>
+        <li><a href="#gene-science">Gene Science</a></li>
+        <li><a href="#capy-items">Capy Items</a></li>
+        <li><a href="#managing-items">Managing Items</a></li>
+        <li><a href="#capy-market">Capy Market</a></li>
+        <li><a href="#capy-inspiration">Capy Inspiration</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

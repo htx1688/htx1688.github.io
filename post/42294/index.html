@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解 NFT 借贷资金池清算机制：如何避免 BendDAO 式流动性危机？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文，我们将系统梳理NFT借贷池模式的几个主要协议包括BendDAO、JPEG’d、Pine Loan和Drops DAO的清算机制。" />
+<meta name="keywords" content="BendDAO" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42294/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解 NFT 借贷资金池清算机制：如何避免 BendDAO 式流动性危机？" />
+<meta property="og:description" content="本文，我们将系统梳理NFT借贷池模式的几个主要协议包括BendDAO、JPEG’d、Pine Loan和Drops DAO的清算机制。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42294/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解 NFT 借贷资金池清算机制：如何避免 BendDAO 式流动性危机？">
+<meta itemprop="description" content="本文，我们将系统梳理NFT借贷池模式的几个主要协议包括BendDAO、JPEG’d、Pine Loan和Drops DAO的清算机制。"><meta itemprop="datePublished" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7040">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解 NFT 借贷资金池清算机制：如何避免 BendDAO 式流动性危机？"/>
+<meta name="twitter:description" content="本文，我们将系统梳理NFT借贷池模式的几个主要协议包括BendDAO、JPEG’d、Pine Loan和Drops DAO的清算机制。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解 NFT 借贷资金池清算机制：如何避免 BendDAO 式流动性危机？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-05">
+      2022-09-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7040 字 -
+        预计阅读 15 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：念青，链捕手</p>
+<p>近期，伴随着NFT市场遇冷，无聊猿等蓝筹NFT也难抗重压，从8月以来地板价持续下跌。8月19日，其地板价一度跌至62.8 ETH，从而触发了列出无聊猿数量最多的NFT 抵押借贷协议 BendDAO 的清算。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_jlk5iw5lji.png" alt="MA08Y6MoRMPekpzkRHLpkAj95wa4gTWTM44luaOj.png" title="6519741"></p>
+<p>近三月来BAYC地板价、均价变化图，数据来源：NFTgo</p>
+<p><strong>短短三天，有28个BAYC和28 个MAYC被清算，而几十枚无聊猿NFT 健康因子小于或等于 1.1，</strong> 在清算的边缘战栗。甚至，BendDAO 的联合创始人@CodeInCoffee 的无聊猿NFT都在即将被清算之列。</p>
+<p>“清算危机”引起了不小的恐慌，储户迅速撤出了他们在流动池中的资产，甚至引发了挤兑。短短几日，BendDAO ETH借贷池中的余额从超过1.6万枚ETH 到几乎消耗殆尽。这也引发了一系列的连锁效应，BendDAO抵押了整个无聊猿合集的近 3%，无聊猿地板系列BAYC、MAYC都不得不面临下行压力，地板价再度下跌。</p>
+<p>市场开始担心，这会不会进一步引发NFT借贷领域的“死亡螺旋”效应。这场“流动性危机”究竟是如何引起的呢？具体事件经过可参考_《从上线暴涨 300 倍到引发蓝筹 NFT 连锁清算，BendDAO 都经历了什么？》_。</p>
+<p>虽然BendDAO流动性危机已经暂时度过。但我们必须追问的是，躲过这一次小风浪，NFT 借贷池模式是否就万事大吉了？其他NFT借贷池的清算机制是否还存在潜在风险，能不能经得起极端市场环境的考验？</p>
+<p>本文，我们将系统梳理NFT借贷池模式的几个主要协议包括BendDAO、JPEG’d、Pine Loan和Drops DAO的清算机制，以及从用户的角度如何该如何判断从而控制风险。</p>
+<p><strong>一、点对点借贷模式（Peer to Peer）VS 资金池（Peer to Pool）</strong></p>
+<p>首先，我们必须厘清一个概念，即NFT借贷目前包括点对点（Peer to Peer）模式和资金池（Peer to Pool）模式。本次引发流动性危机的BendDAO属于资金池模式，而事件一出，也有不少类似NFT-Fi等点对点借贷项目开始“标榜”自己的P2P模式要优于资金池模式。</p>
+<p>在P2P模式下，NFT持有人需要与资金出借人商讨双方能接受的价格，然后由借贷平台促成交易。比如，流程和闲鱼上挂单类似，持有人将NFT抵押到借贷平台上，填写想要贷得的金额、期限及支付的利息，资金出借人可以在平台上浏览各个NFT借贷的信息，然后提交愿意提供的贷款金额及利息。此类项目代表为NFTfi 和 Arcade 。</p>
+<p><strong>贷款人只需按时还款，就不会有被清算的风险。但</strong> <strong>如果</strong> <strong>贷款</strong> <strong>到期未还款，抵押的NFT会从智能合约中转移给资金出借人。</strong> <strong>因为交易仅局限在借贷双方，即便出现违约，也不会进一步扩大风险。</strong></p>
+<p>而资金池模式下，持有者把NFT资产超额抵押到一个资金池后可立即借出款项，整个流程就像使用Aave或Compound平台一样。NFT定价由近一段时间地板价均价决定。 NFT所有者支付的利息金额取决于借入资金的数量和池中的剩余资金。如果NFT所有者无法还款或 NFT 价格跌至清算线，NFT将被公开拍卖，资金将退还贷方。利用点对池机制的NFT借贷协议的市场赛道相比点对点的还要更拥挤，BendDAO 、DropsDAO 、JPEG&rsquo;d 、XCarnival 、Pine  、Pilgrim等都属于这一模式。</p>
+<p>但也正如Aave、Compound等DeFi协议一样，清算是借贷的常规操作。面临极端行情，清算、抛压、坏账都是新项目的必经之路。</p>
+<p><strong>二、NFT 资金池模式的清算机制该如何设置？</strong></p>
+<p>本文主要梳理了NFT资金池模式的四个头部协议（BendDAO、DropsDAO 、JPEG&rsquo;d 和Pine ）的清算机制以及发展现状。</p>
+<p><strong>1、BendDAO</strong></p>
+<p>在此次危机前，BendDAO的清算机制是怎样的？</p>
+<p>BendDAO 用一个最直接的指标“健康因子”来对当前的借贷情况进行评估，健康因子是对抵押的NFT相对于借出的ETH及其基础价值的安全性的数字表示，数值越高则资金状态就越安全，可以抵御清算风险。它的计算公式为：</p>
+<p><strong>健康因子 = (地板价*清算阈值) / 有利息的债务</strong></p>
+<p>此外，还有一个关键数值为抵押率LTV（借贷金额或债务价值 / 抵押物市场价值），BendDAO抵押率最高为40%，目前BAYC和CRYPTOPUNKS抵押率最高，接近40%，用户可以自己设置需要贷出的金额，设置的借贷价格越低，健康因子越高。</p>
+<p>假设你抵押了一个定价（通常为地板价）150ETH的BAYC，你借出60ETH，按照BendDAO之前的清算阈值90%（和LTV同理，债务价值 / 抵押品价值）计算，如果底价跌至 66.67 ETH，则可以触发 48 小时强平保护和 NFT 抵押品的拍卖，因为你的 NFT贷款的健康系数低于 1。</p>
+<p>例如本次BAYC地板价跌破65 ETH 则引发了部分抵押NFT的清算。健康因素取决于抵押品的清算门槛与贷款的金额，<strong>贷款金额（有利息的债务）越低、地板价越高、清算阈值越低，健康因子越高。</strong></p>
+<p>BendDAO NFT计算数据来自OpenSea和LooksRare，抵押品价值以ETH计价而不是USDT计价。最开始设置48小时清算保护主要是出于对抵押者的保护，借款人（拥有抵押 NFT 的用户）将能够在 48 小时内偿还贷款即可赎回自己的抵押物。</p>
+<p>此外，为了保护抵押者，拍卖的条件也相对较为严格：出价必须1 .超过地板价的95%；2 .大于累计债务总额；3 .高于之前的出价加上 1% 的债务。</p>
+<p>BendDAO 联合创始人@CodeInCoffee在社区提案中承认：“在设置初始参数时，我们低估了 NFT 在熊市中的非流动性”。</p>
+<p>BendDAO在通过提案后，清算机制修改为：清算阈值从90%逐渐调整为 70%，以减少坏账；将拍卖周期由 48 小时调整为 4 小时，防止时间过长NFT价格波动过大、刺激资产流动性；将ETH基准利率调整为 20% 举措、取消了95%的底价和首次出价限制，并将存储利率调整为20%，来鼓励ETH储户提供流动性。</p>
+<p>事实上，在BendDAO早期机制设计上，有考虑过底价下降但没有清算人参与拍卖的极端情况，但当时团队认为NFT底价的短期波动是正常的，蓝筹 NFT共识不是一天建成的，短时间内也不会崩溃。因此，平台只有暂时的浮亏，没有实际的损失。要么是借款人在未来某个时候偿还债务，要么是在市场价格回升后，一些清算人出现参与拍卖债务。</p>
+<p>然而，BendDAO会遇到的最大问题是清算价格小于债务价格导致无法清算，而陷入当清算价格大于债务价格时没人愿意买回 NFT 的窘境，因此 NFT 范畴最终依然只能包括蓝筹项目。</p>
+<p>为什么这一次是BendDAO首先亮了黄灯？</p>
+<p>NFT-Fi研究员Walon Lin认为，BendDAO 流动性危机最关键的并非LTV和清算阈值的设置，而是后期要求清算人出价必须超过地板价的95%以及大于累计债务总额，对于清算人来说缺乏激励，也因此造成了被清算NFT的流拍。此外，BendDAO是直接清算模式，而不是像JPEG&rsquo;d设置了DAO金库的优先清算机制，即DAO金库会先买走被清算的NFT，然后再进行处置。</p>
+<p>但这种模式的前提是DAO对该NFT系列的市场前景充满信心，相信这批资产可以被市场消化掉，来保证金库的资金稳定。因此，这种模式需要很强的风险控制能力，也需要该NFT共识足够坚强。</p>
+<p>而BendFDAO这种清算人模式面临的一个尴尬处境是，很多NFT大户因为持有的无聊猿流动性太差了，自己卖不掉就干脆在借贷协议里寻找一个合适的退出机制，相当于把流动性风险甩给清算一方。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_95krpehbf1.png" alt="jsiJxKkjUQfcTiWCPT3G8SbdY0UM7NNAsem3GSFp.png" title="6519742"></p>
+<p>目前BendDAO平台上的抵押品及数量。</p>
+<p><strong>2、</strong> <strong>JPEG&rsquo;d</strong></p>
+<p>JPEG&rsquo;d同属于资金池类的NFT借贷平台，但在借贷机制上采用了MakerDAO的CDP (抵押贷稳定币)模型，协议使用者质押NFT进入协议，借出NFT抵押生成的稳定币PUSd，最多可以借入 PUSd 底价的32%。JPEG&rsquo;d 提供为抵押者提供2%的贷款利率，同时储存的APY为 10-20%  。</p>
+<p>目前JPEG&rsquo;d平台上抵押的NFT资金池主要有CryptoPunks（69枚）、BAYC（9）、MAYC（12）、Doodles（5）。</p>
+<p>JPEG&rsquo;d同样也通过“健康指数”来对当前的借贷情况进行评估，数值越高则资金状态就越安全。它的计算公式为：</p>
+<p><strong>健康指数=（1-（LTV/清算指数））X100</strong></p>
+<p>但该平台清算机制却由清算指数触发，此前JPEG&rsquo;d设置的清算指数（债务价值 / 抵押品价值比率）为 33% ，如果NFT抵押品价值略有下降或用户提取更多债务导致债务/抵押品比率等于或超过 33%，将被清算。<strong>但在BendDAO出现流动性危机之后，</strong> <strong>JPEG&rsquo;d</strong> <strong>将清算比率调整为40%，即LTV大于40%会被清算</strong> 。</p>
+<p>健康指数通过百分比呈现，目的是为了让用户能更直观感受到自己的订单是否面临被清算的风险，来及时偿还贷款。和BendDAO的健康因子与清算直接挂钩功能不太相同。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_69v8wejwbs.png" alt="vXcvnkoKrQKRw5NeqoCTvhJuAPas9vYA491RTACD.png" title="6519743"></p>
+<p>如上图所示，假设你抵押的CryptoPunks底价为66.52ETH，你最大能借出的金额为25.94ETH，当CryptoPunks地板价下跌至64.94ETH（25.94ETH / 40%）以下，你的NFT就会进入清算保护和拍卖流程，拍卖持续24小时。如果在倒计时结束前不到5分钟提出新的出价，则拍卖将延长10分钟。这个过程重复，直到没有其他投标人。</p>
+<p>与BendDAO的清算机制相比，JPEG&rsquo;d设置的机制可以说极为严格，这就迫使抵押者不得不借出较少的金额，来保证自己的订单保持健康。但好处也很明显，地板价只要稍微下跌，就会迫使抵押者赎回NFT，或者进入清算，相对来说减少了坏账发生的风险。但站在抵押者的角度上看，则意味着拥有更少的缓冲空间，被清算的风险提高，因此被迫缩短抵押借贷周期。当然，这也意味着JPEG&rsquo;d平台上的抵押品流动更快。</p>
+<p>此外，前边提到，与BendDAO不同，在开始清算后，JPEG’d 国库会用贷款金额的价格将NFT 买回，最后由 DAO 对国库 NFT 进行处置，在一定程度上也在NFT市场行情不佳的情况下避免了恐慌和流动性危机。</p>
+<p>考虑到抵押者面临的风险，JPEG&rsquo;d设计了一种新的保险模块，这也是其他同类协议中还不具备的。购买保险的费用为初始债务的5%。如果抵押者被清算，可以在清算后48小时内偿还了债务和25%的清算费用后从DAO回购他们的 NFT。25% 的清算费用基于用户的未偿债务，即本金加上任何应计利息。</p>
+<p>值得一提的是，近期，针对BendDAO事件，JPEG&rsquo;d DAO还通过了一个新的提案，即JPEG&rsquo;d DAO 将为在两周内（2022 年 8 月 17 日至 2022 年 8 月 31 日）从 Bend DAO 迁移到 JPEG&rsquo;d 的合格 NFT 提供免费保险。目前提案已经通过。</p>
+<p><strong>3、Drops DAO</strong></p>
+<p>Drops DAO 今年5月正式上线主网，目前，Drops平台上规模最大的为 Yuga Labs 借贷池，持有BAYC、MAYC 和 PUNKS NFT的用户可进行流动性挖矿。和前面三个协议不同，Drops的LTV普遍要高，官方表示最高可借入高达 NFT 底价的 60%的贷款。但高LTV的背后是由Drops特殊的定价机制支撑的。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_7zppwepssu.png" alt="f7ytmBbJjlcrMsIDXGCXZBhqt21yRMztd7kMgn9s.png" title="6519744"></p>
+<p>Drops在定价时同时采用了预言机、时间加权和去除极端值并利用碎片化进行定价。具体来看：以地板价为基准，对交易进行初步检验：25 个区块确认、1 个 NFT 卖出、同一个 Token ID 未在 24 小时内再次被卖出；去除极端值：计算 100 笔交易数据的地板价后，去除 5% 以下与 950% 以上分位值的交易；去除可能性极端值：去除掉N 个标准差的交易价格；喂价 4 小时记录一次等。</p>
+<p><strong>这种较为严格的、考虑到流动性的定价方式保证了Drops平台上抵押的NFT的基本品质，因此能做到在控制好风险敞口的情况下给出更高的估值，但对于非蓝筹的NFT系列并不友好。</strong></p>
+<p>此外，Drops鼓励同时抵押多个 NFT资产。</p>
+<p>比如，根据Drops设置的最大LTV为60%，可算出最低抵押率（100% 除以 LTV 百分比）为166.6%。</p>
+<p>假设，你在 BAYC 的价值为100 ETH时借了50 ETH，最低抵押率为166.6%，50 ETH * 166.6% = 83.3 ETH ，只要 BAYC 价格不低于83.3 ETH 并且没有借入更多资金，贷款将保持偿付能力。一旦超过借款限额，借款人的贷款可以被任何人清算。</p>
+<p>当仅提供 1 个 NFT 作为抵押品时，LTV大于等于90%要进行清算。例如，提供的NFT价值为 100 ETH，用户借出50 ETH。 NFT价值需要大于55.5 ETH 才能不被清算。</p>
+<p>提供2个或以上 NFT 作为抵押品时，首个清算阈值为60%，第二个及以上清算阈值为90%。</p>
+<p>例如：假设用户提供 2个BAYC ，每个价值 100 ETH（总共 200 ETH），LTV 为 60%，借贷限额为120 ETH，用户借入100 ETH。假设 BAYC 的价格跌至80 ETH，抵押品总价值现在是160 ETH，新的借贷限额是 96 ETH，贷款抵押不足，抵押人的第一个NFT以80ETH*90%=72ETH的价格被清算，相当于用其中一个NFT来偿还了债务，那么抵押人的债务就从100 ETH减少到 28 ETH，用户可以保留2个NFT中的1个。借款人不再超过其借款限额，并拥有285%（NFT价值80ETH / 债务金额28ETH）的抵押率。如果用户拥有超过2个NFT，清算 NFT 的数量将取决于需要多少个 NFT 才能将债务推低至借贷限额以下。</p>
+<p>这种清算机制允许借贷人借出更多的资金，并且可以通过多个NFT的抵押机制来缓解借贷人的资金压力。但与JPEG’d面临的风险类似，DAO承担了初步清算的角色，金库资金面临一定的稳定性风险。</p>
+<p><strong>4、Pine</strong></p>
+<p>相较前几个协议，Pine还处于较为早期Beta阶段，今年5月完成Sino Global Capital和Amber Group等领投的150万美元融资。Pine目前已经创建了31种NFT资金池，总锁仓价值为855,765美元。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_3o1b0l6y51.png" alt="VHKHS369F1BmhwricbRl5LtqCVYlWmeLZm6z9c0a.png" title="6519745"></p>
+<p>Pine的清算机制设置较为简单，LTV大于40% 就会被清算。Pine的LTV 将根据贷方设定的收款和条款而有所不同。出于安全考虑，Pine 的 LTV 比率设定在 30-50% 范围内。如果借款人未能在贷款到期日之前清偿贷款义务，即偿还贷款和应计利息，则将手动清算。</p>
+<p>据其白皮书介绍，抵押者会提前24小时收到最后偿还期限通知，贷款到期后，借款人拥有12小时的宽限期，从贷方或清算人处回购其清算资产。在回购期间，清算人不会在此期间结束前出售资产。此外，借款人还有为期3天的调节期，在这段时间内，Pine 团队将尝试帮助借款人与清算人协商回购。无法保证可以安排交易（例如，如果清算人在 OpenSea 上出售资产，则可能无法再进行回购）。</p>
+<p>总的来说，Pine的清算机制设置较为简单，平台对于风险的管控意识比较薄弱，用户应注意控制风险。而且该平台收录的NFT项目并非典型意义上的蓝筹NFT，价格容易产生波动，风险也会比较高。</p>
+<p><strong>三、目前</strong>  <strong>P2Pool</strong>  <strong>模式存在哪些问题？</strong></p>
+<p>研究员Walon Lin认为，说到底，NFT-Fi目前最大的难点还是流动性的问题，这个问题不解决，那么资金池协议的杠杆比例就会很低。</p>
+<p>P to Pool资金池模式的基础设施还未真正搭建起来，比如，目前的定价模型和预言机还没有真正做到良好的激励。例如，如果采用地板价定价，对稀有NFT持有者不够友好，如果采用预言机定价，则地板价的NFT没办法及时清算掉。第二，这个赛道还没有看到更多类似Sudoswap这类的AMM机制或者类清算的平台。未来，或许可以通过将NFT项目方作为清算人的方式，解决清算危机的问题。</p>
+<p>各个资金池协议的LTV如何设置，如何定价，本质上是Trade-off的问题，需要同时兼顾、权衡抵押者和流动性提供者的利益，但这些问题暂时无法得到解决。在基础设施没有完全建立之前，P2P会是更优的选择。</p>
+<p>此外，按照目前的运行逻辑，资金池模式还有一个硬伤是，无法实现Permissionless，只允许蓝筹项目进入，因此受众相对有限。但NFT-Fi的初衷就是“提高NFT流动性”，非蓝筹NFT进入资金池才是真正意义上的大规模采用。</p>
+<p><em>最后</em>_，<strong>还想请大家思考一个问题</strong>：<strong>深熊之中</strong>，<strong>我们能够指望NFT</strong>-<strong>Fi来提高NFT的流动性吗</strong>？<strong>目前来看</strong>，<strong>答案并不是那么乐观</strong>，<strong>NFT</strong>-<strong>Fi本质上是给NFT加了一道杠杆</strong>，<strong>等同于锦上添花</strong>。<strong>在市场遇冷的环境下</strong>，<strong>这些怀抱“提高NFT流动性”初心的协议</strong>，<strong>面临着严峻的考验</strong>。<strong>对此</strong>，<strong>你如何看待</strong>？<strong>欢迎添加微信号jiayifan510与链捕手作者一起交流</strong>。_</p>
+<p><em>参考：《Cobo Ventures：NFTFi深度解析—从当前市场，看未来NFTFi的发展》</em></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42306/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">万字拆解FTX的营销之道：如何在3年内做到320亿美元估值？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42319/">
+                <span class="next-text nav-default">一文拆解 Port3 Network 宏图：成为 Web3 社交数据网关 加速 Web2 用户全面链上迁移</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          zk-SNARK的构建及案例 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将从非技术的角度简化阐述 SNARK 的证明逻辑，然后会以 Scroll 的 zk Rollup 为例来说明 zk 证明系统的运行。" />
+<meta name="keywords" content="Zk-snark, 金色百科" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54493/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="zk-SNARK的构建及案例" />
+<meta property="og:description" content="本文将从非技术的角度简化阐述 SNARK 的证明逻辑，然后会以 Scroll 的 zk Rollup 为例来说明 zk 证明系统的运行。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54493/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="zk-SNARK的构建及案例">
+<meta itemprop="description" content="本文将从非技术的角度简化阐述 SNARK 的证明逻辑，然后会以 Scroll 的 zk Rollup 为例来说明 zk 证明系统的运行。"><meta itemprop="datePublished" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5109">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="zk-SNARK的构建及案例"/>
+<meta name="twitter:description" content="本文将从非技术的角度简化阐述 SNARK 的证明逻辑，然后会以 Scroll 的 zk Rollup 为例来说明 zk 证明系统的运行。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">zk-SNARK的构建及案例</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-06">
+      2023-07-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5109 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>TL;DR</strong></p>
+<ul>
+<li>
+<p><strong>SNARK 的构建流程是什么样的？</strong></p>
+<p>待证明的问题-算术电路-R1CS-多项式</p>
+</li>
+<li>
+<p><strong>为什么最终要转换成多项式？</strong></p>
+<p>因为多项式的特性有效的缩短了验证时间，实现了简洁性。</p>
+</li>
+<li>
+<p><strong>是如何实现零知识的？</strong></p>
+<p>简单来说，就是在推导多项式的过程中，多选取两个随机数，以此推导出的多项式能让验证者无法从中获取原多项式的系数，即证明者的秘密输入，以此实现 ZK。</p>
+</li>
+<li>
+<p><strong>怎么实现非交互？</strong></p>
+<p>在证明开始前，引入了一个第三方，即可信设置，将原本验证者挑选随机数的任务交给了可信设置，从而实现验证者和证明者之间的非交互。</p>
+</li>
+</ul>
+<p>ZK 技术近两年在 Web3 领域备受关注。从 Rollup 开始，越来越多不同赛道的项目都开始尝试使用 ZK 技术。在这之中，SNARK 和 STARK 是大家最常听到的两个名词，为了后期更好地理解ZK技术的应用，<strong>本文将从非技术的角度简化阐述 SNARK 的证明逻辑，然后会以</strong>  <strong>Scroll 的 zk Rollup</strong>  <strong>为例来说明 zk 证明系统的运行。</strong></p>
+<p>文章旨在阐述基本逻辑，便于阅读，会尽量避免术语使用，且不会深入探讨数学转换等细节，如有疏漏，敬请谅解。</p>
+<p>2012年1月，加州大学伯克利分校教授 Alessandro Chiesa 与人合作撰写了 SNARK 的论文，提出了术语 zk-SNARK。</p>
+<p>zk-SNARK，全称 Zero-Knowledge-Succinct Non-Interactive Argument of Knowledge，是使用了 ZK技术的一种证明系统。<strong>需要注意的是，SNARK 是一类方案的名称，有很多不同的组合方法都可以实现 SNARK。</strong></p>
+<ul>
+<li>
+<p>零知识（Zero-Knowledge）：只有证明者知道的内容将会被隐藏，除了证明者，其他任何人都无法看到。</p>
+</li>
+<li>
+<p>简短（Succinct）：生成的证明小，验证时间快。</p>
+</li>
+<li>
+<p>非交互性（Non-Interactive）：证明者和验证者之间交互很少，甚至没有。</p>
+</li>
+<li>
+<p>论证（Argument）：验证者的验证只对计算能力受限的证明者有效，因为拥有超强计算能力的证明者可以伪造证明，也就是说，系统具备计算可靠性。</p>
+</li>
+<li>
+<p>知识（Knowledge）：证明者只有知道一些验证者不知道的信息才能计算出证明。</p>
+</li>
+</ul>
+<p>zk-SNARK 要解决的是“计算验证问题”，即验证者能否在不知道证明者隐私的情况下，高效地验证计算结果。</p>
+<p>下面将以 zk-SNARK 的简化版构建流程来<strong>说</strong> <strong>明该系统是如何结合零知识达到高效验证的。</strong></p>
+<p><strong>zk-SNARK 的构建</strong></p>
+<p><strong>将待证明问题转化为多项式</strong></p>
+<p>简单来说，SNARK 的思路是将证明<strong>陈述是否成立</strong> 转换成证明<strong>多项式等式是否成立</strong> 。</p>
+<p>整个转换过程：待求证的问题➡算术电路➡R1CS➡多项式➡多项式之间的转换</p>
+<p><strong>待求证的问题➡算术电路</strong></p>
+<p>要通过计算证明一个问题是否为真，首先就要将待证明的问题转化成一个计算问题，而任何计算都可以描述为一个算术电路。</p>
+<p>算术电路通常由常数、“加法门”、“乘法门”组成，通过门的叠加，我们可以构建出复杂的多项式。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_tm8qdn8ofz.png" alt="zk-SNARK的构建及案例"></p>
+<p>上图中的算术电路构建的多项式为：（Inp1+Inp2）*（-1）= Output</p>
+<p>现实中的问题要转为算术电路极其复杂，我们可以将之简单理解为：输入一些内容，内容经过电路转化，最终输出一个结果。即：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_nf8dt25s27.png" alt="zk-SNARK的构建及案例"></p>
+<p>基于算术电路的概念，我们构造一个用于生成证明的算术电路，即：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_0yewcqkzs7.png" alt="zk-SNARK的构建及案例"></p>
+<p>该电路中包含了两组输入，公开输入 x  和秘密输入w。公开输入x意味该内容是待证明问题的固定值，验证者和证明者都知晓，秘密输入 w 则意味着该内容只有证明者知晓。</p>
+<p>我们构建的算术电路为 C( x, w ) = 0，即通过电路输入x与w，最终的输出结果为0。证明者和验证者知道电路输出为0，且公有输入为x的情况下，证明者需要证明自己知道秘密输入 w。</p>
+<p><strong>算术电路➡R1CS</strong></p>
+<p>我们最终需要一个多项式，但算术电路不能直接转化为多项式，需要 R1CS 作为二者间的媒介，故先将算术电路转换为 R1CS。</p>
+<p>R1CS，全名为 Rank-1 Constraints System（一阶约束系统），是一种描述电路的语言，本质上是一种矩阵向量方程。具体来说，R1CS 是由三个向量 (a,b,c) 组成的序列，R1CS 的解是一个向量 s，其中 s 必须满足方程：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_wuhvgq8zap.png" alt="zk-SNARK的构建及案例"></p>
+<p>其中 . 代表内积运算。</p>
+<p><em>此间具体的数学转换可以参见 Vatalik：Quadratic Arithmetic Programs: from Zero to Hero</em></p>
+<p>我们只需要知道，<strong>R1CS 的作用是对算术电路中的每个门的描述进行限定，使得每个门之间的向量满足以上关系。</strong></p>
+<p><strong>R1CS➡多项式</strong></p>
+<p>在得到 R1CS 这个媒介后，我们就可以将其等价转换成多项式。</p>
+<p>矩阵和多项式之间可以进行如下图所示的等价转换：</p>
+<p>多项式</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_bnr4i3iu8p.png" alt="zk-SNARK的构建及案例"></p>
+<p>转化为矩阵</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_dtq1pjhu2w.png" alt="zk-SNARK的构建及案例"></p>
+<p>根据上述等价转换的性质，对于满足 R1CS 的矩阵，我们可以使用拉格朗日插值法，还原出多项式每一项系数，基于这个关系，我们可以将 R1CS 矩阵推导为多项式关系，即：</p>
+<p><strong>注：A, B, C分别代表一个多项式</strong></p>
+<p>一个多项式对应我们想要证明的问题所对应的一个R1CS矩阵约束，通过以上转化，我们可以知道，多项式之间满足以上关系，就说明我们的R1CS矩阵是正确的，从而说明证明者在算术电路中的秘密输入也是正确的。</p>
+<p>到这我们的问题就简化为：验证者随机挑选一个数 x，让证明者证明 A(x) * B(x)=C(x) 成立，如果成立，说明证明者的秘密输入正确。</p>
+<p><strong>多项式之间的转换</strong></p>
+<p>复杂的算术电路中，有成千上万个门，我们需要对每个门验证其是否满足R1CS约束。换句话说，我们需要验证数次 A(x) * B(x)=C(x) 等式成立，但是逐次单独验证的效率太低，如何能做到一次性验证所有门的约束的正确性？</p>
+<p>为了方便理解，我们引入一个 P(x)，令 P(x) = A(x) * B(x) – C(x)</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_au8dknsl5a.png" alt="zk-SNARK的构建及案例"></p>
+<p>我们知道，任意的一个多项式只要它有解，就可以将它分解成线性多项式。故我们将 P(x) 拆分为 F(x) 和 H(x)，即：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_legphrrazz.png" alt="zk-SNARK的构建及案例"></p>
+<p>然后将 F(x) 公开，这就意味着存在一个 H(x) = P(x)/F(x) ，从而我们要验证的多项式最终转变为 ：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_c9f4fqu5tz.png" alt="zk-SNARK的构建及案例"></p>
+<p>A(x) * B(x) – C(x)：包含多项式的系数，只有证明者知，即秘密输入。</p>
+<p>F(x) ：一个公开的多项式，验证者和证明者皆知，即公开输入。</p>
+<p>H(x) ：证明者通过计算得知，验证者不可知。</p>
+<p><strong>而最终要证明的问题为：多项式等式 A(x) * B(x) – C(x) = F(x) * H(x)，在所有x上都成立。</strong></p>
+<p>现在只需要验证一次多项式就可以验证所有约束是否满足矩阵关系。</p>
+<p><strong>到这里我们就完成了将待证明的问题转化成只需要验证一次的多项式，实现了系统的简洁性。</strong></p>
+<p>但是这个实现的简洁性是让验证者的验证时间缩短，那证明大小呢？</p>
+<p><strong>简单来说，在证明协议中，使用的是 Merkle 树的结构，这有效的降低了证明的大小。</strong></p>
+<p>整个转换过程完成以后，自然而然的会产生两个问题：</p>
+<ul>
+<li>
+<p>为什么要转换成多项式？</p>
+<p>因为多项式实现了证明的简洁性。零知识证明的问题就是验证计算满足多个约束的问题，而多项式可以一个点验证多个约束。换句话说，验证者本来要验证 n 次才能确认的问题，现在只需要验证一次就能极大概率地确认证明的正确性。</p>
+</li>
+<li>
+<p>为什么验证多项式上的一个点，就能确定两个多项式 A(x) * B(x) – C(x )= F(x) * H(x) 成立？</p>
+<p>这是由多项式的特性决定的，即：一个多项式在任意点的计算结果都可以看做是其唯一身份的表示。对于两个多项式，它们只会在有限的点上相交。</p>
+</li>
+</ul>
+<p>对于上述的两个 d 阶多项式：A(x) * B(x) – C(x) 和 F(x) * H(x)，如果它们不相等，它们最多只会在d 个点上相交，也就是在 d 个点上的解相同。</p>
+<p>完成了多项式的转换，我们就要进入多项式证明阶段。</p>
+<p><strong>证明多项式成立</strong></p>
+<p>为了便于阐述，我们采用多项式 P(x) = F(x) * H(x)。</p>
+<p>现在，证明者要证明的问题是：在所有 x 上，P(x) = F(x) * H(x)。</p>
+<p>证明者和验证者对以上多项式的验证过程如下：</p>
+<ul>
+<li>
+<p>验证者选择随机挑战点 x，假设 x = s；</p>
+</li>
+<li>
+<p>证明者收到 s 后，计算 P(s) 和 H(s)，并把这两个值给验证者；</p>
+</li>
+<li>
+<p>验证者先计算 F(s)，再计算 F(s) * H(s)，并判断 F(s) * H(s) = P(s) 是否成立，若成立则验证通过。</p>
+</li>
+</ul>
+<p>但是我们仔细思考就会发现以上流程存在一些问题：</p>
+<ul>
+<li>
+<p>证明者能够知道整个等式的信息，如果收到随机点 s，他能计算出 F(s)，然后构造出一对假的 P(x) 和 H(x)，使得P(s) = F(s) * H(s) ，以此欺骗验证者。</p>
+</li>
+<li>
+<p>证明者不使用验证者给出的 s 计算 F(s) 和 H(s)，而是用其他值计算，以此欺骗验证者。</p>
+</li>
+<li>
+<p>验证者收到的值是由公共输入和证明者的隐私输入一起计算出来的，如果验证者算力极大，可以破解证明者的隐私输入。</p>
+</li>
+</ul>
+<p>针对上述问题，我们进行以下优化：</p>
+<ul>
+<li>
+<p>验证者在选取了随机点 s 后，对 s 进行同态加密，同态加密意味着<strong>加密后计算的解=计算后加密的解</strong> ；在这种加密形式下，证明者能够计算出解，但不能构造假的 P(x) 和 H(x)。</p>
+</li>
+<li>
+<p>在验证者选择挑战点 s 时，再选取一个随机参数 λ，额外生成一个 s 和 λ 之间的线性关系。验证者把同态加密后的  s 和 λ 都发给证明者。待证明者将证明发回，验证者除了验证证明是否为真，还需要验证随机参数λ 与 s 之间的关系。</p>
+</li>
+<li>
+<p><strong>针对验证者可破解秘密输入的问题，我们就可以引入 ZK。</strong> 纵览整个证明，我们可以发现在验证过程中，证明者发给验证者的只有计算出的多项式的值，验证者可以通过值倒推出多项式的系数，即证明者的秘密输入。为了防止验证者倒推，我们可以从 R1CS 推出多项式 A、B、C 的时候，多选取两个随机数并增加一组取值，这样还原出来的多项式比原来的多项式多1阶，从而让验证者无法从加密后的多项式中获取原多项式的信息，以此实现 ZK。</p>
+</li>
+</ul>
+<p>优化以后我们发现证明系统依旧需要验证者和证明者之间进行交互，如何才能实现非交互？</p>
+<p><strong>实现非交互</strong></p>
+<p><strong>为了实现非交互，SNARK 引入了可信设置（Setup）。</strong></p>
+<p>换句话说，在证明开始前，将原本属于验证者的选择随机挑战点的权力交给一个可信的第三方，第三方选择了随机参数 λ 后，将加密后的 λ 放在 R1CS 电路中，以此生成 CRS（Common Reference String，公共参考字串）。验证方能从 CRS 中获取属于自己的 Sv，证明方能从 CRS 中获取属于自己的 Sp。</p>
+<p>需要注意的是，λ 在生成 Sv 和 Sp 后，需要被销毁，若 λ 被泄露，可能被用来通过虚假验证伪造交易。</p>
+<p><strong>zk-SNARK 工作流程</strong></p>
+<p>在明白 SNARK 的构建流程后，基于我们构造的可生成证明的算术电路，zk-SNARK 的证明流程如下：</p>
+<ul>
+<li>
+<p>Setup:(C circuit, λ)= (Sv, Sp)</p>
+<p>通过电路 C 和随机参数 λ ，生成后续证明者和验证者使用的随机参数 Sv、Sp。</p>
+</li>
+<li>
+<p>Prove(Sp,x,w) = Π</p>
+<p>证明者通过随机参数 Sp，公共输入 x，秘密输入 w，计算出证明 Π。</p>
+</li>
+<li>
+<p>Verify(Sv,x,Π) == (∃ w s.t. C(x,w))</p>
+<p>验证者通过随机参数 Sv，公共输入 x 和证明 Π 来验证是否存在 C（x,w）=0。同时，验证证明是否是通过电路 C 计算得出。</p>
+</li>
+</ul>
+<p>到此，我们就完成了整个 zk-SNARK 的讲解，下面来看看实际运用的案例。</p>
+<p><strong>案例：以 Scroll 的 zk Rollup 为例</strong></p>
+<p>证明系统的作用是让证明者说服验证者相信一件事；</p>
+<p>对于 zk 证明系统而言，是要让验证者相信由 zk 算法计算出的 Zero-Knowledge Proof（零知识证明）为真。</p>
+<p>我们以 Scroll 的 zk Rollup 为例来说明 zk 证明系统的运行。</p>
+<p>Rollup 是指链下计算，链上验证。对 zk Rollup 而言，交易在链下执行后，证明者需要对交易执行后产生的新的状态根生成 zk 证明，再将证明传到 L1 Rollup 合约进行链上验证。</p>
+<p>需要注意的是，在 zk Rollup 中存在两类区块：</p>
+<ul>
+<li>
+<p>L1 Rollup 区块：提交到以太坊的区块</p>
+</li>
+<li>
+<p>L2 区块：用户在 L2 上提交的交易打包而成的区块</p>
+</li>
+</ul>
+<p>以下是 Scroll 的 zk Rollup 的工作流程：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_ugj17ndfav.png" alt="zk-SNARK的构建及案例"></p>
+<ul>
+<li>
+<p>用户在 L2 发起交易，Sequencer 检索到交易，在链下执行交易并生成 L2 区块和新的状态根；同时将交易数据和新的状态根提交给以太坊上的 Rollup 合约（提交交易数据是为了实现数据可用性）；</p>
+</li>
+<li>
+<p>当L2区块生成时，Coordinator 会从 Sequencer 那收到该区块的执行轨迹，然后将该轨迹随机分配给任意一个 Roller；</p>
+</li>
+<li>
+<p>Roller 将接收到的执行轨迹转换为电路，且为每个电路生成有效性证明，然后将该证明发回给 Coordinator；</p>
+</li>
+<li>
+<p>每生成 k 个 L2块，Coordinator 就会发送一个聚合任务给另一个 Roller，以将 k 个块的证明聚合为单个聚合证明；</p>
+</li>
+<li>
+<p>Coordinator 将单个聚合证明提交给 Rollup 合约，Rollup 合约结合之前提交的状态根和交易数据一起验证聚合证明，验证通过则相应的区块就被视为在 Scroll 上最终确定。</p>
+</li>
+</ul>
+<p>从以上流程可以看到，Roller 是该系统中的证明者，Rollup 合约是验证者。Roller 对在链下执行的交易生成一个 zk 证明；Rollup 合约验证该证明，若验证通过，Rollup 合约就会直接采纳提交的状态根作为自己新状态根。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0706/21_jvtbbcl2a9.png" alt="zk-SNARK的构建及案例"></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54433/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Yuga Labs已从其NFT系列中赚取近1.66亿美元版税</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54472/">
+                <span class="next-text nav-default">巴比特 | 元宇宙每日必读：多个大模型官宣，马斯克、姚期智、杨立昆等共话AIGC，世界人工智能大会有哪些看点？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

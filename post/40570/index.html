@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          跨链通信的危险、现在和未来：LayerZero之后的道路 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="跨链设计领域还没有明显的赢家。在IBC/Layer Zero之后，我们希望能看到更进一步的迭代。" />
+<meta name="keywords" content="跨链桥" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40570/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="跨链通信的危险、现在和未来：LayerZero之后的道路" />
+<meta property="og:description" content="跨链设计领域还没有明显的赢家。在IBC/Layer Zero之后，我们希望能看到更进一步的迭代。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40570/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-24T00:00:00+00:00" />
+
+<meta itemprop="name" content="跨链通信的危险、现在和未来：LayerZero之后的道路">
+<meta itemprop="description" content="跨链设计领域还没有明显的赢家。在IBC/Layer Zero之后，我们希望能看到更进一步的迭代。"><meta itemprop="datePublished" content="2022-07-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8649">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="跨链通信的危险、现在和未来：LayerZero之后的道路"/>
+<meta name="twitter:description" content="跨链设计领域还没有明显的赢家。在IBC/Layer Zero之后，我们希望能看到更进一步的迭代。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">跨链通信的危险、现在和未来：LayerZero之后的道路</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-07-24">
+      2022-07-24
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8649 字 -
+        预计阅读 18 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E8%A7%82%E7%82%B9/"> 观点 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>主要结论：</strong></p>
+<blockquote>
+<p>跨链设计领域还没有明显的赢家。在IBC/Layer Zero之后，我们希望能看到更进一步的迭代。</p>
+</blockquote>
+<p>我们从成本、安全性、效率三个方面比较了所有主流的跨链桥设计：</p>
+<ul>
+<li>
+<p>具有讽刺意味的是，中心化交易所仍然是目前的最佳选择。</p>
+</li>
+<li>
+<p>资产桥（Asset bridges）有非原生代币包装（non-native wrapping）的致命缺陷。</p>
+</li>
+<li>
+<p>全链的去中心化交易所（Omnichain DEXes）**涉及中介链的流动性锁定，这也意味着更多被攻击的可能和对节点以及流动性提供者更高的补偿费用。</p>
+</li>
+</ul>
+<p>（跳出跨链资产转移，来到更通用的跨链通信）</p>
+<ul>
+<li>
+<p>IBC是一个更通用的跨链协议，它没有外部信任的依赖假设。IBC很安全也很高效。它唯一的缺点是部署成本很高。</p>
+</li>
+<li>
+<p>Layer Zero是IBC的一个变种，它通过Chainlink的帮助，把IBC较高的固定部署成本转变成了按次计费的可变成本。Layer Zero在非高频的使用场景中具有优势，但是在高频跨链通信的场景里可扩展性较差。</p>
+</li>
+</ul>
+<p>在这种痛苦的权衡之下，我们相信跨链的设计会继续迭代。在本文第四部分，我们会讨论三个想法：</p>
+<ul>
+<li>
+<p>CLOBs：让跨链流动性池中的资产更加高效</p>
+</li>
+<li>
+<p>zk-SNARKs：减少链上的验证成本</p>
+</li>
+<li>
+<p>Chain level SDK integrations（链级别的SDK集成）：移除对外部中心化“中继者”（relayers）的依赖</p>
+</li>
+</ul>
+<p>这篇文章中会提及的项目：Ethereum 2.0, Cosmos, IBC, Layer Zero, Solana, Serum, Optimistic Roll-ups, StarkNet, Terra, THORChain, Osmosis, Anyswap, Wormhole, Ronin Bridge, Terra Bridge, Avalanche Bridge, Ren Bridge, Axie Infinity。</p>
+<p><strong>第一部分：跨链通信的现状</strong></p>
+<p>这一部分包括：</p>
+<ul>
+<li>
+<p>当前的现实仍然是多链的世界</p>
+</li>
+<li>
+<p>跨链基础设施的价值和使用场景</p>
+</li>
+<li>
+<p>跨链战争和L1战争之间的爱恨情仇</p>
+</li>
+<li>
+<p>跨链协议的价值捕获：为什么它是（且应该是）瘦协议</p>
+</li>
+</ul>
+<p><strong>跨链设计领域</strong></p>
+<p>在短到中期的未来，我们的世界会有更多的链，而不是更少：</p>
+<ul>
+<li>
+<p>技术在不断迭代：目前仍然没有一个最终的成熟的可扩展性技术解决方案。可扩展性的技术方案选择仍然会继续迭代。</p>
+</li>
+<li>
+<p>资本仍在争夺土地：大量的资金进入顶级的生态系统意味着土地的争夺不会很快结束。</p>
+</li>
+<li>
+<p>协议会想要发行L1的代币：从实际来说，发行L1代币诱人的经济利益意味着成功的应用层协议有动机去发布应用专用的链（例如：Axie Infinity 和 Ronin）。</p>
+</li>
+</ul>
+<p>跨链的互操作性是一个很重要的设计领域：</p>
+<ul>
+<li>
+<p>货币的互操作性（Money interoperability）：对用户来说，货币就是货币。不能互换的货币仅仅是商店的积分。创建互操作性能够提升资产的价值。</p>
+</li>
+<li>
+<p>数据的互操作性（Data interoperability）：Facebook 和 Google 是世界上最具价值的企业，因为它们在没有关系的数据中捕获到了价值。类似的数据现在被浪费在相互孤立的区块链中。</p>
+</li>
+<li>
+<p>使用场景：资格认证（credentialing）、信用评分、元宇宙中的身份、协议奖励在另外一条链上的用户。</p>
+</li>
+</ul>
+<p>对那些对L1战争感兴趣的人来说，跨链通信领域已经和区块链可扩展性深度绑定：</p>
+<ul>
+<li>
+<p>竞争性：如果跨链通信变得足够丝滑，它可能会将L1抽象化。毕竟，谁会在意FACEBOOK服务器的规格呢，只要它能够让我们和朋友进行无界限的通信即可。在边际上，一个更顺滑的跨链体验可能会有利于新兴的小链和已经成熟的生态系统进行竞争。</p>
+</li>
+<li>
+<p>协同性：就像联合国和SWIFT没有办法脱离主权国家存在一样，跨链协议的设计和规格也很大程度上依赖于L1s的设计。在当前的这种L1设计范式分离（高TPS、分片、Rollups、侧链、应用专用链）的情况下，跨链领域最重要的参数仍然是没法下定论的。现在说什么都还为时过早。</p>
+</li>
+</ul>
+<p><strong>投资案例</strong></p>
+<p>一个有价值跨链协议应该是一个非提取式的（non-extractive）、无状态的、几乎无需防御的瘦协议，就好像互联网的IP层一样。在我们看来，一些通常用来建立跨链协议护城河的方法并不是最优的，或者它们会对跨链的效用有破坏性：</p>
+<ul>
+<li>
+<p>锁定流动性 → 分散、摩擦、成本</p>
+</li>
+<li>
+<p>统一流动性池 → 供给面大，资本效率低</p>
+</li>
+<li>
+<p>包装用户资产 → 系统性金融风险</p>
+</li>
+<li>
+<p>信任链下的中继者 → 要小心中继者跑路，垄断和中心化</p>
+</li>
+</ul>
+<p>直接的影响：跨链基础设施的主要投资驱动力可能是生态系统基金和具有既得利益的风险投资公司。每个链都可以提供跨链作为最基础的功能。在这种情况下，可信的中立性成为一种罕见的美德——这是另外一个感兴趣的话题，我们不在这里展开。</p>
+<p>因此，我们对跨链重要性的讨论并不意味着它们代币的投资价值比例。</p>
+<p><strong>第二部分：资产跨链—可信赖的中介</strong></p>
+<p>这一部分包括：</p>
+<ul>
+<li>
+<p>中心化交易所</p>
+</li>
+<li>
+<p>资产桥</p>
+</li>
+<li>
+<p>全链去中心化交易所</p>
+</li>
+</ul>
+<p>代币是web3中最突出的原语之一。它们构成了最多的跨链使用场景。</p>
+<p>历史的类比：人们发现银行可以帮助促进两个原本孤立的主权国家之间的价值转移。</p>
+<p><strong>中心化交易所</strong></p>
+<p>中心化交易所就像一个商业银行，在很多国家都有货币储备。如果一个人能够使用中心化交易所，那么它仍旧是一个简单、直观的跨链服务。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>
+<p>简单的使用体验</p>
+</li>
+<li>
+<p>最小的成本——对于简单的转账，大部分的交易所只收取gas fee，用户无需进行复杂的链上计算。</p>
+</li>
+</ul>
+<p><strong>不足：</strong></p>
+<ul>
+<li>
+<p>需要做KYC（know your customer，比如上传证件、进行人脸识别等）——并不是所有人都可以使用它。</p>
+</li>
+<li>
+<p>受许可后才可以代币才可以上市——大部分情况下，一个人只能交易或转移在这个交易所上市的代币。</p>
+</li>
+<li>
+<p>对手方风险：我们并不是在信任智能合约，而是在信任币安的IT系统和它的正直品德——虽然只是一时的。（Binance suspends dogecoin withdrawals 币安禁止狗狗币的提取）</p>
+</li>
+<li>
+<p>没有智能合约的可组合性。</p>
+</li>
+</ul>
+<p><strong>资产桥</strong></p>
+<p>资产桥的资产好像一张旅行者的支票（如果有人老到知道那是什么的话），是一种在web3中被称为wrapping（包装？封装？）的信贷工具。</p>
+<p>项目案例：Wormhole, Ronin Bridge, Terra Bridge, Avalanche Bridge, Ren Bridge</p>
+<p><strong>它是如何工作的？</strong></p>
+<ul>
+<li>
+<p>资产桥在每条链上都部署一个智能合约，然后将此条链的本地资产锁定在智能合约中，凭借桥本身的信用，通过另一条链的智能合约再发行一个自定义包装（wrapped）过的资产。</p>
+</li>
+<li>
+<p>例如：在以太坊上锁定100个ETH，然后通过wormwhole这个智能合约，在solana上发行100个wETH。</p>
+</li>
+<li>
+<p>理论上，这种包装（wrapped）过的资产是依托于在另一条链上1：1锁定的原生资产作为抵押的。</p>
+</li>
+<li>
+<p>这种桥有放入白名单的链下验证者。验证者在链A上观察本地资产是否已经被锁定，然后在链B上发行包装过的资产。在Wormhole这个项目中，一共有19个验证者在被称为“卫士”（Guardian）的网络中，大部分的卫士都是Solana链上的顶级验证者。</p>
+</li>
+</ul>
+<p><strong>优点：</strong></p>
+<ul>
+<li>
+<p>比中心化交易所更低的准入门槛——不需要KYC</p>
+</li>
+<li>
+<p>具有智能合约的可组合性</p>
+</li>
+<li>
+<p>因为使用包装（wrapping），所以不需要外部的流动性锁定</p>
+</li>
+<li>
+<p>很少的额外GAS费用，因为大部分的计算都是在链下完成的</p>
+</li>
+</ul>
+<p><strong>不足：</strong></p>
+<ul>
+<li>
+<p>依赖于对联合验证者的信任，经常遭受攻击或者跑路。</p>
+<p>2022年2月，ETH-SOL的Wormwhole桥被黑了3.25亿美金</p>
+<p>2022年3月，ETH-RON桥被黑了6亿美金</p>
+</li>
+<li>
+<p>与链下的联合验证者交互引入了额外的网络层和智能合约漏洞。</p>
+</li>
+<li>
+<p>存在多个桥竞争的情况下，包装资产（wETH/ETH/xyzETH是三种不同的资产）的流动性非常分散。Wrapping（包装）这种方式在去中心化（多个桥）和高效的流动性之间造成了很不理想的权衡。</p>
+</li>
+<li>
+<p>包装过的资产（例如SOL链上的wETH）是依赖于协议的信用发行的，这些资产长期暴露在黑客的攻击和脱钩的风险下，仅有有限的信用和使用场景，同时也增加了系统性金融风险。</p>
+</li>
+<li>
+<p>能够跨链的资产列表仍然是由资产桥的协议来决定的。</p>
+</li>
+</ul>
+<p><strong>全链去中心化交易所</strong></p>
+<p>我们可以将商业银行去中心化吗？</p>
+<p>可以的，这就是去中心化交易所专用链正在做的。</p>
+<p>案例项目：THORChain, Osmosis, Anyswap</p>
+<p><strong>它是如何工作的？</strong></p>
+<ul>
+<li>
+<p>全链交易所引入了流动性提供者为多条链提供本地资产的流动性。</p>
+</li>
+<li>
+<p>全链交易所引入了专属的代币（RUNE，OSMO等等）来桥接流动性：协议进行两次交易（ETH-RUNE-SOL,即将ETH先换成RUNE，再使用RUNE换成SOL)有利于长尾资产的进行兑换。</p>
+</li>
+<li>
+<p>通常，全链交易所会部署一个专用链来作为交易所提供计算，虽然这不是必须的。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_rj8eum1whs.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>
+<p>比中心化交易所更低的准入门槛——不需要KYC</p>
+</li>
+<li>
+<p>具有智能合约的可组合性</p>
+</li>
+<li>
+<p>统一的流动性：所有链的流动性池都是 XXX-RUNE，即都和RUNE组成流动性。</p>
+</li>
+<li>
+<p>例如：BNB/ETH/LUNA 在和SOL交换时，都是从RUNE-SOL池中提取流动性。</p>
+</li>
+<li>
+<p>全部是原生资产：只要交易完成，那么再不需要依赖于交易所是正直的这个假设。本质上，交易所是把脱钩的风险从用户身上转移到了流动性提供者身上。</p>
+</li>
+<li>
+<p>开放的资产列表：任何人都可以在交易所为一种新的资产提供流动性对。</p>
+</li>
+</ul>
+<p><strong>不足：</strong></p>
+<ul>
+<li>
+<p>没有实时的最终性（fanality）：由于存在很多条链都在向同一个XXX-RUNE的流动性池进行交换的可能性，所以并不能保证在提交一笔交易时一定能够按照提交时的那个特定价格完成交易。这就导致了在退款或还原时有额外的交易摩擦。Stargate 声称已经解决了这个问题。</p>
+</li>
+<li>
+<p>这个中间的专用链是一个潜在的单点故障。</p>
+</li>
+<li>
+<p>多层的费用和滑点：THOR和OSMO发行本地货币作为交易的一侧（也就是说，所有的交易对都是THOR/XXX）。本地货币通常是保证这条专用链正常运转的非常有必要性的一种激励手段。</p>
+</li>
+<li>
+<p>XXX-THORChain桥和中继者（relayers）仍然是中心化的。</p>
+</li>
+</ul>
+<p><strong>总结：这些中介桥的对比</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_448stzq3au.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_a8spulapqu.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<p>我们不喜欢资产桥。包装过的资产不是原生链的主权资产；它们是资产桥协议的非流动性借据，很容易受到攻击。</p>
+<p>对于那些有权限的人（满足KYC，税收以及有它们希望交易的资产），中心化交易所仍旧是最简单也是最便宜选择，它只有短暂的对手方风险。</p>
+<p>除了中心化交易所，用户只能使用全链交易所。它们都支持本地原生资产和统一的流动性。但是用户必须支付协议的多层级费用：流动性的费用、专用链的验证费用或者中继预言机的费用、交易滑点等等。</p>
+<p><strong>第三部分：更通用的跨链——信任并检验</strong></p>
+<p>这部分包括：</p>
+<ul>
+<li>
+<p>IBC是第一个通用的跨链协议。它最大的创新点是：可以在本地链原生验证另一条链上的交易——通过维护一个链上的轻客户端。</p>
+</li>
+<li>
+<p>Layer Zero试图解决IBC最大的问题：链上验证高额的GAS费用。Layer Zero引入了ChainLink预言机，在信任、固定成本、可变成本的设计上做了一些不同的选择。</p>
+</li>
+</ul>
+<p>下一个阶段的跨链主要关注通用的跨链通信。这里不难看出为什么通用的跨链通信在整体上都是很有价值的：</p>
+<ul>
+<li>
+<p>随着WEB3原语的成熟，除了普通的代币跨链，更多的应用场景会用到跨链：NFT、游戏、治理、身份凭证、原生的多链应用。</p>
+</li>
+<li>
+<p>在全链去中心化交易所上建立和迭代用户端应用时，可以作为一个基础设施或API层。</p>
+</li>
+</ul>
+<p><strong>退后一步：系统间通信的高层设计</strong></p>
+<p>跨链通信的难题有三个部分：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_uhn678v555.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<ol>
+<li>
+<p>监听和通知（有请求进来了）。</p>
+</li>
+<li>
+<p>数据（请求什么数据）。</p>
+</li>
+<li>
+<p>验证（我们可以相信这些信息吗）。</p>
+</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_6ydnbjsrtz.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<p>一些细节和讨论，如果你不关心技术，那么可以略过这部分：</p>
+<ul>
+<li>监听和通知：一个系统必须接收到一些信号，然后再开始处理一个通信的请求。</li>
+</ul>
+<p>在WEB 2，一个典型的实现方式是一段“监听者”代码，这意味着服务器不停地（每隔一毫秒去循环一次）去扫描它端口看看是否有新的请求。这种方式在WEB3是不可能的，因为在链上进行高频的循环计算成本太高了。</p>
+<p>在WEB 3，自运行的智能合约需要被通知有一些事情发生了。目前的解决方案都依赖于验证每条链上交易的节点——“中继者”（Relayers）。我们将会在下个部分讨论它们做了什么。</p>
+<ul>
+<li>数据：交易的详细数据（被称作负载）必须在两个系统之间进行传递。</li>
+</ul>
+<p>在WEB 2，这个问题微不足道。谷歌可以通过互联网给FACEBOOK发送任何数据。</p>
+<p>在WEB 3，我们需要关注的是计算需要经济实惠。我们很幸运，感谢这些聪明的以太坊设计，我们不需要将整个区块都发送出去：为了描述并证明一个交易已经发生一个以太坊的区块中，我们只需要发送整个区块大小的不到0.1%的数据(参考: Patricia-tree)。在IBC和Layer Zero，中继者负责发送这些数据。</p>
+<ul>
+<li>验证：消息接收者需要确信这些消息确实是来自于正确的消息发送者的授权。</li>
+</ul>
+<p>在WEB 2，这个问题同样简单明了。FACEBOOK使用已经建立的协议（像HTTPS）来验证谷歌服务器的签名同时解密消息。</p>
+<p>在WEB 3，仅仅知道交易信息和它所属的区块XYZ（数据）是不够的，接受消息的智能合约还需要确信区块XYZ已经被包含在源头区块链中了。这种证实是有难度的，因为即使在这个区块被验证且签名之后，重组也有可能会发生。如何处理这件事是IBC和Layer Zero最主要的区别。</p>
+<p><strong>IBC：中继者+轻客户端</strong></p>
+<p>IBC把以上的三个要素分离给了中继者和轻客户端。</p>
+<p><strong>工作流程</strong></p>
+<ul>
+<li>
+<p>监控和激活+交易数据——中继者：如之前讨论的，中继者是一组节点，它们可以在同一台物理机器上验证两个链的数据。中继者使用便宜的云计算能力去监测链A上的网络请求。如果他们发现了链A→B的请求，它们就会提交一个交易到链B。</p>
+</li>
+<li>
+<p>验证——轻客户端：IBC同样也需要部署一个链上的轻客户端（看定义）。链B上的智能合约可以独立的在链上验证那笔交易在源链上是否已经被写入，这是IBC认可这笔交易的最后一步。</p>
+</li>
+</ul>
+<p>*定义——链上轻客户端：是一个部署在链A上的应用程序，它会观察和记录链B最新的区块头。（即，最长的链）</p>
+<p><strong>关键设计选择的讨论</strong></p>
+<ul>
+<li>
+<p>IBC的运转依赖于链下的中继者，它们运行着链A和链B的轻客户端。IBC中继者的客户端软件是开源和不限制使用的，所以任何人都可以成为中继者。他们不需要在安全方面被信任，因为链上的智能合约会验证所有的交易。中继者的冗余只是为了服务的可用性。</p>
+</li>
+<li>
+<p>链上的验证在像ETH这种高GAS的链上成本会非常高，因为在ETH上的IBC协议需要不停的存储其他链的新区块头来维持实时的验证。</p>
+</li>
+</ul>
+<p>“… 在以太坊上，轻客户端每对链每天要几千万美金的成本,” Layer Zero如是说。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_g9ps1l2ai9.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<ul>
+<li>COSMOS使用自定义链的设计解决了IBC的GAS问题：使IBC成为一个链级别的模块。</li>
+</ul>
+<p>COSMOS要求验证者在链级别而不是智能合约级别维护 COSMOS HUB的轻客户端。计算成本隐含的由验证者来承担，而不是由特定的智能合约账户承担。</p>
+<p><strong>Layer Zero: 中继者+预言机</strong></p>
+<p>Layer Zero 相比 IBC有两个主要的不同点：</p>
+<ul>
+<li>
+<p>部署的形式：Layer Zero是 IBC 智能合约形式的实现 （所以它可以在EVM或SOLANA这样的链上原生运行）—— 截至2022年3月，IBC 只能在COSMOS的链上运行。</p>
+</li>
+<li>
+<p>替换了昂贵的轻客户端：代替了IBC那种需要智能合约在每条链上同步其他链的区块头，它使用外部预言机Chainlink来验证特定区块在链上的最终写入。</p>
+</li>
+</ul>
+<p><strong>工作流程</strong></p>
+<ul>
+<li>
+<p>监控和激活+交易数据——中继者：和IBC一样。</p>
+</li>
+<li>
+<p>验证——预言机：Layer Zero使用Chainlink这样的去中心化预言机网络来检测区块的提交。例如，Layer Zero智能合约会询问Chainlink：“在Terra链上是否有默克尔树根哈希为0xbbcc 的129634区块在你完整版本的区块链账本中？这个区块至少有X个子区块。”</p>
+</li>
+</ul>
+<p>同时，数据部分也会沟通，</p>
+<p>“这里有一个Terra链的交易，钱包地址0x1927发送了10个LUNA给了智能合约地址0x7878。这笔交易被包含在默克尔树根哈希为0xbbcc 的区块中，下面这是区块包含在内的默克尔路径证明。”</p>
+<p>将上面两部分放在一起，我们就有了数据和验证两者来证明在另一条链上发生了一笔交易。</p>
+<p><strong>设计选择讨论</strong></p>
+<ul>
+<li>
+<p>相较于完全在链上的轻客户端，使用Chainlink牺牲了一些安全和运行时间的延迟。</p>
+</li>
+<li>
+<p>引入了额外的协议依赖和智能合约风险</p>
+</li>
+<li>
+<p>调用Chainlink的合约而不是检查链上数据引入了额外的延迟和GAS消耗</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_2ojmi8e5l7.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_skpaju1vgf.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<ul>
+<li>
+<p>这是一个固定成本和可变成本的权衡</p>
+</li>
+<li>
+<p>轻客户端在一些高GAS的链上有比较高的固定成本（无论使用与否都要实时更新），但是基本没有随着使用增加的可变成本。</p>
+</li>
+<li>
+<p>随着Chainlink网络变得拥堵，预言机网络有边际递增的按次使用成本。</p>
+</li>
+</ul>
+<p>鉴于两者差异化的优势，我们期望IBC和Layer Zero可以共存。</p>
+<p>IBC适用于以下的使用场景：</p>
+<p>本地环境和优化较好的经济效益：COSMOS生态的链</p>
+<ul>
+<li>
+<p>低GAS的链：BSC, SOLANA…</p>
+</li>
+<li>
+<p>高频的跨链沟通（从而充分的分摊固定成本）：可能是 Polygon-Ethereum通道，或者是其他成对的链。</p>
+</li>
+</ul>
+<p>反过来说，Layer Zero非常适合将高GAS的链和低频使用的链连接在一起。</p>
+<p><strong>第5部分：展望</strong></p>
+<p>这部分包括：</p>
+<ul>
+<li>
+<p>二层网络的复杂性和分片区块链未来会让跨链通信的问题更加复杂。</p>
+</li>
+<li>
+<p>我们对未来演变的推测：</p>
+</li>
+<li>
+<p>CLOBs——中央限价订单簿，提升资金使用率。</p>
+</li>
+<li>
+<p>使用zk-SNARKs来优化链上验证</p>
+</li>
+<li>
+<p>链级别的SDK来实现完全去中心化</p>
+</li>
+</ul>
+<p><strong>未来将有更多的复杂性</strong></p>
+<p>这里我们只了解简单的一层网络的链间通信。对更复杂的链间互操作性的解决方案的设计仍然是一片空白，下面是一些例子。</p>
+<p>二层网络Roll-ups：由于二层网络的结算层在以太坊网络，以太网的1层网络可能需要来证明最终性。</p>
+<ul>
+<li>Optimistic Roll-ups：Optimistic Roll-ups最致命的缺点是有长达7天的锁定期用来进行欺诈检查，这可能会导致Optimistic Roll-ups单方面的互操作性的困难。</li>
+</ul>
+<p>分片区块链：截至2022年3月，以太坊基金会仍然没有决定ETH2.0网络的设计选择。我们在观察两件事情：</p>
+<ul>
+<li>
+<p>以太坊基金会什么时候会发布分片的设计选择：数据分片，执行分片，ZK-SNARK…，以及这些设计选择隐含着其他的一层网络如何和以太坊网络交互。</p>
+</li>
+<li>
+<p>假如这些分片被设计为互相通信，以太坊2.0分片内部的通信协议是怎样的。</p>
+</li>
+</ul>
+<p><strong>我们的一些推测：</strong></p>
+<p><strong>中心化限价订单簿 Central Limit Order Books (CLOBs)</strong></p>
+<p>类似于去中心化的自动做市商交易所相较于中心化交易所是如何提供一个更开放但更贵的市场，全链交易所目前最大的痛点是非常低的资金利用率。</p>
+<p>也许全链交易所可以借鉴Serum来提供中心化的限价订单簿，在费用、最终性和延迟上提供不同的选择。另外，如果Serum本身发展的足够快，它自己本身也可以尝试。</p>
+<p><strong>ZK-SNARKs（一种零知识证明的技术）</strong></p>
+<p>零知识证明的Roll-ups面临的设计问题和跨链桥面临的非常类似：</p>
+<p>如何证明在另一条链上已经发生的且具有最终性的事情？</p>
+<p>虽然我们目前没有时间来深入探讨零知识证明的数学计算，但我们会非常乐于看到零知识证明和跨链沟通相结合而带来以下全部或一些特性：</p>
+<ul>
+<li>
+<p>使用时间复杂度为O(log n)的简单计算来在目标链上进行验证</p>
+</li>
+<li>
+<p>未来在IBC轻客户端成本和链上数据成本的优化</p>
+</li>
+</ul>
+<p>链级别的SDK标准化，以实现完全的去中心化</p>
+<p>所有目前的跨链解决方案都包括中继者。正如我们之前讨论过的，跨链用例的经济性差意味着中继者总是生态系统中的重量级选手。他们利益一致，如果有必要，他们可能会进行勾结——在某些极端情况下会导致重大的中心化风险。</p>
+<p>所以完全去中心化的桥在技术上是否是可实现的呢？我们相信是的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_vq9bdvthnw.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<p>上面绿色部分的两个要素已经通过部署轻客户端实现了去中心化：</p>
+<p>轻客户端协议的目标是允许用户在一个低容量的环境中（嵌入式智能设备、智能手机、浏览器插件、一些桌面电脑等）有一个高安全性的保证，保证当前以太坊网络某部分的状态的准确性或是验证某项交易。</p>
+<p>light-client-protocol</p>
+<p>所以我们最后需要进行去中心化的一步是监听和通知（Monitor and Alert）。</p>
+<p>不成熟的方案：一个不成熟的方案是需要链B来扫描所有链A的区块来发现是否跨链通信的请求。但如果是以太坊来扫描solana网络，这个方案是不可能实现的。</p>
+<p>SDK集成：考虑一个方案：链A在它的每个区块或隔几个区块中有一个授权的专用空间。链A的规则就是要求矿工们把所有的跨链通信请求放到那个区块空间中去(the &ldquo;networking bytes&rdquo;)。</p>
+<p>链B只需要去扫描这个空间来发现是否有新的请求。这个设计可以降低链B的扫描工作量，类似于轻客户端比全节点要轻2500倍。（这是因为轻客户端只会同步非常有限的一部分元数据，如下图）</p>
+<p><img src="https://img.bibiqing.com/news/2022/0724/17_59i6pv4q59.png" alt="跨链通信的危险、现在和未来：LayerZero之后的道路"></p>
+<p>一个区块空间格式绝不仅是一个疯狂的想法。COSMOS已经把它加入了Tendermint SDK。SOLANA也有类似的区块空间规则，但不是为了跨链通信，而是为了优化并行执行，可参考SeaLevel。毫无疑问，这条路还会继续进行优化。</p>
+<p>牛逼！感谢你读了这么长一篇文章。跨链设计还非常年轻，空间还很大。让我们一起关注并建设它。我们对一个完全去中心化的、没有鲸鱼的跨链通信协议非常兴奋。</p>
+<p>原文作者：推特@TheAntiApe</p>
+<p>译者：推特@0xshushu</p>
+<p>来源：戈多Godot</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40565/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">金色早报 | NFT市场总交易额突破610亿美元</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40561/">
+                <span class="next-text nav-default">区块链基础设施公司Chain宣布1亿美元收购MDT</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

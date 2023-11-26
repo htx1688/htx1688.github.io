@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          区块链的新视角：数据库、共识、Rollup与桥 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="从 Blockchain as a Database 的角度，理解共识协议、Layer1、Layer2 与跨链桥，以及如何通过桥将资产从一个数据库转移到另一个数据库。" />
+<meta name="keywords" content="Rollup, Rollup Bridge, Layer 2" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55355/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="区块链的新视角：数据库、共识、Rollup与桥" />
+<meta property="og:description" content="从 Blockchain as a Database 的角度，理解共识协议、Layer1、Layer2 与跨链桥，以及如何通过桥将资产从一个数据库转移到另一个数据库。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55355/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-20T00:00:00+00:00" />
+
+<meta itemprop="name" content="区块链的新视角：数据库、共识、Rollup与桥">
+<meta itemprop="description" content="从 Blockchain as a Database 的角度，理解共识协议、Layer1、Layer2 与跨链桥，以及如何通过桥将资产从一个数据库转移到另一个数据库。"><meta itemprop="datePublished" content="2023-07-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="10912">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="区块链的新视角：数据库、共识、Rollup与桥"/>
+<meta name="twitter:description" content="从 Blockchain as a Database 的角度，理解共识协议、Layer1、Layer2 与跨链桥，以及如何通过桥将资产从一个数据库转移到另一个数据库。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">区块链的新视角：数据库、共识、Rollup与桥</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-20">
+      2023-07-20
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 10912 字 -
+        预计阅读 22 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Patrick McCorry；编译：0×26，区块律动</p>
+<p>本文来自 Arbitrum 基金会和 Lemniscap 的 Patrick McCorry。Patrick 是英国第一位加密货币博士毕业生，在 2013 到 2016 年攻读博士期间，研究比特币和以太坊相关方向，之后在伦敦国王学院担任助理教授，UCL、NCL 和 UIUC 做研究员。2019 年，Patrick 离开大学进行 Layer2 方向创业，并被 Infura 收购，他在 Infura 期间还制作了一整套区块链课程。之后 Patrick 加入了 Lemniscap 和 Arbitrum Foundation。</p>
+<p>本文分两部分，第一篇为《区块链作为数据库》（Blockchain as a Database），第二篇是《数据库跨链》（Bridging Databases）。Patrick 用第一性原理，将区块链抽象成共识协议+数据库的形式，并以此为基础，解释了 Layer1、Layer2 和跨链桥的工作原理，以及 Layer1 和 Layer2 的区别等。</p>
+<p>以下为经律动编译的文章原文：</p>
+<h3 id="区块链即数据库">《区块链即数据库》</h3>
+<p>关于验证桥是否定义了 rollup 存在了很大的争议，或者换句话说：</p>
+<p><strong>rollup 等于桥？</strong></p>
+<p>我们先退后一步，用第一性原理看这个问题。</p>
+<p><strong>什么是区块链？</strong></p>
+<p><strong>如何把资产从一个数据库通过桥转移到另一个数据库？</strong></p>
+<p>我们通过两篇文章讨论上述两个话题，讨论完毕后再回过头审视这两个话题，评估其正确与否。</p>
+<h4 id="什么是区块链">什么是区块链？</h4>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_7hzrm0o70j.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>区块链的主要目的：允许任何第三方算出相同的数据库信息，并相信这份数据有效。</p>
+<p>区块链的核心是数据库，其中记录着：</p>
+<p><strong>账户余额</strong></p>
+<p><strong>智能合约代码</strong></p>
+<p><strong>程序状态</strong></p>
+<p>在几乎所有的系统中，区块链都定义了所有历史交易的顺序。</p>
+<p>至少这是很长一段时间内，我们学到的。</p>
+<p>它不必是一串交易列表。很可能是一个状态差异列表，边上还有零知识证明。</p>
+<p>那，什么是区块链？</p>
+<p><strong>区块链</strong> ，是一组有顺序的数据表，可以根据确定的规则计算出数据库副本。</p>
+<p>重新强调下区块链的目的：</p>
+<p><strong>允许用户计算出数据库副本。</strong></p>
+<p>唯一的任务就是让复制这个数据库成为可能。</p>
+<p>很无聊对吧？</p>
+<h4 id="对区块链达成了共识">对区块链达成了共识</h4>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_g00m11h17f.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>关于区块链，其中的一个难题是：</p>
+<p><strong>社区如何达成全球一致（共识），并且认识到什么是真正的区块链。</strong></p>
+<p>如果我们能对同一个区块链达成统一，那全球的用户都能算出同样的数据库。</p>
+<p>这引出了共识协议的想法，目标很简单：</p>
+<p><strong>使一群可能是匿名的、互不信任的各方，就一个决定达成一致。</strong></p>
+<p>在区块链的语境中，共识协议使一个方能够提出一个数据『块』，将其附加到数据序列的最上端，所有其他方都同意这确实是新的区块头。</p>
+<p>这就是为什么它被称为区块链，就是因为我们都在就同一串数据块达成一致！</p>
+<p>在设计和实施共识协议时，需要考虑许多技术挑战：</p>
+<p><strong>我们能否实现开放，让任何人都可以参与？</strong></p>
+<p><strong>各方达成一致需要多大的通信复杂性？</strong></p>
+<p><strong>是否可能为人们提供经济激励，让他们主动参与？</strong></p>
+<p>尽管这是一个非常有趣且复杂的主题，我们暂时先不关注这些挑战。唯一需要记住的是，只需要存在一个共识协议，它可以使所有各方就新的数据块达成一致。</p>
+<h4 id="共识协议的新实际案例">共识协议的新实际案例</h4>
+<p>多年来，特别是在追寻区块链 Layer 1 的过程中，社区已经经历过各种各样的共识协议配置的尝试：</p>
+<p><strong>Bitcoin 上的 Nakamoto</strong></p>
+<p><strong>Ethereum 上的 Gasper</strong></p>
+<p><strong>Cosmos 上的 Tendermint</strong></p>
+<p><strong>Avalanche 上的 Snowman</strong></p>
+<p>在几乎所有情况下，（协议）进入市场的策略都是发布一个新的共识协议，协议会持续对数据库进行更新。不仅仅是关于部署共识协议，还包括所有围绕它的基础设施。以及社会层面上，使诚实的大多数无准入的参与其中。</p>
+<p>这是一个艰巨的任务。</p>
+<p>同时也引发了一个有趣的问题：</p>
+<p><strong>如果我想推出一个链，最终成为新的数据库，我真的还需要推出一个新的共识协议么？</strong></p>
+<p>令人惊讶的是，答案是不！</p>
+<h2 id="重拾现有的共识协议">重拾现有的共识协议</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_se95pum6sb.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>区块链可以像一个公告栏一样，让所有人看到一样的讯息。</p>
+<p>在深入探讨之前，我们先设想一个抽象概念：</p>
+<p><strong>公告栏，确保持续性的让所有有需求的人看到数据。</strong></p>
+<p>这是一个与电子投票协议有关的概念。公告栏允许所有用户可以获得同样的协议记录。用户可以获得这份记录，独自执行，并验证协议是否正确。在电子投票这个例子中，（公告栏）可以用来检查投票活动是否正确运行，以及所有票数是否正确记录。</p>
+<p>这和区块链有什么关系？好吧，只要：</p>
+<p><strong>任何人都能获得公告栏中的数据。</strong></p>
+<p>那么，任何人都能得到带有时间戳的数据并且计算出数据库的副本。实际上，许多 Layer-1 链，特别是 Bitcoin 和 Ethereum，是特别好的公告栏。此外，它们还让在公告栏上写入数据变得很容易。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_bww9a2gdsu.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>只需汇总（roll up）数据并将它发布到区块链系统上。</p>
+<p>重用现存的区块链系统被称为 rollup。</p>
+<p>Rollup：所有的数据被汇总并发布到相应的链上。</p>
+<p>决定数据的排序，并保证任何人都可以访问数据的繁重工作，留给了现有的区块链系统。这不是一个新的想法。事实上，它已经存在了大约 10 年。rollup 方法已经成为引导新数据库的一种流行方式。</p>
+<p>有许多例子：Coloredcoins，MasterCoin / Omni，Ordinals，Arbitrum，Optimism，StarkEx，ZkSync，Polygon Hermez，Scroll。</p>
+<p>上述所有项目，以及一些其他的项目，都在试图在 Bitcoin 或 Ethereum 基础上引导新的数据库。</p>
+<p>事实上，由于这种方式的流行，还有一个名为 Celestia 的平台，它专注于构建专门用于启动 rollup 的数据库。</p>
+<p><strong>我们仍然可以把 rollup 看作是区块链：</strong></p>
+<p><strong>一系列定期发布的数据，</strong></p>
+<p><strong>并会附加在有顺序的相关数据库中。</strong></p>
+<p>区块可能会看起来不一样，甚至可能是一串数据块。但总的来说，它仍然是仅附加数据结构，最终总具有（或因果的）排序。</p>
+<p>最终，不论是开发出一种新的共识协议还是重拾已有的，目标是一样的：引导出一个数据库。</p>
+<h2 id="解析区块数据结构的原则">解析区块数据结构的原则</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_z0a92rt3ip.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>由社区来执行并强制执行全球公认的规则，特别是反击系统内部节点。</p>
+<p>假设各方都可以获取相同的数据，<strong>最后的挑战是让所有各方遵循同一套规则，即同一套解析数据块和计算数据库副本的规则（『状态转换函数』）。</strong></p>
+<p>解析数据的一个例子：</p>
+<p><strong>取一个数据块，</strong></p>
+<p><strong>将其解析为一个交易，</strong></p>
+<p><strong>检查交易是否可执行，</strong></p>
+<p><strong>在特定的虚拟机上执行它，</strong></p>
+<p><strong>将更新传递到数据库。</strong></p>
+<p>这导致了加密货币的一个独特问题：</p>
+<p><strong>在面对解析数据时，需要一套拥有全球共识的解析规则。</strong></p>
+<p>在协调全球一致解析规则时，我们需要评估两种情况：</p>
+<p><strong>操作执行。</strong> 所有各方都同意的规则，99.9% 的时间都在执行。</p>
+<p><strong>规则的治理。</strong> 所有各方都有一个设定过程，提出并同意新的规则。</p>
+<p>首先，几乎所有的讨论都将区块链网络的安全性与日常的规则执行操作联系起来。这十分重要，因为它关注的是软件，和参与的各方，如何持续执行同一套规则来保护数据库。</p>
+<p>然而，保护区块链网络的最终保障，特别是当操作执行出现问题时——意味着要更新规则。关于如何改变规则，何时执行新的规则，这必须有一个过程，让所有参与者达成社会层面的共识。</p>
+<p>让我们更详细地探讨执行和治理的概念。</p>
+<h2 id="执行操作">执行操作</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_vvwgu4d016.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>我们所有人都有责任持续执行规则，验证每一个提出的数据库更新。</p>
+<p>日常操作执行是使区块链系统计算数据库如此令人兴奋的原因！</p>
+<p>我们只需要对以下两点达成一致：</p>
+<p><strong>在哪里找到数据块的总排序</strong></p>
+<p><strong>解析数据块的规则。</strong></p>
+<p>这就够了。只要遵循规则的数据库，所有参与者都有机会获取数据块，执行规则。</p>
+<p>无论参与者是大还是小，是排序发起者还是家庭节点，每个人都应该对数据库的内容有信心。</p>
+<p>进一步说，只要所有的市场参与者都执行同样的规则，他们都可以计算出同样的数据库副本，那么我们就可以让市场决定什么应该被认为是真正的区块链。</p>
+<h2 id="治理规则">治理规则</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_rmsr2cepky.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>所有的区块链系统都必须用一套解析数据和计算数据库的规则来引导。</p>
+<p>几乎所有的区块链系统都需要一个引导阶段：</p>
+<p><strong>（Bitcoin）比特币核心来自中本聪</strong></p>
+<p><strong>（Ethereum）黄皮书来自 Gavin Wood。</strong></p>
+<p>通常情况下，一个项目是由一小群开发者引导的，他们决定规则，启动区块链，然后将软件（以及规则）交给更广大的社区。</p>
+<p>下一步就是<strong>改变规则。</strong></p>
+<p>关于改变规则有很多原因，例如软件升级或者修复漏洞。任何规则的修改都需要获得更广泛的同意，或者叫做，<strong>社会共识。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_gw8yo0d2s8.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>有两种方式达成改变规则的共识：</p>
+<p><strong>粗略的共识。不透明且不明确的过程。</strong></p>
+<p><strong>链上治理。明确的代币治理者投票的过程。</strong></p>
+<p>前者，粗略的共识，是像比特币和以太坊这样的区块链网络的核心部分。它涉及到人为的过程，与各种参与者达成一致，然后开发者实施升级，提出一个标记日，升级可以生效。</p>
+<p>后者，链上治理，首先由 Tezos 开创，使参与者能够明确地投票决定是否应该部署升级，然后提供一个时间表，成功投票后，软件可以在这个时间表上更新。正如我们将很快看到的，链上治理的方法已经在 DAOs 中流行起来，作为一种管理单一项目的方式。</p>
+<p>在上述两种情况下，仍然需要就提议的升级达成一致，（即使这样）也不能保证它会顺利进行：</p>
+<p><strong>没有区块链分裂：升级顺利执行，全球一致（包括市场）只接受一个新规则的数据库。</strong></p>
+<p><strong>区块链分裂：如果升级有争议，且争议双方仍然运行，那么它可能导致永久的分叉，因为两个社区应用不同的规则，计算出不同的数据库，各自有自己的市值。</strong></p>
+<p>换句话说，治理过程只提供了一个模糊的结果，社区可能会接受提议的升级。（真正的结果）我们只能在标记日和升级执行后才能确定。很有可能社区成员会反对，忽视新的规则，允许两个竞争的数据库出现。就像 BTC/BCH 和 ETH/ETC 一样。</p>
+<p>最后，有两种方式执行新规则的改变：</p>
+<p><strong>硬分叉。未升级节点将拒绝的规则的可检测变化。对规则进行可检测的更改，未升级的节点将无法参与新规则。</strong></p>
+<p><strong>软分叉。非升级节点将忽视的规则的不可检测变化。对规则进行不可检测的更改，未升级的节点将这部分忽略。</strong></p>
+<p>硬分叉或软分叉的概念关注的点在于，是否可以检测到规则的变化，以及它如何对此做出反应。很容易就会围绕应该使用哪种方法展开激烈的辩论，因为它最终会影响网络的抗审查性，抵御恶意攻击，以及用户是否可以明确选择规则变更。</p>
+<h2 id="数据库的世界">数据库的世界</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_keoay68sm1.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>区块链网络的整个追求就是构建一个开放的数据库，允许任何人读取，写入和保护它。</p>
+<p>过去 14 年来，社区最大的实验始终集中在如何构建一个「更好」的数据库。</p>
+<p>已经有了明显的演变：</p>
+<p><strong>托管数据库。</strong> 复制 web2 的体验，但信任操作员保护数据库的完整性和活力。</p>
+<p><strong>公共数据库。</strong> 允许任何人读取数据库，但最终信任一个操作员来更新它。</p>
+<p><strong>开放数据库。</strong> 允许任何人读取，写入和保护数据库。</p>
+<p>举一些例子：</p>
+<p><strong>中心化交易平台。</strong> 几乎所有的交易平台都实现了 web2 风格的数据库，不可能有任何人计算出数据库的副本。</p>
+<p><strong>权威证明（PoA）。</strong> 一些区块链系统依赖于一个指定的，或多个指定的权威，发布新的区块来更新数据库。任何人都可以下载区块，解析数据块，计算出数据库的副本。他们只是没有权威提出新的区块。</p>
+<p><strong>中本聪共识。</strong> 任何愿意使用财务资源的人，都可以参与更新数据库的过程，通过发布（和投票）新的区块。同样，任何人都可以下载区块，解析数据块，计算出数据库的副本。</p>
+<p>现在——我们使用「更好」的这个词，因为答案——什么是好的数据库，是非常主观的，它取决于社区试图优化的指标：</p>
+<p>看重可以参与共识协议的参与者？</p>
+<p>看重可以下载数据库副本的参与者？</p>
+<p>限制谁可以写入数据库，而不需要受信任的操作员的批准？</p>
+<p>不在意在系统上进行交易的成本？也许在试图保持数据对任何人开放的同时？</p>
+<p>什么对奶奶来说最容易进行交易？</p>
+<p>我们可以客观地定义指标，并评估区块链系统如何实现其声明的目标。社区会永远争论哪些指标重要，以及他们如何比竞争对手更好地实现这些指标。然而，最终重要的是用户选择在哪里进行交易，以及他们为什么做出这个决定。</p>
+<p>只有一个问题——我们如何将资产从一个数据库移动到另一个数据库？例如，一个典型的用户流程可能包括：</p>
+<p><strong>上线。</strong> 在 Coinbase 上购买代币</p>
+<p><strong>转移。</strong> 将代币从 Coinbase 转移到以太坊</p>
+<p><strong>行动。</strong> 尝试 DeFi 应用，</p>
+<p><strong>转移。</strong> 将代币从以太坊转移到 Arbitrum</p>
+<p><strong>行动。</strong> 尝试 DeFi 应用，</p>
+<p><strong>转移。</strong> 将代币从 Arbitrum 转移到 Binance，</p>
+<p><strong>链下。</strong> 变成法币。</p>
+<p>所有命名的系统都是各自具有不同安全性和可审计性的数据库。但是，为了实现资产的转移，我们需要谈谈桥，这将是我们下一篇文章的重点！&quot;</p>
+<p><strong>桥接世界——引言</strong></p>
+<p>简短回顾：《区块链作为数据库》</p>
+<p>上文探讨了 &ldquo;什么是区块链？&quot;，这是一个了解区块链目的的绝佳机会。</p>
+<p>那么，什么是区块链？</p>
+<p><strong>区块链只是一种数据结构，用于规定数据（交易）的整体排序。</strong></p>
+<p>只有一个目的：</p>
+<p><strong>任何人都可以获取区块链，按顺序解析数据（交易），并计算出同一数据库的副本。</strong></p>
+<p>现在轮到了——区块链网络中最难解决的问题之一：参与者如何验证他们拥有相同、且唯一的区块链副本？</p>
+<p>简单来说，区块链工程的整个领域都集中在以下方面：</p>
+<p>实现单一数据库。</p>
+<p>在全球范围内，所有各方汇聚到同一个区块链上的唯一方法就是加入共识协议。它让所有各方共同商定出决定——添加最新的数据块。</p>
+<p>一个有趣的附带说明是，数据块不一定是交易列表，事实上有两种选择：</p>
+<p>交易历史。要执行的事务的明确列表。状</p>
+<p>态差异。可用于更新数据库中存储槽的「状态差异」列表。</p>
+<p>由参与者决定如何将数据解析为可应用于数据库更新的规则集（&ldquo;状态转换函数&rdquo;）。由于有效性证明的兴起，状态转换方法是最近才出现的。</p>
+<p>因此，归根结底，所有区块链协议的重点都是保证正确的数据排序，并向所有人公开。事实上，有一个非常微妙的假设：</p>
+<p><strong>最近广播。共识协议只能保证数据在某个时间点的发布。</strong></p>
+<p>并不能保证历史上达成一致的决策都是可用的，而且大多数提供数据的节点都是利他的（译者注，大多数提供历史交易数据的节点是出于利他主义行为。这是因为在区块链网络中，节点没有义务一直保存所有的交易数据。）。</p>
+<p>最后，在决定如何确保数据库数据的公开性时，项目可以做出以下选择：</p>
+<p><strong>部署一个新的共识协议（&ldquo;Layer1&rdquo;）</strong></p>
+<p><strong>重新使用现有的共识协议（&ldquo;rollup&rdquo;）</strong></p>
+<p>前者是一项艰巨的工作。它需要引导整个生态系统愿意站出来，并且通常需要诚实的大多数参与者来保护系统。</p>
+<p>rollup 承认引导这样一个生态系统是很困难的，而且造轮子的价值不大。利用 Layer1 作为公告板，并让其保证所有相关数据的可用性（和排序）要容易得多。</p>
+<p>无论一个项目决定部署新的 Layer1 还是 rollup，所有方法都会导致一个具有不同程度的信任假设和安全性的数据库世界。</p>
+<p>我们可以很容易地将它们归类为「封闭」、「公共」或「开放」数据库，其重点在于数据库是否可以公开读取，以及用于实现向数据库写入的机制。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_pg7g3k2k8v.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>将资产从一个数据库转移到另一个数据库的跨链桥。</p>
+<p>上述内容听起来很理论化，但有经验证据表明，我们现在生活在一个有成百上千个数据库希望与加密资产互动的世界。</p>
+<p>这就引出了下一个问题：</p>
+<p><strong>用户如何将其资产从一个数据库转移到另一个数据库？</strong></p>
+<p>我们需要研究用户如何将其资产从一个数据库转移到另一个数据库。</p>
+<p>更广义地说，他们如何在不同的系统间传递信息。让我们一探究竟！</p>
+<h1 id="桥接世界">桥接世界</h1>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_6s8ls6scsy.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>这一切都是关于如何通过桥将消息从一个数据库发送到另一个数据库。</p>
+<p>有一个组件可以助力实现想象中的那种区块链世界：</p>
+<p><strong>桥：为难以或不可能跨越的事物提供通道。</strong></p>
+<p>其实桥的工作很简单。它应该让消息从一个数据库传递到另一个数据库。它可以被视为一种通信协议，其中实体（桥）位于发送者和接收者之间。</p>
+<p>所有通信协议都尽力满足以下属性：</p>
+<p><strong>传递及时。消息尽可能快的被接收者使用。</strong></p>
+<p><strong>完整。应该传递完整的内容。</strong></p>
+<p><strong>可验证。接收者可以验证该消息确实是由发送者发起的。</strong></p>
+<p>有一点值得注意，桥作为通信协议，并不致力于保护消息的隐私性。这在桥这个领域是可选项，且（现在）还没有保护消息隐私的桥协议。</p>
+<p>现在，桥需要解决的主要问题是能够让接收者相信消息的真实性，即<strong>证明过程。</strong></p>
+<h2 id="人工运营桥">人工运营桥</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_pjd5h02541.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>我们相信人为运营的操作系统能够传递信息并证明其真实性。</p>
+<p>在几乎所有桥的设计中，发送者（数据库 A）和接收者（数据库 B）之间都有一组权威机构。当然，发送者和接收者很可能是存在于各自数据库中的智能合约。</p>
+<p>这些权威机构将：</p>
+<p><strong>获取。从数据库 A 获取新的消息。</strong></p>
+<p><strong>签名。对将发送到数据库 B 的所有消息进行数字签名。</strong></p>
+<p><strong>证明。将数字签名和消息发送到数据库 B。</strong></p>
+<p>证明过程要求接收方的数据库（数据库 A）验证消息确实是由受信任的权威机构签名的。如果是这样，它就可以对消息的内容和来源有信心。</p>
+<p>关键问题：<strong>信任这些指定的权威机构。</strong></p>
+<p>更进一步，发送者和接收者都必须百分百的信任指定的机构来传递消息并证明其完整性。这是因为如果没有第三方的帮助，发送者和接收者就无法看到外界。</p>
+<p>这种桥可以被称作人工运营桥。</p>
+<p>它依靠人类（服务器端应用程序）来促进通信并代表发送者或接收者强制执行所有规则。它是最容易部署的桥类型，可以应用于各种不同的区块链，但它是最难大规模保护的。</p>
+<p>不幸的是，加密货币和中本聪发起运动的全部意义在于消除系统运行所需的所有信任，并用加密证明取而代之。</p>
+<p>我们需要做得更好。</p>
+<h2 id="不断进化的证明信心">不断进化的证明信心</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_v5nw1lpmmc.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>我们可以尝试减少中间人为操作角色的权限，直至仅携带消息的邮递员。</p>
+<p>我们应该将加密证明与发送者的消息一起发送，以证明消息的真实性。</p>
+<p>如果成功，这份证明应该使接收方智能合约对消息的真实性毫无疑问地相信，而不必信任人工一方。</p>
+<p>可以减少人工运营的角色：协助将消息（作为中继器）从数据库 A 中传递到数据库 B。</p>
+<p>让我们探讨几种不同程度的方法来证明其的实际意义。</p>
+<h2 id="强制提供正确的证明nomad">强制提供正确的证明（Nomad）</h2>
+<p>对于这种方法，我们提出以下问题：</p>
+<p>我们是否可以通过要求人工运营对其证明负责来减少对人工运营的信任？</p>
+<p>在这种方法中，权威机构仍然需要证明消息的真实性，但如果权威机构试图作弊，可能会立即受到惩罚。例如，通过不正确且冲突的消息。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_65izvjs9jw.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>Nomad 协议是实施这种负责方法的一个例子。</p>
+<p>它假设有两个权威方：</p>
+<p><strong>认证权。负责读取数据库 A，签署其发出的消息，并将签名提交给数据库 A。</strong></p>
+<p><strong>否决权。负责交叉验证签名消息是否源自数据库 A，以此保护数据库 B。</strong></p>
+<p>执行认证权一方应该锁定相当大的资产，以阻止恶意行为，并且任何人都可以扮演这个角色。另一方面，否决权必须在协议实际运行之前指定，如何使否决权角色无准入化仍然是一个开放的研究问题。</p>
+<p>Nomad 协议有三个阶段：</p>
+<p><strong>认证消息。</strong> 认证者读取数据库 A 中的消息，签署消息并将签名提交给数据库 A。</p>
+<p><strong>消息中继。</strong> 任何人都可以拿到签名的消息并将其转发到数据库 B。</p>
+<p><strong>否决阶段。</strong> 有一个固定的时间窗口（例如，30 分钟），供有否决权的一方检查发送到数据库 B 的消息是否与数据库 A 上的消息完全相同。如果不是同一个，那么应该否决并取消消息。</p>
+<p>虽然出于说明目的，我们的示例假设只有一个接收数据库，但 Nomad 协议可以扩展，允许多个数据库接收相同的签名消息。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_d9w5rs2dc0.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>数据库 A 承担认证的责任，但依赖拥有否决权的另一方，来监视所有支持的数据库上的恶意签名消息。</p>
+<p>我们需要考虑拥有权力的一方可能试图欺骗桥协议的情况：</p>
+<p><strong>1. 认证方确认并签署了一份没有数据库 A 确认的消息。</strong></p>
+<p><strong>2. 否决方否决数据库 A 认可的消息。</strong></p>
+<p>在第一种情况下，认证方独断的生成了一个数字签名，如果他们试图欺骗接收者，数据库 A 将无法识别该数字签名。任何一方都可以获取签名，将其发送到数据库 A，并授权数据库 A 惩罚认证方。</p>
+<p>在第二种情况下，它仍然是一个完全受信任的角色，并且协议内没有方法可以反击。需要注意的是，协议记录对所有参与者都是公开的，并且在事后可以通过投票取消否决权。然而，到那时可能已经造成了损失，因为否决诚实的消息可能会对依赖基于时间的行动（即清算）类的智能合约产生重大影响。</p>
+<h2 id="检查共识协议spv的一致性">检查共识协议（SPV）的一致性</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_jtbckia19b.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>跟踪被各自共识协议同意的区块，以及有关特定交易和更一般的数据库记录证明。</p>
+<p>对于第二种方法，我们提出以下问题：</p>
+<p><strong>我们可以跟踪数据库 A 的共识协议吗？</strong></p>
+<p>正如上文中提到的，所有区块链网络都有一个共识协议，该协议同意定期在链最顶端生成新区块。区块可以被认为是对数据库的批量更新。</p>
+<p>在这种方法里，目标是<strong>允许数据库 B 上接收（消息）的智能合约，能够跟踪且相信来自数据库 A 的共识协议生成的数据。</strong></p>
+<p>为了实现这一点，共识协议默认情况下必须是轻客户端友好的：</p>
+<p><strong>轻客户端：需要最少的计算和数据即可了解且相信数据库的当前状态。</strong></p>
+<p>简而言之，轻客户端允许用户了解数据库中记录的值，并确信共识协议同意该数据应该存在于数据库中。</p>
+<p><strong>轻客户端的概念和比特币一样古老。</strong></p>
+<p>比特币白皮书中将其称为简化支付验证（Simplified Payment Verification，SPV）模式。SPV 允许用户验证他们确实收到了比特币，而无需验证和保存整个比特币数据库的副本。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_0qhb1s5zej.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>所有的区块头形成一个链式结构，并且每个区块头的哈希值都包含了工作量证明的结果</p>
+<p>SPV 过程按以下方式运行：</p>
+<p><strong>加密承诺。</strong> 每个块头都包含代表整个比特币数据库的加密承诺（默克尔根）。此外，区块头还包含前一个区块的链接及其自身的工作证明。</p>
+<p><strong>检查最长链。</strong> 任何用户应该都可以获得区块头数据并且独立的验证（PoW）目前为止的最长链。</p>
+<p><strong>包含证明。</strong> 一旦用户确信他们的区块头列表代表了主链，任何人都可以向用户提供数据库中特定数据的包含证明（默克尔根）。</p>
+<p><strong>确信。</strong> 用户可以将包含证明与相关块头进行交叉检查，然后确信数据库中的特定数据。</p>
+<p>比特币 SPV 模式可以作为构建轻客户端桥的基础，允许另一个区块链上的智能合约了解比特币数据库中的内容。</p>
+<p>一个名为 BTCRelay 的旧项目在比特币（数据库 A）和以太坊（数据库 B）之间实现了轻客户端桥。这是以太坊上的智能合约，可以解析比特币区块头、包含证明，并通过工作量证明追踪最长的链。最终，它的目的是验证 UTXO 是否确实存储在比特币数据库中，然后允许另一个智能合约对其进行操作。</p>
+<p>不幸的是，BTCRelay 有点超前了。虽然它的功能很完整，但它没有受到太多的关注。</p>
+<p>我们可以从该项目中学到一些经验教训：</p>
+<p><strong>累积 gas 成本。</strong> 跟踪区块头需要许多链上交易，财务成本会随着时间的推移而累积。</p>
+<p><strong>只适用于比特币的分叉。</strong> BTCRelay 只兼容分叉比特币代码库的区块链。使用不同共识协议的区块链需要专门实现其各自的轻客户端。</p>
+<p><strong>仍然需要信任共识。</strong> BTCRelay 只能检查工作证明是否正确，而不能检查区块头是否有效。如果一个敌对的矿工用有效的工作证明制作了一个恶意的区块头，那么桥就可能被破坏。等待约 6 次确认并依赖比特币的诚实多数假设（&gt;51% 的矿工是诚实的）仍然是必要的。</p>
+<p>有些研究主要集中在，通过将多个区块头聚合到一个更新中来降低累积 gas 成本的能力上。例如，NIPOPOWS 和 Glimpse 专注于与 PoW 相关的轻客户端。</p>
+<p>然而，随着其他区块链网络上的许多桥遵循构建轻客户端桥的理念，成功的曙光已经闪现：</p>
+<p>Cosmos 的 IBC</p>
+<p>Near 的 Rainbow bridge</p>
+<p>Ava 的 P-Chain</p>
+<p>IBC 和 P-Chain 都有一个专用层来跟踪来自不同的共识协议。它们都遵循共识协议产生的诚实的大多数签名，但更多的时候，如果共识协议决定欺骗基础层，签署一个冲突的消息，并不总是有后果。</p>
+<h2 id="仍然信任参与者---我们能做得更好吗">仍然信任参与者 - 我们能做得更好吗？</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_ewlpds2oki.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>所有的工作都集中在将信任传递给最有可能被信任的各方，但最终仍然依赖于信任诚实的大多数各方！</p>
+<p>总览本文列举的所有桥，我们始终依赖于一组中间人，他们必须保证通过桥发送的消息的真实性，即使只是保证一个共识协议达成了一个单一的决定。</p>
+<p>我猜想有这样一个基本要求，即桥总是需要一组中间人来帮助将消息从发送方数据库传送到接收数据库。</p>
+<p>如果我们接受这个前提，那么我们也可以认为跟踪共识协议中参与者所做的决定是有意义的，因为他们是决定将应用于数据库的更新总排序的真理之源。</p>
+<p>这就引出了最后一个问题：</p>
+<p><strong>我们能否建立一座桥，独立检查共识协议所做决定的有效性？</strong></p>
+<p>这有一个微妙的区别。</p>
+<p>桥不仅要检查共识协议是否同意数据库更新的总排序，还要检查更新本身相对于数据库的所有其他更新是否有效。</p>
+<p>如果能够做到这一点，那么接收方的智能合约（数据库 B）就可以确信数据库 A 中应用了更新，并确信数据库中的数据实际上是有效的。</p>
+<p>然后，它就可以读取数据库，提取相关信息，然后对其执行操作。</p>
+<p>可以这样做吗？答案是肯定的。</p>
+<h2 id="验证桥的崛起">验证桥的崛起</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_vpzsnrfgif.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>我们可以重复使用数据库 A 的共识协议对所有数据块进行排序，然后验证节点桥可以独立检查所有数据块作为数据库 B 更新的有效性。</p>
+<p>验证桥核心是使智能合约不仅能够检查是否做出了决定，而且能够独立验证决定的内容是否正确。</p>
+<p>总体思路是比轻客户端桥多走几步：</p>
+<p><strong>欺诈与有效性证明。扩展轻客户端的能力，简洁地验证大型计算的正确性。</strong></p>
+<p><strong>数据可用性层。通过重新使用数据库 A 对数据块进行排序，从数据库 B 中移除共识协议。</strong></p>
+<p><strong>开放成员。允许各方自我任命，并为执行所有数据库更新的有效性做出贡献。</strong></p>
+<p>为了避免重复验证桥的分析——仅有最后一个问题需要讨论。</p>
+<p>本文只关注:</p>
+<p>在数据库之间来回传递消息的能力。</p>
+<p>使接收者对消息的真实性有信心。</p>
+<p>我们还没有讨论桥如何在数据库之间持有或转移资产。</p>
+<p>这是因为，从根本上说，所有桥都负责及时传递消息，并使接收方确信消息的真实性。</p>
+<h2 id="资产与负债">资产与负债</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0720/7_0s0yn1oq2b.png" alt="区块链的新视角：数据库、共识、Rollup与桥"></p>
+<p>金库在数据库 A 中持有代币，并通过桥授权在数据库 B 中发行相同数量的代币。</p>
+<p>现在，我们可以在每个数据库上部署智能合约，智能合约可以通过在桥上发送消息进行交互。</p>
+<p>最常见的应用是将资产从数据库 A 转移到数据库 B（反之亦然）。</p>
+<p>这两种智能合约包括：</p>
+<p><strong>金库。发送数据库上的智能合约，用于保管资产。</strong></p>
+<p><strong>发行。接收方数据库中的智能合约，有权为金库中的资产出具欠条。</strong></p>
+<p>在更高维度上，这两个智能合约可以实现大多数想要将资产转移到另一个系统的用户非常熟悉的存款/取款流程：</p>
+<p><strong>存款流程。</strong> 用户可以将钱币存入数据库 A 的金库，金库可以通过桥发送信息，在数据库 B 的用户地址发行相同数量的资产。</p>
+<p><strong>提款流程。</strong> 用户可以通过请求发行者在数据库 B 上销毁代币并通过桥发送消息让金库将相同数量的代币释放到用户的地址来提取代币。</p>
+<p>这种设计的好处之一是，任何人只要有数据库 A 中金库的读取权限和数据库 B 中发行人的读取权限，就可以验证资产是否覆盖负债。换句话说，任何人都可以验证发行的代币是否有一个完全抵押的金库作为后盾。</p>
+<h2 id="下一步是什么">下一步是什么？</h2>
+<p>当然，如果我们想在数据库中移动资产，并使其大规模运行，这一切都取决于桥的安全性，以及我们如何信任发送的信息的完整性。</p>
+<p>历史上，我们一直未能建立起安全的桥，因为它们都依赖于人类来保护发送的信息。包括 BitFinex、Binance、Bitstamp 在内的大多数大型交易所，以及最糟糕的 MtGox，都曾因桥事故而导致用户资金损失。此外，还有 PolyNetwork、Ronin Bridge 和 Harmony 等跨区块链转移资金的桥。</p>
+<p>作为一个社区，我们多年来一直在尝试各种桥的设计，有些只是依赖于可信的中介，而有些则试图将信任从中介转移到各自区块链的共识协议上。</p>
+<p>验证桥只是更进一步——不仅信任共识协议做出的决定，而且检查它是否是一个有效的决定。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55373/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">苹果不谈AI，却处处 AI，大模型“AJAX”首次现身</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55395/">
+                <span class="next-text nav-default">全国法院审判纪要「币六条」解读，律师支招防冻卡及解冻步骤</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#区块链即数据库">《区块链即数据库》</a></li>
+      </ul>
+    </li>
+    <li><a href="#重拾现有的共识协议">重拾现有的共识协议</a></li>
+    <li><a href="#解析区块数据结构的原则">解析区块数据结构的原则</a></li>
+    <li><a href="#执行操作">执行操作</a></li>
+    <li><a href="#治理规则">治理规则</a></li>
+    <li><a href="#数据库的世界">数据库的世界</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#人工运营桥">人工运营桥</a></li>
+    <li><a href="#不断进化的证明信心">不断进化的证明信心</a></li>
+    <li><a href="#强制提供正确的证明nomad">强制提供正确的证明（Nomad）</a></li>
+    <li><a href="#检查共识协议spv的一致性">检查共识协议（SPV）的一致性</a></li>
+    <li><a href="#仍然信任参与者---我们能做得更好吗">仍然信任参与者 - 我们能做得更好吗？</a></li>
+    <li><a href="#验证桥的崛起">验证桥的崛起</a></li>
+    <li><a href="#资产与负债">资产与负债</a></li>
+    <li><a href="#下一步是什么">下一步是什么？</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

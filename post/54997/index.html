@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Aptos上最大的原生协议，将在下个月分三个阶段进行V2升级。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54997/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能" />
+<meta property="og:description" content="Aptos上最大的原生协议，将在下个月分三个阶段进行V2升级。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54997/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-14T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能">
+<meta itemprop="description" content="Aptos上最大的原生协议，将在下个月分三个阶段进行V2升级。"><meta itemprop="datePublished" content="2023-07-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3410">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能"/>
+<meta name="twitter:description" content="Aptos上最大的原生协议，将在下个月分三个阶段进行V2升级。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-14">
+      2023-07-14
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3410 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="http://thala.fi/">Thala</a> 是一种由 Move 语言支持的去中心化金融协议，可通过 Move Dollar 无缝借贷去中心化、超额抵押的稳定币，并通过 Aptos 区块链上的再平衡 AMM 提供资本高效的流动性供应。</p>
+<p>自今年 4 月初推出以来，Thala 作为一个协议不断发展和进化，成为 Aptos 上最大的原生协议，其峰值 TVL 为 3000 万美元，交易量为 5000 万美元。 从那时起，Thala 发布了许多功能和更新，加强了现有的产品套件并引入了新的协议合作伙伴关系。 而今，Thala V2 的发布在即鉴于协议变更和升级的范围之广，V2 的推出将在下个月分三个阶段进行。</p>
+<p>阶段 1 </p>
+<hr>
+<h3 id="mod-锚定稳定性模块">MOD 锚定稳定性模块</h3>
+<p>为了促进递归策略并进一步加强 Move Dollar 的锚定，Thala 推出了锚定稳定性模块 (PSM)，该模块实际上是无息金库，使用户能够在 MOD 和列入白名单的稳定币之间进行 1 对 1 的兑换，且费用较少。 最初，Thala 的 PSM 将支持 Wormhole 和 LayerZero 桥接 USDC。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/3_3g3103yest.png" alt="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能"></p>
+<p>PSM 的推出不仅将巩固 Move Dollar（MOD) 与 1 美元锚定的汇率，还为项目国库创造了新的收入来源。 未来，PSM 资产还可以通过治理部署到低风险、高流动性、计息的现实世界资产（RWA）中。</p>
+<h3 id="cdp-激励措施">CDP 激励措施</h3>
+<p>自推出以来，Thala 通过提供具有特殊的抵押品类型的金库（Vaults），继续与其他 CDP 协议区分开来。 Thala 是 Aptos 上唯一一个用户可以像 tAPT 一样以 LST 进行借贷的协议，也是第一个在链上提供零售杠杆 RWA 敞口的协议。</p>
+<p>随着 PSM 和未来更多独特金库产品的推出，CDP 可用于采购更多奇特的抵押品类型，为其持有人提供独特的价值主张。 具有流动性质押代币、LPT、RWA 和存款收据等产生收益资产的协议可以将部分费用用于激励以其资产为抵押的借贷。</p>
+<p>通过支持金库挖矿，Thala 可以通过激励措施更好地促进和塑造其未来的抵押品支持，并且用户可以通过金库激励措施从更特殊的抵押品类型中获得额外收益。</p>
+<p>（注：特殊抵押品指代比如存款收据代币，实物资产，LP 代币等。）</p>
+<h3 id="闪电贷">闪电贷</h3>
+<p>闪电贷是一个重要的金融原语，Thala 已经将其纳入 RWA 的一键杠杆设计中。 闪电贷的其他应用程序允许用户进行金库抵押品互换； 清算人还可以通过闪电贷获得大量资金，从而在 Thala 上提供更加无缝的用户体验。</p>
+<ul>
+<li>
+<p>现在可以在<a href="https://docs.thala.fi/thala-protocol-design/thalaswap/flash-loans">协议文档</a>中找到如何执行闪电贷的全面概述；</p>
+</li>
+<li>
+<p>该协议对所有闪电贷收取 1 个基点的固定费用，该费用累积到协议费用地址。</p>
+</li>
+</ul>
+<p>截至发布时，所有第一阶段功能现已在主网上上线，Ottersec 已完成第一阶段 V2 合约的全面安全概述。 审计报告可以在协议文档中找到。</p>
+<p>阶段 2 </p>
+<hr>
+<h3 id="vethl">veTHL</h3>
+<p>Thala 的投票托管模型在开发过程中经历了额外的变化。 最初的 veTHL 实施仅支持锁定的 LPT ( 80 THL-20 MOD)，将迫使用户在没有其他选择的情况下提供流动性。 为了鼓励所有用户参与 Thala 的治理，我们更新的投票托管代币经济学现在支持单边 THL 和 80 THL-20 MOD 流动性池代币。</p>
+<p>veTHL 可以通过以下两种方式之一获得：</p>
+<ul>
+<li>
+<p>单侧 THL 锁定 2-52 周；</p>
+</li>
+<li>
+<p>80 – 20 THL-MOD ThalaSwap LPT 锁定 2 – 52 周。</p>
+</li>
+</ul>
+<p>用户可以锁定两者中的任何一个来获得 veTHL，veTHL 代表用户的投票权重。 这可以通过 veTHL 的名义金额和总锁定持续时间来计算。 为了奖励和补偿流动性提供者潜在的无常损失和较高的资本成本，LPT 锁定者将获得投票权重的乘数。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/3_ofprh872mg.png" alt="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能"></p>
+<p>用户的 veTHL 余额代表了他们在 DAO 治理中相对于 veTHL 铸造总量的投票权重。 veTHL 标志着 Thala 向 DAO 治理协议过渡的开始，赋予利益相关者管理协议各个方面的能力，例如金库、抵押品白名单、金库互换、THL 释放等。</p>
+<p>veTHL 标志着 Thala 向 DAO 过渡的开始。 这意味着 ThalaDAO 的成员将能够对重要的协议事务进行投票，包括财务管理、抵押品白名单、协议集成、排放等。</p>
+<h3 id="代币经济学改造和托管-thl">代币经济学改造和托管 THL</h3>
+<p>高 THL 通货膨胀使 Thala 能够为 Aptos 生态系统带来新用户和 TVL，在高峰期成功地在金库和 ThalaSwap 上引导了超过 3000 万美元的 TVL。 然而，Thala 强烈需要采用一种更可持续且与用户保持一致的模式。 为了解决这个问题，Thala 对其排放模型进行了重大改变。 所有 $THL 排放，包括稳定池提供者和流动性提供者，都将获得托管 $THL ($esTHL)，这是应计 $THL 奖励的非流动版本。</p>
+<p>要将 $esTHL 转换为流动 $THL，用户必须将其 $esTHL 归属 30 天。 然而，用户可以提前退出他们的归属期，但代价是对其应计奖励进行动态惩罚。 一部分罚款将被重新定向以奖励 veTHL 持有者的长期合作，而其余罚款将退回国库。 动态退出惩罚的计算和其他细节将在接近第二阶段推出时公布。</p>
+<h2 id="阶段3">阶段 3 </h2>
+<h3 id="议会parliament">议会（Parliament）</h3>
+<p>作为 Aptos 上最大的原生协议，Thala 旨在支持的 Aptos 生态系统中缺少的一个部分是新代币的发布（$THL 除外）。 Thala 目前有 ThalaLaunch 来促进机械流程，但对于新协议（包括 Thala），没有支持代币投票的治理平台。</p>
+<p>Thala 已经为 <a href="https://twitter.com/ThalaLabs/status/1664404945309941760">Aptos Explorer</a>、<a href="https://twitter.com/ThalaLabs/status/1679257376401297408">Surf</a> 和<a href="https://www.thala.dev/">众多开源开发工具</a>提供了新功能，但 Parliament 是 Thala 迄今为止最大的举措。</p>
+<p>Parliament 是一个为 Aptos 构建并支持的 DAO 治理平台，允许协议和 NFT 社区参与代币治理。 很快，协议将能够无缝且无需许可地创建自己的高度可定制的社区空间。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/3_443s54maeb.png" alt="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能"></p>
+<p>启动时，Thala 将整合议会进行 DAO 治理，允许 veTHL 持有者就相关协议事务进行投票。 Thala 将是第一个使用议会进行 DAO 治理的国家，其他 Aptos 原生协议也能效仿。</p>
+<h3 id="批量拍卖batch-auctions">批量拍卖(Batch Auctions)</h3>
+<p>根据 Thala 自己的代币生成活动后的反馈，Thala 意识到需要为项目提供更灵活的代币分配方式。 对于 Thala V2，该协议的启动板产品将支持批量拍卖以及流动性引导池（LBP）。</p>
+<p>在批量拍卖中，有一个固定的期限，用户可以投入资金以预先确定的估值参与。 一旦该期限结束，所有承诺都会以单一清算价格批量并执行。 如果超额承诺超出上限，所有参与者将按比例收到他们的代币和拍卖退款。 批量拍卖模型与 LBP 模型非常相似，有其优点和缺点。 有了这个新产品，协议可以通过在 Thala Launch 上添加批量拍卖选项来更好地评估其代币发行策略。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/3_k6n40oapma.png" alt="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能"></p>
+<h3 id="现实世界资产rwa">现实世界资产(RWA)</h3>
+<p>我们一直在准备将发布一款新的金库产品，该产品的可扩展性远远高于我们现有的 wTBT 和 MOD 金库功能。 根据反馈和现有集成，我们认识到无缝用户体验对于扩展 RWA 产品至关重要。</p>
+<p>Thala 宣布计划于 7 月底推出产品。 增强型 RWA 产品旨在使 RWA 的 DeFi 应用更加人性化。 这种改进的产品具有几个关键特性：</p>
+<ul>
+<li>
+<p>精致的用户界面，方便导航。</p>
+</li>
+<li>
+<p>收益率以 USDC 表示，提供统一且可访问的指标。</p>
+</li>
+<li>
+<p>通过 MOD-USDC LP 和 PSM 一键递归循环。</p>
+</li>
+<li>
+<p>安全的跨链消息传递可实现无缝、自动化的用户流程和清算，无需用户手动桥接资产。</p>
+</li>
+<li>
+<p>RWA 赎回在 Aptos 上以 USDC 的形式分发回用户。</p>
+</li>
+<li>
+<p>预先且易于理解的收益率显示，包括预期的杠杆循环收益率，以帮助用户做出明智的决策。</p>
+</li>
+</ul>
+<p>这里的首要目标是提供一个简单但功能强大的界面，使用户能够轻松利用 DeFi 进行 RWA。 由于 DeFi 的高流动性和高效市场，与银行等传统替代方案相比，用户的债务成本显着降低。 我们坚信，这一创新产品将在 DeFi 和 RWA 领域树立新标准，并突出 DeFi 在实际解决方案中的切实应用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/3_b163puio2v.png" alt="详解Thala V2：引入利用CDP、AMM和启动板的新组件和功能"></p>
+<p>Thala 下一个 RWA 集成的存款模块</p>
+<h2 id="未来规划">未来规划</h2>
+<p>除了这些核心功能之外，Thala V2 还将推出多项生活质量更新，带来 UI/UX 升级、gas 优化等。 此外，上述所有前端预览都是正在进行的工作，Thala 会对发布前的社区反馈和讨论持开放态度。</p>
+<p>自推出以来，Thala 不断对其现有产品套件进行更新和改进，V2 引入了几个利用 CDP、AMM 和启动板的新组件和功能。 鉴于 Thala 在 Aptos 生态系统内的以下垂直领域取得了成功，该协议将很快扩展到另一个尚未开发的 DeFi 原语。 随着 Aptos 于 10 月首次解锁 $APT，该协议将寻求扩展其产品套件，并在今年晚些时候推出其流动质押代币 $thAPT。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55031/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">未来的城市决策，听AIGC的，还是听人的？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55028/">
+                <span class="next-text nav-default">研报：值得关注的新秀模块化L2公链Eclipse</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#mod-锚定稳定性模块">MOD 锚定稳定性模块</a></li>
+        <li><a href="#cdp-激励措施">CDP 激励措施</a></li>
+        <li><a href="#闪电贷">闪电贷</a></li>
+        <li><a href="#vethl">veTHL</a></li>
+        <li><a href="#代币经济学改造和托管-thl">代币经济学改造和托管 THL</a></li>
+      </ul>
+    </li>
+    <li><a href="#阶段3">阶段 3 </a>
+      <ul>
+        <li><a href="#议会parliament">议会（Parliament）</a></li>
+        <li><a href="#批量拍卖batch-auctions">批量拍卖(Batch Auctions)</a></li>
+        <li><a href="#现实世界资产rwa">现实世界资产(RWA)</a></li>
+      </ul>
+    </li>
+    <li><a href="#未来规划">未来规划</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

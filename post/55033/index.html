@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Layer2跨链桥战争：Orbiter VS Layerswap 谁更好用？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将通过对Orbiter 和Layerswap两个跨链桥的原理、操作以及一些细节方面的介绍，以小见大，帮助大家了解当前二层跨链桥的现状。" />
+<meta name="keywords" content="Layer 2, 跨鏈" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55033/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Layer2跨链桥战争：Orbiter VS Layerswap 谁更好用？" />
+<meta property="og:description" content="本文将通过对Orbiter 和Layerswap两个跨链桥的原理、操作以及一些细节方面的介绍，以小见大，帮助大家了解当前二层跨链桥的现状。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55033/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-14T00:00:00+00:00" />
+
+<meta itemprop="name" content="Layer2跨链桥战争：Orbiter VS Layerswap 谁更好用？">
+<meta itemprop="description" content="本文将通过对Orbiter 和Layerswap两个跨链桥的原理、操作以及一些细节方面的介绍，以小见大，帮助大家了解当前二层跨链桥的现状。"><meta itemprop="datePublished" content="2023-07-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4220">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Layer2跨链桥战争：Orbiter VS Layerswap 谁更好用？"/>
+<meta name="twitter:description" content="本文将通过对Orbiter 和Layerswap两个跨链桥的原理、操作以及一些细节方面的介绍，以小见大，帮助大家了解当前二层跨链桥的现状。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Layer2跨链桥战争：Orbiter VS Layerswap 谁更好用？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-14">
+      2023-07-14
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4220 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>本文将通过对Orbiter 和Layerswap两个跨链桥的原理、操作以及一些细节方面的介绍，以小见大，帮助大家了解当前二层跨链桥的现状，也方便自己在跨链时做出最优的选择。</p>
+<p>在链上生态如此丰富的当下，跨链桥已经成为了整个生态不可缺失的一部分。尽管跨链桥被盗的新闻频频出现，但其仍然给用户的资产转移提供了便利。</p>
+<p>随着 Arbitrum、Optimism 等以太坊二层网络的发展，一些专注于 L2 之间资产转移的跨链桥也逐渐崭露头角。今天这篇文章，就要给大家介绍两个非常实用的跨链桥——Orbiter 和Layerswap。</p>
+<p>通过对这两个跨链桥的原理、操作以及一些细节方面的介绍，以小见大，帮助大家了解当前二层跨链桥的现状，也方便自己在跨链时做出最优的选择。</p>
+<h3 id="01为什么选择-layerswap-和-orbiter">01、为什么选择 Layerswap 和 Orbiter</h3>
+<p>可能会有读者疑惑，目前市面上那么多跨链桥，为什么别的不提，单单将这两位拎出来进行介绍呢？这其中另有深意，且听我细细道来。</p>
+<h4 id="官方背书">官方背书</h4>
+<p>首先，跨链桥最重要的是什么？我说是安全性，应该没有人反对吧！作为一个资产转移工具，就如同古代押送货物的镖师，安全自然是重中之重。再加上我开头提到的跨链桥各种被盗，一个不安全的跨链桥，就算他倒贴手续费，也绝对不会有用户愿意使用的。</p>
+<p>打开 zkSync 和 Starknet 的官网，可以清楚地看见这两个跨链桥，都在官方推荐的靠前位置，有了官方的背书，可信度自然是上来了。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_te1ylc8bi2.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_pns1sus2tj.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<h4 id="空投预期">空投预期</h4>
+<p>作为 Web3 用户，空投是万万不可错过的奖励。而在所有的空投中，公链的空投通常是最大方，且覆盖面最广的。目前最值得期待的两个公链空投，应该就是 zkSync 和 Starknet 了。</p>
+<p>如果你想获得这两条链的空投，势必就要体验他们的生态，而 Orbiter 和 Layerswap 都是早早布局这两条链，用户可以非常方便地从其它链转移资产到 zkSync 和 Starknet。</p>
+<p>此外，这两个项目本身也都从未进行空投，如果用户在体验新链使用优先使用它们，那么可以实现一鱼多吃的效果，获得公链和跨链桥两份空投。</p>
+<h3 id="02原理与操作">02、原理与操作</h3>
+<h4 id="原理介绍">原理介绍</h4>
+<p><strong>1.Orbiter</strong></p>
+<p>作为用户，我们虽然不用完全了解跨链桥运转的每一步，但是基本的原理还是可以学习一下，毕竟涉及的是我们自己资金的安全性，了解过后，用起来也更放心。</p>
+<p>Orbiter 在进行跨链时，存在 Sender（发送者）和 Maker（做市商）两个角色。做市商在为跨链发起者提供服务之前，需要先在 Orbiter 的做市商保证金合约中存入超额保证金，并在 Maker address 里面存入 Liquidity 资金，以保证 Sender 的资金可以正常地跨链。</p>
+<p>假设现在我们有一笔 0.1ETH 的资金，要从 Arbitrum 转移到 zkSync，正常的流程是 Sender 在 Arbitrum 上将资金发送给 Maker，Maker 需要知道目标网络，也就是这笔资金要跨到哪条链上，以及资金的数量和类型。</p>
+<p>确认无误后，Maker 就会在目标网络，这里就是 zkSync 上发送给你的钱包一笔资产，这样整个跨链过程就完成了。</p>
+<p>目标网络是使用一个叫做 Identification Code（识别码）的东西来进行区分的，这个识别码在跨链时会被添加在转账金额的后四位，通过检查该识别码，Maker 可以确认目标链。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_o566yv5j6c.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_9z23vadn5t.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>Maker 在整个跨链过程中就相当于是一个资金的中转站。在这个过程中，如果 Maker 没有将 Sender 的资产成功发送，那么 Sender 可以依据交易批准界面提供的识别码等信息向做市商保证金合约(MDC)发起仲裁请求，获得超额补偿。</p>
+<h4 id="2layerswap">2.Layerswap</h4>
+<p>Layerswap 并没有在自己的用户手册中披露太多关于技术原理方面的东西，但是从其早期的跨链风格来看，Layerswap 还是和上面的 Orbiter 有所不同。</p>
+<p>Layerswap 诞生的初期，二层网络还没有成熟，很多用户想要体验 Arbitrum、Optimism 这些二层，只能先从交易所提现资金到 ETH 主网，再从主网使用官方跨链桥，把资产跨链到二层。</p>
+<p>而 Layerswap 当时推出了一个 Bransfer 的工具，并在各大交易所注册自己的账号。用户如果需要进行将 ETH 跨链到二层网络，只需要将资产转移给 Layerswap 的交易所账号里，接着他们会在二层网络发送一笔资金给你的目标地址。</p>
+<p>由于交易所内部转账免手续费，你需要支付的几乎只有二层转账的费用，外加 Layerswap 自己收取的一些费用，可以说是非常便宜了。</p>
+<p>而内部转账如何确认呢？这里就用到了 Bransfer，用户需要在交易所申请一个只读 API，Layerswap 拿到了你的 API，就可以读取你的转账数据了。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_7k9sghw0b9.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>随着二层的发展，大部分交易所已经支持 Arbitrum 和 Optimism 的充提了，就连还未发币的 zkSync 和 Starknet 也都陆续被支持。</p>
+<p>一旦交易所支持这些二层了，那 Layerswap 似乎就失去了它的优势，因此在最新的 v2 版本中，Layerswap 将 Bransfer 进行了迁移，成为了一个内置功能，用户无需再注册 Bransfer。</p>
+<p>此外，由于二者的合并，其交易历史也进行了统一，用户可以直接在 Layerswap 上进行查看。</p>
+<p>从 Layerswap 的发家史来看，结合当前的跨链资金限制，我们可以猜测其大概率还是使用的还是自己的资金来帮助用户进行跨链，从而赚钱手续费。</p>
+<h4 id="实际操作">实际操作</h4>
+<h4 id="1-orbiter">1. Orbiter</h4>
+<blockquote>
+<p><a href="https://orbiter.finance">https://orbiter.finance</a></p>
+</blockquote>
+<p>这里我以 Arbitrum 跨链到 zkSync Era 进行演示。首先我们打开 Orbiter 的网站，这里直接使用 V2 版本，可跨链的代币会更多。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_leed7kpijf.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>如图所示，界面非常简洁，直接选择好对应的链、代币，并填入数量即可。底部会显示帮你节省了多少 GAS 费以及时间，如果你想看到实际费用，将鼠标指针放在问号上面就会显示官方跨链桥的费用，以及使用 Orbiter 的费用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_9scsgu3pon.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>如果想要查看自己跨链的历史，可以在右上角的 History 查看。除了跨链的功能，orbiter 还推出了一个 L2 的数据看板，点击左上角的 L2 Data，就可以看到二层整体的交易数据以及各个项目单独的数据。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_sv2bl01j4i.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<h4 id="2-layerswap">2. Layerswap</h4>
+<blockquote>
+<p><a href="https://layerswap.io/app">https://layerswap.io/app</a></p>
+</blockquote>
+<p>打开 Layerswap 的官网，因为它支持交易所直接跨链，这里我们尝试从 OKX 跨链 ETH 到 zkSync Era。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_0c8p87jjmn.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>选好 OKX 和 zkSync Era 之后，输入要跨链的金额，这里代币种类无法更改，只有 ETH 可以选，而且限制最大 1 ETH。</p>
+<p>右上角有客服按钮，如果跨链过程中出现任何问题，可以直接联系他们，“Transfer”那里也可以看到历史记录。</p>
+<p>底部会显示你将收到的代币数量，这里显示我会收到 0.99802 个 ETH。包括 0.001198 ETH 的 Layerswap Fee 以及 0.01 的 Exchange Fee。</p>
+<p>收款地址这里，既可以填写与发送地址相同的地址，也可以自定义一个其它地址，比较方便。</p>
+<p>点击“Swap Now”之后，会进入转账界面，你需要在 OKX 里面提现 1 个 ETH，发送到它提供给你的收款地址。这里发送的公链是可以选择的，默认是 Arbitrum，节省手续费。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_y91azalelu.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>当你完成了交易所提现到该地址的操作后，这个界面会自动检测到资金到账，接着会把这笔资金转移到你 zkSync Era 的地址上。</p>
+<h3 id="03细节对比">03、细节对比</h3>
+<h4 id="支持的公链数量">支持的公链数量</h4>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_z011kjbqdf.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>从支持的公链数量上来看，Layerswap 比 Obiter 多出了两个，分别是 Solana 和 Avalanche，且单独支持交易所提现跨链。</p>
+<p>但是数量多不代表更好，Solana 这条公链在 FTX 崩盘之后，已经远不如从前那般活跃。Avalanche 整个生态似乎也没有什么特别亮眼的项目，整体的活跃度也比较一般。因此Orbiter 缺失了这两条链的支持，问题也不是很大。</p>
+<h4 id="跨链速度">跨链速度</h4>
+<p>在跨链速度方面，我们从任意链跨到 zkSync Era。</p>
+<p>Orbiter 的时间基本都在 30 秒左右，其中主网速度稍慢，可能要45秒，如果主网较卡时，可能还要更久。最快的是 BSC 网络，跨链到 zkSync Era 只需要 15秒。</p>
+<p>Layerswap 跨链速度普遍都稍慢，基本都在2分钟左右。其中 polygon 跨链到 zkSync Era 的速度最慢，超过 1 个小时。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_mmilktbymb.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>因此在跨链速度方面，Orbiter 还是完胜 Layerswap 的。</p>
+<h4 id="跨链费用">跨链费用</h4>
+<p>Orbiter 大部分二层之间的跨链费用在 2U~4U 之间，通常都是固定的，少数跨链费用是随着跨链金额的增加而增加的，例如将 ETH 从 zkSync Era 跨链回 Arbitrum 就是这样。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_l0if2ud9vz.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>当跨链金额为 0.01 ETH 时，费用为 2.47 U。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_aoai5kb5ea.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>当我们试图把跨链金额提高到 1ETH 时，跨链手续费立刻水涨船高，来到了 4.43U。</p>
+<p>而二层跨到主网的费用就高了，14U 手续费起步，跨链金额越大，手续费也是越高，最高可以到 20U，再高就没有了，因为 Orbiter 的 Maker 对跨到主网的资金做了限制，最大只有 10E。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_cfvag0cyal.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>Layerswap 二层之间跨链的费用基本都在 0.0016E 左右，也就是3U。不管跨链资金怎么变化，手续费仍然比较稳定。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_n8c42sd2mt.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>当我们尝试把资金从二层跨到以太坊主网时，手续费竟然比二层之间互转还便宜。整体体验下来可以发现，Layerswap 的跨链费用还是比较稳定的，就像交易所的提币费用那样稳定。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_gs3fmky41z.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>对比下来，在跨链费用方面，Layerswap 似乎还略胜一筹。</p>
+<p>除了直接在跨链桥上直接查看跨链费用，使用 Chaineye 也可以进行跨链费用查询。</p>
+<blockquote>
+<p><a href="https://chaineye.tools/bridge">https://chaineye.tools/bridge</a></p>
+</blockquote>
+<p>打开工具后输入跨链的相关信息，一键就可以查询各个跨链桥的费用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_teuayuj8ak.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>工具默认会按照手续费由低到高进行排名，可以将右上角的“cheapest”改成“fastest”。这样就会显示速度最快的链。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0714/6_eyq8dynklg.png" alt="Layer2跨链桥战争：Orbiter VS Layerswap，谁更好用？丨附交互教程"></p>
+<p>（按照速度从快到慢排序）</p>
+<h4 id="安全性">安全性</h4>
+<p>从上面提到的原理来看，Orbiter 通过白名单机制让多个有资金的做市商为用户在各链提供跨链的流动性，同时通过保证金与仲裁机制避免了做市商收到资金后的不作为风险，来保障用户的资金安全。</p>
+<p>相比于 Layerswap 单一实体提供流动性，前者在保证用户资金安全似乎考虑得更为全面。</p>
+<h3 id="04总结">04、总结</h3>
+<p>通常上面的论述，我们可以使用下面的策略来完成日常跨链：</p>
+<p>1. 当跨链资金不大时，优先使用 Layerswap，它的手续费较低，但是速度稍微慢一点；</p>
+<p>2. 当跨链资金较大时，优先使用 Orbiter，Orbiter 的流动性显然更充足，可以满足更大资金的跨链需求，而 Layerswap 有着 1ETH 的限制；</p>
+<p>3. 当需要从二层跨链到主网时，优先使用 Layerswap，二层到主网的费用还是 Layerswap 最便宜；</p>
+<p>4. 资金在交易所，想要直接跨链到目标链的用户，优先选择 Layerswap，毕竟只有它支持交易所；</p>
+<p>5. 对时间和安全比较在意，但不在乎手续费的用户，可以优先选择 Orbiter。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55003/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">GPT-4 被曝“变蠢”！为了降本，OpenAI 偷偷搞“小动作”？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55014/">
+                <span class="next-text nav-default">Multichain公告：Multichain资产被陌生IP地址和CEO姐姐转走</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#01为什么选择-layerswap-和-orbiter">01、为什么选择 Layerswap 和 Orbiter</a></li>
+        <li><a href="#02原理与操作">02、原理与操作</a></li>
+        <li><a href="#03细节对比">03、细节对比</a></li>
+        <li><a href="#04总结">04、总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

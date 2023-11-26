@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          zkSync中的原生Account Abstraction介绍 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文主要介绍了zkSync这个Layer2解决方案中抽象账户（AA、抽象帐户）的发展及相关内容。" />
+<meta name="keywords" content="zkSync, Layer 2" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/57600/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="zkSync中的原生Account Abstraction介绍" />
+<meta property="og:description" content="本文主要介绍了zkSync这个Layer2解决方案中抽象账户（AA、抽象帐户）的发展及相关内容。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/57600/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="zkSync中的原生Account Abstraction介绍">
+<meta itemprop="description" content="本文主要介绍了zkSync这个Layer2解决方案中抽象账户（AA、抽象帐户）的发展及相关内容。"><meta itemprop="datePublished" content="2023-08-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7715">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="zkSync中的原生Account Abstraction介绍"/>
+<meta name="twitter:description" content="本文主要介绍了zkSync这个Layer2解决方案中抽象账户（AA、抽象帐户）的发展及相关内容。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">zkSync中的原生Account Abstraction介绍</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-23">
+      2023-08-23
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7715 字 -
+        预计阅读 16 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Written by ChiHaoLu，imToken Labs</p>
+<p>本文主要介绍了zkSync这个Layer2解决方案中抽象账户（AA、抽象帐户）的发展及相关内容。重点将放在三个部分：</p>
+<ul>
+<li>
+<p>帐户合约：帐户类型，帐户合约的重要入口点和相关重点</p>
+</li>
+<li>
+<p>交易：AA交易的验证方式和执行方式、流程</p>
+</li>
+<li>
+<p>手续费：交易手续费、Paymaster</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0823/15_ysc1yhz88n.png" alt="wXO9pTRzhIvPDKhIdGhNYWqOdj85rH6eYhNdyZun.png" title="7087109"></p>
+<p><strong>目录</strong></p>
+<ul>
+<li>
+<p>导言</p>
+</li>
+<li>
+<p>zkSync AA合约简要概览</p>
+</li>
+<li>
+<p>zkSync时代的费用模型和Paymaster</p>
+</li>
+<li>
+<p>总结与比较</p>
+</li>
+<li>
+<p>结束语</p>
+</li>
+</ul>
+<p><strong>背景</strong></p>
+<ul>
+<li>
+<p>熟悉智能合约钱包及其常见特性</p>
+</li>
+<li>
+<p>大致了解以太坊交易的运作方式</p>
+</li>
+<li>
+<p>大致了解EIP-4337的运作模式</p>
+</li>
+<li>
+<p>大致了解ZK（有效性）Rollup的运作模式</p>
+</li>
+<li>
+<p>Quick Look at the zkSync</p>
+</li>
+</ul>
+<p>这里为了方便阅读，不需要深入理解zkSync，简要回顾一下zkSync的基本信息。zkSync主要有两个版本，1.0版（zkSync Lite）和2.0版（zkSync Era）。</p>
+<p>zkSync 1.0版仅支持EOA（外部账户）且不支持智能合约（仅支持代币转账和交换），而zkSync 2.0，即zkSync Era，属于原生AA（抽象账户）（所有账户类型都是合约，没有EOA，即以太坊中的EOA和合约账户的区别），同时兼容EVM（以太坊虚拟机），支持使用Rust、Yul、Vyper、Solidity等开发智能合约。</p>
+<p>下文提到的zkSync若无特别指称，均指的是zkSync 2.0，即zkSync Era。</p>
+<p>在zkSync Era中，还存在多个System Contract，可以理解为它们将zkSync的一些重要操作系统功能实现在智能合约中。这些System Contract都是预编译合约，从未被部署（直接在节点中运行），但它们都有一个正式地址。</p>
+<p>执行AA协议时，zkSync会通过一些System Contract来进行逻辑运算和判断，例如在验证nonce时，是由NonceHolder来判断，而执行抽象账户机制和收取手续费是由bootloader来判断，下文会逐一介绍它们。</p>
+<p><strong>Recap Account Abstraction</strong></p>
+<p>账户抽象的核心概念可以总结为两个关键点：签名抽象和支付抽象。</p>
+<p>签名抽象的目标是使各种账户合约能够使用不同的验证方案。这意味着用户不受限于只能使用特定曲线的数字签名算法，而可以选择任何他们喜好的验证机制。</p>
+<p>而支付抽象旨在为用户提供多种交易支付选项。例如，可以使用ERC-20代币进行支付，而不是使用原生代币，或者可以由第三方赞助交易，甚至是其他更特别的支付模式。</p>
+<p>zkSync 2.0中的账户可以像EOA一样发起交易，但也可以利用其可编程性来实现任意逻辑，如合约账户。这就是我们所谓的帐户抽象（Account Abstraction），它融合了以太坊中两种账户类型的优势，使AA账户的使用体验更加灵活，从而实现了上述两种目标：签名抽象和支付抽象。</p>
+<p><strong>zkSync Era中的AA机制</strong></p>
+<p>在zkSync Era中，zkSync AA的最重要角色是bootloader，它是一个System Contract，主要用于处理交易以及执行AA机制，对应于EIP-4337的EntryPoint Contract。bootloader无法被用户调用（只能由Operator触发），也从未被部署（直接在节点上运行），但它具有一个正式地址（可用于收款）。</p>
+<p>Operator是ZK Rollup中的重要角色，是中心化的Off-Chain Server，与可能见过的Sequencer类似，负责从外部触发bootloader等System Contract。</p>
+<p>原生的帐户抽象协议（例如StarkNet、zkSync）基本上都是参考EIP-4337进行设计，zkSync的实现中，用户会将交易发送给Operator，Operator会将交易发送给bootloader，并开始一系列的处理。</p>
+<p>从区块的角度来看：</p>
+<p>当bootloader接收到来自Operator的输入时，bootloader会首先为该区块定义一些环境变量（如燃气价格、区块号、区块时间戳等）。然后，bootloader会顺序读取交易列表，首先查询该帐户合约是否同意该交易（即AA机制中的调用validate function），然后将它们放入区块中。</p>
+<p>每笔交易验证通过后，Operator会验证该区块是否足够大，以便发送给验证者（或是否超时）。如果足够大或超时，Operator会关闭该区块，停止向bootloader添加新交易，并完成交易执行。</p>
+<p>从交易的角度来看，当Operator触发bootloader后，bootloader会顺序处理每笔交易：</p>
+<ol>
+<li>
+<p>确认用户帐户合约地址对应的nonce是否合法</p>
+</li>
+<li>
+<p>调用用户帐户合约上的validate function进行验证</p>
+</li>
+<li>
+<p>验证通过后，帐户合约会将gas fee汇入bootloader的地址（或通过Paymaster，后文会介绍），bootloader会检查自己是否收到足够的款项。</p>
+</li>
+<li>
+<p>调用用户帐户合约上的execute function执行交易。</p>
+</li>
+</ol>
+<p>以上的前三步对应着EIP-4337的验证循环（Verification Loop），第四步则对应着EIP-4337的执行循环（Execution Loop）。</p>
+<p>这里主要进行了一个概述性的介绍，每一步的细节和角色将在接下来的详细说明中逐一阐述。</p>
+<p><strong>zkSync 抽象帐户合约快速概览</strong></p>
+<p><strong>Nonce</strong></p>
+<p>zkSync 的账户 nonce 被记录在一个名为 NonceHolder 的系统合约中，通过映射（mapping）的方式记住每组 (account_address, nonce) 对是否被使用，用以判断 nonce 是否合法。</p>
+<p>根据前文所述，在 Operator 触发 bootloader 后的第一步是检查 nonce。因此，在每笔交易开始之前，NonceHolder 将用于确认当前使用的这组 nonce 是否合法（目前仅检查是否已使用）。如果 nonce 合法，将进入验证阶段（Verification Phase），此时 nonce 将被标记为已使用；如果不合法，则交易（验证）将失败。</p>
+<p>关于 zkSync 当前 nonce 的重点：</p>
+<p>尽管当前用户可以同时向账户发送具有不同 nonce 的多笔交易进行执行，但由于 zkSync 不支持并行处理，因此不同 nonce 的交易仍将按顺序进行处理。</p>
+<p>理论上，用户可以使用任何 256 位的非零整数作为 nonce，但 zkSync 仍建议使用 incrementNonceIfEquals 作为管理 nonce 的方式，以确保它是按顺序递增的（目前 zkSync 的 AA 机制仅确认未使用过的 nonce，但官方文件表示未来可能会要求顺序递增）。</p>
+<p><strong>账户合约</strong></p>
+<p>在 zkSync 中的账户合约有以下四个必要的入口点（Entry Point），分别是：</p>
+<ul>
+<li>
+<p>validateTransaction：在验证阶段被调用，以确认此次操作是否经过账户所有者的授权，用户可以在这里定制自己的验证逻辑（例如各种签名算法、多签等）。</p>
+</li>
+<li>
+<p>payForTransaction：当交易手续费由该账户支付（而不是使用 paymaster）时，操作员将调用此函数向 bootloader 地址支付至少 tx.gasprice * tx.gaslimit 的 ETH。</p>
+</li>
+<li>
+<p>prepareForPaymaster：当交易手续费将由 Paymaster 支付时，操作员将调用此函数以完成与 paymaster 的交互前准备工作。zkSync 提供的示例是批准 Paymaster 的 ERC-20 代币。</p>
+</li>
+<li>
+<p>executeTransaction：在验证阶段成功通过且成功收取手续费后，此函数将用于执行用户希望实现的操作（例如与合约互动、汇款等行为）。</p>
+</li>
+</ul>
+<p>关于 Paymaster、手续费数量（tx.gasprice * tx.gaslimit）等内容将在后续章节中解释。</p>
+<p>在zkSync的账户中还有一个非必需的保险函数 executeTransactionFromOutside。当无法执行操作时（例如序列生成器没有响应或发现zkSync存在监管风险时），可以使用“逃跑机制”将资金提取到L1。这部分与AA协议没有太大的关系，因此不会在此详细描述，有兴趣的人可以查看官方文件和zkSync的规范。</p>
+<p><strong>验证函数的要点和限制</strong></p>
+<p>在validateTransaction函数中，可以实现各种定制逻辑，例如如果账户已经实现了EIP-1271标准，可以直接将EIP-1271中的验证逻辑套用在validateTransaction中，或者参考zkSync官方文档中的多签名账户合约实现。</p>
+<p>同时，在EIP-4337的Verification Phase中为了避免DoS威胁，有一些限制（不能涉及外部的操作码以及有限的深度等），在zkSync中也有类似的限制，例如：</p>
+<p><strong>1.合约逻辑只能触及自己的槽位（如果账户合约的地址为A）：</strong></p>
+<p>- 属于地址A的槽位</p>
+<p>- 任何其他地址的槽位A</p>
+<p>- 任何其他地址的槽位keccak256(A||X)，即可以直接使用地址作为映射的键（例如映射(address=&gt;value)），也等同于允许访问槽位keccak256(A||X)，以实现扩展。例如ERC-20上的代币余额。</p>
+<p><strong>2.合约逻辑不得使用全局变量，例如block.number</strong></p>
+<p><strong>执行函数的要点和限制</strong></p>
+<p>在executeTransaction函数中需要注意的是，如果要执行系统调用（System Call），需要确保具有isSystem标志。因为这些系统合约对账户系统的影响非常大，例如增加nonce的唯一方式是与NonceHolder互动，要部署合约必须与ContractDeployer互动，使用isSystem标志可以确保账户开发者有意识地与系统合约互动。</p>
+<p>然而，建议在实现时可以使用zkSync提供的SystemContractsCaller库，以避免自己处理isSystem标志，并使用其中的systemCallWithPropagatedRevert完成系统调用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0823/15_ysay9m1azr.png" alt="HcJ4N9RyPiqxu3WmnCsZrAWDg6ahOaTvdLjzuowI.png" title="7087125"></p>
+<p>上述代码示例中涉及与`DEPLOYER_SYSTEM_CONTRACT`进行交互。帐户开发者最常遇到的系统合约情况是我们要使用帐户来部署一个合约，此时必须与`ContractDeployer`这个系统合约进行交互。在这种情况下，帐户开发者需要与`ContractDeployer`合约进行通信，以确保成功部署合约并执行所需的操作。</p>
+<p><strong>zkSync时代的费用模型和Paymaster</strong></p>
+<p><strong>费用和 Gas 限额</strong></p>
+<p>zkSync的费用模型与以太坊非常相似，费用代币仍然是ETH。然而，除了基本的计算和写入槽位成本外，与其他Layer2解决方案（如Arbitrum、Optimism）一样，zkSync还需要考虑发布到L1的额外成本（安全费用）。由于发布数据到L1上的燃气价格非常不稳定，因此在每个区块开启（开始记录交易）时，zkSync的Operator会定义以下动态参数：</p>
+<p>- <strong>gasPrice</strong> ：以gwei为单位的燃气价格，即前文提到的交易对象中的tx.gasprice</p>
+<p>- <strong>gasPerPubdata</strong> ：在以太坊上发布一个字节的数据所需的燃气数量</p>
+<p>此外，与EIP-4337不同，zkSync不需要定义三种燃气限制：verificationGas、executionGas和preVerificationGas，而只需要一个gasLimit来包含以上所有费用成本，因此用户需要确保gasLimit足够涵盖Verification阶段、Execution阶段以及上传数据到L1的安全费用等所有费用成本。这个费用成本包含在前文提到的交易对象中的tx.gaslimit。</p>
+<p>将这两者相乘（tx.gasprice * tx.gaslimit）就可以得到这笔交易支付给bootloader的手续费数量。</p>
+<p><strong>Paymaster</strong></p>
+<p>Paymaster主要在用户交易支付手续费阶段，代替用户的帐户合约向bootloader支付ETH。用户可以选择不同的Paymaster和支付模式来支付手续费，例如（但不限于）：</p>
+<p>- 在交易发起前或交易执行后向Paymaster支付ERC-20代币</p>
+<p>- 使用信用卡向Paymaster合约充值</p>
+<p>- Paymaster将持续为用户免费支付部分或全部手续费</p>
+<p>用户与Paymaster互动的方式取决于不同的协议，可以是中心化也可以是去中心化；可以在交易前，也可以在交易后；可以使用ERC-20代币也可以使用法定货币，甚至可以是免费的。</p>
+<p>zkSync的Paymaster合约主要由两个函数组成，分别是validateAndPayForPaymasterTransaction（必需）和postTransaction（可选），两者都只能被bootloader调用：</p>
+<p>- validateAndPayForPaymasterTransaction是整个Paymaster合约中唯一必须实现的函数。当操作员收到的交易附带Paymaster参数时，表示手续费不由用户的帐户合约支付，而是由Paymaster支付。此时，操作员将调用validateAndPayForPaymasterTransaction来判断该Paymaster是否愿意支付这笔交易的手续费。如果Paymaster同意，该函数将向bootloader发送至少tx.gasprice * tx.gaslimit的ETH。</p>
+<p>- postTransaction是一个可选函数，通常用于退款（将未使用完的燃气退还给发件人）。然而，当前的zkSync尚不支持此操作。</p>
+<p>zkSync中的Paymaster在实现了postTransaction后才会执行postTransaction，这一点与EIP-4337不同，EIP-4337在validatePaymasterUserOp没有返回上下文时不会调用postOp，反之亦然。</p>
+<p>综合以上，举例来说用户现在想要发送一笔手续费由 Paymaster 支付的交易，那流程如下：</p>
+<ol>
+<li>
+<p>借由 NonceHolder 确认 nonce 是否合法</p>
+</li>
+<li>
+<p>呼叫用户 Account Contract 上的 validateTransaction 进行验证，确认交易由帐户拥有者授权</p>
+</li>
+<li>
+<p>呼叫用户 Account Contract 上的 prepareForPaymaster，里面可能会执行例如 approve 一定数量的 ERC-20 Token 给 Paymaster 或是不做任何事</p>
+</li>
+<li>
+<p>呼叫 Paymaster Contract 上的 validateAndPayForPaymasterTransaction 确认 Paymaster 愿意支付并且收取手续费，同时 Paymaster 向用户收取一定数量的 ERC-20（前面 approve 的）</p>
+</li>
+<li>
+<p>确认 bootloader 收到正确数量（至少 tx.gasprice * tx.gaslimit）的 ETH 手续费</p>
+</li>
+<li>
+<p>呼叫用户 Account Contract 上的 executeTransaction 执行用户想要的交易</p>
+</li>
+<li>
+<p>如果 Paymaster Contract 有实作 postTransaction 且 gas 仍然足够（没有 out of gas error），那就执行 postTransaction</p>
+</li>
+</ol>
+<p>最后一步即便 out of gas error 导致不能执行 postTransaction，这笔 AA 交易也算是成功，只是省略掉呼叫 postTransaction 的动作而已。</p>
+<p>更深入探究 zkSync 的 Paymaster 会发现它的 Verification Rules 和 4337 稍有不同（zkSync Paymaster 可以踩任何其他合约的 slot）、同时也有各种不同的 type（例如 Approval-based），这部分由于比较细节所以有兴趣深入的人可以参考官方文件或我之前的实作。</p>
+<p><strong>Summary &amp; Comparison</strong></p>
+<p>通过前文的解释，我们已经了解了账户合约具有哪些重要的入口点，以及它们的作用和相关限制。同时，我们也了解了系统合约的功能。接下来，让我们对在 zkSync 中一个自动操作（AA）交易从构建到完成的过程进行总结，同时我也会提供更详细的参考资料，以供那些希望深入了解的人参考：</p>
+<p>1. 用户在本地使用 SDK 或钱包构建交易对象（例如：from、to、data、value等）。</p>
+<p>2. 用户对该交易进行签名。这里的签名不一定是传统的 EIP-712 格式和 ECDSA 曲线签名。zkSync 还支持 EIP-2718 和 EIP-1559，选择签名方式和验证方式的关键在于通过帐户合约中的验证函数进行验证。</p>
+<p>3. 将已签名的交易通过 RPC API 发送给操作员（Operator）。此时交易进入待处理状态。操作员将交易传递给 bootloader（调用 bootloader 合约上的 processL2Tx 函数），开始一系列的 AA 协议流程。</p>
+<p>4. Bootloader 会检查 Nonce 是否合法，使用 NonceHolder 进行检查。</p>
+<p>5. Bootloader 会调用用户账户合约上的 validateTransaction 函数，以确认此交易已获得帐户所有者的授权。</p>
+<p>6. Bootloader 收取手续费有两种方式，具体收费方式取决于交易参数（构建交易对象时是否附带 paymaster 参数）：</p>
+<p>   a. 调用 payForTransaction 函数与账户合约收取手续费；</p>
+<p>   b. 调用 prepareForPaymaster 和 validateAndPayForPaymasterTransaction 函数与 Paymaster 合约收取手续费。</p>
+<p>7.「呼叫 payForTransaction 来跟 Account 合约手续费」或者「呼叫prepareForPaymaster 和validateAndPayForPaymasterTransaction 来跟 Paymaster 合约手续费」</p>
+<p>8. 检查 bootloader 是否已收到至少 tx.gasprice * tx.gaslimit 数量的交易手续费。</p>
+<p>9. Bootloader 会调用用户账户合约上的 executeTransaction 函数来执行交易。</p>
+<p>10. （可选）如果使用 Paymaster 支付手续费，bootloader 会调用 postTransaction 函数。如果 Paymaster 没有实现 postTransaction，或者 gas 已耗尽，将跳过此步骤。</p>
+<p>以上的4.~7.步为验证阶段（定义在bootloader的l2TxValidation），第8.~9.步 执行阶段（定义在 bootloader 的 l2TxExecution）。</p>
+<p><strong>EIP-4337、StarkNet 和 zkSync 时代的比较</strong></p>
+<p>基本上这三者的AA机制流程都相仿，皆为验证阶段→手续费机制（由账户合约支付或者Paymaster）→执行阶段，主要差别有：</p>
+<ul>
+<li>
+<p>执行 AA 机制的角色是：在 zkSync 时代中开启与其他两者 AA 的差别在于 Operator 需要和 bootloader（系统合约）一起配合，例如 bootloader 会开启一个新区块并定义该区块的相关参数，接收操作员发送来的交易者并进行验证。在 4337 中这部分由 Bundler 与 EntryPoint 协作，而在 StarkNet 中这部分全部由 Sequencer 负责。</p>
+</li>
+<li>
+<p>Gas Cost 是否需要考量到 L1 安全费用：L2 的 AA 都需要考虑这个上传数据到 L1 的费用，不只是推送提到的 ZK（Validity）Rollups Native AA，在 Optimistic Rollups 实作 4337 时也需要算入 L1安全费用（计算在 preVerificationGas 中，细节可见 Alchemy 相关文件）。</p>
+</li>
+<li>
+<p>是否可以在账户合约部署前发送出交易：在 StarkNet 和 zkSync 时代中都没有像 4337 的 EntryPoint 有 initCode 这个字段允许替用户部署账户合约，所以其都不在可以配置账户前发送出交易。</p>
+</li>
+</ul>
+<p><strong>对比</strong></p>
+<p><strong><img src="https://img.bibiqing.com/news/2023/0823/15_3ec57k2h8n.png" alt="VOBhvEvzk06iHKk5Z1pMseUlue6yBpVw7CHkxXwR.png" title="7087164"></strong></p>
+<blockquote>
+<p>由于StarkNet尚无已实现的Paymaster机制、zkSync也尚未完成gas退款机制的设计，所以一些比较细节的比较在这里就没有列出。</p>
+</blockquote>
+<p>另外，目前的 4337 bundler我们完成了 P2P mempool，且 zkRollups 的 Sequencer 和 Operator 也还是唯一的官方服务器，所以都有一定中心化的成分存在。</p>
+<p>在开发流程上 zkSync 由于没有与各家bundler串接的问题（只需要与 Operator API 交互），所以使用起来 4337 很容易，开发帐户合约（SDK）的体验也更好；同时 zkSync 可以使用 Solidity作为合约开发语言，所以也不需要在 StarkNet 开发中跨过Cairo的门槛。</p>
+<p><strong>结语</strong></p>
+<p>由于 StarkNet 和 zkSync 都属于本地 AA（Native AA）的范畴，因此你也可以参考我之前撰写的 StarkNet AA 介绍文章，题为《StarkNet Account Abstraction 简介》（Introduction of StarkNet Account Abstraction）。此外，你还可以阅读与 EIP-4337 相关的其他文章，以获得更多相关信息。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/57617/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">USDC将在Polygon PoS、Base、Polkadot、NEAR、Optimism和Cosmos推出</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/57599/">
+                <span class="next-text nav-default">ZK赛道新进展：Opside Pre-alpha测试网成绩回顾</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

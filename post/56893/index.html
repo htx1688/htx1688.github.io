@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          SignalPlus：解析低IV行情下期权卖方的组合策略 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="辩证的去看IV高或者低，辩证的去看卖方和买方，辩证的去看多头和空头，辩证的去看很多前人得出的结论，赢在修正，不在预测。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56893/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="SignalPlus：解析低IV行情下期权卖方的组合策略" />
+<meta property="og:description" content="辩证的去看IV高或者低，辩证的去看卖方和买方，辩证的去看多头和空头，辩证的去看很多前人得出的结论，赢在修正，不在预测。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56893/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-11T00:00:00+00:00" />
+
+<meta itemprop="name" content="SignalPlus：解析低IV行情下期权卖方的组合策略">
+<meta itemprop="description" content="辩证的去看IV高或者低，辩证的去看卖方和买方，辩证的去看多头和空头，辩证的去看很多前人得出的结论，赢在修正，不在预测。"><meta itemprop="datePublished" content="2023-08-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3068">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SignalPlus：解析低IV行情下期权卖方的组合策略"/>
+<meta name="twitter:description" content="辩证的去看IV高或者低，辩证的去看卖方和买方，辩证的去看多头和空头，辩证的去看很多前人得出的结论，赢在修正，不在预测。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">SignalPlus：解析低IV行情下期权卖方的组合策略</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-11">
+      2023-08-11
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3068 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E8%A1%8C%E6%83%85/"> 行情 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：栗坤 Sober</p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_wpsse9ucc3.png" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p>大多数马赛克市场期权玩家认为当前 IV 在 30 附近或者以下（如下图所示：IV vs RV, source from：signalplus）的时候，卖方没法继续“鸭”了，此时 long Gamma 或者 long Vega 应该粉墨登场！</p>
+<p>但这实际是这样么？我不这么觉得，待我剥茧抽丝，细细道来。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_ryzc0cnpdy.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>近 1 个月马赛克市场 IV 与 RV 对比</em></p>
+<h2 id="一iv低或者高要看参照物是什么">一、 IV 低或者高，要看参照物是什么？</h2>
+<p>我们平时做交易，交易的是什么价值？对，交易的是价格，也就是相对价值，投资或者交易本质也是最优性价比的选择。此时此刻，再去说 10 年前无风险（当时相当于无风险和刚兑，当然这种说法学术上面也不那么严谨） 15% 收益的信托，或者是 5% 的余额宝都意义不大。</p>
+<p>相对价值交易的情况可能会变得非常复杂，尤其是在执行这种策略时，我们简单将相对价值做个描述。例如：许多玩家在尝试衡量今天大饼 IV 时使用历史大饼的 IV 来衡量，那确实一去不复返了。</p>
+<p><strong>用过去衡量今天！</strong> （投资行业我们知道千万不要把“历史性行业”和“周期性行业”做混淆，期权 IV 和定价也是一样道理）</p>
+<p>事物的基本面已经发生变化（用哲学一点话来讲：我不能两次踏入同一条河流）。因此，与其以过去为基准，不如以另外一个标的资产（例如：美股芯片股）为基准，大家都会这么比，但我们心里要有杆秤，意义不大了。就像 A 股现在的互联网你还用 18 年以前估值方法去研究，那就是“刻舟求剑”了。</p>
+<p>事实上，现在很多机构做波动率套利，其中一种方式就是用自己建模的 IV 和当前 IV 做比较，而进行波动率套利交易（高 sell，低 buy，配平 delta）。但是，不同专业水准的机构模型水平大相径庭，且目前也存在一些私募基金挂羊头卖狗肉的情况，我们作为普通投资人还是需要进行甄别。</p>
+<h2 id="二看看过去半年实际情况">二、 看看过去半年实际情况</h2>
+<p>看看过去 6 个月鸭站上面 IV 与 RV 的数据，我们通过数据观察可以发现虽然今年大家喊了半年 IV“太低了”，实际卖方赚钱虽然较之前更卷，但是如果不做卖方，同样水平玩家做买方真的能赚到钱么？不要看一次，两次，要拿出长期业绩来。【留给各位思考，开放式问题】</p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_vkathgn7e2.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>近 6 个月马赛克市场 IV 与 RV 对比</em></p>
+<p>实际上长期来看 IV 不能脱离 RV 太远，彼此 Match 才是长期生存之道，否则买方不就成“大冤种”么？</p>
+<p>因此，我认为比较有意义的是做一些相对价值分析，去定价当下 IV 的合理值，只要在合理值水位以上，哪怕再低，接着卖。看看大饼这半年多 IV 与 RV 走势，虽然 Gap 值很小，但是大多数时间 IV 是有溢价的。卖方卖保险，挣的是什么？就是这个溢价钱。</p>
+<p>最近 1-2 个月很多卖方抱怨 IV 低，做一些 long gamma 策略，其实亏的更惨，这就是我要说的，低或者不低，要看 IV 的相对定价和个人期权策略的能力圈。</p>
+<h2 id="三有什么典型的策略">三、 有什么典型的策略</h2>
+<p>最近思考和实战，觉得反日历策略会是一个性价比很高的策略，通过下图可以看出 8 月底大饼的 IV 都还比较低， 9 月份有明显上翘，surface 图也可以很明显观察出来。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_7wj3m9zc4l.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>大饼 Term structure</em></p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_86y5s6gsvm.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>大饼 surface</em></p>
+<p>组合策略构建比较简单。以今天 8 月 3 日周四为建仓日</p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_gi2g8jn8k2.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>策略具体买卖期权</em></p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_pquyacd6co.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>Breakeven &amp; Greeks</em></p>
+<p>方法如下：买入 8 月底 2.8 w 的 put，卖 9 月底 2.8 w 的 put。组合是以 premium 收入方式构建的。由于属于跨月组合，有单向卖权保证金。IV 上翘意味 9 月可以卖出溢价（相对最大程度收 Theta）， 8 月下凹意味着 8 月可以 buy 的便宜。</p>
+<p>在 8 月底合约到期之前，组合属于完全对冲的，没有大的风险敞口。</p>
+<p>我们分析一下<strong>三种未来情况</strong> ：</p>
+<h3 id="1大饼大涨达到28w元以上">1 ：大饼大涨，达到 2.8 w 元以上。</h3>
+<p>此刻两个 PUT 都成为深虚，只要双平的支出低于建仓收入，就是成功的。如果这种上涨就有可能两个期权都归 0 的。这个在 8 月底到期前我们再讨论应变。反正持有 9 月卖 put（2.8 W）是+delta 的，有各种应对手段可以使用。</p>
+<h3 id="2大饼大跌达到28w以下">2 ：大饼大跌，达到 2.8 w 以下。</h3>
+<p>此刻 buy put 可以先获利平仓，等待大饼反弹再处理 9 月卖 put。如果大饼严重下跌，put 由浅虚变为深度实值，两个期权一样价格了，甚至于在低位出现了价格倒挂！就是远月的比近月的还低！这样的话，双双平仓还有可能以盈利告终！</p>
+<h3 id="3大饼继续盘整">3 ：大饼继续盘整。</h3>
+<p>这个属于初始判断错误（因为反日历还是预测方向上有大的波动的），那么 8 月到期前我们再权衡是否延续该策略。因为我们初始是权利金收入型策略，回旋余地会比日历多一些，另外本身反日历策略从 breakeven 也明显看出是反脆弱策略。</p>
+<p>这个策略我自己实战下来感受是与 put 端做牛市价差风险特征截然不同，所以对于风险厌恶的玩家应该更容易接受。和大家习惯思维最大的不同是，哪怕是 long gamma 或者 long vega，我都更建议构建 premium 收入型策略，就如同之前一篇文章写得“反向比例价差”策略一样。这样建立策略初始压力很低，同时不断积累 Theta 可以做一下长期尾部风险保护。这在期权长期投资及增加赔率过程中也发挥重要作用。</p>
+<p>如何<strong>低成本</strong> ，<strong>长期</strong> 的做好尾部风险保护？这对于很多机构投资人都是难题，但是相反，其实对于散户来讲用好我们可以暴露的 delta 敞口并支出一定的 theta 保护住尾部就没那么难，这是<strong>我们的优势</strong> 。</p>
+<p>在处理应对方式上，我基本在动起来之后不会做双平。因为在一个价格上做相反头寸的平仓是浪费机会，因为在一段时间内价格肯定是波动，单边行情少之又少，平掉有利头寸等一下平掉另外一个头寸，或者有交易系统的玩家就更简单了，完全按照系统的设置平仓某一条腿。</p>
+<h2 id="四建议大家做卖方还是做买方">四、 建议大家做卖方还是做买方？</h2>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_7ebh2wfmz1.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>（稳健）低回撤策略 20 年算数平均收益和复合收益</em></p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_u403m90pi0.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p><em>（激进）高爆发策略 20 年算数平均收益和复合收益</em></p>
+<p>上面 2 张图是交易 20 年每年盈利情况，分别作了算数平均数和复利。为什么复利是第八大奇迹，相信 2 张图表道破真相。</p>
+<p>当下市场环境下以文中推荐权利金收入型策略做期权卖方，不管是反日历还是反向比例价差，都能把尾巴兜住。如果看官对尾部风险管理感兴趣的，可以看我之前也写过一篇《如何利用期权进行尾部风险管理》的文章。各位可视自己能力圈选择适合自己且复利效果好的期权策略，见仁见智，没有标准答案。</p>
+<h2 id="结语">【结语】</h2>
+<p>辩证的去看 IV 高或者低，辩证的去看卖方和买方，辩证的去看多头和空头。</p>
+<p>辩证的去看很多前人得出的结论。在交易的世界，我们就猥琐发育，做好滑头就好了，持续迭代交易系统，赢在修正，不在预测！</p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/26_r6w1rk50mm.jpg" alt="SignalPlus：解析低IV行情下期权卖方的组合策略"></p>
+<p>您可在 ChatGPT 4.0 的  Plugin Store 搜索 SignalPlus ，获取实时加密资讯。如果想即时收到我们的更新，欢迎关注我们的推特账号@SignalPlus_Web 3 ，或者加入我们的微信群（添加小助手微信：chillywzq）、Telegram 群以及 Discord 社群，和更多朋友一起交流互动。</p>
+<p>SignalPlus Official Website：https://www.signalplus.com</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56862/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">POW赛道翻红带火Dynex 币价暴涨数十倍背后面临社区多重质疑</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56826/">
+                <span class="next-text nav-default">SignalPlus波动率专栏(20230810)：大宗交易布局远期期权</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一iv低或者高要看参照物是什么">一、 IV 低或者高，要看参照物是什么？</a></li>
+    <li><a href="#二看看过去半年实际情况">二、 看看过去半年实际情况</a></li>
+    <li><a href="#三有什么典型的策略">三、 有什么典型的策略</a>
+      <ul>
+        <li><a href="#1大饼大涨达到28w元以上">1 ：大饼大涨，达到 2.8 w 元以上。</a></li>
+        <li><a href="#2大饼大跌达到28w以下">2 ：大饼大跌，达到 2.8 w 以下。</a></li>
+        <li><a href="#3大饼继续盘整">3 ：大饼继续盘整。</a></li>
+      </ul>
+    </li>
+    <li><a href="#四建议大家做卖方还是做买方">四、 建议大家做卖方还是做买方？</a></li>
+    <li><a href="#结语">【结语】</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Opside ZK-PoW V2 版本：多矿工场景下 ZKP计算可缩短至不到一分钟 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Opside ZK-PoW V2.0优化了多矿工参与ZKP计算的流程，提升了硬件利用率和可用性。" />
+<meta name="keywords" content="Opside" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54360/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Opside ZK-PoW V2 版本：多矿工场景下 ZKP计算可缩短至不到一分钟" />
+<meta property="og:description" content="Opside ZK-PoW V2.0优化了多矿工参与ZKP计算的流程，提升了硬件利用率和可用性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54360/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="Opside ZK-PoW V2 版本：多矿工场景下 ZKP计算可缩短至不到一分钟">
+<meta itemprop="description" content="Opside ZK-PoW V2.0优化了多矿工参与ZKP计算的流程，提升了硬件利用率和可用性。"><meta itemprop="datePublished" content="2023-07-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4286">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Opside ZK-PoW V2 版本：多矿工场景下 ZKP计算可缩短至不到一分钟"/>
+<meta name="twitter:description" content="Opside ZK-PoW V2.0优化了多矿工参与ZKP计算的流程，提升了硬件利用率和可用性。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Opside ZK-PoW V2 版本：多矿工场景下 ZKP计算可缩短至不到一分钟</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-05">
+      2023-07-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4286 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E7%9F%BF%E5%8C%BA/"> 矿区 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="一opside-zk-pow介绍">一、Opside ZK-PoW介绍</h2>
+<p>Opside 是一个去中心化的ZK-RaaS (ZK-Rollup as a Service)平台，也是业内领先的ZKP（零知识证明）挖矿网络。ZK-RaaS (ZK-Rollup as a Service) 可以为任何人提供一键生成 ZK-Rollup的服务。Opside 提供通用的 ZK-Rollup launchbase，开发者可以通过launchbase轻松地部署不同类型的ZK-Rollup到不同的base chain上。</p>
+<ul>
+<li>
+<p>Base chain，包括Ethereum/Opside chain/BNB chain/Polygon PoS等公链。</p>
+</li>
+<li>
+<p>ZK-Rollup类型，包括zkSync、Polygon zkEVM、Scroll、StarkNet 等zkEVMs，以及其他种类的ZK-Rollups。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0705/p3g6rlf0bl3mzoo" alt="Yn_6l6_8_r5iv2wyhXRvR3XPgXRja63u2ildf3WviDWxVxmT9gfmrGiBjcX3aTKuMOQw0t5ztsqBgQ5fVi0S6S0zfV82d6r31oVj1QBjJH7mm_s9TFQ5_l4G30u4wrZQkuio6Md9Fpd7INFqdBnNfw8"></p>
+<p>Opside ZK-PoW Cloud会部署到多链上，包括但不限于Ethereum、BNB Chain、Polygon PoS以及Opside Chain本身。在Opside的设计中，开发者可以在上述不同的base chain上部署ZK-Rollups。随着ZK-Rollup技术的逐渐成熟，未来可能会诞生成百上千个ZK-Rollups，这将带来极大的ZKP算力需求。Opside使用 ZK-PoW 机制来激励 Miner 提供 ZKP 算力，从而为 ZK-Rollup 提供完整的硬件设施。</p>
+<h2 id="二zk-pow-v20整体架构">二、ZK-PoW V2.0整体架构</h2>
+<p>ZK-PoW V2.0的整体架构包括几个关键组件：</p>
+<ul>
+<li>
+<p>ZK-PoW Cloud：这是Opside提供的用于ZKP计算的云基础设施。它部署在多个链上，包括Ethereum、BNB Chain、Polygon PoS和Opside Chain。ZK-PoW Cloud负责协调和管理ZKP计算任务。</p>
+</li>
+<li>
+<p>矿工节点：这些是由矿工操作的节点，他们贡献自己的计算能力来执行ZKP计算。矿工可以通过在他们的挖矿硬件上运行专用软件来参与ZK-PoW网络。</p>
+</li>
+<li>
+<p>ZKP任务分发：ZK-PoW Cloud将ZKP计算任务分发给矿工节点。分发是以去中心化方式进行的，以确保公平性和效率性。ZKP任务包括为各种ZK-Rollup生成和验证零知识证明。</p>
+</li>
+<li>
+<p>ZKP计算：矿工节点接收ZKP计算任务，并进行必要的计算来生成所需的证明。这涉及执行密码学算法和进行复杂的计算。</p>
+</li>
+<li>
+<p>证明提交和验证：一旦ZKP计算完成，矿工节点将生成的证明提交给ZK-PoW Cloud进行验证。云基础设施验证证明的正确性，以确保其有效性和完整性。</p>
+</li>
+<li>
+<p>激励机制：矿工通过为他们的计算贡献获得奖励来激励他们参与ZK-PoW网络。奖励系统旨在激励矿工并维护网络的安全性和稳定性。</p>
+</li>
+</ul>
+<p>总的来说，ZK-PoW V2.0将矿工的计算资源与云基础设施相结合，为各种ZK-Rollup提供高效且可扩展的ZKP计算能力。</p>
+<p>Aggregator 是Prover的重要组成模块， 它负责分发ZKP证明任务并接收任务结果即ZKP证明，管理ZKP证明以及将ZKP证明提交到Base Chain以此获取奖励 。因此基于功能将新版Aggregator 分为三个子模块，分别为：Proof Generator, Proof Manager, Proof Sender。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0705/iqw16pz1toi3pgm" alt="Ni6ucak6pIKdU9UtLBVNka8UPkCVGYszLqkZnjIo04bdhRVJfjp_ilw5_z_FO8ORjGx9n_0jrBJ2uNzPDPCp0IOWdnslnNm3UKeQOQ5ERDo6PgzzX4HbWUMjpvqU4G6rVlF-SWD5qEYyMTnGa01BRig"></p>
+<p>如上图虚线框内Proof Generator模块将负责给prover（PoW矿机） 发布证明任务并接受任务结果：ZKP证明，然后将ZKP证明保存到DB数据库中。Proof Manager 负责管理完成是ZKP证明，将要上链的ZKP证明封装成发送任务转交给模块Proof Sender。模块Proof Sender 完成ZKP证明上链，即提交证明给部署在Base Chain上的 zkevm contract。</p>
+<p>下面分别介绍这三个模块：</p>
+<h3 id="proof-generator">Proof generator</h3>
+<p>Rollup Chain 将一定数量交易，打包成一个batch，然后将若干个（依据交易的频繁性等多个因数）batch打包成一个sequence，然后将其提交到Base Chain，因此我们可以说每次上链数据单位是sequence。 每个sequence包括1个以上batch，而ZKP证明是证明已提交的sequence的合法性，所以batch是证明任务最小单位。</p>
+<p>依据sequence包含的batch不同，需要完成的证明任务也不同，具体如下：</p>
+<ul>
+<li>
+<p>batch数目等于1， 证明流程BatchProofTask &mdash;-&gt; FinalProofTask，需要依次完成BatchProofTask，FinalProofTask证明任务。</p>
+</li>
+<li>
+<p>sequence包含batch数目大于1， 证明流程多个BatchProofTask &mdash;-&gt;AggregatorproofTask &mdash;&gt; FinalProofTask，需要依次完成多个BatchProofTask ，AggregatorproofTask，FinalProofTask证明任务。</p>
+</li>
+</ul>
+<p>为了尽可能提高证明产生的效率，也为了提高PoW矿工收益，我们尽可能并发生成证明。具体表现在以下两方面：</p>
+<ul>
+<li>
+<p>各个sequence 证明生成没有上下文或者状态上依赖，可以并发进行。</p>
+</li>
+<li>
+<p>同一个 sequence 里多个BatchProofTask可以并发进行。</p>
+</li>
+</ul>
+<p>以此更好的发挥prover的算力资源，从而能更高效的生成证明。</p>
+<h3 id="proof-manager">Proof manager</h3>
+<p>该模块主要负责管理ZKP证明，控制ZKP证明上链验证。主要分为三个模块</p>
+<ul>
+<li>
+<p>submitPendingProof: 该模块只在Aggregator每次启动时执行一次，目的是将上一次Aggregator服务停止前未完成的ZKP证明提交完成。这里是针对proofHash提交了且其他矿工提交了proof的情况。关于proofHash， proof的介绍参考Proof Sender。</p>
+</li>
+<li>
+<p>tryFetchProofToSend: 在协程执行，将最新生成的ZKP证明且该证明对应的sequence未被验证加入到Proof Sender的缓存中等待上链。</p>
+</li>
+<li>
+<p>processResend: 在协程执行，目的让超过时间窗口没验证成功的sequence重新提交上链。</p>
+</li>
+</ul>
+<h3 id="proof-sender">Proof sender</h3>
+<p>Opside 提出了一个ZKP两步提交算法，来实现了prover的去中心化。这种算法既能够防止ZKP抢跑攻击，又可以让更多的矿工获得奖励，从而鼓励更多的矿工在线，并提供稳定、持续的ZKP算力。</p>
+<ul>
+<li>
+<p>第1步：对于某个sequence生产PoW证明记为proof，首先计算Hash(proof / address), 记为proofHash，并向合约提交，若该sequence之前没有提交过proofHash，则开启proofHash的提交时间窗口T1， 在之后T1个区块内矿工都有资格提交该sequence，且T1区块后才能提交proof。</p>
+</li>
+<li>
+<p>第2步：提交proof， T1后区块后，开启proof提交，且限定在T2个区块内提交。如果T2区块后，所有矿工提交proof都没验证通过，则之前所有提交过proofHash的矿工都被被惩罚。如果在T1时间窗口能成功提交了proofHash，但是在T2时间窗口内未能成功提交proof，且T2 窗口内其他矿工成功提交了proof，则仍然可以继续提交该proof。除了以上场景外，重新走两步提交流程。</p>
+</li>
+</ul>
+<p>如下图，Proof Sender 基于三个线程安全且优先级排序缓存来实现两步提交，这三个缓存基于 sequence的起始高度进行排序，保证每次从这个三个缓存获取元素对应的 sequence高度都是最低的，同时这三个缓存中元素是去重的。对应sequence的高度越低越需要优先处理。</p>
+<ul>
+<li>
+<p>finalProofMsgCahce: 存放的是Proof Manager发送来finalProof消息，也就是完成ZKP证明。</p>
+</li>
+<li>
+<p>monitPHTxCache： 存储要监控proofHash 交易。</p>
+</li>
+<li>
+<p>ProofHashCache: 存储proof消息，用于proof上链。</p>
+</li>
+</ul>
+<p>如下图：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0705/8e5hcoza64dpwgh" alt="SpbZaK0JnEl3Flr22QrFA5w8bFBcmyP99ZotBIOAGKE4TLnHqxBGOk_6DikUDb-flYGqdg8y1544tdDgH2kFjtVw8m97RL1oCsk-gvtoUO1RgrYMRYsoVSr1bBuuczd0PhXj89Ww6EjOnMN87y7egrc"></p>
+<p>Proof Sender 模块启动后会启动3个协程，分别消费这三个缓存数据。</p>
+<p>简单流程是：</p>
+<ol>
+<li>
+<p>协程1负责消费finalProofMsgCahce中的finalProof消息，计算proofHash ，如果符合上链条件（在T1条件内），则将proofHash上链，同时将proofHash 交易放入到monitPHTxCache中。</p>
+</li>
+<li>
+<p>协程2消费monitPHTxCache的proofHash 交易消息，如果在T2时间窗口内，满足proof上链条件，这构造proof消息，存放到ProofHashCache。</p>
+</li>
+<li>
+<p>协程3消费proof消息，proof上链。</p>
+</li>
+</ol>
+<p>相对旧模块，结构更加清晰，节省资源开销。</p>
+<h2 id="三总结">三、总结</h2>
+<p>与Version1.0对比</p>
+<ul>
+<li>
+<p>V2.0拆分了原有服务为三个子模块，三个模块分别负责证明产生，证明管理，证明上链，结构更加清晰，三个模块耦合性低，鲁棒性强。</p>
+</li>
+<li>
+<p>证明产生模块Proof Generator相对旧版添加了startBatch 参数方便新加入矿工能更快跟上挖矿进度。</p>
+</li>
+<li>
+<p>证明管理模块Proof Manager相对旧版更好改进：对于矿工重启服务或者其他原因导致proof 未提交或者提交失败会第一时间重发proof，保证矿工利益；同时重发机制不仅针对proof提交失败情况，也针对所有proof提交失败或者未提交，重启时间窗口，保证Rollup Chain安全性。</p>
+</li>
+<li>
+<p>证明发送模块Proof Sender基于三个线程安全优先级缓存来实现交易两步式提交，相对之前版本减少全局锁使用，保证了低高度的proof能第一时间提交，保证了矿工的利益。同时，整个服务流程更清晰，减少了线程数量，减少了程序执行中资源的消耗。</p>
+</li>
+</ul>
+<p>压测结果：</p>
+<ul>
+<li>Version2.0使用10台64核机器，完成batch 证明566个，耗时7小时38分40秒，平均48.62秒完成一个证明。在多矿工场景下，相较于V1.0，V2.0的zk proof生成效率整体提高了50%</li>
+</ul>
+<p>总之，Opside ZK-PoW V2.0优化了多矿工参与ZKP计算的流程，提升了硬件利用率，提高了服务可用性，对矿工更加友好。更重要的是，在多矿工的场景下，将ZKP的计算缩短到不到一分钟，极大地加快了ZK-Rollup的确认时间。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54400/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Neo与OKX合作推出亚太区黑客松</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54364/">
+                <span class="next-text nav-default">Opside ZK-PoW V2.0：支持多链多Rollup的ZKP挖矿</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一opside-zk-pow介绍">一、Opside ZK-PoW介绍</a></li>
+    <li><a href="#二zk-pow-v20整体架构">二、ZK-PoW V2.0整体架构</a>
+      <ul>
+        <li><a href="#proof-generator">Proof generator</a></li>
+        <li><a href="#proof-manager">Proof manager</a></li>
+        <li><a href="#proof-sender">Proof sender</a></li>
+      </ul>
+    </li>
+    <li><a href="#三总结">三、总结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

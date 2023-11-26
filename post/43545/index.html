@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Aptos公布Gas计划：花费如何计算？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Aptos Labs 于 10 月 14 日公布了 Aptos 的 GAS 计划" />
+<meta name="keywords" content="Aptos" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43545/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Aptos公布Gas计划：花费如何计算？" />
+<meta property="og:description" content="Aptos Labs 于 10 月 14 日公布了 Aptos 的 GAS 计划" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43545/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-16T00:00:00+00:00" />
+
+<meta itemprop="name" content="Aptos公布Gas计划：花费如何计算？">
+<meta itemprop="description" content="Aptos Labs 于 10 月 14 日公布了 Aptos 的 GAS 计划"><meta itemprop="datePublished" content="2022-10-16T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-16T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4018">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Aptos公布Gas计划：花费如何计算？"/>
+<meta name="twitter:description" content="Aptos Labs 于 10 月 14 日公布了 Aptos 的 GAS 计划"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Aptos公布Gas计划：花费如何计算？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-16">
+      2022-10-16
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4018 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>Aptos Labs 于 10 月 14 日公布了 Aptos 的 GAS 计划</strong> ，因为 MOVE 语言的上一个版本其实是打算在没有 GAS 的前提下运行的，所以并没有为 GAS 计划做好准备，所以 Aptos labs 此次为 Aptos 建立的 GAS 计划是 MOVE 语言首个 GAS 设计，被官方称为「一场冒险」。</p>
+<p>在 Aptos 的 GAS 计划中，Aptos Labs 表明了自己制定 GAS 的原则、流程、如何计算 GAS、后期 GAS 费调整以及积极接受 Aptos 社区的建议。</p>
+<p>GAS 计量是 Aptos 和其他很多区块链的基本概念，它定义了执行和存储链上交易平台需的计算和存储资源量的抽象计算。GAS 计划将链上所有执行所消耗的成本确定，用于计算执行交易期间使用的 GAS 花费。</p>
+<h3 id="流程">流程</h3>
+<h4 id="为了有效的执行我们在-aptos-链上的流程是">为了有效的执行，我们在 Aptos 链上的流程是：</h4>
+<p>1）定义我们的原则；</p>
+<p>2）准备一个评估框架，以确定每个执行的价格；</p>
+<p>3）为 Move 建立 GAS 计量系统和安全 GAS 代数；</p>
+<p>4）将上游 GAS 框架导入 Aptos；</p>
+<p>5）使 GAS 框架具有存储意识；</p>
+<p>6）最后，进一步细化 GAS 计划。</p>
+<h3 id="原则">原则</h3>
+<h4 id="我们的定义原则是">我们的定义原则是:</h4>
+<p>1、操作的成本应该与网络上的可用资源直接相关 (例如 CPU、内存、网络、存储 I/O 和空间使用等)。此外，当技术和流程改进后，GAS 所需的成本应该要随之降低。</p>
+<p>2、Gas 应该由链上治理设置，并且可以无缝配置。</p>
+<p>3、Gas 可以防止对网络中固定资源集的 DoS 攻击，并且可能需要根据网络情况通过治理建议迅速进行调整。</p>
+<p>4、Aptos 的 GAS 价格反映了 Aptos 基金会加速增长和保持区块链人人可及的愿望。</p>
+<p>5、鼓励在设计中做出好的选择——例如优先考虑安全性、模块化、断言等事件。</p>
+<h3 id="计算-gas">计算 GAS</h3>
+<p>当用户提交交易时，他们还必须在事务中指定两个数量:</p>
+<p><strong>Max gas amount:</strong> 以 GAS 单位计量。这是用户 (即，交易发送者) 愿意为执行交易花费的最大 GAS 单位数。</p>
+<p><strong>Gas unit price:</strong> 以每单位 GAS 的八进制计算，其中 1 八进制=0.00000001 APT(=$10^{-8}$)。这是用户愿意支付的 GAS 价格。</p>
+<h4 id="在执行过程中交易将被收取">在执行过程中，交易将被收取:</h4>
+<p>1）固定成本，固定基数加上大额交易的额外费用。</p>
+<p>2）执行成本，用于执行 Move 指令。</p>
+<p>3）读取成本，用于从持久存储读取数据。</p>
+<p>4）写入成本，用于将数据写入持久存储。</p>
+<p>最终的交易费用可以用消耗的 GAS 总量 (以 GAS 单位计算) 乘以 GAS 单价来计算。例如，如果一笔交易消耗 670 个 GAS 单位，而用户在交易中指定的天然气单位价格为每单位 100 Octa，<strong>那么最终的交易费用为 670 * 100 = 67000 Octa = 0.00067 APT。</strong></p>
+<p>如果一个交易在执行过程中耗尽了 gas，那么发送方将根据最大 gas 量收取费用，并且该交易平台做的所有更改都将被恢复。</p>
+<h3 id="建立一个-gas-计划表">建立一个 GAS 计划表</h3>
+<h4 id="1基本配置">1、基本配置</h4>
+<p>GAS 计划中有几个组成部分与单个操作的细节无关，包括交易大小和最大 GAS 单位 (不同于用户在交易中指定的最大 GAS 量)。</p>
+<h4 id="2交易规模">2、交易规模</h4>
+<p>对于大多数交易，交易规模可能在千字节的数量级。然而，Move 模块的发布很容易就有几千字节，而 Aptos 框架大约有 100 KB。大多数用户模块的大小一般在 4KB 到 40KB 之间。最初，我们将交易规模的值设置为 32KB，但根据社区的反应，要求提供更多空间以简化应用程序开发，因此我们将交易规模调整为 64KB。</p>
+<p>非常大规模的交易会导致整个网络的带宽成本提高，并可能对性能产生负面影响。如果被滥用，内存池会被鼓励忽略规模更大的交易，因此我们的方法是在最大规模交易的大小和可访问性之间取得平衡。</p>
+<h4 id="3最大-gas-单位">3、最大 GAS 单位</h4>
+<p>GAS 计划中的的最大 GAS 单位定义了一个交易最多可以执行多少操作。注意！这不同于用户在交易中指定的最大 GAS 量。</p>
+<p>GAS 计划的最大 GAS 单位直接影响到一个交易可以执行多长时间，将其设置过高可能会导致对区块链产生负面性能影响交易。例如，用户可能忘记在 while 循环中有一个增量，从而导致无限循环，这是一个常见错误。我们发现，<strong>即使我们进行了最大的框架升级，我们仍然不到 gas 计划的最大 gas 单位（设定为 1,000,000）的 90%。</strong></p>
+<h4 id="4执行">4、执行</h4>
+<p>为了评估执行成本，我们构建了一个基准框架，并在执行该框架时使用。</p>
+<p>Valgrind 来分析 Move VM。它的输出是一组带注释的源代码，它告诉我们每行代码产生了多少机器指令。</p>
+<p>在上述分析的帮助下，我们粗略估计了所有 Move 指令和本机函数的相对成本。然而，我们注意到这个方法与内联函数存在一些问题：它们不会自动包含在调用者的计数中。我们还看到，这只发生在我们分析某些 Move 指令时，我们可以通过将数字相加来解决这个问题。</p>
+<p>随后，通过考虑增强系统稳健性和安全性的编码范例，团队得出了最终执行的机器指令数量。<strong>这个数字依次与存储和最大 GAS 单位进行权衡，以确定它们在 GAS 计划中的当前值。</strong></p>
+<h4 id="5存储">5、存储</h4>
+<p>每当访问存储在持久存储中的账本状态项或数据时，Aptos 节点都会向存储设备发出读取或写入。每秒的数据访问总数取决于存储设备的带宽和 IOPS 容量。与 gas 调度计算部分的 CPU 周期类似，数据访问是区块链用户在系统负载时通过费用市场竞争的瞬时稀缺性，此外，写入数据的磁盘占用成本在链上是永久的。Aptos 团队通过考虑这些成本来设计存储 GAS 计划。</p>
+<p>访问和存储任何状态项都会产生与验证整个区块链状态的数据结构</p>
+<p>水母默克尔树相关的成本：</p>
+<p>此成本与不同状态项的基数有关（$2^{256}$）。还有一个成本与每个项目的大小成正比。要对一个状态项进行操作，费用为（下一节中描述的例外情况除外）：</p>
+<p><strong>存储 GAS 费 = item_fee + (byte_fee * bytes)</strong></p>
+<h3 id="读创建和写">读、创建和写</h3>
+<p>对状态项的任何访问都属于以下三种类型之一:读、创建或写。访问按项目费和字节费收费，如上面的等式所示。</p>
+<p>读操作是最常见的操作，它只受瞬时资源稀缺的限制。因此，读取费用是根据磁盘 IOPS(项目费用) 和参考硬件规范的带宽容量进行校准的。</p>
+<p>create 是在状态存储中添加一个新项。因此，create 增加了身份验证数据结构，使一切都变得更昂贵，因此成本最高。创建费用是根据网络拥有的参考磁盘空间进行校准的。因此，用项目 (item_fee) 和字节 (byte_fee) 填满磁盘需要大量的 GAS。</p>
+<p>写操作更新状态存储中的现有项。因此，写操作不会在身份验证数据结构中产生额外的开销。然而，通过修改现有的条目到更大的字节，仍然可以破坏磁盘。因此，我们对更新项中的字节收取与创建时相同的费用。</p>
+<p>应该注意的是，与存储相关的成本是基于每一笔交易进行评估的:即使您多次读取/写入相同的资源，也只需要支付一次费用。</p>
+<p><strong>基于上述考虑，我们定义了 6 个 GAS 参数，它们构成了 GAS 总费用的组成部分。见以下:</strong></p>
+<p>per_item_read:根据 IOPs 进行校正</p>
+<p>per_byte_read:根据实际带宽校准</p>
+<p>per_item_create:根据目标总项目进行校准</p>
+<p>per_byte_create:根据目标总大小进行校准-每个项目包含的第一个 1KB</p>
+<p>per_item_write:与 per_item_read 相同</p>
+<p>per_byte_write:与 per_byte_create 相同</p>
+<p>更多信息，请访问此处。</p>
+<h3 id="稳定的-gas-单位成本">稳定的 GAS 单位成本</h3>
+<p>无论以 APT 或法定货币的市场价值计算执行操作的成本如何，每个操作和交易本身都需要相对于存储和执行成本的固定单位成本。固定的 gas 单位成本有助于保持 gas 计划不变，并与 APT 的自由市场价值脱钩。此外，正确选择 GAS 单位的精确位数有助于保持 GAS 计划不变。考虑到这一点，Aptos 团队以大约 3 位数的精度来表示 GAS 单位。因此，转账交易的成本大约是 700 个 gas 单位。</p>
+<h3 id="社区参与">社区参与</h3>
+<p>即使我们对 GAS 计划投入了大量的精力，但是它还远远不够完善。作为一个社区项目，Aptos 社区成员可以选择:</p>
+<p>1）根据你的经验，找出 GAS 计划不合理的地方；</p>
+<p>2）说出你对 GAS 计划的担忧，并参与社区讨论。</p>
+<p>3）就 Aptos 上与 GAS 相关的治理提案进行投票。</p>
+<h3 id="如何调整-gas-成本">如何调整 GAS 成本？</h3>
+<p>GAS 计划作为链上配置被存储，但是可以通过 Aptos 治理提案进行更改，并且可以无缝添加新指令或原生功能。</p>
+<p>GAS 计划被设计为可扩展的，允许通过治理提案对其进行升级。随着 Aptos 和 Aptos 社区不断改进 Move VM 并纳入用户反馈，GAS 参数可以随着时间的推移进行调整。</p>
+<p>有时，GAS 公式可能需要超出链上配置的复杂更改。这些 GAS 公式通常用 Rust 编码，并通过链上 GAS 特征标志来区分。要升级这些公式，必须使用新公式更新节点软件，并以不同的 GAS 特征标志进行区分。然后必须发布节点软件并为节点运营商大量采用，最后，必须发布并批准治理提案才能使用新的 gas 版本。</p>
+<h3 id="未来的工作">未来的工作</h3>
+<p>这是 Move 的第一个可行的 GAS 框架。它需要对 Move VM 和 Aptos-Core 进行大量修改。我们希望这项工作为今后的工作铺平道路：</p>
+<p><strong>1）降低执行成本，</strong> 拥有一个真实的 GAS 模型表明编译器和虚拟机在哪里有效率，团队可以改进其中的大部分以降低执行成本。</p>
+<p><strong>2）多维 GAS 计算，</strong> 允许用户为执行和存储指定单独的预算。这样，用户就不必为因为代码编写不佳的应用程序花费过长的执行时间，支付高昂的 gas 价格。它还将允许对区块链端交易的最大 Gas 价格进行更细粒度的定义；</p>
+<p><strong>3）缓解臃肿状态，</strong> 目前没有简单的方法来缩小状态集，除了合约（或用户）显式删除事物。用户付钱删除数据可能会带来套利机会，用户在便宜的时候创建存储，在昂贵的时候删除它。Aptos 推迟了解决这一挑战，这可能会削弱开发人员删除链上数据的动力。该团队正在探索每个项目 TTL 的概念，该概念将在 TTL 到期时删除未访问的状态项目。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43546/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">A16z：拥抱Web3 如何与NFT项目和社区建立合作关系？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43541/">
+                <span class="next-text nav-default">Mango攻击者：相信所有的行为都是合法的</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#流程">流程</a></li>
+        <li><a href="#原则">原则</a></li>
+        <li><a href="#计算-gas">计算 GAS</a></li>
+        <li><a href="#建立一个-gas-计划表">建立一个 GAS 计划表</a></li>
+        <li><a href="#读创建和写">读、创建和写</a></li>
+        <li><a href="#稳定的-gas-单位成本">稳定的 GAS 单位成本</a></li>
+        <li><a href="#社区参与">社区参与</a></li>
+        <li><a href="#如何调整-gas-成本">如何调整 GAS 成本？</a></li>
+        <li><a href="#未来的工作">未来的工作</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

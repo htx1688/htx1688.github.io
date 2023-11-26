@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          CertiK：Vyper 5200万美元损失，事件详解 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="2023年7月30日，专为以太坊虚拟机（EVM）设计的面向合约的编程语言 Vyper 编译器0.2.15、0.2.16 和 0.3.0 版本被宣布存在重入锁失效漏洞。多个 DeFi 项目受到该漏洞的影响，损失总额达 5,200 万美元。" />
+<meta name="keywords" content="Vyper, 攻擊者, 漏洞" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56215/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="CertiK：Vyper 5200万美元损失，事件详解" />
+<meta property="og:description" content="2023年7月30日，专为以太坊虚拟机（EVM）设计的面向合约的编程语言 Vyper 编译器0.2.15、0.2.16 和 0.3.0 版本被宣布存在重入锁失效漏洞。多个 DeFi 项目受到该漏洞的影响，损失总额达 5,200 万美元。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56215/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="CertiK：Vyper 5200万美元损失，事件详解">
+<meta itemprop="description" content="2023年7月30日，专为以太坊虚拟机（EVM）设计的面向合约的编程语言 Vyper 编译器0.2.15、0.2.16 和 0.3.0 版本被宣布存在重入锁失效漏洞。多个 DeFi 项目受到该漏洞的影响，损失总额达 5,200 万美元。"><meta itemprop="datePublished" content="2023-08-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2888">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CertiK：Vyper 5200万美元损失，事件详解"/>
+<meta name="twitter:description" content="2023年7月30日，专为以太坊虚拟机（EVM）设计的面向合约的编程语言 Vyper 编译器0.2.15、0.2.16 和 0.3.0 版本被宣布存在重入锁失效漏洞。多个 DeFi 项目受到该漏洞的影响，损失总额达 5,200 万美元。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">CertiK：Vyper 5200万美元损失，事件详解</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-02">
+      2023-08-02
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2888 字 -
+        预计阅读 6 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>有报告称 Vyper 0.2.15、0.2.16 和 0.3.0 版本存在漏洞，导致 Curve 上的许多池有遭受重入攻击的风险。该漏洞允许攻击者在移除流动性过程中调用添加流动性函数。</p>
+<p>目前，总共有6,930万美元受到影响，其中1,670万美元已被白帽黑客追回。这也意味着此次事件造成了5,200万美元被盗，成为了2023年迄今为止金额最高的重入攻击。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_t4p8splr0q.jpg" alt="Vyper Incident Anaylsis"></p>
+<h2 id="事件总结"><strong>事件总结</strong></h2>
+<p>2023年7月30日，专为以太坊虚拟机（EVM）设计的面向合约的编程语言 Vyper 编译器0.2.15、0.2.16 和 0.3.0 版本被宣布存在重入锁失效漏洞。多个 DeFi 项目受到该漏洞的影响，损失总额达 5,200 万美元。</p>
+<p>CertiK 已确定有六个地址涉及此次事件。第一个（0x172）未能利用区块 17806056 中的漏洞。最初的漏洞利用者从 Tornado Cash 提取了 0.1 ETH，并继续创建攻击合约。然而，一个跑在前面的钱包（0x6Ec21）支付了更多的gas费用，并率先执行了交易，获得了大约 6,100枚WETH（1,140 万美元）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_kal1uupsm2.jpg" alt="2f7fe8af-e9c8-49ce-a8db-eef1c49f1cb7"> 由MEV机器人在前置交易失败的漏洞 来源：Etherscan Etherscan</p>
+<p>该漏洞导致了进一步的损失：EOA 0xDCe5d 获得了价值约 2,100 万美元的资产。涉案钱包明细如下图：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_97sss7syv4.jpg" alt="d764fa52-1ace-41d8-959c-af9d566c780d"></p>
+<p>共有6个项目受到影响，约有6,930万美元被盗走，其中1,670万美元已被归还，总计损失约为5,200万美元。</p>
+<h2 id="什么是vyper"><strong>什么是Vyper</strong></h2>
+<p>Vyper 是以太坊虚拟机（EVM）的一种面向合约的 pythonic 编程语言。Vyper 的测试版从 2017 年就开始有了，但其首个非测试版本是于2020年7月发布的 0.2.1 版。</p>
+<p>Solidity是以太坊生态系统中的主流语言，它比Vyper存在的时间要长得多，因此许多社区成员创建了专门使用 Solidity 运行的工具。根据 DeFiLlama 的数据显示，在DeFi协议中价值约700 亿美元的总锁仓价值（TVL）中，Vyper 智能合约占 21.7 亿美元，而 Solidity 则占绝大多数，高达 674.9 亿美元。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_ekc92tzfm5.jpg" alt="616cb7f4-e84a-479f-bd50-73e2adaec534"> 根据语言划分的总锁仓价值 来源：<a href="https://defillama.com/languages">DeFiLlama</a></p>
+<p>截至2023年5月10日，Vyper的主导地位从 2020 年8月的30%高点降至 6.27%。尽管 Vyper的TVL 主导地位明显低于Solidity，但这一事件仍导致6,200万美元受到影响。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_vs8jc2tflt.jpg" alt="b89a9653-a2d4-4e89-9042-24e06ed1590a (1)"> 不同编程语言在 TVL 中的主导地位 来源：<a href="https://defillama.com/languages">DeFiLlama</a></p>
+<h2 id="编译器版本"><strong>编译器版本</strong></h2>
+<p>编译器版本是指编程语言编译器的特定版本，编译器将人类可读的源代码转换为机器可读的代码。</p>
+<p>编译器版本会定期更新，以引入功能、修复漏洞并增强安全性。Vyper 语言目前不提供白客漏洞悬赏计划。</p>
+<h3 id="版本-0215---030"><strong>版本 0.2.15 - 0.3.0</strong></h3>
+<p>上文提到的就是Vyper 的0.2.15、0.2.16 和 0.3.0版本中发现了漏洞，导致了多个DeFi项目遭到重入攻击。</p>
+<p>而最早的Vyper 漏洞版本 0.2.15 发布于2021年7 月23日。到同年12月发布 0.3.1 版时，之前的漏洞已不复存在。</p>
+<h2 id="时间线"><strong>时间线</strong></h2>
+<p>事件最初开始于北京时间7月30日晚9点10分，攻击者针对Curve 上 JPEG’d池的交易由于前置运行交易而失败。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_7y34n2hts2.jpg" alt="Screenshot 2023-07-31 at 9.08.31 PM"></p>
+<p>北京时间7月30日晚10点，JPEG‘d 确认 pETH-ETH Curve池已被恶意利用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_9fgfyj0t81.jpg" alt="6cb2c13f-8e37-4a6d-a730-e79b74d79541"></p>
+<p>Vyper 随后宣布，0.2.15、0.2.16 和 0.3.0 版本包括了一个失效的重入锁。Vyper 发布推文后，Metronome 和 Alchemix 也受到了影响。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_swt93sizkt.jpg" alt="Screenshot 2023-07-31 at 9.42.01 PM"></p>
+<p>Metronome DAO 宣布消息：<img src="https://img.bibiqing.com/news/2023/0802/20_skgkfotznq.jpg" alt="6b3a3eb4-edaf-4f06-9992-8051b7ca5a6a"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_k04j28gmsn.jpg" alt="5d46549e-4472-4ed6-9ae9-3fb1f2d169fe"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_5tklf5555d.jpg" alt="Screenshot 2023-07-31 at 9.44.24 PM"></p>
+<p>北京时间第二天凌晨，Curve Finance在 Discord 上发布公告称，剩余的资金池不受Vyper Bug的影响，是安全的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_rothqtwe9l.jpg" alt="3851e10f-a538-4265-937b-cee316d81997"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_acnlp3hqe7.jpg" alt="Screenshot 2023-07-31 at 9.47.22 PM"></p>
+<p>Curve Finance 在 Twitter 上宣布，Arbitrum上的一个资金池有可能受到影响，但没有可供恶意行为者执行的有利可图的漏洞，这意味着资金池不太可能受到攻击。CertiK也尚未检测到任何其他利用Vyper漏洞的攻击。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_nr09vdiblp.jpg" alt="f7ebf87d-f89d-4b08-9e4d-dd81b6db0bb6"></p>
+<h2 id="攻击流程"><strong>攻击流程</strong></h2>
+<p>以下是以JPEG’d为目标的交易示例：</p>
+<p>攻击者: <a href="https://etherscan.io/address/0x6ec21d1868743a44318c3c259a6d4953f9978538">0x6ec21d1868743a44318c3c259a6d4953f9978538</a></p>
+<p>攻击合约: <a href="https://etherscan.io/address/0x466b85b49ec0c5c1eb402d5ea3c4b88864ea0f04#code">0x466b85b49ec0c5c1eb402d5ea3c4b88864ea0f04#code</a></p>
+<ol>
+<li>攻击者首先从 Balancer：Vault中借入80,000 WETH (约合149,371,300美元)</li>
+<li>然后，攻击者将WETH 换成 ETH，调用 pETH-ETH-f.add_liquidity()，将 40,000 ETH（约合74,685,650美元）添加到 pETH-ETH-f 池中。作为回报，攻击者收到了32,431枚pETH（pETH-ETH-f）。</li>
+<li>攻击者调用 remove_liquidity() 删除了在步骤2中添加的流动性。3,740 pETH 和 34,316 ETH 被转入攻击合约，攻击合约的 fallbak() 函数被触发了，将控制权交给了攻击者。在 fallback() 函数中，攻击者又向 pETH-ETH-f 池中添加了40,000 ETH的流动性，并收到了 82,182 pETH。</li>
+<li>攻击者再次调用remove_liquidity()，取出10,272pETH，收到47,506 ETH和1,184pETH。然后，攻击者在pETH-ETH-f 池中用4,924枚 pETH交换了4,285枚ETH。</li>
+</ol>
+<p>总的来说，攻击者从第3步获得了34,316枚ETH，从第4步获得了47,506和 4,285枚ETH，共计 86,107枚ETH。在偿还了 80,000 ETH闪电贷后，攻击者还剩下6,107 ETH（约11,395,506美元）。</p>
+<h2 id="漏洞"><strong>漏洞</strong></h2>
+<p>该漏洞允许攻击者在移除流动性过程中调用添加流动性函数。虽然这些函数本应受到 @nonreentrant(&rsquo;lock&rsquo;)的保护，但对 add_liquidty() 和 remove_liquidity() 函数的测试证明，它并不能防止重入攻击。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_72hgj4b8o8.jpg" alt="4a3f1af6-70db-4254-a977-395e9d5cd6e3"> Vyper_contract for Curve.fi Factory Pool 数据源: <a href="https://etherscan.io/address/0x9848482da3ee3076165ce6497eda906e66bb85c5#code">Etherscan</a></p>
+<p>继利用 JPEG&rsquo;d、Metronome 和 Alchemix 漏洞之后，Vyper 的 v0.2.15、v0.2.16 和 v0.3.0 版本确实存在重入保护失败的漏洞。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0802/20_zmvsccklth.jpg" alt="4deb4693-41c3-4e31-88ca-af753b4fbb51"></p>
+<h3 id="解决措施"><strong>解决措施</strong></h3>
+<p>使用易受攻击的Vyper版本的项目应联系 Vyper协助进行缓解。项目也应尽量升级到不含此漏洞的最新版Vyper。</p>
+<h2 id="总结"><strong>总结</strong></h2>
+<p>Vyper被攻击事件是CertiK2023 年检测到的最大的重入漏洞。就资金损失而言，该攻击损失金额占据了此类事件的78.6%。</p>
+<p>今年两起最大的重入漏洞，都是利用Vyper编写的合约，尽管漏洞并不相同。</p>
+<p>目前，2023 年所有链中因重入攻击造成的损失已超过 6,600 万美元。这比 2020年全年多出约400万美元，仅比 2021年的损失额少100万美元。值得注意的是，2023年的总额也比 2022 年因重新定位攻击造成的损失增加了 259.45%。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56217/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Cathie Wood 最新专访：改变华尔街的投资者正在押注比特币和人工智能</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56230/">
+                <span class="next-text nav-default">ChatGPT产品层出不穷，全球监管都在摸着石头过河</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#事件总结"><strong>事件总结</strong></a></li>
+    <li><a href="#什么是vyper"><strong>什么是Vyper</strong></a></li>
+    <li><a href="#编译器版本"><strong>编译器版本</strong></a>
+      <ul>
+        <li><a href="#版本-0215---030"><strong>版本 0.2.15 - 0.3.0</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#时间线"><strong>时间线</strong></a></li>
+    <li><a href="#攻击流程"><strong>攻击流程</strong></a></li>
+    <li><a href="#漏洞"><strong>漏洞</strong></a>
+      <ul>
+        <li><a href="#解决措施"><strong>解决措施</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#总结"><strong>总结</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

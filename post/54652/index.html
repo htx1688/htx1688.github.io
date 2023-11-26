@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          零知识处理单元（ZPU）设计方案介绍—— 多功能及可编程的ZK硬件加速器 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文中提出了零知识处理单元(ZPU)，这是一种通用的可编程硬件加速器，旨在解决零知识处理的新需求。" />
+<meta name="keywords" content="零知識處理單元, 零知識證明" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54652/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="零知识处理单元（ZPU）设计方案介绍—— 多功能及可编程的ZK硬件加速器" />
+<meta property="og:description" content="本文中提出了零知识处理单元(ZPU)，这是一种通用的可编程硬件加速器，旨在解决零知识处理的新需求。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54652/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-10T00:00:00+00:00" />
+
+<meta itemprop="name" content="零知识处理单元（ZPU）设计方案介绍—— 多功能及可编程的ZK硬件加速器">
+<meta itemprop="description" content="本文中提出了零知识处理单元(ZPU)，这是一种通用的可编程硬件加速器，旨在解决零知识处理的新需求。"><meta itemprop="datePublished" content="2023-07-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4422">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="零知识处理单元（ZPU）设计方案介绍—— 多功能及可编程的ZK硬件加速器"/>
+<meta name="twitter:description" content="本文中提出了零知识处理单元(ZPU)，这是一种通用的可编程硬件加速器，旨在解决零知识处理的新需求。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">零知识处理单元（ZPU）设计方案介绍—— 多功能及可编程的ZK硬件加速器</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-10">
+      2023-07-10
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4422 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Ingonyama，Medium；编译：Kate, Marsbit</p>
+<p>**<strong>TL;DR：</strong> **</p>
+<p>在本博客中，我们提出了零知识处理单元(ZPU)，这是一种通用的可编程硬件加速器，旨在解决零知识处理的新需求。</p>
+<p>我们将介绍ZPU架构和设计注意事项。我们解释了ZPU生态系统不同部分背后的设计选择：ISA，数据流，内存和处理元件(PE)内部结构。最后，我们将 ZK 和全同态加密 (FHE) 与最先进的 ASIC 架构进行比较。</p>
+<p>**<strong>介绍</strong> **</p>
+<p>数据驱动的应用程序的快速增长和对隐私的日益增长的需求导致了对保护敏感信息的加密协议的兴趣激增。在这些协议中，零知识证明(ZKP)作为确保计算完整性和隐私性的强大工具脱颖而出。ZKP使一方能够在不泄露任何额外信息的情况下向另一方证明声明的有效性。这一特性导致ZKP在各种以隐私为重点的应用中得到广泛采用，包括区块链技术、安全云计算解决方案和可验证的外包服务。</p>
+<p>然而，在实际应用程序中采用ZKP面临着一个重大挑战：与证明生成相关的性能开销。ZKP算法通常涉及对非常大的整数的复杂数学运算，例如椭圆曲线上的大型多项式计算和多标量乘法。此外，密码算法在不断发展，新的和更有效的方案正在快速发展。因此，现有的硬件加速器很难跟上各种各样的加密原语和不断变化的加密算法。</p>
+<p>在这篇博客中，我们提出了零知识处理单元(ZPU)，这是一种新颖的多功能硬件加速器，旨在解决零知识处理的新需求。ZPU建立在指令集架构(ISA)上，支持可编程性，使其能够适应快速发展的加密算法。ZPU 具有处理元件 (PE) 的互连网络，具有对大字模块化算法的本地支持。PE的核心结构受到乘法累加(MAC)引擎的启发，该引擎是数字信号处理(DSP)和其他计算系统中的基本处理元素。PE的运算符使用模块化算法，其核心组件专门用于支持ZK算法中的常见运算，例如NTT蝴蝶运算和用于多标量乘法的椭圆曲线点加法。</p>
+<p>**<strong>指令集架构</strong> **</p>
+<p>ZPU架构的特点是一个由指令集架构(ISA)定义的处理元件(PE)的互连网络，如下图1所示。我们选择这种架构是为了适应零知识协议不断变化的环境。</p>
+<p>ISA 方法使 ZPU 能够保持灵活性，适应ZK算法的变化，并支持广泛的加密原语。此外，使用ISA而不是固定的硬件可以在制造后持续改进软件，确保即使在该领域出现新的进展，ZPU也能保持相关性和效率。</p>
+<p>ISA是处理器可以执行的一组指令。它作为硬件和软件之间的接口，定义了软件与硬件交互的方式。通过定制ISA来设计ZPU，我们可以针对ZK处理任务的特定要求对其进行优化，例如大字模算术运算、椭圆曲线加密和其他复杂的密码运算。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0710/10_utg2ifjz3j.png" alt="é¶ç¥è¯è¯æ"></p>
+<p>图1：PE网络结构</p>
+<p>**<strong>PE核心部件</strong> **</p>
+<p>每个PE都设计了一个内核，其中包括模乘法器、加法器和减法器，如图2所示。这些核心组件的灵感来自数字信号处理(DSP)和其他计算系统的基本处理元件，乘法累加(MAC)引擎。MAC引擎有效地执行乘法累加运算，包括将两个数字相乘并将乘积加到累加器中。</p>
+<p>PE的核心结构是为ZK中常见的运算量身定制的，例如用于多标量乘法的椭圆曲线点加法和用于数论变换(NTT)的NTT蝴蝶运算。蝴蝶运算包括加法、减法和乘法，都是在模运算下进行的。该操作的名称来源于其计算流程图的蝴蝶外观，它非常适合PE的核心硬件组件，因为它们通过专用的蝴蝶指令实现原生蝴蝶计算。</p>
+<p>此外，每个PE包含几个专用内存单元，包括：</p>
+<p>1.到达休息室：用于存储到达PE的数据的存储器。</p>
+<p>2.出发休息室：用于存储从PE出发的数据的存储器。</p>
+<p>3.操作数A、B和C的暂存存储器：三个单独的存储器用于存储中间结果。</p>
+<p>4.内存扩展器：用于处理各种算法需求的多用途内存，例如用于多标量乘法(MSM)的桶聚合。</p>
+<p>5.程序存储器：用于存储指令队列的存储器。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0710/10_u13tywasrn.png" alt="é¶ç¥è¯è¯æ"></p>
+<p>图2：PE核心组件</p>
+<p>**<strong>PE位宽</strong> **</p>
+<p>PE本机支持大字模块算术运算(最多256位字)。PE中高位宽本机支持和低位宽本机支持之间的权衡源于需要平衡不同操作数大小的效率。</p>
+<p>当PE具有高位宽本机支持时，它会针对处理大操作数大小进行优化，而不需要将它们分解成更小的块。然而，这种优化的代价是较小位宽操作的效率降低，因为PE未得到充分利用。另一方面，当PE具有低位宽本机支持时，它被优化为更有效地处理小操作数大小。然而，当处理较大位宽的操作时，这种优化会导致效率低下，因为PE需要将较大的操作数分解成较小的块，并依次处理这些块。</p>
+<p>挑战在于找到高低位宽本机支持之间的适当平衡，以确保在广泛的操作数大小范围内进行有效处理。这种平衡应该考虑目标应用程序领域(即ZK协议)中普遍存在的常见位宽度，并权衡每种设计选择的优缺点。在ZPU架构的情况下，选择256位字长作为一个很好的平衡。</p>
+<p>**<strong>PE的连接</strong> **</p>
+<p>所有PE之间采用环形连接，每个PE直接与相邻的两个PE相连，形成一个环形网络。这种环形连接允许控制数据在不同PE之间有效地传播。PE也通过互连组件连接，这是一种类似于桶形移位器的机制，可以随着时间的推移在不同的PE之间实现直接连接。这种设置允许PE发送和接收来自所有其他PE的信息。</p>
+<p>**<strong>周边组件</strong> **</p>
+<p>该架构还集成了片外高带宽内存(HBM)，以支持高内存容量和高内存带宽。将多个PE聚在一起组成一个PE集群，每个PE集群与一个HBM bank或信道相连。此外，还包括一个基于ARM的片上CPU子系统来管理整个系统操作。</p>
+<p>**<strong>绩效评估</strong> **</p>
+<p>为了评估ZPU的性能，我们考虑了我们旨在加速的算法的关键操作。我们主要研究的是NTT蝴蝶运算和椭圆曲线(EC)点加法运算。为了评估MSM和NTT操作的总计算时间，我们计算了它们所需的计算指令的总量，并将它们除以时钟频率和PE的数量。</p>
+<p>NTT 蝶形运算在每个时钟周期执行。对于多标量乘法(MSM)中的关键元素椭圆曲线点加法运算，我们将其解构为可以在单个PE上执行的基本机器级指令。我们随后计算完成此操作所需的时钟周期数。通过分析，我们确定每个椭圆曲线点相加运算可以每18个时钟周期执行一次。</p>
+<p>这些假设为我们的性能评估提供了基础，并且可以根据需要进行调整，以反映不同的算法要求或硬件功能。</p>
+<p>根据我们的计算，在GPU的1.305 GHz频率上运行72个PE的配置足以匹配Zprize的MSM操作中GPU类别获胜者的性能。Yrrid Software和Matter Labs都实现了这一壮举，使用A40 NVIDIA GPU每4次MSM计算达到2.52秒的结果。该比较基于固定基点 MSM 计算，涉及从 BLS 12-377 标量场中随机选择的 2²⁶ 标量，以及来自 BLS 12-377 G1 曲线的一组固定椭圆曲线点和有限的随机采样输入向量来自标量场的场元素。</p>
+<p>根据我们对PE的面积估计，使用8nm工艺的ASIC，与A40 GPU中采用的工艺技术相同，可以在与A40 GPU相同的628 mm2面积内容纳大约925个PE。这意味着我们实现了比A40 GPU高约13倍的效率。</p>
+<p>PipeZK是一种高效的流水线加速器，旨在提高零知识证明(ZKP)生成的性能，具有专用的MSM和NTT内核，分别优化了多标量乘法和大型多项式计算的处理。</p>
+<p>与 PipeZK 相比，我们发现仅 17 个以 PipeZK 频率 300 MHz 运行的 PE 的配置就足以匹配 PipeZK 的 MSM 操作性能。PipeZK在BN128曲线中的2²⁰长度的MSM上以 300 MHz 执行 MSM 操作，耗时0.061秒完成。此外，为了匹配PipeZK的NTT操作性能，在300MHz下运行256位元素的2²⁰元素NTT，耗时0.011秒，我们需要大约 4 个以相同频率运行的 PE。总的来说，为了匹配PipeZK同时运行MSM和NTT的性能，我们需要21个PE。</p>
+<p>根据我们的面积估计，使用28nm工艺的ASIC(与PipeZK中采用的工艺技术相同)可以在与PipeZK芯片相同的50.75 mm2面积内容纳大约16个PE。这意味着我们的效率略低于PipeZK的固定架构(效率低25%)，同时仍然可以完全灵活地适应不同的椭圆曲线和ZK协议。</p>
+<p>环处理单元(RPU)是最近的一项工作，旨在加速基于环的带错误学习（RLWE）的计算，这是各种安全和隐私增强技术的基础，如同态加密和后量子加密。</p>
+<p>与RPU相比，我们的计算表明，当计算128位元素的64K NTT时，为了匹配RPU在最佳配置(128 bank和HPLEs)下的性能，我们将需要大约23个PE在RPU的1.68GHz频率上运行。我们的分析表明，采用与RPU相同的12nm工艺技术的ASIC可以在RPU占用的20.5 mm²面积内容纳大约19.65个PE。这意味着我们的效率略低于RPU(效率低15%)，同时与NTT以外的原语兼容。</p>
+<p>TREBUCHET是一个完全同态加密(FHE)加速器，它使用环处理单元(RPU)作为片上区块。切片还通过将数据调度到接近计算元素的位置来促进内存管理。RPU在整个设备中被复制，使软件能够最大限度地减少数据移动并利用数据级并行性。</p>
+<p>TREBUCHET和ZPU都基于ISA架构和大型算术单词引擎，这些引擎在模块化算法下支持非常长的单词(128位或更高)。然而，与RPU或TREBUCHET SoC相比，ZPU的附加价值在于它扩大了该架构旨在解决的问题集。RPU和TREBUCHET主要关注NTT，而ZPU支持更多的原语，如多标量乘法(MSM)和面向算术的哈希函数。</p>
+<p>**<strong>总结</strong> **</p>
+<p>我们的性能评估表明，ZPU可以匹配甚至超过现有最先进的ASIC设计的性能，同时对ZK算法和加密原语的变化提供更大的适应性。虽然需要考虑权衡，例如PE 中高位宽和低位宽支持之间的平衡，但ZPU的设计经过精心优化，以确保在广泛的操作数尺寸范围内进行高效处理。对于那些有兴趣了解更多关于ZPU或探索潜在合作的人，请随时与我们联系。我们期待与大家分享更多关于ZPU项目进展和未来发展的最新信息。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54648/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">近19万人从事加密行业工作，其中约55%居住在北美和欧洲</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54693/">
+                <span class="next-text nav-default">律师：MiCA法案的稳定币交易上限阻碍了加密货币的采用</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

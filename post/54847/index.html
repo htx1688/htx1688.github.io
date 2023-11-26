@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          浅谈大模型数据隐私，几种常见的的模型攻击方式 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="模型泄漏信息的原因有多种。其中一些是结构性的，与构建模型的方式有关；而另一些是由于泛化能力差、对敏感数据的记忆等因素造成的" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54847/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="浅谈大模型数据隐私，几种常见的的模型攻击方式" />
+<meta property="og:description" content="模型泄漏信息的原因有多种。其中一些是结构性的，与构建模型的方式有关；而另一些是由于泛化能力差、对敏感数据的记忆等因素造成的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54847/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="浅谈大模型数据隐私，几种常见的的模型攻击方式">
+<meta itemprop="description" content="模型泄漏信息的原因有多种。其中一些是结构性的，与构建模型的方式有关；而另一些是由于泛化能力差、对敏感数据的记忆等因素造成的"><meta itemprop="datePublished" content="2023-07-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8209">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浅谈大模型数据隐私，几种常见的的模型攻击方式"/>
+<meta name="twitter:description" content="模型泄漏信息的原因有多种。其中一些是结构性的，与构建模型的方式有关；而另一些是由于泛化能力差、对敏感数据的记忆等因素造成的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">浅谈大模型数据隐私，几种常见的的模型攻击方式</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-12">
+      2023-07-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8209 字 -
+        预计阅读 17 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文来源：<a href="https://mp.weixin.qq.com/s/8t6ByMKXERGuedYIyJRHTA">绿洲资本</a></p>
+<p>作者：参赞生命力</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/5_7wlge2qscp.jpg" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<p>图片来源：由<a href="https://www.wujieai.com/ai">无界 AI</a>‌ 生成</p>
+<p>2023年3月20日，ChatGPT 发生了数据泄露事件，暴露了部分 ChatGPT 使用者的个人信息。鉴于此，意大利的隐私监管机构认为 ChatGPT 涉嫌非法处理个人数据，侵犯隐私，违反了 GDPR 相关条例。意大利也随后成为首个禁止使用 ChatGPT 的国家，并引发了其他欧盟国家对是否需要采取更严厉的措施来控制相关技术的讨论。</p>
+<p>几乎所有在线服务都在收集我们的个人数据，并可能将这些数据用于训练 LLM。然而，模型会如何使用这些用于训练的数据则是难以确定的。如果在模型的训练中使用了诸如地理位置、健康记录、身份信息等敏感数据，那么针对模型中隐私数据的提取攻击（Data extraction attack）将会造成大量的用户隐私泄漏。「Are Large Pre-Trained Language Models Leaking Your Personal Information?」一文中证明，由于 LLM 对于训练数据的记忆，LLM 在对话过程中确实存在泄露个人信息的风险，且其风险随着示例数量的增加而增加。</p>
+<p>模型泄漏信息的原因有多种。其中一些是结构性的，与构建模型的方式有关；而另一些是由于泛化能力差、对敏感数据的记忆等因素造成的。在接下来的文章中，我们会先介绍基本的数据泄漏流程，然后介绍隐私攻击、越狱、数据中毒、后门攻击这几种常见的的模型攻击方式，最后会介绍目前关于隐私保护的一些研究。</p>
+<h3 id="i-威胁建模"><strong>I. 威胁建模</strong></h3>
+<p>一个基本的 LLM 威胁模型中包括一个通用的模型环境、各种参与者和敏感资产。其中敏感资产包括训练数据集、模型参数 、模型超参数和架构。其中参与者包括：数据所有者、模型所有者、模型消费者以及窃取方（Adversary）。下图描述了一个威胁模型下的资产、参与者、信息流和可能的操作流：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/310jcvjydtisnwc" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<p>在这样一个基础的威胁建模中，数据所有者拥有隐私数据资产，模型拥有者拥有模型参数和配置资产，模型的消费者通过 API 或用户界面来使用模型。而窃取方则试图通过某些手段获得隐私数据资产，或者模型参数资产。</p>
+<h3 id="ii-隐私攻击"><strong>II. 隐私攻击</strong></h3>
+<p>隐私攻击分为四种主要的类型：成员推理攻击、重构攻击、属性推理攻击和模型提取。</p>
+<ol>
+<li><strong>成员推理攻击（MIA）</strong></li>
+</ol>
+<p>成员推理试图确定输入样本 x 是否被用作训练集 D 的一部分。例如通常情况下，用户的隐私数据会作保密处理，但依旧可以利用非敏感信息来进行推测。一个例子是假如知道了某个私人俱乐部的成员都喜欢戴紫色墨镜、穿红色皮鞋，那么我们遇到一个戴紫色墨镜且穿红色皮鞋（非敏感信息）的人，就可以推断他很可能是这个私人俱乐部的成员（敏感信息）。</p>
+<p>成员推理攻击是目前关于隐私攻击最流行的方式，由 Shokri 等人在「Membership inference attacks against machine learning models」一文中首先提出。文章指出，这种攻击仅假定了解模型的输出预测向量，并且是针对受监督的机器学习模型进行的。如果可以访问模型参数和梯度，则可以进行准确度更高的成员推理攻击。</p>
+<p>成员推理攻击的一种典型方式被称为影子模型攻击（shadow attack），即基于已知可访问的数据集去训练一个影子模型，然后通过对影子模型的询问来套取敏感信息。</p>
+<p>除了监督式学习模型之外，GAN 和 VAE 等生成式模型也容易受到成员推理攻击。「GAN-Leaks: A Taxonomy of Membership Inference Attacks against Generative Models」一文中介绍了 GAN 在面对成员推理攻击时的问题；「LOGAN: Membership inference attacks against generative models」一文介绍了其他生成式模型在成员推理攻击时的反应，并介绍了如何基于对数据生成组件的了解来检索训练数据的攻击方式；「Language models as zero-shot planners: Extracting actionable knowledge for embodied agents」一文中提出了基于掩码语言建模 (MLM) 的模型也容易受到 MIA 攻击的影响，在某些情况下可以确定样本数据是否属于训练数据。</p>
+<p>另一方面，成员推理也可以用于模型安全审查，数据所有者可以借助成员推理去审核黑盒模型。「Membership Inference Attacks on Sequence-to-Sequence Models: Is My Data In Your Machine Translation System?」 一文介绍了数据所有者如何查看数据是否在未经授权的情况下被使用的情况。</p>
+<p>「Membership inference attacks against machine learning models」一文中研究了过度拟合和黑盒成员推理之间的联系，作者通过使用相同数据集在不同 MLaaS 平台中训练模型来测量过度拟合对攻击准确性的影响。通过实验表明，过度拟合会导致隐私泄露，但也指出这不是唯一的情况，因为一些泛化程度较高的模型更容易发生成员泄露。</p>
+<ol>
+<li><strong>重构攻击（Reconstruction Attacks）</strong></li>
+</ol>
+<p>重构攻击试图重建多个训练样本以及它们的训练标签，即在给定输出标签和某些特征的部分知识的情况下，尝试恢复敏感特征或完整数据样本。例如，通过模型反演对模型接口上获取的信息进行逆向重构，恢复训练数据中的生物特征、病诊记录等用户敏感信息，如下图：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/rs1vuym6islpv6v" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<p>重构攻击中，较高的泛化误差会导致推断出数据属性的概率也随之升高。在「The secret revealer: generative model-inversion attacks against deep neural networks」一文中， 作者基于对手知识较弱的假设，证明具有高预测能力的模型更容易受到重构攻击。另外与成员推理中的易受攻击的情况类似，对于不过拟合的模型，分布外数据的记忆和检索也容易受到重构攻击。</p>
+<ol>
+<li><strong>属性推理攻击（Attribute Inference Attacks）</strong></li>
+</ol>
+<p>属性推理攻击是指利用公开可见的属性和结构，推理出隐蔽或不完整的属性数据。一个示例是提取有关患者数据集中男女比例的信息，或者对一个性别分类的模型推断训练数据集中的人是否戴眼镜。在某些情况下，这种类型的泄漏可能会影响隐私。</p>
+<p>「Hacking Smart Machines with Smarter Ones: How to Extract Meaningful Data from Machine Learning Classifiers」提到利用某些类型的属性数据也可用于更深入地了解训练数据，进而导致他人使用此信息来拼凑更全局的信息。</p>
+<p>「You are who you know and how you behave: Attribute inference attacks via users’ social friends and behaviors」一文介绍了一类属性推理攻击方式，即通过用户自身已知行为锁定并套取该用户其他信息。「AttriGuard: A Practical Defense Against Attribute Inference Attacks via Adversarial Machine Learning」介绍了应对属性推理攻击的一些防御方法。</p>
+<p>属性推理旨在从模型中提取被模型无意学习到信息、或与训练任务无关的信息。即使是泛化良好的模型也可能学习与整个输入数据分布相关的属性，有时这对于模型训练的学习过程来说是难以避免的。</p>
+<p>「Exploiting unintended feature leakage in collaborative learning」一文中证明，即使使用泛化良好的模型也可以进行属性推理攻击，因此过度拟合似乎不是导致属性推理攻击的原因。关于属性推理攻击，目前对它们的成因以及它们在什么情况下似乎有效的信息较少，这也许是未来研究的一个值得期待的方向。</p>
+<ol>
+<li><strong>模型提取攻击（Model Extraction Attack）</strong></li>
+</ol>
+<p>模型提取是一类黑盒攻击方式，在这种攻击中，对手试图通过创建一个行为与受攻击模型非常相似的替代模型，以此来提取信息并可能完全重建模型。</p>
+<p>「Model Extraction of BERT-based APIs」、「Model Reconstruction from Model Explanations」、「Knockoff nets: Stealing functionality of black-box models 」、「High Accuracy and High Fidelity Extraction of Neural Networks」几篇论文从不同角度阐述了模型提取攻击的一些尝试。</p>
+<p>创建替代模型有两个主要步骤：第一步为任务精度提取，即在从输入数据分布中提取与学习任务相关的测试集，从而创建与目标模型的准确性相匹配的模型。第二步为保真度提取，即使得创建的替代品在一组不与学习任务相关的去拟合目标匹配的模型。在任务精度提取中，目标是创建一个替代品，该替代品可以与目标模型同样好或更好地学习相同的任务。保真度提取中，目标是试这个替代品尽可能忠实地复制决策边界。</p>
+<p>除了创建替代模型之外，还有一些方法专注于从目标模型中恢复信息，例如「Stealing hyperparameters in machine learning」中提到的窃取目标模型中的超参数；或「Towards Reverse-Engineering Black-Box Neural Networks」中提到的有关提取激活函数、优化算法、数量层等等各种神经网络架构的信息等。</p>
+<p>「Towards Reverse-Engineering Black-Box Neural Networks」一文表明，当测试集拟合度高于 98% 的模型受到攻击时，就有可能通过提取攻击窃取模型参数。此外，「ML-Doctor: Holistic Risk Assessment of Inference Attacks Against Machine Learning Models」中证明，泛化误差较高的模型更难被窃取，这可能是因为模型记住了不属于攻击者所拥有的数据集的样本。另一个可能影响模型提取成功率的因素是测试集数据类别，当数据类别越多时会导致更差的攻击性能。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/lrqa1jcsht0e81u" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<p>上图说明了每个模型算法的攻击类型图。在每个算法或机器学习领域的下方，绿色表明到目前为止研究过可适用的攻击类型，红色表示没有发现适用的攻击类型。</p>
+<h3 id="iii-模型越狱"><strong>III. 模型越狱</strong></h3>
+<p>模型越狱是通过某些方式使 LLM 产生退化输出行为，诸如冒犯性输出、违反内容监管输出，或者隐私数据泄漏的输出。越来越多的研究表明，即使非专家用户也可以通过简单地操作提示来越狱 LLM。</p>
+<p>比如以下示例，开发者的目标是构建一个翻译模型。场景里有两个用户，第一个用户是善意的，将模型用于其预期用例；而第二个用户则试图通过提供恶意输入来改变模型的目标。在此示例中，语言模型响应为“Haha pwned!!”而不是实际应该翻译句子。在这种越狱情况下，模型的响应可以设计成各种意图，从目标劫持（简单地未能执行任务）到生成冒犯性的种族主义文本，甚至发布私人专有信息。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/yakdbvujv8p44ku" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<h3 id="iv-数据中毒"><strong>IV. 数据中毒</strong></h3>
+<p>数据中毒是一种特殊的对抗攻击，是针对生成式模型行为的一种攻击技术。恶意行为者可以利用数据中毒为自己打开进入模型的后门，从而绕过由算法控制的系统。</p>
+<p>在人类的眼中，下面的三张图片分别展示了三样不同的东西：一只鸟、一只狗和一匹马。但对于机器学习算法来说，这三者或许表示同样的东西:一个有黑边的白色小方框。这个例子说明机器学习模型有一个十分危险的特性，可以利用这一特性使其对数据进行错误分类。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/71u8ty5640eqk9c" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<p>数据中毒攻击旨在通过插入错误标记的数据来修改模型的训练集，目的是诱使它做出错误的预测。成功的攻击会损害模型的完整性，从而在模型的预测中产生一致的错误。一旦模型中毒，从攻击中恢复是非常困难的，一些开发人员甚至可能放弃模型。</p>
+<p>「RealToxicityPrompts: Evaluating neural toxic degeneration in language models」一文中提到了一种方式，在对 GPT-2 提供一组基于文本完成的提示，以暴露其模型的内部参数。「Concealed data poisoning attacks on NLP models」中探索了如何通过修改训练数据以导致语言模型出现故障，以生成不符合目标的文本。</p>
+<p>虽然数据中毒非常危险，但需要攻击者能够访问机器学习模型的训练管道，然后才可以分发中毒模型。因此处在持续收集数据迭代的模型，或者基于联邦学习产生的模型，需要额外重视数据中毒所带来的影响。</p>
+<h3 id="v-后门攻击"><strong>V. 后门攻击</strong></h3>
+<p>后门攻击是指暗中插入或修改文本以导致语言模型的恶意输出。「Backdoors against natural language processing: A review」一文介绍了后门攻击的问题，其中某些漏洞在训练期间被传递给模型，并且可以通过使用词汇触发激活模型毒性。</p>
+<p>它与数据中毒的不同之处在于保留了模型的预期功能。「Training-free lexical backdoor attacks on language models」中提出了一种称为无训练词法后门攻击 (TFLexAttack) 的方法，该方法涉及通过将词法“触发器”引入语言模型的分词器来操纵嵌入字典。</p>
+<p><strong>SolidGoldMagikarp 现象</strong></p>
+<p>SolidGoldMagikarp 现象是一个典型的后门攻击现象**，** 当对 ChatGPT 输入 “SolidGoldMagikarp”时，它只回答一个词：“distribute”。当让它重复 “StreamerBot”时，它会回复：“You’re a jerk”。当被要求重复 “TheNitromeFan”时，它的回答是“182”。而如果在这个词两边加上单引号，他的回答就是无穷无尽的“ The”。当被问及 TheNitromeFan 是谁时，ChatGPT 回答说：“182 是一个数字，不是一个人。它通常被用来指代这个数字本身。”</p>
+<p>SolidGoldMagikarp 现象是指使用 OpenAI 的 GPT 标记器来识别模型无法谈论的特定标记，以及导致模型输出乱码文本的标记。「Explaining SolidGoldMagikarp by looking at it from random directions」一文探讨该现象背后的可能原因。</p>
+<p>以下列举几个比较频繁出现且重要的后门攻击类型</p>
+<p><strong>A. 基于指令</strong></p>
+<p><strong>a. 直接指令：</strong> 这些攻击主要可参考「Ignore previous prompt: Attack techniques for language models」，其中简单地指示模型忽略其先前的提示，并在当前位置指派新任务。</p>
+<p><strong>b. 认知攻击：</strong> 最常见的攻击类型，在 LLM 通常通过提供“安全空间”或保证这种响应的情况，通过“诱骗”执行它原本不会执行的错位行为。「Chatgpt: This ai has a jailbreak?!」记录了对 ChatGPT 发动这种攻击的一些尝试。</p>
+<p><strong>c. 指令重复：</strong> 这些类型的攻击涉及多次输入相同的指令，以便看起来好像攻击者正在“乞求”语言模型。从字面意义上来说，乞讨也可以用措辞来表达。</p>
+<p><strong>d. 间接任务偏转：</strong> 这种攻击的重点是伪装成另一个恶意任务。这种攻击针对的是通常不会遵循恶意指令的模型</p>
+<p><strong>B. 基于非指令</strong></p>
+<p><strong>a. 语法转换：</strong> 此类攻击涉及对攻击文本的正交转换，例如使用 LeetSpeak 或 Base64，以绕过应用程序中可能存在的内容过滤器，而模型可以固有地转换这种编码文本。</p>
+<p><strong>b. 少量黑客攻击：</strong> 一种涉及语言模型训练范式的简单方法。在这种方法中，攻击包含几个文本特征，这些特征可能旨在恶意错位模型。比如 SolidGoldMagikarp 现象就属于这一类。</p>
+<p><strong>c. 文本完成作为指令</strong> ：这些攻击的工作原理是向模型提供不完整的句子，从而迫使模型完成句子，并在此过程中忽略其先前的指令，从而导致错位。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/mee0d2rskkp4sd3" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<h3 id="vi-模型保护"><strong>VI. 模型保护</strong></h3>
+<p>研究如何防御模型攻击是一个艰巨且重要的任务。大多数针对安全分析的论文都提出并测试了缓解对应攻击的方式，以下是一些比较典型的防御手段。</p>
+<ol>
+<li><strong>差分隐私（Differential Privacy）</strong></li>
+</ol>
+<p>差分隐私是目前对成员推理攻击最突出的防御手段之一，它为模型输出中的个体数据提供了安全保证。关于差分隐私的论述来自于论文「The algorithmic foundations of differential privacy」。</p>
+<p>差分隐私给模型的输出增加了噪声，使得攻击者无法根据输出结果在统计上严格区分两个数据集。差分隐私最初是数据分析的隐私定义，它基于“在学习有关人口的有用信息的同时不了解任何个人”这一想法而设计。差分隐私不保护整体数据集的隐私安全，而是通过噪声机制保护数据集中每个个体的隐私数据。</p>
+<p>关于差分隐私的数学定义如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0712/wsngzijmkmfm1ig" alt="浅谈大模型数据隐私，几种常见的的模型攻击方式"></p>
+<p>差分隐私在隐私保护和效用或模型准确性之间进行权衡。「Membership Inference Attack against Differentially Private Deep Learning Model」中通过评估得出结论，只有当模型显着牺牲其效用时，它们才能提供隐私保护。</p>
+<ol>
+<li><strong>正则化（Regularization）</strong></li>
+</ol>
+<p>机器学习中的正则化技术旨在减少过度拟合并提高模型泛化性能。Dropout 是一种常用的正则化形式，它在训练期间随机丢弃预定义百分比的神经网络单元。鉴于黑盒成员推理攻击与过度拟合有关，这是应对此类攻击的明智方法，并且有多篇论文提出将其作为防御措施，并取得了不错的效果。</p>
+<p>另一种形式的正则化使用组合多个单独训练的模型的技术，如模型堆叠（model stacking）针对推理攻击产生了积极的结果。模型堆叠或类似技术的一个优点是它们与模型类别无关。</p>
+<ol>
+<li><strong>预测向量篡改（Prediction vector tampering）</strong></li>
+</ol>
+<p>由于许多模型假设在推理过程中可以访问预测向量，因此提出的对策之一是将输出限制为模型的前 k 个类或预测。然而，这种限制，即使是最严格的形式（仅输出类标签）似乎也没有完全减轻成员推理攻击，因为由于模型错误分类仍然可能发生信息泄漏。另一种选择是降低预测向量的精度，从而减少信息泄漏。</p>
+<p>另外有研究表明，向输出向量添加噪声也会影响成员推理攻击。</p>
+<ol>
+<li><strong>梯度调整（Loss gradient setting）</strong></li>
+</ol>
+<p>由于重建攻击通常需要在训练期间访问损失梯度，大多数针对重建攻击的防御措施都提出了影响从这些梯度中检索到的信息的技术。将所有低于某个阈值的损失梯度设置为零，被提议作为防御深度学习中的重建攻击。「Deep Leakage from Gradients」一文中证明这种方式非常有效，且当只有 20% 的梯度设置为零，并且对模型性能的影响可以忽略不计。</p>
+<ol>
+<li><strong>防止 DNN 模型窃取攻击 (PRADA)</strong></li>
+</ol>
+<p>「PRADA: protecting against DNN model stealing attacks」一文中提出了基于对手使用的模型查询来检测模型窃取攻击方法。检测基于以下假设：尝试探索决策边界的模型查询将具有与正常查询呈现不同的样本分布。虽然检测成功，但作者指出，如果对手调整其策略，则有可能被规避。</p>
+<ol>
+<li><strong>成员推理（Membership inference）</strong></li>
+</ol>
+<p>「Thieves on Sesame Street! Model Extraction of BERT-based APIs」中研究了使用成员推理来防御模型提取的想法。它基于使用成员推理的前提，模型所有者可以区分合法的用户查询和无意义的查询，这些查询的唯一目的是提取模型。作者指出，这种类型的防御具有局限性，例如可能会标记合法用户发出的合法但超出分布的查询，但更重要的是，它们可以被进行自适应查询的对手规避。</p>
+<ol>
+<li><strong>通过提示调整</strong></li>
+</ol>
+<p>在「Controlling the Extraction of Memorized Data from Large Language Models via Prompt-Tuning」一文中提出了一种新的方法，它使用提示调整来控制 LLM 中记忆内容的提取率。他们提出了两种提示训练策略来提高和降低提取率，分别对应于攻击和防御。</p>
+<h3 id="vii-结论"><strong>VII. 结论</strong></h3>
+<p>1. LLM 目前仍具备较大的安全风险以及隐私泄漏风险</p>
+<p>2. 提取模型结构和数据的攻击，本质来说是对模型机密性的攻击</p>
+<p>3. 学术界目前主要的研究集中在如何攻击模型以及数据泄漏的原理研究</p>
+<p>4. 部分导致 LLM 泄漏数据的原理仍不明朗</p>
+<p>5. 诸如差分隐私、预测向量篡改等可在一定程度上对数据隐私起到保护，这些方式集中于模型的训练阶段</p>
+<p>6. 现有的保护措施并不是完善的，而且需要牺牲模型性能和准确性</p>
+<h2 id="_________-_">_<strong>________</strong> _</h2>
+<h2 id="_reference_"><em>Reference：</em></h2>
+<p><em>1. Kalpesh Krishna, Gaurav Singh Tomar, Ankur P. Parikh, Nicolas Papernot, and Mohit Iyyer. 2020. Thieves on Sesame Street! Model Extraction of BERT-based APIs. In International Conference on Learning Representations. ICLR, Virtual Conference, formerly Addis Ababa, Ethiopia.</em></p>
+<p><em>2. The secret sharer: Evaluating and testing unintended memoriza- tion in neural networks</em></p>
+<p><em>3. Martín Abadi, Andy Chu, Ian J. Goodfellow, H. B. McMahan, Ilya Mironov, Kunal Talwar, and Li Zhang. 2016. Deep learning with differential privacy</em></p>
+<p><em>4. Giuseppe Ateniese, Luigi V. Mancini, Angelo Spognardi, Antonio Villani, Domenico Vitali, and Giovanni Felici. 2015. Hacking Smart Machines with Smarter Ones: How to Extract Meaningful Data from Machine Learning Classifiers.</em></p>
+<p><em>5. Bargav Jayaraman and David Evans. 2019. Evaluating Differentially Private Machine Learning in Practice. In 28th USENIX Security Symposium (USENIX Security 19). USENIX Association, Santa Clara, CA, 1895–1912</em></p>
+<p><em>6. Defending membership inference attacks without losing utility</em></p>
+<p><em>7. Yugeng Liu, Rui Wen, Xinlei He, Ahmed Salem, Zhikun Zhang, Michael Backes, Emiliano De Cristofaro, Mario Fritz, and Yang Zhang. 2021. ML-Doctor: Holistic Risk Assessment of Inference Attacks Against Machine Learning Models</em></p>
+<p><em>8. Tricking LLMs into Disobedience: Understanding, Analyzing, and Preventing Jailbreaks</em></p>
+<p><em>9. Maria Rigaki and Sebastian Garcia. 2021. A survey of privacy attacks in machine learning</em></p>
+<p><em>10. Nicholas Carlini, Florian Tramer, Eric Wallace, Matthew Jagielski, Ariel Herbert-Voss, Katherine Lee, Adam Roberts, Tom Brown, Dawn Song, Ul-far Erlingsson, Alina Oprea, and Colin Raffel. 2021. Extracting training data from large language models</em></p>
+<p><em>11. Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, and Noah A. Smith. 2020. RealToxi-city Prompts: Evaluating neural toxic degeneration in language models.</em></p>
+<p><em>12. Wenlong Huang, Pieter Abbeel, Deepak Pathak, and Igor Mordatch. 2022b. Language models as zero-shot planners: Extracting actionable knowledge for embodied agents. In ICML 2022, volume 162 of Proceedings of Machine Learning Research, pages 9118–9147. PMLR</em></p>
+<p><em>13. Ethan Perez, Saffron Huang, Francis Song, Trevor Cai, Roman Ring, John Aslanides, Amelia Glaese, Nat McAleese, and Geoffrey Irving. 2022. Red teaming language models with language models.</em></p>
+<p><em>14. Eric Wallace, Tony Zhao, Shi Feng, and Sameer Singh. Concealed data poisoning attacks on NLP models.</em></p>
+<p><em>15. Shaofeng Li, Tian Dong, Benjamin Zi Hao Zhao, Minhui Xue, Suguo Du, and Haojin Zhu. 2022. Backdoors against natural language processing: A review. IEEE Security &amp; Privacy, 20(5):50–59</em></p>
+<p><em>16. Yujin Huang, Terry Yue Zhuo, Qiongkai Xu, Han Hu, Xingliang Yuan, and Chunyang Chen. 2023. Training-free lexical backdoor attacks on language models.</em></p>
+<p><em>17. Explaining SolidGoldMagikarp by looking at it from random directions</em></p>
+<p><em>18. Fábio Perez and Ian Ribeiro. 2022. Ignore previous prompt: Attack techniques for language models. arXiv preprint arXiv:2211.09527.</em></p>
+<p><em>19. Yannic Kilcher. 2022. Chatgpt: This ai has a jailbreak?! (unbelievable ai progress).</em></p>
+<p><em>20. Battista Biggio and Fabio Roli. 2018. Wild patterns: Ten years after the rise of adversarial machine learning. Pattern Recognition 84 (2018), 317–331.</em></p>
+<p><em>21. Ligeng Zhu, Zhijian Liu, and Song Han. 2019. Deep Leakage from Gradients. In Advances in Neural Information Processing Systems 32, H. Wallach, H. Larochelle, A. Beygelzimer, F. d&rsquo;Alché-Buc, E. Fox, and R. Garnett (Eds.). Curran Associates, Inc., Vancouver, Canada, 14747–14756</em></p>
+<p><em>22. Nicholas Papernot, Patrick McDaniel, Arunesh Sinha, and Michael P. Wellman. 2018. SoK: Security and Privacy in Machine Learning. In 2018 IEEE European Symposium on Security and Privacy (EuroS P). IEEE, London, UK, 399–414</em></p>
+<p><em>23. Michael Veale, Reuben Binns, and Lilian Edwards. 2018. Algorithms that remember: model inversion attacks and data protection law. Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences 376, 2133 (2018), 20180083</em></p>
+<p><em>24. Reza Shokri, Marco Stronati, Congzheng Song, and Vitaly Shmatikov. 2017. Membership inference attacks against machine learning models. In 2017 IEEE Symposium on Security and Privacy (SP). IEEE, San Francisco, CA, USA, 3–18</em></p>
+<p><em>25. Sorami Hisamoto, Matt Post, and Kevin Duh. 2020. Membership Inference Attacks on Sequence-to-Sequence Models: Is My Data In Your Machine Translation System?</em></p>
+<p><em>26. Congzheng Song and Vitaly Shmatikov. 2019. Auditing Data Provenance in Text-Generation Models. In Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining (KDD ’19). Association for Computing Machinery, New York, NY, USA, 196–206.</em></p>
+<p><em>27. Jinyuan Jia and Neil Zhenqiang Gong. 2018. AttriGuard: A Practical Defense Against Attribute Inference Attacks via Adversarial Machine Learning. In 27th USENIX Security Symposium (USENIX Security 18).</em></p>
+<p><em>28. Matthew Fredrikson, Eric Lantz, Somesh Jha, Simon Lin, David Page, and Thomas Ristenpart. 2014. Privacy in Pharmacogenetics: An End-to-End Case Study of Personalized Warfarin Dosing.</em></p>
+<p><em>29. Matthew Jagielski, Nicholas Carlini, David Berthelot, Alex Kurakin, and Nicolas Papernot. 2020. High Accuracy and High Fidelity Extraction of Neural Networks</em></p>
+<p><em>30. Binghui Wang and Neil Zhenqiang Gong. 2018. Stealing hyperparameters in machine learning. In 2018 IEEE Symposium on Security and Privacy (SP). IEEE, San Francisco, CA, USA, 36–52</em></p>
+<p><em>31. Seong Joon Oh, Max Augustin, Mario Fritz, and Bernt Schiele. 2018. Towards Reverse-Engineering Black-Box Neural Networks. In Sixth International Conference on Learning Representations. ICLR, Vancouver, Canada.</em></p>
+<p><em>32. Cynthia Dwork and Aaron Roth. 2013. The algorithmic foundations of differential privacy. Foundations and Trends in Theoretical Computer Science 9, 3-4 (2013), 211–487</em></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54846/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">苹果Vision Pro来了，回顾科技四巨头的研发与XR行业的兴衰沉浮</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54875/">
+                <span class="next-text nav-default">全览 RWA 赛道：10 大头部项目进展和 20 个早期项目概要</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#i-威胁建模"><strong>I. 威胁建模</strong></a></li>
+        <li><a href="#ii-隐私攻击"><strong>II. 隐私攻击</strong></a></li>
+        <li><a href="#iii-模型越狱"><strong>III. 模型越狱</strong></a></li>
+        <li><a href="#iv-数据中毒"><strong>IV. 数据中毒</strong></a></li>
+        <li><a href="#v-后门攻击"><strong>V. 后门攻击</strong></a></li>
+        <li><a href="#vi-模型保护"><strong>VI. 模型保护</strong></a></li>
+        <li><a href="#vii-结论"><strong>VII. 结论</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#_________-_">_<strong>________</strong> _</a></li>
+    <li><a href="#_reference_"><em>Reference：</em></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

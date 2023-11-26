@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          指南：清晰理解zkEVM、EVM 兼容性和Rollup - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="ZK-Rollup一直被认为是以太坊扩展的终极目标。" />
+<meta name="keywords" content="zkRollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41870/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="指南：清晰理解zkEVM、EVM 兼容性和Rollup" />
+<meta property="og:description" content="ZK-Rollup一直被认为是以太坊扩展的终极目标。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41870/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-24T00:00:00+00:00" />
+
+<meta itemprop="name" content="指南：清晰理解zkEVM、EVM 兼容性和Rollup">
+<meta itemprop="description" content="ZK-Rollup一直被认为是以太坊扩展的终极目标。"><meta itemprop="datePublished" content="2022-08-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9993">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="指南：清晰理解zkEVM、EVM 兼容性和Rollup"/>
+<meta name="twitter:description" content="ZK-Rollup一直被认为是以太坊扩展的终极目标。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">指南：清晰理解zkEVM、EVM 兼容性和Rollup</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-24">
+      2022-08-24
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9993 字 -
+        预计阅读 20 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>ZK-Rollup一直被认为是以太坊扩展的终极目标。然而，尽管它对以太坊的扩展路线图来说是很重要，但在几个关键点上仍然存在不确定性：</strong></p>
+<ul>
+<li>
+<p>ZK-Rollup到底是什么?</p>
+</li>
+<li>
+<p>特定于应用程序的Rollup和通用Rollup之间有什么不同?</p>
+</li>
+<li>
+<p>什么是zkEVM Rollup?像EVM等效和EVM兼容这样的术语实际上是什么意思，它们如何应用于Rollup?</p>
+</li>
+<li>
+<p>ZK-Rollup生态系统的当前状态是怎样的，这对项目意味着什么?</p>
+</li>
+</ul>
+<p>如果你是一名希望了解以太坊扩展下一阶段的开发人员，本文将(希望)对你有所帮助。</p>
+<h3 id="zk-rollup"><strong>ZK-Rollup</strong></h3>
+<p>ZK -Rollup是这样实现的：像STARK或SNARK这样的证明系统允许用亚线性处理来验证线性数量的语句(例如，1000个语句→10个验证者检查，10,000个语句→11个验证者检查)。我们可以使用这个属性来创建可大规模扩展的区块链交易处理上，如下所示：</p>
+<ul>
+<li>
+<p>用户将他们的资产锁定在L1上的ZK-Rollup智能合约中；</p>
+</li>
+<li>
+<p>用户将涉及这些资产的交易提交给L2的sequencer，L2的sequencer将它们收集成有序的批次，并为每个批次生成有效性证明（例如 STARK/SNARK）和聚合状态更新；</p>
+</li>
+<li>
+<p>这个状态更新和证明会提交给我们的L1的ZK-Rollup智能合约并进行验证，它会用于更新我们的L1状态；</p>
+</li>
+<li>
+<p>用户可以使用这种L1状态(根据不同的数据可用性机制)来检索他们的资产，从而实现完全的自我托管和“以太坊安全”。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_0j1cjajn7m.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>验证证明的gas成本与被验证交易的数量呈次线性关系，与直接使用L1相比，它可以呈现更大的规模。</p>
+<h3 id="特定于应用程序的rollup"><strong>特定于应用程序的Rollup</strong></h3>
+<p>到目前为止，所有生产级ZK-Rollup都是我们所说的“特定于应用程序的Rollup”。在特定于应用程序的Rollup中，Rollup支持由Rollup运算符定义的固定数量的“状态转换”(例如交易)。例如：</p>
+<ul>
+<li>
+<p>Loopring—支付和交易</p>
+</li>
+<li>
+<p>Immutable —NFT铸造，交易，游戏</p>
+</li>
+<li>
+<p>dydx—永续合约交易</p>
+</li>
+</ul>
+<p>如果你需要解决的是一个项目的需求，那么就可以通过特定于应用程序的Rollup来满足，你的用例可能会获得更好的性能、更好的用户体验和更好的价格，因为它们缺乏通用性是一个巨大的优势。例如，在Immutable，我们可以通过补贴免费的NFT铸造，在NFT交易中收取一定的费用来取消gas费用——这种权衡之所以可能是因为Rollup状态转换的可预测性。</p>
+<p>然而，许多项目希望能够创建自己的自定义逻辑和智能合约，独立于Rollup的运营商，这在特定于应用程序的Rollup中是不可能的。此外，许多DeFi项目需要“可组合性”，或需要有与其他项目交互的能力(例如，许多DeFi项目使用Uniswap作为价格预言机)。只有当你的Rollup不仅支持自定义代码，而且支持任何用户都可以部署的原生智能合约时，可组合性才有可能实现。为了实现这一点，我们需要修改ZK-Rollup的体系结构，以囊括每个组件。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_hz2er0vsza.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>为了提高灵活性，需要做一些考虑和权衡：性能大幅下降、Rollup参数的可自定义性降低和费用增加。然而，其最大的缺点是没有实现通用ZK-Rollup。但这种情况已经开始改变：</p>
+<ul>
+<li>
+<p>StarkNet目前在主网上（尽管处于Alpha 阶段）。</p>
+</li>
+<li>
+<p>3个独立的项目（zkSync, Polygon Hermez/zkEVM和Scroll）都在ETH CC 2022上宣布，它们将成为第一个到达主网的“zkEVM”。</p>
+</li>
+</ul>
+<p>这些公告是值得深入研究的，因为这些团队不仅宣布了通用Rollup，他们还宣布了“zkEVM”。随之而来的是Twitter上关于“EVM兼容性”、“EVM等效性”、“真正的zkEVM”以及哪种方法更好的争论。对于应用程序开发人员来说，这些争论常常是噪音——所以本文的目的是分析这些术语、设计决策和理念，并解释它们对开发人员的实际影响。</p>
+<h3 id="什么是evm"><strong>什么是EVM?</strong></h3>
+<p>以太坊虚拟机是执行以太坊交易的运行环境，最初在以太坊黄皮书中定义，后来被一系列以太坊改进提案(eip)修改。它由以下部分组成：</p>
+<ul>
+<li>
+<p>用于执行程序的标准“机器”，每个交易都有易失的“内存”，交易可以写入的持久“存储”和一个可操作的“堆栈”。</p>
+</li>
+<li>
+<p>在这个机器中执行状态转换的140个定价“操作码”。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_1a1ynon9pd.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>虚拟机的一些操作码示例：</p>
+<ul>
+<li>
+<p>堆栈操作：PUSH1(向堆栈中添加内容)</p>
+</li>
+<li>
+<p>算术操作：ADD（加数字），SUBTRACT</p>
+</li>
+<li>
+<p>状态操作：SSTORE(存储数据)，SLOAD(加载数据)</p>
+</li>
+<li>
+<p>交易操作：CALLDATA， BLOCKNUMBER(返回当前执行交易的信息)</p>
+</li>
+</ul>
+<p>一个EVM程序就是一系列操作码和参数。当这些程序被表示为一个连续的代码块时，我们称其结果为“字节码”(通常表示为十六进制字符串)。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_zmbgcrsaha.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>通过将大量这样的操作码组合成一个执行序列，我们可以创建任意的程序。以太坊使用自定义虚拟机，而不是去适应调整现有的虚拟机，因为它有独特的需求：</p>
+<ul>
+<li>
+<p>每个操作都必须有防止滥用的“成本”(因为所有节点都运行所有交易)。</p>
+</li>
+<li>
+<p>每个操作都必须是确定性的(因为所有节点必须对交易执行后的状态达成一致)。</p>
+</li>
+<li>
+<p>我们需要区块链特定的概念(例如智能合约、交易)。</p>
+</li>
+<li>
+<p>一些复杂的操作必须是原语(例如密码学)。</p>
+</li>
+<li>
+<p>交易必须沙箱化，没有I/O或外部状态访问。</p>
+</li>
+</ul>
+<p>EVM是2015年发布的第一个图灵完备区块链VM。它有一些设计上的限制，但其巨大的先发优势和随后的广泛采用为以太坊提供了差异化——它是目前为止在整个领域中最久经考验的智能合约基础设施。</p>
+<p>由于以太坊的主导地位，许多后来的区块链都直接采用了这种运行环境。例如，Polygon和BNBChain是以太坊的直接分叉。值得注意的是，EVM并不是一成不变的，并且经常在EIP-1559等升级中进行修改。由于其他区块链需要时间更新，或在多个地方与以太坊不同，所以它们通常运行的是略微过时的EVM版本，可能难以跟上变化的步伐——这一事实可能会让以太坊核心开发人员感到沮丧。</p>
+<h3 id="以太坊兼容性"><strong>以太坊兼容性</strong></h3>
+<p>然而，人们所说的“EVM链”通常不仅仅是对这个运行环境的镜像。有几个主要的规范开始于以太坊，并已成为事实上的全球标准：</p>
+<ul>
+<li>
+<p>Solidity（可编译为EVM字节码的高级语言）</p>
+</li>
+<li>
+<p>以太坊的JSON-RPC客户端API（与以太坊节点交互的规范）</p>
+</li>
+<li>
+<p>ERC20/ERC721（以太坊代币标准）</p>
+</li>
+<li>
+<p>ethers . js（以太坊接口的web库）</p>
+</li>
+<li>
+<p>以太坊的密码学（例如keccak256作为哈希函数，secp256k1上的ECDSA签名）</p>
+</li>
+</ul>
+<p>从技术上讲，你的链可能有一个EVM 运行环境，却不支持上述部分或全部。然而，遵守这些标准会使你在新链上使用以太坊工具变得更加容易。一个很好的例子就是Polygon，它除了使用上述所有工具之外，还能够运行一个分叉版本的Etherscan (Polygonscan)，使用像Hardhat这样的以太坊开发工具，并在像Metamask这样的钱包中作为不同的以太坊“网络”被支持。像Nansen和Dune这样的工具最初都是针对以太坊的，因此添加对新的EVM区块链的支持很简单。新的钱包，新的NFT市场——如果以太坊的接口和你的链的接口之间的唯一区别是链ID，那么你有可能是第一个，并且是以最轻松的方式进行添加的人。也就是说，这些工具是为以太坊构建的。一旦你开始修改自己的区块链(例如，更大的区块，更快的区块时间)，你就需要冒着破坏它们的风险。这里没有所谓的完美匹配。</p>
+<p>当涉及到开发人员工具时，任何不支持上述规范的区块链都会被自动落下，并且随着EVM生态系统的发展有进一步落后的风险。</p>
+<p>我认为，“EVM兼容”这个术语实际上不足以描述这里所说的网络效应，我们实际上描述的是“以太坊兼容”，它远远超出了智能合约执行环境，已经扩展到了整个以太坊生态系统和工具集。</p>
+<p>为了解决这个问题，像Solana这样的非EVM区块链不得不创建完全平行的生态系统，这就降低了它们的速度，使其更难吸引现有的开发者。然而，不需要遵守这些标准确实使非 EVM 区块链能够对以太坊工具集进行更根本的更改，从而更积极地将自己与以太坊区分开来。创建一个EVM区块链非常简单，但为什么有人会使用你的而不是数以百计的其他“快速EVM区块链”呢? 如果能克服需要建立一个成功的平行链和生态系统的困难，那么Solana的情况已经表明，a) 你可以吸引出色的应用程序（如MagicEden, Phantom）， b) 如果商业激励充足，源于EVM的项目仍然会支持你 （如Opensea增加对Solana的支持）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_yau6i4ms9t.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<h3 id="zk-evm"><strong>zk-EVM</strong></h3>
+<p>通用Rollup都有一个共同的目标：让开发人员和用户以尽可能快的速度产生网络效果。这就需要创造性能最好的Rollup技术，拥有最好的BD团队和最有效的营销，三者缺一不可。然而，所有Rollup团队(基于上述原因)都深切关注：</p>
+<ul>
+<li>
+<p>将现有的以太坊合约(和开发人员)迁移到他们的Rollup中。</p>
+</li>
+<li>
+<p>支持现有的EVM工具(例如库、钱包、市场等)。</p>
+</li>
+</ul>
+<p>实现这两个目标的最简单方法是创建一个“zkEVM”：一个通用的Rollup，它将EVM作为智能合约引擎运行，并保持与上述以太坊生态系统的通用接口的兼容性。</p>
+<p>然而，这并不像分叉 Geth，或创建一个新的L1区块链那样容易。我们的目标是运行EVM字节码——但是ZK证明需要将它们要证明的所有计算语句转换成一种非常特定的格式——一种“代数电路”，然后再将它们编译成STARK或SNARK。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_e59vorcl2a.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>这种更深层次的理解对于我们的目的来说并不是必要的——只要记住，为了支持EVM计算，我们必须将所有的EVM程序转换成这些电路，以便稍后验证它们。</p>
+<p>一般来说，有以下几种方法：</p>
+<ul>
+<li>
+<p>通过将其转换成可验证的电路，直接证明EVM的执行跟踪。</p>
+</li>
+<li>
+<p>创建一个自定义VM，将EVM操作码映射到该VM的操作码上，然后证明该自定义环境中跟踪的正确性。</p>
+</li>
+<li>
+<p>创建一个自定义VM，将Solidity转换为自定义VM的字节码(直接，或者通过自定义高级语言)，并在自定义环境中进行验证。</p>
+</li>
+</ul>
+<h3 id="选项1证明evm执行跟踪"><strong>选项1：证明EVM执行跟踪</strong></h3>
+<p><strong>Scroll</strong></p>
+<p>让我们从最直观的开始：证明EVM执行跟踪本身，这是目前由Scroll团队研究的一种方法。为了实现这一目标，我们需要:</p>
+<ul>
+<li>
+<p>为一些密码累加器设计一个电路(允许验证我们正在准确读取存储并加载正确的字节码)。</p>
+</li>
+<li>
+<p>设计一个电路来连接字节码和实际的执行跟踪。</p>
+</li>
+<li>
+<p>为每个操作码设计一个电路(允许我们证明每个操作码读写和计算的正确性)。</p>
+</li>
+</ul>
+<p>在电路中直接实现每个EVM操作码是具有挑战性的，但这种方法会准确地反映EVM，因此它在可维护性和工具支持方面有显著优势。下图显示了Scroll和Ethereum之间，唯一理论上的区别——实际的运行环境。值得注意的是，Scroll目前并没有通过这种机制支持所有的EVM操作码，尽管他们打算随着时间的推移进行改善。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_bg6ugkq1pe.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>Optimism团队曾对此进行了精彩的讨论，虽然他们的讨论是在Optimistic Rollup的背景下展开的。Optimism最初创建了一个自定义的Optimistic虚拟机(OVM)作为它们Rollup的执行环境。OVM是“兼容以太坊”的，这意味着它可以运行修改过的Solidity代码，但一些不匹配的领域的存在，使得以太坊工具和复杂的代码经常需要被重新编写。因此，Optimism转向了“EVM等效”，直接使用确切的EVM规范，并正在开发第一个与EVM等效的欺诈证明系统。然而，Optimistic Rollup不需要担心电路或验证者效率。</p>
+<p>但是，EVM的核心基础设施不太适合ZK-Rollup。Rollup性能的一个核心衡量标准是我们需要将特定计算编码到电路中所需的“约束”数量。在许多情况下，镜像EVM会直接带来巨大的开销。例如，EVM使用256位整数，而ZK证明在素数字段上才会最自然地工作。引入范围检查以对抗不匹配的字段算术为每个 EVM 步骤增加了约 100 个约束。以太坊的存储布局严重依赖于keccak256，它的电路形式比对STARK友好的哈希函数(如Poseidon, Pedersen)大1000倍——但替换keccak将会对现有的以太坊基础设施造成巨大的兼容性问题。此外，与SNARK/STARK友好限额椭圆曲线相比，标准以太坊椭圆曲线上的签名在证明和验证上都非常昂贵。简单地说，直接证明EVM会带来巨大的计算开销。虽然最近在这方面有了一些进展(例如多项式承诺、递归证明、硬件加速)，但证明EVM跟踪的效率要远远低于在自定义设计的VM中进行的证明，至少在EVM本身做出改变变得对SNARK更友好之前(可能需要几年时间)。</p>
+<h3 id="选项2自定义vm操作码支持"><strong>选项2：自定义VM+操作码支持</strong></h3>
+<p>这种实现促使团队采用上面所述的“与EVM兼容”的方法：创建具有优化性能的自定义VM，然后将EVM字节码直接转换为用于VM的字节码。</p>
+<p><strong>Polygon</strong></p>
+<p>Polygon Hermez(最近更名为Polygon zkEVM)便是一个专注于此方法的团队。Polygon的方法是构建一个zkEVM（操作码级别的等效），这听起来与Scroll所采取的方法很相似。然而，与Scroll不同的是，Polygon的备用运行环境(“ZKExecutor”)运行自定义的“zkASM”操作码而不是EVM操作码，以试图优化EVM解析(即减少约束的数量和直接证明EVM)。Hermez团队将其描述为“基于操作码的方法”，其核心挑战是在他们的自定义VM中重新创建每个EVM操作码，这样他们就可以快速地从EVM字节码转换为可验证的格式。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_e6slajgn0k.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>这些中间步骤增加了维护和潜在bug的“表面积”。最后，重要的是要清楚，你的程序不是运行在电路中镜像EVM的zkEVM中，它们在备用的“ZKExecutor”运行，这与EVM本身类似但又不同。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_isjus2ursr.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>因此，虽然大多数Solidity代码可以正常运行，但会有一些不兼容运行在该系统上的现有L1应用程序和工具的情况。Polygon宣称“与现有的以太坊工具100%兼容”，并承诺遵守JSON-RPC。在实践中，这种说法可能是比较理想化的，依赖于以太坊本身的东西将变得对 SNARK 更加友好。</p>
+<p>Polygon的方法比Scroll的Rollup性能更好(至少在短期内是这样)，但有:</p>
+<ul>
+<li>
+<p>更多的自定义代码，因为我们需要创建zkASM。</p>
+</li>
+<li>
+<p>开发人员可能需要修改他们的L1代码或工具框架。</p>
+</li>
+<li>
+<p>随着时间的推移，可能与以太坊偏离。</p>
+</li>
+</ul>
+<h3 id="选项3自定义vm--转译器"><strong>选项3：自定义VM + 转译器</strong></h3>
+<p>上述解决方案在“使EVM为ZK-Rollup工作”上投入了大量的开发时间，将兼容性置于长期性能和可扩展性之上。还有另一种选择：创建一个全新的、专门构建的VM，然后在上面添加对以太坊工具的支持以作为附加层。</p>
+<p><strong>StarkNet</strong></p>
+<p>这就是StarkWare在StarkNet上所采取的方法，StarkNet是目前进展最快的通用Rollup。StarkNet运行一个自定义的智能合约VM (Cairo VM)，带有自己的底层语言(Cairo)，两者都是为智能合约Rollup而构建的。这意味着StarkNet没有现成的以太坊兼容性——正如我们之前看到的，即使是操作码级别的VM级别兼容性也是Rollup性能的潜在“手刹”。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_htzslnbwfh.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>然而，Nethermind团队(与StarkWare合作)已经创建了Warp转译器，它能够将任意的Solidity代码转换为Cairo VM字节码。Warp的目标是将普通的Solidity合约移植到StarkNet上——这会实现许多以太坊开发者在“EVM兼容性”方面的主要目标。然而，在实践中，Warp 不支持一些 Solidity 功能，包括低级调用。</p>
+<p>这种构建智能合约Rollup的方法保持了“Solidity兼容性”：你不需要在EVM内部执行程序，也不需要保持与任何其他以太坊接口的兼容性，但Solidity开发人员将能够编写可用于你的Rollup的代码。因此，你可以保持与以太坊类似的开发人员体验，而不必牺牲自己的基础层。</p>
+<p>然而，这种方法还有几个需要考虑的方面。首先，构建自己的VM是具有挑战性的——以太坊团队已经有超过五年的时间来解决EVM的问题，并且仍然经常进行升级和修复。更自定义的Rollup可以获得更好的性能，但同时也将失去其他所有链和Rollup对EVM所做的集体改进带来的好处。</p>
+<p>其次，通过转译器来支持Solidity会有潜在损失可组合性的风险——如果开发人员同时使用CAIRO和Solidity编写合约，那么支持两者之间接口的工具很可能会非常容易受攻击。到目前为止，绝大多数的StarkNet项目都直接使用了CAIRO，它们可能不容易与未来的Solidity项目组合在一起。最后，可能也是最重要的一点是，StarkNet团队目前的目标并不是与其他以太坊组件兼容——他们正在开发自己的客户端API、javascript库和钱包系统，这将迫使兼容以太坊的工具手动添加对StarkNet的支持。这非常具有挑战性，但并非不可能——正如上文所述，Solana已经足够成功，其自定义标准受到一些以太坊工具的尊重。</p>
+<p>然而，如果他们能成功做到这一点，StarkWare团队将着眼于复制EVM的先发优势，并使用首个针对ZK-Rollup进行优化的智能合约VM。</p>
+<p><strong>zkSync</strong></p>
+<p>另一个采用这种策略的团队是zkSync。zkSync创建了自己的VM (SyncVM)，它是基于寄存器的，并定义了自己的代数中间表示(AIR)。然后，他们构建了一个专门的编译器，将Yul(一种中间语言，可以编译成针对不同EVM版本的字节码，比如较低级别的Solidity)编译成LLVM-IR，然后再将LLVM-IR编译成用于自定义VM的指令。这类似于StarkWare所采取的方法，但它们在基础语言上提供了更多的灵活性（尽管目前仅支持 Solidity 0.8.x）。zkSync团队最初创建了他们自己的类似于Cairo的语言(Zinc)，但是他们将主要精力集中在了Solidity编译器上，以便L1开发人员能够更简单地进行迁移。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_7lob9flqs6.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>zkSync利用这个自定义VM来提供非EVM兼容的功能，比如帐户抽象(Account Abstraction)，这一直是以太坊核心协议的一个目标。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_bo2wtde9in.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>综上所述，你可以清楚地看到每个团队遵循的不同策略:</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_34anrjcdnu.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<h3 id="vitalik的zkevm类型"><strong>Vitalik的zkEVM类型</strong></h3>
+<p>Vitalik Buterin在关于zkEVM的博客上强调了Rollup团队目前面临的基本困境：EVM不是为“可验证”程序构建的。事实上，正如我们通过上面的分析所展示的，越是寻求与以太坊的高兼容性，程序在“可验证格式”中的性能就会越低。根据与现有EVM基础设施的兼容性程度，Vitalik确定了通用Rollup的几大类别：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_4jno9gz8gg.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>我想对他的论点做的唯一扩展是，在每个“类型”中也存在着显著程度的可变性——我们处理的是一个范围，而不是完全细分的类别。从开发人员的经验来看，对应用层进行单个小更改的Type 3 Rollup比对应用层进行大规模更改的Type 2 Rollup更常见，但在技术上没有引入新的 VM并成为Type 4。</p>
+<h3 id="智能合约rollup的当前状态"><strong>智能合约Rollup的当前状态</strong></h3>
+<p>没有ZK-Rollup能完美地反映EVM在所有情况下的行为——这完全是程度的问题，当涉及可维护性和性能(而不仅仅是兼容性)时，每个团队所做的具体选择将是最重要的。我认为以下定义是最清晰、最一致的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_1eqtyaas5o.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>重要的是要明白，以上这些方法都不是“天生王者”——它是一种分类，而不是一种等级。它们都做出了不同的权衡：更容易构建、维护和升级，性能更高，更容易与现有工具兼容。最终，领先地位也将由更好的分销和营销决定，而不是纯粹的技术能力。话虽如此，做出正确的基本技术决策无疑具有很大的优势。Scroll对EVM规范的热忱承诺是否能让他们轻松应对EVM的任何升级?另一个团队更务实的方法会帮助他们更快地进入市场吗?StarkWare的自定义VM + 转译器方法会为长期发展奠定更坚实的基础吗?另一个团队是否会从这个领域的先行者犯的错误中吸取教训，并击败他们? 以太坊当前发展的美妙之处在于，我们有不同的团队，用本质上不同的方法朝着一个共同的目标前进。</p>
+<p>但在我们忘乎所以之前，我们也应该清醒地认识到智能合约Rollup的当前情况。每个团队都有强烈的欲望将自己推销为“即将接管世界”的项目——但最早要到2022年底，才会有“生产级”智能合约rollup在以太坊上，而其中许多团队要到2023年才会准备好。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_ubl44vcdo0.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<p>由于这种尚不成熟的状态，特定于应用程序的Rollup仍然是开发人员在不影响以太坊安全性的前提下进行扩展的最佳选择。我预计在可预见的未来，特定于应用程序Rollup的性能、自定义和可靠性仍将在某些用例(例如，交易所、NFT铸造/交易)中保持卓越表现。</p>
+<h3 id="其他因素"><strong>其他因素</strong></h3>
+<p>尽管本文主要关注以太坊生态系统的兼容性与性能，但这些并不是关于他们的全部内容。还有许多其他因素会影响我们是否应该构建特定的通用Rollup。下面将提出几个主要的附加标准：</p>
+<ul>
+<li>
+<p>费用：这些Rollup会以原生代币，或ETH，或两者的某种复杂组合收取费用吗?费用结构对用户和开发人员的体验有巨大的影响，因为Rollup通常需要费用代币来支付计算费用。</p>
+</li>
+<li>
+<p>证明和排序：所有的Rollup都需要一个实体，该实体负责对交易进行排序和生成证明。今天，大多数特定于应用程序的Rollup都是“单sequencer”，它往往以弹性为代价产生更高的吞吐量。大多数通用的Rollup最初是作为单sequencer的Rollup，但他们通常有计划随着时间的推移将这个sequencer进行去中心化。</p>
+</li>
+<li>
+<p>自我托管：ZK-Rollup的核心承诺是在保持以太坊安全性的同时扩大规模。然而，许多通用Rollup目前没有明确的机制在发生恶意或出现不可用的sequencer时恢复用户资产。</p>
+</li>
+<li>
+<p>数据可用性：如介绍中所述，自我托管的保证取决于故障情况下状态数据的可用性。然而，完全的数据可用性为用户带来了额外的成本，导致了一系列的数据可用模式。这已经广泛应用于特定于应用程序的Rollup中（例如 Validiums、Volitions），但每个通用Rollup都需要单独添加此功能。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0824/5_bj9qk81qc1.png" alt="指南：清晰理解zkEVM、EVM 兼容性和Rollup"></p>
+<h3 id="总结"><strong>总结</strong></h3>
+<p>智能合约Rollup是以太坊扩展路线图中一个非常重要的部分。这些Rollup在与现有以太坊工具集的关系中做出了不同的权衡，这也证明了以太坊开发人员生态系统的多样性。</p>
+<p>然而，目前关于EVM兼容性的讨论通常没有抓住要点。从开发人员的角度来看，所有这些Rollup都将支持Solidity代码。真正的以太坊兼容性是一个更大的挑战，需要进行大量的考虑和权衡，开发人员在提交Rollup之前应该意识到这一点。目前，大多数Rollup项目都是大规模的“远期销售”，即销售3年以上的愿景，而不是今天(甚至是12个月)可能实现的目标，这可能会造成一定程度上的混乱。</p>
+<p>为了提高透明度，我希望每个主要Rollup团队都能对以下问题提供更清晰的答案：</p>
+<ul>
+<li>
+<p>在L1和L2运行时，它们的区别是什么?哪些操作码会在L2上被修改吗?VM的其他特征(例如费用结构)与L1有什么不同吗?</p>
+</li>
+<li>
+<p>你的自定义VM的正式规范在哪里?与其他选项相比，它的性能在哪里更高/更低?</p>
+</li>
+<li>
+<p>这次Rollup将对其他以太坊接口(例如客户端API、库)做出多少更改，这将破坏以太坊工具吗?</p>
+</li>
+<li>
+<p>这个Rollup什么时候会在测试网上上线?在主网上吗?能够支持1000+客户合约TPS的持续吞吐吗?</p>
+</li>
+<li>
+<p>你希望什么时候支持用户资产的完全自我托管?在通用Rollup的背景下，它将是什么样子的?</p>
+</li>
+</ul>
+<p>随着合并即将到来，经过检验的特定于应用程序的Rollup在生产中，而通用Rollup将在明年冲击主网，以太坊扩展的未来就在当下。</p>
+<p>Source：https://immutablex.medium.com/ground-up-guide-zkevm-evm-compatibility-rollups-787b6e88108e</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41874/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">域名生意逆市火爆 BNS能否接棒ENS？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41843/">
+                <span class="next-text nav-default">BendDAO资不抵债NFT终于也要迎来次贷危机了吗？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#zk-rollup"><strong>ZK-Rollup</strong></a></li>
+        <li><a href="#特定于应用程序的rollup"><strong>特定于应用程序的Rollup</strong></a></li>
+        <li><a href="#什么是evm"><strong>什么是EVM?</strong></a></li>
+        <li><a href="#以太坊兼容性"><strong>以太坊兼容性</strong></a></li>
+        <li><a href="#zk-evm"><strong>zk-EVM</strong></a></li>
+        <li><a href="#选项1证明evm执行跟踪"><strong>选项1：证明EVM执行跟踪</strong></a></li>
+        <li><a href="#选项2自定义vm操作码支持"><strong>选项2：自定义VM+操作码支持</strong></a></li>
+        <li><a href="#选项3自定义vm--转译器"><strong>选项3：自定义VM + 转译器</strong></a></li>
+        <li><a href="#vitalik的zkevm类型"><strong>Vitalik的zkEVM类型</strong></a></li>
+        <li><a href="#智能合约rollup的当前状态"><strong>智能合约Rollup的当前状态</strong></a></li>
+        <li><a href="#其他因素"><strong>其他因素</strong></a></li>
+        <li><a href="#总结"><strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          了解 EVM 本地设计的 Optimistic Rollup 的关键优势 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="几周前，我们宣布了 Specular—一个具有新颖 EVM 本地设计的 Optimistic Rollup—并且很高兴看到我们的 Twitter 线程激发了关于如何最好地设计此类系统的兴奋和讨论。" />
+<meta name="keywords" content="EVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43181/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="了解 EVM 本地设计的 Optimistic Rollup 的关键优势" />
+<meta property="og:description" content="几周前，我们宣布了 Specular—一个具有新颖 EVM 本地设计的 Optimistic Rollup—并且很高兴看到我们的 Twitter 线程激发了关于如何最好地设计此类系统的兴奋和讨论。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43181/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-02T00:00:00+00:00" />
+
+<meta itemprop="name" content="了解 EVM 本地设计的 Optimistic Rollup 的关键优势">
+<meta itemprop="description" content="几周前，我们宣布了 Specular—一个具有新颖 EVM 本地设计的 Optimistic Rollup—并且很高兴看到我们的 Twitter 线程激发了关于如何最好地设计此类系统的兴奋和讨论。"><meta itemprop="datePublished" content="2022-10-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5828">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="了解 EVM 本地设计的 Optimistic Rollup 的关键优势"/>
+<meta name="twitter:description" content="几周前，我们宣布了 Specular—一个具有新颖 EVM 本地设计的 Optimistic Rollup—并且很高兴看到我们的 Twitter 线程激发了关于如何最好地设计此类系统的兴奋和讨论。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">了解 EVM 本地设计的 Optimistic Rollup 的关键优势</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-02">
+      2022-10-02
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5828 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>几周前，我们宣布了 Specular—一个具有新颖 EVM 本地设计的 Optimistic Rollup—并且很高兴看到我们的 Twitter 线程激发了关于如何最好地设计此类系统的兴奋和讨论。在这篇文章中，我们想澄清一下我们认为 EVM 原生方法相对于其他 Optimistic rollup 方法的一些关键优势，包括 Optimism 和 Arbitrum 正在进行的工作，通过在较低级别 VM 上定义的欺诈证明系统来追求 EVM 等效性。</p>
+<p>在我们开始之前，这篇文章假设您对 optimistic rollup (ORU) 有基本的了解；以及现代以太坊 ORU 如何依赖负责裁决争议的链上交互式欺诈证明机制。可以在此处找到对相关先前工作的广泛调查。</p>
+<h2 id="背景">背景</h2>
+<p>Optimism 和 Arbitrum 正在推出一种利用现有以太坊客户端基础设施的新架构，以便与现有的以太坊工具和 L2 智能合约（称为 EVM 等效性）完全兼容。由客户端执行导致的状态转换争议通过链上验证的交互式欺诈证明 (IFP) 解决。为了支持 IFP，客户端程序被编译为较低级别的目标 VM（例如 MIPS 或 WASM），可以在（MIPS/WASM）指令级别为其构建状态转换证明。然后将生成的二进制文件提交到链上，允许链上验证者以较低级别 VM 语义的粒度强制执行其执行。</p>
+<p>至关重要的是，这种较低级别的 VM 方法完全不知道 EVM 的存在及其语义。因此，它不是按照意图强制执行 EVM 语义[1]，而是强制执行较低级别的语义来执行据称实现了 EVM 的特定二进制文件。因此，这种设计技术 (1) 排除了多个以太坊客户端程序[2]的无许可和信任最小化参与；(2) 导致难以独立审计且无法正式验证的臃肿、过大的可信计算库（TCB）；(3) 遭受频繁触发但不透明的升级过程的困扰，进一步增加了安全审计开销。</p>
+<p>为了解决这些问题，我们主张采用我们认为更简单、更自然的 EVM 原生方法来处理 IFP。也就是说，我们建议在单个 EVM 指令级别显式地在链上执行 EVM 语义。下面我们将描述这种设计相对于较低级别的 VM 方法的一些优点。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1002/6_fchcm9ay92.png" alt="了解 EVM 本地设计的 Optimistic Rollup 的关键优势"></p>
+<h2 id="客户端多元化">客户端多元化</h2>
+<p>虽然以太坊网络由包括 Geth、Besu 和 Erigon 在内的不同客户端运行（然而目前采用率不足），但当前的 L2 解决方案还没有接近支持客户端多样性。这很重要，因为我们希望防止由软件错误/漏洞引起的无效 ORU 状态转换因为未检测到和无可争议而出差错。</p>
+<p>Optimism 团队提出了一种潜在的解决方案，该解决方案通过为许多列入白名单的客户端程序中的每一个包括一个链上二进制承诺，将较低级别的 VM 方法扩展到多客户端设置。验证者必须准备好参与涉及其中任何一个的挑战阶段，只有在他们设法赢得所调用的挑战阶段的门槛时才能赢得整体争议。</p>
+<p>这种方法只提供外在的客户多样性，而不是证明系统本身的内在。每个客户都有自己的独立证明系统与之关联。事实上，这只是一种通用的纵深防御技术，任何 Rollup 都可以在使用多数票组合不同证明系统的方案中使用（例如，甚至将 Optimistic Rollup 和 ZK-rollup 组合到一个多重证明系统中））。虽然它可能会提供一些客户端多样性的表象，但在单独使用时会引入多个问题：</p>
+<p>1.客户端程序的参与是许可的。也就是说，客户端程序的编译二进制文件必须作为白名单程序提交到链上，才能被允许参与争议解决。</p>
+<ul>
+<li>
+<p>此外，由于二进制承诺随版本的变化而变化，Optimism 的治理过程也处于升级任何客户端程序（甚至只是其编译工具链）的关键路径上。</p>
+</li>
+<li>
+<p>理想情况下：客户端程序可以参与和升级，而无需经过 ORU 的治理。</p>
+</li>
+</ul>
+<p>2.有一个强大的信任假设，即大多数客户端程序正确地实现了 EVM。这可以解释为 K-of-N 版本 或 N-of-N 版本编程。</p>
+<ul>
+<li>
+<p>正如我们在下一节中指出的，这尤其成问题，因为客户端程序难以审计。</p>
+</li>
+<li>
+<p>理想情况下：只需一个客户端程序即可正确实现 EVM（即使用经典的 N 版本编程）。</p>
+</li>
+</ul>
+<p>3. 验证者别无选择，只能准备运行每个列入白名单的客户端程序来解决争议。</p>
+<ul>
+<li>
+<p>由于争议过程中的额外冗余，这不仅昂贵且缓慢，而且操作上也更加复杂，因为验证者必须学习如何配置和运行每个程序。</p>
+</li>
+<li>
+<p>操作复杂性随着客户数量的增加而增加，对可以包含多少客户端程序设置了实际限制。</p>
+</li>
+</ul>
+<p>总而言之，我们认为这种设计不能有效地分配信任——客户端程序包含是许可的，必须信任大多数人才能正确实现 EVM 语义，并且支持的数量实际上会受到信任、devops 和一般操作复杂性问题的限制。</p>
+<p>我们的方法提供了内在的客户端多样性，因为链上验证者对客户端程序是不可知的。所有客户端都使用相同的证明系统进行交互。任何支持 EVM 语义的程序都可以无许可参与，并且只有一个程序必须实现正确的语义才能检测/争议故障。验证者还可以真正选择运行他们最熟悉的任何客户端程序，从而提供更简单的 devops。</p>
+<p>因此，EVM 本地 ORU 为无需许可、信任最小化的客户端多样性提供支持。虽然这两种方法都可以检测恶意注入的状态转换（例如，由无效交易引起的），但只有 EVM 本地方法能够可靠地检测和解决错误/漏洞。</p>
+<h2 id="可审计性">可审计性</h2>
+<p>ORU 的 TCB 必须是可审计的和/或可正式验证的，以确保其可信度。现有的 ORU 达不到这个目标。</p>
+<h2 id="客户端程序信任假设">客户端程序信任假设</h2>
+<p>在较低级别的 VM 方法中：因为链上验证者在目标 ISA 指令级别（而不是较高级别的 EVM 语义）强制执行客户端程序，因此仅检查验证者不足以确定等价性将强制语义与 EVM 的语义相比较。ORU VM 的强制语义由列入白名单的客户端二进制文件隐式确定。如果不审计整个客户端程序和编译器，就不可能先验地确定这些语义是否等同于 EVM 语义。而在外部客户端多样性的情况下，这个问题会进一步恶化，因为语义是由多数共识决定的（通过争议机制表现出来），需要对所有或至少大多数客户端程序和编译器进行审计。</p>
+<p>因此，TCB 不仅包括验证者，还包括每个客户端程序，以及与每个程序关联的编译器工具链和二进制提交生成器。TCB 臃肿的规模和复杂性造成了明显的软件错误/漏洞风险，这些风险可能会影响 ORU 的安全性，并相应地增加审计开销。</p>
+<p>我们强调，它不像捎带由上游客户端程序（即 Geth）的维护者进行的安全审计那么简单，因为该程序必须定制以支持一步证明生成（请参阅此处和此处的 Geth 分叉）。此外，由于链上验证者无法访问存储区块、交易和帐户/存储状态的以太坊数据库，因此他们必须插入原像预言机组件以允许 MIPS/WASM 代码查询数据库。</p>
+<p>在 EVM 本地方法中，EVM 语义由链上验证者明确实施。由于无需许可和信任最小化的客户端多样性，ORU 的整体安全性不会在很大程度上依赖于任何单个客户端程序的正确性。因此，EVM 本地 ORU 的 TCB 仅包括链上验证者。这很好，因为 TCB 的有限范围允许它更容易审计，并且相对于正式的 EVM 规范完全可以正式验证，正如我们在下面谈到的那样。</p>
+<h2 id="验证者信任假设">验证者信任假设</h2>
+<p>EVM 本地和较低级别的 VM 方法都在 TCB 中包含一步形式验证者。虽然较低级别的 VM 验证者可能更易于实施和审计（由于指令集较小），但考虑到端到端实施和/或审计系统其余部分的难度——尤其是客户端和编译器。</p>
+<p>此外，形式验证——尤其是 KEVM——使竞争环境更加公平。KEVM 是使用支持 Solidity 智能合约形式验证的 K-Framework 实现的 EVM 的可执行形式规范。因此，KEVM 是 Specular 的完美补充，因为它提供了正式的规范和一套验证工具，使我们能够正式验证我们的链上验证者。我们正在积极参与这一研究方向，目前正在与 KEVM 团队合作探索利用 KEVM 的各种方法。</p>
+<p>另一方面，正式验证采用低级别 VM 方法的 ORU 的 TCB 是不可行的。虽然可以正式验证 MIPS 验证者，但这并不能保证 EVM 语义的执行。为了实现这样的保证，Geth 本身——连同它的编译工具链——必须经过形式验证；然而，鉴于这些程序的复杂、计算无界和并发的性质，这实际上是不可能的。</p>
+<p>因此，EVM 本地 ORU 的 TCB 可以根据现有的、经过充分测试的正式规范进行形式验证，而较低级别的 VM 方法则不能。</p>
+<h2 id="编译器信任假设">编译器信任假设</h2>
+<p>在较低级别的 VM 方法中，引入了高度定制的编译工具链来支持一步证明生成。然而，这个工具链并不成熟。编译器和目标 ISA 都是定制的（参见此处和此处）。Nitro 为原像预言机和收件箱添加了几个自定义 WASM 操作码，而 Cannon 则添加了几个自定义 MIPS 系统调用。目标运行时模型也受到若干约定或约束的修改和约束。例如，Nitro 和 Cannon 都对内存进行了默克化处理，以实现简洁的一步证明，而不会泄露整个内存空间。Cannon 还要求将编译后的程序和输入/输出加载到内存的特定位置。此外，Nitro 和 Cannon 都将浮点指令替换为软浮点实现（参见<a href="https://github.com/ethereum-optimism/cannon/blob/dfac3fb2e09bb974e77e6563a64d898d049a2a90/mipigo/build.sh#L7">此处</a>和<a href="https://github.com/OffchainLabs/nitro/blob/9918c014e663baa44b5a61d671e0dee00ef81ff2/docs/proving/wavm-floats.md">此处</a>‌）。@pepyakin 写了一篇很棒的<a href="https://hackmd.io/@pepyakin/HJn8yuP1o">博客文章</a>‌，它涉及到使用 WASM 作为目标 ISA 的其他复杂性。</p>
+<p>这些定制中的任何一个都可能无意中改变已编译的 Geth 二进制文件的行为，因此必须进行广泛的审计。鉴于编译器工具链的不成熟，x86 Geth 和 MIPS/WASM Geth 之间的一致性不能被视为给定的。</p>
+<p>EVM 本地方法没有任何这些问题——正常的执行和争议解决在相同的抽象层面上运行，并且在实践中密切共享代码路径。</p>
+<h2 id="tcb-升级">TCB 升级</h2>
+<h3 id="频率">频率</h3>
+<p>虽然以太坊客户端程序经常升级，但以太坊协议本身往往一年只硬分叉几次。实际修改 EVM 语义的硬分叉甚至更少见，大约一年一次。此外，许多这些更改（例如共识）不会影响执行语义。因此，与采用较低级别 VM 方法的 ORU 相比，EVM 本地 ORU 的 TCB 需要相对较少的升级。相比之下，较低级别的 VM 方法需要每次客户端升级时都升级 L1 合约，因为更改必须反映在链上新的二进制承诺中。</p>
+<p>此外，我们预计以太坊协议和 EVM 规范最终会以某种形式稳定下来。这有两个含义：</p>
+<ol>
+<li>
+<p>从长远来看，EVM 本地 ORU 的 TCB（或等效意义上的链上验证者）的升级频率将会降低——最终趋于零。另一方面，个别客户端程序可能会继续经历旨在提高性能和修复错误的升级，从而在较低级别的 VM 方法中触发频繁必要的 TCB 升级。</p>
+</li>
+<li>
+<p>EVM 本地 ORU 可以与以太坊同步稳定。这是因为负责开发 Specular 的社区可能会放弃其 L1 合约升级密钥，而不会失去向客户提供性能升级和错误修复的能力。另一方面，一旦 Optimism 团队扔掉了钥匙（正如他们所说的那样），就不可能及时进行此类升级（如果有的话）。这使得这样做是一项风险更高的工作，即使外部客户多样性计划提供了轻微的保护措施——以至于它可能永远不够安全，无法摆脱它们。</p>
+</li>
+</ol>
+<p>因此，我们认为放弃（快速）升级密钥的最安全和最实用的途径是通过 EVM 本地 ORU 设计。</p>
+<h3 id="透明度">透明度</h3>
+<p>较低级别 VM 方法中 TCB 的大小和复杂性导致升级过程不透明。例如，客户端的升级方式不如以太坊规范透明，后者需要经过慎重的提议 (EIP) 流程。对特定于 ORU 的工具链组件的升级，例如 Golang-to-ISA 编译器，仍然更不透明。</p>
+<p>在我们的方法中，语义验证与实现这些语义的客户端程序之间存在明显的区别。因此，更容易辨别升级是否会潜在地影响语义的解释——审计人员只需要查看 L1 合约源代码中的差异。</p>
+<h2 id="结论">结论</h2>
+<p>由于上述原因，我们相信 EVM 本地设计可提供卓越的安全性和信任属性。</p>
+<p>感谢 Patrick McCorry 对这篇文章的反馈和意见。</p>
+<h2 id="附录">附录</h2>
+<p>在本节中，我们对 @kelvinfichter 深思熟虑的<a href="https://kelvinfichter.com/pages/thoughts/evm-proofs/">博文</a>‌中的具体摘录做出回应，他在博文中总结了（他的观点）两种方法之间的权衡。虽然这篇文章承认了上述大部分观点，但它也提出了一些有趣的问题。</p>
+<p><strong>升级</strong></p>
+<blockquote>
+<p>Optimism 基本可以在不触碰任何智能合约的情况下自由修改客户端代码</p>
+</blockquote>
+<p>二元承诺仍然必须改变。在治理过程中如何处理对安全关键合约代码的修改和对合约中编译和提交的安全关键客户端代码的修改之间应该没有有意义的区别。任何一方的修改都会对较低级别 VM 方法中 Rollup 的安全性产生不利影响。</p>
+<ul>
+<li>
+<p>此外，虽然确实任何人都可以计算客户端代码版本之间的差异，以查看升级中发生了什么变化，但在实践中审核跨越数万到数十万个 LoC 的代码库的更改更具挑战性，因为任何给定修改的影响都不太清楚。</p>
+</li>
+<li>
+<p>此外，由于客户端的更改不需要传播到证明，EVM 更新不会触发新的智能合约审计。原生 EVM 故障证明必然受上游 EVM 更改的支配。以太坊硬分叉大约每年两次，并且这些硬分叉中至少有一个通常会引入 EVM 调整（一些比其他更多，例如在伦敦硬分叉中引入 EIP-1559）。如果本地 EVM 证明系统想要维持上游 EVM 等效性，则必须升级证明合约。</p>
+</li>
+</ul>
+<p>在 EVM 本地方法中需要审计的相同硬分叉也可能会在较低级别的 VM 方法中触发审计。在我们看来，单个客户端的工程/审计工作的差异并不显着——正如前面所讨论的，EVM 原生方法在多客户端案例中领先。</p>
+<p><strong>引入新功能</strong></p>
+<blockquote>
+<p>尝试在 EVM 之外引入新功能时，具有本地 EVM 证明的系统可能会更加困难。以调用数据（calldata）压缩为例 […]</p>
+</blockquote>
+<p>我们同意 EVM 范围之外的某些功能（例如调用数据（calldata）压缩）可能有助于为用户实现低交易成本（尽管最近数据可用性层的发展利用了对以太坊的现有信任，这可能不是立即需要的）。较低级别的 VM 方法在这里确实具有更大的灵活性。然而，所有的希望都不会消失。</p>
+<p>通过将 L2 扩展与 EVM 语义分离，我们可以专注于确保链上验证者的安全性。可以引入不同的验证者来支持 L2 扩展，从而保持核心 EVM 验证者独立且完整。我们目前计划插入零知识证明技术来验证此类扩展。虽然在 SNARK 中执行 EVM 语义可能很复杂，但数据压缩（calldata）等 L2 扩展更易于处理，因为语义规范完全在我们的控制之下（因此可以设计为对 SNARK 友好）。我们注意到，这仍然是一个正在进行的研究领域。</p>
+<p><strong>工程努力</strong></p>
+<blockquote>
+<p>本地 EVM 证明合约比低级证明复杂得多，以至于即使构建单个原生 EVM 证明也将是一项巨大的工程工作。然而，KEVM 的存在意味着有可能形式验证证明的 EVM 方面的正确性。</p>
+</blockquote>
+<p>鉴于迄今为止我们为构建 Specular 所投入的工程资源数量，我们认为这是一个高估。此外，如上所述并在帖子中承认，许多问题实际上可以通过形式的方法来解决。</p>
+<h2 id="脚注">脚注</h2>
+<p>[1] 我们使用术语 EVM 语义，包括以太坊黄皮书中定义的交易间和交易内语义。</p>
+<p>[2] 为了消除歧义，我们将实现以太坊的软件称为客户端程序，并将它们的实例（即运行该软件的实际节点）称为客户端。</p>
+<p>原文：Specular，由 DeFi 之道翻译编辑。</p>
+<p>来源：DeFi之道</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43172/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">蓝筹 NFT 项目大额融资之后都有怎样的规划</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43183/">
+                <span class="next-text nav-default">美国稳定币法案将如何影响顶级的非中心化稳定币</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#客户端多元化">客户端多元化</a></li>
+    <li><a href="#可审计性">可审计性</a></li>
+    <li><a href="#客户端程序信任假设">客户端程序信任假设</a></li>
+    <li><a href="#验证者信任假设">验证者信任假设</a></li>
+    <li><a href="#编译器信任假设">编译器信任假设</a></li>
+    <li><a href="#tcb-升级">TCB 升级</a>
+      <ul>
+        <li><a href="#频率">频率</a></li>
+        <li><a href="#透明度">透明度</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+    <li><a href="#附录">附录</a></li>
+    <li><a href="#脚注">脚注</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

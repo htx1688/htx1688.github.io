@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          桥上的Horatio：万字长文最全综述区块链桥安全和信任假设 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="对区块链桥接的安全性和信任假设进行全面概述，包含大多数消息传输协议、桥接和互操作性项目。" />
+<meta name="keywords" content="跨链桥" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46227/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="桥上的Horatio：万字长文最全综述区块链桥安全和信任假设" />
+<meta property="og:description" content="对区块链桥接的安全性和信任假设进行全面概述，包含大多数消息传输协议、桥接和互操作性项目。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46227/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="桥上的Horatio：万字长文最全综述区块链桥安全和信任假设">
+<meta itemprop="description" content="对区块链桥接的安全性和信任假设进行全面概述，包含大多数消息传输协议、桥接和互操作性项目。"><meta itemprop="datePublished" content="2023-01-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="13572">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="桥上的Horatio：万字长文最全综述区块链桥安全和信任假设"/>
+<meta name="twitter:description" content="对区块链桥接的安全性和信任假设进行全面概述，包含大多数消息传输协议、桥接和互操作性项目。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">桥上的Horatio：万字长文最全综述区块链桥安全和信任假设</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-01-06">
+      2023-01-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 13572 字 -
+        预计阅读 28 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>文/Maven11 Reseaarch；译/金色财经xiaozou &amp; Maxwell</p>
+<p>早期罗马的一个著名传说描述了Horatius Cocles几乎单枪匹马地保卫一座桥梁以抵御伊特鲁里亚侵略者。</p>
+<p>前几个月里，我们看到代币桥成为黑客攻击的目标，而攻击手段越来越复杂。一些人开始讨论桥接到底有多安全。因此，我们想对区块链桥接的安全性和信任假设进行全面概述，包含大多数消息传输协议、桥接和互操作性项目。此外，我们还将浅析跨链消息传输协议和桥接经济学，因为如果协议代币能让你对其进行管理控制，那么这方面也是极其重要的。</p>
+<p>首先，让我们明确下桥相关协议上的漏洞攻击问题到底有多严重。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_53ybaogoum.png" alt="NMtv4wfBWIccmBksG7L1ZO4fNdxnVraFDHemQcGO.png" title="6771915"></p>
+<p>可以清楚地看到，随着现有链数量的增加，桥接漏洞攻击已成为巨大问题。除非我们优先考虑安全问题，否则这必会发展为一个更加系统化的风险，而作为用户的我们需要肩负协议责任站在最前沿——归根结底，毕竟那都是我们的资金。这也是我们撰写本文的初衷——关注互操作性领域中的信任假设和安全性问题。</p>
+<p>同样，由于行业变得越来越注重多链、应用链和模块化，我们也见证了大量新兴区块链和层的涌入。为了适应用户和流动性需求，互操作性是必要的。因此，随着越来越多的区块链开始建设自己的生态系统，桥接变得越来越重要，越来越受欢迎，尤其是代币桥。人们需要将流动性从一个链转移到另一个链。于是，代币桥很受欢迎。尽管这不并是桥接的唯一用例。这里我们需要特别提到通用消息传输协议，例如IBC，它通过自身的消息传输系统和标准支持了大量用例。</p>
+<p>下面，你可以很好地概览有多少资产被桥接在各链上：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_2wkpgd15ie.png" alt="1OMEvcmj9oOc9huMa3U0EGRKkpkfILfC6nhU9IEN.png" title="6771920"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_w3qdzd4hbu.png" alt="OncySlsz5Su3LmNvomKVpO203M8NOayKUkMpfvhS.png" title="6771921"><img src="https://img.bibiqing.com/news/2023/0106/25_f17e8tlgtm.png" alt="SraeLGyfFWdWNuOzctoEtyn3T5G1eDCWhIUoxMRz.png" title="6771922"></p>
+<p>这明确地显示了桥接需求，突出了为什么在涉及跨链消息传输协议和桥接时，我们推动安全性建设是如此至关重要——因为它们处理的是巨额价值，传输量巨大，在很多情况下常由多签智能合约进行托管。</p>
+<p>在大多数桥接应用程序和跨链消息传输协议中，有一系列操作有助于提高效能。你将在下文看到。但是，它们依赖于特定的桥接/消息传输协议：</p>
+<p>欺诈监控（Fraud Watcher/Monitoring）：状态监视器，如轻客户端、验证器或预言机。</p>
+<p>中继器（Relayer）：负责消息传递/中继（中继器通常只是传递消息的信使，而非共识参与者），将信息从源链传递到链下操作的目标链。</p>
+<p>共识（Consensus）：监控链的主体间达成的协议，形式可以是可信的第三方valset，例如Axelar或共识节点的链下网络，甚至是多签。</p>
+<p>签名（Signature）：桥接主体对消息进行加密签名，可能是验证者对加密签名进行签名，例如引入IBC，或例如Polymer使用ZKP（如Plonky2）对来自源链的验证者签名进行验证。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_nietwobsg6.png" alt="9Q2lA4ZUTGfnMkSD3ec8teFkhSxFtnESUsjIPgg7.png" title="6771923"></p>
+<p>（桥接主体与通用架构）</p>
+<p>这些协议可主要分为以下四类：</p>
+<p>托管桥接（通常是特定资产的桥接，但你甚至可以称交易所为托管桥接）：以托管（通过第三方）或非托管（智能合约）方式提供包装资产。此类协议的一个例子是wBTC，它有一个中心化商家BitGo，BitGo铸造等效的ERC-20代币（即以太坊上的wBTC）。稍后我们将讨论这种解决方案的信任假设和风险问题，但仅通过此处解释，便可见一斑了。</p>
+<p>特定多签链：这些通常是两条链之间的双向桥接，如Harmony Bridge、Avalanche Bridge和Rainbow Bridge，全部通过以太坊上的智能合约将各自的链连接到以太坊。用户通常将资产发送到协议，在那里资产被作为抵押品持有，并在目标链上发行一个桥包装代币，由源链上锁定在合约里的抵押品支持。这些通常由一组验证器保护，甚至只由一个多签保护。我们已然知晓这些解决方案是容易出现风险的——例如Ronin Bridge及近期的Harmony Bridge桥攻击事件。</p>
+<p>特定应用程序：提供对多链访问，但仅用于该特定应用程序，例如Thorchain，它还使用单独的验证器集运营自己的链。这些信任假设通常存在于一个验证器集中，该验证器集控制并处理网络上连接到各链上不同智能合约/地址的所有消息和交易。</p>
+<p>通用跨链消息：跨链消息传输协议，允许跨带指令设置的链进行通用消息传输，例如IBC。这些通常依赖于验证器集。在这里，信任位于两个链相连的验证器集中。就XCM来说，信任取决于中继链（Polkadot）。你还可以添加诸如Polymer和LayerZero之类的消息传输协议，它们都是不可知的。</p>
+<p>● 跨链消息传输协议通常与流动性层一起使用，因为它们通常只处理基于其规范的链间通信和标准。Superform是一个很好的例子，它同时使用了LayerZero和Socket（作为流动性层）。你也可以将基于Cosmos的独立链视为IBC的流动性中心。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_res7tft4n8.png" alt="kOxOw22Ztyxm9sAnCbAqNVin6tgK8taumFUQuvf7.png" title="6771924"></p>
+<p>（上述桥接类型的简化操作架构）</p>
+<p>下文内容将介绍跨链协议的两个重要部分，即所涉智能合约风险和需要考虑的额外信任假设。</p>
+<h2 id="智能合约风险">智能合约风险</h2>
+<p>首先要关注的最明显的安全风险之一就是智能合约风险。智能合约用于大多数没有原生通用消息传输协议的跨链桥接，所以，它们的安全性至关重要。那么，让我们来讨论一下这里需要强调的一些风险。避免这些风险最有效的方法就是完全不使用智能合约，而是依赖相关链的安全性。</p>
+<h3 id="1调用合约的正确语句">（1）调用合约的正确语句</h3>
+<p>a. 哪些函数可能在执行前依赖预定义条件。</p>
+<p>b. 断言条件以检查全部函数执行所需均为true的事项，例如桥流动性合约余额。</p>
+<p>c. 如不满足所需条件（如上述条件），则恢复可触发语句。</p>
+<h3 id="2正式验证和严格测试">（2）正式验证和严格测试</h3>
+<p>a. 合约的正式验证对于确保所述智能合约在特定条件下的正确性非常重要。可以运行吗？是否按照我要它遵守的规格运行？</p>
+<p>b. 测试合约的所有功能——每次更新或更改都要测试。</p>
+<p>c. 测试随机性以确保如果违反安全属性，则函数为真。</p>
+<p>d. 有各种各样的测试方法可以使用，如，单元测试、静态和动态分析等等。如果你想探讨下你能做什么，可以咨询Runtime Verification这样的公司。</p>
+<p>永远记得要审计你的合约，但也要清楚，审计并不保证不会出错，它只是另一种最小化信任的方式。Bug奖励也是种可以利用的好办法，有很多实现方式——比如Sherlock和ImmuneFi。</p>
+<h3 id="3可升级-vs-不可升级">（3）可升级 vs 不可升级</h3>
+<p>a. 你的合约应该是不可篡改、不可升级的吗？这显然确保了“恶意主体”不会引发问题。然而却降低了创新能力。我们需要一个新的合约并向其迁移，这样做需要通过我们上面探讨过的众多检查点。另一个问题是，如果合约存在目前无法解决的缺陷，只要缺陷还在，就早晚会被利用遭受攻击，怎么办？当然，不可升级的好处在于，其限制了合约稳健情况下的漏洞利用，但如果在没有采取适当安全措施情况下对可升级合约进行升级更新，则可能导致故障——之前发生过此类故障。</p>
+<p>b. 然而，选择可升级性在大多数情况下都是正确的，还有各种方法可确保你对最小化信任和最大化安全的坚持：</p>
+<p>（i）为失败做好准备——如果发生漏洞攻击，需要进行哪些升级，是否可以制定紧急措施？</p>
+<p>（ii）利用代理模式——在不同合约之间将状态（信息）和逻辑（执行）相分离。这意味着你可以升级智能合约的逻辑，而不破坏状态本身。</p>
+<h3 id="4急停">（4）急停</h3>
+<p>要有可以访问急停功能的实体，该功能关闭了智能合约功能的可访问性。该功能应该只在及其重要的情况下使用，在这种情况下，需要急停来阻止漏洞利用攻击。然而，这样做确实是将权力置于少数人手中，但有时却可以帮助在合约遭受攻击的情况下保护合约功能。这是一个很好的方法和想法，可以与下一点并行实现。</p>
+<h3 id="5监控">（5）监控</h3>
+<p>积极监控智能合约的功能和执行对于确保有效性和正确跟踪是极其重要的。你还可以使用各种监控工具来获取对合约的有效性和安全性至关重要的某些触发器或功能的警报。</p>
+<p>还有一种方法是激励监控者（如Optimistic Rollups），让其有动机捕捉欺诈活动并报告。然而，这需要以一种真正有效的方式来实施，还有比监控更紧迫的事情要做。</p>
+<h3 id="6治理">（6）治理</h3>
+<p>a. 如果你的智能合约的控制权是分散的，分布于你协议的代币持有者，那么治理系统的安全则需要确定性。</p>
+<p>b. 需要考虑的问题是，大型代币持有者能够升级合约并改变功能以迎合其利益，这可能会导致恶意利用，引发故障造成资金损失——这在以前曾经发生过。</p>
+<p>（i）一个值得考虑的好方法是Optimistic Approval，这是一种添加时间锁（timelocks）和否决过程（veto process）的方法，允许调整激励措施，限制某些参与者的权力，并有助于避免恶意提案。</p>
+<p>（ii）这也与时间锁使用相关联，以防止智能合约执行系统不可或缺的功能，直到一定时间过后，这将允许紧急功能在必要时介入。</p>
+<p>（iii）TWAP投票也可以用来减少快速治理投票收购。</p>
+<p>c. 去中心化的治理系统非常有用，可以让社区成员在协议的未来事项中有发言权。然而，它也确实增加了风险和信任假设。</p>
+<h3 id="7访问控制">（7）访问控制</h3>
+<p>a. 合约的具体功能需要解决调用主体问题。是否允许所有EoA调用功能？功能应该是公共的还是私有的？一些功能应该只被有限主体访问，比如可升级性，或铸造代币。</p>
+<p>b. 谁是所有者，他们能够执行哪些功能——所有者仅是一个个体还是个多签？通常，单独的个体可以访问部分功能，以限制中心化。无论如何，你应该专注于消除单点故障和最小化信任——专注于最小化，因为你永远不可能消除信任。</p>
+<h3 id="8重入攻击reentry">（8）重入攻击（Reentry）</h3>
+<p>使用序列号、时间戳或密码证明来确保有效识别合同调用，以避免双重收费。</p>
+<h3 id="9预言机操纵合并预言机">（9）预言机操纵（合并预言机）</h3>
+<p>对于依赖于价格反馈或来自预言机的类似信息的智能合约来说，另一个重点考量就是要有安全的方法来识别操纵行为，并限制从外部角度来看可能发生的问题。</p>
+<p>有一篇很不错的研究文章值得一读，那就是“Consolidated Price Feeds”，该文列举了在使用预言机时确保安全性和最小化信任的方法。</p>
+<p>从上面可以清楚地看出，当涉及到智能合约风险时，会涉及到很多利弊权衡。我们希望上面提到的大部分风险都能够显现出来，让用户和开发人员可以开启风险评估。</p>
+<p>还应该注意的是，即使一些跨链消息传输协议不依赖于“智能合约”，它们仍然依赖于需要广泛审计并测试的代码和协议设计。这是不言而喻的，但仍不能掉以轻心。它们也应该根据所探讨的一些相同的想法进行更新。最近导致漏洞利用攻击的一个非智能合约bug的例子是BNB漏洞，这是旧的IBC规范中没有及时更新的过时代码引发的后果。</p>
+<h2 id="信任假设">信任假设</h2>
+<p>另一个要探讨的重要内容是所使用的特定协议内的信任假设。这对于像wBTC这样由中心化托管人托管的项目来说是非常重要的。即使是对roll-up合约来说，也是相关的，这些合约是其特定第2层的桥接智能合约。它们通常由一个多签或类似系统控制，在很多情况下甚至是可升级的。在某些情况下，信任假设很小，在另外一些情况下，信任假设则相当大。然而，需要注意的是，在任何桥接/消息传输协议中，某种程度上都存在信任假设，而且总会存在。即使是在像IBC这样的无智能合约消息传输协议情况下也是如此。在这些情况下，你信任相连链的验证器集。在其他情况下，有一个可信任的第三方操作桥接协议，你主要信任该验证器集，如Axelar及Polkadot。在这些情况下，你也经常依赖于智能合约，至少对Axelar来说如此，智能合约充当了与Axelar桥接的资金托管人。</p>
+<h2 id="信任假设将永远存在">信任假设将永远存在</h2>
+<p>有一些方法可以解决一些信任假设问题，例如依赖ZKP来验证链上区块头的正确性。然而，仍然存在一个信任假设，即区块头从源链（及其valset）来看是正确的，因此，要说不涉及信任假设是完全错误的。你还要依赖于链上的验证合约是正确的，所以开源合约应始终作为首选，并接受测试和正式验证。这确实防止了对外部信任假设的依赖，涉及的外部信任假设总是越少越好。虽然我们永远不会达到无需信任的状态，但我们可以相对接近这个目标，并达到实际的无需信任状态，即信任完全存在于一个具有充足加密经济一致性的去中心化网络中。这意味着黑客攻击的代价将远远超过收益。这里，同样重要的是要考虑到，为了其自身利益，确保网络的长期健康符合大多数网络参与者的利益。这让我们想到了不断提及的-EV和+EV，以及Moloch的角色，以及我们作为一个社区在链上链下协同对抗非理性行为者的能力。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_vslsga7p1k.png" alt="oMPvPodI0nB6zxE55tFTh3ROdwtqFllsHtxeqxQ1.png" title="6771925"></p>
+<p>（在智能合约风险和信任假设风险维度下的上述桥接类型）</p>
+<h2 id="信任差异">信任差异</h2>
+<p>有件事是很重要的，那就是信任是有差异的。每个区块链的信任系统都不一样。将数据从一个区块链传输到另一个更高或更低加密经济安全性的区块链可能会导致恶意操作。</p>
+<p>多签钱包需要来自不同方的多个签名才能授权交易，这使得单个实体更难危及系统的安全性。另一方面，去中心化治理支持用户社区的集体决策，使得单个实体更难获得对系统的控制。但是，每个多签设置都不同于另一个，提供不同数量的安全和信任假设。去中心化治理也是如此。代币持有者是否足够的去中心化，他们是否实施了利于安全性的治理——例如，Optimistic Approval？有若干重要因素需要考虑，这些因素通常因协议而异。</p>
+<h2 id="重入攻击reentrance和流动性">重入攻击（Reentrance）和流动性</h2>
+<p>我们之前提到的另一个关键内容是“重放/重入攻击”。在重放攻击中，攻击者将先前在一个区块链上记录的交易广播给另一个区块链，可能会允许它们多次使用相同的资金或资产。避免发生这种情况的最明显的方法显然是使用轻客户端以加密方式证明所述交易已经在各链上完成。然而，这并非在所有链上都可行。最近发生的这类攻击最明显的一个例子是Nomad。另一个选择是使用序列号或时间戳，以确保每个交易都有一个不能重用的唯一标识符——随机性在这里也很重要。</p>
+<p>还需要考虑的一件事是特定资产的流动性在哪里。例如，它是否存于源链流动性合约中？它是否像某些USD稳定币一样，流动性实际上在链下？有很多信任假设需要考虑。我们的目标应该是将信任假设最小化，但我们永远无法完全消除信任假设。</p>
+<p>现在，我们已经明确了当你桥接你所珍视的资产、只想查询数据或共享状态时需要注意的重要事项——让我们来理解为什么桥接资产和状态是至关重要的。</p>
+<p>数据移动和状态共享是实现真正的跨链可组合性的下一步。它允许应用程序以链不可知的方式扩展跨越链的边界并构建协议。这样一来，链A上的模块、账户或智能合约就可以调用或读取链B上的智能合约、账户或模块的状态。一个很好的相关例证就是IBC中的ICQ模块。相应地，确保连接到各种链上的资产安全也至关重要，因为我们和很多人都预见到了一个多链共存的未来，希望如此。</p>
+<h2 id="跨链消息传递协议的一般分析">跨链消息传递协议的一般分析</h2>
+<p>本节基本上可以作为每一个现有的跨链桥和消息传递协议的指南。它将涵盖这些桥的各种安全措施以及他们的信任假设。如果错过了某个协议，那么我们深表歉意。但是，本节仍应涵盖现有的绝大多数协议，甚至还会涉及特定的桥合约，例如L2桥合约。</p>
+<p>我们已经在之前的文章中深入探讨了IBC的工作原理。不过需要强调的是，它们的主要信任假设在于已打开通道的链的验证者集。它们没有智能合约风险，而是对验证者集（valset）及其状态的信任。</p>
+<p>正如我们在Polymer文章中所述，IBC有多种衍生物。我们的意思是指以某种方式利用IBC跨链消息传递协议。第一部分将介绍此类协议。即Polymer和Composable，我们已经对Polymer进行了全面深入的研究，因此这部分将较为简短，因为你应该已经非常熟悉了。同样重要的是要注意，我们是Polymer和Composable的投资者。</p>
+<h3 id="polymer">Polymer</h3>
+<p>IBC路由协议，比桥更像是一种通用的跨链消息传递协议</p>
+<p>轻客户端或智能合约作为轻客户端验证区块块头（来自验证者的签名）</p>
+<p>通过来自验证者集的验证者签名的加密证明——非Cosmos链上的ZKP，通过递归（plonky2）和链上验证——它们的zkIBC实现。</p>
+<p>智能合约中的IBC逻辑</p>
+<p>可以提供依赖于连接链的valsets 的异步桥。</p>
+<p>实现数据共享和查询。不仅仅是资产桥。</p>
+<p>在源链上同步提交（验证者签名），一旦在目标链上检查了区块头，便具有最终确定性。</p>
+<p>加密经济安全是连接链valsets与IBC的利害关系，对于非基于IBC的链，信任假设取决于部署的智能合约。</p>
+<h3 id="composable">Composable</h3>
+<p>XCVM的运行方式与Polymer的运行方式类似。具有部署原生跨链协议的能力。所以具备状态共享，查询能力等等。</p>
+<p>Centauri是他们的传输层，它促进了实际的通信。这是基于IBC的，也允许状态共享。它基本上允许通过连接到其各自中继链的平行链从IBC链桥接。</p>
+<p>与IBC和 IBC 的 rust 实现一样与轻客户端一起运行以支持Polkadot生态系统 (Substrate)。轻客户端或智能合约/Pallets充当轻客户端验证区块头（来自验证者的签名）</p>
+<p>在这种情况下，信任假设从两个单一的valset转移到相关中继链（Polkadot 或 Kusama）的valset，该中继链运行桥接的平行链的状态。这是通过IBC pallet（类似于以太坊上Solidity中的Polymer IBC合约）来实现其平行链上所需的IBC框架。</p>
+<p>观察者节点在链受到攻击时验证区块的有效性。</p>
+<p>对于具有原生轻客户端支持的链，该过程与IBC的原生工作方式非常相似。</p>
+<p>下一节将解释XCMP的工作原理，它是Polkadot生态系统的原生跨链消息传递协议。这是Composable的自然后续，因为它们确实起源于该生态系统。</p>
+<h3 id="xcmp">XCMP</h3>
+<p>平行链依赖单一信任假设，因为它们都依赖于Polkadot的共识，因此它们信任主中继链。Kusama及其平行链相同。</p>
+<p>因此XCMP依靠中继链和平行链验证者来验证从平行链发送的消息，该过程由中继链上的一个区块确认。</p>
+<p>可以和诸如IBC建立通道。然而，每次提交都需要进入中继链，因此需要监控中继链上的状态以确认消息已达成共识。因此，平行链区块头进入中继链区块以确认消息传递。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_lggou32ih5.png" alt="eGWrsttbHsyz9zHBeICasYnB6ULbQK1ythWGlRgR.png" title="6771926"></p>
+<p>在这种情况下，中继链作为可信第三方 (TTP) 运行——因此它与中继链的valset 一样安全——这是信任假设。</p>
+<p>平行链通过共享安全性通过中继链 (Polkadot) 获得它们的安全性。</p>
+<p>这意味着Polkadot网络的总质押是XCMP的信任假设和加密经济安全。</p>
+<h3 id="ibc">IBC</h3>
+<ul>
+<li>
+<p>需要彼此链上的轻客户端以加密方式验证两条链之间的共识状态</p>
+</li>
+<li>
+<p>要求中继器在两条链上的轻客户端之间中继信息。中继器需要活跃性——能够在节点之间交换消息，节点成功达成共识的能力。</p>
+</li>
+<li>
+<p>中继器不会将消息中继到每个链上的轻客户端。相反，中继器提交给每个链的消息的确切接收者是该链上的 IBC模块。轻客户端是IBC模块的一个小亚组件。</p>
+</li>
+</ul>
+<p>IBC轻客户端仅在初始化步骤信任特定区块头（创建客户端时的信任根）。在那一步中，客户端确实相信提供区块头的节点是诚实的。在那一步之后，他们不再有基于特定完整节点诚实的信任假设。</p>
+<ul>
+<li>
+<p>信任假设位于连接的区块链的两个验证者集内</p>
+</li>
+<li>
+<p>加密经济安全是相关链的总质押 </p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_toksc39d6z.png" alt="lt1Q0mkNuNUYeLzdi3WoY6wHzhi5R3RC3Hsvc15j.png" title="6771927"></p>
+<p>为了继续Cosmos路线，让我们来看看Gravity和Axelar，它们都通过非CosmosSDK/Tendermint链上的智能合约运行自己的桥，并连接到它们自己的链上，这些链充当受信任的第三方和共识网络。这些都是相对简单的解决方案，但它们确实使Interchain生态系统能够连接到更广泛的区块链生态系统。因此，让我们也看看它们。</p>
+<h3 id="gravity">Gravity</h3>
+<p>运行Cosmos链作为共识网络，保护和铸造可在Cosmos生态系统中使用的ICS资产。</p>
+<p>验证者需要运行一个完整的ETH节点</p>
+<p>由中继网络连接（在这种情况下，它不像IBC那样是无需信任的），这增加了信任假设，因为他们控制着他们的Cosmos SDK区域，因此运行他们自己的ETH节点，如前所述。</p>
+<p>连接到Gravity的流动性存在于以太坊的智能合约中。</p>
+<p>不可升级的合约，只能进行轻微的逻辑升级。</p>
+<p>信任假设取决于Gravity bridge valset、智能合约安全风险和具有利益冲突的中继网络。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_ekh2lswnbk.png" alt="yQxsGeVYd86ZGyebGzWHFbMUCLFLO2cKuGbcYEsL.png" title="6771928"></p>
+<h3 id="axelar">  Axelar</h3>
+<p>与Gravity类似，它依赖于Axelar链的验证者来运行接入Axelar的链上的节点/轻客户端。</p>
+<p>还类似于Gravity一样对交易进行批处理</p>
+<p>还依赖于需要移植到新加入链的目标语言的智能合约。Axelar目前支持的链比仅服务于以太坊的Gravity 多。这些智能合约本身并不是流动性的智能合约，而是可以调用其他合约的智能合约。这意味着它们在理论上像网关或轻节点一样运行，在其中传递符合Axelar提供的逻辑的消息。然后，像Satellite这样的桥可以使用基础设施来建立实际的流动性桥以及桥资产。</p>
+<p>允许跨链传递一般消息，目标应用程序将Axelar作为消息传递协议来实现，这与IBC以及Polymer和 Composable的目标相同。</p>
+<p>允许应用程序使用其基础架构。类似于LayerZero不是桥，但Stargate是。这是一个可靠的比较，但是请记住，Axelar运营着自己的共识网络，是它的Cosmos SDK链，它的验证者也在其中运行连接系统的节点。</p>
+<p>受信任的valset目前有60个验证者（尽管并非所有验证者都在连接的链上运行节点，只是其中的一个子集或有时是全部）。显然还需要考虑智能合约风险，而且如果你使用的是通过其基础设施连接的桥，它们也是智能合约。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_74l2p97y32.png" alt="bb1sCeZygPtaLEAiIb5JpSrr9NXsfmfTOHRyjqgR.png" title="6771929"></p>
+<p> 接下来我认为我们需要看看LayerZero，它确实席卷了通用的跨链消息传递协议世界，并且已经看到了巨大的吸引力。再次需要注意的是，L0 不是桥，而是一种消息传递协议，你可以使用它来构建桥或调用跨链智能合约。</p>
+<h3 id="layerzero">LayerZero</h3>
+<p>两个实体——预言机和中继器。</p>
+<p>预言机将区块头转发到目标链，而中继器根据来自预言机的中继信息转发来自源链的交易证明，证明交易/消息是有效的</p>
+<p>应用程序可以灵活地使用LayerZero的默认预言机和中继器，或者创建和运行自己的预言机和中继器。它们被用作跨链消息传递协议，而不是实际的代币桥。但是你可以用它建立桥，比如Stargate和其他，它们使用LayerZero来进行消息传递。</p>
+<p>Endpoint，这是LayerZero的Axelar网关版本，或Polymer的IBC逻辑智能合约。他们基本上像IBC中的轻客户端一样处理验证。</p>
+<p>这确实意味着和Axelar一样，你将依赖LayerZero基础设施，然后是连接到LayerZero的智能合约。</p>
+<p>如果两个参与者之一不诚实，交易将失败。但是，如果两者都是不诚实的（如果你依赖中心化解决方案或应用程序自己的解决方案可能会成为问题），则可能会被利用。由于这里使用的这种去中心化的预言机网络是必不可少的，它也有多种选择，并且可能使用统一的预言机——如果需要，请进一步参考预言机部分。</p>
+<p>不依赖于可信的第三方链，而是依赖于可以具有不同程度的安全性和信任度的模块化架构。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_2ykj9fiyua.png" alt="zw55UIU7DQYFQEQ2r4LCX3qzNdSTJRC2DxSENnKV.png" title="6771930"></p>
+<p>安全性与所使用的oracle/relayer解决方案以及智能合约风险一样。</p>
+<p>不提供或依赖任何加密经济安全性。但是，它确实依赖于所用网络的加密经济安全性，以及使用的预言机的经济安全性。中继器的安全性是多重签名等。它在所使用的智能合约中也有信任假设。</p>
+<p>接下来让我们看看“Optimistic桥”，我在这里特别指的是Nomad和他们的一些合作伙伴。这显然有一些所指，但请记住，Nomad被攻击利用的不是桥接机制，而是智能合约。网络安全性未能涵盖智能合约这一点。</p>
+<h3 id="optimistic-bridges">Optimistic Bridges</h3>
+<p>交易/数据发布到前面提到的Endpoint/网关的合约。</p>
+<p>桥代理签署数据的Merkle根是正确的并发布它。然后任何中继者都可以将其发布到想要的目标链。如果发生欺诈，该代理绑定的代币会被处罚。</p>
+<p>发布数据后，将启动一个防欺诈窗口，在该窗口中，链的任何观察者（因为他们获得了代理人的保证金而受到激励）都可以证明源链上存在欺诈行为，因此保证金会被惩罚。然而，目前，链上惩罚本身是不可能的，所以它必须在链下网络中发生，通常是半手动的。</p>
+<p>如果在时间范围内没有发送防欺诈数据，则数据在目标链上被认为最终确定了，并且可以调用目标链上的合约。</p>
+<p>这种技术具有较低的信任假设，但是，它在很大程度上依赖于智能合约和观察者的工作。如果存在任何智能合约漏洞，观察者将无能为力。</p>
+<p>他们只需要一个诚实的观察者，因为只需一个人就能正确验证更新。</p>
+<p>这确实意味着绑定的可罚没质押不需要非常高，因为你依赖的是只有一方是诚实的这一事实。</p>
+<p>需要去中心化的代理，否则，一个人就可以停止系统。</p>
+<p>需要对观察者征税以防止DoS，然而，这意味着如果从来没有任何欺诈，你也不会获得任何东西——需要不同的激励计划，除非你只是依靠桥的参与者来运行它们，但这会导致中心化，因为观察者/参与者和协议将运行一切。</p>
+<p>加密经济安全取决于所使用的特定网络。它可能是观察者或代理人的加密经济安全，他们拥有被允许参与的绑定代币等。如前所述，有多种方法可以限制他们的影响范围。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_56ieelr93p.png" alt="oto3LqVaFOxAHZz8nRyAon7wgR8T8Z771hHRDxAA.png" title="6771931"></p>
+<p>Optimistic Bridges的架构  </p>
+<p>接下来让我们介绍多方计算 (MPC) 桥，其中一些还依赖于它们自己的可信第三方外部验证共识网络，就像一个区块链。此类解决方案的两个示例是Qredo和Chainflip 。Synapse的无领导（leaderless）MPC valset 的工作方式也有些类似。</p>
+<h3 id="具有外部验证者的多方计算-mpc">具有外部验证者的多方计算 (MPC)</h3>
+<p>MPC是一种门限签名方案，允许多个节点在单个密钥下创建签名，这使得串通和接管帐户变得更加困难。</p>
+<p>外部验证者是指协议正在运行具有验证者节点的网络或链，验证者节点验证签名和调用并控制MPC钱包想要桥接的链上的网关智能合约功能。这也可以称为中间链方法。</p>
+<p>许多MPC解决方案还运行各种安全性硬件。</p>
+<p>如果未经授权尝试访问帐户，则存储在该节点中的密钥将被破坏，社交工程是唯一的访问方式（我们之前已经看到成功）</p>
+<p>这也意味着这些桥通常仅限于少数人使用，无法广泛使用。通常侧重于机构使用。</p>
+<p>桥的网关合约的信任假设是根据正在使用的协议的正确设置。各种智能合约中的安全风险。社会工程学在这里也是一个有效的关注点。</p>
+<p>中间链常用于为用户记录资产的归属。</p>
+<p>网关应由去中心化的多重签名/节点网络控制，以实现最佳安全假设。</p>
+<p>在这些情况下，中间链通常是系统的加密经济安全性，因为它允许记录和更改谁拥有资产，因此它是受信任的第三方。</p>
+<p>请记住，随着使用的签名者数量的增加，系统的延迟可能会增加，如下所示： </p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_py7y6p9z26.png" alt="iypg2ZItoEstMYARqJhVeAfBnHOeBqwIyBRpyrx2.png" title="6771932"></p>
+<p>各种解决方案最终看起来有点像这样： </p>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_6d3nf4luj5.png" alt="sPfEyQBZwc8pycSP0U2P3zZKqpChBYq5FYDNzY5T.png" title="6771933">前两个解决方案在某种程度上也可以看作是特定于应用程序的桥，这也是我们之前提到的一种链。另一个属于这一类的链，就是人们通常想到的链是Rune，也被称为THORChain。</p>
+<h3 id="runethorchain">Rune（THORChain）</h3>
+<ul>
+<li>
+<p>THORChain本质上充当外部验证者，实际上在连接的链上操作无领导的金库。这也意味着它是整个网络的加密经济安全性，因为它充当桥接链之间的中间人。这也是需要做出的信任假设之一。</p>
+</li>
+<li>
+<p>状态链在委托交易输出的同时协调资产和交换逻辑</p>
+</li>
+<li>
+<p>这与连接的每个链上的“Endpoint”一起工作以处理特定交易</p>
+</li>
+<li>
+<p>每个签名者都需要在连接的链上运行一个完整的节点</p>
+</li>
+<li>
+<p>每个链的客户端都是相对轻量级的，只包含调用特定链上的合约所需的逻辑。主要逻辑在运行THORChain 本身的观察者客户端中。让我们把它画出来，这样你就可以得到一个更好理解： </p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_3b5mh4febv.png" alt="tzCezbUx1LLNVII1ZK2P7b1qHMAFNvDybxHdGsH9.png" title="6771934">为了结束我们的分析，让我们看一下通常不称为桥的一种桥，它是一种L2 rollup合约。这些是L2与之通信的以太坊合约，资产被锁定，然后在所述rollup上“铸造”资产。目前，这些合约持有数十亿资产。因此，它们的有效性非常重要。让我们来看看它们是如何工作的，以及它们提供的安全类型。</p>
+<h3 id="rollup桥合约">Rollup桥合约</h3>
+<ul>
+<li>
+<p>从资产锁定在L1智能合约中然后在L2 上可用的意义上来说，其功能类似于桥</p>
+</li>
+<li>
+<p>Rollup状态和证明在L2合约上得到验证，提供加密安全性，这种安全性在某种程度上源自底层链。如果需要有效性证明，它会在L1上的验证者合约中发送和验证。</p>
+</li>
+<li>
+<p>大多数Rollup在其智能合约中都具有可升级性，这显然是一个需要考虑的风险。</p>
+</li>
+<li>
+<p>大多数Rollup允许通过L1进行交易，或者如果排序器失败则强制退出。</p>
+</li>
+<li>
+<p>本质上是一个信任最小化的桥。然而，存在重大的智能合约风险，以及围绕谁控制这些合约的信任假设。</p>
+</li>
+<li>
+<p>Arbitrum和Optimism的“桥”像下面这样工作的。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0106/25_14ppvzfg0n.png" alt="7Wr02wrIuV3FnueaX7VW1Q1SPCLKmRBkn362o89W.png" title="6771936"></p>
+<p>￼现在我们已经涵盖了目前用于跨链消息传递协议和桥的绝大多数类型的解决方案，让我们来看看所讨论的协议安全性的另一个非常重要的部分。这里指的是协议经济学。这里特别令人感兴趣的是协议的加密经济安全性，如果它具有赋予治理权力或允许你接管协议本身的重要部分的代币。</p>
+<h2 id="桥经济学">桥经济学</h2>
+<p>让我们从一个假设开始——有一个带有治理代币的桥协议，允许投票升级协议或允许控制协议核心功能。现在，如果锁定在协议中的总价值远远超过通过提案所需的资产，那么攻击协议就有明显的价值。这个简单的假设就是为什么桥经济学和治理功能对桥极其重要。如前所述，在治理方面缓解这种情况的一种方法是使用一种稍微更细微的治理原则，称为Optimistic Approval。</p>
+<p>加密经济学安全性是区块链桥和跨链消息传递协议的一个重要方面，需要精心设计和实施的激励和约束系统来确保系统的安全性和完整性。这就是为什么不依赖受信任的第三方加密经济学安全性的系统能工作最好的原因。在依赖桥的加密经济学安全性来保护各种链上资产的系统中，显然不如依赖链本身的加密经济学安全性安全。</p>
+<p>然而，目前，大多数桥和跨链消息传递协议都依赖于受信任的第三方的经济性。显然，在valset非常安全的情况下，这可能是非常理想的，但在其他情况下也可能会动摇。还有其他机制的使用可用于保护网络，例如可验证延迟函数，可验证延迟函数可以为依赖此类参与者的网络中的预言机增加随机性。</p>
+<p>其他需要考虑的经济方面是经常使用加密经济学价值的网络，例如多重签名、valsets、mpc甚至门限。这些通常依赖于诚实多数假设，这意味着攻击这些桥的成本是破坏/控制51%网络的成本。</p>
+<h3 id="可信第三方">可信第三方</h3>
+<p>在区块链桥中使用可信第三方既有优点也有缺点。一方面，这些第三方提供了一个中心和可信的协调点，可以更轻松地管理和保护不同网络之间的资产和数据传输。这在不同网络具有不同安全和共识模型的情况下，或者需要额外级别的监督和控制的情况下，特别有用。</p>
+<p>另一方面，使用可信第三方会在系统中引入潜在的故障点。如果第三方受到威胁，可能会导致资产或数据丢失。此外，可信第三方中中心化的权力可能会破坏系统本身的去中心化和无需信任性。</p>
+<h3 id="限额使用rate-limiting">限额使用（Rate Limiting）</h3>
+<p>另一个与经济相关并且可以帮助限制攻击损害的方面是对桥限额使用。限额使用概念的意思是限制每小时可以桥接的美元总价值，以便可以实施紧急解决方案以拯救桥的其余部分。</p>
+<p>显然，这会导致用户体验方面的问题，特别是对于非常流行的桥或大型桥，同时显然会增加一些安全性。例如，你可以将可以桥接的总金额限制为每小时1000万美元。绝大多数用户/散户不会注意到，并且它将利用漏洞可能造成的损害限制在一个更小的数量。这显然在过去的攻击中非常有用。</p>
+<p>限额使用应该限额多少，是否有一些神奇的数字？不一定，这取决于所采用的桥接方式，还取决于桥接的链。例如，在Arbitrum&lt;&gt;ETH桥上，由于其受欢迎程度，被桥接金额需要大一些。但是，对于特定于游戏的应用程序链或rollup，玩游戏不需要大量价值，更愿意确保用户资金的安全。在这种情况下，限额使用将很有意义。</p>
+<p>负面影响是显而易见的——限制和排除大玩家。但是，安全性是否比这些更重要？</p>
+<p>一种解决方案可能是实施“桥车道高速公路”。不同的解决方案和人员使用不同的桥。一个明显的缺点是这会带来流动性和交易量的分散。对于特定于游戏的rollup，限额使用在较低的金额是有意义的，在那里不需要大量金额，并且你希望在任何情况下都确保用户资金的安全。</p>
+<p>其他一些要记住的事情是：</p>
+<p>1.  DoS攻击，因此需要对大容量支付可观的费用。</p>
+<p>2. 你希望针对增长进行优化，但这会稍微阻碍增长。</p>
+<p>正如本文通篇所阐明的那样，一直在权衡取舍。所以在限额使用方面也是如此。然而，这是一个我们希望看到更多实验的领域。在大多数情况下，没有明确的最佳方案，但总的来说，在这个领域尝试新的和大胆的事情是值得做的。没有任何最终设计是理想的，但安全和保障应该是任何协议最关心的问题。你可以说限额使用允许我们为少数人牺牲用户体验并为大多数人提供安全性。</p>
+<h2 id="互操作性和可组合性">互操作性和可组合性</h2>
+<p>互操作性通常用于解释应用程序和链之间资产的无缝转移，而可组合性用于描述这些特定应用程序之间共享基础架构的想法，例如以最少的工作量将应用程序部署在多个链上。这是本文描述的跨链消息传递协议正在完成的工作。</p>
+<p>只有当链和应用程序之间的交易成本较低时，可组合性才真正可持续，否则，它会失去可组合性赋予的主要价值。可组合性为最终用户带来更多选择，并能够跨各种生态系统和应用程序无缝执行操作，同时消除先前的障碍，例如从头开始构建生态系统。 </p>
+<p>当应用程序能够与其他应用程序（例如自动流动性头寸、借贷等）交互时，它们就变得可组合。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/46213/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">盘点2023年Layer2尚未发行Token的项目</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46215/">
+                <span class="next-text nav-default">如何为DAO代币估值？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#智能合约风险">智能合约风险</a>
+      <ul>
+        <li><a href="#1调用合约的正确语句">（1）调用合约的正确语句</a></li>
+        <li><a href="#2正式验证和严格测试">（2）正式验证和严格测试</a></li>
+        <li><a href="#3可升级-vs-不可升级">（3）可升级 vs 不可升级</a></li>
+        <li><a href="#4急停">（4）急停</a></li>
+        <li><a href="#5监控">（5）监控</a></li>
+        <li><a href="#6治理">（6）治理</a></li>
+        <li><a href="#7访问控制">（7）访问控制</a></li>
+        <li><a href="#8重入攻击reentry">（8）重入攻击（Reentry）</a></li>
+        <li><a href="#9预言机操纵合并预言机">（9）预言机操纵（合并预言机）</a></li>
+      </ul>
+    </li>
+    <li><a href="#信任假设">信任假设</a></li>
+    <li><a href="#信任假设将永远存在">信任假设将永远存在</a></li>
+    <li><a href="#信任差异">信任差异</a></li>
+    <li><a href="#重入攻击reentrance和流动性">重入攻击（Reentrance）和流动性</a></li>
+    <li><a href="#跨链消息传递协议的一般分析">跨链消息传递协议的一般分析</a>
+      <ul>
+        <li><a href="#polymer">Polymer</a></li>
+        <li><a href="#composable">Composable</a></li>
+        <li><a href="#xcmp">XCMP</a></li>
+        <li><a href="#ibc">IBC</a></li>
+        <li><a href="#gravity">Gravity</a></li>
+        <li><a href="#axelar">  Axelar</a></li>
+        <li><a href="#layerzero">LayerZero</a></li>
+        <li><a href="#optimistic-bridges">Optimistic Bridges</a></li>
+        <li><a href="#具有外部验证者的多方计算-mpc">具有外部验证者的多方计算 (MPC)</a></li>
+        <li><a href="#runethorchain">Rune（THORChain）</a></li>
+        <li><a href="#rollup桥合约">Rollup桥合约</a></li>
+      </ul>
+    </li>
+    <li><a href="#桥经济学">桥经济学</a>
+      <ul>
+        <li><a href="#可信第三方">可信第三方</a></li>
+        <li><a href="#限额使用rate-limiting">限额使用（Rate Limiting）</a></li>
+      </ul>
+    </li>
+    <li><a href="#互操作性和可组合性">互操作性和可组合性</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

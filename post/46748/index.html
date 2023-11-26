@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Vitalik：以RAI系统为例 探讨预言机共同质押的可能性 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="RAI 面临的主要挑战之一是很难找到愿意充当 LP 的 ETH 持有人，尤其是在利率高于目前约 -5% 至 -10% 的水平时。" />
+<meta name="keywords" content="预言机" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/46748/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Vitalik：以RAI系统为例 探讨预言机共同质押的可能性" />
+<meta property="og:description" content="RAI 面临的主要挑战之一是很难找到愿意充当 LP 的 ETH 持有人，尤其是在利率高于目前约 -5% 至 -10% 的水平时。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/46748/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="Vitalik：以RAI系统为例 探讨预言机共同质押的可能性">
+<meta itemprop="description" content="RAI 面临的主要挑战之一是很难找到愿意充当 LP 的 ETH 持有人，尤其是在利率高于目前约 -5% 至 -10% 的水平时。"><meta itemprop="datePublished" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4235">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vitalik：以RAI系统为例 探讨预言机共同质押的可能性"/>
+<meta name="twitter:description" content="RAI 面临的主要挑战之一是很难找到愿意充当 LP 的 ETH 持有人，尤其是在利率高于目前约 -5% 至 -10% 的水平时。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Vitalik：以RAI系统为例 探讨预言机共同质押的可能性</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-01-29">
+      2023-01-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4235 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：<a href="https://community.reflexer.finance/t/can-oracles-double-as-co-stakers-how-rai-like-systems-might-safely-support-staked-eth/397">Vitalik Buterin</a></p>
+<p>RAI 面临的主要挑战之一是很难找到愿意充当 LP 的 ETH 持有人，尤其是在利率高于目前约 -5% 至 -10% 的水平时。这一问题背后的一个主要原因是，目前，RAI CDP 与 staking 质押竞争作为一种收益来源。</p>
+<p>今天，ETH 持有者可以将其 ETH 放入 CDP，取出 RAI，以 1% DAI 的储蓄率将其转换为 DAI，并赚取约 10% 的利差，或约 5% 的年回报率（考虑到 2 倍的抵押保证金）。或者，他们可以只质押他们的 ETH，并以更低的风险赚取同样的 5% 年回报率。 如果 RAI 利率甚至增加到 -3% ，计算结果将更加有利于 staking 质押。</p>
+<p>有人正在探索多抵押品 RAI 作为此问题的解决方案。我个人对此的看法是，DAI 已经填补了作为任意（包括“现实世界资产”）多抵押算法稳定币的利基市场，因此 RAI 生态在该领域竞争毫无意义。因此，在我看来，只有当“多抵押品”指的是一种极为狭窄的多抵押品形式（ETH 和质押 ETH），则制作 RAI（或分叉）多抵押品才有意义。</p>
+<p>这篇文章探讨了一些不同的方法来做到这一点。</p>
+<h2 id="我们可以让任何solo质押者将他们的质押权益作为-cdp-抵押品双重使用吗">我们可以让任何（solo）质押者将他们的质押权益作为 CDP 抵押品双重使用吗？</h2>
+<p>Eigenlayer 是一组工具，通过将提款地址设置为仅在满足某些条件情况下才返还资金的合约，它使质押者可以在其他应用中重新使用其质押权益。可以想象，人们可以制作一个使用 Eigenlayer 的 RAI 版本：用户通过将取款地址设置为一个合约，将他们质押的 ETH 存入 CDP 中，该合约只有在他们偿还 RAI 债务后才会返还。如果用户被清算，合约的逻辑会将 ETH 的所有权转移给清算人（当在协议中成为可能时，它也会立即触发提款）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/23_8fww4ytai8.png" alt="Vitalik：以RAI系统为例，探讨预言机共同质押的可能性"></p>
+<p>这种方法的主要挑战是，虽然它在正常情况下运行良好，惩罚非常罕见且非常低，但在极端情况下，它会大大降低系统的安全性。 特别是，如果攻击者打算进行 51% 攻击（或者甚至是涉及罚没一些提议者的更温和的攻击），那么他们将所有用于攻击系统的验证器放入 RAI-CDP 中，并尽可能多地取出 RAI 就变得合理了。</p>
+<p>如果攻击者这样做，那么他们实际上是在从系统中“窃取”RAI，导致其产生以 RAI 计价的债务。 该系统可以尝试通过拍卖以使用 FLX 或 ETH 储备回购 RAI 来快速重新平衡，但它仍然有破产的风险。</p>
+<h2 id="rai-可以只使用-lido-的-steth-吗">RAI 可以只使用 Lido 的 stETH 吗？</h2>
+<p>这是一种在解决上述问题的同时，RAI 可能需要最少工作的方法。 然而，我会对这种方法感到担忧，因为进一步巩固像 stETH 这样的质押系统会导致以太坊级别的系统性风险。 如果它获得了更大的市场支配地位，那么这会给管理 stETH 的系统带来很多信任，从而将新的攻击向量引入到整个以太坊质押中。 对于 stETH 而言，这远不如中心化质押衍生品那么真实，但它仍然是一种风险。</p>
+<p>出于这个原因，我强烈倾向于尝试找到使用质押 ETH 作为抵押品的方法，以避免围绕单一主导流动性质押衍生品形成网络效应。 而且由于 RAI 不需要抵押资产的可替代性（因为 CDP 不可替代），RAI 实际上可以成为解决方案的一部分。</p>
+<h2 id="想法-1预言机作为质押者">想法 1 ：预言机作为质押者</h2>
+<p>任何拥有 RAI CDP（或 RAI）的人都非常相信 RAI 的预言机系统不会窃取他们的资金。如果 RAI 预言机开始报告 ETH/USD 价格接近于零，则所有 CDP 将被清算，其持有者将一无所有。RAI 持有者（一个假想的攻击者可能会成为其中最大的一个）将能够进来购买 CDP，并以非常便宜的价格获取其中的 ETH。</p>
+<p>出于这个原因，对预言机系统的信任应该被极其重视。特别是， 51% 的协议投机代币（此处为 FLX）不可能在没有长时间延迟的情况下投票立即更改预言机提供商（否则，系统无法在风险资金总额超过 FLX 市场上限的环境中稳定运行）。我自己对最佳模型的看法大致是<a href="https://ethresear.ch/t/a-not-quite-cryptoeconomic-decentralized-oracle/6453">这样</a>的。</p>
+<p>无论如何，一个关键的观察是，由于 RAI 持有者已经相信预言机不会以这种方式搞砸他们，如果我们也以其他风险较小的方式信任预言机，这似乎不会增加系统的脆弱性。</p>
+<p>一个自然的选择是：RAI 本身创建了一个 Lido 副本，创建 CDP 的用户可以在其中质押这些资金，将 RAI 预言机设置为质押密钥（也许，RAI 预言机可以共同运行分布式验证器），但将 CDP 设置为取款地址。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0129/23_1vvozugygy.png" alt="Vitalik：以RAI系统为例，探讨预言机共同质押的可能性"></p>
+<p>这里的信任程度并没有看起来的那么高：糟糕的 RAI 预言机可能会导致资金被破坏，要么被罚没，要么遭到离线惩罚（inactivity-leaked），但它们无法窃取资金，只有极少数例外情况，比如进行某种特殊的 MEV 攻击，攻击者因双重提议而被罚没。</p>
+<p>但这仍然不完美：这种罕见的特殊攻击是可能的，而且还不清楚预言机是否愿意成为质押者。 质押的法律风险似乎高于成为预言机提供者的法律风险，后者在许多司法管辖区属于明确的言论自由“仅提供信息”类别。 这还会产生更大的动机来攻击它们。</p>
+<h2 id="想法-2-预言机作为-2-of-2-质押者">想法 2 ：预言机作为 2-of-2 质押者</h2>
+<p>这是一种替代方案，可以让用户保持更多控制权并减少对预言机的信任。代替属于预言机的质押密钥，质押密钥是 P + Q，其中 Q 是属于预言机的密钥，P 是 CDP 持有者持有的密钥。由于 BLS 签名的算法特性，预言机可以用 Q 签名，CDP 持有者可以用 P 自己签名，并将两个签名加在一起创建一个验证 P + Q 的签名。这基本上就是 2-of-2 <a href="https://blog.pantherprotocol.io/understanding-distributed-validator-technology-dvt/">DVT</a> 。</p>
+<p>这加强了信任属性，如下所示：</p>
+<ul>
+<li>
+<p>仅靠预言机不能罚没 CDP 持有者；</p>
+</li>
+<li>
+<p>预言机本身不能进行提议者攻击，因为区块提议需要 CDP 持有者签名；</p>
+</li>
+<li>
+<p>CDP 持有者不会被罚没或进行攻击，因此无法以这种方式破坏系统的抵押品；</p>
+</li>
+<li>
+<p>预言机或 CDP 持有者可以离线； 在这种情况下，另一方将触发退出并退出 CDP，而损失很小；</p>
+</li>
+<li>
+<p>极端情况是预言机或 CDP 持有者在不活动泄漏期间（ inactivity leak）离线。 在这种情况下，任何一方都可能让另一方遭遇损失。</p>
+</li>
+</ul>
+<h3 id="执行">执行</h3>
+<p>这种设计是 DVT 的一种特殊情况：</p>
+<ul>
+<li>
+<p>这是 2-of-2 ，所以从网络角度来看，这是最简单的情况；</p>
+</li>
+<li>
+<p>2 个中的 1 个（预言机）正在为数以千计的合作伙伴提供服务。但是，它可以简单地签署相同的数据，并将其发布给所有与之合作的 CDP 以供下载；</p>
+</li>
+<li>
+<p>为了保持区块生产的自主性，在这种特定情况下，它可以使用一个系统，提议者选择要签名的内容，并将其发送给预言机进行共同签名。预言机不应该在同一个域的同一个 slot 中同时签署两个不同的数据，因为这可能会与致盲技巧（blinding tricks ）相结合，以罚没 CDP 。</p>
+</li>
+</ul>
+<p>这是需要实施的新技术，因此可能需要 DVT 团队的合作才能真正实现。一旦建成，它应该不会太难操作。</p>
+<h3 id="想法-2-的弱点">想法 2 的弱点</h3>
+<p>该系统最大的漏洞是 inactivity leaks，因为这些漏洞可能仅由预言机离线触发。然而，我认为接受这种风险是可以的。如果余额低于 16 ETH，验证器将自动退出并撤回 ETH。因此，我们可以简单地接受具有 2 倍抵押品要求的质押 ETH，而不是提供常规 ETH 的 1.5 倍。</p>
+<p>有一种极端情况，如果很多验证器同时泄露，一次只有少数人可以退出，因此一些验证器会在 16 ETH 以下进一步被泄露惩罚，但如果有需求，这是以太坊质押协议中可能会发生的变化。即使没有修复，也需要非常极端的攻击（超过 50% 的人离线），在诚实的验证器控制的余额比例返回到 2/3 以上之前，大量的验证器泄漏远远低于 16 ETH。</p>
+<p>另一个主要缺点是，在一个主要担心不是预言机恶意罚没，而是预言机恶意或不小心下线的世界中，它无法很好地工作。这可能是因为我们要么（i）期望预言机是低质量的质押者，因为我们是为了诚实而非技术熟练度而进行优化，要么（ii）预言机使用可信硬件，并且用户接受这是一个（部分）信任假设（参见 <a href="https://www.puffer.fi/">Puffer</a> ）。为了解决这些弱点，我们提出了下面的想法 3 。</p>
+<h2 id="想法-3-用于分级安全性的半可信预言机">想法 3 ：用于分级安全性的半可信预言机</h2>
+<p>在你可以保证大多数预言机是诚实的情况下，另一种方法消除了剩余的信任问题。</p>
+<p><strong>我们定义了三个常数：</strong></p>
+<p>N：预言机系统中的预言机总数；<br>
+k 1 ：可以与 CDP 持有者一起签署消息的预言机数量（例如 k 1 ~= 0.2 * N）<br>
+k 2 ：在没有 CDP 持有者的情况下可以协同工作以签署消息的预言机数量（例如 k 2 ~= 0.8 * N）</p>
+<p><strong>我们要求预言机维护两个秘密共享密钥：</strong></p>
+<ul>
+<li>
+<p>Q1，在 k 1-of-N 秘密共享中</p>
+</li>
+<li>
+<p>P + Q2，在 k 2-of-N 秘密共享中（后者为每个 CDP 持有者一份）</p>
+</li>
+</ul>
+<p>对于 Q1，预言机可以与 CDP 持有者共同签名，对于 Q2，他们可以独立签名。</p>
+<p>在 k 1 + k 2 = N 的情况下（例如 k 1 = N/5 和 k 2 = 4 N/5 ），这可以确保在两种情况下都不会发生罚没和 inactivity 泄漏：</p>
+<ul>
+<li>
+<p>超过 k 2 的预言机是诚实的（因为它们可以独立签署消息，恶意 CDP 持有者无法找到 k 1 的法定人数来共同签名）；</p>
+</li>
+<li>
+<p>至少 k 1 个预言机是诚实的，并且 CDP 持有者是诚实的（因为这两个群体可以一起签署消息，而其余的预言机不能签名也不能阻止它们）；</p>
+</li>
+</ul>
+<p>这种风格类似于 Rollup 的第 1 阶段训练轮，在两个安全模型之间创建线性混合，作为一种部分信任两者但不过分信任其中一个的方式。</p>
+<p>请注意，这个设计可以看作是想法 1 和 2 的概括（甚至是“CDP 持有者可以自己签名”的提议）：k 1 和 k 2 可以根据需要进行调整，以探索信任谁的整个权衡空间。</p>
+<p>这些方法的一般好处（2 或 3 中的想法 1 ）</p>
+<ul>
+<li>
+<p>可信中立，并且不引入外部依赖：它只会信任参与者，而它已经被给予了更高程度的信任；</p>
+</li>
+<li>
+<p>实现了用户能够同时质押和持有 CDP 的收益；</p>
+</li>
+<li>
+<p>避免不必要地促进现有流动性质押衍生品的网络效应。相反，该计划维持的稳定币是（稳定的）流动质押衍生品。</p>
+</li>
+</ul>
+<h3 id="比较想法-1想法-2-以及-想法-3">比较想法 1、想法 2 以及 想法 3 </h3>
+<ul>
+<li>
+<p>根据实施简单程度进行排名，想法 1 &gt; 想法 2 &gt; 想法 3 </p>
+</li>
+<li>
+<p>根据防止坏预言机进行排名，想法 3 &gt; 想法 2 &gt; 想法 1 </p>
+</li>
+<li>
+<p>根据对不良 CDP 持有者的保护进行排名，想法 3 &gt; 想法 2 &gt; 想法 1 </p>
+</li>
+<li>
+<p>根据避免预言机害怕运行它进行排名，想法 2 &gt; 想法 3 &gt; 想法 1 </p>
+</li>
+</ul>
+<p>总而言之，想法 1 似乎在短期内更易于实施，并且将成为“同时赚取其他质押收益”空间的有趣补充。但是想法 2 和想法 3 似乎更无需信任，也更持久，对预言机的信任度较低，并且更好地维护了 staking 去中心化，因此从长远来看，它们似乎更吸引我。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/46764/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Sui开发者必看：如何构建Capy原型？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/46723/">
+                <span class="next-text nav-default">Web3发展简史：去中心化思潮深入人心 我们究竟为何而战？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#我们可以让任何solo质押者将他们的质押权益作为-cdp-抵押品双重使用吗">我们可以让任何（solo）质押者将他们的质押权益作为 CDP 抵押品双重使用吗？</a></li>
+    <li><a href="#rai-可以只使用-lido-的-steth-吗">RAI 可以只使用 Lido 的 stETH 吗？</a></li>
+    <li><a href="#想法-1预言机作为质押者">想法 1 ：预言机作为质押者</a></li>
+    <li><a href="#想法-2-预言机作为-2-of-2-质押者">想法 2 ：预言机作为 2-of-2 质押者</a>
+      <ul>
+        <li><a href="#执行">执行</a></li>
+        <li><a href="#想法-2-的弱点">想法 2 的弱点</a></li>
+      </ul>
+    </li>
+    <li><a href="#想法-3-用于分级安全性的半可信预言机">想法 3 ：用于分级安全性的半可信预言机</a>
+      <ul>
+        <li><a href="#比较想法-1想法-2-以及-想法-3">比较想法 1、想法 2 以及 想法 3 </a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

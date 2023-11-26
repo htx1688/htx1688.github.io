@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解Oasys：兼容EVM的零手续费高速游戏公链 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="由日本万代南梦宫与世嘉联合推出的游戏公链Oasys是兼容以太坊 EVM 的一条侧链，并支持多链交互。" />
+<meta name="keywords" content="POS, 公链" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/45691/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解Oasys：兼容EVM的零手续费高速游戏公链" />
+<meta property="og:description" content="由日本万代南梦宫与世嘉联合推出的游戏公链Oasys是兼容以太坊 EVM 的一条侧链，并支持多链交互。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/45691/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-20T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解Oasys：兼容EVM的零手续费高速游戏公链">
+<meta itemprop="description" content="由日本万代南梦宫与世嘉联合推出的游戏公链Oasys是兼容以太坊 EVM 的一条侧链，并支持多链交互。"><meta itemprop="datePublished" content="2022-12-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3732">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解Oasys：兼容EVM的零手续费高速游戏公链"/>
+<meta name="twitter:description" content="由日本万代南梦宫与世嘉联合推出的游戏公链Oasys是兼容以太坊 EVM 的一条侧链，并支持多链交互。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解Oasys：兼容EVM的零手续费高速游戏公链</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-12-20">
+      2022-12-20
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3732 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E4%BA%A4%E6%98%93%E6%89%80/"> 交易所 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文来源：李科，PANews</p>
+<p>由日本万代南梦宫与世嘉联合推出的游戏公链Oasys是兼容以太坊 EVM 的一条侧链，并支持多链交互。<strong>Oasys 采用 PoS 共识机制</strong> ，包含 Layer1 和 Layer2 层，一层主要用于主网共识，游戏主要运行在二层网络上。在 Oasys 公链上，游戏开发者可以运行自己的 Layer 2，用户无需支付 Gas 费用，由开发者来承担这些费用。Oasys 试图通过更快的交易速度和零 Gas 费来提高区块链游戏的体验和采用率。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_9yfg49gpcs.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 公链生态版图</p>
+<p>Oasys 今年 7 月完成由 Republic Capital 领投的 2000 万美元 Token 私募轮融资，Jump Crypto、Crypto.com、Huobi、Kucoin、Bitbank 和 Mirana Ventures 等参投。在 12 月 6 日 Oasys 宣布完成新一轮战略融资，由 Galaxy Interactive、韩国游戏巨头 Nexon、Jets Capital、ChainGuardians 等参投，融资金额未公布。另外 Oasys 在本月初分配 100 万美元额度到 Republic 平台进行公募，价格为 0.035USD，公募在 12 个小时内完成。</p>
+<h3 id="创始团队为游戏和区块链领域领军者">创始团队为游戏和区块链领域领军者</h3>
+<p>Oasys 的创始成员主要来自游戏和区块链行业的著名企业。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_sqenmmn7w8.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Gabby Dizon：游戏公会 YGG( Yield Guild Games) 联合创始人。</p>
+<p>Hajime Nakatani：万代南梦宫研究院总裁兼 CEO。</p>
+<p>Hironobu Ueno：区块链游戏公司 double jump.tokyo CEO。</p>
+<p>Hironao Kunimitsu：Gumi 创始人兼 Thirdverse 首席执行官。</p>
+<p>Shuji Utsumi：世嘉联席首席运营官，PlayStation 创始成员。</p>
+<p>Oasys 背后的主要开发团队来自日本链游开发公司 double jump.tokyo。和 AxieInfinity 开发 Ronin 公链的原因一样，double jump.tokyo 在开发链游 My Crypto Heros 的过程中碰到了很多痛点，于是决定开发一个独立的游戏专用区块链来解决这些问题。因此 double jump.tokyo 的创始人也是 Oasys 的联合创始人之一。目前日本另外一家区块链游戏公司 Crypto Games Inc. 也加入到 Oasys 的开发中来，Crypto Games Inc. 从 2019 年开始开发了区块链游戏 Crypto Spells。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_lneryzjwd9.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 背后的开发公司</p>
+<h3 id="oasys-的-layer1oasys-hub">Oasys 的 Layer1：OAsys Hub</h3>
+<p>Oasys 是一个多层 EVM 兼容的 PoS 公共区块链，Oasys 区块链由称为 Hub-Layer的第 1 层和称为Verse-Layer的第 2 层组成。Oasys Hub 是 Oasys 的枢纽层，游戏开发者可以在 Oasys Hub 上开发自己的 2 层游戏，OAS 持有者可以在 OAsys Hub 中委托质押 OAS，验证者可以在 OAsys Hub 中管理节点，游戏玩家可以通过 Oasys Hub 来寻找感兴趣的游戏。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_hrfrzlaazc.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys Layer1(Oasys-Hub) 与 Layer2(X-Verse) 以及外部网络示意图高网络稳定性</p>
+<p>与以太坊一样，Oasys Hub 出块时间设置为 15 秒。Hub-Layer 具有足够的弹性，可以与连接的数千个 2 层 Verse-Layer 一起运行，而没有由于节点故障而导致网络故障的风险。</p>
+<h4 id="高扩展性">高扩展性</h4>
+<p>原则上，Hub-Layer 只能用于运行 FT、NFT、Bridge 和 Rollup 合约，主要的交易产生在 2 层 Verse Layer 上。例外情况下，一些普通合约可以通过治理批准部署在 Hub-Layer 上，但这些合约由治理控制，因此区块链的稳定性不受影响。此外，当将 Verse-Layer 交易发布到 Hub-Layer 时，Rollup 将最小化 Hub-Layer 上的交易数量，因此 Verse-Layer 交易的增加并不影响 Hub-Layer 的性能和可扩展性。</p>
+<h4 id="高数据可用性">高数据可用性</h4>
+<p>Verse-Layer（第 2 层）上的交易数据反映在 Hub-Layer（第 1 层）上，因此 Verse-Layer 中的任何事件都是可验证的。</p>
+<p>Oasys 在 10 月 25 日启动了主网，并开始由 21 个机构节点来维护网络的运行。为了搭建良好的游戏和公链生态，Oasys 选择了业界知名的游戏公司和 Web3 公司来作为验证节点，目前主要节点方有万代南梦宫研究院（Bandai Namco Research）、世嘉（SEGA）、著名游戏公司育碧（Ubisoft）、游戏工会 YGG(Yield Guild Games)、韩国游戏开发商 com2us 和加密投资机构 Jump Crypto 等。在主网上线后，Oasys 表示将计划招募更多的相关公司成为验证者。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_numhadbzz9.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 的 21 个机构节点Oasys 的 Layer2：Verse Layer</p>
+<p>Oasys 将自己的 2 层网络取名为 Verse Layer，Verse 来自 Metaverse 的后半部分，寓意着每一个 2 层网络都是一个独立的小宇宙，开发者可以在 2 层上开发独立的游戏或元宇宙应用。</p>
+<p>目前 Oasys 的 2 层网络采用 Optimistic rollups 技术，但 Oasys 取消了 Optimistic rollups 的 7 天挑战期，因此比其它区块链的 2 层要快，Oasys 2 层上的交易速度能够达到 Web2 产品的同样速度水平。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_ywprfctf9j.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 网络运行机制</p>
+<p>此外，由于 Oasys 上的所有数据都存储在 Hub-Layer 中，可以实现数据的高度可用性，即使 Verse-Layer 丢失，也可以完全恢复。</p>
+<p>目前 Oasys 只支持 Optimistic rollups，未来随着以太坊扩容解决方案的不断推进，Oasys 将会适时支持 ZK-rollups 和其它新技术。</p>
+<h3 id="oasys-链上支持三种类型代币">Oasys 链上支持三种类型代币</h3>
+<p>Oasys 网络中有同质化代币 (Fungible Token)，也有非同质化代币（NFT,None-Fungible Token）。根据不同的网络层级，Oasys 生态中存在三种类型的代币。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_ww48fm3dzg.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 生态中 3 种类型的代币</p>
+<h4 id="1-vftvnft2-层应用内代币">1. vFT/vNFT，2 层应用内代币</h4>
+<p>vFT/vNFT 可以在 Verse-Layer 中铸造，v 代表 verse。该 Token 只能在某些 Verse-Layers 内使用。此类 FT（如游戏币）和 NFT（如 IP）无法跨链桥接。</p>
+<h4 id="2-oftonfthub-枢纽层互操性代币">2. oFT/oNFT，Hub 枢纽层互操性代币</h4>
+<p>oFT/oNFT 可以在 Hub-Layer 上铸造，o 代表中心。该 Token 是可互操作的，在所有的 Verse-Layers 上都可使用。此外，它还可以通过跨链桥发送到另一个网络，比如以太坊。</p>
+<h4 id="3-exftexnft外部网络代币">3. exFT/exNFT，外部网络代币</h4>
+<p>exFT/exNFT 是在 Oasys 之外的网络上铸造的代币，ex 代表外部。它们可通过跨链桥在 Oasys 的 Hub-Layer 和 Verse-Layer 上使用。</p>
+<h3 id="项目代币经济学">项目代币经济学</h3>
+<p>整个 Oasys 的代币经济学基于多代币经济，而不是仅使用 OAS 代币（Oasys 的原生代币）。OAS 代币作为 Oasys 生态系统的基础原生代币； Verse 中的代币用于为每个 Verse 创建一个生态系统； 游戏代币和 Dapps 代币，用于 Verse 中的游戏和 Dapps。</p>
+<p>采用多代币经济而不是单代币经济的原因是可以让 Verse 开发者和游戏开发者有机会自由创建自己的生态系统。</p>
+<p>每个 Verse 开发者都可以根据其 Verse 的特点，构建自己的代币效用生态系统、代币发行总量、代币分配等。例如，一个无需许可的 Verse 可以将 Verse Token 用做支付 gas 费用。游戏和 Dapp 也可以发行代币，代币经济学可以针对每个游戏或 Dapp 进行优化设计。</p>
+<p>Oasys 的原生主代币是 OAS，它是整个 Oasys 生态系统中最高级别的代币。OAS 的总供应量为 100 亿个。主网启动六年后，OAS 代币持有者将通过去中心化治理确定额外的质押奖励供应量。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_88omertuvu.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 原生主代币的分配比例</p>
+<p>OAS 代币具有以下用途:</p>
+<h4 id="1-gas-费">1. Gas 费</h4>
+<p>在 Verse Layer 和 Hub Layer 之间跨层交易、使用 Bridge 合约或在 Hub Layer 上运行合约时需要支付 Gas 费用。Rolling up 的 Gas 费由 Verse 开发者支付，随着 Oasys 生态系统的发展，Verse Layers 越多，每个 Verse 上的交易越多，Gas 费用就越高。但 Oasys 的 Gas 费是渐进增加的，因此 gas 费上涨的不利因素微乎其微。</p>
+<h4 id="2-verse-开发质押">2. Verse 开发质押</h4>
+<p>任何人只要向 Verse 合约存入超过 100 万个 OAS，就可以建立一个 Verse。通过征收一定数量的初始 Verse 开发费，可以在扩展生态的同时防止 Verses 做恶。</p>
+<h4 id="3-去中心化治理">3. 去中心化治理</h4>
+<p>OAS 代币持有者可以通过去中心化治理参与 Oasys 的决策。提案包括调整质押奖励通胀率、资金使用、投票决定在 Hub-Layer 上开发哪类合约等。</p>
+<h4 id="4-质押奖励">4. 质押奖励</h4>
+<p>质押 OAS 代币可以获得质押奖励。在验证合约上质押 1000 万个以上 OAS 的人都可以成为网络验证者。</p>
+<h4 id="5-付款">5. 付款</h4>
+<p>在许多游戏中，每天有大量的小额支付。在 Oasys 生态系统中，OAS 代币可用于游戏内外的小额支付。OAS 代币将作为整个 Oasys 生态系统中的关键货币。这类似于 ETH 在以太坊生态系统中的地位。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_av16r0fl5k.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 原生主代币的释放周期</p>
+<h3 id="项目进展与路线图">项目进展与路线图</h3>
+<p>Oasys 已经在 10 月 25 日启动了主网，首批 21 个节点已经部署到位开始运行。12 月 5 日 Oasys 宣布 Oasys Hub 开放使用，用户可以在 Oasys Hub 中选择节点进行授权押并获得代币奖励。12 月 12 日，Oasys 原生代币 OAS 正式登陆 OKX、Huobi、Gate、Kucion、Bybit 5 个交易所开始交易。</p>
+<p>目前通过官网看到 Oasys 上已经建立起 3 个 Verse，在 3 个 Vsere 之上总共创建了 11 个游戏项目。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_32qgsjhmwf.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 12 月 8 日宣布与广受好评的游戏开发主管 Yu Suzuki 合作推出基于 Oasys 区块链的首个 NFT 项目 OASYX。OASYX 将与知名传统游戏创作者、艺术家一起创造 1 万个 NFT，并由 double jump.tokyo 进行发行。OASYX NFT 为其持有者赋予了一些实用性特权，拥有 OASYX NFT 可以参与到 Oasys 的生态系统中，比如参与未来 Oasys 上的游戏项目。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1220/4_3eg2emj0ss.png" alt="一文详解 Oasys：兼容 EVM 的零手续费高速游戏公链"></p>
+<p>Oasys 项目设计路线图</p>
+<p>Oasys 下一步的主要计划是持续扩展生态，陆续支持 ZK-Rollups 和以太坊 2.0，以及促进 Oasys 游戏公链的广泛采用，达到链上应用数上千和用户上亿，并计划在 6 年内成为一个完全由 DAO 运行的可持续发展游戏公链。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45711/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">晚间必读5篇 | 盘点 2022 年那些辉煌与落寞相生的加密项目</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/45692/">
+                <span class="next-text nav-default">一文介绍7个去中心化期权协议</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#创始团队为游戏和区块链领域领军者">创始团队为游戏和区块链领域领军者</a></li>
+        <li><a href="#oasys-的-layer1oasys-hub">Oasys 的 Layer1：OAsys Hub</a></li>
+        <li><a href="#oasys-链上支持三种类型代币">Oasys 链上支持三种类型代币</a></li>
+        <li><a href="#项目代币经济学">项目代币经济学</a></li>
+        <li><a href="#项目进展与路线图">项目进展与路线图</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

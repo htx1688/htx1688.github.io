@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解a16z crypto新推出的两款SNARK工具 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="最大限度减少证明者的承诺成本，以高性能和可审计性为ZK系L2开疆拓土。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56890/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解a16z crypto新推出的两款SNARK工具" />
+<meta property="og:description" content="最大限度减少证明者的承诺成本，以高性能和可审计性为ZK系L2开疆拓土。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56890/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-11T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解a16z crypto新推出的两款SNARK工具">
+<meta itemprop="description" content="最大限度减少证明者的承诺成本，以高性能和可审计性为ZK系L2开疆拓土。"><meta itemprop="datePublished" content="2023-08-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5272">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解a16z crypto新推出的两款SNARK工具"/>
+<meta name="twitter:description" content="最大限度减少证明者的承诺成本，以高性能和可审计性为ZK系L2开疆拓土。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解a16z crypto新推出的两款SNARK工具</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-11">
+      2023-08-11
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5272 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>本文来自 <a href="https://a16zcrypto.com/posts/article/introducing-lasso-and-jolt/">a 16 z</a>，原文作者：Justin Thaler，由 Odaily 星球日报译者 Jessica 编译。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0811/25_oosntv0eib.png" alt="详解a16z crypto新推出的两款SNARK工具"></p>
+<p>8 月 10 日，a 16 z crypto 推出基于 SNARK 的新工具 Lasso 和 Jolt，它们共同代表了一种全新的 SNARK 设计方法，可将广泛部署的工具链的性能提高一个数量级或更多；提供更好、更方便的开发者体验；并使审计变得更加容易。</p>
+<p>SNARK （简洁的非交互式知识参数）是一种加密协议，任何人都可以向不信任的验证者证明它知道满足某些属性的“证人” 。</p>
+<ul>
+<li>
+<p>在 Web 3 中的一个突出用例是 L 2 向 L 1 证明它们知道授权一系列交易的数字签名，因此签名本身不必由 L 1 网络存储和验证，从而提升可扩展性。 </p>
+</li>
+<li>
+<p>在区块链之外的应用包括：快速证明不受信任的硬件设备产生的所有输出的有效性，确保用户可以信任它们。个人可以以零知识的方式证明 ，受信任的当局已向他们颁发了凭证，证明他们的年龄足以访问有年龄限制的内容，而无需透露其出生日期。任何通过网络发送加密数据的人都可以向管理员证明该数据符合网络策略，而无需透露更多细节。</p>
+</li>
+</ul>
+<p>虽然许多 SNARK 对验证者来说保持有吸引力的成本，但 SNARK 通常仍会在证明者计算中引入约六个数量级的开销。证明者所承受的额外工作是高度并行化的，但数百万倍的开销严重限制了 SNARK 的应用范围。</p>
+<p><strong>更具性能优势的 SNARK 将加速 L 2 ，还可以允许构建者解锁尚未设想的应用。</strong> 这就是为什么我们要引入两项新的相关技术：Lasso ，一种新的查找参数，可以显着提高证明者成本；Jolt ，它使用 Lasso 提供了一个新的框架，用于为所谓的 zkVM 和更广泛的前端设计设计 SNARK。它们共同提高了 SNARK 设计的性能、开发人员体验和可审核性，进而提高了 web 3 中的构建。</p>
+<p>我们对 Lasso 的初步实现已经证明，与流行的 SNARK 工具链 halo 2 中的查找参数相比，速度提高了 10 倍以上。当 Lasso 代码库完全优化后，我们预计速度会提高约 40 倍。Jolt 包含 Lasso 之上的其他创新，我们预计它能够实现与现有 zkVM 类似或更好的加速。</p>
+<h3 id="查找参数lasso-和-jolt">查找参数、Lasso 和 Jolt </h3>
+<p>SNARK 前端是将计算机程序转换为 SNARK 后端可以摄取的电路的编译器。<em>（注：电路是一种极其有限的计算模型，其中可用的“原始运算”只是加法和乘法。）</em></p>
+<p>现代 SNARK 设计中的一个关键工具是一种称为查找参数的协议，它允许不受信任的证明者以加密方式提交一个大向量，然后证明该向量的每个条目都包含在某个预定的表中。查找参数可以通过有效地处理并非由少量加法和乘法自然计算的运算来帮助保持电路较小。</p>
+<p>然而，正如以太坊基金会的 Barry Whitehat 去年所言，“如果我们能够仅使用查找参数来有效地定义电路，那么它将导致更简单的工具和电路”。我们设计的电路只执行查找。随着时间的推移，查找参数“对于几乎所有事情都将变得比多项式约束更有效”。 </p>
+<p>这一愿景与当今的工作方式形成鲜明对比，当今开发人员通过使用特殊的领域特定语言（将程序编译为多项式约束）或直接手动编码约束来编写程序来部署 SNARK。该工具链需要大量工作，并且为安全关键型错误的蔓延提供了很大的表面积。即使使用复杂的工具和电路，SNARK 的性能仍然很慢，这限制了它们的适用性。  </p>
+<p><strong>Lasso 和 Jolt 解决了所有三个关键问题：性能、开发人员体验和可审核性，</strong> 共同实现了查找奇点的愿景。Lasso 和 Jolt 还迫使人们重新思考 SNARK 设计中许多公认的智慧。</p>
+<p>在介绍完必要的背景知识后，下文重新审视了有关 SNARK 性能的一些常见观点，并解释了如何根据 Lasso 和 Jolt 等创新来优化它们。</p>
+<h3 id="snark-设计背景为什么这么慢">SNARK 设计背景：为什么这么慢？</h3>
+<p>大多数 SNARK 后端都让证明者使用多项式承诺方案以加密方式承诺电路中每个门的值。然后证明者证明所提交的值确实对应于见证检查程序的正确执行。 </p>
+<p><strong>我将</strong> <strong>来自多项式承诺方案的证明者工作称为承诺成本。</strong> SNARK 具有来自多项式承诺方案之外的额外证明成本。但<strong>承诺成本往往是瓶颈。</strong> Lasso 和 Jolt 也是如此。如果设计一个 SNARK，其中承诺成本不是主要的证明者成本，这并不意味着多项式承诺方案很便宜。相反，这意味着其他成本高于应有的成本。 </p>
+<p>直观上，承诺的目的是通过密码学方法安全地增加证明系统的简洁性。当证明者提交一个大的值向量时，大致就像证明者将整个向量发送给验证者，就像普通证明系统将整个见证人发送给验证者一样。承诺方案可以在不强迫验证者实际接收整个见证的情况下实现这一目标——这意味着 SNARK 设计中承诺方案的目的是控制验证者成本。</p>
+<p>但这些加密方法对于证明者来说非常昂贵，特别是与 SNARK 在多项式承诺方案之外使用的信息论方法相比。信息论方法仅依赖于有限域运算。并且一个字段操作比提交任意字段元素所需的时间快几个数量级。 </p>
+<p>根据使用的多项式承诺方案，计算承诺涉及多重幂运算（也称为多标量乘法，或 MSM）或 FFT 和 Merkle 哈希。Lasso 和 Jolt 可以使用任何多项式承诺方案，但在使用基于 MSM 的方案实例化时具有特别有吸引力的成本，例如 IPA / Bulletproofs、KZG / PST、Hyrax、Dory 或 Zeromorph。</p>
+<h3 id="为什么-lasso-和-jolt-很重要">为什么 Lasso 和 Jolt 很重要</h3>
+<p>Lasso 是一种新的查找参数，其中证明者承诺比以前的工作更少且更小的值。<strong>这可能会有 20 倍或更多的加速</strong> ，其中 2 到 4 倍的加速来自于较少的提交值，另一个 10 倍的加速来自于 Lasso 中所有提交的值都很小的事实。与许多先前的查找参数不同，Lasso（和 Jolt）还避免了 FFT ，FFT 占用大量空间，并且可能成为大型实例的瓶颈。 </p>
+<p>此外，Lasso 甚至适用于巨大的表，只要这些表是“结构化的”（在精确的技术意义上）。这些表太大，任何人都无法显式实现，但 Lasso 只为其实际访问的表元素付费。特别是——与之前的查找参数相比——如果表是结构化的，那么任何一方都不需要以加密方式提交表中的所有值。</p>
+<p>Lasso 利用两种不同的结构概念：可分解性和 LDE 结构。 <em>（LDE 是称为低次扩展多项式的技术概念的缩写。）</em> 可分解性大致意味着可以通过对更小的表执行少量查找来回答对表的单次查找。这是比 LDE 结构更严格的要求，但 Lasso 在应用于可分解表时特别有效。  </p>
+<h3 id="jolt">Jolt</h3>
+<p>Jolt（Just One Lookup Table ）是一种新的前端，由 Lasso 使用巨大的查找表的能力解锁。<strong>Jolt 的目标是虚拟机/CPU 抽象，也称为指令集架构（ISA）</strong> 。<strong>支持这种抽象的 SNARK 称为 zkVM</strong> 。例如，考虑RISC-Zero 项目也针对的RISC-V 指令集（包括乘法扩展）。这是由计算机体系结构社区开发的一种流行的开源 ISA，没有考虑到 SNARK。 </p>
+<p>对于每个 RISC-V 指令 fi ，Jolt 的主要思想是创建一个包含 fi 的整个评估表的查找表。对于基本上每个 RISC-V 指令，生成的查找表都是可分解的，并且套索适用。</p>
+<h3 id="重新审视-snark-设计中公认的智慧">重新审视 SNARK 设计中公认的智慧</h3>
+<p>Lasso 和 Jolt 还颠覆了 SNARK 设计中的一些公认的智慧。</p>
+<p><strong>#1. 大面积的 SNARK 是一种浪费。每个人都应该使用 FRI、Ligero、Brakedown 或变体，因为它们避免了通常适用于大范围的椭圆曲线技术。</strong></p>
+<p>这里的字段大小大致对应于 SNARK 证明中出现的数字的大小。由于非常大的数字的加法和乘法成本很高，因此大字段上的 SNARK 是浪费的想法意味着我们应该努力设计永远不会出现大数字的协议。基于 MSM 的承诺使用椭圆曲线，椭圆曲线通常是在大字段（大小约为 2 256）上定义的，因此这些承诺因性能较差而闻名。 </p>
+<p>使用小字段是否有意义（即使它们是一个选项）在很大程度上取决于应用程序。Lasso 和 Jolt 走得更远。他们表明，即使使用基于 MSM 的承诺方案，证明者的工作也几乎可以独立于字段大小。这是因为，对于基于 MSM 的承诺，承诺值的大小比这些值所在字段的大小更重要。</p>
+<p>现有的 SNARK 使证明者承诺许多随机字段元素。例如，名为 Plonk 的流行 SNARK 后端中的证明者承诺每个电路门大约 7 个随机场元素（以及其他非随机场元素）。即使被证明的计算中出现的所有值都很小，这些随机场元素也会很大。 </p>
+<p>相比之下，Lasso 和 Jolt 仅要求证明者提交较小的值（Lasso 的证明者提交的值也比先前的查找参数少）。这极大地提高了基于 MSM 的方案的性能。至少，Lasso 和 Jolt 应该废除这样的观念：在证明者性能很重要的情况下，社区应该放弃基于 MSM 的承诺。</p>
+<p><strong>#2 更简单的指令集带来更快的 zkVM。</strong></p>
+<p>只要每条指令的评估表是可分解的，Jolt 的（每条指令）复杂度仅取决于指令的输入大小。Jolt 证实，令人惊讶的复杂指令是可分解的，特别是所有 RISC-V。</p>
+<p>这与人们普遍认为的观点相反，即更简单的虚拟机 (zkVM) 必然会导致更小的电路和相关的更快的证明器（VM 的每一步）。这是特别简单的 zkVM（例如 Cairo VM）背后的指导动机，它们是专门为 SNARK 友好而设计的。 </p>
+<p>事实上，对于更简单的虚拟机，Jolt 为证明者实现了比之前的 SNARK 更低的承诺成本。例如，对于 Cairo VM 执行，SNARK 证明者在 VM 的每个步骤中提交 51 个字段元素。Cairo 部署的 SNARK 当前在 251 位字段上工作（63 位是 SNARK 可以使用的字段大小的硬下限）。Jolt 的证明器致力于 RISC-V CPU 的每步约 60 个字段元素（定义超过 64 位数据类型）。考虑到提交的字段元素很小的事实后，Jolt 证明者的成本大致相当于提交 6 个随机 256 位字段元素的成本。</p>
+<p><strong>＃ 3 将大型计算分解为小块不会造成性能损失。</strong></p>
+<p>基于这种观点，当今的项目将任何大电路分解成小块，分别证明每个块，并通过 SNARK 递归聚合结果。这些部署使用这种方法来缓解流行 SNARK 中的性能瓶颈。例如，基于 FRI 的 SNARK 需要接近 100 GB 的证明空间，即使对于小型电路也是如此。它们还需要 FFT，这是一种超线性运算，如果 SNARK“同时”应用于大型电路，则可能成为瓶颈。</p>
+<p>现实情况是，一些 SNARK（例如 Lasso 和 Jolt）表现出规模经济（而不是当前部署的 SNARK 中的规模不经济）。这 意味着被证明的语句越大，相对于直接证人检查（即在不保证正确性的情况下评估证人电路所需的工作），证明者开销越小。在技术层面，规模经济来自两个地方。 </p>
+<p>n 大小的 MSM 的 Pippenger 加速：相对于朴素算法的 log( n ) 因子改进。n 越大，改善越大。</p>
+<p>在 Lasso 等查找参数中，证明者支付“一次性”成本，该成本取决于查找表的大小，但与查找的值的数量无关。一次性证明者成本在对表的所有查找中进行摊销。更大的块意味着更多的查找，这意味着更好的摊销。</p>
+<p>当今处理大型电路的流行方法是将事物分解成尽可能小的部分。每个部分的大小的主要限制是它们不能太小，以至于递归聚合证明成为证明者的瓶颈。 </p>
+<p>Lasso 和 Jolt 提出了一种本质上相反的方法。人们应该使用具有规模经济性的 SNARK。然后将大型计算分解为尽可能大的部分，并对结果进行递归。每个片段大小的主要限制是证明空间，它随着片段变大而增长。</p>
+<p><strong>#4 高度约束对于高效的 SNARK 是必要的。</strong></p>
+<p>Jolt 使用 R 1 CS 作为其中间表示。在 Jolt 中使用“高度”或“自定义”约束没有任何好处。Jolt 中的证明者成本大部分在于查找参数 Lasso，而不是证明将查找视为理所当然的结果约束系统的可满足性。 </p>
+<p>Jolt 是通用的，因此它不会失去通用性。因此，它反驳了开发人员对设计高度约束（通常是手动指定）的强烈关注，以努力从当今流行的 SNARK 中挤出改进的性能。 </p>
+<p>当然，某些上下文仍然可能受益于高度或自定义约束。一个重要的例子是 Minroot VDF，其 5 度约束可以将承诺成本降低约 3 倍。</p>
+<p><strong>＃ 5 稀疏多项式承诺方案成本高昂，应尽可能避免。</strong></p>
+<p>这是针对最近引入的名为 CCS 的约束系统和支持它的 SNARK 的主要批评——Spartan 和 Marlin，CCS 是当今实践中流行的所有约束系统的清晰概括。 </p>
+<p>这种批评是没有根据的。事实上，Lasso 和 Jolt 的技术核心是 Spartan 中的稀疏多项式承诺方案——Spark。Spark 本身是将任何（非稀疏）多项式承诺方案通用转换为支持稀疏多项式的方案。 </p>
+<p>Lasso 优化并扩展了 Spark，以确保证明者只承诺“小”值，但即使没有这些优化，批评也是不合理的。事实上，Spartan 的证明者比 SNARK （例如避免稀疏多项式承诺的 Plonk）承诺更少的（随机）字段元素。</p>
+<p>Spartan 的方法具有额外的性能优势，特别是对于具有重复结构的电路。对于这些电路，加法门不会增加 Spartan 证明者的加密工作。这项工作仅随着给定约束系统中变量的数量而增长，而不是随着约束的数量而增长。与 Plonk 不同的是，Spartan 证明者无需提交同一变量的多个不同“副本”。</p>
+<p>我们乐观地认为 Lasso 和 Jolt 将极大地改变 SNARK 的设计方式，从而提高性能和可审计性。这是一种具有神奇能力的关键工具，可以最大限度地减少证明者的承诺成本。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56836/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">稳定币江湖再起风潮！揭秘支付巨头 Paypal 新成员 PYUSD</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56911/">
+                <span class="next-text nav-default">小米大模型首度曝光，华为小艺抢先交卷，手机GPT时刻近了？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#查找参数lasso-和-jolt">查找参数、Lasso 和 Jolt </a></li>
+        <li><a href="#snark-设计背景为什么这么慢">SNARK 设计背景：为什么这么慢？</a></li>
+        <li><a href="#为什么-lasso-和-jolt-很重要">为什么 Lasso 和 Jolt 很重要</a></li>
+        <li><a href="#jolt">Jolt</a></li>
+        <li><a href="#重新审视-snark-设计中公认的智慧">重新审视 SNARK 设计中公认的智慧</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

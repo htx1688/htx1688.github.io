@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          a16z解读最新NFT发行策略Wave Mint：工作原理、优势和挑战 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将介绍 wave mint 机制的工作原理，它的优势和挑战，以及我们在实践中运行 wave mint 的一些经验。" />
+<meta name="keywords" content="NFT" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49483/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="a16z解读最新NFT发行策略Wave Mint：工作原理、优势和挑战" />
+<meta property="og:description" content="本文将介绍 wave mint 机制的工作原理，它的优势和挑战，以及我们在实践中运行 wave mint 的一些经验。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49483/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-10T00:00:00+00:00" />
+
+<meta itemprop="name" content="a16z解读最新NFT发行策略Wave Mint：工作原理、优势和挑战">
+<meta itemprop="description" content="本文将介绍 wave mint 机制的工作原理，它的优势和挑战，以及我们在实践中运行 wave mint 的一些经验。"><meta itemprop="datePublished" content="2023-04-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4419">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="a16z解读最新NFT发行策略Wave Mint：工作原理、优势和挑战"/>
+<meta name="twitter:description" content="本文将介绍 wave mint 机制的工作原理，它的优势和挑战，以及我们在实践中运行 wave mint 的一些经验。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">a16z解读最新NFT发行策略Wave Mint：工作原理、优势和挑战</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-10">
+      2023-04-10
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4419 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文：《A new NFT launch strategy: The wave mint》by Scott Duke Kominers、1337 Skulls Sers</p>
+<p>编译：Katie 辜</p>
+<p>本文将介绍 wave mint 机制的工作原理，它的优势和挑战，以及我们在实践中运行 wave mint 的一些经验。</p>
+<p>在 NFT 项目中，mint（最初分配代币的过程）在很大程度上决定了你的社区调性，以及社区和更广泛的市场如何看待项目的发展。这意味着需要一种机制来吸引你想要的人的参与，并以一种简单、安全、吸引人的方式来执行。</p>
+<p>本文我们将回顾 1337 Skulls 最近推出的一种新的 mint 策略「wave mint」，其中不同 NFT 社区的成员被邀请在一系列 wave（wave 即参与 mint 的机会）中参与 mint，参与 mint 的用户从社区开始，逐渐向外扩展。wave mint 利用人们在链上的数据和声誉来选择与项目文化和目标非常匹配的持有者，同时将注意力和精力转移到项目上。它还避免了「free mint」的常见问题，如 Gas War 和机器人（bot）的干扰。</p>
+<p>接下来将介绍 wave mint 机制的工作原理，它的优势和挑战，以及我们在实践中运行 wave mint 的一些经验。随着 NFT 社区尝试不同的 mint 和参与策略，我们希望这将成为艺术家、Builder 和其他项目创作者可以采用的 mint 方式。</p>
+<h3 id="wave-mint-机制的运行原理">Wave Mint 机制的运行原理</h3>
+<p>理论上，免费发放 NFT 是吸引更多用户参与项目的好方法。但在实践中，「free mint」使得社区管理难度加大，因为「free mint」可能会被机器人网络（bot）和 / 或抱着抄底一把就跑的用户占领，他们只是计划「倒卖 NFT」，而不是长期坚守社区。</p>
+<p>项目如何才能找到与项目价值观和目标一致的人呢？答案是寻找那些已经在他们的加密钱包中拥有相关 NFT 的人，并邀请他们加入。</p>
+<p>在 wave mint 中，不同组的人被邀请按顺序 mint，每个开放的「mint wave」的时间从几分钟到几天不等。只要参与每一波「wave」的人数相对于代币供应总量较低，mint 就可以是免费的（或者说低于市场出清价格就可以免费），而不会导致 Gas War。</p>
+<p>在不同的「wave」中被邀请进行 mint 的团体应招募那些可能认真参与新项目并支持其目标和愿景的持有者。也许最简单粗暴的方法就是利用具有「共同利益」的既定社区： 1337 Skulls 为类似的 cc 0 项目（如 Nouns 和 Blitmap）提供了「mint wave」。与此同时，一款链上游戏可能会为 DigiDaigaku 和 Pirate Nation 等项目的持有者提供「wave」让其参与 mint。</p>
+<p>最关键的一点是每个钱包应该只允许 mint 一次，即使它有资格参与多次「wave mint」。许多 NFT 社区的参与度确实存在重叠，因此将每个钱包限制只能进行单个 mint 有助于确保持有者的不重叠且分布广。即使有「单个 mint」的限制，持有来自多个受邀社区的 NFT 的用户仍然比普通人胜算更大。如果他们错过了第一波资格，拥有来自多个受邀社区的 NFT 将为他们赢得更多的参与资格。</p>
+<p>社区本身应该经过精心策划，首先发展一个强大的核心持有者社区，然后从里向外构建。这一策略需要建立核心社区和社会认同的紧密联系，然后利用「关系网」向外扩张，连接到距离远但志同道合的网络。</p>
+<p>早期「wave」：「值得信赖的关系」——早期「wave」应专注于「值得信赖」的社区。在这些社区中，创作者拥有强大的个人关系以及已建立的「存在感」和声誉。早期与密切且可信的社区合作可以帮助建立对新项目的信任。尤其是因为在 wave mint 中，人们通常从钱包中 mint 其他 NFT，甚至可能是高价值的 NFT。通过可靠的连接建立早期的 mint，有助于建立人们对 mint 过程感到信任的「社会证明」。</p>
+<p>下一波「wave」：「加强关系」——一旦建立了值得信赖的核心社区，下一步就有可能瞄准「关系加强」的社区，即那些与通过最早的几波招募进来的社区在持有人数量上有显著重叠的社区。社区用户通过「熟人介绍」得以增长，也有助于吸引那些特别想要成为项目一部分的人。</p>
+<p>后期「wave」：一旦一个项目建立了一个核心社区，并吸引了其他相关社区的关注，就有可能向联系较弱的更大社区打开许多新窗口，吸引那些不一定有直接联系，但在早期 wave 中对该项目有兴趣的人。</p>
+<p>测试 Wave Mint 机制</p>
+<p>我们在推出 1337 Skulls 的过程下测试了 wave mint 这种机制， 1337 Skulls 是一个 NFT 项目，目的是在 NFT 社区之间建立桥梁，这些社区在「cc0 无版权许可」下开放其知识产权进行扩展和重新混合。wave mint 是吸引那些本身对 cc 0、链上艺术和更广泛的互联网混合文化充满热情的持有者的一种方式。</p>
+<p>我们从自己亲近的社区开始入手，然后为 cc0 NFT 生态系统中许多其他项目的持有者开放「wave」。随着我们在 mint 过程的深入进展，我们逐渐引入了针对较大群体但时间更短的参与「wave」。最后，我们的目标是为各种 NFT 项目的持有者提供特别短暂的「wave」，这些项目与早期「wave」中选择的项目有共性（例如，相似的美学、发布日期和社区管理风格）。通过这种方式，我们筛选了那些特别有兴趣加入我们但先前与社区「关系不紧密」的成员。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0410/5387q7q6m7jn2be" alt="a16z解读最新NFT发行策略Wave Mint：工作原理、优势和挑战"></p>
+<h3 id="评估-wave-mint-策略">评估 Wave Mint 策略</h3>
+<p>根据设计，wave mint 方法选择那些预先认同项目目标和价值观的人。此外，在同一时期内，每一波「wave」都会从一个已建立的社区中引入一群持有者，这立即产生了网络效应，有助于「破冰」。</p>
+<p>从进入市场的角度来看，这为复合受众增长提供了一个重要的机会——「通过原持有者吸引下一个持有者」。每次 mint wave 的信息在社区内部和社区之间通过口口相传迅速传播。从社区建设的角度来看，wave mint 方法有助于确保大多数代币持有者从一开始就在社区中至少有几个强大的联系。</p>
+<p>我们还发现，至少在我们的案例中，wave mint 过程本身也吸引了人们对项目的关注。在数小时和数天内的 mint，使 1337 Skulls 社区能够随着 NFT 的发行得到曝光，并且更容易实时有新的社区成员的加入。</p>
+<p>从机制设计的角度来看，wave mint 机制意味着人们的钱包有效地充当了一种「人格证明」。许多人将他们的大部分 NFT（尤其是高价值的 NFT）保存在一个或最多几个钱包中（这是不推荐的安全做法），将每个钱包限制只能 mint 一个 NFT 有助于减少重复计数。例如，在 11337 Skulls 项目的 mint 后期，该项目有超过 50% 的独立持有者（以不同的钱包来衡量），与许多白名单上的 mint 相比，供应的集中度要低得多。</p>
+<p>此外，自发地短时间内开放 mint 窗口会使整个 mint 过程难度加大。这样做还可以更容易地实时监控 mint 并发现异常情况，例如，如果有人将快照资产分发到多个钱包以获得多个「free mint」。wave mint 机制可以让团队在这种情况下很容易地暂停 mint。由于每一次单独的「wave」相对于总供应量来说都很小，因此有可能使供应与需求同步，从而避免 Gas War。</p>
+<h3 id="wave-mint-与普通白名单的对比">Wave Mint 与普通白名单的对比</h3>
+<p>与更常见的运行多个白名单（allow-list）的策略相比，wave mint 策略有几个优点。在这种策略中，特定社区的成员有一个预先登记的机会，并可能进入 mint 名单。</p>
+<p>虽然白名单机制让人们有足够的时间来发现项目和登记，但它们往往无法集中参与度。包括我们自己在内的许多人都登记了白名单，但当他们参与的时候却忘记了参与相关的 mint。wave mint 策略收紧了反馈循环——从最初通过现有的 NFT 社区了解项目，到采取行动 mint，再到随后加入并参与社区。</p>
+<p>有了前期的白名单，也无法确定有多少人会参与 mint。这通常会导致团队过度分配供应，从而导致大规模的 Gas War。相比之下，wave mint 允许该项目实时扩大或缩小可用头寸的数量，调整供应以满足需求。你可以选择让一个「wave」持续更长的时间，或者打开多个「wave」，并提供针对特定社区的特定数量的 mint。</p>
+<p>同时，多个白名单机制机制使用户更难受到 mint 限制，因为它们为用户提供了大量机会来重新定位资产，以获得多个允白名单名额。wave mint 机制直接解决了这种漏洞，尽管这样做在很大程度上依赖于提前进行「快照」（snapshot）。</p>
+<p>最后，wave mint 还有一个优势。通过申请或抽签管理的白名单通常不一定能成功中签。相比之下，wave mint 更有可能带来一个积极的开放机会框架。即使人们确实错过了他们有资格参加的 wave，也还有其他的参与机会。</p>
+<h3 id="挑战操作和安全性">挑战：操作和安全性</h3>
+<p>从操作的角度来看，wave mint 执行起来很复杂。它运行的时间很长，并且需要在整个过程中在前端和后端团队之间进行仔细的同步。前端和社交媒体团队将不断在 Twitter 上发帖，吸引用户参与到 Discord 中，并为项目带来乐趣和关注度（以及对下一个可能开放的社区 wave 的猜测），而后端团队将切换钱包名单，打开和关闭 mint wave，并确保一切顺利运行。</p>
+<p>与此同时，在用户方面，还存在一些关于安全性的关键问题。从本质上讲，这种机制诱使人们用他们用来持有其他数字资产的钱包来 mint，通常是那些可能特别有价值的资产，比如来自主要社区的代币。而不良行为者可能会试图创建虚假的 wave mint 来访问这些保管用户高价值 NFT 的钱包。</p>
+<p>对于 wave mint，人们更重要的是仔细检查每一个 mint 邀请，团队有责任提供明确的信息和文件。随着 wave 的迅速打开和关闭，智能合约和其他关键信息必须提前进行检查，并明确解释和记录。（尽管团队在 Discord、社交媒体和其他通信渠道周围实施最大限度的安全措施非常重要，但 wave mint 尤其需要避免恶意行为者在中途盗走合法的 wave mint。）</p>
+<p>从长远来看，最好能有专门针对 wave mint 优化的委托解决方案，允许人们委托访问权限，这样他们就不必直接从资金库钱包中 mint。最后，在激励机制方面，如果「wave mint」变得普及，人们可能会开始将他们的数字资产存储在许多不同的钱包中，希望最大限度地提高参与 mint 的机会。这将要求更有创造性的标准来决定谁应该被允许参与每一波 wave。</p>
+<p>一个 NFT 项目形成其初始社区的方式对于确定其前进的道路至关重要。将代币交到正确的人手中对于建立社区原生文化至关重要。wave mint 是解决这个问题的有力方法。邀请不同社区的成员分批加入，就有可能以一种长期健康和稳定社区的方式建立一个持有者网络，从可信赖的社区核心成员逐渐向外扩大社区规模。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49500/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">4000万枚MATIC从Polygon Staking转入币安</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49479/">
+                <span class="next-text nav-default">AC Capital：上海升级在即 LSD 为何备受期待</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#wave-mint-机制的运行原理">Wave Mint 机制的运行原理</a></li>
+        <li><a href="#评估-wave-mint-策略">评估 Wave Mint 策略</a></li>
+        <li><a href="#wave-mint-与普通白名单的对比">Wave Mint 与普通白名单的对比</a></li>
+        <li><a href="#挑战操作和安全性">挑战：操作和安全性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

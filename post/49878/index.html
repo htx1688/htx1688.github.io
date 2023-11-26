@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深入探讨：为何在Move/Sui建设DeFi - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="这篇深度探索希望向大家阐述Move语言和Sui Move语言的一些核心概念，从而解释为何我们认为Sui是部署DeFi的最佳选择。" />
+<meta name="keywords" content="Moves, Sui, DeFi" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49878/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深入探讨：为何在Move/Sui建设DeFi" />
+<meta property="og:description" content="这篇深度探索希望向大家阐述Move语言和Sui Move语言的一些核心概念，从而解释为何我们认为Sui是部署DeFi的最佳选择。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49878/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="深入探讨：为何在Move/Sui建设DeFi">
+<meta itemprop="description" content="这篇深度探索希望向大家阐述Move语言和Sui Move语言的一些核心概念，从而解释为何我们认为Sui是部署DeFi的最佳选择。"><meta itemprop="datePublished" content="2023-04-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-04-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4957">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入探讨：为何在Move/Sui建设DeFi"/>
+<meta name="twitter:description" content="这篇深度探索希望向大家阐述Move语言和Sui Move语言的一些核心概念，从而解释为何我们认为Sui是部署DeFi的最佳选择。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深入探讨：为何在Move/Sui建设DeFi</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-04-19">
+      2023-04-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4957 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>撰文：Typus Finance</p>
+<p>前言</p>
+<p>当我们建立Typus时，<strong>我们经常被问到「为什么使用Move语言？」或「为什么选择Sui？」。</strong> 这篇深度探索希望向大家阐述Move语言和Sui Move语言的一些核心概念，从而解释为何我们认为Sui是部属DeFi的最佳选择。我们希望这篇文章能提供开发人员或其他项目方一些洞见。</p>
+<p>在我们正式谈论Sui Move之前，先来了解原始的Diem-style Move语言。</p>
+<p>第一部分：为何在Move上建设DeFi？</p>
+<p>Move语言是为DeFi而生</p>
+<p>Move最初是由Facebook为Diem区块链开发的，旨在打造一个全球金融基础设施，以支援数十亿用户。</p>
+<p>Move设计初衷是成为一种用于操作数位资产(digital assets)的语言。它必须能够以精确、易懂和可验证的方式来阐述Libra货币和治理规则。</p>
+<p>长远来看，Move必须可以将各种资产及对应的商业逻辑代码化，从而建立金融基础设施。</p>
+<p>Move的解决方案是「头等资源(first-class resources)」——将资产视为程式语言界的头等公民。用户可以通过资源(resource)的四种不同能力来轻松定义和操作数位资产：</p>
+<p>1.复制 (copy)</p>
+<p>2.索引 (key)</p>
+<p>3.丢弃 (drop)</p>
+<p>4.储存 (store)</p>
+<p>为了打造强大且可拓展的DeFi生态系统，我们需要从程式语言的三个方面来提供支援：</p>
+<p>1.数字资产的稀缺性</p>
+<p>2.强制存取控制</p>
+<p>3.资产安全性</p>
+<p>1.数字资产的稀缺性</p>
+<p>稀缺性是有价值的实物资产的重要属性，但数位资产本身没有内建稀缺性的特质。因此，我们必须通过程式来强制为数位资产赋予稀缺性。</p>
+<p>也就是说，资产供给量不应是无限的。程式设计上，必须可以防止人们复制资产，并且应该要把创建新资产设为一种特权。</p>
+<p>为实现稀缺性，Move规定资产永远不能被复制或丢弃，只能在不同的储存场所之间移动。 （Move的名称由此而来）</p>
+<p>Move如何实现这一点呢？</p>
+<p>Move有一个类型系统(type system)，由字节代码验证器来强制执行。当开发人员将Move字节代码发布到区块链时，该系统将可以用来防范资产价值整个失控。</p>
+<p>重复使用——如果我编写了一段以硬币作为某函数的输入项，然后再编写另一段代码，试图复制该硬币（译：从而影响该函数的输出结果），那么类型系统将会纠错，并回传错误（译：让开发者知道该操作不可被执行）。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/f636455cbe5bb2f610f6ec11ac173d49.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>双重支付——如果我拥有一枚硬币，并尝试将其传递给某个接受硬币作为付款的函数，它会防止同一枚硬币被重复传递。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/2d5c61d789595643cfbe31f905ab60a5.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>销毁——如果我有一些以硬币作为输入项的函数，那么我不应该有能力去重新指定该硬币的存量，因为凭空让硬币的存量减少代表有硬币被丢弃。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/e763ed9fa097e0d9c3d76a190cb6b782.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>上述设定都是为了让数位资产的特性类似于实体资产。使用Move，开发人员可以通过上述设计来让数位资产满足资产该有的特性。</p>
+<p>2.強制存取控制</p>
+<p>在Solidity中，数据集中储存在合约里。当合约中存在漏洞时，一旦骇客获得合约权限，所有用户数据都会受到攻击。</p>
+<p>Move 开发团队认为数据应该储存在拥有者的账户中，而不是储存在合约中。在 Move 中，有模组的概念，模组可以是一个程式库，也可以是一个允许创建、储存或转移资产的程序。类似于以太坊中的合约，但更像是一间采用物件导向程式语言的银行。</p>
+<p>Move 限定只有公共模组可以被其他模组调动。同样，结构中的栏位只能在其模组内访问和更改。每个资源都储存在由所有者账户控制的模组中。</p>
+<p>该功能让所有权资讯和数位资产的特殊权限得以在智能合约下被维护。即使某个数位资产被发送到智能合约，该资产的所有权也不会改变。</p>
+<p>更直白的例子是，如果骇客获得了 Move 智能合约的访问权限，他/她也无法将资产提取到自己的钱包中。</p>
+<p>3.资产安全</p>
+<p>DeFi 的安全风险越来越令人担忧，我们屡屡听到造成超过 1 亿美元损失的骇客攻击。据 SlowMist 统计，2022 年上半年就发生了约 100 起 DeFi 安全事件，损失超过 16.3 亿美元，其中项目缺陷和合约漏洞是常见原因。</p>
+<p>作为一种专注于金融场景的语言，Move 从 Solidity 可能存在的安全漏洞中获得了经验教训，并高度重视「智能合约安全和正确性」。</p>
+<p>字节码验证器(bytecode verifier)</p>
+<p>Move 的字节码验证器可以在执行每个字节码程序之前检查它们，防止许多常见的漏洞。安全预防措施由验证器强制执行，开发者不能绕过编译器，直接使用字节码编写代码。它在代码被发布到区块链时直接强制执行。</p>
+<p>先前提到的资产稀缺性功能是通过字节码验证器实现的，它可以预设强制执行稀缺性。开发者依赖语言的强大支援，确保代码中的不变性，无论攻击者尝试什么都不会改变其代码特性。</p>
+<p>第二部分：为何在Sui上建设DeFi？</p>
+<p>我们已经解释完为何我们认为Move对DeFi而言是最佳的开发语言，接下来让我们谈谈为什么我们优先选择在Sui上部属我们的项目。</p>
+<p>这个决策背后的三大支柱是：</p>
+<p>1.共识机制——释放验证者和共识资源，让区块链更有余裕处理DeFi交易。</p>
+<p>2.平行协议——没有上限的横向可扩展性，以满足DeFi的需求。</p>
+<p>3.存储基金的代币经济学设计——为DeFi应用提供更具资本效率的模型，以将数据储存在链上。</p>
+<p>1.共识机制</p>
+<p>Sui的共识机制和处理简单/复合交易的能力被认为是其最有价值的创新，也是提供更稳定的DeFi交易环境的关键。 Sui的共识取决于为两种物件设定——自有物件和共享物件。</p>
+<p>自有物件对应简单交易</p>
+<p>在Sui上，自有物件是由单个地址拥有的，例如代币或NFT。这种场景包括像P2P代币转移、大量铸造NFT、投票、在dApp上发送消息等简单交易。</p>
+<p>对于简单交易，Sui使用了一种称为拜占庭一致广播的演算法，这是一种比传统共识方法更简单的演算法，可以消除过多的开销。 Sui指出，它「针对单写物件进行优化，允许放弃共识的这种设计以处理简单交易」。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/0aa2bbebfceed7941544b418454be9d6.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>因为验证者不需要像传统共识一样相互沟通，所以这种演算法让简单交易只需消耗比较少的运算资源。</p>
+<p>共享物件对应复合交易</p>
+<p>在 Sui 上，共享物件是没有特定所有者的物件，任何人都可以读取或写入。这些场景主要包括像自动化造市、开放大众竞标的拍卖或接受任意交易的中央限价单簿等复杂的 DeFi 交易。</p>
+<p>在复杂交易方面，Sui采用了Narwhal-Bullshark共识引擎。这个机制有两个主要组件：Narwhal（Sui的记忆体池）和Bullshark（用来确保交易的排序）。</p>
+<p>将Narwhal比喻成一个管家，它会将待处理的交易打包成一个无人领导的图并标记为「集(collection)」。整个图形结构允许系统在每一轮中插入交易。最后会生成证书，用以证明各轮次每个｢集」当中的资料的可用性。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/67673d6f5531959e2b12198ddb365ba7.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>透过 Narwhal，交易被建立成一个有向无环图(directed acyclic graph, DAG)，就像一个档案树，其中活动的顺序以图形方式呈现。</p>
+<p>Bullshark优化了Narwhal提供的DAG结构，着重于减少网络验证者之间的通讯开销。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/5cb3dc3b3ada45ffaded11272ca7a2eb.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>原始的Narwhal和Tusk（Bullshark的前身）论文指出，当Narwhal和Tusk一起使用时，它们可以实现「每秒160,000笔交易，延迟约3秒钟」的效果。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/e2ea166a21f3c136045277d256611ade.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>当 Yuga Labs 的 Otherside NFT 推出时，它曾一度使以太坊网路出现问题。它是史上最大的 NFT 发行之一，数量是其他NFT项目的好几倍。根据用于进行此次发行的 gas 数据，需求远远超出了所有人的预期。这次发行的规模非常大，最终导致Etherscan 网站无法正常运行。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/ccc3b2f3ea82c60c299db73afe94156a.png" alt="image.png" title="image.png"></p>
+<p>在 Solana 上发生过更糟糕的情况，由于大量 NFT 的创建导致网络断线好几次。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/6ca962bfdbc3a5e3775aa1a7ebb9df2e.png" alt="image.png" title="image.png"></p>
+<p>透过这种共识机制，Sui 的验证者不会像以太坊或 Solana 那样面临运算压力。像 NFT 大量铸造等交易被分离出来，把它们与 DeFi 活动相关的交易区隔开来，因此不需要共识（译：也就是不需要全局排序），释放了验证者和共识资源，为 DeFi 提供了一个不那么拥挤、稳定的环境，以处理和部署 DeFi 交易。</p>
+<p>2.平行协议</p>
+<p>EVM 的主要限制之一是交易必须依序执行——一次只能执行一笔交易，其他交易必须等待其完成执行。这个模型可能有潜在的有趣用途，但缺乏可扩展性和效率。</p>
+<p>平行执行指的是识别独立的交易，并同时执行它们。然后，按照执行顺序来对相依交易进行排序并将其序列化。平行处理的概念很简单，但其困难点通常在于识别交易之间的相依关系。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/2ad843d2b659c12114a204cf82576d80.png" alt="image.png" title="image.png"></p>
+<p>Sui 利用 Move 的所有权类型和其自身的物件中心数据模型，明确识别交易之间的相依关系。由于 Sui 上的物件代表可共享的资产，因此可以通过检查交易是否使用相同的物件来识别相依关系。</p>
+<p>正如前面在共识机制段落中所解释的，拜占庭一致广播理论上允许Sui水平扩展以满足应用需求，同时保持每笔交易极低的运营成本。</p>
+<p>这种设计突破了现有区块链的一个关键瓶颈——它消除了在一系列交易的总排序列表上达成全局共识的需求。</p>
+<p>3.存储基金的代币经济学设计</p>
+<p>在区块链上，写入资料和读取资料之间需要承担财务成本，这是一个具有挑战性的问题。以以太坊为例，写入1MB的数据成本可能高达数万至数十万美元。区块链存储的市场机制还没有成熟的解决方案，所以它急需一种可行的商业模式。验证者需要储存大量数据才能运营区块链网路，通常这些成本将会被转嫁给终端用户。</p>
+<p>存储的问题在于时间，这是经济学家所称的外部性(externality)。在其他的一些区块链上，旧用户没有将存储成本内部化，导致新用户间接要为旧用户先前存放的数据买单。因此，Sui提出了存储基金代币经济模型来解决这一问题。</p>
+<p>举例而言，Alice从Sui网络刚开始使用时，链上储存的数据量不大，她可以享受较低的gas费用。而Bob等到Sui网络成熟后才开始使用，由于此时链上储存的数据量较大，他被迫支付较高的gas费用。</p>
+<p>Sui的代币经济模型旨在永久解决存储成本的问题。当用户在Sui上进行交易时，他们要提前支付计算和存储的费用。存储费用会存入一个存储基金，用于调整未来奖励给予验证者和委托人的份额。</p>
+<p><img src="https://www.dcnews.io/uploads/20230417/38ef9e37892043b4484d89386f60b1b0.png" alt="深入探讨：为何在Move/Sui建设DeFi"></p>
+<p>存储基金是由过去的交易所资助的，并作为在不同时期转移gas费用的工具。它包括删除的这个选项——当用户删除先前储存的链上数据时，用户可以获得退款。这鼓励用户不停思考自己在链上储存的数据是否有必要继续储存。</p>
+<p>租赁模型通过按期支付结构来让用户支付存储费用，这种设计有利于那些打算在Sui上部署的项目。它引入了一个市场机制，让用户依照经济效益去决定是否释放存储空间。具体来说，DeFi协议可以删除过去已经结束的拍卖纪录，NFT协议可以删除不再使用的NFT元数据等。</p>
+<p>总而言之</p>
+<p>资产导向的程式设计使得Move语言很自然地成为部署DeFi项目的好选择。技术逻辑方面的各种设计，如存取控制、形式验证等，为去中心化资产的安全提供了多重保障。</p>
+<p>资产和所有权是智能合约的基础和DeFi的关键支柱，但现有的其他程式语言没有办法很好地描绘它们。 Move是第一种解决这个问题的智能合约语言。</p>
+<p>Sui Move不仅利用了Move的所有权/资产导向程式设计，其基于物件的资料模型设定也为其锦上添花。根据设计，Sui验证者可以有效地无限扩展网路吞吐量，以满足开发者的需求。 Sui的可扩展性不仅限于交易处理。储存也是低成本和水平可扩展的。</p>
+<p>通过Move和Sui Move的组合，Typus相信我们选择了一个出色的基础设施来定义和建构一个链上DeFi原语，从而实现即时和低延迟的交易。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49880/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">上线在即 一文了解“MOVE 双子星” Sui 的主要生态项目</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49912/">
+                <span class="next-text nav-default">数据解读 ETH 上海升级关键指标</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

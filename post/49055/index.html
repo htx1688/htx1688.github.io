@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          ZK专家“华山论剑”：安全与去信任 ZK协议在机制上该如何平衡取舍？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="​ZK领域头部专家在本文中分享了零知识证明协议在机制设计和工程建构上的安全原则与新颖方案，以及在设计过程中的种种权衡。" />
+<meta name="keywords" content="zkEVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/49055/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="ZK专家“华山论剑”：安全与去信任 ZK协议在机制上该如何平衡取舍？" />
+<meta property="og:description" content="​ZK领域头部专家在本文中分享了零知识证明协议在机制设计和工程建构上的安全原则与新颖方案，以及在设计过程中的种种权衡。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/49055/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-29T00:00:00+00:00" />
+
+<meta itemprop="name" content="ZK专家“华山论剑”：安全与去信任 ZK协议在机制上该如何平衡取舍？">
+<meta itemprop="description" content="​ZK领域头部专家在本文中分享了零知识证明协议在机制设计和工程建构上的安全原则与新颖方案，以及在设计过程中的种种权衡。"><meta itemprop="datePublished" content="2023-03-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="11752">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ZK专家“华山论剑”：安全与去信任 ZK协议在机制上该如何平衡取舍？"/>
+<meta name="twitter:description" content="​ZK领域头部专家在本文中分享了零知识证明协议在机制设计和工程建构上的安全原则与新颖方案，以及在设计过程中的种种权衡。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">ZK专家“华山论剑”：安全与去信任 ZK协议在机制上该如何平衡取舍？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-29">
+      2023-03-29
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 11752 字 -
+        预计阅读 24 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>ZK领域头部专家在本文中分享了零知识证明协议在机制设计和工程建构上的安全原则与新颖方案，以及在设计过程中的种种权衡。</p>
+<p>近日，zkSync和Polygon都推出了各自的zkEVM，掀起了一波行业的热潮。与此同时，社区对于zkEVM的安全性和去中心化也有了很多讨论。IOSG在前不久刚结束的ETHDenver期间，举办了一场以安全为主题的活动（Stay SAFU, Security Day），有幸邀请到了在零知识证明领域的头部项目参与讨论，他们分享了零知识证明协议在机制设计和工程建构上的安全原则与新颖方案，以及在设计过程中的种种权衡。</p>
+<p>以下为各位嘉宾分享的insight原文，参与者为：</p>
+<p>?️Queenie Wu, IOSG Ventures 合伙人（主持人）；</p>
+<p>?️Alex Gluchowski, zkSync 联合创始人；</p>
+<p>?️Ye Zhang, Scroll 联合创始人和研究负责人；</p>
+<p>?️Matt Finestone, Taiko 首席运营官；</p>
+<p>?️Mikhail Komarov, Nil foundation 创始人；</p>
+<p>?️Brian R, Risc0 创始人；</p>
+<p>点击观看视频：https://youtu.be/dWkOCaVWp4o</p>
+<p><strong>?️ Q1：零知识证明是如何增强你们正在构建的系统的安全性的？另一方面，部署零知识证明会带来哪些安全问题？</strong></p>
+<p><strong><strong>?️</strong>  [Brian <em>R</em>]</strong></p>
+<p>我是Risk Zero的CEO Brian Redford。我们是在Risk-V Micro Architecture构建的Risk Zero zkVM的开发者，可以在ZK系统中执行任意代码。我们还在部署一个名为Bonsai的Layer2网络，它可以在ZK场景下执行任何代码，可以把它理解为是一个ZK加速器。在ZK如何增强安全性方面，我想这取决于具体的应用场景。<strong>当然，能够进行计算并生成可以在世界任何地方验证的证明方式完全改变了区块链安全的范式。</strong> 你不再需要一遍又一遍地重新做相同的计算，再通过复杂的各种机制（比如经济机制）来保证整个系统的安全性。</p>
+<p><strong><strong>?️</strong>  [Mikhail Komarov]</strong></p>
+<p>我是Nil的创始人Mikhail Komarov。我们为正在开发的ZK项目提供基础设施，例如zk-EVM编译器。这个编译器可以将高级语言编译成电路，使得高级语言中定义的每个计算都可以被证明，无需执行任何操作，只需要简单的电路即可。除此之外，我们还引入了一个“证明市场（Proof Market）”的概念，给想要生成zkSNARK/STARK证明的项目方，提供了一个去中心化的竞价市场。每个开发者都可以提交所需要生成的零知识证明的竞价单，然后只需要在应用程序中调用证明，以获取所需的服务（比如zkRollup就可以使用证明市场）。</p>
+<p>基本上，我们是开发人员所需的基础设施。从我们自身来说，它并没有增强我们的安全性，但从整体来说，它确实增强了安全性。正如Brian所说的那样，它通过消除协议中应在Trustless的环境中运行的信任假设来增强安全性。<strong>它的关键在于进一步减少信任假设。</strong> 这就是它如何增强安全性的方式。我相信零知识证明如果被项目，去年发生的一些安全事故可能可以避免。</p>
+<p><strong><strong>?️</strong>  [Matt Finestone]</strong></p>
+<p>我是Matt 来自Taiko，我们是一个以太坊兼容的ZK Rollup。我们追求最大程度的以太坊和EVM兼容性。<strong>在安全方面，我们独特的地方是我们非常依赖于经过充分测试和验证的以太坊构建模块、客户端和智能合约模式。</strong> 正如Mikhail所说，ZK减少了信任假设或将其转移到Protocol/证明层面。“需要信任的”不再是一些有动机的人，而是数学和围绕数学证明开发的协议和应用。对于ZK Rollup，有很多安全考虑，不仅仅是ZK。</p>
+<p>我认为我们尽可能地从以太坊中重用安全的部分，以保持安全。随着时间的推移和实战测试，ZK将是非常强大的系统。</p>
+<p><strong><strong>?️</strong>  [Ye Zhang]</strong></p>
+<p>大家好，我的名字是Ye。我在Scroll工作。我先简单介绍一下Scroll。Scroll是以太坊的扩容解决方案。它与以太坊兼容度非常高，用户可以与应用程序交互，开发者可以部署智能合约，只需将代码复制粘贴并迁移到Scroll上即可。它比以太坊更快，更便宜，同时具有更高的吞吐量和更严格的安全性。<strong>我们会去中心化我们的证明系统（Decentralized Prover Network），防止证明系统的单点故障。</strong> 这是我们迈向去中心化的第一步，因为ZK Rollup的在未来相当长的一段时间内会是去中心化的。即使你对数学非常信任，对密码学非常信任，但你仍然可能遇到这种单点故障，因为你要依赖于某个证明者。</p>
+<p>去中心化的第一步是想要将证明系统去中心化，以使其更加可靠。至于ZK的安全性，我认为其他嘉宾已经介绍了ZK给你带来了非常强大的公共可验证性属性。基本上，任何人都可以进行计算和执行证明，然后任何人都可以验证这个证明并得到相同的保证。如果你有数百万个节点，每个人只需要重新执行验证算法，而不是初始计算，这样也实现了系统的可扩展性。这就是ZK技术的威力所在，至于它可能存在的问题，如果我们的系统完全依赖数学的运算，如果存在一些错误，比如缺失一些约束条件，那么可能会很危险。这就是为什么我们采取多种方法来提高我们的安全性。例如，我们采用社区驱动的方法进行开发。<strong>从第一天开始，我们就开源了所有开发过程，并由以太坊和我们自己的社区进行了审核，这是一个更高的标准。</strong> 这就是我们最小化信任和提高安全性的方法。</p>
+<p> <strong>[Alex Gluchowski]</strong></p>
+<p>我叫Alex Gluchowski，是Matter Labs的CEO，我们是zkSync协议背后的公司。我们正在构建zkSync Era Network，这是一个与ZK EVM兼容的ZK Rollup。我们采取了与EVM等效的Rollup略有不同的方法。我们认为应该采取务实的方法, 从兼容的东西开始，这样开发者可以轻松接入和移植现有应用程序，并从现有工具中启动。但是，最终的ZK环境是不同的。如果你将自己绑定到原有技术上，将很难实现ZK系统的最大容量。这很重要，因为我们的使命是将区块链扩展到真实世界的范围，将下一个十亿用户引入区块链，创造新的价值互联网。<strong>如果你考虑到数百万甚至数十亿用户，你真的想要降低成本，因为随着所有这些数十亿个交易的累加，成本将变得非常重要。</strong></p>
+<p>这如何影响我们如何增强安全性？这是一个非常有趣的问题。当你询问如何提高安全性或任何其他因素时，你想要比较替代方案，对吧？我的基准是什么？使用ZK的替代方案是什么？替代方案可能是在ZK Rollup之前可用的其他扩展技术，例如Optimistic Rollup、侧链、Plasma等。这些方案引入了新的信任假设。<strong>如果我们的目标是将规模扩大到10亿用户，而我们的使命不仅是扩大吞吐量，而是扩大价值规模，同时保持自我主权、自我保管、无需许可的性质以及完全无需信任的系统特性，那只有使用ZK可以实现。</strong></p>
+<p><strong>Q2：</strong> <strong>我们在比较不同类型的zkEVM时，通常关注的是他们的可扩展性和兼容性，（Vitalik对此进行了详细的比较:</strong></p>
+<p><strong><a href="https://vitalik.ca/general/2022/08/04/zkevm.html">https://vitalik.ca/general/2022/08/04/zkevm.html</a>），如果我们在此增加一个安全的维度，zkSync Era、Scroll和Taiko会如何比较不同的机制设计可能带来的不同的潜在安全风险？</strong></p>
+<p> <strong>[Alex Gluchowski]</strong></p>
+<p>正如前面的发言者所提到的，<strong>你需要隐含地信任这些复杂系统的许多组件来保证安全性，例如，你信任编译器产生的代码，你认为它正在执行你放在这个编译器中的代码逻辑。</strong> 为什么你会相信它是Solidity？它没有形式化定义，所以你只是信任编译器在各个版本中的行为是正确的。我们认为这是必须要解决的问题。这就是为什么我们开始建立基于LLVM框架的编译器，它支持Solidity作为前端之一，并依赖于这个成熟的框架，有很多工具可用于代码的静态分析、安全检查等，而后端是我们的zkVM虚拟机。我们还可以支持其他更成熟的语言，这些语言实际上已经被用于其他安全环境，如Rust，或者是一些更新颖的语言，这些语言是增加了安全考量的，如Move，它能避免一些安全问题，比如双花之类的。总而言之，尽管比较复杂，我们必须从不同的层面去解决。</p>
+<p> <strong>[Ye Zhang]</strong></p>
+<p>我想讲一些不同的方法及其背景。我们正在建立EVM Bytecode级别的兼容方案。基本上我们可以与EVM Bytecode进行兼容。这与zkSync的构建方式不同，我们也相信编译器不应该被信任。这就是为什么我们相信Solidity编译器，虽然它不成熟，但在区块链的背景下，Solidity已经是相对成熟的了。之前没有人使用Solidity和LLVM。<strong>我们相信那是一个更好的标准，因为已经经过了实践的检验，很多智能合约DeFi已经经过了Solidity开发者的实践考验。这就是为什么我们相信遵守这种编译器的标准，遵守Solidity编译器的标准，遵守EVM黄皮书的定义是保证系统安全性的最好方法。</strong> 因为从电路方面来说，我们不需要考虑编译器方面的问题，我们不需要建立我们自己的编译器，我们只是采用现有的基础设施，证明它的执行是正确的。</p>
+<p><strong>我们情愿把系统构建的复杂性只放在解决zkEVM在Bytecode层面的兼容性，而不是同时构建一个编译器以及支持LLVM的后端，我们不希望在构建zkEVM之外还需要构建编译器。</strong> 另一个考虑因素是，我们肯定关心开发者的体验。Layer2是为扩展EVM而建立的，目前的EVM已经因为大量Solidity代码和应用变得拥挤不堪。我们希望开发者能够无缝迁移到我们的系统，同时确保安全性。这也是为什么我们目前不打算在EVM当中增加更多花俏的功能。遵循这个标准可以使 Ethereum真正可扩展，同时保证在此基础上的系统最佳性能和及时交付。同时，我们也在以太坊官方推动各种开源实现，包括Type1和Type2的zkEVM，包括隐私和扩容等。我们从第一天开始就采用开源方式构建。我们非常关注Ethereum zkEVM的开发和演进，我们领导了其中一半的开发，我们是团队的一部分，因此我们确切地知道整个系统需要多长时间才能真正准备好。这就是为什么我们采取这种方法来准备产品和深入社区，然后考虑如何推动Ethereum的终极目标。</p>
+<p> <strong>[Matt Finestone]</strong></p>
+<p>这是两个很好的答案，Taiko和Scroll的方案更靠近，我们也没有引入新的编译器。我喜欢Alex所说的，就是在区块链背景下安全的替代方案是什么？我认为我们都会同意，以太坊可能是黄金标准。我们按照黄皮书实施，重复使用以太坊而不是调整它的组件，即使是在EVM以外的以太坊组件、数据存储结构等方面，也是经过实践验证的。当然，这里始终有权衡。Alex谈到了十亿用户和超低成本以及保持价值的扩展性。<strong>我们可能会在证明成本上做出更高的牺牲，但我们坚持使用经过实战考验的EVM标准和以太坊标准。</strong> 而对Ye Zhang所说的关于实用性和快速进入市场的一些考虑，我们也会做出了权衡。</p>
+<p>在ZK的背景下，有一些方向不容易实现，例如一些哈希函数或一些数据存储结构。我们不去改变这些东西，因为我们不确定它们的效果会如何，比如把Merkel Patricia Tree改成了 Verkle Tree，即使这在以太坊的路线图上本身就存在。我们对经过试验和实战考验的组件更加自信，系统的复杂性不在于试图重新发明以太坊的EVM和其他组件，而是在于如果将ZK完全地部署兼容EVM。这将需要更长的时间来完成，我们需要比Scroll更长的时间来做一些权衡以实现可用性。在安全性上，我们的实现路径会更令人放心。</p>
+<p><strong>[Mikhail Komarov]</strong></p>
+<p>以太坊经过实战考验，让我们重用所有这些系统，减少新的假设。但还有几个安全问题，少有人真正考虑过，而我们的目标是解决它们。第一个问题，你必须信任编译器。还有另一个问题，就是如果你想实现完全的EVM兼容性，比如Type1的EVM兼容性，那么你就需要手动在电路中重新部署EVM的任何Opcode，通过找出作为电路的某个表达式，它在某个确定域上的形式会是怎样的，这是一个手动的过程，而且非常复杂，很容易出错。我们自己就做过这样的事情，而且搞砸了电路，因此我们知道这是糟糕的。<strong>为了不重复这些问题，也不让任何人犯这些错误，我们正在致力于通过允许人们通过使用已经经过实战测试的 EVM 实现编译电路，来消除这种安全假设，而不是通过手动重新实现所有的 OpCode。</strong> 我们的目标是通过使用 LLVM 编译器来编译它，而不是手动重新实现，由此有了最小的安全假设。这是另一个需要消除的安全假设，我们将针对 zkEVM 进行解决。</p>
+<p><strong>[Brian R]</strong></p>
+<p>你可以在类似RiscV的系统上运行geth来解决Mikhail所说的问题。我们实际上刚刚添加了Go的支持。<strong>我们构建并设计了RiscZero VM，我们选择RiscV指令集的部分原因是因为它有形式化定义，而且非常轻巧。</strong> RiscV电路的安全范围有所规范，并且已经进行了大量工作来将形式化验证方法纳入证明某个实现过程符合RiscV规范。我们专注于保证这个简单系统中的密码学正确，然后在其上运行EVM确实有效。当然，这种方法会有性能损失。比如进行ERC20代币转移需要大约1分钟。</p>
+<p><strong>Q3：正如Alex刚刚提到的，对于系统的任何部分，升级或选择另一种解决方案都是可能的。那么，如何确保系统的可升级性，并且以非常安全的方式实现？</strong></p>
+<p><strong>[Brian R]</strong></p>
+<p>是的，我认为在 ZK 中，可升级性是一个非常重要的话题。从我们的角度来看，在没有部署网络和背后有大量经济价值的情况下，我们花费了大量时间确保我们正在构建正确的技术堆栈抽象。我们可以切换哈希函数，切换有限域和证明系统，或者添加新的技术，例如 PLONK，到技术堆栈中。这也是我们选择 RiscV 作为主要支持的「指令集」的另一个原因，因为它本身就是一个非常清晰的抽象系统。因此，您可以随意更换任何东西。LLVM 显然具有非常类似的特征。</p>
+<p> <strong>[Matt Finestone]</strong></p>
+<p>是的，升级是一个很大的话题，我们可以将其看作一个去信任化系统的问题。系统的部署实现可能会出现漏洞，用户就会面临风险，或者要信任构建该系统的人或一些参与者，他们可能会在趁虚而入等等。升级是一种在某些层面上找到安全和去信任化的平衡。当你对系统的信任度提高时，可以去除其中一些受信任的参与者。在这里，我们应该对一些受信任的参与者持有非常警惕的态度，因为我们做这些事情的目的是为了消除这些参与者。对于这些非常复杂的系统，最好在早期就可以介入。我认为，Alex和Matter Labs团队已经在这方面提供了一些很好的参考案例。他们有一个很好的安全委员会和时间延迟的机制。那么升级的正确节奏是什么？这是一个非常重要的问题，我不知道更多的用户是否会对完全去信任的系统感到安心，因为这样的系统往往非常复杂，引入了许多新的东西，或者是信任这些善意的参与者。这是一个非常关乎人性的问题，当然也有一些技术解决方案，比如多重证明可能是一个不错的选择。我认为，我们有可能从类似于Optimism的组件中重用一些设计。如果我们的有效性证明有问题，那么重用Optimistic Rollups的实现将更容易制定欺诈证明的系统，以使其适用于以太坊等效环境。你可以混合匹配欺诈证明和有效性证明，如果有任何异议，那么升级性或某种类型的治理方案可以覆盖它。</p>
+<p><strong>[Mikhail Komarov]</strong></p>
+<p>让我来说一下。我刚花了一些时间思考这个问题。我担心我没有理解问题，因为我想说哪里有升级问题？只需重建电路即可。那么，究竟是哪些升级问题呢？</p>
+<p>**<strong>[Ye Zhang]</strong> **</p>
+<p>从我们的角度来看，首先，肯定不能仅仅编译新电路，因为它会影响您的证明密钥、验证密钥和许多链上智能合约，所以肯定不能经常这样做。<strong>我们在考虑多重证明的方法，添加双重验证等机制。</strong> 有多种方法可以解决这个问题，除了像Matt提到的，我们不考虑直接与Optimistic的欺诈证明相结合，因为这会让最终确认时间变得更长。我们正在探索一些其他方法，很快就会在以太坊研究中提出一些提案，关于如何增加一些额外的保证。例如，Justin Drake提出了使用Intel SGX（TEE环境）作为一些额外保证的方法，严格地增加了安全保证。此外，还可能存在一些其他的治理方式，我们认为安全委员会和时间延迟是不错的方式。我们也在思考这个问题。<strong>这是一个权衡，我相信大多数Rollups仍需要更长时间才能真正摆脱这种可升级性问题，因为升级系统是一件长期的事。</strong> 我们正在认真关注和研究这个问题。</p>
+<p>**<strong>[Alex Gluchowski]</strong> **</p>
+<p>我可以给一些背景信息，为什么可升级性是一个重要的问题。打个比方，对于任何你电脑桌面上运行的某个程序，你只需下载新版本并安装，对吧？升级有什么问题？问题在于，在区块链的背景下，我们试图构建Trustless的系统，但在某些情况下，升级的需求可能会破坏这种信任。对于Layer1，没有这个问题。如果要升级以太坊，只需下载新的客户端，安装它，然后所有人协调分叉。然后我们安排一次分叉，定个日期，在某个区块号进行分叉，那么任何不喜欢此次升级的人都可以留在旧版本的旧分支上。这种可升级性路径是完全Trustless的。它不会让您依赖任何诚实的大多数或任何可信的参与者。</p>
+<p>问题出现在Layer2的背景下。如果我们构建的是Rollup，Rollup依赖于Layer1的智能合约。这个智能合约可能是不可变的，其中某些特定电路的某些固定功能和验证密钥已经内置，那么问题就在于如果存在Bug，那么你将束手无策。那如果面临bug，或者如果想修复它该怎么做？</p>
+<p>我们在zkSync 1.0（zkSync Lite）披露了过一个漏洞，具有可升级性的时间锁定，因此团队可以提出新版本的升级提案。然后，如果用户不喜欢这个新的版本，所有用户都有几周的时间将资产从Layer1退出。我们有Trustless的机制来实现退出。但因为被迫进入了这个时间锁定，我们无法修复它，所以我们想出了一个折衷方案，并引入了我们称之为Security Council的方案，这是一个独立的委员会。我们邀请了一些来自不同社区、不同项目的以太坊社区的15名知名成员加入。</p>
+<p>团队不控制合约，只能提出升级方案，Security Council来做出决定，可以决定加速升级。但这仍然不是最佳选择，因为理论上还是有一组人可以在此期间立即安装一个恶意版本。也许他们不想这样做，但也许他们会被某些参与者强迫，我们无法排除这种可能。因此，如果我们希望充分利用零知识证明，并且仅依赖数学和开源代码而不是任何验证程序的受信任方等，最终实现完全Trustless的机制。</p>
+<p><strong>我们目前在思考一个更好的方案，由团队提出时间锁定的升级提案，Security Council可以介入建议冻结智能合约，然后在Layer1上进行软分叉。</strong> 因此，这需要与Layer1协调，这需要Layer2协议已经有一定规模足够重要，以使社区实际上进行分叉，安装新版本等。因为Layer1无法为每个小协议执行此操作，它必须是像以太坊上的系统级事物那样重要的协议。</p>
+<p>这是我们目前拥有的增强无需信任的可升级方案的最佳机制，以便保护我们免受第一层严重漏洞的影响。但这还是会引入一些类似时效性的问题，如果出现这样的问题，协议将暂停一段时间，想象一下我们已经从Visa和PayPal切换到使用这种大型Rollups进行区块链支付，突然之间用户资产被冻结，没有人可以进行支付，需要我们协调升级几天，这是巨大的问题。我们当前没有更好的解决方案，也没有看到更好的解决方案。如果您有想法，请联系我们，让我们进一步探讨。</p>
+<p><strong>Q4：有一个关键词被多次提到，那就是“无需信任-Trustless”。正如我们所知，当前系统中最重要的组成部分仍然是中心化的。从中心化到去中心化的演变，我们将面临哪些安全挑战？</strong></p>
+<p>******<strong>[Alex Gluchowski]</strong> ** ** **</p>
+<p><strong>我认为这（Trustless）将增强安全性。这将为我们提供多一重因素的保护。首先，ZK Rollup必须为每个块提供有效性证明，但它可以存在问题，例如，也许我们忘记了某些约束条件。在此之上，我们还需要通过权益证明共识机制来提供签名，这是额外的一层保护。因为为了破坏系统，恶意攻击者必须首先找到漏洞，然后必须在伙同这个这些验证者中的大多数来一起作恶。</strong></p>
+<p><strong>这个可能性是比较小的，因为攻击者要么已经是这个区块链上的控制方，要么必须购买大量代币，这给了我们足够的时间，可能其他人也会发现相同的漏洞，并提交Immunefi或其他地方，团队可以进行修复。或者，也许我们将同时运行一些蜜罐，这是完全开放的，任何人都可以破解并从中获得奖励。所以，总体来说，这为整个系统提供了两个因素的保护。而且，我们可以在此基础上添加更多因素。</strong></p>
+<p><strong><strong>到目前为止，我不会相信一个号称完全无需信任的ZK Rollup是安全的。</strong> 对我来说，这将是极具风险的。我不会在这样的ZK Rollup上放置比我可承受失去的金额更大金额的资产。</strong></p>
+<p><strong>我最喜欢举的例子是波音737 Max事件。这个事故的原因不是因为他们试图转移公众注意力的软件问题，而是因为他们依赖于飞机上的单个传感器，这是完全不负责任的行为。航空业已经有很长的发展历史，过程中有很多技术迭代，不能依赖单个系统是业界的共识。但因为他们在生产波音737 max的过程中因为各种原因（比如成本、交付时间等）牺牲了安全的系统设计，最终导致了事故。因此，我们始终希望至少有两个完全独立的安全因子，来降低故障的概率。</strong></p>
+<p>****<strong>[Ye Zhang]</strong> ** **</p>
+<p><strong>我们秉持着长期主义的理念来思考ZK Rollup的去中心化路线图。先去中心Sequencer还是Prover，甚至如何定义ZK Rollup的去中心化，我们都有自己的想法。<strong>我认为最终我们将同时去中心化Sequencer和Prover。但是我们有一些略微不同的优先排序，我们希望先将Prover去中心化。</strong> 安全性绝对是重要原因之一。如果先将Sequencer去中心化，那在zkEVM变得非常成熟稳健之前，如果有人真的发现了一些漏洞并提交了虚假证明，它有一定概率会被Sequencer接受并出块，对系统造成破坏。</strong></p>
+<p><strong>因此，我们会先保留中心化的Sequencer。因为zkEVM是有可能出现漏洞的，因为它是非常复杂的系统。因此，我们希望至少在早期阶段，我们控制中心化的排序，至少能保证正确有效的出块。</strong></p>
+<p><strong>另一个先去中心化Prover的原因是，有许多硬件公司正在寻找如何使zkEVM更高效的方案。如果我们承诺去中心化Prover的这种方案，他们会参与优化系统的代码。我们都知道，ZK ASIC可能需要一年以上才能问世，如果我们首先进行Prover的去中心化，他们将更有动力为我们的系统进行构建，使系统变得更加高效。Sequencer的去中心化是我们后面计划要做的事情。</strong></p>
+<p><strong>这里还要考虑一个更复杂的因素，如果将Prover和Sequencer分配到两个不同的群体，则需要非常小心地设计激励方案，例如分配到这两方的奖励的比例，如何能够做到足够合理且平衡两方的激励。</strong></p>
+<p>**除此之外，我们还有一些其他的安全手段。例如，我们正在构建的方式是开源的，我们正在进行一些内部安全审计，而不仅仅是外部审计。我们拥有一个非常强大的安全团队。我们提供各种资金资助来鼓励更多人参与安全方案的构建，比如形式化验证等工具。我们团队还曾经在Consensys ZKEVM和Aztec的电路上找到过漏洞。<strong>我们正在尝试改善整个生态系统的安全性。</strong> **</p>
+<p>**<strong>[Matt Finestone]</strong> **</p>
+<p><strong>Taiko可能会更早地面临这种挑战。尽管大家都有一定程度的去中心化，但实际上我们也在计划和以太坊保持一样的方式，包括EVM、Gas时间表和状态树等，同时也考虑到Ethos和其他去中心化（我们称之为）Sequencer Proposer，以及Prover。在几个月前的第一个测试网中，约有2000独立个人或地址无需许可的Propose一个区块。尽管可能存在一些恶意区块，但这也是去中心化的承诺。我认为这不是渐进式的去中心化，或许是渐进式的效率提升，因为你必须放弃一些效率。Proposer可能会建立相同的区块，导致有些交易冗余，同时也付出了一些向Layer1支付了ETH的有价值的区块空间。有些人会得到退款，有的会直接跳过。</strong></p>
+<p>**对我们来说，我们在下一个即将到来的测试网中立即实现去中心化不太现实。Permissionless provers在测试网环境中比较难，<strong>因为有女巫攻击，人们会让proposed block中充满垃圾信息，而Prover必须花费真正的计算资源证明它们，但却没有实际收入。</strong> 因此，我们将使用Permissioned Proposer，让任何去中心化的Prover提交区块，并得到相应的奖励，这个很重要。另外，如果系统出现故障，一个Prover提交了有效性证明，同时也出现了一个不一致的证明被提交，那么智能合约就可以知道并且暂停。它会识别到为什么有两个正确的有效性证明在不同的块上？出现这种情况立即暂停，也就引发了时间延迟。如Alex所说，我们当前无法对完全无需许可、无需信任的实施感到放心，<strong>我们要努力实现平衡。</strong> **</p>
+<p>**<strong>[Mikhail Komarov]</strong> **</p>
+<p><strong>我们从一开始就考虑了这个问题。一些人最初的解决方案是自上而下的方法，例如决定创建Rollup，然后考虑去中心化的次序问题，比如先去中心化Sequencer。然后去中心化Prover，一环接一环。相比之下，我们采用了一种不同的方法，我们自下而上来解决问题。</strong></p>
+<p><strong>我们首先建立了一个去中心化的Prover网络，来无需许可地汇集算力。然后我们试图在Prover网络的基础上添加Sequencer，因为Sequencer必须和Prover网络紧密结合，特别是与成熟的去中心化Prover网络。这里涉及到需要支付额外的证明费用，通信的复杂性等问题，所以Sequencer必须紧密结合Prover网络，以确保其有效性。我们所开发的系统可以作为ZK Rollup的底层基建。</strong></p>
+<p>**为了确保所有的证明生成都有一个激励机制来加速完成，并提高质量和保持安全性，我们引入了证明市场（Proof market）来管理所有证明的生成和排序。同时，我们保持了这个系统的去中心化和无需许可性。<strong>这种方法是从底层解决问题，而不是从顶层解决问题。</strong> **</p>
+<p>**<strong>[Brian R]</strong> **</p>
+<p><strong>我认为我们采取的方法，与其他网络有很大的不同。类似于Nil团队正在建立的证明市场（Proof market），但是我们采用了一种更无需信任的方式。我们当前没有关注Sequencing的问题，而是关注在证明系统上，让它能够更加强健地进行各种运算。这种方法简化了很多复杂性，有利于尽快将最多的计算量投入市场。</strong></p>
+<p><strong>我们希望降低开发人员的使用门槛，让他们在以太坊或任何系统上建立任何他们想要的应用程序，并拥有这个去中心化的基础计算层，用零知识证明来保证计算的正确性。</strong></p>
+<p><strong><img src="https://img.bibiqing.com/news/2023/0329/9_9abl7sq7vp.jpeg" alt="ZK专家“华山论剑”：安全与去信任，ZK协议在机制上该如何平衡取舍？"></strong></p>
+<p><strong><strong>Q5. 观众：</strong> 在Algorand中，出现了一种名为State Painting的技术。它的基本思想是从一个共识区块链中提取状态，并将其“Paint”到另一个共识区块链上。这种技术更像是一种跨链方案，同时运用到了零知识证明的方案。那在Layer2中，系统共识其实依赖于Layer1的共识，这样是否会降低Layer2的安全性？</strong></p>
+<p> <strong><strong>[Alex Gluchowski]</strong></strong></p>
+<p><strong>在ZK Rollups的实施中，Layer1和Layer2的之间的资产流动是完全无需信任的，Layer2完全承接了Layer1的安全性。关于资产在Layer2之间的转移，如果你是通过以太坊Layer1的原生桥接，那么它也是完全无信任的。但是，如果没有通过Layer1，其安全性取决于通过哪种跨链方式实现桥接。</strong></p>
+<p>**<strong>在zkSync中，我们正在实现一种被称为Hyperchain的方案</strong> 。具体而言，我们将建立多个由相同电路驱动的链，这些链仍然通过以太坊上进行桥接。<strong>Hyperchain将提供免费的、完全无信任的、非常便宜的交易，可以从任何链到任何其他链。当我们谈论将数亿甚至数十亿的用户引入区块链时，这一点非常重要。</strong> **</p>
+<p><strong>在未来，我们不可能让数以万亿的交易都运行在一个单一的系统或共识上。它们将不得不在许多不同的共识系统上运行，比如分片、独立的应用链等。但同时我们需要保证这些不同链之间的可连接和通信的低成本。</strong></p>
+<p>**打个比方，就像我们今天使用不同系统的电子邮件，用户可以轻松地完成不同电子邮件系统之间的通信。这就是我们希望通过Hyperchain实现的东西。<strong>除了完美地承接Layer1的安全性，高效且无需信任的跨链通信，Hyperchain还可以通过递归证明来实现使用的超低成本。</strong> **</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/49053/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">World ID与GPT-4同时上线 OpenAI创始人的另一场探险？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/49050/">
+                <span class="next-text nav-default">澳大利亚参议员提出私人法案以加快加密货币监管</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

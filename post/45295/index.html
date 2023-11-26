@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          从GPT-1到GPT-4看ChatGPT的崛起 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="整理了一下ChatGPT的发展历程、背后的技术原理，以及它的局限性在哪。" />
+<meta name="keywords" content="chatGPT" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/45295/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="从GPT-1到GPT-4看ChatGPT的崛起" />
+<meta property="og:description" content="整理了一下ChatGPT的发展历程、背后的技术原理，以及它的局限性在哪。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/45295/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-12-07T00:00:00+00:00" />
+
+<meta itemprop="name" content="从GPT-1到GPT-4看ChatGPT的崛起">
+<meta itemprop="description" content="整理了一下ChatGPT的发展历程、背后的技术原理，以及它的局限性在哪。"><meta itemprop="datePublished" content="2022-12-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4605">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从GPT-1到GPT-4看ChatGPT的崛起"/>
+<meta name="twitter:description" content="整理了一下ChatGPT的发展历程、背后的技术原理，以及它的局限性在哪。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">从GPT-1到GPT-4看ChatGPT的崛起</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-12-07">
+      2022-12-07
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4605 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：阿法兔</p>
+<p>整理了一下ChatGPT的发展历程、背后的技术原理，以及它的局限性在哪。（请注意：有部分内容来自于文内的参考资料，如有兴趣还请阅读原文，本文不构成任何投资建议或者对项目的推荐）</p>
+<h2 id="chatgpt是个啥-">**<strong>ChatGPT是个啥？</strong> **</h2>
+<p><img src="https://img.bibiqing.com/news/2022/1207/26_8qcy3l9bbz.png" alt="从GPT-1到GPT-4看ChatGPT的崛起"></p>
+<p><strong>ChatGPT是个啥？</strong></p>
+<p>近期，OpenAI 发布了 ChatGPT，是一个可以对话的方式进行交互的模型，因为它的智能化，得到了很多用户的欢迎。ChatGPT 也是OpenAI之前发布的 InstructGPT 的亲戚，<strong>ChatGPT</strong> 模型的训练是使用RLHF（Reinforcement learning with human feedback）也许<strong>ChatGPT的到来，也是OpenAI 的GPT-4正式推出之前的序章。</strong></p>
+<p><strong>什么是GPT？从GPT-1到GPT-3</strong></p>
+<p>Generative Pre-trained Transformer (GPT)，是一种基于互联网可用数据训练的文本生成深度学习模型。它用于问答、文本摘要生成、机器翻译、分类、代码生成和对话 AI。</p>
+<p>2018年，GPT-1诞生，这一年也是NLP（自然语言处理）的预训练模型元年。性能方面，GPT-1有着一定的泛化能力，能够用于和监督任务无关的NLP任务中。其常用任务包括：</p>
+<ul>
+<li>
+<p>自然语言推理：判断两个句子的关系（包含、矛盾、中立）</p>
+</li>
+<li>
+<p>问答与常识推理：输入文章及若干答案，输出答案的准确率</p>
+</li>
+<li>
+<p>语义相似度识别：判断两个句子语义是否相关</p>
+</li>
+<li>
+<p>分类：判断输入文本是指定的哪个类别</p>
+</li>
+</ul>
+<p>虽然GPT-1在未经调试的任务上有一些效果，但其泛化能力远低于经过微调的有监督任务，因此GPT-1只能算得上一个还算不错的语言理解工具而非对话式AI。</p>
+<p>GPT-2也于2019年如期而至，不过，GPT-2并没有对原有的网络进行过多的结构创新与设计，只使用了更多的网络参数与更大的数据集：最大模型共计48层，参数量达15亿，学习目标则使用无监督预训练模型做有监督任务。<strong>在性能方面，除了理解能力外，GPT-2在生成方面第一次表现出了强大的天赋：阅读摘要、聊天、续写、编故事，甚至生成假新闻、钓鱼邮件或在网上进行角色扮演通通不在话下。</strong> 在“变得更大”之后，GPT-2的确展现出了普适而强大的能力，并在多个特定的语言建模任务上实现了彼时的最佳性能。</p>
+<p>之后，<strong>GPT-3出现了，作为一个无监督模型（现在经常被称为自监督模型），几乎可以完成自然语言处理的绝大部分任务</strong> ，例如面向问题的搜索、阅读理解、语义推断、机器翻译、文章生成和自动问答等等。而且，该模型在诸多任务上表现卓越，例如在法语-英语和德语-英语机器翻译任务上达到当前最佳水平，自动产生的文章几乎让人无法辨别出自人还是机器（仅52%的正确率，与随机猜测相当），更令人惊讶的是在两位数的加减运算任务上达到几乎100%的正确率，甚至还可以依据任务描述自动生成代码。<strong>一个无监督模型功能多效果好，似乎让人们看到了通用人工智能的希望，可能这就是GPT-3影响如此之大的主要原因</strong></p>
+<p><strong>GPT-3模型到底是什么？</strong></p>
+<p><strong>实际上，GPT-3就是一个简单的统计语言模型。</strong> 从机器学习的角度，语言模型是对词语序列的概率分布的建模，即利用已经说过的片段作为条件预测下一个时刻不同词语出现的概率分布。语言模型一方面可以衡量一个句子符合语言文法的程度（例如衡量人机对话系统自动产生的回复是否自然流畅），同时也可以用来预测生成新的句子。例如，对于一个片段“中午12点了，我们一起去餐厅”，语言模型可以预测“餐厅”后面可能出现的词语。一般的语言模型会预测下一个词语是“吃饭”，强大的语言模型能够捕捉时间信息并且预测产生符合语境的词语“吃午饭”。</p>
+<p>通常，一个语言模型是否强大主要取决于两点：<strong>首先看该模型是否能够利用所有的历史上下文信息</strong> ，上述例子中如果无法捕捉“中午12点”这个远距离的语义信息，语言模型几乎无法预测下一个词语“吃午饭”。<strong>其次，还要看是否有足够丰富的历史上下文可供模型学习，也就是说训练语料是否足够丰富</strong> 。由于语言模型属于自监督学习，优化目标是最大化所见文本的语言模型概率，因此任何文本无需标注即可作为训练数据。</p>
+<p><strong>由于GPT-3更强的性能和明显更多的参数，它包含了更多的主题文本，显然优于前代的GPT-2。作为目前最大的密集型神经网络，GPT-3能够将网页描述转换为相应代码、模仿人类叙事、创作定制诗歌、生成游戏剧本，甚至模仿已故的各位哲学家——预测生命的真谛。</strong> 且GPT-3不需要微调，在处理语法难题方面，它只需要一些输出类型的样本（少量学习）。可以说GPT-3似乎已经满足了我们对于语言专家的一切想象。</p>
+<p>注：上文主要参考以下文章：</p>
+<p>1.GPT4发布在即堪比人脑，多位圈内大佬坐不住了！-徐杰承、云昭 -公众号51CTO技术栈- 2022-11-24 18:08</p>
+<p>2.一文解答你对GPT-3的好奇！GPT-3是什么？为何说它如此优秀？-张家俊 中国科学院自动化研究所 2020-11-11 17:25 发表于北京</p>
+<p>3.The Batch: 329 | InstructGPT，一种更友善、更温和的语言模型-公众号DeeplearningAI-2022-02-07 12:30</p>
+<p><strong>GPT-3存在什么问题？</strong></p>
+<p>但是 GTP-3 并不完美，当前有人们最担忧人工智能的主要问题之一，就是聊天机器人和文本生成工具等很可能会不分青红皂白和质量好坏，地对网络上的所有文本进行学习，进而生产出错误的、恶意冒犯的、甚至是攻击性的语言输出，这将会充分影响到它们的下一步应用。</p>
+<p>OpenAI也曾经提出，会在不久的将来发布更为强大的GPT-4：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1207/26_a4f02gkv36.png" alt="从GPT-1到GPT-4看ChatGPT的崛起"></p>
+<p>将 GPT-3 与GPT-4、 人脑进行比较（图片来源：Lex Fridman @youtube）</p>
+<p>据说，GPT-4会在明年发布，它能够通过图灵测试，并且能够先进到<strong>和人类没有区别</strong> ，除此之外，企业引进GPT-4的成本也将大规模下降。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1207/26_l53g9p5yqq.png" alt="从GPT-1到GPT-4看ChatGPT的崛起"></p>
+<h2 id="chatgp与instructgpt"><strong>ChatGP与InstructGPT</strong></h2>
+<p><strong>ChatGPT与InstructGPT</strong></p>
+<p>谈到Chatgpt，就要聊聊它的“前身”InstructGPT。</p>
+<p>2022年初，OpenAI发布了InstructGPT；在这项研究中，相比 GPT-3 而言，OpenAI 采用对齐研究（alignment research），训练出更真实、更无害，而且更好地遵循用户意图的语言模型 InstructGPT，InstructGPT是一个经过微调的新版本GPT-3，可以将有害的、不真实的和有偏差的输出最小化。</p>
+<p><strong>InstructGPT的工作原理是什么？</strong></p>
+<p><strong>开发人员通过结合监督学习+从人类反馈中获得的强化学习。来提高GPT-3的输出质量。在这种学习中，人类对模型的潜在输出进行排序；强化学习算法则对产生类似于高级输出材料的模型进行奖励。</strong></p>
+<p>训练数据集以创建提示开始，其中一些提示是基于GPT-3用户的输入，比如“给我讲一个关于青蛙的故事”或“用几句话给一个6岁的孩子解释一下登月”。</p>
+<p>开发人员将提示分为三个部分，并以不同的方式为每个部分创建响应：</p>
+<ol>
+<li>
+<p>人类作家会对第一组提示做出响应。开发人员微调了一个经过训练的GPT-3，将它变成InstructGPT以生成每个提示的现有响应。</p>
+</li>
+<li>
+<p>下一步是训练一个模型，使其对更好的响应做出更高的奖励。对于第二组提示，经过优化的模型会生成多个响应。人工评分者会对每个回复进行排名。在给出一个提示和两个响应后，一个奖励模型(另一个预先训练的GPT-3)学会了为评分高的响应计算更高的奖励，为评分低的回答计算更低的奖励。</p>
+</li>
+<li>
+<p>开发人员使用第三组提示和强化学习方法近端策略优化(Proximal Policy Optimization, PPO)进一步微调了语言模型。给出提示后，语言模型会生成响应，而奖励模型会给予相应奖励。PPO使用奖励来更新语言模型。</p>
+</li>
+</ol>
+<p>本段参考：The Batch: 329 | InstructGPT，一种更友善、更温和的语言模型-公众号DeeplearningAI-2022-02-07 12:30</p>
+<p><strong>重要在何处？核心在于——人工智能需要是能够负责任的人工智能</strong></p>
+<p>OpenAI的语言模型可以助力教育领域、虚拟治疗师、写作辅助工具、角色扮演游戏等，在这些领域，社会偏见、错误信息和毒害信息存在都是比较麻烦的，能够避免这些缺陷的系统才能更具备有用性。</p>
+<p><strong>Chatgpt与InstructGPT的训练过程有哪些不同？</strong></p>
+<p>总体来说，Chatgpt和上文的InstructGPT一样，是使用 RLHF（从人类反馈中强化学习）训练的。不同之处在于数据是如何设置用于训练（以及收集）的。（这里解释一下：<em>之前的InstructGPT模__型，是给一个输入就给一个输出，再跟训练数据__对比，对了有奖励不对有惩罚；现在的<strong>Chatgpt</strong> 是一个输入，模型给出多个输出，然后人给这个输出结果排序，让模型去给这些结果从“更像人话”到“狗屁不通”排序，让模型学习人类排序的方式，这种策略叫做supervised learning，本段感谢张子兼博士）</em></p>
+<p><img src="https://img.bibiqing.com/news/2022/1207/26_wgg27yavg6.png" alt="从GPT-1到GPT-4看ChatGPT的崛起"></p>
+<h2 id="chatgpt存在哪些局限性"><strong>ChatGPT存在哪些局限性？</strong></h2>
+<p>如下：</p>
+<p>a) 在训练的强化学习 (RL) 阶段，没有真相和问题标准答案的具体来源，来答复你的问题。</p>
+<p>b) 训练模型更加谨慎，可能会拒绝回答（以避免提示的误报）。</p>
+<p>c) 监督训练可能会误导/偏向模型倾向于知道理想的答案，而不是模型生成一组随机的响应并且只有人类评论者选择好的/排名靠前的响应</p>
+<p>注意：ChatGPT 对措辞敏感。，有时模型最终对一个短语没有反应，但对问题/短语稍作调整，它最终会正确回答。训练者更倾向于喜欢更长的答案，因为这些答案可能看起来更全面，导致倾向于更为冗长的回答，以及模型中会过度使用某些短语，如果初始提示或问题含糊不清，则模型不会适当地要求澄清。</p>
+<p>ChatGPT’s self-identified limitations are as follows.</p>
+<p>Plausible-sounding but incorrect answers:</p>
+<p>a) There is no real source of truth to fix this issue during the Reinforcement Learning (RL) phase of training. </p>
+<p>b) Training model to be more cautious can mistakenly decline to answer (false positive of troublesome prompts).</p>
+<p>c) Supervised training may mislead / bias the model tends to know the ideal answer rather than the model generating a random set of responses and only human reviewers selecting a good/highly-ranked responseChatGPT is sensitive to phrasing. Sometimes the model ends up with no response for a phrase, but with a slight tweak to the question/phrase, it ends up answering it correctly.</p>
+<p>Trainers prefer longer answers that might look more comprehensive, leading to a bias towards verbose responses and overuse of certain phrases.The model is not appropriately asking for clarification if the initial prompt or question is ambiguous.A safety layer to refuse inappropriate requests via Moderation API has been implemented. However, we can still expect false negative and positive responses.</p>
+<p>参考文献：</p>
+<p>1.https://medium.com/inkwater-atlas/chatgpt-the-new-frontier-of-artificial-intelligence-9aee81287677</p>
+<p>2.https://pub.towardsai.net/openai-debuts-chatgpt-50dd611278a4</p>
+<p>3.https://openai.com/blog/chatgpt/</p>
+<p>4.GPT4发布在即堪比人脑，多位圈内大佬坐不住了！-徐杰承、云昭 -公众号51CTO技术栈- 2022-11-24 18:08</p>
+<p>5.一文解答你对GPT-3的好奇！GPT-3是什么？为何说它如此优秀？-张家俊 中国科学院自动化研究所 2020-11-11 17:25 发表于北京</p>
+<p>6.The Batch: 329 | InstructGPT，一种更友善、更温和的语言模型-公众号DeeplearningAI-2022-02-07 12:30</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/45290/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">参议员沃伦：正在起草一项全面的加密货币法案</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/45316/">
+                <span class="next-text nav-default">观点：加密货币已经成为欺诈者的乐园</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#chatgpt是个啥-">**<strong>ChatGPT是个啥？</strong> **</a></li>
+    <li><a href="#chatgp与instructgpt"><strong>ChatGP与InstructGPT</strong></a></li>
+    <li><a href="#chatgpt存在哪些局限性"><strong>ChatGPT存在哪些局限性？</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Token Terminal：深度分析常见Layer1的运行原理及经济模型 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Token Terminal 探讨了基于 PoW和 PoS的主要L1和L2们的区块链经济模型，以及流动性质押等协议的新兴模型。并将每种区块链的经济模型原理非常通俗易懂的进行了拆解和举例。" />
+<meta name="keywords" content="Layer1, 質押" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51853/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Token Terminal：深度分析常见Layer1的运行原理及经济模型" />
+<meta property="og:description" content="Token Terminal 探讨了基于 PoW和 PoS的主要L1和L2们的区块链经济模型，以及流动性质押等协议的新兴模型。并将每种区块链的经济模型原理非常通俗易懂的进行了拆解和举例。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51853/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-24T00:00:00+00:00" />
+
+<meta itemprop="name" content="Token Terminal：深度分析常见Layer1的运行原理及经济模型">
+<meta itemprop="description" content="Token Terminal 探讨了基于 PoW和 PoS的主要L1和L2们的区块链经济模型，以及流动性质押等协议的新兴模型。并将每种区块链的经济模型原理非常通俗易懂的进行了拆解和举例。"><meta itemprop="datePublished" content="2023-05-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4769">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Token Terminal：深度分析常见Layer1的运行原理及经济模型"/>
+<meta name="twitter:description" content="Token Terminal 探讨了基于 PoW和 PoS的主要L1和L2们的区块链经济模型，以及流动性质押等协议的新兴模型。并将每种区块链的经济模型原理非常通俗易懂的进行了拆解和举例。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Token Terminal：深度分析常见Layer1的运行原理及经济模型</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-24">
+      2023-05-24
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4769 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Tokenterminal</p>
+<p>我们时常直观的感受到使用不同区块链所产生的成本和收益，即gas费和激励。</p>
+<p>但是，你真的彻底了解它们完整的经济模型吗？gas和激励从何而来，又将流入何处？不同经济模型设计下的市场表现如何？</p>
+<p><strong>Token Terminal 探讨了基于 PoW和 PoS的主要L1和L2们的区块链经济模型，以及流动性质押等协议的新兴模型。并将每种区块链的经济模型原理非常通俗易懂的进行了拆解和举例。</strong></p>
+<p><strong>同时，通过可视化区块链的每日费用变化，也对主流区块链们的市场表现进行了洞察分析，以供投资者使用文中的框架来比较区块链们的经济表现、潜力和可持续性。</strong></p>
+<h3 id="介绍">介绍</h3>
+<p>下图可视化了本文中提到的区块链在过去 180 天内的每日费用。</p>
+<p>深潮注：可以看到以太坊和比特币的交易费用总量上仍旧是遥遥领先的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_c9dieilhnt.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>通常构成区块链经济结构的关键组成部分是<strong>交易费用、通货膨胀的区块奖励（激励）和费用销毁。</strong></p>
+<p>交易费用代表区块空间的市场价格。</p>
+<p>激励是鼓励人们采取行动（例如验证交易）的经济奖励。</p>
+<p>费用销毁是一种从流通中移除每笔交易费用的一部分的机制。</p>
+<p>鉴于单个区块链的容量有限，我们将看到一个拥有多个不同区块链的世界——每个区块链都针对不同的用例进行了优化——彼此互操作。区块链市场最初由比特币主导，一个极其简单和有限的合约执行环境。随着以太坊的推出，（理论上）在区块链上部署任意复杂的合约或程序成为可能。现在，随着扩展解决方案、特定应用程序区块链和跨链桥的兴起，在实践中也可以部署任意复杂的合约（可扩展性不再是限制）。在本文中，我们将分解最常见类型的区块链的经济模型。</p>
+<h3 id="基于pow的l1">基于PoW的L1</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_5neubl8sjv.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p><strong>原理阐述：</strong></p>
+<ol>
+<li>
+<p>用户为一个区块支付 1 BTC 的交易费用</p>
+</li>
+<li>
+<p>矿工收到所有费用（1 BTC）</p>
+</li>
+<li>
+<p>矿工从区块奖励中获得 1 BTC（新发行的 BTC）</p>
+</li>
+</ol>
+<p><strong>最终结果：</strong></p>
+<ol>
+<li>矿工收到 2 BTC</li>
+</ol>
+<p><strong>要点：</strong></p>
+<ul>
+<li>
+<p>在比特币上提交交易的需求为区块空间创造了一个市场。用户向矿工支付区块空间。大宗补贴进一步激励了矿工，大宗补贴是新铸造的比特币，增加了货币的总供应量。目前，比特币的所有费用和区块补贴都归矿工所有。</p>
+</li>
+<li>
+<p>比特币通过 CPU 能力提供安全性。比特币的价值主张是创建一个安全、透明和不可变的全球账本，允许无信任和不可逆的价值转移。这些价值由源自 CPU 使用率的安全性维护。每个块都需要消耗大量的 CPU 能力才能在网络上进行验证。本质上，1 个 CPU 对应网络上的 1 个投票。因此，只要大部分 CPU 掌握在诚实的矿工手中，网络就是安全的。</p>
+</li>
+<li>
+<p>比特币的经济由两个变量决定：交易费用和区块补贴。交易费用根据网络区块空间的供需情况确定。区块补贴是增加 BTC 流通供应的通货膨胀奖励。目前，一个区块的矿工获得 6.25 个比特币的奖励，这个数字每四年减半。最终，比特币将达到 2100 万的最大供应量（预计在 2140 年左右发生），区块奖励将仅由交易费用组成。这意味着用户采用对于网络保持经济可持续性至关重要。</p>
+</li>
+</ul>
+<h3 id="基于pos的l1">基于PoS的L1</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_uq1m29j0ra.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p><strong>原理阐述：</strong></p>
+<ol>
+<li>
+<p>用户为一个区块支付 1 ETH 的交易费用（包括 MEV）</p>
+</li>
+<li>
+<p>0.8 ETH 被销毁 —&gt; “股票回购”让所有 ETH 持有者平等受益</p>
+</li>
+<li>
+<p>验证者从费用中赚取 0.2 ETH</p>
+</li>
+<li>
+<p>验证者从区块奖励中获得 1 ETH（新发行的 ETH）</p>
+</li>
+<li>
+<p>由于验证者已经从委托人那里获得了一半的股份，因此验证者必须与这些 ETH 持有者分享其收入的 50%</p>
+</li>
+</ol>
+<p><strong>最终结果：</strong></p>
+<ol>
+<li>
+<p>0.8 ETH 被销毁</p>
+</li>
+<li>
+<p>验证者收到 0.6 ETH</p>
+</li>
+<li>
+<p>通过委托质押的 ETH 持有者获得 0.6 ETH</p>
+</li>
+</ol>
+<p><strong>要点：</strong></p>
+<ul>
+<li>
+<p>在以太坊上，大约 85% 的总交易费用被销毁，有效地作为“股票回购”，让所有 ETH 持有者同样受益。同时，验证者赚取剩余的费用和额外的质押奖励，即新铸造的 ETH。在过去 30 天内，以太坊平均每天收取约 1500 万美元的费用。</p>
+</li>
+<li>
+<p>2021 年 8 月通过EIP-1559实施的费用燃烧机制将 ETH 变成了一种生产性资产。此外，从 PoW 到 PoS 的过渡降低了 ETH 的新发行率。自 2022 年 9 月 Merge 以来，以太坊不再向矿工分发区块奖励。这一变化导致新 ETH 的发行量下降了约 90%（约 14k ETH/天的区块奖励被约 1.7k ETH/天的质押奖励所取代）。这导致 ETH 供应在高使用率期间出现通货紧缩。</p>
+</li>
+<li>
+<p>以太坊的经济结构包含三个关键组成部分：<strong>总交易费用、被销毁的交易费用部分和质押奖励</strong> 。交易费用根据网络区块空间的供需情况确定。质押奖励是增加 ETH 总供应量的通货膨胀奖励。交易费用的燃烧导致 ETH 的通货紧缩压力，而循环供应的减少可能会随着时间的推移增加代币的价值。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_h0uj8fi8u5.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>合并后，ETH 供应在高使用率期间一直处于通缩状态。例如，今年 5 月，销毁的 ETH 数量（收入）一直大于作为质押奖励（代币激励）铸造的 ETH 数量。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_1bb8qhob3d.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>流动性质押项目允许用户通过代表标的资产的衍生流动性代币（liquid staking derivative，LSD）来质押他们的资产并保持流动性。</p>
+<p><strong>原理阐述：</strong></p>
+<ol>
+<li>
+<p>用户为一个区块支付 1 ETH 的交易费用（包括 MEV）</p>
+</li>
+<li>
+<p>0.8 ETH 被销毁 —&gt; “股票回购”让所有 ETH 持有者平等受益</p>
+</li>
+<li>
+<p>验证者从费用中赚取 0.2 ETH</p>
+</li>
+<li>
+<p>Validator 从区块奖励中获得 1 ETH（新发行的 ETH）</p>
+</li>
+<li>
+<p>验证者已经从通过流动性抵押协议 Lido 存入 ETH 的用户那里获得了全部股权，因此它与这些 ETH 持有者分享 100% 的收入</p>
+</li>
+<li>
+<p>Lido 从提供服务的总质押奖励中抽取 10%（0.12 ETH），并将剩余的 90%（1.08 ETH）分配给通过 Lido 质押的 ETH 持有者</p>
+</li>
+</ol>
+<p><strong>最终结果：</strong></p>
+<ol>
+<li>
+<p>0.8 ETH 被销毁</p>
+</li>
+<li>
+<p>验证者收到 0 ETH</p>
+</li>
+<li>
+<p>Lido 收到 0.12 ETH（其中 50% 用于支付节点运营成本）</p>
+</li>
+<li>
+<p>通过委托质押的 ETH 持有者将获得 1.08 ETH</p>
+</li>
+</ol>
+<p><strong>要点：</strong></p>
+<ul>
+<li>
+<p><strong>Liquid 质押协议增强了用户体验。</strong> 质押，本质上是一个技术性和高维护性的过程，已经被像Lido这样的协议简化了。通过允许用户锁定他们的 ETH 并接收可转让实用代币 (stETH)，Lido 促进了无缝质押，同时使用户能够获得与验证活动相关的奖励。为了提供这项服务，Lido 从总收益中提取 10% 的费用。这笔费用在节点运营商和 Lido DAO 之间平分。</p>
+</li>
+<li>
+<p><strong>抵押的技术性和高资本要求为流动性抵押协议开辟了商机。</strong> 传统的以太坊Staking需要用户维护一个节点，投入大量资金（32 ETH），并牺牲代币流动性。相比之下，Lido 将用户的代币批量分配给验证者，从而消除了 32 ETH 的障碍。通过简化用户体验、提供流动性和民主化质押，Lido 和类似协议正在打开一个快速增长的市场领域。</p>
+</li>
+<li>
+<p><strong>抵押的民主化允许更广泛的投资者参与。</strong> 除了区块链 (L2)之外，流动性质押市场部门是增长最快的市场部门之一。成功执行的Shapella 升级（4 月 12 日）可以说降低了与 ETH 作为投资相关的风险，以及 ETH 作为收益资产的相关风险。因此，预计 ETH 质押比率（质押资产/流通市值）将增长并与其他 PoS 链持平。目前，ETH 的质押比例约为 15%，与其他 PoS 链相比相对较低。例如，Solana 和 Avalanche 目前拥有超过 60% 的抵押率。鉴于 ETH 的市值较高，在撰写本文时约为 2200 亿美元，我们可以看到未来几个季度质押的资产将增长数十亿美元。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_igmtyvacnc.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>Lido 已成为流动性质押市场领域的当前市场领导者，质押资产总额达 120 亿美元。这个数字同比增长了 38%，过去 180 天增长了 105%。</p>
+<p>在过去的 30 天里，Lido 产生了 6040 万美元的费用，并获得了其中的 10%，即 604 万美元的收入。该收入在节点运营商和 Lido DAO 之间按 50/50 分配。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_8sisjhucjd.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>Avalanche是一种区块链 (L1)，它通过优先考虑可扩展性和更快的交易速度来与以太坊竞争。它使用一种新颖的共识算法，可提供强大的安全性、快速的交易终结性和高吞吐量，同时保持去中心化。</p>
+<p><strong>原理阐述：</strong></p>
+<ol>
+<li>
+<p>用户为一个区块支付 1 AVAX 的交易费用</p>
+</li>
+<li>
+<p>1 AVAX 被销毁 —&gt; “股票回购”让所有 AVAX 持有者平等受益</p>
+</li>
+<li>
+<p>验证者从费用中赚取 0 AVAX</p>
+</li>
+<li>
+<p>验证者从区块奖励中获得 2 个 AVAX（新发行的 AVAX）</p>
+</li>
+<li>
+<p>由于验证者已经从委托人那里获得了部分股份，因此验证者必须与那些 AVAX 持有者分享其收入</p>
+</li>
+</ol>
+<p><strong>最终结果：</strong></p>
+<ol>
+<li>
+<p>1 AVAX 被销毁</p>
+</li>
+<li>
+<p>验证者收到 1 个 AVAX</p>
+</li>
+<li>
+<p>通过委托质押的 AVAX 持有者将获得 1 个 AVAX</p>
+</li>
+</ol>
+<p><strong>要点：</strong></p>
+<ul>
+<li>
+<p><strong>在Avalanche上，所有交易费用都被销毁，验证者的唯一收入来源是质押奖励。</strong> 销毁机制作为一种“股份回购”，对所有 AVAX 持有者同样有利。在过去的 30 天里，Avalanche 的平均每日费用约为 64,000 美元。</p>
+</li>
+<li>
+<p><strong>作为区块链领域相对较新的成员，Avalanche 正在发行大量 AVAX 代币以奖励其验证者。</strong> 这种方法通常被用作在平台早期阶段引导增长的一种方式。这些奖励吸引验证者并刺激 Avalanche 生态系统内的增长和活动。</p>
+</li>
+<li>
+<p><strong>Avalanche 的经济模型可能会在未来发生变化。</strong> 费用和奖励结构不是一成不变的，可以根据未来的治理决策进行调整。目前，AVAX 代币总供应量的 50% 被分配用作验证者的质押奖励。这种分配计划在十年内发生，从 2020 年到 2030 年。随着质押奖励分配最终结束，未来我们可能会看到一部分交易费用被重定向到验证者。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_ku6haoobkl.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>自该网络于 2020 年 9 月启动以来，共销毁了约 230 万个 AVAX，并分发了约 5700 万个 AVAX 作为质押奖励。</p>
+<h3 id="基于pos的l2">基于PoS的L2</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_iy7ecpt3c4.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>Optimism是一种扩展解决方案（乐观汇总），旨在通过提高其交易速度和吞吐量来使以太坊变得更好。Optimism 在 L2 上执行交易，并分批提交给 L1 最终确定。根据交易类型，这导致大约 5-20 倍的gas降低。</p>
+<p><strong>原理阐述：</strong></p>
+<ol>
+<li>
+<p>用户为一个区块支付 1 ETH 的交易费用</p>
+</li>
+<li>
+<p>所有交易费用（1 ETH）都进入 Optimism Foundation 运行的排序器</p>
+</li>
+<li>
+<p>Sequencer 支付 0.8 ETH 的交易费用以将交易提交到 L1（以太坊）</p>
+</li>
+<li>
+<p>Sequencer（在本例中为 Optimism Foundation）保留 0.2 ETH 作为利润</p>
+</li>
+</ol>
+<p><strong>最终结果：</strong></p>
+<ol>
+<li>
+<p>0 ETH 被销毁（不包括以太坊上的销毁）</p>
+</li>
+<li>
+<p>排序器收到 0.2 ETH</p>
+</li>
+<li>
+<p>L1 验证者收到 0.8 ETH</p>
+</li>
+</ol>
+<p><strong>要点：</strong></p>
+<ul>
+<li>
+<p><strong>第 2 层区块链扩展应用程序。</strong> L2 区块链允许广泛使用的 L1 应用程序，如Uniswap、 Blur、 OpenSea等，将它们的交易活动从 L1 转移到一个单独的链，该链定期将其交易结算回 L1。目前， Uniswap超过 30% 的来自 L2。</p>
+</li>
+<li>
+<p><strong>第 2 层区块链支持更优化的用户体验。</strong> 作为 L2，该应用程序可以针对其用例（例如交易）优化用户体验（交易费用/MEV 收集和回扣、链上隐私等）。可以实施这种优化，同时仍然在更安全的 L1 上维护交易记录。</p>
+</li>
+<li>
+<p><strong>第 2 层区块链的经济性由两个变量驱动：L2 收取的费用和向 L1 结算交易的成本。</strong> L2 区块链的主要商业模式是通过削减用户支付的交易费用来产生收入。利润率由向 L1 结算交易的成本决定。例如，Optimism上的用户自推出以来共支付了 3820 万美元的交易费用。在这些费用中，有 2850 万美元用于支付向以太坊提交交易的gas费。因此，Optimism 捕获了差额，即 970 万美元，作为收入。随着竞争的加剧，L2 区块链的利润率预计会下降。能够通过数据压缩和其他技术优化其在以太坊上的 gas 支出的 L2 区块链，进一步减少 L2 的费用，可能会在未来获得市场份额。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0524/8_e6d30zf3oc.jpg" alt="Token Terminal：深度分析常见Layer1的运行原理及经济模型"></p>
+<p>自网络推出以来，Optimism 上的用户共支付了 3820 万美元的交易费用。在这些费用中，有 2850 万美元用于支付向以太坊提交交易的gas费。</p>
+<h3 id="结论">结论</h3>
+<p>区块链通过提供分散、安全和透明的交易处理架构，正在重新定义经济活动的基础设施。在像加密这样快速发展的行业中，我们看到这些计算平台的经济模型不断创新。尽管存在差异，但投资者可以使用上述框架来比较它们的经济表现、潜力和可持续性。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51841/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SignalPlus宏观点评(20230524)</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51844/">
+                <span class="next-text nav-default">Uniswap基金会就如何分配约440万个ARB发起征集建议</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#介绍">介绍</a></li>
+        <li><a href="#基于pow的l1">基于PoW的L1</a></li>
+        <li><a href="#基于pos的l1">基于PoS的L1</a></li>
+        <li><a href="#基于pos的l2">基于PoS的L2</a></li>
+        <li><a href="#结论">结论</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

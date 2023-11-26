@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          深入Solidity数据存储位置——Storage - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="介绍 EVM 中的一个重要数据位置：存储（Storage）" />
+<meta name="keywords" content="Solidity" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43478/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="深入Solidity数据存储位置——Storage" />
+<meta property="og:description" content="介绍 EVM 中的一个重要数据位置：存储（Storage）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43478/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="深入Solidity数据存储位置——Storage">
+<meta itemprop="description" content="介绍 EVM 中的一个重要数据位置：存储（Storage）"><meta itemprop="datePublished" content="2022-10-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9225">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入Solidity数据存储位置——Storage"/>
+<meta name="twitter:description" content="介绍 EVM 中的一个重要数据位置：存储（Storage）"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">深入Solidity数据存储位置——Storage</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-13">
+      2022-10-13
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9225 字 -
+        预计阅读 19 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>这是深入 Solidity 数据存储位置[4]系列的另一篇。在今天的文章中，我们将更详细地介绍 EVM 中的一个重要数据位置：存储（Storage）。</p>
+<p>我们将看到合约存储的布局是如何工作的，<code>storage</code>引用。我们还将使用OpenZeppelin[5]和Compound[6]中的一些合约来学习<code>storage</code>引用在实践中如何工作，同时顺便学习这些流行合约和协议背后的 Solidity 代码。</p>
+<h2 id="目录">目录</h2>
+<ul>
+<li>
+<p>介绍</p>
+</li>
+<li>
+<p>存储的布局</p>
+</li>
+<li>
+<p>存储器的基础知识</p>
+</li>
+<li>
+<p>与存储交互</p>
+</li>
+<li>
+<p>函数参数中的存储指针</p>
+</li>
+<li>
+<p>函数体中的存储指针</p>
+</li>
+<li>
+<p>读取存储的成本。</p>
+</li>
+<li>
+<p>结论</p>
+</li>
+</ul>
+<h2 id="介绍">介绍</h2>
+<p>了解以太坊和基于 EVM 的链中的存储模型对于良好的智能合约开发至关重要。</p>
+<p>你可以在智能合约上永久地存储数据，以便将来执行时可以访问它。每个智能合约都在自己的永久存储中保持其状态。它就像*&ldquo;智能合约的迷你数据库 &ldquo;*，但与其他数据库不同，这个数据库是可以公开访问的。所有存储在智能合约存储器中的值可供外部免费读取（通过静态调用），无需向区块链发送交易。</p>
+<p>然而，向存储空间写入是相当昂贵的。事实上，就 Gas 成本而言，它是 EVM 中最昂贵的操作。存储的内容可以通过<code>sendTransaction</code>调用来改变。这种调用会改变状态。这就是为什么合约变量被称为状态变量的原因。</p>
+<p>需要记住的一件事是，在以太坊和 EVM 的设计中，一个合约既不能读也不能写非自身定义的任何存储。合约 A 可以从另一个合约 B 的存储中读取或写入的唯一方法是当合约 B 暴露出使其能够这样做的函数。</p>
+<h2 id="存储的基本原理">存储的基本原理</h2>
+<p>智能合约的存储是一个持久的可读可写的数据位置。意思是说，如果数据在一次交易中被写入合约存储，一旦交易完成，它就会持久存在。在这个交易之后，读取合约存储将检索到之前这个交易所写入/更新的数据。</p>
+<p>每个合约都有自己的存储，可以用以下规则来描述和绑定：</p>
+<ul>
+<li>
+<p>持有状态变量</p>
+</li>
+<li>
+<p>在交易和函数调用之间持久存在</p>
+</li>
+<li>
+<p>读取是免费的，但写入是昂贵的</p>
+</li>
+<li>
+<p>合约存储在合约构建期间被预先分配。</p>
+</li>
+</ul>
+<p>驻留在存储中的变量在 Solidity 中被称为状态变量。</p>
+<p>你应该记住关于合约存储的唯一事情是：</p>
+<blockquote>
+<p>存储是持久保存和昂贵的!</p>
+</blockquote>
+<p>将数据保存到存储中是 EVM 中需要最多的 Gas 的操作之一。</p>
+<p>写入存储的实际成本是多少？</p>
+<p>成本并不总是相同的，计算写入存储的 Gas 是相当复杂的公式，尤其是在最新的以太坊 2.0 升级后）。</p>
+<p>作为一个简单的总结，写入存储的成本如下：</p>
+<ul>
+<li>
+<p>初始化一个存储槽（第一次，或如果该槽不包含任何值），从零到非零值，花费 20,000 gas</p>
+</li>
+<li>
+<p>修改一个存储槽的值需要 5,000 个 Gas</p>
+</li>
+<li>
+<p>删除存储槽中的数值，需要退还 15,000 Gas。</p>
+</li>
+</ul>
+<p>读取合约存储真的是免费的吗？</p>
+<p>智能合约的存储是免费的，可以从外部读取（从 EOA），此时，不需要支付 Gas。</p>
+<p>然而，如果读取操作是修改该合约、另一个合约或区块链上的状态的交易的一部分，则必须支付 Gas。</p>
+<p>一个合约可以读取其他合约的存储吗？</p>
+<p>默认情况下，一个智能只能在执行环境中读取自己的存储（通过<code>SLOAD</code>）。但是，如果一个智能合约在其公共接口（ABI）中公开了能够从特定的状态变量或存储槽中读取数据的函数，那么该智能合约也可以读取其他智能合约的存储。</p>
+<h2 id="存储的布局">存储的布局</h2>
+<p>正如OpenZeppelin 在他们的深入 EVM 第二部分文章中[7]所解释的那样，智能合约的存储是一个字长寻址空间。这与内存或调用数据相反，后者是线性数据位置（增长的字节数组），你通过偏移量（字节数组中的索引）访问数据。</p>
+<p>相反，智能合约的存储是一个键值映射（=数据库），其中键对应于存储中的一个槽号，而值是存储在这个存储槽中的实际值。</p>
+<p>智能合约的存储是由槽组成的，其中：</p>
+<ul>
+<li>
+<p>每个存储槽可以包含长度不超过 32 字节的字。</p>
+</li>
+<li>
+<p>存储槽从位置 0 开始（就像数组索引）。</p>
+</li>
+<li>
+<p>总共有 2²⁵⁶ 个存储槽可用（用于读/写）。</p>
+</li>
+</ul>
+<p>综上所述：</p>
+<blockquote>
+<p>一个智能合约的存储由 2²⁵⁶ 个槽组成，其中每个槽可以包含大小不超过 32 字节的值。</p>
+</blockquote>
+<p>在底层，合约存储是一个键值存储，其中 256 位的键映射到 256 位的值。每个存储槽的所有值最初都被设置为零，但也可以在合约部署期间（即 &ldquo;构造函数&rdquo;）初始化为非零或一些特定的值，。</p>
+<h2 id="合约存储像货架">合约存储像货架</h2>
+<p>在他的文章中，Steve Marx[8]将智能合约的存储描述为 &ldquo;<em>一个天文数字的大数组，最初充满了零，数组中的条目（索引）就是合约的存储槽。&rdquo;</em> 。</p>
+<p>这在现实世界中会是什么样子？如何用我们可能最熟悉的东西来表示一个智能合约的存储？</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_9jgw3sd84b.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>合约的存储布局与货架很相似。</p>
+</blockquote>
+<p>从货架上把东西拿出来。这相当于 EVM 在读取状态变量时的做法。</p>
+<p>contract Owner {    address _owner;    function owner() public returns (address) {        return _owner;    }}</p>
+<p>在上面的合约中，只有一个架子（=一个槽）。EVM 从 &ldquo;0 号架子 &ldquo;上加载变量，并将其卸载（到堆栈上）以呈现给你。</p>
+<h2 id="状态变量的布局">状态变量的布局</h2>
+<p>Solidity 的主要开发者<code>chriseth</code>这样描述合约的存储:</p>
+<blockquote>
+<p>&ldquo;你可以把存储看作是一个具有虚拟结构的大数组&hellip;&hellip;一个在运行时不能改变的结构&ndash;它是由你合约中的状态变量决定的&rdquo;。</p>
+</blockquote>
+<p>从上面的例子中，我们可以看到，Solidity 为你合约中的每一个定义的状态变量分配了一个存储槽。对于静态大小的状态变量，存储槽是连续分配的，从 0 号槽开始，按照定义状态变量的顺序。</p>
+<p>Chriseth 在这里的意思是: &ldquo;存储不能在函数调用中创建&rdquo;。事实上，如果必须是永久存在，通过调用函数来创建新的存储变量，也没有什么意义（不过，<code>映射</code>的情况略有不同）。</p>
+<p>智能合约的存储是在合约构建过程中（在合约被部署时）预置的。这意味着合约存储的布局在合约创建时就已经确定了。该布局是基于你的合约级变量声明而 &ldquo;成型 &ldquo;的，并且这种布局不能被未来的方法调用所改变。</p>
+<p>让我们用<code>solc</code>命令行工具看看上一个合约的实际存储布局，如果你运行下面的命令。</p>
+<p>solc contracts/Owner.sol &ndash;storage-layout &ndash;pretty-json</p>
+<p>你将得到以下 JSON 输出：</p>
+<p>======= contracts/Owner.sol:Owner =======Contract Storage Layout:{  &ldquo;storage&rdquo;:  [    {      &ldquo;astId&rdquo;: 3,      &ldquo;contract&rdquo;: &ldquo;contracts/Owner.sol:Owner&rdquo;,      &ldquo;label&rdquo;: &ldquo;_owner&rdquo;,      &ldquo;offset&rdquo;: 0,      &ldquo;slot&rdquo;: &ldquo;0&rdquo;,      &ldquo;type&rdquo;: &ldquo;t_address&rdquo;    }  ],  &ldquo;types&rdquo;:  {    &ldquo;t_address&rdquo;:    {      &ldquo;encoding&rdquo;: &ldquo;inplace&rdquo;,      &ldquo;label&rdquo;: &ldquo;address&rdquo;,      &ldquo;numberOfBytes&rdquo;: &ldquo;20&rdquo;    }  }}</p>
+<p>从上面的 JSON 输出中，我们可以看到一个<code>storage</code>字段，它包含一个对象数组。这个数组中的每个对象都是指一个状态变量名。我们还可以看到，每个变量都被映射到一个 <code>插槽（slot）</code>，并有一个基本的 <code>类型（type）</code>。</p>
+<p>这意味着变量<code>_owner</code>可以被改变为同一类型（在我们的例子中为<code>地址</code>）的任何有效值。然而，槽<code>0</code>是为这个变量保留的，并将永远在那里。</p>
+<p>现在让我们来看看状态变量是如何在存储中布局的（进一步了解请看Solidity 文档[9]）。</p>
+<p>考虑一下下面的 Solidity 代码：</p>
+<p>pragma solidity ^0.8.0;contract StorageContract {    uint256 a = 10;    uint256 b = 20;}</p>
+<p>所有静态大小的变量都是按照它们被定义的顺序依次放入存储槽的。</p>
+<p>记住：每个存储槽最多可以容纳 32 字节长的值。</p>
+<p>在我们上面的例子中，<code>a</code>和<code>b</code>是 32 字节长（因为它们的类型是<code>uin256</code>）。因此，它们被分配了自己的存储槽。</p>
+<h2 id="将状态变量打包在一个存储槽中">将状态变量打包在一个存储槽中</h2>
+<p>在我们之前的例子中没有什么特别之处。但是现在让我们考虑这样的情况：你有几个不同大小的 uint 变量，如下所示：</p>
+<p>pragma solidity ^0.8.0;contract StorageContract {    uint256 a = 10;    uint64 b = 20;    uint64 c = 30;    uint128 d = 40;    function readStorageSlot0() public view returns (bytes32 result) {    	assembly {            result := sload(0)        }    }    function readStorageSlot1() public view returns (bytes32 result) {       assembly {            result := sload(1)        }    }}</p>
+<p>我们已经写了两个基本的函数来读取低级别的合约存储槽。看一下输出，我们得到以下结果：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_lvufj9ktf3.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>Solidity 文档中指出：</p>
+<blockquote>
+<p>&ldquo;如果可能的话，少于 32 字节的多个连续项目会被打包到一个存储槽中&hellip;。</p>
+</blockquote>
+<p>存储槽中的第一个项目被低阶对齐存储</p>
+<p>因此，当变量小于 32 字节时，Solidity 尝试将一个以上的变量打包到一个存储槽中，如果它们能被容纳的话。因此，一个存储槽可以容纳一个以上的状态变量。</p>
+<p>如果一个基本类型不适合存储槽的剩余空间，它将被移到下一个存储槽。对于以下 Solidity 合约。</p>
+<p>pragma solidity ^0.8.0;contract StorageContract {    uint256 a = 10;    uint64 b = 20;    uint128 c = 30;    uint128 d = 40;}</p>
+<p>它的存储布局会是这样的：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_59yfr6ns3v.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>在存储槽 0 处读取 1 个值</p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_2sb421224q.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>读取存储槽 1 的数值.</p>
+</blockquote>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_rksu3mijp7.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>读取存储槽 2 的值</p>
+</blockquote>
+<p>让我们看一个更具体的例子，一个流行的 Defi 协议: Aave。</p>
+<p><strong>例子: Aave <code>Pool.sol</code> 合约</strong></p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_7iwipzrdbm.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>AAVE 协议使用Pool[10]s 作为管理流动性的主要智能合约。这些是主要的 &ldquo;面向用户的合约&rdquo;。用户直接与 Aave pool 合约交互，以提供或借用流动性（通过 Solidity 的其他合约，或使用 web3/ethers 库）。</p>
+<p>定义在 <code>Pool.sol</code> 中的主要 Aave <code>Pool</code> 合约继承了一个名字很有趣的合约，与本文的主题有关：<code>PoolStorage</code>。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_p6ez8uuicf.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>来源：Aave v3 Protocol, Pool.sol[11]</p>
+<p>正如协议的 Aave v3 的 Natspec 注释中所描述的，<code>PoolStorage</code>合约有一个目的：<code>定义了Pool合约的存储布局</code>。</p>
+<p>如果我们看一下<code>PoolStorage</code>合约的 Solidity 代码，我们可以看到一些状态变量由于其类型而被包装在同一个存储槽中。</p>
+<ul>
+<li>
+<p><strong>下面的绿色部分：</strong> 与闪电款有关的状态变量（<code>_flashLoanPremiumTotal</code>和<code>_flashLoanPremiumToProtocol</code>）都是<code>uint128</code>。它们打包在一起占据了一整个存储槽（槽号 6）。</p>
+</li>
+<li>
+<p><strong>下面是蓝色部分：</strong> 最后两个状态变量<code>_maxStableRateBorrowSizePercent</code>和<code>_flashLoanPremiumToProtocol</code>的类型是<code>uint64</code>和<code>uint16</code>。它们也都被装在存储槽（槽号 7）中，并在存储槽中一起占据了 10 个字节。这就为潜在的其他状态变量留下了一些空间（剩余的 22 个字节），可以和它们一起打包。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_07du6z7t41.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>来源：Aave v3, PoolStorage.sol[12]</p>
+</blockquote>
+<h2 id="存储布局与继承性">存储布局与继承性</h2>
+<p>合约存储的布局也是基于继承的。如果一个合约继承了其他合约，它的存储布局就会遵循继承的顺序。</p>
+<ul>
+<li>
+<p>在最基础的合约中定义的状态变量从 0 槽开始。</p>
+</li>
+<li>
+<p>在下面的派生合约中定义的状态变量被放在次序槽中（槽 1、2、3，等等&hellip;&hellip;）。</p>
+</li>
+</ul>
+<p>另外，请注意，与将状态变量打包在一个存储槽中的规则同样适用。如果可以通过继承，来自不同父子合约的状态变量确实共享同一个存储槽。</p>
+<h2 id="与存储交互">与存储交互</h2>
+<p>EVM 提供了两个操作码来与存储进行交互：<code>SLOAD</code>来读取，<code>SSTORE</code>来写入存储。这两个操作码只在内联汇编中可用。Solidity 在编译后将写到状态变量转换为这些操作码。</p>
+<h3 id="从存储器中读取">从存储器中读取</h3>
+<p>EVM 可以使用<code>SLOAD</code>操作码读取智能合约的存储。<code>SLOAD</code>从存储中加载一个字到栈中。</p>
+<p><code>SLOAD</code>操作码在内联汇编中可用。它可以用来轻松检索存储在特定存储槽的整个字值。</p>
+<p>function readStorageNb(uint256 slotNb)    public    view    returns (bytes32 result){    assembly {        result := sload(slotNb)    }}</p>
+<p>这就是 solidity 在幕后所做的事情。当通过 getter 函数读取状态变量时，它将自动使用<code>SLOAD</code>操作码。例如，ERC20 中流行的<code>name()</code>或<code>symbol()</code>函数。这些函数除了返回状态变量外，不做其他事情。请看下面来自 OpenZeppelin 的屏幕截图。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_ousubkn7g7.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>来源：OpenZeppelin Github 代码库，ERC20.sol[13]</p>
+</blockquote>
+<p>如果你在 Remix 中查询<code>name()</code>函数，并对 getter 进行调试，你会得到以下操作码：</p>
+<p>; name()JUMPDESTPUSH1 60PUSH1 03     ; step 1 - push the number 3 on the stack (= slot nb 3)DUP1SLOAD        ; step 2 - pass the number 3 as argument to SLOAD to             ; load the value stored in the storage slot nb 3             ; (where the `_name` variable is stored); rest of the opcodes are emitted for brevity</p>
+<h3 id="写入存储">写入存储</h3>
+<p>EVM 可以使用<code>SSTORE</code>操作码写入智能合约的存储。<code>SSTORE</code>将一个字长保存到存储空间。</p>
+<p>使用内联汇编，代码将看起来像这样：</p>
+<p>function writeToStorageSlot(uint256 slotNb) public {	string memory value = &ldquo;All About Solidity&rdquo;;  assembly {        sstore(slotNb, value)    }}</p>
+<p>让我们继续之前的例子，即 OpenZeppelin 的 ERC20 代币。如果我们部署 ERC20 代币合约并使用 Remix 调试<code>constructor</code>，我们将得到以下操作代码：</p>
+<p>MLOAD  ; 1. load the token name from memoryPUSH1 ffNOTANDDUP4DUP1ADDORDUP6   ; 2. put back 3 (= slot nb for `name`) on top of the stackSSTORE ; 3. store at storage slot 3 the token `name` parameterPUSH3 0003eeJUMP</p>
+<blockquote>
+<p>在 Remix 上试试[14]，在部署 ERC20 代币后调试交易。</p>
+</blockquote>
+<p>这条推文很好地描述了操作码<code>SSTORE</code>在 geth 客户端的作用。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_hqsiwkwc0u.png" alt="深入Solidity数据存储位置——Storage">我们可以从 geth 客户端的源代码中看到，<code>SSTORE</code>从栈中弹出两个值，栈顶第一个<code>loc</code>是存储位置，栈顶第二个<code>val</code>是存储中的值。</p>
+<p>我们还可以看到，这两个值在通过<code>interpreter.evm.StateDB.SetState(...)</code>写入合约存储时，都将从栈中取出的两个项目转换为<code>bytes32</code>值。</p>
+<p>因此，我们可以直接从 geth 客户端的源代码中看到我们在存储布局一节中的解释：智能合约存储将 bytes32 的 key 映射为 bytes32 的值，因此在 EVM 的底层下，所有东西都被当作 bytes32 的字长。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_nd6wwqw9wn.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>这里还有一张最后的图，来自该推文的同一作者，详细解释了<code>SSTORE</code>操作码的流程。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_0k9ejsjlgf.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>源于 faheel from Twitter.[15]</p>
+</blockquote>
+<h2 id="函数参数中的存储指针">函数参数中的存储指针</h2>
+<p><code>storage</code>关键字可以用于作为参数给函数传递复杂的变量。但这是如何实现的呢？</p>
+<p>当<code>storage</code>在一个函数参数中被指定时，这意味着传递给函数的参数必须是一个状态变量。</p>
+<p>让我们使用一个非常简单的例子，仍然继续使用 OpenZeppelin 库。这也将帮助我们更好地理解其包中的合约和库的一部分。</p>
+<p>OpenZeppelin 提供了一个<code>Timers</code>库，可以用来建立和处理 Solidity 合约中的定时器和时间点。看看下面的函数<code>setDeadline(...)</code>和<code>reset(...)</code>及其参数。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_mbuno97hnf.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>来源：OpenZeppelin Github 资源库中的 Timer.sol[16]</p>
+</blockquote>
+<p>这两个函数只接受存储指针。这意味着什么呢？</p>
+<p>让我们创建一个 TimeWatch 合约来了解一下!</p>
+<p>// SPDX-License-Identifier: MITpragma solidity ^ 0.8 .10;import &ldquo;@openzeppelin/contracts/utils/Timers.sol&rdquo;;contract TimeWatch {  using Timers for * ;  function startTimer(uint64 _deadline) public {    Timers.Timestamp memory timer = Timers.Timestamp(0);    timer.setDeadline(_deadline);  }}</p>
+<p>如果你尝试在 Remix 上编译这个合约，Solidity 编译器应该抱怨以下错误:</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_zobu4po90z.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>调试存储指针错误</p>
+</blockquote>
+<p>这个错误是有道理的。来自<code>Timers</code>库的<code>setDeadline(..)</code>函数只接受存储指针。这意味着该函数参数需要是：</p>
+<ul>
+<li>
+<p>直接的状态变量</p>
+</li>
+<li>
+<p>或者对状态变量的引用（另一个<code>存储</code>引用，或者我喜欢称之为存储指针）。</p>
+</li>
+</ul>
+<p>然后让我们重写 TimeWatch，使其工作。我们还可以添加一个复位按钮来使其工作：</p>
+<p>// SPDX-License-Identifier: MITpragma solidity ^ 0.8 .10;import &ldquo;./Timers.sol&rdquo;;contract TimeWatch {  Timers.Timestamp timer;  function startTimer(uint64 _deadline) public {    Timers.setDeadline(timer, _deadline);  }}</p>
+<p>我们已经看到了一个关于函数参数使用存储指针的基本例子。让我们通过一个更复杂的例子来深入了解函数参数的存储指针。</p>
+<p>当一个函数的参数是一个 &ldquo;存储&quot;引用时，该函数可以直接接受一个状态变量或对一个状态变量的引用。</p>
+<p>让我们继续<code>TimeWatch</code>的例子。使用<code>Timers</code>库来建立一个比赛合约。使用合约可以减少对比赛组织者或任何可能不信任的第三方欺骗计时器和规则的信任程度。</p>
+<p>下面是一个原型。该合约通过映射来跟踪参与比赛的选手和他们的时间。请注意下面的<code>startRacerTime(...)</code>函数：</p>
+<p>// SPDX-License-Identifier: MITpragma solidity ^ 0.8 .10;import &ldquo;./Timers.sol&rdquo;;contract RaceTournament {  mapping(address =&gt; Timers.Timestamp) racers;  function startRacerTimer(address _racer, uint64 _deadline) public {    Timers.Timestamp storage racerTimer = racers[_racer];    Timers.setDeadline(racerTimer, _deadline);  }}</p>
+<p>编译可以通过，因为<code>racerTimer</code>指向<code>racers</code>的映射中的某个条目（合约存储）。因此，由于这个变量是对合约存储的引用，<code>Timers</code>库中的<code>setDeadline(...)</code>函数将接受它作为一个有效的函数参数。</p>
+<h2 id="在函数体中的存储指针">在函数体中的存储指针</h2>
+<p>当变量为基本类型时，将存储变量赋值给局部变量（在函数体中定义的）总是复制。</p>
+<p>然而，对于复杂或动态类型，规则有所不同。，如果你不希望被克隆，你可以将关键字<code>storage</code>传递给一个值。</p>
+<p>我们将这些变量描述为存储指针或存储引用类型的局部变量。</p>
+<p>在一个函数中，任何存储引用的变量总是指的是在合约的存储上预先分配的一块数据。换句话说，一个存储引用总是指的是一个状态变量。</p>
+<p>让我们看看一个非常流行的智能合约治理协议 Compound 的 Solidity 代码，它被作为许多其他治理协议的基础。</p>
+<h3 id="真实的例子---compound">真实的例子 - Compound</h3>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_ef75a31k7k.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>智能合约 &ldquo;GovernorAlpha &ldquo;在构建治理协议方面具有重要影响。这个合约不仅被用作 Compound，而且还被用作Uniswap[17]或Indexed Finance[18]的基础治理。</p>
+<p>让我们来看看 <code>GovernorAlpha</code>的一个核心功能。函数<code>propose(...)</code>就像它的名字一样，可以创建一个新的提议（例如：改变一个<code>cToken</code>的利率）。如果你看下面，你会看到我们之前解释的两个例子：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_bqakf14pfe.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>在第 153 行中，局部变量<code>proposalId</code>被分配到状态变量<code>proposalCount</code>的值。由于这个局部变量是基本类型的（一个<code>uint</code>），这个值被从合约存储（从状态变量<code>proposalCount</code>）复制/克隆到局部变量（在堆栈上）。对本地变量的任何改变都不会传播到合约存储中。</p>
+<p>在 Compound 中，这一行被用来在本地保存新的提案 ID（通过增加<code>proposalCount</code>第 152 行产生）。这也节省了一些 Gas。请看第 154 和 157 行。如果变量不是 <code>proposalId</code>，而是 <code>proposalCount</code>（实际的状态变量），这将读取两次合约存储。</p>
+<p><strong>第 154 行：</strong> 使用新的<code>proposalId</code>，创建一个<code>newProposal</code>。由于<code>newProposal</code>变量是一个<code>结构体</code>（复杂类型），我们必须指定之后 EVM 操作和编辑这个变量时操作的数据位置，这里使用一个<code>storage（存储）</code>引用。</p>
+<ul>
+<li>
+<p>是什么意思呢？<code>newProposal</code>指向合约存储中的某个地方。</p>
+</li>
+<li>
+<p>它指的是合约存储中的哪个地方？它指的是 &ldquo;proposals &ldquo;映射中的一个 &ldquo;Proposal&rdquo;。</p>
+</li>
+<li>
+<p>哪个 <code>Proposal</code>？该 Proposal 是由映射中的<code>proposalId</code>所引用。</p>
+</li>
+</ul>
+<p>那么这个<code>storage</code>关键字意味着什么？它意味着对<code>newProposal</code>变量的每一次修改都会导致向合约存储区写入数据。你可以看到从第 157 行开始，新提案的所有细节都通过<code>Proposal</code>结构成员一个接一个地写入。每一行都写到了合约存储区。</p>
+<p>一旦函数被执行，新的 Proposal（提案）将被保存在合约存储中，并且这些变化将持续存在。</p>
+<h3 id="在存储引用的底层发生了什么">在存储引用的底层发生了什么？</h3>
+<p>看一下下面的例子，类似的治理主题。它详细说明了从存储中复制 <em>vs</em> 使用存储引用时使用的 EVM 操作码。</p>
+<p>pragma solidity ^ 0.8 .0;contract Voting {  uint256 votesCount;  struct Vote {    bool hasVoted;    string vote;  }  mapping(address =&gt; Vote) votes;  // ; opcodes  // PUSH1 00 ; push number 0 on the stack (for slot 0)  // SLOAD ; load value at storage slot 0 (= `votesCount`)  function getVotesCount() public view returns(uint256) {    uint256 currentVotesCount = votesCount;    return currentVotesCount;  }  // ; opcodes  // PUSH1 00  // PUSH1 01 ; push 1 on the stack (storage slot nb 1 for `votes`)  // PUSH1 00  // CALLER  // PUSH20 ffffffffffffffffffffffffffffffffffffffff  // AND  // PUSH20 ffffffffffffffffffffffffffffffffffffffff  // AND  // DUP2  // MSTORE  // PUSH1 20  // ADD  // SWAP1  // DUP2  // MSTORE  // PUSH1 20  // ADD  // PUSH1 00  // SHA3  // SWAP1  // POP  // PUSH1 01 ; push `true` for `hasVoted` onto the stack  // DUP2  // PUSH1 00  // ADD  // PUSH1 00  // PUSH2 0100  // EXP  // DUP2  // SLOAD ; load the value located at the storage reference  // DUP2  // PUSH1 ff  // MUL  // NOT  // AND  // SWAP1  // DUP4  // ISZERO  // ISZERO  // MUL  // OR  // SWAP1  // SSTORE ; update the storage by marking it `hasVoted`  function hasVoted() public {    Vote storage callerVoteDetails = votes[msg.sender];    callerVoteDetails.hasVoted = true;  }}</p>
+<p>第一个函数<code>getVotesCount()</code>从堆栈中复制值，然后返回它。我们可以看到，这个值是通过<code>SLOAD</code>从存储空间加载到堆栈的。对变量<code>currentVotesCount</code>所做的任何改变都不会被传回存储空间。</p>
+<p>相反的第二个例子包含一个<code>storage</code>的引用，给 <code>Vote</code>结构中的成员 <code>hasVoted</code>赋值，存储就会被更新，我们可以通过操作码 <code>SSTORE</code>看到。</p>
+<p>这个例子显示，给<code>storage</code>引用变量赋值会更新合约存储。EVM 将此理解为执行<code>SSTORE</code>指令。</p>
+<p>相反，如前面的例子所示，从存储变量中赋值的基本类型变量并不会创建引用，而只是将值从存储中复制到堆栈中。EVM 将此理解为一个可以简单地执行<code>SLOAD</code>指令。</p>
+<h2 id="从汇编和-yul-访问存储">从汇编和 Yul 访问存储</h2>
+<p>你可以通过指定一个存储槽和存储偏移量，在内联汇编中读写合约存储。</p>
+<p>我们之前看到，存储中的一些变量不一定占据一个完整的存储槽，但有时会被挤在一起。</p>
+<p>我们还看到，<code>SLOAD</code>作为一个操作码只接受存储槽号作为参数，并返回存储在这个槽下的完整的<code>bytes32</code>值。</p>
+<p>但是，如何读取一个挤在同一个存储槽中的状态变量？</p>
+<p>以下面的合约为例。</p>
+<p>contract Storage {		uint64 a;    uint64 b;    uint128 c;}</p>
+<p>Solidity 文档解释如下：</p>
+<blockquote>
+<p>对于本地<strong>存储</strong> 变量或状态变量，使用一个 Yul 标识符是不够的，因为它们不一定占据一个完整的<strong>存储</strong> 槽。</p>
+<p>因此，它们的 &ldquo;地址 &ldquo;是由一个槽和该槽内的一个字节偏移量组成。</p>
+</blockquote>
+<p>因此，一个变量的 &ldquo;地址&quot;由两个部分组成。</p>
+<ul>
+<li>
+<p>槽号：变量所在的位置。</p>
+</li>
+<li>
+<p>变量开始的字节偏移量（在该槽内）。</p>
+</li>
+</ul>
+<p>让我们继续看一些基本的汇编代码，以便更好地理解。看看下面的合约和它的函数：</p>
+<p>contract Storage {  uint64 a = 1;  uint64 b = 2;  uint128 c = 3;	function getSlotNumbers() public view returns(uint256 slotA, uint256 slotB, uint256 slotC) {    assembly {    	slotA := a.slot      slotB := b.slot      slotC := c.slot    }}  function getVariableOffsets() public view returns(uint256 offsetA, uint256 offsetB, uint256 offsetC) {  		assembly {      	    offsetA := a.offset            offsetB := b.offset            offsetC := c.offset        }		}}</p>
+<p>通过 Remix 运行这两个函数可以得到以下输出:</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_fayjbk57cl.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>要检索变量<code>c</code>所指向的槽，使用<code>c.slot</code>，要检索字节偏移量，使用<code>c.offset</code>。仅使用<code>c</code>本身会导致错误：</p>
+<p>function ReadVariableC() public view returns (uint64 value) {		assembly {        value := sload(c)    }}</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_k8wnri3132.png" alt="深入Solidity数据存储位置——Storage"></p>
+<p>上面的代码将不会被编译，并会出现以下错误</p>
+<p>有一点也要提到的是，在内联汇编中，你不能向存储变量的<code>.slot</code>或<code>.offset</code>赋值：</p>
+<p>function doesNotCompile() public {    assembly {        a.slot := 8        a.offset := 9    }}</p>
+<p><img src="https://img.bibiqing.com/news/2022/1013/3_c43m086ufb.png" alt="深入Solidity数据存储位置——Storage"></p>
+<blockquote>
+<p>solc 编译器的错误报告（截图取自 Remix）</p>
+</blockquote>
+<p>Yul 中存储指针的偏移量的值是多少呢？在函数体中，一些变量可以是存储指针/存储引用。例如，这包括<code>struct</code>、<code>array</code>和<code>mapping</code>。对于这样的变量，在 Yul 中<code>.offset</code>总是为零，因为这样的变量总是占据了一个完整的存储槽，不能与其他变量紧密地挤在一起存储。</p>
+<h2 id="结论">结论</h2>
+<p>智能合约的存储空间，无论是初始化还是修改里面的数据，都要付出高昂的代价。虽然从合约存储中读取数据是免费的，但如果这些读取操作是改变状态的交易的一部分，我们还是应该考虑到向智能合约的存储读取时的 Gas 成本。</p>
+<p>由于对存储的操作有很高的 Gas 成本，Solidity 文档中指出了一个重要的考虑。</p>
+<blockquote>
+<p>应该将你存储在持久性存储中的内容减少到合约运行所需的程度[19]。</p>
+</blockquote>
+<p>建议尽可能地将某些数据存储在合约存储之外，以减少相关的 Gas 成本。</p>
+<h2 id="参考资料">参考资料</h2>
+<p>深入以太坊 , Part 2[20]</p>
+<p>Solidity 文档：状态变量在储存中的布局 g[21]</p>
+<p>openzeppelin-contracts/StorageSlot.sol[22]</p>
+<p>Solidity 中的数据表示[23]</p>
+<p>了解以太坊智能合约的存储[24]</p>
+<p>解剖智能合约的结构&ndash;功能、数据和变量[25]</p>
+<hr>
+<p>译文出自：登链翻译计划[1] 译者：翻译小组[2] 校对：Tiny 熊[3]</p>
+<p>本翻译由 Duet Protocol[26] 赞助支持。</p>
+<p>原文链接： <a href="https://betterprogramming.pub/all-about-solidity-data-locations-part-i-storage-e50604bfc1ad">https://betterprogramming.pub/all-about-solidity-data-locations-part-i-storage-e50604bfc1ad</a></p>
+<h3 id="参考资料-1">参考资料</h3>
+<p>[1]登链翻译计划: <em><a href="https://github.com/lbc-team/Pioneer">https://github.com/lbc-team/Pioneer</a></em></p>
+<p>[2]翻译小组: <em><a href="https://learnblockchain.cn/people/412">https://learnblockchain.cn/people/412</a></em></p>
+<p>[3]Tiny 熊: <em><a href="https://learnblockchain.cn/people/15">https://learnblockchain.cn/people/15</a></em></p>
+<p>[4]深入Solidity数据存储位置: <em><a href="https://learnblockchain.cn/article/4864">https://learnblockchain.cn/article/4864</a></em></p>
+<p>[5]OpenZeppelin: <em><a href="https://docs.openzeppelin.com/">https://docs.openzeppelin.com/</a></em></p>
+<p>[6]Compound: <em><a href="https://compound.finance/docs">https://compound.finance/docs</a></em></p>
+<p>[7]OpenZeppelin在他们的深入 EVM 第二部分文章中: <em><a href="https://blog.openzeppelin.com/ethereum-in-depth-part-2-6339cf6bddb9/">https://blog.openzeppelin.com/ethereum-in-depth-part-2-6339cf6bddb9/</a></em></p>
+<p>[8]在他的文章中，Steve Marx: <em><a href="https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/">https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/</a></em></p>
+<p>[9]Solidity文档: <em><a href="https://learnblockchain.cn/docs/solidity/internals/layout">https://learnblockchain.cn/docs/solidity/internals/layout</a>_in_storage.html</em></p>
+<p>[10]Pool: <em><a href="https://docs.aave.com/developers/core-contracts/pool">https://docs.aave.com/developers/core-contracts/pool</a></em></p>
+<p>[11]来源：Aave v3 Protocol, Pool.sol: <em><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/Pool.sol</a></em></p>
+<p>[12]来源：Aave v3, PoolStorage.sol: <em><a href="https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/PoolStorage.sol">https://github.com/aave/aave-v3-core/blob/master/contracts/protocol/pool/PoolStorage.sol</a></em></p>
+<p>[13]来源：OpenZeppelin Github代码库，ERC20.sol: <em><a href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol">https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol</a></em></p>
+<p>[14]在Remix上试试: <em><a href="https://remix.ethereum.org/?#code=Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IE1JVApwcmFnbWEgc29saWRpdHkgXjAuOC40OwoKaW1wb3J0ICJAb3BlbnplcHBlbGluL2NvbnRyYWN0c0A0LjcuMC90b2tlbi9FUkMyMC9FUkMyMC5zb2wiOwppbXBvcnQgIkBvcGVuemVwcGVsaW4vY29udHJhY3RzQDQuNy4wL2FjY2Vzcy9Pd25hYmxlLnNvbCI7Cgpjb250cmFjdCBNeVRva2VuIGlzIEVSQzIwLCBPd25hYmxlIHsKICAgIGNvbnN0cnVjdG9yKCkgRVJDMjAoIk15VG9rZW4iLCAiTVRLIikgewogICAgICAgIF9taW50KG1zZy5zZW5kZXIsIDEwMDAwICogMTAgKiogZGVjaW1hbHMoKSk7CiAgICB9CgogICAgZnVuY3Rpb24gbWludChhZGRyZXNzIHRvLCB1aW50MjU2IGFtb3VudCkgcHVibGljIG9ubHlPd25lciB7CiAgICAgICAgX21pbnQodG8sIGFtb3VudCk7CiAgICB9Cn0K&amp;optimize=false&amp;runs=200&amp;evmVersion=null&amp;version=soljson-v0.8.7+commit.e28d00a7.js">https://remix.ethereum.org/?#code=Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IE1JVApwcmFnbWEgc29saWRpdHkgXjAuOC40OwoKaW1wb3J0ICJAb3BlbnplcHBlbGluL2NvbnRyYWN0c0A0LjcuMC90b2tlbi9FUkMyMC9FUkMyMC5zb2wiOwppbXBvcnQgIkBvcGVuemVwcGVsaW4vY29udHJhY3RzQDQuNy4wL2FjY2Vzcy9Pd25hYmxlLnNvbCI7Cgpjb250cmFjdCBNeVRva2VuIGlzIEVSQzIwLCBPd25hYmxlIHsKICAgIGNvbnN0cnVjdG9yKCkgRVJDMjAoIk15VG9rZW4iLCAiTVRLIikgewogICAgICAgIF9taW50KG1zZy5zZW5kZXIsIDEwMDAwICogMTAgKiogZGVjaW1hbHMoKSk7CiAgICB9CgogICAgZnVuY3Rpb24gbWludChhZGRyZXNzIHRvLCB1aW50MjU2IGFtb3VudCkgcHVibGljIG9ubHlPd25lciB7CiAgICAgICAgX21pbnQodG8sIGFtb3VudCk7CiAgICB9Cn0K&amp;optimize=false&amp;runs=200&amp;evmVersion=null&amp;version=soljson-v0.8.7+commit.e28d00a7.js</a></em></p>
+<p>[15]faheel from Twitter.: <em><a href="https://twitter.com/721Orbit/status/1511961744238948356?s=20&amp;t=KDGCQ4OwQ47e2NACgQ8WWg">https://twitter.com/721Orbit/status/1511961744238948356?s=20&amp;t=KDGCQ4OwQ47e2NACgQ8WWg</a></em></p>
+<p>[16]来源：OpenZeppelin Github资源库中的Timer.sol: <em><a href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Timers.sol">https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Timers.sol</a></em></p>
+<p>[17]Uniswap: <em><a href="https://github.com/Uniswap/governance/blob/master/contracts/GovernorAlpha.sol">https://github.com/Uniswap/governance/blob/master/contracts/GovernorAlpha.sol</a></em></p>
+<p>[18]Indexed Finance: <em><a href="https://github.com/indexed-finance/governance/blob/master/contracts/governance/GovernorAlpha.sol">https://github.com/indexed-finance/governance/blob/master/contracts/governance/GovernorAlpha.sol</a></em></p>
+<p>[19]应该将你存储在持久性存储中的内容减少到合约运行所需的程度: <em><a href="https://learnblockchain.cn/docs/solidity/introduction-to-smart-contracts.html#index-10">https://learnblockchain.cn/docs/solidity/introduction-to-smart-contracts.html#index-10</a></em></p>
+<p>[20]深入以太坊 , Part 2: <em><a href="https://blog.openzeppelin.com/ethereum-in-depth-part-2-6339cf6bddb9/">https://blog.openzeppelin.com/ethereum-in-depth-part-2-6339cf6bddb9/</a></em></p>
+<p>[21]Solidity 文档：状态变量在储存中的布局g: <em><a href="https://learnblockchain.cn/docs/solidity/internals/layout">https://learnblockchain.cn/docs/solidity/internals/layout</a>_in_storage.html</em></p>
+<p>[22]openzeppelin-contracts/StorageSlot.sol: <em><a href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/StorageSlot.sol">https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/StorageSlot.sol</a></em></p>
+<p>[23]Solidity中的数据表示: <em><a href="https://ethdebug.github.io/solidity-279%22">https://ethdebug.github.io/solidity-279&quot;</a>     src=&ldquo;<a href="https://img.jinse.cn/5363788">https://img.jinse.cn/5363788</a>_image3.png&rdquo;   &gt;</em></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43459/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">如何从开发角度解决Web3游戏的现有问题？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43449/">
+                <span class="next-text nav-default">托管服务商Copper已在C轮融资中获投1.96亿美元，本轮融资尚未结束</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#目录">目录</a></li>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#存储的基本原理">存储的基本原理</a></li>
+    <li><a href="#存储的布局">存储的布局</a></li>
+    <li><a href="#合约存储像货架">合约存储像货架</a></li>
+    <li><a href="#状态变量的布局">状态变量的布局</a></li>
+    <li><a href="#将状态变量打包在一个存储槽中">将状态变量打包在一个存储槽中</a></li>
+    <li><a href="#存储布局与继承性">存储布局与继承性</a></li>
+    <li><a href="#与存储交互">与存储交互</a>
+      <ul>
+        <li><a href="#从存储器中读取">从存储器中读取</a></li>
+        <li><a href="#写入存储">写入存储</a></li>
+      </ul>
+    </li>
+    <li><a href="#函数参数中的存储指针">函数参数中的存储指针</a></li>
+    <li><a href="#在函数体中的存储指针">在函数体中的存储指针</a>
+      <ul>
+        <li><a href="#真实的例子---compound">真实的例子 - Compound</a></li>
+        <li><a href="#在存储引用的底层发生了什么">在存储引用的底层发生了什么？</a></li>
+      </ul>
+    </li>
+    <li><a href="#从汇编和-yul-访问存储">从汇编和 Yul 访问存储</a></li>
+    <li><a href="#结论">结论</a></li>
+    <li><a href="#参考资料">参考资料</a>
+      <ul>
+        <li><a href="#参考资料-1">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

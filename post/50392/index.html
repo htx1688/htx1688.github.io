@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Paradigm：探讨MEV-Boost和共识机制之间的关系 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文旨在探讨 Mev-Boost 和共识之间相互作用、揭示以太坊权益证明机制中微妙之处，并列举一些可能前进方向。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50392/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Paradigm：探讨MEV-Boost和共识机制之间的关系" />
+<meta property="og:description" content="本文旨在探讨 Mev-Boost 和共识之间相互作用、揭示以太坊权益证明机制中微妙之处，并列举一些可能前进方向。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50392/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="Paradigm：探讨MEV-Boost和共识机制之间的关系">
+<meta itemprop="description" content="本文旨在探讨 Mev-Boost 和共识之间相互作用、揭示以太坊权益证明机制中微妙之处，并列举一些可能前进方向。"><meta itemprop="datePublished" content="2023-05-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4755">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Paradigm：探讨MEV-Boost和共识机制之间的关系"/>
+<meta name="twitter:description" content="本文旨在探讨 Mev-Boost 和共识之间相互作用、揭示以太坊权益证明机制中微妙之处，并列举一些可能前进方向。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Paradigm：探讨MEV-Boost和共识机制之间的关系</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-01">
+      2023-05-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4755 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《<a href="https://www.paradigm.xyz/2023/04/mev-boost-ethereum-consensus#so-what-should-we-do">Time, slots, and the ordering of events in Ethereum Proof-of-Stake</a>》</p>
+<p>原文作者：Georgios Konstantopoulos、Mike Neuder，Paradigm</p>
+<p>原文编译：wesely</p>
+<p>4 月 2 日，一名恶意的以太坊网络参与者利用 mev-boost-relay 中的漏洞窃取了一位 MEV 搜索者的 2000 万美元（请参阅 Flashbots 的事后分析）。在接下来的几天里，开发人员通过发布五个补丁来解决这个 bug，并结合现有的网络延迟和验证器策略，在 4 月 6 日导致以太坊网络出现短暂不稳定期。重新组织对于网络健康是不利的，因为它会降低区块生产率并减少结算保证。</p>
+<p>本文旨在探讨 mev-boost 和共识之间相互作用、揭示以太坊权益证明机制中微妙之处，并列举一些可能前进方向。我们受到搜索者遭受攻击和网络暂时不稳定事件所启发。</p>
+<h2 id="什么是-mev-boost为什么重要">什么是 mev-boost？为什么重要？</h2>
+<p>mev-boost 是由 Flashbots 和社区设计的协议，旨在缓解最大可提取价值（MEV）对以太坊网络造成负面影响。</p>
+<p>mev-boost 中有三个角色：</p>
+<ul>
+<li>
+<p>Relays - 相互信任拍卖商将提案人连接到区块构建者。</p>
+</li>
+<li>
+<p>Builders - 构建区块以最大化自己和提案人的 MEV 的复杂实体。</p>
+</li>
+<li>
+<p>Proposers - 以太坊权益证明验证器。</p>
+</li>
+</ul>
+<p>每个区块的大致事件序列是：</p>
+<ul>
+<li>
+<p>Builders 通过从用户、搜索者或其他（私有或公共）订单流中接收交易来创建一个区块。</p>
+</li>
+<li>
+<p>Builders 将该区块提交给 Relay。</p>
+</li>
+<li>
+<p>Relays 证该区块是否有效，并计算它向提案人支付多少费用。</p>
+</li>
+<li>
+<p>Relay 向当前时隙的提案人发送「blinded」头部和付款价值。</p>
+</li>
+<li>
+<p>提议人评估他们收到的所有出价，并签署与最高付款相关联的 blinded 头部。</p>
+</li>
+</ul>
+<p>提议人将此已签名头部发送回中继站点。</p>
+<p>该区块由中继使用其本地信标节点发布并返回给提议方。奖励通过在该区块内进行交易和区块奖励分配给构建者和提议方。</p>
+<p>Relay 是一种相互信任的第三方，促进了来自于 proposer 的对于 block space 公平交换以及来自 builder 的 transaction sequencing for MEV extraction。Relay 保护 builders 免受 MEV 偷窃，其中 proposers 复制 builder transactions 来获取 MEV 而不是分配给发现它的 searcher/builder。Relay 保护 proposers 确认 builder 区块有效性、代表 proposer 每个时隙处理数百个区块，并确保 proposer 支付的准确性。</p>
+<p>mev-boost 是关键的协议基础设施，因为它使所有提案人都能够民主地访问 MEV，而无需与构建者或搜索者建立信任关系，这有助于以太坊的长期去中心化。</p>
+<h2 id="以太坊的分叉选择规则和-mev-boost">以太坊的分叉选择规则和 mev-boost</h2>
+<p>在我们深入攻击和响应之前，我们先来看一下以太坊的权益证明（PoS）机制及其相关的分叉选择规则。分叉选择规则允许网络就链头达成共识。根据《合并后以太坊重组》：</p>
+<p>分叉选择规则是一个函数，由客户端评估，它将已经看到的区块和其他消息作为输入，并向客户端输出「正式链」是什么。需要分叉选择规则是因为可能有多个有效的链可供选择（例如，在同时发布具有相同父级的两个竞争区块时）。</p>
+<p>关于分叉选择规则较少知道的一个方面是它与时间的关系，这对区块生产有重大影响。</p>
+<h3 id="插槽和子插槽周期">插槽和子插槽周期</h3>
+<p>在以太坊 PoS 中，时间被划分为 12 秒增量称为插槽。PoS 算法随机指定验证器获得该插槽提议一个区块；此验证器被称为提议者。在同一插槽中，其他验证器被指派任务：通过应用 fork-choice 规则投票支持他们本地视图中链头所在位置上最新版本的区块。12 秒间隔被分为三个阶段，每个阶段消耗 4 秒。</p>
+<p>在插槽中发生的事件如下所示，其中 t= 0 表示插槽开始。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0501/7_unz9pcvtdr.png" alt="Paradigm：探讨MEV-Boost和共识机制之间的关系"></p>
+<p>在插槽中最关键的时刻是在 t= 4 的认证截止时间。如果一个认证验证器在认证截止时间之前没有看到一个块，他们将会投票给链上先前接受的头部（根据分支选择规则）。越早提出一个块，它就有更多的时间传播，因此它积累了更多的见证（因为更多的验证器在认证截止日期之前看到了它）。</p>
+<p>从网络健康角度来看，块发布的最佳时间是 t= 0 （由规范指定）。然而，由于随着时间推移块价值单调递增，建议者有动机延迟发布他们的区块以允许更多 MEV 积累。请参阅权益证明中计时游戏和这个讨论以获取进一步细节。</p>
+<p>历史上，在认证期限之后甚至靠近插槽结束时建议者仍可以发布区块，只要下一个验证器在构建其后续插槽区块之前观察到该区块即可。这是父级区块继承重量和分支选择规则在叶节点处终止导致没有延迟发表区块带来负面影响。为了帮助推动理性行为（延迟区块发布）朝着诚实行为（按时发布）的方向发展，「诚实重组」被实施。</p>
+<h3 id="提案者提升和诚实的重组">提案者提升和诚实的重组</h3>
+<p>两个新概念被引入到共识客户端中，对证明截止日期具有关键影响。</p>
+<ul>
+<li>
+<p>提案者提升（PR）- 试图通过授予提案者相当于完整证明权重 40 ％的分叉选择「提升」来最小化重组平衡攻击。重要的是，这种增强只持续一个时隙。</p>
+</li>
+<li>
+<p>诚实的重组（PR）- 采用了提议人增强并允许诚实的建议人使用它来强制重新组织具有低于 20 ％认证权重的块。这在 Lighthouse 和 Prysm 中实现（自 v 4.0-Capella 发布以来）。此更改是可选项，因为它是由建议人做出的本地决策，并且不会影响验证器行为。因此，没有协调努力将其同时推出到所有客户端，也没有与任何特定硬分叉相关联。</p>
+</li>
+</ul>
+<p>请注意，在某些特殊情况下避免进行诚实性重新排序：</p>
+<ul>
+<li>
+<p>在纪元边界块期间</p>
+</li>
+<li>
+<p>如果链条未完成</p>
+</li>
+<li>
+<p>如果链头不是从重新排序块之前的时隙获取</p>
+</li>
+</ul>
+<p>条件 3 确保诚实性重新排序仅从链中删除单个块，这作为断路器使得链能够在极端网络延迟期间继续生成块。这也反映了提案人对其网络视图的信心降低，因为他们不能再确定其提议者增强块将被视为规范。</p>
+<p>下面的图表演示了诚实行为如何改变以实施重新组织策略。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0501/7_atyf123g4l.png" alt="Paradigm：探讨MEV-Boost和共识机制之间的关系"></p>
+<p>在这种情况下，让 b 1 代表一个晚到的区块。由于延迟，b 1 仅具有第 n 个槽位 19 ％的证明权重。剩余 81 ％的证明权重分配给父区块 HEAD，因为许多验证者在认证截止日期之前没有看到 b 1 。</p>
+<p>如果没有诚实的重新组织，在第 n+ 1 个时隙中提议者将 b 1 视为链头并构建子区块 b 2 。尽管它只有 19 ％的证明权重，但提议者不会努力重新组织 b 1 。在第 n+ 1 个时隙期间，b 2 具有提议者增强功能，并且假设它按时交付，则通过积累该时隙大部分认证而成为规范。</p>
+<p>通过诚实地重新组织，情况就大不相同了。现在第 n+ 1 个时间段的提案人发现对于 b 1 的 19% 认证权重低于重新组织阈值, 因此他们以 HEAD 作为 b 2 的父级来构建一个新区块，并强制性地进行了重新组织 b 1. 当我们达到 n + 1 时间段的认证截止日期时, 诚实验证器将比较 b 2 （40% 来自提案人增强）与 b 1 （19% ）相对权重。所有客户端都执行提议人增强，因此 b 2 将被视为链头，并将积累时隙 n+ 1 的认证。</p>
+<h3 id="针对解绑攻击的中继和信标节点修复">针对解绑攻击的中继和信标节点修复</h3>
+<p>在 4 月 2 日的解绑攻击中，提议者利用了一个中继漏洞，通过向中继发送无效的签名头来进行攻击。随后几天，中继和核心开发团队发布了许多软件补丁以减轻重复攻击的风险。五个主要变化如下：</p>
+<p>1.Relay 更改：</p>
+<ul>
+<li>
+<p>检查数据库是否存在已知恶意提议者（仅由超声波中继在生产环境下使用，并已被删除）。</p>
+</li>
+<li>
+<p>检查该时段内是否已将完整块传递给 P2P 网络。</p>
+</li>
+<li>
+<p>在发布块之前引入 0-500 ms 范围内的统一随机延迟（从所有接力器移除）。</p>
+</li>
+</ul>
+<p>2.信标链节点更改（仅适用于接力信标链节点）：</p>
+<ul>
+<li>
+<p>广播信标块之前验证其有效性。</p>
+</li>
+<li>
+<p>在发布块之前检查网络上是否有等价物。</p>
+</li>
+</ul>
+<p>这些变化的组合导致共识不稳定，而大部分验证器现在都使用上述诚实重组策略进一步加剧了这种情况。</p>
+<h3 id="未预料到的后果">未预料到的后果</h3>
+<p>以上 5 个更改每一个都会增加接力区块发布热路径上的延迟时间，从而增加了接力区块可能会超过证明截止期限而被广播的概率。下图显示了这五个检查的顺序以及引入延迟如何导致块发布超过证明截止期限。</p>
+<p>在实施这些检查之前，签名头到达时间显著晚于 t= 0 （例如 t= 3 ）通常不会出现问题。中继开销非常低，因此会在 t= 4 之前发布块。</p>
+<p>然而，随着这五个补丁引入的延迟时间增加，中继现在可能部分负责延迟广播。让我们看一下以下假设情况下的区块发布。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0501/apsf6trim1dzt0v" alt="Paradigm：探讨MEV-Boost和共识机制之间的关系"></p>
+<p>中继在 t= 3 时从提议者处接收到已签名的头部。到了 t= 4 ，中继仍在执行检查，因此广播发生在证明截止期之后。在这种情况下，提议者发送已签名头部晚和中继引入一些额外的延迟相结合导致错过了证明截止期。如果没有诚实重组，则这些块很可能会进入链上。如我们在图 2 中所看到的那样，随后插槽的诚实提议者不会故意重新组织由于时间太晚而被拒绝的块。然而，在有诚实重组的情况下，错过证明截止期意味着该块将被下一个提议者重新组织。</p>
+<p>因此，在攻击后几天内，分叉块数量急剧增加。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0501/c2tpy6ufm8m6sqi" alt="Paradigm：探讨MEV-Boost和共识机制之间的关系"></p>
+<p>Metrika 2 周的数据显示，在最糟糕的情况下，一个小时内有 13 个区块（4.3 ％）被重新组织，这比正常情况多了约 5 倍。随着中继推出各种变化，分叉块数量的急剧增加变得明显起来。由于中继操作员和核心开发人员做出了巨大的社区努力，一旦理解了影响，许多更改就被撤销，并且网络恢复到健康状态。</p>
+<p>截至今天，最有用的更改是信标节点块验证和在广播之前进行等价检查。恶意提议者不能再通过向中继发送无效头部并确保中继信标节点在发布之前不看到等价块来执行攻击。尽管如此，该中继仍然容易受到 Mev-boost 和 ePBS 中介攻击所呈现的更普遍等价攻击的影响。</p>
+<h2 id="那么我们该怎么办呢">那么我们该怎么办呢？</h2>
+<p>在这篇文章中，我们强调了 mev-boost 的工作原理以及它对以太坊共识的重要性。我们还详细介绍了与时间相关的 Ethereum 分叉选择规则中一些不太为人知的方面。通过使用拆分攻击和开发者的响应作为案例研究，我们强调了分叉选择规则中与时间相关的方面潜在脆弱性及其对网络稳定性的影响。</p>
+<p>鉴于此，研究界应评估什么是「可接受」的重新组织数量，并考虑普遍情况下等价攻击所带来的风险，以确定是否需要实施缓解措施。</p>
+<p>此外，目前正在积极探索多个未来方向：</p>
+<ul>
+<li>
+<p>实现「headlock」以保护 mev-boost 免受等价攻击。这也需要更改共识客户端软件并可能需要进行规范更改以延长证明截止期。</p>
+</li>
+<li>
+<p>增加针对 mev-boost 软件的漏洞赏金计划数量和可见度。</p>
+</li>
+<li>
+<p>扩展模拟软件以探索子时隙定时如何影响网络稳定性。这可以用于评估如何通过调整证明截止期来减少重新组织。</p>
+</li>
+<li>
+<p>优化中继上的块发布路径以减少不必要的延迟。这已经在研究中了。</p>
+</li>
+<li>
+<p>认识到 mev-boost 是核心协议功能，并将其吸收到共识客户端中，即 enshrined-PBS（ePBS）。两个时隙的 ePBS 容易受到等价攻击的影响，因此实现「headlock」仍然是一种选择。</p>
+</li>
+<li>
+<p>增加基于延迟和证明截止期问题的更多 hive 和 / 或规范测试。</p>
+</li>
+<li>
+<p>通过构建中继规范的其他实现来鼓励中继客户端多样性。</p>
+</li>
+<li>
+<p>考虑调整等价惩罚措施，但请记住，在极大 MEV 机会存在时，即使完全削减 32 ETH 也可能无法阻止恶意行为。</p>
+</li>
+</ul>
+<p>总体而言，我们对 MEV 和 mev-boost 生态系统周围重新激发起来的能量感到兴奋。通过拆分攻击和缓解措施，我们已经了解了延迟、mev-boost 和共识机制之间关键关系；我们希望协议能够持续强化。</p>
+<p>非常感谢 Bert Miller、Danny Ryan、Alex Stokes、Francesco D’Amato、Michael Sproul、Terence Tsao、Frankie、Joachim Neu、Chris Hager、Matt Garnett、Charlie Noyes 和 samczsun 对本文的反馈，以及 Achal Srinivasan。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50399/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">ETH周报 | 坎昆升级确定纳入EIP-4844；Uniswap Wallet上架App Store（4.24-4.30）</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50398/">
+                <span class="next-text nav-default">Rollup Layer2的模块化演进之路</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是-mev-boost为什么重要">什么是 mev-boost？为什么重要？</a></li>
+    <li><a href="#以太坊的分叉选择规则和-mev-boost">以太坊的分叉选择规则和 mev-boost</a>
+      <ul>
+        <li><a href="#插槽和子插槽周期">插槽和子插槽周期</a></li>
+        <li><a href="#提案者提升和诚实的重组">提案者提升和诚实的重组</a></li>
+        <li><a href="#针对解绑攻击的中继和信标节点修复">针对解绑攻击的中继和信标节点修复</a></li>
+        <li><a href="#未预料到的后果">未预料到的后果</a></li>
+      </ul>
+    </li>
+    <li><a href="#那么我们该怎么办呢">那么我们该怎么办呢？</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

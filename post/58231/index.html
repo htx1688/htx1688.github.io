@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          解读Lybra：业务模型、代币设计及V2优劣势 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="当前 LSDFI 赛道的体量并不算大，约在 6.6 亿左右，而 Lybra 在 LSDFI 的市场中占比 51.2%，是绝对的先发头部项目。" />
+<meta name="keywords" content="Lybra Finance" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58231/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="解读Lybra：业务模型、代币设计及V2优劣势" />
+<meta property="og:description" content="当前 LSDFI 赛道的体量并不算大，约在 6.6 亿左右，而 Lybra 在 LSDFI 的市场中占比 51.2%，是绝对的先发头部项目。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58231/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="解读Lybra：业务模型、代币设计及V2优劣势">
+<meta itemprop="description" content="当前 LSDFI 赛道的体量并不算大，约在 6.6 亿左右，而 Lybra 在 LSDFI 的市场中占比 51.2%，是绝对的先发头部项目。"><meta itemprop="datePublished" content="2023-09-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4278">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解读Lybra：业务模型、代币设计及V2优劣势"/>
+<meta name="twitter:description" content="当前 LSDFI 赛道的体量并不算大，约在 6.6 亿左右，而 Lybra 在 LSDFI 的市场中占比 51.2%，是绝对的先发头部项目。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">解读Lybra：业务模型、代币设计及V2优劣势</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-01">
+      2023-09-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4278 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：ETHAN，E2M Research</p>
+<h3 id="一lybra-的业务设计">一、Lybra 的业务设计</h3>
+<h4 id="11-业务模式"><strong>1.1 业务模式</strong></h4>
+<p>Lybra 的主要业务是生息稳定币 eUSD，用户可以将 ETH（通过协议自动换成 stETH）和 stETH 作为抵押品进行超额抵押后铸造 eUSD。用户抵押获得的 eUSD 放弃了 LSD 资产的生息收益，与此同时项目方会将 stETH 的生息收益在市场上购买成 eUSD 并按照用户的 eUSD 持仓分发。协议会收取铸造的 eUSD 的 1.5% 的年管理费作为业务收入。</p>
+<p>LSD（Liquid Staking Derivatives）是基于 ETH 转为 POS 机制后出现的最低 32ETH 的质押要求和节点高运营门槛的痛点衍生出的行业解决方案之一，特指通过联合质押方式允许小额质押 ETH 进入链上协议换取的 1:1 质押凭证。</p>
+<p>本文中提到的 stETH，是联合质押方式的头部项目 Lido 发行的 ETH 质押凭证，Lido 占据了 POS 质押总份额的 32%，业务模式是自行筛选合格的节点运营商并允许用户小额质押到其协议中得到 stETH，收取用户质押收益的 10%。</p>
+<h4 id="12-刚性赎回"><strong>1.2 刚性赎回</strong></h4>
+<p>eUSD 的价值会因市场交易而上下波动，当 eUSD 的价格较低且低于 0.995 时，协议会提供扣款 0.5% 的刚性赎回的服务，即用户可以选择刚性赎回业务将 eUSD 按照 1:0.995 进行刚性赎回换回 ETH，从而让 eUSD 的价格不会继续脱锚。</p>
+<p>这一部分的退出流动性由协议内选择刚性兑换功能的用户的抵押资产提供，当刚性赎回发生时，提供退出流动性的用户获得 0.5% 的赎回费用和额外 20% 年化的 LBR 奖励。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/ev6to5tjmhwbm4d" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<h4 id="13-清算机制"><strong>1.3 清算机制</strong></h4>
+<p>协议抵押品的健康抵押率为 160% 以上，而清算线为 150%，当用户被清算时，最高 50% 的抵押品将从清算人的余额中被清算以偿还债务。作为回报，清算人收到价值相当于已偿还 eUSD 价值 109% 的抵押资产，并且 0.5% 的抵押资产归 Keeper（第三方运行的监控项目） 所有，如果由 Keeper 提出清算，Keeper 可以获得 1% 的收益。当全局抵押率低于 150% 的时候，低于 125% 的用户会被全额清算。</p>
+<h4 id="14-设计上的微创新"><strong>1.4 设计上的微创新</strong></h4>
+<p>eUSD 的机制参考了 Liquity 协议的代码库，并在 Liquity 的流动池基础上做了一些微创新：</p>
+<p>1、liquity 会收一个一次性的铸币费但之后就没有其它费用，这一情况初期让 Liquity 获得了大量的协议收入，但是后期会出现增长乏力；而 eUSD 并没有收取铸币费而是会收取 1.5% 的 eUSD 的管理费，这一点会比 Liquity 在收入方面有更持续的协议收入。</p>
+<p>2、Liquity 会激励用户提供赎回资金进入流动池，同时持续奖励 LQTY 代币；Lybra 去掉了流动池功能，改为由 Liquidator 提供清算，在此基础上增加了额外的 20%LBR 年化奖励。</p>
+<p>3、Liquity 的抵押品是单一的，有且仅有 ETH，这一点也是目前增速降低的原因，而 Lybra 在此基础上支持了 stETH 作为抵押品，同时 v2 之后也会支持更多的 LSD 资产，扩大了资产的持续范围也获得了更多的增量。</p>
+<h4 id="15-协议当前业务上潜在的问题"><strong>1.5 协议当前业务上潜在的问题：</strong></h4>
+<p>1、eUSD 价格一直向上溢价，原因分别为：eUSD 的生息属性会被用户长期持仓且溢价看待，减少潜在抛压且很难向下脱钩；业务逻辑会将 stETH 收益购买成 eUSD 从而形成周期买盘。</p>
+<p>2、所有稳定币的永恒问题是应用场景，在当前阶段 eUSD 除 Curve 和 Uni 的两个交易对外并没有其他应用场景，对于稳定币来说长期发展严重受限。</p>
+<h3 id="二lbr-代币经济模型">二、LBR 代币经济模型</h3>
+<p>当前协议的代币 LBR 的分配机制为下表所示，其中 IDO 部分以 0.3U 的价格出售 5M LBR，价值为 1.5M。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/pfl54wmutl651ei" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<p>Lybra 协议也采用了 ve 的经济模型，协议内 Ve 代币以线性释放机制转换回 LBR，而不是到期一次性释放。当前协议内的 ve 代币为 esLBR，不能交易或转让，但拥有投票权并可以分享协议收益。挖矿奖励是 esLBR 的主要来源，esLBR 在 30 天内线性转换为 LBR。</p>
+<p>按照其 5 月的 esLBR 释放模型，每日排放的 esLBR 总量将在 54,618 至 126,277 之间，释放的比例分别为：eUSD 奖励池：78%，LBR/ETH Uniswap V2 LP 池：15%，eUSD/USDC Curve LP 池：7%。</p>
+<h3 id="三当前的协议相关数据8-月-25-日">三、当前的协议相关数据（8 月 25 日）</h3>
+<h4 id="31-稳定币市场格局"><strong>3.1 稳定币市场格局</strong></h4>
+<p>看下稳定币市场的整体格局，defilama 的数据显示，在稳定币排行中为第 12 位。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/88l553u3at4vy2k" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<h4 id="32-lsdfi-市场格局"><strong>3.2 LSDFI 市场格局</strong></h4>
+<p>根据 Defimochi 的 dune 数据，当前 LSDFI 赛道的体量并不算大，约在 6.6 亿左右，而 Lybra 在 LSDFI 的市场中占比 51.2%，是绝对的先发头部项目。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/hlqs6kmmm20msy2" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<h4 id="33-lybra-的协议内利率计算"><strong>3.3 Lybra 的协议内利率计算</strong></h4>
+<p><img src="https://img.bibiqing.com/news/2023/0901/un5925r9gv7g4mp" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<p>eUSD 为生息稳定币，根据上图的数据，官网的 eUSD 利率为 8.40%；笔者尝试估算参与铸造的用户获得的收益：实际计算当前全局抵押率为 198%，当日 Lido 的 stETH 利率约为 4%，扣去 1.5% 的协议年化费用（按照 eUSD 规模扣除，因此前面的总数直接减去 1.5%），按照全局抵押率质押的用户获得的收益约为 6.42%，与官方给出的数据有一定差距。</p>
+<p>实际链上发放的 eUSD 收益可以了解 Loki 的 Lybra 机制拆解。https://mirror.xyz/gundam0079.eth/RFkeOG9UCUDC57ggdy7xMVX7jGOPt9Mt8-y0E-30vfw</p>
+<h4 id="34-官网界面"><strong>3.4 官网界面</strong></h4>
+<p>下图为 Lybra 的官网收益操作界面，首先来看 eUSD 的 Mint pool 部分，这里的 APR16.39% 为补贴的 esLBR 的年化收益，这一部分的额外收益即为协议的飞轮逻辑的关键。</p>
+<p>用户参与 eUSD 的 mint 机制后，虽然会被协议抽取年化 1.5% 的管理费，即是用户在铸造并持有 eUSD 后会相较于 stETH 失去（1.5%/198%)≈0.76% 的总收益，但是会获得以 esLBR 按月线性释放的 16.39% 年化奖励，额外收益和 esLBR 的收益预期与持有 stETH 相比是更加具有吸引力的。</p>
+<p>换句话说，虽然会被协议抽水 stETH 的部分收入，但是协议会为持仓 eUSD 的用户额外补贴更多的线性释放的 esLBR，以未来的收益预期和潜在抛压增长协议资金。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/liv7lpknupqlubr" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<p>图中还有一个信息是左上角的可选 Boost 机制，开启 Boost 机制的用户会延迟获得 esLBR 的年化奖励（最高一年时间 Boost100%），例如当用户选择 6 个月的 Boost 后，协议会暂停发放 esLBR 半年，并在半年后按照 50% 的加成即 1.5 倍发放 esLBR。</p>
+<h4 id="35-历史清算数据"><strong>3.5 历史清算数据</strong></h4>
+<p>在 dune 中的数据显示，协议曾于 8 月初至 8 月 17 日发生大额清算，清仓 1.58M，总历史清算规模 1.87M。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/epspt5788izp287" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<h4 id="36-eusd-持仓人数"><strong>3.6 eUSD 持仓人数</strong></h4>
+<p>整个协议持仓 eUSD 的用户数为 1068 人，从这一数据来看协议依然在早期阶段，笔者尝试参与抵押 ETH 铸造 eUSD，铸造业务有 1 个 ETH 的最低门槛，算上 ETH 链上存在的高额 gas 费用的话，对散户很不友好，低于 1ETH 的散户无法参与且几个 ETH 的用户考虑参与也需要考虑 gas 成本，笔者认为后续如果开启 Layer2 以及跨链的质押降低门槛后才可能吸收散户参与者的资金。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/qbhyal3wys1o7iv" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<h4 id="37-lbr-估值"><strong>3.7 LBR 估值</strong></h4>
+<p>8 月 25 日笔者进行估值，在估算时，根据 Defilama 的数据显示，币价 $1.4,流通市值 19.72M, FDV140M。Lybra 的 Fee 和 Reveue 为 2.64M（以近一个月的收入乘以 12）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/8mmns181h62dzs3" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<p>在去中心化稳定币方面 Makerdao 为绝对龙头，以 MakerDao 的 TokenTerminal 数据进行对比 ,MakerDao 当前流通市值 917.96M， FDV1.02B；Fee 和 Revenue 数据为 106M（近一个月的收入乘以 12 进行估算）</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/ml64qihgmt6atcu" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<p>LBR 目前估值见下表：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/klecbswqlk1uie9" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<p>从估值的对比可得 Lybra 的 FDV 估值明显远大于 MakerDao，而以流通市值作比较的话 LBR 在当前时间相较 Makerdao 会低一些。</p>
+<p>Lybra 的单币挖矿项目中利润为 eUSD，此处是协议将 1.5% 的收入全部买成 eUSD，为协议给与质押 LBR 代币的实际赋能，从这里考虑的话协议估值依然会有一定程度的低估。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/f7t8asy72e5uti9" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<h3 id="四v2-以及优劣势分析">四、V2 以及优劣势分析</h3>
+<h4 id="41-lybra-v2"><strong>4.1 Lybra V2</strong></h4>
+<p>在目前官方公布的信息中，预计 8 月底将进行 V2 版本的升级且交由 Consensys、Halboun 进行审计，同时 Lybra 的 V2 迁移指南已经发布，用户可以在 V2 更新后按照指南将 LBR 和 eUSD 更新至 V2 版本。</p>
+<p>V2 的更新计划相关内容有：peUSD 的发行、与 LayerZero 的合作，eUSD 的更多交易对和降低 eUSD 的正溢价以及经济模型的更新（dLP 和 Lybra War）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0901/93mdesrac8sl3te" alt="解读Lybra：业务模型、代币设计及V2优劣势"></p>
+<p><strong>发行 Non-rebase 的稳定币 peUSD 以及支持更多 LSD 资产作为抵押品</strong></p>
+<p>发行 peUSD 锚定 Non-Rebase LSD（初步包括 WBETH,rETH,swETH），同时允许兑换 eUSD 为 Non-rebase 的 peUSD，peUSD 不带有生息属性更加利于流通和交易</p>
+<p><strong>抵押的 eUSD 可以进行闪电贷</strong></p>
+<p>peUSD 抵押的 eUSD 可以进行闪电贷，并收取 5% 的手续费率，其设计初衷是为了进行清算</p>
+<p><strong>和 LayerZero 合作开发全链代币</strong></p>
+<p>peUSD 和 LBR 会通过 LayerZero 成为全链版本允许跨链流通</p>
+<p><strong>增加稳定币交易对</strong></p>
+<p>在 eUSD 的应用场景方面，会在 Curve 发行 eUSD/3CRV 池，增加稳定币交易对。</p>
+<p><strong>价值平抑机制</strong></p>
+<p>在降低 eUSD 的正溢价方面，Lybra 提出了价格平抑机制，当 eUSD 溢价超过 5% 时，协议将购买 eUSD 的资金转为购买 USDC 进行分发，而在 0.05 以下时发放 peUSD。</p>
+<p><strong>dLP 机制：</strong></p>
+<p>持有 eUSD 的用户需要质押资产总值的 5% 的 LBR/ETH 交易对进入 Curve 池子中来领取奖励否则暂停发放，增大 LBR 的交易深度，如果不质押 LP 会暂停释放 esLBR，且罚除的 LBR 会以折扣价格（50%）给到用户</p>
+<p><strong>延长 esLBR 线性释放时间</strong></p>
+<p>将 30 天线性解锁的机制上限改为 90 天，拉长了线性释放的周期以及增大了内部价格博弈的复杂性。用户也可以直接提取但会按照时间情况罚除 LBR 奖励，罚除的 LBR 同样会以折扣价格（50%）给到用户</p>
+<p><strong>Lybra War</strong></p>
+<p>随着 Lybra 支持更多的 LSD 资产，会设计贿选玩法，希望产生类似 Curve War 的 Lybra War</p>
+<h4 id="42-优劣势分析"><strong>4.2 优劣势分析：</strong></h4>
+<p><strong>优势：</strong></p>
+<p>1、先发优势:</p>
+<p>Lybra 是目前的 LSDFI 市值头部，协议内持仓用户数也并不多</p>
+<p>2、具有正向飞轮逻辑:</p>
+<p>如果在 ETH 的上升行情中，抵押品 ETH 的价值上升会带来更高的抵押率和更高的收益，具有不低的发展潜力。</p>
+<p><strong>劣势：</strong></p>
+<p>1、信誉风险:</p>
+<p>协议为匿名团队，团队履历未知。</p>
+<p>2、依赖代币补贴会累计代币的抛压:</p>
+<p>本质是抵押品的借贷，依赖释放代币进行补贴从而让协议进行正向飞轮的运转，但协议发展始终存在大量的补贴成本，在协议增长缓慢时会累积成潜在的抛压风险。</p>
+<p>3、依然处于早期阶段且护城河不明显:</p>
+<p>协议目前 3 亿多的 TVL 锁仓量和 1.6 亿体量的 eUSD 并不多，FDV 市值相较 maker 明显高估，未来如果出现与 LSD 票据的大供应方即 Lido 或与大交易场景 Curve 或 Uni 深度合作的竞争对手，Lybra 的后续增长会面临挑战。</p>
+<p>4、需要拓展的应用场景:</p>
+<p>eUSD 在当前来看场景是受限的，只有 Curve 和 Uni 的池子且流动性较低，peUSD 的设计和 layer zero 的全链支持可能会一定程度解决，这一部分是需要持续关注的。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58192/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">灰度胜诉 SEC，预示现货比特币 ETF 将通过？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58266/">
+                <span class="next-text nav-default">金色Web3.0日报 | 中国人民法院报：虚拟货币属合法财产受到法律保护</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一lybra-的业务设计">一、Lybra 的业务设计</a></li>
+        <li><a href="#二lbr-代币经济模型">二、LBR 代币经济模型</a></li>
+        <li><a href="#三当前的协议相关数据8-月-25-日">三、当前的协议相关数据（8 月 25 日）</a></li>
+        <li><a href="#四v2-以及优劣势分析">四、V2 以及优劣势分析</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

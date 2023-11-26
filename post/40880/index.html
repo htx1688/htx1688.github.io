@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          浅谈：在ZK-rollup和以太坊上的帐户抽象 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="StarkNet和zkSync遵循Vitalik的愿景推出了一项长期功能：帐户抽象。" />
+<meta name="keywords" content="zkRollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40880/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="浅谈：在ZK-rollup和以太坊上的帐户抽象" />
+<meta property="og:description" content="StarkNet和zkSync遵循Vitalik的愿景推出了一项长期功能：帐户抽象。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40880/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="浅谈：在ZK-rollup和以太坊上的帐户抽象">
+<meta itemprop="description" content="StarkNet和zkSync遵循Vitalik的愿景推出了一项长期功能：帐户抽象。"><meta itemprop="datePublished" content="2022-08-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2481">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浅谈：在ZK-rollup和以太坊上的帐户抽象"/>
+<meta name="twitter:description" content="StarkNet和zkSync遵循Vitalik的愿景推出了一项长期功能：帐户抽象。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">浅谈：在ZK-rollup和以太坊上的帐户抽象</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-01">
+      2022-08-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 2481 字 -
+        预计阅读 5 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>虽然今天我们的加密钱包可以用于访问和管理我们的加密货币，NFT，并进行质押，但我认为从账户的角度来看，还有很多事情是可以做的。StarkNet和zkSync遵循Vitalik的愿景推出了一项长期功能：帐户抽象。</p>
+<h3 id="抽象是什么"><strong>抽象是什么?</strong></h3>
+<p>抽象过程是隐藏信息的实践。这增加了计算机系统在更高层次上的使用能力，并会对底层的过程知之甚少。</p>
+<p>在程序员PoV中，我们假设其隐藏了对象的所有数据，但只保留了其相关数据，这样会减少复杂性并提高效率。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0801/22_ufv0ysh7a1.png" alt="浅谈：在ZK-rollup和以太坊上的帐户抽象"></p>
+<h3 id="账户抽象的定义"><strong>账户抽象的定义</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2022/0801/22_a2davzrjsw.png" alt="浅谈：在ZK-rollup和以太坊上的帐户抽象"></p>
+<p>在以太坊网络上，目前有两种类型的账户。</p>
+<ul>
+<li>EOA：外部账户是存在于EVM(以太坊虚拟机)之外的用于加密货币发送和接收的钱包：冷钱包，如 Ledger、MetaMask、Phantom 等。</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0801/22_9o4sea0pu3.png" alt="浅谈：在ZK-rollup和以太坊上的帐户抽象"></p>
+<ul>
+<li>合约帐户是存在于EVM中的“智能合约”。例如，Uniswap上的池基本上是智能合约。</li>
+</ul>
+<p>以太坊帐户抽象的目标是将两种帐户类型减少到一种，即合约帐户。单一帐户类型将具有处理代币和合约的功能。开发人员和用户将不再需要区分帐户类型，因为交易将完全移入EVM，并脱离区块链协议。</p>
+<h3 id="外部账户精度"><strong>外部账户精度</strong></h3>
+<p>EOA有三个属性：</p>
+<ul>
+<li>
+<p>代表该账户可用ETH的余额。</p>
+</li>
+<li>
+<p>确保每笔交易都是唯一的随机数。</p>
+</li>
+<li>
+<p>唯一标识网络上帐户的地址。</p>
+</li>
+</ul>
+<p>值得一提的是，在以太坊上，每笔交易都必须从EOA发起。这意味着当由以太坊虚拟机(EVM)执行一笔交易时，被触及的第一个帐户必须是EOA，并且相应的账户必须向矿工支付费用以执行整个交易。</p>
+<p>以太坊上的每个账户都与一个名为Keypair的加密对象相关联：</p>
+<ul>
+<li>
+<p>私钥：用于签署数字消息。</p>
+</li>
+<li>
+<p>公钥：允许任何人验证给定的签名是否确实是其对应的私钥签名。</p>
+</li>
+</ul>
+<h3 id="在starknet和zksync上的帐户抽象"><strong>在StarkNet和zkSync上的帐户抽象</strong></h3>
+<p>截止到今天，StarkNet和zkSync 2.0在帐户抽象方面是最先进的，它们都设法用特定方式实现帐户抽象。</p>
+<p>账户抽象有两个主要目标：</p>
+<ul>
+<li>
+<p>签名抽象：允许不同的帐户合约使用不同的签名验证方案。</p>
+</li>
+<li>
+<p>支付抽象：允许不同的交易支付模式。例如，由另一方/合约支付或使用ETH以外的其他代币进行支付。</p>
+</li>
+</ul>
+<p>StarkNet Account模型仍然用合约来表示，也就是所谓的“账户合约”。简单来说：任何部署在StarkNet上的Cairo智能合约都可以是一个Account，唯一的要求是它们必须符合一个特定的接口，该接口具有验证和执行交易的方法。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0801/22_21j27z5hbh.png" alt="浅谈：在ZK-rollup和以太坊上的帐户抽象"></p>
+<p>在zkSync端，一个帐户还需要实现两个函数：validateTransaction 和 isValidSignature。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0801/22_ji5h69y1dn.png" alt="浅谈：在ZK-rollup和以太坊上的帐户抽象"></p>
+<p>通过这种抽象，我们可以直接看到：</p>
+<ul>
+<li>
+<p>使用多个密钥对来验证交易(简单地将多重签名集成在一起)。</p>
+</li>
+<li>
+<p>更改我们的帐户Keypair。</p>
+</li>
+<li>
+<p>使用与ECDSA不同的签名方案。</p>
+</li>
+</ul>
+<h3 id="它能带来什么"><strong>它能带来什么?</strong></h3>
+<p>这可能是这个故事中最重要的部分：让我们更深入地讨论帐户抽象的用例。我们可以将这些用例分成两个不同的领域：</p>
+<ul>
+<li>
+<p>用户简化</p>
+</li>
+<li>
+<p>技术用例</p>
+</li>
+</ul>
+<p><strong>用户简化：会话密钥</strong></p>
+<p>假设我们正在玩一款链上游戏：目前我们需要自己签署每一笔交易。就是说每做一个动作（比如在收集奖励，移动角色，发送信息时），就需要签署一项交易。</p>
+<p>会话密钥是授权玩家在特定时间内玩游戏的理念。我们生成了一个会话密钥，保存在浏览器的本地存储中，并且仅授权在10分钟内允许其签署交易。10分钟后，密钥将被撤销，我们将需要创建一个新的密钥并再次授权。</p>
+<p>在这种扩展下，我们还可以想象创建批处理交易：与在超市中选择产品并在最后只支付一次费用的抽象相同。</p>
+<p><strong>用户简化：交易自动化和拆分权限</strong></p>
+<p>使用抽象账户，就可以实现更改给定钱包的主要签名密钥的功能，甚至可以管理多个签名密钥。我们可以将自己的管理密钥放在冷钱包中，而其他密钥就保存在不太安全的设备上，并且这些将只被授权执行某些操作。</p>
+<p>一个很酷的例子:</p>
+<p>我不怎么使用的最安全的密钥是唯一能够转移或发送超过1k美元到另一个账户的密钥，然而，我也可以在我的计算机上使用那些不安全的密钥来执行操作，例如在某些特定的dapp上领取奖励，或在链上游戏中执行任何交易。</p>
+<p>现在让我们假设这些密钥保存在执行自动交易/运行我们自己的bot的服务器中：我们可以确保这些密钥只能用于执行自己设置的操作并提高安全性。</p>
+<p>最后一个实用程序可能是一个协议，该协议代表我们将 DCA 确定为循环交易。</p>
+<p><strong>技术用例：为他人支付费用</strong></p>
+<p>这是我们可以使用帐户抽象做的最有趣的事情之一。想象一下，一个账户可以支付另一个账户的费用，该有多么的令人兴奋。</p>
+<h3 id="总结"><strong>总结</strong></h3>
+<p>我们已经看到帐户抽象如何可以成为区块链未来的游戏规则改变者。我个人深信，账户抽象将迎来一个新的用例时代，尤其是在视频游戏产业链上。</p>
+<p>Source：https://medium.com/@0xexomonk/blockchains-demystifying-account-abstraction-on-zk-rollups-ethereum-smart-contracts-c7ae864bc542</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40882/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">目前为止 DAO靠什么盈利？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40889/">
+                <span class="next-text nav-default">区块链将成为元宇宙治理的核心</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#抽象是什么"><strong>抽象是什么?</strong></a></li>
+        <li><a href="#账户抽象的定义"><strong>账户抽象的定义</strong></a></li>
+        <li><a href="#外部账户精度"><strong>外部账户精度</strong></a></li>
+        <li><a href="#在starknet和zksync上的帐户抽象"><strong>在StarkNet和zkSync上的帐户抽象</strong></a></li>
+        <li><a href="#它能带来什么"><strong>它能带来什么?</strong></a></li>
+        <li><a href="#总结"><strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

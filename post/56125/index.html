@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Curve 掀开了合约语言层攻击这一被忽视的问题盖子，对 DeFi 而言，注定会是一场惊心动魄的大考。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/56125/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言" />
+<meta property="og:description" content="Curve 掀开了合约语言层攻击这一被忽视的问题盖子，对 DeFi 而言，注定会是一场惊心动魄的大考。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/56125/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言">
+<meta itemprop="description" content="Curve 掀开了合约语言层攻击这一被忽视的问题盖子，对 DeFi 而言，注定会是一场惊心动魄的大考。"><meta itemprop="datePublished" content="2023-08-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3045">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言"/>
+<meta name="twitter:description" content="Curve 掀开了合约语言层攻击这一被忽视的问题盖子，对 DeFi 而言，注定会是一场惊心动魄的大考。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-01">
+      2023-08-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3045 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Frank，Foresight News</p>
+<p>昨夜开始，Curve 因受 Vyper 个别版本的重入锁故障影响，导致旗下 alETH/msETH/pETH 等稳定池被黑客攻击，由此引发一系列的 DeFi 次生灾害与加密世界震荡，至今仍在持续发酵中。</p>
+<p>这也是 DeFi 世界罕见地直面针对智能合约语言层 Bug 的攻击事件。不过相比于加密世界中常常见诸报端的 Solidity 语言，Vyper 其实并不那么为人所熟知。</p>
+<p>那 Vyper 究竟是什么，它在 DeFi 世界中扮演着怎样的角色，为什么它的 Bug 又会引起行业的高度关注？本篇文章 Foresight News 就带大家来了解一下目前正处于风口浪尖的 Vyper 语言。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/sr12udaivbea3ss" alt="Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言"></p>
+<h2 id="vyper第二受欢迎的智能合约编程语言">Vyper：第二受欢迎的智能合约编程语言</h2>
+<p>Vyper 创建于 2017 年，在此之前，开发人员编写智能合约最常用的语言是 Solidity。而 Vyper 和 Solidity 一样，都是一种面向智能合约的编程语言，可编译为以太坊虚拟机（EVM）的字节代码，运行在 EVM 上。</p>
+<p>不过 Vyper 的编译器使用 Python 进行编写，是一种基于 Python 且兼容 EVM 的编程语言，具有强类型、小型编译器代码和高效的字节码生成的特点，这也使其成为想要进入 Web3 的 Python 开发人员的最佳选择之一。</p>
+<p>这导致从采用率角度看，目前的 Vyper 也是仅次于 Solidity 的「第二大兼容 EVM 的智能合约编程语言」，截至此次攻击事件发生前的 DeFiLlama 最新统计数据显示：</p>
+<p>在目前的 DeFi 开发格局中（TVL 占比维度），Solidity 以 94.71% 的市场份额占据绝对垄断地位，而 Vyper 以 3.04% 的市场份额位列第二名。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/ahuffl78cnaqcyw" alt="Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言"></p>
+<p>而第三名开始往后的 Rust（0.9% ）、Cairo（0.53% ）、Haskell（0.26% ）已经是断崖式下降。</p>
+<p>除了基于 Python 的特点之外，Vyper 不采用面向对象模式、内联汇编，并且不支持代码重用、修饰符、继承、函数重载、递归调用、无限长度循环和二进制定长浮点等。</p>
+<p>此外它还针对安全性、可读性、可审核性和 Gas 效率进行了优化：</p>
+<ul>
+<li>
+<p>安全性：支持在 Vyper 中构建安全的智能合约；</p>
+</li>
+<li>
+<p>可读性：Vyper 的智能合约语言和编译器实现力求简单，以提高代码的可读性，尤其是对于没有使用 Vyper 经验的用户以及一般没有编程经验的用户；</p>
+</li>
+<li>
+<p>可审核性：Vyper 代码最大限度地让人可读，且其简单架构减少了软件错误，提升了智能合约的可审计性；</p>
+</li>
+</ul>
+<p>Vyper 的创始人 John Max Skaller 曾表示，构建 Vyper 有两个原因：「首先，我喜欢 Python，特别是它的简单性，但我不喜欢它缺乏范围确定性，凡事都需要做大量更改来取得进展，因此我决定在保留与 Python 兼容性的同时，通过建造高级得多的编程语言，并在其中建造函数性编程语言的某些概念来改正这些问题。</p>
+<p>第二个原因是性能。我有一个称之为 interscript 的主要 Python 程序，一个有读写能力的编程工具，它受到 Python 中缺乏良好结构和性能问题的困扰」。</p>
+<p>总的来说，Vyper 的设计初衷是为了创建出智能合约参与方易懂的透明智能合约简化流程，以主打可读性与可审核性，从而确保安全。</p>
+<h2 id="vyper-的优劣势">Vyper 的优劣势</h2>
+<p>本章节谈及的 Vyper 优劣势，主要是相比 Solidity 语言，毕竟从上文提到的市场份额维度，其它的智能合约语言暂时还未形成较大的气候。</p>
+<p>首先，Vyper 相比 Solidity 的最大优势之一，就是它基于 Python 开发的特性，因此虽然 Vyper 的功能和流行程度不如 Solidity，但对于熟悉 Python 的开发人员来说，它是理想的可选语言。</p>
+<p>同时，Vyper 编译器还选择将局部变量存储在内存中而不是堆栈上，这使得合约更加简单和高效，并解决了其他高级语言中常见的「堆栈过深」的问题。</p>
+<p>Vyper 也提供了更多内置函数，以确保几乎每个 Solidity 和 Yul 中的功能在 Vyper 中也可以实现。开发者通过内置函数可以访问低级位运算、外部调用和代理合约操作，通过编译时提供覆盖文件可以实现自定义存储布局。</p>
+<p>而 Vyper 相比 Solidity 的劣势也很明显，主要源于它是一种相对 Solidity 较新的语言，所以首当其冲自然是开发者维护和社区工具层面的短板：</p>
+<p>Vyper 至今仍然缺乏 Solidity 所拥有的广泛社区支持——Solidity 有大量优秀的开发工具可供使用，像 OpenZeppelin 为安全的智能合约开发提供开源库，以及 Remix 在线 IDE 和本地开发人员环境 Hardhat 等 IDE，为其提供了允许轻松开发 DApp 的工具和功能。</p>
+<p>截至发文时，GitHub 数据显示，Solidity 的贡献者为 568 人，而 Vyper 为 189 人，相差 3 倍。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0801/dcjqkhp8lwekjv0" alt="Curve被攻击事件持续发酵，一文读懂处于风口浪尖的Vyper语言"></p>
+<p>不过 Vyper 虽然没有丰富的的开发工具套件，但它有更紧密集成的工具，并且也可以插入到 Solidity 开发工具中——如 Titanaboa 解释器，具有许多与 EVM 和 Vyper 相关的内置工具，可用于实验和开发；Dasy，作为一种基于 Vyper 的 Lisp，具有编译时代码执行功能。</p>
+<p>此外从技术细节角度，Vyper 缺少修饰符、类继承和递归调用，并且编程语言不是图灵完备的。</p>
+<p>当然这些大部分是 Vyper 特意提供更少的功能，旨在提升安全性和可审计性，以使合约更安全和易于审核，但这也使得开发人员需要额外的工作来解决这些限制，从而意味着本就不占人力优势的 Vyper 注定开发效能偏低。</p>
+<h2 id="vyper-的影响力从何而来">Vyper 的影响力从何而来？</h2>
+<p>目前来看，此次 Vyper 故障只涉及 0.2.15、 0.2.16 和 0.3.0 等几个特定版本，且从上文也可知，使用 Vyper 编写的头部 DeFi 项目的体量并不大，仅占不到 5% 的 TVL 市场份额。</p>
+<p>那为何此次 Vyper 的故障却造成了如此大的影响？</p>
+<p>简言之，虽然在主流 DeFi 协议中，主动使用 Vyper 语言进行开发的项目并不多，且此次出现问题的是 Vyper 的几个特定版本，但有一个头部 DeFi 项目却是基于 Vyper 开发：</p>
+<p>没错，正是 Curve，主要原因似乎与上文提到的 Gas 优化特性有关——因为 Curve 合约较为复杂，Vyper 使得这些复杂性变得更易于管理，并进一步节省 Gas（其它基于 Vyper 开发的知名项目则屈指可数，如 Uniswap v1 版本、第一个 ETH 2.0 存款合约等）。</p>
+<p>由于 Curve 已经成为 DeFi 世界甚至整个链上金融的关键基础设施，所以在层层嵌套之下，Curve 的稳定池本质上就是绝大部分协议的底层资金与收益来源，这也是此次安全事件发生至今，JPEG&rsquo;d、Alchemix、Metronome、deBridge、Ellipsis Finance 等余震不断的关键原因。</p>
+<p>不过 Vyper 的新版本已经修复这个漏洞，但由于受影响的 Curve 稳定池合约不可升级，因此无法进行部署升级，只能选择废弃对应合约，将资金撤出。</p>
+<h2 id="小结">小结</h2>
+<p>总的来看，此次安全事件之所以大家会心有余悸，主要是因为智能合约语言层的 Bug 风险，已经远超 DeFi 协议本身或者说智能合约逻辑的范畴。</p>
+<p>试想一下，如果此次不只是 Vyper，而是连 Solidity 也同样出了问题，那么链上所有的 DeFi 协议可能都几难幸免，我们甚至会真的面临「DeFi 不存在了」的风险。</p>
+<p>但祸兮福之所倚，这次 Curve 也算被动掀开了对智能合约语言层进行攻击的问题盖子，让大家意识到了这个可能，对 DeFi 世界而言，是一次大考，也是一场自我救赎的机会。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/56174/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">CRV危机发酵，接下来会发生什么？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/56142/">
+                <span class="next-text nav-default">Curve创始人1.8亿美元贷款现状：被清算风险有多大</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#vyper第二受欢迎的智能合约编程语言">Vyper：第二受欢迎的智能合约编程语言</a></li>
+    <li><a href="#vyper-的优劣势">Vyper 的优劣势</a></li>
+    <li><a href="#vyper-的影响力从何而来">Vyper 的影响力从何而来？</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

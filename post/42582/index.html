@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          如何实现区块构建者角色的去中心化？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文主要围绕 Vitalik 最近的 SBC MEV 研讨会演讲而构建，并提供进一步的分析。" />
+<meta name="keywords" content="去中心化" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42582/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="如何实现区块构建者角色的去中心化？" />
+<meta property="og:description" content="本文主要围绕 Vitalik 最近的 SBC MEV 研讨会演讲而构建，并提供进一步的分析。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42582/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="如何实现区块构建者角色的去中心化？">
+<meta itemprop="description" content="本文主要围绕 Vitalik 最近的 SBC MEV 研讨会演讲而构建，并提供进一步的分析。"><meta itemprop="datePublished" content="2022-09-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6697">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何实现区块构建者角色的去中心化？"/>
+<meta name="twitter:description" content="本文主要围绕 Vitalik 最近的 SBC MEV 研讨会演讲而构建，并提供进一步的分析。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">如何实现区块构建者角色的去中心化？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-13">
+      2022-09-13
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6697 字 -
+        预计阅读 14 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<blockquote>
+<p>本文主要围绕 Vitalik 最近的 SBC MEV 研讨会演讲而构建，并提供进一步的分析。</p>
+</blockquote>
+<p><strong>原文标题：《如何实现区块构建者角色的去中心化？这里有两种方法》（</strong> <strong>Decentralizing the Builder Role</strong> <strong>）</strong></p>
+<p><strong>撰文：Jon Charbonneau</strong></p>
+<h2 id="引言">引言</h2>
+<p>快速回顾——本报告的一个关键主题是 Vitalik Buterin 在《终局游戏》一文中的想法，即所有前进道路似乎都通向：</p>
+<ul>
+<li>
+<p><strong>中心化区块生产</strong></p>
+</li>
+<li>
+<p><strong>去中心化和去信任的区块验证</strong></p>
+</li>
+<li>
+<p><strong>继续提供抗审查</strong></p>
+</li>
+</ul>
+<p>生产者 - 构建者分离（PBS）试图将中心化与构建者隔离（远离验证者），然后以太坊添加盔甲（例如 crList）以减轻构建者的审查权力。构建者自然会很老练，所以悬而未决的问题主要是他们的中心化程度。我们是在说 1 个构建者？还是 10 个？</p>
+<p><strong>一个中心化构建者仍然不理想，那么我们能做得更好吗？解决这个问题有两种方法：</strong></p>
+<ul>
+<li>拥有许多构建者的去中心化市场 —— 确保构建者市场在没有根深蒂固的参与方的情况下具有竞争力。许多构建者竞争并只获得很小的利润。这个角色变得非常商品化。这需要解决诸如排他性订单流之类的问题，否则这些问题可能会巩固单个构建者。</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0913/26_r19l6y5j5o.png" alt="如何实现区块构建者角色的去中心化？"></p>
+<ul>
+<li>去中心化构建者角色本身 —— 使获胜的构建者本身成为去中心化的协议。一组去中心化的参与者都有助于构建一个给定的区块。</li>
+</ul>
+<p>本报告主要围绕 Vitalik 最近的 SBC MEV 研讨会演讲而构建。我将把它分解并提供进一步的分析。</p>
+<h2 id="去中心化的构建者能胜出吗">去中心化的构建者能胜出吗？</h2>
+<p>这里实际上有两个潜在的问题：</p>
+<ul>
+<li>
+<p>技术可行性——我将介绍一些可行的路径（存在其他可能性，并且正在积极探索中）</p>
+</li>
+<li>
+<p>竞争力——用户真的想使用它吗？或者一个中心化构建者总是会在功能和效率上胜过去中心化构建者？</p>
+</li>
+</ul>
+<h2 id="去中心化什么">去中心化什么？</h2>
+<p>中心化构建者很容易。下面考虑了一些可以去中心化的分布式构建者，需要在许多搜索者和用户之间聚合捆绑和交易：</p>
+<ul>
+<li>算法 - 构建者运行算法来聚合搜索者的捆绑包和其他交易，然后自己填写区块的其余部分。该算法及其输入可以分散。（请注意，这里假设分布式构建者仅运行一种算法的简单情况。实际上，分布式构建者中的不同参与者可能在运行不同算法时贡献区块的不同部分。）</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0913/26_zllevbp3sh.png" alt="如何实现区块构建者角色的去中心化？"></p>
+<p><em>资料来源：基于 Vitalik Buterin 的图片</em></p>
+<ul>
+<li>
+<p>资源 - 资源需求将显着增加，尤其是使用 Danksharding。区块将携带更多数据并且构建起来更加复杂→构建它们的带宽和硬件要求更高。不需要一个节点来构建和分发整个区块，而是可以在多个节点之间拆分工作。</p>
+</li>
+<li>
+<p>额外的构建者服务——构建者可以发挥创意并提供新的服务，例如交易预确认。为了使分布式构建者取得成功，他们需要提供与中心化构建者相比具有竞争力的服务。</p>
+</li>
+<li>
+<p>访问订单流（orderflow）——将订单流发送给单个构建者非常简单，并且可以为用户带来好处。也许他们承诺不抢跑你的交易，他们可以在你后面给你一些回扣。在潜在的许多参与者之间分散对订单流的访问是比较棘手的。</p>
+</li>
+<li>
+<p>隐私——同样，相信您的订单将私下执行的构建者是最容易的，因此您可以将其发送给他们。分布式构建者需要一种方法来提供交易隐私，同时在此过程中还包括许多去中心化方。</p>
+</li>
+<li>
+<p>跨链执行——分布式构建者需要一种与外部参与者协调以捕获跨链 MEV 的方法（例如，如果链 Y 上的交换将以原子方式完成，则仅在链 X 上完成交换）。</p>
+</li>
+</ul>
+<h2 id="挑战">挑战</h2>
+<p>如果我们想在整个区块生产供应链中避开受信任的第三方，有几个障碍需要克服。我将在这里解决的一些挑战包括：</p>
+<h3 id="如何保护搜索者免受-mev-窃取">如何保护搜索者免受 MEV 窃取？</h3>
+<p>如果建设者看到搜索者提交给他们的捆绑包，他们可以复制交易，然后用他们自己的地址替换搜索者的地址。构建者在不奖励搜索者的情况下捕获了 MEV。</p>
+<p>神圣（enshrined）PBS 和 MEV-Boost（加上中间可信中继）中使用的提交披露方案从提议者 ←→ 构建者关系中消除了同样的 MEV 窃取威胁，但对于搜索者 ←→ 构建者来说，这是一个未解决的问题。搜索者目前只信任构建者，但信任不是可扩展的解决方案。</p>
+<h3 id="如何允许聚合器机制组合搜索者输入">如何允许聚合器机制组合搜索者输入？</h3>
+<p>保护搜索者免受 MEV 窃取意味着他们的捆绑包不能以明文形式发送。但是，如果它们不在明处，那么构建者如何聚合它们呢？</p>
+<h3 id="如何保证聚合器机制能够真正发布这个区块">如何保证聚合器机制能够真正发布这个区块？</h3>
+<p>捆绑内容最终必须明确。从密文→明文的过程是什么，我们如何在没有信任假设的情况下实现这一目标？</p>
+<h3 id="如何保护搜索者免受聚合者--提议者勾结">如何保护搜索者免受聚合者 + 提议者勾结？</h3>
+<p>请注意，这并不是构建分布式构建者所面临的挑战的详尽列表。还有其他悬而未决的问题（例如，您如何防止分布式构建者受到他们被迫模拟的大量不良捆绑包的 DDOS 攻击？）和未知的未知数。</p>
+<h2 id="想法-1---可信硬件">想法 1 - 可信硬件</h2>
+<p><img src="https://img.bibiqing.com/news/2022/0913/26_e9lktjyren.png" alt="如何实现区块构建者角色的去中心化？"></p>
+<p>一种方法利用可信硬件 - TPM（可信平台模块）。排序如下所示：</p>
+<p>在解密区块之前，TPM 必须确信两件事：</p>
+<ul>
+<li>
+<p>提议者签名 - 这种对区块头的承诺（没有看到区块体）防止提议者窃取 MEV。如果提议者在构建者区块体被公开后（通过提议替代区块）试图为自己窃取 MEV，任何人都可以提出他们最初的承诺。这证明提议者在相同的区块高度签署了两个区块→他们被削减了。</p>
+</li>
+<li>
+<p>提议者签名的可用性证明 - 防止聚合者 + 提议者串通。提议者的承诺存在是不够的——它必须是可用的。如果只有聚合器收到承诺，他们可以简单地永远隐藏它，允许提议者提出替代的 MEV 窃取区块。TPM 必须确信最初的提议者签名实际上是公开的。</p>
+</li>
+</ul>
+<p>有几种方法可以证明提议者签名的可用性：</p>
+<ul>
+<li>
+<p>证明者 - 验证者可以证明看到提议者签名，然后 TPM 可以检查提议者和这些证明者签名。这需要更改以太坊协议。</p>
+</li>
+<li>
+<p>低安全性实时数据可用性预言机——像 Chainlink 这样的东西可以证明签名存在并将被重新广播的事实。</p>
+</li>
+<li>
+<p>聚合器内的 M of N 假设 - 聚合器本身可以是分布式 M of N 协议。聚合器协议中可能存在阈值投票，您对此有一个诚实的假设。</p>
+</li>
+</ul>
+<h2 id="想法-2---合并不相交的捆绑包和顺序拍卖">想法 2 - 合并不相交的捆绑包和顺序拍卖</h2>
+<h3 id="合并不相交的捆绑包">合并不相交的捆绑包</h3>
+<p>这种方法需要 M of N 聚合器，但我们可以摆脱 TPM。该过程如下所示：</p>
+<ul>
+<li>
+<p>搜索者发送加密到一个阈值密钥的捆绑包。捆绑包包含访问列表（他们访问的帐户和存储槽的列表）和正确性 SNARK（注意快速生成此内容的技术复杂性）。</p>
+</li>
+<li>
+<p>聚合器合并不相交的捆绑包，使总出价（bid）最大化。（我们在这里只讨论聚合不相交的出价，但有可能进一步改进这一点。）</p>
+</li>
+<li>
+<p>聚合器必须计算状态根</p>
+</li>
+</ul>
+<p>最后一步很棘手。计算状态根需要清楚地看到交易，或者至少看到它们的状态更新。然而，即使看到状态更新也可能足以进行 MEV 窃取。对于何时计算状态，我们有几个选项：</p>
+<ul>
+<li>
+<p>让一个聚合器节点解密然后计算状态。但是，他们可以与提议者勾结。</p>
+</li>
+<li>
+<p>只有在提议者承诺支持接收到的任何区块和状态根之后，才计算状态根。这种设置将利用 EigenLayer - 提议者让自己受到额外的削减条件才能参与。提议者发送一条链下消息，承诺他们将依次生成的唯一区块是包含这组捆绑包（无论它们是什么）的区块。只有在提议者做出承诺之后，捆绑包才会被解密，并计算状态根。如果提议者违反了这一承诺，那么他们将被削减。</p>
+</li>
+</ul>
+<p>请注意，对于此 EigenLayer 构造，也可以避免前面提到的 SNARK 要求。这里的提议者可以预先提交一个替代区块或替代区块组合，如果提交给他们的区块或替代区块组合被证明是无效的。然后可以使用一个欺诈证明来检查第一个区块组合的无效性。</p>
+<h3 id="顺序拍卖">顺序拍卖</h3>
+<p>EigenLayer 技术可以直接用于不相交的捆绑合并，或者它可以依赖于每个插槽内的多轮顺序拍卖。（请注意，如果需要，也可以在此顺序构造中避免 SNARK 要求。）</p>
+<p>例如，以下可能发生在一个区块中：</p>
+<p><strong>第 1 轮</strong></p>
+<p>1. 提议者签署一个 EigenLayer 消息，预先同意一些交易（包括捆绑 1），从而在这一轮中最大化他们的出价以启动区块</p>
+<p>2. 构建者公布该区块的这一部分</p>
+<p>3. 提议者发布状态差异</p>
+<p><strong>第 2 轮</strong></p>
+<p>4. 提议者签署一条 EigenLayer 消息，预先同意额外的交易（包括捆绑 2），从而在本轮中最大化他们的出价以继续这个区块</p>
+<p>5. 构建者公布该区块的这一部分</p>
+<p>6. 提议者发布状态差异</p>
+<p><strong>第 3 轮…</strong></p>
+<p>一个缺点是这种合并可能不是最理想的。例如，提议者可能已经预先同意捆绑包 1，然后他们收到了与捆绑包 1 冲突的更有利可图的捆绑包 2。他们将不得不拒绝此捆绑包 2。</p>
+<p>具有相同订单流的中心化构建者可以看到所有交易，当他们在插槽末尾构建区块时可以包含捆绑包 2（因为他们没有预先同意捆绑包 1）。</p>
+<p>另一个潜在的缺点 - 顺序拍卖可能会使非原子 MEV 变得非常困难，因为如果世界状况发生变化，搜索者将无法取消或更新他们的出价（一旦承诺）。如果您需要在交易被包含之前 10 秒以上提交交易，那么如果您保留更新出价的能力，您将无法承担尽可能多的风险。</p>
+<p>但是，该示例假定相同的订单流。实际上，由于它提供的保证，这种分布式构建者可能能够在接收更多订单流方面胜过中心化构建者。更好的保证 → 更多的订单流 → 构建最有利可图的区块（即使有其他缺点）。然后，由于分布式构建者始终提供最高价值的区块，因此提议者选择这种结构（切断自己接受其他构建器的区块）将具有经济意义。</p>
+<p>为了取得成功，分布式构建者提供的价值可能需要超过它带来的缺点（包括效率较低的合并和非原子 MEV 的挑战）。</p>
+<h2 id="区块构建-post-danksharding">区块构建 post-Danksharding</h2>
+<p>Danksharding 使验证者的节点要求较低。单个节点只负责下载区块的一部分。</p>
+<p>然而，最初提出的设计将有意义地增加构建以太坊区块的硬件和带宽要求（尽管验证者总是可以以分布式方式重建）。那么问题是我们是否甚至可以以分布式方式进行初始构建。这将消除对单个高资源实体构建完整区块、计算所有 KZG 承诺、连接到许多子网以发布它，等等。</p>
+<p>（注意：这个架构是否会使用子网或类似 DHT 的开放研究问题，但我会在这里假设子网）。</p>
+<p>实际上很有可能以分布式方式构建。分布式纠删码甚至没有那么难。</p>
+<p>首先，包含每个数据交易的人负责对其进行编码并将 blob 区块传播到子网和数据可用性网络。</p>
+<p>当聚合器选择包含哪些数据交易时，他们可以使用实时 DA 预言机。聚合器不能只自己进行数据可用性采样 (DAS)，因为当只有一方进行 DAS 时，这并不安全。所以一些分布式预言机需要下载整个东西。</p>
+<p>然后网络可以从这里填写列。请记住，数据在此 2 D 方案中得到扩展。例如，每个 blob 是 512 个 chunks，但它被擦除编码为 1024 个 chunks。然后扩展也垂直运行。例如，您在此处说图像中有 32 个 blob，然后垂直扩展为 64 个 blob。多项式承诺在每行水平和每列垂直运行。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0913/26_7r3goni3lk.png" alt="如何实现区块构建者角色的去中心化？"></p>
+<p><em>资料来源：Vitalik Buterin</em></p>
+<h2 id="kzg-承诺">KZG 承诺</h2>
+<p>由于 KZG 承诺的线性，你可以填写这些列，这将用于以太坊的分片设计。</p>
+<p>KZG 的承诺 (com) 具有线性关系。例如，您可以说 com (A) + com (B) = com (A+B)。</p>
+<p>你在证明中也有线性。例如，如果：</p>
+<ul>
+<li>
+<p>Qᴀ 证明 A = 在某个坐标 z 处的某个值，并且</p>
+</li>
+<li>
+<p>Qʙ 证明 B = 在同一坐标 z 处的某个值，则</p>
+</li>
+<li>
+<p>您可以对 Qᴀ 和 Qʙ 进行线性组合，这本身就是证明 A 和 B 的相同线性组合在相同坐标 z 处具有正确值</p>
+</li>
+</ul>
+<p>更正式地说：</p>
+<ul>
+<li>
+<p>让 Qᴀ 证明 A (z) 和 Qʙ 证明 B (z)</p>
+</li>
+<li>
+<p>然后，cQᴀ + dQʙ 证明 (cA + dB)(z)</p>
+</li>
+</ul>
+<p>这种线性属性允许网络填入所有内容。例如，如果您有第 0 列中第 0-31 行的证明，那么您可以使用它来生成第 0 列中第 32-63 行的证明。</p>
+<p>只有 KZG 具有这种承诺线性和证明线性（IPA 和 Merkle 树，包括 SNARK 的 Merkle 树不能同时满足这两个）。</p>
+<p>要更深入地了解以太坊的 2 D KZG 方案，您可以查看我的以太坊报告或 Dankrad 最近的 KZG 演讲。Vitalik 的这篇研究文章‌还谈到了将 KZG 与 IPA 用于 DAS 的考虑因素。</p>
+<p>这里的 TLDR 是 KZG 有一些非常好的属性，允许分布式区块构建和重建。您不需要任何一方来处理所有数据、扩展所有数据、计算所有 KZG 承诺并传播它们。它们可以为每一行和每一列单独完成。如果这样做了，我们就没有剩余的超级节点要求：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0913/26_v0jbletisg.png" alt="如何实现区块构建者角色的去中心化？"></p>
+<p>资料来源：Dankrad Feist 和 Vitalik Buterin</p>
+<h2 id="非-kzg-替代选择">非 KZG 替代选择</h2>
+<p>如果我们无法实现所有 KZG 魔法，那么这是下一个最佳选择。</p>
+<p>行承诺的前半部分只是 blob，所以没有问题。然后，构建者必须提供其余部分和一些列承诺。</p>
+<p>然后这些承诺必须匹配。所以 jᵗʰ 坐标处的 iᵗʰ 行承诺 = iᵗʰ 坐标处的 jᵗʰ 列承诺。</p>
+<p>更正式地说：</p>
+<ul>
+<li>
+<p>构建者必须提供行承诺 R₁…Rₕ 和列承诺 C₁…C?，其中 Rᵢ(xⱼ) = Cⱼ(xᵢ)</p>
+</li>
+<li>
+<p>以及承诺等价的证明</p>
+</li>
+<li>
+<p>这可以像讨论的那样以分布式方式完成，但请注意，这样做更难：</p>
+</li>
+<li>
+<p>前面描述的 KZG 方法 - 可以在一轮中完成。构建者只检查所有 blob 然后发布。网络在不涉及构建者的完全独立的过程中填充行。</p>
+</li>
+<li>
+<p>此处的分布式方法 - 至少需要两轮协议。构建者需要参与。</p>
+</li>
+</ul>
+<h2 id="额外的构建者服务---预先确认">额外的构建者服务 - 预先确认</h2>
+<p>以太坊区块时间很慢，用户喜欢快速的区块时间。以太坊做出这一牺牲主要是希望支持一个大型去中心化验证者集——Vitalik 在这里写过的权衡空间。但是我们能做到两全其美吗？</p>
+<p>以太坊 rollup 用户已经了解并喜欢这些预先确认。构建者创新也许能够在基础层提供类似的服务。</p>
+<p>例如，构建者可以同意：</p>
+<ul>
+<li>
+<p>如果用户发送优先级费用 ≥ 5 的交易，构建者会立即发送一个可执行的签名消息，同意将其包含在内。</p>
+</li>
+<li>
+<p>如果用户发送优先级费用≥ 8 的交易，构建者甚至提供后状态根。因此，较高的优先级费用迫使交易以某种顺序被包含在内，从而使用户可以立即知道该交易的结果是什么。</p>
+</li>
+</ul>
+<p>如果构建者不履行他们的承诺，他们可能会被削减。</p>
+<p>在具有并行化 EVM 的未来，您还可以通过预先确认获得更高级的信息。例如，只要用户关心的状态没有改变，即使在给出预先确认之后，构建者也可以重新排序一个区块中的一些交易。</p>
+<h2 id="分布式构建者可以提供预先确认吗">分布式构建者可以提供预先确认吗？</h2>
+<p>是的。分布式构建者可以运行一些内部共识算法，例如具有快速出块时间的 Tendermint。构建者可能会因以下原因受到处罚：</p>
+<ul>
+<li>
+<p>Tendermint 机制内的双重确定性</p>
+</li>
+<li>
+<p>签署与 Tendermint 机制认同的内容不兼容的区块</p>
+</li>
+</ul>
+<p>请注意，为了在此处获得最佳安全性，需要对最终构建者签名进行某种帐户抽象。阈值 BLS 是不可归因的——这意味着如果建设者只是 BLS 签署区块，如果出现问题，我们将不知道该削减谁。抽象签名将解决这个问题。</p>
+<p>对于任何构建者预确认服务（分布式或中心化的），请注意，预确认仅与他们实际构建获胜区块的能力一样好。具有更高包含率的更占主导地位的构建者可以提供更好的预确认。</p>
+<p>但是，您实际上可以通过分布式构建者获得更强的预先确认，例如 EigenLayer 构造。如果当前提议者选择了 EigenLayer 并且您获得了预先确认，那么您的交易必须包括在内。您不再押注于中心化构建者的概率赔率，给您一个预先确认然后最终是否赢得区块。</p>
+<h2 id="分布式构建者的优缺点">分布式构建者的优缺点</h2>
+<p>假设所有的技术都成功了，分布式构建者有成千上万的参与者。你甚至可以让大部分以太坊验证者选择加入提供亚秒级预确认的 EigenLayer 构造。与中心化构建者相比，这种分布式构建者具有一些不错的竞争优势：</p>
+<ul>
+<li>
+<p>经济安全——支持预确认服务的巨额安全存款</p>
+</li>
+<li>
+<p>信任——搜索者可以信任这个分布式构建者，而不是单个中心化实体</p>
+</li>
+<li>
+<p>抗审查——与决定恶意的单个中心化运营商相比，破坏和控制任何安全的分布式系统都更加困难</p>
+</li>
+</ul>
+<p>中心化构建者可能具有其他优势，一些是固有的，一些基于分布式构建者的构造：</p>
+<ul>
+<li>
+<p>更快地适应新功能——适应市场需求的灵活性是有价值的，而这可能是上述分布式构建者构造所缺乏的。理想情况下，您可以将来自多方的独特功能聚合到一个区块中。</p>
+</li>
+<li>
+<p>更低的延迟——这总是相关的，但对于跨链 MEV 尤其如此，当世界状态跨域变化时，搜索者更有可能想要更新他们的出价。（如前所述，他们还希望首先在整个区块过程中灵活地修改出价。）</p>
+</li>
+</ul>
+<h2 id="结论性想法">结论性想法</h2>
+<p>以太坊在很大程度上是根据最坏情况假设设计的——即使只有一个构建者存在，我们如何才能最好地减轻他们的权力（例如，审查能力）？</p>
+<p>然而，我们可以（并且应该）同时努力避免这种最坏情况的假设。这意味着设计一个并不总是导致根深蒂固的中心化构建者的系统。这里描述的两个想法提供了一些更有趣的可能性。然而，它们远不是一个详尽的清单——其他想法正在积极探索中，并且应该继续探索。</p>
+<p>此外，这不应被视为「专有订单流的问题神奇地消失了，因此我们不再需要围绕它进行构建。」dApps 必须继续围绕 MEV 进行机制设计创新，包括减少对专有订单流的需求。MEV 不会去任何地方。</p>
+<p>特别感谢 Vitalik Buterin、Sreeram Kannan、Robert Miller 和 Stephane Gosselin 的审阅和意见。没有他们的工作，这份报告是不可能完成的。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42573/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">美国与AWS：以太坊合并后的严重“中心化”问题</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42560/">
+                <span class="next-text nav-default">数据：亚太地区约21%的人正在使用DeFi</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#去中心化的构建者能胜出吗">去中心化的构建者能胜出吗？</a></li>
+    <li><a href="#去中心化什么">去中心化什么？</a></li>
+    <li><a href="#挑战">挑战</a>
+      <ul>
+        <li><a href="#如何保护搜索者免受-mev-窃取">如何保护搜索者免受 MEV 窃取？</a></li>
+        <li><a href="#如何允许聚合器机制组合搜索者输入">如何允许聚合器机制组合搜索者输入？</a></li>
+        <li><a href="#如何保证聚合器机制能够真正发布这个区块">如何保证聚合器机制能够真正发布这个区块？</a></li>
+        <li><a href="#如何保护搜索者免受聚合者--提议者勾结">如何保护搜索者免受聚合者 + 提议者勾结？</a></li>
+      </ul>
+    </li>
+    <li><a href="#想法-1---可信硬件">想法 1 - 可信硬件</a></li>
+    <li><a href="#想法-2---合并不相交的捆绑包和顺序拍卖">想法 2 - 合并不相交的捆绑包和顺序拍卖</a>
+      <ul>
+        <li><a href="#合并不相交的捆绑包">合并不相交的捆绑包</a></li>
+        <li><a href="#顺序拍卖">顺序拍卖</a></li>
+      </ul>
+    </li>
+    <li><a href="#区块构建-post-danksharding">区块构建 post-Danksharding</a></li>
+    <li><a href="#kzg-承诺">KZG 承诺</a></li>
+    <li><a href="#非-kzg-替代选择">非 KZG 替代选择</a></li>
+    <li><a href="#额外的构建者服务---预先确认">额外的构建者服务 - 预先确认</a></li>
+    <li><a href="#分布式构建者可以提供预先确认吗">分布式构建者可以提供预先确认吗？</a></li>
+    <li><a href="#分布式构建者的优缺点">分布式构建者的优缺点</a></li>
+    <li><a href="#结论性想法">结论性想法</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

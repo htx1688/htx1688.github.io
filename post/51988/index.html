@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文说透zk-SNARKs 为何未来十年与区块链一样重要 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="当下在 Layer 2 扩容方案中，ZK技术被太坊联合创始人 Vitalik Buterin (V 神)认为是解决扩容问题的最终方案。" />
+<meta name="keywords" content="Zk-snark" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51988/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文说透zk-SNARKs 为何未来十年与区块链一样重要" />
+<meta property="og:description" content="当下在 Layer 2 扩容方案中，ZK技术被太坊联合创始人 Vitalik Buterin (V 神)认为是解决扩容问题的最终方案。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51988/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-26T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文说透zk-SNARKs 为何未来十年与区块链一样重要">
+<meta itemprop="description" content="当下在 Layer 2 扩容方案中，ZK技术被太坊联合创始人 Vitalik Buterin (V 神)认为是解决扩容问题的最终方案。"><meta itemprop="datePublished" content="2023-05-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3331">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文说透zk-SNARKs 为何未来十年与区块链一样重要"/>
+<meta name="twitter:description" content="当下在 Layer 2 扩容方案中，ZK技术被太坊联合创始人 Vitalik Buterin (V 神)认为是解决扩容问题的最终方案。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文说透zk-SNARKs 为何未来十年与区块链一样重要</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-26">
+      2023-05-26
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3331 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E8%A7%82%E7%82%B9/"> 观点 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>一直以来，区块链的不可能三角（即可拓展性、去中心化、安全性）三者只能得其二）</strong> ，所以在以太坊实现了较高程度的安全和隐私之后，<strong>扩容变成重中之重。</strong></p>
+<p>因此Layer 2 顺势而生，<strong>当下在 Layer 2 扩容方案中，ZK技术被太坊联合创始人 Vitalik Buterin (V 神)认为是解决扩容问题的最终方案。</strong></p>
+<p>5 月 21 日，在黑山举办的非营利性的年度全球以太坊会议 EDCON 2023 大会上，V 神表示，未来 10 年，以ZK为底层技术的zk-SNARK 将与区块链一样重要。</p>
+<p><strong>那么最近V 神力推的 zk-SNARKs 到底是什么？能解决哪些区块链疑难杂症？</strong> 一起来看看今天的这篇介绍。<br>
+以下为正文：</p>
+<p><strong>01</strong>  <strong>什么是 zk-SNARKs？</strong></p>
+<p><strong>1.谁创造了 zk-SNARKs？</strong></p>
+<p><strong>“zk-SNARKs”一词是由一群密码学家创建的，</strong> 其中包括 Nir Bitansky、Alessandro Chiesa 和 Eran Tromer，最初这些人在一篇论文中发表了关于 zk-SNARKs 的基本原理。由此，zk-SNARKs 逐步被许多不同的项目和团队开发和改进。</p>
+<p><strong>2.zk-SNARK 代表什么？</strong></p>
+<p><strong>- ZK：zero knowledge零知识</strong></p>
+<p>零知识意味着正在验证声明的人无法从验证过程中获得任何新信息。<strong>换句话说，在零知识证明过程中，验证者只知道陈述是对还是错，除此之外一无所知。</strong></p>
+<p><strong>- S：simplicity 简洁</strong></p>
+<p>简洁的 zk-SNARKs 证明是<strong>简短且易于验证的证明。</strong> 这与常规的零知识证明形成对比，后者可能非常长且复杂。通常，zk-SNARK 证明可以在几毫秒内得到验证。</p>
+<p><strong>- N：non-interactive 非交互式</strong></p>
+<p>非交互式 zk-SNARKs 证明不需要证明者和验证者之间的任何交互。<strong>这意味着只有一条结果消息从证明者发送到验证者。</strong> 这与交互式证明形成对比，在交互式证明中，证明者和验证者必须相互来回交互才能完成证明。</p>
+<p><strong>- AR：argument 争论</strong></p>
+<p>论点是支持一个观点的一个或一组理由。在 zk-SNARKs 的上下文中，论证是一系列数学运算，用于证明一个陈述论点是正确的。</p>
+<p><strong>- K：knowledge 知识</strong></p>
+<p>知识是指证明者知道完成证明所需的某些信息的想法。例如，这可能是帐户的私钥。</p>
+<p><strong>综上所述，zk-SNARKs 是一个ZK系统（零知识证明系统），它允许用户（“证明者”）向另一方（“验证者”）证明某些东西，比如他们的身份、他们的资金所有权等，而无需透露有关这些资产的任何信息。</strong> 例如：</p>
+<p>- 用户应该能够证明他的账户中有足够的余额来购买产品或服务，而不必分享他所拥有的确切金额；<br>
+- 用户应该能够在访问应用程序之前验证他的身份，而不必共享他的个人数据。</p>
+<p><strong>以如何“向一个 5 岁的孩子解释 zk-SNARKs”举例，这里可以通过一个游戏来解释 zk-SNARKs 是什么：</strong></p>
+<p>“想象一下，你正在和三个朋友一起玩“语文老师在哪里？”，奖项是 1000 美元的赌注由获胜者平分。你和你的朋友围坐在一张桌子旁，每个人都拿到了一张有语文老师的图片。</p>
+<p>你必须在图片中找到语文老师， 一旦找到语文老师就需要证明你找到了他，但不能透露她的位置或其他任何信息。换句话说，您想在不透露任何超出您声明有效性的信息的情况下证明对事实的了解。</p>
+<p>运用zkSNARK原中，可以拿一张相同大小的纸，并在图片中语文老师的位置标记一个点。然后可以把纸藏在一个盒里，一旦你的朋友解决了这个谜题，他们就可以自己看到你标记的语文老师所在的位置。”</p>
+<p>换句话说，zk-SNARKs 允许你证明你所需的验证信息，而无需透露该信息的具体值。<strong>在当前跨链生态系统中，使用 zk-SNARKs 技术可以维护其平台上构建的区块链和 DApp 的隐私。</strong><br>
+在这里面，关键思想是验证者不可能获得关于该证明的任何信息（因此称为“零知识”证明）。</p>
+<p><strong>02</strong>  <strong>zk-SNARKs 运作原理</strong></p>
+<p>zk-SNARKs 在加密领域尤为重要，因为许多区块链本质上是公开的，隐私就变得尤为重要。<br>
+最著名的例子是 Zcash，它是一种隐私加密资产。当在比特币和以太坊等公链交易Zcash时，会使用发送方和接收方地址等详细信息以及输入和输出值（即花费了多少，未花费多少）进行验证。<br>
+但通过 zk-SNARKs，Zcash 可以在不公开地址和价值等信息的情况下证明交易有效。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0526/22_lmeu546yi3.png" alt="一文说透zk-SNARKs 为何未来十年与区块链一样重要">Zcash 如何使用 zkSNARKS 为加密用户提供隐私层<br>
+来源：Blockchainhub.net</p>
+<p>zk-SNARKs 如何运作？<strong>数字签名构成了 zk-SNARKs 的工作原理</strong> 。数字签名使用加密算法对敏感信息进行保护，使其对另一方隐藏，同时向该方提供所要求的必要证据。<br>
+<strong>那么具体它是如何完成的呢？步骤如下：</strong><br>
+1.证明者首先生成一对密钥，一个公钥，一个私钥。他使用私钥签署交易。<br>
+2.然后证明者将此交易编码为 zk-SNARKs，这是交易有效的数学证明。<br>
+3.证明与公钥一起发送给验证者。然后，验证者使用公钥检查公式是否正确，而无需了解有关交易的任何其他信息。由于只验证少量信息，因此可以非常快速地完成此检查，以确认交易有效。</p>
+<p><strong>03</strong>  <strong>zk-SNARKs 的具体用例</strong></p>
+<p><strong>1.哪些 Token 使用 zk-SNARKs？</strong></p>
+<p>SNARK 加密 Token 是一种使用 zk-SNARKs 来改善隐私的加密资产，也称为隐私 Token。这类隐私Token的例子有：<br>
+- Zcash (ZEC)<br>
+- Verge (XVG)<br>
+- Monero (XMR)<br>
+- Dash (DASH)<br>
+- Beam (BEAM)<br>
+- Horizen (ZEN)<br>
+- Bytecoin (BCN)<br>
+zk-SNARKs 的主要挑战是如果私钥被泄露，就可以创建伪造的证明。这可能允许伪造证明的创建者进行欺诈，例如，创建和使用伪造的隐私币。</p>
+<p><strong>2. zk-SNARKS 的其他应用</strong></p>
+<p>Filecoin 是一个去中心化存储提供商，运作过程涉及多个方面。</p>
+<p>首先，Filecoin 网络上的存储提供者（提供存储空间以换取区块奖励），而“证明者”，必须证明他们正在正确地将数据存储在链上。<br>
+另一方面，我们有“验证者”，即节点，他们必须验证存储提供商是否正确存储和保护数据。这些验证者必须对存储提供者给出的证明感到满意。<br>
+**这要求存储提供商和节点在数据易手时进行通信。可以想象，这一过程将是资源密集型的。<br>
+** Filecoin 官方博客文章解释道：“为了验证他们的存储，如今单个存储提供商提供的必须证明的数据量是巨大的，而且只会随着时间的推移而增长。Filecoin 网络的出块时间为 30 秒。为了保持时间不变并启用可扩展的方法，Filecoin需要一种允许快速、高效和稳健验证的解决方案，”</p>
+<p>借助 zk-SNARKs，Filecoin 网络可以通过减少各方验证存储所需的时间来提高其可扩展性和效率。<br>
+对于存储提供商，zk-SNARKs 减少了他们需要传输的数据量以证明其存储，从而降低了运营成本。</p>
+<p>**3. zk-SNARKs 还可以用于其他事情<br>
+** 例如：</p>
+<p><strong>- 身份验证：</strong> 无需密码即可验证用户凭据，不再需要护照、出生证明等文件证明，以保护出生地点和出生日期等敏感信息。</p>
+<p><strong>- 投票系统：</strong> 无需身份识别即可验证选民身份，即使选票泄露也无法识别选民身份，从而保护选民隐私。</p>
+<p><strong>- 数据压缩：</strong> 这是 zk-SNARKS 的一个有趣用途，值得单独展开一节。</p>
+<p><strong>04</strong>  <strong>小结</strong></p>
+<p>总的来说，zk-SNARKS 有三个关键要点：<br>
+1.zkSNARKS 是一种零知识证明系统，它允许一方向另一方证明他们知道一个值 x，而无需传达有关 x 的任何其他信息。<br>
+2.关键思想是验证者不可能仅仅从证明者能够证明他们知道 x 的事实中推导出关于 x 的任何信息。这保护了证明者的数据隐私。<br>
+3.零知识证明系统用于各种应用，包括安全通信、密码学和隐私保护数据分析。<br>
+虽然目前零知识证明系统是一个相对较新的研究领域，其可行性和实用性仍有许多悬而未决的问题。然而，它们已经被用来创造一些令人印象深刻的产品。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/52001/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文说透 V 神眼里未来十年和区块链一样重要的 zk-SNARKs</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51983/">
+                <span class="next-text nav-default">允许散户交易虚拟资产，香港新政6月1日落地有何看点？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

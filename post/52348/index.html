@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          互链操作协议LayerZero研究报告 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文将介绍 Layer Zero 的技术和特点，以及它当前扩张的生态。" />
+<meta name="keywords" content="LayerZero, 項目" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/52348/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="互链操作协议LayerZero研究报告" />
+<meta property="og:description" content="本文将介绍 Layer Zero 的技术和特点，以及它当前扩张的生态。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/52348/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-01T00:00:00+00:00" />
+
+<meta itemprop="name" content="互链操作协议LayerZero研究报告">
+<meta itemprop="description" content="本文将介绍 Layer Zero 的技术和特点，以及它当前扩张的生态。"><meta itemprop="datePublished" content="2023-06-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5154">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="互链操作协议LayerZero研究报告"/>
+<meta name="twitter:description" content="本文将介绍 Layer Zero 的技术和特点，以及它当前扩张的生态。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">互链操作协议LayerZero研究报告</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-01">
+      2023-06-01
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5154 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%A5%E5%91%8A/"> 报告 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>目录</strong></p>
+<p><strong>一、项目简介</strong></p>
+<p><strong>二、项目愿景</strong></p>
+<p><strong>三、特色和优势</strong></p>
+<p><strong>四、发展历史</strong></p>
+<p><strong>五、团队背景</strong></p>
+<p><strong>六、融资信息</strong></p>
+<p><strong>七、发展成果</strong></p>
+<p><strong>八、经济模型</strong></p>
+<p><strong>九、风险与机会</strong></p>
+<p>随着 DeFi 项目的兴起，跨链互操作性成为区块链领域的热门话题，在众多的跨链平台中，Layer Zero 凭借其创新技术和设计备受关注。本文将介绍 Layer Zero 的技术和特点，以及它当前扩张的生态。</p>
+<p><strong>一、项目简介</strong></p>
+<p>LayerZero 是一个去信任的全链互操作性协议，是区块链间的通信平台，专为跨链传递轻量级信息而设计，通过可配置的去信任化提供真实且有保证的消息传递。LayerZero提供了一个功能强大的底层通信网络结构，可在此基础上构建各种跨链应用程序集，打破了区块链彼此之间孤立的状态。LayerZero对于开发者来说，可以实现无缝链接应用程序，消除不同区块链之间的障碍，实现高效准确的信息交换，对于用户来说，允许交易在不同链之间进行，提高了流动性。</p>
+<p><strong>二、项目愿景</strong></p>
+<p>LayerZero不能简单的理解为资产跨链桥，而是比L1公链更底层的基础设施协议，做更上层的消息跨链，从而突破链与链之间的孤岛效应。LayerZero要做的更多的是基于LayerZero协议搭建更加丰富的跨链生态，提供全链生态的网络基础架构和消息传输层。目前基于LayerZero构建的较有代表性的产品有Stargate以及Radiant等，未来随着LayerZero生态的继续发展，预计还将会有更多基于LayerZero协议开发的原生跨链产品诞生。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0601/5_bgs0uehsa6.png" alt="互链操作协议LayerZero研究报告"></p>
+<p><strong>三、特色和优势</strong></p>
+<p><strong>1. 特色</strong></p>
+<p>LayerZero最突出的特点是其超轻量级的节点，利用超轻节点技术，通过中继者和预言机在不同链的端点之间传输消息，在保证安全性的前提下降低费用。</p>
+<p><strong>（1）超轻节点</strong></p>
+<p>首先，区块链网络中的每一个节点，其实就是存储数据的每一台电脑或者服务器终端，轻节点只是节点的一种运作模式，和全节点不同的是，轻节点只存储区块链数据的一小部分，如区块头和其他一些信息，不存储区块内的具体交易信息。那么超轻节点与轻节点相比，它的验证方式与链上轻节点相同，但不保留所有区块头，而是通过预言机按需传输流式区块头，从而更高效的同步链外实体以达到所需状态。</p>
+<p><strong>（2）LayerZero的核心组件</strong></p>
+<p>根据LayerZero白皮书显示，LayerZero的核心组件有两个，分别是预言机（Oracle）和中继器（Relayer）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0601/5_sh8o74jqj4.png" alt="互链操作协议LayerZero研究报告"></p>
+<p>预言机是第三方服务，提供一种独立于其他 LayerZero 的机制组件，能从一个链中读取一个块头和将其发送到另一个链上，这样能在目标链上验证源链上交易的有效性。LayerZero 采用 Chainlink 充当其预言机。</p>
+<p>中继器是一种链下服务，在功能上类似于预言机，但它不是获取块头，而是获取指定交易的证明。为了确保有效地传递，唯一的要求是对于使用 LayerZero 协议发送的任何给定消息，预言机和中继器必须相互独立。LayerZero 甚至可以实现自己的中继服务。这种设计允许用户确定中继器不能与预言机串通，这种独立性使LayerZero能够实现无信任的验证交付。</p>
+<p>预言机提交的区块头将与中继提交的交易证明进行交叉验证，二者不形成任何共识，只传输消息。简单来说，预言机作为LayerZero 跨链中的公证人角色，让目标链知道验证的结果如何，而中继器就负责提供验证交易所需的证明过程以及跨链信息的具体内容。</p>
+<p><strong>（3）运行模式</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0601/5_4b6go52mld.png" alt="互链操作协议LayerZero研究报告"></p>
+<p>据LayerZero白皮书表示，当要传递一个跨链的消息时（例如从 A 链到 B 链），首先需要调用 LayerZeroEndpoint 的智能合约，A链上的超轻节点收到这个任务，并且将消息（交易证明和区块头）和去往B链的信息打包，分别去提醒链外的预言机和中继器，这里预言机和中继器是互相独立的，而且在链下，二者不可能串通，预言机去获得块头信息，中继器去获得交易证明；当B链上的超轻节点收到预言机的块头消息后，中继器再次提交相应的交易证明，只有当块头消息和证明消息匹配上了，真正的消息内容才会发到B链上，完成跨链通信。</p>
+<p>预言机和中继器都是可以自定义配置的，用户可以只使用 LayerZero 的轻节点，然后使用与 LayerZero 不同的中继器，以及与 Chainlink 不同的预言机。</p>
+<p><strong>2. 优势</strong></p>
+<p><strong>（1）安全性</strong></p>
+<p>作为底层协议，LayerZero的安全性是独立于外部协议的，从而确保了整个协议共识的稳定性。另外，得益于独特的预言机和中继器设计，预言机和中继器相互独立，只有二者都被认为是真实的情况下才会完成交易，保障了信息传输的安全性。</p>
+<p><strong>（2）扩展性</strong></p>
+<p>LayerZero 作为一个通用的消息传递层，这意味着可以将任何合约从链 A 转移到链 B实现与L1的跨链互操作，通过创新的端点设计，LayerZero 可以很轻松的进行扩展以支持任何链，为区块链生态系统带来了更广泛的应用场景。</p>
+<p><strong>（3）高效率</strong></p>
+<p>首先，LayerZero 的超轻节点技术可以实现更高的传输效率，并在保证安全的前提下降低了验证成本；其次，LayerZero 的中继器或预言机都没有形成任何共识，只简单传输消息，所有的验证都在自己的目标链上完成，所以速度和吞吐量的限制完全取决于两个交易链的属性。</p>
+<p><strong>四、发展历史</strong></p>
+<p>2021.05 26  LayerZero白皮书发布</p>
+<p>2022.03 15  邀请SushiSwap前创始人0xmaki 加入团队</p>
+<p>2022.03.17  LayerZero旗下跨链协议Stargate代币$STG销售（1亿枚，占STG总发行量的10%，拍卖结束后1亿STG将被锁仓12个月，之后分6个月线性解锁）</p>
+<p>2022.03.18  Stargate主网上线</p>
+<p>2022.08.11  去中心化稳定币协议 Angle Protocol 与 LayerZero 集成，实现旗下欧元稳定币agEUR在以太坊、Polygon、Optimism和Arbitrum之间进行跨链转移。</p>
+<p>2022.09.07  LayerZero推出全链区块浏览器 LayerZero Scan</p>
+<p>2022.11.20  LayerZero在Metis Goerli上测试网上线</p>
+<p>2022.12.01 LayerZero主网整合Chainlink 预言机</p>
+<p>2023.02.06  Trade Joe集成LayerZero，Joe原生Token JOE将转变为全链Token</p>
+<p>2023.03.10  LayerZero Labs宣布在 Coinbase 以太坊 Layer2 网络 Base 上部署，LayerZero 的端点合约已部署至测试网</p>
+<p><strong>五、团队背景</strong></p>
+<p>LayerZero Labs于2021年创立，据 LinkedIn 披露目前 有 55名成员（包含兼职员工），创始团队成员具体情况如下：</p>
+<p>Ryan Zarick：LayerZero Labs联合创始人兼CTO，毕业于美国新罕布什尔大学，计算机专业硕士。22011.11 – 2013.03 担任 BuzzDraft 的 CTO；2010.09 – 2020.13 担任 Coder Den 的联合创始人；2018.01 – 2020.03 担任 80Trill 的联合创始人；2019.06 – 2021.01 担任 Minimal AI 的联合创始人；2021 年创立 LayerZero 并担任 CTO。</p>
+<p>Bryan Pellegrino：LayerZero Labs联合创始人兼CEO，毕业于美国新罕布什尔大学，主修计算机专业。2010.10 – 2013.01 担任 Coder Den 的联合创始人兼 COO；2011.06 – 2013.01 担任 BuzzDraft 的 CEO；2017.10 – 2019.08 担任 OpenToken 的联合创始人；2016.06 – 至今，担任 Rho AI 的首席工程师；2021 年创立 LayerZero 。在创立LayerZero之前，Pellegrino曾是一位职业德扑选手，还和 Ryan Zarick一起创立过一家机器学习公司，成功地把一套机器学习工具销售给了一支MLB球队。</p>
+<p>Caleb Banister：LayerZero Labs创始人，毕业于美国新罕布什尔大学，主修计算机专业。2005.06 – 2010.12 担任 UNH 互操作性实验室的软件开发师；2010.09 – 2021.02 担任 Coder Den的联合创始人；2018.03 – 2021.02 担任 80Trill的联合创始人；2019.06 – 2021.02 担任 Minimal AI的联合创始人；2021年创立 LayerZero。</p>
+<p>从LayerZeroLabs 3位联合创始人的履历来看，团队有卓越的机器学习算法和区块链开发的创新能力，而且彼此有长期的合作关系，都拥有多年的开发经历和成功的创业经验。</p>
+<p>另外，Sushiswap 的联创 0xmaki 也全职加入该团队并担任首席战略顾问，帮助 Layerzero 的跨链生态建设。</p>
+<p><strong>六、融资信息</strong></p>
+<p>2021年4月,获得一笔200万美元的种子轮融资。</p>
+<p>2021年9月，LayerZero Labs完成630万美元A轮融资，Multicoin和Binance Labs领投，Sino Global Capital、Defiance、Delphi Digital, Robot Ventures, Spartan, Hypersphere Ventures、 Protocol Ventures、 Gen Block Capital等参投。</p>
+<p>2022年3月，LayerZero Labs以10亿美元估值完成1.35亿美元A+轮融资，a16z、FTX Ventures、红杉资本共同领投，Coinbase Ventures、PayPal Ventures、Tiger Global和Uniswap Labs等参投。（2022年11月，LayerZero 发文表示，已从 FTX/FTX Ventures/Alameda Research 手上回购 100% 的股权、币权及其它任何协议。）</p>
+<p>2023年4月，LayerZero Labs以30亿美元估值完成1.2亿美元B轮融资，a16z Crypto、佳士得拍卖行、红杉资本、三星 Next、BOND、Circle Ventures 和 OpenSea Ventures 等参投。</p>
+<p>可以看出，LayerZero一开始就得到了众多大资本的青睐，截至目前已获得2.63亿美元的融资，项目资金充裕，能支撑技术产品的推进，保证项目长期的发展运营。</p>
+<p><strong>七、发展成果</strong></p>
+<p>LayerZero作为一个全链互操作性协议，以实现跨链状态共享、借贷、治理等，目前LayerZero 已经支持了 Ethereum、BNB Chain、Avalanche、Aptos、Polygon、Arbitrum、Optimism、Fantom 等总计30多条链。LayerZero生态快速扩张，在Defi、NFT、跨链桥等方向都取得了不小的进展。具体如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0601/5_ok51nkr2ht.png" alt="互链操作协议LayerZero研究报告"></p>
+<p>跨链桥：以往的跨链模式是锁定和铸造，即在原链的指定智能合约锁定原生通证后，在目标链铸造新通证 。这种跨链桥方式主要应用于通证传递，但该模式依赖于网络验证节点，如果节点作恶或者被黑客控制，会造成严重损失，而且无法在不同链上发送原生资产。而LayerZero 生态跨链桥 Stargate 能够让交易在链上实现无缝桥接，作为第一个基于 Layerzero 构建的 dAPP，Stargate攻破了即时资金锁定、统一的流动性和原生资产这一跨链的三难困境，从而将各个公链的资金流动性孤岛链接起来，提高资本效率。</p>
+<p>DeFi：DeFi主要问题之一是缺乏流动性，LayerZero可以做到链间互操作，开发人员在特定链上构建 Dex或其他 DeFi 应用程序，而对于用户来说，使用 LayerZero可以留在原有链上使用任何Dex或者聚合器从其他目标链上进行流动性挖矿。</p>
+<p>全链NFT：Gh0sts 作为首个全链式 NFT， 实现了多链发行，且可在多链之间实现原子级的跨链转移。LayerZero实现了NFT 可以跨链移动，且无需通过在各个链上启动全新项目导致用户群体分割。</p>
+<p><strong>八、经济模型</strong></p>
+<p>LayerZero 暂未发行代币</p>
+<p><strong>九、风险与机会</strong></p>
+<p><strong>（1）风险</strong></p>
+<p>LayerZero 的安全性未经充分验证，预言机和中继者彼此之间需要独立运行的信任假设仍不确定，中继机制背后的安全隐患等问题仍需警惕，重要的是在于如何实现中继的去中心化。而且LayerZero 将验证链上信息的任务外包给Chainlink等第三方，这在一定程度上会出现无法控制的安全问题，增加潜在的风险和不确定性。</p>
+<p>另外目前LayerZero还未发币，不确定项目发币后，其经济模型能力和代币的价值捕获能力如何。</p>
+<p><strong>（2）机会</strong></p>
+<p>随着区块链的发展，链与链之间的互操作性变得极为重要，各个链之间必须实现安全、高效无缝的交互。作为底层协议，LayerZero 在产品设计上不同于目前市面上的跨链桥项目，利用超轻节点技术，选择预言机网络取代了传统跨链的连续流式传输，从而使协议更加灵活，且降低了成本。目前，LayerZero 已经链接了超过30条链，并广泛应用于各个生态，在多链共存来临之际，LayerZero将具有先发优势，为区块链生态发展做出贡献。</p>
+<p>参考：</p>
+<p><a href="https://layerzero.network/pdf/LayerZero">https://layerzero.network/pdf/LayerZero</a>_Whitepaper_Release.pdf</p>
+<p><a href="https://www.web3sj.com/project/58557/">https://www.web3sj.com/project/58557/</a></p>
+<p><a href="https://www.sohu.com/a/593455455">https://www.sohu.com/a/593455455</a>_121118710</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/52322/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">杭州动漫地铁专列今日发车！无界AI《新西湖繁胜去全景图》与迪斯尼等超级IP一同亮相</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/52318/">
+                <span class="next-text nav-default">或将面临集体诉讼？一文剖析推特网红Ben「欺诈事件」全过程</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

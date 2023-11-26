@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文详解Maverick四种区间变动模式和操作教程 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Maverick 将 Uniswap v3 的流动性区间手动挪动操作变成了自动操作，而且不收取手续费。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/53416/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文详解Maverick四种区间变动模式和操作教程" />
+<meta property="og:description" content="Maverick 将 Uniswap v3 的流动性区间手动挪动操作变成了自动操作，而且不收取手续费。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/53416/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文详解Maverick四种区间变动模式和操作教程">
+<meta itemprop="description" content="Maverick 将 Uniswap v3 的流动性区间手动挪动操作变成了自动操作，而且不收取手续费。"><meta itemprop="datePublished" content="2023-06-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-06-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4497">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文详解Maverick四种区间变动模式和操作教程"/>
+<meta name="twitter:description" content="Maverick 将 Uniswap v3 的流动性区间手动挪动操作变成了自动操作，而且不收取手续费。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文详解Maverick四种区间变动模式和操作教程</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-06-19">
+      2023-06-19
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4497 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Biteye 核心贡献者 Crush</p>
+<p>币安近日琐事缠身，与 SEC 的纠纷也是让自家的 BNB 一度暴跌至 220 ，但是突然上线的新一期挖矿，让大家的注意力又集中到了这个名为 Maverick 的项目。</p>
+<p>根据币安的介绍，Maverick 是一种可组合的去中心化金融基础设施，使建设者和流动性提供者实现高资本效率并执行他们所需的流动性提供 (LP) 策略。</p>
+<p>光看这一句话的介绍，你可能很懵，不清楚这是干什么的，那就让我们先从 Uniswap v2 说起，了解一下他们解决了什么问题。</p>
+<h2 id="一uniswap-v2-的玩法">一、Uniswap v2 的玩法</h2>
+<p>如果一个用户在 Uniswap v2 中添加了流动性，这些流动性是怎么流动的呢？</p>
+<p>拿 ETH 举例，如果你想在 ETH 2000 U 的时候在 Uniswap v2 添加流动性，准备 4000 U，其中 2000 U 买一个 ETH，剩下 2000 U，按照 1 ETH： 2000 U 的比例添加进池子。</p>
+<p>为了简化模型，我们假设池子里就只有你的流动性。</p>
+<p>这时候别人卖出 0.5 个 ETH，就等于是把 0.5 个 ETH 给你的流动性，按照一个 ETH 值 2000 U 的价格，你的流动性提供 1000 U 给这个人。</p>
+<p>一笔交易之后，池子中的流动性变成了 1.5 ETH： 1000 U。</p>
+<p>由于那个人的卖出， 1.5 个 ETH 只能换 1000 U 了，也就是说，ETH 的价格被他砸到 1000/1.5 ≈ 666.67 U ，而之前的价格是 2000 U。</p>
+<h3 id="lpliquid-provider-流动性提供者">LP（Liquid Provider 流动性提供者）</h3>
+<p>由于你添加了 1 个 ETH 和 2000 U 进池子，所以你就是我们常说的 LP，没有你的这笔钱，上面那个用户就没有办法砸盘。</p>
+<p>既然你提供了池子给别人砸盘，那么相应的好处就是可以拿到交易手续费，通常在 0.05% 到 1% 之间。</p>
+<h3 id="无常损失">无常损失</h3>
+<p>你最开始投入了 4000 U（1 ETH+ 2000 U），后来 ETH 价格被人砸到 666 U，你的流动性变成了 1.5 ETH： 1000 U，按照左右价值相等的原理，这个时候你的资产价值只有 2000 U 了，一下子就亏了 2000 U。</p>
+<p>而如果不做流动性，只是拿着 1 ETH 和 2000 U，尽管 ETH 跌到了 666 U，你的资产仍然有 2666 U，多亏的 666 U 就是无常损失。</p>
+<h3 id="滑点">滑点</h3>
+<p>当你下单卖出，并且池子里流动性不足的时候，你创建订单时的价格和最终的成交价很可能不一样，也就是你卖出的价格更低了，而这就是由于流动性不够所带来的滑点问题。</p>
+<h3 id="区间">区间</h3>
+<p>Uniswap v2 版本中，你的流动性一旦放入，就是平铺在整个价格区间。ETH 一直涨，你就得一直卖出 ETH，ETH 一直跌，你就得一直买入 ETH。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_3mg98tj3vt.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>这带来了三个不好的地方：</p>
+<p>1、资金利用效率低，大部分资金被闲置</p>
+<p>ETH 的价格不会短时间内暴拉至无限高，也不至于暴跌至归零，通常是在一个区间，例如 1800-2200 这里徘徊。</p>
+<p>将所有的流动性平铺在整个区间，而 ETH 又只在 1800-2200 这里买卖，那么在它前后的大部分资金都浪费了，成为了闲置资金。</p>
+<p>2、所有价格区间池子厚度都一样，极端行情滑点高</p>
+<p>通过上图可以看到，如果价格只在 1800-2200 之间徘徊，万一这里出现了极端行情，由于所有价格区间的池子都一样厚，价格很有可能被砸得很低，而闲置资金却站在一旁观望，没有起到任何作用。</p>
+<p>假设闲置资金利用起来，形成一个上图中绿色三角形的部分，集中在 1800-2200 的价格区间有很多的流动性托底，那么 ETH 价格就不会过分波动，滑点也会很小，用户体验瞬间提升几个台阶。</p>
+<p>3、LP 手续费收入低</p>
+<p>这一条也是由于资金利用效率低所带来的，用户存入流动性就是为了赚取手续费，结果大部分资金都没有被利用，那么用户所获得的手续费肯定也是变相减少了。</p>
+<h2 id="二uniswap-v3-的升级">二、Uniswap v3 的升级</h2>
+<p>Uniswap v3 升级之后，很快就解决了上面的几个问题。v3 推出了集中流动性，用户可以自行将流动性固定在 1800-2200 的区间，一旦超过了这个区间，用户的流动性就不会再去工作，而集中流动性所带来的好处就是资金利用率的上升，以及滑点的优化，相信大家已经能抢答了。</p>
+<p>但是接着问题又来了，如果我就是一个专门在 Uniswap v3 上挖矿的用户，我设置了一个 1800-2200 的区间，在这个区间里，流动性正常工作，并且帮我赚取手续费，但是超过这个区间怎么办？</p>
+<p>常见的操作就是，先取出流动性，然后设置一个新的区间，例如 2200-2600 ，最后再把流动性重新导入池子中，只有这样，流动性才能继续为我赚钱。</p>
+<p>这里产生了两个问题：</p>
+<p>1、来回地移动价格区间非常耗费个人精力</p>
+<p>2、更换区间产生的手续费，日积月累，也是一笔不小的花费</p>
+<h2 id="三maveric-的创新之处">三、Maveric 的创新之处</h2>
+<p>终于要到 Maveric 登场了，是的，他们就是解决了上面的区间挪动问题，把本来手动的操作变成了自动操作，而且这个区间的自动挪动，是不收取手续费的。</p>
+<p>你只需要设置一个价格区间大小，然后设置一个手续费，接着选择偏好的模式，你的价格区间，便会跟着价格一块挪动。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_1uvcesbbdz.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>比如一开始价格在 1126 时，你的区间在 1000-1400 之间。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_asty3y199g.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>等到价格涨到了 1866 时，Maveric 也会自动将你的区间调整到新的价格线的附近。成功进入新区间后，你的流动性仍然能够赚取手续费。</p>
+<h2 id="四maveric-实操演练">四、Maveric 实操演练</h2>
+<p>花费长篇大论了解了他们在干什么后，接下来的操作就简单了。打开 Maverick 的<a href="https://mav.xyz/">官网</a>，连接钱包，这里我们使用 ZkSync Era 网络，一方面是有机会获得 ZkSync 未来的空投，另一方面是其手续费相对于主网来说更低。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_ohqrq9ohj2.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>官网左上角依次是 「Swap」、「Boosted Positions」 「Pools」，第一个「Swap」 就是正常的代币交换，后面的「Pools」就是添加流动性的地方。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_z1dsuudggs.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<h3 id="一手续费与区间的关系">（一）手续费与区间的关系</h3>
+<p>你可以直接搜索关键词，加入别人已经创建的池子，也可以右上角新建一个池子，添加你想提供流动性的一对代币，比如用一个山寨币和 ETH 组成流动性，进行挂钩，使得山寨币产生一个价格。</p>
+<p>这里我们直接加入别人的池子即可，搜索结果排在第一的是 APR 最高的一个池子，可以看到这个池子的手续费是 0.1% ，价格区间大小是 2% 。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_n9mjw8cmkq.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>如果你想更改这些信息，则可以点进池子，选择「Edit」进行自定义，但是要注意以下两点：</p>
+<p>1. 手续费越高，成交的单子可能越少。毕竟交易的人也不傻，肯定会优先选择手续费低的流动性；</p>
+<p>2. 区间设置得过大，则可能会出现部分流动性闲置无法赚取手续费的情况，具体还是取决于代币对的波动情况和区间设置的准确程度。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_f21hm5knd5.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>那么基于以上两点，我们可以知道，价格区间设置得越小，手续费通常就可以收得越高。但是有人会问，我区间就设置得大，然后手续费也收得高，你奈我何？</p>
+<p>结果也是显而易见的，这个池子的 APR 会下降很多，比如上图中最高的 APR 达到了 281.88% ，而最低的甚至小于 1% ，贫富差距极其严重。</p>
+<p>由此可知，我们想要在提供流动性时挣最多的钱，就得多研究一下，如何设置一个合理的价格区间和手续费。</p>
+<h3 id="二四种区间变动模式">（二）四种区间变动模式</h3>
+<p>继续上面的操作，当确认区间和手续费无误之后，点击「Next」，进入区间变动模式选择。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_4t57ee7p3n.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>这里一共提供了四种变动模式供用户进行选择：</p>
+<p>1. Mode Static——价格区间固定不变动，但区间分布可调整</p>
+<p>2. Mode Right——代币价格上涨时，区间才跟着价格变动</p>
+<p>3. Mode Left——代币价格下跌时，区间才跟着价格变动</p>
+<p>4. Mode Both——不论代币价格涨跌，区间都跟着价格变动</p>
+<p>前面文章讲过，Uniswap v2 的资金利用率没有上来，用户承担着无常损失风险的同时，还挣不到太多手续费；</p>
+<p>接着 Uniswap v3 更新了区间设置功能，提高了资金利用率，也提高了用户的手续费收入，但是区间是固定的，需要手动调整；</p>
+<p>等到了 Maveric 这里，让区间跟随价格变动，进一步提高了手续费的收入和资金利用率。同时，在 Mode Right 和 Mode Left 模式中，由于只有单边的区间变动，只承担单边损失，相较于 Uniswap v3，单边行情下的无常损失得到了优化，但是 Mode Both 的无常损失依旧是具有较大的不确定性。</p>
+<p>从这个优化过程我们可以发现：</p>
+<p>1. 尽管用户的手续费赚得更多了，但是收益仍与风险相伴；</p>
+<p>2. 从选择模式这里也不难看出，工具永远只能给你提供便利，最终是否赚钱，靠的仍然是自己的判断。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_l606cu1tqh.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>当你选择 Mode Static 时，区间虽然固定了，但是区间的分布却有所不同。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_h1rsms5kln.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>第一种是指数型分布，将流动性资金分成 11 个价格区间，越靠近价格线的部分，分配的流动性资金越多，可以让你的资金在短时间内得到有效的利用，但价格一旦远离你的重仓位置，比如价格线跑到左右两边，这个时候你的手续费收益就变少了。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_v6s2a55yb8.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>第二种是平均分布，让 11 个区间分配的流动性资金相等，好处是只要在区间内，不管是哪里，手续费都不会少挣。</p>
+<p>但如果价格线大部分时候只在中间徘徊，而你又没有将主要资金放在中间部分，那么两边资金就浪费了。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_pws0w0veqg.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>第三种是单区间分布，相比较于第一种更加激进，直接将所有的资金都梭哈进中间一个区间内，所有的资金都得到有效利用，同时也能获得最多的手续费。</p>
+<p>但是只要在区间之外，就一分钱手续费都没有。由于只有一个区间，价格线跳出区间也是轻而易举的事。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_59fjf66yud.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>当你选择 Mode Right 时，如图所示，你的流动性区间会在价格线左边，价格完全没有进入区间，只需提供 USDC，等待价格回落到你的区间，接盘他人的 ETH 赚取手续费即可。</p>
+<p>如果 ETH 价格持续升高，即价格线往右走，那么你的 USDC 作为流动性，则会被右移一个区间，继续使用 USDC 去接盘别人卖出的 ETH，当价格在新区间回升时，再卖出 ETH 换成 USDC，赚取手续费。</p>
+<p>但是如果价格持续下跌，则区间不会再往左移动，因为你选择的 Mode Right，只有代币价格上涨时，区间才会跟着移动，后面的 Mode Left 也是同理。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_lw7yafhnh2.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>Mode Both 则是两种代币都需要添加，因为价格线会正在落在你的流动性区间中间，且区间会随着价格左右变动，不管价格是涨是跌。</p>
+<h3 id="三流动性激励">（三）流动性激励</h3>
+<p>Maveric 的首页还有一个「Boosted Positions」的选项，点开它可以看到哪些池子是有额外奖励的，比如这里的一个池子就有额外 1.95% 的 APR，主要是用来吸引用户往这个池子里添加流动性的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_ply9rslqsd.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>在顶部右边的 Engage 中，可以看到一个「Liquidity Shaping」的按钮，这个按钮千万不要乱点，它可不是提供流动性，而是捐钱，给池子的流动性激励提供资金来源。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_le2catrqnh.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>如果你在 Liquidity Shaping 里面存了钱，那么这个钱可不会帮你赚取手续费，它会直接变成某个池子里额外的 APR 奖励，然后别人来这个池子里提供流动性的时候，额外奖励给别人。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0619/15_poe2a2dpf8.png" alt="一文详解Maverick四种区间变动模式和操作教程"></p>
+<p>在之前的网页中，Liquidity Shaping 是直接放在池子后面的，很多用户没有注意看，当成是提供流动性的地方，钱一存进去就变成了别人的奖励，这是比较坑人的一点，现在改过来之后就好了一点。</p>
+<p>按照社区的 MOD 的说法，这个功能似乎是给项目方使用的，用来提高某个池子的奖励，以吸引用户去为这个池子提供流动性。但是从实际效果上来看，可能在创新不如上面的价格区间自动变化。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/53425/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文读懂Intents：定义、现有用例及未来用例畅想</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/53413/">
+                <span class="next-text nav-default">一周AIGC丨大模型融资杀疯了，天才、名校、大厂争相下场</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一uniswap-v2-的玩法">一、Uniswap v2 的玩法</a>
+      <ul>
+        <li><a href="#lpliquid-provider-流动性提供者">LP（Liquid Provider 流动性提供者）</a></li>
+        <li><a href="#无常损失">无常损失</a></li>
+        <li><a href="#滑点">滑点</a></li>
+        <li><a href="#区间">区间</a></li>
+      </ul>
+    </li>
+    <li><a href="#二uniswap-v3-的升级">二、Uniswap v3 的升级</a></li>
+    <li><a href="#三maveric-的创新之处">三、Maveric 的创新之处</a></li>
+    <li><a href="#四maveric-实操演练">四、Maveric 实操演练</a>
+      <ul>
+        <li><a href="#一手续费与区间的关系">（一）手续费与区间的关系</a></li>
+        <li><a href="#二四种区间变动模式">（二）四种区间变动模式</a></li>
+        <li><a href="#三流动性激励">（三）流动性激励</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

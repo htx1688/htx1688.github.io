@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          解读零知识证明中的实现差异：zkSNARKs与zkSTARKs优缺点对比 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="​zkSNARKs 和 zkSTARKs 都是零知识证明 系统，允许证明者向验证者证明陈述是真实的而无需透露关于陈述本身的任何信息的解决方案。" />
+<meta name="keywords" content="零知识证明" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/48492/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="解读零知识证明中的实现差异：zkSNARKs与zkSTARKs优缺点对比" />
+<meta property="og:description" content="​zkSNARKs 和 zkSTARKs 都是零知识证明 系统，允许证明者向验证者证明陈述是真实的而无需透露关于陈述本身的任何信息的解决方案。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/48492/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-15T00:00:00+00:00" />
+
+<meta itemprop="name" content="解读零知识证明中的实现差异：zkSNARKs与zkSTARKs优缺点对比">
+<meta itemprop="description" content="​zkSNARKs 和 zkSTARKs 都是零知识证明 系统，允许证明者向验证者证明陈述是真实的而无需透露关于陈述本身的任何信息的解决方案。"><meta itemprop="datePublished" content="2023-03-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4943">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解读零知识证明中的实现差异：zkSNARKs与zkSTARKs优缺点对比"/>
+<meta name="twitter:description" content="​zkSNARKs 和 zkSTARKs 都是零知识证明 系统，允许证明者向验证者证明陈述是真实的而无需透露关于陈述本身的任何信息的解决方案。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">解读零知识证明中的实现差异：zkSNARKs与zkSTARKs优缺点对比</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-15">
+      2023-03-15
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4943 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>编译：Cindy，SophonLabs</p>
+<p>随着计算机技术的不断发展，我们可以轻松地在互联网上存储、传输和处理大量的个人和企业数据。然而在这个数字化时代，大家对数据隐私和安全的担忧也越来越高。为了保护数据的隐私性，密码学家们开发了许多技术，其中零知识证明（Zero-Knowledge Proof，ZKP）是其中一项核心技术。在本文中，我们将盘点细分零知识证明中的实现差异。</p>
+<h3 id="交互式与非交互式零知识证明">交互式与非交互式零知识证明</h3>
+<p>零知识证明的两种主要类型是交互式和非交互式。交互式零知识证明和非交互式零知识证明都是证明者（prover）和验证者（verifier）之间进行的过程，但它们在证明的交互流程上有所不同。</p>
+<p>交互式零知识证明 (IZKP) 要求证明者和验证者进行来回对话，在对话中证明者对验证者的查询做出响应。这种互动可以亲自进行，也可以通过互联网等网络进行。需要与验证者进行多轮的交互，以便验证者可以询问有关所证明语句之外的附加信息。在每一轮中，证明者需要根据验证者的询问提供一个回答。</p>
+<p>这种交互式证明方法对于某些复杂的问题可行，但可能会带来时间和计算成本的问题，并需要所有参与者进行通信。另一方面，非交互式零知识证明 (NIZKP) 不需要证明者和验证者之间的任何交互。非交互式零知识证明是指证明者可以一次性地生成证明，并将它发送给验证者，而不需要进行多轮的交互。与交互式证明相比，非交互式证明速度更快，需要的计算成本和通信量也更少。但是，它有时可能不是可行的方案，如需要涉及附加信息的证明，或需要证明一个非常复杂的语句时。相反，证明者创建了一个单一的、自包含的证明，验证者可以在没有进一步沟通的情况下独立验证。这比交互式证明更方便和高效，因为它不需要证明者和验证者同时在线或交换多条消息。</p>
+<p>实现这一目标的最经典方法之一是使用基于数字签名的 Fiat-Shamir 启发式技术。交互式和非交互式零知识证明之间的主要区别之一是证明者和验证者之间所需的信任级别。在交互式证明中，验证者必须信任证明者遵守协议并对他们的查询提供诚实的回应。另一方面，在非交互式证明中，验证者根本不需要信任证明者，因为他们可以在不依赖证明者提供的任何信息的情况下独立验证证明。两种类型的零知识证明之间的另一个区别是所需的计算复杂度级别。</p>
+<p>交互式证明往往比非交互式证明计算量更大，因为它们需要证明者和验证者交换多条消息并执行额外的计算。另一方面，非交互式证明只需要验证者进行一次计算，从而使它们更加高效和可扩展。交互式和非交互式零知识证明各有利弊，给定场景的最佳选择将取决于具体要求和约束。交互式证明可能更适用于证明者和验证者同时在线且可以轻松沟通的情况。相比之下，非交互式证明可能更适用于证明者和验证者不同时在线或证明者可信度不确定的情况。总之，交互式零知识证明和非交互式零知识证明通常是根据特定问题和应用场景来选择的。</p>
+<h3 id="交互式零知识证明izkp的局限性">交互式零知识证明（IZKP）的局限性</h3>
+<p>交互式零知识证明是最早被研究和广泛应用的零知识证明类型之一。在这种证明过程中，证明者和验证者之间会进行多轮的交互。这些交互旨在允许验证者向证明者询问特定的信息，以验证被证明的内容。这种交互性质使得交互式证明可以非常有效地解决复杂的问题。</p>
+<p>一个简单的例子是著名的“彩色图问题”，它是关于如何在任何图中着色的问题。如果证明者声称他能够在任何图中为每个节点着色，而且相邻节点必须使用不同的颜色，那么验证者可以采取交互式零知识证明方法来判断该声称是否正确。在证明过程中，证明者首先以某种方式着色图形，接着验证者选择任意两个节点并询问证明者它们是否被用了同一种颜色。证明者需要回答这个问题，但不能透露为什么他会如此选择。这个过程会持续几轮，验证者可以检查一些有关证明者如何着色图形的随机数据。如果证明者可靠地回答了问题，证明者就可以认为是正确的。交互式零知识证明 (IZKP) 有几个局限性，因此使它们更加昂贵和复杂。</p>
+<p>IZKP 需要证明者和验证者之间的交互，这可能是低效且耗时的。为了完成证明，证明者必须与验证者来回发送多条消息。这可能会花费大量时间，尤其是在证明很复杂或涉及大量数据的情况下。当速度至关重要时，例如在高频交易或实时决策中，这可能是个问题。</p>
+<p>IZKP 不能很好地扩展。随着被证明数据的增加，证明的复杂性也随之增加，难以在合理的时间内完成证明。当需要证明大量数据时，例如在供应链管理或医疗保健中，这可能是一个问题。</p>
+<p>IZKP 依赖于证明者和验证者是诚实的并且不会试图欺骗或操纵证明的假设。然而，这个假设并不总是有效的，证明者可以通过发送虚假消息或以某种方式操纵证明来试图欺骗验证者。这可能会损害证明的完整性并破坏其实用性。</p>
+<p>IZKP 需要专门的加密技术，这可能难以实施并且需要高水平的技术专长。这可能会使非技术用户使用 IZKP 变得困难，并且可能会限制它们在某些情况下的采用。</p>
+<p>总的来说，虽然 IZKP 有可能提供强大的安全和隐私保证，但上述限制在历史上阻碍了它们的广泛使用。但它存在一些缺点。尤其是这种证明需要证明者和验证者之间进行多轮的交互，这会带来时间和计算成本的问题，并需要所有参与者进行通信。其次，有些应用程序可能需要处理的信息太复杂，以至于证明者和验证者之间必须进行多轮交互才能得到完整的证明，这就使得交互式证明方法不太可行。一旦理解了交互式和非交互式 ZKP 之间的区别，就该深入研究最流行的区块链和加密行业实现 — zkSNARKs。虽然 zkSync 使用 zkSNARKs，可以说是最流行的使用 ZKPs 的 L2，但紧随其后的是 Starkware 的 zkSTARKs。让我们了解这两种实现方式的不同之处以及各自的优缺点。</p>
+<h3 id="zksnarks-与-zkstarks">zkSNARKs 与 zkSTARKs</h3>
+<p>zkSNARKs 和 zkSTARKs 都是零知识证明 (ZKP) 系统，允许一方（证明者）向另一方（验证者）证明陈述是真实的，而无需透露关于陈述本身的任何信息。ZKP 有很多应用，包括区块链上的隐私保护交易、安全的多方计算和匿名通信。它们都是用于保护数据交易和计算中的隐私，但它们的应用场景和技术方案有很大的不同。zkSNARKs技术优势在于高度压缩的小证明，在保证计算安全性的同时，支持高度隐私保护和高效交易。zkSTARKs技术优势在于对复杂算法和大型数据处理性能方面的优化，可以实现更高级别的保护和证明。</p>
+<h4 id="zksnarks">zkSNARKs</h4>
+<p>zkSNARKs是一种使用高度压缩的算法来提供非常小的证明的方法，这些证明可以用来证明满足某些条件的任意计算。通过使用zkSNARKs技术，可以得到一个经过验证的证明，证明所描述的计算的具体值和详细步骤是未知的。zkSNARKs的优点是证明大小非常小，只需要大约200字节的证明就可以验证一个数百万次计算后的结果，证明的计算成本也相对较低。同时，它们允许对基于密码学的计算进行高效的隐私保护，特别是在需要验证但不愿意透露信息时非常有用。因此，zkSNARKs广泛应用于无信任环境下的交易、加密货币、身份验证和隐私保护领域。zkSNARKs（零知识简洁非交互式知识论证）最早由 Eli Ben-Sasson、Alessandro Chiesa、Daniel Genkin、Eran Tromer 和 Madars Virza 于 2014 年在一篇论文中提出。它们基于“非-交互式证明”，这意味着证明者和验证者在证明过程中不需要相互通信。这使得 zkSNARKs 非常适合在区块链中使用，在区块链中，各方之间的通信受到达成共识的需要的限制。zkSNARKs 使用公钥和私钥的组合来创建证明。证明者可以访问私钥，他们用它来生成他们希望做出的陈述的证明。验证者可以访问相应的公钥，用于验证证明。如果证明是有效的，验证者可以确信该陈述是真实的，即使他们没有关于该陈述本身的任何信息。</p>
+<ul>
+<li><strong>zkSNARKs 的优势</strong></li>
+</ul>
+<p>zkSNARKs 的主要优势之一是它们的效率。证明过程非常快，使得在区块链等高吞吐量系统中使用 zkSNARKs 成为可能。</p>
+<ul>
+<li><strong>zkSNARKs 的缺点</strong></li>
+</ul>
+<p>他们依赖于“可信设置”过程，其中一组参与者生成并销毁一组公钥和私钥。如果未正确执行此过程，可能会危及系统的安全性。因此需要够在可信的第三方中进行设置和参与、视数据的不同而具有不同的性能，并且它们的证明可能会被各种攻击技术攻击。</p>
+<p>此外，zkSNARKs 不是透明的，这意味着如果不访问私钥就无法验证证明的正确性。</p>
+<h4 id="zkstarks">zkSTARKs</h4>
+<p>zkSTARKs是另一种零知识证明技术，专门用于处理复杂算法和大规模数据。相比之下，zkSTARKs可以在不需要中间方的情况下提供更高的安全性，因为它们不需要可信的第三方进行参与和设置。zkSTARKs的优点包括不需要选择特定曲线进行计算，证明更加通用，并且具有良好的可扩展性和抗攻击性。它们也没有任何机密密钥或公共参数，这使得它们非常适合用于无信任环境下进行的基于密钥的计算。然而，zkSTARKs技术需要更高的计算成本和证明大小比zkSNARKs技术更大，因此在一些场景中可能不适合使用。</p>
+<ul>
+<li><strong>zkSTARKs 的优势</strong></li>
+</ul>
+<p>zkSTARKs 的主要优势之一是它们的透明度。使用 zkSNARKs，无法在不访问私钥的情况下验证证明的正确性。使用 zkSTARKs，可以创建一个“验证证明”，它允许任何人在不访问任何秘密信息的情况下验证证明的正确性。这使得 zkSTARKs 成为信任必不可少的应用程序的更安全和透明的选择。</p>
+<p>zkSTARKs 的另一个优势是它们的可扩展性。zkSNARKs 依赖于资源密集型的复杂数学运算，随着证明规模的增加，它们的效率会降低。</p>
+<ul>
+<li><strong>zkSTARK 的缺点</strong></li>
+</ul>
+<p>一个主要缺点是 zkSTARKs 仅适用于证明某些类型声明的真实性。特别是，它们只能用于证明以多项式表示的陈述的真实性，这限制了它们的适用性。</p>
+<p>另一个缺点是 zkSTARKs 不是完全非交互的，需要一个可信的设置阶段，在这个阶段生成一个公共参考字符串（CRS）。此 CRS 必须保密且安全，zkSTARK 证明才能被视为有效。如果 CRS 受到损害，那么证明的安全性也会受到损害。</p>
+<p>此外，zkSTARKs 尚未被广泛使用或被充分理解，因此可能尚未发现潜在的漏洞。缺乏广泛采用和理解也意味着缺乏使用 zkSTARKs 的工具和资源，使得在实践中实施和使用它们变得更加困难。</p>
+<p>最后，与其他零知识证明系统相比，zkSTARKs 仍然相对较新且未经测试，这意味着它们的长期安全性和可靠性尚未得到充分了解。对于寻求经过验证且可靠的方法来验证声明真实性的组织或个人而言，这种不确定性可能是一个缺点。</p>
+<h3 id="总结">总结</h3>
+<p>虽然 zkSTARKs 在效率和安全性方面提供了一些好处，但在决定是否使用它们时也有一些缺点需要考虑。这些缺点包括适用范围有限、需要可信的设置阶段、缺乏广泛采用和理解，以及对其长期安全性和可靠性的不确定性。zkSNARKs基于曲线上的折线算法，可以用于证明一些计算结果在不泄露计算输入和密钥的情况下是正确的。这种技术可以应用于区块链、加密货币和密码学等领域。</p>
+<p>与zkSNARKs不同，zkSTARKs是在简洁交互证明的框架下建立的，这意味着证明可以很容易地验证，而不需要涉及证明者和验证者之间的任何交互。因此，zkSTARKs在安全性和可扩展性方面都具有更大的优势。</p>
+<p>随着技术的发展零知识证明技术将继续发展和应用，在保护隐私和进行安全验证等方面，零知识证明技术具有非常广泛的应用前景。同时随着协议的发展和优化，零知识证明技术的计算效率和证明大小等方面也将得到改善，从而进一步推动其在实际应用中的普及和应用。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/48465/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">硅谷银行1月份已裁员100-120人</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/48472/">
+                <span class="next-text nav-default">借着Euler黑客事件 聊聊DeFi的安全审计和安全</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#交互式与非交互式零知识证明">交互式与非交互式零知识证明</a></li>
+        <li><a href="#交互式零知识证明izkp的局限性">交互式零知识证明（IZKP）的局限性</a></li>
+        <li><a href="#zksnarks-与-zkstarks">zkSNARKs 与 zkSTARKs</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

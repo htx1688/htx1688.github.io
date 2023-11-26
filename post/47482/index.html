@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解 Synthetix V3：关于流动性的协议级重构 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="作为最「古老」的 DeFi 协议之一，Synthetix 在 2021 年初是合成资产赛道的绝对龙头，也让行业展开了不少针对合成资产协议的讨论。" />
+<meta name="keywords" content="Synthetix" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/47482/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解 Synthetix V3：关于流动性的协议级重构" />
+<meta property="og:description" content="作为最「古老」的 DeFi 协议之一，Synthetix 在 2021 年初是合成资产赛道的绝对龙头，也让行业展开了不少针对合成资产协议的讨论。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/47482/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解 Synthetix V3：关于流动性的协议级重构">
+<meta itemprop="description" content="作为最「古老」的 DeFi 协议之一，Synthetix 在 2021 年初是合成资产赛道的绝对龙头，也让行业展开了不少针对合成资产协议的讨论。"><meta itemprop="datePublished" content="2023-02-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-02-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3827">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解 Synthetix V3：关于流动性的协议级重构"/>
+<meta name="twitter:description" content="作为最「古老」的 DeFi 协议之一，Synthetix 在 2021 年初是合成资产赛道的绝对龙头，也让行业展开了不少针对合成资产协议的讨论。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解 Synthetix V3：关于流动性的协议级重构</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-02-17">
+      2023-02-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3827 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>撰文：Babywhale，Foresight News</p>
+<p>在 2022 年原子交换正式上线并获得了不错的效果之后，Synthetix 将 V3 提上了日程。作为最「古老」的 DeFi 协议之一，Synthetix 在 2021 年初是合成资产赛道的绝对龙头，也让行业展开了不少针对合成资产协议的讨论。</p>
+<p>据 OKX 行情显示，<strong>SNX 价格于 2021 年 2 月 14 日达到了约 29 美元的历史最高价，而彼时比特币与以太坊均未达到历史高点。</strong> 但之后 SNX 就没有再出现过于亮眼的表现了，一方面是由于 Synthetix 的机制设计过于复杂，另一方面也是因为大家发现通过如此之高的抵押率交易合成资产 sETH、sBTC 不如直接交易比特币和以太坊，加上大量新兴资产的崛起，使得 Synthetix 收益率的吸引力大大降低了。</p>
+<p><strong>但 Synthetix 并未因此走向衰亡，而是巧妙利用了 sUSD 与 sToken 间零滑点的机制讲述了新的「原子交换」的故事。</strong></p>
+<h2 id="过去的-synthetix">过去的 Synthetix</h2>
+<p>Synthetix 最开始完全以合成资产平台的定位亮相于市场中，且设置了一个及其特殊的「债务池」机制：用户通过质押 SNX 来借出 sUSD，与 MakerDAO 抵押资产铸造 DAI 不同，虽然 Synthetix 也会在 SNX 抵押率不足（目前清算线为 160% 的抵押率）时进行清算，但本质上的逻辑却完全不同。</p>
+<p>在 Synthetix 中，所有质押 SNX 铸造 sUSD 的用户共用一个「债务池」，也就是说当你铸造 sUSD 时，铸造出的 sUSD 数量占所有 sUSD 数量的比例就是你占整个债务池的比例，而所有被铸造的 sUSD 就是整个系统的债务。由于所有人共用一个债务池，所以如果其他用户通过操作使得资产升值（例如使用 sUSD 购买 sBTC，而 sBTC 上涨）就会导致剩余用户的债务增加。</p>
+<p>究其原因，部分用户的资产升值意味着系统整体的负债增加了，此时如果你的资产升值率没有高于系统平均值，就意味着亏损。反过来说，假如部分用户出现了亏损，那么即使你持有 sUSD 没有做任何操作，你的债务也减少了。</p>
+<p>不得不说，这个设计的确非常的新颖，使得整个系统都处在动态平衡之中。不过新颖并不意味着可以被大多数人接受，当交互其他 DeFi 协议、持有其他代币或 NFT 的收益本身就有很高的潜在收益时，Synthetix 就显得不够看了。</p>
+<p>简单来说，需要超额抵押 SNX 才能铸造 sUSD 来进行投资，投资的标的一方面受到了一定限制。另外，通过投资产生的收益可能因为其他用户同样产生收益而被冲淡。虽然 Synthetix 为质押者提供了 SNX 通胀激励以及交易费用激励，但在牛市中与动辄翻倍的代币相比，用户自然会选择将本金进行直接投资。</p>
+<h2 id="原子交换">原子交换</h2>
+<p>正如刚刚所说，虽然有类似于 MakerDAO 的超额抵押铸造稳定币的影子，但其机制相对更加复杂，需要设置的策略更多，使用体验并不算友好。合成资产的叙事也在牛市日新月异的新项目轰炸中逐渐没落。</p>
+<p>但 Synthetix 并非什么都没有留下，团队也意识到死抓着合成资产这个叙事不放可能最终会被市场抛弃，于是巧妙利用了机制中 sUSD 兑换其他 sToken 直接使用预言机喂价兑换而无需考虑深度的无滑点交易，正式开始了原子交换（Atomic Swap）的叙事。</p>
+<p>原子交换的功能最早在由 Synthetix 创始人 Kain Warwick、Yearn 创始人 Andre Cronje 等四人共同提出的 SIP-120（https://sips.synthetix.io/sips/sip-120/）中出现。该提案原本旨在作为 Synthetix 生态内部的一种交易模式，后因 Synthetix 生态外部性逐渐增强而被发现为是一个极佳的流动性工具。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/20_u5j00gs7z0.png" alt="详解 Synthetix V3：关于流动性的协议级重构"></p>
+<p>2022 年 8 月，随着 Tiaki 版本更新，原子交换功能正式被集成至 1inch，开始为链上交易提供零滑点的交易路径（主要集中在大宗交易）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/20_l9synj1p6f.png" alt="详解 Synthetix V3：关于流动性的协议级重构"></p>
+<p>于是，Synthetix 团队也不再纠结于在合成资产的叙事上撞南墙，而是将原子交换作为了 Synthetix 的最重要的功能之一。当然，Synthetix 生态与 Optimism 的深度绑定以及期权（Lyra）、合约（Kwenta）等生态的拓展也是 Synthetix 战略的重要部分。</p>
+<h2 id="synthetix-v3-的诞生">Synthetix V3 的诞生</h2>
+<p>对 Synthetix 而言，虽然原子交换确实在一定程度上提高了包括以太坊、比特币等资产的流动性和交易深度，但却很难进一步扩大影响力。Synthetix 当前可以获得 SNX 通胀奖励的 c-ratio（可以理解为 SNX 的超额抵押率）为 400%，加之 SNX 代币总量仅有略超 3 亿枚，考虑到被质押的 SNX 数量，用于提供流动性的 sUSD 比例和 sUSD 被交易为其他代币的比例，真正能在原子交换中提供流动性的 sUSD、sETH、sBTC 等资产并不多。</p>
+<p>据Dune 数据显示，撰写本文时，SNX 总量为约 3.14 亿，L1 与 L2 总计的质押率约为 67.37%，而在 Curve 上提供流动性并可以进行原子交换的 sUSD、sETH、sBTC（包括 L1 和 L2）分别约有 3690 万枚、19180 枚、576.7 枚，按照撰写本文时的 SNX 以及比特币、以太坊价格计算，这些提供流动性的 sToken 总价值约为 8340.48 万美元，质押的 SNX 总价值约为 5.589 亿美元，可用于原子交换的 sToken 总价值不到质押 SNX 总价值的 15%。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/20_1bw0pr6aau.png" alt="详解 Synthetix V3：关于流动性的协议级重构"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0217/20_po3esvsy3e.png" alt="详解 Synthetix V3：关于流动性的协议级重构"></p>
+<p>所以，对 Synthetix 来说，想要提供更好的交易深度以及更高的费用收益，只能提高 sUSD 等 sToken 的数量，而这仅仅靠 SNX 远远不够。于是 Synthetix V3 应运而生，在保留了期货、合约等市场的前提下，在原子交换叙事上做了大幅的优化。</p>
+<p>当前已投票通过的与 V3 相关的优化包括：</p>
+<h3 id="sip-255">SIP-255</h3>
+<p>SIP-255 调整了原本要奖励给 SNX 质押者的通过原子交换产生的费用的分发路径，使得这些费用被自动销毁以偿还质押者的债务，从而降低债务和可能发生的清算风险。也可以理解为，用户收到来自原子交换奖励的 sUSD，然后这部分原本需要用户手动领取的 sUSD 被自动销毁以减少质押者的负债。质押者可以选择重新质押被赎回的 SNX 来获得这部分奖励。</p>
+<p>从项目的角度而言，该措施可以帮助质押者，尤其是会经常忘记领取奖励的质押者保持长期的健康负债率，降低清算风险。此外，该方案也能增加 SNX 和 sUSD 的利用率，并降质押者对抵押率的敏感度，从而刺激质押者更多的质押、有效减少协议的总体债务，并铸造更多的 sToken。</p>
+<h3 id="sip-301">SIP-301</h3>
+<p>SIP-301 旨在为用户创建 ERC-721 格式的账户代币 NFT，使得用户可以在不同的钱包地址之间转移其 SNX 的质押头寸。该提案解耦了「账户」与「地址」的绝对绑定。此外，ERC-721 标准可以最大限度地提高智能合约和现有用户界面的可组合性。也允许为账户代币创建二级市场。</p>
+<p>此外，通过添加更强大的委托功能，操作安全性也有所提高。例如，硬件钱包可能拥有一个账户，该账户有权领取委托给软件钱包的奖励。如果软件钱包被攻破，攻击者将只能索取账户的未付奖励（例如，不能取消抵押账户的所有抵押品）。</p>
+<h3 id="sip-302303304305">SIP-302、303、304、305</h3>
+<p>这四项 SIP 包含了对 V3 版本关于池、市场、清算和奖励的机制设计。简单来说，V3 版本中使用其他经过投票允许的抵押资产（例如可能包含以太坊）铸造 sUSD 时，每个市场都可以依据资产属性设置自定义的参数。也就是说，V3 中的新市场将不再沿用债务池的模式，而是类似 MakerDAO 的 CDP 模式，不同的是铸造的 sUSD 可通过原子交换的特殊功能来提高链上交易深度。</p>
+<p>此外，V3 还在支持建立无需许可的现期货市场以及清算、奖励等方面进行了体验上的改进。</p>
+<p>就现有已通过的 SIP 看来，Synthetix V3 拥有足以被市场期待的潜力：</p>
+<p>支持除 SNX 外资产抵押。上文已经分析过仅使用 SNX 作为抵押品铸造 sUSD 会因项目自身机制使得 sUSD 的实际流通量受到限制。新版本通过支持多种抵押品铸造 sUSD 解决了这一限制，增加了生产 sUSD 的渠道，使得项目本身的想象力得到了进一步的释放。</p>
+<p>而这种想象力，一方面是新的市场不受统一债务池的限制，采用了比较流行的 CDP 模式，可能将使得 sUSD 等支持原子交换的资产作为未来链上交易的重要中枢。只需要 0.35% 手续费（当前的数据，未来可能会出现改动），就可以依据预言机价格直接成交的模式可以相当大程度上增加交易深度，并进一步成为通过聚合器中交易的首选路径。</p>
+<p>另一方面，则是 sUSD 的数量增加使得除了本身特色的原子交换之外还可以围绕 sUSD 进行更加丰富的上层建筑设计（例如上文提到的无需许可的现期货市场）。如此一来，Synthetix 自身的费用收入会相较当下有进一步的提升。以当前销毁费用的机制来说，SNX 质押者可以将更多精力放在使用 sUSD 产生收益。</p>
+<p>更重要的是，除了 sUSD，Synthetix 本身合成资产的属性使其还可以囊括例如 sETH、sBTC 等等资产。目前 Synthetix V3 上线的预期时间是第一季度末，第二季度初，届时 Synthetix 将从一个旨在成为「去中心化券商」的纯合成资产市场，变为合成资产 sToken 和原子交换双轮驱动的，专注于流动性的综合 DeFi 协议。对 Synthetix，这可以说是一次比较成功的转型，对 DeFi 市场而言，则是提供了一个除了利用需要消耗大量 Gas 的数学公式来提高流动性和交易深度的又一不错的选择。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/47457/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">为什么模块化区块链是未来？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/47461/">
+                <span class="next-text nav-default">休眠2年的地址将超3亿枚DOGE转至新地址，价值约2800万美元</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#过去的-synthetix">过去的 Synthetix</a></li>
+    <li><a href="#原子交换">原子交换</a></li>
+    <li><a href="#synthetix-v3-的诞生">Synthetix V3 的诞生</a>
+      <ul>
+        <li><a href="#sip-255">SIP-255</a></li>
+        <li><a href="#sip-301">SIP-301</a></li>
+        <li><a href="#sip-302303304305">SIP-302、303、304、305</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

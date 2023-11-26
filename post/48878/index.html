@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          万字详谈Rollup排序器的去中心化道路 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Kelvin 认为 「ZK Rollup」 不是真正的 ZK Rollup，我认为所有「Rollup」都不是真正的 Rollup，至少现在还不是。那么问题是，我们如何使它们成为真正的 Rollup？" />
+<meta name="keywords" content="Rollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/48878/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="万字详谈Rollup排序器的去中心化道路" />
+<meta property="og:description" content="Kelvin 认为 「ZK Rollup」 不是真正的 ZK Rollup，我认为所有「Rollup」都不是真正的 Rollup，至少现在还不是。那么问题是，我们如何使它们成为真正的 Rollup？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/48878/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-26T00:00:00+00:00" />
+
+<meta itemprop="name" content="万字详谈Rollup排序器的去中心化道路">
+<meta itemprop="description" content="Kelvin 认为 「ZK Rollup」 不是真正的 ZK Rollup，我认为所有「Rollup」都不是真正的 Rollup，至少现在还不是。那么问题是，我们如何使它们成为真正的 Rollup？"><meta itemprop="datePublished" content="2023-03-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="20634">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="万字详谈Rollup排序器的去中心化道路"/>
+<meta name="twitter:description" content="Kelvin 认为 「ZK Rollup」 不是真正的 ZK Rollup，我认为所有「Rollup」都不是真正的 Rollup，至少现在还不是。那么问题是，我们如何使它们成为真正的 Rollup？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">万字详谈Rollup排序器的去中心化道路</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-03-26">
+      2023-03-26
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 20634 字 -
+        预计阅读 42 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>Kelvin 认为 「ZK Rollup」 不是真正的 ZK Rollup，我认为所有「Rollup」都不是真正的 Rollup，至少现在还不是。那么问题是，我们如何使它们成为真正的 Rollup？</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_e50k936s8t.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>当前的 Rollup 大多是需要信任和许可的： </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_0cqrbhsobt.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>来源：L2 Beat https://l 2b eat.com/scaling/risk</p>
+<p>我将概述以下方面的情况： </p>
+<ul>
+<li>
+<p>强制交易包含机制：即使 Rollup 运营商正在审查用户，用户也应该能够强制包含他们的交易以抵抗审查。</p>
+</li>
+<li>
+<p>L2 定序器去中心化和（可选）共识：单排序器、PoA、PoS 领导者选择、PoS 共识、MEV 拍卖、基于 Rollup、效率证明等。 </p>
+</li>
+<li>
+<p>Shared Sequencer &amp; X-Chain Atomicity：这是真正有趣的全新东西。</p>
+</li>
+<li>
+<p>MEV-Aware 设计：我将简要介绍 FCFS 的一些变体。关于加密内存池，可以参考我最近的文章。  </p>
+</li>
+</ul>
+<p>本文不讨论提高 Rollup 安全性的许多其他要求，包括降低升级密钥的能力，实施稳健且无需许可的证明等。</p>
+<h2 id="rollup-如何工作">Rollup 如何工作？</h2>
+<h3 id="智能合约-rollup-scr">智能合约 Rollup (SCR)</h3>
+<p>首先，简要回顾一下 SCR 的工作原理。今天在以太坊上使用的 Rollup 都是 SCR。在更高层次上，SCR 基本上只是： </p>
+<ul>
+<li>
+<p>输入的有序数组（在 L1 上，因此交易数据必须发布在数据可用性层上） </p>
+</li>
+<li>
+<p>在它们上面运行的代码（Rollup 节点软件）</p>
+</li>
+<li>
+<p>基于输入的确定性输出（Rollup 区块链）</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_84oj24ak39.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>资料来源：Rollups 实际上如何工作 - Kelvin Fichter https://www.youtube.com/watch? v=NKQz 9 jU 0 ftg</p>
+<p>更具体地说，传统的排序器通过将它们的状态根和调用数据发布到它们关联的 L1 智能合约来提交 Rollup 块，新块被添加到 Rollup 的顶端。链上合约运行 Rollup 的轻型客户端，保存区块头哈希。合约在收到有效性证明后或在欺诈证明窗口期结束后被确认结算。如果一个未最终确定的 ORU 块是无效的，可以通过提交一个回滚链的欺诈证明来孤立它（以及所有后续区块）。证明有助于保护跨链桥：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_n2r9y1hehv.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>交易包提交应该需要某种类型的保证金来防止恶意行为。如果提交了欺诈交易包（例如无效的状态根），保证金将被烧毁并分配一些给欺证明的挑战者。</p>
+<p>SCR 具有「合并共识」——一种可在链上验证的共识协议。Rollup 共识可以完全在 L1 智能合约中运行。它不影响主链共识机制，也不需要主链共识机制的任何支持。 </p>
+<p>去中心化共识协议通常包含四个主要特征（请注意，这是一种简化，不能清楚地说明全部共识协议，例如，无领导协议）：</p>
+<ul>
+<li>
+<p>区块有效性函数——状态转换函数。区块有效性在链下执行，通过有效性证明或欺诈证明来证明。</p>
+</li>
+<li>
+<p>分叉选择规则——如何在两个原本有效的链之间进行选择。Rollups 旨在通过构造实现分叉自由，因此并不严格要求分叉选择规则。 </p>
+</li>
+<li>
+<p>领导者选择算法——允许谁将新区块添加到区块链。 </p>
+</li>
+<li>
+<p>抗女巫攻击——PoW、PoS 等 </p>
+</li>
+</ul>
+<p>鉴于 1 和 2 还存在争议，去中心化排序器的最低要求就是某种形式的抗女巫攻击 + 领导者选举。Fuel Labs 一直在做这方面的工作，他们认为 PoS： </p>
+<ul>
+<li>
+<p>不应该应用于具备完整共识协议的 Rollup（其中验证器 / 排序器将对区块进行投票）</p>
+</li>
+<li>
+<p>应该只用于 Rollup 中的领导者选择 </p>
+</li>
+</ul>
+<p>为什么你应该有一个 L2 本地共识，这一点也有很好的论据，稍后会详细介绍。 </p>
+<h3 id="主权-rollupsr">主权 Rollup（SR）</h3>
+<p>主权 Rollup 仍然将交易数据发布到 L1 以获得数据（DA）可用性和共识，但他们在 Rollup 中处理客户端的「结算」。DA 层告诉你数据存在，但它们没有定义 Rollup 的规范链：</p>
+<ul>
+<li>
+<p>SCR - 「规范」Rollup 链由 L1 智能合约决定。</p>
+</li>
+<li>
+<p>SR - 没有决定「规范」Rollup 链的 L1 智能合约。规范的 Rollup 链可以由 Rollup 节点自己决定（检查 L1 DA，然后在本地验证分叉选择规则）。  </p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_u6cziwoiwe.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>来源： Celestia</p>
+<p>相关说明：有一个有趣的论点，即不存在全球规范链（只有桥能决定哪个链被认为是规范的）。这里有一个反驳的观点，其他关于 Rollup 在主权和可组合性之前权衡的 Twitter 线程。我鼓励你筛选这些信息，以及了解最近关于比特币主权 Rollup 的话题。 </p>
+<p>上面的「规范」框架很容易理解，而且它不是本文的重点，我继续使用它。有关一般 Rollup 架构的更多背景信息，可以参考此处。</p>
+<h2 id="去中心化排序器">去中心化排序器</h2>
+<p>用户发起的强制交易包含</p>
+<h3 id="智能合约-rollup">智能合约 Rollup</h3>
+<p>如上所述，定序器一般负责批量处理交易并将其发布到 L1 智能合约。不过，用户也可以自己直接向合约中插入一些交易：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_aadgp63muu.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>当然这是低效和昂贵的，因此排序器将打包交易并将它们一起提交。这分摊了许多交易的固定成本，并允许更好的数据压缩： </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_a5wu4tge6z.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>定序器承诺最终会在 L1 上发布这些交易，同时我们可以计算输出以获得软确认：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_icb7cc5aa9.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>当排序器将这些事务发布到 L1 时，会进一步巩固输出：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_yol3emkbzt.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>通常情况下，用户在从 L1 将资金桥接到 L2 时只会自己包含交易。这作为 L1 合约的输入，告诉 L2 它可以在 L2 上铸造由 L1 上锁定资产支持的资产。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_2bz99tdkpl.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>如果我想把我的钱还给 L1，我可以在 L2 上销毁它，然后告诉 L1 把我的钱还给我。L1 不知道 L2 发生了什么，因此需要提交证明以及解锁我在 L1 上资金的请求。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_11apfc0eaz.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>因为我是 L2 过来的，所以排序器可以发起这个取款请求，提交给 L1。但是，现在你信任 L2 排序器的抗审查性（censorship resistance，CR）。你不再拥有与在 L1 相同的保证，也许他们不喜欢你，或者排序器关闭，你的资产永远停留在 L2 上。 </p>
+<p>Rollup 可以通过各种措施在本地增加自己的抗审查。这可能包括拥有一个具有高质押价值的 L2 共识集、包含列表的一些变体、添加阈值加密等，以最大限度减少 L2 用户审查的机会。这些都是不错的做法，但理想情况下，我们还希望 L2 用户拥有与 L1 相同的抗审查保证。 </p>
+<p>如果用户受到审查，他们需要一些方法来强制退出 Rollup 或强制将他们的交易纳入 L2。这就是为什么 L2 用户应该保留诸如强制将他们的 L2 交易直接包含到 L1 合约中的能力。例如，被审查的用户可能能够自己直接向 L1 提交一个单操作交易包。   </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_3ksvsr84te.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>资料来源：Starknet Escape Hatch Research</p>
+<p>如果 L2 用户的唯一选择是将交易直接强制发送到 L1，这并不理想。对于许多低价值用户来说，这并不友好，尤其是在与 L1 交互成本越来越高的情况下。更高级的设计可能能够解决这个限制，强制在 Rollup 之间进行原子交易。Kalman Lajkó 在这里进行了一项引人入胜的设计，我强烈推荐阅读。它希望在具有共享证明者和 DA 层的系统中启用交叉 Rollup 强制交易。</p>
+<h3 id="主权-rollup">主权 Rollup</h3>
+<p>主权 Rollup 的强制包含机制工作方式不同，如前所述，它们执行分叉选择规则的方式与 SCR 不同（Sovereign Labs 在发布的精彩帖子）。 </p>
+<p>在 SCR 中，L1 智能合约执行 Rollup 的分叉选择规则。除了验证 ZK 证明之外，它还检查该证明是否建立在之前的证明之上（而不是其他分叉），以及它是否处理了在 L1 上发送的所有相关强制交易。 </p>
+<p>SR 可以将其 ZK 证明发布到 L1 DA 层，供所有人查看为 calldata/blob（即使 L1 未验证它们）。然后，你只需添加一条规则，即新证明只有在先前有效证明的基础上才有效。这个规则可以在客户端强制执行，但它会要求用户扫描链的历史。</p>
+<p>calldata 可以绑定回 L1 区块头，并且可以添加一条声明说「我已经扫描了 DA 层的证明（从区块 X 开始到区块 Y 结束），并且这个证明建立在最近的有效证明之上」。这直接在证明中证明了分叉选择规则，而不是在客户端强制执行。 </p>
+<p>由于你已经在扫描证明，因此你还可以证明你已经扫描了任何强制交易。任何人都可以在需要时将强制交易直接发布到 L1 DA 层。</p>
+<h2 id="交易终局性的层级和-zk-快速终局性">交易终局性的层级和 ZK 快速终局性</h2>
+<p>以太坊上的链上证明验证通常非常昂贵，因此目前的 ZKR（例如 StarkEx）往往每隔几个小时才将 STARK 发布到以太坊。相对于交易数量，证明的增长往往非常缓慢，因此这种批处理可以显着节省成本。然而，这么长的最终确定时间带来的用户体验并不理想。</p>
+<p>如果 Rollup 只在链上发布状态差异（而不是完整的交易数据），那么即使是完整的节点也无法在没有证明的情况下确保最终确定性。如果 Rollup 的完整交易数据发布在链上，那么至少任何完整节点都可以与 L1 一起完成。</p>
+<p>通常，轻节点只会依赖中心化排序器实现软确认。然而，ZKR 可以在 p2p 层中快速生成和分发 ZK 证明，供所有轻客户端实时查看，同时以 L1 速度为它们提供最终性。稍后，这些证明可以递归地打包发布到 L1。 </p>
+<p>这就是 Sovereign Labs 计划做的事情，类似地，Scroll 计划在链上发布中间 ZK 证明（但不验证它们），因此轻客户端可以相当快地同步。通过这两种方式，Rollup 可以开始以 L1 的速度完成终局性，而不是等待以节省 Gas 成本。请注意，在这两种情况下，你只是将最终确定时间降低到绝对最小值（L1 速度）。  </p>
+<p>任何排序器都不会比 L1 更快实现最终确定性。不同的排序器设计可以做的最好的结果是为你提供比 L1 更快的预确认，并具有不同级别的确定性（例如，具备去中心化共识集的 L2 的预确认比单个可信排序器的更可靠）。</p>
+<p>Patrick McCorry 最近还对 Rollup 交易最终确定性等级进行了很好的概述。</p>
+<ul>
+<li>
+<p>根据谁向你提交（以及 Rollup 结构是什么），交易「最终性」有不同的级别</p>
+</li>
+<li>
+<p>不同的参与者在给定时间对「真相」的认知程度不同（例如，L2 轻客户端、全节点和 L1 智能合约将在不同时间意识到相同的「真相」）</p>
+</li>
+</ul>
+<h3 id="单排序器">单排序器</h3>
+<p>当前大多数 Rollup 都有一个排序器用于提交交易包。它提高了效率，但也带来了较弱的实时活性和抗审查性。加上适当的保护措施后，这对于许多用例来说可能是可以接受的：</p>
+<ul>
+<li>
+<p>抗审查：如上所述，用户强制包含交易的机制。 </p>
+</li>
+<li>
+<p>活性：如果主排序器出现故障，则可以使用某种热备份选项（类似地为 ZKR 证明者提供备份，而 ORU 欺诈证明者应该是无需许可的）。如果备用排序器也出现故障，任何人都应该能够介入。 </p>
+</li>
+</ul>
+<p>例如，备用排序器可以由 Rollup 治理机制选出，用户可以获得安全性、抗审查性和活性。即使从长远来看，单个主动排序器也是一个可行的选择。</p>
+<p>Base 可能是一个新趋势的开始。公司现在可以管理和优化他们的产品，就像他们对企业区块链的胡说八道感到兴奋一样，但它现在实际上可以成为一个无需许可、安全和可互操作的链。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_onegdpckl1.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>Base 最终打算将他们的排序器集去中心化，但重点是他们并不严格需要这样做（或者他们可以在非常有限的范围内，例如小型排序器集）。要明确的是，这需要 Rollup 来实施必要的步骤，来确保它实际上是安全的，并维护抗审查性（删除任意即时升级、实施稳健证明、强制交易包含、MEV 拍卖等）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_vvspbcofqm.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>这将是对中心化 / 托管产品的巨大改进，而不是对最大去中心化产品的替代。Rollup 只是扩展了设计空间。这也是大多数 Rollup 团队没有将排序器去中心化作为首要任务的主要原因——其他项目更看重用户安全、抗审查和减少对 Rollup 运营商的信任。 </p>
+<p>然而，如果用户 / 其他方需要介入以保持活性和「实时抗审查」（相对于「最终抗审查」，例如强制通过 L1 进行交易），这仍然不是理想的选择。根据强制交易包含机制，低价值用户介入可能成本高昂或不切实际。对实时抗审查和活性的最大保证有高度偏好的 Rollup 将寻求去中心化。运营单个受许可的排序器时也可能存在监管考虑。</p>
+<h3 id="权威证明poa">权威证明（PoA）</h3>
+<p>对单个排序器的一个直接改进是允许少数地理分布式排序器。排序器可以简单地轮换，他们之间建立联系将有助于激励诚实的行为。 </p>
+<p>这个概念应该不会太陌生——多重签名桥通常有少数受信任的公司，或者类似的委员会，比如 Arbitrum 的 AnyTrust DA 。但重要的是，他们在这里的权力要小得多（你不依赖 Rollup 排序器来保证安全，这与多重签名跨链桥运营商提取锁定资金的方式不同）。总的来说，与单排序器相比，这种方案的抗审查和活性更好，但仍然不完美。</p>
+<h3 id="排序器拍卖又名-mev-拍卖-meva">排序器拍卖又名 MEV 拍卖 (MEVA)</h3>
+<p>Rollup 也可以通过智能合约直接运行 MEV 拍卖 (MEVA) ，而不是根据质押分配排序器权利。任何人都可以竞标交易的排序权，拍卖合约将排序权授予出价最高的人。这可以针对每个区块进行，也可以持续一段较长的时间（例如，竞标成为第二天的排序器的权利）。获胜的排序器仍应提交一笔保证金，以保证如果他们随后出现故障或作恶，可以实施处罚。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_qnpd36gb76.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>资料来源：ZK Rollup 的去中心化</p>
+<p>在实践中，如果拍卖没有直接纳入协议，协议外的 MEVA 是最自然的结果。如果根据质押权重确定排序权，就会出现某种形式的 MEV-Boost/PBS 式拍卖系统，类似于我们今天在 L1 以太坊上看到的。这种情况下，费用 /MEV 可能会分配给质押者。如果拍卖被纳入协议，那么费用 /MEV 可能会进入某种形式的 Rollup DAO 金库。</p>
+<h3 id="领导选举的无许可-pos">领导选举的无许可 PoS</h3>
+<p>无需许可即可作为排序器加入，但你必须质押代币（可能是 L2 的原生代币）。质押机制可以通过智能合约或直接在 Rollup 中建立在基础层上。你可以使用此 PoS 结合某种形式的链上随机性的方式来进行领导者选择，这与任何 L1 大致相同。你对一个区块进行排序的概率 = 你占总质押量的比例。可以通过削减等来对错误 / 恶意的排序器施加惩罚。</p>
+<p>请注意，由于上述原因，这不需要排序器达成共识。Rollup 使用 L1 达成共识，因此不需要本地共识。质押决定哪些排序器可以提议区块，但是他们不需要对其他排序器提议的区块进行投票。 </p>
+<p>也可以授予任意时间长度的排序权。你可能有权对 100 个连续的 Rollup 块或 1000 个等进行排序。更长的周期可能更高效，并且在给定时间内只需要一个排序器。然而，授予扩大的垄断权可能有其他外部性。</p>
+<h3 id="dymension">Dymension</h3>
+<p>Dymension 是一个实践这些思路的项目。Dymension Hub 将是 Cosmos 中典型的诚实多数 PoS L1。它的 L2（「RollApps」）将使用它进行结算和共识，同时依赖 Celestia 进行 DA（因此这些 L2 实际上是「Optimistic Chains」，而不是「Rollup」）。 </p>
+<p>根据他们的 Litepaper，去中心化 RollApp 排序将需要在 Dymension Hub 上抵押 DYM（Dymension 的原生资产）。然后，领导者的选择取决于抵押的 DYM 的相对数量。这些排序器将从各自的 Rollup 中获得收入（费用和其他 MEV），然后将相关的成本支付给 Dymension Hub 和 Celestia。 </p>
+<p>这种机制的结果是，这个堆栈中几乎所有的价值捕获都直接累积到 DYM 代币中。使用自己的原生代币进行排序的 Rollup（正如 StarkNet 打算对 STRK 所做的那样）为他们自己的代币附加了价值。这个设置启发了一个问题：以太坊 Rollup 是否只能使用 ETH 进行排序器选举？</p>
+<p>在我看来，这大大降低了在此类结算层上部署 L2 的动机。大多数 L2 团队自然希望他们自己的代币能够产生有意义的价值（而不是仅仅用于费用）。</p>
+<h3 id="用于领导人选举和-l2-共识的无许可-pos">用于领导人选举和 L2 共识的无许可 PoS</h3>
+<p>如果需要，也可以使用 L2 质押进行排序器选举和本地共识。这正是 StarkNet（STRK ） 计划的代币模型： </p>
+<ul>
+<li>
+<p>PoS 排序器领导者选举：如上所述，需要某种形式的领导者选举。</p>
+</li>
+<li>
+<p>PoS 共识：激励 L2 验证者在 L1 最终确定之前达成临时 L2 共识，提供更强的预确认。这不是一个严格的要求，但却是一个有吸引力的选择。</p>
+</li>
+</ul>
+<p>此外，STRK 可以以某种形式用于：</p>
+<ul>
+<li>
+<p>DA 的 PoS 共识：激励提供需要单独共识的 alt-DA。</p>
+</li>
+<li>
+<p>证明：激励证明者生产 STARK。</p>
+</li>
+</ul>
+<p>交易流程如下：</p>
+<ul>
+<li>
+<p>排序：排序器对交易进行排序并提交一个区块</p>
+</li>
+<li>
+<p>L2 共识：StarkNet 共识协议签署提议的区块</p>
+</li>
+<li>
+<p>证明生产：证明者为共识同意的区块生成证明</p>
+</li>
+<li>
+<p>L1 状态更新：将证明提交给 L1 以进行状态更新</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_90d72zuz24.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>有关 StarkNet 计划的更多详细信息，你可以参考以这一篇贴文。 </p>
+<h2 id="l2-共识还是只是-l1-共识">L2 共识，还是只是 L1 共识？ </h2>
+<p>L2 可能会也可能不会实现自己的本地共识（即，L2 验证者在将数据发送到 L1 以获得最终共识之前在其区块上签名）。例如，L1 智能合约可以根据其规则了解到：</p>
+<ul>
+<li>
+<p>用于领导者选举和共识 的 PoS： 「我只能接受由 L2 共识签署的区块。」</p>
+</li>
+<li>
+<p>用于领导者选举的 PoS： 「这是被选中的排序器，此时允许提交区块。」 </p>
+</li>
+</ul>
+<p>Rollup 如果没有本地共识，你需要做的是：</p>
+<ul>
+<li>
+<p>使 Rollup 区块提议无需许可。</p>
+</li>
+<li>
+<p>创建一些标准来选择为给定高度构建的最佳区块</p>
+</li>
+<li>
+<p>让节点或结算合约执行分叉选择规则</p>
+</li>
+<li>
+<p>从 L1 继承共识和最终性</p>
+</li>
+</ul>
+<p>请注意，在任何一种情况下，L2 的价值都可以累积到 Rollup 代币中。即使 L2 代币仅用于某种形式的领导者选择（而非共识投票），排序权的价值仍会累积到 L2 代币上。</p>
+<h3 id="l2-共识的缺点">L2 共识的缺点</h3>
+<p>现在让我们讨论在 L1 之前拥有 / 不拥有本地共识的权衡。 </p>
+<p>Fuel Labs 团队提出的一个论点认为 L2 共识会降低抗审查性。「这允许大多数验证者审查新区块，这意味着可以冻结用户资金。不需要 PoS 来保护 Rollup，因为 Rollup 是由以太坊保护的。」这是一个争议地带。如前所述，即使审查排序器依然可以提供抗审查性（例如，强制交易直接进入 L1，或更复杂的设计，例如 Kalman Lajkó 正在研究的设计）。 </p>
+<p>另一种说法是，完全达成共识是「低效的」。例如，下面前一种情况似乎更容易：</p>
+<ul>
+<li>
+<p>一个时间段内，一个主排序器运行所有东西。</p>
+</li>
+<li>
+<p>一个时间段内，一个主排序器运行所有东西，然后所有其他节点需要投票并同意。</p>
+</li>
+</ul>
+<p>当然，不同的排序器设计和共识机制存在很大差异。</p>
+<p>此外，请注意，如此处和此处所述，一些人对在排序器去中心化中使用 PoS 表示担忧。L1 与 L2 的复杂性可能使处理某些类型的攻击更具挑战性。</p>
+<h3 id="l2-共识的优势">L2 共识的优势</h3>
+<p>排序器的最大目标可能是在 L1 的完全安全和保障之前为用户提供更快的软确认。查看 StarkNet 的机制：</p>
+<p>「强大而快速的 L2 终局性——StarkNet 状态只有在交易包被证明为 L1 之后才成为最终状态（可能需要几个小时）。因此，L2 去中心化协议应该在下一交易包被证明之前就执行顺序做出有意义的承诺。」</p>
+<p>由多排序器的经济安全支持的共识有助于在此期间提供更有力的保证：</p>
+<p>「Starknet 共识必须是负责任的，因为违反安全和活性的行为会受到惩罚，任何部分参与者（包括恶意的多数）都会受到惩罚。」</p>
+<p>Rollup 还可以灵活地在共识机制选项的范围内尝试不同的权衡点，因为它们最终总是可以回退到以太坊 L1 的安全性和动态可用性。 </p>
+<h2 id="在-l1-排序的-rollups">在 L1 排序的 Rollups</h2>
+<p>上面的 Rollup 都构建了特定的排序器，以某种形式创建 Rollup 区块。例如，PoS 无需许可即可加入，但在给定 slot，只有选出的 L2 排序器能够提交区块。也有一些相关方案不依赖任何 L2 排序器，它们通过 L1 本身来进行交易排序。  </p>
+<h3 id="完全无政府状态">完全无政府状态</h3>
+<p>Vitalik 早在 2021 年就提出了这种「完全无政府状态」的想法。任何人都可以随时提交交易包。它满足了上面讨论的去中心化排序器的两个最低要求：</p>
+<ul>
+<li>
+<p>抗女巫攻击：由 L1 提供抗女巫攻击（即交易费用和区块大小 /gas 限制）。 </p>
+</li>
+<li>
+<p>领导者选择：领导者选择是事后的。</p>
+</li>
+</ul>
+<p>这已经足够了，因为 L1 已经提供了安全性。如果 L2 区块已发布到 L1，则它们只有在无效或建立在无效区块上（将被回滚）时才会被孤立。如果它们有效并发布到 L1，则它们具有与 L1 本身相同的安全性。</p>
+<p>Vitalik 指出了一个重要的问题：效率低下。多个参与者很可能并行提交交易包，但只有一个可以被成功包含。这会浪费大量精力来生成证明和 / 或在发布交易包到链上时浪费 Gas。</p>
+<h3 id="based-rollup">Based Rollup</h3>
+<p>但是，PBS 现在可以使这种无政府状态的设计变得可行。它允许更多有规律的排序，每个 L1 区块最多有一个 Rollup 区块，并且没有浪费 Gas（虽然可能浪费了计算资源）。L1 区块构建者可以只包含最高价值的 Rollup 区块，并根据搜索者输入的出价构建区块，类似于任何 L1 区块。Z 在默认情况下许可 ZK 证明可能是合理的，这样做可以避免浪费计算。</p>
+<p>这是 Justin Drake 最近提出的「Based Rollups」提案背后的核心思想。他使用该术语来指代由 L1（「基础」层）排序交易的 Rollup。L1 提议者只需确保在自己的 L1 区块中包含 Rollup 区块。这个简单的方案可以立即拥有 L1 的活性和去中心化。它们回避了棘手的问题，例如在 L2 排序器审查的情况下解决强制交易包含问题。此外，它们还消除了一些 Gas 开销，因为不需要排序器签名验证。 </p>
+<p>一个有趣的问题是关于这些 L2 交易在哪里进行处理。L2 客户端需要将这些交易发送到某个地方，以便 L1 搜索者 / 构建者接收它们并创建区块和数据块。它们可能会被送到：</p>
+<p>L1 Mempool - 它们可以与一些特殊的元数据一起发送，「知情」的搜索者 / 构建者来解释。但是，这可能会增加 L1 内存池的负载。</p>
+<p>L2 的 p2p Mempools - 这条思路似乎更站得住脚。搜索者 / 构建者除了通常的渠道外，还将开始检查和解释这些内容。 </p>
+<p>这里的一个明显缺点是 Based Rollup 限制了排序器的灵活性。例如：</p>
+<p>减少 MEV：Rollups 可以通过 FCFS 的变体、加密的内存池等变得有创意。 </p>
+<p>预确认：L2 用户喜欢快速的交易「确认」。Based Rollup 交易「确认」时间最多回落到与 L1 持平（12 秒），或者等待更长时间才能发布完整交易包。 </p>
+<p>有趣的是，这正是早期 Rollup 团队正在做的事情：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_ss4z7s7tde.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>Justin 指出，重新质押可能会有所帮助。</p>
+<p>这些都是围绕 EigenLayer 的研究领域，至少在他们的白皮书中提到过。目前尚不清楚这种方案能否实际解决问题。为了重新质押以有效改善这些缺点，可能希望所有质押者都选择运行它。通过让想要执行此操作的质押者进入一个单独的共享排序层（稍后会详细介绍）来模拟这个想法似乎更合乎逻辑。 </p>
+<h3 id="效率证明-poe">效率证明 (PoE)</h3>
+<p>去年，Polygon Hermez 提出了一项名为 PoE 的提案。这是专门用于 L1 排序的 ZK Rollup 的另一种变体。这里的排序器是一个完全开放的角色，任何人都可以提交交易包（即完全无政府状态）。PoE 有两个参与方，过程分为两步：</p>
+<p>排序器</p>
+<p>排序器收集 L2 用户交易并通过发送 L1 交易（包括所有选定的 L2 交易数据）创建交易包。排序器将根据收到的经济价值提交区块，或为用户实现更好的服务（例如，在每个 L1 区块中发布一个交易包，即使这会使 L2 交易更昂贵，但用户想要更快的交易）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_wvirsu2v57.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>排序器将支付 L1 Gas 费以发布交易包，并且协议定义了必须用 MATIC 支付的额外费用。一旦发布，获胜的交易包立即定义链的新顶端，任何节点都可以确定性地计算当前状态。然后需要有效性证明来最终确定轻客户端的状态（包括 L1 智能合约）。 </p>
+<p>聚合器 </p>
+<p>这里的聚合器是 ZK 证明者。同样，这是一个任何人都可以参与的无需许可的角色。很简单：</p>
+<ul>
+<li>
+<p>带有交易数据的排序交易包在 L1 上按它们在 L1 上出现的位置排序。</p>
+</li>
+<li>
+<p>PoE 智能合约接受更新有效状态的第一个有效性证明，包括一个或多个尚未被证明的提议交易包。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_1y61g5r40g.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>聚合器可以进行成本效益分析，以找出发布证明的正确频率。如果他们赢了，他们将获得一部分费用，但等待更长时间以发布新证明会将他们的固定验证成本分摊到更多交易中。如果聚合器延迟发布证明（它不证明新状态），那么合约将执行还原操作。证明者浪费了计算资源，但他们会节省大部分的 Gas。  </p>
+<p>费用按如下方式分配：</p>
+<ul>
+<li>
+<p>来自 L2 交易的费用将由创建有效性证明的聚合器处理和分配。</p>
+</li>
+<li>
+<p>所有的交易费用都会被发送到每个交易包对应的排序器。</p>
+</li>
+<li>
+<p>排序器创建交易包的质押费用将被发送到聚合器，聚合器将此交易包包含在有效性证明中。</p>
+</li>
+</ul>
+<h3 id="纯分叉选择规则">纯分叉选择规则</h3>
+<p>Rollkit SR 具有相似的「纯分叉选择规则」概念，如此处所述，指的是没有特权排序器的 Rollup。节点遵从 DA 层进行排序，并应用「先到先得」的分叉选择规则。</p>
+<h3 id="l1-排序的经济学">L1 排序的经济学</h3>
+<p>这些 L1 排序设计具有重要的经济影响，因为 L2 交易的 MEV 现在将在 L1 区块生产者级别捕获。在「传统的」L2 排序模型中，L2 交易的 MEV 由 L2 排序器 / 共识参与者 / 拍卖机制捕获。在这种情况下，尚不清楚有多少 MEV 会泄漏到 L1。</p>
+<p>这是好事还是坏事，难以说清：</p>
+<ul>
+<li>
+<p>好事：有些人喜欢「 L1 经济联盟」（例如，ETH 获得更多价值）。 </p>
+</li>
+<li>
+<p>坏事：其他人担心基础层的激励（例如，比特币矿工的中心化风险）。</p>
+</li>
+</ul>
+<p>这类方案可能是有意义的，特别是作为一种更简单的 Rollup 引导方法，但很难看到大多数 Rollup 将如此多的 MEV 放弃给 L1。Rollups 的一大好处确实是经济收益——一旦 DA 开始扩展并且成本下降，他们将只需要向 L1 支付很少的费用。较慢的出块时间和简单的 MEV 方法的缺陷对用户来说似乎也不是最佳选择。</p>
+<h2 id="激励-zk-证明">激励 ZK 证明</h2>
+<p>请注意，上述 PoE 的竞争可能围绕最快的聚合器进行。ZK 证明者市场有两个经济问题需要解决：</p>
+<ul>
+<li>
+<p>如何激励证明者创建证明</p>
+</li>
+<li>
+<p>如何使证明提交无需许可，使其成为一个竞争激烈且稳健的市场</p>
+</li>
+</ul>
+<p>让我们考虑 ZK 证明者市场的两个简单模型：</p>
+<h3 id="富有竞争的市场">富有竞争的市场</h3>
+<p>一个无需许可的市场中，证明者都争先恐后地为 Rollup 排序器 / 共识产生的区块创建证明。第一个创建证明的人可以获得为证明者指定的任何奖励。该模型可以高效地找到最适合该工作的证明者。</p>
+<p>这看起来非常类似于 PoW 挖掘。然而，这里有一个独特的区别：证明是确定性计算。结果是，与其他证明者相比具有小但一致优势的证明者几乎总能获胜。那么这个市场就很容易出现中心化。 </p>
+<p>在 PoW 挖矿中，随机性方面有更好的结果——如果我有 1% 的挖矿算力，我应该得到 1% 的奖励。</p>
+<p>这种竞争性证明模型在计算冗余方面也是次优的——许多证明者将竞争并花费资源来创建证明，但只有一个人会获胜（类似于 PoW 挖矿）。</p>
+<h3 id="基于回合制的证明">基于回合制的证明</h3>
+<p>证明者之间可以采取轮换的方式创建证明（例如，根据质押的代币或声誉）。这种方式可能更加去中心化，但在证明延迟方面效率较低（在一个证明者能够更快更有效地创建证明的情况下，另一个「慢」证明者也有机会创建证明）。但是，它可以防止在只有一个证明者能够创建证明时浪费计算资源。 </p>
+<p>此外，如果证明人的回合内未能提供证明（无论是恶意的还是无意的），网络就会遇到问题。如果这些回合很长（例如，给定的证明者获得几个小时的垄断权）并且证明者宕机，协议将很难恢复。如果转换证明者的时间很短，其他证明者则可以介入。 </p>
+<p>也可以允许任何人发布证明，但只有指定的证明者才能在给定时间内获得奖励。因此，如果当前证明者失败了，另一个证明者可以发布证明，但他们无法获得奖励。这是一种无私行为，花费资源进行计算而没有任何回报。</p>
+<p>Scroll 正在探索更多基于回合制的方法，将执行分配给随机选择的「rollers」（证明者）：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_2njdqtorbb.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>Scroll 工作流程</p>
+<p>还有很多有趣的问题，比如在排序时用户层面的证明应该如何收费。可以在此处找到关于这些主题的更多讨论：</p>
+<ul>
+<li>
+<p>Scroll 的 Ye Zhang 在《去中心化 ZK Rollup》一文中讨论了这种基于抵押 + 排序 MEVA 的回合制网络的可能性 </p>
+</li>
+<li>
+<p>《Scroll 架构概述》提供了 roller 模型的更多详细信息</p>
+</li>
+<li>
+<p>Starknet Decentralized Protocol IV - Proofs in the Protocol</p>
+</li>
+<li>
+<p>Starknet Decentralized Protocol VI - The Buffer Problem</p>
+</li>
+</ul>
+<h2 id="共享排序">共享排序</h2>
+<p>大多数早期的解决方案都假定每个 Rollup 都需要自己弄清楚如何去中心化他们的排序器。正如我们在 L1 排序方案中看到的那样，但事实并非如此。许多 Rollup 可以选择一个共享排序器 (SS)。这样做的好处是：</p>
+<ul>
+<li>
+<p>省力：无需再担心序器的去中心化问题，无需招募和管理验证者。这是一种非常「模块化」的方法——将交易排序剥离。SS 从字面上看是一家 SaaS 公司（排序器即服务）。</p>
+</li>
+<li>
+<p>结合安全和去中心化：让一个排序层建立强大的经济安全（更强的预确认）和实时 CR，而不是为每个单独的 Rollup 创建多个小型委员会。</p>
+</li>
+<li>
+<p>快速交易：其他单个 Rollup 排序器也可以做到这一点，但请注意，你仍然可以在这里获得那些超快的预确认。  </p>
+</li>
+<li>
+<p>跨链原子性——在链 A 和链 B 上同时执行交易。（这个很复杂，所以我稍后会更深入讲解）。 </p>
+</li>
+</ul>
+<p>如前所述，简单地使用原生 L1 作为 L2 的排序器从根本上有几个缺点： </p>
+<ul>
+<li>
+<p>仍然受限于 L1 的数据和交易排序吞吐量</p>
+</li>
+<li>
+<p>失去为 L2 用户提供低于 L1 区块时间的快速交易的能力</p>
+</li>
+</ul>
+<p>L1 排序可以做的最好的事情是消除 L1 的计算瓶颈（如果交易执行是吞吐量的瓶颈）并实现通信复杂性的改进。</p>
+<p>那么，我们能否设计专门且更高效的 SS，而不是让 L1 来做……</p>
+<h3 id="metro---astria-的共享排序器">Metro - Astria 的共享排序器</h3>
+<p>Metro 是 SS 层的一个方案。你可以参考 Evan Forbes 的研究帖子、Modular Insights talk 和 Shared Security Summit talk 了解更多详情。由 Josh Bowen 领导的 Astria 团队正在致力于实现 Metro 方案。</p>
+<h3 id="执行与排序分离">执行与排序分离</h3>
+<p>当前的 Rollup 节点实际上处理三件事：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_ud88siehe2.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>这里的关键是执行和排序的分离。而共享排序可以做到：</p>
+<ul>
+<li>
+<p>为许多选择将其作为排序层的链排序交易</p>
+</li>
+<li>
+<p>不执行（或证明）这些交易和生成结果状态</p>
+</li>
+</ul>
+<p>排序是无状态的。SS 节点不再需要存储所有不同 Rollup 的完整状态，他们删除了执行计算，传统排序器面临的巨大瓶颈在这里消失了。 </p>
+<p>当从共识中剥离执行时，效率会变得非常高。如果节点所要做的只是生成有序的交易块并就该块达成一致而不执行所有事情，那么它们的效率会非常高。执行和证明可以在事后由不同的各方完成。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_hglgu24wyy.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<h3 id="兼具排序器安全和去中心化">兼具排序器安全和去中心化</h3>
+<p>SS 节点可以保持相对轻量级，甚至可以水平扩展（通过选择共识节点的随机子集来对不同的交易子集进行排序）。排序层比传统排序器更加去中心化，传统的排序器需要掌握链的复杂状态并负责执行。 </p>
+<p>此外，通过跨多个链汇集资源，无需在多个 Rollup 中分割 PoS 共识，而是将它们全部聚合在一个地方。与许多实现自己的排序器集的 Rollup 相比，这种方案可能会产生更去中心化的排序器集，且不需要大量的质押资产。这很重要，因为： </p>
+<ul>
+<li>
+<p>排序：为 Rollup 用户提供实时抗审查（CR）和活性的第一道线。 </p>
+</li>
+<li>
+<p>执行和证明：可以在没有强烈的去中心化需求的情况下在事后完成。</p>
+</li>
+</ul>
+<p>一旦同意交易排序，执行（和证明）可以在事后推迟到一个完全不同的链：</p>
+<ul>
+<li>
+<p>软共识和排序：共享排序器为用户提供快速预确认</p>
+</li>
+<li>
+<p>共识 &amp; 数据可用性：交易数据已在 DA 层最终确定，供所有人查看</p>
+</li>
+<li>
+<p>惰性执行和证明：任何人都可以在事后执行和证明交易</p>
+</li>
+</ul>
+<p>后续的执行层不需要去中心化，因为这不是 CR 的来源。单排序器不是 CR 的理想选择，但这并不是因为它们作为执行者的角色，而是因为他们排序并包括交易。在这里，SS 已经提供了有序的交易输入，因此也就是 CR。之后对状态承诺的计算和比较就不需要去中心化了。 </p>
+<h3 id="软执行">软执行</h3>
+<p>用户喜欢快速的软执行： </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_53li6hb7m6.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>这需要某种形式的共识（或中心化排序器）来提供出色的用户体验：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_hrtotdvu39.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>如果你只是依赖像 Celestia 这样的基础层的共识，就不能提供这些围绕排序和包容性的软性承诺。如果 SS 有一个具质押了高价值资产的去中心化委员会，它可以在快速区块（低于 L1 区块时间）上提供相当强大的承诺。  </p>
+<p>因此，只要 SS 创建一个区块，用户就可以得到软确认。这种确认的强度取决于 SS 的构建（权力下放、经济安全、分叉选择规则等）。一旦数据实际发布到基础层，你就可以将这些交易视为真正的最终交易。然后可以生成并提交状态根和相关证明的最终计算。 </p>
+<h3 id="lazy-rollup">Lazy Rollup</h3>
+<p>「Lazy Rollup」非常简单。他们等到交易全部被排序并发布到 DA 层，然后他们下载这些交易，可选地应用分叉选择规则来选择交易的子集，执行交易处理，并确定交易状态。然后可以生成区块头。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_kfjgssspj9.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>请注意，由于 SS 无法以需要访问完整状态的方式生成区块，因此它们不会检查无效的状态转换。因此，使用 SS 的「Lazy Rollup」状态机必须能够处理无效交易。当节点执行有序交易以计算结果状态时，节点可以简单地删除无效 / 恢复交易。立即执行的传统 Rollup 没有此限制。 </p>
+<p>在将交易包含在链上之前需要状态访问才能处理交易的 Rollup 在这里行不通。例如，如果 Rollup 有一个区块有效性规则，区块包含的所有交易都是不会失败的有效交易。如果 Rollup 需要交易锻而不是状态访问，那么可以专门为这种类型的 Rollup 创建一个特殊的 SS（例如，类似于 Fuel v2 或带有私有内存池的 Rollup）。</p>
+<h3 id="支付-gas">支付 Gas</h3>
+<p>为了让 SS 运行，必须有某种机制让用户为他们的交易付费。你可以简单地使用大多数 Rollup 交易类型中已经包含的现有签名和地址来支付 SS 层上的 Gas。或者，付款可能涉及 SS 上的一些包装交易，任何人都可以为包含的任意数据付费。这是一个开放的设计空间。 </p>
+<h3 id="分叉选择规则">分叉选择规则</h3>
+<p>Rollup 能够继承他们正在使用的 SS 的分叉选择规则。然后，Rollup 的全节点实际上是 SS 的轻客户端，检查一些提交以指示哪个 Rollup 区块在指定高度是正确的。 </p>
+<p>但是，继承 SS 的分叉选择规则是可选的——你可以简单地要求 Rollup 处理（不一定执行）它发布到基础层的所有事务数据。它会有效地继承基础层的 CR 和活性，但是你会牺牲很多用户喜欢的 SS 特性。</p>
+<h3 id="mev">MEV</h3>
+<p>假设一个 Rollup 想要继承其 SS 的分叉选择规则并获得快速的软执行，SS 自然会在 MEV 方面处于非常核心的位置。它决定 Rollup 的交易包含和排序。 </p>
+<p>然而，Rollup 不一定必须执行 SS 提供的交易，或者按照提供的顺序执行交易。你可以在技术上允许自己的 Rollup 进行第二轮处理，以在执行后重新排序 SS 发布的交易。但是，如上所述，这会失去使用 SS 的大部分优点。 </p>
+<p>即使在这种情况下，SS 层也可能仍然存在 MEV，因为它有权包含交易。如果你真的想要，你甚至可以允许你的 Rollup 在第二轮处理中排除某些交易，但这会变得混乱，减少 CR，并且失去大部分 SS 的好处。 </p>
+<h3 id="换出共享排序器">换出共享排序器</h3>
+<p>区块链中难以分叉的是任何形式的有价值的共享状态。看看 ETH 与 ETC 或类似的 ETH 与 ETH POW ，社会共识决定了「真正的以太坊」是什么。我们都同意的「真实」状态是有价值的。</p>
+<p>然而，SS 实际上只是一个服务提供者——它们没有与之关联的有价值的状态。使用给定 SS 的 Rollup 保留了分叉它的能力，以支持一些其他排序机制，只需要一个小的硬分叉（例如，如果 SS 提取了太多价值）。</p>
+<p>更具挑战性的是网络效应。如果许多 Rollups 都开始使用 SS 并且它们获得了巨大的网络效应，那么分离可能会很痛苦，除非其他 Rollups 也愿意迁移。</p>
+<h3 id="espresso-排序器-esq由-eigenlayer-保障">Espresso 排序器 (ESQ)：由 EigenLayer 保障</h3>
+<p>EigenLayer 白皮书提到去中心化 SS 是重新质押的潜在用例之一。这个 SS 可以由 ETH 重新质押保护，它将处理许多不同 L2 的交易排序。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_547hesvc42.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>Well Espresso 刚刚在他们的共享排序器计划中公布了这一点。它可以利用 EigenLayer 重新质押来确保其共识。为了提供一个漂亮的可视化效果，今天 Rollup 是这个样子的：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_8dancs8093.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>这就是他们使用 Espresso 等 SS 时的样子：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_1dwa4715b9.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>Espresso 排序器 (ESQ) 总体上与 Metro 的思路非常相似。它们按照相同的核心原则工作——将交易执行从排序中剥离出来。除此之外，ESQ 还将为交易提供数据可用性。</p>
+<h3 id="hotshot-共识和-espresso-da数据可用性">HotShot 共识和 Espresso DA（数据可用性）</h3>
+<p>作为背景，以太坊目前使用 Gasper 达成共识（Casper FFG 作为最终工具 + LMD GHOST 作为其分叉选择规则）。这里相关的 TLDR 是 Gasper 即使在大多数节点可能掉线的条件下也能保持活跃（动态可用性）。它有效地运行两个协议（Casper FFG 和 LMD Ghost），共同维护一个带有最终前缀的动态可用链。Gasper 在快速确定性上进行权衡。</p>
+<p>总体而言，ESQ 包括：</p>
+<ul>
+<li>
+<p>HotShot：ESQ 建立在 HotShot 共识协议之上，与 Gasper 不同，该协议将快速最终性优先于动态可用性。它还可以扩展以支持更多验证器，就像以太坊所做的那样。 </p>
+</li>
+<li>
+<p>Espresso DA：ESQ 还将为选择加入的链提供 DA。该机制还用于扩大他们的普遍共识。</p>
+</li>
+<li>
+<p>排序器合约：作为轻客户端验证 HotShot 共识并记录检查点的智能合约。此外，它还管理 ESQ 的 HotShot PoS 共识的质押者。</p>
+</li>
+<li>
+<p>网络层：在参与 HotShot 的节点和 Espresso DA 之间实现交易和共识消息的通信</p>
+</li>
+<li>
+<p>Rollup REST API - L2 Rollup 用于与 Espresso 排序器集成的 API。</p>
+</li>
+</ul>
+<p>再仔细看看 DA。在乐观情况下，高带宽节点将使数据对所有其他节点可用，并且每个单独区块的可用性也由随机选出的小型委员会提供支持。鉴于小型委员会面临 DDoS 和贿赂攻击的风险，只要有足够比例的节点不妥协，可验证信息传播 ( VID) 就可以提供可靠（但较慢）的备份路径来保证 DA。</p>
+<p>这个系统是为扩展性而构建的，因此 ESQ 希望为 L2 提供更便宜的 DA。他们仍然会将他们的证明和状态更新结算到 L1 以太坊，但请注意，这将使默认情况下使用 ESQ 的链不再是完整的「Rollups」（以太坊 L1 不保证他们的 DA )。它比数据可用性委员会 (DAC) 的简单实现更强大，但它的保证比真正的 Rollup 更弱。</p>
+<h3 id="交易流程">交易流程</h3>
+<ul>
+<li>
+<p>排序器合约 ：HotShot 直接与其 L1 排序器合约交互。它验证了 HotShot 共识，并为其他参与者提供了一个界面来查看已排序的区块。该合约存储了区块提交的附加日志，不是完整的区块，任何人都可以根据提交的信息验证区块。</p>
+</li>
+<li>
+<p>L2 合约：每个使用 ESQ 的 L2 仍然有自己的以太坊 L1 Rollup 合约。为了验证发送到每个 Rollup 的状态更新（通过有效性 / 欺诈证明），每个 Rollup 合约必须能够访问导致声明的状态更新的经过认证的区块序列。它们与排序器合约交互以查询这些。 </p>
+</li>
+</ul>
+<p>转发给 SS 的交易将被排序，然后在 L1 上最终确定之前发回 Rollup 的执行者和证明者。SS 还将提交给区块信息连同用于验证该块的仲裁证书一起发送到其 L1 排序器合约。这允许 L1 Rollup 合约将 Rollup 状态更新证明与被证明为共识输出的区块提交的信息进行比较。 </p>
+<p>交易流程的完整视图：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_z34g92cw4a.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_9ulngg1h3y.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<h3 id="跨链原子性">跨链原子性</h3>
+<p>正如 Espresso 帖子中所述，SS 可以提供一些关于跨链原子性的令人兴奋的用例：</p>
+<p>跨多个 Rollup 共享的排序层有望使跨链消息传递和桥接更便宜、更快、更安全。消除为另一个链的排序器构建轻客户端的需要，节约了成本。通过消除给定 Rollup 与其他 Rollup 的共识保持实时独立的需求，交叉 Rollup 桥接也可以进一步节省成本。共享排序器还为桥接提供了安全优势：共享排序器可以保证当且仅当事务在另一个 Rollup 中完成时，它才能在一个 Rollup 中完成。 此外，共享排序器增强了用户表达跨不同 Rollup 的事务之间的原子依赖性的能力。按照惯例，Alice 将独立于 Bob 的 Rollup-B 交易 t&rsquo; 签署和发布她的 Rollup-A 交易 t&rsquo;。在这种情况下，Alice 的交易可能会在 Bob 的交易之前很久就被排序，从而给 Bob 留下一个长期的选择来中止。这种可选性不平衡通过共享排序器得到缓解，Alice 和 Bob 可以将两个交易作为一个签名包一起提交（即，排序器必须将这两个交易视为一个交易）。</p>
+<p>这对跨链 MEV 产生了影响，因为链上活动最终会增长。典型的例子是「原子套利」。同一种资产在两个不同的链上以两种不同的价格进行交易。搜索者希望在没有风险的情况下同时执行两笔交易来实现套利。例如：</p>
+<ul>
+<li>
+<p>Trade 1 (T 1 ) - 在 Rollup 1 (R 1 ) 上以低价购买 ETH</p>
+</li>
+<li>
+<p>Trade 2 (T 2 ) - 在 Rollup 2 (R 2 ) 上以高价卖出 ETH</p>
+</li>
+</ul>
+<p>对于原子套利 ，要么两笔交易都被成交，要么都没有成交。如果两个 Rollup 都选择了同一个 SS，那么它可以为搜索者实现这种原子套利。这里的 SS 可以保证：</p>
+<ul>
+<li>
+<p>T 1 包含在 R 1 的指令流中，当且仅当： </p>
+</li>
+<li>
+<p>T 2 也包含在到 R 2 的指令流中</p>
+</li>
+</ul>
+<p>假设 Rollup 虚拟机按顺序执行各自流中的所有事务（即，不存在无效指令，只是一些指令可以抛出错误而不影响状态），那么我们还可以保证：</p>
+<ul>
+<li>
+<p>T 1 在 R 1 上执行，当且仅当 ：</p>
+</li>
+<li>
+<p>T 2 也在 R 2 上执行</p>
+</li>
+</ul>
+<p>但是，这仍然不是你在共享状态机（例如，完全在以太坊 L1 上）上进行交易时的保证。如前所述，SS 不持有这些 Rollup 的状态，它们不执行交易。你不能完全保证其中一项交易（在 R 1 或 R 2 上）不会在执行时恢复。</p>
+<p>直接在这个基础上构建更高级的原语是有问题的。例如，如果你尝试在此 SS 之上构建一个即时销毁和铸造的跨链桥接，它会在完全相同的区块高度同时执行以下操作：</p>
+<ul>
+<li>
+<p>销毁 R 1 上的输入</p>
+</li>
+<li>
+<p>在 R 2 上生成输出</p>
+</li>
+</ul>
+<p>你可能会遇到以下情况： </p>
+<ul>
+<li>
+<p>R 1 上的销毁可能会抛出意外错误，但 </p>
+</li>
+<li>
+<p>R 2 上的输出不会因任何原因而失效，因此它会完全执行。 </p>
+</li>
+</ul>
+<p>这将是一个大问题。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_f60j0dy1d6.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>在某些情况下，只要这两个事务都包含在输入流中并被执行，你就可以确定这两个事务的预期结果，但通常情况并非如此。 </p>
+<ul>
+<li>
+<p>保证：T 1 和 T 2 将包含在它们各自的流中，并且（可能）都将执行。</p>
+</li>
+<li>
+<p>不保证：成功执行交易和由此产生的期望状态。 </p>
+</li>
+</ul>
+<p>这些「保证」可能足以满足原子套利之类的需求，其中搜索者已经拥有在每条链上执行这些交易所需的资产，但这显然不是共享状态机的同步可组合性。对于像跨链闪电贷这样的东西，它本身并不能提供足够的保证。 </p>
+<p>与其他跨链消息传递协议结合使用时，可能仍然有用。让我们看看与交叉 Rollup 消息传递协议一起使用时如何促进 NFT 跨链原子交换：</p>
+<ul>
+<li>
+<p>T 1 在 R 1 上将 ETH 从 U 1 （用户 1 ）转移到 SC 1 （智能合约 1 ）</p>
+</li>
+<li>
+<p>T 2 在 R 2 上将 NFT 从 U 2 （用户 2 ）转移到 SC 2 （智能合约 2 ）</p>
+</li>
+<li>
+<p>SC 1 当且仅当它收到来自 SC 2 的确认 NFT 已存入的消息时，才允许 U 2 提取 ETH</p>
+</li>
+<li>
+<p>SC 2 当且仅当它收到来自 SC 1 的确认 ETH 已存入的消息时，才允许 U 1 提取 NFT</p>
+</li>
+<li>
+<p>两个智能合约都实现了一个时间锁，这样如果任何一方失败，双方都可以收回他们的资产</p>
+</li>
+</ul>
+<p>此处的 SS 允许两个用户在步骤 1 中以原子方式提交。然后，你使用某种形式的跨链消息传递来验证彼此的结果状态并解锁资产以执行交换。 </p>
+<p>如果没有 SS 以原子方式进行，两方可以就价格达成一致。但随后 U 1 可以提交交易，然后 U 2 可以等待并决定是否要中止交易。有了 SS，他们就会被锁定在交易中。</p>
+<p>这几乎是 SS 跨链原子性用例的边缘。总结： </p>
+<ul>
+<li>
+<p>此处提供的保证的精确强度和实用性仍未得到证实</p>
+</li>
+<li>
+<p>这对于跨链原子套利可能非常有用，同样可能对其他应用程序有用，例如跨链交换和 NFT 交易</p>
+</li>
+<li>
+<p>提供额外的加密经济担保（例如，提供债券作为抵押品）来承保某些类型的跨链交易可能会有所帮助</p>
+</li>
+<li>
+<p>但是，你永远无法无条件地保证交易结果（你可以通过在共享状态机上以原子方式一起执行交易来获得）</p>
+</li>
+</ul>
+<p>关于跨链原子性的其他有趣主题，我建议查看：</p>
+<ul>
+<li>
+<p>Optimism&rsquo;s Superchain - 探索了 SS 在 OP 链中的使用。</p>
+</li>
+<li>
+<p>Anoma - Heterogeneous Paxos 和 Typhon 是非常不同的方法。</p>
+</li>
+<li>
+<p>前面提到的 Kalman 的 Cross Rollup Forced Transactions。</p>
+</li>
+</ul>
+<h3 id="共享排序器总结">共享排序器总结</h3>
+<p>总而言之，SS 的基本思想是：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_c5zlbl2bp2.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>显然这幅图并不科学，一切都是高度主观的，并且非常依赖于确切的构造。TLDR 如下：</p>
+<ul>
+<li>
+<p>中心化排序器 - 如果你完全控制系统，通常很容易实现你想要的任何功能。然而，预确认能力有次优的保证，强制退出可能是不可取的，活性是次优的等。</p>
+</li>
+<li>
+<p>去中心化的 L2 排序器：具有分布式质押排序器的 Rollup 相对于只有单个排序器的 Rollup 更具稳健性。但是，不同设计方案在诸如延迟之类的事情上需要进行权衡（例如，如果许多 L2 节点现在需要在确认 Rollup 区块之前进行投票）。 </p>
+</li>
+<li>
+<p>在 L1 排序：最大程度保证去中心化、抗审查和活性等。但是，它缺乏快速预确认、数据吞吐量限制等功能。</p>
+</li>
+<li>
+<p>共享排序器：拥有去中心化排序器的功能，不需要引导你自己的 排序器集。然而，与 L1 排序相比，这种方案在 L1 最终确定之前的过渡时期有较弱的保证。此外，共享层可以将许多 Rollup 的委员会、经济安全等聚合到一个地方（可能比单个 Rollup 都有自己的委员会更强大）。</p>
+</li>
+</ul>
+<p>一旦 L1 最终确定，所有 Rollup 都会达到 100% L1 安全性。在获得 L1 结算的完全安全和保障之前，大多数排序器设计只是试图提供好用功能，但削弱了在过渡期间的保证。</p>
+<h2 id="suave">SUAVE</h2>
+<h3 id="去中心化构建器与共享排序器">去中心化构建器与共享排序器</h3>
+<p>当我们谈论这些试图处理许多其他链的交易的共享层时，差异可能会让人非常困惑。特别是当 SUAVE 通常被称为「排序层」或者其他术语时，例如「用于 Rollup 的去中心化区块构建器」。需要明确的是，SUAVE 与上述 SS 设计有很大不同。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_u3cmoymeqy.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_7u0850kdej.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>让我们观察一下 SUAVE 如何与以太坊交互。SUAVE 不会以任何方式被嵌入以太坊协议。用户只需将他们的交易发送到其加密内存池中。SUAVE 执行者的网络然后会为以太坊（或类似的任何其他链）输出一个区块（或部分区块）。这些区块将与传统的集中心化以太坊构建者的区块竞争。以太坊提议者在它们之间做出选择。</p>
+<p>同样，SUAVE 不会取代 Rollup 选择区块的机制。例如，Rollup 可以实现一个 PoS 共识集，其运作方式与以太坊 L1 的运作方式大致相同。然后，这些排序器 / 验证器可以选择 SUAVE 为它们生成的区块。 </p>
+<p>这与上面描述的 SS 非常不同，在 SS 中，Rollup 可以完全消除去中心化排序器的需要。他们通过选择 Metro 或 ESQ 等来外包排序功能，并且他们可以选择继承 SS 的分叉选择规则。Ethereum、Arbitrum、Optimism 等不会因为选择 SUAVE 交易排序而改变分叉选择规则。 </p>
+<p>SUAVE 不关心你的链的分叉选择规则是什么或者你的区块是如何选择的。它可以为任何链提供最有利可图的排序。请注意，与前面描述的 SS 节点不同，SUAVE 执行程序通常拥有完全状态（尽管它们也可能满足某些不需要状态的偏好）。他们需要模拟不同交易的结果以创建最佳排序。 </p>
+<p>为了解差异，让我们考虑一个用户想要运行原子跨链套利的示例。提交给 SUAVE 与提交给 SS，他们可以获得的保证有何区别：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_5a3bujyh9v.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<h3 id="suave--共享排序器">SUAVE + 共享排序器</h3>
+<p>现在考虑一下，SUAVE 如何与 Rollup 排序交互？甚至可能与 SS 交互？Espresso 似乎确实相信 SUAVE 与 ESQ 兼容。ESQ 旨在与私有内存池服务兼容，例如可以充当构建器的 SUAVE。它看起来类似于我们在以太坊上使用的 PBS，现在：</p>
+<ul>
+<li>
+<p>共享提议者= 共享排序器</p>
+</li>
+<li>
+<p>共享构建者= SUAVE</p>
+</li>
+</ul>
+<p>与 PBS 一样，构建者可以获得提议者（此处为排序器）的盲目提交，以提议给定的区块。提议者只知道从提议区块中获得的总效用（构建者的出价），而不知道内容。</p>
+<p>综上所述，我们再回过头来看一个想做跨链套利的搜索者。SUAVE 本身可以构建并发送到两个不同的 Rollup：</p>
+<ul>
+<li>
+<p>Block 1 (B 1 ) 其中包括 Trade 1 (T 1 ) - 在 Rollup 1 (R 1 ) 上以低价购买 ETH</p>
+</li>
+<li>
+<p>Block 2 (B 2 ) 包括交易 2 (T 2 ) - 在 Rollup 2 (R 2 ) 上以高价出售 ETH</p>
+</li>
+</ul>
+<p>但很有可能 B 1 赢得了拍卖而 B 2 输了（反之亦然）。如果将这两个 Rollup 选择到同一个 SS 中会发生什么。 </p>
+<p>SS 节点不知道交易实际上在做什么，所以它们需要有人（比如 SUAVE，或其他 MEV-aware 构建者）为它们构建一个完整的区块，如果它们想要高效的话。好吧，SUAVE 执行者可以将 B 1 和 B 2 都提交给 SS，条件是两个区块都被填充或杀死（原子地执行或删除两者）。 </p>
+<p>现在你可以在整个过程中获得非常好的经济保证：</p>
+<ul>
+<li>
+<p>SUAVE = 共享构建者 = 可以向你保证，如果 B 1 和 B 2 都包含并以原子方式执行，会发生什么状态。</p>
+</li>
+<li>
+<p>SS =共享提议者 = 可以向你保证 B 1 和 B 2 都包含在内并以原子方式执行。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_g9j8qu0iv2.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<h3 id="重新质押-rollup"> 重新质押 Rollup</h3>
+<p>我最近在 Flashbots 论坛上发了一篇关于 SUAVE 的潜在经济安全模型的帖子。简而言之， 我讨论了为什么从长远来看，Rollup 对于 SUAVE 来说可能是比重新质押更好的选择。</p>
+<p>Hasu 也对重新质押和 Rollup 之间的权衡做出了一些非常深思熟虑的回应。以下是他回应的概要：</p>
+<ul>
+<li>
+<p>Rollup 通过 L1 保证安全性 / 抗审查 / 活性，但 SUAVE 并没有像大多数链那样从中受益，因为 SUAVE 链不适合普通用户。事实上，Flashbots 正在研究如何主动限制用户将资金桥接到 SUAVE 的需求。理想情况下，链只需要搜索者 / 构建者在那里保留足够的运营资金。这可能比为用户存储大量资金而构建的传统 Rollup 的要求要低得多。此外，与普通用户相比，在这条链的上下文中，通过 L1 强制状态转换对于搜索者 / 构建者来说可能没有那么有价值。</p>
+</li>
+<li>
+<p>DA 很昂贵，至少今天是这样。我们将看到 EIP-4844 的影响，以及随后对 DA 需求可能的增长。我会注意到，对于代币持有者来说，重新质押可能更「昂贵」（即，如果费用收入较低，并且需要对 ETH 重新质押者进行通胀激励以获得足够的经济安全）。一种对用户来说更贵，而另一种对代币持有者来说更贵。</p>
+</li>
+<li>
+<p>SUAVE 需要将状态转换从其他域报告回主链（因此可以解锁对执行者的有条件付款）。关于 Rollup 从以太坊 L1 和其他 Rollup 读取状态的能力，它们具有很好的信任最小化属性。</p>
+</li>
+</ul>
+<p>这里有一个新想法：两者都做怎么样？这就是重新质押 Rollup。  </p>
+<p>这样并没有解决 Hasu 提到的所有问题，但它仍然是一个非常有趣的新选择，尤其是从长远来看。 </p>
+<p>Rollup 可以使用这些 EigenLayer 重新质押者来实现本地共识，而不仅是提供安全，但是链随后汇总到以太坊（向以太坊发布数据和证明）。</p>
+<p>如前所述，Rollup 可以决定实施他们自己的本地共识，以便在真正的 L1 最终确定之前为短期预确认和重组阻力提供更有力的保证。好吧，为什么我们不让 Rollup 共识集成为一组以太坊重新质押者呢？现在你有两个选择： </p>
+<ul>
+<li>
+<p>在 L1 之前实现确定性：高价值、去中心化的重新质押共识提供了强大的短期重组阻力。</p>
+</li>
+<li>
+<p>在 L1 之后实现确定性：仍然是 Rollup！它将其数据发布到以太坊，并且可以发布 ZK / 欺诈证明。 </p>
+</li>
+</ul>
+<p>一旦 L1 完成确定性，任何 Rollup 都具有相同的安全性。这只是实现自己共识的 Rollup 的一种变体。与其像前面描述的那样在 Rollup 上设置自己的验证器并由自己的原生代币提供保护，这种方案选择让以太坊重新质押者运行共识。</p>
+<p>同样，如果 Celestia 采用某种形式的重新质押（目前 Celestia 的 L1 非常小，没有智能合约功能），那将会很有趣。我之前曾写过，对于 Celestia 来说，嵌入 Rollup 将是一个有趣的方向，而本地重新质押将是另一个令人着迷的工具，允许自由市场决定他们想要加入哪些功能。重新质押还可以帮助 Celestia 的安全预算，因为 alt-DA 层的价值累积模型仍未得到证实。 </p>
+<h2 id="其他-mev-因素">其他 MEV 因素</h2>
+<p>最简单的想法（一般 Rollup 所做的）是使用简单的 FCFS 运行单个排序器，排序器按照它们收到的顺序提交事务。你可以合理地相信单排序器遵守 FCFS 排序，但它仍然会加剧潜在竞争和相关的负外部性，以及其他问题（不要实施 PoW 来尝试修复它）。因此，即使是中心化排序器也需要更有效地应对 MEV。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_s7s5rj5ers.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>上面的一些解决方案隐含地处理了 MEV 的部分问题（例如，举办一个完全免费的公开拍卖），但显然没有 Rollups 想说他们的用户被夹在中间。所以，我们可能需要发挥创意，结合拍卖的好处和可编程的隐私。</p>
+<p>这就是为什么中心化排序器今天喜欢拥有私有内存池——试图确保用户不会被抢跑等。但这并不容易去中心化。如果你向许多排序器开放，你是否相信他们运行自己的私有内存池？即使你这样做了，如果每个人都有自己的私人内存池并且你需要开始轮换领导者，那也可能产生新的问题。</p>
+<p>加密内存池是解决其中许多问题的一个引人入胜的研究领域。我刚刚发布了一篇文章介绍它。在这篇文章中，我简要概述了 FCFS 提案的一些变体。</p>
+<h3 id="时间提升">时间提升</h3>
+<p>意识到简单 FCFS（先到先得） 的局限性和负外部性，Arbitrum 已经开始探索它的新变体。最近，他们提出了时间提升（Time Boost）机制。基础知识： </p>
+<ul>
+<li>
+<p>受信任的中心化排序器继续为用户交易运行私有内存池</p>
+</li>
+<li>
+<p>排序器在收到每个交易时加上时间戳</p>
+</li>
+<li>
+<p>默认情况下，交易将在收到后 500 毫秒执行</p>
+</li>
+<li>
+<p>用户可以选择为他们的交易支付额外的优先权费用，给它一个「时间提升」，将时间戳减少最多 500 毫秒 </p>
+</li>
+</ul>
+<p>提升由以下公式计算：  </p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_jc59h8jwps.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p> </p>
+<p>F = 交易的优先费 </p>
+<p>g = 可提升的最大时间（500 毫秒）</p>
+<p>c = 待定常数</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_00z6l0so8v.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>当前搜索者只能通过尽量减少延迟（打开许多连接、物理上接近、基础设施投资等）来表达他们对快速包含到 Arbitrum 排序器的偏好。Time Boost 反而会降低投资于上述策略的动机，因为搜索者现在可以通过他们的优先费用出价来表达他们对快速包含交易的偏好。 </p>
+<p>它比简单的 FCFS 有了明显的改进，但在我看来仍然有一些缺点：</p>
+<ul>
+<li>
+<p>它减少了延迟竞赛的动机，但并没有消除它。最小化延迟将始终允许搜索者出价低于竞争对手，并且图表的曲率使延迟边缘对于高价值 MEV 机会特别有价值。 </p>
+</li>
+<li>
+<p>尚不清楚内存池隐私和时间戳如何在单个排序器之外有效地去中心化。 </p>
+</li>
+<li>
+<p>搜索者的出价缺乏表现力。搜索者只能为更快的收录出价，但他们无法表达更复杂的偏好，就像更灵活的显式拍卖（例如，今天的以太坊 L1）中的情况一样。</p>
+</li>
+<li>
+<p>相关的是，如果在此级别实施，将无法恢复失败的竞价。</p>
+</li>
+</ul>
+<p>FBA-FCFS</p>
+<p>Flashbots 的 Xin 去年为 Arbitrum 提出了一个替代方案（FBA-FCFS） 。这种实现 Themis 的频繁批量拍卖风格的变体。在提案中：</p>
+<ul>
+<li>
+<p>节点向领导者报告部分排序，然后领导者将这些聚合成一个无序的批次。在设定的批次时间「公平粒度」（例如 500 毫秒）内，假设所有事务都同时发生。</p>
+</li>
+<li>
+<p>领导者然后通过某种形式的拍卖解决批次内的弱排序。</p>
+</li>
+</ul>
+<p>与时间提升提议类似，有一些想法尝试保证相对较快的交易包含（建议 &lt;500 毫秒）并防止通过受信任的节点抢跑。同样，它允许搜索者通过费用表达他们的偏好，从而减少了延迟竞争的动机）。 </p>
+<p>在给定批次的末尾，「快速搜索者」存在剩余的延迟优势，而其他「慢速搜索者」无法竞争：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_l03pb6r6wl.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<p>资料来源：区块空间市场中的延迟军备竞赛问题</p>
+<p>这是此类拍卖的一个很好理解的方面。更长的批次时间可能进一步使延迟边缘相关的时间百分比下降，尽管批次价值可能更高。较长的出块时间会对 MEV 产生其他影响。</p>
+<p>延迟边缘总结：</p>
+<ul>
+<li>
+<p>时间提升：较低的延迟总是有利的（较低的延迟 = 平均总是可以有较低的出价）。</p>
+</li>
+<li>
+<p>FBA-FCFS：较低的延迟有时是有利的（当「慢」和「快」搜索者之间的小差异显示相关信息时）。</p>
+</li>
+</ul>
+<p>关于延迟时间： </p>
+<ul>
+<li>
+<p>时间提升：所有用户交易在收到时默认延迟 500 毫秒。</p>
+</li>
+<li>
+<p>FBA-FCFS ：批处理时间为 500 毫秒，因此可以将这个时间窗口内收到的用户交易包含在其中。</p>
+</li>
+</ul>
+<p>FBA-FCFS 带来了更多的可变性（例如，交易可能会根据接收时间滑到下一批），但不支付优先费用的普通用户交易的收录时间平均应该更短。时间在 Time Boost 模型中被连续处理（没有区块的概念），而时间在 FBA-FCFS 模型中被离散化。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0326/18_1q6vghehr2.png" alt="万字详谈Rollup排序器的去中心化道路"></p>
+<h3 id="延迟和去中心化">延迟和去中心化</h3>
+<p>请阅读 Phil 的这篇文章。</p>
+<h2 id="结论">结论</h2>
+<p>希望现在你对排序器去中心化的路径和相关障碍有一个不错的认识。这是 Rollup 在未来几年内成熟所需要应对的众多挑战之一。</p>
+<p>其他一些有趣的探索领域包括：</p>
+<ul>
+<li>
+<p>不同层的交互：随着排序器去中心化，它们如何与交易供应链的不同部分交互？什么类型的拍卖（例如，SUAVE）应该插入去中心化排序器集（例如，共享排序器）？  </p>
+</li>
+<li>
+<p>交易费用机制：多维资源定价与状态定价</p>
+</li>
+<li>
+<p>L2 费用市场：收取「L2 原生」费用（例如，L2 拥堵）和「L1 原生」费用（例如，支付 L1 DA）</p>
+</li>
+<li>
+<p>ZK 证明者市场：如何正确激励 ZK 证明者的去中心化和无许可市场，这是 L2 费用的一个重要子集。 </p>
+</li>
+<li>
+<p>Rollup 商业模式：Rollup 代币和构建它们的团队如何积累价值并实现可持续性。</p>
+</li>
+<li>
+<p>可升级性和治理：去中心化它们并减少信任假设，同时保持灵活性。</p>
+</li>
+<li>
+<p>欺诈和 ZK 证明：建立更强大的机制，例如多证明者。</p>
+</li>
+</ul>
+<p>感谢 Ben Fisch、Josh Bowen、Cem Özer、Kelvin Fichter、Zaki Manian、Hasu、Robert Miller、Tarun Chitra、Sreeram Kannan 以及其他人围绕该主题的投入和讨论。 </p>
+<p>来源：星球日报</p>
+<p>原文作者：Jon Charbonneau</p>
+<p>原文编译：0x11，Foresight News</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/48868/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">数据：美联储资产负债表再次扩张逾400亿美元规模</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/48858/">
+                <span class="next-text nav-default">委内瑞拉监管机构正关闭加密货币交易所和矿场</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rollup-如何工作">Rollup 如何工作？</a>
+      <ul>
+        <li><a href="#智能合约-rollup-scr">智能合约 Rollup (SCR)</a></li>
+        <li><a href="#主权-rollupsr">主权 Rollup（SR）</a></li>
+      </ul>
+    </li>
+    <li><a href="#去中心化排序器">去中心化排序器</a>
+      <ul>
+        <li><a href="#智能合约-rollup">智能合约 Rollup</a></li>
+        <li><a href="#主权-rollup">主权 Rollup</a></li>
+      </ul>
+    </li>
+    <li><a href="#交易终局性的层级和-zk-快速终局性">交易终局性的层级和 ZK 快速终局性</a>
+      <ul>
+        <li><a href="#单排序器">单排序器</a></li>
+        <li><a href="#权威证明poa">权威证明（PoA）</a></li>
+        <li><a href="#排序器拍卖又名-mev-拍卖-meva">排序器拍卖又名 MEV 拍卖 (MEVA)</a></li>
+        <li><a href="#领导选举的无许可-pos">领导选举的无许可 PoS</a></li>
+        <li><a href="#dymension">Dymension</a></li>
+        <li><a href="#用于领导人选举和-l2-共识的无许可-pos">用于领导人选举和 L2 共识的无许可 PoS</a></li>
+      </ul>
+    </li>
+    <li><a href="#l2-共识还是只是-l1-共识">L2 共识，还是只是 L1 共识？ </a>
+      <ul>
+        <li><a href="#l2-共识的缺点">L2 共识的缺点</a></li>
+        <li><a href="#l2-共识的优势">L2 共识的优势</a></li>
+      </ul>
+    </li>
+    <li><a href="#在-l1-排序的-rollups">在 L1 排序的 Rollups</a>
+      <ul>
+        <li><a href="#完全无政府状态">完全无政府状态</a></li>
+        <li><a href="#based-rollup">Based Rollup</a></li>
+        <li><a href="#效率证明-poe">效率证明 (PoE)</a></li>
+        <li><a href="#纯分叉选择规则">纯分叉选择规则</a></li>
+        <li><a href="#l1-排序的经济学">L1 排序的经济学</a></li>
+      </ul>
+    </li>
+    <li><a href="#激励-zk-证明">激励 ZK 证明</a>
+      <ul>
+        <li><a href="#富有竞争的市场">富有竞争的市场</a></li>
+        <li><a href="#基于回合制的证明">基于回合制的证明</a></li>
+      </ul>
+    </li>
+    <li><a href="#共享排序">共享排序</a>
+      <ul>
+        <li><a href="#metro---astria-的共享排序器">Metro - Astria 的共享排序器</a></li>
+        <li><a href="#执行与排序分离">执行与排序分离</a></li>
+        <li><a href="#兼具排序器安全和去中心化">兼具排序器安全和去中心化</a></li>
+        <li><a href="#软执行">软执行</a></li>
+        <li><a href="#lazy-rollup">Lazy Rollup</a></li>
+        <li><a href="#支付-gas">支付 Gas</a></li>
+        <li><a href="#分叉选择规则">分叉选择规则</a></li>
+        <li><a href="#mev">MEV</a></li>
+        <li><a href="#换出共享排序器">换出共享排序器</a></li>
+        <li><a href="#espresso-排序器-esq由-eigenlayer-保障">Espresso 排序器 (ESQ)：由 EigenLayer 保障</a></li>
+        <li><a href="#hotshot-共识和-espresso-da数据可用性">HotShot 共识和 Espresso DA（数据可用性）</a></li>
+        <li><a href="#交易流程">交易流程</a></li>
+        <li><a href="#跨链原子性">跨链原子性</a></li>
+        <li><a href="#共享排序器总结">共享排序器总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#suave">SUAVE</a>
+      <ul>
+        <li><a href="#去中心化构建器与共享排序器">去中心化构建器与共享排序器</a></li>
+        <li><a href="#suave--共享排序器">SUAVE + 共享排序器</a></li>
+        <li><a href="#重新质押-rollup"> 重新质押 Rollup</a></li>
+      </ul>
+    </li>
+    <li><a href="#其他-mev-因素">其他 MEV 因素</a>
+      <ul>
+        <li><a href="#时间提升">时间提升</a></li>
+        <li><a href="#延迟和去中心化">延迟和去中心化</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          a16z：详谈去中心化链上可信设置仪式的可行性 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="可信设置仪式（Trusted Setup Ceremony）虽然一直向加密社区发起挑战，但这绝对也是最能让加密社区兴奋的环节。" />
+<meta name="keywords" content="A16Z, 去中心化" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42432/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="a16z：详谈去中心化链上可信设置仪式的可行性" />
+<meta property="og:description" content="可信设置仪式（Trusted Setup Ceremony）虽然一直向加密社区发起挑战，但这绝对也是最能让加密社区兴奋的环节。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42432/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-08T00:00:00+00:00" />
+
+<meta itemprop="name" content="a16z：详谈去中心化链上可信设置仪式的可行性">
+<meta itemprop="description" content="可信设置仪式（Trusted Setup Ceremony）虽然一直向加密社区发起挑战，但这绝对也是最能让加密社区兴奋的环节。"><meta itemprop="datePublished" content="2022-09-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5508">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="a16z：详谈去中心化链上可信设置仪式的可行性"/>
+<meta name="twitter:description" content="可信设置仪式（Trusted Setup Ceremony）虽然一直向加密社区发起挑战，但这绝对也是最能让加密社区兴奋的环节。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">a16z：详谈去中心化链上可信设置仪式的可行性</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-08">
+      2022-09-08
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5508 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Valeria Nikolaenko 和 Sam Ragsdale</p>
+<p>原文编译：Amber，Foresight News</p>
+<p><strong>可信设置仪式（Trusted Setup Ceremony）虽然一直向加密社区发起挑战，但这绝对也是最能让加密社区兴奋的环节。</strong> 仪式的目标是生成可靠的加密密钥，用于保护加密钱包、区块链协议或零知识证明系统。这些程序是项目安全性的信任之根，因此确保分毫不差的操作和执行可信设置仪式至关重要。</p>
+<p>目前区块链项目进行可信设置仪式的形式多种多样，包括但不限于 blowtorches、radioactive dust 以及 airplanes 等，而这几种形式都有一个共同点，也就是他们都依赖于一个中心化的协调器。本文将展示如何通过智能合约替换中心化协调器来让流程实现去中心化，与此同时我们还会开源一个库，允许任何人在以太坊上运行被加密从业者称为 Kate-Zaverucha-Goldberg（KZG）或「powers-of-tau」的仪式。</p>
+<p>我们的去中心化方法有局限性，但它仍然有用。由于当前的链上数据限制，加密参数的大小必须保持不超过 64 KB。但是参与者的数量没有上限，任何人在任何时候都能提交贡献。这些短参数的应用包括小型零知识 SNARK、数据可用性采样和 Verkle 树等。</p>
+<h2 id="可信设置仪式的历史和机制">可信设置仪式的历史和机制</h2>
+<p>在典型的可信设置仪式中，一组参与者将协作生成一组加密参数。每个参与方都使用本地生成的加密信息来生成有助于创建这些参数的数据。适当的设置可以确保加密信息不会泄露，加密信息仅能被按照协议指定使用，并且这些加密信息在仪式结束时会被完全销毁。只要仪式中至少有一方保证诚实并且（在仪式结束后）销毁了加密信息，那么整个流程就可以被视作是安全的。（当然，前提是代码没有错误）</p>
+<p>一些最突出的仪式是由 Zcash 推出的，这是一个以隐私为导向的区块链项目。这些仪式的参与者生成了公共参数，旨在允许 Zcash 用户构建和验证私人加密交易。六名参与者在 2016 年举办了第一届 Zcash 仪式 Sprout。两年后，加密研究员 Ariel Gabizon，现在是 Aztec 的首席科学家，在仪式的设计中发现了一个毁灭性的错误，这个错误是从一篇基础研究论文中继承下来的。该漏洞可能使攻击者能够在不被检测到的情况下创建无限的 Zcash 硬币。Zcash 团队将这个漏洞保密了七个月，直到系统升级 Sapling（其仪式涉及 90 名参与者）解决了这个问题。虽然基于安全漏洞的攻击不会影响用户交易的隐私，但无限伪造的前景破坏了 Zcash 的安全前提。（从理论上讲，不可能知道是否发生了攻击。)</p>
+<p>可信设置的另一个值得注意的例子是永久的「tau-power-of-tau」仪式，该仪式主要为 Semaphore 设计，Semaphore 是一种用于以太坊上匿名信令的隐私保护技术。该设置使用 BN254 椭圆曲线，到目前为止已有 71 名参与者。其他着名的项目后来使用这种设置在顶部运行自己的仪式，包括 Tornado.Cash、Hermez 网络和 Loopring。 Aztec 在 BLS12_381 椭圆曲线上举行了类似的仪式，有 176 名参与者参加 zkSync，这是一个「第二层」以太坊扩展解决方案，使用零知识汇总。 Filecoin 是一种分散的数据存储协议，分别在第一阶段和第二阶段与 19 名和 33 名参与者一起举行了仪式，分叉了原始存储库。 Celo 是一个 1 层区块链，也为他们的轻量级客户端 Plumo 举办了一个仪式。</p>
+<p>永久仪式对参与者人数没有限制。换句话说，任何人都可以参与任何程度的安全，而不是信任其他人来运行受信任的设置仪式。一个值得信赖的参与者确保所有结果参数的安全性;链条与其最强的环节一样强大。顾名思义，永久仪式可以永久举行，就像原始的 tau 权力仪式的前提一样。也就是说，项目通常会决定仪式的具体开始和结束时间，这样他们就可以将生成的参数嵌入到协议中，而不必担心不断更新它们。</p>
+<p>以太坊计划为即将到来的 ProtoDankSharding 和 DankSharding 升级运行一个较小的可信设置仪式 。这两次升级将增加以太坊链提供给客户端进行存储的数据量。此数据的有效期为建议的 30 到 60 天。该仪式正在积极开发中，计划于明年初持续运作六周左右的时间。（请参见 kzg-ceremony-specs 了解更多详情）而它正在成为迄今为止最大的区块链可信设置仪式。</p>
+<p>偏执是一种「美德」，尤其当涉及到可信的设置仪式时。如果机器的硬件或软件受到损害，则可能会破坏其生成的秘密的安全性。泄露秘密的偷偷摸摸的侧信道攻击也很难排除。例如，手机可以通过记录 CPU 振动的声波来监视计算机的操作。在实践中，由于很难消除所有可能的侧信道攻击 - 包括那些尚未发现或披露的攻击 - 甚至有人提议将机器飞到太空在那里举行仪式。</p>
+<p>目前，严谨的仪式参与者的剧本通常如下。购买新机器（未受污染的硬件）。通过移除所有网卡（以防止本地机密泄露）来进行风险隔离。在法拉第笼中远程未公开的位置运行机器（以挫败潜在的窥探者）。为伪随机加密信息生成器设定大量熵和硬复制数据，如随机输入或视频文件的种子（以使加密信息难以被破解）。最后，通过将一切燃烧成灰烬来销毁加密信息 - 以及任何关于加密信息的痕迹。</p>
+<h2 id="协调可信设置仪式">协调可信设置仪式</h2>
+<p>所有可信设置仪式都依赖于一个中心化的协调者。协调者是个人或私人服务器或其他实体，他们被委托注册和订购参与者，通过将信息从前一个参与者转发到下一个参与者来充当中继，并保留所有通信的集中日志以用于审计。协调员通常还负责永久向公众提供日志，不过必须要承认的是，这种中心化的系统很容易因为管理不善或者一些非人为因素导致信息丢失。</p>
+<p>具有讽刺意味的是，当去中心化是加密精神的核心原则时，加密项目必须依赖于中心化的可信设置仪式。因此，我们决定证明直接在以太坊区块链上为永续的 powers-of-tau 举办一个小型仪式的可行性。该设置是完全去中心化的，无需许可的，抗审查的，并且只要任何一个参与者是诚实的，都是安全的。按照当前价格计算，参加仪式的费用仅为 7 至 400 美元，具体取决于所需结果参数的大小（在这种情况下，介于 8 和 1024 次 tau 之间）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_1sj9f1spgk.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>到目前为止，我们建议不要将代码用于实验目的以外的任何目的。如果发现代码有任何问题的人向我们报告，我们将不胜感激。我们很乐意收集有关我们方法的反馈和审核。</p>
+<h2 id="了解-kzg-或powers-of-tau仪式">了解 KZG 或「powers-of-tau」仪式</h2>
+<p>让我们来探索一下最受欢迎的可信设置之一，它被称为 KZG，或「powers-of-tau」仪式。感谢以太坊联合创始人 Vitalik Buterin，他关于可信设置的博客文章为我们在本节中的想法提供了信息。该设置生成 powers-of-tau 的编码，之所以这样命名，是因为「tau」恰好是用于表示参与者生成的秘密的变量：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_sm4b66hmi2.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>对于某些应用（例如 Groth16，Jens Groth 在 2016 年设计的流行的 zkSNARK 证明方案），设置的第一阶段之后是第二阶段，即多方计算（MPC）仪式，为特定的 SNARK 电路生成参数。但是，我们的工作仅集中在第一阶段。第一阶段 - 生成 tau 的幂 - 已经可以用作通用 SNARK（例如 PLONK 和 SONIC）以及其他加密应用程序（例如 KZG 承诺，Verkle 树和数据可用性采样）的基础构建块。 （DAS）。通常，通用 SNARK 参数应该非常大，以便它们可以支持大而有用的电路。包含更多门的电路通常更有用，因为它们可以捕获大型计算;tau 的幂数大致对应于电路中的栅极数。因此，典型的设置大小为|pp|= ~40 GB，能够支持 ~2 的电路 28 Gas。鉴于以太坊目前的约束，将如此大的参数放在链上是不可行的，但是对于小型 SNARK 电路，Verkle 树或 DAS 有用的较小的可信设置仪式可以在链上运行。</p>
+<p>以太坊基金会计划 为大小为 200 KB 至 1.5 MB 的 powers-of-tau 运行几个较小的仪式。虽然更大的仪式可能看起来更好，但考虑到更大的参数可以创建更有用的 SNARK 电路，实际上，更大的并不总是更好。某些应用程序（如 DAS）特别需要一个较小的应用程序！[原因非常技术性，但如果你很好奇，那是因为具有 n 次幂的设置（在 G 中）1） 仅允许 KZG 对≤ n 次多项式的承诺，这对于确保 KZG 承诺下的多项式可以从任何 n 次评估中重建至关重要。此属性支持数据可用性采样：每次成功获得（采样）多项式的随机评估时，它保证多项式可以用概率 t/n 完全重构。如果你想了解更多关于 DAS 的信息，请查看 Buterin 在以太坊研究论坛上的这篇文章。</p>
+<p>我们设计了一个智能合约，可以部署在以太坊区块链上，以运行可信设置仪式。该合约将公共参数完全存储在链上，并通过用户的交易收集参与。</p>
+<p>新参与者首先读取这些参数：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_968lmjq4pn.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>然后对随机密钥 τ&rsquo; 进行采样并计算更新的参数：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_83vzwfpelt.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>并将它们发布在链上，并附上证明三件事：</p>
+<ul>
+<li>
+<p>离散对数的知识：参与者知道τ&rsquo;。（证明对可信设置仪式的最新贡献建立在所有先前参与者的工作之上。</p>
+</li>
+<li>
+<p>pp 的格式良好 1：这些元素确实编码增量幂。（验证了新参与者对仪式的贡献的良好形式。</p>
+</li>
+<li>
+<p>更新未擦除：τ&rsquo; ≠ 0。（针对试图通过删除所有参与者过去的工作来破坏系统的攻击者的防御。</p>
+</li>
+</ul>
+<p>智能合约验证证明，如果它是正确的，它会更新它存储的公共参数。您可以在存储库中找到有关数学及其背后推理的更多详细信息。</p>
+<h2 id="计算-gas-成本">计算 Gas 成本</h2>
+<p>在链上运行设置的主要挑战是使受信任的设置仪式尽可能高效。理想情况下，提交捐款的费用不超过 50 美元。（大型项目可能能够为贡献者补贴 Gas，在这种情况下，数百名参与者每人花费 100 美元更容易想象）。下面，我们提供有关设置中最昂贵部分的更多详细信息。较低的 Gas 成本将降低贡献成本，并允许构建更长的参数（更多的 tau 功率和更大的 SNARK 电路）！</p>
+<p>我们的设置适用于椭圆曲线 BN254（也称为 BN256，BN128 和 alt_bn128），它支持 以太坊上的以下预编译合约：</p>
+<p>ECADD 允许添加两个椭圆曲线点，即计算[α+ β]1 来自 [α]1 和 [β]1： 汽油费 150</p>
+<p>ECMULT 允许椭圆曲线点乘以标量，即计算 [a*α]1 从 a 和 [α]1： 汽油费 6，000</p>
+<p>ECPAIR 允许检查椭圆曲线对的乘积，即计算 e（[α1]1, [β1]2）* &hellip; *e（[α1]1, [β1]2） = 1，相当于检查α1*β1+ &hellip; + αk*βk= 0 ： Gas 成本 34，000 * k + 45，000</p>
+<p>如果以太坊能够启用 BLS12_381（如 EIP-2537 中所建议的那样），我们的设置合同也可以很容易地用于其他曲线。</p>
+<p>让我们估计将设置更新为</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_ll2w622ylo.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>验证证明的 Gas 成本。 如上所述，每个参与者都会更新设置并提交包含三个组件的证明。证明的组件 1 和 3 - 「离散日志知识」和「更新是非擦除的」 - 验证起来非常便宜。挑战在于验证组件 2，「pp 的良好成形性」1「，在链上。它需要一个大的多标量乘法（MSM）和两个配对：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_k15vyy82w1.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>其中 ρ0,&hellip;,?n-1 是伪随机采样标量。就预编译的智能合约而言，需要：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_vcuq6lbcwj.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>存储数据的 Gas 成本。 每个参与者还将链上更新存储为调用数据（每字节 68 gas），占 n * 64 * 68 gas。（对于那些熟悉椭圆曲线密码学的人来说，需要注意一点：根据我们对 n = 256 的测量，存储压缩点将使解压缩主导总体成本。</p>
+<p>以此估算出的 Gas 成本如下：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0908/4_6ds9rdg6z7.png" alt="a16z：详谈去中心化链上可信设置仪式的可行性"></p>
+<p>当然我们也还在探索降低 Gas 成本的解决方案。</p>
+<p>开源库：evm-powers-of-tau</p>
+<p>我们已经在 github.com/a16z/evm-powers-of-tau 开源了基于 EVM 的 powers-of-tau 仪式。使用我们的策略进行仪式既简单又透明：</p>
+<ul>
+<li>
+<p>部署存储和验证协定（协定 /KZG.sol）</p>
+</li>
+<li>
+<p>参与者从以前的事务调用数据中读取仪式参数</p>
+</li>
+<li>
+<p>参与者在本地生成一个密钥，计算更新的参数</p>
+</li>
+<li>
+<p>贡献者生成他们的证明：pi1，pi2</p>
+</li>
+<li>
+<p>贡献者通过 KZG.potUpdate（）将更新的参数提交给公共区块链上部署的智能合约</p>
+</li>
+<li>
+<p>智能合约将验证更新的有效性，在提交格式错误的情况下恢复</p>
+</li>
+<li>
+<p>多个贡献者可以永久执行步骤 2-5，每个步骤都可以提高仪式的安全性</p>
+</li>
+<li>
+<p>每当开发人员对提交的数量和质量有信心时，他们就可以在区块链中查询当前参数，并将这些值用作加密密钥。</p>
+</li>
+</ul>
+<p>我们的存储库使用 arkworks-rs 来计算步骤 2 和 3（rust 计算可以在 src / pot_update.rs 中找到），但用户可能想要编写自己的。更新提交的整个端到端流程可以在 tests/integration_test.rs 的集成测试中找到。</p>
+<p>请注意，我们选择使用 calldata 在链上存储更新的 powers-of-tau 参数，因为它比存储便宜几个数量级。可以在 src/query.rs 中找到此数据的基于 ethers-rs 的查询。</p>
+<p>最后，证明和详细的方程式可以在 techreport/main.pdf 的技术报告中找到。</p>
+<h2 id="未来工作计划">未来工作计划</h2>
+<p>在将这种可信设置仪式用于生产环境之前，我们建议首先对数学证明和示例实现进行全面审核。</p>
+<p>随着实施，更新仪式的交易成本随着设置大小而线性增长。对于大多数应用程序（SNARKs，DAS），我们希望设置 n &gt; = 256，目前每次更新的费用为 73 美元。</p>
+<p>我们也许能够通过有效更新计算的 STARK 证明和对更新值的向量承诺来实现亚线性验证成本增长。这种结构还将消除对以太坊 L1 BN254 预编译的依赖性，从而可以使用更流行的 BLS12-381 曲线。</p>
+<p>所有的仪式策略都是经过反复权衡和测试的。我们认为这种结构是可靠的，并且具有很好的可验证和抗审查性。但同样，在完成更多工作来验证我们方法的合理性之前，直接使用文中提到的这一方案仍然需要高度谨慎。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42417/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">40 图捋清从 Web1 到 Web3 的互联网简史</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42457/">
+                <span class="next-text nav-default">Animoca Brands与淡马锡、博裕资本和CGV达成1.1亿美元融资协议</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#可信设置仪式的历史和机制">可信设置仪式的历史和机制</a></li>
+    <li><a href="#协调可信设置仪式">协调可信设置仪式</a></li>
+    <li><a href="#了解-kzg-或powers-of-tau仪式">了解 KZG 或「powers-of-tau」仪式</a></li>
+    <li><a href="#计算-gas-成本">计算 Gas 成本</a></li>
+    <li><a href="#未来工作计划">未来工作计划</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

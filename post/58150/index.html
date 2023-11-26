@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          为什么要选择 Manta Pacific 部署应用？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文讲述 Manta Pacific 如何利用 OP Stack、Celestia、通用 ZK 电路等模块化设计，在以太坊生态，保留 ZK 完整特性前提下，实现与 EVM 环境及 Solidity 兼容的 ZK 应用。" />
+<meta name="keywords" content="Manta Network, ZK-Rollup, EVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58150/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="为什么要选择 Manta Pacific 部署应用？" />
+<meta property="og:description" content="本文讲述 Manta Pacific 如何利用 OP Stack、Celestia、通用 ZK 电路等模块化设计，在以太坊生态，保留 ZK 完整特性前提下，实现与 EVM 环境及 Solidity 兼容的 ZK 应用。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58150/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-31T00:00:00+00:00" />
+
+<meta itemprop="name" content="为什么要选择 Manta Pacific 部署应用？">
+<meta itemprop="description" content="本文讲述 Manta Pacific 如何利用 OP Stack、Celestia、通用 ZK 电路等模块化设计，在以太坊生态，保留 ZK 完整特性前提下，实现与 EVM 环境及 Solidity 兼容的 ZK 应用。"><meta itemprop="datePublished" content="2023-08-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-31T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9259">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="为什么要选择 Manta Pacific 部署应用？"/>
+<meta name="twitter:description" content="本文讲述 Manta Pacific 如何利用 OP Stack、Celestia、通用 ZK 电路等模块化设计，在以太坊生态，保留 ZK 完整特性前提下，实现与 EVM 环境及 Solidity 兼容的 ZK 应用。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">为什么要选择 Manta Pacific 部署应用？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-31">
+      2023-08-31
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9259 字 -
+        预计阅读 19 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>来源：mantanetwork</p>
+<h3 id="tldr"><strong>TL;DR</strong></h3>
+<p>1、Manta Pacific 是专门为 ZK 应用设计的 Layer2，完全兼容以太坊 EVM 环境及 Solidity 语言；</p>
+<p>2、Manta Pacific 基于 OP Stack 具有原生 EVM 兼容性，兼容 Solidity 语言，以太坊生态现有 dApp 可真正无缝迁移到 Manta Pacific；</p>
+<p>3、提供 ZK 通用电路，开发者可用 Solidity 通过 SDK 或 API 直接调用 ZK 电路，部署 zkDApp 或在现有的 dApp上增加 ZK 功能；</p>
+<p>4、Manta Network 通用 ZK 电路可利用 ZK 实现合规隐私功能，实现非对称博弈场景。</p>
+<p>Manta Network 致力于零知识证明 ZK 大规模应用，且利用 ZK 特性，实现合规的可验证隐私。为实现愿景，Manta Network 推出两个底层基础设施：</p>
+<p>1、Manta Atlantic：基于波卡 Substrate 框架的可编程 ZK 公链；</p>
+<p>2、Manta Pacific：基于以太坊的 EVM 原生 ZK 模块化 Layer2 执行层。</p>
+<p>本文重点讲述 Manta Pacific 如何利用 OP Stack、Celestia、通用 ZK 电路等模块化设计，在以太坊生态内，在保留 ZK 完整特性前提下，实现与 EVM 环境及 Solidity 兼容的 ZK 应用。</p>
+<h2 id="为什么要模块化以及什么是模块化"><strong>为什么要“模块化”以及什么是模块化？</strong></h2>
+<p>模块化 Modular 概念最早由 Celestia 团队提出，通常指对以太坊扩容，将数据可用层、执行层，从以太坊主网解耦。</p>
+<p>通俗地说，如果饭店所有厨师，既要备菜、又要炒菜、上菜、服务客户、收银，那这个饭店规模越大，服务的用户越多，越没效率。以太坊就面临这个局面。</p>
+<p>最好的方式是分工，专人做专事。这是模块化的基本原则。</p>
+<p>比特币、以太坊为代表的单体链发展到今天，已不能满足开发者全部需求，比如 TPS、定制化功能，如低 Gas 甚至无 Gas 交易等等。越来越多的项目基于 OP Stack 等模块化堆栈，推出 Layer2 ，其中包括 Manta Network 推出的 Manta Pacific。</p>
+<p>模块化意味着定制化和更强的可组合性。项目方可根据自身需求，在某些方面做取舍。比如将安全性交给以太坊主网保障，自己则追求定制化低 Gas 或 0 Gas，以及超高交易速度等等。</p>
+<p>汽车装备、电脑、手机、互联网等等，无论在软件还是硬件上，都已非常模块化，可插拔，可组合。</p>
+<p>EthCC 巴黎期间，Vitalik Buterin 出席 Celestia 主办的模块化主题活动 Modular Summit，分享模块化内容。此外，模块化代表项目 Celestia 当前估值已超20亿美元，该赛道受到主流资本关注。</p>
+<h2 id="什么是-manta-pacific-"><strong>什么是 Manta Pacific ？</strong></h2>
+<p>Manta Pacific 是与 Optimism、Arbitrum 一样，也是以太坊 Layer2 执行层，用户可用 Metamask 等钱包交互，ETH 作为 Gas，MANTA 代币作为流动性代币，参与到生态 DeFi、NFT 及 GameFi 等项目中，同时还将作为治理代币。</p>
+<p>Manta Pacific 与其他 Layer2 的不同点，或者说竞争力在于，Manta Pacific 基于 Caldera 定制的 OP Stack 模块化技术堆栈，使用 Celestia 作为数据可用层，内置 Manta Network 通用 ZK 电路。</p>
+<p><strong>接下来，我们将拆解应用 OP Stack、Celestia，以及内置通用 ZK 电路的优势。先来看 OP Stack 可以带来哪些优势。</strong></p>
+<h2 id="1应用-op-stack几乎100兼容以太坊-evm-环境与-solidity-语言现有-dapp-可真正无缝迁移到-manta-pacific"><strong>1、应用 OP Stack：几乎100%兼容以太坊 EVM 环境与 Solidity 语言，现有 dApp 可真正无缝迁移到 Manta Pacific</strong></h2>
+<p>原生 EVM 和 Solidity 兼容。使用 OP Stack 技术堆栈搭建 Layer2，Manta Pacific 具有与 Optimism 相同的 EVM 兼容能力，也就是，几乎100%兼容以太坊现有的 EVM 环境。</p>
+<p>意味着，以太坊生态现有 dApp 可真正无缝、无摩擦地迁移到 Manta Pacific，这是目前 ZK Rollup 很难做到的事情。</p>
+<h3 id="什么是-evm-"><strong>什么是 EVM ？</strong></h3>
+<p>以太坊虚拟机 EVM，是以太坊账户体系和智能合约运行的环境，是以太坊从一个区块到另一个区块计算新的、有效状态的规则。</p>
+<p>状态，是以太坊重要概念之一。状态是以太坊当前应用的梅克尔帕特里夏树（Merkle Patricia Tree）数据结构，可让我们把交易信息从当前区块溯源到创世区块。所有参与维护以太坊的节点，所谓的共识，甚至是以太坊本身存在的意义，就是为了保证状态连续、统一，让每个节点看到的当前状态一致。</p>
+<p>EVM就是维护一致的规则和环境。</p>
+<h3 id="evm-兼容"><strong>EVM 兼容</strong></h3>
+<p>若某区块链是 EVM 兼容的，简单理解，以太坊现有开发者，可在稍加改动后，将以太坊上现有 DApp 直接“复制粘贴”到该链上。</p>
+<p>EVM 兼容，可让开发者使用熟悉的 Solidity 语言编写智能合约，且能便捷地将以太坊上现有智能合约部署至该链。</p>
+<p>对用户来说，EVM 兼容链地址与以太坊相同，支持 Metamask 等主流钱包，操作习惯相同，Gas更低，Tps 更高。当前，无论是地址数量、现有开发者数量、新开发者的选择还是流动性，以太坊都处于领先地位。所以，以太坊开发语言 Solidity 和 EVM 虚拟机实际已成为区块链标准。</p>
+<p>以太坊在设计之初并未考虑 ZK 兼容问题，加密方式与 ZK 不兼容，如果用以太坊现有的 EVM 环境生成 ZK 证明，可能需要几小时。所以，现有 ZK Rollup 或称 zkEVM，需要在兼容以太坊 EVM 环境和 ZK 效率之间做选择。</p>
+<p>而 OP Stack 可让 Manta Pacific 在内置 ZK 电路，让生态项目实现 ZK 功能的前提下，兼容以太坊 EVM 环境。</p>
+<h3 id="manta-pacific-如何在-evm-环境中实现-zk-功能"><strong>Manta Pacific 如何在 EVM 环境中实现 ZK 功能？</strong></h3>
+<p>当用户在 Manta Pacific 链上提交交易时，将作为零知识证明过程中的证明者 Prover，在本地浏览器生成证明，链上去中心化验证者 Collators 验证该证明。</p>
+<p>Manta Network 使用 zkSNARK Groth16，ZK 友好的 Poseidon Hash，优化和升级椭圆曲线密码术（FH-ECC）等算法，使得整个 ZK 生成、证明过程仅需2秒。</p>
+<p>之后，包含 ZK 证明的区块会提交到 Optimism 排序器，Optimism 最终打包 Manta Pacific 交易，上传到以太坊主网，确认交易最终性，并由以太坊主网保障安全性。</p>
+<h3 id="manta-pacific-与其他-zk-rollup-的区别"><strong>Manta Pacific 与其他 ZK Rollup 的区别</strong></h3>
+<p>通常，用户在 ZK Rollup 提交交易时，Rollup 自身排序器节点，会将用户交易校验、压缩并打包，生成代表该批次交易正确性的 ZK 证明。也就是在这一步，需要考虑 EVM 兼容与 ZK 效率之间的平衡。</p>
+<p>之后，交易以“包”（Batch）的形式提交到以太坊主网，由主网智能合约作为验证者，验证 ZK 证明正确性。</p>
+<p>而 Manta Pacific，如上文所述，用户作为证明者，利用浏览器生成 ZK 证明，Manta Network 自身现有的链上 Collators 作为验证者，验证 ZK 证明。实际到这一步，Manta Network 模块化 ZK 电路，已将 ZK 交易处理完毕。这也是 Manta Pacific 与 ZK Rollup 区别所在。</p>
+<p>再之后，Optimism 排序节点，才将附带 ZK 证明的 Manta Pacific 交易压缩、打包，上传至以太坊主网。</p>
+<p><strong>在 Layer2 内完成 ZK 证明的生成和验证，可让 Manta Pacific 生态应用完整地实现 ZK 功能，可将 ZK 的正确性、压缩交易的简洁性、确保隐私的零知识性，完整地与现有应用结合，或让开发者根据 ZK 特性部署新应用，这是目前 Manta Pacific 独有的。</strong></p>
+<h2 id="2将-zk-复杂性抽象可直接使用-solidity-通过-api-或-sdk调用-zk-功能"><strong>2、将 ZK 复杂性抽象，可直接使用 Solidity 通过 API 或 SDK，调用 ZK 功能</strong></h2>
+<p>另一方面，Solidity 语言拥有最庞大的开发者群体。据 Defillama 数据，目前用 Solidity 开发的项目，TVL 占比超94%，排名第二的 Vyper 语言，TVL 占比仅为3.75%。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/nd0c5thukw0r6is" alt="为什么要选择 Manta Pacific 部署应用？"></p>
+<p><strong>利用 OP Stack，Manta Pacific 可做到 Solidity 原生兼容。Solidity 开发者可直接在 Manta Pacific 部署应用，或将现有的以太坊生态 dApp 迁移到 Manta Pacific。</strong></p>
+<p><strong>或者，Solidity 开发者仅需几行代码，即可通过调用 SDK 或 API 的形式，实现 ZK 功能，或将自己现有的 dApp 与 ZK 功能结合。</strong></p>
+<p>当前，ZK Rollup 兼容 Solidity 的方式是采用编译器。类似于 Solidity 相当于英文，原生语言相当于中文，编译器相当于谷歌翻译等软件。虽可做到兼容，但增加了安全假设。客观上，增加了安全问题出现的可能性。</p>
+<p>此前，以太坊 EVM 编译器 Vyper 官方推特帐号发布推文表示，Vyper 版本 0.2.15、0.2.16 和 0.3.0 容易受到递归锁故障的影响。Curve Finance 受到此影响。</p>
+<h2 id="3op-stack--superchain超强模块化与-layer2-流动性互通的可能性"><strong>3、OP Stack ＆ SuperChain：超强模块化与 Layer2 流动性互通的可能性</strong></h2>
+<p>当前，OP Stack 在所有模块化堆栈中发展速度最快，今年6月以来，已有超10个项目宣布基于 OP Stack 推出 Layer2，其中包括 Coinbase、Worldcoin、Loot Chain、Manta Network 等等。</p>
+<p>项目之所以扎堆选择 OP Stack，除了 OP Stack 推出时间久，经过市场检验外，还有很大原因在于基于 OP Stack 的 Layer2 之间，可拥有原子级别的互操作性。</p>
+<h3 id="什么叫原子级别的互操作性"><strong>什么叫原子级别的互操作性？</strong></h3>
+<p>大家在以太坊参与 DeFi 时，会发现，把代币添加到 Curve 中获得 LP Token，可将 LP Token 进一步质押获得项目方激励，或者也可把某些 LP Token，质押进 Yearn 获得挖矿收益。</p>
+<p>流动性在多个 DeFi 协议间共享，用户也可获得多重收益，原子级别的互操作性，提供了更多可组合的选择，像“乐高”一样。</p>
+<p>而现有的各个链之间，流动性是分散的。很多项目也在试图聚合这些相对分散的流动性，基于 OP Stack 构建的 Superchain 是其中之一。在Bedrock之后，OP Stack 下一个主要可扩展性改进是引入 Superchain 概念</p>
+<p>Superchain 是 Optimism 计划构建的 Layer2 生态，包括 Optimism 本身在内。Superchain 是一组 Layer2 链，构建在 OP Stack 上。Optimism 将为所有 OP Chain 提供交易排序、桥接、数据可用性服务等选项，基于 OP Stack 的 Layer2 可自由配置。</p>
+<p>OP Stack 在架构方面极其模块化，分为六层，分别是治理层 Governance Layer 、结算层 Settlement、 执行层 Execution Layer Layer、资源管理与索引层 Derivation Layer、排序层 Sequencing Layer、数据可用层 DA Layer。OP Stack 每层都是模块化 API，可任意组合、解耦，像乐高一样。</p>
+<p>OP Stack 是 Superchain 统一的开发堆栈。Superchain 之间是可相互连接、通信。</p>
+<p>如跨链 MEV：</p>
+<p>1）Base 上的区块1，包含一笔交易1——在 Base 上以低价购买ETH；</p>
+<p>2）Manta Pacific 上的区块2，包含一笔交易2——在 Manta Pacific 上以高价出售ETH</p>
+<p>因为 OP Stack 共享排序器是有状态的，可确保区块1和区块2都包含并执行，且只要基于 OP Stack 的 Layer2 验证者 Validator 都基于 OP Stack，不做定制化的改动，则可保证交易在 Base 与 Manta Pacific 上不会回滚。</p>
+<p>由此，共同基于 OP Stack 的 Layer2 之间，在某种程度上，拥有原子级别互操作性，可衍生跨链借贷、跨链 MEV、跨链套利，甚至流动性聚合等场景。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/l8r76i1oudd379s" alt="为什么要选择 Manta Pacific 部署应用？"></p>
+<h3 id="小结"><strong>小结</strong></h3>
+<p>基于 OP Stack，Manta Pacific 可实现：</p>
+<p>1、现有 ZK Rollup 都做不到的，几乎100%兼容以太坊 EVM 环境及 Solidity 开发语言。好处是，可让以太坊生态现有 dApp，真正无缝迁移到 Manta Pacific，没有部署门槛。同时也减少安全假设，让现有 dApp 迁移更安全。</p>
+<p>2、可在 OP Stack 里内置 ZK 电路，在 EVM 环境中，实现 ZK 功能。同时，Solidity 开发者仅需几行代码，通过 SDK 或 API，便可轻松调用 Manta Network 通用 ZK 电路，从头部署一个 ZK 应用，或将 ZK 功能与现有的 dApp 结合。</p>
+<p>3、与现有 ZK Rollup 不同，Manta Pacific 基于 OP Stack，所以实际上是 Optimistic Rollup。而 Manta Pacific 利用 Manta Network 通用 ZK 电路，在 Layer2 内完成 ZK 证明的生成和验证，在 Optimistic Rollup 里，实现了 ZK 功能，使得 ZK 的正确性、简洁性、零知识性可以完整地应用，再加上 OP 本身 EVM 兼容，真正实现了在 EVM 环境内使用 ZK。</p>
+<p>4、基于 OP Stack，Manta Pacific 有机会与 Coinbase、Worldcoin、Loot Chain 等其他基于 OP Stack 的 Layer2 实现原子级跨链互操作性，在某种程度上实现跨链流动性互通。</p>
+<p><strong>再来看 Celestia 可以带来哪些优势。</strong></p>
+<h2 id="4-应用-celestia-作为数据可用层da-层大幅降低-gas-费用"><strong>4、 应用 Celestia 作为数据可用层（DA 层），大幅降低 Gas 费用</strong></h2>
+<p>援引 IOBC Capital 的文章，以太坊 Gas 费主要由三部分构成：执行费用（网络中所有节点执行交易并且验证其有效性的费用）、存储 / 状态费用（更新新状态的费用）、数据可用性费用（将数据发布到 L1 的费用）。其中，数据可用性费用占比最大。</p>
+<h3 id="什么是数据可用性"><strong>什么是数据可用性？</strong></h3>
+<p>通常，会将 Layer1 分为四层：</p>
+<p>1）共识层</p>
+<p>2）结算层</p>
+<p>3）数据层</p>
+<p>4）执行层</p>
+<p>节点通常有两种：</p>
+<p>全节点——下载并验证所有区块信息及交易数据。</p>
+<p>轻节点——非完全验证节点，易部署，只验证区块头（数据摘要）。</p>
+<p>首先，确保新区块产生时，该区块中的所有数据确实已发布，使得其他节点可校验。若全节点未发布区块中所有数据，则其他节点无法检测，该区块是否隐藏恶意交易。</p>
+<p>也就是说，节点需要获取一定时间内的所有交易数据，并验证，不存在已经确认但未验证的交易数据。这便是通常意义上的数据可用性。</p>
+<p>若某个全节点隐瞒一些交易数据，其他全节点在校验后，会拒绝跟随此区块，但仅下载区块头信息的轻节点则无法校验，会继续跟随这条分叉区块，影响安全。</p>
+<p>尽管通常区块链会罚没该全节点保证金，但这同样会使质押给该节点的用户受到损失。且当隐瞒数据的收益，超过罚没成本，节点有动机隐瞒，届时实际受损的，只会是质押用户和该链其他使用者。</p>
+<p>另一方面，若全节点部署逐渐中心化，节点间存在串通可能，会危及整条链的安全。这是为什么数据可用很重要。</p>
+<p>数据可用越来越受到关注，一方面因为以太坊 PoS 合并，另一方面则是 Rollup 发展。当前 Rollup 会运行中心化排序器（Sequencer）。</p>
+<p>用户在 Rollup 上交易，排序器为交易排序、打包、压缩，发布到以太坊主网，由主网全节点通过欺诈证明（Optimistic）或有效性证明（ZK）验证数据。</p>
+<p>只要排序器提交的区块所有数据真实可用，以太坊主网才可据此跟踪、校验、重建 Rollup状态，保证数据真实和用户财产安全。</p>
+<h3 id="什么是-celestia使用-celestia-作为-da-层意味着什么"><strong>什么是 Celestia？使用 Celestia 作为 DA 层意味着什么？</strong></h3>
+<p>Celestia 为其他 Layer1、Layer2 提供可插拔的数据可用层。</p>
+<p>Celestia 是 Layer1 协议，兼容 EVM 链及 Cosmos 应用链，未来将支持所有类型的 Rollup，这些链可直接使用 Celestia 作为数据可用层。</p>
+<p>通常，Layer2 需要将数据发布到以太坊主网，将以太坊主网作为数据可用层，但这仍旧需要与以太坊主网 dApp 以及其他 Layer2 竞争以太坊主网资源。</p>
+<p>而使用 Celestia，相当于将数据可用层从以太坊外迁至 Celestia。Celestia 是专门提供数据可用层服务的项目，使用纠删码（Erasure Coding）和数据可用性抽样（Data Availability Sampling，DAS），保证安全。</p>
+<p>对用户及开发者来说，最直观的感受是，使用 Celestia 后，Manta Pacific 的 Gas 费用将大幅削减。</p>
+<p>以太坊 Rollup 现有成本由两部分构成：</p>
+<p>1）Rollup 自身 Gas 成本。即用户交互，排序器进行排序，状态转换时收费的费用。</p>
+<p>2）Rollup 将区块提交到以太坊，花费的Gas。</p>
+<p>Rollup 排序器打包、压缩后，会在以太坊上创建一个区块。目前存储为 Calldata 形式，成本为每字节 16 Gas。</p>
+<p>以太坊和 Rollup 各自根据拥堵情况不同，收取的 Gas也不同。排序器在批量处理用户交互内容前，会尽力预测以太坊 Gas 费用，并向用户收取。</p>
+<p>也就是说，Rollup 上的 Gas 之所以便宜，是因为将用户若干笔交互打包到一起，相当于大家均摊了 Gas。</p>
+<p>当市场处于冷淡期，以太坊上交互较少，大家需要均摊的 Gas 也会减少，Rollup 只会在正常 Gas 上收取很小的利润。一旦，以太坊上 Gas 飙升，Rollup 上的 Gas 也会上涨。</p>
+<p>所以，Rollup 本质上还是在跟以太坊主网的 dApp 和其他 Rollup 抢夺区块空间。另一方面，Rollup 自身交互火爆，也会拉高 Gas。比如 Aribitrum 奥德赛 Odyssey。</p>
+<p>总的来说，Rollup 当前成本模式为线性，成本会随以太坊交互需求情况，上升会下降。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0831/of3jc3egt37hp0v" alt="为什么要选择 Manta Pacific 部署应用？"></p>
+<p>而 Celestia 的成本则是亚线性，成本最终会趋近于一个值，一个远低于以太坊现有成本的值。</p>
+<p>在 EIP-4844 升级部署后，Rollup数据存储会从 Calldata 变为 Blob，费用降低，但仍旧比 Celestia 贵。</p>
+<h2 id="5集群clusters一组相互通信的链通过信任最小化桥跨链"><strong>5、集群（Clusters）一组相互通信的链，通过信任最小化桥跨链</strong></h2>
+<p>Celestia 官方文章，将跨链大致分为两类：</p>
+<p>A.  可信跨链桥，需要信任第三方，比如中继链节点。其可靠性建立在第三方节点共识之上，即节点多数是诚实的。</p>
+<p>B.  信任最小化跨链桥，类似以太坊和 Rollup 的关系，靠欺诈证明（Optimistic）和有效性证明（ZK），校验 Rollup 交易数据有效性。</p>
+<p>Celestia 提出一个概念——集群（Clusters），即一组相互通信的链，通过信任最小化桥跨链，每条链都可以验证其他链的状态。使用 Celestia 作为数据可用层集群中的所有链，都可以检查彼此的块是否包含在 Celestia链中。</p>
+<p>只是基于 Celestia 的链之间互操作性，没有 OP 的 Superchain 那么强，例如，Celestia 集群概念中，Optimistic Rollup 和 ZK Rollup 属于两个集群，即使都将 Celestia 作为数据可用层，仍不能解决原子级别互操作性问题。</p>
+<p><strong>最后再来看看 Manta Network 通用 ZK 电路。</strong></p>
+<h2 id="6通用-zk-电路在-evm-环境中实现-zk-完整功能"><strong>6、通用 ZK 电路：在 EVM 环境中实现 ZK 完整功能</strong></h2>
+<h3 id="什么是零知识证明-zk-"><strong>什么是零知识证明 ZK ？</strong></h3>
+<p>在零知识证明过程中，有两类参与者：证明者 Prover 和验证者 Verifier。证明者生成 ZK 证明，验证者验证该 ZK 证明。验证过程中，证明者可选择仅提供 ZK 证明本身，验证者根据密码学和数论原理，在不获取 ZK 证明背后所代表信息的前提下，验证该 ZK 证明为真。</p>
+<h3 id="零知识证明的性质"><strong>零知识证明的性质</strong></h3>
+<p>1）正确性：从数学上讲，ZK 证明无法伪造且无法篡改。若证明者能生成 ZK 证明，则证明一定为真。</p>
+<p>2）简洁性（压缩交易）：验证者无需再进行复杂计算验证所有信息，而是仅需验证 ZK 证明本身即可。</p>
+<p>3）零知识性（隐私性）：证明过程中，验证者除了“证明”之外，不会获得其他相关信息，保证信息隐私。</p>
+<p>值得注意的是，并不是所有 ZK 应用都使用了零知识性，也就说，并不是所有 ZK 项目都是隐私的，他们可能仅使用 ZK 来压缩交易。</p>
+<p>在 ZK Rollup 交互中，用户在 ZK Rollup 内交易，Rollup 自身的排序器作为证明者，排序用户交易、压缩、打包并生成 ZK 证明。以太坊主网智能合约作为验证者，验证该 ZK 证明的正确性，从而验证该证明背后所代表的交易正确性。</p>
+<p>主网智能合约无需再对 ZK Rollup 的交易进行复杂校验，且一个 ZK 证明可代表更多的交易信息正确，从而达到扩容的目的，提高以太坊主网确认交易的能力。但在此过程中，交易并不是隐私的，仍是透明的。所以，当前 ZK Rollup 并未应用零知识性，也就是并未实现隐私。</p>
+<p>对比来看，Manta Pacific 的用户作为证明者，提交交易时，在本地生成 ZK 证明，链上 Collators 作为验证者，验证 ZK 证明。此后，已验证过的交易，由 OP Stack 排序器打包压缩，提交到以太坊主网。</p>
+<p>在 Layer2 内部，Manta Pacific 实际已完成 ZK 的生成与验证，所以可完整实现 ZK 的零知识性，即隐私性。</p>
+<h3 id="零知识证明中的电路指的是什么起到了什么作用"><strong>零知识证明中的电路指的是什么？起到了什么作用？</strong></h3>
+<p>在零知识证明中，“电路”是一种表示复杂算法和函数的方式。在这里，电路并不是指传统意义上的电子电路，而是指一种数学或逻辑结构。在零知识证明的上下文中，电路经常用来描述或定义某个特定的问题或声明。</p>
+<h3 id="电路的主要作用"><strong>电路的主要作用</strong></h3>
+<p>1）描述问题：电路可以描述或定义某个特定的问题或声明。例如，证明者可能希望证明他们知道满足某个特定电路的输入。</p>
+<p>2）隐藏具体细节：通过使用电路，证明者可以证明他们知道满足电路条件的某些信息，而不需要透露该信息的具体内容。</p>
+<p>3）可验证性：电路提供了一种方式，使得验证者可以在不知道证明者使用的具体输入的情况下，验证证明的正确性。</p>
+<p>4）通用性和可重用性：一旦定义了电路，它可以被用于多种不同的问题和场景。这也是为什么有些ZKP框架支持所谓的“通用”电路，它们可以描述并解决各种各样的问题。</p>
+<p>总之，电路在零知识证明中充当了桥梁，连接了证明者想要证明的声明和验证者想要验证的声明，同时确保不透露任何超出声明之外的信息。</p>
+<p>电路用于定义被证明的计算。每个特定的应用都需要自己的电路。不同的服务（如 zkEVM、ZKML、ZK Oracle、ZK Bridge以及各种共识证明和状态证明）需要不同的电路。</p>
+<h3 id="manta-network-的-zk-通用电路"><strong>Manta Network 的 ZK 通用电路</strong></h3>
+<p>Manta Pacific 是专门为 ZK 应用设计，几乎完全兼容以太坊 EVM 环境及 Solidity 开发语言的 Layer2。</p>
+<p>Manta Pacific 发布了通用 ZK 电路2.0，这是一个面向开发者的 ZK 库，开发者可以轻松地为他们现有的 Solidity 智能合约和 dApp 调用实现 ZK（ZK-enabled）的合约，仅需几行代码即可实现。</p>
+<p>通用电路为 Solidity 开发者提供 ZK-as-a Service 服务，目前包括 Manta Network 现有的 MantaPay 电路，可用于实现合规的 DeFi 隐私交易；</p>
+<p>zkShuffle 电路，用于链上游戏的 ZK 智能合约（zkContracts），可为链上游戏实现隐私洗牌、发牌功能；</p>
+<p>以及以太坊基金会旗下 PSE（Privacy Scaling and Exploration）开发的，基于 Semaphore 项目的 ZK 电路，可用于实现 Web3 Social 身份隐私验证。</p>
+<p>Manta Network 还将继续推出更多通用电路，以便为 Solidity 应用提供更多 ZK 功能。通过 Manta Pacific 上的通用电路，开发者可轻松地部署 EVM 原生的 ZK 应用，也可通过高级 API，为他们的现有 Solidity 智能合约和 dApps 调用 ZK-enabled 合约。</p>
+<p>举例而言，例如开发者做链上隐私卡牌类应用，可使用 zkShuffle 电路，实现隐私洗牌及发牌。</p>
+<p>Manta 通用电路简化 ZK 应用开发的一个实际例子是 zkShuffle。zkShuffle 为 Solidity 开发者提供了一个简单的方法，使用 ZK 创建扑克游戏，实现公平的非对称博弈游戏。</p>
+<p>zkShuffle 实现了链上隐私德扑。相对来说，用户玩 Axie 卡牌游戏时，可通过地址查看持有的卡牌信息，了解对方策略，结果是，所有人都会按照几种固定组合购买卡牌，降低了游戏可玩性。</p>
+<p>而 zkShuffle 通过同态加密和 ZK 实现了链上隐私德扑，没有人能通过任何手段查询玩家卡牌信息，或操纵发牌信息，实现绝对公平。有了 Manta Network 通用电路，zkShuffle 可直接调用其中的 ZK 电路，实现想要的功能。</p>
+<p>在通用电路之前，构建 zkShuffle 和类似的 ZK 应用需要手动构建电路，并在 Rust 和 Solidity 等编程语言之间进行转换。但是，随着 Manta 通用电路的引入，复杂性已大大降低。</p>
+<h3 id="为什么-zk-应用是下一代-web3-应用隐私与非对称博弈"><strong>为什么 ZK 应用是下一代 Web3 应用：隐私与非对称博弈</strong></h3>
+<p>如前文所述，而零知识证明的加入，会让对称博弈，变为非完全对称博弈。</p>
+<p>若卡牌类游戏是对称博弈的，意味着大家在玩德扑、麻将或者斗地主时明牌，你可以看到其他人的牌面，其他人也可以看见你的。这也是目前链上卡牌游戏现状。</p>
+<p>而扑克、麻将等游戏，之所以经久不衰，正是其非完全对称博弈性。运气和策略，会打破“强者恒强”局面，让所有人都有机会获胜，新手也可凭借超好的运气打败老玩家。这类游戏的乐趣就在于，玩家可凭借记忆力和经验，预测、判断其他玩家卡牌，以及未发出的卡牌。</p>
+<p>预判可能准确，可能出错，但二者都是游戏的乐趣所在。</p>
+<p>ZK 的隐私性，可让原本透明的链上卡牌，变得隐私，让非对称博弈进入链上世界，大大增加游戏可玩性。</p>
+<p>另外，隐私其实是“成瘾品”，一旦拥有就回不到从前。</p>
+<p>判断某个项目或技术，会不会成为新范式，或者会不会带来变革，有两个直观的标准。</p>
+<ol>
+<li>
+<p>一旦用了这个“东西”之后，还能不能回归原来的状态。</p>
+</li>
+<li>
+<p>会不会改变原有多方博弈的情况。</p>
+</li>
+</ol>
+<p>比如，在用过滴滴打车之后，还能回到路边招手的状态吗？即便是想到路边打车，也做不到了，因为博弈情况发生了改变。司机不用滴滴，很难接到单，所以即便用户真的在路边招手，也未必打得到车，这种行为效率会变得十分低下，以至于所有人都会用滴滴。</p>
+<p>同样的情况，也发生在外卖等多个领域。所以，由蜂窝通讯、WiFi 等物联网技术的发展，而催生的移动互联网，是一个新范式、新变革。而隐私同样如此。</p>
+<p>在没有体验过隐私功能前，大家可能不觉得自己需要过多的隐私保护，而一旦体验过隐私功能，可能就回不到从前了。就像，微信刚宣布推出“朋友圈三天可见”功能，大家也不觉得有什么，但现在，可能大多数好友的朋友圈，都是三天可见。因为大家不想别人可以轻松翻阅自己的过往，这种“裸露”的感觉并不会让人舒适。</p>
+<p>这也是为什么要构建 ZK 应用，或者基于 Manta Pacific 构建 ZK 应用是必要的。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58157/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">为什么看好StarkNet？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58171/">
+                <span class="next-text nav-default">现金流见底、安全事故频发，撸毛业走到尽头了吗？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tldr"><strong>TL;DR</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#为什么要模块化以及什么是模块化"><strong>为什么要“模块化”以及什么是模块化？</strong></a></li>
+    <li><a href="#什么是-manta-pacific-"><strong>什么是 Manta Pacific ？</strong></a></li>
+    <li><a href="#1应用-op-stack几乎100兼容以太坊-evm-环境与-solidity-语言现有-dapp-可真正无缝迁移到-manta-pacific"><strong>1、应用 OP Stack：几乎100%兼容以太坊 EVM 环境与 Solidity 语言，现有 dApp 可真正无缝迁移到 Manta Pacific</strong></a>
+      <ul>
+        <li><a href="#什么是-evm-"><strong>什么是 EVM ？</strong></a></li>
+        <li><a href="#evm-兼容"><strong>EVM 兼容</strong></a></li>
+        <li><a href="#manta-pacific-如何在-evm-环境中实现-zk-功能"><strong>Manta Pacific 如何在 EVM 环境中实现 ZK 功能？</strong></a></li>
+        <li><a href="#manta-pacific-与其他-zk-rollup-的区别"><strong>Manta Pacific 与其他 ZK Rollup 的区别</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#2将-zk-复杂性抽象可直接使用-solidity-通过-api-或-sdk调用-zk-功能"><strong>2、将 ZK 复杂性抽象，可直接使用 Solidity 通过 API 或 SDK，调用 ZK 功能</strong></a></li>
+    <li><a href="#3op-stack--superchain超强模块化与-layer2-流动性互通的可能性"><strong>3、OP Stack ＆ SuperChain：超强模块化与 Layer2 流动性互通的可能性</strong></a>
+      <ul>
+        <li><a href="#什么叫原子级别的互操作性"><strong>什么叫原子级别的互操作性？</strong></a></li>
+        <li><a href="#小结"><strong>小结</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#4-应用-celestia-作为数据可用层da-层大幅降低-gas-费用"><strong>4、 应用 Celestia 作为数据可用层（DA 层），大幅降低 Gas 费用</strong></a>
+      <ul>
+        <li><a href="#什么是数据可用性"><strong>什么是数据可用性？</strong></a></li>
+        <li><a href="#什么是-celestia使用-celestia-作为-da-层意味着什么"><strong>什么是 Celestia？使用 Celestia 作为 DA 层意味着什么？</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#5集群clusters一组相互通信的链通过信任最小化桥跨链"><strong>5、集群（Clusters）一组相互通信的链，通过信任最小化桥跨链</strong></a></li>
+    <li><a href="#6通用-zk-电路在-evm-环境中实现-zk-完整功能"><strong>6、通用 ZK 电路：在 EVM 环境中实现 ZK 完整功能</strong></a>
+      <ul>
+        <li><a href="#什么是零知识证明-zk-"><strong>什么是零知识证明 ZK ？</strong></a></li>
+        <li><a href="#零知识证明的性质"><strong>零知识证明的性质</strong></a></li>
+        <li><a href="#零知识证明中的电路指的是什么起到了什么作用"><strong>零知识证明中的电路指的是什么？起到了什么作用？</strong></a></li>
+        <li><a href="#电路的主要作用"><strong>电路的主要作用</strong></a></li>
+        <li><a href="#manta-network-的-zk-通用电路"><strong>Manta Network 的 ZK 通用电路</strong></a></li>
+        <li><a href="#为什么-zk-应用是下一代-web3-应用隐私与非对称博弈"><strong>为什么 ZK 应用是下一代 Web3 应用：隐私与非对称博弈</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

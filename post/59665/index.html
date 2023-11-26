@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          详解 MEV 原理、最新趋势及评估方式 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="全景式解析 MEV的原理、类别、应对方案及未来发展。" />
+<meta name="keywords" content="MEV, 金色百科" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59665/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="详解 MEV 原理、最新趋势及评估方式" />
+<meta property="og:description" content="全景式解析 MEV的原理、类别、应对方案及未来发展。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59665/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="详解 MEV 原理、最新趋势及评估方式">
+<meta itemprop="description" content="全景式解析 MEV的原理、类别、应对方案及未来发展。"><meta itemprop="datePublished" content="2023-09-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="11856">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="详解 MEV 原理、最新趋势及评估方式"/>
+<meta name="twitter:description" content="全景式解析 MEV的原理、类别、应对方案及未来发展。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">详解 MEV 原理、最新趋势及评估方式</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-22">
+      2023-09-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 11856 字 -
+        预计阅读 24 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Patrick Mccorry；编译：火火/白话区块链 </p>
+<h2 id="一相关概念">一、相关概念</h2>
+<p>让我们从 MEV 缩写的定义开始：</p>
+<blockquote>
+<p><strong>MEV（Maximizing Extractable Value）最大可提取价值：</strong> 在区块生产过程中，代理可以通过包含、排除或更改交易顺序来提取的最大价值。</p>
+</blockquote>
+<p>更明确地说，矿工可提取价值（MEV）的概念是指代理检查用户最近的交易，制定策略以从中获利，并随后实施该策略以获取任何潜在收益的场景。</p>
+<p><strong>通过干扰待处理交易的执行来赚钱</strong> 这一非常简单的行为会对用户、DeFi 协议和底层区块链网络产生巨大的影响。</p>
+<p>在进入核心讨论之前，我们将介绍一些有关 MEV 的背景信息——MEV 的道德是什么？无论是在利用 MEV 的代理还是试图防御它的参与者的背景下。</p>
+<h3 id="1mev-游戏中的特工">1）MEV 游戏中的特工</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_wyp16suej8.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>除了寻求参与智能合约的用户之外，还有两个与 MEV 概念密切相关的关键角色：</p>
+<p>- <strong>搜索者。</strong> 代理发现从用户交易中获利的机会，创建一系列交易来利用它，并向提议者提议该交易束。</p>
+<p>- <strong>提议者。</strong> 有权决定交易顺序的代理人。</p>
+<p>搜索者可以是拥有丰富专业知识的贸易公司，也可以是在卧室里编码的业余爱好者。</p>
+<blockquote>
+<p>搜索者是一个无需许可的角色。</p>
+</blockquote>
+<p><strong>唯一的障碍是搜索者寻找阿尔法、构建有竞争力的 MEV 机器人并利用机会的能力。</strong> 获得资本会有所帮助，但这还不是一个重大障碍。</p>
+<p><strong>另一方面，提议者有权决定交易的顺序，从而决定交易的执行结果</strong> 。这一关键角色可以由各种实体来填补，包括矿工（在工作量证明系统中）、Stakers（在权益证明系统中）或排序器（在Rollup中）。</p>
+<blockquote>
+<p>虽然提议者池通常受到限制，但它可以是开放的。</p>
+</blockquote>
+<p>对谁可以担任提议者的角色施加限制是有令人信服的理由的：</p>
+<p>1）<strong>共识协议：</strong> 许多区块链系统需要提议者参与基于轮次的协议，要求每轮中大多数（或绝大多数）提议者的合作。协调所有 N 个参与者之间的沟通通常被证明是一个瓶颈。</p>
+<p>2）<strong>交易路由：</strong> 用户必须有可靠的方式将交易传输给提议者。这可以通过将交易转发到公共内存池或直接转发到指定的提议者来实现。</p>
+<p>3）<strong>可验证的完整性：</strong> 更广泛的社区可能会寻求一个客观的指标来验证所有提议者是否作为一个集体一起工作来决定交易的顺序，并且他们总是延长最新的顺序。例如，网络可以实施分叉选择规则，其中提议者建立在最重的链（权益/工作）之上。 </p>
+<p>4）<strong>MEV 的风险：</strong> 在一些区块链系统中，尤其是当今的大多数 Rollups，提议者被赋予不利用 MEV 机会的责任。因此，社区有权决定信任谁至关重要。</p>
+<p><strong>简单来说，必须有一种机制允许用户以独立的方式验证提议者是否拥有决定最近交易排序的权限</strong> 。如果没有这种保证，恶意行为者可能会用虚假的交易订单淹没系统，使用户无法辨别真相。</p>
+<p>为了使代理的解释简单，我们将构建者的角色纳入提议者中，并假设提议者既会构建一个区块，又有权发布它。</p>
+<h3 id="2代理人的相互作用和关系详解-mev-原理最新趋势及评估方式httpsimgbibiqingcomnews2023092211_n7q3n2eni1png">2）代理人的相互作用和关系<img src="https://img.bibiqing.com/news/2023/0922/11_n7q3n2eni1.png" alt="详解 MEV 原理、最新趋势及评估方式"></h3>
+<p>搜索者和提议者之间的相互作用是什么？</p>
+<p><strong>MEV 研究的一个重点是理解搜索者和提议者之间的相互作用。</strong> 此外，必须确定这些角色是否可以由同一实体来履行，或者是否需要不同的代理：</p>
+<p>1）<strong>同一个经纪人。</strong> 搜索者可以是系统中的提议者， </p>
+<p>2）<strong>单独的代理。</strong> 有一个（或多个）搜索者不是提议者，他们都在竞争影响提议者。</p>
+<p>换句话说，确定搜索者是否可以完全且无可争议地控制交易排序策略非常重要。<strong>如果搜索者也是提议者，那么它可能会授予搜索者额外的权力来观察其他搜索者所采用的策略，使他们能够从更具竞争力的搜索者那里窃取机会。</strong></p>
+<p>另一方面，如果搜索者不能成为提议者或与提议者勾结，那么它允许我们假设一个搜索者必须相互竞争的环境。他们的目标是影响提议者并说服他们根据获胜搜索者的偏好对交易列表进行排序。</p>
+<blockquote>
+<p><strong>MEV 利润最大化中的外包与垄断：</strong>  存在一个有趣的争论，对于提议者来说，将识别和利用 MEV 的任务分包给开放的搜索者市场是否更有利可图，或者他们是否应该旨在通过垄断方式。</p>
+</blockquote>
+<p>我们假设<strong>提议者将作为诚实的一方并遵守他们承诺的交易排序政策</strong> 。此外，搜索者和提议者始终是独立的代理。</p>
+<p>我们的重点是了解搜索者用来影响提议者的排序策略的策略，并希望击败所有其他竞争对手获得同样的机会。</p>
+<h3 id="3交易订购政策">3）交易订购政策</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_e6yolcwj3m.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>MEV 的追求和防御侧重于搜索者影响区块链系统单个组件的能力：</p>
+<p>- <strong>交易排序政策。</strong> 给定待处理的用户交易列表，应用哪种排序算法来输出排序交易的最终列表（即已确认的块）。</p>
+<p>区块链系统可以实现多种排序策略，其目标是<strong>为所有</strong> 可能想要进行交易的用户提供公平性。 </p>
+<p><strong>这就引发了疑问：</strong> 公平的定义是什么？</p>
+<p>- 用户是否应该支付相同的费用并按照先到先得的原则进行交易？</p>
+<p>- 用户是否应该根据交易的优先级支付费用，并且所有交易都根据支付的费用进行排序？</p>
+<p>这两种情况都遵循<strong>用户只要有支付能力就可以进行交易的一般原则。</strong> 它并不规定用户的交易将在总排序中占据承诺的位置，只是它最终会被及时排序执行。</p>
+<p><strong>这种公平的概念很有趣，它是区块链网络抗审查的基础。</strong></p>
+<p>它概述了用户的交易能力应仅取决于他们的支付能力，并且他们不会因地理位置、身份、性别或信仰体系而受到歧视。它起源于比特币领域，由于网络仅支持支付，因此可以很容易地应用。</p>
+<p>然而，当我们试图理解智能合约支持系统中的公平性时，保证交易包含在内的能力就不足了。对于像以太坊这样的网络，我们必须扩大公平的范围，超越将交易纳入全球排序的范围。它还应该考虑签署交易的用户的意图以及交易执行后是否达到了用户期望的结果。</p>
+<blockquote>
+<p><strong>认识到用户意图在公平性中的重要作用。</strong>  用户衡量公平性的标准不仅在于及时纳入交易的能力，还在于评估交易的实际结果以及是否符合他们签署交易时的最初期望。</p>
+</blockquote>
+<p>这可以为我们所说的审查制度带来一个新的、有趣的定义：</p>
+<p>- <strong>审查制度抵抗力薄弱。</strong> 只要用户愿意支付适当的费用，他们就可以随时订购执行交易。</p>
+<p>- <strong>强大的审查阻力。</strong>  用户可以强制实现交易的预期结果，并且他们只需要支付适当的费用。</p>
+<p>请记住这一点，因为当我们了解如何利用 MEV 来干扰用户的交易并迫使其执行失败时，这一点将变得很重要。因此，即使可以强制将用户的交易纳入总排序中，也无法实现用户期望的结果（意图）。</p>
+<p>据我们所知，如果我们想要构建一个具有强大审查抵抗力的系统，排序策略必须防止搜索者有选择性地干扰用户交易的能力。这仍然是一个开放的研究问题。</p>
+<p>通过 Relays实施制裁OFAC正在积极测试区块链网络是否可以继续根据用户支付交易包含的能力来公平对待用户。</p>
+<h2 id="二mev的启用">二、MEV的启用</h2>
+<p>为了更深入地研究矿工可提取价值（MEV）的技术方面，我们必须检查以下内容：</p>
+<p>1）<strong>定位 MEV 机会：</strong> 了解搜索者如何在区块链系统中发现用户最近的交易。 </p>
+<p>2）<strong>执行环境：</strong> 检查所有交易执行的技术环境。 </p>
+<p>3）<strong>利用策略：</strong> 研究搜索者可以用来利用 MEV 机会的各种策略，例如交易重新排序、抢先交易和套利。</p>
+<p>4）<strong>影响排序：</strong> 探索搜索者如何影响提议者优先考虑其 MEV 相关交易。</p>
+<p>一旦我们牢牢掌握了这些基本组成部分，我们就可以继续评估 MEV 的伦理影响和道德考虑。</p>
+<h3 id="1寻找-mev-机会">1）寻找 MEV 机会</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_u8weogazop.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>搜索者需要访问最近的用户交易来寻找新的 MEV 和赚钱机会。</p>
+<p><strong>查找交易有两种方法：</strong></p>
+<p>- <strong>八卦协议。</strong> 用户将其交易提交到对等网络，交易会在非常快的时间范围内（&lt;1 秒）传播到所有节点。 </p>
+<p>- <strong>提案者提要。</strong>  提议者发布待处理和/或最近订购的交易。</p>
+<p>大多数用户在八卦协议上发送交易，希望提议者能够发现他们的交易并将其包含在他们的区块中。与此同时，包括搜索者在内的任何人都可以加入八卦协议并侦听待处理的交易。</p>
+<p>它导致了 “黑暗森林”的‘Dark Forest’绰号，因为几乎可以保证搜索者会找到用户的交易，并在存在赚钱机会时干扰其执行。<strong>例如，在《黑暗森林》的帖子中，当搜索者发现他们的交易、对其进行评估并为自己收集资金时，作者未能收回风险资金。</strong></p>
+<p>迄今为止，<strong>击败黑暗森林的唯一方法是避免向点对点网络发送交易</strong> 。在随后的帖子中，作者. 通过将交易直接发送给以太坊矿工来逃离暗黑森林。这与其他实例一起，最终导致 Flashbot 提供直接交易功能，允许用户将交易直接发送给可信矿工（作为服务）。 </p>
+<p>如果区块链经历重组并且用户的交易暂时未经确认并放置在内存池中，MEV 机器人仍然存在利用直接交易的风险。然而，与 PoW 以太坊中所有区块的 7% 相比，重组事件在以太坊权益证明中相对较少。</p>
+<p><strong>同样的风险不适用于Rollup（如今天实施的）。几乎所有交易都是直接交易，因为用户与提议者（排序器）有直接通信连接。</strong> 搜索者几乎没有机会窃听通道，这显着增加了利用 MEV 机会进行待处理交易的难度。</p>
+<p>这导致人们认为Rollup已经击败了搜索者。<strong>迄今为止，任何成功都取决于提案者的可信度，而不是利用 MEV 谋取私利。</strong> 当然，这并不是故事的全部，搜索者仍然可以找到 MEV 机会。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_gecaagzv1f.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p><strong>在Rollup中，由于直接交易，搜索者将注意力转移到查找最近确认的交易，以期找到类似套利的机会。</strong></p>
+<p>例如，在 Arbitrum 中，提议者维护一个发布最近订购的交易的提要。它每 250 毫秒发布一次，主要是为了帮助 Infura 和 Etherscan 等基础设施提供商获取最新数据。这允许用户将交易发送到 Sequencer，然后在 Etherscan 上检查其状态。此外，它允许任何人运行具有 Sequencer 确认状态的 Arbitrum 节点。</p>
+<p>遗憾的是，MEV 机器人发现了此提要。搜索者将连接到源并利用最近订购的交易中的套利机会。</p>
+<blockquote>
+<p><strong>任何有关交易的信息都可以启用 MEV。</strong> 大多数关于 MEV 的讨论都集中在搜索者定位和干扰待处理交易执行的能力。然而，即使提议者完全被信任不允许搜索者找到待处理的交易，搜索者仍然有可能利用提议者提供的任何信息。 </p>
+</blockquote>
+<h3 id="2共享数据库状态">2）共享数据库状态</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_4i2gwpw5ua.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<h3 id="交易的最终执行可能与签署交易时的预期执行不同">交易的最终执行可能与签署交易时的预期执行不同。 </h3>
+<p><strong>每个区块链系统都作为有限状态机运行，在这种情况下，有一个状态转换函数（STF），它需要：</strong>  </p>
+<p><strong>- 最新的数据库状态</strong></p>
+<p><strong>- 用户的输入</strong></p>
+<p>执行后，STF 将输出数据库的新状态。我们可以总结如下：</p>
+<p>- STF(database_state, user’s input) = new_database_state</p>
+<p>当用户发起交易时，他们将特定的状态转换函数及其输入作为目标。需要注意的是，事务不会提交到当前数据库状态；只有在执行时才知道最新的数据库状态。</p>
+<p><strong>在区块链系统中，状态转换函数包括许多可能影响数据库更新的组件。</strong></p>
+<p>为了简单起见，它主要由 EVM、WASM、MIPS 或 Cairo 等虚拟机定义。更进一步，当开发人员将智能合约部署到虚拟机上时，他们会锁定数据库的条目以供智能合约独占使用。数据库条目只有在智能合约执行时才能更新。</p>
+<blockquote>
+<p>智能合约定义对特定数据库条目的访问权限。</p>
+</blockquote>
+<p><strong>因此，当用户发起交易并瞄准智能合约时，他们打算更新数据库中的特定条目或智能合约也具有写访问权限的任何数据库条目。由于智能合约定义了写入访问权限，因此它可以定义，允许谁执行该操作。</strong></p>
+<p><strong>在大多数情况下，智能合约以包容性政策运行，允许任何人只要满足某些预定义标准就可以执行它。</strong> 除非智能合约功能用于管理目的，否则标准将不取决于交易发起者的身份，而是用于维护管理智能合约的规则。<strong>例如，在执行Token X → Token Y 的交换之前，检查用户是否有足够的Token X 余额。</strong></p>
+<p>总而言之，我们必须考虑交易的两个关键方面：</p>
+<p>1）<strong>不承诺输出：</strong> 当用户签署交易时，他们不会被锁定到特定的执行结果。他们的签名涵盖了输入和目标智能合约，但并不规定确切的执行。 </p>
+<p>2）<strong>智能合约先决条件：</strong> 智能合约规定了成功执行必须满足的条件。这些条件通常围绕执行协议规则（例如交换逻辑）而不是调用者的身份。</p>
+<p>这两个组件对于方便用户同时发出交易和处理竞争条件都是必要的。否则，正如我们几年前在卡尔达诺上推出交换所看到的那样，它可能会导致可怕的可用性问题。</p>
+<p>同时，它导致 MEV 在任何智能合约平台上启用，因为它允许机器人干扰用户交易的执行，并可能通过这样做产生利润。</p>
+<h3 id="3交易捆绑和干扰方法">3）交易捆绑和干扰方法</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_sgthgvkcdn.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>感谢以下的公共性质：</p>
+<p>- 用户交易，</p>
+<p>- 共享数据库状态。</p>
+<p>搜索者可以模拟待处理的事务并全面了解未来的数据库状态。他们的任务是模拟事务并确定未来是否存在对他们有利的数据库状态。如果是这样，那么他们应该努力使未来的数据库状态发生并捕捉盈利机会。</p>
+<p>一旦他们找到对他们有利可图的待处理交易，搜索者就可以执行以下两种策略之一：</p>
+<p>- <strong>不要干扰。</strong> 允许用户的事务按预期执行，搜索者将利用结果数据库状态来跟进他们自己的事务。 </p>
+<p>- <strong>一定要干涉。</strong> 搜索者必须在执行用户交易之前发出设置理想条件的交易。 </p>
+<p>不干涉方法很简单。搜索者本质上已经预先计算出用户交易执行后数据库会是什么样子，他们可以发出一个在事后执行的交易并获取由此产生的利润。例如，搜索者可以通过反向运行用户的交易来追逐套利机会。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_8w3srkjn3s.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>搜索者可能会发出两个交易，将用户的交易夹在中间并干扰其执行以获取利润。</p>
+<p>The 干扰do interfere方法要求搜索者发出交易并力争在用户交易之前对他们的交易进行排序。这将影响用户事务的执行，并有望产生对搜索者有利的所需数据库状态。 </p>
+<p><strong>干扰的两个例子包括：</strong></p>
+<p>- <strong>夹心。</strong> 搜索者将发出围绕用户交易的两个交易。它会干扰用户的交易执行以获取利润。</p>
+<p>- <strong>抢先。</strong>  搜索者将复制用户的交易并在他们之前执行它。它可以让搜索者抢在用户之前抢到盈利机会。</p>
+<p>为了使干扰方法发挥作用，需要对事务执行模型做出假设。如前所述，我们假设用户的交易在签名时没有固定的结果，其最终执行取决于共享数据库状态。</p>
+<p>由于执行模型，以及用户可以定义一组在事务成功执行之前必须满足的前置/后置条件这一事实，可以说用户定义了<strong>一系列可接受的结果</strong> ，即使它可能被寻找机会获取利润的搜索者用来对付他们。</p>
+<p>在评估 MEV 的道德时，用户有权批准一系列可接受的结果这一想法很重要。</p>
+<h3 id="4影响提议者如何确定交易排序的优先级">4）影响提议者如何确定交易排序的优先级</h3>
+<p>这给我们带来了启用 MEV 的最后一步——了解搜索者如何说服提议者将他们的交易包优先排序在总排序中的特定位置。</p>
+<p>采取的方法取决于提议者实施的排序策略，但通常分为两类：</p>
+<p>- <strong>优先拍卖。</strong> 搜索者必须支付高于所有其他搜索者的出价。</p>
+<p>- <strong>延迟游戏。</strong> 搜索者必须在所有其他搜索者之前将其交易（支付适当的费用）发送给提议者。</p>
+<p>换句话说，我们需要考虑搜索者之间的竞争，他们如何能够在竞争中胜出，以及哪种方法能够使搜索者的开放市场能够在公平的竞争环境中参与。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_1yar262971.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>优先gas拍卖的一个例子，搜索者不断广播费用更高的新交易。12 秒的区块窗口内至少有 100 笔交易。 </p>
+<p>由于八卦协议的公共性和以太坊上的费用市场拍卖机制，随着社区意识到 MEV，出现了一种新现象，并导致了严重的网络拥塞。</p>
+<p>在黑暗森林中，如果一个搜索者发现了 MEV 机会，那么其他搜索者很可能也会找到它。只有一个搜索者可以赢得 MEV 机会，从而导致一场竞争非常激烈的竞标战，称为 <strong>优先天然气拍卖</strong> 。</p>
+<p>在优先gas拍卖中，搜索者希望支付高于所有竞争对手的最低必要出价，同时最大化利润。他们必须监控当前的出价集（在内存池中）并以更高的出价发出新交易。所有新交易都应取代之前的交易。</p>
+<p><strong>竞争对手重复上述过程，导致大量垃圾邮件袭击点对点网络。</strong> 例如，在上图中，我们可以在 12 秒窗口内统计至少 100 笔交易。此外，只有一项交易可以成功并抓住 MEV 机会。所有竞争交易仍然包含在一个块中，并且可能无法执行。浪费带宽和块空间。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_ok1maivv3g.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>Flashbots 通过将拍卖移至链下解决了与优先 Gas 拍卖相关的拥塞问题。</p>
+<p>Flashbots 的出现带来了一种解决方案，可以缓解与优先 Gas 拍卖相关的问题。</p>
+<blockquote>
+<p><strong>Flashbot 的解决方案：</strong> 采用优先拍卖协议来挑选获胜者，并将其移至链外。</p>
+</blockquote>
+<p>我们鼓励所有搜索者向 Flashbots 运行的 Relay 提交捆绑包。由中继来选择中标并将其转发给提议者。所有失败的投标均被中继丢弃。</p>
+<p><strong>这为提议者-构建者分离（BPS）框架proposer-builder separation (BPS) framework</strong> 的发展铺平了道路，该概念区分了为区块订购交易的区块构建者和有权决定区块最终内容的区块提议者。</p>
+<p>角色的分离为构建者和搜索者创造了一个开放的市场，他们可以协作创建有利可图的区块，同时通过优先拍卖与提议者分享部分利润。主要目标是确保没有任何一方能够获得 MEV 机会产生的所有利润。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_ghupcfyhtu.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>对于像以太坊这样的第 1 层区块链来说，说服提议者的过程与像 Arbitrum 这样的汇总区块链非常不同。</p>
+<p>以太坊拥有约 80 万验证者、公共内存池，并且选择验证者成为下一个提议者的过程取决于随机信标。而Arbitrum只有一个Sequencer（Proposer），它有一个私有内存池，易于识别，用户可以与其直接连接。</p>
+<p>汇总环境会影响搜索者如何尝试影响提议者，因为他们不再有权访问待决指示，并且只有一个（或几个）方需要说服。</p>
+<p>如前所述，<strong>搜索者可以：</strong></p>
+<p><strong>- 聆听音序器提要</strong></p>
+<p><strong>- 查找最近订购的交易</strong></p>
+<p><strong>- 利用反向运行策略来抓住 MEV 机会</strong></p>
+<p>如果搜索者是第一个了解 MEV 机会的机器人并且与提议者有最快的连接，那么他们可以增加在竞争中赢得利润的机会。换句话说，如果没有优先级拍卖，搜索者获胜的唯一方法就是参加延迟游戏。</p>
+<p>搜索者在研究 Sequencer feed 策略后发现，feed 将随机优先考虑不同的 Web 套接字连接以首先接收交易。</p>
+<p>最好的策略是简单地打开尽可能多的连接，并通过赢得连接抽奖来首先接收交易。 这导致与 Arbitrum Sequencer 的连接超过 150k。</p>
+<p>过多的连接是一种资源浪费，是对 Arbitrum Sequencer 的潜在拒绝服务攻击，并且只对能够在延迟游戏中成功竞争的搜索者有利。</p>
+<blockquote>
+<p><strong>时间加速提案</strong>  将先到先得与优先拍卖相结合。大多数交易可以根据 FCFS 进行排序，但搜索者有机会参与优先拍卖以获得回售机会。因此，它消除了任何延迟优势，同时仍然允许用户享受 FCFS 订购策略。</p>
+</blockquote>
+<h2 id="三mev道德">三、MEV道德</h2>
+<p>所有生态系统都需要解决以下问题：</p>
+<p><strong>我们应该培育 MEV 环境还是尝试完全阻止它？</strong></p>
+<p>令人惊讶的是，没有直接的答案，但技术社区中的许多人对此主题持二元观点。</p>
+<p>MEV 这个词让很多人产生了一种情绪，认为我们只是把用户扔进了狼群，这总是不好的</p>
+<p>关于 MEV 的开发和预防有两种观点：</p>
+<p>- <strong>反MEV阵营。</strong> MEV 有害。这类似于将用户扔给MEV 退化狼degen wolves 并让他们受到最大限度的利用。我们应该尽一切努力防止其被利用。</p>
+<p>- <strong>支持 MEV 阵营。</strong> MEV 很好。它为搜索者执行最终有利于用户体验和稳定市场的行动提供了经济激励。更重要的是，MEV的开发是不可避免的，我们应该尽我们所能去拥抱它。</p>
+<p>有一些容易识别的因素导致了社区内的二元观点。通常，这种观点植根于金融领域的轶事证据和个人经验。</p>
+<p><strong>一些人认为，传统金融体系中高频交易的盛行往往会使小型交易者处于不利地位，而有利于拥有资源（和权限）更快执行交易的大型交易公司。</strong> 另外，它会导致用户进行交易以获得更糟糕的交易，同时让大公司从中获利。</p>
+<p>相比之下，其他人认为由于区块链系统的开放和无需许可的性质，MEV 的利用是不可避免的。这是系统运行方式的一个继承方面，可以说，区块链系统的稳定性取决于我们最大化提取同时将利润分享给所有参与者的能力。</p>
+<h3 id="1评估-mev-如何影响区块链系统">1）评估 MEV 如何影响区块链系统</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_846qllbdhc.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>窃取自 mev.day — flashbot 事件的一大焦点是了解 MEV 如何影响区块链系统的共识协议（如权益证明）。</p>
+<p>为了理解 MEV 在道德上是否合理，我们应该评估它如何影响第一层区块链系统的公平奖励假设，以及它是否对用户交易的意图产生负面影响。</p>
+<h3 id="1对所有提案者的公平奖励">1）对所有提案者的公平奖励</h3>
+<p>像比特币和以太坊这样的第一层区块链的核心属性是，所有提议者代表网络生成区块时获得的奖励大致相同。</p>
+<p>为所有提议者提供公平奖励的动机有两个关键方面支撑着区块链系统的安全性和可靠性。</p>
+<p>- <strong>保持提议者集去中心化。</strong> 首先，它的目的是防止单个提议者随着时间的推移变得比所有其他提议者不成比例地增长，这可能使他们能够积累足够的资本来执行 51% 攻击。</p>
+<p>- <strong>遵循最长链条的经济激励。</strong> 其次，它为所有提议者持续延长最长链创造了经济激励。如果一个区块的奖励显着超过下一个区块，则存在提议者可能会被激励重新组织链的尖端的风险。.</p>
+<p>在以太坊社区中，上述见解导致提议者与构建者分离（PBS）作为 MEV 利润民主化的一种方法。换句话说，拥抱MEV的重点是让所有提案者公平分享奖励，最终保障网络的去中心化和可靠性。 </p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_sbepgj0g24.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>Rollup 的重点并不是为数十万参与者提供公平的奖励，而是奖励任何愿意挺身而出并保持系统活力的一方。</p>
+<p>相反，Conversely, <strong>在汇总生态系统中，向所有提议者提供公平奖励的要求是不同的</strong> ，主要是因为潜在的信任假设不同。</p>
+<p>在以太坊等第一层区块链中，信任假设依赖于大多数提议者诚实行事以维护系统的完整性。它应该针对不同参与者的庞大网络进行优化，并奖励他们的正常运行时间。</p>
+<p>在汇总中，信任要求要温和得多：</p>
+<p>- <strong>安全，</strong>  一个诚实的一方来维护系统的完整性。</p>
+<p>- <strong>活力，</strong> 任何用户都可以使用链上强制包含机制提交交易。 </p>
+<p>当然，强制包含机制应该是用户可以使用的最后手段选项 (我不是based-rollups的粉丝）</p>
+<p>几乎所有用户都依赖指定的提议者来决定交易的顺序，并提供有关其交易最终如何执行的软确认。软确认可以由单个提议者或多个提议者共同支持。您可以以了解有关汇总中不同级别的事务最终性的更多信息。 </p>
+<blockquote>
+<p><strong>分散测序。</strong>  如果一些汇总想要保证提案者委员会（或一组）之间的软确认的正常运行时间，他们可能会寻求更强的信任假设，例如诚实的多数。这并不是 Rollup 的严格要求，社区仍在探索各种选择。</p>
+</blockquote>
+<p>重要的一点是，汇总不一定需要保证数十万参与者的正常运行时间或最大化参与者的去中心化。首要任务是确保系统可公开访问，并且一个诚实的团体可以在正确的时间介入来保护它。</p>
+<p>因此，接受 MEV 并为 rollup 的所有提议者提供公平奖励的需求较弱，尤其是在只有一名提议者的情况下。采用 MEV 的问题不是为了系统的安全，而是将资金留在桌面上或从额外的收入流中获取一些利润是否符合提议者的最佳利益。</p>
+<p>这仍然是一个悬而未决的研究问题，但经验证据表明，当今大多数汇总都已成功使用单个 Sequencer 运行，而不采用 MEV，这表明了这一结论。</p>
+<h3 id="2干扰用户交易">2）干扰用户交易</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0922/11_khqsgq11ph.png" alt="详解 MEV 原理、最新趋势及评估方式"></p>
+<p>评估 MEV 道德时要考虑的另一个方面是了解搜索者的交易捆绑对用户交易的执行可能产生的潜在影响，无论是积极的还是消极的。</p>
+<p>我们认为，仅关注它如何影响用户交易的意图过于有限。</p>
+<p>评估应涵盖更广泛的视角，考虑对 DeFi 协议内代理的影响，以及其对 DeFi 协议同步操作做出贡献的能力。</p>
+<p>让我们借此机会考虑一下交易捆绑的具体例子，以及它是否可以被证明是一种道德活动。</p>
+<h4 id="抢先交易"><strong>抢先交易</strong></h4>
+<h4 id="详解-mev-原理最新趋势及评估方式httpsimgbibiqingcomnews2023092211_np1pwgsqsapng"><img src="https://img.bibiqing.com/news/2023/0922/11_np1pwgsqsa.png" alt="详解 MEV 原理、最新趋势及评估方式"></h4>
+<h4 id="抢先交易攻击可能会迫使用户的交易失败从而导致审查">抢先交易攻击可能会迫使用户的交易失败，从而导致审查。</h4>
+<p>该策略通常与搜索者评估用户的交易、复制其内容以及窃取用户的机会相关。</p>
+<p>- <strong>负面 — 保证 Tx 交付</strong></p>
+<p>Near 的 Rainbow Bridge 利用 MEV 机器人来保证其欺诈证明的交易交付。这有助于保护 DeFi 协议的完整性并最终保护用户。 </p>
+<p>- <strong>负面——审查制度问题</strong></p>
+<p>当搜索者迫使用户的交易失败时，抢先交易可以启用审查。</p>
+<p>当 Vitalik 试图“抛售”SHIBA Token并且MEV 机器人干扰他的交易以阻止他出售Token时，就见证了这一点。</p>
+<p>Vitalik 被迫迁移到 CoW Swap 并将这些交易直接发送给提议者（矿工）。</p>
+<p>- <strong>正面——无法收回暴露的资金</strong></p>
+<p>在黑暗森林的例子中，MEV 机器人能够窃取资金，而用户试图从暴露/损坏的智能合约中恢复资金。</p>
+<h4 id="夹心sandwiching"><strong>夹心Sandwiching</strong></h4>
+<p>该策略通常与搜索者在用户交易之前和之后更改汇率相关。</p>
+<p><strong>- 负面 — 最差汇率</strong></p>
+<p>在许多夹心的情况下，用户在执行交换时最终会得到最差的汇率。这是因为搜索者移动的价格不是用户喜欢的，用户的交换执行，然后搜索者将价格移回。</p>
+<p>搜索者通过创建套利机会而受益，并收集用户可能收到的任何正滑点。有人认为夹心交易有利于路由交易，但大多数讨论都集中在用户的直接负面体验上。</p>
+<p><strong>- 正面 — 最佳汇率（正）</strong></p>
+<p>及时流动性（JIT）要求搜索者在用户交换之前战略性地注入集中流动性，并在交换后立即撤回。</p>
+<p>这使得用户在进行交换时能够获得更优惠的汇率，而搜索者则可以赚取大部分促进交换的费用。</p>
+<p>被动流动性提供者（LP）可能会发现自己处于不利地位，因为他们收取的费用很少甚至不收取任何费用，因为执行交换时使用的是搜索者的流动性，而不是他们的流动性。</p>
+<p>不幸的是， 最近人们发现两种三明治策略可以结合起来，结果是两败俱伤。用户将获得最差的汇率，并允许搜索者获得大部分促进兑换的费用。因此，用户和被动 LP 都会遭受损失。 </p>
+<h4 id="回程"><strong>回程</strong></h4>
+<p>该策略通常与搜索者追逐类似套利的机会相关。</p>
+<p>- <strong>类似套利的机会（积极）</strong></p>
+<p>据我所知，最常见的回溯情况是当搜索者在用户进行大量交换后想要套利汇率时。</p>
+<p>这有利于 DeFi 协议的同步性，因为它使Token的价格保持同步，并最终对用户有利，因为他们在交换Token时始终支付市场价格。</p>
+<p>我不记得有任何对用户或 DeFi 协议产生负面影响的反向运行策略。如果你能想到什么，请在评论中留言！</p>
+<h3 id="3需要客观评估和主观判断">3）需要客观评估和主观判断</h3>
+<p>我们可以把一盏灯照亮黑暗的森林，客观地衡量它的影响，然后做出是否应该拥抱它（以及拥抱到什么程度）的判断。</p>
+<p>人们越来越需要一种增强的方法来衡量 MEV 的影响。</p>
+<p>该方法应包括：</p>
+<p>- 交易捆绑策略</p>
+<p>- 特定于应用的效果</p>
+<p>- 代理商的盈利能力</p>
+<p>- 不受益的代理商的潜在损失</p>
+<p>- 发生频率</p>
+<p>有了上述客观指标，社区就可以对其道德做出价值判断。例如，如果我们考虑即时流动性，它为用户提供了更好的尾端资产兑换率，如果它占所有交易的比例&lt;1%，那么它可能是一个合理的 MEV 策略，因为收益大于风险。</p>
+<p>据我所知，MEV 的论述中完全没有上述类型的分析。链上数据是可用的，但数据集尚无法轻松访问以进行上述分析。</p>
+<p>社区正在讨论如何在支持 MEV 活动和维护生态系统公平之间取得平衡，其中公平应该被明确定义。</p>
+<h3 id="4强化主观性">4）强化主观性？</h3>
+<p>围绕接受道德上合理的 MEV 形式的讨论引发了一个基本的质询：</p>
+<p>在区块链系统中，谁有责任坚持对应该拥抱或限制什么类型的 MEV 的主观判断？</p>
+<p>在像以太坊这样的第一层区块链的背景下，没有中央机构有权强加主观判断。确定是否应排除某些类型的 MEV 的责任由个别提案者或建造者承担。<strong>然而，如果没有协调一致的集体行动，这种排除往往是不切实际的。</strong></p>
+<p>此外，鉴于社区致力于保持可信的中立性并坚持去中心化原则以保障交易权，因此在像以太坊这样的网络上强制执行任何形式的主观判断是极不可能的。 即使 OFAC 制裁执行最终也未能获得 100% 的支持。</p>
+<p>现在，当我们将注意力转移到第 2 层汇总解决方案时，我们遇到了不同的场景。</p>
+<p>在这里，单个实体，即提议者，拥有对他们可能选择为交易提供的软确认执行主观判断的权力。例如，在大多数汇总实现中，信任提议者不会通过操纵 MEV 机会来利用其特权地位来获取额外奖励。然而，可以想象的是，在未来，提案者可能会选择限制特定形式的 MEV——至少尽其所能。</p>
+<p>这就提出了加强主观性的实用性问题，并引发了一个有趣的研究问题：</p>
+<blockquote>
+<p><strong>促进选择性 MEV 的软确认。</strong>  评估 Sequencer 实时检查交易的有效性，确定部署的 MEV 策略并决定是否应拒绝交易，而不会影响整体用户体验或增加系统的软最终延迟。</p>
+</blockquote>
+<p>换句话说，如果有一个客观的方法来评估 MEV 的影响，并有一个主观框架来决定应该容忍哪种 MEV，那么 Rollup 的 Sequencer 执行它的实用性如何。</p>
+<h2 id="四可信的中立高于一切">四、可信的中立高于一切？</h2>
+<p>通过实施一个允许提议者自由排除某些交易的系统，我们可能会为进一步侵蚀用户的交易权利打开大门。</p>
+<p>当我们深入研究 MEV 的伦理考虑以及限制某些形式的潜在理由时，出现了更广泛的道德困境——围绕这些判断可能无意中促进审查制度的困境。</p>
+<p>人们合理地担心，随着时间的推移，用户的交易自由可能会受到侵蚀，因为系统运营商认为某些交易在道德上不公正。它可能会从直接损害用户的交易开始，但最终会导致对其他形式交易的审查，因为现在存在可以实现这一点的技术。</p>
+<p><strong>我坚信像以太坊这样的第一层区块链必须不惜一切代价保持可信的中立性。</strong> 不仅要保护交易权，还要保护建立在其之上的所有汇总。这是保证以太坊能够成为信任之根和保护锁定在链下系统中的用户资金的平台的先决条件。</p>
+<p>另一方面，在类似汇总的系统中，提案者有可能实现实时交易过滤并放弃可信的中立性。</p>
+<p>无论我们对可信中立的重要性有何看法，这种研究途径都可能会被追求。我们的社区必须积极参与并了解其实际实施的程度。</p>
+<blockquote>
+<p>确实，接受交易过滤的实用性可能会无意中导致一个侵蚀用户交易自由的系统。</p>
+</blockquote>
+<p>这就是为什么我们的社区必须并行开展另一个研究流，该研究流重点关注束缚提议者手脚的排序协议，阻止他们过滤特定交易的能力，并最终保护用户的交易权。 </p>
+<blockquote>
+<p><strong>默认情况下不可能是邪恶的。</strong> 在我看来，最终的游戏是建立一个提案者不能作恶的汇总，而不是简单地承诺他们不会作恶。 </p>
+</blockquote>
+<p>假设社区决定实施束缚提议者手脚的协议，那么就有理由担心 MEV 必须默认被接受。我认为，事实并非一定如此。比如包含：</p>
+<p>- 先到先得订购</p>
+<p>- 委员会的订购协议</p>
+<p>- 通过微型拍卖启用反向运行</p>
+<p>它允许汇总采用后台运行策略，这通常被认为在道德上是公正的，同时使得在不直接访问用户的情况下很难夹入用户的交易。</p>
+<p>如果没有交易过滤，则权衡是排序协议可能会阻止整个 MEV 策略类别，但这可能是帮助保护用户交易自由所必需的。</p>
+<p>当然，另一方面，也许汇总不应该试图阻止 MEV 的机会，而应该完全拥抱 MEV。通过让搜索者参与开放市场，让市场围绕 MEV 产生的利润达到某种平衡。任何事情都可能发生！</p>
+<p><strong>对于是否预防或接受 MEV 没有正确答案。</strong></p>
+<p>值得庆幸的是，rollups 作为一个技术堆栈，为我们提供了尝试上述所有内容的自由并找到最能保护所有相关方（包括交易用户、DeFi 协议中的代理以及底层参与者）利益的解决方案协议。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59716/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">下一个时代的船舵，李彦宏握住AI原生应用</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59721/">
+                <span class="next-text nav-default">详解EigenLayer重质押的新用例：MEV-Boost&#43;</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一相关概念">一、相关概念</a>
+      <ul>
+        <li><a href="#1mev-游戏中的特工">1）MEV 游戏中的特工</a></li>
+        <li><a href="#2代理人的相互作用和关系详解-mev-原理最新趋势及评估方式httpsimgbibiqingcomnews2023092211_n7q3n2eni1png">2）代理人的相互作用和关系<img src="https://img.bibiqing.com/news/2023/0922/11_n7q3n2eni1.png" alt="详解 MEV 原理、最新趋势及评估方式"></a></li>
+        <li><a href="#3交易订购政策">3）交易订购政策</a></li>
+      </ul>
+    </li>
+    <li><a href="#二mev的启用">二、MEV的启用</a>
+      <ul>
+        <li><a href="#1寻找-mev-机会">1）寻找 MEV 机会</a></li>
+        <li><a href="#2共享数据库状态">2）共享数据库状态</a></li>
+        <li><a href="#交易的最终执行可能与签署交易时的预期执行不同">交易的最终执行可能与签署交易时的预期执行不同。 </a></li>
+        <li><a href="#3交易捆绑和干扰方法">3）交易捆绑和干扰方法</a></li>
+        <li><a href="#4影响提议者如何确定交易排序的优先级">4）影响提议者如何确定交易排序的优先级</a></li>
+      </ul>
+    </li>
+    <li><a href="#三mev道德">三、MEV道德</a>
+      <ul>
+        <li><a href="#1评估-mev-如何影响区块链系统">1）评估 MEV 如何影响区块链系统</a></li>
+        <li><a href="#1对所有提案者的公平奖励">1）对所有提案者的公平奖励</a></li>
+        <li><a href="#2干扰用户交易">2）干扰用户交易</a></li>
+        <li><a href="#3需要客观评估和主观判断">3）需要客观评估和主观判断</a></li>
+        <li><a href="#4强化主观性">4）强化主观性？</a></li>
+      </ul>
+    </li>
+    <li><a href="#四可信的中立高于一切">四、可信的中立高于一切？</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

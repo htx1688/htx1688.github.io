@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Blur 链上数据深度分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="经过一个多月的努力，我们对研报进行了重大的升级，加入对链上数据的深度分析。主要对4个目的进行深入的分析。" />
+<meta name="keywords" content="Blur" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54638/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Blur 链上数据深度分析" />
+<meta property="og:description" content="经过一个多月的努力，我们对研报进行了重大的升级，加入对链上数据的深度分析。主要对4个目的进行深入的分析。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54638/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-09T00:00:00+00:00" />
+
+<meta itemprop="name" content="Blur 链上数据深度分析">
+<meta itemprop="description" content="经过一个多月的努力，我们对研报进行了重大的升级，加入对链上数据的深度分析。主要对4个目的进行深入的分析。"><meta itemprop="datePublished" content="2023-07-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4638">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Blur 链上数据深度分析"/>
+<meta name="twitter:description" content="经过一个多月的努力，我们对研报进行了重大的升级，加入对链上数据的深度分析。主要对4个目的进行深入的分析。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Blur 链上数据深度分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-09">
+      2023-07-09
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4638 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：日月小楚</p>
+<p>Big Thing，经过一个多月的努力，我们对研报进行了重大的升级，加入对链上数据的深度分析。主要对4个目的进行深入的分析：</p>
+<p>1）从团队/投资人质押大户/基金会的动作来判断他们对项目未来的态度</p>
+<ul>
+<li>是持有、增持、还是在不断卖出</li>
+</ul>
+<p>2）多个维度看主力吸筹，还是分发筹码</p>
+<p>3）现在主力持有人的情况</p>
+<ul>
+<li>
+<p>未来增持的实力</p>
+</li>
+<li>
+<p>长期还是短期</p>
+</li>
+<li>
+<p>是否是聪明钱</p>
+</li>
+</ul>
+<p>4）增持/减持者的数据分析</p>
+<p>以BLUR为列，看看投研数据</p>
+<p><strong>1 Holder人数的研究</strong></p>
+<p>holder人数代表着项目支持者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_ddustoi9rl.png" alt="xYXzixYz0rteD7Gc1whqBCDHErMfzcXFbhYiCtHz.png" title="7061623"></p>
+<p>上图为blur的持币人数随着时间的变化，分别代表着持有blur超过2枚，超过200枚，超过100K枚的变化。</p>
+<p>1）超过2枚，价值在1U左右，代表持有人的总数。</p>
+<p>在这里我采用了与其它数据平台不同的定义。因为在研究中我发现，存在着大量非常小的非零地址，它们只是卖出转账的遗留。很显然，这些地址是不能算持币用户，因为他们压根都不会觉得持有，但是他们的存在会影响holder总人数的数据，甚至会产生相反的结论。</p>
+<p>2）超过200枚，价值在100U左右，参考的是江湖流传的100U战神，代表着有意愿主动买入并持有的用户数量。</p>
+<p>3）超过100K枚，价值5万U左右，用于代表大户。</p>
+<p>从上面的图中可以看出，blur的地址数量一直在增持，但是3月增持比较大。4到6月总持有人数增持都在1000+人，增持速度大概在4%左右。而200的持有人数，每月增持在800人左右。而对于大户，每月的增长在20+左右。（其中六月代币解锁，项目方分发了20个大额的钱包）</p>
+<p><strong>整体来说，blur在过去3周的持币地址的增幅比较小，只有地址每月的涨幅仅为4%左右。尤其是持币大户每月的增长是更加的小。</strong></p>
+<p><strong>2 DEX/CEX近60天数据研究</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_isevsydjbi.png" alt="xG3o6ui7lW4tHxqeRHHcUHrWUMkthDbU6ynsZNKC.png" title="7061625"></p>
+<p>上面图中，第一张代表着每日交易所的充值/提现情况，其中黄色代表当日净充值，蓝色代表当日净提现。阴影面积是充值提现的累计。第二张图代表着每笔充值/提现的平均数量，用来判断充值和提现是否是大户行为还是散户行为。直观的看，值比较高的就是大户的行为，而峰值比较低的主要是都是散户的行为。</p>
+<p>1）从交易所的充值提现来看，在6月15日附近，出现大额的充值，结合当时blur有大量的解锁，可以判断是团队解锁的筹码充值进入交易所。而在6月8日~12日之间，交易量整体净流出了600万枚blur，但是从平均提现来看，并没有大额的行为。大概率是做市商的行为，分了多笔小额的进行</p>
+<p>2）也特别注意到，在5月14日到6月8日之间，交易所整体流入流出量并没有太大的变动。但是充值量先后出现了两个峰值，这说明虽然有很多散户在从交易所提现，但是大户却相反却在充值，导致blur的币价整体一直在下跌。</p>
+<p><strong>总结，从数据来看5月14日到6月8日之间，很多散户在从交易所提现，但是大户却相反却在充值，导致blur的币价整体一直在下跌。而在6月8日~12日之间，交易量整体净流出了600万枚blur，是做市商分多笔小额的提现。而15日有大额的解锁的筹码充值进入交易所。以上迹象来看，在15日之后blur大概率形成底部，做市商会有所行动，目的是为了拉高出货。从结果来看，blur从15日最低的0.3刀，涨到0.45，涨幅达到50%。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_9aczfnnp7s.png" alt="LGkCCpHhVOdeWHD0WViBAME2BQF1FkK0C1bgnUwL.png" title="7061624"></p>
+<p>上图是dex的买入卖出行为，第一张图代表着每日dex上买入卖出情况，其中黄色柱子代表当日净买入，蓝色柱子代表当日净卖出。阴影面积是充值买入量，负值表示净卖出。第二张图代表着每笔买入/卖出的平均数量，用来判断大户行为。</p>
+<p>dex与cex不同的是，dex是直接买入和卖出。</p>
+<p>1）从上图中可以看到，在4月28日到5月24日的时间内，不仅累计净卖出了大量blur，而且第二张图出现多个蓝色峰，说明一直都大户在dex上面卖出。</p>
+<p>2）在红色框中，可以看到在6月12日附近，这两天净买入量都比较大，并且大户大额买入。那么为什么那时候blur币价并没有大涨呢？因为交易所跟dex是有做市机器人联动，<strong>说明交易所内散户在大量卖出。从链上能看出blur在0.3位置有大户买入，所以价格成功筑底并开启了后面的反弹。</strong></p>
+<p><strong>所以，对于最近一波blur的行情，dex和cex的种种迹象都比较明显了。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_8c5qcv4mlu.png" alt="C1cildywIbpbHmk9j5Wiuel9Ya4VPrXg0CIq4Y99.png" title="7061627"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_z1fitnjfci.png" alt="iuwcTW7GZiG2hf8l3GIJMJJhQTn37BISyuidroF4.png" title="7061628"></p>
+<p>上图是dex和cex的钱包地址（合约地址）转账的次数，是转入转出的累计的次数</p>
+<p>从cex可以看出，CEX上面最活跃的时间是UTC 14:00,13:00,06:00， 其次是12:00,15:00。 转化成北京时间的话，主要是以半夜为主，说明cex上面的交易以美国时区的为主。</p>
+<p>从dex可以看出，DEX上面最活跃的时间UTC 12：00，其次是02:00，15:00，13:00。转化成北京时间，最活跃的依然是半夜，以欧美时间为主。其次是晚上9点和11点，是比较晚的时候。</p>
+<p>整体来看，blur现在cex和dex比较活跃的都是美国时间为主。</p>
+<p><strong>3 持币大户深度画像</strong></p>
+<p>请注意，这里的持币大户在排除了项目方、dex、cex、mev、dex中间钱包、cex中间钱包等地址之后，持有blur数量的Top100的地址。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_os7vgue330.png" alt="NETpU3IBqM8pbQbINqeSrcOuI02nP1y4nftJgk8X.png" title="7061629"></p>
+<p>上面是持币大户地址的汇总的核心信息。</p>
+<p>1）ROI，从ROI来看，大部分持币大户当前处于亏损状态，中位数是亏损20%， 中间段50%的持币大户亏损范围在3%到37%之间。</p>
+<p>2）TransactionsPerDay （TPD）是指地址的平均每日的转账次数，用来来衡量钱包在链上活跃度的指标，并能从侧面来判断持币者是长线还是短线操作。从数据来看，blur的持币大户TPD中位数为0.4次，即月平均是12次，这主要反应出并不是高频操作。</p>
+<p>从TPD数据中，还发现一切非常活跃的钱包，这可能是一些持有blur的做市商的钱包。</p>
+<p>3）从addressAge来看，我们可以发现，中位数的钱包时间为217天，超过四分之三的钱包已经有69天以上。这表明大部分钱包并非新生成地址，已经存在一段时间。</p>
+<p>4）HoldDay代表地址持有blur的时长，其中位数为61天，这意味着平均持有时间超过了两个月，且四分位数集中在25天到100天间。值得注意的是，blur的价格在过去的两个月中从0.8美元跌至0.3美元</p>
+<p><strong>综合来看，blur的持币大户的钱包大部分是处于2月以上的钱包，并且每日转账数量并不活跃，并非是频繁交易者。blur持币大户整体是在一个月前买入，新进的大户占比很低。而且，持币大户整体处于亏损中，大部分亏损在3%到37%之间。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_zthe3i4gw4.png" alt="STnjo9TOGSaqTv3vtvCQsm1NlsvwQSH3jLs52ox0.png" title="7061630"></p>
+<p>上图是持币大户的成本，以及持有量的关系图。球的大小代表着持有的时间。从上图中我们可以直观的看到</p>
+<p>1）大部分大户的平均持有成本集中在0.5和0.8刀之间，特别是0.6刀附近。</p>
+<p>2）有些持仓大户的成本在0.3~0.4刀附近，他们球体相对较小，说明他们是近期新进的大户。</p>
+<p>3）在1刀以上成本的持仓大户已经非常少了，说明在高位的大户早就已经被洗盘，或者在低价格买入以降低持仓成本。并且持仓量比较小，在图中成本在1刀以上的只有三位，分别320万，48万，和30万blur</p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_rjngnqy7sp.png" alt="5KKygqKnLlXFmqnzTTczrYXzXnfR8o58duGBrsCa.png" title="7061631"></p>
+<p>上图是持币大户的总资产量，以及持有量的关系图。球的大小代表剩余其它的资产，即球越大，blur占其资产比列越小，可以间接的反应持币大户可可能进一步增持的潜力。从上图中我们可以直观的看到</p>
+<p>1）持币大户的资产，大部分集中在100万美金以内的。其中1百万~1千万，1千万~1亿美金资产的占比不到10%。</p>
+<p>2）资产100万以上的大户的球体都比较大，说明他们持有的blur比列不高。而在10万美金~100万美金之间，也有相当一部分地址其blu在的占比并不高。</p>
+<p>3）从blur持有量来看，持有量比较大的（100万blur以上）blur所占的资产比例都比较高，说明这些地址都是专门地址持有blur</p>
+<p><strong>总的来说，blur的持币大户的地址总的资产并不高，集中在100万美金以下。而持有量blur的地址，blur占比比列比较高。</strong></p>
+<p><strong>4 增持者分析</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_stvppk9ft4.png" alt="Pba7yhnmBBRf8OWxWTUc7YbAc2kMLr34673FE1wA.png" title="7061632"></p>
+<p>上图是过去60天中，持仓大户增持情况的数据。其中</p>
+<p>1）%Increase Of Amount 代表增持的blur数量，占持仓大户总blur仓位的比列。那么这个比例是53.48%，也就是说一半以上筹码已经发生了换手。</p>
+<p>2）% Increase Holder Of Total Holders 代表着持币大户中增持的比列，高达42%。</p>
+<p>3）虽然前面两个数据的情况还不错，但是在我们具体看增持者情况的时候，却发现了一些问题。</p>
+<p>A：虽然持币大户中有42%增持，但是累计增持30万blur以上，只有25个。</p>
+<p>B：红色框选出来的，多个192万blur的增持者。他们都具有相同数量，并且只持有blur一个代币，并且都是从交易转出，这可能是某个大户的统一行为，也可能是做市商的行为。同时我们发现，增持量排名第一和第二的大户，同样也是从交易所内转出，并且是只有10天的新钱包。<strong>虽然我们无非判断这些地址是有谁控制。但是至少说明，实际增持的人并没有前面分析的那么多。</strong></p>
+<p>4）增持者直接从dex买入的只有三人，链上的增持并没有那么活跃。</p>
+<p>5 团队/机构解锁筹码研究（之前已发布）</p>
+<p><strong>1）blur14号解锁后，3000万转入coinbase。但CB交易量只在14号增加了200万。且价格反而上升了20%。</strong></p>
+<p><strong>2）1.54亿blur转入多个钱包，钱包都是刚注册的。可以认为解锁筹码由项目方统一控制。</strong></p>
+<p><strong>3）在14号，blur官方钱包从coinbase提现。</strong></p>
+<p><strong>4）有315万blur转给做市商，并且wintermute近几日在增持中。</strong></p>
+<p><strong><img src="https://img.bibiqing.com/news/2023/0709/18_m2wg5kw6ya.png" alt="m6vDMknfEqju1b01HWt6PE0aDysnyv52QQUn4lKR.png" title="7061633"></strong></p>
+<p>6月14日，根据白皮书，投资人解锁7849万枚，团队贡献者解锁1.17亿枚，顾问解锁498万枚锁。</p>
+<p><strong>根据链上追查，实际转出了1.91亿枚</strong> ，由地址0xCD531Ae9EFCCE479654c4926dec5F6209531Ca7b进行分发。我对其进行深入的调查，<strong>发现1.91亿枚blur一共转账到了18个地址。其中的5个地址的blur已经转出</strong> ，共计3310万枚blur，他们的去向为：21万直接在dex卖出，2973万枚转入coinbase，315万枚转给了wintermute。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_er97ovf6s9.png" alt="cbp8lonHsPi2r0fjji8lDlWTZZeC6lzvK2mhXIVO.png" title="7061634"></p>
+<p>对还持有blur的地址进行了分析，大部分地址都是新地址，并且没有其他的转账记录，这些地址一共持有1.54亿枚。只有图中的倒数三个，转账比较频繁，但是他们收到了blur总计只有30多万枚。可以认为链上有1.54亿blur 由统一控制中（大概率是项目方）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0709/18_8o5sp8irb8.png" alt="MxnoUFZ2uQyOSYncsXf1vilUmi586hIXowqy16fK.png" title="7061636"></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54727/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">重新定义流动质押：Lido 如何推动以太坊的质押格局</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54640/">
+                <span class="next-text nav-default">Foresight Ventures市场周报：市场高位震荡，RWA叙事火热</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          全面解析跨链桥基本原理及安全性 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="跨链桥不是一个新话题，但我们还需要重新认识它。" />
+<meta name="keywords" content="跨链桥" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/41679/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="全面解析跨链桥基本原理及安全性" />
+<meta property="og:description" content="跨链桥不是一个新话题，但我们还需要重新认识它。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/41679/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-18T00:00:00+00:00" />
+
+<meta itemprop="name" content="全面解析跨链桥基本原理及安全性">
+<meta itemprop="description" content="跨链桥不是一个新话题，但我们还需要重新认识它。"><meta itemprop="datePublished" content="2022-08-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9537">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="全面解析跨链桥基本原理及安全性"/>
+<meta name="twitter:description" content="跨链桥不是一个新话题，但我们还需要重新认识它。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">全面解析跨链桥基本原理及安全性</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-08-18">
+      2022-08-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 9537 字 -
+        预计阅读 20 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>**什么是跨链桥？<br>
+**</p>
+<p>当前区块链行业发展迅猛，出现了各种各样的公有链，但是不同链上有着不同类型的资产、协议等，使得它们之间无法直接通信，这给用户带来了诸多不便，比如：某用户持有比特币资产，但是想在以太坊生态中进行投资或消费，那么最直接的方式就是通过中心化的交易所进行兑换，但是整个过程非常繁琐，耗时很长并且需要多次支付手续费。</p>
+<p>跨链技术的发展使得用户对于不同区块链之间的互操作（如：资产交易和信息交互）成为可能，其中应用范围最广的实现就是跨链桥。Web3领域中的「跨链桥」，不是物理位置连接的桥，而是连接两个不同的区块链网络。这种连接非常重要，因为如果没有区块链「桥」，区块链就会处于孤立的环境中，无法相互通信。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_ijmmzaeqph.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<h3 id="跨链互操作性详细解读">跨链互操作性详细解读</h3>
+<p>区块链的互操作性Interoperability，由Interaction、Operation和Ability组合而成，即“相互操作的能力”，简称互操作性。区块链互操作性主要包含三方面内容：一是用于应用层的互操作性，主要解决上层应用与底层链紧密耦合的问题，二是用于链间互操作性，主要解决“链级孤岛”问题，三是链下数据互操作性，主要解决链上链下数据的安全可信交互。而本文主要从跨链交易的用途讨论区块链互操作性，即不同区块链系统之间的资产和信息交互。</p>
+<p>下面将首先对三种区块链中的互操作性技术进行详细介绍：</p>
+<p>2.1公证人机制</p>
+<p>公证人机制是技术上可实现的最简单的一种跨链机制，本质上是一种中介的方式。通过引入一个或多个可信第三方做信用背书，持续监听链上的事件，并根据获取到的事件信息负责在其他链上进行跨链消息的验证和转发。公证人机制的实现方式主要分为以下三种：</p>
+<p>1.单签名公证人机制</p>
+<p>最简单的公证人机制，该方式会选取一个独立的节点或者机构作为第三方公证人。公证人在整个跨链交互中进行数据收集、验证、交易确认等任务。该方式兼容性高、交易速度快，但使用范围仅限于跨链资产交换等场景。</p>
+<p>2.多签名公证人机制</p>
+<p>该方式中公证人为一群独立节点或者机构组成的联盟，每个节点都拥有一个密钥，只有一定比例的公证人在跨链交易上签名达成共识时，该交易才有效。</p>
+<p>该方式弱化了单签名公证人机制的中心化风险，具有更高的安全性，即使有部分节点受到恶意攻击也不会影响整个跨链系统的运行。</p>
+<p>3.分布式签名公证人机制</p>
+<p>该方式相较于多签名公证人机制，采用了多方计算MPC（multipartycomputation）来确保密钥的安全性和隐私性。即将密钥拆分为多个碎片并随机分发给公证人，但无法利用这些碎片得出完整的密钥，仅当一定比例的公证人共同完成签名后才能拼凑出完整的密钥。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_1tif8d0crd.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>2.2哈希锁定</p>
+<p>哈希锁定全称为哈希时间锁定合约（Hash timelock contract），该方式利用哈希函数的单向性与低碰撞性，通过哈希锁和时间锁，在无需可信第三方作为公证人的情况下完成不同链间资产兑换的跨链技术。其中，哈希时间锁要求接收方在规定的deadline期限内，能够确认收款并生成证明给发送方，否则资金将会归还。发送方能够使用收款证明获取到接收方在目标链上的资金或触发相关事件。</p>
+<p>该方式的能够保证同一条链上的资产总量保持不变，但通常只能用于转账操作。下面以闪电网络中基于哈希锁定的原子交换实现过程：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_sw5s25214u.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>1）用户A生成随机数s，并计算出其哈希值H(s)；</p>
+<p>2）将H(s)值通过网络发送给另一条链上的用户B；</p>
+<p>3）用户A设置时间锁t1，并使用H(s)将BTC锁定在自己所在的链的脚本中，该操作限定了只有能提供s值的用户才能获取到锁定的BTC；</p>
+<p>4）另一条链上的用户B在A所在链上确认上述交易后，同样在自己所在的链上设置时间锁t2（t2 &lt; t1），同时使用接收到的H(s)将自己的BTC锁定在该链的脚本中；</p>
+<p>5）用户A在t2时间内向用户B的脚本发送s值；</p>
+<p>6）用户B的合约验证通过后，将锁定的BTC发送给用户A，同时获取到s值。此时如果交易超过t2时限则跨链交易失败，双方都各自取回待兑换的资产。</p>
+<p>7）用户B将获取到的s值在t1时限内，发送给用户A的脚本。待其验证通过后，脚本将锁定的BTC发送给用户B。如果超时同样使得跨链交易失败。</p>
+<p>2.3 侧链/中继技术</p>
+<p>侧链和中继是最常用的跨链机制，都可以通过采集原链上的信息，实现主链区块和账本数据的解析和验证。</p>
+<p>但二者存在以下几点差异：首先，侧链从属于主链，侧重于提高主链的可扩展性，对于主链不可见，通常共享原链上的原生代币，而中继则没有从属关系，着重于跨链数据的传输；其次，侧链处理交易时需要同步所有的区块头，导致其速度比中继链慢；最后，侧链和主链的安全机制相互独立，即侧链具有自己的共识协议，这些协议通常是为特定类型的交易设计的，意味着其通常不会继承主链的安全属性，在使用侧链时，用户将失去对资金的保管权，且仅依赖于侧链的安全性。而中继则依赖于主链进行验证。</p>
+<p>中继本质上是各主链抽象出的一个跨链操作层，是公证人和侧链机制的融合和扩展。主要作用是作为一个通信中枢收集不同区块链间的数据并进行消息转发，适用于异构或同构的区块链。</p>
+<p>侧链实现的基本技术是双向锚定（Two-way Peg）。跨链过程实际上是在一条链上锁定某种代币资产，同时又在另一条链上生成对应的另一种代币资产。其中，双向锚定技术就是解决跨链过程中，目标链如何判定代币资产已经被安全锁定的问题。被认为是区块链上第一条侧链的BTC-Relay，其就通过在智能合约中内嵌Bitcoin SPV功能来允许用户在以太坊上验证比特币的交易。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_csbdjyyn3f.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>该技术目前可以通过单一托管模式、联盟模式、驱动链模式、SPV模式实现，</p>
+<p>下面将进行具体介绍：</p>
+<p>1.单一托管模式</p>
+<p>最简单的实现方式，基本原理与单签名公证人相同。通过公证人实现侧链资产的锁定和验证释放。</p>
+<p>2. 联盟模式</p>
+<p>资产托管方是公证人联盟，基本原理与多签名公证人相同，利用多重签名减小上述方式中中心化的风险。</p>
+<p>3.驱动链模式</p>
+<p>该模式中由交易处理节点作为公证人，负责资金的托管和解锁。具体过程为：交易处理节点提交其他链上的资产锁定信息到区块中并发起草案，在投票与确认后，在当前链上解锁指定的资产。</p>
+<p>4.SPV（Simple Payment Verification ）模式</p>
+<p>主链和侧链通过SPV验证，确定资产是否被安全锁定。下面以BTC-Relay中该模式的具体实现为例，进行介绍：</p>
+<p>1）用户A向主链上包含了侧链信息的指定地址发送代币，锁定主链资产；</p>
+<p>2）等待一段确认期，使得上述交易经过主链共识后被确认；</p>
+<p>3）用户在侧链提交一笔铸币交易和对应的主链资产锁定交易的SPV证明，侧链区块根据SPV证明验证上述交易的有效性，验证通过后侧链会进行铸币但该资产此时处于锁定状态；</p>
+<p>4）等待一段竞争期，目的是为了保证资产被完全锁定，从而防范双花攻击。如：等待SPV区块头的验证数大于6次；</p>
+<p>5）侧链解锁铸币，使得其可以在侧链上自由流通。</p>
+<h3 id="跨链互操作性协议">跨链互操作性协议</h3>
+<p>3.1资产交换</p>
+<p>区块链在转移跨链资产时通常分为以下四种方式：第一种是锁定和铸造，该方式会在原链上锁定资产，并在目标链上铸造对应的资产；第二种方式是销毁和铸造，该方式会销毁原链上的资产，并在目标链上铸造资产；第三种方式是原子交换，该方式会将原链上的资产直接兑换为目标链上的资产，且无需信任，因此其不需要前两种方式中的可信第三方；第四种方式为流动性置换，该方式会在不同的链上建立流动性资金池，用户可以在资金池中直接兑换另一条链上的原生资产，另外流动性提供者也可以通过提供代币作为流动性资金。典型的资产交换协议有Plasma、Rollup等，下面将进行详细介绍。</p>
+<p>3.1.1 Plasma</p>
+<p>Plasma包含一系列运行在区块链上的智能合约，通过与侧链间接交互实现跨链。它可以创建子链的无限分支，这些子链是以太坊主链的的较小副本，具有自己的共识机制。计算所需的带宽和交易数据在侧链进行，仅定期发布交易结果到主链。每个子链都依赖于“欺诈证明系统”的安全性，任何人都可以质疑其有效性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_ftsuv7esp6.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>Plasma实际上不是单指一个项目本身，而是一种框架。其有多种实现方式，本文以Plasma MVP，一种基于UTXO模型的侧链为例进行介绍。Plasma MVP的侧链采用POA共识算法，即参与共识的只有一个管理者（Operator）。在业务类型上该项目只支持转账，共有两种种场景，分别为：存款（Deposit）、取款/退出（Withdrawal/Exit），下面将分别进行介绍：</p>
+<p>1.存款（Deposit）：</p>
+<p>1）用户发起一个Deposit调用交易向主链Plasma智能合约上发送一定数额</p>
+<p>的以太币或ERC20代币，交易成功执行后产生一个DepositCreated事件；</p>
+<p>2）Operator监测到该事件，生成一个仅包含一笔交易的区块。该笔交易是</p>
+<p>由合约调用deposit()函数为用户创建侧链资产Creat(DepositCreated,amount)；</p>
+<p>3）侧链上创建的交易包含两个输入UTXO和两个输出UTXO，在存款（充</p>
+<p>值）时，只有输出的第一个UTXO不为0，其他值都为0，具体如下：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_qo46zjszal.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>4）Operator将该区块的默尔克树根发送到主链合约中，合约会产生</p>
+<p>BlockSubmitted事件；</p>
+<p>5）用户监听到该事件，验证其有效性，存款成功。</p>
+<p>2.取款/退出（Withdrawal/Exit）：</p>
+<p>1）用户向主链的Plasma 合约发起Exit交易，其中包含一些必要参数用于明确待提现的UTXO位置和合法性：要取款的UTXO所在区块号（h）、区块内交易所在编号（Tindex）、交易中UTXO编号（Uindex）等标识目标UTXO位置的参数，以及该UTXO涉及到的一系列交易确认签名等信息。此外，同时还要提供一笔保证金EXIT_BOND；</p>
+<p>2）该交易会被放入一个优先队列中，优先级按照如下公式进行计算：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_z06cgt6lfi.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>根据该公式计算优先级决定取款顺序的原因是保证在出现恶意交易时，之前的UTXO都可以安全退出，即旧的UTXO总是先于新的UTXO被取出；</p>
+<p>3）Exit交易需要等待一段挑战期才会生效，最快7天、最慢14天。</p>
+<p>在Exit交易中，如果有其他用户发现申请人存在恶意行为，就会发起一个争议challengeExit。该争议需要提供有效的UTXO争议对象的默克尔证明。如果该争议被验证成功，则被争议对象的交易将会从队列中删除，同时将保证金奖励给发起争议的用户。</p>
+<p>由于Operator负责将区块打包给主链，所以其可以监控到侧链上的所有交易，而一旦其存在某些恶意行为将会导致严重的后果，如双花攻击等。</p>
+<p>针对这一点，Plasma在取款/退出期间也进行了很多设计避免了这些情况。首先是上文中提到的优先级队列，其主要目的是保证存在恶意交易时，能够保证用户的资金安全。该优先级按照上述计算公式，首先由区块的次序决定，其次是单个块中的交易次序，最后是交易中的余额，同时上述三个值就可以唯一的确定一个UTXO的位置。因此上述优先级计算公式可以确保旧的交易优先级高于新的交易，这意味着如果一笔不正确的交易（如：双花攻击）被加入到区块时，那么所有错误交易之前的交易都会先执行，最后再执行错误交易，这会使得双花攻击失败。</p>
+<p>但是存在Operator可以故意将错误交易打包到用户交易之前的可能，针对这种情况，Plasma的交易中其实存在两个签名。第一个是当用户发起交易时，会对交易本身进行签名，接着发送给Operator打包。第二个是当交易被加入到区块中时，用户会再进行一次签名，其被称为“确认签名”。如果用户正确遵循该规则，那么在该笔交易被Operator打包前，用户绝不会发出确认签名，即Operator无法将非法交易写在用户的交易之前。</p>
+<p>Plasma存在的问题：</p>
+<p>1）每个用户都必须监控和验证整个Plasma MVP链上的所有交易，防范恶意交易并及时退出。但是验证成本高昂，且增大了链上开销；</p>
+<p>2）数据可用性问题：侧链的Operator如果仅发布区块头，而拒绝发布链下的交易数据，这将使得主链无法验证侧链的正确性。</p>
+<p>3）用户取款/退出操作耗时很长，必须等待挑战期结束。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_z3j5fy7c6g.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>3.1.2Rollup</p>
+<p>Rollup与Plasma类似都通过侧链实现对数据的交易和执行，二者不同之处在于，Plasma将数据和计算都放到链下进行，但是该方式存在链下数据的可用性问题。针对该问题，Rollup仅将计算（和状态存储）移到链下，但将每个交易的部分数据保存在链上。具体地说，该方案会将数百个链下交易汇总为一个批次，并在侧链上按批次执行交易，最终完成的交易“打包”后再按批次发布到主链上，以此提升主链的交易速度。这种将数据存放在链上的方式，允许任何人在本地进行Rollup中的所有操作，从而实现欺诈验证、发起提款、甚至自己打包交易等功能。</p>
+<p>Rollup主链上存在一个智能合约维护一个状态树的根节点，该节点数据包括：账户余额、合约代码等，但该状态树本身并不存储在合约内部，该树由侧链每隔一段时间通过数据的交易和执行结果产生，具体如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_uh7ykqfqvs.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>交易的批次由一个高度压缩的交易集合，以及之前的状态根和新的状态根（执行该批次交易之后生成的新的状态根）组成。合约将检查批次中前一个状态根是否与当前的状态根匹配，如果匹配，将切换到新的状态根，具体如下：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_mg01colkwd.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>Rollup针对谁可以提交批次这一问题，有以下几种方案：</p>
+<p>1）任何人都可以提交，该方式是最简单的一种方式。但是，由于存在多个参与者，如果批次交易并行发布，会导致生成证明或批次交易发布到链上的这个过程产生过多的花销。</p>
+<p>2）中心化定序器（Centralized sequencer）：目前最常用的一种方式，由一个中心化的单一定序器提交交易批次。</p>
+<p>3）定序器拍卖（Sequencer auction）：通过拍卖的方式，使得出价最高的实体有权成为定序器。</p>
+<p>4）PoS投票：任何人都可以将指定代币存入Rollup合约，接着可以从每批交易中的存款者中随机选取一位作为定序器，选取的概率与存入的代币数量成正比，该方式的缺点是会导致大量不必要的资金被锁定。</p>
+<p>5）DPoS投票：拍卖中选取的定序器，如果存在离线或打包恶意交易等不良操作，代币持有者可以通过投票将其踢出并举行新的拍卖重新选取定序器。</p>
+<p>Rollup中的一个重要问题是如何确定批次中的后状态根的正确性，因为如果提交伪造的后状态根而无需付出任何代价，那么攻击者可以伪造该数据使得自己获取到所有代币。针对该问题，Rollup目前有两种典型的解决方案ZK-rollups和Optimistic-rollups。</p>
+<p>Optimistic-rollups使用欺诈证明，即Rollup合约跟踪状态根的整个历史记录和每个批次的交易Hash值。如果有人发现某个批次的状态后根不正确，可以将其生成欺诈证明发布到合约中，如果合约验证通过，将恢复该批次和之后的所有批次。典型的项目有Arbitrum、Optimism；ZK-rollups则使用有效性证明，每个批次都包含一个ZK-SNARK的加密证明，其可证明后状态根是执行正确的结果。</p>
+<p>3.2信息交互</p>
+<p>3.2.1 Polkadot</p>
+<p>Polkadot是一种支持多链的异构多链跨链平台，使得多个区块链之间可以实现去信任地交互，其架构中有三种类型的链：</p>
+<p>第一种是中继链（Relay chain），该链位于Polkadot的核心，主要用于转发各平行链上产生的跨链交易，记录各平行链的交易状态，并传递交易的验证和执行结果，采取拜占庭容错算法（BFT,byzantine fault tolerance）为整个系统提供统一的共识和安全保障。该链本身不包含任何交易，只负责最顶层的跨链交易路由，DApp均在平行链上进行开发和部署。</p>
+<p>第二种是平行链（Parachain），其只负责具体的业务场景中的DApp应用开发和部署，各自并行存在，开发者可以依据特定应用场景下的问题，选择平行链底层的区块链系统。其链本身不具备区块共识，其安全性通过Polkadot的共享安全性模型由中继链的验证者提供。</p>
+<p>第三种是桥接链，专门针对异构链开发设计的一个跨链结构，如当以太坊需要与Polkadot中继链进行交互时，以太坊数据需要首先经过以太坊底层系统中的桥接链对跨链信息进行规范化处理，才能转换为Polkadot网络交互需要的形式。该链具有自身的共识算法，通过不同的Bridge与Polkadot连接在一起进行交互。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_4srvj7g231.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>其核心是通过提供一个中继链，链上以区块链的数据形式存储所有连接到中继链上的所有其他链信息，这些信息来自连接在中继链上的各个独立运行的平行链。网络中存在四种类型的参与者，包括验证人（Validator）、收集人（Collator）、钓鱼人（Fisherman）、提名人（Nominator）。下面将对其进行具体介绍：验证人：拥有最高权限，主要负责Polkado网络的出块，通过运行一个中继链的客户端，在整个网络的每一轮区块产生过程中，验证各个被提名的平行链出的区块。当各个平行链的区块都被其验证人确定之后，验证人会将所有平行链区块头组装到中继链区块并进行共识出块；</p>
+<p>收集人：帮助验证人在各个平行链收集必要的交易信息，打包并执行相关交易，然后将执行交易的结果附上一个零知识证明，提交给该平行链的验证人；</p>
+<p>钓鱼人：不直接参与区块打包的过程，钓鱼人可以通过检举一个有质押的参与方存在的非法行为，并提供带签名的有效证明去获取奖励收益。其中非法行为包括验证人对两个有相同 父区块的不同区块进行签名，或在平行链上验证通过一个无效区块等；</p>
+<p>提名人：是一个拥有权益的群体，验证人由提名人选举产生。提名人选择验证人之后，可以通过将自身的权益质押给验证人，从而使验证人代表其维护整个Polkadot网络，这种方式使得提名人和验证人可以收到相同比例的奖励和惩罚。</p>
+<p>每个平行链有两个消息队列，一个是输出队列engress，一个是输入队列ingress。Polkadot中的平行链A和平行链B之间的跨链交易过程如下：</p>
+<p>1）A链将跨链交易存放到自己的输出队列engress中；</p>
+<p>2）A链的Collator收集A链的普通交易和跨链交易并提交给A链的Validator集合；</p>
+<p>3）A链的Validator集合验证成功后，将本次区块头信息和engress内信息提交到中继链上；</p>
+<p>4）中继链利用共识算法确认区块以及跨链交易路由后，中继链上的Validator会将A链的相应交易从A链的engress队列提交到链B上的ingress队列；</p>
+<p>5）B链执行区块和ingress队列中的交易并修改自身账本。</p>
+<p>由于所有平行链的共识同步发生，所以跨链交易没有双花等安全性问题。</p>
+<p>3.2.2 Cosmos</p>
+<p>Cosmos与Polkadot类似，都是通过一个中继链对跨链消息进行中转，从而创建一个异构跨链平台，但二者也存在一些不同之处。首先在Cosmos网络中存在两种角色包括：Hub、Zone，其中Hub为用于处理跨链交互的中继链，Zone为Cosmos中的平行链。Cosmos生态中有不同的Hub作为中心枢纽，每个中心枢纽又可以和自己的分区Zone连接，同时不同的Hub之间也可以互相连接。具体的网络架构如下：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_8p9hna21mb.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>为了支持平行链之间的跨链操作，Cosmos提出了一种跨链交互协议IBC（inter-blockchain communication protocol），并利用tendermint共识算法的即时确定性实现多个异构链之间的价值和数据传输。因此，Cosmos中平行链需要满足如下两个前提条件：</p>
+<p>1）快速确定性（fast finality）：由共识算法保证，即Cosmos的跨链不支持PoW等概率确定模型的区块链；</p>
+<p>2）强监管性（sovereignty）：每个平行链都具备一组验证人能够决定其出块。同时如果要连接概率链（如：以太坊），则需要额外的结构支持。</p>
+<p>Cosmos网络体系外的其他异构链需要通过一个Bridge-Zone转接层才能接入Hub，该转接层用于中转异构链中的跨链交易，并对跨链交易信息中的数据结构进行规范化处理，具体包括：对原链交易的确认、在Cosmos网络中生产或销毁相应代币等。</p>
+<p>下面以以太坊用户向Cosmos网络转移资产为例，介绍Cosmos Bridge的跨链通信流程：首先需要在以太坊上部署一个Bridge合约，该合约负责跨链交易的处理，包含具体的交互规则。如果用户需要向Cosmos网络转账时，需要先将ETH发送到Bridge合约中锁定，但是跨链交易如果失败，系统可以回退到交易前的状态。或者当Bridge合约监测到Cosmos有跨链交易将资产转移到以太坊，那么合约将自动解锁对应资产。Bridge合约会跟踪Zone验证节点的状态，并且其可以和Hub共享一组验证者节点。当Zone的验证者节点接收到跨链交易时，会首先会通过SPV验证用户是否给Bridge合约发送了ETH，验证通过将在Bridge-Zone生成对应的Cosmos-ETH。同理，将Cosmos-ETH转移到以太坊的过程也类似，不过该过程将销毁Cosmos-ETH，同时解锁Bridge合约中对应的ETH并转移到某账户地址中。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_s5oaijurkt.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>Cosmos中各个网络中枢Hub和Hub所在的分区Zone之间的消息传递都使用IBC协议，当新Zone产生时，在线治理社区的投票会决定新Zone是否可以连接到Hub上，所以Cosmos也支持区块链的扩展。不同Zone之间的跨链消息传递如下图所示：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0818/9_9fck10yfju.png" alt="全面解析跨链桥基本原理及安全性"></p>
+<p>具体为：首先Zone1向Hub发出一笔BlockCommit交易，包含区块的头部信息和所有验证人的公钥；接着如果Zone1试图发起一笔向Zone3的代币转移交易，Zone1首先验证该交易的合法性，如果有效则将该交易发送到自己的输出队列中，等待发送给Hub，交易信息包括：交易的发起者Zone、该笔交易在发起Zone中确认的高度和目标Zone；接下来，Zone1中的中继程序根据消息队列中的交易生成默克尔证明并作为Packet中的有效载荷发送到Hub；Hub中的验证者通过SPV验证对该证明进行核验，核验通过则发送消息给Zone3，Hub给Zone3发送消息的过程同上；Zone3接收到Hub发送的跨链交易后，首先验证对该笔交易是否由Zone1发起的真实有效交易，并给Hub发送确认消息表明可以接收来自Zone1的资产；最后Hub给Zone3发送消息，将资产发送给Zone3，完成了一笔完整的跨链交易。</p>
+<p>综上，本文主要介绍了三种常见的跨链互操作性技术，包括公证人机制、哈希锁定、侧链/中继。下一篇文章将介绍基于以上三种跨链技术实现的跨链桥项目。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/41663/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">哪些Crypto趋势接下来值得关注？我们询问了 15 位知名投资者</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/41682/">
+                <span class="next-text nav-default">如果USDC/USDT离开以太坊</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#跨链互操作性详细解读">跨链互操作性详细解读</a></li>
+        <li><a href="#跨链互操作性协议">跨链互操作性协议</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

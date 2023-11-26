@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Vitalik：多项式承诺如何让 zk-SNARK 的实现更加高效？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在本文中，Vitalik 介绍了 zk-SNARK 技术的工作原理和难点，然后解释了多项式以及多项式承诺如何让 zk-SNARK 的实现更加高效。" />
+<meta name="keywords" content="Zk-snark" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42278/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Vitalik：多项式承诺如何让 zk-SNARK 的实现更加高效？" />
+<meta property="og:description" content="在本文中，Vitalik 介绍了 zk-SNARK 技术的工作原理和难点，然后解释了多项式以及多项式承诺如何让 zk-SNARK 的实现更加高效。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42278/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="Vitalik：多项式承诺如何让 zk-SNARK 的实现更加高效？">
+<meta itemprop="description" content="在本文中，Vitalik 介绍了 zk-SNARK 技术的工作原理和难点，然后解释了多项式以及多项式承诺如何让 zk-SNARK 的实现更加高效。"><meta itemprop="datePublished" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7843">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vitalik：多项式承诺如何让 zk-SNARK 的实现更加高效？"/>
+<meta name="twitter:description" content="在本文中，Vitalik 介绍了 zk-SNARK 技术的工作原理和难点，然后解释了多项式以及多项式承诺如何让 zk-SNARK 的实现更加高效。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Vitalik：多项式承诺如何让 zk-SNARK 的实现更加高效？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-05">
+      2022-09-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7843 字 -
+        预计阅读 16 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：An approximate introduction to how zk-SNARKs are possible</p>
+<p>原文作者：Vitalik Buterin</p>
+<p>原文来源：vitalik.ca</p>
+<p>编者注：说到过去十年来诞生的最强密码学技术，肯定免不了提及零知识证明 (zero knowledge proof)。在区块链领域中，它们有两大应用场景：可扩展性和隐私。zk-SNARK 作为其中一种 zkp 技术，在近几年来也得到了较大的突破，以太坊上出现了诸如 zkSync、Scroll、Hermez 等此类使用 zk-SNARK 证明的通用扩容解决方案。</p>
+<p>然而，实现 zk-SNARK 并不简单，因为对某个声明生成了 zk-SNARK 证明之后，验证者需要以某种方式检查计算中的数百万个步骤。多项式承诺就是在这里发挥其作用，即可以将计算编码为多项式，然后使用一种特殊类型的多项式“哈希”(多项式承诺)，以允许验证者在极短的时间内验证多项式等式，即便这些计算背后的多项式规模无比大。</p>
+<p>在本文中，Vitalik 介绍了 zk-SNARK 技术的工作原理和难点，然后解释了多项式以及多项式承诺如何让 zk-SNARK 的实现更加高效。</p>
+<p>特别感谢 Dankrad Feist、Karl Floersch 以及 Hsiao-wei Wan 的反馈和校对。</p>
+<p>过去十年来诞生的最强密码学技术大概要数<strong>通用简洁零知识证明，通常称为 zk-SNARK（zero knowledge succinct arguments of knowledge）</strong> 。<strong>zk-SNARK 允许你生成一个证明 (这个证明是针对一些运算得出的特定输出，可用于对该运算的验证)，通过这种方式，即使底层计算十分耗时，该证明也可以被快速验证。“ZK”（零知识）为证明新增了一个额外特性：证明可以隐藏计算的某些输入。</strong></p>
+<p>例如，您可以对以下声明生成一个证明：“我知道一个秘密值，如果你将数字添加到挑选的单词 cow 的末尾，然后对其进行 1 亿次 SHA256 哈希运算，那么输出的哈希值以 0x57d00485aa 开头”。验证者验证该证明的耗时可远小于自行进行 1 亿次哈希运算的耗时，而且证明也不会泄漏秘密值。</p>
+<p>在区块链领域中，该技术有两大应用场景：</p>
+<ol>
+<li>
+<p><strong>可扩展性</strong> ：如果一个区块的验证十分耗时，某个人可以验证区块并生成一个证明，而其他人只需快速地验证证明即可</p>
+</li>
+<li>
+<p><strong>隐私</strong> ：你可以证明你有权转移某些资产（你收到了该资产，而且你还没有转走），而不透露该资产的来源。这不会对外泄漏交易双方的信息，确保了交易的安全性。</p>
+</li>
+</ol>
+<p>然而，zk-SNARK 是相当复杂的；实际上，就在 2014-17 年，它们还常被称为“月亮数学”。好消息是，从那时起，协议愈发简化，我们对它们的理解也愈发深入。本篇博客将试图以一种数学水平普通的人能理解的方式来解释 ZK-SNARKs 的工作原理。</p>
+<p>注意，我们将聚焦于可扩展性；一旦有了可扩展性，这些协议的隐私性就相对容易实现，因此我们将在最后回归这个主题。</p>
+<p>**<strong>为什么 ZK-SNARK “会”很难</strong> **</p>
+<p>以开头例子为例：我们有一个数字（我们可以将末尾跟着秘密输入的 “cow” 整体编码为一个整数），我们计算该数字的 SHA256 哈希，然后重复做 9999999 次，最后我们检查输出的开头。这里面的计算量特别大。</p>
+<p>一个“简洁（succinct）”证明指的是证明大小和验证耗时的增长远慢于需验证计算量的增长。如果我们想要一个“简洁”证明，我们就不能要求验证者在每轮哈希中做一些运算（因为那样的话，验证耗时将与计算量成正比）。相反，验证者必须以某种方式检查整个运算过程，而不必窥视运算过程中的每个部分。</p>
+<p>有一种自然的技术就是随机抽样：让验证者只在 500 个不同的地方检查运算的正确性，如果所有的 500 个检查都通过了，那么认为运算过程的其余部分也大概率没问题？</p>
+<p>该流程甚至可以通过使用 <strong>Fiat-Shamir 启发式</strong> （Fiat-Shamir heuristic）转化为非交互式证明：证明者计算运算过程的默克尔根，基于默克尔根伪随机地选取 500 个索引，并提供对应的 500 个默克尔分支。核心思想是证明者并不知道将要揭示哪些分支，直到他们已经对数据生成了“承诺”。如果恶意证明者在了解到需要检查哪些索引后试图篡改数据，那么这会改变默克尔根的值，而这将导致一组新随机索引被选出，这将需要再次去篡改数据…让恶意证明者陷入无休止的循环中，无法达成目的。</p>
+<p>但不幸的是，简单地随机抽查运算过程存在一个致命的缺陷：运算过程本身并不健壮。如果恶意证明者在计算过程中的某个位置翻转一个比特，可以导致一个完全不同的结果，而随机抽样验证者几乎永远不会发现。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_asnnsoy25j.jpg" alt="vitalik"></p>
+<p>只需一次故意的插入错误，就会导致计算得出完全错误的结果，而这几乎不会被随机检查所捕获。</p>
+<p>如果要提出一个 zk-SNARK 协议，那么很多人会走到上面这步，然后陷入困境，最终放弃。不单独查看每个计算片段的情况下，验证者究竟如何才能够校验每个计算片段？事实证明，有一个绝妙的解决方案。</p>
+<p>**<strong>多项式</strong> **</p>
+<p>多项式是一类特殊的代数表达式，具有以下形式：</p>
+<ul>
+<li>
+<p><em>x</em>+5</p>
+</li>
+<li>
+<p>_x_4</p>
+</li>
+<li>
+<p>_x_3</p>
+</li>
+<li>
+<p>+3_x_2</p>
+</li>
+<li>
+<p>+3_x_+1</p>
+</li>
+<li>
+<p>628_x_271</p>
+</li>
+<li>
+<p>+318_x_270</p>
+</li>
+<li>
+<p>+530_x_269</p>
+</li>
+<li>
+<p>+…+69_x_+381</p>
+</li>
+</ul>
+<p>也就是说，它们是有限个形式为 <em>cxk</em> 的项之和。</p>
+<p>多项式有许多有趣的特性。但这里，我们将聚焦于多项式的一个特性：<strong>多项式是一个可以包含无限信息量（多项式显然可视为一个整数列表）的单一数学对象上</strong> 。面的第四个示例包含 tau 的 816 位的信息，而且我们能够很容易地想象出一个包含更多信息量的多项式。</p>
+<p>此外，<strong>多项式间的单个等式就能够表示无限个数间的方程</strong> 。例如，考虑等式 <em>A</em>(<em>x</em>)+<em>B</em>(<em>x</em>)=<em>C</em>(<em>x</em>)。如果该等式是正确的，那么下面也是正确的：</p>
+<ul>
+<li>
+<p><em>A</em>(0)+<em>B</em>(0)=<em>C</em>(0)</p>
+</li>
+<li>
+<p><em>A</em>(1)+<em>B</em>(1)=<em>C</em>(1)</p>
+</li>
+<li>
+<p><em>A</em>(2)+<em>B</em>(2)=<em>C</em>(2)</p>
+</li>
+<li>
+<p><em>A</em>(3)+<em>B</em>(3)=<em>C</em>(3)</p>
+</li>
+</ul>
+<p>可以类推到每个可能的下标。甚至，你可以构造特地表示一组数字的多项式，这样你就可以一次性地检查众多等式。例如，假设您想检查：</p>
+<ul>
+<li>
+<p>12 + 1 = 13</p>
+</li>
+<li>
+<p>10 + 8 = 18</p>
+</li>
+<li>
+<p>15 + 8 = 23</p>
+</li>
+<li>
+<p>15 + 13 = 28</p>
+</li>
+</ul>
+<p>您可以使用一个名为拉格朗日插值的方法来构造多项式：<em>A</em>(<em>x</em>) 在某些特定下标集合（例如 (0，1，2，3) 上的输出为 (12，10，15，15)），<em>B</em>(<em>x</em>) 在相同下标上的输出为 (1，8，8，13)，如此类推。准确地说，以下是相应的多项式：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_h8s0l4tfdw.png" alt="vitalik"></p>
+<p>用这些多项式校验等式 <em>A</em>(<em>x</em>)+<em>B</em>(<em>x</em>)=<em>C</em>(<em>x</em>) 相当于同时校验上述四个等式。</p>
+<p>**<strong>将多项式与自身进行比较</strong> **</p>
+<p>甚至，你可以用一个简单的多项式等式来校验相同多项式的大量相邻取值的关系。这稍微更进一步。假设您想校验，对于给定的多项式 <em>F</em>，在整数范围 {0,1…98} 内满足 <em>F</em>(<em>x</em>+2)=<em>F</em>(<em>x</em>)+<em>F</em>(<em>x</em>+1)（因此，如果您还校验_F_(0)=<em>F</em>(1)=1，那么 <em>F</em>(100) 将是第 100 个斐波拉契数）。</p>
+<p>作为多项式，<em>F</em>(<em>x</em>+2)−_F_(<em>x</em>+1)−_F_(<em>x</em>) 不会正好为零，因为它在 <em>x</em>={0,1…98} 范围外的取值是不受限的。但我们可以做一些巧妙的处理。一般而言，有这样一条定则：如果多项式 <em>P</em> 在某些集合 <em>S</em>={_x_1，<em>x_2…<em>xn</em>} 上的取值为零，那么可以表示为 <em>P</em>(<em>x</em>)=<em>Z</em>(<em>x</em>)∗_H</em>(<em>x</em>) 的形式，其中 <em>Z</em>(<em>x</em>)=(_x_−_x_1)∗（_x_−_x_2)∗…∗(<em>x_−_xn</em>)，而且 <em>H</em>(<em>x</em>) 也是一个多项式。<strong>换句话说，在某个集合上值为零的任一多项式可以表示为在相同集合上值为零的最简（最低阶）多项式的（多项式）倍数。</strong></p>
+<p>为什么会这样？这其实是多项式长除法的一个巧妙的推论：因式定理（the factor theorem）。我们知道，当用 Z(<em>x</em>) 除 <em>P</em>(<em>x</em>) 时，我们将得到商 <em>Q</em>(x) 和余数 <em>R</em>(x)，满足 <em>P</em>(<em>x</em>)=<em>Z</em>(<em>x</em>)∗_Q_(<em>x</em>)+<em>R</em>(<em>x</em>)，其中余数 <em>R</em>(<em>x</em>) 的阶严格小于 <em>Z</em>(<em>x</em>)。因为我们知道多项式 <em>P</em> 在集合 <em>S</em> 上的取值为零，这意味着多项式 <em>R</em> 在集合 <em>S</em> 上的取值也必须为零。因此，我们可以通过多项式插值简单地计算 <em>R</em>(<em>x</em>)，因为它是一个阶至多为 _n_−1 的多项式，而我们知道其中的 <em>n</em> 个取值（集合 <em>S</em> 上的取值为零）。使用上述所有零值进行插值得到零多项式，因此，<em>R</em>(<em>x</em>)=0，<em>H</em>(<em>x</em>)=<em>Q</em>(<em>x</em>)。（译者注，一个有 <em>n</em> 个解的 &lt;=_n_−1 次多项式必为零多项式）</p>
+<p>回到我们的例子上，如果我们有一个编码了斐波那契数的多项式 <em>F</em>（因此，在 <em>x</em>={0,1…98} 上满足 <em>F</em>(<em>x</em>+2)=<em>F</em>(<em>x</em>)+<em>F</em>(<em>x</em>+1)，那么我可以通过证明多项式 <em>P</em>(x)= <em>F</em>(<em>x</em>+2)−_F_(<em>x</em>+1)−_F_(<em>x</em>) 在该范围的取值为零来向你证明 <em>F</em> 确实满足该条件： <em>H</em>(<em>x</em>)=(<em>F</em>(<em>x</em>+2)−_F_(<em>x</em>+1)−_F_(<em>x</em>))/Z(x)，其中 <em>Z</em>(<em>x</em>)=(_x_−0)∗(_x_−1)∗…∗(_x_−98).</p>
+<p>你可以自行计算 <em>Z</em>(<em>x</em>)（理想情况下会被提前计算出来），检查该等式，如果检查通过，那么 <em>F</em>(<em>x</em>) 的确满足条件！</p>
+<p>现在，退一步，留意一下我们做了什么。我们将一个步长 100 的计算（计算第 100 个斐波那契数）转换为单个多项式等式。当然，证明第 <em>N</em> 个斐波那契数的取值意义不大，尤其是因为斐波那契数具有闭合形式。但你可以使用完全相同的底层技术，只需一些额外的多项式和更复杂的等式，就可以对任意步长的任意计算进行编码。</p>
+<p>现在，如果存在一种使用多项式校验等式的方法，而且这种方法比检查每个系数快得多…</p>
+<p>**<strong>多项式承诺</strong> **</p>
+<p>再一次，事实证明，这样的方法是存在的：<strong>多项式承诺</strong> 。<strong>最好把多项式承诺看作一种对多项式进行“哈希”的特殊方法</strong> ，该哈希拥有额外特性，<strong>即你可以通过校验多项式哈希间的等式来校验多项式间的等式</strong> 。不同多项式承诺方案在适用等式类型上有着不同的特点。</p>
+<p>下面是一些常见的例子，您可以使用各种多项式承诺方案（我们使用com(P)来表示“对多项式 <em>P</em> 的承诺”）：</p>
+<ul>
+<li>
+<p><strong>相加</strong> ：给定 <em>com</em>(<em>P</em>)、<em>com</em>(<em>Q</em>) 和 <em>com</em>(<em>R</em>)，检查是否满足 <em>P</em>+<em>Q</em>=<em>R</em></p>
+</li>
+<li>
+<p><strong>相乘</strong> ：给定 <em>com</em>(<em>P</em>)、<em>com</em>(<em>Q</em>) 和 <em>com</em>(<em>R</em>)，检查是否满足 <em>P_∗_Q</em>=<em>R</em></p>
+</li>
+<li>
+<p><strong>在某个点上求值</strong> ：给定 <em>com</em>(<em>P</em>)、<em>w</em>、<em>z</em> 和一个补充证明（或“见证”）<em>Q</em>，验证 <em>P</em>(<em>w</em>)=<em>z</em></p>
+</li>
+</ul>
+<p>值得注意的是，这些原语可以相互组合。如果支持加法和乘法，那么你可以这样计算：为了证明 <em>P</em>(<em>w</em>)=<em>z</em>，你可以构造出 <em>Q</em>(<em>x</em>)=</p>
+<p><em>（P</em>(<em>x</em>)−_z）/（_x−w）， 然后验证者可以验证:</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_mnsqpo6sc1.jpg" alt="vitalik"></p>
+<p>这行得通是因为如果存在这样一个多项式 <em>Q</em>(<em>x</em>)，那么 <em>P</em>(<em>x</em>)−_z_=<em>Q</em>(<em>x</em>)∗(<em>x_−_w</em>)，这意味着_P_(<em>x</em>)−_z_ 在 <em>w</em> 处等于零（因为 <em>x_−_w</em> 在 <em>w</em> 处等于零），因此 <em>P</em>(<em>x</em>) 在 <em>w</em> 处等于 <em>z</em>。</p>
+<p>如果你能计算出某点的取值，那么你可以进行各种校验。这是因为有一个数字定理表明：<strong>大体上，如果一些包含了一些多项式的等式在一个随机选择的下标下成立，那么对多项式整体而言等式基本为真</strong> 。因此，如果我们只有一个证明某点取值的机制，那么我们就可以通过一个交互式游戏进行验证，如我们的方程 <em>P</em>(<em>x</em>+2)−_P_(<em>x</em>+1)−_P_(<em>x</em>)=<em>Z</em>(<em>x</em>)∗_H_(<em>x</em>)：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_023cwz3d4z.jpg" alt="vitalik"></p>
+<p>正如前面提到的，我们可以使用 Fiat-Shamir 启发式使其转化为非交互式：证明者可以令 r=hash(com(P), com(H))（其中 hash 是任一加密哈希函数；它不需要拥有任何特殊属性）并计算 r。证明者不能通过挑选只“符合”特定 r 的 P 和 H 来进行“欺诈行为”，因为他们在选取 P 和 H 时不知道 r！</p>
+<p>**<strong>快速回顾</strong> **</p>
+<ul>
+<li>
+<p>ZK-SNARK很难，因为验证者需要以某种方式检查计算中的数百万个步骤，而无需直接地检查每个单独的步骤（因为这会十分耗时）。</p>
+</li>
+<li>
+<p>我们通过将计算编码为多项式来解决这个问题。</p>
+</li>
+<li>
+<p>单个多项式可以包含无限大的信息量，而且单个多项式表达式（例如，<em>P</em>(<em>x</em>+2)−_P_(<em>x</em>+1)−_P_(<em>x</em>)=<em>Z</em>(<em>x</em>)∗_H_(<em>x</em>)）可以代表无限个数间的方程。</p>
+</li>
+<li>
+<p>如果你可以验证多项式等式，那么你同时在隐式地验证所有的数值等式（用任何实际 <em>x</em> 下标替换多项式中的 <em>x</em>）。</p>
+</li>
+<li>
+<p>我们使用一种特殊类型的多项式“哈希”，称为多项式承诺，以允许我们在极短时间内验证多项式等式，即使背后的多项式规模非常大。</p>
+</li>
+</ul>
+<p>**<strong>那么，这些神奇的多项式哈希是如何工作的？</strong> **</p>
+<p>目前有三种被广泛使用的主流方案：<strong>bulletproofs, Kate and FRI</strong> 。</p>
+<ul>
+<li>
+<p>这里是Dankrad Feist对Kate承诺的描述：https://dankradfeist.de/ethereum/2020/06/16/kate-polynomial-commitments.html</p>
+</li>
+<li>
+<p>这里是curve25519-dalek团队对bulletproofs的描述：https://doc-internal.dalek.rs/bulletproofs/notes/inner_product_proof/index.html，而这里是我的图解：https://twitter.com/VitalikButerin/status/1371844878968176647</p>
+</li>
+<li>
+<p>这里是对FRI的描述，我写的…：https://vitalik.ca/general/2017/11/22/starks_part_2.html</p>
+</li>
+</ul>
+<p>**<strong>哇，哇，别紧张。试着简单地讲解其中一个，不要把我带到更可怕的链接上</strong> **</p>
+<p>老实说，它们没有那么简单。这就是为什么所有的这些数学理论直到 2015 年左右才真正崛起的缘故。</p>
+<p>**<strong>请？</strong> **</p>
+<p>在我看来，FRI 是最容易理解透的（如果你愿意把椭圆曲线配对 elliptic curve pairings 看作黑盒，Kate 会更容易理解，但配对确实很复杂，所以总体来说我觉得 FRI 更简单）。</p>
+<p>以下是 FRI 工作原理的简化版（简单起见，免去真正协议中的许多技巧和优化）。假设你有一个阶小于n的多项式 <em>P</em>。对 <em>P</em> 的承诺是某组预选下标取值的默克尔根（例如，{0,1…8_n_−1} ，尽管这并不是最高效的选取方式）。现在我们需要额外添加一些东西来证明这组取值来自一个阶小于 <em>n</em> 的多项式。（译者注，需要验证多项式阶小于 <em>n</em> 的原因是保证作恶者通过随机抽样概率尽可能低，给定多项式 <em>P</em>，一个基本拟合 <em>P</em> 的另一个多项式 <em>Q</em>，也是能通过随机抽样的，但 <em>Q</em> 的特点是其阶要足够大才能成功）</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_jwyve5lc71.png" alt="vitalik"></p>
+<p>我们要求证明者提供 <em>Q</em>(<em>x</em>) 和 <em>R</em>(<em>x</em>) 的 Merkle 根。然后，我们生成一个随机数 <em>r</em>，并要求证明者提供一个“随机线性组合”<em>S</em>(<em>x</em>)=<em>Q</em>(<em>x</em>)+<em>r_∗_R</em>(<em>x</em>)。</p>
+<p>我们伪随机抽样了一大组下标（像之前一样，使用提供的Merkle根作为随机种子），并要求证明者在这些下标处提供 <em>P</em>、<em>Q</em>、<em>R</em> 和 <em>S</em> 的 Merkle 分支。在每个提供的下标处，我们校验：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_zqybn130or.png" alt="vitalik"></p>
+<p>如果我们做了足够校验，那么我们可以确信 <em>S</em>(<em>x</em>) 的“预期”值与“提供”值最多（例如，1%）是不同的。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_3bydqodqla.png" alt="vitalik"></p>
+<p>从这里开始，我们简单地用 <em>S</em> 重复上面的游戏，逐步“降低”我们关心的多项式的阶，直到多项式的阶低到我们可以直接校验的程度。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_9qiifpi664.jpg" alt="vitalik"></p>
+<p>和前面的示例一样，这里的“Bob”是一个抽象概念，对密码学家在思维上论证协议非常有用。事实上，Alice 自己生成了完整证明，为了防止她作弊，我们使用 Fiat-Shamir：我们根据此前证明中生成的数据的哈希随机选取每个样本的下标或 <em>r</em> 值。</p>
+<p>（在该简化协议中）一个对 <em>P</em> 完整的“FRI承诺”包括：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_nu3i53m1cu.png" alt="vitalik"></p>
+<p>流程中的每步都可能会引入一些“误差”，但如果您进行了足够多的检查，那么总误差将低到你可以证明 <em>P</em>(<em>x</em>) 在至少 80% 的下标处等于一个阶小于 <em>n</em> 的多项式。这足以满足我们用例的需求：如果你想在 zk-SNARK 中作弊，你需要对少数值进行多项式承诺，其多项式的取值会在多处不同于真正阶小于 <em>n</em> 的多项式，因此任何对其进行 FRI 承诺的尝试都会失败。</p>
+<p>此外，您仔细检查一下，FRI 承诺中对象的总数和大小是 O(log阶)，因此，对于大型多项式，承诺实际上比多项式本身小得多。</p>
+<p>为了检查这类不同多项式承诺间的等式（例如，给定对 <em>A</em>、<em>B</em> 和 <em>C</em> 的 FRI 承诺，检查 <em>A</em>(<em>x</em>)+<em>B</em>(<em>x</em>)=<em>C</em>(<em>x</em>)），只需简单地随机选择很多下标，要求验证者提供在每个多项式的这些下标处的 Merkle 分支，并验证等式在每个下标处成立即可。</p>
+<p>上面描述的是一种效率极低的协议；有很多代数技巧可以将协议效率提高约 100 倍，如果你想要一个切实可行的协议，比如在区块链交易中使用，你需要使用这些技巧。特别是，例如，<em>Q</em> 和 <em>R</em> 实际上不是必要的，因为如果你非常聪明地选择取值点，你可以直接从 P 的取值重构出所需 <em>Q</em> 和 <em>R</em> 的取值。但是上面的描述应该足以让你确信多项式承诺从原理上是可行的。</p>
+<p>**<strong>有限域</strong> **</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_p7enqi0n9t.png" alt="vitalik"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_5wy7jfd1s4.png" alt="vitalik"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_5034ytwje9.png" alt="vitalik"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_blr0zmjrgc.jpg" alt="vitalik"></p>
+<p>因为数字的“回环”方式，模运算有时被称为“时钟数学”</p>
+<p>通过模运算，我们创造了一个全新的算术系统，它和传统算术一样是自洽的。因此，我们可以讨论该域中的所有同类结构，包括我们在“常规数学”中讨论的多项式。密码学家喜欢使用模数学（或者，更一般的，“有限域”），因为任何模运算结果的大小都会有界-无论你做什么，值都不会“超出”集合 {0,1,2…_p_−1}。即使计算有限域中一个一百万次多项式，也不会得出一个集合以外的值。</p>
+<p>**<strong>将计算转化为一组多项式等式更具意义的例子？</strong> **</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_3rlz9sg045.png" alt="vitalik"></p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/15_89hv7hg7uw.png" alt="vitalik"></p>
+<p>**<strong>隐私</strong> **</p>
+<p>但这里有一个问题：我们怎么知道对 <em>P</em>(<em>x</em>) 和 <em>R</em>(<em>x</em>) 的承诺不会“泄漏”信息（使得能够揭示我们试图隐藏的 <em>P</em>(64) 的确切值）？</p>
+<p>这里有些好消息：<strong>这些证明是对大量的数据和计算生成的小证明。因此，一般来说，证明往往不够大，只能暴露一点点信息</strong> 。但我们能从“只有一点点”推进到“零”吗？幸运的是，我们可以。</p>
+<p>在这里，一个相当通用的技巧是往多项式添加一些“模糊因子”。当我们选定P时，将 <em>Z</em>(<em>x</em>) 的小倍数加到多项式中（即，取随机 <em>E</em>(<em>X</em>)，令 <em>P</em>′(<em>x</em>)=<em>P</em>(<em>x</em>)+<em>Z</em>(<em>x</em>)∗_E_(<em>x</em>)）。这并不会影响命题的正确性（事实上，<em>P</em>′ 在“在计算发生”的下标处的值与 <em>P</em> 相同，因此它仍是有效的转义版本），但它可以在承诺中添加足够多的额外“噪声”，使得任何余下信息不可恢复。此外，对于 FRI，重要的是不要对计算发生范围的随机点进行采样（在本例中为 {0…64} ）。（译者注，这样即使是同样的多项式也会让人猜不到）</p>
+<p>**<strong>我们能再回顾一下吗？？</strong> **</p>
+<ul>
+<li>
+<p>最优秀的三类多项式承诺是 FRI、Kate 和 bulletProof。</p>
+</li>
+<li>
+<p>Kate在概念上是最简单的，但它依赖于非常复杂的椭圆曲线配对“黑盒”。</p>
+</li>
+<li>
+<p>FRI很酷，因为它只依赖哈希；它的工作原理是将多项式逐渐归约为阶越来越低的多项式，并在每步进行随机抽样检查，使用 Merkle 分支来证明等价性。</p>
+</li>
+<li>
+<p>为了防止单个值大小的膨胀，我们不在整数上做算术运算和多项式运算，而是在有限域上做所有事情（通常是对一些素数 p 进行模运算）</p>
+</li>
+<li>
+<p>多项式承诺天然支持隐私保护，因为生成的证明已经比多项式小得多了，因此多项式承诺只能暴露多项式中一点点信息。但我们可以往多项式添加一些随机性，将暴露的信息从“一点点”减少到“零”。</p>
+</li>
+</ul>
+<p>**<strong>哪些问题仍在研究当中？</strong> **</p>
+<ul>
+<li>
+<p><strong>优化 FRI</strong> ：已经有很多涉及精心挑选的取值域的优化，“DEEP-FRI”，以及一系列其他让 FRI更高效的技巧。<strong>Starkware 及其他人正在研究这块。</strong></p>
+</li>
+<li>
+<p><strong>将计算编码为多项式的更佳方法</strong> ：找出将涉及哈希函数、内存访问和其他特征的复杂计算编码为多项式等式的最高效方法仍是一个挑战。在这方面已经取得了很大的进展（例如，见 PLOOKUP)，但我们仍需更多的进展，特别是如果我们想将<strong>通用虚拟机执行</strong> 编码为多项式的话。</p>
+</li>
+<li>
+<p><strong>增量可验证计算</strong> ：如果随着计算继续能够高效地“扩展”证明，那就太好了。这在“单证明者”情况下很有价值，而且在“多证明者”的情况下也很有价值，特别对于不同参与者创建区块的区块链而言。最近一些在这方面的工作，请参见 Halo。</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42296/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SEC互联网执法办公室负责人：区块链是垃圾</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42284/">
+                <span class="next-text nav-default">Web3 基础设施协议如何尝试获取价值？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

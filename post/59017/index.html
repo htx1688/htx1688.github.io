@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          SignalPlus：自动编码器 (autoencoder) - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Autoencoder是一种无监督学习模型，用于数据压缩和特征提取。它可以通过编码和解码过程学习到数据中的重要特征，并生成与原始数据相似的重建数据。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59017/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="SignalPlus：自动编码器 (autoencoder)" />
+<meta property="og:description" content="Autoencoder是一种无监督学习模型，用于数据压缩和特征提取。它可以通过编码和解码过程学习到数据中的重要特征，并生成与原始数据相似的重建数据。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59017/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="SignalPlus：自动编码器 (autoencoder)">
+<meta itemprop="description" content="Autoencoder是一种无监督学习模型，用于数据压缩和特征提取。它可以通过编码和解码过程学习到数据中的重要特征，并生成与原始数据相似的重建数据。"><meta itemprop="datePublished" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3885">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SignalPlus：自动编码器 (autoencoder)"/>
+<meta name="twitter:description" content="Autoencoder是一种无监督学习模型，用于数据压缩和特征提取。它可以通过编码和解码过程学习到数据中的重要特征，并生成与原始数据相似的重建数据。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">SignalPlus：自动编码器 (autoencoder)</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-13">
+      2023-09-13
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3885 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Steven Wang</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_4k7k4rj7f6.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<h2 id="前言">前言</h2>
+<p>两兄弟 N.Coder 和 D.Coder 经营着一家艺术画廊。一周末，他们举办了一场特别奇怪的展览，因为它只有一面墙，没有实体艺术品。当他们收到一幅新画时，N.Coder 在墙上选择一个点作为标记来代表这幅画，然后扔掉原来的艺术品。当顾客要求观看这幅画时，D.Coder 尝试仅使用墙上相关标记的坐标来重新创作这件艺术品。</p>
+<p>展墙如下图所示，每个黑点是 N.Coder 放置的一个标记，代表一幅画。在墙上坐标 [– 3.5, 1 ] 处的那幅原图 (original) 数字 6 的画 N.Coder 对其进行了重建 (reconstruction)。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_ly745o0vce.PNG" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>下图展示了更多例子，顶行的数字是原图，中行的坐标是 N.Coder 将图挂在墙上的坐标，底行是 D.Coder 根据坐标重建的作品。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_ivs44um97b.PNG" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>问题来了，N.Coder 如何决定每幅画在展墙上对应的坐标，而使得 D.Coder 仅用它就能重建原图的？原来是两兄弟在放置标记和重建作品的过程中，仔细监控售票处因顾客因重建质量不佳而要求退款而造成的收入损失，他们经过多年的“训练”逐渐“精通”标记放置和作品重建，而最大限度地减少这种收入损失。从上图对比原图和重建可以看出，两兄弟之间的磨合效果还不错。来参观艺术品的顾客很少抱怨 D.Coder 重新创作的画作与他们来参观的原始作品有很大的不同。</p>
+<p>有一天，N.Coder 望着展墙，有了一个大胆的想法，对于那些墙上当前没有标记的部分，如果让 D.Coder 来重建能创作出什么样的作品？如果成功的话，那么他们就可以举办自己 100% 原创的画展了。想想就兴奋，于是 D.Coder 随机选取了之前没有标记的坐标 (<strong>红点</strong> ) 来重建，结果如下图所示。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_spamsj6p51.PNG" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>正如你所看到的，重建效果较差，有些图甚至都分辨不出是什么数字。那么到底出了什么问题，Coder 两兄弟该如何改进他们的方案呢？</p>
+<h2 id="1自动编码器">1.自动编码器</h2>
+<p>前言的故事其实就是类比<strong>自动编码器</strong>  (autoencoder)，D.Coder 音译为 encoder，即<strong>编码器</strong> ，做的事情就是将图片转成坐标，而 N.Coder 音译为 decoder，即<strong>解码器</strong> ，做的事情就是将坐标还原成图片。上节的两兄弟监控的收入损失其实就是模型训练时用的损失函数。</p>
+<p>故事归故事，让我们看看自动编码器的严谨描述，它本质上就是一个神经网络，包含：</p>
+<ul>
+<li>
+<p>一个<strong>编码器</strong>  (encoder)：用来把高维数据压缩成低维表征向量。</p>
+</li>
+<li>
+<p>一个<strong>解码器</strong>  (decoder)：用来将低维表征向量还原成高维数据。</p>
+</li>
+</ul>
+<p>该流程如下图所示，original input data 是高维图片数据，图片包含很多像素因此是高维的，而 representation vector 是低维表征向量，本例用的二维向量 [-2.0, -0.5 ] 是低维的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_o0bbqeeky6.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>该网络经过训练，可以找到编码器和解码器的权重，最小化原始输入与输入通过编码器和解码器后的重建之间的损失。表征向量是将原始图像压缩到较低维的潜空间。 通过选择<strong>潜空间</strong>  (latent space) 中的任何点，我们应该能够通过将该点传递给解码器来生成新的图像，因为解码器已经学会了如何将潜空间中的点转换为可看的图像。</p>
+<p>在前言描述中，N.Coder 和 D.Coder 使用表示二维潜空间 (墙壁) 内的向量对每个图像进行编码。之所以用二维是为了可视化潜空间，在实践中，潜空间通常高过两维，以便更自由地捕获图像中更大的细微差别。</p>
+<h2 id="2模型解析">2.模型解析</h2>
+<h3 id="21初次见面">2.1 初次见面</h3>
+<p>一般来说，最好用单独的文件来创建模型的类，比如下面的 Autoencoder class。这样其他项目可以灵活调用此类。下面代码首先展示了 Autoencoder 的框架，__init__() 是构造函数，通过调用 _build() 来创建模型，compile() 函数用于设定优化器，save() 函数用于保存模型，load_weights() 函数用于下次使用模型时加载权重，train() 函数用于训练模型。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_1asqhqcqgo.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>构建函数包含 8 个必需参数和 2 个默认参数，input_dim 是图片的维度，z_dim 是潜空间的维度，剩下的 6 个必需参数分别是编码器和解码器的滤波器个数 (filters)、滤波器大小 (kernel_size)、步长大小 (strides)。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_jiv4v90noi.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>用构建函数创建自动编码器，命名为 AE。输入数据是黑白图片，其维度是 ( 28, 28, 1)，潜空间用的 2D 平面，因此 z_dim = 2 。此外六个参数的值都是一个大小为 <strong>4</strong>  的列表，那么编码模型和解码模型都含有 <strong>4</strong>  层。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_cl886wiogk.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>在 AutoEncoder 类里面定义 _build() 函数，构建编码器和解码器并将两者相连，代码框架如下 (后三小节会逐个分析)：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_z0kselbc3l.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>接下两小节我们来一一剖析自动编码器中的编码模型和解码模型。</p>
+<h3 id="22编码模型">2.2 编码模型</h3>
+<p>编码器的任务是将输入图片转换成潜空间的一个点，编码模型在 _build() 函数里面的具体实现如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_r4z4wic5q4.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>代码解释如下：</p>
+<ul>
+<li>
+<p>第 2-3 行将图片定义为 encoder 的输入。</p>
+</li>
+<li>
+<p>第 5-17 行按顺序将卷积层堆起来。</p>
+</li>
+<li>
+<p>第 19 行记录 x 的形状，K.int_shape 的返回是一个元组 (None, 7, 7, 64)，第 0 个元素是样本大小，用 [ 1:] 返回除样本大小的数据形状 ( 7, 7, 64)。</p>
+</li>
+<li>
+<p>第 20 行将最后的卷积层打平成为一个 1D 向量。</p>
+</li>
+<li>
+<p>第 21 行的稠密层将该向量转成另一个大小为 z_dim 的 1D 向量。</p>
+</li>
+<li>
+<p>第 22 行构建 encoder 模型，分别在 Model() 函数确定入参 encoder_input 和 encoder_output。</p>
+</li>
+</ul>
+<p>用 summary() 函数打印出编码模型的信息，用来描述每层的名称类型 (layer (type))、输出形状 (Output Shape) 和参数个数 (Param #)。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_2e6k3o79zd.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_reslm2lb5i.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<h3 id="23解码模型">2.3 解码模型</h3>
+<p>解码器是编码器的镜像，只不过不是使用卷积层，而是使用卷积转置层 (convolutional transpose layers) 来构建。当步长设为 2 ，卷积层每次将图片的高和宽减半，而卷积转置层将图片的高和宽翻倍。具体操作见下图。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_ivebhips6h.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>解码器在 _build() 函数里面的具体实现如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_c1mcn9pupw.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>代码解释如下：</p>
+<ul>
+<li>
+<p>第 1 行将 encoder 的输出定义为 decoder 的输入。</p>
+</li>
+<li>
+<p>第 2-3 行将 1D 向量重塑成形状为 ( 7, 7, 64) 的张量。</p>
+</li>
+<li>
+<p>第 6-15 行按顺序将卷积转置层堆起来。</p>
+</li>
+<li>
+<p>第 7-22 行：</p>
+</li>
+<li>
+<p>如果是最后一层，用 sigmoid 函数转换，得到的结果在 0-1 之间当成像素</p>
+</li>
+<li>
+<p>如果不是最后一层，用 leaky relu 函数转换，并加上批归一化 (batch normalization) 和随机失活 (dropout) 的处理。</p>
+</li>
+<li>
+<p>第 24-25 行构建 decoder 模型，分别在 Model() 函数确定入参 decoder_input 和 decoder_output，前者是 encoder 的输出，即潜空间的点，而后者是重建的图片。</p>
+</li>
+</ul>
+<p>用 summary() 函数打印出解码模型的信息。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_hwwsdztr53.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_tgdokjbtqt.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<h3 id="24串连起来">2.4 串连起来</h3>
+<p>为了能同时训练编码器和解码器，我们需要将两者连在一起，</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_i4agjydgnm.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>代码解释如下：</p>
+<ul>
+<li>
+<p>第 1 行将 encoder_input 作为整体模型的输入 model_input (中间产物 encoder_output 是编码器的输出)。</p>
+</li>
+<li>
+<p>第 2 行将解码器的输出作为整体模型的输出 model_output (解码器的输入就是编码器的输出)。</p>
+</li>
+<li>
+<p>第 3 行构建 autoencoder 模型，分别在 Model() 函数确定入参 model_input 和 model_output。</p>
+</li>
+</ul>
+<p>一图胜千言。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_b7hpsnvb9r.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<h3 id="25训练模型">2.5 训练模型</h3>
+<p>构建好模型之后，只需要定义损失函数和编译优化器。损失函数通常选择均方误差 (RMSE)。编译 complie() 函数的实现如下，用的是 Adam 优化器，学习率设为 0.0005 ：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_j64tq4psm0.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_700j70ew5w.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>训练模型用 fit() 函数，批大小设为 32 ，epoch 设为 200 ，代码如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_1puy5idaha.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_w2e1l7wkl2.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>在测试集上随机选 10 个看看效果：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_ca2khqf4bn.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_0t44jmn43k.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>10 张图中只有 4 张重建效果还行。</p>
+<h2 id="3三大缺陷">3.三大缺陷</h2>
+<p>模型训练之后，我们可以可视化图片在潜空间的情况。通过模型中的 encoder 在测试集生成坐标在 2D 散点图中显示。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_k59rzkbru2.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_nb5kdfp0ay.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>图中有三个现象值得注意：</p>
+<ol>
+<li>
+<p>有些数字的占地区域很小，比如红色的 9 ，有些数字的占地区域很大，比如紫色的 0 。</p>
+</li>
+<li>
+<p>图中的点对于 ( 0, 0) 不对称，比如 x 轴上负值的点比正值的点会多很多，有些点甚至到了 x =-15 处。</p>
+</li>
+<li>
+<p>颜色之间有很大的间隙，其中包含很少的点，如上图左上角。</p>
+</li>
+</ol>
+<p>上述三大缺陷使我们从潜空间中采样非常困难：</p>
+<ul>
+<li>
+<p>对于缺陷 1 ， 由于数字 9 比 0 的占地区域大，那么我们更容易采样到 9 。</p>
+</li>
+<li>
+<p>对于缺陷 2 ，从技术上讲，我们可以采样平面上任何点。但每个数字的分布是不确定的，如果分布不是对称的话，那么随机采样的会很难操作。</p>
+</li>
+<li>
+<p>对于缺陷 3 ，从下图可看出从潜空间中的空白处有的根本重构不出像样的数字。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_at8jtihsjc.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>缺陷 3 空白出重构不出数字还好理解，但下图两条红线表示的重构就让人担忧了。这两个点都不在空白处，但是还是无法解码成像样的数字。根本原因就是自动编码器并没有强制确保生成的潜空间是连续的，例如，即便 ( 2,-2) 能够生成令人满意的数字 4 ，但该模型没有一个机制来确保点 ( 2.1, – 2.1) 也能产生令人满意的数字 4 。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_60j506ns13.png" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<h2 id="总结">总结</h2>
+<p>自动编码器只需要特征不需要标签，是一种无监督学习的模型，用于重建数据。该模型是一个生成模型，但从上节提到的三大缺陷，该生成模型对于低维黑白数字的效果都不好，那么对于高维彩色人脸的效果会更差。</p>
+<p>这个自编码器框架是好的，那么我们应该如何解决这三个缺陷能生成一个强大的自动编码器。这个就是下篇的内容，<strong>变分自动编码器</strong>  (<strong>V</strong> ariational <strong>A</strong> uto<strong>E</strong> ncoder, <strong>VAE</strong> )。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0913/18_s1mat64hj3.jpg" alt="SignalPlus：自动编码器 (autoencoder)"></p>
+<p>您可在 ChatGPT 4.0 的 Plugin Store 搜索  SignalPlus，获取实时加密资讯。如果想即时收到我们的更新，欢迎关注我们的推特账号@SignalPlus_Web 3 ，或者加入我们的微信群（添加小助手微信：SignalPlus 123）、Telegram 群以及 Discord 社群，和更多朋友一起交流互动。</p>
+<p>SignalPlus Official Website：https://www.signalplus.com</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59016/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">SEC是否批准比特币现货ETF申请，ETF会给加密市场带来哪些影响？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59067/">
+                <span class="next-text nav-default">SignalPlus波动率专栏(20230913)：加密市场反弹，保护性下跌策略仍受关注</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#1自动编码器">1.自动编码器</a></li>
+    <li><a href="#2模型解析">2.模型解析</a>
+      <ul>
+        <li><a href="#21初次见面">2.1 初次见面</a></li>
+        <li><a href="#22编码模型">2.2 编码模型</a></li>
+        <li><a href="#23解码模型">2.3 解码模型</a></li>
+        <li><a href="#24串连起来">2.4 串连起来</a></li>
+        <li><a href="#25训练模型">2.5 训练模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#3三大缺陷">3.三大缺陷</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

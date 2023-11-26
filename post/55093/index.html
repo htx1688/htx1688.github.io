@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          ​Polygon 2.0：一文读懂​Polygon 2.0架构、蓝图和新代币POL - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="Polygon 2.0 是一个由 ZK 驱动的 L2 链网络，旨在成为互联网的价值层，旨在通过 ZK 技术实现可扩展性和互操作性。" />
+<meta name="keywords" content="Polygon" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/55093/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="​Polygon 2.0：一文读懂​Polygon 2.0架构、蓝图和新代币POL" />
+<meta property="og:description" content="Polygon 2.0 是一个由 ZK 驱动的 L2 链网络，旨在成为互联网的价值层，旨在通过 ZK 技术实现可扩展性和互操作性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/55093/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-16T00:00:00+00:00" />
+
+<meta itemprop="name" content="​Polygon 2.0：一文读懂​Polygon 2.0架构、蓝图和新代币POL">
+<meta itemprop="description" content="Polygon 2.0 是一个由 ZK 驱动的 L2 链网络，旨在成为互联网的价值层，旨在通过 ZK 技术实现可扩展性和互操作性。"><meta itemprop="datePublished" content="2023-07-16T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-16T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5059">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="​Polygon 2.0：一文读懂​Polygon 2.0架构、蓝图和新代币POL"/>
+<meta name="twitter:description" content="Polygon 2.0 是一个由 ZK 驱动的 L2 链网络，旨在成为互联网的价值层，旨在通过 ZK 技术实现可扩展性和互操作性。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">​Polygon 2.0：一文读懂​Polygon 2.0架构、蓝图和新代币POL</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-16">
+      2023-07-16
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5059 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：100y，Four Pillars；翻译：金色财经0xxz</p>
+<p><strong>要点</strong></p>
+<p>Polygon 2.0 是一个由 ZK 驱动的 L2 链网络，旨在成为互联网的价值层，旨在通过 ZK 技术实现可扩展性和互操作性。</p>
+<p>根据新的蓝图，POL 的新代币经济学已被提出，预计它将在 Polygon 2.0 生态系统成熟之前发挥重要作用。</p>
+<h1 id="1-大规模采用之路"><strong>1. 大规模采用之路</strong></h1>
+<h2 id="11-前言"><strong>1.1 前言</strong></h2>
+<p>尽管目前加密货币市场的价格仍远低于上次牛市的高点，但区块链领域比以往任何时候都更加多样化。特别是，上次牛市很大程度上是有利的宏观环境以及区块链缺乏有意义的现实用例，因此可以看到许多协议将其方向集中在当前市场的大规模采用上。</p>
+<p>对于大规模采用来说，改进的不仅仅是一个领域，而是许多领域。首先，增强钱包等服务的 UI/UX 非常重要，这些服务通常是用户使用区块链的初始接触点。其次，需要为用户提供更多实用的区块链服务。最后，需要一个完善的基础设施来促进许多用户轻松使用区块链。</p>
+<h2 id="12-不同类型的区块链网络走向大规模采用"><strong>1.2 不同类型的区块链网络走向大规模采用</strong></h2>
+<p>本文将从基础设施的角度探讨大规模采用的概念，但为大规模采用而设计的网络实际上应该是什么样子？到目前为止，不同的区块链网络已经提出了独特的方法和策略。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_fedh3p8qsu.png" alt="fppY9aSevNvm8CvvkpUcdiWE7hHYIveNdaqQNdpF.png" title="7065016"></p>
+<p>第一个是在单链上进行优化。这是 Solana、Sei、Aptos、Sui 等人所采用的方法。单链的优点是链中的各个 dApp 可以无缝组合地相互交互。然而，缺点是网络的性能由性能最低的节点决定，并且网络可能变得中心化，因为节点需要更高规格的硬件来实现高可扩展性。</p>
+<p>第二是构建一个具有多个L1网络和适当的跨链协议的生态系统。Cosmos、Polkadot 和 Avalanche 是这种方法的一些例子。这种方法的优点是理论上可以通过并行扩展无限增加可扩展性，但缺点是尽管存在跨链协议，但不同网络的异步特性降低了可组合性，并使生态系统和安全性变得碎片化。</p>
+<p>第三种方法是垂直提高可扩展性，例如基于单个基础层的rollup网络。这种方法的例子包括 Optimism、Arbitrum One 和 Starknet。这种方法的优点是它允许高可扩展性，同时仍然通过执行链外计算而受益于基础层的安全性，并且它允许各种应用程序在一个网络内以高可组合性进行交互。然而，缺点是 L1 在某种程度上限制了 L2 的可扩展性，正如 Vitalik Buterin 指出的那样，使用相同的垂直扩展结构来垂直提高可扩展性是有限的。</p>
+<p>所有上述方法都很重要，因为它们为大规模采用提供了方向，但它们都有明显的优点和缺点。因此，近年来出现了一种方法，综合上述方法优势，如下图所示。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_pevwbt4r3l.png" alt="FpHsfK6rxMOSeEDR6iWNykMQd1PkEjm3q9KU2aKD.png" title="7065017"></p>
+<p>除了我们将在本文中讨论的Polygon之外，所有领先的rollup网络——Optimsim 的 OP Stack、Arbitrum 的 Orbit、zkSync 的 ZK Stack 和 Starknet 的 Fractal Scaling——都在寻求提高垂直和水平的可扩展性。</p>
+<p>在上述方法中，多个L2或L3网络共享基础层，其优点是1）继承基础层的强大安全性，消除安全破碎化，2）通过并行运行网络实现理论上无限的可扩展性，3）实现更多通过共享结算或数据可用性层实现无缝且安全的互操作性和可组合性。</p>
+<p>在我看来，这是区块链大规模采用的最佳模式，因为1）区块链网络的安全性需要统一而不是碎片化，以便大量资金流动，2）对于用户而言它需要提供高水平的可扩展性，3）即使存在多个网络，资产转移和交互也需要无缝且安全。</p>
+<h1 id="2polygon-20"><strong>2、Polygon 2.0</strong></h1>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_s2y73dtlzc.png" alt="WleFihWbeV8EO8eT43AfwQy83QEY0IovJEFyhMCx.png" title="7065018"></p>
+<p>（来源：Polygon）</p>
+<h2 id="21-互联网的价值层"><strong>2.1 互联网的价值层</strong></h2>
+<p>最近，Polygon 发布了Polygon 2.0 蓝图，该蓝图建立在上述方法的基础上，并以“互联网的价值层”为愿景。正如任何人都可以在互联网上创建和交换信息一样，价值层是一个允许任何人创建、交换和编程价值的协议。</p>
+<p>Polygon 2.0 的价值观是“无限可扩展性”和“统一流动性”，其目标是通过 ZK 驱动的 L2 链网络来实现。在用户方面，尽管使用多个 ZK L2 链，但 UX 感觉就像使用单个链。</p>
+<h2 id="22-polygon-pos--validium"><strong>2.2 Polygon PoS → Validium</strong></h2>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_7s9bmsnogs.png" alt="ZHgE0pGfcWg05ktBvM4JT61BtQli0g7N36EVKuEz.png" title="7065019"></p>
+<p>（来源：Polygon）</p>
+<p>在我们深入了解 Polygon 2.0 的架构之前，Polygon 联合创始人 Mihailo Bjelic在治理论坛上发布了一项提案，将现有的 L1 网络 Polygon PoS 升级到 validium，以实现 Polygon 2.0 的愿景。Polygon 已经拥有与以太坊兼容的 ZK L2 技术，称为 Polygon zkEVM，目前运行良好。</p>
+<p>首先，zkEVM的引入，可以在一定程度上依赖以太坊网络的安全性，因为PoS网络的计算结果的有效性证明将在以太坊网络上进行验证。其次，现有的Polygon PoS验证者将代替以太坊网络来管理交易数据，与rollup模式相比，可以实现更低的费用和更快的速度。</p>
+<p>这稍微改变了PoS网络上验证者的角色：首先，它们将继续确保交易数据的可用性，其次，它们将充当排序器来确定L2网络交易的顺序。</p>
+<h2 id="23-polygon-20架构zk驱动的l2链网络"><strong>2.3 Polygon 2.0架构：ZK驱动的L2链网络</strong></h2>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_5kzye2s4i2.png" alt="h82Dns3PepXVzJU1Y309WjhnB6lWsL1lFY0VKYVL.png" title="7065020"></p>
+<p>（来源：Polygon）</p>
+<p>Polygon 2.0是基于以太坊的ZK L2链生态系统。这些由 ZK 驱动的 L2 链称为“Polygon Chains”。从垂直和水平可扩展性的改进来看，Polygon 2.0 的结构是什么样的？就像互联网具有称为互联网协议套件的分层结构一样，Polygon 2.0 也包含执行不同角色的层。</p>
+<h3 id="231-质押层"><strong>2.3.1 质押层</strong></h3>
+<p>Stake Layer 是负责 Polygon 2.0 验证者所有事务的层，它作为智能合约存在于以太坊网络上，有两种类型：</p>
+<ul>
+<li>
+<p><strong>验证者管理者</strong> - 一个智能合约，用于管理 Polygon 2.0 生态系统中的验证者池，包括所有验证者的列表、哪些验证者参与哪些 Polygon 链、它们的质押大小、质押/解除质押请求、惩罚等等。</p>
+</li>
+<li>
+<p><strong>链管理者</strong> - 存在每个 Polygon 链的智能合约，用于管理验证者列表、验证该链的配置（例如，验证者的最大/最小数量、惩罚条件、质押所需代币的类型/大小）等。</p>
+</li>
+</ul>
+<p>验证者可以通过质押代币加入 Polygon 2.0 中的公共验证者池，并根据需要作为多个 Polygon 链上的验证者参与。Polygon 2.0 中的验证者基本上负责排序和验证用户的交易以创建区块，以及生成 ZKP 的证明过程并确保交易数据的可用性。</p>
+<p>验证者因其各种角色而获得补偿，包括 1) 协议奖励，2) 来自参与 Polygon Chain 的交易费用，以及 3) 来自 Polygon Chains 的额外奖励（例如，原生代币）。</p>
+<h3 id="232-互操作层"><strong>2.3.2 互操作层</strong></h3>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_kdd52hjmmh.png" alt="vJB1tDDURmDdMgw2JSQ4uFaUQtF24lvCO5Q8noxI.png" title="7065021"></p>
+<p>（来源：多Polygon）</p>
+<p>互操作层可在 Polygon 2.0 生态系统中实现无缝跨链消息传递，使用户感觉他们正在使用单个网络，尽管他们实际上使用多个网络。</p>
+<p>每个Polygon链都管理消息队列，消息队列是发送到其他Polygon链的消息，其中包含 1) 内容、2) 目标链、3) 目标地址和 4) 元数据。消息队列都有相应的ZKP，如果特定消息的ZKP在以太坊上得到验证，则目标链可以安全地执行此跨链交易。</p>
+<p>然而，由于 ZKP 在以太坊上验证的成本很高，因此互操作层还添加了一个聚合器组件，该组件将由Polygon链中的消息队列生成的多个 ZKP 汇集在一起 ，并允许它们在以太坊网络上进行廉价的验证。由于聚合器需要去中心化以保证活性和抗审查性，因此它由 Polygon 2.0 的通用验证者池管理。</p>
+<p>事实上，跨链交互是这样的，一旦聚合器收到 ZKP，目标链就会以最佳方式处理交易，为用户提供“统一流动性”体验，因为交易几乎可以立即和原子地处理，尽管使用多个网络。</p>
+<h3 id="233-执行层"><strong>2.3.3 执行层</strong></h3>
+<p>执行层是Polygon Chains中实际计算发生的层，它具有类似于典型区块链网络的组件（例如P2P通信、共识、Mempool、数据库等）。</p>
+<p>Polygon Chains 在客户端层面是高度可定制的，包括原生代币、交易费用流程、额外的验证者奖励、区块时间和大小、检查点时间（ZKP 提交的频率）以及rollup/validium选择。</p>
+<h3 id="234-证明层"><strong>2.3.4 证明层</strong></h3>
+<p>由于Polygon 2.0是ZK驱动的L2链的集合，因此ZKP发挥着非常重要的作用，证明层负责为Polygon链上的每笔交易生成ZKP。证明者使用Polygon 团队开发的Plonky2 。</p>
+<h1 id="3新代币pol"><strong>3、新代币：POL</strong></h1>
+<h2 id="31-代币经济学"><strong>3.1 代币经济学</strong></h2>
+<p>虽然我们一直在仔细研究 Polygon 2.0，但很明显，实现这一愿景既涉及协议经济学，也涉及技术。作为回应，Mihailo Bjelic、Sandeep Nailwal、Amit Chaudhary 和 Wenxuan Deng向 Polygon 社区提出了一种名为 POL 的新代币模型。</p>
+<p>在白皮书中，他们将 POL 的设计目标设定为 1）生态系统安全，2）无限可扩展性，3）生态系统支持，4）无摩擦，5）社区所有权，并提出了以下实用效用：</p>
+<ul>
+<li>
+<p><strong>验证者质押：</strong>  Polygon 2.0 中的验证者必须质押 POL 代币才能参与验证者池。</p>
+</li>
+<li>
+<p><strong>验证者奖励：</strong> 必须持续向验证者提供预定义的奖励。验证者默认获得协议奖励，并且还可以从 Polygon Chains 获得交易费或额外激励奖励。</p>
+</li>
+<li>
+<p><strong>治理：</strong> 代币将用于治理，治理框架尚未披露。将有一个新的社区金库，由 POL 代币持有者管理，并将有助于支持生态系统。</p>
+</li>
+</ul>
+<p>POL 代币的初始供应量为 100 亿，从 MATIC 1:1 迁移，建议年通胀率为 2%：</p>
+<ul>
+<li>
+<p><strong>验证者奖励：</strong> 验证者将在前 10 年额外获得总供应量 1% ，此后社区可以通过治理决定是否维持或减少这一份额。</p>
+</li>
+<li>
+<p><strong>生态系统支持：</strong> 前10年，将向新推出的社区金库提供相当于总供应量1%的金额，可通过社区治理用于生态系统支持。10年后，社区可以通过治理决定是维持还是减少这个数额。</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_hdwoal3gtg.png" alt="b8fOHUoZXO02mTrxl7UEil3n39RYf20yvXojvgnB.png" title="7065023"></p>
+<p>（来源：Polygon）</p>
+<p>与现有 MATIC 代币经济（MATIC 总供应量固定为 100 亿）不同，POL 代币的通货膨胀率为 10 年每年 2%。在 Polygon 2.0 生态系统足够成熟之前，这种通胀供应将为网络提供良好服务。一旦 Polygon 2.0 生态系统完善并通过交易费用实现可持续性，社区就可以通过治理来减少通胀。考虑到目前比特币网络的通胀率约为 1.8%，2% 并不是一个巨大的数字。</p>
+<h2 id="32-模拟"><strong>3.2 模拟</strong></h2>
+<p>但新 POL 代币的代币经济学有多现实呢？网络是否足够安全，验证者是否会受到足够的激励，生态系统是否会得到足够的支持？Polygon 模拟了这些问题并将结果包含在白皮书中。</p>
+<p>基于一系列假设，很明显，即使在最坏的情况下，验证者也可以获得 4-5% 的年度激励，并且社区财政部将获得足够的资金。（请注意，社区金库的规模是使用 1 枚POL 5 美元的平均价格计算的）。</p>
+<ul>
+<li>
+<p>Polygon 公链平均交易费用：0.01 美元（目前 Polygon PoS 平均费用），平均验证者数量：100，平均 TPS：38。</p>
+</li>
+<li>
+<p>Supernets Polygon Chains 的平均交易费用为 0.001 美元，平均验证者数量：15，平均 TPS：19。</p>
+</li>
+<li>
+<p>每个验证者的平均年运营成本：6,000 美元（应用摩尔定律的修改版本，每三年运营成本减半）</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2023/0716/8_2spdg38uqb.png" alt="wpC0r6z4adeAqmCgCv1bgNMrlh1En0o5R6RG0X72.png" title="7065024"></p>
+<p>（来源：Polygon）</p>
+<h2 id="33-与其他代币的比较"><strong>3.3 与其他代币的比较</strong></h2>
+<p>乍一看，拟议的 POL 代币经济与 Polkadot 的 DOT、Cosmos 的 ATOM 和 Avalanche 的 AVAX 类似，但也存在一些差异。</p>
+<p>首先，POL 和 DOT 之间有一个很大的区别：构建在底层上的网络要成为平行链，需要通过一个称为平行链拍卖的过程将大量 DOT 代币锁定到 Polkadot 中继链中。然而在Polygon 2.0中，任何人都可以部署Polygon Chain，满足验证要求的验证者就可以参与。</p>
+<p>其次，POL 与 AVAX 和 ATOM（支持 ICS）略有不同，因为这三者的共同点是质押原生代币的验证者可以作为多个网络上的验证者参与，但它们在通胀率、治理等方面有所不同。 。</p>
+<h1 id="4最后的想法"><strong>4、最后的想法</strong></h1>
+<p>随着区块链行业和技术的成熟，越来越多的尝试垂直和水平提高网络的可扩展性，而Polygon 2.0正在走这条路。虽然其他领先的 L2 项目（例如 Optimsim、Arbitrum、zkSync、Starknet）也在做出类似的尝试，但 Polygon 2.0 的与众不同之处在于：1）具有高度以太坊兼容性的 zkEVM 技术，2）利用 ZKP 的跨链解决方案。</p>
+<p>虽然其他项目参考了多条 L2/L3 链的跨链解决方案，但很少有项目提供详细的跨链解决方案。最近，跨链项目已经开始使用 ZK 技术（例如 zkBridge、Electron Labs、Polymer Labs 等），Polygon 2.0 也具备在其跨链解决方案中利用 ZKP 的能力，旨在提供卓越的跨链用户体验。</p>
+<p>让我们拭目以待，看Polygon 2.0与ZK技术一起能否实现可扩展性和互操作性，有可能成为互联网的价值层。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/55094/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Meta重新定义多模态！北大校友共同一作，70亿参数文生图模型击败Diffusion</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/55077/">
+                <span class="next-text nav-default">Solana Q2报告：DEX平均交易量同比增长3倍 日活跃地址30万</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-前言"><strong>1.1 前言</strong></a></li>
+    <li><a href="#12-不同类型的区块链网络走向大规模采用"><strong>1.2 不同类型的区块链网络走向大规模采用</strong></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-互联网的价值层"><strong>2.1 互联网的价值层</strong></a></li>
+    <li><a href="#22-polygon-pos--validium"><strong>2.2 Polygon PoS → Validium</strong></a></li>
+    <li><a href="#23-polygon-20架构zk驱动的l2链网络"><strong>2.3 Polygon 2.0架构：ZK驱动的L2链网络</strong></a>
+      <ul>
+        <li><a href="#231-质押层"><strong>2.3.1 质押层</strong></a></li>
+        <li><a href="#232-互操作层"><strong>2.3.2 互操作层</strong></a></li>
+        <li><a href="#233-执行层"><strong>2.3.3 执行层</strong></a></li>
+        <li><a href="#234-证明层"><strong>2.3.4 证明层</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-代币经济学"><strong>3.1 代币经济学</strong></a></li>
+    <li><a href="#32-模拟"><strong>3.2 模拟</strong></a></li>
+    <li><a href="#33-与其他代币的比较"><strong>3.3 与其他代币的比较</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

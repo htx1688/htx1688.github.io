@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          ve（3 3）DEX ——深入探讨Solidly和Velodrome - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="更深入地了解Solidly和后来的Velodrome模型，以了解它们对基本Curve和veCRV模板的改进。" />
+<meta name="keywords" content="Solidly" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51516/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="ve（3 3）DEX ——深入探讨Solidly和Velodrome" />
+<meta property="og:description" content="更深入地了解Solidly和后来的Velodrome模型，以了解它们对基本Curve和veCRV模板的改进。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51516/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-18T00:00:00+00:00" />
+
+<meta itemprop="name" content="ve（3 3）DEX ——深入探讨Solidly和Velodrome">
+<meta itemprop="description" content="更深入地了解Solidly和后来的Velodrome模型，以了解它们对基本Curve和veCRV模板的改进。"><meta itemprop="datePublished" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4431">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ve（3 3）DEX ——深入探讨Solidly和Velodrome"/>
+<meta name="twitter:description" content="更深入地了解Solidly和后来的Velodrome模型，以了解它们对基本Curve和veCRV模板的改进。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">ve（3 3）DEX ——深入探讨Solidly和Velodrome</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-18">
+      2023-05-18
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4431 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：TokenBrice </p>
+<p>Solidly/Velodrome分叉如雨后春笋般出现，特别是在流行的第二层，如Arbitrum或zkSync。Solidly现在是DeFi中排名第三的分叉协议，并且是分叉(如Velodrome)成为市场领导者的罕见案例之一。乍一看，这似乎只是另一个分叉的炒作，就像我们有Uni/Sushi的分叉季，Olympus的分叉季等。</p>
+<p>事实上，这是夸大其词：每周都会推出数量惊人的此类 DEX，其中 95% 从现在起六个月后将不再适用。然而，就像大多数这样的炒作一样，在深处，在去中心化交易所的设计方式方面，有一个真正的根本性创新值得研究。</p>
+<p>因此，本文将深入探讨Solidly和Velodrome模型，以了解它们成为标准分叉模板的原因。话虽如此，将我们将思考这些去中心化交易所的下一步，以及这个市场在几个月后会是什么样子。</p>
+<p>让我们开始吧！</p>
+<p>本文假定你对去中心化金融有最低限度的了解，并对veCRV模型有彻底的了解。如果你需要复习，请查看：CRV Wars: understanding the race to accumulate power to influence Curve Finance protocol</p>
+<p>**<strong>ve(3,3) DEX 简介</strong> **</p>
+<p>在我们深入探讨 Solidly 如何构建并尝试改进 veCRV 模型之前，让我们先退一步考虑一下范围。</p>
+<p>**<strong>AMM结构VS激励层</strong> **</p>
+<p>事实上，要了解ve(3,3) DEX的故事，我们需要区分对去中心化交易所同样重要的两个层面：</p>
+<p><strong>1.流动性结构层：</strong> 用于维持流动性的各种AMM模型，如UNIv2的x*y=k或Curve的stablesswap。</p>
+<p><strong>2.激励层：</strong> 费用+针对流动性提供者的所有其他激励，包括代币发行(如CRV模型)。</p>
+<p><strong>归根结底，第一层——流动性结构——是游戏的核心，而第二层——激励机制——对于吸引和维持足够的流动性至关重要。</strong></p>
+<p>Curve在这两方面都进行了创新。虽然我们今天讨论的模型利用了它，但它们完全侧重于改进激励层。事实上，在目前阶段，大多数利用Solidly或Velodrome模型的ve(3,3) DEX只提供两种众所周知的流动性结构类型：x*y=k和stableswap。</p>
+<p>根据DEX的不同，这两种流动性模型被称为相关/波动或稳定/波动。</p>
+<p>那么，让我们来谈谈Andre Cronje原创 Solidly的有趣之处，以及我们可以从它的失败中得到什么启示。</p>
+<p>**<strong>Andre Cronje的Solidly 创新</strong> **</p>
+<p>Solidly于2022年初在Cronje的媒体上推出，其愿景的关键部分是对储物柜（locker）实用性的重大改进。在Curve上，储物柜使用不可转让的投票托管代币承诺使用四年。虽然这对Curve生态系统中所有参与者的长期激励是很好的，但它也创造了一个相当大的进入壁垒。</p>
+<p>于是就有了以veNFT为核心的ve(3,3)。虽然veCRV是非流动性的，但veSOLID头寸由veNFT代表，允许其转让或OTC出售/购买。它有助于使锁定不那么可怕。为了进一步激励它，Cronje引入了“反稀释性重组（anti-dilutive rebases）”，这是一个来自Ampleforth/Olympus的概念。</p>
+<p>这里的想法很简单：由于Curve/ Solidly DEX模型每周向流动性提供者发放代币，因此代币持有者不断被稀释。他们必须不断提高自己的地位，才能维持目前的投票份额。为了弥补这一点，在Solidly模型下，veSOLID持有者每周获得与每周释放量成比例的基数。这使他们即使在没有锁定新代币的情况下也能保持投票份额。</p>
+<p>除了这些变化之外，Solidly继承了大部分Curve模型，包括LP激励功能，使veToken持有者能够从其流动性头寸中获得更高的收益。这个功能具有实际影响，因为它几乎“类似Convex”。事实上，这样一个功能的逻辑结论是，一个或几个参与者获得大量的veToken，并向存款人提供LP激励以便收费。</p>
+<p>该功能的存在与否是Solidly和Velodrome模型之间的关键区别，因此我们将在稍后再讨论它。</p>
+<p>最后，选民激励模型还有一个关键的转折。在Curve上，LP获得一半的交易费用 + CRV 释放量，而选民则不会受到他们投票的池的费用的影响。这可能会导致选民为了贿赂而投票给矿池的情况，即使矿池没有为交易所提供任何交易量。</p>
+<p>在Solidly上，LP只获得SOLID释放的奖励，LP费用将重新分配给池中的选民。因此，作为一个veSOLID持有者，为了优化你的收益，你会被激励去考虑你正在投票的矿池的交易量，而不仅仅是贿赂。这将更好地协调协议主要参与者(交换者、流动性提供者、持有者)的激励机制。</p>
+<p>Solidly还创新了发布策略，根据他们在Fantom (Solidly所在的地方)上的在线活动，<strong>针对协议进行空投</strong> 。所有这些创新和炒作共同导致了大量的流动性迅速被吸引到交易所。</p>
+<p>但Solidly最初的实施存在一些关键弱点，包括释放量急剧下降，以及完全无需许可的标准创建，允许任何矿池获得SOLID奖励。它是可赌的，所以它被玩了。很快，代币被创造出来，唯一的目的是种植SOLID，与 TVL 一起价格迅速上升。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/19_vgntzeab33.png" alt="4HvcdXCz5mfb0giZDGniTSU578AVROSnctozejGm.png" title="7020814"></p>
+<p>TVL 来得快，消失得也快，Solidly 成为了大多数人历史的一部分。但那些密切关注事件的人知道，Solidly的失败并非来自于ve(3,3)模型的弱点，而更多的是它的实现细节被忽视了，这意味着虽然Solidly已经不复存在，但ve(3,3)可能会重新出现。几个月后，它在另一个团队制造的另一个链上做到了：进入Velodrome。</p>
+<p>**<strong>Velodrome对Solidly模型的改进</strong> **</p>
+<p>Velodrome利用Solidly模型，并通过实施仪表白名单解决了释放问题，帮助避免了奖励分配给虚构代币的情况，就像在Solidly上看到的那样。</p>
+<p>然而，Velodrome远不止是一个简单的分叉，它还进行了进一步的改进。其中包括更可持续的释放模型和移除LP激励功能，这意味着veVELO持有者在收益方面没有优惠待遇。Velodrome还简化了首次LP的体验，他们可能会对你在实施 LP 激励 的 DEX 上看到的收益率范围感到困惑。</p>
+<p>除了技术特点之外，Velodrome的成功很大程度上要归功于团队的执行力和对业务发展战略的关注，这是ve(3,3)模型的重要组成部分。基于Optimism，Velodrome发现其PMF是链流动性层。由于它的模式，维持Velodrome项目的流动性比Uniswap项目更具成本效益。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/19_jgqj2o8yqq.png" alt="EltSmAnr15WVwlH2O30LNsJNZ6GOhoYGkWAGXqVt.png" title="7020818"></p>
+<p>https：//twitter.com/TokenBrice/status/1643631689984274432?s=20</p>
+<p>与Solidly一样，Velodrome空投了几个带有veVELO NFT的协议，没有任何附加条件，这极大地帮助吸引了最初的投票和贿赂活动。该协议非常适合，主要是与其他发行稳定币或 ETH 流动性股权衍生品的协议相匹配：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/19_7ad6forz2e.png" alt="Dcv8GLWfBb5K4YrDl9WDdfgfzu7cXp1jvo6tjzhJ.png" title="7020819"></p>
+<p> DeFiwars.xyz – veVELO ownership overview</p>
+<p>现在已经快一年了，由于协议中分配的OP激励措施(称为Tour de OP)的谨慎和渐进的调整，活动得以持续。其中大多数用于激励两种行为，这些行为对维持飞轮至关重要：</p>
+<p><strong>1.来自协议的贿赂，由OP贿赂匹配激励。</strong></p>
+<p><strong>2.锁定veVELO，由OP锁定奖励激励。</strong></p>
+<p>对于锁定VELO或向交易所部署大量协议、拥有流动性的项目，贿赂匹配进一步增加，有助于进一步放大强化效应：那些想要在Velodrome上建立长期持续流动性的人有充分的理由购买VELO、锁定和投票、贿赂和供应POL，理想情况下是一次完成。</p>
+<p>这使得Velodrome在Velodrome的协议TVL图表中名列前茅，处理了大约区块链总量的30%，而Uniswap占50%，大约占Velodrome TVL的四分之一。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0518/19_e9hqnltgn0.png" alt="FotRepnkqfXNXfNGV8gKa7VeTDGJ9ZoSxDgjhB84.png" title="7020820"></p>
+<p> Volume on DEXes on Optimism, from DeFiLlama</p>
+<p>那么，为什么两者之间的差距如此之大呢？很简单：Uniswap的成交量/TVL比目前的Velodrome高9倍，因为Uniswap的流动性更加集中，因此效率更高。但随着Velodrome V2即将到来，这种情况即将发生变化。</p>
+<p>**<strong>Velodrome V2 简介</strong> **</p>
+<p>虽然Uniswap在流动性集中方面领先一步，但它将迅速改变。v3许可证于2023年4月1日到期，这意味着该模型现在更容易重新实施。许多DEX，包括Solidly/Velodrome 分叉，都打算利用这一点。尽管如此，为了保持本文的重点，我们将只讨论预计在未来几周或几个月内发布的Velodrome V2。</p>
+<p>实际上，Velodrome V2不仅标志着在DEX上引入了UNI-v3风格的LP，而且还显著改进了UX/UI，简化了veNFT的管理，veNFT的艺术品等等。有关详细信息，请查看V2公告文章。</p>
+<p>**<strong>结论</strong> **</p>
+<p>我希望本文能帮助你理解Solidly和Velodrome模型的好处。虽然我在介绍中提到了无数的分叉，但我还是坚持本文的方向。我想这需要我梳理一下他们的主要分支和他们在模板中实现的修改：敬请期待。</p>
+<p>**<strong>关键要点</strong> **</p>
+<p><strong>•业务发展的重要性：</strong> ve(3,3)就像Curve一样，是协议的协议。从长远来看，团队的专业精神、有效地确定优先级、执行BD的能力是DEX成功的重要因素。</p>
+<p><strong>•发布/空投/顶级车手的质量：</strong> 即使BD做得很好，给定的ve(3,3) DEX也只能与其顶级车手一样好。是的，你希望他们贿赂、投票、提高意识，但不仅如此。驱动DEX的流动性质量也很重要(成交量/TVL比率)。</p>
+<p><strong>•LP激励及其结果：</strong>  如果一个ve(3,3)实现LP 激励，它会调用类似 Convex 的协议。ve(3,3)的成功将取决于它的Convex类产品做得多好。要跟踪各种包装器和主要veTokens持有者的关键统计信息，请检查 DeFiWars。</p>
+<p><strong>•ve(3,3) +流动性集中度：</strong> 虽然ve(3,3)是DEX激励层的重大创新，但它目前利用的是低于标准的流动性结构。将ve(3,3)激励模型与高效的UNI v3式流动性结构相匹配，有助于进一步提高飞轮的有效性。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51488/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Variant Fund联合创始人：透过Lens Protocol看Web3社交网络</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51474/">
+                <span class="next-text nav-default">ve(3,3) 无处不在，有哪些值得关注的项目？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

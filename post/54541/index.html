@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          zkEVM Rollup:从技术的憧憬到项目的落差 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本份研报的目标是以简明易懂的语言为你系统梳理zkEVM Rollup的一系列概念，深入分析zkEVM Rollup技术的演变和发展现状，并对其中的主要生态项目进行详细解读。" />
+<meta name="keywords" content="zkEVM, Rollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/54541/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="zkEVM Rollup:从技术的憧憬到项目的落差" />
+<meta property="og:description" content="本份研报的目标是以简明易懂的语言为你系统梳理zkEVM Rollup的一系列概念，深入分析zkEVM Rollup技术的演变和发展现状，并对其中的主要生态项目进行详细解读。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/54541/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-07T00:00:00+00:00" />
+
+<meta itemprop="name" content="zkEVM Rollup:从技术的憧憬到项目的落差">
+<meta itemprop="description" content="本份研报的目标是以简明易懂的语言为你系统梳理zkEVM Rollup的一系列概念，深入分析zkEVM Rollup技术的演变和发展现状，并对其中的主要生态项目进行详细解读。"><meta itemprop="datePublished" content="2023-07-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="11292">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="zkEVM Rollup:从技术的憧憬到项目的落差"/>
+<meta name="twitter:description" content="本份研报的目标是以简明易懂的语言为你系统梳理zkEVM Rollup的一系列概念，深入分析zkEVM Rollup技术的演变和发展现状，并对其中的主要生态项目进行详细解读。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">zkEVM Rollup:从技术的憧憬到项目的落差</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-07-07">
+      2023-07-07
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 11292 字 -
+        预计阅读 23 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>为了解决区块链Layer 1网络的扩容问题，Rollup方案应运而生。结合ZK技术，ZK Rollup成为Layer 2赛道的新宠儿。然而，对于大多数人来说，ZK、Rollup和EVM等相关概念可能有一定的理解门槛。因此，本份研报的目标是以简明易懂的语言为你系统梳理zkEVM Rollup的一系列概念，深入分析zkEVM Rollup技术的演变和发展现状，并对其中的主要生态项目进行详细解读，以此旨在帮助你全面深入了解和判断zkEVM Rollup赛道发展趋势。</p>
+<p><strong>PART 1</strong>  <strong>理解ZK</strong></p>
+<p>ZK（或是ZKP），全称Zero-Knowledge Proof，即零知识证明，在密码学中，零知识证明或零知识协议是一种方法，通过该方法，一方（证明者）可以向另一方（验证者）证明一个事实，而无需透露该事实的具体信息，也就是说一方（证明者）无需透露任何该事实的「具体信息」，便能让对方知道这个事实是否正确，因此 ZK 技术能够在隐私保护领域为我们带来诸多想象空间。</p>
+<p>当然，ZK技术除了能够带来隐私保护的好处，在ZK Rollup中，ZK技术更重要是解决“验证难”的问题。“验证”这个过程对于区块链非常重要，Ethereum中绝大部分的计算过程都是为了满足验证的要求，而ZK Rollup能大大整个节点网络投入在验证中的时间。举例，如果一个区块需要很长时间来验证区块生成时是否满足整个网络的规则，那么可以有一个证明者初次验证它并生成有关这个区块计算结果的“证明”，剩下的其他人可以通过快速验证这个“证明”而不是计算量极大的原区块，而达到验证区块的目的。</p>
+<p>一个简单的ZK协议分为以下几个步骤，生成密钥、证明和验证，接下来我将逐一为你拆解。</p>
+<p><strong>01</strong>  <strong>生成密钥，证明和验证</strong></p>
+<p>在ZK中，我们需要首先将待验证的问题转化为数学表达式，进而转化为多项式，并将其表示为算数电路的形式。当程序转换为算术电路时，它被分解为由加法、减法等基本算术运算组成的单个步骤。如一个将作为输出的函数，可以转化为以下电路图，见图 1。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_io53erhu7b.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图 1 一个电路图的示例，可以注意到在电路中所有的运算被拆分为最简单的基本运算| 图源https://zhuanlan.zhihu.com/p/487866576</p>
+<p>使用这个电路和一些随机数作为输入，我们可以生成一个证明密钥（pk，proving key）和验证密钥（vk，verification key），用于后续的验证过程，示意图见图 2。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_27f7ueanov.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图 2 “公共参数”的生成</p>
+<p>我们的证明系统还需要两种类型的输入——私有输入和公开输入，与证明密钥一起生成证明。其中，私有输入（witness）是我们想要隐藏的秘密，而公开输入是可以公开的信息。例如，在等式X+Y*Z=OUT中，X和OUT是公开输入，而Y和Z的值则是我们不想向验证者公开的。虽然根据公开输入可以推出Y*Z的值，但是Y和Z的具体取值仍然无法确定。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_8bqszpel80.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图 3 ZK-SNARKs的证明过程和验证过程</p>
+<p>当验证方接收到证明后，使用公开输入、证明和验证密钥来验证该证明，并返回验证结果（即是否验证成功）。</p>
+<p>明白了上述流程之后，我们可以将这种技术运用到区块的验证当中，实现一个小小的ZK-SNARK，见图 3。实现零知识证明的协议和方式有很多，SNARK是相较比较容易理解的一种，也是现阶段多数项目的选择。在“从ZK-SNARKs到ZK-STARKs”这个段落中我们会谈到SNARK的优势和不足。</p>
+<p><strong>02</strong>  <strong>尝试一个小小的SNARK</strong></p>
+<p>我们以一个记录账户状态的 Merkle Tree 的零知识证明为例来练习。该 Merkle Tree 记录了账户的地址和余额。当有新的交易需要更新 Merkle Tree 时，我们需要执行以下操作：</p>
+<p>1) 验证交易的发送方和接收方是否在树的叶子节点上。</p>
+<p>2) 验证发送方的签名。</p>
+<p>3) 更新发送方和接收方的余额。</p>
+<p>4) 更新 Merkle Tree 的根节点（即 Merkle Root），并将其作为最终输出。</p>
+<p>在没有零知识证明的情况下，验证者需要重复这些步骤来确保计算的准确性。但是使用零知识证明后，情况就不同了。首先，我们需要确定两种类型的输入：</p>
+<p>在该过程中，只有新的交易信息、原 Merkle Root 和更新后的 Merkle Root 是公开输入。</p>
+<p>Merkle Tree 本身作为 witness（见证），不需要被验证者读取或处理。</p>
+<p>其次，我们需要生成密钥和计算电路。我们将 Merkle Tree 更新、输入输出地址验证等计算过程构建成计算电路，以获得证明密钥和验证密钥。该电路与输入的交易信息无关，也与现有的 Merkle Root 无关，因为 Merkle Tree 的计算方式是固定的。</p>
+<p>在生成证明的阶段，我们将前后两个 Merkle Tree 和交易信息作为输入。在验证者阶段，验证者可以不需要获取到Merkle Tree，也就是不了解账户信息的情况下，确保更新情况的可靠性。该电路类似于一个稳固的黑盒，只要输入正确，就能获得正确的输出。</p>
+<p>使用零知识证明，其他验证者可以快速验证 Merkle Tree 的生成过程是可信的，从而减少了网络上重复验证的时间，同时Merkle Tree的信息无需向验证者披露。</p>
+<p><strong>03</strong>  <strong>从ZK-SNARKs到ZK-STARKs</strong></p>
+<p>上述讲的证明协议是ZK-SNARKs。SNARK代表succinct non-interactive arguments of knowledge，其中succinct指的是这种方式的简洁性，non-interactive指的是相对于其他证明方式，SNARKs是非交互性质的证明，即验证者只需使用由证明者生成的proof即可获得验证结果。但是，ZK-SNARKs存在一些问题。在密钥生成阶段，电路和随机数相当于一组初始的公共参数，这个公共参数的生成过程存在不可避免的中心化问题。</p>
+<p>ZK-STARKs在SNARK的基础上另辟蹊径，其中的“s”代表可扩展的，其证明生成时间和原始计算的耗时呈拟线性关系，而验证耗时和原始计算呈对数关系，这意味着在大量数据集作为数据的情况下，验证者所需的验证时间被大大缩短。</p>
+<p>同时，作为ZK-SNARKs的升级版，ZK-STARKs不仅仅可以提高验证效率（理论效率为10倍），而且不依赖椭圆曲线或可信设置，并且不需要生成初始公共参数的过程（字母“T”代表透明性），这消除了对可信设置的中心化需求。一些开发者认为，ZK-STARK中的哈希函数有助于抵御量子攻击。</p>
+<p>然而，ZK-STARKs的推出时间较晚，目前技术还不够成熟，并且依赖哈希函数，这限制了它的通用性，ZK-SNARKs仍然是通用的证明算法。基于STARK的算法的一些示例包括Fractal、SuperSonic等，相关项目方有StarkWare、Polygon Miden等。</p>
+<p><strong>PART 2</strong>  <strong>理解Rollup</strong></p>
+<p>除了ZK，另一个我们需要了解的概念是Rollup，Rollup 的意义在于解决一层网络的拥堵问题。</p>
+<p>以Ethereum为例，它当前存在着交易拥堵的问题。解决这个问题有两种方法：一种是增加区块链本身的交易能力，例如通过分片等技术来扩展区块链的吞吐量。另一种方法是改变区块链的使用方式，即在二层（Layer2，下称L2）中执行大部分活动，而不是直接在链上执行。在这种情况下，链上往往会部署一个智能合约，它只负责处理存款和取款，并使用各种方法来读取链下数据，以验证链下发生的一切是否符合规则。这相当于在小路旁架设高速公路，即通过L2扩容来解决拥堵问题。</p>
+<p>当前，L2扩容的三种主要类型或方案是state-channels、Plasma和Rollup。它们是三种不同的范式，各有优点和缺点。所有L2扩展大致都可以归为这三个类别（尽管命名存在部分争议，例如validium），其中，Rollup具有自己的优势所在。</p>
+<p><strong>Rollup和数据可用性</strong></p>
+<p>相比于其他扩容方案，Rollup具有一定的优越性，其中一个比较直观的优势是解决了Plasma数据可用性的问题（Darren老师文章“数据可用性”这个章节中曾提到）,这里我也将做一定的补充。</p>
+<p>数据在链上这一事实十分重要（注意：将数据“放在IPFS上”是行不通的，因为IPFS不提供共识层面的验证，无法保证给定数据是否可用，即数据必须存储在区块中）。在Plasma以及之前的Channel这两种扩容方案中，数据和计算完全放到二层网络中，当二层网络和以太坊进行交互时，二层链上所有交易数据并不包含在内，从状态机的视角来看，也就是没有包含Plasma链每一次状态变更的情况。这会导致以太坊如果脱离了Plasma等的二层网络，就无法复原之前状态变更的情况，因此以太坊数据可用性非常依赖对Plasma数据的保护。</p>
+<p><strong>Rollup的机制</strong></p>
+<p>为了保证数据可用性，因此市场选择了Rollup，那么Rollup具体是如何工作的？</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_pmc267muss.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图 4 L1合约中的State Root | 图源https://vitalik.ca/general/2021/01/05/rollup.html</p>
+<p>在Rollup的设计中，主链上有一个Rollup contract的合约，其中保存了一个状态根（state root）。可以把这个状态根看作是Merkle Tree的Merkle根的升级版，它存储了账户余额（即状态的一种）、合约代码等信息，图 4展现了Rollup contract中存储的状态根。</p>
+<p>L2节点主要有三个功能：首先确定哪些交易应该优先被打包（通常该类节点或客户端被称为定序器Sequencer），其次需要对每个打包的数据给出证明，最后提交给L1上的Rollup contract由该合约进行验证。图 5展现了L2中定序器的作用。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_l4hp9st6rg.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图 5 定序，证明和提交Batch是L2阶段的主要功能 |图源https://foresightnews.pro/article/detail/20517</p>
+<p>具体来说，L2可以将一批数据（batch）传递给L1，这些数据可以是高度压缩的交易集合或合约运行后的状态变化情况，同时还包括L1合约中存储的状态根（state root）以及经过L2处理数据后得到的新的后状态根（post-state root）。合约根据这些数据来验证后状态根的正确性。一旦验证通过，该批数据就会在L1层确认，完成了从L2到L1的上链过程。</p>
+<p>后状态根（post-state root）是根据原始数据计算得出的，为了确保提交的数据中的新后状态根是正确的，最直接的方法是让L1重新计算一次。然而，这样做无疑会给L1带来巨大的压力。为了解决这个关键问题，存在两种完全不同的优化方案，即Optimistic Rollup和 ZK Rollup。</p>
+<p><strong>ZK Rollup和Optimistic Rollup</strong></p>
+<p>ZK Rollup使用诸如ZK-SNARKs或ZK-STARKs等加密协议证明，通过这些证明来验证执行该批次后状态根（post-state root）的正确性。不论L2的计算量有多大，ZK Rollup能够快速在L1上链上进行验证。</p>
+<p>另一种证明方式是Optimistic Rollup，它使用欺诈证明。这里有个形象的比喻，这就好比妈妈不经常检查儿子的作业，但只要有一次作业没有完成，就会严厉惩罚。在这种机制下，Rollup合约跟踪状态根的完整历史和每个批次的哈希值。如果有人发现某个批次的后状态根不正确，他们可以发布一个证明，证明该批次计算不正确。其他节点一起验证该证明，并恢复该批次及其后续的所有批次。</p>
+<p>图 6总结了Optimistic Rollup和ZK Rollup的优劣势对比。在这里需要注意的是，ZK Rollup在TPS方面表现出色，并且在退款周期方面具有显著优势。然而，它的劣势在于EVM兼容性和L2层的计算消耗：</p>
+<ol>
+<li>Optimistic Rollup项目，如Optimism和Arbitrum，分别使用OVM和AVM，它们的虚拟环境与EVM基本相同，因此可以直接将L1层的合约迁移到L2上进行部署。然而，在ZK Rollup中，将ZK-SNARK用于证明通用的EVM执行是相当困难的，因为EVM并不是按照ZK证明计算的数学需求来开发的，所以需要改造某一类的EVM客户端，以利用ZK技术来验证交易和合约运行。</li>
+</ol>
+<p>2) 同时，即使经过相应的转化，ZK运算仍然需要大量的算力投入，因此在L2层的效率上ZK Rollup不及Optimistic Rollup。</p>
+<ol start="3">
+<li>ZK Rollup提供了比Optimistic Rollup更好的数据压缩功能，因此能够在L1上提交更小的数据。</li>
+</ol>
+<p>4) 由于ZK中的证明验证过程更快捷，且具有更高的批处理密度，在L1层的计算消耗上ZK Rollup较低。可以理解为L2上的节点付出大大减轻了对L1节点的要求，从而显著提升了L1层的可扩展性。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_s520vhvc9a.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图6 两种rollup方式的比较 | 图源：https://tokeninsight.medium.com/zksync-vs-starkware-whats-the-difference-between-the-top-two-zk-rollup-66d1a7d08ef3</p>
+<p><strong>ZK Rollup 还是 zkEVM Rollup？</strong></p>
+<p>虽然ZK Rollup看起来很有吸引力，但在实际部署中存在诸多困难。目前，ZK Rollup仍然具有相当大的局限性，而Optimistic Rollup仍然是主流方案。大多数已实现的ZK Rollup也都是为某些特定应用程序定制的。</p>
+<p>如何理解定制化的ZK Rollup？开发者为不同DApp构建专用电路（“ASIC”），如Loopring、StarkEx rollup和 zkSync 1.0，它们支持特定类型的支付、Token交换或者是NFT铸造，然而，它们的电路设计需要高度的技术知识，这导致了开发者体验的不佳。以特定类型的支付数据为例子，节点将交易数据提交给定序器，由定序器打包成batch交给提验证（proof）的节点作为公开的输入，证明过程和虚拟机上的合约执行过程无关，ZK只是负责将某个特定的执行结果的rollup计算、压缩过程进行进行证明。</p>
+<p>而zkEVM Rollup又代表了将虚拟机运行结果Rollup的能力。当在L2层运行通用的智能合约，需要证明合约运行前后状态转换的有效性时，便需要有一个虚拟环境能够支撑ZK算法的运行。因此，运行合约，输出最终状态，证明合约执行过程的有效性，并将交易记录，账户记录，状态变化记录数据一同rollup提交，这便是zkEVM的意义。而L1层只需要快速验证证明，开销较小，无需再次运行合约，图 7生动的说明了zkVM的作用。需要注意的是，zkEVM其实是运行在L2层的类EVM虚拟机器，因此更为精确的说法是Zero Knowledge Virtual Machine，zkVM，只不过大家强调其兼容以太坊而称之为zkEVM。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_yt4ctrg2bu.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图7 一图说明zkVM | 图源https://mp.weixin.qq.com/s/i9O0vpHnkHFwVBPjNeqMUQ</p>
+<p>现有项目也在考虑逐渐放弃了为特定应用程序做优化，而升级转向支持运行通用合约即zkEVM Rollup。因此，zkEVM Rollup虽然作为ZK Rollup的下位概念，在大部分情况下，提起ZK Rollup时便指zkEVM rollup。</p>
+<p><strong>PART 4</strong>  <strong>zkEVM Rollup项目概览</strong></p>
+<p>2023年上半年各类zkEVM项目喷井式而出，笔者在关注这些项目的时候主要关注以下方面：</p>
+<p>1. 当前项目进展：包括当前项目阶段，以及测试网、主网预计上线时间，是否和发展路线图有一致性。</p>
+<p>2. 项目实际交互情况：通过与测试（主）网的交互等，主观感受网络TPS，单笔交易确认时间等，对网络性能有直观感受。</p>
+<p>3. zkEVM兼容性：这是最为核心的技术点也是最难评判的，即便部分项目开源，在VM层面的技术最为硬核，且涉及到较多的ZK协议。具体的，需要关注ZK协议、VM安全性、兼容程度等。</p>
+<p>4. zkEVM Rollup架构：相对于zkEVM，一般项目都会在白皮书等技术文档中公开其Rollup架构，且总体差异性较少，但是要关注其整体去中心化程度。</p>
+<p>5. 生态运营：项目用户数量、活跃程度、链上应用生态的运营和孵化情况以及开发者社区的维护等软性反应项目运营的情况的指标。</p>
+<p>6. 投融资情况。</p>
+<p>本文更多的从前四点角度来对项目进行考量，更多地从技术层面关注zkEVM Rollup的整体架构。</p>
+<p><strong>Scroll</strong></p>
+<p>Scroll团队创立于2021年，致力于开发EVM等效的ZK Rollup用于扩展以太坊，近两年来，Scroll一直致力于与Privacy and Scaling Explorations团队以及其他开源贡献者一起公开构建与字节码兼容的zkEVM。2月底Scroll宣布其Alpha测试网现已在Goerli上线，任何用户无需许可都能够参与技术测试，测试网平均出块时间为3秒，现已经有2千多万笔交易，150多万的区块和400万余的交互地址。同时Scroll也于4月11日开放了网站生态系统界面。</p>
+<p>从近期信息披露来看，Scroll在类型二EVM等效的道路上不断向前。近期，Scroll已经完成了所有EVM操作码的兼容开发工作，正在进行审计工作，同时下个目标是兼容EIP2718交易。</p>
+<p>技术架构上，Scroll的架构较为传统,因此在这里详细介绍。如图8，主要分为两个部分：核心部分是zkEVM，用于证明EVM在L2执行的正确性；但是要将zkEVM变成以太坊上完整的ZK Rollup，还需要围绕zkEVM构建一个完整的L2架构。具体的，现有的Scroll Alpha testnet由Scroll Node、Bridge Contract和Rollup Contract组成：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_hcc2s9h40d.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图 8 Scroll rollup整体架构 | 来源 <a href="https://scroll.io/blog/architecture">https://scroll.io/blog/architecture</a></p>
+<p>1. Scroll Node：由Sequencer、Relayer和Coordinator组成。</p>
+<p>a) Sequencer，也就是所谓的定序器，向用户和应用开放JSON-RPC，读取交易池中的交易并生成L2的区块和状态根。现阶段Scroll的Sequencer节点是中心化的，在之后的升级中会逐渐去中心化。</p>
+<p>b) Coordinator负责在Roller和Scroll Node之间进行通讯，当有新的区块在Sequencer中生成的时候，随机选择池中的Roller进行证明生成。</p>
+<p>c) Relayer监测Ethereum和Scroll链上的Bridge Contract和Rollup Contract。Rollup Contract保证L2数据在L1层面的数据可用性，确保在L1层可以恢复L2区块，一旦L2层提交的区块经过L1层上Rollup Contract的有效性验证，那么该区块在L2才达成终局性的不可更改的状态。Bridge Contract在跨链时负责在双链合约之间通信，双向发送任意消息或是完成跨链时资产质押和提取操作。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0707/2_54lozlrfaq.png" alt="zkEVM Rollup:从技术的憧憬到项目的落差"></p>
+<p>图9 2. Roller Network | 来源 <a href="https://scroll.io/blog/architecture">https://scroll.io/blog/architecture</a></p>
+<p>1. Roller Network：Roller内置zkEVM，在网络中充当证明者，负责为ZK Rollup生成有效性证明，见图 9。</p>
+<p>a) Roller首先将从Coordinator接收到的execution trace（也就是合约具体做了哪些操作，涉及哪些地址）转换为电路的witnesses。</p>
+<p>b) 它为每个 zkEVM 电路生成证明，最后聚合这些来自多个ZK电路的证明。</p>
+<p><strong>StarkWare</strong></p>
+<p>StarkWare提供了一种基于STARK的扩展解决方案，以确保L2的安全性、快速性和无缝用户体验。他们支持多种数据可用性模式。StarkNet是他们的L2网络，而StarkEx则是面向企业用户的Rollup验证服务，DApp可以构建在StarkEx服务之上。然而，目前只能针对特定的DApp进行定制化的电路编写，而不是通用的zkEVM Rollup。StarkEx支持一系列即插即用的服务，包括NFT铸造和交易、衍生品交易等。在生态方面，去中心化期货合约交易平台DYDX是StarkWare的忠实用户。</p>
+<p>StarkNet，严格来讲是zkVM，它没有针对以太坊操作码做ZK电路，而是自己做了一套更加ZK友好的汇编语言、AIR（代数中间表示）以及高级语言Cairo。尽管StarkNet本身不兼容EVM，但仍然可以通过包括Kakarot（Kakarot是一个用Cairo写的zkEVM，是一个字节码等效EVM的zkEVM）等其他方式兼容以太坊。根据个人理解，StarkNet相对来说还是一个中心化的项目，其中一点是其无法随着以太坊的安全性升级而同步，因此需要集中研发人员补足安全性上的短板，并跟随ETH开发适配新的协议。</p>
+<p>StarkNet使用的STARK作为其证明系统，相对于SNARK，STARK具有更多创新。它不需要和 SNARK 那样依赖“可信设置”。并且，它还带有更简单的密码学假设，避免了对椭圆曲线、配对和指数知识假设的需要，纯粹依赖哈希和信息论，因此更能抵御量子攻击。总体而言，STARK比SNARK更安全。在拓展能力方面，STARK边际效应显著，证明越大，总成本越低。</p>
+<p>然而，在架构方面，目前系统中只有一个Sequencer（定序器），由StarkWare控制，并且只有一个Prover（也就是生成ZK Proof的证明者），它不仅为StarkNet生成证明，还为运行在他们自己的StarkEx rollup上的所有其他应用程序生成证明。</p>
+<p><strong>ZK Rollup的变体：Validiums和Volitions</strong></p>
+<p>Validium也是一种L2级别扩展解决方案，它使用诸如ZK Rollup之类的计算证明来强制执行交易过程的完整性。和ZK Rollup不同的是，Validium不会将交易数据存储在以太坊主网上。牺牲链上数据可用性是一种权衡取舍，它可以带来可扩展性的巨大改进，最直接的点便是Validiums每秒可以处理约9000笔交易。</p>
+<p>但是在笔者眼中Validium不能算严格的ZK Rollup。这个方案和Plasma类似，都没有做到L1层的数据可用性，因此都不能算作Rollup。和Plasma的区别在于Plasma在L2层中设置了类似于OP Rollup的“七天退出机制”，而Validium利用了和ZK手段来缩短L2层对数据的验证时间且不把数据同步到L1中。</p>
+<p>Volition由StarkWare率先推出，可让用户轻松地在ZK Rollup和Validium之间切换。例如一些应用程序，比如去中心化衍生品交易所可能更适合Validium，同时仍希望与ZK Rollup上的应用程序可互操作，那么Volition便提供了这种可切换性。</p>
+<p><strong>zkSync</strong></p>
+<p>与StarkNet类似，zkSync一直坚持选择高级语言等效的zkVM，并且备受瞩目，拥有相当高的热度和锁仓量。zkSync 1.0（zkSync Lite）于2020年6月15日在以太坊主网上启动，实现了约300 TPS的交易吞吐量，但不兼容EVM。而zkSync 2.0（zkSync Era）于2023年3月24日启动。</p>
+<p>zkSync Era的目标是通过使用他们自定义的 VM进行优化，而不是追求EVM等效性，从而更快地生成证明。它通过强大的LLVM编译器支持Solidity、Vyper、Yul和Zinc（rollup的内部编程语言），以此来实现大部分智能合约功能。由于采用了自研 VM，zkSync Era支持原生账号抽象，使得任何账户都可以用任何 Token 支付费用。</p>
+<p>此外，通过zkPorter协议的应用，结合了ZK Rollups和分片技术，网络吞吐量得到了指数级增长，达到20,000+ TPS（类似于Volitions的数据可用性切换）。</p>
+<p>总体而言，zkSync是一个生态丰富的L2项目，备受开发者和投资者关注。尽管近期出现了一些zkSync上彻底失败的项目案例，但仍然存在一个问题，即开发者是否能在高级语言等效的zkVM上获得良好的开发和迁移体验。目前缺乏开发者层面的确切使用报告，如果开发者有良好的体验，那么其他类型的努力贴近EVM的zkVM又有何意义呢？我们还需要更多时间来观察。</p>
+<p><strong>Polygon zkEVM</strong></p>
+<p>Polygon 于3月27日启动zkEVM Rollup主网络的Beta版，也是以太坊等效的虚拟机，并开源所有zkEVM代码。相较于zkSync，polygon zkEVM的锁仓量就小很多，但是在生态中也有很多比较有趣且有活力的项目。</p>
+<p>在Rollup设计方面，Polygon与Scroll不同之处在于使用了效率证明（PoE）模型来激励排序器（Sequencer）和聚合器（Aggregator），以解决去中心化和无许可验证器的一些挑战。在无需许可的排序器-聚合器两步模型中，任何排序器都可以提出打包批次的申请，以获得打包费用，但需要支付L1层的Gas费用并存入一定数量的 Token；同时，聚合器需要设定自己的目标，以最大化保证每次证明生成的利润。此外，Polygon与Volition（ZK Rollup和Validium）模式还具有深度兼容的数据可用性模型，来为用户提供不同层次的服务。</p>
+<p>另外，Polygon在ZK协议方面也投入了相当的工作量，效果也是显著的，在文档中他们总结自己的技术优势，主要包括以下几点：</p>
+<p>1) 更加兼容：Polygon始终坚持采用EVM等效的zkVM，以降低开发者迁移dApp的成本。同时，尽管Polygon Miden采用了ZK-STARK协议，但仍支持运行Solidity合约。</p>
+<p>2) 更容易的验证：ZK Rollup经常受到批评的原因是生成有效性证明需要昂贵的专用硬件，厂商运行这些硬件并将成本转嫁给用户。Polygon ZK Rollup（如Polygon Zero）旨在简化证明方案，使得更低级的设备可以参与其中，例如，在消费级PC上进行的Plonky2证明生成测试。</p>
+<p>3) 更快的证明生成和验证过程：Polygon Zero可以在170毫秒内生成一个45kb的证明。</p>
+<p><strong>PART 5</strong>  <strong>理论技术和现实项目之鸿沟</strong></p>
+<p>本份研报主要进行了ZK技术的科普，Rollup机制的介绍，重点强调了数据可用性的重要性，并在ZK 还是zkEVM Rollup的问题上做了一定的界别。此外，在区分zkVM和zkEVM的基础上，同时还详细梳理了zkEVM三种类型的区别以及围绕着不同类型以及相关的ZK赛道。最后，结合几名优势项目，对各自的技术框架、现有生态等进行了回顾。</p>
+<p>然而，在具体项目方面，选择高级语言等效的项目反而占据市场主流地位，部分StarkWare这类中心化较为严重的产品也能博得市场的青睐。即便在理论研究中谈到的第一类VM有很强的局限性，但是在有限的市场客户下，“通用性”似乎是一种累赘，我们无法分辨出“高效拓展”突破了哪些问题并实现了超越理论的效果。当然实际上很多人也不关注技术特征，因此这显得不太Web3，又很Web3。</p>
+<p>Rollup技术的目的是进一步挖掘区块链的价值，但往往因为迫切成为市场上的“创新性概念”，而产生“开倒车”的现象，回归到中心化。这是当前市场存在的问题。</p>
+<p>区块链的价值很容易被看到，谁不希望拥有一个永恒的计算机？但核心问题是，当这台计算机的运行能力远远低于我们身边任何一台服务器，并需要大量资源投入时，即使使用价值远低于我们的投入成本，作为一个“公共产品”，它还能吸引每个人加入使用吗？</p>
+<p>当我们已经拥有了相当多国家、社会甚至个人的产品时，在什么情况下，我们愿意忽视高昂的使用成本，追求“永远在线，永远正确”的结果呢？我认为这是当今区块链行业需要思考的问题。Rollup技术在技术上可以改善这个问题，但还有一大部分问题需要留给浮躁的市场去解决。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/54539/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">V神首谈比特币开发者可以从以太坊历程中学到什么？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/54565/">
+                <span class="next-text nav-default">巴比特 | 元宇宙每日必读：OpenAI 正式发布GPT-4 API，对所有付费API用户开放，外媒总结了常见的 10 种用法</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="MetaMask Snap 是什么？它有哪些技术能力？安全性如何保障？开发体验如何？" />
+<meta name="keywords" content="MetaMask Snap" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59731/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析" />
+<meta property="og:description" content="MetaMask Snap 是什么？它有哪些技术能力？安全性如何保障？开发体验如何？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59731/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析">
+<meta itemprop="description" content="MetaMask Snap 是什么？它有哪些技术能力？安全性如何保障？开发体验如何？"><meta itemprop="datePublished" content="2023-09-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5836">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"/>
+<meta name="twitter:description" content="MetaMask Snap 是什么？它有哪些技术能力？安全性如何保障？开发体验如何？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-22">
+      2023-09-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5836 字 -
+        预计阅读 12 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者： LXDAO专家组成员：李大猫、Bruce 共同编写</p>
+<p>本文将深入探讨 <strong>MetaMask Snap</strong>  技术方面的内容。MetaMask Snap 是什么？它有哪些技术能力？安全性如何保障？开发体验如何？这些问题或许将决定 MetaMask Snap 的未来潜力。</p>
+<h2 id="metamask-snap-是什么"><strong>MetaMask Snap 是什么?</strong></h2>
+<p>前几天 ConsenSys 宣布向公众推出 MetaMask Snaps Open Beta。MetaMask Snaps 可以扩展钱包的能力，可以安装由第三方开发人员创建的 app（Snap）来获得新的功能。</p>
+<p>如果说 ConsenSys 将 MetaMask 打造成了微信，那么 Snap 就是微信小程序。因此可以看出 MetaMask 的雄心，结合 ConsenSys 的体量和 MetaMask 的用户数，钱包领域的格局将因此产生改变。</p>
+<p>目前官方已经公布了 35 款可用的 Snap，并发布了 Snap 应用商店 <a href="https://snaps.metamask.io/">https://snaps.metamask.io/</a>。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_o8uqj554s5.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p><strong>部分 Snap 一览</strong></p>
+<p>那么 MetaMask Snap 从技术角度来看具体是什么样的呢？它们有什么能力限制？是否安全？开发体验如何？这些或许都将决定了 MetaMask Snap 的未来潜力。</p>
+<p>去年开始，LXDAO 就深入研究了 Snap 的实现，目前多位成员已参与了 Snap 的开发并积极参与相关黑客松。今天，我们将从技术角度深入探讨上面的问题，并实际动手开发一个 Snap 来让你感受下 Snap 的开发者体验。</p>
+<h2 id="metamask-snap-初体验"><strong>MetaMask Snap 初体验</strong></h2>
+<h3 id="安装-metamask-snap"><strong>安装 MetaMask Snap</strong></h3>
+<p>通常可以通过 MetaMask Snap 官方市场进行安装，也可以直接在项目方的官网进行安装。以 UniPass 为例，当访问应用页面时，会提供一个按钮让你链接 MetaMask。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_rk5blve4hu.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>点击之后，会进行 Snap 的安装：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_9fe67a1s4s.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<h3 id="使用-metamask-snap"><strong>使用 MetaMask Snap</strong></h3>
+<p>安装完成之后，就可以开始使用对应的产品和功能了，在这个应用中 UniPass 为你创建一个智能合约账号，方便你通过 MetaMask 的 EOA 账号进行操控等。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_sng4d29siq.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>当你执行转账时，UniPass 会弹出来 Snap 向你确认是否要对 UniPass AA 钱包执行该操作。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_y0d1spzntb.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>通过 MetaMask 确认之后，即可执行相关操作。在这个场景中，MetaMask 通过 Snap 拥有了控制 UniPass AA 钱包的能力，UniPass 无需自己开发一个钱包插件即可让用户操作钱包，也可以借助 MetaMask 非常低成本的引入用户！</p>
+<p>从这个安装和使用流程中，我们可以得到什么信息？</p>
+<ol>
+<li>
+<p>Snap 具备比较精细的权限控制，甚至包括链接钱包的权限、网络请求等。整体采用了最小权限访问（Principle of Least Privilege）的思路来设计，安全第一。</p>
+</li>
+<li>
+<p>从 npm:@unipasswallet/unipass-snap 可以看到 Snap 是基于 NPM 进行包和版本管理。后面详细介绍一下安全性。</p>
+</li>
+<li>
+<p>Snap 具备非常高的灵活性，可以按照项目的需求自行开发和决定展示的内容和逻辑。但是 UI 比较简陋，有一定的优化空间。</p>
+</li>
+<li>
+<p>Snap 的体验非常简单和可靠，确实达到了 Beta 版本和生产环境的水平。</p>
+</li>
+</ol>
+<p>对于一个钱包产品来说，安全性永远是第一位的，接下来我们分析一下 Snap 的安全性设计。</p>
+<h2 id="snap-是安全的吗"><strong>Snap 是安全的吗?</strong></h2>
+<p><strong>Snap 代码运行时分析</strong></p>
+<p>上面提到了 Snap 是基于 NPM 进行包和版本管理，说明 Snap 实际上是基于 Web 和 JavaScript 的应用。众所周知，JS 的语法非常灵活自由，很容易带来 XSS 以及钓鱼等攻击。MetaMask Snap 如何应对这一挑战？</p>
+<p>经过一些研究不难发现，MetaMask 资助 Agoric 并且深度集成了 Agoric 团队的 Hardened JavaSscript（又称 Secure EcmaScript ）作为其&quot;完全虚拟化&quot;沙盒方案。Agoric 设计了一个 JavaScript 限制 API，并且提交了 Draft 提案到 TC-39（JS 标准化协会），地址是：https://github.com/tc39/proposal-ses。</p>
+<p>简单的说 Hardened JavaScript 是一个更加安全的标准 JavaScript 的子集。借助了一些 JS 的能力和机制，削减了一些 JS API 的调用权限和方式，从而降低了一些风险。它为对应的代码创建了安全的沙盒来执行，同时遵循了 **<strong>Principle of Least Privilege 的原则来规划代码的权限控制。</strong> **</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_pchq7g3gij.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>Agoric 跟 MetaMask 合作开发了 LavoMoat (<a href="https://github.com/LavaMoat/lavamoat">https://github.com/LavaMoat/lavamoat</a>) 这个项目来增强 Snap 的安全性。LavaMoat 是一套工具，重点解决 JS 项目外部依赖的安全风险，增加对一些 API 和逻辑的限制。</p>
+<p>Agoric 和跟 MetaMask 联合发起过黑盒白盒安全攻防测试，并输出过详细的安全报告。所以在代码运行时的层面，我们有充足的理由相信 Snap 是安全的。</p>
+<p><strong>Snap 代码必须开源且经过审计</strong></p>
+<p>除了有明确的用户授权流程和最小权限的设计，成为官方认可的 Snap 必须开源代码，通过社区的力量大大降低 Snap 自带恶意代码的可能性。</p>
+<p>此外，我们也发现在官网上的 Snap 均经过第三方安全公司的代码审计才能发布。这大大提高了 Snap 的安全可信度，审计方包括大家都非常熟悉的慢雾。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_3qv37j87ls.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>**<br>
+目前发现的 Snap 的安全风险**</p>
+<p>由于目前 Snap 是基于 NPM 的包和版本管理，在代码的层面存在一定变更的可能性，而且非强制性审计，可能产生一定的安全风险。</p>
+<p>因为 MetaMask 无法控制 NPM 平台的版本发布，因此项目方可以随时发布新的版本来让用户进行安装。而由于审计的成本原因，审计公司并不会对每一个版本进行审计，因此会出现一种情况：最新版本的变更，可能并没有开源或者经过审计。</p>
+<p>不过由于执行环境是沙箱环境，而且使用了最小权限的设计，除非用户手动确认新的权限变更，新版本 Snap 则只会拥有之前的版本的权限来执行操作。但如果某个 Snap 的权限索取过大，这仍然将会产生风险，因此在安装使用 Snap 的时候，仍然需要保持警惕之心。</p>
+<h2 id="metamask-snap-的技术能力和限制"><strong>MetaMask Snap 的技术能力和限制</strong></h2>
+<p>虽然近期 MetaMask Snap 正式公布，但实际上 Snap 已经开发了 4 年了！最早 MetaMask Snap 的构想由 Dan Finlay 在 2019 年 10 月 10 日发布在 Medium <a href="https://medium.com/metamask/introducing-the-next-evolution-of-the-web3-wallet-4abdf801a4ee">https://medium.com/metamask/introducing-the-next-evolution-of-the-web3-wallet-4abdf801a4ee</a>。</p>
+<p>平衡安全性、灵活性、有效性是一个非常大的挑战，也可以看出 MetaMask 为这一天付出了非常多的成本，做了很多准备工作。</p>
+<p>目前主要开放了三大 API：</p>
+<ol>
+<li>
+<p>Interoperability（互操作性），允许开发者基于 MetaMask 开发其他链钱包</p>
+</li>
+<li>
+<p>Transaction Insights（交易洞察），允许开发者在用户交易发起前获取交易data，从而分析交易是否存在风险</p>
+</li>
+<li>
+<p>Notifications（通知），通过 Snap 直接推送消息给用户（不过这里似乎需要网站支持，略微有点鸡肋）</p>
+</li>
+</ol>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_ndctoz2sul.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>下面简单介绍下 MetaMask Snap 具体开放的能力以及效果，方便你有一个更为形象的感知。</p>
+<h3 id="notification-通知能力"><strong>Notification 通知能力</strong></h3>
+<p>Snap_notify 接口可以在 MetaMask 或浏览器中显示通知。Snap 可以通过这个接口向用户直接发送消息，具体如下图所示</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_zw0judset9.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<h3 id="transaction-insights-能力"><strong>Transaction Insights 能力</strong></h3>
+<p>当用户与智能合约进行交互时，MetaMask 会触发 Snap 的 onTransaction事件，MetaMask 会将未签名的原始交易传递给 onTransaction 处理程序方法，Snap可以在交易的二次确认页面返回一个界面，并且自定义显示内容。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_k9so6pr5lm.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>通过这种能力，可以实现交易信息的安全审计、扩展信息展示等功能。</p>
+<h3 id="dialog-接口和定制界面能力"><strong>Dialog 接口和定制界面能力</strong></h3>
+<p>Dialog 能力将允许 Snap 直接弹出一个独立窗口，实现类似传统 Alert/Confirm/Prompt 弹窗能力(如下图)，分别用于提醒、确认、提交信息等。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_ae89sreu8z.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>通过 Dialog，你将可以定制简单的交互界面以及操作，来对接你的 DApp。</p>
+<h2 id="metamask-snap-暂时无法实现什么样的功能"><strong>MetaMask Snap 暂时无法实现什么样的功能?</strong></h2>
+<p>限制于安全性等原因，Snap 目前不支持第三方前端框架，只提供了比较少数的 UIKit，以下仍然是用 insight 做示例，展示所有开发者可以调用的 UI 组件库。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_jr6zbdiuus.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>如图所示，目前上线的只有 Heading (大文字)，Text (小文字)，Panel (卡片且只能用一次)，Divider (分割线)，Copyable (点击复制)和小部分 Markdown 子集( <strong>bold</strong>  和 <em>italic</em>)，所以说构建可交互似乎暂时无法实现，也无法使用内嵌 html 来实现交互操作。不过在官方 Discord 中提问后，官方声称这些都是出于安全性的考虑，并将会在接下来的版本中放开。</p>
+<p>此外，同样基于安全的考虑，对外部的请求也只支持 Fetch 方法，而不支持更多请求协议例如 WebSocket。由于安全、能力和隐私限制，也无法获取到客户端的信息，比如当前唤起 Snap 的网址是什么，无法实现更丰富多样的功能。</p>
+<p>这些问题和限制大多数是出于安全性的考虑，相信未来在安全性得到验证之后，会考虑开放更多权限。</p>
+<p>提供了这些 API 的 MetaMask 实际上已经成为类似开放平台一样的产品。这种感觉就像当时微信推出公众号、小程序一样，瞬间让人感觉不再是一个简单的聊天工具。</p>
+<p>MetaMask 在 19 年就预料到了今天的市场格局，即有非常多的公链和项目方、各种定制化的钱包需求。与其每个项目方都需要开发自己的插件而用户需要同时安装数个插件，倒不如基于 MetaMask Snap 来开发。在第一批放出来的 Snaps 中，我们也发现了类似 Sui Wallet、Solana Wallet、Arweave Wallet 等其他非 EVM 生态的钱包。凭借已有的用户量，MetaMask Snap 必将对钱包的格局产生重大的影响。</p>
+<p>实际上，MetaMask Snap 的想象空间或许要比我们预想的更大，甚至超出了钱包的范畴。我们也可以看到来自 EthSign 团队的作品，基于 MetaMask Snaps 做了通用的密码管理器 KeyChain，所有浏览器里的密码都可以被钱包密钥加密后存储。这样管好钱包，就带上了所有的密码。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_988gyfulj4.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>Snap 跟开发者非常相关，有了开放 API，具体的开发者体验如何？我们不妨亲自动手开发一个 Snap 体验一下。</p>
+<h2 id="直接开发一个-snap-测试"><strong>直接开发一个 Snap 测试</strong></h2>
+<h3 id="梳理思路"><strong>梳理思路</strong></h3>
+<p>众所周知，大部分用户在绝大多数情况下其实并不知道正在交互的智能合约到底是什么，主要包括如下几个问题：</p>
+<ol>
+<li>
+<p>交易的合约是否是钓鱼网站替换的合约</p>
+</li>
+<li>
+<p>交易的合约是否是一个可升级合约</p>
+</li>
+<li>
+<p>智能合约是否是一个刚被部署还没有多少人验证过的合约</p>
+</li>
+<li>
+<p>交易的合约是否开源</p>
+</li>
+</ol>
+<p>对于普通用户来说，让他在操作之前去阅读合约的 solidity 代码更是天方夜谭。这时其实非常适合通过 Transaction Insight 功能来实现一些智能合约分析，比如使用 AI 来对智能合约做一个比较浅显的<strong>安全性审计，或许可以过滤到 80% 的低级钓鱼攻击。</strong></p>
+<h3 id="准备开发环境"><strong>准备开发环境</strong></h3>
+<p><strong>下</strong> <strong>载钱包</strong></p>
+<p>首先需要安装 MetaMask Flask</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_rjsptpsfqq.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>MetaMask Flask 是一个以开发人员为中心的 MetaMask 扩展发行版，主要用于新功能预览以及实验性功能开发。注意这是 MetaMask 的开发者版本，请不要进行日常使用，也不要导入自己日常使用的私钥。这里使用 Flask 主要是方便我们开发的 Snap 能本地即时预览。</p>
+<blockquote>
+<p>建议安装后先暂时关掉小狐狸钱包以及其他浏览器钱包，或者新创建一个 Chrome Profile 使用，否则会冲突。</p>
+</blockquote>
+<p><strong>创建账户</strong></p>
+<p>安装钱包后就像正常创建 MetaMask 钱包一样创建一个新钱包，请注意，这是一个专门用于测试的钱包，请不要导入自己的日常钱包。</p>
+<p>接下来我们需要给新创建的钱包中充值一些测试币，测试币可以通过水龙头获取，本文讲的 Snap 使用的是 Goerli，所以下文以 Goerli 为主。</p>
+<p>基于模板初始化 <strong>Snap</strong></p>
+<p>按照官方文档，首先使用 <code>@metamask/create-snap</code> 这个 CLI 来创建一个新的 Snap 项目，同时我们使用官方的模板进行初始化：</p>
+<p>yarn create @metamask/snap transaction-insights-snap &amp;&amp; cd transaction-insights-snap</p>
+<h3 id="snap-文件结构"><strong>Snap 文件结构</strong></h3>
+<p>Snap 的主要文件在 <code>./packages/snap</code> 中，文件目录结构如下</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_jj64dgftz6.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>Snap 的配置文件被放在 <code>snap.mainfest.json</code> 中，Snap 的主体文件为 <code>./src/index.ts，</code>可以看到非常简洁。</p>
+<h3 id="启用权限"><strong>启用权限</strong></h3>
+<p>首先需要启用权限，首先我们在 snap.mainfest.json 中新增如下三条</p>
+<pre><code>&quot;initialPermissions&quot;: {    &quot;endowment:transaction-insight&quot;: {}，//交易洞察    &quot;endowment:ethereum-provider&quot;: {}，//获取rpc    &quot;endowment:network-access&quot;: {}//请求网络  }
+</code></pre>
+<p>Mainfest 文件中还可以修改 description 和 proposedName 来修改项目的描述和名称。</p>
+<h3 id="获取交易"><strong>获取交易</strong></h3>
+<p>接下来本案例中只需要修改 <code>index.ts</code> 文件即可完成全部功能，简单的代码示例如下，可以完整运行的代码请移步：https://github.com/LidamaoHub/insights。</p>
+<pre><code>import { OnTransactionHandler， OnRpcRequestHandler } from'@metamask/snaps-types';import { heading， panel， text， copyable， divider } from'@metamask/snaps-ui';export const onTransaction: OnTransactionHandler = async ({ transaction }) =&gt; {  // transaction 包含了 to（合约地址）、data（交互数据）等值  // 以下为获取合约 Audit 数据的代码示例  const info = fetch(`http://contract-info.audit.dev/?address=${transaction.address}`);  // 以下是UI部分代码示例  return {    content: [      text(        `${info.riskList.length} risk item`,      ),      heading(`${info.riskList.length ? 'Risk List' : ''}`),      ...info.riskList.map((item, i) =&gt; text(`${i + 1} ${item.text}`)),      divider(),      text(        `More audit info from the following url`,      ),      copyable(        `https://contract-info.audit.dev/mm${info.token}`,      )    ]  };};
+</code></pre>
+<p>更多的内容请参考 MetaMask Snap 开发者文档完成更复杂的 Snap 产品。</p>
+<p>安装之后，你的每个交易将会可以看到类似的风险提示信息：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_q0fnwsi0ci.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p>目前 Snap 的开发体验非常流畅，其中几乎没有遇到什么问题，而且官方的模版也是非常丰富多样。拥有丰富经验的开发者通常可以在几个小时内上手并且开始开发自己需要的 Snap。但需要正式发布并让主流用户都可以使用，最大的拦路虎将会是安全审计。并不是所有独立开发者和小团队都有资源为他的 Snap 做审计。因此可以预期 Snap 的数量和丰富度在未来很长的一段时间，都不会有非常大的爆发增长量。</p>
+<h3 id="开发者支持"><strong>开发者支持</strong></h3>
+<p>如果你能够跑通以上样例，那么恭喜你已经成为一个合格的 Snap 入门开发者！</p>
+<p>MetaMask 官方也在去年成立了一个 MetaMask Grants DAO，通过赠款计划资助 MetaMask 生态系统中高价值项目。MetaMask Grants DAO 是一项由员工主导的实验性计划，向全球外部开发人员发放赠款，以在 MetaMask 生态系统中构建有影响力的体验。MetaMask 将每个季度的部分利润注资到这个 DAO，当前 MetaMask Grants DAO 每年的预算为 240 万美元。</p>
+<p>目前只要是能丰富 MetaMask 生态的项目都可以申请官方的 MetaMask Grants DAO（ MetaMask Grant ），关于更多的信息请移步 <a href="https://metamaskgrants.org/">https://metamaskgrants.org/</a>。</p>
+<p>值得一提的是 LXDAO 很荣幸的在今年申请到了 MetaMask 的 Grants 并参与了相关项目的开发，并建立了联系通道，如果你是 LXDAO 成员有相关的想法，可以更高效的联系到他们递交申请。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0922/14_sa6z6m7fb5.png" alt="MetaMask Snap技术解读：开发体验、能力限制、安全性和商业潜力分析"></p>
+<p><strong>结语</strong></p>
+<p>我们在上面从技术层面剖析了一下 Snap 是什么、是否安全、能力限制以及开发者体验。简单总结如下：</p>
+<ul>
+<li>
+<p>Snap 类似微信小程序，开启了 MetaMask 更大的想象空间</p>
+</li>
+<li>
+<p>安全性整体不错，但是也存在一定的风险，仍然需要对高危权限保持警惕</p>
+</li>
+<li>
+<p>由于安全性的考虑，目前开放的能力不多，但仍然可以产生足够想象空间的 Snap</p>
+</li>
+<li>
+<p>经过四年的打磨和测试，开发者体验优异，然而由于其安全性的考虑，设计了白名单机制和审计的要求，可以预期的是在未来一段时间并不会有海量的 Snap 涌现出来</p>
+</li>
+</ul>
+<p>目前 MetaMask Snap 仍在快速迭代的，相信未来会开放更多权限和能力。希望能推出更开放同时安全的机制，比如苹果官方 Audit 审核机制以及官方代码仓库版本控制，这样才能让更多开发者低成本参与进来。如果这个问题得到改善，可以预期将会在未来产生大量的需求。甚至会出现专门的 Snap 开发者岗位。</p>
+<p>借助海量的 MetaMask 用户，独立开发者或许也有一定的机会。让我们拭目以待 Snap 带来的下一个突破性创新。</p>
+<p>最后，感谢您的文章，相信这有助于让更多人了解 MetaMask Snap 的发展现状。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/59747/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">LPDfi：解锁Uniswap流动性的下一个大事件</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59700/">
+                <span class="next-text nav-default">Multicoin：构建DePIN网络的三个必要考量——硬件、供应阈值和需求</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#metamask-snap-是什么"><strong>MetaMask Snap 是什么?</strong></a></li>
+    <li><a href="#metamask-snap-初体验"><strong>MetaMask Snap 初体验</strong></a>
+      <ul>
+        <li><a href="#安装-metamask-snap"><strong>安装 MetaMask Snap</strong></a></li>
+        <li><a href="#使用-metamask-snap"><strong>使用 MetaMask Snap</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#snap-是安全的吗"><strong>Snap 是安全的吗?</strong></a></li>
+    <li><a href="#metamask-snap-的技术能力和限制"><strong>MetaMask Snap 的技术能力和限制</strong></a>
+      <ul>
+        <li><a href="#notification-通知能力"><strong>Notification 通知能力</strong></a></li>
+        <li><a href="#transaction-insights-能力"><strong>Transaction Insights 能力</strong></a></li>
+        <li><a href="#dialog-接口和定制界面能力"><strong>Dialog 接口和定制界面能力</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#metamask-snap-暂时无法实现什么样的功能"><strong>MetaMask Snap 暂时无法实现什么样的功能?</strong></a></li>
+    <li><a href="#直接开发一个-snap-测试"><strong>直接开发一个 Snap 测试</strong></a>
+      <ul>
+        <li><a href="#梳理思路"><strong>梳理思路</strong></a></li>
+        <li><a href="#准备开发环境"><strong>准备开发环境</strong></a></li>
+        <li><a href="#snap-文件结构"><strong>Snap 文件结构</strong></a></li>
+        <li><a href="#启用权限"><strong>启用权限</strong></a></li>
+        <li><a href="#获取交易"><strong>获取交易</strong></a></li>
+        <li><a href="#开发者支持"><strong>开发者支持</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          波卡账户深度指南（上） - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本期主要介绍波卡地址格式的类型和原理，以及派生的地址和系统账户是如何使用的等知识。" />
+<meta name="keywords" content="polkadot, 波卡, 波卡生態" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/58835/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="波卡账户深度指南（上）" />
+<meta property="og:description" content="本期主要介绍波卡地址格式的类型和原理，以及派生的地址和系统账户是如何使用的等知识。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/58835/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-11T00:00:00+00:00" />
+
+<meta itemprop="name" content="波卡账户深度指南（上）">
+<meta itemprop="description" content="本期主要介绍波卡地址格式的类型和原理，以及派生的地址和系统账户是如何使用的等知识。"><meta itemprop="datePublished" content="2023-09-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4785">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="波卡账户深度指南（上）"/>
+<meta name="twitter:description" content="本期主要介绍波卡地址格式的类型和原理，以及派生的地址和系统账户是如何使用的等知识。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">波卡账户深度指南（上）</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-11">
+      2023-09-11
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4785 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h1 id="地址格式">地址格式</h1>
+<p>基于Substrate的链使用的地址格式是SS58。SS58是对比特币中的Base-58-check的修改，并做了一些小改动。值得注意的是，该格式包含一个地址类型前缀，用于标识属于特定网络的地址。</p>
+<p>例如：</p>
+<ul>
+<li>波卡地址始终以数字1开头。</li>
+<li>Kusama地址始终以大写字母开头，如C、D、F、G、H、J。</li>
+<li>通用的Substrate地址始终以数字5开头。</li>
+</ul>
+<p>这些前缀以及地址验证方法，都嵌入在Substrate SS58格式中。永远不要使用正则表达式进行地址验证。</p>
+<p>关键要理解，不同网络的格式只是由地址生成工具生成的私钥-公钥对中的同一公钥的其他表示形式。因此，只要格式是正确转换的，那么基于Substrate的链上的地址是兼容的。</p>
+<p>在Runtime28中，默认的地址格式（详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-accounts">https://wiki.polkadot.network/docs/learn-accounts</a>##address-format）为【MultiAddress】类型。</p>
+<p>这个【enum】是链上账户的多格式地址包装器，用于描述波卡的默认地址格式，以表示许多不同的地址类型。其中包括20字节、32字节和任意原始字节变体。它还增强了原始【indices】（详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-accounts#indices">https://wiki.polkadot.network/docs/learn-accounts#indices</a>）查找功能。</p>
+<p>注：</p>
+<p>许多钱包允许你在不同格式之间进行转换。也有独立的工具；你可以在地址转换工具（详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-account-advanced#address-conversion-tools">https://wiki.polkadot.network/docs/learn-account-advanced#address-conversion-tools</a>）部分找到它们。</p>
+<h1 id="派生路径">派生路径</h1>
+<p>如果你想在网络上使用同一种子创建和管理多个账户，你可以使用派生路径。我们可以将派生账户视为使用原始助记词种子创建的根账户的子账户。许多波卡密钥生成工具支持硬派生和软派生。例如，如果你打算创建一个要在波卡链上使用的账户，可以在助记词后面加上//来派生一个硬派生的子账户。</p>
+<p>或者在助记词后面加上/，来派生一个软派生的子账户</p>
+<p>如果你想使用同一种子在波卡链上创建另一个账户，可以更改上述字符串末尾的数字。例如，【/1】、【/2】和【/3】将会创建不同的派生账户。</p>
+<p>你可以在派生路径中使用任意字母或数字，只要你认为有意义即可；它们不必遵循任何特定的模式。你还可以在路径中组合多个派生。例如，【//bill//account//1】和【//john/polkadot/initial】都是有效的。</p>
+<p>要重新创建一个派生账户，你必须知道种子和派生路径，因此你应该使用一个明确定义的顺序（例如//0、//1、//2&hellip;）或确保写下使用的每个派生路径。</p>
+<p>注：</p>
+<p>只有知道派生路径，才能生成派生账户。</p>
+<p>还有一种派生类型叫做密码派生。在波卡上，你可以在助记词后使用///来派生密码密钥账户</p>
+<p>在这种类型的派生中，如果助记词泄漏，没有初始密码就无法派生账户。实际上，对于软派生和硬派生的账户，如果有人知道助记词和派生路径，他们就能够访问你的账户。对于密码派生的账户，密码应用于派生路径。你可以知道助记词和派生路径，但如果没有密码，则无法访问该账户。</p>
+<p>用数学术语来说，如果我们有一个书面派生路径【written derivation path】和密码【password】，就可以计算出真实的派生路径【real derivation path】，即f（书面派生路径，密码【written derivation path,password】），其中f是一个函数。</p>
+<p>然后，我们可以使用f（种子，真实派生路径【seed,real derivation path】）来计算账户密钥对【account key pair】。与可以混合使用的硬派生和软派生不同，每次派生只应指定一个密码。</p>
+<p>注：</p>
+<p>密码派生账户的安全性取决于所选的密码的安全性。</p>
+<p>软派生vs硬派生</p>
+<p>软派生允许某人在知道派生账户私钥的情况下， &ldquo;逆向&quot;找出初始账户的私钥。此外，还可以确定由同一种子生成的不同账户与该种子相关联。硬派生路径则不允许这两项操作——即使你知道派生私钥，也无法计算出根地址的私钥，也无法证明第一个账户与第二个账户相关联。鉴于所有派生账户的私钥都是完全安全的，因此这些派生方法都有其用武之地。除非你有软派生的特定需要，否则建议使用硬派生路径生成账户。</p>
+<p>有关派生路径格式的详细信息和示例，请参阅Subkey文档（详情请参见：<a href="https://docs.substrate.io/reference/command-line-tools/subkey/">https://docs.substrate.io/reference/command-line-tools/subkey/</a>）。Polkadot-JS应用程序和插件以及Parity签名器（Parity Signer）支持使用与Subkey相同的语法进行自定义派生路径。</p>
+<p>有些钱包会在生成的助记词末尾自动添加派生路径。这将为不同的路径生成单独的种子，允许使用相同的助记词进行不同路径的签名，例如【//polkadot】和【//kusama】。尽管你可能正确保存了助记词，但只有当两个钱包使用相同的派生路径时，在另一个钱包中使用助记词才会生成相同的地址。</p>
+<p>Polkadot和Kusama都在BIP44registry（详情请参见：</p>
+<p><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md">https://github.com/satoshilabs/slips/blob/master/slip-0044.md</a>）登记了路径。</p>
+<p>注意：</p>
+<p>要获得某个地址的密钥，你必须知道其父节点私钥和派生路径。只有当你熟悉了这一主题的知识后，才能使用自定义派生路径。</p>
+<p>有人好奇：前缀是如何工作的？</p>
+<p>SS58registry（详情请参见：</p>
+<p><a href="https://github.com/paritytech/ss58-registry/blob/main/ss58-registry.json">https://github.com/paritytech/ss58-registry/blob/main/ss58-registry.json</a>）指出：</p>
+<ul>
+<li>波卡具有地址类型【00000000b】（十进制为【0】）。</li>
+<li>Kusama（波卡金丝雀网络）具有地址类型【00000010b】（十进制为【2】）。</li>
+<li>通用Substrate的地址类型是【00101010b】（十进制为【42】）。</li>
+</ul>
+<p>由于【Base58-check】字母表中没有数字0，因此最小值确实是1。因此，【00000000b】在Base58-check中是1。如果我们尝试解码类似【1FRMM8PEiWXYax7rpS6X4XZX1aAAxSWx1CrKTyrVYhV24fg】的波卡地址，则结果为</p>
+<p>【000aff6865635ae11013a83835c019d44ec3f865145943f487ae82a8e7bed3a66b29d7】。第一个字节为【00】，二进制为【00000000】，十进制为【0】，因此符合波卡的地址类型。</p>
+<p>让我们来看一下Substrate地址。如果我们解码【5CK8D1sKNwF473wbuBP6NuhQfPaWUetNsWUNAAzVwTfxqjfr】，我们会得到</p>
+<p>【2a0aff6865635ae11013a83835c019d44ec3f865145943f487ae82a8e7bed3a66b77e5】。第一个字节为【2a】，从十六进制转换成十进制（详情请参见：</p>
+<p><a href="https://www.rapidtables.com/convert/number/hex-to-decimal.html">https://www.rapidtables.com/convert/number/hex-to-decimal.html</a>）后为【42】。42在二进制中是【00101010】，正如SS58文件中所述。</p>
+<p>最后，让我们看看Kusama地址。解码【CpjsLDC1JFyrhm3ftC9Gs4QoyrkHKhZKtK7YqGTRFtTafgp】会得到【020aff6865635ae11013a83835c019d44ec3f865145943f487ae82a8e7bed3a66b0985】，并且第一个字节为【02】，就像指定的一样。</p>
+<p>如果我们尝试以完全不同的字母开头的Kusama地址，（例如【J4iggBtsWsb61RemU2TDWDXTNHqHNfBSAkGvVZBtn1AJV1a】），我们仍然会得到【02】作为第一个字节：</p>
+<p>【02f2d606a67f58fa0b3ad2b556195a0ef905676efd4e3ec62f8fa1b8461355f1142509】。有些地址始终具有相同的前缀，而像Kusama这样的地址则可能变化很大，但这只是Base58-check编码的一个怪现象。</p>
+<h1 id="系统账户">系统账户</h1>
+<p>顾名思义，系统账户由系统使用。例如，它们用于国库、众贷和提名池。从Runtime的角度来看，这些账户与链上的任何其他账户一样。这些特殊的系统账户只是公钥，私钥是未知的（也无法获取）。因此，只有该模块（pallet）本身才能与此账户进行交互。这些账户永远不会发出已签名的外源extrinsics（详情请参见：</p>
+<p><a href="https://wiki.polkadot.network/docs/learn-extrinsics">https://wiki.polkadot.network/docs/learn-extrinsics</a>），因为它们没有私钥。</p>
+<p>注：</p>
+<p>你可以在Subscan（详情请参见：</p>
+<p><a href="https://polkadot.subscan.io/account_list?role=module">https://polkadot.subscan.io/account_list?role=module</a>）上查看系统账户。</p>
+<p>让我们来看看系统账户是如何在幕后生成的。例如，要生成国库账户，将字符串“modl”和“py/trsry”的原始字节组合起来创建账户ID（AccountID）。有关更多信息，请查看Substrate StackExchange上有关国库账户（详情请参见：</p>
+<p><a href="https://substrate.stackexchange.com/questions/536/how-do-treasury-accounts-compare-to-end-user-accounts-in-frame">https://substrate.stackexchange.com/questions/536/how-do-treasury-accounts-compare-to-end-user-accounts-in-frame</a>）的文章。</p>
+<p>同样，在生成众贷账户时，将字符串“modl”和“py/cfund”的原始字节以及基金指数组合起来创建账户ID（AccountID）。类似的逻辑也适用于提名池和平行链账户。</p>
+<h1 id="可移植性">可移植性</h1>
+<p>上述信息为我们带来可移植性：在多个钱包使用助记词或种子短语的能力。可移植性取决于几个因素：</p>
+<ul>
+<li>派生路径</li>
+<li>助记词格式</li>
+<li>种子派生</li>
+<li>签名方案</li>
+</ul>
+<p>要在多个钱包中使用完全相同的助记符，请确保它们采用兼容的方法生成密钥和签署信息。如果你仍在寻找易理解的文档，请联系项目维护者。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0911/ucnd3u4cl2lts5a" alt="波卡账户深度指南（上）"></p>
+<p>Ed25519密钥与BIP39的兼容性有限，详情请参见：</p>
+<p><a href="https://github.com/paritytech/substrate-bip39">https://github.com/paritytech/substrate-bip39</a></p>
+<p>BIP44Registry，详情请参见：</p>
+<p><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md">https://github.com/satoshilabs/slips/blob/master/slip-0044.md</a></p>
+<p>基于Khovratovich的Ed25519和BIP32，详情请参见：</p>
+<p>[https://github.com/LedgerHQ/orakolo/blob/master/papers/Ed25519_BIP Final.pdf](<a href="https://github.com/LedgerHQ/orakolo/blob/master/papers/Ed25519_BIP">https://github.com/LedgerHQ/orakolo/blob/master/papers/Ed25519_BIP</a> Final.pdf)</p>
+<p>Sr25519已经计划了。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58864/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">比特币与火人节</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/58795/">
+                <span class="next-text nav-default">大模型创业又添牛人，奈雪的茶前CTO也杀入</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

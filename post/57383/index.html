@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文打算从Dankrad的视角出发，通过对Layer2的细节作进一步分析，来深入理解为何Validium不是严格意义上的“Layer2”。" />
+<meta name="keywords" content="Rollup" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/57383/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2" />
+<meta property="og:description" content="本文打算从Dankrad的视角出发，通过对Layer2的细节作进一步分析，来深入理解为何Validium不是严格意义上的“Layer2”。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/57383/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-20T00:00:00+00:00" />
+
+<meta itemprop="name" content="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2">
+<meta itemprop="description" content="本文打算从Dankrad的视角出发，通过对Layer2的细节作进一步分析，来深入理解为何Validium不是严格意义上的“Layer2”。"><meta itemprop="datePublished" content="2023-08-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4951">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"/>
+<meta name="twitter:description" content="本文打算从Dankrad的视角出发，通过对Layer2的细节作进一步分析，来深入理解为何Validium不是严格意义上的“Layer2”。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-08-20">
+      2023-08-20
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4951 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Faust，极客web3</p>
+<p>导语：近日，Danksharding的提出者、以太坊基金会的研究员Dankrad Feist在推特上发表了一番颇具争议的言论。他明确指出，不采用ETH作DA层（数据可用性层）的模块化区块链不是Rollup，同时也不是以太坊Layer2。如果按照Dankrad的说法，Arbitrum Nova和Immutable X、ApeX、Metis都可能从Layer2名单里“除名”，因为它们只在ETH之外（自己构建了名为DAC的链下DA网络）披露交易数据。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_v0sy7vfns8.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>同时，Dankrad还表示，像Plasmas和状态通道这种不需要链上数据可用性（Data Availability）来确保安全的方案仍算是Layer2，但Validium（不用ETH作DA层的ZKRollup）不算Layer2。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_8omgenas7m.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_j1kgz1du94.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>Dankrad此言一出，便引来了诸多Rollup领域的Founder或Researcher质疑。毕竟有许多“Layer2”项目为了节约成本，并没有采用ETH作为DA(数据可用性)层，如果把这些项目踢出L2名单，必然波及到相当多的扩容网络；同时，如果validium不算L2，Plasma应该也没资格算作L2。</p>
+<p>对此，Dankrad表示，Plasma用户在DA不可用时（就是指链下的DA层网络搞数据扣留，不公开交易数据），仍然可以把自己的资产安全撤出至L1；但相同的情况下，Validium（大多数采用StarkEx方案的项目都是validium）却可以让用户无法撤资至L1，把钱冻住。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_g5flj20m0a.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>显然，Dankrad打算从“是否安全”来界定一个扩容项目是否为以太坊Layer2。如果从“安全性”的角度来考量，Validium在定序器故障 + DA层发动数据扣留攻击(隐瞒新数据)的极端情况下，的确可以把用户资产冻结在L2无法提到L1；Plasma因在设计上与Validium不同，虽然多数时候安全保障不及Validium，但在定序器故障 + DA层发动数据扣留攻击(隐瞒新数据)时，却允许用户把资产安全撤离至L1。所以Dankrad的说辞不无道理。</p>
+<p>本文打算从Dankrad的视角出发，通过对Layer2的细节作进一步分析，来深入理解为何Validium不是严格意义上的“Layer2”。</p>
+<h3 id="到底怎么定义layer2">到底怎么定义Layer2？</h3>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_2zhk6vvaps.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>按照ethereum.org网站和多数以太坊社区成员的定义，Layer2是“给以太坊扩容+继承以太坊安全性 的独立区块链”。首先，“给以太坊扩容”就是指分流以太坊无法承载的流量，分担TPS方面的压力。而“继承以太坊安全性”，其实可以转译为“借助以太坊保障自身安全性”。</p>
+<p>比如，Layer2上所有的交易Tx都要在ETH上完成最终结算Finalize，数据有错误的Tx不会被放行；如果要回滚Layer2的区块，要先回滚以太坊区块，只要以太坊主网不发生类似51%攻击的区块回滚，L2区块就不会回滚。</p>
+<p>如果我们更进一步探讨Layer2的安全性，其实还要考虑许多极端情况。比如，如果L2项目方跑路、定序器Sequencer故障、链下DA层挂掉，在这些极端事件发生时，用户能否把自己在L2上的资金安全撤出到L1上？</p>
+<h3 id="layer2的强制提款机制">Layer2的“强制提款”机制</h3>
+<p>不考虑L2合约升级/多签隐患等因素，其实如Arbitrum或StarkEx都有为用户设置强制提款的出口。假设L2的定序器发动审查攻击，故意拒绝用户的交易/提款请求，或干脆永久宕机，Arbitrum用户可以调用L1上Sequencer Inbox合约的force Inclusion函数，将交易数据直接提交至L1；如果在24小时内，定序器没有处理这笔需要“强制包含”的交易/提款，该交易会被直接包含进Rollup账本的交易序列中，这就为L2用户创造了一个可强制提款的“安全出口”。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_z4dutkcckf.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>相比之下，有逃生舱Escape Hetch机制的StarkEx方案要有过之无不及。如果L2用户在L1提交的Forced Withdrawal请求在7天窗口期结束时，未得到定序器响应，则该用户可以调用freeze Request功能让L2进入冻结期。此时，L2定序器将无法在L1上更新L2的状态，L2状态冻结后要过1年才能解冻。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_alsq48zrvb.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_fcvvj8sn3b.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>L2状态冻结后，用户可以构造与当前状态相关的Merkle Proof，证明自己在L2上有XX数额的资金，通过L1上的逃生舱Escape Hetch相关合约来提款。这便是StarkEx方案所提供的“全额提款”服务。即便L2项目方没了，定序器永久故障了，用户还是有办法把资金撤出L2。</p>
+<p>但这里存在一个问题：用StarkEx方案的L2大多是Validium（比如Immutable X和ApeX），并不会把DA所需的数据发布到ETH，构造当前L2状态树的信息都存在链下。如果用户无法在链下获取构造Merkle Proof的数据（比如链下DA层发动数据扣留攻击），是无法通过逃生舱来提款的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_m6232ug1qp.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>至此，文章开头提到的Dankrad认为Validium不安全的原因，其实很明确了：因为Validium不像Rollup一样把DA的数据发到链上，所以用户可能无法构造出“强制提款”所需的Merkle Proof。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_8omgenas7m.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_63hpovsc29.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<h3 id="validium和plasma在发生数据扣留攻击时的区别">Validium和Plasma在发生数据扣留攻击时的区别</h3>
+<p>事实上，Validium的定序器只在L1链上发布L2最新的Stateroot（状态树的根），再提交一个Validity Proof（ZK Proof），证明新的Stateroot生成过程涉及的状态转换（用户资金变化），都是正确的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_pvtl0j91h4.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_9mss9vaipb.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>但单凭stateroot无法还原出此刻的状态树world state trie，也就无法知晓每个L2账户的具体状态（包含资金余额），L2用户就无法构造对应当前合法Stateroot的Merkle Proof。这便是Validium不利的地方。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_8j0c5s2lvq.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>这里必须要强调下DAC这个东西。Validium的DA所涉数据，比如定序器最新处理的一批交易，会同步给名为数据可用性委员会DAC（Data Availability Committee）的L2专属DA网络，DAC由多台节点服务器构成，一般由L2官方和社区成员或其他单位负责运行和监督（但这只是表面上的，实际上DAC成员都有谁，外界很难查证）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_ryp7g4ok6j.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>有意思的地方在于，Validium的DAC成员需要频繁在L1提交多签，证明L2定序器在L1提交的新Stateroot和Validity Proof，与DAC同步到的DA数据能对上号。DAC的多签提交后，新的Stateroot和Validity Proof才会被认为是合法的。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_7tbv6lzjh1.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>目前Immutable X的DAC采用5/7多签，dYdX虽然是ZKRollup，但也有DAC，用的是1/2多签。（dYdX只在L1发布State diff即状态变化，而非完整交易数据。但获取了历史记录里的State diff，就可以还原全部L2地址的资产余额，此时就可以构造Merkle Proof来全额提款）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_8omgenas7m.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>Dankrad的观点不无道理。Validium的DAC成员如果合谋，发起数据扣留攻击，不让其他L2节点同步此刻的最新数据，并且更新此刻L2的合法Stateroot，用户无法构造此刻合法root对应的Merkle Proof来提款（因为此刻往后的DA数据不可用了，可用的是以前的DA数据）。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_3miielunro.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>但Dankrad考虑的只是理论上的极端情况，现实中大多数Validium定序器都会实时的把新处理的交易数据广播给其他L2节点，其中不乏诚实节点。只要有1个诚实节点能够及时获取DA数据，用户就可以从L2全身而退。</p>
+<p>可理论上存在于Validium身上的问题，为何不存在于Plasma身上？这是因为Plasma判定合法Stateroot的方式，和Validium不同，有欺诈证明窗口期的缘故。Plasma是OPRollup之前的L2扩容方案，与OPR一样靠欺诈证明保证L2的安全。</p>
+<p>Plasma与OPR一样有窗口期的设定，定序器发布的新stateroot不会立刻判定为合法，要等窗口期close且没有L2节点发布欺诈证明。所以Plasma和OPR的当前合法Stateroot，都是几天以前提交的（这就好比我们看到的星光，其实都是很久以前发出的），而用户往往可以获取过去时刻的DA数据。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_4dknoi7ouv.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>同时，欺诈证明机制能在此刻生效的前提，是此刻L2的DA可用，也即Plasma的Verifier节点可以获取此刻的DA所涉数据，这样才能生成此刻的欺诈证明(如果有必要的话）。</p>
+<p>那么一切都很简单了：Plasma正常工作的前提是此刻L2的DA数据可用。如果从此刻开始，L2的DA不可用了，用户能安全撤资吗？</p>
+<p>这个问题不难分析，假设Plasma的窗口期是7天，如果从某个时间点T0开始，新的DA数据就不可用（DAC发动数据扣留攻击，不让诚实的L2节点获取T0往后的数据）。因为T0及此后一段时间内的合法Stateroot，是T0时刻前提交的，而T0时刻前的历史数据可追溯，所以用户可以构造Merkle Proof来强制提款。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_p4ywg4lnz0.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>即便很多人无法立刻察觉异常，但因为有窗口期存在（OP是7天），只要T0时刻提交的Stateroot还未合法化，且T0之前的DA数据可追溯，用户就可以把钱安全撤出L2。</p>
+<h3 id="总结">总结</h3>
+<p>至此我们大致可以理清楚Validium和Plasma在安全性上的区别：</p>
+<p>Validium的定序器发布Stateroot后，只要立刻发布Validity Proof和DAC多签，就可以使其合法，成为最新的合法Stateroot；如果用户和诚实L2节点遭遇数据扣留攻击，无法构造当前合法Stateroot对应的Merkle Proof，就无法提款到L1。</p>
+<p>而Plasma提交新的Stateroot后，要等窗口期结束才能合法，此时的合法Stateroot是过去提交的。因为有窗口期（ARB是3天，OP是7天）存在，即便新提交的Stateroot的DA数据不可用，用户也有当前合法Stateroot的DA数据（合法root是过去提交的），有足够的时间强制提款到L1。</p>
+<p>所以，Dankrad说的话有道理。当发生数据扣留攻击时，Validium存在把用户资产困在L2的可能，但Plasma并不存在这个问题。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_s7s34z56sp.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p>所以，链下DA层的数据扣留攻击会造成许多安全隐患，但Celestia尝试解决的正是这个问题。此外，因为大多数Layer2项目都会提供让L2节点与定序器保持链下同步的服务端口，所以Dankrad的忧虑其实往往只是理论上的，而不是现实中的。</p>
+<p>如果我们用鸡蛋里挑骨头的态度，再提出更极端的假设：所有的Plasma链下节点都不可用了，那么那些没跑过L2节点的普通用户都无法强制提款到L1。但这种事情发生的概率，等价于一条公链的所有节点集体永久性宕机的概率，可能永远不会发生。</p>
+<p>所以，很多时候，大家只是在谈论一些根本就不会发生的事情。正如美剧《切尔诺贝利》里克格勃副主席对主角说的那段金句：“为何要担心根本就不会发生的事情呢？”</p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_vayee5st20.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0820/10_6lld6cmdrt.png" alt="不用以太坊做DA层就不算Rollup？从Danksharding提出者的视角理解Layer2"></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/57377/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">比特币暴跌 那些比特币头部巨鲸们的动向如何？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/57389/">
+                <span class="next-text nav-default">拆解 Rollup 经济学：目前如何创收？未来可构建「rollup 联盟」实现互操作性？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#到底怎么定义layer2">到底怎么定义Layer2？</a></li>
+        <li><a href="#layer2的强制提款机制">Layer2的“强制提款”机制</a></li>
+        <li><a href="#validium和plasma在发生数据扣留攻击时的区别">Validium和Plasma在发生数据扣留攻击时的区别</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          以Uniswap为例 详谈MEV对AMM的长期影响 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="在 MEV 的提取过程中，AMM 就算不是最重要的组件也是最相关的组件之一，由于内存池的透明性，AMM 的用户不可避免地会连接到 MEV 机器人。" />
+<meta name="keywords" content="MEV, Uniswap" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/44663/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="以Uniswap为例 详谈MEV对AMM的长期影响" />
+<meta property="og:description" content="在 MEV 的提取过程中，AMM 就算不是最重要的组件也是最相关的组件之一，由于内存池的透明性，AMM 的用户不可避免地会连接到 MEV 机器人。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/44663/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-11-17T00:00:00+00:00" />
+
+<meta itemprop="name" content="以Uniswap为例 详谈MEV对AMM的长期影响">
+<meta itemprop="description" content="在 MEV 的提取过程中，AMM 就算不是最重要的组件也是最相关的组件之一，由于内存池的透明性，AMM 的用户不可避免地会连接到 MEV 机器人。"><meta itemprop="datePublished" content="2022-11-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-11-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7723">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="以Uniswap为例 详谈MEV对AMM的长期影响"/>
+<meta name="twitter:description" content="在 MEV 的提取过程中，AMM 就算不是最重要的组件也是最相关的组件之一，由于内存池的透明性，AMM 的用户不可避免地会连接到 MEV 机器人。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">以Uniswap为例 详谈MEV对AMM的长期影响</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-11-17">
+      2022-11-17
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 7723 字 -
+        预计阅读 16 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文标题：《 MEV 对 Uniswap 的影响 》</p>
+<p>原文作者：EigenPhi</p>
+<p>原文编译：angelilu，Foresight News</p>
+<p>MEV（最大可提取价值）距离最初的概念被提出不久，已然成为 2022 年的一个核心话题，MEV 也被视为区块链中的无许可激励措施，用户可在先到先得的基础上提取。然而，黑暗森林中诱人的财富机会也很难发现，而是需要专门的能力。这些现象也引起了人们对以太坊生态系统中公共问题的担忧，从优先 gas 拍卖 （PGA）引起的区块拥塞问题到验证者和区块构建者之间可能存在的更严重的漏洞安全问题。</p>
+<p>在 MEV 的提取过程中，AMM 就算不是最重要的组件也是最相关的组件之一，由于内存池的透明性，AMM 的用户不可避免地会连接到 MEV 机器人。这条推文直接反映了用户可能面临的麻烦。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_5s3k1ssbfe.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>从另一个角度来看，套利机器人在提高 AMM 市场的价格发现效率方面发挥着至关重要的作用。在探索 MEV 如何影响 Uniswap 上的用户时，利益相关者可能认为以下两点非常重要：</p>
+<ul>
+<li>
+<p>对 Uniswap 社区及其用户的影响有多大？</p>
+</li>
+<li>
+<p>哪些 Uniswap 用户和流动性池更有可能参与？</p>
+</li>
+</ul>
+<p>在这份报告中，我们发现了一些有趣且令人振奋的结论，并基于观察样本和数据分析阐明了这些结论。虽然很难计算黑暗森林的最大可提取价值，但我们可以通过观察提取的资产价值来校准 MEV 市场及其影响。在下文中，我们将针对 Uniswap V3 流动性池的三种类型的 MEV 机器人活动进行分析。</p>
+<h2 id="概述">概述</h2>
+<h3 id="mev-机器人活动收入">MEV 机器人活动收入</h3>
+<p>总收入规模比较</p>
+<p>MEV 机器人的一部分收入来自于降低市场价差时的套利收益，这也体现在流动性提供者（LP）的无常损失和掉期用户的滑点损失上。而另一部分收入来自抢先用户的掉期交易并导致他们承担额外的滑点损失。JIT 机器人在 Uniswap V3 的新功能——集中流动性方面是独一无二的。他们扮演高度活跃的 LP 的角色，并从其他被动 LP 那里提取掉期费收入。</p>
+<p>我们直观地衡量了这些机器人提取的收入规模，并将其与 Uniswap V3 的通常定义的供应方收入进行了比较。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_v8zuj0ulc7.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>让我们看看不同类型的 MEV 机器人在 2022 年 1 月 1 日至 10 月 31 日期间的表现：</p>
+<ul>
+<li>
+<p>套利机器人从涉及 Uniswap V3 流动性池的市场价格不对称中提取了至少 8500 万美元。</p>
+</li>
+<li>
+<p>三明治机器人从 Uniswap V3 流动性池的交换用户中提取了至少 4700 万美元。</p>
+</li>
+<li>
+<p>JIT 机器人从 Uniswap V3 的交换费收入中提取了 600 万美元。</p>
+</li>
+<li>
+<p>这三种类型的总提取价值已经超过了供应方收入的 25%（即 LP 的掉期费收入），即 5.4 亿美元。</p>
+</li>
+</ul>
+<p>在黑暗森林和 MEV 机器人进入公众视野之前，LP、交易所用户和治理代币持有者在 AMM 社区中发挥了重要作用。TVL、交易量、费率、滑点、流动性挖矿收益率是重要的指标。如今，从提取价值的规模来看，MEV 机器人是这个社区中不容忽视的组成部分之一。</p>
+<p>随着社区变得更加多样化，并演变成更复杂的价值转移网络。鉴于这种模式，MEV 数据已成为增强决策的宝贵资产。本报告和未来工作的目标之一是透明地概述该网络。并且不时跟踪其演变可以帮助相关方更好地了解 MEV 如何长期影响 Uniswap 社区。</p>
+<p>月收入趋势</p>
+<p>让我们从今年的月度收入数据开始看：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_vkso434m3g.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>从下面的相关系数来看，套利机器人和三明治机器人的收入与 LP 的收入之间没有负相关（来源：Dune，@messari / Messari：Uniswap Macro Financial Statements），这意味着它们之间没有明显的利益冲突代理。然而，最近几个月，他们的收入更有可能随着整个市场而波动。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_aqgm2oi3s4.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>比较不同类型的 MEV 机器人的收益，我们发现套利机器人比其他类型的机器人可以提取更多的价值。JIT 机器人的月收入比其他两种类型小一个数量级，并且尚未呈现出明显的趋势，这也与此类机会刚刚出现有关。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_ntp0zoqozj.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="交易量贡献">交易量贡献</h3>
+<p>这些 MEV 机器人对 Uniswap 的交易量贡献也是另一种校准宏观层面影响的方法。</p>
+<p>从下面的直方图中，我们可以看到大多数套利观察：代币在 Uniswap V3 池和其他场所之间交易。</p>
+<p>因此，要考察套利事件的交易量贡献，不能简单地总结套利交易量并与 Uniswap V3 的总交易量进行比较，其中对其他场所的贡献量也会被计算在内。相反，更可信的方法是考虑将套利交易量和直接发生在 Uniswap V3 池的交易量进行比较。同样的逻辑也适用于计算三明治机器人的交易量贡献。</p>
+<p>JIT 机器人不需要发出掉期交易；他们增加和消除流动性以提取费用。但是，我们可以测量 JIT 事件中目标互换交易的数量，以研究对互换用户的影响。我们将在以后的报告中对此进行探讨。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_gkenwyggsj.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="频率分析">频率分析</h3>
+<h3 id="每日观察次数">每日观察次数</h3>
+<p>我们还可以通过观察每日观察次数来检测这些机器人发现 MEV 机会的频率。尽管以下结果显示了观察到的最小集，但沿时间线或机器人类型比较数据仍然是合理的。</p>
+<p>下图显示，从今年 5 月开始，套利机器人的活动显着增加。相比之下，三明治机器人的观察频率保持在一个稳定的水平。显然，套利机器人比其他机器人更有可能找到 MEV 机会。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_o46fob0785.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>每日计数波动和趋势</p>
+<p>观察频率的波动与代表性加密资产在套利和三明治活动方面的绝对价格变化呈正相关。在这里，我们展示了 ETH 7 天价格变化百分比的示例（绝对值的移动平均结果，来源：来自 coinmarketcap.com的历史收盘价）。套利机器人的移动平均线之间的相关系数约为 0.43，三明治机器人的相关系数约为 0.60。结果在一定程度上表明，交易机会的发生与市场价格波动的强度有关，这是相当合理的。自 5 月以来套利机器人活动的结构性增长也可能与其他因素有关，例如最近几个月平均 Gas 价格的下降，这不是本报告的重点。</p>
+<p>与此同时，近几个月来，JIT 机器人有发现越来越多机会的趋势。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_fj6s0gkstl.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="观察利润">观察利润</h3>
+<p>MEV 机器人口袋里的实际利润是预测未来 MEV 市场对外界的吸引力的另一个参数。这方面的评估需要对数据进行更仔细和更精细的处理，原因有两个：</p>
+<ul>
+<li>
+<p>仅仅依靠链上数据来获得准确的答案是不够的，因为存在幸存者偏差。例如，一个看起来从链上交易中获利的机器人可能仍然遭受许多失败的交易成本或其他链下对冲成本的影响。</p>
+</li>
+<li>
+<p>将代币价格转换为美元的过程可能会强烈影响机器人盈利能力的评估。这是因为当价格误差接近收入和成本之间的差异时，每一分钱都算数，这就是我们想要的利润数据。此外，长尾资产的可实现流动性也是需要考虑的因素。</p>
+</li>
+</ul>
+<p>我们正在努力优化代币价格的计算，以下结果基于我们最新版本的价格指数。</p>
+<p>从每日的利润分布我们可以看出，套利和三明治机器人在大多数日子里获得平均利润，并有几个幸运的日子赚取的资金超过平均利润。例如，8 月 1 日，套利机器人的每日利润达到 447 万美元以上。当天，简单的空间套利贡献了 71.6%（320 万美元）。从 JIT 机器人的每日利润百分比来看，它们有时似乎比套利机器人赚的钱更多。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_12gnojhu0r.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>单次观察的盈亏都符合肥尾分布。与套利机器人的盈利能力相比，三明治机器人和 JIT 机器人遵循相同的分布属性，但它们可以提取的单个观察中的最大利润至少小一个数量级。MEV 机器人在一次行动中也会遭受相当大的损失。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_av1ognqm20.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="观察成本和矿工提取价值">观察成本和矿工提取价值</h3>
+<p>为了让矿工及时打包交易，MEV 机器人参与到 gas 费拍卖市场，激烈的竞争将 gas 费的成本推得非常高。Flash 机器人等机构已经推出了链下拍卖市场，其中一些拍卖成本以 coinbase.transfer() 的形式转换为矿工小费。这两部分成本构成了 MEV 机器人参与 MEV 市场的主要显性成本。将其作为收入的百分比，我们可以了解机器人的利润率水平，以及矿工提取的 MEV 价值有多少。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_f7eepf2bmg.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>机器人的平均交易成本（ gas 费和矿工小费）总体呈下降趋势。但三明治机器人的成本高于其他两种，分配给矿工的收入比例大幅增长，10 月份接近 90%。</p>
+<p>收入套利机器人支付矿工的比例呈下降趋势，10 月份低于 50%。矿工从 JIT 机器人中提取价值的百分比是最低的，这与他们目前所从事的竞争较少的情况是一致的。</p>
+<p>总的来说，超过一半的提取价值实际上流入了矿工的口袋。</p>
+<h3 id="对池的影响">对池的影响</h3>
+<p>我们还可以观察到哪些流动资金池更有可能参与 MEV 活动。让我们将这个问题分解为特征分析和相关性分析任务。在本报告中，首先我们提出了一个一般的结果。</p>
+<p>我们合并 Uniswap V3 流动性池的元数据和按流动性池地址分组的 MEV 活动参数，如下图所示。由于套利机器人的盈利能力参数涉及 Uniswap V3 流动性池和其他场所，我们将其放在一边，重点关注机器人活动的频率、三明治机器人和 JIT 机器人的盈利能力以及所涉及的交易用户的情况。</p>
+<p>结果显示，三明治机器人 80% 以上的利润来自按交易量排序的前 10 名流动性池。然而，只有 20% 的三明治活动发生在这些流动性池中，这意味着交易量大的流动性池更容易被三明治机器人从中提取价值，但其他流动性池的交易用户仍可能经常被夹在中间。这一事实也通过每个池中遭受三明治活动的唯一交易用户数量的分布得到验证。在我们观察到的时间范围内，一些流动性池也没有参与三明治活动。</p>
+<p>至于 JIT 机器人，他们似乎更关注按交易量排序的前 10 个流动性池，84% 的利润是从这些池中提取的， 56% JIT 活动也发生在这里。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_7vwgbkhces.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>就套利机器人在这些池中的平均活动频率而言，费用等级等于 0.0005 或 0.0001 的池更有可能被提取。费用等级为 0.0005 的池主要受三明治活动的影响。JIT 活动也主要发生在费用等级为 0.0005 的池中。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_kpckrzs95g.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>我们还展示了按池地址分组的几个参数的直方图。结果也服从肥尾分布，这意味着一小群池的参与程度远高于平均水平。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_526f1nsssd.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>与其他场所相比，与加密资产、USDC、WETH 和 USDT 相关的 Uniswap V3 流动性池是 MEV 机器人最喜欢与之交互的流动性池。您可以在我们的网站上实时查看 MEV 活动中按交易量或交易量变化百分比排序的热门流动性池统计数据。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_246ufmkdu3.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="参与者">参与者</h3>
+<p>MEV 机器人与其他用户之间的交互关系也是一个吸引人的话题。下表和图比较了我们观察范围内参与 MEV 活动的不同代理类型的数量。从下表中，我们看到可以从 JIT 活动中受益的唯一交易用户地址的增长趋势。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_hidrb2bm2f.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>但是，通过计算唯一机器人合约的数量和涉及的用户地址，很难评论这些地址背后有多少实体，因为不同的地址可能属于一个实体。绘制这些地址的交易关系的生动的互动网络可以帮助更好地理解这个问题，这在本报告中没有涉及。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_fw91ol9ce6.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h2 id="套利机器人">套利机器人</h2>
+<h3 id="套利机器人排行榜前-20-名">套利机器人排行榜（前 20 名）</h3>
+<p>下图分别显示了按总利润和总活动计数排序的前 20 个套利合约地址。总利润和总活动计数之间的关系与机器人可以最大程度地提取的利润上限呈正相关。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_qnyfws3ljq.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_f0a0zzwkoj.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="套利模式的频率">套利模式的频率</h3>
+<p>我们可以通过计算涉及的场所数量和涉及的 Uniswap V3 池的百分比来观察套利交易的结构。前 10 种可能的组合表明，涉及一个 Uniswap V3 池和另一个场所的空间套利是最常见的模式。随后的两种常见模式是涉及一个或两个 Uniswap V3 池的三角形套利。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_6slr1gyfyh.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>另一个有趣的发现是，仅 Uniswap V3 流动性池中也有很多套利机会。单笔套利交易也可能涉及 100 多个场所（例如）：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_sez8yg4n7a.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="用户本身作为套利机器人">用户本身作为套利机器人</h3>
+<p>套利机器人，也是 AMM 的一种交易用户，除了严重的 gas 费活动外，还受到征税的代币合约的影响。下面的数据和图表显示，虽然大多数有利可图的套利交易不涉及征税代币，但不排除一些特别优秀的机器人可以在征税代币中找到财富。有一个微妙的趋势是，更有利可图的套利机器人可能参与较少百分比的征税代币。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_kzh8u451bs.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_7q4idt35cs.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="盈利能力的细分">盈利能力的细分</h3>
+<p>我们还将盈利能力参数的分布放在下面，以供相关方参考。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_w28im3ndpi.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h2 id="三明治机器人">三明治机器人</h2>
+<h3 id="三明治机器人排行榜前-20-名">三明治机器人排行榜（前 20 名）</h3>
+<p>以下面板分别显示了按总利润或总活动频率排序的前 20 个三明治合约的地址。总利润和总活动计数之间的关系表明，大多数盈利机器人今年更有能力成功提交超过 100 次交易。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_gni8ipho1c.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_26jbhu3vbu.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="交易用户被夹在中间">交易用户被夹在中间</h3>
+<p>在大多数情况下，只有一个交易用户夹在一个三明治活动中。但有时，三明治机器人可以在我们的观察范围内一次性抢先运行多达 4 个交易用户的交换交易。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_3lwi3ilyj1.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>从下面的前 20 名三明治受害者数据中，最痛苦的交换用户今年参与了 300 多笔三明治交易。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_zt1t4sec4b.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="uniswap-流动性池的三明治活动">Uniswap 流动性池的三明治活动</h3>
+<p>从可以在我们的网站上实时查看的前 10 个被利用的合约中，我们看到与其他场所相比 Uniswap 流动性池主要参与三明治活动。这部分是由于这些 Uniswap 池的巨大交易量，这对三明治机器人来说是一个优势。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_jyzc9vs15q.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="盈利能力的细分-1">盈利能力的细分</h3>
+<p>我们还将盈利能力参数的分布放在下面，以供相关方参考。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_ejmw2s35b3.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h2 id="jit-机器人">JIT 机器人</h2>
+<h3 id="jit-机器人排行榜前-20-名">JIT 机器人排行榜（前 20 名）</h3>
+<p>我们仅通过检测 JIT 机器人添加流动性交易中的唯一「地址」来观察 6 个 JIT 机器人。其中两家尚未盈利。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_rjgsvq2j1m.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_ir3uzlo0rs.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="交易用户从-jit-中受益">交易用户从 JIT 中受益</h3>
+<p>JIT 机器人可以为目标交易用户提供大量的流动性，使其具有较小的滑点损失的优势。从下面的前 20 名受益者数据中，许多交易用户都在频繁地使用这一新功能，并能享受到其带来的好处。我们通过在每次观察中模拟交易用户在没有 JIT 机器人活动的情况下可能承受的滑点来校准收益。从如下所示的模拟滑点和实际滑点的直方图可以看出，从较大的滑点率明显转变为较小的滑点率。在计算过程中，我们还发现在少数情况下存在负滑点值。通过人工查看原因，我们发现在一些增加流动性的 JIT 机器人交易中，出于某种原因，它们会进行反向互换交易，从而为下一个互换用户带来了更优惠的价格。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_hf101eu2fg.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<p>从下面的前 20 名受益者列表中，我们看到相当多的掉期用户已经在频繁地享受这一新功能。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_cfhmyqshvz.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h3 id="盈利能力的细分-2">盈利能力的细分</h3>
+<p>我们还将盈利能力参数的分布放在下面，以供相关方参考。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1117/10_uasmka6udw.png" alt="以Uniswap为例，详谈MEV对AMM的长期影响"></p>
+<h2 id="结论">结论</h2>
+<p>从以上分析可以看出，机器人已经成为 AMM 社区不可忽视的重要组成部分。了解 MEV 机器人与其他实体之间的交易关系，可以帮助利益相关者更好地了解 MEV 对 AMM 的长期影响。</p>
+<p>在本报告中，我们从不同的角度描述了上述关系，并基于可靠的数据源和数据分析得出了一些有趣的结论：</p>
+<ul>
+<li>
+<p>收入——从机器人提取的收入规模来看，我们看到套利机器人从涉及 Uniswap V3 流动性池的市场价格不对称中提取了至少 8500 万美元。三明治机器人以滑点损失的形式从掉期用户那里提取了至少 4700 万美元。JIT 机器人从 Uniswap V3 的交换费收入中提取了 600 万美元。机器人的总收入占 LP 收入的 25%。但是，套利机器人、三明治机器人和 LP 之间没有明显的利益冲突。最近几个月，他们的收入更有可能跟随市场波动。JIT 机器人的月收入比其他两种类型小一个数量级，并且还没有呈现出明显的趋势。</p>
+</li>
+<li>
+<p>频率 - 与其他机器人相比，套利机器人更有可能找到交易机会。从今年 5 月开始，套利机器人的活动明显增加，而三明治机器人的观察频率保持稳定。交易机会与市场价格波动的强度正相关。近几个月来，JIT 机器人的交易机会呈上升趋势。</p>
+</li>
+<li>
+<p>盈利能力 - MEV 机器人在大多数日子里获得平均利润，并且有几个幸运的日子可以赚很多钱。单次观察的盈亏都符合肥尾分布。三明治机器人可以获得的最大利润比套利机器人小一个数量级，这是由于交易机会更少，成本更高，机器人之间的竞争更加激烈。JIT 机器人 仍处于早期阶段。</p>
+</li>
+<li>
+<p>成本 - 机器人的平均交易成本在最近几个月呈下降趋势。三明治机器人的成本高于套利机器人，分配给矿工的收入比例显着增长，10 月份接近 90%，而套利机器人则下降到 30% 以下。总的来说，超过一半的提取价值流入了矿工的口袋。</p>
+</li>
+<li>
+<p>池 - 三明治机器人 80% 以上的利润来自按交易量排序的前 10 个池。然而，只有 20% 的三明治活动发生在这些池中。在我们观察到的时间范围内，一些游泳池也没有参与三明治活动。JIT 机器人似乎更关注按交易量排序的前 10 个池，其中 84% 的利润来自这些池，56% 的 JIT 活动也发生在这里。费用等级等于 0.0005 或 0.0001 的流动性池更有可能被套利机器人提取。费用等级为 0.0005 的流动性池主要受到三明治活动和 JIT 活动的影响。按池分组的参数的肥尾分布也表明，少数池的参与程度远高于平均水平。</p>
+</li>
+<li>
+<p>参与者 - 可以从 JIT 活动中受益的唯一交换用户似乎有增加的趋势。来自实际掉期交易和模拟的滑点数据也验证了这一点。还有其他协议也提供战略流动性，为寻求更多收益的 LP 提供机器人服务。他们的策略主要是在窄幅范围内分配流动性，并根据布林带等量化指标调整刻度间隔以跟踪市场价格。与这些策略相比，JIT 机器人正试图以一种创新的、更具资本效率的方式来解决相同的问题。值得考虑的是，AMM 协议设计者等相关方直接提供类似的功能，可以在提升用户体验和增加 LP 收益的同时，以一种全新的方式连接 swap 用户和 LP。</p>
+</li>
+<li>
+<p>机器人 - 我们还分别列出了按总利润和活动计数排序的前 20 个机器人合约地址。总利润和总活动计数之间的关系与机器人可以最大程度地提取的利润上限呈正相关。关于套利机器人如何处理征税代币，大多数有利可图的套利交易不涉及征税代币。但不排除有一些特别优秀的机器人可以在征税代币中找到财富。在大多数情况下，只有一个交换用户夹在一个三明治活动中。但在某些情况下，三明治机器人可以在我们的观察范围内一次性运行多达 4 个交换用户的交换交易。今年最痛苦的掉期用户参与了 300 多笔三明治交易。</p>
+</li>
+<li>
+<p>交易模式 - 通过观察套利交易的结构，我们发现涉及一个 Uniswap V3 池和另一个场所的空间套利是最常见的模式。以下两种常见模式是涉及一个或两个 Uniswap V3 流动性池的三角形套利。仅 Uniswap V3 流动性池中也有很多套利机会。而单笔涉及 100 多个场馆的套利交易也可以获利。</p>
+</li>
+</ul>
+<h2 id="方法">方法</h2>
+<h3 id="数据源">数据源</h3>
+<p>上述分析基于从我们构建的完整以太坊节点获取的原始区块数据。涵盖的数据范围是从块号 13916166（包括）到 15871479（包括）。我们解码原始数据以获得我们需要的细粒度数据字段。</p>
+<p>为了将某些参数与整体市场情况和 Uniswap V3 的宏观参数进行比较，我们采用了以下第三方数据：</p>
+<ul>
+<li>
+<p>ETH 来自 coinmarketcap 的历史收盘价。</p>
+</li>
+<li>
+<p>Uniswap V3 的每日元数据来自 dune@messari / Messari：Uniswap 宏观财务报表。</p>
+</li>
+<li>
+<p>Uniswap V3 的元数据来自 <a href="https://www.uniswap.shippooor.xyz/">https://www.uniswap.shippooor.xyz/</a>。（链：以太坊，数据集：流动性池）</p>
+</li>
+</ul>
+<h3 id="我们如何识别机器人">我们如何识别机器人？</h3>
+<ul>
+<li>
+<p>我们将交易视为资产转移的集合，我们使用一组规则通过评估这些转移的结果来查看是否发生了 MEV 活动。经验法则是交易中存在不止一次的转账（或掉期），交易者最终会出现盈余。</p>
+</li>
+<li>
+<p>为了识别不同类型的 MEV 活动，我们在当前阶段收集遵守我们的启发式规则的观察结果，并且我们通过每天将样本结果与 MEV-inspect 的样本结果进行比较来根据检测到的假阴性或假阳性继续增强我们的算法.</p>
+</li>
+<li>
+<p>在本报告中，我们确定了涉及 Uniswap V3 池的三种类型的 MEV 活动。我们涵盖的 Uniswap V3 流动性池地址总数为 8837 个，其中包括来自工厂交易失败的地址，而第三方数据源中列出的流动性池为 8767 个。套利、三明治和 JIT 观察的总数分别为 663889、90291 和 13020。 </p>
+</li>
+</ul>
+<h3 id="我们如何计算利润和成本">我们如何计算利润和成本？</h3>
+<ul>
+<li>
+<p>我们不断优化我们的价格指数算法。目前，我们直接将 USDT、USDC、DAI 等同于 1 美元。对于流动性较好的主流资产（ETH、WETH、WBTC），AMM 和链上预言机可以提供相对可靠的报价来源。随着这些主流资产的价格稳定下来，我们进一步根据计算时的掉期比率计算其他代币的价格。</p>
+</li>
+<li>
+<p>我们只考虑检测到的每笔交易的链上成本。计算过程是对每笔交易的 gas 费用和 coinbase.transfer() 值（如果有的话）求和，然后根据 ETH 的价格将结果转换为美元。</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/44690/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">晚间必读 | What Happened? SBF亲述FTX发生了什么</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/44655/">
+                <span class="next-text nav-default">以更长远的眼光看待Web3</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a>
+      <ul>
+        <li><a href="#mev-机器人活动收入">MEV 机器人活动收入</a></li>
+        <li><a href="#交易量贡献">交易量贡献</a></li>
+        <li><a href="#频率分析">频率分析</a></li>
+        <li><a href="#每日观察次数">每日观察次数</a></li>
+        <li><a href="#观察利润">观察利润</a></li>
+        <li><a href="#观察成本和矿工提取价值">观察成本和矿工提取价值</a></li>
+        <li><a href="#对池的影响">对池的影响</a></li>
+        <li><a href="#参与者">参与者</a></li>
+      </ul>
+    </li>
+    <li><a href="#套利机器人">套利机器人</a>
+      <ul>
+        <li><a href="#套利机器人排行榜前-20-名">套利机器人排行榜（前 20 名）</a></li>
+        <li><a href="#套利模式的频率">套利模式的频率</a></li>
+        <li><a href="#用户本身作为套利机器人">用户本身作为套利机器人</a></li>
+        <li><a href="#盈利能力的细分">盈利能力的细分</a></li>
+      </ul>
+    </li>
+    <li><a href="#三明治机器人">三明治机器人</a>
+      <ul>
+        <li><a href="#三明治机器人排行榜前-20-名">三明治机器人排行榜（前 20 名）</a></li>
+        <li><a href="#交易用户被夹在中间">交易用户被夹在中间</a></li>
+        <li><a href="#uniswap-流动性池的三明治活动">Uniswap 流动性池的三明治活动</a></li>
+        <li><a href="#盈利能力的细分-1">盈利能力的细分</a></li>
+      </ul>
+    </li>
+    <li><a href="#jit-机器人">JIT 机器人</a>
+      <ul>
+        <li><a href="#jit-机器人排行榜前-20-名">JIT 机器人排行榜（前 20 名）</a></li>
+        <li><a href="#交易用户从-jit-中受益">交易用户从 JIT 中受益</a></li>
+        <li><a href="#盈利能力的细分-2">盈利能力的细分</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+    <li><a href="#方法">方法</a>
+      <ul>
+        <li><a href="#数据源">数据源</a></li>
+        <li><a href="#我们如何识别机器人">我们如何识别机器人？</a></li>
+        <li><a href="#我们如何计算利润和成本">我们如何计算利润和成本？</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

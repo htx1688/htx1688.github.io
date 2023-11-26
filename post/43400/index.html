@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          比特币闪电网络上的DeFi研究 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="基于闪电网络开发的各种应用已经逐步成熟并进入实用阶段" />
+<meta name="keywords" content="Lightning, BTC" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43400/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="比特币闪电网络上的DeFi研究" />
+<meta property="og:description" content="基于闪电网络开发的各种应用已经逐步成熟并进入实用阶段" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43400/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-11T00:00:00+00:00" />
+
+<meta itemprop="name" content="比特币闪电网络上的DeFi研究">
+<meta itemprop="description" content="基于闪电网络开发的各种应用已经逐步成熟并进入实用阶段"><meta itemprop="datePublished" content="2022-10-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="12343">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="比特币闪电网络上的DeFi研究"/>
+<meta name="twitter:description" content="基于闪电网络开发的各种应用已经逐步成熟并进入实用阶段"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">比特币闪电网络上的DeFi研究</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-11">
+      2022-10-11
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 12343 字 -
+        预计阅读 25 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%AF%94%E7%89%B9%E5%B8%81/"> 比特币 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：Bill , Waterdrip Capital </p>
+<h2 id="引言">引言：</h2>
+<p>比特币是现今最成熟的数字货币系统，无需任何中间人，用户可在比特币的网络里转移货币，实现对商品和服务的支付能力。但作为实用的支付系统，比特币还存在着一些缺陷。比如，比特币平均每秒只能处理大约7笔交易，每笔交易要等到1小时后才能基本确认（6个可信区块）；对微支付（micropayment）来说，交易费用可能太高，相比之下，Visa平均每秒处理1700笔交易，声称每秒能处理65000笔交易。比特币网络可以改变其协议，通过增加区块大小或减少区块时间来允许每秒更多的支付，但这将牺牲比特币的安全性，与比特币的核心价值主张相悖。</p>
+<p>实际上，很多人忽视了比特币的闪电网络和侧链的发展。闪电网络代表了在不损害比特币网络安全的情况下解决比特币吞吐量缓慢的解决方案。利用闪电网络，数百万人可以在同一时间以近乎即时的速度发送一部分比特币。</p>
+<p>从理论上讲，闪电网络每秒能够完成数百万笔交易，远远超过Visa和万事达等全球支付提供商，而且闪电网络交易的成本非常低，没有区块大小限制。基于闪电网络开发的各种应用已经逐步成熟并进入实用阶段，未来的闪电网络可能会激活数十亿甚至数万亿的加密市场。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_wgz9z30it8.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Arcane Research）</p>
+<h2 id="闪电网络">闪电网络</h2>
+<p>闪电网络（Lightning Network）由Joseph Poon和Tadge Dryja在2015年首先提出，被认为是比特币创立以来最重要的革新。它利用了比特币的安全特性，在线下提供高速的实时交易处理能力。用户既可通过点对点的直接支付方式，也可以通过网络路由的方式实现间接支付。闪电网络并没有发明新的加密形式，也没有使用新奇的比特币脚本，却巧妙地实现了离线支付的功能。</p>
+<h3 id="一闪电网络发展现状">一、闪电网络发展现状</h3>
+<p>闪电网络自2018年推出以来，一直仅有一些小众应用。但最近的发展表明，这种情况正在迅速改变。自2020年底以来，闪电网络的被使用量已经显著增加，尤其是去年萨尔瓦多政府支持比特币作为国家法定货币后。</p>
+<p>1、闪电网络基础数据稳步增长</p>
+<p>闪电网络通道中BTC 的数量：从2018年7月1日的26个，到2019年5月9日增长至1104个，一年增长了4倍；从2021年1月1日的1058个，到2021年9月30日增长至2968个，9个月增长近3倍。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_9nypbksg96.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Arcane Research）</p>
+<p>截至今年10月9日，闪电网络所有通道累积的比特币容量约为 4940个</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_s2qokqrqif.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Bitcoin Visuals）</p>
+<p>同时，约有1.7万个节点在网络上运行，以及来自全球各地的8.5万个连接节点的通道。</p>
+<p>Lightning Network Nodes</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_u4bl3kyi9m.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Bitcoin Visuals）</p>
+<p>Lightning Network Channels</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_7t1rcmaycc.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Bitcoin Visuals）</p>
+<p>虽然对比“跨链 ”到以太坊、BSC等链的各种“锚定”比特币，闪电网络的规模距离 wBTC（24.44万个）hBTC(1.29万个)等仍有较大差距，但是从用户数量上，闪电网络的发展仍然值得期待。根据 Arcane Research 的统计和预估，去年夏天，全球仅有超过10万用户使用闪电支付，而到了2022年3月，估计有8000多万人在已安装的应用程序上（如Cash APP）使用闪电网路。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_1dv7rdqvzf.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Arcane Research）</p>
+<p>通过收集实际交易数据，可以观察到通过闪电网络进行支付的数量和金额正在迅速上升。去年，付款数量大约翻了一番，付款价值增加了400%以上。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_3canpceuu7.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Arcane Research）</p>
+<h3 id="二闪电网络基本原理">二、闪电网络基本原理</h3>
+<p>闪电网络的主要思路并不复杂，作为比特币的Layer2 解决方案，其核心是将大量交易过程放到比特币区块链之外进行，只把关键环节放到链上进行确认。</p>
+<p>闪电网络利用一个由智能合约驱动的支付通道网络，在点对点之间发送交易，构成闪电网络的核心概念主要有两个：</p>
+<p>RSMC（Revocable Sequence Maturity Contract），序列到期可撤销合约；</p>
+<p>HTLC（Hashed Timelock Contract），哈希时间锁定合约。</p>
+<blockquote>
+<p>RSMC 的原理是双方在链下互持一个对己方不利的合约（未发布上链的交易信息）来记录当前的交易状态。要更新状态时，互相把“把柄”（Revocation Key）交给对方来将上一个状态作废掉（因为如果要单方面反悔、发布过时的状态上链，则对方可以用“把柄”来获得更多资产）。在这个过程中只有在提现时候才需要通过区块链。另外，即使双方都确认了某次提现，首先提出提现一方的资金到账时间要晚于对方，这就鼓励大家尽量都在链外完成交易。通过 RSMC，可以实现大量中间交易发生在链下。（<a href="https://twitter.com/hu_zhiwei/status/1529332924679860224?s=20&amp;t=laBZlrZvHTpmTwcOuNT9LQ&amp;accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NjU0NTkxODksImZpbGVHVUlEIjoiemRreUJvTVE2anNWeGpBNiIsImlhdCI6MTY2NTQ1ODg4OSwiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNzI0MDE0OTk4OH0.eXDCgn6u-548fp24IDxqP9UER9VdXs_xLyUS8-hW7f0">https://twitter.com/hu_zhiwei/status/1529332924679860224?s=20&amp;t=laBZlrZvHTpmTwcOuNT9LQ</a>，作者@hu_zhiwei， 有修改）</p>
+</blockquote>
+<p>HTLC 哈希时间锁定合约，可以将其理解为限时转账，通过智能合约，双方约定付款方先冻结（时间为t1）一笔比特币用于付款，收款方会生成随机信息 R，并会将R的哈希值H（H = Hash(R)，R 是 哈希 H 的原像） 提供给付款方，如果在一定时间内(t2，且t2 &lt; t1)，有人（节点）能提供信息R给付款方（使得R哈希后的值跟已知值H 匹配,实际上意味着收款方授权了该节点的提现），则该节点可以拿到该笔锁定的比特币。HTLC 机制可以扩展到多个人的支付场景。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_uvgy1m4904.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：lightning.network）</p>
+<p>RSMC 保障了两个人之间的直接交易可以在链下完成， HTLC在RSMC的基础上解决了比特币跨节点传递的问题，保障了任意两个人之间的转账都可以通过一条支付通道来完成。这两个类型的交易组合构成的闪电网络实现了任意两个人之间的交易都能在链下完成。</p>
+<p>Basis of Lightning Technology (BOLT)</p>
+<p>上面介绍了闪电网络的核心概念，然而若是想要实际使用闪电网络，尤其是基于闪电网络进行项目开发，还需要一个协议对其进行规范，BOLT就是闪电网络中的这类协议。BOLT规范定义了所有闪电网络软件都应运行的一系列功能，以便互操作，BOLT 包括各个层面的子协议，如网络连接、消息传递、P2P、路由和支付层等。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_z0sacusdhv.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：<a href="https://blog.csdn.net/mutourend/article/details/118671063?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NjU0NTkxODksImZpbGVHVUlEIjoiemRreUJvTVE2anNWeGpBNiIsImlhdCI6MTY2NTQ1ODg4OSwiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNzI0MDE0OTk4OH0.eXDCgn6u-548fp24IDxqP9UER9VdXs_xLyUS8-hW7f0">https://blog.csdn.net/mutourend/article/details/118671063</a>）</p>
+<p>以上仅是对闪电网络技术原理的概括性描述，想深入了解闪电网络的读者可参考白皮书等公开资料。(<a href="https://lightning.network/lightning-network-paper.pdf">https://lightning.network/lightning-network-paper.pdf</a>)</p>
+<h3 id="三闪电网络生态系统">三、闪电网络生态系统</h3>
+<p>随着闪电网络技术的不断迭代和发展，以及使用闪电网络的用户量和资金量日益增长，越来越多的公司正在进入闪电网络生态系统。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_pld6tor0bl.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>（来源：Arcane Research）</p>
+<p>从上图可以看出，使用闪电网络的产品和项目已经相当丰富，包括节点和流动性服务、支付基础设施和商户解决方案、钱包/银行、金融和贸易、甚至有游戏、播客、流媒体和社交应用等。</p>
+<p>使用人数比较多的有：</p>
+<p><strong>Cash App</strong></p>
+<p>一个金融服务平台，除了提供银行服务外（由 Cash 的银行合作伙伴提供），还提供比特币服务，可用于支付、消费和投资等。正如上文提到的，今年3月份，预估有8000多万人在通过Cash App使用比特币闪电网络支付。</p>
+<p><strong>Strike</strong></p>
+<p>自从萨尔瓦多将比特币与美元一起列为法定货币以来，Strike已经成为闪电网络上最受欢迎的应用程序之一。</p>
+<p>但是，除了一些基础设施外，以上的各种服务基本都是仅限于闪电网络中比特币本身的支付/转账/收款等功能，虽然这是目前其最大的使用场景，但站在比特币网络和比特币生态来看，因其不能够将更多资产（即便是基于比特币的Omni网络发行的USDT ）带入闪电网络，因而并不能给比特币生态带来其他更多的可能行。</p>
+<h2 id="omnibolt">OmniBOLT</h2>
+<p>为了解决这个问题， OmniBOLT协议应运而生。OmniBOLT 可以看作是比特币闪电网络的延伸。它专注于更快、更便宜地转移代币。它不仅专注于比特币，还整合了闪电网络上的其他智能资产。</p>
+<p>Omni是区块链界的老品牌，可以追溯到2012年的Mastercoin（2015年改名为Omni），它得到了Omni Foundation的支持。Omni最大的贡献是,通过在协议级别, 在不改变比特币基础、不产生替代技术来处理新规则的情况下，使用现有比特币构建了具有新程序的新货币层（Omnilayer）。</p>
+<p>OmniLayer建立在比特币之上，支持智能合约和发行代币等功能。加密世界中众所周知的 USDT 最早就是基于OmniLayer发行的。</p>
+<p>OmniBOLT 是继 OmniLayer 之后的第二个重要协议，两者均由 Omni Foundation 提出。同时，OmniBOLT背后也是Omni Foundation的核心成员。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_mckjqr98s1.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>上文已经提到，BOLT 代表闪电网络技术基础，这是闪电网络的实际标准。基于这个标准，闪电网络能够兼容比特币、莱特币（或其他类比特币的Token）。但是，那些基于 OmniLayer 的Token被排除在外。</p>
+<p>为了解决这个问题，Omni 提出了OmniBOLT协议，使得以USDT为代表的一系列Omni-aware资产和稳定币都可以接入闪电网络。此外，它还允许多链资产在onion network网络内交互。随着 OmniBOLT 的出现，使得通过一个协议将所有区块链和相关的数字资产进入按照闪电网络规范设计的通道成为可能。通过OmniBOLT标准，它完整实现了可感知资产的闪电网络节点，并且致力于链接不同的公链和生态，提供对外一致的接口和用户环境，其核心的产品和标准除了OmniBOLT协议外，还包括OBD网络。</p>
+<h3 id="obd网络">OBD网络</h3>
+<p>OBD 网络实际是一个无托管OmniBOLT守护进程（None-Custodial-OmniBOLT-Daemon）。OBD设计中把通道和底层公链网络解耦，从而支持更多公链的资产进入OBD网络流通。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_p6s0v9qzc9.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>OBD实现了OmniBOLT规范，也是一个开源的链外分散平台，构建在OmniLayer网络之上，在智能资产闪电网络通道上实现基本的多跳HTLC支付、多货币原子交换（Atomic Swap）和更多的链外合约。此外，OBD是专为入境流动性提供商设计的。守护程序允许数千个远程light客户端连接，包括来自LND钱包的连接。</p>
+<h3 id="omnibolt的工作原理">OmniBOLT的工作原理</h3>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_8h1efcss59.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>1、链上协议是Omnilayer，是发行和结算层；</p>
+<p>OmniBOLT 本身不发行代币。所有代币均在 OmniLayer 上发行，通过 P2(W)SH 支持的通道进入 OmniBOLT 网络，锁定在主链上，可随时在 Omnilayer 主链上兑换。</p>
+<p>2、主要构成OmniBOLT的网络协议包括通道管理对等协议，RSMC 和OmniLayer 交易，HTLC，以及支付路由等。</p>
+<p>需要注意的是，仅比特币地址不能感知除了比特币之外的任何资产信息。当用户将Omni资产转账到不支持Omni层的比特币地址交易通道时，很难或不可能恢复所转移的Omni资产。因此，OmniBOLT及其实现中的地址必须是Omnicore创建的Omnilayer地址。这也是当前lnd通道不能成为OmniBOLT通道的原因，不久的将来，OmniBOLT将更新为“OmniLayer安全隔离见证地址格式”。</p>
+<p>据我们了解，OmniBOLT也会拥有自己的节点，这些节点预计将分布在全球各地，其数量将与LN相同或超过LN。此外，支持OmniLayer的节点（各个交易所、钱包等基本都支持OmniLayer）也可以升级成OmniBOLT闪电网络节点。</p>
+<p>3、应用层由各种应用的合约组成，也是构成比特币 DeFi 的核心应用，如去中心化交易平台（DEX）、抵押借贷平台、线上商店等更多应用。</p>
+<h2 id="比特币defi-值得关注的项目">比特币DeFi 值得关注的项目</h2>
+<p>一个公链或者L2 协议的生态想要发展壮大，其生态系统（尤其是DEX）的重要性不言而喻。Uniswap 出现之前和出现之后的Ethereum,几乎就是两个不同的世界。目前，基于比特币的DeFi项目虽然还不是很多，但是已经初步显现出构建比特币DeFi版图的轮廓，值得投资者长期关注。</p>
+<h3 id="uprets">Uprets</h3>
+<p>Uprets是由OmniLab 开发的基于比特币闪电网络技术的DEX, 是比特币闪电网络的延伸，Uprets的闪电网络就是原生的token 通道， 能够将更多资产（如Omni-USDT，无需换成BTC）直接带入闪电网络。用户和比特币矿工能够直接在比特币Omni Layer上进行比特币和其他资产的交易而无需转入到中化交易所。该项目已经得到USDT发行方Tether的支持，项目目前处于开发测试阶段，部分功能已经进入社区公测阶段。</p>
+<h3 id="taro">Taro</h3>
+<p>Taro 是由Lightning Labs开发的一种新的 Taproot 支持的协议，用于在比特币区块链上发行资产，可以通过闪电网络进行即时、大容量、低费用的交易。Taro 依赖于比特币的最新升级 Taproot 来构建新的树结构，允许开发人员在现有输出中嵌入任意资产元数据。Taro 的核心是利用比特币网络的安全性和稳定性以及闪电网络的速度、可扩展性和低费用，可以与闪电网络上的多跳交易一起使用。与新协议一起，Taro于今年4月初，宣布其完成了7000万美元的B轮融资以进一步建立闪电网络基础设施并帮助增加人数。</p>
+<h3 id="rgb">RGB</h3>
+<p>RGB 是用于比特币和闪电网络的可扩展和保密的智能合约系统。RGB 基于 Peter Todd 关于一次性密封和客户端验证的研究，并被 Giacomo Zucco 和社区在 2016 年设想为比特币和闪电网络上更好的资产发行协议。我们可以将 RGB 定义为一组允许我们以可扩展和保密的方式执行复杂智能合约的开源协议。它并非一个特定的网络（如比特币或闪电网络），每个智能合约只是一组能用不同通信通道（默认为闪电网络）进行交互的合约参与者。RGB 利用比特币区块链作为其状态承诺层，并在链下维护智能合约的代码和数据，借此实现可扩展性。</p>
+<h3 id="kollider">Kollider</h3>
+<p>Kollider是使用比特币闪电网络的实时结算的衍生品交易所。在Kollider上，用户目前可以用法币进行5种加密资产的交易，并可以最大加到100倍的杠杆。该项目采用永续合约模式，暂时交易量并不大，社区基础相对薄弱。</p>
+<h3 id="portal">Portal</h3>
+<p>Portal是使用比特币闪电网络的点对点交易所，之前官宣过融资信息，由Coinbase 领投。项目目前正在开发一款跨链的原子化交易应用。</p>
+<p>除了通过闪电网络，也有一些项目在其他路径上丰富着比特币的生态，比如通过智能合约、侧链、跨链协议等，其中比较知名的有RSK，Stacks和Liquid等项目，以及各种“跨链”到以太坊、BSC等链的各种“锚定”比特币。</p>
+<h3 id="rsk">RSK</h3>
+<p>我们把 RSK 理解为比特币主链的一条侧链，在无需分叉 或更改原始的比特币的前提下，通过智能合约等附加功能对其进行扩展。RSK MainNet 网络已于 2018 年 1 月初发布。智能比特币（RBTC）是RSK的原生代币，用作在RSK网络中执行交易的GAS。RBTC以1:1 的比例与比特币挂钩（1 RBTC = 1BTC），可以通过所谓的“比特币 – RSK 桥接机制”自动在 BTC 和 RBTC 间转换，从而将比特币和 RSK 协议结合在一起。</p>
+<p>此外，RSK 具有很好的兼容性， 在以下各个层面与以太坊高度兼容：执行虚拟机（EVM）、javascript 编程接口（web3）、节点进程间连接（JSON-RPC）和智能合约编程语言（Solidity）。RSKVM 提供 EVM 中不具有的其他功能，要利用这些改进，需要对智能合约源代码进行一些更改。此外，RSKVM 还具有特定的预编译合约，可以提供与比特币的桥接功能。</p>
+<p>目前，RBTC的数量约为3076个，流通市值约为0.61亿美金。官方在最新的博客中表示，RSK 网络Liquality集成了Rootstock并提高了比特币DeFi的可见性。</p>
+<h3 id="stacks">Stacks</h3>
+<p>Stacks是比特币主链的另一个知名侧链，原名Blockstack ，2020年第4季度更名为Stacks。与RSK 不同的是，Stacks 将其发行的STX作为 Stacks 网络的原生加密货币（STX最大供应量为18.18亿，流通市值约5.5亿美金）。它用于为比特币的智能合约提供燃料，奖励开放 Stacks 网络上的矿工，并使持有者能够通过 Stacking 赚取比特币。</p>
+<p>作为比特币侧链，Stacks通过其转移证明 (PoX) 共识机制直接与比特币区块链连接来实现这一点，该机制让矿工支付 BTC 以铸造新的 Stacks (STX) 代币。此外，STX 代币持有者还可以stack (not stake) 他们的代币以赚取比特币作为奖励。</p>
+<p>Stacks 引入了一种新的智能合约编程语言，称为 Clarity，由于其明确的语法，它的设计既安全又易于构建。 根据其官网显示，目前已经有30个Dapp运行在Stacks上，涵盖了Data、DAO 、DeFi、NFT 、钱包等。</p>
+<h3 id="liquid-networkblockstream">Liquid Network(Blockstream)</h3>
+<p>Liquid Network 是由 加拿大 Blockstream 公司开发的比特币主链的一条侧链，可以实现快速以及隐私转账，也可以在该侧链上进行数字货币发行，如发行证券型代币和其他数字资产。</p>
+<p>去年11月，萨尔瓦多政府计划发行的10 亿美元 “ 比特币债券”就将发在Liquid Network 上。该债券为10亿以美元计价的10年期债券，票面利率为6.5%。所募资金的一半将用于购买比特币，并持有五年，其余的将用于资助与比特币有关的建设项目。萨尔瓦多政府开创了这种以比特币作为基础资产担保的新的债券发行方式，也可能会成为比特币DeFi的一种新玩法。</p>
+<p>其他的比特币侧链项目还有如 Nomic，Impervious等，但是目前还有待开发。</p>
+<p>以上这些项目虽各有不同，但都是构成比特币DeFi拼图的一部分，那么比特币上的DeFi 究竟是如何实现的呢？下面以OmniLab 开发的项目Uprets为例(Uprets为暂定的项目代号，后期可能会更名)，浅析基于比特币闪电网络技术 DEX 的基本原理，以及对比特币生态发展的展望。</p>
+<h2 id="upretslightning-swap">Uprets——Lightning Swap</h2>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_s07zkssm8f.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<h3 id="一自动做市商amm模型分析">一、自动做市商（AMM）模型分析</h3>
+<p><strong>Uprets VS. Uniswap</strong></p>
+<p>DEX 最重要的就是其AMM模型。相信大家都已经熟知诸如Uniswap、Curve 和Balancer 的AMM模型。</p>
+<p>AMM模型简单来说，就是通过定义全局常量不变量，在AMM模型上运行，确保成交确定性和链上交易资本的有效使用。他们的智能合约持有各种代币对的流动性储备，交易员直接针对这些储备进行Swap交易。</p>
+<p>在此模型中，价格是根据常数乘积x*y=k模型（或其变体）自动设置的，其中x是令牌a的数量，y是池中令牌B的数量。当交易者卖出x’代币a换y’代币B时，池中代币a的数量增加，代币B的数量减少，但产品保持不变：（x+x’）*（y-y’）=x*y=k。</p>
+<p>通过收取交易费（一般为0.3%）激励流动性提供者(LP)。这也是2020年DeFi Summer爆火后，各大公链竞相模仿并推动各类DeFi创新的底层逻辑，可以说2020-2021年的整个市场上涨正是由DeFi及其衍生品的持续创新推动。</p>
+<p>比特币上的DEX 和传统的DEX机制完全不同。想要了解Uprets 在闪电网络上AMM工作的核心机制，需要将套利者加入模型。我们假设读者对闪电网络和AMM都很熟悉了，省略对基本概念的介绍。为了便于理解，我们对比Uniswap来说明。</p>
+<p><strong>1、流动性池</strong></p>
+<p>闪电网络已经有资金通道支持多跳HTLC支付。由某种代币出资的通道形成了一个逻辑网络，在这个网络中，即使没有直接通道，Alice也可以向Bob付款。支付路径上的节点提供流动性，如果支付成功，通道则会收到部分费用。参与交易的Alice和Bob通过闪电网络收付款和交易，并不会产生额外的Gas费用。</p>
+<p>在Uniswap的AMM模型中，流动性提供者扮演着类似的角色：如果Swap成功，将资金存入LP池的人将根据其对流动池的贡献比例获得佣金。但用户在交易时，实际上调取了智能合约，因而需要支付网络Gas费用。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_vuwiza8450.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p><strong>全局池</strong></p>
+<p>Uprets在lightning network中的资金通道形成了一个全球流动性池，不同之处在于整个lightning network是一个池，每个节点都维护一部分流动性，而Uniswap AMM使用一个合约地址来收集流动性：所有代币都存放在一个地址中。</p>
+<p>CEX和DEX的有机结合（比特币版本的Uniswap V3）</p>
+<p>从概念上讲，订单簿是一个离散的空间，由一系列具有多种价格的订单组成。最高出价和最低出价之间必须存在价差，如果价差太大，则无法成交。如果订单簿dex处于链上状态，做市商通常还会承担Gas费的损失。</p>
+<p>为了获得成交的确定性，Uprets利用融资通道填补所有价格之间的价差。因此，会有有一个覆盖整个价格空间的连续空间。当价格变动时，流动性提供者有动机将流动性集中在当前价格周围，以获得更高的佣金。他们撤销旧的流动性范围，并提交涵盖当前价格的新流动性范围。这对冲了订单簿模型的流动性稀疏性。它的作用类似于Uniswap V3和CEX订单簿的结合。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_zvbpl5nsv8.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>2、流动性挖矿</p>
+<p>节点提交流动性范围后，在该范围内交换时将收到佣金。Lightning Network没有为流动性提供商收取佣金的合约，而是利用路由协议，使流动性提供商的通道资金能够用于交易，因此这些通道直接赚取佣金。</p>
+<p>增加流动性</p>
+<p>为闪电网络增加流动性很简单：只需与你的交易对手打开一个通道并为其提供资金。lightning network会发现新的通道并更新网络图，以便你的通道为全球支付流动性做出贡献。</p>
+<p>移除流动性</p>
+<p>撤回已签署和提交的订单和范围内的流动性，或者关闭通道并将代币撤回到主链。</p>
+<p>需要注意的是，为通道融资需要BTC gas。但增加（消除）流动性没有成本（基于闪电网络）。</p>
+<p>3、通道状态</p>
+<p>在闪电网络中，交易、增加或者移除流动性，都会改变通道状态</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_vkdtuootwp.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>4、运行匹配引擎的跟踪器</p>
+<p>当OmniBOLT节点在线时，它必须通过其连接的跟踪器向网络宣布自己，作为集合点，通知其邻居更新其令牌类型、通道数量和流动性储备。Omnibolt应用跟踪网络来注册节点，并更新节点图的状态。任何跟踪器都可以是允许节点连接的集合点。</p>
+<p>5、费用结构</p>
+<p>代币A到代币B的交易：在A中支付0.3%的费用。该费用将在原子交换支付路径中的节点之间分摊，这意味着尽管池中有许多流动性提供者，但对于每笔交易，并非所有提供者都得到支付。跟踪器平衡了整个网络的工作负载：如果一个节点忙于处理HTLC，则会选择另一个节点作为跳点并赚取交换费。如果流动性提供者认为他所联系的追踪者不够公平，他可以选择另一个。每个跟踪器应发布其路径/节点选择策略。而在Uniswap中，是通过智能合约自动分配。</p>
+<p>6、非永久性损失（又被称为无常损失）</p>
+<p>Uprets中支付流动性提供商几乎永远不会面临任何损失（因为资金相当于只在套利时参与了中间的“垫付”环节，且可以赚取差价）。</p>
+<p>Uniswap的LP提供者希望利用流动性赚取交易费用，可能出现潜在损失。</p>
+<p>下图显示无常损失如何发生以及损失有多大的示例。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_vlj7t063yf.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>7、小结</p>
+<p>Uprets Ligntning Swap与Uniswap式的AMM模型对比表</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_ia9y2hhwpy.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>8、除此之外，Uprets（Lightning Swap）作为比特币网络原生交易解决方案的优势还有很多，比如：</p>
+<p>1）大量的比特币矿工/BTC持有人可以在比特币闪电网络上直接将BTC换成Omni-USDT,不用再必须依赖某些CEX进行交易，暴露个人信息，甚至无端被冻结提币等困扰；</p>
+<p>2）无须再依赖其他中心化机构将BTC打包(wrap)进入DeFi，可以直接参与到Uprets等原生DeFi(LiFi)协议，同时将其他资产带入闪电网络，激活比特币网络本身潜在的巨大DeFi（LiFi）市场。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_6mo77frpfg.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>3）基于闪电网络和zkRollup的二层计算，没有GAS费，交易滑点低，速度快，能够满足大额交易和高频交易的需求。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_8jhio3h2mf.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<h2 id="回顾与展望">回顾与展望</h2>
+<p>闪电网络现在已经成为全球最受欢迎的加密货币支付协议。OmniBOLT 是继 OmniLayer 之后，由Omni Foundation提出的第二个重要协议。</p>
+<p>可能很多人不知道的是，USDT(应该)是除了比特币（Bitcoin）之外的第一个基于比特币网络的区块链应用。早在2014年，第一批USDT于比特币网络上诞生，大概在2015年2月正式上线几大主流交易所。在2018年之前，USDT的转账路径只有一条，那就是基于比特币网络的Omni-USDT。</p>
+<p>后来随着以太坊网络开始流行，基于以太坊开发的项目开始井喷式增长，Tether在2018年发行了基于以太坊网络的 ERC20-USDT。而现在被使用最广泛，发行数量最多的USDT是Tether在2019年开始，基于波场发行的TRC20-USDT。虽然TRC20-USDT在安全性方面没有比特币和以太坊网络上的USDT高，但使用TRC20-USDT的转账成本更低，速度更快，更迎合了市场的需求，因而被广泛使用。（通过质押获得带宽和能量后，可以做到零成本转账，秒级到账，但是当转账次数超过带宽或能量的消耗，则需要质押或通过租赁的方式获得更多的带宽和能量）</p>
+<p>目前USDT已经成为全球使用最广的加密稳定币，同时还在BSC，AVAX 、EOS 等多个区块链网络发行。目前总供应量超过685亿个,其中TRC20-USDT超过341亿个，Omni-USDT大约为8.88亿个。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_s1u4ojkho2.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>(来源：<a href="https://tether.to/en/transparency">https://tether.to/en/transparency)</a>?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NjU0NTkxODksImZpbGVHVUlEIjoiemRreUJvTVE2anNWeGpBNiIsImlhdCI6MTY2NTQ1ODg4OSwiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNzI0MDE0OTk4OH0.eXDCgn6u-548fp24IDxqP9UER9VdXs_xLyUS8-hW7f0)</p>
+<p>虽然基于比特币网络的Omni-USDT发行最早，享受了比特币网络的安全等级，但是Omni-USDT在使用体验上，也继承了比特币网络的弊端：转账手续费太高，到账时间比较长（1个小时左右），完全不适合频繁的小额转账和支付。因而逐步被大家所忽视，发行量常年在几十亿美金当量。</p>
+<p>如果，Omni-USDT能够通过OmniBOLT和Uprets无缝接入闪电网络，与TRC20-USDT相比，支付/转账/交易的速度更快，费用更低（无需质押代币带宽等资源），同时还更安全，那将会会发生什么？</p>
+<p>事实上，在今年年初，Tether就曾在Twitter上官宣，2022年，Tether会联合Synonym一起，通过OmniBOLT将代币（不仅是USDT）带入闪电网络来推动比特币经济的发展。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_rkfgjetfse.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>并于今年三月，Synonym 通过OmniBOLT，在比特币闪电网络上完成了第一笔USDT稳定币交易</p>
+<p>（<a href="https://mempool.space/address/3N5YQzhGGaJMbbVSC2KTWZaqMVtZmvyoQT?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NjU0NTkxODksImZpbGVHVUlEIjoiemRreUJvTVE2anNWeGpBNiIsImlhdCI6MTY2NTQ1ODg4OSwiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNzI0MDE0OTk4OH0.eXDCgn6u-548fp24IDxqP9UER9VdXs_xLyUS8-hW7f0">https://mempool.space/address/3N5YQzhGGaJMbbVSC2KTWZaqMVtZmvyoQT</a>）</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_ddwds2ko1r.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>Bitcoin magazine等媒体争相报道（<a href="https://bitcoinmagazine.com/business/usdt-pilot-brings-tokens-to-bitcoin-lightning?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjE2NjU0NTkxODksImZpbGVHVUlEIjoiemRreUJvTVE2anNWeGpBNiIsImlhdCI6MTY2NTQ1ODg4OSwiaXNzIjoidXBsb2FkZXJfYWNjZXNzX3Jlc291cmNlIiwidXNlcklkIjotNzI0MDE0OTk4OH0.eXDCgn6u-548fp24IDxqP9UER9VdXs_xLyUS8-hW7f0">https://bitcoinmagazine.com/business/usdt-pilot-brings-tokens-to-bitcoin-lightning</a>）</p>
+<p><img src="https://img.bibiqing.com/news/2022/1011/27_mrskucr9li.png!heading" alt="Waterdrip Capital：比特币闪电网络上的DeFi研究"></p>
+<p>值得期待的是，OmniLab开发的OmniBOLT协议和Uprets（Ligntnig Swap ）产品有望在1-2个月后发布内测版。以USDT为首的Omnilayer资产和其他公链资产如能通过其顺利接入闪电网络，凭借比特币网络自身的安全性，闪电网络的便捷性，以及比特币网络巨大的资产体量和良好的流动性，如今有了原生的交易对手(USDT)，未来比特币的交易可以彻底不再依赖CEX，相信在DEX等比特币DeFi上交易量将会十分惊人。另外，从OmniBOLT核心团队得知，该团队正在用零知识证明实现 BTC/OmniBOLT上面真正的智能合约，基于支付网络的智能合约是又一个潜在杀手级功能。沉寂在OmniLayer上超10亿个的USDT必定会被激活，经过一定时间的积累，发行在比特币网络上的Omni-USDT数量可能会超过发行在其他所有链上USDT的总和，推动比特币 DeFi 和区块链行业走向一个新的高度，进而吸引更多开发者、社区和投资者，以及传统商业，投入到比特币DeFi 研究、创新和建设，更复杂的需求被满足，更丰富的应用被发布，更庞大的资产进入加密领域，更有价值的创新融入现实世界，在比特币网络上建立真正的商业帝国。</p>
+<p>【参考文献】</p>
+<p>1、https://lightning.network/lightning-network-paper.pdf</p>
+<p>2、https://arcane.no/research/reports/the-state-of-lightning</p>
+<p>3、https://arcane.no/research/reports/the-state-of-lightning-volume-2</p>
+<p>4、https://arcane.no/research/the-lightning-network-is-bringing-payments-back-to-bitcoin</p>
+<p>5、https://bitcoinvisuals.com/lightning</p>
+<p>6、https://mirror.xyz/huzhiwei.eth/J2Kv1ATWo0_d3ZidG-8BDrIJcYX7DFew_ruQ2p03sgU</p>
+<p>7、https://omnilab.online/</p>
+<p>8、https://github.com/omnilaboratory/OmniBOLT-spec</p>
+<p>9、https://github.com/omnilaboratory/obd</p>
+<p>10、https://github.com/omnilaboratory/OmniBOLT-spec/blob/master/OmniBOLT-06-Automatic-Market-Maker-and-DEX.md</p>
+<p>11、邹钧、张海宁．区块链技术指南［Ｍ］．北京：机械工业出版社，2017．220-226．</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43401/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">zkSync L3“探路者”将于 2023 年Q1登陆测试网</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43385/">
+                <span class="next-text nav-default">曾经out的共享经济 回来了吗？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言：</a></li>
+    <li><a href="#闪电网络">闪电网络</a>
+      <ul>
+        <li><a href="#一闪电网络发展现状">一、闪电网络发展现状</a></li>
+        <li><a href="#二闪电网络基本原理">二、闪电网络基本原理</a></li>
+        <li><a href="#三闪电网络生态系统">三、闪电网络生态系统</a></li>
+      </ul>
+    </li>
+    <li><a href="#omnibolt">OmniBOLT</a>
+      <ul>
+        <li><a href="#obd网络">OBD网络</a></li>
+        <li><a href="#omnibolt的工作原理">OmniBOLT的工作原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#比特币defi-值得关注的项目">比特币DeFi 值得关注的项目</a>
+      <ul>
+        <li><a href="#uprets">Uprets</a></li>
+        <li><a href="#taro">Taro</a></li>
+        <li><a href="#rgb">RGB</a></li>
+        <li><a href="#kollider">Kollider</a></li>
+        <li><a href="#portal">Portal</a></li>
+        <li><a href="#rsk">RSK</a></li>
+        <li><a href="#stacks">Stacks</a></li>
+        <li><a href="#liquid-networkblockstream">Liquid Network(Blockstream)</a></li>
+      </ul>
+    </li>
+    <li><a href="#upretslightning-swap">Uprets——Lightning Swap</a>
+      <ul>
+        <li><a href="#一自动做市商amm模型分析">一、自动做市商（AMM）模型分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#回顾与展望">回顾与展望</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

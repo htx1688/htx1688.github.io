@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Paradigm 介绍 Goldfish：PoS 以太坊中 LMD GHOST 分叉规则的安全替代品 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="我们提出了 Goldfish 共识协议，旨在作为 PoS 以太坊信标链中 LMD GHOST 的替代品。" />
+<meta name="keywords" content="加密市场" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42537/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Paradigm 介绍 Goldfish：PoS 以太坊中 LMD GHOST 分叉规则的安全替代品" />
+<meta property="og:description" content="我们提出了 Goldfish 共识协议，旨在作为 PoS 以太坊信标链中 LMD GHOST 的替代品。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42537/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-12T00:00:00+00:00" />
+
+<meta itemprop="name" content="Paradigm 介绍 Goldfish：PoS 以太坊中 LMD GHOST 分叉规则的安全替代品">
+<meta itemprop="description" content="我们提出了 Goldfish 共识协议，旨在作为 PoS 以太坊信标链中 LMD GHOST 的替代品。"><meta itemprop="datePublished" content="2022-09-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3212">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Paradigm 介绍 Goldfish：PoS 以太坊中 LMD GHOST 分叉规则的安全替代品"/>
+<meta name="twitter:description" content="我们提出了 Goldfish 共识协议，旨在作为 PoS 以太坊信标链中 LMD GHOST 的替代品。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Paradigm 介绍 Goldfish：PoS 以太坊中 LMD GHOST 分叉规则的安全替代品</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-12">
+      2022-09-12
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3212 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>合并：从工作量证明到权益证明</strong></p>
+<p>以太坊即将从工作量证明 (PoW) 过渡到权益证明 (PoS) ，这是多年研究和开发的结晶。虽然 PoS 带来了许多潜在的优势，但这也意味着以太坊正在放弃中本聪最&quot;长情&quot;的协议——当然也是最简单、最优雅的共识协议之一，并且已经过去中心化区块链的实战考验。</p>
+<p>以太坊 PoS 共识协议中，一个众所周知的脆弱组件已被证明是“LMD GHOST”选择分叉规则，最近发生了多次攻击和打补丁，其安全性仍未得到证明。</p>
+<p>在题为“PoS 以太坊不再被攻击 ？”的文章中，我们提出了 Goldfish，它是 PoS 以太坊中 LMD GHOST 选择分叉规则可证明的、安全的替代品。我们认为这只是朝着更严格的协议设计和分析迈出的第一步，目的是加强以太坊的安全性。</p>
+<p><strong>以太坊的权益证明协议</strong></p>
+<p>以太坊的权益证明 (PoS) 共识协议比 PoW 复杂得多。</p>
+<p>它实际上是两种不同共识协议的组合：一个“finality gadget”（称为 Casper FFG），在 6.4 分钟长的 epoch 后最终确定区块，以及在每个 epoch 内管理链的选择分叉规则 fork-choice rule（称为“Greedy Heaviest Observed Subtree”，简称LMD GHOST）。这两个组件以复杂的方式相互交互，下面用框图进行描述：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0912/20_4g3uewst6d.png" alt="image.png" title="1662748012530145.png"></p>
+<p>具体来说，LMD GHOST 指导区块生产过程，并以 12 秒的时间Slot和验证者的子抽样组合运行。因此，它可以被认为是在 PoS 以太坊区块奖励前负责较弱的“短期共识”。一旦就交易账本达成短期共识，它就会被移交给 Casper FFG 进行额外的加固，它在包含 32 个插槽（slots） = 6.4 分钟的时间尺度上运行，并涉及完整的验证器集。因此，Casper FFG 负责提供更强大的“长期共识”，提供最终性和负责任的安全性。</p>
+<p>不幸的是，这种复杂性伴随着挑战。特别是，LMD GHOST 组件，以及 LMD GHOST 和 Casper FFG 之间的交互，都存在反反复复的攻击、打补丁。目前为 Merge 采用的协议既没有公开的攻击，也没有正式的安全分析/证明。</p>
+<p>缺乏安全证明是令人担忧的原因，但并不是因为简单学术模型中的证明必然完美地表明现实世界的安全性。相反，即使在简化模型中，我们也无法最终解释为什么这个协议是安全的，这表明我们实际上并不了解协议，或者它们的后果和交互的全部范围。</p>
+<p><strong>Goldfish</strong></p>
+<p>在题为“PoS 以太坊不再被攻击 ？”的文章中，我们提供了 PoS 以太坊的 LMD GHOST 分叉选择规则的替代品。该协议称为 Goldfish，类似于 LMD GHOST（因此不需要对当前客户端实现进行大修），但带有安全证明。</p>
+<p>为了更好地理解Goldfish，让我们先预览下 LMD GHOST 的大致工作原理：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0912/20_vna3mrgu87.png" alt="image.png" title="1662748262202817.png"></p>
+<p>假设我们的简化网络模型中消息引起的最大延迟为已知值 A（如上图中的△）。在 LMD GHOST 中，相似步骤得到的值为 2A 。对于每个间隙，从完整的验证者集中随机选择一个提议者和一个小的验证者委员会。在每个slot开始时，slot的提议者运行 LMD GHOST 分叉选择规则（有两个修改，“提议者提升”和“模棱两可的折扣”，它们是响应两个早期攻击的补丁）以确定规范的区块链奖励和提出一个新的区块。</p>
+<p>在slot进行到一半时，slot的委员会成员还使用相同的分叉选择规则确定规范的区块奖励，并投票支持该奖励。 LMD GHOST 没有指定确认规则，而是让用户来决定区块树的哪些区块拥有“足够”的票数以确信他们不会离开规范链。</p>
+<p>Goldfish 紧密遵循这个一般结构，但为验证者引入了一个额外的阶段，以同步他们对投票计数的看法，并确认区块：</p>
+<p><img src="https://img.bibiqing.com/news/2022/0912/20_v51804s3he.png" alt="image.png" title="1662748671468592.png"></p>
+<p>在每个slot的开始，slot的提议者根据前一个 slot 的投票运行简单的 GHOST 分叉选择规则，以确定在哪里提议一个块。进入slot的三分之一时，该时段的委员会成员使用相同的分叉选择规则，该规则基于前一个时段的投票和提议者转发的投票，来确定在哪里投票。 最后，在进入slot的三分之二时，所有验证者都运行一个明确定义的 T 深度确认规则。</p>
+<p>Goldfish 基于两种关键技术，投票缓冲和投票到期，以仔细同步诚实验证者的观点：</p>
+<ul>
+<li>
+<p>投票缓冲（也称为view merge，最早出现在新的共识协议 Highway 上）。简而言之，缓冲从网络收到的选票，以及在每个验证者的本地视图中精心定时包含这些选票，保证了在具有诚实提议者的slot中，所有诚实的验证者都投票支持提议者的提议。这导致了重组弹性：诚实的提议者的提议保证保留在规范链中。随之而来的是安全性（即输出账本的安全性和活跃性）。</p>
+</li>
+<li>
+<p>投票到期（也称为临时投票）意味着在每个slot内，只有前一个slot的投票会影响协议的行为（类似于“健忘”的金鱼，Goldfish 协议名称源于此）。投票到期使投票集很小，这可能会影响诚实验证者的短期未来行动。因此，在任何时间点，只有少数协议消息需要在诚实验证者的视图中进行缓冲和合并。因此，投票到期是投票缓冲效率/可行性的先决条件。投票到期对于支持波动的验证者参与水平以及支持在每个slot较小的子样本选民委员会中运行协议，而不是在整个验证者集中运行协议也至关重要。</p>
+</li>
+</ul>
+<p>最后，Goldfish 的确认规则会确认区块是否在创建后的一段时间内仍在规范链上。分析表明，由此产生的确认翻转概率在出块和区块确认之间的延迟中呈指数级降低。</p>
+<p><strong>Goldfish 面临的挑战：异步（Asynchrony）</strong></p>
+<p>Goldfish 很简单，可以接受严格的安全证明。这一分析立即取得了成果：请记住，我们一开始就假设我们的简化模型中的网络延迟上限为 A (上图中的△表示) 。在证明安全性的过程中，我们必须明确这一假设和其他假设。</p>
+<p>如果违反了这个界限，即如果网络暂时异步，会发生什么？我们可以追踪安全论证的步骤，看看在没有假设的情况下会出现什么问题。我们看到，如果实际网络延迟大于 2A（即当前 PoS 以太坊中的 8 秒），那么 Goldfish 将无法及时获得slot (t-1)的决定性选票以在slot t 的基础上进行构建，该协议可能会受到重组的影响。</p>
+<p>这样的重组是不好的。但至少由于严格的安全论点，我们可以更好地了解我们系统的安全性关键依赖于哪些条件，以及为什么以及如何。我们可以做出更明智的决定，以确保满足这些先决条件。例如，虽然在当前的点对点网络协议中，攻击者可能更容易引起一些网络延迟，但最近（也由于与网络相关的数据可用性采样挑战）对强化的点对点协议重新产生了兴趣，这些协议重新启用共识层的权益分配来指导对等点的选择。这样的协议更加抗攻击，并且可以合理地缓解延迟问题。此外，确定性/问责制小工具（最终可能会通过“单槽确定性”进一步加速）为任何重组提供了支持。</p>
+<p><strong>还需要做什么</strong></p>
+<p>我们提出了 Goldfish 共识协议，旨在作为 PoS 以太坊信标链中 LMD GHOST 的替代品。我们对 Goldfish 本身进行了严格的安全分析，并结合了终局/问责制小工具（基于另一个共识协议，例如 HotStuff）。其他 PoS 以太坊共识安全挑战仍然存在，例如，来自分叉选择和 finality gadget 的交互，我们期待在未来看到 PoS 以太坊在这些方面的进一步共识安全改进。</p>
+<p>来源：Paradigm、比推</p>
+<p>编译及整理：比推 Mary Liu</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42538/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">NFT市场Rarible宣布支持DOGAMÍ原生Token DOGA</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42533/">
+                <span class="next-text nav-default">报告：预计到2030年有超过5亿人购买加密货币</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

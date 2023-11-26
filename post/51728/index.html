@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          解读比特币Oridinals协议与BRC20标准的原理创新与局限 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="虽然应用还是很苍白，作为有趣的破圈尝试，开启了比特币可编程性的遐想。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51728/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="解读比特币Oridinals协议与BRC20标准的原理创新与局限" />
+<meta property="og:description" content="虽然应用还是很苍白，作为有趣的破圈尝试，开启了比特币可编程性的遐想。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51728/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-22T00:00:00+00:00" />
+
+<meta itemprop="name" content="解读比特币Oridinals协议与BRC20标准的原理创新与局限">
+<meta itemprop="description" content="虽然应用还是很苍白，作为有趣的破圈尝试，开启了比特币可编程性的遐想。"><meta itemprop="datePublished" content="2023-05-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5495">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解读比特币Oridinals协议与BRC20标准的原理创新与局限"/>
+<meta name="twitter:description" content="虽然应用还是很苍白，作为有趣的破圈尝试，开启了比特币可编程性的遐想。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">解读比特币Oridinals协议与BRC20标准的原理创新与局限</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-22">
+      2023-05-22
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 5495 字 -
+        预计阅读 11 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%AF%94%E7%89%B9%E5%B8%81/"> 比特币 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<blockquote>
+<p>“The Times 03/Jan/2009 Chancellor on brink of second bailout for banks.”——比特币创世区块</p>
+</blockquote>
+<p>最近 BTC 上手续费区块收入占比最高到 74% ，大约 4.85 BTC 手续费，而仅仅两个月前才 2% 左右，源于数个百倍币的诞生以及大众 fomo 的情绪，让 BRC 20 的市场迎来爆发， 5 月 7 日 Bitcoin 网络上有超过 40 万笔交易待确认，虽然他和我们熟知的 ERC 20 虽然都被称为代币标准，但是实现的机制原理差异巨大，本文将从技术视角尝试解读其实现以及价值。</p>
+<h2 id="1ordinals协议的核心思想">1、Ordinals 协议的核心思想</h2>
+<h3 id="11概述">1.1、概述</h3>
+<p>每一枚比特币都是由一亿个「聪（Satoshis）」构成 ( 1 btc = 10 ^ 8 sat)，这些 sat 每一个都有唯一标识且无法分割。</p>
+<p>1、根据比特币里面 sat 的「序数（ordinal）」，</p>
+<p>2、赋予每一个聪特定的含义「Inscriptions（铭刻）」</p>
+<p>这就是 Ordinals 协议。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/21_58wlu78cn4.png" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<h2 id="2聪是如何编号的">2、聪是如何编号的？</h2>
+<p>他借由比特币独特的出块流程和 UTXO 模型，从而让每一个「<strong>聪（sat）</strong> 」具有独特的编号。</p>
+<p>比特币是在「<strong>挖矿</strong> 」中产生的，挖矿过程是矿工通过解决复杂的数学问题（POW）获得出块权，来验证新交易并添加到区块链中，比特币网络每 10 分钟左右会生成一个新的区块，每个区块包含一组新的交易和之前区块的哈希值，其中矿工的收益又被称为<strong>Coinbase 区块</strong></p>
+<p>在以太坊中采用“账户余额模型”，即每个地址有单独的存储结构和空间余额（balance）便是其中的一个字段。</p>
+<p>这种模型的优点是：</p>
+<ul>
+<li>
+<p>简单非常容易理解和编码实现。</p>
+</li>
+<li>
+<p>高效，每笔交易只需要验证发送账户是否有足够的余额来支付交易；</p>
+</li>
+</ul>
+<p>缺点：会出现双重支出攻击。</p>
+<p>可拓展阅读：<a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247483981&amp;idx=1&amp;sn=376c2d0b9b28aff74af74926bf4891de&amp;chksm=e83aa597df4d2c818850eb3b6f47a7d02bc54a8342d8ba05852dec07e5ce96c5fe7ad97993e4&amp;scene=21#wechat_redirect">【前沿解读】斯坦福研究员论文-以太坊可逆交易标准 ERC 20/721 R 的机制、创新与局限</a></p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/21_pre8selbri.png" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<p>但是比特币网络不同，<strong>他账户的余额并不是由一个数字表明</strong> ，而是由当前区块链网络中所有跟当前账户有关的 UTXO（未花费的交易输出）组成。</p>
+<h3 id="21比特币的-utxo-模型">2.1、比特币的 UTXO 模型</h3>
+<p>UTXO（Unspent Transaction Output）是一种账本模型，在比特币系统中，每一笔交易都会产生一些输出，比如转账交易的输出就是接收方的比特币地址和转账金额。这些输出被存储在 UTXO 集合中，用于记录未花费的交易输出。</p>
+<p>每一笔交易都由若干个输入（Input） 和若干个 输出（Output） 构成。每一笔交易都要花费一笔输入，产生一笔输出，而其所产生的输出，就是“未花费过的交易输出”；一个 Input 指向的是前面区块的某个 Output，只有 Coinbase 交易没有输入，只有凭空输出。</p>
+<p>UTXO 模型的优点是更加安全和隐私保护，因为它没有中心化的账户记录和传统账户模型可能泄露的账户余额信息。</p>
+<p>UTXO 模型的缺点是增加了交易的验证成本和存储成本。每次交易时都需要验证交易的支付和接收是否合法，同时也需要存储大量的 UTXO 信息。</p>
+<p>所以任何交易，<strong>总是可以由 Input 溯源到 Coinbase 交易 继而追溯每一个聪被挖矿挖出时的序号。</strong></p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/c507bp8ks3pyts2" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<p>所以我们说自己有多少比特币（bitcoin）实际上是指的我们拥有所有权的那些 UTXO 中所指明的比特币（bitcoin）的数量，因此如果我们想要统计一个地址的 BTC 数量:</p>
+<ol>
+<li>
+<p>从创始块开始扫描；</p>
+</li>
+<li>
+<p>遇到某笔交易的某个 output 是指定的地址，余额增加；</p>
+</li>
+<li>
+<p>遇到某笔交易的某个 input 是指定的地址，余额减少；</p>
+</li>
+</ol>
+<h3 id="22sat和utxo的关系">2.2、sat 和 UTXO 的关系</h3>
+<p>注意是每一个 sat 不是 UTXO! 由于 UTXO 是不可再分的最小交易单元，因此 sat 只能存在于 UTXO 中，且 UTXO 包含了一定范围的 sats，且只能在花费某一 UTXO 后产生新的输出中对 sats 编号进行拆分</p>
+<p>比如我在创世块或者 CoinBase 区块获得了 50 个 BTC 的奖励，对应的 Input 和 Output 则是</p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/21_2w7s51vq81.png" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<p>如果我进行一笔 20 BTC 的转账给 B 地址，则 UTXO 集中会呈现，这里的 input 是上一笔的 output</p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/21_pq2ehma3yu.png" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<p>这里的 sats 消耗顺序，是基于 FIFO&quot;先进先出&quot;（First-In-First-Out ）原则，在交易费用相同的情况下，较早的 UTXO 将比较晚的 UTXO 更优先被用于交易。</p>
+<p>这些就是 Ordinal NFT 的核心技术支撑，非常的简洁但是却能衍生出很多好玩的东西! 这个 Ordinal Number 甚至可以用来表示域名等。</p>
+<h3 id="23ordinal-number的表示方法">2.3、Ordinal number 的表示方法</h3>
+<p>Ordinal Number 则有很多种表示方式，比如度数表示法(Degree Notation)</p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/21_s9flcaa2vu.png" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<p>这种表示法有趣的地方在于，它根据比特币自身的周期性特征，人为地为 sat 创造了一种稀缺性：</p>
+<ul>
+<li>
+<p>common: 所有不是区块 mint 出的第一个 sat 的 sats</p>
+</li>
+<li>
+<p>uncommon: 该 sat 是某区块挖出的第一个 sat(D== 0)</p>
+</li>
+<li>
+<p>rare: 难度调整时挖出的第一个 sat(C== 0&amp;&amp;D== 0)</p>
+</li>
+<li>
+<p>epic: 减半时挖出的第一个 sat(B== 0&amp;&amp;D== 0 </p>
+</li>
+<li>
+<p>legendary: 发生 Cycle 轮换时挖出的第一个 sat(B==C==D== 0)</p>
+</li>
+<li>
+<p>mythic: 创世区块挖出的第一个 sat(A==B==C==D== 0)</p>
+</li>
+</ul>
+<p>比如：https://ordinals.com/sat/1 ° 0 ′ 0 ″ 0 ‴，所以目前产生 Fomo 追逐的核心点并非是 mint 的内容中包含什么东西，而是对应的 Ordinal Number 这样的序号值。</p>
+<p>如果说序号是结合了比特币原生的诸多技术特性产生的，那么铭刻（Inscriptions）则是注入 sat 具体内容的方法，所以问题便来到，有了唯一标识的 sat 如何定义其绑定的任意内容呢？</p>
+<h2 id="3如何inscriptions铭刻任意内容">3、如何 Inscriptions（铭刻）任意内容</h2>
+<p>在讨论铭刻之前，咱们先了解下比特币扩容的两次重大升级：SegWit 和 Taproot</p>
+<h3 id="31segwit隔离见证">3.1、SegWit（隔离见证）</h3>
+<p>他是比特币的一个重大升级于 2017 年 8 月激活，主要目的是优化比特币的交易处理能力、降低交易费用，并在更安全的条件下实现比特币的扩容。SegWit 是一个软分叉（Soft Fork）升级，涵盖多个 BIP（141、 142、 143、 144 和 145 ），所谓软分叉也就是可以兼容老版本的比特币客户端，没有破坏比特币网络的兼容性。</p>
+<p>它的<strong>核心改变是把交易中的签名（Witness Data）从交易数据中分离出来</strong> ，使交易数据更小，从而减少交易费用，并提高比特币网络的容量。</p>
+<p>SegWit 的实现方式是将所有的交易数据分为两部分，一部分是交易的基本信息（Transaction Data），另一部分是交易的签名信息（Witness Data），并把签名信息保存在一个新的数据结构中，是被称为“隔离见证（witness）”的新区块中，并与原始交易分开传输。</p>
+<p>这样，比特币交易的交易数据大小提高了上限，同时降低了签名数据的交易费用。在 SegWit 升级之前，比特币的容量上限是 1 MB，而 SegWit 之后，比特币交易的容量上限达到了 4 MB。</p>
+<p>所以 Oridnals Inscription 的<strong>本质就是把铭刻数据藏在见证数据中。</strong></p>
+<h3 id="32taproot升级">3.2、Taproot 升级</h3>
+<p>与 SegWit 升级类似，Taproot 升级同样是一种软分叉升级，是 Bitcoin Core 贡献者 Gregory Maxwell 在 2018 年提出的比特币升级提案，它并不会改变比特币协议本身，而是对现有的比特币交易机制进行改进。</p>
+<p>该升级主要包含 3 个技术概念 —— P2SH、MAST 和 Schnorr 。其结果是让复杂的交易如多签名交易、时间锁交易看起来如同普通的比特币交易，增强了比特币的隐私性，目的是推动了比特币实现智能合约部署、拓展用例等各种场景升级。</p>
+<p>在 SegWit 升级中，比特币协议增加了一个新的版本号，用于表示新的交易格式。在 Taproot 升级中，比特币协议最重要的更改是将脚本验证程序从 ScriptVerify flag 更新为 ScriptVerify v2 flag，以支持 Tapscript。</p>
+<p>一个Tapscript的上链需要分为两个步骤：commit 和 reveal。而 Inscription（铭刻）的内容则包含在 reveal 交易的第一个输入中，从而铭刻在此交易的第一个输出的第一个 sat 上。比如</p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/21_swhssf0nts.png" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<p>这里有多个操作指令，但是开头必然是 OP_FALSE 此指令被推入执行栈后脚本就会停止运行，但仍然被存在了链上。</p>
+<p>所以 Ordinal Inscription 的本质是：在比特币网络上<strong>借助一个永远不会被执行的脚本 tapscript，搭建了一个简易的记账层</strong> ，进行资产和数据的统计和记录</p>
+<p>由于只有记账，这就意味着不会有类似智能合约的脚本执行以及验证的过程，<strong>必然高度依赖链下的中心化管理和上报结果。</strong></p>
+<h2 id="4什么是brc20">4、什么是 BRC 20 ？</h2>
+<p>BRC-20 的名字乍一看很像以太坊的 ERC 20 ，但其实两者技术差别非常大，ERC-20 代币的持有状态保存于链上 ，能在链上得到网络共识。而 BRC 20 则是借助 Ordinals 协议铭刻的**JSON 格式铭文，**该规范只是定义了 brc-20 代币的部署、铸造和转账行为， <strong>且BRC-20 代币的持有状态由链下服务维护 。</strong></p>
+<p>部署的 json 是什么样的？</p>
+<p><img src="https://img.bibiqing.com/news/2023/0522/21_8fvqb9z3dv.png" alt="解读比特币Oridinals协议与BRC20标准的原理创新与局限"></p>
+<p>对应的 op 还有 Mint 和 Transfer，两个格式几乎一致，当然如果熟悉以太坊上交易的话，会觉得奇怪，这里的转账接收方 to 怎么表示呢？</p>
+<p>这是因为转账交易生效时，就是该铭文内容对应的 sat 被交易的时候，所以铭文对应的 sat 被谁接收，谁就是 transfer 的对象 ，因此 brc-20 的转账必须伴随比特币所有权的转移 （不是只是作为手续费被消耗）。</p>
+<p>中心化机构则依据链上登记的各个 op 来推导出用户当前应该有的余额。</p>
+<p>如 unisat.io 这样客户端软件（索引器），根据mint、transfer 事件进行统计获得。如：UTXO 中包含 mint 铭文，就为第一个所有者添加，transfer 则在发起者的地址上扣除余额，接收者地址加上余额。</p>
+<p>拓展阅读：<a href="https://www.odaily.news/post/5179486">【源码解读】你买的 NFT 到底是什么？</a></p>
+<p>在这个过程中，铭文是 ‘附加’ 交易（聪）上的，<strong>比特币的矿工并不会处理这些铭文</strong> ，从链上来看跟其它聪依然是没有分别的，他们都是当做普通的聪来转移的。</p>
+<h2 id="5如何评价ordinals与brc20">5、如何评价 Ordinals 与 BRC 20 </h2>
+<p>BRC-20 及 Ordinals NFT， 给比特币带来了很多争论，基本分成两种阵营：</p>
+<p>支持方认为，只要你支付手续费，你就有<strong>全权以任意的方式使用区块空间，不论交易是什么内容</strong> ，他们 认为 BRC-20 与 NFT 给比特币带来了新的文化与叙事，有利于提高比特币的实际应用价值。</p>
+<p>反对方认为，这些 BRC-20 与 NFT 毫无价值是垃圾交易，过多的垃圾交易会抢占交易带宽，导致交易入块时间变长以及手续费变高。</p>
+<p>笔者看来，通过上文的技术实现路线可以显然感受到，虽然新生事物在价格上爆火，但是其技术缺陷也十分显著</p>
+<p><strong>1、过于中心化</strong></p>
+<p>Ordinals 协议，必须基于比特币网络之外的线下服务进行状态维护。如果底层的状态服务不可用或者有缺陷，可能导致资产损失，因为比特币网络没办法阻止失效铭文上链，中心化平台要裁定谁的铭文有效，在该平台上就是有效的。</p>
+<p><strong>2、缺乏可信验证机制</strong></p>
+<p>不是采用智能合约公开透明的代码规则，所以该协议无法满足共识、防止双花等资金安全的需求。</p>
+<p>可拓展阅读：<a href="https://www.odaily.news/post/5185582">解读最新 Final 的 ERC-6147 ：极简的半强制性 NFT 产权分离标准</a></p>
+<p><strong>3、比特币网络性能局限</strong></p>
+<p>目前比特币出块间隔长达十分钟，交易确认的速度过慢，也会导致交易体验不佳。而且比特币的交易成本太高，并且，一笔成功的上链铭文交易要扣掉三方抽成，平台网络数据延迟，以及各种卡顿带来的预估差错成本，所以矿工费拉满至少要 2-3 倍才行</p>
+<p><strong>4、缺乏基础设施</strong></p>
+<p>比如作为 token 最核心的交易和定价服务，现在是主要依靠交易平台的订单系统保障，完全中心化的结果缺乏权威的交易方法和定价方法。比如其交易场景若没有中心化平台裁定极易被双花作恶。铭文先到先得的 fomo 机制和矿工按矿工费优先打包的机制存在的逻辑悖论，这就决定了 mint 并不一定是公平的</p>
+<p><strong>5、缺乏安全性</strong></p>
+<p><strong>BRC 20 容易让用户产生错觉</strong> ，使其认为 BRC 20 是利用了比特币的安全性进行创造的代币，会和比特币一样的安全以及稳定，但其实它与 BTC 并不一样，BTC 的安全是建立在加密以及共识算法所支撑之上，已经相对稳定运行了相当长的时间，经受住了时间的考验，而 BRC 20 是利用 Ordinals 协议与 BTC 进行绑定，Ordinals 协议目前运行时间短，还在发展初始阶段，其中可能会存在一些安全隐患还未被发现。</p>
+<p>慢雾也发出 BRC 20 存在的安全风险的提醒：</p>
+<p>近期 BRC-20 比较火，我们注意到 BRC-20 从 Mint 代币到交易，可能存在安全风险：Mint 代币上，相关的 BRC 20 代币铸造平台安全性存疑，防御措施较为薄弱，容易被恶意攻击篡改代码，从而导致用户 Mint 时资产被盗。在交易方法上，有两种方式：一是私下找第三方担保交易，很容易遇到骗子、假币等；二是去专门的交易平台挂单交易，这些交易平台的安全性无法得到保证。</p>
+<p>笔者虽然并不看好眼前的 Ordinals，毕竟他对区块空间的应用还是太单调只是把图片、NFT 放进去并没有产生更多价值。但是作为一个有趣的尝试，如此破圈的创新也能重新引发大家的思考：</p>
+<p><strong>如何利用比特币可编程性？毕竟如今的公链中不会有比比特币更强的共识与安全性了。</strong></p>
+<p>都是存储空间的利用，其实 Ordinals 协议在 OP-Ruturn 输出的金融交易，这在本质上和全节点存储的其他东西没有什么不同，但是是否比特币只能为高净值交易服务？是否可自由的将区块空间去存储和执行一些低成本的数据？</p>
+<p>这也让我想起曾经 Vitalik 为代表提出的：“当你合理地使用技术并且支付了相应的花费，那你的行为就是有合法性的”</p>
+<blockquote>
+<p>附录</p>
+<p><a href="https://docs.ordinals.com/introduction.html">https://docs.ordinals.com/introduction.html</a></p>
+<p><a href="https://github.com/casey/ord/blob/master/bip.mediawiki#specification">https://github.com/casey/ord/blob/master/bip.mediawiki#specification</a></p>
+<p><a href="https://docs.lightning.engineering/the-lightning-network/taproot-assets/taproot-assets-protocol">https://docs.lightning.engineering/the-lightning-network/taproot-assets/taproot-assets-protocol</a></p>
+<p><a href="https://learnblockchain.cn/article/3050">https://learnblockchain.cn/article/3050</a> </p>
+<p><a href="https://www.wu-talk.com/index.php">https://www.wu-talk.com/index.php</a>? m=content&amp;c=index&amp;a=show&amp;catid= 6&amp;id= 13659 </p>
+<p><a href="https://learnblockchain.cn/article/5376">https://learnblockchain.cn/article/5376</a> </p>
+</blockquote>
+<h2 id="十四君-原创回顾">十四君-原创回顾</h2>
+<ul>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484151&amp;idx=1&amp;sn=345fb4a3ae6efbe52606fe2af4b85a3e&amp;chksm=e83aa52ddf4d2c3bd84d1ddfefdfc3a1a06a8274dbd28f43cea205202364acd2a15e63231edc&amp;scene=21#wechat_redirect">跨链赛道研报：LayerZero 全链互操作协议凭什么估值 30 亿美金(上）</a></p>
+</li>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484142&amp;idx=1&amp;sn=d0edb41636937f32753a61f7e7d6515d&amp;chksm=e83aa534df4d2c228852e2d2945478bb85561d35bdb0bd886cea9a36c0f540405ad824474f8a&amp;scene=21#wechat_redirect">体验Web3.Unity 并回顾 GameFi 探索之路</a></p>
+</li>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484135&amp;idx=1&amp;sn=b6c098f0e3218f61459604ecf9b17ec3&amp;chksm=e83aa53ddf4d2c2b41c9cdba36c4341b29db78951c35760dfa3e42652152a1cf62bfc6769a6f&amp;scene=21#wechat_redirect">以太坊账号抽象 ERC 4337 的过审方案解读(上）</a></p>
+</li>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484127&amp;idx=1&amp;sn=4b930ce55709c5c18f9b308e5115f6e0&amp;chksm=e83aa505df4d2c13a450bd34728e2ed24ed17946e9fca4cddc74e3b3193a829ed2a4d6572a8d&amp;scene=21#wechat_redirect">解读最新 Final 的 ERC-6147 ：极简的半强制性 NFT 产权分离标准</a></p>
+</li>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484114&amp;idx=1&amp;sn=915f9e4bdddb3be5c3bedc5631513813&amp;chksm=e83aa508df4d2c1e57645b4d4bbfed8b1d43948bb751c962f59bd4dd8d964614b478c9b45eae&amp;scene=21#wechat_redirect">从份账单说起，为什么链上交易值得分析？</a></p>
+</li>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484105&amp;idx=1&amp;sn=bd4c2264062770836321ef2b8faad151&amp;chksm=e83aa513df4d2c05d6b768d3d4498645eca1768c29f0e478dfe6e89acff8beb35e75563d24a2&amp;scene=21#wechat_redirect">解读 Nostr：抗审查的去中心化社交协议</a></p>
+</li>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484082&amp;idx=1&amp;sn=94ed8067f835c742fb3ed64a363f6415&amp;chksm=e83aa568df4d2c7eb9d2918cf8946f5f38fd78c4980567840a942535043af895c5b09814a7e3&amp;scene=21#wechat_redirect">解读 Dex 中的无常损失:原理,机制,公式推导</a></p>
+</li>
+<li>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzIyMTQ5MTg5Mw==&amp;mid=2247484036&amp;idx=1&amp;sn=9224a0e57cf3889a7a2b7111a24fe5d8&amp;chksm=e83aa55edf4d2c48e08f2dce651db18e1df8087927e5b109e1fe6d6fdfa7b58c0783253be0ae&amp;scene=21#wechat_redirect">解读：OpenSea 的强制版税执行工具</a></p>
+</li>
+</ul>
+<p>欢迎你从公众号后台留言作者，探讨web3行业问题，<strong>关注十四，用技术视角带给你价值</strong></p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51731/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">解读比特币Ordinals协议与BRC20标准的原理创新与局限</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51727/">
+                <span class="next-text nav-default">金色Web3.0日报 | 香港证监会将举行虚拟资产交易平台媒体发布会</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1ordinals协议的核心思想">1、Ordinals 协议的核心思想</a>
+      <ul>
+        <li><a href="#11概述">1.1、概述</a></li>
+      </ul>
+    </li>
+    <li><a href="#2聪是如何编号的">2、聪是如何编号的？</a>
+      <ul>
+        <li><a href="#21比特币的-utxo-模型">2.1、比特币的 UTXO 模型</a></li>
+        <li><a href="#22sat和utxo的关系">2.2、sat 和 UTXO 的关系</a></li>
+        <li><a href="#23ordinal-number的表示方法">2.3、Ordinal number 的表示方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#3如何inscriptions铭刻任意内容">3、如何 Inscriptions（铭刻）任意内容</a>
+      <ul>
+        <li><a href="#31segwit隔离见证">3.1、SegWit（隔离见证）</a></li>
+        <li><a href="#32taproot升级">3.2、Taproot 升级</a></li>
+      </ul>
+    </li>
+    <li><a href="#4什么是brc20">4、什么是 BRC 20 ？</a></li>
+    <li><a href="#5如何评价ordinals与brc20">5、如何评价 Ordinals 与 BRC 20 </a></li>
+    <li><a href="#十四君-原创回顾">十四君-原创回顾</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

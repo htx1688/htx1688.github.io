@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          几个关于ETH Merge、ETC迁徙的技术细节和背后原因 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="如果保留 PoW 分叉，只能说新 Ether 币可能还有点价值，但是 USDT、USDC 等基本不值钱了，因为如果你是 Tether 或 Circle，你肯定选择跟 V 神走。" />
+<meta name="keywords" content="ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/40761/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="几个关于ETH Merge、ETC迁徙的技术细节和背后原因" />
+<meta property="og:description" content="如果保留 PoW 分叉，只能说新 Ether 币可能还有点价值，但是 USDT、USDC 等基本不值钱了，因为如果你是 Tether 或 Circle，你肯定选择跟 V 神走。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/40761/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-28T00:00:00+00:00" />
+
+<meta itemprop="name" content="几个关于ETH Merge、ETC迁徙的技术细节和背后原因">
+<meta itemprop="description" content="如果保留 PoW 分叉，只能说新 Ether 币可能还有点价值，但是 USDT、USDC 等基本不值钱了，因为如果你是 Tether 或 Circle，你肯定选择跟 V 神走。"><meta itemprop="datePublished" content="2022-07-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4071">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="几个关于ETH Merge、ETC迁徙的技术细节和背后原因"/>
+<meta name="twitter:description" content="如果保留 PoW 分叉，只能说新 Ether 币可能还有点价值，但是 USDT、USDC 等基本不值钱了，因为如果你是 Tether 或 Circle，你肯定选择跟 V 神走。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">几个关于ETH Merge、ETC迁徙的技术细节和背后原因</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-07-28">
+      2022-07-28
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4071 字 -
+        预计阅读 9 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>本文作者</strong></p>
+<p><strong>0xTodd</strong></p>
+<p><strong>首先，ETH 具备分叉的条件么？</strong></p>
+<p>基本不具备，因为 ETH 网络的价值不仅仅是 Ether 这个币，更多是它上面的 token。如果保留 PoW 分叉，只能说新 Ether 币可能还有点价值，但是 USDT、USDC 等基本不值钱了，因为如果你是 Tether 或 Circle，你肯定选择跟 V 神走。</p>
+<p><strong>Merge 的过程是什么样的？</strong></p>
+<p>如果粗暴地划分，ETH 可以分为两层：共识层和执行层。前者类似于企业中的领导，后者类似于企业中的员工。空降一批新领导（PoS 节点），大换血掉之前的老领导（PoW 矿工节点），但是员工（EVM）还是之前的员工，因为它们只负责执行。所以，作为用户，你感觉不到有什么区别。</p>
+<p><strong>那么如果 PoW 拒不升级客户端怎么样？</strong></p>
+<p>有人可能会问，老领导占着办公室不走怎么办？参考人民公仆里瓦夏上一任总统就是赖着不走。难度炸弹就是解决这个问题的，理论上，如果 PoW 拒不升级客户端，那么 ETH PoW 链会变得原来越难挖，从现在 13 秒一个块，逐渐增加到数十秒，上百秒。</p>
+<p><strong>挖得慢会怎么样？</strong></p>
+<p>那么大家都知道，分布式系统中，最长链是合法链。有难度炸弹的情况下， 老客户端是跑不赢新客户端的。PoS ETH 标准 12 秒一个块，固定的，所以 TPS 也略有上升。</p>
+<p><strong>那么老 PoW 矿工升级到新客户端硬挖不行么？</strong></p>
+<p>不行，因为 ETH 的区块里原来有个字段叫 “ommers”，这个字段是被调成 0 了。另外原来的 difficulty 字段被改成 random 了。意思是以后没有区块难度了，区块只随机在验证者中产生。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0728/9_bm96jpeu9j.png" alt="几个关于ETH Merge、ETC迁徙的技术细节和背后原因"></p>
+<p><strong>稍等，这个随机产生是怎么产生的？</strong></p>
+<p>你存 32 个 ETH，你就可以当一个验证者（validator）。然后，每 12 秒全网随机选一个健康的节点来打包区块（过去是比全网谁算哈希算的最快，所以共识层的 KPI 也变了）。</p>
+<p><strong>这个随机真的随机么？</strong></p>
+<p>很遗憾，它不是真随机。虽然区块链的哈希经常被用于抽奖，但事实上，这样的分布式系统无法产生真 · 随机，因为矿工可以控制哈希的产生。</p>
+<p><strong>那随机数问题怎么解决呢？</strong></p>
+<p>所以，ETH 也在想办法，在 ETH 的 merge 之后的第 5 个阶段 splurge 中，以太坊会采用 VDF 技术（可验证延迟函数），到时候真随机数信手拈来，这样彻底解决 PoS 选节点的随机问题。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0728/9_cfak844d2j.png" alt="几个关于ETH Merge、ETC迁徙的技术细节和背后原因"></p>
+<p><strong>那未来还有矿池么？</strong></p>
+<p>我觉得还是有，现在 PoS ETH 上有 41w 个节点。也就是平均来说，假如你有 32 个 ETH，每 56 天（41w*12 秒）才能随机到你头上出块一次。而大家都学过概率论，这个 56 天只是期望值还没有保底。所以说，加入矿池一起分钱是不错的选择。</p>
+<p><strong>参加 ETH PoS 挖矿年化多少？</strong></p>
+<p>总体来说，大家预期是 5% 左右，但是算上手续费也许可以到 9% 左右。大体规律是，Stake ETH 总量越多，总产量越高，但是分摊到每个验证者头上的收入越少，这个曲线非线性。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0728/9_srphv188zs.png" alt="几个关于ETH Merge、ETC迁徙的技术细节和背后原因"></p>
+<p><strong>说回分叉，如果说硬要分叉，那么该怎么做呢？</strong></p>
+<p>首先是快照，然后恢复那几个被删掉的字段，然后忽悠矿工们加入。矿工确实没地方可去，但是，如果新链的代币收入没法 cover 掉电费和显卡折旧，那也是无法持续的。</p>
+<p><strong>新链的币到底值多少钱呢？</strong></p>
+<p>坦率来讲，取决于交易所。如果交易所愿意上币，那这个项目哪怕做成狗屎，都是有人买单的。希望交易所们保持正直、冷静。参考 BCHA，没有任何爸爸，只不过因为被交易所上了，还仍然有价格。如果新链代币没有被 list，那么它的价值将非常有限，那么矿工很快就会关机了。</p>
+<p><strong>那么 ETC 呢？矿工会不会去 ETC？</strong></p>
+<p>肯定会。但是容量是非常有限的。</p>
+<p>永远记住，是价格指导算力，不是算力指导价格。比特币厉害，不是因为支持它的矿工多，而是因为比特币值钱，所以矿工才愿意支持比特币，这样才能交电费。否则，BCH 早就 flip BTC 了，毕竟当年它的矿工爸爸有那么多。</p>
+<p><strong>ETC 容量有限，那么到底有多少？</strong></p>
+<p>ETC 算力是 25 TH/s，ETC 是 924 TH/s，大概是 1：37。而现在 ETC 价格是 32，ETH 价格是 1600，大概是 1：50。所以说这个容量真的很小。如果硬挤进去，那么回本周期会非常长。ETH 显卡矿机耗电没有比特币那么厉害，所以关机币价没有 BTC 那么高，挤一挤是可以硬挖 ETC 的，就是太卷。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0728/9_2vnpck9qby.png" alt="几个关于ETH Merge、ETC迁徙的技术细节和背后原因"></p>
+<p><strong>除非…</strong></p>
+<p>除非 ETC 能涨到四位数，那么 ETH 算力可以完全切入进去，并且回本周期不变。</p>
+<p><strong>但是…</strong></p>
+<p>是的，肯定有但是，这个是先有鸡先有蛋的问题。币价指导算力，币价不上去，算力没法来。</p>
+<p><strong>那么 ETC 凭什么？</strong></p>
+<p>讲道理，ETC 才是真正的 ETH（开玩笑）。不过 u1s1，确实 ETH 才是那个分叉出来的链，最初 V 神做的那个东西就是 ETC，所以它才叫 classic。因为 the DAO 事件，感兴趣可以自己查，ETC 决心回滚一笔黑客的交易，所以 ETH 才诞生。</p>
+<p><strong>ETC 上面有 EVM 么？有 DeFi 么？</strong></p>
+<p>有；有。</p>
+<p>ETC 的 EVM 和 ETH 是一摸一样的，毕竟这两个曾经就是一体的。只不过 ETC 网络很容易被攻击，因此 DeFi 生态一直不温不火。现在 ETC 全网 TVL 大概几十万美金吧，主要是有两个 Swap，这个量很小了可以说是。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0728/9_bvrj7gs7ro.png" alt="几个关于ETH Merge、ETC迁徙的技术细节和背后原因"></p>
+<p><strong>为什么 ETC 会被攻击呢？</strong></p>
+<p>因为它和 ETH 用同一种矿机，而算力是可以在一些平台上被租借的。因此，只要黑客租借了 ETH 算力的 1%，就可以轻松达到 51% 攻击 ETC 的门槛。而且，过去针对 ETC 的攻击确实也多次生过。</p>
+<p><strong>攻击怎么发生的？</strong></p>
+<p>这是 PoW 区块链的基础知识，叫做双花。例如，我用 100 个 ETC，买走你的一个古董花瓶。然后租借算力重新产生区块，然后让重新产生的区块不包括 “我转你钱” 这笔交易，接着成为最长链。那么我的 ETC 就没有被转给你，那么我的 ETC 和古董花瓶都在我的手里，你血亏。</p>
+<p><strong>攻击一次要多少成本呢？</strong></p>
+<p>如果去 Nicehash 租算力，攻击 ETC 一整天大概要 20-30 个 BTC 的成本。所以说，你不敢在上面搞 DeFi，谁能忍受频繁回滚的区块链呢？现在交易所的 ETC 充值都需要几百个区块确认，但我觉得其实几百个确认都不太够。</p>
+<p><img src="https://img.bibiqing.com/news/2022/0728/9_uffsi8wng2.png" alt="几个关于ETH Merge、ETC迁徙的技术细节和背后原因"></p>
+<p><strong>大量算力涌入 ETC 会带来什么？</strong></p>
+<p>基本面改善，如果大量算力涌入 ETC，那么对于 ETC 来说，确实是利好。但是前提是，二级市场要有人为之买单才行。</p>
+<p>你会发现，我们进入了一个奇怪循环。要想二级市场买单，你要有生态；要想有生态，你要安全；要想安全，你算力要高；要想算力高，二级市场要为你买单。</p>
+<p>PS：这和 ETH PoW 分叉的逻辑基本一致，没有太大的区别（主要是我可以少些一个 thread，哈哈）</p>
+<p><strong>攻击 ETH 呢？费用怎么样？</strong></p>
+<p>攻击 PoW ETH 一个小时，根据https://51attack.info/计算，需要 90 万美金左右。但是问题在于，你租不到那么多算力，你必须去买矿机。而假如你买了全世界 51% 的 ETH 矿机，那你已经是 ETH 大庄了，你没必要攻击它了。所以它主要是基于经济假设。</p>
+<p><strong>那么攻击 PoS ETH 呢？成本几何？</strong></p>
+<p>这也是 PoS 的牛逼之处，攻击它非常艰难。因为它是 PoS，要求矿工押注，而且每个区块都能确保它的状态是最终的。</p>
+<p><strong>什么叫最终状态是确定的？</strong></p>
+<p>举个例子，还是 ETC，我要买你的古董花瓶，付给你的钱，因为有最长链原则在，你不知道这个货款，到底收到还是没收到，所以它的状态是薛定谔的。虽然钱包里显示收到了，但是这个东西有可能回滚。</p>
+<p><strong>不对呀，那 BTC、ETH 岂不是也不安全？</strong></p>
+<p>不，现在 BTC\ETH 之所以要几个区块确认，只是从概率学上来说，几个区块之后再想追逐最长链变得不可能了，所以它只是 99.9…9% 安全的，中本聪的论文里就讨论过这个问题。只要是 99 足够多，那它可以基本视为安全的。</p>
+<p><strong>等等，你把我绕晕了…</strong></p>
+<p>什么叫是 99.9…9% 安全？意思是说，我付给你 100 USDT，你收到了，但是假如我的矿机运气爆棚，连续挖出 N 个区块，我是可以取消掉这笔交易的，只不过这个概率极小极小罢了。而所谓 “最终状态是确定性的”，是把安全概率提升到 100%！</p>
+<p><strong>PoS ETH 如何实现最终确定性呢？</strong></p>
+<p>PoS ETH 中的所有节点，要对每个区块进行 “站队”。只有某个区块得到了全网 2/3 的锁仓 ETH 投票才算是有效的。</p>
+<p>在 PoW 当中，两个矿工同时算出一道题目的概率是常见的，所以要竞争最长链。但是在 PoS 中，两个同一高度的区块，同时得到 2/3 票这个命题是不可能的。因为 2/3+2/3&gt;1。</p>
+<p><strong>所以呢？</strong></p>
+<p>所以在 PoS 机制之下，每个区块一旦上链了，就永远无法回滚了，它就是确定性的。你可以永远相信 PoS ETH，你看到了就是收到了，这是最终状态，所见即所得。</p>
+<p><strong>听说远古 PoS 有一种很骚的攻击方式…</strong></p>
+<p>假如你是大户，拥有 1 亿枚 token，某天，你把 1 亿 token 全部卖成了美金。</p>
+<p>随后，你从你卖掉之前的区块开始攻击，因为你（曾经）的 token 多，所以你很快可以新起一条最长链，然后把卖成美金那笔转账取消掉，变成最长链，那你可以即拿了美金，又取回了 token。</p>
+<p><strong>这种方式可以攻击如今的 ETH 么？</strong></p>
+<p>现在的确定性的下注 PoS 方式，把这种攻击方式彻底防御了——因为不许回滚。</p>
+<p><strong>那么想要攻击 PoS ETH 该什么办呢？</strong></p>
+<p>拥有全网抵押 ETH 的 2/3，按照现价这个高达 1.4 亿美金，又不能闪电贷，所以对于黑客来说难度还是极高极高的。而且，即便黑客凑齐了，ETH 也有手段防范这样的攻击。可以参考：</p>
+<p><a href="https://arxiv.org/pdf/2003.03052.pdf">https://arxiv.org/pdf/2003.03052.pdf</a></p>
+<p><strong>费这么大周章，所以你想说？</strong></p>
+<p>不要过分被 L1 的 narrative 所欺骗，ETH 本身从理论论证，到技术实现，再到社区积累都是非常恐怖的，方方面面都考虑地很周道，这才是一个安全底层给人的信赖感觉。当然，比特币做得也好，比特币甚至连升级都是向前兼容的，这样稳定的系统才配做未来世界金融系统的底层。</p>
+<p>所以！！ETH 很难被颠覆，即便对手是大矿工。</p>
+<p>所以！！ETH to da moon。</p>
+<p>原文链接：</p>
+<p><a href="https://mirror.xyz/0x17f3F81860345567482E1D232FB5B6f8bD77f3Bd/ArvcQgpJR">https://mirror.xyz/0x17f3F81860345567482E1D232FB5B6f8bD77f3Bd/ArvcQgpJR</a>_2moX3Ge92SQ_MZIUpq8C3IjPqsbRdZRg4</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/40770/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">福布斯的Web3探索</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/40774/">
+                <span class="next-text nav-default">加密风投Variant已为两只新风险基金共筹集4.5亿美元</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          BRC-20链上数据分析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="由于BTC网络并不支持图灵完备的智能合约，因此自BTC诞生起，长期以来被用于点对点转账及价值储存外的其他场景并不太多。" />
+<meta name="keywords" content="BRC-20, Ordinals" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50968/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="BRC-20链上数据分析" />
+<meta property="og:description" content="由于BTC网络并不支持图灵完备的智能合约，因此自BTC诞生起，长期以来被用于点对点转账及价值储存外的其他场景并不太多。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50968/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-10T00:00:00+00:00" />
+
+<meta itemprop="name" content="BRC-20链上数据分析">
+<meta itemprop="description" content="由于BTC网络并不支持图灵完备的智能合约，因此自BTC诞生起，长期以来被用于点对点转账及价值储存外的其他场景并不太多。"><meta itemprop="datePublished" content="2023-05-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4903">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BRC-20链上数据分析"/>
+<meta name="twitter:description" content="由于BTC网络并不支持图灵完备的智能合约，因此自BTC诞生起，长期以来被用于点对点转账及价值储存外的其他场景并不太多。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">BRC-20链上数据分析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-10">
+      2023-05-10
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 4903 字 -
+        预计阅读 10 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>由于BTC网络并不支持图灵完备的智能合约，因此自BTC诞生起，长期以来被用于点对点转账及价值储存外的其他场景并不太多。</p>
+<p>2022年12月20日， Casey Rodarmor开创了比特币Ordinals和Inscriptions（序数和铭文）的新概念，<strong>Ordinals是将NFT放在比特币链上的一种方式，带动比特币生态活跃度迅速攀升。</strong></p>
+<p>2月28日NFT巨头YUGA LABS进军BTC NFT，宣布将利用Ordianals协议发布名为TwelveFold系列NFT，进一步促进比特币生态的热度再次大幅上涨。</p>
+<p>在BTC NFT被广泛关注后，@domodata基于Ordinals协议开启了一个对于BTC上同质化代币发行的实验，名为brc-20。此外，BTC将于2024年迎来再次减半，减半后区块奖励为3.125，这也促进了近期比特币生态的活跃和发展。</p>
+<p>BTC生态发展至今，基于BTC L2的链上项目逐渐增多，并开始繁荣，但基于L1的生态相对来说显得微乎其微。我们对比特币原生生态项目梳理如下：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_emqtgef1p3.png" alt="image.png" title="1683719344249869.png"></p>
+<p>我们就Layer2网络、跨链资产、BTC Ordinnals NFT 3个主流比特币生态项目做了梳理如下：</p>
+<h2 id="11-layer2网络">1.1 Layer2网络</h2>
+<p>1）闪电网络</p>
+<p>闪电网络（也称为闪电或LN）是建立在比特币网络上的可扩展性解决方案，用于即时、大额小额支付，同时降低交易费用，消除了将资金委托于第三方平台的风险。闪电网络最初是在Joseph Poon和Tadge Dryja于2015年撰写的白皮书中设想的，它的测试网于2016年5月发布，第一笔真实交易发生于2017年12月。简单来说，闪电网络的核心就是将交易环节放在链下进行，只有最终的交易结果才在链上确认从而提高比特币的交易效率。据1ML数据统计，截止到2023年5月9日，比特币闪电网络容量（支持BTC的数量）已达到5,386.17枚，价值1.48亿美元。闪电网络节点数为16,364，通道数为73,385。</p>
+<p>2）Stacks</p>
+<p>“不可能三角”一直是区块链最难解决的技术难题，即在去中心化、安全性和高性能上无法同时兼顾。Stacks的成功主要是源于它在比特币原教主义（比特币公链已足够完美，无需扩容来提高速度）与扩容主义之间找到了平衡点。Stacks是基于比特币区块链的独立区块链，由Muneeb Ali和Ryan Shea于2013年创建。采用“Proof of Transfer”（PoX）协议，利用比特币的安全性和Stacks代币（STX）实现智能合约。早期专注于DApps开发和结合比特币安全性提供去中心化体验。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_p2jk3zsbvt.png" alt="image.png" title="1683719352315837.png"></p>
+<p>以上为Stacks中的累积交易增长情况，2023年2月1日至21日，Stacks网络已经处理了336万笔交易，与前一个月的113万笔交易相比，环比激增223%；截止到5月9日，已累积处理了388.53万笔交易。</p>
+<p>3）Rootstock（RSK）</p>
+<p>根链（RootStock，RSK）是建立在比特币区块链上的智能合约对等平台，是比特币的侧链。它加入了新的转账速度认证和BTC智能合约系统。根链每秒处理300笔交易，20秒内几乎可以确认所有交易，并且RSK使用和BTC一样的挖矿机制。在BTC转入根链时将会变成“根币（RTC）”，根币相当于存活在根链上的比特币，并且它们可以随时转回比特币链，并且不需要添加额外的交易费。值得一提的是，所有的根币都是由BTC等值转换过来的，用于支付给矿工的转账手续费及合约处理手续费。</p>
+<p>4）Liquid</p>
+<p>Liquid是一个交易所间的结算网络，将世界各地的加密货币交易所和机构联系在一起，从而实现更快的比特币交易和数字资产的发行。Liquid网络是为交易所、经纪人和做市商提供的一个区块链，可以与网络的其他成员进行快速、私密的比特币交易。通过Liquid的发行资产功能，会员可以对法定货币、证券甚至其他加密货币进行代币化。Liquid挂钩和共识由职能机构的联盟进行管理。Liquid侧链中的原生代币是LBTC。</p>
+<h2 id="12-跨链资产">1.2 跨链资产</h2>
+<p>1）WBTC</p>
+<p>Wrapped Bitcoin (WBTC)由Kyber、Ren和BitGo共同发起的一种ERC-20代币，是第一个与比特币1:1支持的ERC-20代币。它为包括去中心化交易所(DEX)和金融应用程序在内的以太坊生态系统带来了更大的流动性。目前支持Receive、Mint和Burn三大功能。若想接收WBTC，用户需向商家请求代币，在商家执行KYC等验证程序后，用户与商家进行交换。铸币由商家发起并由托管人执行，销毁只有商家才能进行。</p>
+<p>发行至今，WBTC市值曾高达160.2亿美元，当前市值为44.85亿美元，其供应量于2022年5月13日达最大值285,004，此后逐步降低，当前供应量为154,410。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_nrejrswl05.png" alt="image.png" title="1683719364798334.png"></p>
+<p>2)renBTC</p>
+<p>与WBTC类似，renBTC是基于RenProtocol发行的流通于以太坊网络的BTC 1:1锚定币。截止到5月8日，其单日供应量为304.49，供应量正在急速减少。renBTC曾作为主流BTC跨链资产之一，由于Alameda暴雷影响（其开发团队于2021年2月宣布加入Alemeda），目前renBTC市场份额已不足1%。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_mzkrzt1k6r.png" alt="image.png" title="1683719371925768.png"></p>
+<h2 id="13-btc-ordinnals-nft">1.3 BTC Ordinnals NFT</h2>
+<p>1）BTC Ordinnals NFT每日新增情况</p>
+<p>Ordinal协议为每个satoshi（比特币最小单位：聪）分配一个序号，分配后每个聪就可以通过比特币交易来刻上图片、文本或视频等数据。自Ordinnals发行至今，累计发行374.4万NFT。NFT生成情况在上线初期并不明显，受到2月中旬Bitcoin Punks发行的影响，NFT生成数量逐步增加，高峰期主要于4月下旬以后，日均生成量为36.57万。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_8i2kvcc8fo.png" alt="image.png" title="1683719378424923.png"></p>
+<p>依照NFT每日新增类型来看，以文本格式（图示绿色）为主，占比总量的81.89%。在Ordinnal上线初期，图片格式（图示蓝色）也是BTC NFT的主力军之一，占比总量的17.46%。</p>
+<p>2）铭文铸造情况</p>
+<p>截止到5月9日，Ordinals铭文铸造总量为501万枚。5月7日铸造40万枚铭文，创下迄今为止单日铸造量历史最高记录，历史第二次最高铸造记录发生在5月1日，单日铸造量达37.28万枚。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_kdybmbhimm.png" alt="image.png" title="1683719386361922.png"></p>
+<p>BRC-20是模仿ERC-20发行的在比特币网络上执行的实验性质的比特币网络同质化代币标准。它利用铭刻在比特币网络上的JSON数据来部署代币合约、铸造代币和转移代币。</p>
+<p>据ChainAegis链上监控数据统计，截止到5月10日，BRC-20共发行了14,307种代币，总市值达843,125,123美元，过去24小时交易量为208,375,043美元。以下为按市值排名的BRC-20 Top10榜单：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_kv94tvv2i6.png" alt="image.png" title="1683719396265723.png"></p>
+<p>$ordi是发行的第一个BRC-20代币，总量2100万个（致敬BTC），目前市值为6.19亿美元，24小时交易量高达1.97亿，约为排名第二的PEPE 24小时交易量的318.86倍。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_7vz6o9us03.png" alt="image.png" title="1683719402896058.png"></p>
+<p>以上为BRC-20代币交易次数及相关费用（涵盖铸造、转移和部署费用）。5月7日，BRC-20交易次数达历史最高，为39.67万次，当日相关费用（245.72BTC）排名第二，5月9日，当日相关费用达255.01BTC，创历史新高。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_e2yvtzp8qi.png" alt="image.png" title="1683719408389174.png"></p>
+<p>以上为BTC矿工收入（区块奖励+手续费）。5月8日，单日BTC挖矿手续费收益创近5年来历史新高，达683.36 BTC，价值1910万美元。截至5月10日，5月份BTC矿工收入高达10,685.85BTC，价值2.94亿美元，仅挖矿手续费部分收益，已达2,260.85 BTC，价值6228万美元。</p>
+<p>PEPE是最近广受关注的模因币，在没有预售、零税、LP销毁和放弃合约权限的情况下秘密推出。初始供应量为420,690,000,000,000，其中93.1%的代币被发送到流动性池，6.9%的代币保存在钱包中。目前PEPE已在币安上线。</p>
+<p>4月15日，PEPE正式开启交易。初始价格为0.000000001美元，截止到5月8日，PEPE的价格已经上涨到0.00000251美元，上涨了251倍。5月6日，PEPE价格上涨至0.0000042美元，到达历史最高价格，其市值也上涨到18.25亿美元。5月8日，PEPE市值回落至10.6亿美元，距离最高市值下降了41.92%。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_m4ii9ns3ay.png" alt="image.png" title="1683719415975365.png"></p>
+<p>5月5日，PEPE在币安上线，仅仅3天时间，币安的热钱包地址已成为持有PEPE最大的地址，占PEPE总代币的10.26%，OKX占6.56%。PEPE持有者共有107,972个，持币者占比相对分散，集中度较小。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_s0ew77j61t.png" alt="image.png" title="1683719420929276.png"></p>
+<p>根据统计，PEPE在Huobi、MEXC、OKX、Poioniex和Gate.io这5家交易所的持有余额以及每小时的流入流出情况。结合以下三个数据来看，上线之初，交易以Huobi交易所为主，之后各交易所交易量逐渐增多。从5月2日开始，OKX持有的PEPE开始逐渐增多，持有量已超越其他4个交易所，流入流出量也逐渐增加。Huobi和Poloniex的流入流出逐渐减少。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_p0smmr8mds.png" alt="image.png" title="1683719427766965.png"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_12qdzhaflv.png" alt="image.png" title="1683719432203124.png"></p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_n4ph4mqe6a.png" alt="image.png" title="1683719441678374.png"></p>
+<p>投资PEPE的地址数共有166,115个，其中可以获取利润的地址有125,231个。按照下图划分投资区间，可以看到，投资金额在100-1k的地址数最多，可以获取利润的地址数占总地址数的73.47%。投资金额在0-100区间内可以获取利润的地址占比最大。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_giqlpvq245.png" alt="image.png" title="1683719446311351.png"></p>
+<p>按照ROI（投资回报率：利润/总成本）排名，列举了以下20个持有PEPE地址的收益情况。其中PEPE的官方钱包地址排名第一，利润达到4753万美元。排名第二的地址中有1.9T枚PEPE，利润达到5M美元。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_phb8m7fbs0.png" alt="image.png" title="1683719454967201.png"></p>
+<p>Ordinals上线后，BTC链上交易次数大幅增长。2023年4月中旬以来，链上交易次数激增，由日交易307,308笔上涨至602,792笔，后者为前者的1.96倍。5月8日，日交易高达663,113笔，创近五年历史新高。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_lywebunblo.png" alt="image.png" title="1683719463156445.png"></p>
+<p>结合BTC交易量来看，交易笔数虽大幅增长，但整体交易量却并不高，可见链上均为小额BTC交易，更多的用户可能仍处于观望状态。</p>
+<p><img src="https://img.bibiqing.com/news/2023/0510/28_ovgf9r74bt.png" alt="image.png" title="1683719468917732.png"></p>
+<p>Ordinals、BRC-20相继上线，为比特币生态添上浓墨淡彩的一笔，但是也存在很多争议和问题。目前，大多数BRC-20代币本质是模因币，本身并没有太多实用价值，存在过度FOMO的风险；2023年4月24日，由于UniSat Wallet的代码库存在漏洞，UniSat Marketplace遭到大量双花攻击；2023年5月5日，Ordinals程序也爆出存在铭文编号漏洞。金融的本质是风控，用户需时刻保持警惕，避免不必要的损失。</p>
+<p>SharkTeam的愿景是全面保护Web3世界的安全。团队由来自世界各地的经验丰富的安全专业人士和高级研究人员组成，精通区块链和智能合约的底层理论，提供包括智能合约审计、链上分析、应急响应等服务。已与区块链生态系统各个领域的关键参与者,如Polkadot、Moonbeam、polygon、OKC、Huobi Global、imToken、ChainIDE等建立长期合作关系。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50930/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">BRC-20导致比特币网络又堵又贵？别忘了它还有这个大杀招</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50913/">
+                <span class="next-text nav-default">BRC-20新叙事引发比特币网络波动，有哪些争议和潜在风险？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-layer2网络">1.1 Layer2网络</a></li>
+    <li><a href="#12-跨链资产">1.2 跨链资产</a></li>
+    <li><a href="#13-btc-ordinnals-nft">1.3 BTC Ordinnals NFT</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

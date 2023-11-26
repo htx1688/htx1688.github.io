@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          五大模块化区块链的体系结构、共识机制等探析 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文探索Polygon、Avalanche、Polkadot、Cosmos、Besu五大模块化区块链的体系结构、可扩展性解决方案、共识机制和互操作性特性。" />
+<meta name="keywords" content="Polygon, Avalanche, Polkadot, COSMOS" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/51243/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="五大模块化区块链的体系结构、共识机制等探析" />
+<meta property="og:description" content="本文探索Polygon、Avalanche、Polkadot、Cosmos、Besu五大模块化区块链的体系结构、可扩展性解决方案、共识机制和互操作性特性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/51243/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-15T00:00:00+00:00" />
+
+<meta itemprop="name" content="五大模块化区块链的体系结构、共识机制等探析">
+<meta itemprop="description" content="本文探索Polygon、Avalanche、Polkadot、Cosmos、Besu五大模块化区块链的体系结构、可扩展性解决方案、共识机制和互操作性特性。"><meta itemprop="datePublished" content="2023-05-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3929">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="五大模块化区块链的体系结构、共识机制等探析"/>
+<meta name="twitter:description" content="本文探索Polygon、Avalanche、Polkadot、Cosmos、Besu五大模块化区块链的体系结构、可扩展性解决方案、共识机制和互操作性特性。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">五大模块化区块链的体系结构、共识机制等探析</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-15">
+      2023-05-15
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3929 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者：Naz</p>
+<p><strong>比较模块化区块链的线程</strong></p>
+<p>探索它们的体系结构、可扩展性解决方案、共识机制和互操作性特性。</p>
+<p><strong>共识机制</strong></p>
+<p>PolyBFT(多边形拜占庭容错)</p>
+<p>Avalanche共识，节点间重复子采样和DAG中的传递投票</p>
+<p>BABE用于块生产(Ouroboros Praos的变体)和GRANDPA用于最终确定(PBFT的变体)</p>
+<p><strong>Tendermint PBFT</strong></p>
+<p>QBFT、IBFT 2.0、Etherhash 和 Clique</p>
+<h2 id="验证者准入"><strong>验证者准入</strong></h2>
+<p>Polygon：权益证明</p>
+<p>Avalance/Polkadot/Cosmos： 在主要网络上的权益证明，并在其他网络上保留该选项</p>
+<p>Besu：运行 3 种共识机制，PoS、PoW 和 PoA（权威证明）</p>
+<p><strong>计算吞吐量</strong></p>
+<p>Polygon：超过2000个TPS</p>
+<p>Avalance/Polkadot/Cosmos：取决于每个链的运行时复杂性，并且随着可互操作链的增长，整个网络是不受约束的。</p>
+<p>Besu：最高400 TPS</p>
+<p><strong>交易延迟</strong></p>
+<p>???????：2秒区块时间的即时终结。</p>
+<p>?????????：调整系统参数以减少两个节点在单个 txn 上相互矛盾的可能性。</p>
+<p>????????：终结时间在 12 到 60 秒之间。</p>
+<p>??????：在 6-7 秒之间完成。</p>
+<p>????：很难确定，因为它因不同的共识机制而异。你可以在这里阅读更多：<br>
+https：//hyperledger.org/learn/publications/blockchain-performance-metrics#appendix-a</p>
+<p><strong>交易费用</strong></p>
+<p>???????：通过交易批处理提供更低的 gas 成本。用户可以根据自己的需要配置批处理，从而能够配置 txn 的成本。</p>
+<p>?????????/??????：每个正在使用的链的可定制费用。</p>
+<p>????????：费用可以通过权重系统预先计算来定制，每个链的费用燃烧是可选的。</p>
+<p>????：费用由网络参与者设定，换句话说，每个共识机制的验证者。</p>
+<h2 id="跨链网络拓扑"><strong>跨链网络拓扑</strong></h2>
+<p>???????：具有自己的验证节点的自主权链的分布式网络。</p>
+<p>?????????：运行多个链的验证者重叠网络，同时验证</p>
+<p>????????：从中央链到连接链的分层继承安全性。通过跨链消息传递的互操作性。</p>
+<p>??????：具有自己的验证器的自主权链的分布式网络。通过链间通信实现互操作性。</p>
+<p>????：与EVM兼容的网络的互操作性。</p>
+<p><strong>治理</strong></p>
+<p>???????/?????????： 区块链参数可通过链上投票升级。</p>
+<p>??????： 改变共识参数和协调资金的链上机制。</p>
+<p>????：没有发现与HyperLedger Besu治理相关的文件。</p>
+<p>????????：整个运行时逻辑存储在链上作为 WASM（Web Assembly）二进制文件，允许无分叉运行时升级。治理模块包括代币加权投票、时间锁定投票和自适应群体偏差。</p>
+<p><strong>可开发性</strong></p>
+<p>???????：</p>
+<p>借助 Polygon Edge 对 EVM 的内置支持，Solidity 智能合约无需任何修改即可轻松移植到 Polygon Edge 网络。</p>
+<p>?????????：</p>
+<p>用于构建你自己的 VM 的 Avalanche 虚拟机（即将发布的 SDK）。<br>
+为了让你的链上线，需要吸引一个验证者子网来运行你的链。<br>
+在 EVM 兼容的 C 链上部署智能合约。</p>
+<p>????????：</p>
+<p>用于在 Rust 中构建你自己的虚拟机的 Substrate。<br>
+在你在平行链拍卖中赢得一个席位后，你的链就会上线，平行链拍卖继承了中继链的安全性。或者，你可以发展自己的验证者社区。</p>
+<p>??????：</p>
+<p>Cosmos SDK和Tendermint作为中间件，可以用任何语言构建自己的VM。<br>
+为了使你的链上线你需要从头开始构建验证器社区，并从现有链中吸引验证器社区。</p>
+<p>????：支持Solidity。</p>
+<p><strong>共享安全</strong></p>
+<p>???????：验证者验证超级网络上的所有交易。由第三方质押公司组成，验证者在验证网络之前在主网上质押 MATIC 代币。可以实现高度的安全性，因为：验证者由Polygon审查。值得注意的是，验证者的任何不当行为都会立即对所质押的金额产生影响。</p>
+<p>?????????：安全是在子网级别处理的，可以由多个虚拟机(区块链)组成。子网中的每个验证器在主网络上也有一个节点。共享安全性是可选的。</p>
+<p>????????：中继链验证所有平行链的状态转换。每个平行链都需要实现自己的安全措施，以防止审查攻击。共享安全是强制性的。</p>
+<p>??????：每个hub和zone都有自己的安全性。研究与中心验证区域共享的安全性。</p>
+<p>????：缺乏共享安全。</p>
+<h2 id="互操作性"><strong>互操作性</strong></h2>
+<p>???????：</p>
+<p>*可与EVM兼容的区块链互操作。<br>
+*可以在以太坊/Polygon主网上执行和部署任何智能合约。<br>
+*即插即用的现有以太坊工具：Solidity, Hardhat, ethers.js, web.js, Metamask, Remix等</p>
+<p>?????????：</p>
+<p>*在一个子网内的虚拟机之间以及在任何子网之间进行互操作。<br>
+*子网级别的信任级别不同。<br>
+*主网络可以作为信任的来源。<br>
+*通过桥连接到外部区块链。</p>
+<p>????????：</p>
+<p>*所有平行链共享中继链验证器集的相同信任假设。<br>
+*通过桥接平行链连接到外部区块链。<br>
+*外部区块链的最终确定时间较长。<br>
+* 平行链插槽数量有限。</p>
+<p>??????：</p>
+<p>*通过连接zone和hub的路径进行互操作。<br>
+*采用的每个zone/hub路径不同的信任级别。<br>
+*通过Peg区域连接到外部区块链或要求他们分叉代码并实现IBC (区块链间通信Inter blockchain Communication)。</p>
+<p>????：与 EVM 兼容网络的互操作性。</p>
+<p><strong>代币经济学</strong></p>
+<p>???????：超级网络需要验证者在Polygon PoS链上押注$MATIC。从代币经济学的角度来看，你可以设置自己的原生gas货币，提供即时效用。</p>
+<p>?????????：每个子网的验证者也必须验证主网络，并抵押2000 $AVAX。在AVAX中，主网络上的交易费用、子网和区块链创建费用被烧毁。每个子网都可以有自己的代币。</p>
+<p>????????：$DOT用于保护中继链。每个平行链需要获得足够的DOT来赢得拍卖以获得一个插槽，每个平行链都有自己的代币。</p>
+<p>??????：每个zone/hub都赢得了代币，并且会有很多hub。通货膨胀/无上限供应。</p>
+<p>????：支持 0 最低gas费。</p>
+<p><strong>采用</strong></p>
+<p>???????：Nexon, Immutable， @Google， @ gotchicchain和其他10个客户正在构建超级网络。</p>
+<p>?????????：19+ 个子网，但似乎只有 5 个处于活动状态。</p>
+<p>????????：基板生态系统 （https://substrate.io/ecosystem/projects/）</p>
+<p>??????：200 多个 Cosmos 链。 (<a href="https://mapofzones.com/home">https://mapofzones.com/home</a> )</p>
+<p>????：许多企业案例研究。 (<a href="https://hyperledger.org/learn/case-studies">https://hyperledger.org/learn/case-studies</a>)</p>
+<h2 id="evm-兼容性"><strong>EVM 兼容性</strong></h2>
+<p>???????：是的</p>
+<p>?????????：是 + AVM + 自定义 VM 选项（SpaceVM、BlobVM 等）</p>
+<p>????????：没有</p>
+<p>??????：默认情况下不是，但是 EVMOS 是一个兼容的 Cosmos 链。</p>
+<p>????：是的</p>
+<p><strong>存储</strong></p>
+<p>???????：LevelDB</p>
+<p>?????????：Bundlr 网络</p>
+<p>????????：DCS（去中心化云存储）</p>
+<p>??????：因应用链而异</p>
+<p>????：RocksDB（KVS）</p>
+<p><strong>帐户抽象</strong></p>
+<p>???????：实验性的</p>
+<p>?????????：可以在定制的虚拟机中实现</p>
+<p>????????：不适用</p>
+<p>??????：不适用</p>
+<p>????：缺乏AA。</p>
+<h2 id="中继器"><strong>中继器</strong></h2>
+<p>???????/?????????/????：不是原生的，通过3P软件</p>
+<p>????????：不适用</p>
+<p>??????：不适用</p>
+<h2 id="质押奖励"><strong>质押/奖励</strong></h2>
+<p>???????：$MATIC/灵活</p>
+<p>?????????：$AVAX/灵活</p>
+<p>????????：不适用</p>
+<p>??????：$ATOM/原生代币</p>
+<p>????：不需要/原生代币</p>
+<p><strong>EIP-1559 燃烧</strong></p>
+<p>???????：是的</p>
+<p>?????????：没有,但是默认高度可定制的费用。</p>
+<p>????????：每个链的费用燃烧是可选的。</p>
+<p>??????：N / a</p>
+<p>????：是的</p>
+<h2 id="桥接能力"><strong>桥接能力</strong></h2>
+<p>???????：内置PoSV1，支持 ERC-20、ERC-721 和 ERC-1155，外部生态系统的 3P。</p>
+<p>?????????：额外部署，支持不带生态系统的ERC-20，外部生态系统的3P。</p>
+<p>????????：不适用</p>
+<p>??????: 重力桥</p>
+<p>????：HyperLedger Cacti</p>
+<p><strong>双重质押</strong></p>
+<p>这些模块化链都没有双重质押。</p>
+<h2 id="轻节点"><strong>轻节点</strong></h2>
+<p>???????：没有</p>
+<p>?????????：状态同步/数据库复制</p>
+<p>????????：不适用</p>
+<p>??????：轻客户端/全节点</p>
+<p>????：否，仅完整和存档 =&gt;（Pos、PoA、PoW）</p>
+<h2 id="kyc"><strong>KYC</strong></h2>
+<p>???????/??????/????：不是内置的，可集成的。</p>
+<p>?????????：是的，内置。</p>
+<p>????????：不适用</p>
+<h2 id="流动性质押"><strong>流动性质押</strong></h2>
+<p>???????：没有，但是和Hub一起计划的。</p>
+<p>?????????：没有</p>
+<p>????????：不适用</p>
+<p>??????：是的</p>
+<p>????：没有</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/51242/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">为什么中本聪不给比特币设计最终性？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/51209/">
+                <span class="next-text nav-default">详解RWA DeFi协议Tangible</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#验证者准入"><strong>验证者准入</strong></a></li>
+    <li><a href="#跨链网络拓扑"><strong>跨链网络拓扑</strong></a></li>
+    <li><a href="#互操作性"><strong>互操作性</strong></a></li>
+    <li><a href="#evm-兼容性"><strong>EVM 兼容性</strong></a></li>
+    <li><a href="#中继器"><strong>中继器</strong></a></li>
+    <li><a href="#质押奖励"><strong>质押/奖励</strong></a></li>
+    <li><a href="#桥接能力"><strong>桥接能力</strong></a></li>
+    <li><a href="#轻节点"><strong>轻节点</strong></a></li>
+    <li><a href="#kyc"><strong>KYC</strong></a></li>
+    <li><a href="#流动性质押"><strong>流动性质押</strong></a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

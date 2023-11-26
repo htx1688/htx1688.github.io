@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="以太坊的未来路线可谓是为 Rollup 量身打造，而目前最被寄予厚望的方案就是采用了零知识证明技术的 zk Rollup。" />
+<meta name="keywords" content="zkEVM" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/42301/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup" />
+<meta property="og:description" content="以太坊的未来路线可谓是为 Rollup 量身打造，而目前最被寄予厚望的方案就是采用了零知识证明技术的 zk Rollup。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/42301/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-05T00:00:00+00:00" />
+
+<meta itemprop="name" content="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup">
+<meta itemprop="description" content="以太坊的未来路线可谓是为 Rollup 量身打造，而目前最被寄予厚望的方案就是采用了零知识证明技术的 zk Rollup。"><meta itemprop="datePublished" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-09-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6409">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"/>
+<meta name="twitter:description" content="以太坊的未来路线可谓是为 Rollup 量身打造，而目前最被寄予厚望的方案就是采用了零知识证明技术的 zk Rollup。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-09-05">
+      2022-09-05
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6409 字 -
+        预计阅读 13 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>作者: msfew@Foresight Ventures</p>
+<p>以太坊的未来路线可谓是为 Rollup 量身打造, 而目前最被寄予厚望的方案就是采用了零知识证明技术的 zk Rollup.</p>
+<p>通常大家的认知中, zk Rollup 需要数年的工程开发才可以真正落地, 这是由于构建 zkEVM 的开发难度巨大. 为了让开发者能无缝移植和部署以太坊智能合约到 zk Rollup 中, 开发团队需要对兼容 EVM 的 zkEVM 进行开发与性能优化.</p>
+<p>实现 zkEVM 一直是以太坊基金会和 Polygon 等其他 zk Rollup 团队的重点任务. 在长期视角下, zkEVM 的实现不仅能解决以太坊主网共识瓶颈的各个方面:</p>
+<ul>
+<li>
+<p>I/O: 通过无状态和 enshrined zkEVMs</p>
+</li>
+<li>
+<p>存储: 通过无状态和 enshrined zkEVMs</p>
+</li>
+<li>
+<p>计算: 通过 enshrined zkEVMs</p>
+</li>
+</ul>
+<p>同时以 zkEVM 为核心组件, 可以构建一个真正完美的通用 Rollup 网络.</p>
+<p>Polygon 就在近期带来了这么一个带有 zkEVM 的 alpha 版本 zk Rollup, 与 Scroll, StarkNet, zkSync, Sin7Y 等的方案相比各有千秋. 这些 zkEVM 的存在是 Polygon 与以太坊生态的一个巨大飞跃, 也意味着全新且更好的 Rollup 用户体验即将到来.</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_vofeh199oj.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<h1 id="0-zkevm">0. zkEVM</h1>
+<h2 id="a-zkevm-介绍">a) zkEVM 介绍</h2>
+<p>在了解 zkEVM Rollup 如何颠覆以太坊用户体验之前, 我们需要认识 zkEVM 的概念. 如果你想更深入地了解 zk, zkVM 与 zkEVM, 欢迎阅读我们之前的研究文章.</p>
+<p>zkEVM 的概念可以被拆解成两个部分:</p>
+<ul>
+<li>
+<p>zk: 零知识证明技术, 可以通过一个精简的证明来证明一批次 tx 的有效性, 达成计算可信, 从而实现扩容.</p>
+</li>
+<li>
+<p>EVM: 以太坊生态的智能合约执行器. 正是 EVM 的存在才让以太坊具有智能合约运行能力, 成为全球计算网络 (相比之下比特币的功能可能只能算是计算器), 同时 EVM 也衍生出 EVM 兼容, EVM 等同, EVM 超集的概念.</p>
+</li>
+</ul>
+<p>那么 zkEVM 就是一个至少在编程语言层面兼容 EVM 的 zk 虚拟机. 智能合约在 zkEVM 中运行后, 会生成一个 zk 证明, 它可以证明运行状态转换的有效性, 保证计算可信. 验证者只需对证明验证即可 (开销很小), 无需重新执行 (冗余很大).</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_wiok4lksv5.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<h2 id="b-zkevm-意义">b) zkEVM 意义</h2>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_2jgd8f9ki1.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>zkEVM 在各个层面都具有重大的意义:</p>
+<ul>
+<li>
+<p>对于 Rollup 扩容: zkEVM 可以为批量 tx 生成证明从而在主网快速验证, 以完全可信与无需多轮复杂共识的方式借助主网安全性达成了计算可信.</p>
+</li>
+<li>
+<p>对于 DApp 开发者: 开发者无需学习任何 zk 相关的硬核知识或 Solidity 和 Vyper 以外的新语言, 就可以借助 zkEVM 来给任意智能合约赋予 zk 的超能力.</p>
+</li>
+<li>
+<p>对于 zkEVM 开发者: 无需为网络上的智能合约的功能编写不同的电路, 而是只需维护 zkEVM 即可.</p>
+</li>
+<li>
+<p>对于 Layer3 搭建者: 可以尝试在 zkEVM 中搭建 Layer3 的 Verifier, 于是 Layer3 的批量交易可以进一步被同时证明且批量地打包成一条 tx 在主网验证 (L3: 1000 tx → L2: 10 tx → L1: 1 tx), 实现 App-rollup.</p>
+</li>
+<li>
+<p>对于以太坊: 多个 zkEVM 方案的存在最终会成为重要的 Public Goods, 帮助以太坊实现下一阶段的 Enshrined zkEVM 与 zk everything 的 Roadmap.</p>
+</li>
+</ul>
+<h2 id="c-zkevm-方案与进度对比">c) zkEVM 方案与进度对比</h2>
+<p>近期 zk Rollup 项目非常活跃. StarkNet 宣布将在未来发币, Aztec 发布了隐私 DeFi, zkSync 发布了主网上线倒计时, Scroll 发布了 Pre-Alpha 版本的 zkEVM, Polygon 开源了 zkEVM 项目的全套代码……</p>
+<p>以太坊生态可谓是一场 zk 与 zkEVM 的军备竞赛. 而正如我们在之前的 zkVM 与 zkEVM 文章中所说的, zkEVM 的方案各有千秋, 各有优势.</p>
+<p>首先是技术大方向上的区别, 基本分为两个方向:</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_vhrnn2in4m.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>两个方向上都有不同的选手:</p>
+<ul>
+<li>
+<p>基于原生: Polygon, AppliedZKP, Scroll, Taiko. 当然后三者都在同一个 Repo 中进行开发, 基本可以视为是同种方案.</p>
+</li>
+<li>
+<p>基于编译: StarkNet, zkSync, OlaVM 等. 这个赛道上选手最多, 但不同项目的差别其实也比较大.</p>
+</li>
+</ul>
+<p>按照 Vitalik 的分类对比方法的话, 分为如下类型:</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_o9e1zlcfjy.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<ul>
+<li>
+<p>Type 1: 完全适配以太坊 L1 的 enshrined zkEVM. 如 AppliedZKP.</p>
+</li>
+<li>
+<p>Type 2: 完全 EVM 等同的 zkEVM, 内部结构略有区别. 如未来的 Scroll 和 Hermez.</p>
+</li>
+<li>
+<p>Type 2.5: EVM 等同, 仅 gas cost 不同 (可能会导致细微的兼容性差别) 的 zkEVM. 如加上复杂操作的 precompiles 后的 Scroll 和 Hermez.</p>
+</li>
+<li>
+<p>Type 3: 几乎 EVM 等同的 zkEVM. 如现阶段的 Scroll 和 Hermez.</p>
+</li>
+<li>
+<p>Type 4: 语言层面兼容 EVM 的 zkEVM, 特性和开发者设施会不同, 同时开发者也无法直接手写 EVM Bytecode. 如 zkSync 和 StarkNet.</p>
+</li>
+</ul>
+<p>在方案的取舍上, 实际上有非常多的变量. 就像游戏初始人物加点一样, 只有一定量的天赋点可以分配给每个变量, 可以说又是一个三难选择:</p>
+<ul>
+<li>
+<p>性能 (zk Prover, Verifier, 开销, 硬件加速)</p>
+</li>
+<li>
+<p>适配性 (DApp 开发者, 基础设施, 开发工具, 矿工)</p>
+</li>
+<li>
+<p>开发难度 (维护难度, 开发进度, 系统复杂度, 工程实现复杂度)</p>
+</li>
+</ul>
+<p>其中典型方案的区别为:</p>
+<ul>
+<li>
+<p>StarkNet: 完全实现一个全新的 zkVM (CairoVM), 性能好, 开发难度不高, 但适配性不足 (需要 Warp 转译器实现 EVM), 最大的亮点是已经形成生态, 同时具有 storage proof 和 fractal scaling 等创新.</p>
+</li>
+<li>
+<p>zkSync: IR 层面的 zkEVM (LLVM-IR 部分). 适配性好 (语言层面适配), 性能和开发难度都中等, 更加灵活, 最大的亮点是可以在编译器迭代过程中, 可以通过 LLVM 支持除了 Solidity 外的其他语言.</p>
+</li>
+<li>
+<p>Hermez 和 Scroll: 都算是 Bytecode 层面的 zkEVM (不代表完全复用 EVM Bytecode, 但两者的差别很细微). 适配性极好, 性能有所牺牲 (原始的 EVM 并不 zk 友好, 电路化之后有很多性能上的挑战需要攻克), 开发难度很高, 最大的亮点是架构安全性与最原生.</p>
+</li>
+</ul>
+<h1 id="1-polygon-zkevm-rollup">1. Polygon zkEVM Rollup</h1>
+<p>Polygon Hermez 此次开源的 zkEVM Rollup 网络的核心组件就是 zkEVM. 它的整体技术方案与其他方案的对比和我们前文中所述的基本一致.</p>
+<h2 id="a-polygon-zkevm-rollup-架构">a) Polygon zkEVM Rollup 架构</h2>
+<p>Polygon zkEVM Rollup 的整体架构如下:</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_30gpy5wj6v.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>架构中的核心就是 zkEVM 本身. zkEVM 会执行 L2 的 tx, 并且链下证明网络会为 zkEVM 中 tx 的执行生成有效性证明, 最终状态改变和证明会被提交上以太坊主网.</p>
+<p>Polygon zkEVM Rollup 的关键组件为: PoE 共识算法, zkNode, zkProver, STARK 与 SNARK 的 Proof Builder, Rollup 跨链桥:</p>
+<ul>
+<li>
+<p>PoE 共识算法: 为了安全性, 效率, 与去中心化的提升, PoE 算法替换了 Hermez 1.0 的 PoD 算法. PoE 能与 PoS 相结合, 保证 Polygon zkEVM Rollup 出块的去中心化与高效. 任何运行 zkNode 的矿工都可以成为 Sequencer, 而任何运行 zkNode 与 zkProver 的矿工可以成为 Aggregator. 其中矿工出块权利的 gas fee 将使用 $MATIC 进行交易.</p>
+</li>
+<li>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_am7bf6ywkh.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+</li>
+<li>
+<p>zkNode: zkNode 是任何想参与 Polygon zkEVM Rollup 网络的矿工所需要运行的软件. zkNode 会进行 tx 的同步, 排序, 与验证. 除此之外, 如果仅仅是想了解网络的运行状态, 而非参与, 就只需要运行一个 read-only 节点, 无需运行 zkNode.</p>
+</li>
+<li>
+<p>zkProver: zkProver 是任何想作为 Aggregator 角色参与 Polygon zkEVM Rollup 网络的矿工所需要运行的软件. zkProver 顾名思义是一个生成 zk 证明的证明器. 本质上, zkEVM 是多项式表示下的状态转换, zkProver 中包含了一个 Main SM Executor 和多个 Secondary State Machines, 来达到对状态转换的证明.</p>
+</li>
+<li>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_1rd9zs8myp.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+</li>
+<li>
+<p>STARK 与 SNARK Proof Builder: 两个 Proof Builder 会生成 STARK 与 SNARK 两类不同证明. STARK (PIL STARK) 为状态转换批次的多项式约束的满足生成证明, 而 SNARK (SnarkJS) 会对 STARK 证明的构建生成 constant size 的证明, 从而以更低的成本发布在链上.</p>
+</li>
+</ul>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_5op2m9820t.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>Rollup 跨链桥: Polygon zkEVM Rollup 除了是一个传统的 Burn/Mint 跨链桥以外, 还可以作为与其他 L2 进行跨链的桥梁.</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_7hktzn2srr.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<h2 id="b-polygon-zkevm-rollup-设计">b) Polygon zkEVM Rollup 设计</h2>
+<p>Polygon zkEVM Rollup 的设计核心思路就是:</p>
+<ul>
+<li>
+<p>去中心化 (任何人都可以通过 DA 来重建整个 Rollup 的状态, 没有任何 Censorship 和中心化控制的存在)</p>
+</li>
+<li>
+<p>无需准入 (任何人都可以参与到网络中, 作为 Sequencer 或 Aggregator)</p>
+</li>
+<li>
+<p>安全性 (继承以太坊的安全性, 通过以太坊网络来帮助 Rollup 状态更新与证明的验证)</p>
+</li>
+<li>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_9wsa8pdzak.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+</li>
+<li>
+<p>性能与高效 (通过 PoE, 链下计算, 跨链桥合约的 UTXO 模式结算, 以及各种密码学优化方案进行性能提升)</p>
+</li>
+</ul>
+<h2 id="c-polygon-zkevm-rollup-特色">c) Polygon zkEVM Rollup 特色</h2>
+<p>真正让 Polygon 方案脱颖而出的优势有很多.</p>
+<p>首先, Polygon 开发团队间的协作天然地形成了合力. Polygon 的 zk 宇宙中包含了 Polygon Hermez (也就是我们所说的 Polygon zkEVM 的主力开发团队), Polygon Zero, Polygon Miden, 与 Polygon Nightfall, 模块化方案中更是包括了其他的很多团队. 虽然三支 zk 队伍的方向略有不同, 但都是 zkVM 领域的顶尖团队, 在技术方案与架构上能直接地进行协作与互相帮助. 比如 Polygon Hermez 选择 64-bit 的 small field 的 STARK 证明生成就是采取了 Polygon Zero 的建议.</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_dlyf8s1dt0.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>此外, Polygon zkEVM Rollup 在 zk 技术上有很多创新. 比如两门 DSL zkASM 和 PIL 的创造, 可以用于解释 EVM 字节码与编码多项式承诺; STARK 与 SNARK 的结合, 发挥了 STARK 的 Scalable 和 SNARK 的 Succinct, 让证明整体更快的同时最终链上空间消耗更小; 优化上, 采用了非常高效的 Goldilocks 作为 base field, 实现了 Keccek 电路的并行计算, 使用 Poseidon-hash Merkle tree 作为数据结构进行系统的存储.</p>
+<p>在证明生成去中心化与 EVM 等同性上, Polygon Hermez 与 Scroll 都以各自的方式做出了很大的努力. 要实现 EVM 等同性, 就必须要将 EVM 的操作码通过 zk 电路的形式来编写, Polygon 通过 zkASM 来解释, 然后在 zkExecutor 中执行 (Geth 本质上一样是解释), 而 Scroll 是直接可以对 Geth 客户端的 Execution Trace 生成证明. 两者在兼容性上实际没有区别 (runtime 的解释或者转译不会对适配性有影响), 对比下, Polygon 的方案在 EVM 等同性上做到了对证明节点更友好, 更高效, 对比之下, Scroll 侧重于完全复用 Geth 的安全基础, 更方便审计.</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_jyve9satt8.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>我认为 Polygon Hermez 的 zkEVM 的方案在原生 EVM 支持与性能之间击中了 Sweet Spot, 不仅通过 zkASM 对 EVM 进行解释, 避免了 EVM 底层开发复杂度极高的问题, 同时也通过不同角度的创新与优化让性能不再是 zkEVM 的致命问题.</p>
+<h1 id="2-zkevm-rollup-方案的优势">2. zkEVM Rollup 方案的优势</h1>
+<h2 id="a-layer-1-与-rollup">a) Layer 1 与 Rollup</h2>
+<p>用户苦 Layer 1 gas 已久也, 在我们之前 MEV 的研究里, 讨论到了一个理想的网络的形态.</p>
+<p><strong>在一个</strong> <strong>理想的网络里:</strong></p>
+<ul>
+<li>
+<p><strong>任何人都可以发送交易 (no censorship)</strong></p>
+</li>
+<li>
+<p><strong>没有垃圾信息 (no spam)</strong></p>
+</li>
+<li>
+<p><strong>费率非常低 (low fees)</strong></p>
+</li>
+</ul>
+<p>同时在 Crypto 与区块链的语境中, 网络还需要是去中心化与性能可拓展的. 这就是一个理想区块链网络的三难格局:</p>
+<ul>
+<li>
+<p>low fees with no spam</p>
+</li>
+<li>
+<p>decentralized with no permission and no censorship</p>
+</li>
+<li>
+<p>scalable with general computation</p>
+</li>
+</ul>
+<p>Layer 1 的单体区块链不可能同时做到以上几点, 而 Rollup 通过中心化出块, 去中心化验证做到了能最终实现性能高, 去中心化, 低费率的终局.</p>
+<p>这也是我们在 Rollup 文章中得出的结论.</p>
+<h2 id="b-optimistic-rollup-与-zk-rollup">b) Optimistic Rollup 与 zk Rollup</h2>
+<p>在长远的角度和实际的理论性能上限下, zk Rollup 相比 OP Rollup 更具有可拓展性, 安全假设更加强.</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_nm86sq80l1.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>Optimistic Rollup 所带有的挑战期让一个 tx 被真正 finalized 的时间特别长, 而 zk Rollup 的证明一经生成与验证, 则可以直接让 tx 完全 finalized.</p>
+<p>Rollup 的 OP 就像 Layer 1 的 PoW 与最长链原则, zk 像 PoS 与其相关共识. 对于 Layer 1 来说, PoW 与 PoS 的机制都是可以的, 但追求性能的 Rollup 在终局中更需要更强保证 (通过质押或者密码学) 的 zk 机制来实现.</p>
+<p>这也是我们在模块化区块链文章中得出的结论.</p>
+<h2 id="c-zk-rollup-与-zkevm-rollup">c) zk Rollup 与 zkEVM Rollup</h2>
+<p>既然 zk Rollup, 那么为什么现在火热的都是 Optimistic Rollup 呢?</p>
+<p>因为目前运行的 zk Rollup 并没有通用计算能力, 如 Loopring 等, 仅仅是停留在单一操作的阶段, 开发者无法部署与移植智能合约到 Rollup 中.</p>
+<p>zk 证明主要用于证明操作的正确性, 一个 zkEVM Rollup 的出现能培养像 Optimistic Rollup 一样的智能合约生态, 远远比普通的 zk Rollup 转账扩容网络灵活, 同时会比 Optimistic Rollup 更具有安全性, 用户体验更好.</p>
+<h1 id="3-zkevm-rollup-的用户体验">3. zkEVM Rollup 的用户体验</h1>
+<h2 id="a-天时地利人和">a) 天时地利人和</h2>
+<p>zkEVM Rollup 的出现是天时地利人和:</p>
+<ul>
+<li>
+<p>天时: Layer 1 扩容遭遇瓶颈, Optimistic Rollup 已探索了 Rollup 的道路.</p>
+</li>
+<li>
+<p>地利: 以太坊所提供的安全性与社会共识为 zkEVM Rollup 的建立提供了完美土壤.</p>
+</li>
+<li>
+<p>人和: EVM 生态占据区块链开发的主导地位, 无数 zk 开发团队为 zkEVM 方案贡献着力量.</p>
+</li>
+</ul>
+<p>那么 zkEVM Rollup 对于用户来说到底什么体验上的提升呢?</p>
+<p>首先我们需要定义一下用户, 我认为, 用户包含了开发者和普通用户:</p>
+<h2 id="b-开发者的用户体验">b) 开发者的用户体验</h2>
+<ul>
+<li>
+<p>zkEVM ⇒ 不用学习新语言甚至不用写新合约来开发 DApp: Solidity 作为区块链合约世界的第一语言, 有着无数的资源和生态, 且是最适合区块链场景的语言, 这两个优点结合起来, 远远优于 Move 或 Rust 等.</p>
+</li>
+<li>
+<p>Rollup ⇒ 解锁更多的应用场景: 用以太坊主网来做支付或者游戏等应用由于性能和开销问题, 是不太合适的. zkEVM Rollup 能让更多的 App 以 DApp 的形态实现.</p>
+</li>
+</ul>
+<h2 id="c-用户的用户体验">c) 用户的用户体验</h2>
+<ul>
+<li>
+<p>zk ⇒ 比 PoS 网络更强的安全性和比 OP Rollup 更快的 finality: 一些 PoS 网络靠代币质押来保证安全性, 而它们的资金量较小, 所创造的安全性保证是不强的, zk 的密码学通过数学来保证绝对的安全性. OP Rollup 的挑战期让一个 tx 在一定时间内无法被确认, 而 zk Rollup 对 tx 的证明一经生成则确认了 tx.</p>
+</li>
+<li>
+<p>EVM ⇒ 完全一致的使用流程和基础设施: 除了需要在钱包和应用内切换网络以外, 用户所有的使用流程都会与在主网上一模一样, 无需额外的学习成本, 只需要像之前一样使用应用.</p>
+</li>
+<li>
+<p>Rollup ⇒  OP 和 zk Rollup 都可以提供 L2 的 instant finality: 从用户体验上来说, 基本还没反应过来, 交易就已经被执行完成. 因此用户无需再等待十几秒或者十几分钟的时间来继续发送下一个交易. 在应用使用上, 用户就可以更加无负担地进行链上活动, 进行高频的交易或者链上游戏等.</p>
+</li>
+</ul>
+<h2 id="d-polygon-zkevm-rollup-用户体验">d) Polygon zkEVM Rollup 用户体验</h2>
+<p>在未来, 用户与开发者在 zkEVM Rollup 上的体验会无限接近于以太坊主网, 同时体验会在低 gas 与快速确认的优势下更加地迅捷和流畅.</p>
+<p><img src="https://img.bibiqing.com/news/2022/0905/27_musm34uvze.png" alt="Foresight Ventures: 从 Polygon zkEVM 出发 理解 zkEVM Rollup"></p>
+<p>Polygon zkEVM Rollup 的计划中, ETH 始终会作为 Rollup 的 gas fee 计价单位, 而 MATIC 会作为质押所需要的代币, 这是非常优秀的一个决策:</p>
+<ul>
+<li>
+<p><strong>更好的价值捕获:</strong>  Polygon 在运营 PoS 网络的经验中得出的结论是质押所带来的价值捕获优于直接使用代币作为 gas.</p>
+</li>
+<li>
+<p><strong>更好的使用体验:</strong>  ETH 作为 Rollup 代币, 能让 L1 的用户或者跨链桥项目免于过程中额外的 Swap 步骤 (大部分人会直接跨 ETH). 同时 ETH 作为 gas 也更具有正统性.</p>
+</li>
+<li>
+<p><strong>更显著的差异化:</strong>  Polygon zkEVM Rollup 会与 Polygon PoS 有更明显的差异, 同时机制的不同确实也需要这样的差异, 来让用户选择更适合自己的方案.</p>
+</li>
+</ul>
+<p>同时, Polygon 所为 zkEVM Rollup 带来的还有:</p>
+<ul>
+<li>熟悉的 “环境”: 用户不用关心底层的技术改变, 一切都会和 Polygon PoS 非常相似, 只是各方面来说 zkEVM Rollup 会更快, 更安全, 更好用. 开发者也可以参加着熟悉的黑客松, 享受着 Polygon 所积累的丰富开发生态与社群.</li>
+</ul>
+<h1 id="4-zkevm-rollup-的未来">4. zkEVM Rollup 的未来</h1>
+<p>对于 zkEVM Rollup 方案的未来, 我们会分析技术上的未来, 以及这个方案的终局形态到底是什么.</p>
+<h2 id="a-zkevm-技术">a) zkEVM 技术</h2>
+<p>Vitalik 对这个话题有着非常深刻的见解. 在他所概括的四种 zkEVM 分类中, 没有真正的好与坏的方案, 只是有不同的技术上的取舍: 更贴近底层但更慢, 更缺少兼容性但更快.</p>
+<p>长远来看, zkEVM 的工程化落地和优化只是时间上的问题. 所有方案都有着自己的价值. Vitalik 也说这些不同方案或许在时间的推移中慢慢转型, 直到找到适合自己定位的哪一种.</p>
+<p>最好的未来, 就是我们拥有非常多个不同风味的 zkEVM, 从而开发者可以选择自己喜欢的那一种, 以太坊主网也可以去通过他们的创新来做自我提升. 越多创新就是越好的未来.</p>
+<h2 id="b-rollup-技术">b) Rollup 技术</h2>
+<p>Rollup 技术的终局会是 zkEVM Rollup, 而 Optimistic Rollup 会继续有着自己的一席之地, 甚至会有 zkEVM 与 Optimistic 混合的 Rollup (个人认为一种机制其实足矣).</p>
+<p>zkEVM Rollup 在很多方面都比 Optimistic Rollup 好. 但是 Optimistic Rollup 最大的好处就是建立起来更简单, Optimism Bedrock 和 Geth 只有五百行代码的区别, 任何了解 Geth 的工程师都可以很轻松的搭建一条 Optimistic Rollup, 或者未来在 Celestia 上使用 Optimint 等引擎, OP Rollup 这方面的道路已经被全面探索过. 而 zkEVM Rollup 复杂度更高, 学习门槛更高, 还没有真正完全落地的经验与方案.</p>
+<h2 id="c-技术不是最重要的">c) 技术…不是最重要的</h2>
+<p>聊了很多的技术, 但是技术肯定不是最重要的. zkEVM Rollup, Rollup, 以太坊, 乃至区块链的瓶颈从来不是工程落地或者 DA 或者共识上的技术瓶颈, 而是用户.</p>
+<p>举个 Web2 的例子 (感谢 Nelson): 苹果的 App Store. 所有的开发者都会优先考虑在 App Store 上发布应用, 但是 App Store 的审核非常不稳定, 经常会随机拒绝应用的上传. 相比之下, 安卓的应用市场, 或者亚马逊的应用市场审核就友好很多. 但是为啥大家都想发布到 App Store 呢? 因为 App Store 有成熟且稳定的用户群体! 无论安卓或者亚马逊应用市场的开发者体验做得再天花乱坠, 开发者都还是会涌向有着用户的平台.</p>
+<p>软件开发的目标不是优雅的 API, 100% 的 Test Coverage, 最好的编程语言, 而是: 解决更多的问题和提供更多的价值. 这就意味着需要面向更多的用户.</p>
+<h2 id="d-终局形态">d) 终局形态</h2>
+<p>那么在我们的想象中, 一个真正终局的 zkEVM Rollup 会是怎么样的呢?</p>
+<ol>
+<li>终局的基础: 技术</li>
+</ol>
+<ul>
+<li>
+<p>zkEVM 层面: 所有的方案只要能落地都是好的, 但不必过于原教旨主义. 以太坊的 EVM 是一个非常 Legacy 的陈旧系统 (当然依旧是顶尖的方案), 尽管去对 zkEVM 进行更多的改善和创新. 除此之外 zkEVM 需要更多的优化, 减小 proving overhead 来赶上 Optimistic 方案.</p>
+</li>
+<li>
+<p>Rollup 层面: 保证优先满足区块链的核心价值 (去中心化, 安全性), 而不是一味对 TPS 进行军备竞赛.</p>
+</li>
+<li>
+<p>终局的核心: Social Consensus</p>
+</li>
+<li>
+<p>生态层面: 最理想的情况下就是所有以太坊主网的应用都迁移到某个 Rollup 上. 如果这个 zkEVM Rollup 本身就具有良好的生态基础, 那么在启动上就会拉开其他方案非常多. 在这个方面, 不得不说, Polygon 有着巨大的优势.</p>
+</li>
+<li>
+<p>开发者层面: EVM 兼容性不是决定性因素, 而是哪个 zkEVM Rollup 能最快地接触到开发者, 让开发者使用它作为网络来进行开发. 从来不是网络去顺应开发者, 而是开发者去挑一个整体最快或者最好的网络, 然后去慢慢适应这个网络的开发.</p>
+</li>
+<li>
+<p>用户层面: 用户的心智与社会共识非常重要. 除了 Reach 开发者, 谁最先最有效的 Reach 到用户也是最重要的因素. 一个成功的网络不应该成为技术宅对技术方案优越性的自嗨, 而是真正地为用户解决问题, 创造价值.</p>
+<p>zkEVM Rollup 都有光明的未来.</p>
+</li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/42312/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">F2O模式是旁氏模型吗？一文详解其模型的经济学原理</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/42315/">
+                <span class="next-text nav-default">Helium 为何要放弃构建自己的区块链转投 Solana?</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-zkevm-介绍">a) zkEVM 介绍</a></li>
+    <li><a href="#b-zkevm-意义">b) zkEVM 意义</a></li>
+    <li><a href="#c-zkevm-方案与进度对比">c) zkEVM 方案与进度对比</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#a-polygon-zkevm-rollup-架构">a) Polygon zkEVM Rollup 架构</a></li>
+    <li><a href="#b-polygon-zkevm-rollup-设计">b) Polygon zkEVM Rollup 设计</a></li>
+    <li><a href="#c-polygon-zkevm-rollup-特色">c) Polygon zkEVM Rollup 特色</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#a-layer-1-与-rollup">a) Layer 1 与 Rollup</a></li>
+    <li><a href="#b-optimistic-rollup-与-zk-rollup">b) Optimistic Rollup 与 zk Rollup</a></li>
+    <li><a href="#c-zk-rollup-与-zkevm-rollup">c) zk Rollup 与 zkEVM Rollup</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#a-天时地利人和">a) 天时地利人和</a></li>
+    <li><a href="#b-开发者的用户体验">b) 开发者的用户体验</a></li>
+    <li><a href="#c-用户的用户体验">c) 用户的用户体验</a></li>
+    <li><a href="#d-polygon-zkevm-rollup-用户体验">d) Polygon zkEVM Rollup 用户体验</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#a-zkevm-技术">a) zkEVM 技术</a></li>
+    <li><a href="#b-rollup-技术">b) Rollup 技术</a></li>
+    <li><a href="#c-技术不是最重要的">c) 技术…不是最重要的</a></li>
+    <li><a href="#d-终局形态">d) 终局形态</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

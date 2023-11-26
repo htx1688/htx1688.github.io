@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          谈以太坊的账户抽象化与ERC-4337 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="ERC-4337 没有试图修改协议共识，而是在系统中复制了 mempool 的功能。" />
+<meta name="keywords" content="ETH" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43846/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="谈以太坊的账户抽象化与ERC-4337" />
+<meta property="og:description" content="ERC-4337 没有试图修改协议共识，而是在系统中复制了 mempool 的功能。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43846/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-25T00:00:00+00:00" />
+
+<meta itemprop="name" content="谈以太坊的账户抽象化与ERC-4337">
+<meta itemprop="description" content="ERC-4337 没有试图修改协议共识，而是在系统中复制了 mempool 的功能。"><meta itemprop="datePublished" content="2022-10-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3338">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="谈以太坊的账户抽象化与ERC-4337"/>
+<meta name="twitter:description" content="ERC-4337 没有试图修改协议共识，而是在系统中复制了 mempool 的功能。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">谈以太坊的账户抽象化与ERC-4337</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-25">
+      2022-10-25
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3338 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>以太坊系统中实际存在两种类型的账户：</p>
+<p><strong>一种是由私钥控制的外部账户（externally-owned account，EOA），</strong> 比如我们所使用的钱包中的账户，这类账户都有自己的余额。拥有者可以通过创建和签名一笔交易从自己的外部账户发送消息；</p>
+<p><strong>另一种是由部署到区块链上的代码控制的合约账户（contract account），</strong> 由存储在智能合约账户（有时也被称为智能钱包）内的以太坊虚拟机代码控制。当合约账户收到信息时，其内部代码就会被激活，并允许它对内部存储进行读取和写入以及创建新合约等操作。按照目前的以太坊协议，只有外部帐户才可以发起交易，并且仅允许账户的所有人修改其帐户状态。</p>
+<h3 id="什么是账户抽象化">什么是账户抽象化？</h3>
+<p>账户抽象是对以上两种账户的一种改进，尝试模糊二者之间的界限，变成一种包含复杂逻辑的通用性账户，<strong>使账户可以同时拥有合约账户和外部账户的功能</strong> 。</p>
+<p>这种做法相当于让用户按照合约账户的格式来定义外部账户，用户可以在智能合约钱包中包含任何逻辑验证。由密钥控制的账户也可以获得代码的支持。</p>
+<h3 id="账户抽象化的各种方案">账户抽象化的各种方案</h3>
+<p>一直以来，实现账户抽象化都是以太坊开发者社区的愿景。社区也提出了各种各样的方案，如：<strong>EIP-86，EIP-2938 等</strong> 。</p>
+<p>EIP-86 是为账户抽象做技术准备，它定义了一种新的账户类型，允许用户创建基于智能合约的账户。</p>
+<p>以太坊协议本身要求将所有内容打包到源自 ECDSA 安全的外部账户 (EOA) 的交易中，每个用户操作都需要由来自 EOA 的事务包装，这会产生 21000 gas 的费用。用户需要在单独的 EOA 中拥有 ETH 来支付 gas。</p>
+<p>EIP-86 提出的账户抽象带来新类型的事务，与传统事务必须有一个 EOA 作为发送者相比，这些事务没有发送者。这种事务破坏了事务哈希的唯一性。EIP-86 原计划于 Metropolis 阶段升级，但由于前面所说的问题，开发者决定在 Metropolis 中暂缓引入。</p>
+<p>EIP-2938 提供了一种账户抽象化解决方案，通过更改一部分以太坊协议，允许合约账户与外部账户一样可以发起交易。但是由于这个方案需要在共识层进行以太坊协议的更改，所以并没有得到广泛的接受。</p>
+<p>后来提出的新的协议 <strong>ERC-4337</strong>  则提供了一种无需更改共识协议的方案试图达到与 EIP2938 同样的效果，这种安全性更高的实现方式目前在社区中得到了更多的关注。</p>
+<h3 id="erc-4337-如何实现">ERC-4337 如何实现？</h3>
+<p>ERC-4337 没有试图修改协议共识，而是在系统中复制了 mempool 的功能。</p>
+<p>用户发送一个<strong>用户操作（UserOperation）对象</strong> ，这个对象中包括了用户的意图、签名和其他数据。</p>
+<p>用户操作有一个单独的 mempool 存储池，连接到这个存储池的节点会进行 ERC-4337 特定的验证，以过滤操作来确保他们只收到支付费用的操作。</p>
+<p>由矿工或使用 Flashbots 服务的打包者批量收集这些用户操作，打包成单笔<strong>捆绑交易（bundle transaction）</strong> ，并纳入以太坊区块中。<strong>打包者为以太坊中的捆绑交易支付 gas fee</strong> ，并收取每个单独的 UserOperation 所支付的费用进行补偿。打包者将使用费用优先级逻辑选择包含哪些 UserOperation 对象。  </p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/2_cuzsps5hlb.png" alt="谈以太坊的账户抽象化与ERC-4337"></p>
+<p>其中的用户操作 UserOperation 看起来像一个事务，但它是一个 ABI 编码的结构，包括了以下字段：</p>
+<p>1、发件人：进行操作的钱包；</p>
+<p>2、nonce 和 signature：传递给钱包验证函数的参数，以便钱包可以验证操作；</p>
+<p>3、initCode：如果钱包尚不存在，则用于创建钱包的初始化代码；</p>
+<p>4、callData：用于实际执行步骤调用钱包的数据。</p>
+<p>而每一个钱包都是一个智能合约，必须包括两个功能函数：</p>
+<p>1、validateUserOp，它接受一个 UserOperation 作为输入。这个函数应该验证 UserOperation 里的签名和 nonce，如果验证成功则支付费用并增加 nonce，如果验证失败则抛出异常；</p>
+<p>2、op 执行函数，将 calldata 解析成钱包执行操作的一个或多个指令。  </p>
+<h3 id="erc-4337-带来的变化">ERC-4337 带来的变化</h3>
+<p>如果该提议被普遍采用，<strong>签名验证转移到了以太坊虚拟机（EVM）上</strong> ，validateUserOp 函数添加了任意签名和随机数验证逻辑，使验证逻辑变得更加灵活。</p>
+<p>如此一来，签署交易之时就能采用新的密码学工具，钱包也可以提供一些新的功能，比如：</p>
+<p>1、多重签名；</p>
+<p>2、社交恢复；</p>
+<p>3、更高效、更简单的签名算法（例如 Schnorr、BLS）；</p>
+<p>4、后量子安全签名算法（例如，Lamport、Winternitz）；</p>
+<p>5、可升级钱包。</p>
+<p>这种方案还打开了各种其他交易许可管理，比如<strong>允许交易通过智能合约来支付 gas 费</strong> 。</p>
+<p>在目前，外部钱包要在以太坊上交互的 gas fee 只能通过钱包中的 ETH 来支付，如果你的钱包中只有 ERC-20 Token，没有 ETH，你将没有办法将这些 Token 转出。当 ERC-4337 采用后，用户可以使用账户中的 ERC-20 Token 来支付费用，由矿工节点用合约作为中介来代为支付 ETH 上链并获取用户的 ERC-20 Token 。</p>
+<p>抽象化实现后，<strong>由外部账户的所有者签名交易并进行广播将不再是发起交易的唯一方法</strong> 。这将为以太坊充当元交易的中继者带来可能。目前许多以太坊上的应用都需要依靠中继者在区块链上发布用户交易，并向中继者支付费用。如果钱包中可以内置更复杂的合约，有些中继者就不再有存在的必要，也就不需要向他们支付额外的费用。</p>
+<p>虽然有很多优点，但是新方案也同样面临一些问题。</p>
+<p>最突出的一点就是更高的 Gas 成本，基本的 ERC-4337 操作约需要 42000 gas，而常规交易需要 21000 gas，原因如下：</p>
+<h4 id="1需要支付大量的单个存储读写成本在-eoa-的情况下这些成本会捆绑到一笔-21000-gas-的付款中">1、需要支付大量的单个存储读/写成本，在 EOA 的情况下，这些成本会捆绑到一笔 21000 gas 的付款中：</h4>
+<p>（1）编辑包含 pubkey+nonce (~5000) 的存储 slot；</p>
+<p>（2）用户操作调用数据成本（约 4500，通过压缩可减少到约 2500）；</p>
+<p>（3）ECRECOVER (~3000)；</p>
+<p>（4）首次访问钱包本身 (~2600)</p>
+<p>（5）首次访问收款人账户 (~2600)</p>
+<p>（6）将 ETH 转入收款人账户 (~9000)</p>
+<p>（7）编辑存储以支付费用（~5000）</p>
+<p>（8）访问包含代理 (~2100) 的存储 slot，然后访问代理本身 (~2600)；</p>
+<h4 id="2除了上述存储读写成本之外合约还需要执行业务逻辑解包-useroperation对其进行哈希洗牌变量等">2、除了上述存储读/写成本之外，合约还需要执行「业务逻辑」（解包 UserOperation、对其进行哈希、洗牌变量等）</h4>
+<h4 id="3需要消耗-gas-来支付日志费用eoa-不发布日志">3、需要消耗 gas 来支付日志费用（EOA 不发布日志）；</h4>
+<h4 id="4一次性合约创建成本约-32000-gas加上代理中每个-code-byte-200-gas再加上设置代理地址的-20000-gas">4、一次性合约创建成本（约 32000 gas，加上代理中每个 code byte 200 gas，再加上设置代理地址的 20000 gas）</h4>
+<p>简而言之，账户抽象地址的每一步都需要计算，需要消耗更多的资源，也增加了额外的费用。</p>
+<p>好在这并不是无解的。</p>
+<p>由于 Rollup 擅长进行数据压缩，与数据复杂的账户抽象方案具有天然的契合点。</p>
+<p>在 Vitalik 最新的提案中，<strong>提出了通过 layer 2 来处理账户抽象化产生的数据</strong> 。其改进点在于，将只能分步骤实现的功能打包成批交易，同时用 SNARK 技术来保证交易有效性。  </p>
+<h3 id="结语">结语</h3>
+<p>在以太坊重点发展 Layer 2 的格局已定的现在，Vitalik 对以太坊升级的后续计划开始转向账户抽象。最新的提案中展示了 rollup+账户抽象的技术路径。各个 Rollup 提供商也推出了兼容账户抽象的新版本。</p>
+<p>今年 6 月，zkSync 发布 V2 更新信息：增添「账户抽象」功能，增加与以太坊 EVM 的兼容性。10 月，ERC-4337 发布了新版本，添加了包括 BLS 签名算法的签名聚合功能。签名聚合能够让构建者和批次提交者也能聚合签名（例如 BLS、SNARKs），大大减少链上数据，可为 rollups 降低数据成本。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1025/2_haomb056ky.png" alt="谈以太坊的账户抽象化与ERC-4337"></p>
+<p>我们有理由相信，账户抽象带来的变化同样蕴藏着生态爆发的可能性。随着 Rollup 的发展，可以与 Rollup 进行结合的账户抽象化一定也能发展出更优更精细的方案。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43837/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">三分钟读懂Solana上的DeFi/NFT收益聚合器Dappio</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43819/">
+                <span class="next-text nav-default">投资机构青睐的SocialFi 有哪些项目值得期待？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#什么是账户抽象化">什么是账户抽象化？</a></li>
+        <li><a href="#账户抽象化的各种方案">账户抽象化的各种方案</a></li>
+        <li><a href="#erc-4337-如何实现">ERC-4337 如何实现？</a></li>
+        <li><a href="#erc-4337-带来的变化">ERC-4337 带来的变化</a></li>
+        <li><a href="#结语">结语</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

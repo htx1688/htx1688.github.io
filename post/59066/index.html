@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          比特币需要ZK Rollup吗？详解比特币DA适配器方案Chainway和Kasar Labs - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="从本质上讲，比特币并不需要。" />
+
+  <meta name="keywords" content="区块大全, 区块链, 区块链资讯, 区块链快讯, 区块链新闻, 比特币行情" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/59066/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="比特币需要ZK Rollup吗？详解比特币DA适配器方案Chainway和Kasar Labs" />
+<meta property="og:description" content="从本质上讲，比特币并不需要。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/59066/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-13T00:00:00+00:00" />
+
+<meta itemprop="name" content="比特币需要ZK Rollup吗？详解比特币DA适配器方案Chainway和Kasar Labs">
+<meta itemprop="description" content="从本质上讲，比特币并不需要。"><meta itemprop="datePublished" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3991">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="比特币需要ZK Rollup吗？详解比特币DA适配器方案Chainway和Kasar Labs"/>
+<meta name="twitter:description" content="从本质上讲，比特币并不需要。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">比特币需要ZK Rollup吗？详解比特币DA适配器方案Chainway和Kasar Labs</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-09-13">
+      2023-09-13
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3991 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%AF%94%E7%89%B9%E5%B8%81/"> 比特币 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文作者：<a href="https://bitcoinmagazine.com/technical/zk-rollups-are-coming-to-bitcoin-heres-all-you-need-to-know">Namcios</a></p>
+<p>原文编译：深潮 TechFlow</p>
+<p>比特币即将迎来零知识（ZK）Rollups。最近，两个不同的项目将这一发展变为现实，这一进展不仅可以帮助比特币实现更大规模的扩展，还可以为决定使用它的用户提供额外的隐私保证。</p>
+<p>Chainway 上周宣布开源其数据可用性（DA）适配器，这是一种技术，允许开发人员利用比特币的安全性和最终性来开发使用 Sovereign 软件开发工具包（SDK）的 Rollups。Sovereign 为开发人员提供了捆绑服务，用于构建不同类型的 Rollups，而 Chainway 的发布旨在实现比特币的第一个 ZK Rollup。</p>
+<p>Kasar Labs 与 Taproot Wizards 合作，巧合地同时发布了适用于比特币的 DA 适配器。该适配器允许开发人员将 Madara 堆栈插入比特币中，以运行基于 StarkWare 创建的 Cairo 编程语言的 Starknet Rollup。</p>
+<h2 id="什么是-zk-rollup">什么是 ZK Rollup？</h2>
+<p>Rollups 将非标准比特币交易（例如某些侧链的交易）批量处理并发布到基础区块链（如比特币）的区块中。这极大地降低了验证这些交易的计算成本，同时在一定程度上受益于 Layer-1 区块链的安全性。从这个意义上说，Rollup 交易存在于比特币上。然后，用户将为该侧链运行一个节点，该节点知道如何解释发布到比特币上的数据并建立账户余额。然而，这意味着每个人都需要运行该其他协议的完整节点，这是不可扩展的。这就是 ZK 的作用所在。</p>
+<p>ZK Rollup 利用零知识证明，这是一种确保计算完整性而不损害隐私的密码学证明。它允许证明者以数学确定性向验证者证明计算陈述的正确性，而不泄露用于计算该证明的具体信息细节。在 Rollup 的背景下，这一点非常重要，因为它只需要观察者知道最终的证明，就可以验证这些陈述或交易。使用 ZK 证明使得使用 Rollup 的人可以从比特币中以数学确定性获得最新状态的证明，同时保持完全的隐私。</p>
+<p>ZK Rollup 的好处包括无需用户在线接收支付，只需在可能的情况下获取链上的支付数据，无需管理流动性，并且不依赖于比特币基础层的低费用。此外，使用 ZK Rollup，开发人员可以在比特币之上添加任何所需的编程环境，例如图灵完备的智能合约。</p>
+<p>ZK 证明使用了两种主要的数学技巧：SNARK 和 STARK。前者，即简洁的非交互式知识论证，早于后者，并且在诸如 Zcash 之类的加密货币中得到了应用，为用户提供了很高的隐私级别。可扩展的透明知识论证是后来开发的，旨在在所期望的隐私性之上提供更好的安全性和可扩展性。这是因为 SNARK 依赖于可信的设置来生成证明，而 STARK 旨在完全无需信任。最后，SNARK 容易受到量子计算的影响，但 STARK 是量子安全的。</p>
+<p>鉴于比特币几乎没有出现过故障的历史和对深度重组的抵抗能力，它是最适合用于 Rollup 交易的加密货币，因为 Rollup 交易依赖于主链来访问用户需要花费的关键数据。主链还确保 Rollup 保持活跃并可用。</p>
+<p>为了在比特币上正确实施 ZK Rollup，并允许用户可信地在 Rollup 之间桥接他们的比特币，需要对比特币进行软分叉。这个软分叉将向最古老的加密货币添加一个新的操作码，使比特币本身能够意识到并能够验证 ZK 证明。如果发生这种情况，用户只需要运行比特币节点，就能够可信地验证特定 Rollup 发布的证明，了解他们的账户和余额，并能够从 Rollup 中提取资金。</p>
+<p>在第一部分提到的两个项目并不假设比特币会发生共识变化。相反，它们利用 Ordinals 协议来避免对新操作码的需求。更具体地说，它们利用了 Ordinals 引入的铭文信封的概念，这种创新允许开发人员和用户通过使用特定的标志和几个操作码来封装任何类型的数据。在 Ordinal 铭文中，这个标志是「ord」。</p>
+<p>信封开头的标志和操作码具有双重作用。首先，它们让比特币节点知道它们可以跳过那些与比特币网络无关的信息信封。其次，它们对知道该信封的用户和应用程序起到相反的作用，让它们知道其中包含了他们感兴趣的内容。在 ZK Rollup 的情况下，用户可以扫描比特币区块以查找这些信封，了解 Rollup 的最新状态，并使用 ZK 证明进行数学验证。</p>
+<p>现在我们对 ZK 证明有了了解，让我们回到前面提到的两个项目，并探索它们设计中的独特方面。</p>
+<h2 id="sovereign">SOVEREIGN</h2>
+<p>Sovereign SDK 本身有三个主要目标。首先，它旨在为 Rollup 与 DA 层之间的通信提供标准接口，使得 Rollup 更容易部署在新的 DA 层上，并使新的链能够支持现有的 Rollup。其次，它与加密编译器集成，将代码的业务逻辑转换为可加密验证的形式。最后，它提供了常见区块链基元（如代币、非同质化代币和跨链桥）的默认实现。</p>
+<p>正如前面提到的，Chainway 的 DA 适配器旨在使使用 Sovereign SDK 构建的应用程序更容易连接到比特币。换句话说，适配器使得 Sovereign Rollup 可以利用比特币作为其 DA 层，这在以前是不可能的。数据可用性对于 Rollup 至关重要，因为它允许在主链之外进行的计算得到可信验证，并且是用户能够验证或修改其余额以及从 Rollup 中提取资金的要求。</p>
+<p>为了使 Sovereign Rollup 交易被包含在比特币区块中，用户将其交易传递给所谓的排序器。排序器在 Chainway 的 DA 适配器设计中由基金会自身运行，负责在侧链和比特币之间建立这种连接，确保用户传递的所有交易都以 ZK 证明的形式发布到比特币上。</p>
+<p>这听起来有点中心化，确实如此。然而，鉴于有效性证明技术——ZK-STARKs 的存在，排序器实际上无法恶意行事。这是因为证明私下确认了交易的合法性，任何人都可以验证。例如，排序器无法挪用用户资金，也无法进行未经授权的交易。但是，他们理论上可以通过不将用户的交易包含在比特币区块中并保留该数据来审查用户的交易。如果出现这种情况，用户可以选择将其交易数据发布到比特币中，通过将该信息记录到比特币中。</p>
+<p>Chainway 表示，未来他们计划通过一小组排序器实现去中心化的排序，参与将是无需许可的，并基于质押。</p>
+<h2 id="starknet">STARKNET</h2>
+<p>与 Sovereign 类似，Starknet 也旨在允许 Rollup 的构建。然而，Starknet 是一个更具观点的生态系统，其中包括 Cairo、CairoVM 和 Madara 等明确的组件，开发者可以利用这些组件进行构建。</p>
+<p>Starknet 是一个目前在以太坊上运行的 ZK Rollup，这意味着 Rollup 依赖于 Vitalik Buterin 创建的区块链作为其 DA 层。它利用 STARK 证明为用户提供所需的隐私和安全性假设，以及通过在发布证明和新状态到 Layer-1 之前对交易进行批处理来提高可扩展性和降低交易成本。 Cairo 是一种用于编写可证明程序的图灵完备编程语言，其中一方可以向另一方证明某个计算已经正确执行，而无需该方重新执行相同的程序。它是生成用于一般计算的 STARK 证明的第一个生产级平台。</p>
+<p>Cairo 虚拟机接收编译器生成的字节码，并在计算机上运行它。运行的输出是程序的追踪，然后可以将其发送给 STARK 证明生成器，以证明 Cairo 代码中表达的语句的有效性。</p>
+<p>Madara 是 Starknet 堆栈的排序器，帮助开发人员支持基于 Starknet 的 ZK Rollup。</p>
+<p>直到最近，所有这些软件堆栈只能在以太坊上使用。现在，Kasar Labs 和 Taproot Wizards 为比特币推出了一个 DA 适配器，旨在允许开发人员将使用开源版本的 Starknet 构建的 Rollup 锚定到原始且最安全的加密货币网络。</p>
+<h2 id="比特币是否需要-zk-rollup">比特币是否需要 ZK Rollup？</h2>
+<p>从本质上讲，比特币并不需要。它在今天的状态下运行得非常好，没有太多理由认为比特币需要发生重大变化。另一方面，扩展性是一个真正的需求，像闪电网络这样的技术已经被证明在允许那些本来无法参与比特币经济交易的用户更多参与方面非常有用。</p>
+<p>ZK Rollup 提供了一种以不同视角看待比特币的方式。上述两个项目并不要求比特币本身进行任何实际变化，但是如果要实现这项技术的全部功能，就需要通过引入新的操作码来进行共识变更。目前看来，这项基于零知识的 Rollup 技术研究正试图推动比特币的潜力边界，这对于扩大比特币用户群体来说是一件好事，就像闪电网络一样。</p>
+<p>与闪电网络类似，Rollup 通过将多个交易合并在一起，然后将单个信息源发布到比特币上来实现功能。当然，ZK Rollup 采用了与闪电网络非常不同的方法，这是正确的。这项技术并不试图与经过验证的廉价支付第二层竞争，比特币用户已经喜爱这种方式。相反，Rollup 关注其他问题，并试图提供其他解决方案。</p>
+<p>对于那些希望在比特币上进行更多操作的人来说，这种最终能够实现私密、复杂计算并依赖数学证明的扩展技术听起来很有吸引力。即使如此，完全无需信任地在 Rollup 内外桥接比特币将取决于该操作码。但即便如此，这个想法是存在的。</p>
+<p>目前尚不清楚 ZK Rollup 是否会在比特币上获得任何关注。比特币已经有一个侧链，Liquid 在比特币上已经活跃了多年，但其交易量仍然不大。可以说，在 Liquid 的情况下，联邦模型的存在是一个不利因素，而 ZK Rollup 在这种情况下更具优势。也许 Rollup 可能会遭遇与 Liquid 相同的命运，即低交易量和低兴趣，因为比特币用户继续选择简单地「HODL 比特币并持有」。或者它可能会开启比特币发展和使用的新篇章。</p>
+<p>无论最终结果是成功还是失败，探索这些高质量研究的发展都是一项自然且必要的努力。无论结果如何，都可以从中学到新东西。无论如何，有一件事是确定的——比特币将继续进行哈希运算和生成区块，让所有用户享受硬通货的货币确定性，而不用关心任何这些事情。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/58983/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">比特币下一轮减半行情的测算</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/59006/">
+                <span class="next-text nav-default">比特币硬分叉历史：既是分裂 也是生长</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是-zk-rollup">什么是 ZK Rollup？</a></li>
+    <li><a href="#sovereign">SOVEREIGN</a></li>
+    <li><a href="#starknet">STARKNET</a></li>
+    <li><a href="#比特币是否需要-zk-rollup">比特币是否需要 ZK Rollup？</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文探讨 Aptos、Solana 和新公链周期律 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="为了便于读者理解，本篇clips将区块链共识与通讯技术原理等做了一定的简化描述。" />
+<meta name="keywords" content="公链" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/43728/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文探讨 Aptos、Solana 和新公链周期律" />
+<meta property="og:description" content="为了便于读者理解，本篇clips将区块链共识与通讯技术原理等做了一定的简化描述。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/43728/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-21T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文探讨 Aptos、Solana 和新公链周期律">
+<meta itemprop="description" content="为了便于读者理解，本篇clips将区块链共识与通讯技术原理等做了一定的简化描述。"><meta itemprop="datePublished" content="2022-10-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="8495">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文探讨 Aptos、Solana 和新公链周期律"/>
+<meta name="twitter:description" content="为了便于读者理解，本篇clips将区块链共识与通讯技术原理等做了一定的简化描述。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文探讨 Aptos、Solana 和新公链周期律</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2022-10-21">
+      2022-10-21
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 8495 字 -
+        预计阅读 17 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0/"> 其它文章 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>研究机构：Mint Ventures</p>
+<p>研究员：王叶</p>
+<p>本篇文章属于Mint Ventures的 Mint Clips 系列。Mint Clips是我们对于行业事件，在内外部交流后的一些思考。相对于我们的#深度研报 和#赛道扫描 系列文章，Mint Clips并不讨论特定的项目，主要呈现对于特定议题的“阶段性洞察”。</p>
+<p>本文尝试对Aptos的未来发展定位为下一个Solana。因为在区块链不可能三角的约束中，新公链总是呈现周期性发展，上个周期以Solana为首的新公链凭借着激进的低费高速模式快速崛起，也因为一些内在的缺陷而有可能被Aptos等新公链逐渐赶超。而老牌公链以太坊，已经在多链未来中拥有了强大的护城河。</p>
+<p>前段时间笔者受巴比特之邀，参与“Web3 Builder，无问西东”活动，被问到了一个问题是：“A16Z，币安和FTX这些顶级机构都对Aptos等新公链非常看好，会不会让这些公链能够挑战一下以太坊的霸主地位？”, 鉴于对这个话题感兴趣的读者众多，笔者在此对截至到目前为止的思考进行了梳理，形成了以下这篇对Solana、Aptos以及新公链的综合评述。笔者将Aptos的市场定位，大致为当下Solana的市场位置。</p>
+<p>为了便于读者理解，本篇clips将区块链共识与通讯技术原理等做了一定的简化描述。</p>
+<p>以下内容仅为笔者对新公链若干特定议题的阶段性思考，形式上近似于一篇漫谈，期待同业的指正和交流。</p>
+<h2 id="公链赛道的初步划分">公链赛道的初步划分</h2>
+<p>2015年，以太坊的上线，开创了智能合约公链时代，也让公链成为了整个Web3不可或缺的基础设施。</p>
+<p>2017年，ICO与加密猫（Crypto Kitties）的爆火，几乎使以太坊网络陷入瘫痪。从此所有从业者都意识到，此时的区块链是完全不足以承担更大面积的现实社会交易需求，扩容必然是WEB3长期刚需的黄金赛道。</p>
+<p>为了方便今天对新公链的讨论，我们暂且搁置已拥有大量应用、大量开发者、超强影响力，但受制于已有的众多利益相关者，不得不缓慢转型的以太坊，而优先观察没有早期影响力与用户积累，但是历史包袱更轻、可以轻松采用全新高性能方案的新公链。Solana一度是新公链赛道绝对的王者，但如今，Aptos被众多投资人视为“Solana Killer”。</p>
+<p>首先，我认为Aptos有较大概率能冲击Solana的位置。</p>
+<p>在以太坊正式落地分片、实现足够高性能前，高性能新公链赛道将表现出一定的周期律。具体来说，一条新公链受益于激进的高速与低费而快速生长，同时因为激进的高速低费选择带来的漏洞而走入负向飞轮。本轮的Solana的高性能叙事开始失去光彩，“宕机链”的绰号逐渐取代“以太坊杀手”的称号，资本开始寻找周期律下新的接棒人。</p>
+<h3 id="solana的崛起与衰落之路高速与低费">Solana的崛起与衰落之路——高速与低费</h3>
+<p>超高TPS的故事</p>
+<p>Solana高TPS是建立在10倍的区块大小、低冗余度及1/30的出块时间，还有并行计算后约10倍的速度之上的，实现了ETH约3000倍的理论TPS。</p>
+<p>（1）区块大小</p>
+<p>其中，Solana将区块体积从约1MB增加至10MB，由此带来10倍的性能提升。但是增加区块体积并不是非常值得采用的方案，因为区块体积过大，在增加系统处理能力的同时，会造成两个明显弊端：能存储区块链完整交易的全节点大幅减少、大区块在系统中传输时间过长甚至易受攻击（比特币的几个著名分叉BCH、BSV等都来源于区块大小的激烈争论，最终比特币坚持了小区块）。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/2t5290igtmzliz0" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>来源：https://vitalik.ca/general/2020/12/28/endnotes.html</p>
+<p>虽然Solana在通信过程中做了较多改进而规避了一些风险，但是Solana的大区块依然增加了全节点的门槛，减少了全节点的数量，对于去中心化程度和网络安全性造成了一定的负面影响。</p>
+<p>（2）共识层面的改进–出块时间与低冗余度</p>
+<p><strong>中心化的交易处理流程</strong></p>
+<p>在web2.0的中心化系统中，以支付宝为例，由于后台只有支付宝官方的服务器，交易的处理是非常简单的：</p>
+<p>①交易信息被发送至支付宝</p>
+<p>②支付宝直接确认并执行交易</p>
+<p>③没有人负责验证，因为大多数人默认相信支付宝不愿意作恶。</p>
+<p>总计1次发送，1次执行，0次检验，总时长几乎可以忽略。</p>
+<p><strong>去中心化的交易处理流程</strong></p>
+<p>但是在公链领域，成为验证者是几乎无门槛的事，我们无法直接相信一个验证者做出了正确的交易处理。因此，我们需要大量验证者，且验证过程也会非常复杂：</p>
+<ul>
+<li>以太坊</li>
+</ul>
+<p><strong>我们不妨来观察以太坊是如何确认交易的:</strong></p>
+<p><strong>（1）交易完成后，相关交易信息经过6秒传输至以太坊全网n个节点</strong></p>
+<p><strong>（2）由一个随机节点处理，将处理好的交易打包，生成区块</strong></p>
+<p><strong>（3）区块被发送到全网n个节点进行检验。</strong></p>
+<p>总体增加了大量传输与检验次数，一个出块流程为12秒。</p>
+<p>由于单个节点的不可信，区块链时代一定会有多轮博弈机制，让所有节点相互验证，从而维护区块链最终结果的准确性，这增加了时间消耗和冗余计算，也是区块链不可能三角存在的重要原因。</p>
+<p>Solana在传输层面和区块验证层面均大幅提升了速度。Solana将出块时间从以太坊的12秒降低下降至0.4秒（最多0.8秒），从而实现了约30倍的扩容。</p>
+<ul>
+<li><strong>Solana</strong></li>
+</ul>
+<p>我们来看看Solana是如何记账的：</p>
+<p>（1）交易传输层面： Solana会在每个运转周期（Epoch）提前公布每次出块（Slot）的负责人（Leader），也就意味着，所有的交易只需要被传输到Leader，而无需传遍全网，这降低了传播环节的冗余。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/es58a2hzk3gpjzv" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：CatcherVC</p>
+<p>（2）交易的验证层面：Solana出块负责人将区块分割，其他验证者只需检验分到自己的部分，而不是整个区块。</p>
+<p>Solana的出块机制下，计算的冗余程度从n²下降至logn，从而实现了更高效的运转（以下进行简单的科普）。</p>
+<p>我们不妨来回忆一些经典数学题：</p>
+<p>（1）如果n个人中，任意2人都需要互换账本，一共出现了多少次账本互换呢？答案是n(n-1)次，或者说n²级别。</p>
+<p>（2）相应的，假设n个人中，任意一人都需要和一个已知的“领导”互换账本，账本一共被交换了多少次呢？答案是2(n-1)次，或者说n级别。</p>
+<p>（3）再次假设，如果n个人中，已知的“领导”和每个人互换账本的一部分，那么账本总计被交换了多少次呢？显然比n级别还要低，我们可以简单理解为logn级别。</p>
+<p>其中（1）对应以太坊，（3）对应Solana。</p>
+<p>我们可以得到如下图示，Solana的共识机制下，系统出块所需的冗余计算大大减少，出块速度也明显提升。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/3uwi8k0bklwl9bw" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：推特@TheAntiApe</p>
+<p>在Solana诞生之初，这样的设计确实可以让Solana实现飞速的运转。但是大家很容易发现这种模式的弊端：接受各种交易、识别有效交易、打包交易、分割区块、要求其他验证者各自验证并回收验证结果等工作，都是领导节点完成的。</p>
+<p>领导节点面临着极大的压力，在交易量很大/无效交易很多等情况出现时，很容易出现崩溃。而从下图我们很容易看出，领导节点一旦崩溃，整个系统是非常难正常运转的，这就引发了整个区块网络的频频宕机。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/ajwzw281cozdspy" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：推特@TheAntiApe</p>
+<p>此外，提前公布的领导节点被贿赂作恶、被针对性攻击等中心化问题也无法规避，这对整个区块链也有一定负面影响。</p>
+<p>2021年9月Solana生态爆发后，至今已经发生了多次宕机事故。频繁的宕机事故，限制了Solana的发展空间。在下轮牛市，用户需要一条不会频繁宕机（至少暂时没有表现出极高宕机风险）的新公链。</p>
+<p><strong>（3）并行计算</strong></p>
+<p>在基本的共识机制之外，Solana也做了智能合约并行处理的改进。</p>
+<p>早期以太坊采用了EVM作为智能合约运行环境，这种选择的重要特性是串行计算（依次处理交易事务），是相对低效的处理模式。虽然以太坊社区也有将EVM升级（为EWASM）的规划，但是距离落地还很遥远。</p>
+<p>而Solana采用了Sealevel支持智能合约的并行处理，支持了使用英伟达4096核GPU进行超强的并行计算。这让Solana在大多数情况下，都可以表现出超强的运转能力。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/rw1mg4lfkelj5ru" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：Solana 白皮书</p>
+<p>但是Solana也会面对以下一些特殊情况：</p>
+<p>（1）Solana需要正确的判断交易是可以并行的，而判断错误可能引起故障。</p>
+<p>（2）如果Solana判断后发现交易是必须串行的，则它串行运转的速度，比以太坊还要慢。</p>
+<p>总结下来，4096核并行计算的特性，让它在可并行处理的程序中拥有超高的效率，但是一旦遇到无法并行处理的交易，他的效率会低于以太坊，甚至可能出现故障而宕机。此外，Solana低冗余度的特性，也就是通过“领导节点分配任务”的模式，让Solana可以轻松获得更高的正常运转效率。但是一旦出现故障，以太坊的高冗余度使它可以迅速恢复，而Solana的低冗余度极容易使网络崩溃。总体上，Solana项目做出了非常多高价值的创新，早期Solana可以迅速通过高TPS崛起，但后期，它不得不为容易宕机的特性埋单。</p>
+<p><strong>这就是区块链版本的“用冗余对抗不确定性”吧。</strong></p>
+<p><strong>超低费用的故事</strong></p>
+<p><strong>（1）公链的收支与“印钞”</strong></p>
+<p>Solana崛起的另一大依靠是低费用。概括的说，低费用一方面来源于超高的处理能力，另一个方面来源于系统的发币补贴。我们可以详解这种发币补贴模式下的收支。</p>
+<p>如果我们思考公链的商业逻辑，它为各种商业项目提供营商环境，同时对所有的用户收税，那么公链会很像一个国家，而公链代币更像是用于交税的法币。</p>
+<p>进一步分析，我们按照大多数公链的共同特征，对这个收入与支出进行简化。这些“国家”的税收，是所有用户的手续费，而这些“国家”的财政支出，则是为验证者发放的激励。如果大家去翻阅政府财政报告，大概率会看到这个词：“收支平衡”。</p>
+<p>正如国家需要收支平衡一样，公链也需要收支平衡。但如果我们查阅每条公链的收与支，就会发现，绝大多数公链的支出，是超过其收入的：</p>
+<p>给验证者的奖励-手续费收入=公链的亏损</p>
+<p>Bankless曾经对公链的亏损率做出过如下的统计：</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/v5bc2m9u1fkso3t" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：Bankless</p>
+<p>在一条公链的收入少于需要给验证者的支出时，这些亏损的额度，往往只能通过“开启印钞机”，发币进行补贴，也就是：</p>
+<p>公链的亏损=增发奖励</p>
+<p><strong>那么，验证的奖励往往来源于两部分：正常收入与“印钞补贴”：</strong></p>
+<p><strong>手续费收入+增发奖励=给验证者的奖励</strong></p>
+<p>对Solana来说，区块链验证者应收100元“工资”时，Solana“印钞补贴”给验证者的金额往往高达98.8元，实际从用户收费大约只有1.2元。当然，这个数据会随时间变化，但是Solana距离收支平衡与可持续运转，还有很长的路要走。</p>
+<p><strong>（2） “印钞”带来公链的通货膨胀</strong></p>
+<p>我们选择了将公链类比为国家，将公链代币类比为法币，则对于一条公链来说，货币的总价值与商品的总价值应当是完全对应的。</p>
+<p>我们可以简单地进行如下思考：一个国家的商品只有苹果，第一年，国家总计生产了100千克苹果，而总计发行了100元货币，则苹果的市场价格将为1元/千克。如果第二年，这个国家发展迅速，有了200千克苹果，也增发了100元货币，则苹果的价格也可以稳定在1元/千克。而如果第三年国家发展陷入停滞，仍然只生产了200千克苹果，但再次增发了100元货币，则苹果的价格，将变成1.5元/千克，也就是出现了较为严重的通货膨胀。</p>
+<p>相应的，对于以较高速度增发“货币”的Solana“国家”来说，早期由于链上商品总价值的快速增长，增发货币的负面影响将被几乎抵消。</p>
+<p>但是，当Solana已经遇到了明显发展瓶颈之后，当总货币量与总商品价值开始失调之后，Solana继续印钞来弥补亏空，或者减少印钞而增加“收税”，本质上都是不利于区块链发展的。这也被一些人称为“新公链的周期律”。</p>
+<p>至少在下一轮，市场期待一条重新找到收支平衡，或至少通过早期生态的快速发展，不让用户感觉到收支不平衡的公链。目前看来，Solana可能被接棒，Aptos也有望成为那个接棒人。</p>
+<p>我们也不妨在此也探讨一下以太坊的商业模式：对于以太坊来说，在2021年实现EIP1559销毁机制和2022年正式合并而降低运营成本后，对应的公式已经变成了：</p>
+<p><strong>手续费收入+增发-销毁=给验证者的支出</strong></p>
+<p>如果按照收入-支出=利润，那么对于以太坊来说：</p>
+<p><strong>利润=销毁-增发</strong></p>
+<p>其中，合并后增发量由每年450万个下降到18-209万个，而销毁量则与区块链使用情况决定。不难算出，在以太坊gas 价格超过15时，以太坊大概率是一条超越了盈亏平衡线区块链，若能长期保持，则能实现长期的发展和生存。</p>
+<p><strong>（3）收支视角下的一些分析案例</strong></p>
+<p>收支或许是大家常常忽略的话题，但是即使在全新web3世界中，商业的最基本逻辑也依然离不开收入与支出。</p>
+<p>2022年6月，Starkware上 Immutable X（IMX）项目增加收费，dydx出走自建链等，其实也暗示了收支对公链格局的一些影响。我们可以在这里按照收支的视角，对两个项目进行一定的分析。</p>
+<p><strong>IMX</strong></p>
+<p>对于 Immutable X来说，我们不妨将其收入与支出进行基本的拆解：</p>
+<p>作为一个zkrollup，2022年6月前， Immutable X宣称完全0 gas，因此主要的业务收入基本为0。</p>
+<p>而作为基于starkware开发的zkrollup，它需要将交易记录打包至以太坊主链进行验证和存储以保证安全性，并向以太坊支付相应费用，主要支出为以太坊的gas fee。此外，IMX也需要向starkware交使用费等。</p>
+<p>这样的收支显然不平衡，于是2022年6月，IMX开始加收2%的交易费，以维持系统收支的平衡。</p>
+<p><strong>DYDX与短期应用链风潮</strong></p>
+<p>接下来，我们可以站在DYDX的视角观察它的收支与选择：</p>
+<p>对于Starkware上的DYDX来说，其如果选择以太坊layer2，则其收入=交易手续费，支出=给Starkex的付费+给以太坊系统的gas fee+做链上应用的成本。</p>
+<p>对于去Cosmos自建链的DYDX来说，其收入=交易手续费+自建链gas fee，支出=做链成本。</p>
+<p>也就是说，DYDX如果选择去Cosmos自建链，则其将省下给以太坊的付费，增加做链成本和gas fee捕获，当然也会损失一定以太坊生态的流量。在当前以太坊的比较高的区块租金和Cosmos低建链成本的前提下，DYDX切换到Cosmos自建链是一种顺理成章的选择。</p>
+<p>当然，在以太坊分片落地，变得更低费高效时，应用（链）视角下，自建链将不再是足够经济学理性的选择，原先DYDX等项目的应用链叙事，也就会到达一定的转折点。</p>
+<p>那么按照高TPS和低费用的逻辑与周期律，新公链赛道中Solana的发展明显遇到了瓶颈，新公链龙头的接棒人将会出现。这个接棒人，从资本追捧、技术的重新取舍和Move语言叙事可以初步看出，有可能会是Aptos。</p>
+<h3 id="aptos有望接棒新公链">Aptos有望接棒新公链</h3>
+<p>目前看来，Aptos与Solana的投资方高度重合，Solana的部分高管以及链上项目方也都有转投Aptos的趋势，这对于Aptos接棒Solana是较大的机遇。此外，高性能的重新取舍、Move语言的新故事，也都让Aptos有了较为强大的竞争力。当然Aptos是否可以接棒以及接棒后的实际发展情况，可能要考验项目团队的能力了。</p>
+<p>上线首日，Aptos团队在Token分配、社区管理等方面均引发一定争议，也让笔者对项目团队的能力不敢过于乐观。</p>
+<p>高性能的故事</p>
+<p>（1）Diem-BFT V4共识机制</p>
+<p>这种共识机制的核心创新之处大致如下：</p>
+<p><strong>首先，系统每次把一大批交易记录压缩成一个“摘要”（图中的“PoAv”）。</strong></p>
+<p><strong>其次，区块中只包含“摘要”而不是全部交易记录。</strong></p>
+<p>这样一来，同样大小的区块，包含了更多交易记录，也就实现了较高的扩容水平。当然，这种压缩也会存在若干潜在风险，例如不同批次的交易记录需要分割得不重不漏，否则会出现交易处理故障。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/6n5gnrq12s670wa" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：Huobi Research</p>
+<p>由于Aptos当前公布的Tokenomics较为模糊，我们暂时不深入研究其经济模型的持续性问题。</p>
+<p>（2）并行计算</p>
+<p>Aptos采用了乐观假设，即默认交易没有关联性后将其并行处理。如果交易之间的相关度很低、可以并行处理，Aptos将因为并行计算大幅加速。但如果交易关联度很高，则Aptos将获得略低于ETH的处理速度，但后果相对没有特别严重。</p>
+<p>当然，Aptos最终选择了16线程并行处理，对于节点硬件的要求也是较高的，符合要求的节点数量也会有所减少（从Aptos当前的节点筛选中也可以看出一些信号），这也会牺牲去中心化程度与安全性。</p>
+<p>应该说，从纯技术角度看并行计算，Aptos更多是又一次的权衡取舍而非完全的创新，笔者对于乐观假设等方案持保留态度。</p>
+<p>Move语言的故事</p>
+<p>Move语言是Aptos的主要叙事之一，也确实拥有较强的影响力。</p>
+<p>Move是一种静态的编程语言，强调了安全性。例如，Move不支持动态调用（Dynamic Dispatch），也就是所有的代码必须在正式运转前，具备让人完全一眼看懂各种运转关系的能力，这是更注重安全性的方案，在金融领域中具有独特价值。Solidity则支持了动态调用，更强调灵活性。</p>
+<p>总体来说，Move语言在很多区块链场景中都值得采用。但Solidity具备的灵活性等自身优势与过往积累，也足以维持相当数量的用户。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/rlyudsj19sfsbtq" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：Buidler DAO</p>
+<h2 id="新公链与以太坊的对决">新公链与以太坊的对决</h2>
+<p>笔者对Aptos冲击以太坊持悲观态度，虽然Aptos与以太坊在区块链性能层面各有取舍，但在多链未来的角度中，当下以太坊与Aptos很难称为同一维度的竞争对手：</p>
+<p>以太坊已经构建起了安全且规模宏大的多链体系（包括Optimism、Arbritrum、Starkware、Zksync等若干Rollup），且部分Rollup已经有了接近新公链龙头的发展水平，而Aptos暂时仍属于流动性割裂的单链。安全的多链体系将是以太坊隐形的护城河。</p>
+<h3 id="多链未来">多链未来</h3>
+<p>首先，由于区块链天生存在不可能三角，而区块链上的赛道逐渐增多（Defi、Gamefi、NFT…）等，一条区块链很难满足多种用户需求，所以未来一定会是多链的。</p>
+<h3 id="跨链的风险性">跨链的风险性</h3>
+<p>2021年，高性能新公链、各赛道专用链飞速发展，但与此同时，用户也注意到了极为明显的问题，就是跨链风险与流动性割裂。如果一个用户在Aptos上购买和使用域名，在Solana链上玩Stepn，在Flow链买最新的NFT…用户可能需要经常在不同区块链之间划转资产，但目前为止，暂时没有出现安全的跨链交互手段。“跨链桥”这种应用，因为多次出现被盗新闻，已经被业界称为“黑客的提款机”。</p>
+<p>众所周知，单个区块链受到共识机制的约束，是安全的。但两条区块链交互时，没有一个共识机制来约束，因此跨链桥类项目存在无法消除的安全风险。</p>
+<p>因而笔者对于多链时代的预测，是安全的多链体系，而不是流动性割裂的若干单链。</p>
+<h3 id="多链体系的安全性">多链体系的安全性</h3>
+<p>在多链时代，以太坊做为共享安全层，各具特色的Rollup满足不同的用户需求，其实是非常安全的多链体系。</p>
+<p>设想一下，用户可以存入资产去IMX玩Illuvium游戏，也可以通过以太坊主链，将资产转移至Arbitrum参加奥德赛做任务，这些资产转移过程（Cross-Rollup），都是由以太坊主链保证安全性，规避了绝大多数跨链中存在的问题。</p>
+<h3 id="以太坊的强大多链体系">以太坊的强大多链体系</h3>
+<p>以太坊的多链生态已经有了强大的竞争力，以太坊上的两大OP Rollup：Optimism和Arbiturm的TVL都冲进了前8。而在明年的以太坊上海升级中，预计以太坊上各种Rollup项目与以太坊交互的成本将大幅降低，这将促使各种Rollup发展再次出现飞跃，进而使以太坊为共享安全层的多链体系拥有极为稳固的行业地位。</p>
+<p><img src="https://img.bibiqing.com/news/2022/1021/7ky930m5q9ab4p5" alt="一文探讨 Aptos、Solana 和新公链周期律"></p>
+<p>图源：Defillama</p>
+<p>此外，以太坊Rollup中的ZK Rollup也在快速发展，且ZK Rollup长期来看，在安全性、交易速度、交易费用等多个维度均相比OP Rollup有更高的上限。随着Zksync本月上线主网，Polygon zkevm与Scroll的发展，在不远的将来，ZK Rollup的生态也将有望达到新公链龙头的水平，Aptos等流动性割裂的单链，即便有多链发展规划，冲击强大的以太坊多链体系，也是有极大难度的。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/43720/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文梳理Devcon大会热议「账户抽象」背后相关知识点</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/43711/">
+                <span class="next-text nav-default">元宇宙热潮退去？去年工程师年入150万 有人跳槽薪资翻倍 如今薪资收紧</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#公链赛道的初步划分">公链赛道的初步划分</a>
+      <ul>
+        <li><a href="#solana的崛起与衰落之路高速与低费">Solana的崛起与衰落之路——高速与低费</a></li>
+        <li><a href="#aptos有望接棒新公链">Aptos有望接棒新公链</a></li>
+      </ul>
+    </li>
+    <li><a href="#新公链与以太坊的对决">新公链与以太坊的对决</a>
+      <ul>
+        <li><a href="#多链未来">多链未来</a></li>
+        <li><a href="#跨链的风险性">跨链的风险性</a></li>
+        <li><a href="#多链体系的安全性">多链体系的安全性</a></li>
+        <li><a href="#以太坊的强大多链体系">以太坊的强大多链体系</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

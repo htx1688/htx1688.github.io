@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          DeFi 借贷概念：清算 - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="本文我们将回顾 DeFi 清算的运作方式，以及为什么它们很重要。" />
+<meta name="keywords" content="DeFi清算" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/50696/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="DeFi 借贷概念：清算" />
+<meta property="og:description" content="本文我们将回顾 DeFi 清算的运作方式，以及为什么它们很重要。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/50696/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-06T00:00:00+00:00" />
+
+<meta itemprop="name" content="DeFi 借贷概念：清算">
+<meta itemprop="description" content="本文我们将回顾 DeFi 清算的运作方式，以及为什么它们很重要。"><meta itemprop="datePublished" content="2023-05-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6950">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DeFi 借贷概念：清算"/>
+<meta name="twitter:description" content="本文我们将回顾 DeFi 清算的运作方式，以及为什么它们很重要。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">DeFi 借贷概念：清算</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-06">
+      2023-05-06
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 6950 字 -
+        预计阅读 14 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>原文链接：https://medium.com/smlxl/defi-lending-concepts-part-2-liquidations-7f0f0ffec96c</p>
+<p>译文出自：登链翻译计划</p>
+<p>译者：翻译小组 校对：Tiny 熊</p>
+<p>这篇文章是借贷系列文章的二篇，本文我们将回顾 DeFi 清算的运作方式，以及为什么它们很重要。</p>
+<p><a href="https://www.jinse.cn/blockchain/3453844.html" title="全面解读DeFi借贷：组成、公式、用例">在上一篇文章中</a>，我们回顾了 Defi 借贷协议的核心概念，以及不同的协议如何选择实现这些操作，例如份额币，在这篇文章中，我们将重点讨论我们认为是最令人兴奋的 Defi 借贷概念之一：清算。</p>
+<p>超额抵押和坏账</p>
+<p>清算和清算阈值</p>
+<p>Compound：账户流动性</p>
+<p>Maker</p>
+<p>AAVE V2 - 健康系数</p>
+<p>破产头寸分析</p>
+<h2 id="超额抵押和坏账">超额抵押和坏账</h2>
+<p>你可能还记得我们以前的文章[5]，协议用户只能用他们提供给协议的抵押品的一个可变比例来借入资产。这是有道理的，因为协议需要确保，如果你无法偿还债务，它可以从你那里收回其资产（或任何价值相同的其他资产）。这种资产抵押的过程始于传统金融服务，例如，今天，人们可以把他们的房子或兰博基尼作为偿还贷款的担保。</p>
+<p>抵押依靠的前提是抵押品的价格保持其价值 &ndash; 尽管房子或兰博基尼的价格不能保证，但它们各自的价值比 ERC20 或 NFT 的价值波动要小。</p>
+<p>在大多数 DeFi 贷款协议中，你的抵押贷款资产必须比你的贷款有更高价值&ndash;也被称为<strong>超额抵押</strong> 。</p>
+<p>如果贷款协议想保持财务稳定，只允许超额抵押贷款，这符合贷款协议的利益。想象一下，你提供一些资产作为抵押品，而这个资产的价值突然下降到低于你从协议中贷款的资产价值。你就会缺乏偿还贷款的动力。毕竟，你在偿还贷款过程中抢救出来的抵押品现在的价值将低于你实际偿还贷款的金额。这笔贷款现在就得不到偿还。</p>
+<p>每出现得不到偿还的贷款对其协议都是不利的。穿仓贷款产生的债务在协议中造成了不安全，毕竟，债务的数额是贷款人无法从协议中收回的资产数额。为了强调这种债务有多糟糕：如果协议上出现相当于传统金融服务的 &ldquo;银行挤兑&rdquo;，最后从协议中提取资产的用户将没法提取资产。</p>
+<p>很自然，有大量坏账的协议对用户的吸引力就会降低。</p>
+<h2 id="清算和清算阈值">清算和清算阈值</h2>
+<p>我们已经确定，当抵押品的价值低于借款人连本带利的债务价值时，被称为抵押不足，借款人的债务对借贷协议的健康构成威胁。为了防止抵押不足的头寸的积累，协议允许不一定是协议用户的第三方（称为清算人）来偿还抵押不足（或接近抵押不足）的借款人的债务。通过偿还抵押不足的债务，清算人有权要求索取债务人的抵押品，同时获得折扣。这个过程被称为<strong>清算</strong> 。</p>
+<p>你可能想知道：为什么协议要依靠第三方来清算不健康的头寸？毕竟，协议可以将自动清算机制植入其代码中。</p>
+<p>发送清算交易需要耗费大量的 Gas。如果协议自动发送这些昂贵的交易，由此产生的 Gas 成本将增加他们的运营成本，从而削弱协议利润。</p>
+<p>此外，一个自动清算系统的设计将是非常困难的。一个协议不仅要考虑一个头寸是否应该自动清算，还要考虑何时清算，并以反映市场波动的速度进行清算。通过激励专门的第三方来清算这些头寸，将这个过程外包出去要容易得多。</p>
+<p>清算本身并不有利可图&ndash;为了使这一过程有利可图，债务人的抵押品的价值必须高于其所欠债务。如果不能保证这一过程会给他们带来利润，清算者就不会清算头寸。</p>
+<p>但是，一个头寸何时可以清算？这个条件是由协议决定的，由他们分配给每个资产的<strong>清算阈值（liquidation threshold）</strong> 的函数确定。</p>
+<p>有了清算阈值，时间就成了关键。正如我们所知，如果一个头寸的债务价值超过其抵押品的价值，清算这些头寸对清算人来说是无利可图的，协议会被坏账缠身。因此，安全的清算阈值为清算人提供了足够的时间，在他们达到无力偿还之前清算超额抵押的头寸。</p>
+<p>现在我们了解了每个相关方保持头寸健康的动机，我们将展示协议如何实际执行这些机制的例子：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_0sseprqosi.png" alt="DeFi 借贷概念：清算"></p>
+<h2 id="compound账户流动性">Compound：账户流动性</h2>
+<p>Compound，指的是他们在<code>账户流动性</code>参数下的头寸清算阈值，由 Compound 的主合约&ndash;Comptroller 计算。</p>
+<p>Comptroller 有一个名为<code>getAccountLiquidity()</code>的函数，返回关于账户流动性的信息。在内部这个函数调用<code>getHypotheticalAccountLiquidityInternal()</code>：</p>
+<pre><code>pragma solidity ^ 0.8 .13;struct AccountLiquidityLocalVars {  uint sumCollateral;  uint sumBorrowPlusEffects;  uint cTokenBalance;  uint borrowBalance;  uint exchangeRateMantissa;  uint oraclePriceMantissa;  Exp collateralFactor;  Exp exchangeRate;  Exp oraclePrice;  Exp tokensToDenom;}// ...function getHypotheticalAccountLiquidityInternal(  address account,  CToken cTokenModify,  uint redeemTokens,  uint borrowAmount) internal view returns(Error, uint, uint) {  AccountLiquidityLocalVars memory vars;  uint oErr;  CToken[] memory assets = accountAssets[account];  for (uint i = 0; i &lt; assets.length; i++) {    CToken asset = assets[i];    (oErr, vars.cTokenBalance, vars.borrowBalance, vars.exchangeRateMantissa) =    asset.getAccountSnapshot(account);    if (oErr != 0) {      return (Error.SNAPSHOT_ERROR, 0, 0);    }    vars.collateralFactor = Exp({      mantissa: markets[address(asset)].collateralFactorMantissa    });    vars.exchangeRate = Exp({      mantissa: vars.exchangeRateMantissa    });    vars.oraclePriceMantissa = oracle.getUnderlyingPrice(asset);    if (vars.oraclePriceMantissa == 0) {      return (Error.PRICE_ERROR, 0, 0);    }    vars.oraclePrice = Exp({      mantissa: vars.oraclePriceMantissa    });    vars.tokensToDenom = mul_(mul_(vars.collateralFactor, vars.exchangeRate),      vars.oraclePrice);    vars.sumCollateral = mul_ScalarTruncateAddUInt(vars.tokensToDenom,      vars.cTokenBalance, vars.sumCollateral);    vars.sumBorrowPlusEffects = mul_ScalarTruncateAddUInt(vars.oraclePrice,      vars.borrowBalance, vars.sumBorrowPlusEffects);    if (asset == cTokenModify) {      vars.sumBorrowPlusEffects = mul_ScalarTruncateAddUInt(vars.tokensToDenom,        redeemTokens, vars.sumBorrowPlusEffects);      vars.sumBorrowPlusEffects = mul_ScalarTruncateAddUInt(vars.oraclePrice,        borrowAmount, vars.sumBorrowPlusEffects);    }  }  if (vars.sumCollateral &gt; vars.sumBorrowPlusEffects) {    return (Error.NO_ERROR, vars.sumCollateral - vars.sumBorrowPlusEffects, 0);  } else {    return (Error.NO_ERROR, 0, vars.sumBorrowPlusEffects - vars.sumCollateral);  }}
+</code></pre>
+<p>源码[6]</p>
+<p>我们在这里看到，这个函数的主要逻辑是在一个 for-loop 的范围内。这表明，一个账户的流动性是通过遍历该账户参与的所有市场来计算的。换句话说，在计算账户流动性时，所有由账户借入的资产，或用作抵押品的资产都会被考虑。</p>
+<p>回顾一下，在我们的上一篇文章[7]中，<code>cTokenBalance</code>是用户作为抵押品的标的资产的金额。在这个例子中，我们还可以看到 <code>borrowBalance</code>和一些神秘的 <code>exchangeRateMantissa</code>，它们都是由 <code>getAccountSnapshot()</code>返回。</p>
+<p>在我们之前的文章中对可通用的<code>exchangeRate</code>变量的讨论中：</p>
+<p>一个任意的汇率， 如果其 exchangeRate&lt;1，可以增加铸币量，如果 exchangeRate&gt;1，可以减少铸币量</p>
+<p>这对<code>exchangeRateMantissa</code>来说是成立的，它代表了<code>cToken</code>与标的资产之间的汇率。</p>
+<p>在我们的例子中，可以看到，在获得上面提到的 3 个参数后，监理公司要做的第一件事是获得它目前正在迭代的特定市场的<code>collateralFactor（抵押品系数）</code>。这个 <code>collateralFactor（抵押品系数）</code>信息是一个指标，表明用户可以用他们的抵押品借到多少钱。从这个定义中，我们可以假设，用户对他们存入的每一个抵押品所能借到的金额都是不同的。</p>
+<p>这个数额在不同资产之间不同的主要原因是，在协议的眼中，每个资产都有自己的 &ldquo;风险&rdquo;，这通常归结为一个资产的价值随着时间的推移可能有多大的波动。</p>
+<p>Compound 的治理（governance）会根据市场情况改变抵押品系数，但在任何时候，他们的抵押品系数不能超过 0.9&ndash;最多只能借到你所存抵押品的 90%：</p>
+<pre><code>pragma solidity ^ 0.8 .13;uint internal constant collateralFactorMaxMantissa = 0.9e18; // 0.9
+</code></pre>
+<p>》 源码[8]</p>
+<p>然后，我们看到对<code>oracle.getUnderlyingPrice(asset)</code>的调用，它调用了一个外部合约，称为Oracle[9]。</p>
+<p><strong>Oracles 是借贷协议中使用的合约，用于获取以某种通用货币（通常是美元、ETH 或协议使用的稳定币）计价的某种资产的价格。</strong></p>
+<p>现在，我们已经涵盖了所有影响单个市场的头寸健康度的因素，所以我们将写下计算单个市场的 &ldquo;账户流动性(AccountLiquidity)&ldquo;的方程式：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_fev3rbnonl.png" alt="DeFi 借贷概念：清算"></p>
+<p>注：在 Compound 中，资产的价格是以美元（USD）计价的。</p>
+<p>这是一个相当多的变量，但如果你记的[&ldquo;份额代币 &ldquo;](<a href="https://learnblockchain.cn/article/5684">https://learnblockchain.cn/article/5684</a> &ldquo;&ldquo;份额代币 &ldquo;&quot;)的 Compound 部分，你会看到表达式为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_5utplg3wk0.png" alt="DeFi 借贷概念：清算"></p>
+<p>简单地代表了用户的 cTokens 的标的资产价值。</p>
+<p>此外，<code>borrowBalance_{user}</code>变量，正如你在这里看到的，是用户借入资产的总余额，包括其应计利息。</p>
+<p>因此，下面的<code>账户流动性</code>方程是有意义的：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_wiim1tdl09.png" alt="DeFi 借贷概念：清算"></p>
+<h2 id="maker">Maker</h2>
+<p>另一个为清算抵押品不足的头寸设定阈值的协议是 Maker。</p>
+<p>让我们研究一下该协议部署的处理清算的两个合约：</p>
+<ul>
+<li>
+<p><code>Dog</code>：在迁移到清算 2.0 后部署的（正如 Maker 治理描述的）。这里的清算功能是<code>bark()</code>。</p>
+</li>
+<li>
+<p><code>Cat</code>：清算 1.2，<code>bite()</code>。</p>
+</li>
+<li>
+<p><code>grab()</code>：在部署 Cat 合约之前，作为清算的方式使用<code>vat</code>合约。</p>
+</li>
+</ul>
+<p>让我们看一下<code>bite()</code>的代码片段：</p>
+<pre><code>pragma solidity ^ 0.8 .13;function bite(bytes32 ilk, address urn) external returns(uint id) {    (, uint rate, uint spot) = vat.ilks(ilk);    (uint ink, uint art) = vat.urns(ilk, urn);    require(live == 1, &quot;Cat/not-live&quot;);    require(spot &gt; 0 &amp;&amp; mul(ink, spot) &lt; mul(art, rate), &quot;Cat/not-unsafe&quot;);
+</code></pre>
+<p>源码[10]</p>
+<p>还有一个来自<code>bark()</code>的类似代码片段：</p>
+<pre><code>pragma solidity ^ 0.8 .13;function bark(bytes32 ilk, address urn, address kpr) external returns  (uint256 id) {    require(live == 1, &quot;Dog/not-live&quot;);    (uint256 ink, uint256 art) = vat.urns(ilk, urn);    Ilk memory milk = ilks[ilk];    uint256 dart;    uint256 rate;    uint256 dust; {      uint256 spot;      (, rate, spot, , dust) = vat.ilks(ilk);      require(spot &gt; 0 &amp;&amp; mul(ink, spot) &lt; mul(art, rate), &quot;Dog/not-unsafe&quot;);
+</code></pre>
+<p>源码[11]</p>
+<p>你可能注意到，两者都有相同的不安全信息。因此，每个清算函数对金库安全的要求是相同的，这可以用这个等式表示：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_pjldpm0juv.png" alt="DeFi 借贷概念：清算"></p>
+<p>我们可以用它来定义需要保持的不等式，以使金库（Maker 对头寸的称呼）仍然是安全的：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_ftrwtkv2ms.png" alt="DeFi 借贷概念：清算"></p>
+<p>img</p>
+<p>写得更漂亮一些：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_ha1t4imto4.png" alt="DeFi 借贷概念：清算"></p>
+<p>我们建议读者绕道去看看MakerDAO 词汇表[12]，它扩展了我们提供的关于整个 Maker 生态系统的不同变量名称和术语的信息。</p>
+<p>另外，你也可以相信我们在这里概述的内容：</p>
+<p><code>spot_{ilk}</code>在不等式中被用作抵押品的价格，以 DAI 为单位并除以抵押品的清算率（由 governance 合约决定）。</p>
+<p><code>ink_{urn}</code>是头寸的抵押品余额。</p>
+<p><code>rate_{ilk}</code>是特定抵押品类型的累积债务。当与<code>art_{urn}</code>（即一个头寸借入的债务额）相乘，我们可以得到 DAI 的总债务。</p>
+<p>为了简化我们刚才的内容，不使用 Maker 的术语，方程是这样的：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_8hhzj7gja4.png" alt="DeFi 借贷概念：清算"></p>
+<p>注：Maker 使用 DAI &ndash; 该协议自己的稳定币 &ndash; 来表示抵押品和债务的价值。</p>
+<h2 id="aave-v2---健康系数">AAVE V2 - 健康系数</h2>
+<p>AAVE V2 也定义了他们自己的阈值，<code>健康系数（HealthFactor）</code>。一个健康系数值为<code>H_{f}</code>&lt;1 的用户可以被清算。</p>
+<p>这里定义了：</p>
+<pre><code>pragma solidity ^ 0.8 .13;vars.healthFactor = calculateHealthFactorFromBalances(  vars.totalCollateralInETH,  vars.totalDebtInETH,  vars.avgLiquidationThreshold);// .../** * @dev Calculates the health factor from the corresponding balances * @param totalCollateralInETH The total collateral in ETH * @param totalDebtInETH The total debt in ETH * @param liquidationThreshold The avg liquidation threshold * @return The health factor calculated from the balances provided **/function calculateHealthFactorFromBalances(  uint256 totalCollateralInETH,  uint256 totalDebtInETH,  uint256 liquidationThreshold) internal pure returns(uint256) {  if (totalDebtInETH == 0) return uint256(-1);  return (totalCollateralInETH.percentMul(liquidationThreshold)).wadDiv(totalDebtInETH);}
+</code></pre>
+<p>源码[13]</p>
+<p>很明显，当用户没有债务时，他们的头寸不能被清算，所以<code>健康系数</code>默认为<code>type(uint256).max</code>。</p>
+<p>否则，&ldquo;健康系数&quot;定义为：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_be4jo52zlm.png" alt="DeFi 借贷概念：清算"></p>
+<p>注：AAVE V2 以 ETH 表示其抵押品和债务价值。</p>
+<p>其中 &ldquo;LiquidationThreshold &ldquo;是通过治理为每个资产独立定义的，这项任务目前委托给Gauntlet[14]，它为协议提供所有风险参数，包括 &ldquo;LiquidationThreshold&rdquo;。</p>
+<h2 id="穿仓头寸分析">穿仓头寸分析</h2>
+<p>现在我们已经涵盖了坏账的概念，我们将提供一个真实世界的例子来说明其重要性</p>
+<p>我们将涉及的头寸是 AAVE V2 的以下账户：<code>0x227cAa7eF6D955A92F483dB2BD01172997A1a623</code>。</p>
+<p>让我们开始调查它的现状，通过调用 AAVE V2 借贷协议上的<code>getUserAccountData</code>函数：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_8r69itpbi3.png" alt="DeFi 借贷概念：清算"></p>
+<p>现在让我们把上面看到的东西分解一下，体会一下这个仓位的水下情况有多严重：</p>
+<ul>
+<li>
+<p>债务总额（<code>totalDebtETH</code>）：17.83508595148699eth</p>
+</li>
+<li>
+<p>抵押品总额（<code>totalCollateralETH</code>）：0.013596360502551568 eth</p>
+</li>
+</ul>
+<p>这就是我们需要了解的，这个仓位有问题&ndash;抵押品的价值对应其所产生的债务的一个微不足道的部分。</p>
+<p>但是，这些头寸是如何达到这种状态的呢？</p>
+<p>为了回答这个问题，我们可以看看这个用户在 AAVE 上执行的最新操作：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_tke4jzjapn.png" alt="DeFi 借贷概念：清算"></p>
+<p>看起来一切都很好，直到<code>13514857</code>区块，其中用户从 AAVE 借用了一些资产。让我们看看他们做了什么：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_4sb45iuiuy.png" alt="DeFi 借贷概念：清算"></p>
+<p>债务人借了 700,000 MANA，快速检查一下 MANA 的美元价格会发现，价格是：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_rv8dphmrpl.png" alt="DeFi 借贷概念：清算"></p>
+<p>每 MANA 单位 0.00032838ETH。</p>
+<p>所以通过一些简单的乘法，我们知道这个用户对协议的债务增加了：</p>
+<p>0.00032838 * 700000 = 229.866 ETH</p>
+<p>也值得回顾一下这个区块的 ETH 的美元价格这里[15]，它是 4417.40 美元。</p>
+<p>注意上图中<code>13517657</code>区块发生的入金操作，就在借款后的几个小时。</p>
+<p>让我们看看市场上是否有什么东西动摇了用户的信心：</p>
+<pre><code>➜~cast call - b 13517657 0xA50ba011c48153De246E5192C8f9258A2ba79Ca9 &quot;getAssetPrice(address)&quot;0x0F5D2fB29fb7d3CFeE444a200298f468908cC9420x000000000000000000000000000000000000000000000000000131d14dce4400
+</code></pre>
+<p>以上是一个发送到 AAVE V2 Price Oracle 的 RPC 调用，以获得指定区块的 1 单位 MANA 的价值，单位为 Wei。</p>
+<p>如果我们用这个数据转换前述的价格，我们可以看到发生了什么：</p>
+<p>0.00033625 * 700000 = 235.375 eth</p>
+<p>在短短的几个小时内，产生的债务是~5.5ETH，价值~24000 美元。哎哟。</p>
+<p>由于我们知道这个头寸的结局，我们知道它在某些时候是可以清算的，所以让我们检查涉及这个用户地址的<code>liquidationCall</code>的调用：</p>
+<pre><code>selectevt_block_number,collateralAsset,debtAsset,debtToCover,liquidatedCollateralAmount,liquidatorfromaave_v2_ethereum.LendingPool_evt_LiquidationCallwhereuser = from_hex('0x227cAa7eF6D955A92F483dB2BD01172997A1a623')order byevt_block_number desc;
+</code></pre>
+<p>可以随意在 Dune Analytics[16]上运行上述查询。</p>
+<p>一旦我们找到第一个清算事件，我们就可以理解为什么用户在借贷后不久就存入了资产：</p>
+<pre><code>+------------------+--------------------------------------------+--------------------------------------------+-------------------------+----------------------------+--------------------------------------------+| evt_block_number | collateralAsset                            | debtAsset                                  | debtToCover             | liquidatedCollateralAmount | liquidator                                 |+------------------+--------------------------------------------+--------------------------------------------+-------------------------+----------------------------+--------------------------------------------+|         13520838 | 0x6B175474E89094C44DA98B954EEDEAC495271D0F | 0x0F5D2FB29FB7D3CFEE444A200298F468908CC942 | 17919685927295406794873 |    58271102282974799175987 | 0xB2B3D5B6215D4FB23BF8DD642D385C4B44AADB2A |+------------------+--------------------------------------------+--------------------------------------------+-------------------------+----------------------------+--------------------------------------------+
+</code></pre>
+<p>在这里我们可以看到，第一次清算发生在区块<code>13520838</code>。这次清算是在用户还没有存入资金之前（在存款交易之前约 7 分钟）。</p>
+<p>然后，在区块<code>13520838</code>-<code>13522070</code>之间发生了一连串的小清算，价值不菲：</p>
+<pre><code>selectcount( * ) as num_liquidationsfromaave_v2_ethereum.LendingPool_evt_LiquidationCallwhereuser = from_hex('0x227cAa7eF6D955A92F483dB2BD01172997A1a623')and evt_block_number &lt;= 13522070 and evt_block_number &gt;= 13520838
+
++ - - - - - - - - - +| num_liquidations |+ - - - - - - - - - +| 87 |+ - - - - - - - - - +
+</code></pre>
+<p>让我们检查一下在这些区块之间被清算人从用户那里扣押的所有抵押资产类型：</p>
+<pre><code>selectSUM(liquidatedCollateralAmount) as amountSeized,  collateralAssetfromaave_v2_ethereum.LendingPool_evt_LiquidationCallwhereuser = from_hex('0x227cAa7eF6D955A92F483dB2BD01172997A1a623')and evt_block_number &lt;= 13522070 and evt_block_number &gt;= 13520838group by collateralAsset
+</code></pre>
+<p>我们可以看到只有 2 种资产，DAI（稳定币）和 ETH。</p>
+<pre><code>+--------------------------+--------------------------------------------+| amountSeized             | collateralAsset                            |+--------------------------+--------------------------------------------+| 387663228503220484547359 | 0x6B175474E89094C44DA98B954EEDEAC495271D0F |+--------------------------+--------------------------------------------+| 499940913071713798854    | 0xC02AAA39B223FE8D0A0E5C4F27EAD9083C756CC2 |+--------------------------+--------------------------------------------+
+</code></pre>
+<p>以及它们的金额：</p>
+<ul>
+<li>
+<p>~50 ETH</p>
+</li>
+<li>
+<p>~387,663 DAI</p>
+</li>
+</ul>
+<p>有人可能会问，为什么清算会发生是一小块一小块进行的？</p>
+<p>好吧，当像这样巨大的头寸被一次性清算时，市场会将如此大规模的抵押品清算理解为这些资产类型的卖出信号。记住：根据协议的清算人奖励政策，清算中获得的资产是以折扣价购买的。</p>
+<p>随着抛售压力的增加，一次大规模的清算可能会产生一个清算的雪球。其他市场参与者可能也会出售他们的资产，导致资产价格进一步 &ldquo;抛售&rdquo;，这反过来又会导致协议中其他头寸的更多清算。</p>
+<p>因此，协议通常限制一次清算所能处理的资产量。AAVE 的这个限制的版本，作为一个变量，可以看到下面：</p>
+<pre><code>pragma solidity ^ 0.8 .13;// from ...uint256 internal constant LIQUIDATION_CLOSE_FACTOR_PERCENT = 5000;function liquidationCall(  address collateralAsset,  address debtAsset,  address user,  uint256 debtToCover,  bool receiveAToken) external override returns(uint256, string memory) {    // ...    vars.maxLiquidatableDebt =      vars.userStableDebt.add(vars.userVariableDebt).percentMul(        LIQUIDATION_CLOSE_FACTOR_PERCENT      );    // ...
+</code></pre>
+<p>我们可以看到，限制比例是 50%，这意味着在一次清算中只允许偿还头寸的一半债务。</p>
+<p>清算人也有动力将清算分成小块。如果在清算时，市场上没有足够的流动性，无法将抵押资产全额提供给清算人。通过将清算分成小块，清算人有更大的机会获得流动资产，并从清算中获得利润。</p>
+<p>此外，如果市场上的债务资产没有足够的流动性，那么清算人甚至在一开始就获得该资产以偿还抵押不足的用户的债务可能会成本昂贵。</p>
+<p>最后，想象一下试图清算大量的某种你不拥有这么多数量代币。如果你去 DEX 并试图用一些 WETH 或任何其他资产来交换这个代币，你也可能会遇到很高的 Gas 费用，使你的清算无利可图。</p>
+<p>回到我们的例子，为了检查清算链后的头寸参数，需要解析从<code>getUserAccountData</code>返回给我们的数据：</p>
+<pre><code>from io import BytesIOfrom binascii import unhexlifyfrom dataclasses import dataclass@dataclass(frozen=True)class UserAccountData:    totalCollateralETH: int    totalDebtETH: int    availableBorrowsETH: int    currentLiquidationThreshold: int    ltv: int    healthFactor: intdef parse_user_account_data(uacd: str) -&gt; UserAccountData:    uacd_bytes = unhexlify(uacd[2:])    assert len(uacd_bytes) == 192    uacd_bytes = BytesIO(uacd_bytes)    total_collateral_eth = int.from_bytes(bytes=uacd_bytes.read(32), byteorder=&quot;big&quot;, signed=False)    total_debt_eth = int.from_bytes(bytes=uacd_bytes.read(32), byteorder=&quot;big&quot;, signed=False)    available_borrows_eth = int.from_bytes(bytes=uacd_bytes.read(32), byteorder=&quot;big&quot;, signed=False)    current_liquidation_threshold = int.from_bytes(bytes=uacd_bytes.read(32), byteorder=&quot;big&quot;, signed=False)    ltv = int.from_bytes(bytes=uacd_bytes.read(32), byteorder=&quot;big&quot;, signed=False)    health_factor = int.from_bytes(bytes=uacd_bytes.read(32), byteorder=&quot;big&quot;, signed=False)    return UserAccountData(        totalCollateralETH=total_collateral_eth,        totalDebtETH=total_debt_eth,        availableBorrowsETH=available_borrows_eth,        currentLiquidationThreshold=current_liquidation_threshold,        ltv=ltv,        healthFactor=health_factor,    )
+</code></pre>
+<p>然后我们用<code>cast</code>来查询 chain 的情况：</p>
+<pre><code>➜  ~ cast call -b 13522070 0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9 &quot;getUserAccountData(address)&quot; 0x227cAa7eF6D955A92F483dB2BD01172997A1a6230x000000000000000000000000000000000000000000000000085b5b5e846685f4000000000000000000000000000000000000000000000002743544e203a3e4ae00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f710000000000000000000000000000000000000000000000000000000000001d9500000000000000000000000000000000000000000000000000260a45667b706b
+</code></pre>
+<p>最后解析输出：</p>
+<pre><code>parse_user_account_data('0x000000000000000000000000000000000000000000000000085b5b5e846685f4000000000000000000000000000000000000000000000002743544e203a3e4ae00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f710000000000000000000000000000000000000000000000000000000000001d9500000000000000000000000000000000000000000000000000260a45667b706b')UserAccountData(totalCollateralETH=602175436690458100, totalDebtETH=45267162967098778798, availableBorrowsETH=0, currentLiquidationThreshold=8049, ltv=7573, healthFactor=10707342303391851)
+</code></pre>
+<p>在这里我们看到了清算对头寸的影响：几乎没有任何抵押品了~准确地说，是 0.6 个 ETH。但是债务呢？45.26716296709878 ETH !</p>
+<p>那么在这个区块的高度，MANA 的价格是多少呢？</p>
+<pre><code>➜~cast call - b 13522070 0xA50ba011c48153De246E5192C8f9258A2ba79Ca9 &quot;getAssetPrice(address)&quot;0x0F5D2fB29fb7d3CFeE444a200298f468908cC9420x00000000000000000000000000000000000000000000000000031015cc1da8f2
+</code></pre>
+<p>0.000862110734985458 eth!</p>
+<p>如果你还记得，用户在几个小时前刚刚以 0.00032838 ETH 的价格借入 MANA。这相当于在一只股票上开了一个空头头寸，而这只股票的价格是火箭般的 2.65 倍&ndash;Oof ?‍?!</p>
+<p>清算者无法在 MANA 的价格抛售得太厉害之前及时清算全部头寸，使这个过程无利可图，我们就剩下一个无力偿还的头寸。</p>
+<p>现在我们可以体会到一个有效的流动性阈值的重要性，在避免协议中的坏账。</p>
+<p><strong>小结:</strong></p>
+<p>虽然我们不能明确地说，可以用一个方程式来定义头寸的流动性阈值，但我们肯定可以看到协议之间的相似之处：</p>
+<ul>
+<li>
+<p>所有协议都将其阈值定义为抵押品与债务的某个函数（无论是比率还是差值）。</p>
+</li>
+<li>
+<p>所有协议都留有一定的治理空间，以决定每个抵押品风险参数的价值，以应对市场条件的变化，因为一些资产比其他资产更不稳定。</p>
+</li>
+<li>
+<p>所有协议都使用预言机对其抵押品和债务价格进行计价，并使用广泛接受的货币（例如，ETH，USD，DAI）。</p>
+</li>
+</ul>
+<p>我们已经看到，Maker 和 AAVE 选择使用相同的方程式来表示头寸的安全性：</p>
+<p><img src="https://img.bibiqing.com/news/2023/0506/1_1jdqjtgcdw.png" alt="DeFi 借贷概念：清算"></p>
+<p>作者：Tal[17] 研究员 @ smlXL, 感谢 Sam Ragsdale[18] 和为本帖提供建议和反馈的 smlXL 团队成员。</p>
+<p>感谢 Chaintool[19] 对本翻译的支持。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/50703/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">Cobo COO：AI 与区块链的融合将共同释放 Web3 潜力</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/50641/">
+                <span class="next-text nav-default">DeFi 巨头 Aave、Curve 推出稳定币 重塑去中心化 3Pool</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#超额抵押和坏账">超额抵押和坏账</a></li>
+    <li><a href="#清算和清算阈值">清算和清算阈值</a></li>
+    <li><a href="#compound账户流动性">Compound：账户流动性</a></li>
+    <li><a href="#maker">Maker</a></li>
+    <li><a href="#aave-v2---健康系数">AAVE V2 - 健康系数</a></li>
+    <li><a href="#穿仓头寸分析">穿仓头寸分析</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>

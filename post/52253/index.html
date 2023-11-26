@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文详解比特币 Layer2 协议 Ark：闪电网络的替代方案？ - 区块大全
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="佚名" /><meta name="description" content="流动性是阻碍闪电网络大规模采用的硬伤之一。" />
+<meta name="keywords" content="Ark, Layer 2, Lightning" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.120.4" />
+
+
+<link rel="canonical" href="/post/52253/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.d8d87b982993a745e5e7b6a6cbf257be8c3e82aab5e485f0908ad7e6c3501ab2.css" integrity="sha256-2Nh7mCmTp0Xl57amy/JXvow&#43;gqq15IXwkIrX5sNQGrI=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文详解比特币 Layer2 协议 Ark：闪电网络的替代方案？" />
+<meta property="og:description" content="流动性是阻碍闪电网络大规模采用的硬伤之一。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/52253/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-31T00:00:00+00:00" />
+
+<meta itemprop="name" content="一文详解比特币 Layer2 协议 Ark：闪电网络的替代方案？">
+<meta itemprop="description" content="流动性是阻碍闪电网络大规模采用的硬伤之一。"><meta itemprop="datePublished" content="2023-05-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-31T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3895">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文详解比特币 Layer2 协议 Ark：闪电网络的替代方案？"/>
+<meta name="twitter:description" content="流动性是阻碍闪电网络大规模采用的硬伤之一。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">区块大全</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+      
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      区块大全
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文详解比特币 Layer2 协议 Ark：闪电网络的替代方案？</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      佚名
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2023-05-31">
+      2023-05-31
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3895 字 -
+        预计阅读 8 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="/categories/%E6%AF%94%E7%89%B9%E5%B8%81/"> 比特币 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">币安网</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/binance?ref=githubio">注册链接</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/binance?ref=githubio">币安是全球领先的区块链生态系统，推出了一系列产品，其中包括最大的加密货币交易平台。我们的使命是在未来成为全球性加密货币基础架构供应商。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">欧易OKX</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/okx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/okx?ref=githubio">欧易是全球著名的数字资产交易平台之一，主要面向全球用户提供比特币、莱特币、以太币等数字资产的币币和衍生品交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">HTX火币</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/htx?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/htx?ref=githubio">火币全球专业站，是火币集团旗下服务于全球专业交易用户的创新数字资产国际站，致力于发现优质的创新数字资产投资机会。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>在比特币闪电网络的发展历程中，尽管 PTLC、CoinJoin 在很大程度上对中心化与隐私问题做了改进，但流动性却是阻碍闪电网络大规模采用的硬伤之一。通常对新用户而言，下载闪电钱包后必须要寻找到入站流动性（Inbound Liquidity）才能从闪电通道中接收比特币，入站与出站流动性（Outbound Liquidity）的多少也决定了用户能接收与发送多少比特币。同时，在闪电通道中，流动性总量是固定的，无法改变，除非关闭通道重新设定。因此，总体来说，闪电网络流动性带来的实际用户体验可能并不佳。</p>
+<p>在前不久的迈阿密海滩上，Bitcoin 2023 如火如荼，比特币开发者 Burak Keceli 就这一问题为现场观众带来了比特币 Layer2 协议 Ark，这是一种闪电网络的替代方案，允许用户在不引入流动性限制的情况下发送和接收资金。今天，Foresight News 将为大家介绍 Ark 的工作方式及其技术特点。</p>
+<h2 id="一工作方式">一、工作方式</h2>
+<p>在比特币网络中，一笔交易由输入与输出组成，地址所持有的比特币总额被称为未被花费的交易输出（Unspent Transaction Output，UTXO），一笔交易经由收款方的私钥签署解锁脚本后进入新地址的 BTC 将再次成为 UTXO。Ark 协议则采用一种共享 UTXO 集进行匿名的链下支付，协议中已提交但未公开的交易输出被称为虚拟 UTXO（vTXO）。获取 vTXO 有两种方式，一是从已拥有 vTXO 的用户那里获取；二则是通过原子双向挂钩机制 lifting 将其链上 UTXO 按 1:1 兑换为 vTXO。当然，用户可以单方面将 vTXO 兑换为链上 UTXO，而无需寻求 ASP 合作。</p>
+<p>Ark 协议涉及用户与 Ark Service Provider（ASP）两方。用户是指那些持有、发送和接收 vTXO 的非交互式实体，而 ASP 类似于闪电网络服务提供商，它担任一种无需信任的中介，为网络提供 vTXO 流动性并收取流动性费用。同时，ASP 也充当盲 CoinJoin 协调员的角色，通过提供简单的调整与盲混合（blinded mixing）为交易提供隐私保护。</p>
+<p>当用户在协议上进行付款时，需在 ASP 创建的共享 vTXO 资金池中支付 vTXO。ASP 每天 24 小时在线，其主要工作是每 5 秒创建一个盲交易池，对交易进行盲混合，避免支付跟踪。同时，ASP 可将发款方的 vTXO 赎回成链上资产， 并利用自己的链上资金为 CoinJoin 创建新的 vTXO。因此，上链的交易池即便公开可查，但也只显示 1 个或几个由 ASP 提供的输入，链上数据观察者无法发现真正的付款方。随后，从 ASP 的盲交易池中产生包含新创建 vTXO 的 vTXO 输出。vTXO 被捆绑并嵌套在这个共享输出下，并可以在链上公开。在 Ark 协议中，vTXO 输出生命周期只有 4 周，收款方需要在前两周内通过共同签署 n-of-n 多重签名领取嵌套 vTXO（nested vTXO）。如果 vTXO 在前两周无人认领，vTXO 将重回发送者的控制之下，这类似于闪电网络上的 HTLC 超时。另一方面，如果 ASP 在这段时间碰巧不合作或不回应，不共同签署 ATLC，那么 vTXO 所有者可以公开其嵌套 vTXO，然后等到合约中编码的某个相对时间窗口（24 小时）之后再领取资金。当然，如果被公开的 vTXO 超过 4 周无人认领，ASP 将可以单独清算它们。</p>
+<h2 id="二技术特点">二、技术特点</h2>
+<h3 id="无流动性限制">无流动性限制</h3>
+<p>与闪电网络的相比，Ark 协议没有引入所谓的闪电通道、出站流动性与入站流动性。</p>
+<h3 id="非交互式">非交互式</h3>
+<p>Ark 的非交互式支付通过一种类似于比特币静默支付的方式来实现，即收款方提供一个发送方与收款方之间的「共享秘密」，并为发送方提供一个类似于静默支付的专用公钥。每个新创建的 vTXO 都使用一个包含支付承诺的临时共享秘密进行调整，该秘密会在 vTXO 被花费时，也即 2-of-2 连接器关闭时，锚定 ATLC 会显示付款证明。</p>
+<p>不过，当前 Ark 协议的接收则是对非交互式的一种妥协，它采用一种交互式的方式即 n-of-n 多重签名限制交易输出，它的异步离线接收尚未完善，收款人必须在线运行 Ark 客户端才能签名以限制共享 UTXO 的输出。换言之，用户必须每隔一两周上线一次以接收其代币，否则无人认领的代币将会被 ASP 清理。因此，对于 Ark 而言，要想真正实现完全非交互式，使用户接收离线支付，必须有一种类似于 BIP-118 与 BIP-119 的「限制条款」（covenant）原语来限制交易输出。事实上，即便是为闪电网络附加这种原语，也依然无法实现非交互性。</p>
+<h3 id="绝对原子性">绝对原子性</h3>
+<p>所谓原子性，就是指一笔交易不可切分，要么完全成功，要么完全失败。Ark 使用一种称为 Txlock 的新锁定类型原语确保链下转账的绝对原子性。Txlock 是一种条件，在这个条件下，只有存在一个相互同意的交易标识符才能解锁。</p>
+<p>在 Ark 协议中，Txlock 条件使用连接器（connector）来满足。连接器是协议上的一种特殊输出类型，其原语是如果我们希望比特币脚本检查特定的交易 ID 是否存在，只需将该交易的输出附加到支出交易（spending transaction）中，并对照支出交易的 Prevouts 检查一个预签名（pre-signed）的签名。在签名哈希（sighash）原像（preimage）中的连接器输出点（outpoint）会提交给我们想要满足 Txlock 条件的交易 ID。在 Ark 上下文（context）中，这是包含预期收款人的 vTXO 的资金池交易。Txlocks 在锚定时间锁合约（ATLC）中使用，以提供原子单枢纽（single-hub）支付计划。当首次创建 vTXO 时，ATLC 会附加到它上面。当一个 vTXO 被花费时，vTXO 所有者与 ASP 合作签署 atlc:connect，通过 ATLC 的 2-of-2 密钥路径，预先附加的 ATLC 会连接到连接器上以形成 Txlock。</p>
+<p>这种 Txlock 结构确保，如果附加的 ATLC 要被 ASP 认领，那么连接器输出点的上下文必须保持不变。换句话说，ASP 不能双花其创建的交易池。这为发送者提供了原子支付结构，因为收款人的 vTXO 与连接器嵌套在相同的交易池中。</p>
+<h3 id="更少的链上-footprint">更少的链上 Footprint</h3>
+<p>与闪电网络相比，Ark 没有打开和关闭通道的概念，与链上交互次数少，因此占用的链上空间更少。</p>
+<h3 id="隐私性">隐私性</h3>
+<p>ASP 提供的 CoinJoin「混币」隐私服务；收款人无需获取入站流动性、实时运行服务器以收款并将隐私泄漏给外部观察者。</p>
+<h3 id="兼容闪电网络">兼容闪电网络</h3>
+<p>就像 ATLC 和连接器一样，Ark 可以通过将哈希时间锁合约（HTLC）和点时间锁合约（PTLC）附加到交易池来与闪电网络兼容。附加的 HTLC 存在于另一个称为 HTLC 输出的共享 UTXO 下，该输出在四周后也会过期。ASP 将 HTLC 转发到其交易池后的那一刻，就将其转发到更广泛的闪电网络。这意味着 ASP 也是 Lightning 服务提供商。Ark 用户也可以使用嵌套了 HTLC 的 vTXO 从闪电网络收款。</p>
+<p>由于任何人都可以运行 ASP，用户可以通过不同的 ASP 发送闪电发票，在将 HTLC（或 PTLC）附加到由不同 ASP 创建的交易池上后，HTLC 可以通过多方支付（MPP）转发到最终的收款人。</p>
+<h3 id="零确认-vtxo">零确认 vTXO</h3>
+<p>Ark 协议支持零确认 vTXO，支付随交易池的创建而每 5 秒计入一次，但结算则每十分钟一次。因此，支付是立即入账的，收款方无需等待链上确认就可以花费其零确认 vTXO，用于转账或支付闪电发票（类似于收款码）。所以，理论上，当一个交易池的交易还在内存池中时，ASP 可以双花这笔交易。但 Burak 表示，由于转账的绝对原子性，如果 ASP 在双方约定的 CoinJoin 交易 ID 下双花收款方的 vTXO，那么 ASP 将无法赎回发送方的 vTXO。</p>
+<p>Burak 认为，未来，Ark 可以利用假设的数据操作操作码「opcode」(OP_XOR 或 OP_CAT) 来限制 ASP 的签名中的 nonce，以避免双重支付。到那时，如果双花发生在 CoinJoin 交易中，用户则可以伪造 ASP 签名来认领其之前兑换的 vTXO。</p>
+<h2 id="三总结">三、总结</h2>
+<p>Ark 协议的创始人最初是闪电网络的强烈批评者，他对闪电网络入站流动性、异步接收、链上足迹、接收者隐私、交互性等批评是 Ark 诞生的种子。Burak 自己也承认，他此前的一些反对意见从长远来看是可以解决的，但是他找不到解决入站流动性问题的「良方」。在这个想法的推动下，Ark 应运而生，其创新性将会大大降低用户使用 Layer2 支付的门槛，并且模仿了 CoinJoin、盲化、静默支付等诸多比特币原语构建 Ark 协议，实现比特币的可扩展性与隐私支付。与闪电网络相比，Ark 协议不仅提出其固有的流动性问题的解决方案，还兼容闪电网络，至少已经是一种可以与其相辅相成的协议了。</p>
+<p>不过，Ark 还有很多需要改进的地方。譬如，收款方必须每隔一两周就要上线签名以领取代币，这产生了一种新的用户体验问题。事实上，比特币开发者社区对于 Ark 采用零确认（0-conf） 带来双花问题也产生了一些争论。如果其在非交互式、双花问题上能够进一步完善，那么 Ark 的用户体验与协议的安全性也会大大改善。此外，Ark 在链下完成，虽然链上无法观察到发送者与收款方，但 ASP 是否掌握隐私数据仍然需要打个问号。</p>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left">推荐平台</th>
+            <th style="text-align:left">链接</th>
+            <th style="text-align:left">平台介绍</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Gate芝麻开门</span></td>
+            <td style="text-align:left"><span style="white-space:nowrap"><a
+                        href="https://www.okbtc.cn/gateio?ref=githubio">平台介绍</a></span></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/gateio?ref=githubio">Gate.io芝麻开门创立于2013年，是全球真实交易量TOP10的加密货币交易平台，向全球数千万用户提供安全可靠、真实透明的数字资产交易服务。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bitget</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bitget?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bitget?ref=githubio">Bitget的背后是一群区块链技术的早期接受者，也是区块链未来发展的信仰者，一直致力于提供安全、一站式的交易解决方案，帮助用户更聪明地交易。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">Bybit</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/bybit?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/bybit?ref=githubio">Bybit通过数字资产与传统金融的结合，引领数字资产的生态发展。提供一流的流动性，致力于打造业内最安全、公平、高效及人性化的交易服务平台。</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left"><span style="white-space:nowrap">派网</span></td>
+            <td style="text-align:left"><a href="https://www.okbtc.cn/pionex?ref=githubio">注册链接</a></td>
+            <td style="text-align:left"><a
+                    href="https://www.okbtc.cn/pionex?ref=githubio">派网提供多样化的量化交易机器人，用户可依照自身交易需求和策略选择最适合的机器人。 同时派网也提供合约交易与合约网格机器人，给予更方便的合约交易体验。</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/52227/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">一文对比Polygon四大ZK解决方案：有何特点及优势？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/52235/">
+                <span class="next-text nav-default">以太坊坎昆升级临近：哪些机会值得你关注？</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一工作方式">一、工作方式</a></li>
+    <li><a href="#二技术特点">二、技术特点</a>
+      <ul>
+        <li><a href="#无流动性限制">无流动性限制</a></li>
+        <li><a href="#非交互式">非交互式</a></li>
+        <li><a href="#绝对原子性">绝对原子性</a></li>
+        <li><a href="#更少的链上-footprint">更少的链上 Footprint</a></li>
+        <li><a href="#隐私性">隐私性</a></li>
+        <li><a href="#兼容闪电网络">兼容闪电网络</a></li>
+        <li><a href="#零确认-vtxo">零确认 vTXO</a></li>
+      </ul>
+    </li>
+    <li><a href="#三总结">三、总结</a></li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+
+<a href="https://www.okbtc.cn/binance?ref=githubio" class="iconfont">
+  <img src="/image/logo/binance.png" width="36px" height="36px" alt="binance">
+</a>
+
+<a href="https://www.okbtc.cn/okx?ref=githubio" class="iconfont">
+  <img src="/image/logo/okx.png" width="36px" height="36px" alt="okx">
+</a>
+
+<a href="https://www.okbtc.cn/htx?ref=githubio" class="iconfont">
+  <img src="/image/logo/htx.png" width="36px" height="36px" alt="htx">
+</a>
+
+<a href="https://www.okbtc.cn/gateio?ref=githubio" class="iconfont">
+  <img src="/image/logo/gateio.png" width="36px" height="36px" alt="gateio">
+</a>
+
+<a href="https://www.okbtc.cn/bitget?ref=githubio" class="iconfont">
+  <img src="/image/logo/bitget.png" width="36px" height="36px" alt="bitget">
+</a>
+
+<a href="https://www.okbtc.cn/bybit?ref=githubio" class="iconfont">
+  <img src="/image/logo/bybit.png" width="36px" height="36px" alt="bybit">
+</a>
+
+<a href="https://www.okbtc.cn/pionex?ref=githubio" class="iconfont">
+  <img src="/image/logo/pionex.png" width="36px" height="36px" alt="pionex">
+</a>
+
+
+
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        coin
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5e8c82c5ae3f71b40f78c4ff8ea351326a65ddf5771f76c10c6fc7d09808332d.js" integrity="sha256-XoyCxa4/cbQPeMT/jqNRMmpl3fV3H3bBDG/H0JgIMy0=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  var remark_config = {
+    host: 'https:\/\/remark42.example.com',
+    site_id: 'remark',
+    components: [
+	    'embed',
+    ],
+  }
+  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
+</script>
+
+
+
+
+
+
+
+  </body>
+</html>
